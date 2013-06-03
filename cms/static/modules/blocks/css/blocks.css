@@ -1,0 +1,52 @@
+.block_list {
+	width: 325px;
+	float: left;
+}
+
+.block_tree {
+	height: 100%;
+	overflow-x: scroll;
+	border: 0px;
+	padding-left: 5px;
+}
+
+.block_tree a {
+	text-decoration: none;
+	color: black;
+}
+
+.block_tree a:hover {
+	text-decoration: underline;
+}
+
+.block_tree ul {
+	padding-left: 25px;
+}
+
+.block_tree  ul  li{
+	list-style-type: none;
+}
+
+.block_tree .information-block {
+	margin-left: 0px;
+	margin-bottom: 5px;
+}
+
+.published {
+	font-style: normal;
+	list-style-image: url(/admin/static.php?static=/modules/blocks/img/block_published.png);
+}
+
+.depublished {
+	list-style-image: url(/admin/static.php?static=/modules/blocks/img/block_depublished.png);
+	font-style: italic;
+}
+
+.block_meta {
+	margin-left: 350px;;
+	margin-top: 15px;
+}
+
+.reset {
+	clear: both;
+}

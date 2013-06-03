@@ -1,0 +1,131 @@
+<?php
+
+	// No direct access
+	defined('_ACCESS') or die;
+	
+	require_once "core/data/module.php";
+	require_once "core/visual/action_button.php";
+	require_once "core/visual/tab_menu.php";
+	require_once "dao/article_dao.php";
+	require_once "libraries/system/template_engine.php";
+	require_once "modules/articles/visuals/articles/articles_manager.php";
+	require_once "modules/articles/visuals/terms/terms_manager.php";
+	require_once "modules/articles/visuals/target_pages/target_pages_manager.php";
+
+	class ArticleModule extends Module {
+	
+		private static $TEMPLATE = "articles/module_articles.tpl";
+		private static $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
+		private static $ARTICLES_TAB = 0;
+		private static $TERMS_TAB = 1;
+		private static $TARGET_PAGES_TAB = 2;
+		
+		private $_template_engine;
+		private $_article_dao;
+		private $_current_article;
+		private $_current_term;
+		
+		public function __construct() {
+			$this->_template_engine = TemplateEngine::getInstance();
+			$this->_article_dao = ArticleDao::getInstance();
+			$this->initialize();
+		}
+	
+		public function render() {
+			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
+			
+			$content = null;
+			if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
+				$content = new ArticleManager($this->_current_article, $this->getIdentifier());
+			} else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
+				$content = new TermManager($this->_current_term, $this->getIdentifier());
+			} else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
+				$content = new TargetPagesManager($this->getIdentifier());
+			}
+			
+			if (!is_null($content)) {
+				$this->_template_engine->assign("content", $content->render());
+			}
+			
+			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+		}
+	
+		public function getActionButtons() {
+			$action_buttons = array();
+			
+			if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
+				$save_button = null;
+				$delete_button = null;
+				if (!is_null($this->_current_article)) {
+					$save_button = new ActionButton("Opslaan", "update_element_holder", "icon_apply");
+					$delete_button = new ActionButton("Verwijderen", "delete_element_holder", "icon_delete");
+				}
+				$action_buttons[] = $save_button;
+				$action_buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
+				$action_buttons[] = $delete_button;				
+			}
+			if ($this->getCurrentTabId() == self::$TERMS_TAB) {
+				if (!is_null($this->_current_term) || TermManager::isEditTermMode()) {
+					$action_buttons[] = new ActionButton("Opslaan", "update_term", "icon_apply");
+				}
+				$action_buttons[] = new ActionButton("Toevoegen", "add_term", "icon_add");
+				$action_buttons[] = new ActionButton("Verwijderen", "delete_terms", "icon_delete");
+			}
+			if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
+				$action_buttons[] = new ActionButton("Verwijderen", "delete_target_pages", "icon_delete");
+			}
+			
+			return $action_buttons;
+		}
+		
+		public function getHeadIncludes() {
+			$this->_template_engine->assign("path", $this->getIdentifier());
+			
+			$element_statics_values = array();	
+			if (!is_null($this->_current_article)) {		
+				$element_statics = $this->_current_article->getElementStatics();
+				if (count($element_statics) > 0) {
+					foreach ($element_statics as $element_static) {
+						$element_statics_values[] = $element_static->render();
+					}
+				}
+			}
+			$this->_template_engine->assign("element_statics", $element_statics_values);
+			$this->_template_engine->assign("path", $this->getIdentifier());
+			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+		}
+		
+		public function preHandle() {
+			include_once "modules/articles/pre_handler.php";
+			$this->initialize();
+		}
+		
+		private function initialize() {
+			$this->loadCurrentTerm();
+			$this->loadCurrentArticle();
+		}
+		
+		private function loadCurrentArticle() {
+			if (isset($_GET['article'])) {
+				$this->_current_article = $this->_article_dao->getArticle($_GET['article']);
+			}
+		}
+		
+		private function loadCurrentTerm() {
+			if (isset($_GET['term'])) {
+				$this->_current_term = $this->_article_dao->getTerm($_GET['term']);
+			}
+		}
+		
+		private function renderTabMenu() {
+			$tab_items = array();
+			$tab_items[self::$ARTICLES_TAB] = "Artikelen";
+			$tab_items[self::$TERMS_TAB] = "Termen";
+			$tab_items[self::$TARGET_PAGES_TAB] = "Doelpagina's";
+			$tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+			return $tab_menu->render();
+		}
+	
+	}
+	
+?>

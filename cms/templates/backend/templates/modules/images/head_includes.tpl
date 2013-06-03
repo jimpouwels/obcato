@@ -1,0 +1,2 @@
+<link rel="stylesheet" href="/admin/static.php?static=/modules/{$path}/css/images.css" type="text/css" />
+<script type="text/javascript" src="/admin/static.php?static=/modules/{$path}/js/module_image.js"></script>

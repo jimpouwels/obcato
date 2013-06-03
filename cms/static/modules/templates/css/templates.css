@@ -1,0 +1,53 @@
+/* TEMPLATE EDITOR */
+.admin_form li {
+	list-style: none outside none;
+	clear: both;
+}
+
+.admin_form {
+	padding: 0px;
+	margin: 10px;
+}
+
+.admin_label {
+	min-width: 135px;
+	float: left;
+	padding-top: 12px;
+}
+
+.delete_column .admin_label {
+	padding-top: 0px;
+}
+
+.admin_form select {
+	margin-top: 12px;
+}
+
+.admin_field {
+	margin-top: 8px;
+	width: 300px;
+}
+
+.admin_fieldset .back a {
+	color: black;
+	color: gray;
+	text-decoration: none;
+}
+
+.admin_fieldset .back a:hover {
+	text-decoration: underline;
+}
+.admin_fieldset .back {
+	margin: 0px;
+	float: left;
+}
+.admin_fieldset .back-image {
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: -2px;
+	float: left;
+}
+
+.file_column, .delete_column{
+	text-align: center;
+}

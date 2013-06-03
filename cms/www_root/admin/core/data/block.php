@@ -1,0 +1,56 @@
+<?php
+
+	// No direct access
+	defined('_ACCESS') or die;
+
+	include_once FRONTEND_REQUEST . "core/data/element_holder.php";
+
+	class Block extends ElementHolder {
+	
+		private static $TABLE_NAME = "blocks";
+	
+		private $_position_id;
+		
+		public function getPosition() {
+			$dao = BlockDao::getInstance();
+			return $dao->getBlockPosition($this->_position_id);
+		}
+		
+		public function getPositionId() {
+			return $this->_position_id;
+		}
+		
+		public function setPositionId($position_id) {
+			$this->_position_id = $position_id;
+		}
+		
+		public function persist() {
+			parent::persist();
+		}
+		
+		public function update() {
+			parent::update();
+		}
+		
+		public function delete() {
+			parent::delete();
+		}
+		
+		public static function constructFromRecord($record) {
+			$block = new Block();
+			$block->setId($record['id']);
+			$block->setTitle($record['title']);
+			$block->setPublished($record['published'] == 1 ? true : false);
+			$block->setTemplateId($record['template_id']);
+			$block->setScopeId($record['scope_id']);
+			$block->setPositionId($record['position_id']);
+			$block->setCreatedAt($record['created_at']);
+			$block->setCreatedById($record['created_by']);
+			$block->setType($record['type']);
+			
+			return $block;
+		}
+	
+	}
+	
+?>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<versions>
+	<version>
+		<number>0.0.1</number>
+		<queries />
+	</version>
+	<version>
+		<number>0.0.2</number>
+		<queries>
+			<query>
+				ALTER TABLE articles
+				ADD target_page INTEGER NULL
+			</query>
+			<query>
+				ALTER TABLE articles MODIFY COLUMN target_page INTEGER UNSIGNED DEFAULT NULL
+			</query>
+			<query>
+				ALTER TABLE articles
+				ADD CONSTRAINT articles_pages FOREIGN KEY articles_pages (target_page)
+				REFERENCES element_holders (id)
+				ON DELETE SET NULL
+				ON UPDATE SET NULL
+			</query>
+			<query>
+				CREATE TABLE article_target_pages (
+				  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+				  element_holder_id INTEGER UNSIGNED NOT NULL,
+				  is_default TINYINT(1) UNSIGNED NULL,
+				  PRIMARY KEY (id),
+				  CONSTRAINT article_target_pages FOREIGN KEY article_target_pages (element_holder_id)
+					REFERENCES element_holders (id)
+					ON DELETE CASCADE
+					ON UPDATE CASCADE
+				)
+			</query>
+			<query>
+				UPDATE settings SET database_version = '0.0.2'
+			</query>
+		</queries>
+	</version>
+	<version>
+		<number>0.0.3</number>
+		<queries>
+			<query>
+				CREATE TABLE messages (
+				  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+				  author VARCHAR(255) NOT NULL,
+				  message LONGBLOB NOT NULL,
+				  created_at DATETIME NOT NULL,
+				  is_read BOOLEAN NOT NULL,
+				  PRIMARY KEY (id)
+				)
+			</query>
+			<query>
+				INSERT INTO modules VALUES (13,
+				'Gastenboeken', '/admin/static.php?static=/guestbooks/img/guestbooks.png',
+				2, 0, 0, 'guestbooks', 1, 1, 'form/guestbook_handler.php')
+			</query>
+			<query>
+				CREATE TABLE guestbooks (
+				  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+				  title VARCHAR(255) NOT NULL,
+				  closed BOOLEAN NOT NULL,
+				  auto_acknowledge BOOLEAN NOT NULL,
+				  created_at DATETIME NOT NULL,
+				  created_by int(10) unsigned default NULL,
+				  PRIMARY KEY (id),
+				  CONSTRAINT guestbooks_user FOREIGN KEY guestbooks_user (created_by) REFERENCES auth_users (id)
+					ON DELETE SET NULL
+				)
+			</query>
+			<query>
+				CREATE TABLE guestbook_messages (
+				  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+				  message LONGTEXT NOT NULL,
+				  author VARCHAR(255) NOT NULL,
+				  email_address VARCHAR(255),
+				  posted_at DATETIME NOT NULL,
+				  acknowledged BOOLEAN NOT NULL,
+				  guestbook_id INTEGER UNSIGNED NOT NULL,
+				  PRIMARY KEY (id),
+				  CONSTRAINT guestbooks_messages FOREIGN KEY guestbooks_messages (guestbook_id)
+					REFERENCES guestbooks (id)
+					ON DELETE CASCADE
+					ON UPDATE CASCADE
+				)
+			</query>
+			<query>
+				CREATE TABLE guestbook_elements_metadata (
+				  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+				  guestbook_id INTEGER UNSIGNED default NULL,
+				  element_id INTEGER UNSIGNED NOT NULL,
+				  PRIMARY KEY (id),
+				  CONSTRAINT element_guestbooks FOREIGN KEY element_guestbooks (guestbook_id)
+					REFERENCES guestbooks (id)
+					ON DELETE SET NULL,
+				  CONSTRAINT guestbook_metadata_elements FOREIGN KEY guestbook_metadata_elements (element_id)
+					REFERENCES elements (id)
+					ON DELETE CASCADE
+					ON UPDATE CASCADE
+				)
+			</query>
+			<query>
+				INSERT INTO scopes (name) VALUES ('Gastenboek')
+			</query>
+			<query>
+				INSERT INTO element_types (classname, edit_presentation, icon_url, name, domain_object, scope_id, identifier, system_default)
+				  VALUES ('GuestBookElement', 'edit_guestbook_element.php', 'guestbook_element.png',
+				  'Gastenboek', 'guestbook_element.php', (SELECT id FROM scopes WHERE name = 'Gastenboek'), 'guestbook_element', 1)
+			</query>
+			<query>
+				UPDATE settings SET database_version = '0.0.3'
+			</query>
+		</queries>
+	</version>
+	<version>
+		<number>0.0.4</number>
+		<queries>
+			<query>
+				UPDATE settings SET database_version = '0.0.4'
+			</query>
+		</queries>
+	</version>
+	<version>
+		<number>0.0.5</number>
+		<queries>
+			<query>
+				ALTER TABLE pages ADD COLUMN is_homepage TINYINT(1);
+			</query>
+			<query>
+				ALTER TABLE pages ADD COLUMN description LONGTEXT AFTER is_homepage;
+			</query>
+			<query>
+				UPDATE element_types SET icon_url = REPLACE(icon_url, '/admin/static.php?static=/default/img/element_icons/', '');
+			</query>
+			<query>
+				ALTER TABLE element_types CHANGE location identifier varchar(255);
+			</query>
+			<query>
+				UPDATE element_types SET identifier = REPLACE(identifier, 'elements/', '');
+			</query>
+			<query>
+				UPDATE modules SET pre_handler = 'handler/download_handler.php' WHERE identifier = 'downloads';
+			</query>
+			<query>
+				UPDATE modules SET icon_url = REPLACE(icon_url, '/admin/static.php?static=', '');
+			</query>
+			<query>
+				UPDATE modules SET pre_handler = 'pre_handler.php' WHERE identifier = 'modules';
+			</query>
+			<query>
+				ALTER TABLE settings ADD COLUMN component_dir VARCHAR(255);
+			</query>
+			<query>
+				ALTER TABLE element_types ADD COLUMN destroy_script VARCHAR(255);
+			</query>
+			<query>
+				UPDATE modules SET title = 'Componenten', identifier = 'components' WHERE identifier = 'modules';
+			</query>
+			<query>
+				UPDATE modules SET icon_url = '/components/img/modules.png' WHERE identifier = 'components';
+			</query>
+			<query>
+				ALTER TABLE settings ADD COLUMN backend_template_dir VARCHAR(255);
+			</query>
+			<query>
+				ALTER TABLE settings CHANGE template_dir frontend_template_dir varchar(255);
+			</query>
+			<query>
+				ALTER TABLE modules DROP COLUMN home_item
+			</query>
+			<query>
+				ALTER TABLE modules ADD COLUMN class VARCHAR(255);
+			</query>
+			<query>
+				UPDATE modules SET class = 'PageModule' WHERE identifier = 'pages'
+			</query>
+			<query>
+				UPDATE modules SET class = 'ArticleModule' WHERE identifier = 'articles'
+			</query>
+			<query>
+				UPDATE modules SET class = 'BlockModule' WHERE identifier = 'blocks'
+			</query>
+			<query>
+				UPDATE modules SET class = 'GuestbookModule' WHERE identifier = 'guestbooks'
+			</query>
+			<query>
+				UPDATE modules SET class = 'ImageModule' WHERE identifier = 'images'
+			</query>
+			<query>
+				UPDATE modules SET class = 'DownloadModule' WHERE identifier = 'downloads'
+			</query>
+			<query>
+				UPDATE modules SET class = 'SettingsModule' WHERE identifier = 'settings'
+			</query>
+			<query>
+				UPDATE modules SET class = 'AuthorizationModule' WHERE identifier = 'authorization'
+			</query>
+			<query>
+				UPDATE modules SET class = 'TemplateModule' WHERE identifier = 'templates'
+			</query>
+			<query>
+				UPDATE modules SET class = 'DatabaseModule' WHERE identifier = 'database'
+			</query>
+			<query>
+				UPDATE modules SET class = 'ComponentModule' WHERE identifier = 'components'
+			</query>
+			<query>
+				UPDATE modules SET class = 'LogoutModule' WHERE identifier = 'logout'
+			</query>
+			<query>
+				ALTER TABLE modules DROP COLUMN pre_handler
+			</query>
+		</queries>
+	</version>
+</versions>

@@ -1,0 +1,10 @@
+<tr>
+	<td>
+		{$title_field}
+	</td>
+</tr>
+<tr>
+	<td>
+		{$text_field}
+	</td>
+</tr>

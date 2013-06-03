@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="/admin/static.php?static=/elements/image_element/css/image_element.css" type="text/css" />

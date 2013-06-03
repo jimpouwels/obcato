@@ -1,0 +1,1 @@
+{$warning_message}{$settings_editor}

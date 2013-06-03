@@ -1,0 +1,2 @@
+<link rel="stylesheet" href="/admin/static.php?static=/modules/{$path}/css/blocks.css" type="text/css" />
+<script type="text/javascript" src="/admin/static.php?static=/modules/{$path}/js/module_blocks.js"></script>

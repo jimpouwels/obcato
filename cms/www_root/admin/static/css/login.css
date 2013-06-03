@@ -1,0 +1,90 @@
+body {
+	background-color: #E2E2E2;
+}
+
+#login-form-box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -150px;
+	display:block;
+    height: 300px;
+	width: 500px;
+	border: 1px solid gray;
+	background: url(/admin/static/img/login_header.png) no-repeat;
+	background-color: white;
+	font-family: verdana;
+	font-size: 0.8em;
+}
+
+.loginform {
+	border: 0px;
+}
+
+.admin_label {
+	min-width: 135px;
+	padding-top: 12px;
+	display: block;
+}
+
+.admin_field {
+	margin-top: 8px;
+	width: 200px;
+}
+
+.fields {
+	margin: auto;
+	width: 200px;
+	margin-top: 20px;
+}
+
+.header {
+	width: 450px;
+	margin: auto;
+}
+
+.header img {
+	margin-top: 3px;
+}
+
+.button-holder {
+	width: 80px;
+	float: right;
+	margin-top: 20px;
+}
+
+.button {
+	background: url(/admin/static/img/login-button.png) repeat-x scroll 0 0 transparent;
+    border: 1px solid #6E93B0;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    color: #234E70;
+    display: inline;
+    float: left;
+    font-size: 1em;
+    height: 27px;
+    line-height: 26px;
+    margin-right: 5px;
+    padding: 0 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.button:active {
+    background-position: 0 bottom;
+}
+
+.button:hover {
+	text-decoration: underline;
+}
+
+.error {
+	margin: auto;
+	text-align: center;
+	color: red;
+	margin-top: 60px;
+	clear: both;
+	width: 450px;
+}
