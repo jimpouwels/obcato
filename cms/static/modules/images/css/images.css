@@ -60,3 +60,9 @@
 .admin_field  {
 	width: 275px;
 }
+
+.article_list_searched_by_text {
+	margin-left: 10px;
+	margin-bottom: 0px;
+	margin-top: 5px;
+}

@@ -7,7 +7,7 @@
 	require_once "core/visual/action_button.php";
 	require_once "libraries/system/template_engine.php";
 	require_once "modules/images/visuals/images/image_list.php";
-	require_once "modules/images/visuals/images/images_visual.php";
+	require_once "modules/images/visuals/images/images_tab.php";
 	require_once "modules/images/image_pre_handler.php";
 	require_once "modules/images/label_pre_handler.php";
 
@@ -21,13 +21,13 @@
 
 		private $_template_engine;
 		private $_image_dao;
-		private $_image_pre_handler;
+		private $_images_pre_handler;
 		private $_label_pre_handler;
 		
 		public function __construct() {
 			$this->_template_engine = TemplateEngine::getInstance();
 			$this->_image_dao = ImageDao::getInstance();
-			$this->_image_pre_handler = new ImagePreHandler();
+			$this->_images_pre_handler = new ImagePreHandler();
 			$this->_label_pre_handler = new LabelPreHandler();
 		}
 		
@@ -36,9 +36,9 @@
 			
 			$content = null;
 			if ($this->getCurrentTabId() == self::$IMAGES_TAB) {
-				$content = new ImagesVisual($this->_label_pre_handler->getCurrentLabelFromGetRequest());
+				$content = new ImagesTab($this->_label_pre_handler->getCurrentLabelFromGetRequest(), $this->_images_pre_handler);
 			} else if ($this->getCurrentTabId() == self::$LABELS_TAB) {
-				$content = new LabelManager($this->_image_pre_handler->getCurrentLabelFromGetRequest());
+				$content = new LabelManager($this->_images_pre_handler->getCurrentLabelFromGetRequest());
 			} else if ($this->getCurrentTabId() == self::$IMPORT_TAB) {
 			}
 			
@@ -77,7 +77,7 @@
 		}
 		
 		public function preHandle() {
-			$this->_image_pre_handler->handle();
+			$this->_images_pre_handler->handle();
 			$this->_label_pre_handler->handle();
 		}
 		
