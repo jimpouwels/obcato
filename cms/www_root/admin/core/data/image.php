@@ -37,6 +37,16 @@
 			$this->_thumbnail_file_name = $thumb_filename;
 		}
 		
+		public function getThumbUrl() {
+			$id = $this->getId();
+			return "/admin/upload.php?image=$id&amp;thumb=true";
+		}
+		
+		public function getUrl() {
+			$id = $this->getId();
+			return "/admin/upload.php?image=$id";
+		}
+		
 		public function getThumbFileName() {
 			return $this->_thumbnail_file_name;
 		}

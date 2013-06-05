@@ -27,6 +27,7 @@ $(document).ready(function() {
 	$('#add_image').click(function() {
 		$('#add_image_action').attr('value', 'add_image');
 		$('#add_form_hidden').submit();
+		return false;
 	});
 	
 	// update label button

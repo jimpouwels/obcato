@@ -50,8 +50,8 @@
 	<fieldset class="admin_fieldset image_editor">
 		<div class="fieldset-title">Afbeelding</div>
 		
-		{if !empty($filename)}
-			<img title="{$title}" alt="{$title}" src="/admin/upload.php?image={$id}" />
+		{if !empty($url)}
+			<img title="{$title}" alt="{$title}" src="{$url}" />
 		{/if}
 	</fieldset>
 </form>

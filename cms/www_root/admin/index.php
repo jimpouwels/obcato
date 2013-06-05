@@ -1,6 +1,4 @@
 <?php
-	// DISABLE WARNINGS
-	//error_reporting(0);
 
 	// DIRECT ACCESS GRANTED
 	define("_ACCESS", "GRANTED");
