@@ -62,7 +62,7 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "UPDATE images SET title = '" . $image->getTitle() . "', 
-			          published = " . $image->getPublished() . ", file_name = '" . $image->getFileName() . "'
+			          published = " . $image->isPublished() . ", file_name = '" . $image->getFileName() . "'
 					  , thumb_file_name = '" . $image->getThumbFileName() . "' WHERE id = " . $image->getId();
 			$mysql_database->executeQuery($query);
 		}
@@ -206,7 +206,7 @@
 		private function persistImage($image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
-			$published_value = $image->getPublished();
+			$published_value = $image->isPublished();
 			if (!isset($published_value) || $published_value == '') {
 				$published_value = 0;
 			}

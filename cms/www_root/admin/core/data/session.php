@@ -8,8 +8,6 @@
 
 	class Session {
 	
-		// checks if the user is authenticated, if not redirect
-		// login page
 		public function isAuthenticated() {
 			include_once "libraries/system/constants.php";
 			
@@ -29,8 +27,6 @@
 			return $authenticated;
 		}
 		
-		// tries to authenticate the user and add the user info to
-		// the session
 		public function logIn($username, $password) {
 			$authenticated = false;
 			if (self::authenticate($username, $password)) {
@@ -44,8 +40,7 @@
 			}
 			return $authenticated;
 		}
-		
-		// logs out the current user
+
 		public function logOut($username) {
 			session_start();
 			session_destroy();

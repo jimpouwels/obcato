@@ -54,7 +54,7 @@
 			if ($this->getCurrentTabId() == self::$IMAGES_TAB) {
 				$save_button = null;
 				$delete_button = null;
-				if (!is_null($this->_label_pre_handler->getCurrentLabelFromGetRequest())) {
+				if (!is_null($this->_images_pre_handler->getCurrentImageFromGetRequest())) {
 					$save_button = new ActionButton("Opslaan", "update_image", "icon_apply");
 					$delete_button = new ActionButton("Verwijderen", "delete_image", "icon_delete");
 				}

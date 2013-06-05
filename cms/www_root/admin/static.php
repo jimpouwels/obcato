@@ -5,7 +5,6 @@
 	
 	include_once "backend.php";
 	
-	// AUTHENTICATE
 	$backend = new Backend("site_administrator");
 	$backend->isAuthenticated();
 	
