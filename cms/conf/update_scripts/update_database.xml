@@ -173,40 +173,40 @@
 				ALTER TABLE modules ADD COLUMN class VARCHAR(255);
 			</query>
 			<query>
-				UPDATE modules SET class = 'PageModule' WHERE identifier = 'pages'
+				UPDATE modules SET class = 'PageModuleVisual' WHERE identifier = 'pages'
 			</query>
 			<query>
-				UPDATE modules SET class = 'ArticleModule' WHERE identifier = 'articles'
+				UPDATE modules SET class = 'ArticleModuleVisual' WHERE identifier = 'articles'
 			</query>
 			<query>
-				UPDATE modules SET class = 'BlockModule' WHERE identifier = 'blocks'
+				UPDATE modules SET class = 'BlockModuleVisual' WHERE identifier = 'blocks'
 			</query>
 			<query>
-				UPDATE modules SET class = 'GuestbookModule' WHERE identifier = 'guestbooks'
+				UPDATE modules SET class = 'GuestbookModuleVisual' WHERE identifier = 'guestbooks'
 			</query>
 			<query>
-				UPDATE modules SET class = 'ImageModule' WHERE identifier = 'images'
+				UPDATE modules SET class = 'ImageModuleVisual' WHERE identifier = 'images'
 			</query>
 			<query>
-				UPDATE modules SET class = 'DownloadModule' WHERE identifier = 'downloads'
+				UPDATE modules SET class = 'DownloadModuleVisual' WHERE identifier = 'downloads'
 			</query>
 			<query>
-				UPDATE modules SET class = 'SettingsModule' WHERE identifier = 'settings'
+				UPDATE modules SET class = 'SettingsModuleVisual' WHERE identifier = 'settings'
 			</query>
 			<query>
-				UPDATE modules SET class = 'AuthorizationModule' WHERE identifier = 'authorization'
+				UPDATE modules SET class = 'AuthorizationModuleVisual' WHERE identifier = 'authorization'
 			</query>
 			<query>
-				UPDATE modules SET class = 'TemplateModule' WHERE identifier = 'templates'
+				UPDATE modules SET class = 'TemplateModuleVisual' WHERE identifier = 'templates'
 			</query>
 			<query>
-				UPDATE modules SET class = 'DatabaseModule' WHERE identifier = 'database'
+				UPDATE modules SET class = 'DatabaseModuleVisual' WHERE identifier = 'database'
 			</query>
 			<query>
-				UPDATE modules SET class = 'ComponentModule' WHERE identifier = 'components'
+				UPDATE modules SET class = 'ComponentModuleVisual' WHERE identifier = 'components'
 			</query>
 			<query>
-				UPDATE modules SET class = 'LogoutModule' WHERE identifier = 'logout'
+				UPDATE modules SET class = 'LogoutModuleVisual' WHERE identifier = 'logout'
 			</query>
 			<query>
 				ALTER TABLE modules DROP COLUMN pre_handler

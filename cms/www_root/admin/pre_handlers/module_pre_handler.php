@@ -25,17 +25,8 @@
 				unset($_SESSION['module_tab']);
 			}
 			
-			if (isset($_GET['module_tab'])) {
-				$_SESSION['module_tab'] = $_GET['module_tab'];
-			}
-			
-			if (isset($_SESSION['module_tab'])) {
-				$current_module_tab = $_SESSION['module_tab'];
-			}
-			
 			if (isset($_SESSION['module_id'])) {
 				$current_module = $this->_module_dao->getModule($_SESSION['module_id']);
-				$current_module->setCurrentTabId($current_module_tab);
 			}
 			$this->_callback->setCurrentModule($current_module);
 		}

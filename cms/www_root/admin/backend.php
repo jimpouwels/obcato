@@ -30,17 +30,21 @@
 		}
 		
 		public function start() {
+			$module_visual = null;;
+		
 			$this->isAuthenticated();
-			
 			$this->runPreHandlers();
 			if (!is_null($this->_current_module)) {
-				$this->_current_module->preHandle();
+				require_once "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
+				$class = $this->_current_module->getClass();
+				$module_visual = new $class($this->_current_module);
+				$module_visual->preHandle();
 			}
 			if ($this->isPopupView()) {
 				$popup = new Popup($_GET['popup']);
 				$popup->render();
 			} else {
-				$cms = new Cms($this->_current_module, $this->_settings->getWebsiteTitle());
+				$cms = new Cms($module_visual, $this->_settings->getWebsiteTitle());
 				$cms->render();
 			}
 		}

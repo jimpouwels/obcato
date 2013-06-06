@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/data/module.php";
 	require_once "core/data/page.php";
+	require_once "core/visual/module_visual.php";
 	require_once "core/visual/action_button.php";
 	require_once "modules/pages/visuals/page_tree.php";
 	require_once "modules/pages/visuals/page_editor.php";
 
-	class PageModule extends Module {
+	class PageModuleVisual extends ModuleVisual {
 	
 		private static $PAGE_ID_QS_KEY = "page";
 		private static $PAGE_MODULE_TEMPLATE = "modules/pages/module_pages.tpl";
@@ -17,19 +17,25 @@
 	
 		private $_current_page;
 		private $_template_engine;
+		private $_page_module;
 	
-		public function __construct() {
+		public function __construct($page_module) {
+			$this->_page_module = $page_module;
 			$this->_template_engine = TemplateEngine::getInstance();
 			$this->initialize();
 		}
 	
 		public function render() {
-			$page_tree = new PageTree(Settings::find()->getHomepage(), $this->_current_page, $this->getIdentifier());
-			$page_editor = new PageEditor($this->_current_page, $this->getIdentifier());
+			$page_tree = new PageTree(Settings::find()->getHomepage(), $this->_current_page, $this->_page_module->getIdentifier());
+			$page_editor = new PageEditor($this->_current_page, $this->_page_module->getIdentifier());
 			
 			$this->_template_engine->assign("tree", $page_tree->render());
 			$this->_template_engine->assign("editor", $page_editor->render());
 			return $this->_template_engine->fetch(self::$PAGE_MODULE_TEMPLATE);
+		}
+		
+		public function getTitle() {
+			return $this->_page_module->getTitle();
 		}
 		
 		public function getActionButtons() {
@@ -54,7 +60,7 @@
 		}
 		
 		public function getHeadIncludes() {
-			$this->_template_engine->assign("path", $this->getIdentifier());
+			$this->_template_engine->assign("path", $this->_page_module->getIdentifier());
 			
 			$element_statics_values = array();			
 			$element_statics = $this->_current_page->getElementStatics();

@@ -15,9 +15,6 @@
 		
 		public function getHeadIncludes() {
 		}
-		
-		public function preHandle() {
-		}
 	
 	}
 	

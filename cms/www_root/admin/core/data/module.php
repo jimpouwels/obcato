@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "core/data/entity.php";
-	include_once "libraries/system/template_engine.php";
+	require_once "core/data/entity.php";
+	require_once "libraries/system/template_engine.php";
 
-	abstract class Module extends Entity {
+	class Module extends Entity {
 	
 		private static $TABLE_NAME = "modules";
 	
@@ -19,6 +19,7 @@
 		private $_is_system_default;
 		private $_module_group_id;
 		private $_current_tab_id;
+		private $_class;
 		
 		public function getTitle() {
 			return $this->_title;
@@ -26,6 +27,14 @@
 		
 		public function setTitle($title) {
 			$this->_title = $title;
+		}
+		
+		public function getClass() {
+			return $this->_class;
+		}
+		
+		public function setClass($class) {
+			$this->_class = $class;
 		}
 		
 		public function getIconUrl() {
@@ -83,39 +92,13 @@
 			return $module_group;
 		}
 		
-		public function setCurrentTabId($current_tab_id) {
-			$this->_current_tab_id = $current_tab_id;
-		}
-		
-		public function getCurrentTabId() {
-			return $this->_current_tab_id;
-		}
-		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
-		}
-		
-		abstract function render();
-		
-		abstract function getActionButtons();
-		
-		abstract function getHeadIncludes();
-		
-		abstract function preHandle();
-		
 		public static function constructFromRecord($record) {
 			$module = null;
 		
 			$class = $record['class'];
 			$identifier = $record['identifier'];
 			if (!is_null($class) && $class != '') {
-				include_once "modules/$identifier/activator.php";
-				$module = new $class();
+				$module = new Module();
 				$module->setId($record['id']);
 				$module->setTitle($record['title']);
 				$module->setIconUrl($record['icon_url']);
@@ -124,6 +107,7 @@
 				$module->setEnabled($record['enabled']);
 				$module->setSystemDefault($record['system_default']);
 				$module->setModuleGroupId($record['module_group_id']);
+				$module->setClass($record['class']);
 			}
 			return $module;
 		}

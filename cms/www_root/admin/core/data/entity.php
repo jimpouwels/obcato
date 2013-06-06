@@ -14,12 +14,6 @@
 		public function setId($id) {
 			$this->myId = $id;
 		}
-		
-		abstract function persist();
-		
-		abstract function update();
-		
-		abstract function delete();
 	
 	}
 	
