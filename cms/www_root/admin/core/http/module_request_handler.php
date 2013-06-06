@@ -8,11 +8,18 @@
 	abstract class ModuleRequestHandler extends HttpRequestHandler {
 		
 		public function getCurrentTabId() {
-			$current_module_tab = 0;
-			
+			$this->getModuleTabFromGetRequest();
+			return $this->getModuleTabFromSession();
+		}
+		
+		private function getModuleTabFromGetRequest() {
 			if (isset($_GET['module_tab'])) {
 				$_SESSION['module_tab'] = $_GET['module_tab'];
 			}
+		}
+		
+		private function getModuleTabFromSession() {
+			$current_module_tab = 0;
 			if (isset($_SESSION['module_tab'])) {
 				$current_module_tab = $_SESSION['module_tab'];
 			}
