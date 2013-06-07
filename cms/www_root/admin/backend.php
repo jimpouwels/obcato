@@ -44,10 +44,12 @@
 			Callback invocation for ModulePreHandler.
 		*/
 		public function setCurrentModule($current_module) {
-			$this->_current_module = $current_module;
-			require_once "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
-			$class = $this->_current_module->getClass();
-			$this->_module_visual = new $class($this->_current_module);
+			if (!is_null($current_module)) {
+				$this->_current_module = $current_module;
+				require_once "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
+				$class = $this->_current_module->getClass();
+				$this->_module_visual = new $class($this->_current_module);
+			}
 		}
 		
 		private function renderCms() {
