@@ -8,10 +8,10 @@
 	class ActionsMenu extends Visual {
 	
 		private static $TEMPLATE = "system/actions_menu.tpl";
-		private $myActionButtons;
+		private $_action_buttons;
 	
 		public function __construct($action_buttons) {
-			$this->myActionButtons = $action_buttons;
+			$this->_action_buttons = $action_buttons;
 		}
 	
 		public function render() {
@@ -24,7 +24,7 @@
 		
 		private function getActionButtonsHtml() {
 			$buttons_html = "";
-			foreach ($this->myActionButtons as $action_button) {
+			foreach ($this->_action_buttons as $action_button) {
 				if (!is_null($action_button)) {
 					$buttons_html .= $action_button->render();
 				}
