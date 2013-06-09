@@ -8,21 +8,22 @@
 	require_once "core/visual/action_button.php";
 	require_once "modules/pages/visuals/page_tree.php";
 	require_once "modules/pages/visuals/page_editor.php";
+	require_once "modules/pages/page_pre_handler.php";
 
 	class PageModuleVisual extends ModuleVisual {
-	
-		private static $PAGE_ID_QS_KEY = "page";
+
 		private static $PAGE_MODULE_TEMPLATE = "modules/pages/module_pages.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
 	
 		private $_current_page;
 		private $_template_engine;
 		private $_page_module;
+		private $_page_pre_handler;
 	
 		public function __construct($page_module) {
 			$this->_page_module = $page_module;
 			$this->_template_engine = TemplateEngine::getInstance();
-			$this->initialize();
+			$this->_page_pre_handler = new PagePreHandler();
 		}
 	
 		public function render() {
@@ -75,22 +76,8 @@
 		}
 		
 		public function preHandle() {
-			include_once "modules/pages/pre_handler.php";
-			$this->initialize();
-		}
-		
-		private function initialize() {
-			$this->_current_page = $this->getCurrentPage();
-		}
-		
-		private function getCurrentPage() {
-			$current_page = NULL;
-			if (isset($_GET[self::$PAGE_ID_QS_KEY])) {
-				$current_page = Page::findById($_GET[self::$PAGE_ID_QS_KEY]);
-			} else {
-				$current_page = Page::findById(1);
-			}
-			return $current_page;
+			$this->_page_pre_handler->handle();
+			$this->_current_page = $this->_page_pre_handler->getCurrentPage();
 		}
 	
 	}

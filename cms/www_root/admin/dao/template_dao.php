@@ -40,8 +40,8 @@
 			@param The ID to Template to find
 		*/
 		public function getTemplate($id) {
-			$template = NULL;
-				if (!is_null($id)) {
+			$template = null;
+			if (!is_null($id)) {
 				$mysql_database = MysqlConnector::getInstance(); 
 			
 				$query = "SELECT * FROM templates WHERE id = " . $id;

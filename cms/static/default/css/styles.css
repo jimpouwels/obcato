@@ -156,7 +156,7 @@ body {
 }
 
 /*
-=========== ICON STYLES
+=========== ACTION BUTTON STYLES
 */
 .icon_apply {
 	background: url("/admin/static.php?static=/default/img/default_icons/apply.png") no-repeat scroll 5px 0;
@@ -200,7 +200,7 @@ body {
 	height: 32px;
 	padding: 0px;
 	width: 36px;
-	margin-left: 0px;
+	margin-left: 7px;
 }
 
 .icon_movedown{
@@ -209,7 +209,7 @@ body {
 	height: 32px;
 	padding: 0px;
 	width: 36px;
-	margin-left: -2px;
+	margin-left: 7px;
 }
 
 /*

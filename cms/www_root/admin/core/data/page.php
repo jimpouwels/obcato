@@ -10,12 +10,8 @@
 	class Page extends ElementHolder {
 	
 		private static $TABLE_NAME = "pages";
-		private static $DB_COLUMNS = "e.id, e.template_id, e.title, e.published, e.scope_id, 
-					  e.created_at, e.created_by, e.type, p.navigation_title, p.description, p.parent_id, p.show_in_navigation,
-					  p.include_in_searchindex, p.follow_up, p.is_homepage";
 		
 		private $_page_dao;
-		
 		private $_description;
 		private $_navigation_title;
 		private $_parent_id;
@@ -61,7 +57,7 @@
 		public function getParent() {
 			$parent = null;
 			if (!is_null($this->_parent_id)) {
-				$parent = Page::findById($this->_parent_id);
+				$parent = $this->_page_dao->getPage($this->_parent_id);
 			}
 			return $parent;
 		}
@@ -119,6 +115,7 @@
 			if ($this->getId() == $id) {
 				$last = true;
 			}
+			echo $last;
 			return $last;
 		}
 		
@@ -202,15 +199,6 @@
 		
 		public function moveDown() {
 			$this->_page_dao->moveDown($this);
-		}
-		
-		public static function findById($id) {
-			$page_dao = PageDao::getInstance();
-			return $page_dao->getPage($id);
-		}
-		
-		public static function findByTerm($term) {
-			return $this->_page_dao->searchByTerm($term);			
 		}
 		
 		public static function constructFromRecord($record) {

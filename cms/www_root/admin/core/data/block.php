@@ -16,6 +16,14 @@
 			return $dao->getBlockPosition($this->_position_id);
 		}
 		
+		public function getPositionName() {
+			$position_name = "";
+			$position = $this->getPosition();
+			if (!is_null($position))
+				$position_name = $position->getName();
+			return $position_name;
+		}
+		
 		public function getPositionId() {
 			return $this->_position_id;
 		}

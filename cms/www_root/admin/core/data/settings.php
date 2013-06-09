@@ -140,7 +140,7 @@
 			}
 		
 			if (!is_null($homepage_id)) {
-				$homepage = Page::findById($homepage_id);
+				$homepage = PageDao::getInstance()->getPage($homepage_id);
 			}
 			
 			return $homepage;

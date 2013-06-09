@@ -74,10 +74,11 @@
 		*/
 		public function update($element_holder) {
 			$query = "UPDATE element_holders SET title = '" . $element_holder->getTitle() . "', published = " . $element_holder->isPublished() . ",
-					  scope_id = " . $element_holder->getScopeId() . " WHERE id = " . $element_holder->getId();
-			if ($element_holder->getTemplateId() != '' && !is_null($element_holder->getTemplateId())) {
-				$query = $query . ", e.template_id = " . $element_holder->getTemplateId();
+					  scope_id = " . $element_holder->getScopeId();
+			if ($element_holder->getTemplateId() != "" && !is_null($element_holder->getTemplateId())) {
+				$query .= ", template_id = " . $element_holder->getTemplateId();
 			}
+			$query .= " WHERE id = " . $element_holder->getId();
 			$this->_mysql_connector->executeQuery($query);
 		}
 		
