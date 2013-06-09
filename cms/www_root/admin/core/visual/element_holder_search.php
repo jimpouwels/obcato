@@ -10,6 +10,7 @@
 	require_once "core/visual/button.php";
 	require_once "core/visual/information_message.php";
 	require_once "dao/article_dao.php";
+	require_once "dao/page_dao.php";
 	require_once "core/data/page.php";
 	
 	class ElementHolderSearch extends Visual {
@@ -22,6 +23,7 @@
 		private $_back_click_id;
 		private $_backfill_id;
 		private $_article_dao;
+		private $_page_dao;
 		
 		public function __construct($back_click_id, $backfill_id, $objects_to_search) {
 			$this->_template_engine = TemplateEngine::getInstance();
@@ -29,6 +31,7 @@
 			$this->_back_click_id = $back_click_id;
 			$this->_backfill_id = $backfill_id;
 			$this->_article_dao = ArticleDao::getInstance();
+			$this->_page_dao = PageDao::getInstance();
 		}
 		
 		public function render() {
@@ -58,7 +61,7 @@
 			$search_results = null;
 			if (isset($_GET[self::$OBJECT_TYPE_KEY])) {
 				if ($_GET[self::$OBJECT_TYPE_KEY] == "element_holder_page") {
-					$search_results = Page::findByTerm($search_query);
+					$search_results = $this->_page_dao->searchByTerm($search_query);
 				} else if ($_GET[self::$OBJECT_TYPE_KEY] == "element_holder_article") {
 					$search_results = $this->_article_dao->searchArticles($search_query, null);
 				}
