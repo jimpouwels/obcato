@@ -8,37 +8,21 @@
 	include_once FRONTEND_REQUEST . "core/data/image.php";
 	
 	class ImageDao {
-	
-		// Holds the list of columns that are to be collected
+
 		private static $myAllColumns = "i.id, i.title, i.published, i.created_at, i.created_by, i.file_name, i.thumb_file_name";
-	
-		/*
-			This DAO is a singleton, no constructur but
-			a getInstance() method instead.
-		*/
+
 		private static $instance;
-		
-		/*
-			Private constructor.
-		*/
+
 		private function __construct() {
 		}
-		
-		/*
-			Creates (if not exists) and returns an instance.
-		*/
+
 		public static function getInstance() {
 			if (!self::$instance) {
 				self::$instance = new ImageDao();
 			}
 			return self::$instance;
 		}
-		
-		/*
-			Returns the image for the given ID.
-			
-			@param $image_id The image ID to find the image for
-		*/
+
 		public function getImage($image_id) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -52,12 +36,7 @@
 			
 			return $image;
 		}
-		
-		/*
-			Updates the given image.
-			
-			@param $image The image to update
-		*/
+
 		public function updateImage($image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -66,10 +45,7 @@
 					  , thumb_file_name = '" . $image->getThumbFileName() . "' WHERE id = " . $image->getId();
 			$mysql_database->executeQuery($query);
 		}
-		
-		/*
-			Returns all images.
-		*/
+
 		public function getAllImages() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -85,10 +61,7 @@
 			
 			return $images;
 		}
-				
-		/*
-			Returns all images without a label.
-		*/
+
 		public function getAllImagesWithoutLabel() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -106,14 +79,7 @@
 			
 			return $images;
 		}
-		
-		/*
-			Searches for images.
-			
-			@param $keyword The keyword to search for
-			@param $filename The file name to search for
-			@param $label The label to search for
-		*/
+
 		public function searchImages($keyword, $filename, $label_id) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -152,10 +118,7 @@
 			
 			return $images;
 		}
-		
-		/*
-			Creates a new image.
-		*/
+
 		public function createImage() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			$new_image = new Image();
@@ -166,17 +129,11 @@
 			$user = $authorization_dao->getUser($_SESSION['username']);
 			$new_image->setCreatedById($user->getId());
 			
-			$new_id = $this->persistImage($new_image);
-			$new_image->setId($new_id);
+			$this->persistImage($new_image);
 			
 			return $new_image;
 		}
-		
-		/*
-			Deletes the given image.
-			
-			@param $image The image to delete
-		*/
+
 		public function deleteImage($image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -197,12 +154,7 @@
 			
 			$mysql_database->executeQuery($query);
 		}
-		
-		/*
-			Persists the given image.
-			
-			@param $image The image to persist
-		*/
+
 		private function persistImage($image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -216,13 +168,9 @@
 			
 			echo $query;
 			$mysql_database->executeQuery($query);
-			
-			return mysql_insert_id();
+			$image->setId(mysql_insert_id());
 		}
-		
-		/*
-			Returns all image labels.
-		*/
+
 		public function getAllLabels() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -238,13 +186,7 @@
 			
 			return $labels;
 		}
-		
-		
-		/*
-			Returns the image label with the given ID.
-			
-			@param $id The ID to find the image label for
-		*/
+
 		public function getLabel($id) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -258,12 +200,7 @@
 			
 			return $label;
 		}
-		
-		/*
-			Returns the label with the given name.
-			
-			@param $name The name to find the label for
-		*/
+
 		public function getLabelByName($name) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -278,40 +215,15 @@
 			return $label;
 		}
 		
-		/*
-			Creates and persists a new label.
-		*/
-		public function createLabel() {
-			$mysql_database = MysqlConnector::getInstance(); 
-			$label = new ImageLabel();
-			$label->setName('Nieuwe term');
-			
-			$new_id = $this->persistLabel($label);
-			$label->setId($new_id);
-			
-			return $label;
-		}
-		
-		/*
-			Persists the given label.
-			
-			@param $label The label to update
-		*/
-		private function persistLabel($label) {
+		public function persistLabel($label) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "INSERT INTO image_labels (name) VALUES  ('" . $label->getName() . "')";
 		
 			$mysql_database->executeQuery($query);
-			
-			return mysql_insert_id();
+			$label->setId(mysql_insert_id());
 		}
 		
-		/*
-			Updates the given label.
-			
-			@param $label The label to update
-		*/
 		public function updateLabel($label) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -320,12 +232,6 @@
 			$mysql_database->executeQuery($query);
 		}
 		
-		/*
-			Deletes the label with the given ID.
-			
-			@param $label The ID of the label
-				   to update
-		*/
 		public function deleteLabel($label) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -334,12 +240,6 @@
 			$mysql_database->executeQuery($query);
 		}
 		
-		/*
-			Adds the given label to the given image.
-			
-			@param $label_id The ID of the label to add to the image
-			@param $image The image to add the label to
-		*/
 		public function addLabelToImage($label_id, $image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -348,12 +248,6 @@
 			$mysql_database->executeQuery($query);
 		}
 		
-		/*
-			Deletes the label with the given ID from the given image.
-			
-			@param $label_id The ID of the label to delete from the image
-			@param $image The image to delete the label from
-		*/
 		public function deleteLabelForImage($label_id, $image) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -363,11 +257,6 @@
 			$mysql_database->executeQuery($query);
 		}
 		
-		/*
-			Returns all labels related to the given image ID.
-			
-			@param $image_id The ID of the image to find the labels for
-		*/
 		public function getLabelsForImage($image_id) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			

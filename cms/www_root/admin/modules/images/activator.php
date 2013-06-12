@@ -8,6 +8,7 @@
 	require_once "libraries/system/template_engine.php";
 	require_once "modules/images/visuals/images/image_list.php";
 	require_once "modules/images/visuals/images/images_tab.php";
+	require_once "modules/images/visuals/labels/labels_tab.php";
 	require_once "core/visual/tab_menu.php";
 	require_once "modules/images/image_pre_handler.php";
 	require_once "modules/images/label_pre_handler.php";
@@ -38,12 +39,11 @@
 		
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-			
 			$content = null;
 			if ($this->_current_tab_id == self::$IMAGES_TAB) {
-				$content = new ImagesTab($this->_label_pre_handler->getCurrentLabelFromGetRequest(), $this->_images_pre_handler);
+				$content = new ImagesTab($this->_images_pre_handler);
 			} else if ($this->_current_tab_id == self::$LABELS_TAB) {
-				$content = new LabelManager($this->_images_pre_handler->getCurrentLabelFromGetRequest());
+				$content = new LabelsTab($this->_label_pre_handler);
 			} else if ($this->_current_tab_id == self::$IMPORT_TAB) {
 			}
 			
@@ -63,7 +63,7 @@
 			if ($this->_current_tab_id == self::$IMAGES_TAB) {
 				$save_button = null;
 				$delete_button = null;
-				if (!is_null($this->_images_pre_handler->getCurrentImageFromGetRequest())) {
+				if (!is_null($this->_images_pre_handler->getCurrentImage())) {
 					$save_button = new ActionButton("Opslaan", "update_image", "icon_apply");
 					$delete_button = new ActionButton("Verwijderen", "delete_image", "icon_delete");
 				}
@@ -72,7 +72,11 @@
 				$action_buttons[] = $delete_button;				
 			}
 			if ($this->_current_tab_id == self::$LABELS_TAB) {
-				
+				if (!is_null($this->_label_pre_handler->getCurrentLabel())) {
+					$action_buttons[] = new ActionButton("Opslaan", "update_label", "icon_apply");
+					$action_buttons[] = new ActionButton("Verwijder", "delete_labels", "icon_delete");
+				}
+				$action_buttons[] = new ActionButton("Toevoegen", "add_label", "icon_add");		
 			}
 			if ($this->_current_tab_id == self::$IMPORT_TAB) {
 				

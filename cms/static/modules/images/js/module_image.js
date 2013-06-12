@@ -30,6 +30,13 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	// add label button
+	$('#add_label').click(function() {
+		$('#add_label_action').attr('value', 'add_label');
+		$('#add_form_hidden').submit();
+		return false;
+	});
+	
 	// update label button
 	$('#update_label').click(function() {
 		$('#action').attr('value', 'update_label');
