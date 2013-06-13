@@ -29,7 +29,6 @@
 			$query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $image_id;
 			$result = $mysql_database->executeSelectQuery($query);
 			$image = null;
-			
 			while ($row = mysql_fetch_array($result)) {
 				$image = Image::constructFromRecord($row);
 			}

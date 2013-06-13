@@ -6,12 +6,13 @@
 	require_once "core/visual/module_visual.php";
 	require_once "core/visual/action_button.php";
 	require_once "libraries/system/template_engine.php";
-	require_once "modules/images/visuals/images/image_list.php";
+	require_once "modules/images/visuals/import/import_tab.php";
 	require_once "modules/images/visuals/images/images_tab.php";
 	require_once "modules/images/visuals/labels/labels_tab.php";
 	require_once "core/visual/tab_menu.php";
 	require_once "modules/images/image_pre_handler.php";
 	require_once "modules/images/label_pre_handler.php";
+	require_once "modules/images/import_pre_handler.php";
 
 	class ImageModuleVisual extends ModuleVisual {
 	
@@ -25,6 +26,7 @@
 		private $_image_dao;
 		private $_images_pre_handler;
 		private $_label_pre_handler;
+		private $_import_pre_handler;
 		private $_image_module;
 		private $_current_tab_id;
 		
@@ -34,6 +36,7 @@
 			$this->_image_dao = ImageDao::getInstance();
 			$this->_images_pre_handler = new ImagePreHandler();
 			$this->_label_pre_handler = new LabelPreHandler();
+			$this->_import_pre_handler = new ImportPreHandler();
 			$this->_current_tab_id = $this->_images_pre_handler->getCurrentTabId();
 		}
 		
@@ -45,6 +48,7 @@
 			} else if ($this->_current_tab_id == self::$LABELS_TAB) {
 				$content = new LabelsTab($this->_label_pre_handler);
 			} else if ($this->_current_tab_id == self::$IMPORT_TAB) {
+				$content = new ImportTab();
 			}
 			
 			if (!is_null($content)) {
@@ -79,7 +83,7 @@
 				$action_buttons[] = new ActionButton("Toevoegen", "add_label", "icon_add");		
 			}
 			if ($this->_current_tab_id == self::$IMPORT_TAB) {
-				
+				$action_buttons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");		
 			}
 			return $action_buttons;
 		}
@@ -92,6 +96,7 @@
 		public function preHandle() {
 			$this->_images_pre_handler->handle();
 			$this->_label_pre_handler->handle();
+			$this->_import_pre_handler->handle();
 		}
 		
 		private function renderTabMenu() {
