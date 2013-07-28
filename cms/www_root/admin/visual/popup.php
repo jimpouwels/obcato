@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "libraries/system/template_engine.php";
-	require_once "core/visual/search.php";
+	require_once "visual/search.php";
 	
 	class Popup extends Visual {
 		

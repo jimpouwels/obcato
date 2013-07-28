@@ -5,10 +5,10 @@
 	
 	require_once "dao/module_dao.php";
 	require_once "libraries/system/template_engine.php";
-	require_once "core/visual/visual.php";
-	require_once "core/visual/navigation_menu.php";
-	require_once "core/visual/actions_menu.php";
-	require_once "core/visual/notification_bar.php";
+	require_once "visual/visual.php";
+	require_once "visual/navigation_menu.php";
+	require_once "visual/actions_menu.php";
+	require_once "visual/notification_bar.php";
 	
 	class Cms extends Visual {
 		

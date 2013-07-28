@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "libraries/system/template_engine.php";
-	require_once "core/visual/form_checkbox_single.php";
+	require_once "visual/form_checkbox_single.php";
 	require_once "dao/block_dao.php";
 	
 	class BlockSelector extends Visual {

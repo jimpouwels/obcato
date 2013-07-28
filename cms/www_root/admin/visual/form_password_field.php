@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/visual/form_field.php";
+	require_once "visual/form_field.php";
 	
 	class PasswordField extends FormField {
 	

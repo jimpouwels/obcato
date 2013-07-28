@@ -2,9 +2,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/visual/visual.php";
-	require_once "core/visual/information_message.php";
-	require_once "core/visual/form_checkbox_single.php";
+	require_once "visual/visual.php";
+	require_once "visual/information_message.php";
+	require_once "visual/form_checkbox_single.php";
 	require_once "dao/image_dao.php";
 	
 	class LabelsList extends Visual {

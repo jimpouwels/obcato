@@ -29,10 +29,10 @@
 		$errors['login_unsuccessful'] = 'Verkeerde gebruikersnaam / wachtwoord combinatie';
 	}
 	
-	include_once "core/visual/form_textfield.php";
-	include_once "core/visual/form_password_field.php";
+	include_once "visual/form_textfield.php";
+	include_once "visual/form_password_field.php";
 	include_once "libraries/renderers/main_renderer.php";
-	include_once "core/visual/button.php";
+	include_once "visual/button.php";
 ?>
 		
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

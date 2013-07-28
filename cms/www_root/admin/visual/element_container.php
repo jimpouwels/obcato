@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "libraries/system/template_engine.php";
-	require_once "core/visual/information_message.php";
+	require_once "visual/information_message.php";
 	
 	class ElementContainer extends Visual {
 	

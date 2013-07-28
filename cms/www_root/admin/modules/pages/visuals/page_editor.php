@@ -2,13 +2,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/visual/form_textfield.php";
-	require_once "core/visual/form_textarea.php";
-	require_once "core/visual/form_checkbox_single.php";
-	require_once "core/visual/form_template_picker.php";
-	require_once "core/visual/element_container.php";
-	require_once "core/visual/link_editor.php";
-	require_once "core/visual/block_selector.php";
+	require_once "visual/form_textfield.php";
+	require_once "visual/form_textarea.php";
+	require_once "visual/form_checkbox_single.php";
+	require_once "visual/form_template_picker.php";
+	require_once "visual/element_container.php";
+	require_once "visual/link_editor.php";
+	require_once "visual/block_selector.php";
 	require_once "libraries/system/template_engine.php";
 	
 	class PageEditor extends Visual {

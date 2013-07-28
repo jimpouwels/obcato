@@ -3,7 +3,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "libraries/system/template_engine.php";
-	require_once "core/visual/page_picker.php";
+	require_once "visual/page_picker.php";
 	require_once "dao/article_dao.php";
 	
 	class TargetPagesManager extends Visual {

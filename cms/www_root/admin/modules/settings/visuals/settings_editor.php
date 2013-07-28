@@ -3,8 +3,8 @@
 	// No direct access
 	defined("_ACCESS") or die;
 	
-	require_once "core/visual/visual.php";
-	require_once "core/visual/page_picker.php";
+	require_once "visual/visual.php";
+	require_once "visual/page_picker.php";
 	require_once "libraries/system/template_engine.php";
 	
 	class SettingsEditor extends Visual {
