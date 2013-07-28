@@ -13,7 +13,7 @@
 
 	class SettingsModuleVisual extends ModuleVisual {
 	
-		private static $TEMPLATE = "settings/module_settings.tpl";
+		private static $TEMPLATE = "settings/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
 		private $_templage_engine;
 		private $_settings_module;

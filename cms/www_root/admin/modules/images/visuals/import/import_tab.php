@@ -7,7 +7,7 @@
 	
 	class ImportTab extends Visual {
 	
-		private static $TEMPLATE = "images/import/import_tab.tpl";
+		private static $TEMPLATE = "images/import/root.tpl";
 		private $_template_engine;
 		private $_image_dao;
 		

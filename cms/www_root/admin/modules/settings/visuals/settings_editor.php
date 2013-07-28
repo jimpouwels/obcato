@@ -9,7 +9,7 @@
 	
 	class SettingsEditor extends Visual {
 	
-		private static $TEMPLATE = "modules/settings/settings_editor.tpl";
+		private static $TEMPLATE = "modules/settings/editor.tpl";
 		private $_settings;
 		private $_template_engine;
 	

@@ -4,8 +4,8 @@
 
 	class PageTree extends Visual {
 	
-		private $PAGES_TREE_TEMPLATE = "pages/pages_tree.tpl";
-		private $PAGES_TREE_ITEM_TEMPLATE = "pages/page_tree_item.tpl";
+		private $PAGES_TREE_TEMPLATE = "pages/tree.tpl";
+		private $PAGES_TREE_ITEM_TEMPLATE = "pages/tree_item.tpl";
 	
 		private $_root_page;
 		private $_template_engine;

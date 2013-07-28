@@ -12,7 +12,7 @@
 
 	class PageModuleVisual extends ModuleVisual {
 
-		private static $PAGE_MODULE_TEMPLATE = "modules/pages/module_pages.tpl";
+		private static $PAGE_MODULE_TEMPLATE = "modules/pages/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
 	
 		private $_current_page;

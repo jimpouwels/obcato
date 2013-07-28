@@ -9,7 +9,7 @@
 	
 	class LabelsList extends Visual {
 	
-		private static $TEMPLATE = "images/labels/labels_list.tpl";
+		private static $TEMPLATE = "images/labels/list.tpl";
 		
 		private $_template_engine;
 		private $_image_dao;

@@ -15,7 +15,7 @@
 
 	class ArticleModuleVisual extends ModuleVisual {
 	
-		private static $TEMPLATE = "articles/module_articles.tpl";
+		private static $TEMPLATE = "articles/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
 		private static $ARTICLES_TAB = 0;
 		private static $TERMS_TAB = 1;

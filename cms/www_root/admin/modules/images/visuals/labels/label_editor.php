@@ -7,7 +7,7 @@
 	
 	class LabelEditor extends Visual {
 	
-		private static $TEMPLATE = "images/labels/label_editor.tpl";
+		private static $TEMPLATE = "images/labels/editor.tpl";
 		
 		private $_template_engine;
 		private $_current_label;

@@ -8,7 +8,7 @@
 	
 	class TargetPagesManager extends Visual {
 	
-		private static $TEMPLATE = "articles/target_pages_manager.tpl";
+		private static $TEMPLATE = "articles/target_pages/root.tpl";
 	
 		private $_template_engine;
 		private $_article_dao;

@@ -13,8 +13,8 @@
 	
 	class PageEditor extends Visual {
 	
-		private static $PAGE_EDITOR_TEMPLATE = "pages/page_editor.tpl";
-		private static $PAGE_METADATA_TEMPLATE = "pages/page_metadata.tpl";
+		private static $PAGE_EDITOR_TEMPLATE = "pages/editor.tpl";
+		private static $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
 	
 		private $_template_engine;
 		private $_current_page;

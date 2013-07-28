@@ -13,7 +13,7 @@
 
 	class BlockModuleVisual extends ModuleVisual {
 	
-		private static $TEMPLATE = "blocks/module_blocks.tpl";
+		private static $TEMPLATE = "blocks/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
 		private static $BLOCK_QUERYSTRING_KEY = "block";
 		private static $POSITION_QUERYSTRING_KEY = "position";
