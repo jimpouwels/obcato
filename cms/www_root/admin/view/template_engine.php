@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	include_once "libraries/system/smarty/Smarty.class.php";
+	include_once "view/smarty/Smarty.class.php";
 	
 	class TemplateEngine
 	{

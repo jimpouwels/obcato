@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "libraries/system/template_engine.php";
-	require_once "visual/element_holder_search.php";
-	require_once "visual/image_search_box.php";
+	require_once "view/template_engine.php";
+	require_once "view/views/element_holder_search.php";
+	require_once "view/views/image_search_box.php";
 	
 	class Search extends Visual {
 		

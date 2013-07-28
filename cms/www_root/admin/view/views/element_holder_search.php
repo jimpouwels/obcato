@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "libraries/system/template_engine.php";
-	require_once "visual/search.php";
-	require_once "visual/form_textfield.php";
-	require_once "visual/form_pulldown.php";
-	require_once "visual/button.php";
-	require_once "visual/information_message.php";
+	require_once "view/template_engine.php";
+	require_once "view/views/search.php";
+	require_once "view/views/form_textfield.php";
+	require_once "view/views/form_pulldown.php";
+	require_once "view/views/button.php";
+	require_once "view/views/information_message.php";
 	require_once "dao/article_dao.php";
 	require_once "dao/page_dao.php";
 	require_once "core/data/page.php";

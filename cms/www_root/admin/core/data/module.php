@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 
 	require_once "core/data/entity.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/template_engine.php";
 
 	class Module extends Entity {
 	

@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/module_visual.php";
-	require_once "visual/action_button.php";
-	require_once "visual/tab_menu.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/action_button.php";
+	require_once "view/views/tab_menu.php";
 	require_once "dao/block_dao.php";
 	require_once "modules/blocks/visuals/blocks/block_manager.php";
 	require_once "modules/blocks/visuals/positions/position_manager.php";

@@ -4,10 +4,10 @@
 	defined('_ACCESS') or die;
 	
 	require_once "core/data/settings.php";
-	require_once "visual/module_visual.php";
-	require_once "visual/action_button.php";
-	require_once "visual/warning_message.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/action_button.php";
+	require_once "view/views/warning_message.php";
+	require_once "view/template_engine.php";
 	require_once "modules/settings/visuals/settings_editor.php";
 	require_once "modules/settings/settings_pre_handler.php";
 

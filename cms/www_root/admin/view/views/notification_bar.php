@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "libraries/system/template_engine.php";
+	require_once "view/template_engine.php";
 	require_once "libraries/system/notifications.php";
 	
 	class NotificationBar extends Visual {

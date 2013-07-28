@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
-	require_once "visual/form_textfield.php";
-	require_once "visual/information_message.php";
-	require_once "visual/object_picker.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/views/visual.php";
+	require_once "view/views/form_textfield.php";
+	require_once "view/views/information_message.php";
+	require_once "view/views/object_picker.php";
+	require_once "view/template_engine.php";
 	
 	class LinkEditor extends Visual {
 	

@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/views/visual.php";
+	require_once "view/template_engine.php";
 	
-	class InformationMessage extends Visual {
+	class WarningMessage extends Visual {
 	
-		private static $TEMPLATE = "system/information_message.tpl";
+		private static $TEMPLATE = "system/warning_message.tpl";
 		private $_message;
 		private $_template_engine;
 	

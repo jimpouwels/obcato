@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/module_visual.php";
-	require_once "visual/action_button.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/action_button.php";
+	require_once "view/template_engine.php";
 	require_once "modules/images/visuals/import/import_tab.php";
 	require_once "modules/images/visuals/images/images_tab.php";
 	require_once "modules/images/visuals/labels/labels_tab.php";
-	require_once "visual/tab_menu.php";
+	require_once "view/views/tab_menu.php";
 	require_once "modules/images/image_pre_handler.php";
 	require_once "modules/images/label_pre_handler.php";
 	require_once "modules/images/import_pre_handler.php";

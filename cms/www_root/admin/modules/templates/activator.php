@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "core/data/module.php";
-	require_once "visual/action_button.php";
+	require_once "view/views/action_button.php";
 
 	class TemplateModuleVisual extends Module {
 	

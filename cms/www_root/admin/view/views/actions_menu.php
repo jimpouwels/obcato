@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
+	require_once "view/views/visual.php";
 	
 	class ActionsMenu extends Visual {
 	

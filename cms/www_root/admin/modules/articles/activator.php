@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/action_button.php";
-	require_once "visual/tab_menu.php";
-	require_once "visual/module_visual.php";
+	require_once "view/views/action_button.php";
+	require_once "view/views/tab_menu.php";
+	require_once "view/views/module_visual.php";
 	require_once "dao/article_dao.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/template_engine.php";
 	require_once "modules/articles/visuals/articles/articles_manager.php";
 	require_once "modules/articles/visuals/terms/terms_manager.php";
 	require_once "modules/articles/visuals/target_pages/target_pages_manager.php";

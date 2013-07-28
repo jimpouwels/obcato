@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
+	require_once "view/views/visual.php";
 	require_once "dao/image_dao.php";
 	
 	class ImportTab extends Visual {

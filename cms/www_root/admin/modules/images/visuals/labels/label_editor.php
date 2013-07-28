@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
-	require_once "visual/form_textfield.php";
+	require_once "view/views/visual.php";
+	require_once "view/views/form_textfield.php";
 	
 	class LabelEditor extends Visual {
 	

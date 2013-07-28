@@ -4,11 +4,11 @@
 	defined('_ACCESS') or die;
 	
 	require_once "dao/module_dao.php";
-	require_once "libraries/system/template_engine.php";
-	require_once "visual/visual.php";
-	require_once "visual/navigation_menu.php";
-	require_once "visual/actions_menu.php";
-	require_once "visual/notification_bar.php";
+	require_once "view/template_engine.php";
+	require_once "view/views/visual.php";
+	require_once "view/views/navigation_menu.php";
+	require_once "view/views/actions_menu.php";
+	require_once "view/views/notification_bar.php";
 	
 	class Cms extends Visual {
 		

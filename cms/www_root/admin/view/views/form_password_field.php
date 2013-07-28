@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/form_field.php";
+	require_once "view/views/form_field.php";
 	
-	class SingleCheckbox extends FormField {
+	class PasswordField extends FormField {
 	
-		private static $TEMPLATE = "system/form_checkbox_single.tpl";
+		private static $TEMPLATE = "system/form_password.tpl";
 	
 		private $myName;
 		private $myLabel;
@@ -25,23 +25,22 @@
 	
 		public function render() {
 			if (isset($_POST[$this->myName])) {
-				$this->myValue = 1;
+				$this->myValue = StringUtility::unescapeXml($_POST[$this->myName]);
 			}
 			
 			$css_classes = array();
 			array_push($css_classes, $this->myClassName);
-			$error_class = self::errorClass($this->myName);
+			$error_class = $this->errorClass($this->myName);
 			if (!is_null($error_class) && $error_class != '') {
 				array_push($css_classes, $error_class);				
 			}
 			
 			$template_engine = TemplateEngine::getInstance();
-			$template_engine->assign("checked", $this->myValue);
+			$template_engine->assign("field_value", StringUtility::escapeXml($this->myValue));
 			$template_engine->assign("field_name", $this->myName);
-			$template_engine->assign("error", self::getErrorHtml($this->myName));
-			$template_engine->assign("label", self::getInputLabelHtml($this->myLabel, $this->myName, $this->myMandatory));
-			$template_engine->assign("classes", self::getCssClassesHtml($css_classes));
-			
+			$template_engine->assign("error", $this->getErrorHtml($this->myName));
+			$template_engine->assign("label", $this->getInputLabelHtml($this->myLabel, $this->myName, $this->myMandatory));
+			$template_engine->assign("classes", $this->getCssClassesHtml($css_classes));
 			
 			return $template_engine->fetch(self::$TEMPLATE);
 		}

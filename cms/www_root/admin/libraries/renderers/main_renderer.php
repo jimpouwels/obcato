@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/system/template_engine.php";
+	include_once "view/template_engine.php";
 
 	class MainRenderer {
 		

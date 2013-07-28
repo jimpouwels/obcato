@@ -7,8 +7,8 @@
 	require_once "pre_handlers/link_pre_handler.php";
 	require_once "pre_handlers/element_pre_handler.php";
 	require_once "pre_handlers/module_pre_handler.php";
-	require_once "visual/cms.php";
-	require_once "visual/popup.php";
+	require_once "view/views/cms.php";
+	require_once "view/views/popup.php";
 	
 	class Backend {
 	

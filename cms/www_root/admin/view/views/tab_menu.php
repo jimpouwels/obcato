@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "visual/visual.php";
-	require_once "libraries/system/template_engine.php";
+	require_once "view/views/visual.php";
+	require_once "view/template_engine.php";
 	
 	class TabMenu extends Visual {
 	

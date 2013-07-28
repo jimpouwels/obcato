@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 	
 	require_once "core/data/page.php";
-	require_once "visual/module_visual.php";
-	require_once "visual/action_button.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/action_button.php";
 	require_once "modules/pages/visuals/page_tree.php";
 	require_once "modules/pages/visuals/page_editor.php";
 	require_once "modules/pages/page_pre_handler.php";
