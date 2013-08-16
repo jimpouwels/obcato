@@ -5,7 +5,7 @@
 
 	include_once FRONTEND_REQUEST . "core/data/user.php";
 	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
-	include_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
 
 	class AuthorizationDao {
 	
@@ -158,7 +158,6 @@
 			$query = "INSERT INTO auth_users (username, password, email_address, first_name, last_name, prefix,
 					  created_at, uuid) VALUES ('" . $user->getUsername() . "', '" . StringUtility::hashStringValue('123456') . 
 					  "', NULL, '" . $user->getFirstName() . "', '" . $user->getLastName() . "', NULL, now(), '" . $user->getUuid() . "')";
-			echo $query;
 			$mysql_database->executeQuery($query);
 			
 			return mysql_insert_id();

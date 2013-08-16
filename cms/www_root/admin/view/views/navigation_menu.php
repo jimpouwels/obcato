@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 	
 	require_once "view/views/visual.php";
-	require_once "dao/module_dao.php";
-	require_once "dao/element_dao.php";
+	require_once "database/dao/module_dao.php";
+	require_once "database/dao/element_dao.php";
 	
 	class NavigationMenu extends Visual {
 	

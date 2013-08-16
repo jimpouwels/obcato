@@ -4,11 +4,9 @@
 	defined('_ACCESS') or die;
 	
 	include_once FRONTEND_REQUEST . "core/data/presentable.php";
-	include_once FRONTEND_REQUEST . "dao/scope_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
 
 	class ElementType extends Entity {
-	
-		private static $TABLE_NAME = "element_types";
 	
 		private $_name;
 		private $_class_name;
@@ -127,15 +125,6 @@
 		
 		public function getDestroyScript() {
 			return $this->_destroy_script;
-		}
-
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
 		}
 		
 		public static function constructFromRecord($record) {

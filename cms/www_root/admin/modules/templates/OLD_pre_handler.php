@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	include_once "dao/template_dao.php";
+	include_once "database/dao/template_dao.php";
 	include_once "libraries/validators/form_validator.php";
 	include_once "libraries/handlers/form_handler.php";
 	include_once "libraries/system/notifications.php";

@@ -4,11 +4,9 @@
 	defined('_ACCESS') or die;
 	
 	require_once FRONTEND_REQUEST . "core/data/entity.php";
-	require_once FRONTEND_REQUEST . "dao/block_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 
 	class BlockPosition extends Entity {
-	
-		private static $TABLE_NAME = "block_position";
 	
 		private $_name;
 		private $_explanation;

@@ -7,8 +7,6 @@
 	include_once FRONTEND_REQUEST . "libraries/utilities/link_utility.php";
 
 	class Link extends Entity {
-	
-		private static $TABLE_NAME = "links";
 		
 		const INTERNAL = "INTERNAL";
 		const EXTERNAL = "EXTERNAL";

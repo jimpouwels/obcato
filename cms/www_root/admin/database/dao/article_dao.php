@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "dao/element_dao.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
 	include_once FRONTEND_REQUEST . "core/data/article.php";
 	include_once FRONTEND_REQUEST . "core/data/article_term.php";
-	include_once FRONTEND_REQUEST . "dao/authorization_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
 	include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
 	
 	class ArticleDao {

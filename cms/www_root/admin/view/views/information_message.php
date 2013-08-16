@@ -21,7 +21,7 @@
 			$this->_template_engine->assign("message", $this->_message);
 			
 			return $this->_template_engine->fetch(self::$TEMPLATE);
-		}	
+		}
 	}
 
 ?>

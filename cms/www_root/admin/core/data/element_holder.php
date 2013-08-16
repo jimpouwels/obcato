@@ -4,13 +4,11 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "core/data/presentable.php";
-	require_once FRONTEND_REQUEST . "dao/element_dao.php";
-	require_once FRONTEND_REQUEST . "dao/link_dao.php";
-	require_once FRONTEND_REQUEST . "dao/authorization_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/link_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
 
 	class ElementHolder extends Presentable {
-	
-		private static $TABLE_NAME = "element_holders";
 		
 		private $_element_holder_dao;
 		private $_title;

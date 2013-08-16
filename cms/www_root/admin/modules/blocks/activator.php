@@ -6,7 +6,7 @@
 	require_once "view/views/module_visual.php";
 	require_once "view/views/action_button.php";
 	require_once "view/views/tab_menu.php";
-	require_once "dao/block_dao.php";
+	require_once "database/dao/block_dao.php";
 	require_once "modules/blocks/visuals/blocks/block_manager.php";
 	require_once "modules/blocks/visuals/positions/position_manager.php";
 	require_once "modules/blocks/block_pre_handler.php";

@@ -11,8 +11,8 @@
 	include_once "libraries/utilities/file_utility.php";
 	include_once "core/exceptions/component_properties_exception.php";
 	include_once "core/exceptions/component_descriptor_exception.php";
-	include_once "dao/scope_dao.php";
-	include_once "dao/element_dao.php";
+	include_once "database/dao/scope_dao.php";
+	include_once "database/dao/element_dao.php";
 	
 	class ComponentService {
 	

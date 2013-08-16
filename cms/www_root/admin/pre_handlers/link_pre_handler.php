@@ -9,7 +9,7 @@
 		public function handle() {
 			// Adds a link to the current element holder
 			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'add_link' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				include_once "dao/link_dao.php";
+				include_once "database/dao/link_dao.php";
 			
 				// first obtain the element holder
 				$element_holder_id = $_POST[EDIT_ELEMENT_HOLDER_ID];
@@ -21,7 +21,7 @@
 			
 			// Updates all links in the element holder
 			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'update_element_holder' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				include_once "dao/link_dao.php";
+				include_once "database/dao/link_dao.php";
 				include_once "libraries/handlers/form_handler.php";
 				
 				$link_dao = LinkDao::getInstance();

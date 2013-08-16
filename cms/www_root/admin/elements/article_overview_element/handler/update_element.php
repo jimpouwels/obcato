@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 	
 	include_once "libraries/system/notifications.php";
-	include_once "dao/element_dao.php";
-	include_once "dao/article_dao.php";
+	include_once "database/dao/element_dao.php";
+	include_once "database/dao/article_dao.php";
 	include_once "libraries/utilities/date_utility.php";
 	include_once "libraries/renderers/form_renderer.php";
 	include_once "libraries/handlers/form_handler.php";

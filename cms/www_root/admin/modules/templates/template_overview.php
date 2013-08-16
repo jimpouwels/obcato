@@ -2,9 +2,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	include_once "dao/template_dao.php";
+	include_once "database/dao/template_dao.php";
 	include_once "libraries/renderers/form_renderer.php";
-	include_once "dao/scope_dao.php";
+	include_once "database/dao/scope_dao.php";
 	
 	$template_dao = TemplateDao::getInstance();
 	$scope_dao = ScopeDao::getInstance();

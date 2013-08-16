@@ -4,11 +4,9 @@
 	defined('_ACCESS') or die;
 	
 	require_once FRONTEND_REQUEST . "core/data/entity.php";
-	require_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
+	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
 
 	class Settings extends Entity {
-	
-		private static $TABLE_NAME = "settings";
 		
 		private $_website_title;
 		private $_frontend_hostname;

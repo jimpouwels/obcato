@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "core/data/element_holder.php";
-	require_once FRONTEND_REQUEST . "dao/block_dao.php";
-	require_once FRONTEND_REQUEST . "dao/page_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
 
 	class Page extends ElementHolder {
 	
@@ -115,7 +115,6 @@
 			if ($this->getId() == $id) {
 				$last = true;
 			}
-			echo $last;
 			return $last;
 		}
 		

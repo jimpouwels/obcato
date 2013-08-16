@@ -4,12 +4,10 @@
 	defined('_ACCESS') or die;
 	
 	include_once FRONTEND_REQUEST . "core/data/presentable.php";
-	include_once FRONTEND_REQUEST . "dao/element_dao.php";
-	include_once FRONTEND_REQUEST . "dao/element_holder_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_holder_dao.php";
 
 	abstract class Element extends Presentable {
-	
-		private static $TABLE_NAME = "elements";
 	
 		private $_index;
 		private $_element_holder_id;

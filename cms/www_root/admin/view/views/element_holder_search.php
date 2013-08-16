@@ -9,8 +9,8 @@
 	require_once "view/views/form_pulldown.php";
 	require_once "view/views/button.php";
 	require_once "view/views/information_message.php";
-	require_once "dao/article_dao.php";
-	require_once "dao/page_dao.php";
+	require_once "database/dao/article_dao.php";
+	require_once "database/dao/page_dao.php";
 	require_once "core/data/page.php";
 	
 	class ElementHolderSearch extends Visual {

@@ -7,8 +7,6 @@
 
 	class Scope extends Entity {
 	
-		private static $TABLE_NAME = "scopes";
-	
 		private $_name;
 		
 		public function getName() {
@@ -17,15 +15,6 @@
 		
 		public function setName($name) {
 			$this->_name = $name;
-		}
-		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
 		}
 		
 		public static function constructFromRecord($record) {

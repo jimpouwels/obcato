@@ -5,14 +5,14 @@
 
 	abstract class Entity {
 	
-		private $myId;
+		private $_id;
 		
 		public function getId() {
-			return $this->myId;
+			return $this->_id;
 		}
 		
 		public function setId($id) {
-			$this->myId = $id;
+			$this->_id = $id;
 		}
 	
 	}

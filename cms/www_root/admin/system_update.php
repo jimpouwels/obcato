@@ -9,7 +9,7 @@
 		
 	include_once "core/data/session.php";
 	include_once "libraries/system/constants.php";
-	include_once "libraries/system/mysql_connector.php";
+	include_once "database/mysql_connector.php";
 	include_once "backend.php";
 	
 	// AUTHENTICATE

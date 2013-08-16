@@ -4,11 +4,9 @@
 	defined('_ACCESS') or die;
 
 	include_once FRONTEND_REQUEST . "core/data/element_holder.php";
-	include_once FRONTEND_REQUEST . "dao/article_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	
 	class Article extends ElementHolder {
-	
-		private static $TABLE_NAME = "articles";
 	
 		private $_description;
 		private $_image_id;
@@ -41,7 +39,7 @@
 		public function getImage() {
 			$image = NULL;
 			if ($this->_image_id != '' && !is_null($this->_image_id)) {
-				include_once FRONTEND_REQUEST . "dao/image_dao.php";
+				include_once FRONTEND_REQUEST . "database/dao/image_dao.php";
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
 			}

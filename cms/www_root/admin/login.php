@@ -2,12 +2,10 @@
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
 	
-	// INCLUDE SYSTEM CONSTANTS
 	include_once "libraries/system/constants.php";
-	
 	include_once 'core/data/session.php';
-
 	include_once "libraries/utilities/string_utility.php";
+	
 	$errors = array();
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,7 +29,6 @@
 	
 	include_once "view/views/form_textfield.php";
 	include_once "view/views/form_password_field.php";
-	include_once "libraries/renderers/main_renderer.php";
 	include_once "view/views/button.php";
 ?>
 		

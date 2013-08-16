@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	include_once FRONTEND_REQUEST . "core/data/template.php";
 
 	/*
@@ -69,7 +69,7 @@
 			
 				$query = "SELECT * FROM templates WHERE scope_id = '" . $scope->getId() . "'";
 				$result = $mysql_database->executeSelectQuery($query);
-				$template = NULL;
+				$template = null;
 				while ($row = mysql_fetch_assoc($result)) {
 					$template = Template::constructFromRecord($row);
 					

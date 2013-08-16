@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "core/data/element.php";
-	require_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "dao/image_dao.php";
+	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	require_once FRONTEND_REQUEST . "database/dao/image_dao.php";
 	require_once FRONTEND_REQUEST . "elements/image_element/visuals/image_element_statics.php";
 	require_once FRONTEND_REQUEST . "elements/image_element/visuals/image_element_form.php";
 

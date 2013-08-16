@@ -4,7 +4,7 @@
 	
 	include_once "libraries/renderers/form_renderer.php";
 	include_once "libraries/renderers/main_renderer.php";
-	include_once "libraries/system/mysql_connector.php";
+	include_once "database/mysql_connector.php";
 	include_once "libraries/validators/form_validator.php";
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {

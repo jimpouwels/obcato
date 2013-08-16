@@ -9,7 +9,7 @@
 	require_once "view/views/form_pulldown.php";
 	require_once "view/views/button.php";
 	require_once "view/views/information_message.php";
-	require_once "dao/image_dao.php";
+	require_once "database/dao/image_dao.php";
 	
 	class ImageSearchBox extends Visual {
 		

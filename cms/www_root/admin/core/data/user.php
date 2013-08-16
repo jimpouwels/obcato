@@ -7,8 +7,6 @@
 	
 	class User extends Entity {
 	
-		private static $TABLE_NAME = "users";
-	
 		private $myUsername;
 		private $myEmailAddress;
 		private $myFirstName;

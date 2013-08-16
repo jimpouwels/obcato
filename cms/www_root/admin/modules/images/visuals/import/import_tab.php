@@ -3,7 +3,7 @@
 	defined('_ACCESS') or die;
 	
 	require_once "view/views/visual.php";
-	require_once "dao/image_dao.php";
+	require_once "database/dao/image_dao.php";
 	
 	class ImportTab extends Visual {
 	

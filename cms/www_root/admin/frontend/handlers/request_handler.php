@@ -38,7 +38,7 @@
 				$page_id = $_GET['id'];
 				$page = Page::findById($page_id);
 			} else {
-				include_once FRONTEND_REQUEST . "dao/settings_dao.php";
+				include_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 				$settings_dao = SettingsDao::getInstance();
 				$page = $settings_dao->getHomepage();
 			}
@@ -50,7 +50,7 @@
 			Returns the requested article.
 		*/
 		private function getArticleFromRequest() {
-			include_once FRONTEND_REQUEST . "dao/article_dao.php";
+			include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 			
 			$article_dao = ArticleDao::getInstance();
 			

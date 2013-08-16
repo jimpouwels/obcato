@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "dao/authorization_dao.php";
+	include_once "database/dao/authorization_dao.php";
 	include_once "libraries/renderers/form_renderer.php";
 	
 	// get the current page

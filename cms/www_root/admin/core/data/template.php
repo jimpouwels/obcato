@@ -3,11 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "core/data/entity.php";
+	require_once FRONTEND_REQUEST . "core/data/entity.php";
+	require_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
 
 	class Template extends Entity {
-	
-		private static $TABLE_NAME = "templates";
 	
 		private $_file_name;
 		private $_scope;
@@ -49,13 +48,9 @@
 			$this->_scope_id = $scope_id;
 		}
 		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
+		public function exists() {
+			$template_dir = Settings::find()->getFrontendTemplateDir();
+			return file_exists($template_dir . "/" . $this->getFileName()) && $this->getFileName() != "";
 		}
 		
 		public static function constructFromRecord($record) {

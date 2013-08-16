@@ -7,7 +7,7 @@
 	
 	$backend = new Backend("site_administrator");
 	
-	include_once FRONTEND_REQUEST . "dao/image_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/image_dao.php";
 	
 	$upload_dir = Settings::find()->getUploadDir();
 	

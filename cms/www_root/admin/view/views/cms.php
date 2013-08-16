@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "dao/module_dao.php";
+	require_once "database/dao/module_dao.php";
 	require_once "view/template_engine.php";
 	require_once "view/views/visual.php";
 	require_once "view/views/navigation_menu.php";

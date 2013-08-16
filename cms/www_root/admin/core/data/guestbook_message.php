@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 
 	include_once FRONTEND_REQUEST . "core/data/entity.php";
-	include_once FRONTEND_REQUEST . "dao/guestbook_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/guestbook_dao.php";
 
 	class GuestBookMessage extends Entity {
 	

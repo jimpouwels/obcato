@@ -5,7 +5,7 @@
 	require_once "view/views/visual.php";
 	require_once "view/views/information_message.php";
 	require_once "view/views/form_checkbox_single.php";
-	require_once "dao/image_dao.php";
+	require_once "database/dao/image_dao.php";
 	
 	class LabelsList extends Visual {
 	

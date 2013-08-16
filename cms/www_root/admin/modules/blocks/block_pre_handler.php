@@ -1,1 +1,1 @@
-<?php	// No direct access	defined('_ACCESS') or die;		require_once "core/http/module_request_handler.php";		class BlockPreHandler extends ModuleRequestHandler {		public function handleGet() {		}				public function handlePost() {		}			}	?>
+<?php	// No direct access	defined('_ACCESS') or die;		require_once "view/request_handlers/module_request_handler.php";		class BlockPreHandler extends ModuleRequestHandler {		public function handleGet() {		}				public function handlePost() {		}			}	?>

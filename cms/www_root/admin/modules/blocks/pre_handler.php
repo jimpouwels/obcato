@@ -5,7 +5,7 @@
 	include_once "libraries/validators/form_validator.php";
 	include_once "libraries/handlers/form_handler.php";
 	include_once "libraries/system/notifications.php";
-	include_once "dao/block_dao.php";
+	include_once "database/dao/block_dao.php";
 	
 	// =================================== BLOCKS ============================================================
 	

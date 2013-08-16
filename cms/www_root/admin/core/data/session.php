@@ -3,8 +3,8 @@
 	defined('_ACCESS') or die;
 	
 	include_once "libraries/utilities/string_utility.php";
-	include_once "libraries/system/mysql_connector.php";
-	include_once "dao/authorization_dao.php";
+	include_once "database/mysql_connector.php";
+	include_once "database/dao/authorization_dao.php";
 
 	class Session {
 	

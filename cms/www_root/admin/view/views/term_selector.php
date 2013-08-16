@@ -5,7 +5,7 @@
 	
 	require_once "view/template_engine.php";
 	require_once "view/views/form_checkbox_single.php";
-	require_once "dao/block_dao.php";
+	require_once "database/dao/block_dao.php";
 	
 	class TermSelector extends Visual {
 	

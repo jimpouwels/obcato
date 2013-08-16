@@ -8,8 +8,6 @@
 
 	class Module extends Entity {
 	
-		private static $TABLE_NAME = "modules";
-	
 		private $_id;
 		private $_title;
 		private $_icon_url;
@@ -86,7 +84,7 @@
 		}
 		
 		public function getModuleGroup() {
-			include_once "dao/module_dao.php";
+			include_once "database/dao/module_dao.php";
 			$module_dao = ModuleDao::getInstance();
 			$module_group = $module_dao->getModule($this->_module_group_id);
 			return $module_group;

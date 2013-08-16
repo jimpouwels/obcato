@@ -7,8 +7,6 @@
 
 	class ImageLabel extends Entity {
 	
-		private static $TABLE_NAME = "image_labels";
-	
 		private $_name;
 		
 		public function setName($name) {

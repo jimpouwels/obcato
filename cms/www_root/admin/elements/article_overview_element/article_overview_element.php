@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "core/data/element.php";
-	require_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "dao/article_dao.php";
+	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	require_once FRONTEND_REQUEST . "elements/article_overview_element/visuals/article_overview_element_statics.php";
 	require_once FRONTEND_REQUEST . "elements/article_overview_element/visuals/article_overview_element_form.php";
 
@@ -113,7 +113,7 @@
 		}
 		
 		public function getArticles() {
-			include_once FRONTEND_REQUEST . "dao/article_dao.php";
+			include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 			include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
 			$article_dao = ArticleDao::getInstance();
 			

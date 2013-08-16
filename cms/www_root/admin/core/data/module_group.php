@@ -7,8 +7,6 @@
 	
 	class ModuleGroup extends Entity {
 	
-		private static $TABLE_NAME = "module_group";
-	
 		private $_title;
 		private $_element_group;
 		
@@ -42,15 +40,6 @@
 			}
 			
 			return $modules;
-		}
-
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
 		}
 		
 		public static function constructFromRecord($record) {

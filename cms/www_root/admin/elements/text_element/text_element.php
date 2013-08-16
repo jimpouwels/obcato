@@ -6,7 +6,7 @@
 	require_once FRONTEND_REQUEST . "core/data/element.php";
 	require_once FRONTEND_REQUEST . "elements/text_element/visuals/text_element_form.php";
 	require_once FRONTEND_REQUEST . "elements/text_element/visuals/text_element_statics.php";
-	require_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
+	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
 
 	class TextElement extends Element {
 	

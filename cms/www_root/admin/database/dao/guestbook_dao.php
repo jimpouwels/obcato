@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "libraries/system/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "dao/authorization_dao.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
 	include_once FRONTEND_REQUEST . "core/data/guestbook.php";
 	include_once FRONTEND_REQUEST . "core/data/guestbook_message.php";
 	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";

@@ -7,8 +7,6 @@
 
 	class Block extends ElementHolder {
 	
-		private static $TABLE_NAME = "blocks";
-	
 		private $_position_id;
 		
 		public function getPosition() {

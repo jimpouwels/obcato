@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "dao/settings_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 
 	class MysqlConnector {
 	

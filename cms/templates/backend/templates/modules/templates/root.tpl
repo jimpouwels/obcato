@@ -1,0 +1,14 @@
+{assign var="template_id" value=""}
+{if $current_template}
+	{assign var="template_id" value="?template=$current_template.id"}
+{/if}
+<form id="template_form" method="post" action="/admin/index.php{$template_id}" enctype="multipart/form-data">
+	<fieldset class="displaynone">
+		<input type="hidden" name="action" id="action" value="" />
+	</fieldset>
+	{if isset($template_editor)}
+		{$template_editor}
+	{else}
+		{$template_list}
+	{/if}
+</form>

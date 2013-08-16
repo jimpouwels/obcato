@@ -2,13 +2,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	require_once "dao/page_dao.php";
-	require_once "dao/block_dao.php";
-	require_once "dao/element_dao.php";
+	require_once "database/dao/page_dao.php";
+	require_once "database/dao/block_dao.php";
+	require_once "database/dao/element_dao.php";
 	require_once "libraries/validators/form_validator.php";
 	require_once "libraries/handlers/form_handler.php";
 	require_once "libraries/system/notifications.php";
-	require_once "core/http/module_request_handler.php";
+	require_once "view/request_handlers/module_request_handler.php";
 	
 	class PagePreHandler extends ModuleRequestHandler {
 	
@@ -176,11 +176,6 @@
 				return $this->_page_dao->getPage($_GET[self::$PAGE_ID_GET]);
 			else
 				return $this->_page_dao->getPage(self::$FALLBACK_PAGE_ID);
-		}
-		
-		private function getPageIdFromPostRequest() {
-			if (isset($_POST[self::$PAGE_ID_POST]))
-				return $_POST[self::$PAGE_ID_POST];
 		}
 		
 		private function isUpdatePageAction() {

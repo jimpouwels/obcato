@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/system/mysql_connector.php";
+	include_once "database/mysql_connector.php";
 	include_once "modules/database/domain/table_column.php";
 	
 	class DatabaseDao {
