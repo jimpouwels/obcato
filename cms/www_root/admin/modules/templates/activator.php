@@ -25,7 +25,7 @@
 		}
 
 		public function render() {
-			$this->_template_engine->assign("current_template", $this->_current_template);
+			$this->_template_engine->assign("current_template_id", $this->getCurrentTemplateId());
 			if (!is_null($this->_current_template))
 				$this->_template_engine->assign("template_editor", $this->renderTemplateEditor());
 			else
@@ -57,6 +57,14 @@
 		private function renderTemplateList() {
 			$template_list = new TemplateList();
 			return $template_list->render();
+		}
+		
+		private function getCurrentTemplateId() {
+			$current_template_id = null;
+			if (!is_null($this->_current_template)) {
+				$current_template_id = $this->_current_template->getId();
+			}
+			return $current_template_id;
 		}
 	
 	}

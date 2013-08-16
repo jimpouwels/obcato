@@ -1,6 +1,6 @@
 {assign var="template_id" value=""}
-{if $current_template}
-	{assign var="template_id" value="?template=$current_template.id"}
+{if $current_template_id}
+	{assign var="template_id" value="?template=$current_template_id"}
 {/if}
 <form id="template_form" method="post" action="/admin/index.php{$template_id}" enctype="multipart/form-data">
 	<fieldset class="displaynone">
