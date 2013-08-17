@@ -59,17 +59,7 @@
 		}
 		
 		private function updateTemplate() {
-			// obtain the current template
-			$template_id = "";
-			if (isset($_GET["template"])) {
-				$template_id = $_GET["template"];
-			} else if (isset($_POST["template_id"]) && $_POST["template_id"] != "") {
-				$template_id = $_POST["template_id"];
-			}
-			$current_template = $this->_template_dao->getTemplate($template_id);
-			
-			global $errors;
-			if (isset($current_template) && !is_null($current_template)) {
+			if (isset($this->_current_template) && !is_null($this->_current_template)) {
 				// get the template dir
 				$template_dir = Settings::find()->getFrontendTemplateDir();
 			
@@ -77,43 +67,43 @@
 				$file_name = FormHandler::getFieldValue("file_name", "Bestandsnaam is verplicht");
 				
 				// check if the filename does not exist already
-				if ($file_name != $current_template->getFileName() && !is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
+				if ($file_name != $this->_current_template->getFileName() && !is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
 					$check_template = $this->_template_dao->getTemplateByFileName($file_name);
 					if (!is_null($check_template)) {
-						$errors["file_name_error"] = "Deze bestandsnaam bestaat al voor een ander template";
+						$this->setRequestError("file_name_error", "Deze bestandsnaam bestaat al voor een ander template");
 					}
 				}
 				// check if the uploaded file already exists
 				if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
 					// check if the filename does not exist yet for another template
-					if (file_exists($template_dir . "/" . $_FILES["template_file"]["name"]) && $current_template->getName() != $_FILES["template_file"]["name"]) {
-						$errors["template_file_error"] = "Er bestaat al een ander template met dezelfde naam";
+					if (file_exists($template_dir . "/" . $_FILES["template_file"]["name"]) && $this->_current_template->getName() != $_FILES["template_file"]["name"]) {
+						$this->setRequestError("template_file_error", "Er bestaat al een ander template met dezelfde naam");
 					}
 				}
 				$scopeId = FormValidator::checkEmpty("scope", "Scope is verplicht");
-				if (count($errors) == 0) {
+				if ($this->getErrorCount() == 0) {
 					// check uploaded template file
-					$old_file_name = $template_dir . "/" . $current_template->getFileName();
+					$old_file_name = $template_dir . "/" . $this->_current_template->getFileName();
 					if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
 						// first delete the old file
-						if (file_exists($old_file_name) && $current_template->getFileName() != "") {
+						if (file_exists($old_file_name) && $this->_current_template->getFileName() != "") {
 							unlink($old_file_name);
 						}
 						move_uploaded_file($_FILES["template_file"]["tmp_name"], $template_dir . "/" . $_FILES["template_file"]["name"]);
-						$current_template->setFileName($_FILES["template_file"]["name"]);
+						$this->_current_template->setFileName($_FILES["template_file"]["name"]);
 					} else if ($file_name != '') {
 						// rename the file
-						if ($current_template->getFileName() != "" && file_exists($old_file_name)) {
-							rename($template_dir . "/" . $current_template->getFileName(), $template_dir . "/" . $file_name);
+						if ($this->_current_template->getFileName() != "" && file_exists($old_file_name)) {
+							rename($template_dir . "/" . $this->_current_template->getFileName(), $template_dir . "/" . $file_name);
 						}
 						
-						$current_template->setFileName($file_name);
+						$this->_current_template->setFileName($file_name);
 					}
 				
-					$current_template->setName($name);
-					$current_template->setScopeId($scopeId);
+					$this->_current_template->setName($name);
+					$this->_current_template->setScopeId($scopeId);
 					
-					$this->_template_dao->updateTemplate($current_template);
+					$this->_template_dao->updateTemplate($this->_current_template);
 
 					Notifications::setSuccessMessage("Template succesvol opgeslagen");
 				} else {

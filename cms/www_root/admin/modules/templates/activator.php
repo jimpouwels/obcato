@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/data/module.php";
+	require_once "view/views/module_visual.php";
 	require_once "view/views/action_button.php";
 	require_once "modules/templates/template_pre_handler.php";
 	require_once "modules/templates/visuals/template_list.php";
 	require_once "modules/templates/visuals/template_editor.php";
 
-	class TemplateModuleVisual extends Module {
+	class TemplateModuleVisual extends ModuleVisual {
 	
 		private static $TEMPLATE_MODULE_TEMPLATE = "modules/templates/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "templates/head_includes.tpl";
@@ -52,6 +52,10 @@
 		public function preHandle() {
 			$this->_template_pre_handler->handle();
 			$this->_current_template = $this->_template_pre_handler->getCurrentTemplate();
+		}
+		
+		public function getTitle() {
+			return $this->_template_module->getTitle();
 		}
 		
 		private function renderTemplateEditor() {

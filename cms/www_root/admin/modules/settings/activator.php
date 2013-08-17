@@ -32,7 +32,7 @@
 		}
 		
 		public function getTitle() {
-			$this->_settings_module->getTitle();
+			return $this->_settings_module->getTitle();
 		}
 	
 		public function getActionButtons() {

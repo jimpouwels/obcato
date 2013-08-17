@@ -12,6 +12,16 @@
 			return $this->getModuleTabFromSession();
 		}
 		
+		public function setRequestError($error_identifier, $message) {
+			global $errors;
+			$errors[$error_identifier] = $message;
+		}
+		
+		public function getErrorCount() {
+			global $errors;
+			return count($errors);
+		}
+		
 		private function getModuleTabFromGetRequest() {
 			if (isset($_GET["module_tab"])) {
 				$_SESSION["module_tab"] = $_GET["module_tab"];
