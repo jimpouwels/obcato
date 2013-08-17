@@ -26,9 +26,8 @@
 			$component_dir = FormValidator::checkEmpty("component_dir", "Component directory is verplicht");
 			$backend_template_dir = FormValidator::checkEmpty("backend_template_dir", "Template Engine directory is verplicht");
 			$homepage_id = FormValidator::checkEmpty("homepage_page_id", "De website heeft een homepage nodig");
-		
-			global $errors;
-			if (count($errors) == 0) {
+
+			if ($this->getErrorCount() == 0) {
 				$settings = Settings::find();
 				$settings->setWebsiteTitle($website_title);
 				$settings->setBackendHostname($backend_hostname);
