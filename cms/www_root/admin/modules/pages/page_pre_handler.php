@@ -52,7 +52,7 @@
 		private function updatePage() {
 			$this->assignFieldsWithObligations();
 			
-			if (!$this->hasFormErrors()) {
+			if (!$this->getErrorCount()) {
 				$this->assignOptionalFields();
 				$this->updateElementOrder();
 				$this->addSelectedBlocks();
@@ -86,11 +86,6 @@
 		private function getShowInNavigationValue() {
 			$show_in_navigation = FormHandler::getFieldValue('show_in_navigation');
 			return $show_in_navigation == "on" ? 1 : 0;
-		}
-		
-		private function hasFormErrors() {
-			global $errors;
-			return count($errors) > 0;
 		}
 		
 		private function updateElementOrder() {
