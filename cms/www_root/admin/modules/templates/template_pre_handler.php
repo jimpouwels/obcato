@@ -7,6 +7,7 @@
 	require_once "libraries/handlers/form_handler.php";
 	require_once "libraries/system/notifications.php";
 	require_once "view/request_handlers/module_request_handler.php";
+	require_once "libraries/system/notifications.php";
 	
 	class TemplatePreHandler extends ModuleRequestHandler {
 	
@@ -28,15 +29,105 @@
 		
 		public function handlePost() {
 			$this->_current_template = $this->getTemplateFromPostRequest();
-			// handle template actions
+			if ($this->isUpdateAction()) {
+				$this->updateTemplate();
+			} else if ($this->isAddTemplateAction()) {
+				$this->addTemplate();
+			} else if ($this->isDeleteAction()) {
+				$this->deleteTemplates();
+			}
 		}
 		
 		public function getCurrentTemplate() {
 			return $this->_current_template;
 		}
+		
+		private function addTemplate() {
+			$new_template = $this->_template_dao->createTemplate();
+			Notifications::setSuccessMessage("Template succesvol aangemaakt");
+			header('Location: /admin/index.php?template=' . $new_template->getId());
+			exit();
+		}
+		
+		private function deleteTemplates() {
+			foreach ($this->_template_dao->getTemplates() as $template) {
+				if (isset($_POST['template_' . $template->getId() . '_delete'])) {
+					$this->_template_dao->deleteTemplate($template);
+				}
+			}
+			Notifications::setSuccessMessage("Template(s) succesvol verwijderd");
+		}
+		
+		private function updateTemplate() {
+			// obtain the current template
+			$template_id = "";
+			if (isset($_GET["template"])) {
+				$template_id = $_GET["template"];
+			} else if (isset($_POST["template_id"]) && $_POST["template_id"] != "") {
+				$template_id = $_POST["template_id"];
+			}
+			$current_template = $this->_template_dao->getTemplate($template_id);
+			
+			global $errors;
+			if (isset($current_template) && !is_null($current_template)) {
+				// get the template dir
+				$template_dir = Settings::find()->getFrontendTemplateDir();
+			
+				$name = FormValidator::checkEmpty("name", "Naam is verplicht");
+				$file_name = FormHandler::getFieldValue("file_name", "Bestandsnaam is verplicht");
+				
+				// check if the filename does not exist already
+				if ($file_name != $current_template->getFileName() && !is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
+					$check_template = $this->_template_dao->getTemplateByFileName($file_name);
+					if (!is_null($check_template)) {
+						$errors["file_name_error"] = "Deze bestandsnaam bestaat al voor een ander template";
+					}
+				}
+				// check if the uploaded file already exists
+				if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
+					// check if the filename does not exist yet for another template
+					if (file_exists($template_dir . "/" . $_FILES["template_file"]["name"]) && $current_template->getName() != $_FILES["template_file"]["name"]) {
+						$errors["template_file_error"] = "Er bestaat al een ander template met dezelfde naam";
+					}
+				}
+				$scopeId = FormValidator::checkEmpty("scope", "Scope is verplicht");
+				if (count($errors) == 0) {
+					// check uploaded template file
+					$old_file_name = $template_dir . "/" . $current_template->getFileName();
+					if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
+						// first delete the old file
+						if (file_exists($old_file_name) && $current_template->getFileName() != "") {
+							unlink($old_file_name);
+						}
+						move_uploaded_file($_FILES["template_file"]["tmp_name"], $template_dir . "/" . $_FILES["template_file"]["name"]);
+						$current_template->setFileName($_FILES["template_file"]["name"]);
+					} else if ($file_name != '') {
+						// rename the file
+						if ($current_template->getFileName() != "" && file_exists($old_file_name)) {
+							rename($template_dir . "/" . $current_template->getFileName(), $template_dir . "/" . $file_name);
+						}
+						
+						$current_template->setFileName($file_name);
+					}
+				
+					$current_template->setName($name);
+					$current_template->setScopeId($scopeId);
+					
+					$this->_template_dao->updateTemplate($current_template);
+
+					Notifications::setSuccessMessage("Template succesvol opgeslagen");
+				} else {
+					Notifications::setFailedMessage("Template niet opgeslagen, verwerk de fouten");
+				}
+			}
+		}
 
 		private function getTemplateFromPostRequest() {
-			return $this->_template_dao->getTemplate($_POST[self::$TEMPLATE_ID_POST]);
+			$template = null;
+			if (isset($_POST[self::$TEMPLATE_ID_POST])) {
+				$template = $this->_template_dao->getTemplate($_POST[self::$TEMPLATE_ID_POST]);
+			}
+			return $template;
 		}
 		
 		private function getTemplateFromGetRequest() {
@@ -45,6 +136,18 @@
 		
 		private function isCurrentTemplateShown() {
 			return isset($_GET[self::$TEMPLATE_ID_GET]);
+		}
+		
+		private function isUpdateAction() {
+			return isset($_POST["action"]) && $_POST["action"] == "update_template";
+		}
+		
+		private function isAddTemplateAction() {
+			return isset($_POST["action"]) && $_POST["action"] == "add_template";
+		}
+		
+		private function isDeleteAction() {
+			return isset($_POST["action"]) && $_POST["action"] == "delete_template";
 		}
 
 	}

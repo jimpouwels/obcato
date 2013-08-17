@@ -8,7 +8,7 @@
 	</fieldset>
 	{if isset($template_editor)}
 		{$template_editor}
-	{else}
+	{elseif isset($template_list)}
 		{$template_list}
 	{/if}
 </form>

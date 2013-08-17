@@ -7,6 +7,7 @@
 	require_once "view/views/action_button.php";
 	require_once "modules/templates/template_pre_handler.php";
 	require_once "modules/templates/visuals/template_list.php";
+	require_once "modules/templates/visuals/template_editor.php";
 
 	class TemplateModuleVisual extends Module {
 	
@@ -35,8 +36,11 @@
 	
 		public function getActionButtons() {
 			$action_buttons = array();
+			if (!is_null($this->_current_template)) {
+				$action_buttons[] = new ActionButton("Opslaan", "update_template", "icon_apply");
+			}
 			$action_buttons[] = new ActionButton("Toevoegen", "add_template", "icon_add");
-			$action_buttons[] = new ActionButton("Toevoegen", "delete_template", "icon_delete");
+			$action_buttons[] = new ActionButton("Verwijderen", "delete_template", "icon_delete");
 			return $action_buttons;
 		}
 		
@@ -51,7 +55,8 @@
 		}
 		
 		private function renderTemplateEditor() {
-			
+			$template_editor = new TemplateEditor($this->_current_template);
+			return $template_editor->render();
 		}
 		
 		private function renderTemplateList() {

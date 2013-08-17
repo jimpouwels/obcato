@@ -4,7 +4,6 @@
 	
 	require_once "database/dao/settings_dao.php";
 	require_once "view/request_handlers/module_request_handler.php";
-	require_once "libraries/renderers/form_renderer.php";
 	require_once "libraries/validators/form_validator.php";
 	require_once "libraries/system/notifications.php";
 

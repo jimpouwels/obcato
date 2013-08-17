@@ -12,7 +12,7 @@
 
 	class TemplateList extends Visual {
 		
-		private static $TEMPLATE_LIST = "templates/template_list.tpl";
+		private static $TEMPLATE_LIST_TEMPLATE = "templates/template_list.tpl";
 
 		private $_template_dao;
 		private $_scope_dao;
@@ -27,7 +27,7 @@
 		public function render() {
 			$this->_template_engine->assign("scopes", $this->getAllScopes());
 			$this->_template_engine->assign("information_message", $this->renderInformationMessage());
-			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST);
+			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
 		}
 		
 		private function getAllScopes() {
