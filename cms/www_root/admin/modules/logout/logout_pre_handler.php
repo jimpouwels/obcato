@@ -1,7 +1,7 @@
 <?php
 	
-	require_once "core/data/session.php";
-	require_once "view/request_handlers/module_request_handler.php";
+	require_once FRONTEND_REQUEST . "core/data/session.php";
+	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
 	
 	class LogoutPreHandler extends ModuleRequestHandler {
 	

@@ -20,11 +20,6 @@
 		private $_type;
 		
 		public function __construct() {
-			$this->setPublished(false);
-						
-			$authorization_dao = AuthorizationDao::getInstance();
-			$user = $authorization_dao->getUser($_SESSION["username"]);
-			$this->setCreatedById($user->getId());
 			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 		

@@ -2,10 +2,10 @@
 	// No direct access
 	defined("_ACCESS") or die;
 	
-	require_once "database/dao/settings_dao.php";
-	require_once "view/request_handlers/module_request_handler.php";
-	require_once "libraries/validators/form_validator.php";
-	require_once "libraries/system/notifications.php";
+	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
+	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
+	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
+	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 
 	class SettingsPreHandler extends ModuleRequestHandler {
 	
@@ -43,7 +43,7 @@
 				$settings->setBackendTemplateDir($backend_template_dir);
 				$settings->update();
 				
-				include_once "database/dao/settings_dao.php";
+				include_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 				$settings_dao = SettingsDao::getInstance();
 				$settings_dao->setHomepage($homepage_id);
 				

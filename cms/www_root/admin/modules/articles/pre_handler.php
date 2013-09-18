@@ -2,11 +2,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/handlers/form_handler.php";
-	include_once "libraries/validators/form_validator.php";
-	include_once "libraries/system/notifications.php";
-	include_once "libraries/utilities/string_utility.php";
-	include_once "database/dao/article_dao.php";
+	include_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
+	include_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
+	include_once FRONTEND_REQUEST . "libraries/system/notifications.php";
+	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
+	include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
 	
 	// =================================== ARTICLES ============================================================
 	
@@ -43,6 +44,10 @@
 	function addArticle() {
 		$article_dao = ArticleDao::getInstance();
 		$new_article = $article_dao->createArticle();
+		$new_article->setPublished(false);					
+		$authorization_dao = AuthorizationDao::getInstance();
+		$user = $authorization_dao->getUser($_SESSION["username"]);
+		$new_article->setCreatedById($user->getId());
 		
 		Notifications::setSuccessMessage("Artikel succesvol aangemaakt");
 		header('Location: /admin/index.php?article=' . $new_article->getId());
@@ -50,7 +55,7 @@
 	}
 	
 	function updateArticle($element_holder_id) {
-		include_once "libraries/utilities/date_utility.php";
+		include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
 	
 		global $errors;
 		

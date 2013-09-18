@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/data/settings.php";
+	require_once FRONTEND_REQUEST . "core/data/settings.php";
 	
 	// EDITOR FORM CONSTANTS
 	define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');

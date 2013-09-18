@@ -4,7 +4,7 @@
 	defined('_ACCESS') or die;
 	
 	if (isset($_POST['action']) && $_POST['action'] == 'update_element_holder') {
-		include_once "libraries/handlers/form_handler.php";
+		include_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
 		
 		$element->setTitle(FormHandler::getFieldValue('element_' . $element->getId() . '_title'));
 		$element->setTemplateId(FormHandler::getFieldValue('element_' . $element->getId() . '_template'));

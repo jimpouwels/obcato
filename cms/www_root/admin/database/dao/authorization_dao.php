@@ -151,7 +151,7 @@
 			@param $user The user to persist
 		*/
 		private function persistUser($user) {
-			include_once "libraries/utilities/string_utility.php";
+			include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			

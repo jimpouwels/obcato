@@ -118,7 +118,7 @@
 			$article_dao = ArticleDao::getInstance();
 			
 			$_show_to = NULL;
-			if ($this->myShowUnilToday != 1) {
+			if ($this->_show_until_today != 1) {
 				$_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
 			}
 			$articles = $article_dao->searchArticlesFrontend(DateUtility::mysqlDateToString($this->_show_from, '-'), 

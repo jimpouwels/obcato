@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/utilities/string_utility.php";
+	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
 ?>
 
 <form action="/admin/index.php?user=<?= $current_user->getId(); ?>" method="post" id="user_form" name="update_user">

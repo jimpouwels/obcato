@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "view/views/visual.php";
-	require_once "database/dao/template_dao.php";
-	require_once "database/dao/scope_dao.php";
-	require_once "view/template_engine.php";
-	require_once "view/views/information_message.php";
-	require_once "view/views/form_checkbox_single.php";
+	require_once FRONTEND_REQUEST . "view/views/visual.php";
+	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/information_message.php";
+	require_once FRONTEND_REQUEST . "view/views/form_checkbox_single.php";
 
 	class TemplateList extends Visual {
 		

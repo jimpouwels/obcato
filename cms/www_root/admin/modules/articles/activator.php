@@ -3,15 +3,15 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/action_button.php";
-	require_once "view/views/tab_menu.php";
-	require_once "view/views/module_visual.php";
-	require_once "database/dao/article_dao.php";
-	require_once "view/template_engine.php";
-	require_once "modules/articles/visuals/articles/articles_manager.php";
-	require_once "modules/articles/visuals/terms/terms_manager.php";
-	require_once "modules/articles/visuals/target_pages/target_pages_manager.php";
-	require_once "modules/articles/article_pre_handler.php";
+	require_once FRONTEND_REQUEST . "view/views/action_button.php";
+	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/articles/articles_manager.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/terms/terms_manager.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_manager.php";
+	require_once FRONTEND_REQUEST . "modules/articles/article_pre_handler.php";
 
 	class ArticleModuleVisual extends ModuleVisual {
 	
@@ -105,7 +105,7 @@
 		}
 		
 		public function preHandle() {
-			include_once "modules/articles/pre_handler.php";
+			include_once FRONTEND_REQUEST . "modules/articles/pre_handler.php";
 			$this->initialize();
 		}
 		

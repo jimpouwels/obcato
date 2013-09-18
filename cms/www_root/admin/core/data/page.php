@@ -21,10 +21,6 @@
 		
 		public function __construct() {
 			parent::__construct();
-			$this->_show_in_navigation = true;
-			$this->_navigation_title = "Nieuwe pagina";
-			$this->setTitle("Nieuwe pagina");
-			$this->setType(ELEMENT_HOLDER_PAGE);
 			$this->setScopeId(5);
 			$this->_page_dao = PageDao::getInstance();
 		}

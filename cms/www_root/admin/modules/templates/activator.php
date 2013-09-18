@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
-	require_once "view/views/action_button.php";
-	require_once "modules/templates/template_pre_handler.php";
-	require_once "modules/templates/visuals/template_list.php";
-	require_once "modules/templates/visuals/template_editor.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "view/views/action_button.php";
+	require_once FRONTEND_REQUEST . "modules/templates/template_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/templates/visuals/template_list.php";
+	require_once FRONTEND_REQUEST . "modules/templates/visuals/template_editor.php";
 
 	class TemplateModuleVisual extends ModuleVisual {
 	

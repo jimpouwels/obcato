@@ -3,7 +3,7 @@
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
 	
-	include_once "backend.php";
+	include_once FRONTEND_REQUEST . "backend.php";
 	
 	$backend = new Backend("site_administrator");
 	
@@ -19,7 +19,7 @@
 		if ($image->isPublished()) {
 			$render_image = true;
 		} else {
-			include_once "core/data/session.php";
+			include_once FRONTEND_REQUEST . "core/data/session.php";
 			$backend->isAuthenticated();
 		}
 		

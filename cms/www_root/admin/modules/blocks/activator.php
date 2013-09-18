@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
-	require_once "view/views/action_button.php";
-	require_once "view/views/tab_menu.php";
-	require_once "database/dao/block_dao.php";
-	require_once "modules/blocks/visuals/blocks/block_manager.php";
-	require_once "modules/blocks/visuals/positions/position_manager.php";
-	require_once "modules/blocks/block_pre_handler.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "view/views/action_button.php";
+	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
+	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/visuals/blocks/block_manager.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/visuals/positions/position_manager.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/block_pre_handler.php";
 
 	class BlockModuleVisual extends ModuleVisual {
 	
@@ -81,7 +81,7 @@
 		}
 		
 		public function preHandle() {
-			include_once "modules/blocks/pre_handler.php";
+			include_once FRONTEND_REQUEST . "modules/blocks/pre_handler.php";
 			$this->initialize();
 		}
 		

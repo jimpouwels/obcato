@@ -2,9 +2,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	include_once "libraries/validators/form_validator.php";
-	include_once "libraries/handlers/form_handler.php";
-	include_once "libraries/system/notifications.php";
+	include_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
+	include_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
+	include_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 	
 	// handle post requests
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,7 +35,7 @@
 	
 	// a new user must be created
 	function addUser() {
-		include_once "libraries/utilities/password_utility.php";
+		include_once FRONTEND_REQUEST . "libraries/utilities/password_utility.php";
 	
 		$authorization_dao = AuthorizationDao::getInstance();
 		$new_user = $authorization_dao->createUser();

@@ -93,7 +93,7 @@
 		}
 		
 		private function getElementHolder($element_holder_id) {
-			include_once FRONTEND_REQUEST . 'dao/element_holder_dao.php';
+			include_once FRONTEND_REQUEST . 'database/dao/element_holder_dao.php';
 			$element_holder_dao = ElementHolderDao::getInstance();
 			$element_holder = $element_holder_dao->getElementHolder($element_holder_id);
 			return $element_holder;

@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "core/data/entity.php";
-	require_once "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "core/data/entity.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
 
 	class Module extends Entity {
 	
@@ -84,7 +84,7 @@
 		}
 		
 		public function getModuleGroup() {
-			include_once "database/dao/module_dao.php";
+			include_once FRONTEND_REQUEST . "database/dao/module_dao.php";
 			$module_dao = ModuleDao::getInstance();
 			$module_group = $module_dao->getModule($this->_module_group_id);
 			return $module_group;

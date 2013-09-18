@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/request_handlers/http_request_handler.php";
+	require_once FRONTEND_REQUEST . "view/request_handlers/http_request_handler.php";
 	
 	abstract class ModuleRequestHandler extends HttpRequestHandler {
 		

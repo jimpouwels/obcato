@@ -2,10 +2,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/renderers/form_renderer.php";
-	include_once "libraries/renderers/main_renderer.php";
-	include_once "database/mysql_connector.php";
-	include_once "libraries/validators/form_validator.php";
+	include_once FRONTEND_REQUEST . "libraries/renderers/form_renderer.php";
+	include_once FRONTEND_REQUEST . "libraries/renderers/main_renderer.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$query = FormValidator::checkEmpty('query', 'U heeft geen query ingevoerd');

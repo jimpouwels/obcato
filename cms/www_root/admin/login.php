@@ -2,9 +2,9 @@
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
 	
-	include_once "libraries/system/constants.php";
+	include_once FRONTEND_REQUEST . "libraries/system/constants.php";
 	include_once 'core/data/session.php';
-	include_once "libraries/utilities/string_utility.php";
+	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
 	
 	$errors = array();
 
@@ -27,9 +27,9 @@
 		$errors['login_unsuccessful'] = 'Verkeerde gebruikersnaam / wachtwoord combinatie';
 	}
 	
-	include_once "view/views/form_textfield.php";
-	include_once "view/views/form_password_field.php";
-	include_once "view/views/button.php";
+	include_once FRONTEND_REQUEST . "view/views/form_textfield.php";
+	include_once FRONTEND_REQUEST . "view/views/form_password_field.php";
+	include_once FRONTEND_REQUEST . "view/views/button.php";
 ?>
 		
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

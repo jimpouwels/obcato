@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "database/dao/module_dao.php";
-	require_once "view/template_engine.php";
-	require_once "view/views/visual.php";
-	require_once "view/views/navigation_menu.php";
-	require_once "view/views/actions_menu.php";
-	require_once "view/views/notification_bar.php";
+	require_once FRONTEND_REQUEST . "database/dao/module_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/visual.php";
+	require_once FRONTEND_REQUEST . "view/views/navigation_menu.php";
+	require_once FRONTEND_REQUEST . "view/views/actions_menu.php";
+	require_once FRONTEND_REQUEST . "view/views/notification_bar.php";
 	
 	class Cms extends Visual {
 		

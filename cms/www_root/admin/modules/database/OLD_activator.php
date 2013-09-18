@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/renderers/main_renderer.php";
+	include_once FRONTEND_REQUEST . "libraries/renderers/main_renderer.php";
 	
 ?>
 
@@ -33,13 +33,13 @@
 <?php
 	switch ($current_module_tab) {
 		case 0:
-			include_once "modules/" . $current_module->getIdentifier() . "/configuration.php";
+			include_once FRONTEND_REQUEST . "modules/" . $current_module->getIdentifier() . "/configuration.php";
 			break;
 		case 1:
-			include_once "modules/" . $current_module->getIdentifier() . "/database_tables.php";
+			include_once FRONTEND_REQUEST . "modules/" . $current_module->getIdentifier() . "/database_tables.php";
 			break;
 		case 2:
-			include_once "modules/" . $current_module->getIdentifier() . "/queries.php";
+			include_once FRONTEND_REQUEST . "modules/" . $current_module->getIdentifier() . "/queries.php";
 			break;
 	}
 

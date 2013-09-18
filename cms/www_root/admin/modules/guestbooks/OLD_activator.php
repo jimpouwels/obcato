@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "database/dao/guestbook_dao.php";
-	include_once "libraries/renderers/form_renderer.php";
+	include_once FRONTEND_REQUEST . "database/dao/guestbook_dao.php";
+	include_once FRONTEND_REQUEST . "libraries/renderers/form_renderer.php";
 	
 	// get the current page
 	$guestbook_dao = GuestBookDao::getInstance();

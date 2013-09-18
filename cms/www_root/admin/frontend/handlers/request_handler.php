@@ -3,12 +3,18 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
+	require_once FRONTEND_REQUEST . "core/data/settings.php";
+	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
+	
 	class RequestHandler {
 		
+		private $_page_dao;
+	
 		/*
 			Handles the incoming frontend request.
 		*/
 		public function handleRequest() {
+			$this->_page_dao = PageDao::getInstance();
 			$page = $this->getPageFromRequest();
 			$article = $this->getArticleFromRequest();
 			$this->renderPage($page, $article);
@@ -36,13 +42,11 @@
 		private function getPageFromRequest() {					
 			if (isset($_GET['id']) && $_GET['id'] != '') {
 				$page_id = $_GET['id'];
-				$page = Page::findById($page_id);
+				$page = $this->_page_dao->getPage($page_id);
 			} else {
-				include_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 				$settings_dao = SettingsDao::getInstance();
-				$page = $settings_dao->getHomepage();
+				$page = Settings::find()->getHomepage();
 			}
-			
 			return $page;
 		}
 		

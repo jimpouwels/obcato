@@ -3,13 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/system/notifications.php";
-	include_once "database/dao/element_dao.php";
-	include_once "database/dao/article_dao.php";
-	include_once "libraries/utilities/date_utility.php";
-	include_once "libraries/renderers/form_renderer.php";
-	include_once "libraries/handlers/form_handler.php";
-	include_once "libraries/validators/form_validator.php";
+	include_once FRONTEND_REQUEST . "libraries/system/notifications.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
+	include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
+	include_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
+	include_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
 	
 	if (isset($_POST['action']) && $_POST['action'] == 'update_element_holder') {
 		$show_until_today = FormHandler::getFieldValue('element_' . $element->getId() . '_show_until_today');

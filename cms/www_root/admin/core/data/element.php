@@ -38,12 +38,6 @@
 			return $element_holder_dao->getElementHolder($this->_element_holder_id);
 		}
 		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
 		public function delete() {
 			$element_dao = ElementDao::getInstance();
 			$element_dao->deleteElement($this);

@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/visual.php";
-	require_once "view/views/form_template_picker.php";
+	require_once FRONTEND_REQUEST . "view/views/visual.php";
+	require_once FRONTEND_REQUEST . "view/views/form_template_picker.php";
 	
 	abstract class ElementVisual extends Visual {
 	
@@ -16,7 +16,7 @@
 	
 		public function render() {
 			$element = $this->getElement();
-			$template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "", $element->getTemplate(), $element->getScope());
+			$template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "", $element->getTemplate(), $element->getType()->getScope());
 			$template_engine = TemplateEngine::getInstance();
 			
 			$template_engine->assign("element_form", $this->renderElementForm());

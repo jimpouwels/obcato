@@ -345,7 +345,7 @@
 			$element_ids = array();
 			$element_ids = explode(',', $element_order);
 			if (count($element_ids) > 0 && $element_ids[0] != '') {
-				include_once "database/dao/element_dao.php";
+				include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
 				
 				$element_dao = ElementDao::getInstance();
 				

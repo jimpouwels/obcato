@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "modules/database/dao/database_dao.php";
+	include_once FRONTEND_REQUEST . "modules/database/dao/database_dao.php";
 
 	// get all tables
 	$dao = DatabaseDao::getInstance();

@@ -27,18 +27,18 @@
 				</thead>
 				<tbody>
 					<tr>
-						{counter start=0}
-						{foreach from=$search_result item=image}
-							{if counter & 5 == 0 && counter != 0}</tr><tr>{/if}
+						{assign var="counter" value=0}
+						{foreach from=$search_results item=image}
+							{if $counter & 5 == 0 && $counter != 0}</tr><tr>{/if}
 							{assign var='image_class' value='image_published'}
 							{if $image.published}
 								{assign var='image_class' value='image_unpublished'}
 							{/if}
 							<td>
-								<a class="{$image_class}" href="#" onclick="submitSelectionBackToOpener('{$backfill}', {$search_result.id}, '{$back_click_id}'); return false;" title="Selecteer">{$search_result.title}</a>
-								<img title="{$search_result.title}" src="/admin/upload.php?image={$search_result.id}&amp;thumb=true" />
+								<a class="{$image_class}" href="#" onclick="submitSelectionBackToOpener('{$backfill}', {$image.id}, '{$back_click_id}'); return false;" title="Selecteer">{$image.title}</a>
+								<img title="{$image.title}" src="/admin/upload.php?image={$image.id}&amp;thumb=true" />
 							</td>
-							{counter}
+							{assign var="counter" value=$counter + 1}
 						{/foreach}
 					</tr>
 				</tbody>

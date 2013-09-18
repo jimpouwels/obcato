@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/template_engine.php";
-	require_once "view/views/form_checkbox_single.php";
-	require_once "database/dao/block_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/form_checkbox_single.php";
+	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 	
 	class BlockSelector extends Visual {
 	

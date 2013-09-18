@@ -62,7 +62,7 @@
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
 				
-				if (FRONTEND_REQUEST != '' && $image->getPublished() != 1) {
+				if (FRONTEND_REQUEST != '' && $image->isPublished() != 1) {
 					$image = null;
 				}
 			}	

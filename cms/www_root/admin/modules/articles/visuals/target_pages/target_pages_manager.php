@@ -2,9 +2,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/template_engine.php";
-	require_once "view/views/page_picker.php";
-	require_once "database/dao/article_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/page_picker.php";
+	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	
 	class TargetPagesManager extends Visual {
 	

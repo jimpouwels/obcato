@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
-	require_once "modules/logout/logout_pre_handler.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "modules/logout/logout_pre_handler.php";
 
 	class LogoutModuleVisual extends ModuleVisual {
 	

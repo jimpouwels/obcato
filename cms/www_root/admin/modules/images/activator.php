@@ -3,16 +3,16 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
-	require_once "view/views/action_button.php";
-	require_once "view/template_engine.php";
-	require_once "modules/images/visuals/import/import_tab.php";
-	require_once "modules/images/visuals/images/images_tab.php";
-	require_once "modules/images/visuals/labels/labels_tab.php";
-	require_once "view/views/tab_menu.php";
-	require_once "modules/images/image_pre_handler.php";
-	require_once "modules/images/label_pre_handler.php";
-	require_once "modules/images/import_pre_handler.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "view/views/action_button.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "modules/images/visuals/import/import_tab.php";
+	require_once FRONTEND_REQUEST . "modules/images/visuals/images/images_tab.php";
+	require_once FRONTEND_REQUEST . "modules/images/visuals/labels/labels_tab.php";
+	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
+	require_once FRONTEND_REQUEST . "modules/images/image_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/images/label_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/images/import_pre_handler.php";
 
 	class ImageModuleVisual extends ModuleVisual {
 	

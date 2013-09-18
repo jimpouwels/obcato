@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "database/mysql_connector.php";
-	include_once "modules/database/domain/table_column.php";
+	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	include_once FRONTEND_REQUEST . "modules/database/domain/table_column.php";
 	
 	class DatabaseDao {
 		

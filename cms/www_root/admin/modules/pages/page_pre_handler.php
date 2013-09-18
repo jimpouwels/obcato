@@ -2,13 +2,14 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	require_once "database/dao/page_dao.php";
-	require_once "database/dao/block_dao.php";
-	require_once "database/dao/element_dao.php";
-	require_once "libraries/validators/form_validator.php";
-	require_once "libraries/handlers/form_handler.php";
-	require_once "libraries/system/notifications.php";
-	require_once "view/request_handlers/module_request_handler.php";
+	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
+	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
+	require_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
+	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
+	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
 	
 	class PagePreHandler extends ModuleRequestHandler {
 	
@@ -50,10 +51,10 @@
 		}
 		
 		private function updatePage() {
-			$this->assignFieldsWithObligations();
+			$this->readFieldsWithObligations();
 			
 			if (!$this->getErrorCount()) {
-				$this->assignOptionalFields();
+				$this->readOptionalFields();
 				$this->updateElementOrder();
 				$this->addSelectedBlocks();
 				$this->deleteSelectedBlocksFromPage();
@@ -65,12 +66,12 @@
 			}
 		}
 		
-		private function assignFieldsWithObligations() {
+		private function readFieldsWithObligations() {
 			$this->_current_page->setTitle(FormValidator::checkEmpty('page_title', 'Titel is verplicht'));
 			$this->_current_page->setNavigationTitle(FormValidator::checkEmpty('navigation_title', 'Navigatietitel is verplicht'));
 		}
 		
-		private function assignOptionalFields() {
+		private function readOptionalFields() {
 			$this->_current_page->setDescription(FormHandler::getFieldValue("description"));
 			$this->_current_page->setPublished($this->getPublishedValue());
 			$this->_current_page->setShowInNavigation($this->getShowInNavigationValue());
@@ -136,6 +137,13 @@
 		private function addSubPage() {
 			$new_page = new Page();
 			$new_page->setParentId($this->_current_page->getId());
+			$new_page->setShowInNavigation(true);
+			$new_page->setNavigationTitle("Nieuwe pagina");
+			$new_page->setTitle("Nieuwe pagina");
+			$authorization_dao = AuthorizationDao::getInstance();
+			$user = $authorization_dao->getUser($_SESSION["username"]);
+			$new_page->setCreatedById($user->getId());
+			$new_page->setType(ELEMENT_HOLDER_PAGE);
 			$new_page->persist();
 			
 			$parent = $this->_page_dao->getPage($this->_current_page->getId());

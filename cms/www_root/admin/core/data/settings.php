@@ -5,6 +5,7 @@
 	
 	require_once FRONTEND_REQUEST . "core/data/entity.php";
 	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
 
 	class Settings extends Entity {
 		
@@ -164,7 +165,7 @@
 		
 		public static function find() {
 			$mysql_database = MysqlConnector::getInstance(); 
-			$query = "SELECT * FROM settings LIMIT 0,1";
+			$query = "SELECT * FROM settings";
 			$result = $mysql_database->executeSelectQuery($query);
 			$settings = null;
 			while ($row = mysql_fetch_assoc($result)) {
@@ -189,7 +190,6 @@
 			$settings->setComponentDir($record['component_dir']);
 			$settings->setDatabaseVersion($record['database_version']);
 			$settings->setBackendTemplateDir($record['backend_template_dir']);
-			
 			return $settings;
 		}
 	}

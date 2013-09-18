@@ -53,7 +53,6 @@
 			$pages = array();
 			while ($row = mysql_fetch_assoc($result)) {
 				$page = Page::constructFromRecord($row);
-				
 				array_push($pages, $page);
 			}
 

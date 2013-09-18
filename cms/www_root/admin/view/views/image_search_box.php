@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/template_engine.php";
-	require_once "view/views/search.php";
-	require_once "view/views/form_textfield.php";
-	require_once "view/views/form_pulldown.php";
-	require_once "view/views/button.php";
-	require_once "view/views/information_message.php";
-	require_once "database/dao/image_dao.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/search.php";
+	require_once FRONTEND_REQUEST . "view/views/form_textfield.php";
+	require_once FRONTEND_REQUEST . "view/views/form_pulldown.php";
+	require_once FRONTEND_REQUEST . "view/views/button.php";
+	require_once FRONTEND_REQUEST . "view/views/information_message.php";
+	require_once FRONTEND_REQUEST . "database/dao/image_dao.php";
 	
 	class ImageSearchBox extends Visual {
 		
@@ -67,7 +67,7 @@
 		private function renderSearchResults() {
 			$search_results_value = array();
 			$search_results = null;
-			$search_result = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, $this->getCurrentSearchLabel());
+			$search_results = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, $this->getCurrentSearchLabel());
 			if (!is_null($search_results) && count($search_results) > 0) {
 				foreach ($search_results as $search_result) {
 					$search_result_value = array();
