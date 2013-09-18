@@ -3,20 +3,63 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/module.php";
+	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
+	require_once FRONTEND_REQUEST . "view/views/action_button.php";
+	require_once FRONTEND_REQUEST . "modules/database/database_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/database/visuals/configuration.php";
+	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 
-	class DatabaseModule extends Module {
+	class DatabaseModuleVisual extends ModuleVisual {
+	
+		private static $DATABASE_MODULE_TEMPLATE = "modules/database/root.tpl";
+		private static $HEAD_INCLUDES_TEMPLATE = "modules/database/head_includes.tpl";
+		private static $CONFIGURATION_TAB = 0;
+		private static $TABLES_TAB = 1;
+		private static $QUERY_TAB = 2;
+		private $_database_module;
+		private $_database_pre_handler;
+		private $_templage_engine;
+	
+		public function __construct($database_module) {
+			$this->_database_module = $database_module;
+			$this->_database_pre_handler = new DatabasePreHandler();
+			$this->_template_engine = TemplateEngine::getInstance();
+		}
 	
 		public function render() {
+			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
+			if ($this->_database_pre_handler->getCurrentTabId() == 0) {
+				$content = new Configuration();
+			}
+			$this->_template_engine->assign("content", $content->render());
+			return $this->_template_engine->fetch(self::$DATABASE_MODULE_TEMPLATE);
 		}
 	
 		public function getActionButtons() {
+			$action_buttons = array();
+			return $action_buttons;
 		}
 		
 		public function getHeadIncludes() {
+			$this->_template_engine->assign("path", $this->_database_module->getIdentifier());
+			return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
 		public function preHandle() {
+		}
+		
+		public function getTitle() {
+			return $this->_database_module->getTitle();
+		}
+		
+		private function renderTabMenu() {
+			$tab_items = array();
+			$tab_items[self::$CONFIGURATION_TAB] = "Configuratie";
+			$tab_items[self::$TABLES_TAB] = "Tabellen";
+			$tab_items[self::$QUERY_TAB] = "Query";
+			$tab_menu = new TabMenu($tab_items, $this->_database_pre_handler->getCurrentTabId());
+			return $tab_menu->render();
 		}
 	
 	}

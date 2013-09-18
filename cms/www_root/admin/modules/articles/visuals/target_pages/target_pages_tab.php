@@ -6,7 +6,7 @@
 	require_once FRONTEND_REQUEST . "view/views/page_picker.php";
 	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	
-	class TargetPagesManager extends Visual {
+	class TargetPagesTab extends Visual {
 	
 		private static $TEMPLATE = "articles/target_pages/root.tpl";
 	

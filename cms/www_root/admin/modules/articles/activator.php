@@ -8,9 +8,9 @@
 	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
 	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
-	require_once FRONTEND_REQUEST . "modules/articles/visuals/articles/articles_manager.php";
-	require_once FRONTEND_REQUEST . "modules/articles/visuals/terms/terms_manager.php";
-	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_manager.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/articles/articles_tab.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/terms/terms_tab.php";
+	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/article_pre_handler.php";
 
 	class ArticleModuleVisual extends ModuleVisual {
@@ -41,11 +41,11 @@
 			
 			$content = null;
 			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB) {
-				$content = new ArticleManager($this->_current_article, $this->_article_module->getIdentifier());
+				$content = new ArticleTab($this->_current_article, $this->_article_module->getIdentifier());
 			} else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB) {
-				$content = new TermManager($this->_current_term, $this->_article_module->getIdentifier());
+				$content = new TermTab($this->_current_term, $this->_article_module->getIdentifier());
 			} else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-				$content = new TargetPagesManager($this->_article_module->getIdentifier());
+				$content = new TargetPagesTab($this->_article_module->getIdentifier());
 			}
 			
 			if (!is_null($content)) {
@@ -74,7 +74,7 @@
 				$action_buttons[] = $delete_button;				
 			}
 			if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB) {
-				if (!is_null($this->_current_term) || TermManager::isEditTermMode()) {
+				if (!is_null($this->_current_term) || TermTab::isEditTermMode()) {
 					$action_buttons[] = new ActionButton("Opslaan", "update_term", "icon_apply");
 				}
 				$action_buttons[] = new ActionButton("Toevoegen", "add_term", "icon_add");
