@@ -76,7 +76,6 @@
 			$this->_current_page->setPublished($this->getPublishedValue());
 			$this->_current_page->setShowInNavigation($this->getShowInNavigationValue());
 			$this->_current_page->setTemplateId(FormHandler::getFieldValue("page_template"));
-			echo $this->_current_page->getTemplateId();
 		}
 		
 		private function getPublishedValue() {
