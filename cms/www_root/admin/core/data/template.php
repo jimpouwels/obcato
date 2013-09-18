@@ -34,12 +34,6 @@
 			return $dao->getScope($this->_scope_id);
 		}
 		
-		public function setScope($scope) {
-			if (!is_null($scope)) {
-				$this->_scope_id = $scope->getId();
-			}
-		}
-		
 		public function getScopeId() {
 			return $this->_scope_id;
 		}
