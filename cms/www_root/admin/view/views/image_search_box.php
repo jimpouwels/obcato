@@ -96,7 +96,7 @@
 		private function getCurrentSearchLabel() {
 			$current_search_label = null;
 			if (isset($_GET[self::$SEARCH_LABEL_KEY])) {
-				$current_label_search = $_GET[self::$SEARCH_LABEL_KEY];
+				$current_search_label = $_GET[self::$SEARCH_LABEL_KEY];
 			}
 			return $current_search_label;
 		}
