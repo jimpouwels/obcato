@@ -7,6 +7,7 @@
 	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "modules/database/database_pre_handler.php";
 	require_once FRONTEND_REQUEST . "modules/database/visuals/configuration.php";
+	require_once FRONTEND_REQUEST . "modules/database/visuals/tables.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 
@@ -31,6 +32,8 @@
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
 			if ($this->_database_pre_handler->getCurrentTabId() == 0) {
 				$content = new Configuration();
+			} else if ($this->_database_pre_handler->getCurrentTabId() == 1) {
+				$content = new Tables();
 			}
 			$this->_template_engine->assign("content", $content->render());
 			return $this->_template_engine->fetch(self::$DATABASE_MODULE_TEMPLATE);

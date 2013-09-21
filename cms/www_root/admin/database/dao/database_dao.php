@@ -2,17 +2,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "modules/database/domain/table_column.php";
+	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	
 	class DatabaseDao {
 		
-		// singleton
 		private static $instance;
-		
-		/*
-			Creates (if not exists) and returns an instance.
-		*/
+
 		public static function getInstance() {
 			if (!self::$instance) {
 				self::$instance = new DatabaseDao();
@@ -20,9 +15,6 @@
 			return self::$instance;
 		}
 		
-		/*
-			Returns all tables from the database.
-		*/
 		public function getTables() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -39,11 +31,6 @@
 			return $tables;
 		}
 		
-		/*
-			Returns all columns for the given table.
-			
-			@param $table The table to get the columns for
-		*/
 		public function getColumns($table_name) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -51,12 +38,11 @@
 			$result = $mysql_database->executeSelectQuery($query);
 			
 			$columns = array();
-			$column = NULL;
 			while ($row = mysql_fetch_assoc($result)) {
-				$column = new TableColumn();
-				$column->setName($row['Field']);
-				$column->setType($row['Type']);
-				$column->setAllowedNull($row['Null']);
+				$column = array();
+				$column['name'] = $row['Field'];
+				$column['type'] = $row['Type'];
+				$column['allowed_null'] = $row['Null'];
 				
 				$columns[] = $column;
 			}
