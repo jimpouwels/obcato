@@ -27,7 +27,7 @@
 		}
 		
 		private function renderQueryField() {
-			$query_field = new TextArea(DatabasePreHandler::QUERY_POST_KEY, "Query", "", 55, 10, true, false, "");
+			$query_field = new TextArea(DatabasePreHandler::QUERY_POST_KEY, "Query", $this->_pre_handler->getQuery(), 55, 10, true, false, "");
 			return $query_field->render();
 		}
 		
