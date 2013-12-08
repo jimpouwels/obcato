@@ -8,6 +8,7 @@
 	require_once FRONTEND_REQUEST . "modules/database/database_pre_handler.php";
 	require_once FRONTEND_REQUEST . "modules/database/visuals/configuration.php";
 	require_once FRONTEND_REQUEST . "modules/database/visuals/tables.php";
+	require_once FRONTEND_REQUEST . "modules/database/visuals/queries.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 
@@ -30,10 +31,12 @@
 	
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-			if ($this->_database_pre_handler->getCurrentTabId() == 0) {
+			if ($this->_database_pre_handler->getCurrentTabId() == self::$CONFIGURATION_TAB) {
 				$content = new Configuration();
-			} else if ($this->_database_pre_handler->getCurrentTabId() == 1) {
+			} else if ($this->_database_pre_handler->getCurrentTabId() == self::$TABLES_TAB) {
 				$content = new Tables();
+			} else if ($this->_database_pre_handler->getCurrentTabId() == self::$QUERY_TAB) {
+				$content = new Queries($this->_database_pre_handler);
 			}
 			$this->_template_engine->assign("content", $content->render());
 			return $this->_template_engine->fetch(self::$DATABASE_MODULE_TEMPLATE);
@@ -50,6 +53,7 @@
 		}
 		
 		public function preHandle() {
+			$this->_database_pre_handler->handle();
 		}
 		
 		public function getTitle() {
