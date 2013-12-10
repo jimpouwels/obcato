@@ -38,7 +38,6 @@
 	
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-			
 			$content = null;
 			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB) {
 				$content = new ArticleTab($this->_current_article, $this->_article_module->getIdentifier());
@@ -47,7 +46,6 @@
 			} else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
 				$content = new TargetPagesTab($this->_article_module->getIdentifier());
 			}
-			
 			if (!is_null($content)) {
 				$this->_template_engine->assign("content", $content->render());
 			}

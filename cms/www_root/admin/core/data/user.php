@@ -80,13 +80,8 @@
 			return $full_name;
 		}
 		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
+		public function isLoggedInUser() {
+			return $this->getUsername() == $_SESSION["username"];
 		}
 		
 		public static function constructFromRecord($record) {

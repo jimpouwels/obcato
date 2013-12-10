@@ -74,15 +74,6 @@
 			$this->_created_by_id = $created_by_id;
 		}
 		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
-		}
-		
 		public static function constructFromRecord($record) {
 			$image = new Image();
 			$image->setId($record['id']);
