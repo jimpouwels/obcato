@@ -44,11 +44,9 @@
 			} else if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB) {
 				$content = new PositionManager($this->_current_position);
 			}
-			
 			if (!is_null($content)) {
 				$this->_template_engine->assign("content", $content->render());
 			}
-			
 			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
 		}
 		

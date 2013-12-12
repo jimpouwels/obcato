@@ -62,7 +62,6 @@
 		
 		public function getHeadIncludes() {
 			$this->_template_engine->assign("path", $this->_page_module->getIdentifier());
-			
 			$element_statics_values = array();			
 			$element_statics = $this->_current_page->getElementStatics();
 			if (count($element_statics) > 0) {
@@ -71,7 +70,6 @@
 				}
 			}
 			$this->_template_engine->assign("element_statics", $element_statics_values);
-			
 			return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
