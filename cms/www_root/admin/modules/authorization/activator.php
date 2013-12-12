@@ -7,6 +7,7 @@
 	require_once "view/views/action_button.php";
 	require_once "modules/authorization/authorization_pre_handler.php";
 	require_once "modules/authorization/visuals/user_list.php";
+	require_once "modules/authorization/visuals/user_editor.php";
 	require_once "view/template_engine.php";
 
 	class AuthorizationModuleVisual extends Module {
@@ -24,7 +25,9 @@
 	
 		public function render() {
 			$user_list = new UserList($this->_current_user);
+			$user_editor = new UserEditor($this->_current_user);
 			$this->_template_engine->assign("user_list", $user_list->render());
+			$this->_template_engine->assign("user_editor", $user_editor->render());
 			return $this->_template_engine->fetch(self::$AUTHORIZATION_MODULE_TEMPLATE);
 		}
 	

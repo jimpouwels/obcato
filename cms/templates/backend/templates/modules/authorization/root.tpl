@@ -1,1 +1,1 @@
-{$user_list}
+{$user_list}{$user_editor}
