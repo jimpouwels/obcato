@@ -6,7 +6,7 @@
 	require_once FRONTEND_REQUEST . "view/request_handlers/http_request_handler.php";
 	
 	abstract class ModuleRequestHandler extends HttpRequestHandler {
-		
+				
 		public function getCurrentTabId() {
 			$this->getModuleTabFromGetRequest();
 			return $this->getModuleTabFromSession();

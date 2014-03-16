@@ -3,11 +3,10 @@
 	defined('_ACCESS') or die;
 		
 	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
+	require_once FRONTEND_REQUEST . "modules/pages/page_form.php";
 	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 	require_once FRONTEND_REQUEST . "database/dao/element_dao.php";
 	require_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
-	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
-	require_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
 	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
 	
@@ -51,46 +50,17 @@
 		}
 		
 		private function updatePage() {
-			$this->readFieldsWithObligations();
-			
-			if (!$this->getErrorCount()) {
-				$this->readOptionalFields();
-				$this->updateElementOrder();
-				$this->addSelectedBlocks();
+			$page_form = new PageForm($this->_current_page);
+			try {
+				$page_form->loadFields();
+				$this->_element_dao->updateElementOrder($page_form->getElementOrder(), $this->_current_page);
+				$this->addSelectedBlocks($page_form->getSelectedBlocks());
 				$this->deleteSelectedBlocksFromPage();
 				$this->_current_page->update();
-				
 				Notifications::setSuccessMessage("Pagina succesvol opgeslagen");
-			} else {
+			} catch (FormException $e) {
 				Notifications::setFailedMessage("Pagina niet opgeslagen, verwerk de fouten");
 			}
-		}
-		
-		private function readFieldsWithObligations() {
-			$this->_current_page->setTitle(FormValidator::checkEmpty('page_title', 'Titel is verplicht'));
-			$this->_current_page->setNavigationTitle(FormValidator::checkEmpty('navigation_title', 'Navigatietitel is verplicht'));
-		}
-		
-		private function readOptionalFields() {
-			$this->_current_page->setDescription(FormHandler::getFieldValue("description"));
-			$this->_current_page->setPublished($this->getPublishedValue());
-			$this->_current_page->setShowInNavigation($this->getShowInNavigationValue());
-			$this->_current_page->setTemplateId(FormHandler::getFieldValue("page_template"));
-		}
-		
-		private function getPublishedValue() {
-			$published = FormHandler::getFieldValue('published');
-			return $published == "on" ? 1 : 0;
-		}
-		
-		private function getShowInNavigationValue() {
-			$show_in_navigation = FormHandler::getFieldValue('show_in_navigation');
-			return $show_in_navigation == "on" ? 1 : 0;
-		}
-		
-		private function updateElementOrder() {
-			$element_order = FormHandler::getFieldValue("element_order");
-			$this->_element_dao->updateElementOrder($element_order, $this->_current_page);
 		}
 		
 		private function addSelectedBlockToPage($selected_block_id, $current_page_blocks) {
@@ -100,8 +70,7 @@
 			}
 		}
 		
-		private function addSelectedBlocks() {
-			$selected_blocks = FormHandler::getFieldValue("select_blocks_" . $this->_current_page->getId());
+		private function addSelectedBlocks($selected_blocks) {
 			$current_page_blocks = $this->_current_page->getBlocks();
 			if (!is_null($selected_blocks) && count($selected_blocks) > 0) {
 				foreach ($selected_blocks as $selected_block_id) {
@@ -129,7 +98,7 @@
 			$current_level_pages = $parent->getSubPages();
 			$this->updateFollowUp($current_level_pages);
 			Notifications::setSuccessMessage("Pagina succesvol verwijderd");
-			header('Location: /admin/index.php?page=1');
+			header("Location: /admin/index.php?page=1");
 			exit();
 		}
 		
@@ -150,7 +119,7 @@
 			$this->updateFollowUp($current_level_pages);
 			
 			Notifications::setSuccessMessage("Pagina succesvol aangemaakt");
-			header('Location: /admin/index.php?page=' . $new_page->getId());
+			header("Location: /admin/index.php?page=" . $new_page->getId());
 			exit();
 		}
 		
