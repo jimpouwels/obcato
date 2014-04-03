@@ -43,7 +43,7 @@
 			$template_engine = TemplateEngine::getInstance();
 			$template_engine->assign("field_value", StringUtility::escapeXml($this->myValue));
 			$template_engine->assign("field_name", $this->myName);
-			$template_engine->assign("error", $this->getErrorHtml($this->myValue));
+			$template_engine->assign("error", $this->getErrorHtml($this->myName));
 			$template_engine->assign("label", $this->getInputLabelHtml($this->myLabel, $this->myName, $this->myMandatory));
 			$template_engine->assign("classes", $this->getCssClassesHtml($css_classes));
 			

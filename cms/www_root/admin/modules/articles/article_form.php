@@ -32,6 +32,8 @@
 			$this->_element_order = $this->getFieldValue("element_order");		
 			$this->_selected_terms = $this->getFieldValue("select_terms_" . $this->_article->getId());
 			$this->_delete_lead_image = $this->getFieldValue("delete_lead_image_field");
+			if ($this->hasErrors())
+				throw new FormException();
 		}
 		
 		public function getElementOrder() {
