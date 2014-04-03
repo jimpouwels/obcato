@@ -94,7 +94,8 @@
 		}
 		
 		protected function hasErrors() {
-			return isset($_SESSION["errors"]) && count($_SESSION["errors"]) > 0;
+			global $errors;
+			return count($errors) > 0;
 		}
 		
 		private function isEmpty($field_name) {
@@ -106,7 +107,8 @@
 		}
 		
 		private function raiseError($error_field, $error_message) {
-			$_SESSION["errors"][$error_field . "_error"] = $error_message;
+			global $errors;
+			$errors[$error_field . "_error"] = $error_message;
 		}
 	
 	}

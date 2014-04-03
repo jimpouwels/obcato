@@ -17,10 +17,11 @@
 		}
 		
 		public function getErrorHtml($field_name) {
+			global $errors;
 			$error_html = "";
 			if ($this->hasError($field_name)) {
 				$template_engine = TemplateEngine::getInstance();
-				$template_engine->assign("error", $_SESSION["errors"][$field_name . '_error']);
+				$template_engine->assign("error", $errors[$field_name . '_error']);
 				$error_html = $template_engine->fetch("system/form_error.tpl");
 			}
 			return $error_html;
@@ -48,7 +49,8 @@
 		}
 		
 		private function hasError($field_name) {
-			return isset($_SESSION["errors"][$field_name . "_error"]);
+			global $errors;
+			return isset($errors[$field_name . "_error"]) && $errors[$field_name . "_error"];
 		}
 	}
 
