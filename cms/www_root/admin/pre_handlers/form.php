@@ -54,12 +54,12 @@
 			return $value;
 		}
 		
-		public function getMandatoryDate($field_name) {
+		public function getMandatoryDate($field_name, $error) {
 			if ($this->isEmpty($field_name)) throw new MandatoryFieldEmptyException($field_name . " must not be emtpy");
 			return $this->getDate($field_name);
 		}
 		
-		public function getDate($field_name, $mandatory) {
+		public function getDate($field_name) {
 			$value = $this->getFieldValue($field_name);
 			$valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
 			if (!$valid_date) {

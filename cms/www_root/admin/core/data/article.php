@@ -13,6 +13,11 @@
 		private $_publication_date;
 		private $_target_page_id;
 		
+		public function __construct() {
+			parent::__construct();
+			$this->setScopeId(9);
+		}
+		
 		public function getDescription() {
 			$description = $this->_description;
 			if (FRONTEND_REQUEST != '') {
@@ -94,10 +99,6 @@
 			parent::persist();
 		}
 		
-		public function update() {
-			parent::update();
-		}
-		
 		public function delete() {
 			parent::delete();
 		}
@@ -108,6 +109,7 @@
 			$article->setTitle($record['title']);
 			$article->setPublished($record['published'] == 1 ? true : false);
 			$article->setDescription($record['description']);
+			$article->setScopeId($record['scope_id']);
 			$article->setImageId($record['image_id']);
 			$article->setCreatedAt($record['created_at']);
 			$article->setCreatedById($record['created_by']);

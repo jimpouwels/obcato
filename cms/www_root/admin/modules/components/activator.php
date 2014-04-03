@@ -3,9 +3,15 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/module.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/action_button.php";
 
-	class ComponentModule extends Module {
+	class ComponentModuleVisual extends ModuleVisual {
+		private $_component_module;
+	
+		public function __construct($component_module) {
+			$this->_component_module = $component_module;
+		}
 	
 		public function render() {
 		}
@@ -17,6 +23,10 @@
 		}
 		
 		public function preHandle() {
+		}
+		
+		public function getTitle() {
+			return $this->_component_module->getTitle();
 		}
 	
 	}

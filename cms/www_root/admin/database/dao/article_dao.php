@@ -5,6 +5,7 @@
 	
 	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_holder_dao.php";
 	include_once FRONTEND_REQUEST . "core/data/article.php";
 	include_once FRONTEND_REQUEST . "core/data/article_term.php";
 	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
@@ -17,9 +18,11 @@
 
 		private static $instance;
 		private $_page_dao;
+		private $_element_holder_dao;
 
 		private function __construct() {
 			$this->_page_dao = PageDao::getInstance();
+			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 
 		public static function getInstance() {
@@ -141,11 +144,8 @@
 		public function updateArticle($article) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
-			$query = "UPDATE articles a, element_holders e SET e.title = '" . $article->getTitle() . "'
-					 , e.published = " . $article->isPublished() . ", a.description = '" . $article->getDescription() . "',
-					 publication_date = '" . $article->getPublicationDate() . "'";
-			
-			if (!is_null($article->getImageId()) && $article->getImageId() != '') {
+			$query = "UPDATE articles SET description = '" . $article->getDescription() . "'";
+						if (!is_null($article->getImageId()) && $article->getImageId() != '') {
 				$query = $query . ", image_id = " . $article->getImageId();
 			} else {
 				$query = $query . ", image_id = NULL";
@@ -155,8 +155,9 @@
 			} else {
 				$query = $query . ", target_page = NULL";
 			}
-			$query = $query . " WHERE e.id = " . $article->getId() . " AND e.id = a.element_holder_id";
+			$query = $query . " WHERE element_holder_id = " . $article->getId();
 			$mysql_database->executeQuery($query);
+			$this->_element_holder_dao->update($article);
 		}
 
 		public function deleteArticle($article) {
@@ -198,7 +199,7 @@
 			}
 			$query1 = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type)
 					   VALUES  (NULL, '" . $article->getTitle() . "', " . $published_value . ",
-					   NULL, now(), " . $article->getCreatedBy()->getId() . ", '" . $article->getType() . "')";
+					   " . $article->getScopeId() . ", now(), " . $article->getCreatedBy()->getId() . ", '" . $article->getType() . "')";
 		
 			
 			$mysql_database->executeQuery($query1);

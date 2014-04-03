@@ -664,6 +664,7 @@ INSERT INTO `scopes` (`id`,`name`) VALUES
  (6,'Blok'),
  (7,'Artikel overzicht'),
  (8,'Youtube');
+ (9,'Artikel');
 /*!40000 ALTER TABLE `scopes` ENABLE KEYS */;
 
 

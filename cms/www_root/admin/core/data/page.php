@@ -176,11 +176,6 @@
 			$this->_page_dao->persist($this);
 		}
 		
-		public function update() {
-			parent::update();
-			$this->_page_dao->updatePage($this);
-		}
-		
 		public function delete() {
 			foreach ($this->getSubPages() as $sub_page) {
 				$sub_page->delete();

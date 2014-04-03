@@ -22,8 +22,7 @@
 			$this->_page->setShowInNavigation($this->getCheckboxValue("show_in_navigation"));
 			$this->_page->setTemplateId($this->getFieldValue("page_template"));
 			$this->_element_order = $this->getFieldValue("element_order");
-			$selected_blocks = $this->getFieldValue("select_blocks_" . $this->_page->getId());
-			$this->addSelectedBlocks($selected_blocks);
+			$this->_selected_blocks = $this->getFieldValue("select_blocks_" . $this->_page->getId());
 		}
 		
 		public function getElementOrder() {

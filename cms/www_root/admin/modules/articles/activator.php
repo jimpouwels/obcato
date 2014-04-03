@@ -23,8 +23,8 @@
 		
 		private $_template_engine;
 		private $_article_dao;
-		private $_current_article;
 		private $_current_term;
+		private $_current_article;
 		private $_article_module;
 		private $_article_pre_handler;
 		
@@ -33,7 +33,6 @@
 			$this->_template_engine = TemplateEngine::getInstance();
 			$this->_article_dao = ArticleDao::getInstance();
 			$this->_article_pre_handler = new ArticlePreHandler();
-			$this->initialize();
 		}
 	
 		public function render() {
@@ -59,7 +58,6 @@
 	
 		public function getActionButtons() {
 			$action_buttons = array();
-			
 			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB) {
 				$save_button = null;
 				$delete_button = null;
@@ -104,18 +102,9 @@
 		
 		public function preHandle() {
 			include_once FRONTEND_REQUEST . "modules/articles/pre_handler.php";
-			$this->initialize();
-		}
-		
-		private function initialize() {
+			$this->_article_pre_handler->handle();
+			$this->_current_article = $this->_article_pre_handler->getCurrentArticle();
 			$this->loadCurrentTerm();
-			$this->loadCurrentArticle();
-		}
-		
-		private function loadCurrentArticle() {
-			if (isset($_GET['article'])) {
-				$this->_current_article = $this->_article_dao->getArticle($_GET['article']);
-			}
 		}
 		
 		private function loadCurrentTerm() {

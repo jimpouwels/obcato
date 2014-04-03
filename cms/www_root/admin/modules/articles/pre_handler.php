@@ -15,11 +15,6 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (isset($_POST['action'])) {
 			switch ($_POST['action']) {
-				case 'update_element_holder':
-					if (isset($_POST['element_holder_id'])) {
-						updateArticle($_POST['element_holder_id']);
-					}
-					break;
 				case 'delete_article':
 					if (isset($_POST['element_holder_id'])) {
 						deleteArticle($_POST['element_holder_id']);
@@ -54,69 +49,6 @@
 		exit(); 
 	}
 	
-	function updateArticle($element_holder_id) {
-		include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
-	
-		global $errors;
-		
-		$article_dao = ArticleDao::getInstance();
-		$element_dao = ElementDao::getInstance();
-		$title = FormValidator::checkEmpty('article_title', 'Titel is verplicht');
-		$description = FormHandler::getFieldValue('article_description');
-		$current_element_holder = $article_dao->getArticle($element_holder_id);
-		$published = FormHandler::getFieldValue('article_published');
-		$element_order = FormHandler::getFieldValue('element_order');
-		$selected_terms = FormHandler::getFieldValue('select_terms_' . $current_element_holder->getId());
-		$image_id = FormHandler::getFieldValue('article_image_ref_' . $current_element_holder->getId());
-		$target_page_id = FormHandler::getFieldValue('article_target_page');
-		$delete_image = FormHandler::getFieldValue('delete_lead_image_field');
-		$publication_date = FormValidator::checkDate('publication_date', true, 'Vul een datum in (bijv. 31-12-2010)');
-		
-		if (count($errors) == 0) {
-			$element_dao->updateElementOrder($element_order, $current_element_holder);
-			$current_element_holder->setTitle($title);
-			$current_element_holder->setDescription($description);
-			$current_element_holder->setImageId($image_id);
-			$current_element_holder->setTargetPageId($target_page_id);
-			if (!is_null($publication_date) && $publication_date !='') {
-				$publication_date = DateUtility::stringMySqlDate($publication_date);
-			}
-			$current_element_holder->setPublicationDate($publication_date);
-			
-			$published_value = 0;
-			if ($published == 'on') {
-				$published_value = 1;
-			}
-			
-			if ($delete_image == 'true') {
-				$current_element_holder->setImageId(null);
-			}
-			
-			if (!is_null($selected_terms) && count($selected_terms) > 0) {
-				$existing_terms = $article_dao->getTermsForArticle($current_element_holder->getId());
-				foreach ($selected_terms as $selected_term_id) {
-					// make sure the term is not added twice
-					if (is_null($existing_terms) || count($existing_terms) == 0 || !in_array($article_dao->getTerm($selected_term_id), $existing_terms)) {
-						$article_dao->addTermToArticle($selected_term_id, $current_element_holder);
-					}
-				}
-			}
-			
-			$article_terms = $article_dao->getTermsForArticle($current_element_holder->getId());
-			foreach ($article_terms as $article_term) {
-				if (isset($_POST['term_' . $current_element_holder->getId() . '_' . $article_term->getId() . '_delete'])) {
-					$article_dao->deleteTermFromArticle($article_term->getId(), $current_element_holder);
-				}
-			}
-			
-			$current_element_holder->setPublished($published_value);
-			$article_dao->updateArticle($current_element_holder);
-			
-			Notifications::setSuccessMessage("Artikel succesvol opgeslagen");
-		} else {
-			Notifications::setFailedMessage("Artikel niet opgeslagen, verwerk de fouten");
-		}
-	}
 	
 	// =================================== TERMS ============================================================
 	

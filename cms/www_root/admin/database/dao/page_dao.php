@@ -5,6 +5,7 @@
 	
 	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	include_once FRONTEND_REQUEST . "database/dao/element_holder_dao.php";
 	include_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 	include_once FRONTEND_REQUEST . "database/dao/template_dao.php";
 	include_once FRONTEND_REQUEST . "core/data/page.php";
@@ -19,9 +20,11 @@
 
 		private static $instance;
 		private $_mysql_connector;
+		private $_element_holder_dao;
 
 		private function __construct() {
 			$this->_mysql_connector = MysqlConnector::getInstance();
+			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 
 		public static function getInstance() {
@@ -98,6 +101,7 @@
 			}
 			$query .= " WHERE element_holder_id = " . $page->getId();
 			$this->_mysql_connector->executeQuery($query);
+			$this->_element_holder_dao->update($page);
 		}
 
 		public function searchByTerm($term) {

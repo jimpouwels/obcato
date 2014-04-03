@@ -56,7 +56,7 @@
 				$this->_element_dao->updateElementOrder($page_form->getElementOrder(), $this->_current_page);
 				$this->addSelectedBlocks($page_form->getSelectedBlocks());
 				$this->deleteSelectedBlocksFromPage();
-				$this->_current_page->update();
+				$this->_page_dao->updatePage($this->_current_page);
 				Notifications::setSuccessMessage("Pagina succesvol opgeslagen");
 			} catch (FormException $e) {
 				Notifications::setFailedMessage("Pagina niet opgeslagen, verwerk de fouten");
@@ -134,7 +134,7 @@
 		private function updateFollowUp($pages) {
 			for ($i = 0; $i < count($pages); $i++) {
 				$pages[$i]->setFollowUp($i);
-				$pages[$i]->update();
+				$this->_page_dao->updatePage($pages[$i]);
 			}
 		}
 		
