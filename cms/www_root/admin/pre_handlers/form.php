@@ -101,7 +101,7 @@
 		}
 		
 		private function isEmpty($value) {
-			return is_empty($value) || $value == "";
+			return empty($value) || $value == "";
 		}
 		
 		private function raiseError($error_field, $error_message) {
