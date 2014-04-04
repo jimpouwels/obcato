@@ -31,7 +31,8 @@ $(document).ready(function() {
 	
 	// add term
 	$('#add_term').click(function() {
-		window.location.replace("/admin/index.php?new_term=true");
+		$('#add_term_action').attr('value', 'add_term');
+		$('#add_term_form_hidden').submit();
 	});
 	
 	// update term button

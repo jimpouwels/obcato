@@ -1,0 +1,37 @@
+<?php
+
+	defined("_ACCESS") or die;
+	
+	require_once FRONTEND_REQUEST . "pre_handlers/form.php";
+	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
+	
+	class TermForm extends Form {
+	
+		private $_term;
+		private $_article_dao;
+	
+		public function __construct($term) {
+			$this->_term = $term;
+			$this->_article_dao = ArticleDao::getInstance();
+		}
+		
+		public function setTerm($term) {
+			$this->_term = $term;
+		}
+	
+		public function loadFields() {
+			$this->_term->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
+			if ($this->termExists()) {
+				$this->raiseError("name", "Er bestaat al een term met deze naam");
+			}
+			if ($this->hasErrors())
+				throw new FormException();
+		}
+		
+		private function termExists() {
+			$existing_term = $this->_article_dao->getTermByName($this->_term->getName());
+			return !is_null($existing_term) && $this->_term->getId() != $existing_term->getId();
+		}
+	
+	}
+	

@@ -100,13 +100,13 @@
 			return count($errors) > 0;
 		}
 		
-		private function isEmpty($value) {
-			return empty($value) || $value == "";
-		}
-		
-		private function raiseError($error_field, $error_message) {
+		protected function raiseError($error_field, $error_message) {
 			global $errors;
 			$errors[$error_field . "_error"] = $error_message;
+		}
+		
+		protected function isEmpty($value) {
+			return empty($value) || $value == "";
 		}
 	
 	}

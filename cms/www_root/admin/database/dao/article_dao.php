@@ -237,14 +237,13 @@
 			
 			$query = "SELECT * FROM article_terms WHERE id = " . $id;
 			$result = $mysql_database->executeSelectQuery($query);
-			$term = NULL;
+			$term = null;
 			
 			while ($row = mysql_fetch_array($result)) {
 				$term = new ArticleTerm();
 				$term->setId($row['id']);
 				$term->setName($row['name']);
 			}
-			
 			return $term;
 		}
 
@@ -267,21 +266,20 @@
 		public function createTerm() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			$new_term = new ArticleTerm();
-			$new_term->setName('Nieuwe term');
-			
+			$new_term->setName("Nieuwe term");
+			$postfix = 1;
+			while (!is_null($this->getTermByName($new_term->getName()))) {
+				$new_term->setName("Nieuwe term " . $postfix);
+				$postfix++;
+			}
 			$new_id = $this->persistTerm($new_term);
-			
 			$new_term->setId($new_id);
-			
 			return $new_term;
 		}
 
 		private function persistTerm($term) {
 			$mysql_database = MysqlConnector::getInstance(); 
-			
-			
 			$query = "INSERT INTO article_terms (name) VALUES  ('" . $term->getName() . "')";
-		
 			$mysql_database->executeQuery($query);
 			
 			return mysql_insert_id();

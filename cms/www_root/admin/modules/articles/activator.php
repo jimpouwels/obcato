@@ -12,6 +12,7 @@
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/terms/terms_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/article_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/articles/term_pre_handler.php";
 
 	class ArticleModuleVisual extends ModuleVisual {
 	
@@ -27,12 +28,14 @@
 		private $_current_article;
 		private $_article_module;
 		private $_article_pre_handler;
+		private $_term_pre_handler;
 		
 		public function __construct($article_module) {
 			$this->_article_module = $article_module;
 			$this->_template_engine = TemplateEngine::getInstance();
 			$this->_article_dao = ArticleDao::getInstance();
 			$this->_article_pre_handler = new ArticlePreHandler();
+			$this->_term_pre_handler = new TermPreHandler();
 		}
 	
 		public function render() {
@@ -103,14 +106,9 @@
 		public function preHandle() {
 			include_once FRONTEND_REQUEST . "modules/articles/pre_handler.php";
 			$this->_article_pre_handler->handle();
+			$this->_term_pre_handler->handle();
 			$this->_current_article = $this->_article_pre_handler->getCurrentArticle();
-			$this->loadCurrentTerm();
-		}
-		
-		private function loadCurrentTerm() {
-			if (isset($_GET['term'])) {
-				$this->_current_term = $this->_article_dao->getTerm($_GET['term']);
-			}
+			$this->_current_term = $this->_term_pre_handler->getCurrentTerm();
 		}
 		
 		private function renderTabMenu() {
