@@ -24,14 +24,10 @@
 			$this->_article->setPublished($this->getCheckboxValue("article_published"));
 			$this->_article->setImageId($this->getFieldValue("article_image_ref_" . $this->_article->getId()));
 			$this->_article->setTargetPageId($this->getFieldValue("article_target_page"));
-			$publication_date = $this->getMandatoryDate("publication_date", "Vul een datum in (bijv. 31-12-2010)");
-			if (!is_null($publication_date) && $publication_date !='') {
-				$publication_date = DateUtility::stringMySqlDate($publication_date);
-			}
-			$this->_article->setPublicationDate($publication_date);
+			$this->loadPublicationDate();
+			$this->deleteLeadImageIfNeeded();
 			$this->_element_order = $this->getFieldValue("element_order");		
 			$this->_selected_terms = $this->getFieldValue("select_terms_" . $this->_article->getId());
-			$this->_delete_lead_image = $this->getFieldValue("delete_lead_image_field");
 			if ($this->hasErrors())
 				throw new FormException();
 		}
@@ -48,8 +44,15 @@
 			return $this->_target_page_id;
 		}
 		
-		public function deleteLeadImage() {
-			return $this->_delete_lead_image == "true";
+		private function deleteLeadImageIfNeeded() {
+			if ($this->getFieldValue("delete_lead_image_field") == "true") {
+				$this->_current_article->setImageId(null);
+			}
+		}
+		
+		private function loadPublicationDate() {
+			$publication_date = $this->getMandatoryDate("publication_date", "Vul een datum in (bijv. 31-12-2010)");
+			$this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
 		}
 	
 	}

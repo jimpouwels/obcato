@@ -42,7 +42,7 @@
 		}
 		
 		public function getImage() {
-			$image = NULL;
+			$image = null;
 			if ($this->_image_id != '' && !is_null($this->_image_id)) {
 				include_once FRONTEND_REQUEST . "database/dao/image_dao.php";
 				$image_dao = ImageDao::getInstance();
@@ -68,7 +68,7 @@
 		}
 		
 		public function getTargetPage() {
-			$target_page = NULL;
+			$target_page = null;
 			if (!is_null($this->_target_page_id) && $this->_target_page_id != '') {
 				$target_page = Page::findById($this->_target_page_id);
 			}
