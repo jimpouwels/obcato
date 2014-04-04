@@ -63,20 +63,23 @@
 			}
 		}
 		
-		private function addSelectedBlockToPage($selected_block_id, $current_page_blocks) {
-			$selected_block = $this->_block_dao->getBlock($selected_block_id);
-			if ($selected_block_id != -1 && (is_null($current_page_blocks) || count($current_page_blocks) == 0) || !in_array($selected_block, $current_page_blocks)) {
-				$this->_current_page->addBlock($selected_block);
+		private function addSelectedBlocks($selected_blocks) {
+			if (count($selected_blocks) == 0) return;
+			$current_page_blocks = $this->_current_page->getBlocks();
+			foreach ($selected_blocks as $selected_block_id) {
+				if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
+					$this->_current_page->addBlock($this->_block_dao->getBlock($selected_block_id));
+				}
 			}
 		}
 		
-		private function addSelectedBlocks($selected_blocks) {
-			$current_page_blocks = $this->_current_page->getBlocks();
-			if (!is_null($selected_blocks) && count($selected_blocks) > 0) {
-				foreach ($selected_blocks as $selected_block_id) {
-					$this->addSelectedBlockToPage($selected_block_id, $current_page_blocks);
+		private function blockAlreadyExists($selected_block_id, $current_page_blocks) {
+			foreach ($current_page_blocks as $current_page_block) {
+				if ($current_page_block->getId() == $selected_block_id) {
+					return true;
 				}
 			}
+			return false;
 		}
 		
 		private function deleteSelectedBlocksFromPage() {	
