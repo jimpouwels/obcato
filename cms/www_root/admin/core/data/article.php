@@ -16,6 +16,7 @@
 		public function __construct() {
 			parent::__construct();
 			$this->setScopeId(9);
+			$this->setPublished(false);
 		}
 		
 		public function getDescription() {

@@ -180,7 +180,7 @@
 			$new_article->setTitle('Nieuw artikel');
 			
 			$authorization_dao = AuthorizationDao::getInstance();
-			$user = $authorization_dao->getUser($_SESSION['username']);
+			$user = $authorization_dao->getUser($_SESSION["username"]);
 			$new_article->setCreatedById($user->getId());
 			$new_article->setType(ELEMENT_HOLDER_ARTICLE);
 			

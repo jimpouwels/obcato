@@ -9,49 +9,6 @@
 	include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
 	
-	// =================================== ARTICLES ============================================================
-	
-	// handle post requests
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (isset($_POST['action'])) {
-			switch ($_POST['action']) {
-				case 'delete_article':
-					if (isset($_POST['element_holder_id'])) {
-						deleteArticle($_POST['element_holder_id']);
-					}
-					break;
-			}
-		} else if (isset($_POST['add_article_action'])) {
-			addArticle();
-		}
-	}
-	
-	function deleteArticle($element_holder_id) {
-		$article_dao = ArticleDao::getInstance();
-		$article = $article_dao->getArticle($element_holder_id);
-		$article_dao->deleteArticle($article);
-		
-		Notifications::setSuccessMessage("Artikel succesvol verwijderd");
-		header('Location: /admin/index.php');
-		exit(); 
-	}
-	
-	function addArticle() {
-		$article_dao = ArticleDao::getInstance();
-		$new_article = $article_dao->createArticle();
-		$new_article->setPublished(false);					
-		$authorization_dao = AuthorizationDao::getInstance();
-		$user = $authorization_dao->getUser($_SESSION["username"]);
-		$new_article->setCreatedById($user->getId());
-		
-		Notifications::setSuccessMessage("Artikel succesvol aangemaakt");
-		header('Location: /admin/index.php?article=' . $new_article->getId());
-		exit(); 
-	}
-	
-	
-	// =================================== TERMS ============================================================
-	
 	// handle post requests
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (isset($_POST['action'])) {
