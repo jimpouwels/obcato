@@ -7,9 +7,11 @@
 		public abstract function LoadFields();
 		
 		public function getMandatoryFieldValue($field_name, $error_message) {
-			if ($this->isEmpty($field_name))
-				$this->raiseError($field_name, $error_message);
-			return $this->getFieldValue($field_name);
+			$value = $this->getFieldValue($field_name);
+			if ($this->isEmpty($value)) {
+				$this->raiseError($field_name, $error_message);	
+			}
+			return $value;
 		}
 		
 		public function getFieldValue($field_name) {
@@ -29,49 +31,49 @@
 		}
 		
 		public function getMandatoryEmailAddress($field_name, $error_message) {
-			if ($this->isEmpty($field_name)) {
-				$this->raiseError($field_name, $error_message);
-				return;
+			$email_address = $this->getEmailAddress($field_name);
+			if ($this->isEmpty($email_address)) {
+				$this->raiseError($field_name, $error_message);	
 			}
-			return $this->getEmailAddress($field_name);
+			return $email_address;
 		}
 		
 		public function getEmailAddress($field_name, $error_message) {
 			$value = $this->getFieldValue($field_name);
 			$valid_email = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
-			if (!$valid_email)
+			if (!$this->isEmpty($value) && !$valid_email)
 				$this->raiseError($field_name, $error_message);
 			return $value;
 		}
 		
 		public function getMandatoryNumber($field_name, $error_message) {
-			if ($this->isEmpty($field_name)) {
-				$this->raiseError($field_name, $error_message);
-				return;
-				}
-			return $this->getNumber($field_name);
+			$number = $this->getNumber($field_name);
+			if ($this->isEmpty($number)) {
+				$this->raiseError($field_name, $error_message);	
+			}
+			return $number;
 		}
 		
 		public function getNumber($field_name, $error_message) {
-			$value = $this->getFieldValue($field_name);
-			if (!is_numeric($value))
+			$number = $this->getFieldValue($field_name);
+			if (!$this->isEmpty($number) && !is_numeric($number))
 				$this->raiseError($field_name, $error_message);
-			return $value;
+			return $number;
 		}
 		
 		public function getMandatoryDate($field_name, $error_message) {
-			if ($this->isEmpty($field_name)) {
-				$this->raiseError($field_name, $error_message);
-				return;
+			$date = $this->getDate($field_name);
+			if ($this->isEmpty($date)) {
+				$this->raiseError($field_name, $error_message);	
 			}
-			return $this->getDate($field_name);
+			return $date;
 		}
 		
 		public function getDate($field_name) {
 			$value = $this->getFieldValue($field_name);
 			$valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-			if (!$valid_date) {
-				throw new InvalidDateException($field_name . " is not a valid date");
+			if (!$this->isEmpty($value) && !$valid_date) {
+				$this->raiseError($field_name, $error_message);
 			}
 			return $value;
 		}
@@ -82,11 +84,11 @@
 			$value2 = $this->getFieldValue($password2);
 			
 			if (($value1 == "" || is_null($value1)) && ($value2 != "" || !is_null($value2))) {
-				throw new InvalidPasswordException("Vul beide wachtwoordvelden in");
+				$this->raiseError($field_name, "Vul beide wachtwoordvelden in");
 			} else if (($value2 == "" || is_null($value2)) && ($value1 != "" || !is_null($value1))) {
-				throw new InvalidPasswordException("Herhaal het wachtwoord");
+				$this->raiseError($field_name, "Herhaal het wachtwoord");
 			} else if ($value1 != $value2) {
-				throw new InvalidPasswordException("De wachtwoorden zijn niet gelijk");
+				$this->raiseError($field_name, "De wachtwoorden zijn niet gelijk");
 			} else {
 				$value = $value1;
 			}
@@ -98,12 +100,8 @@
 			return count($errors) > 0;
 		}
 		
-		private function isEmpty($field_name) {
-			$value = FormHandler::getFieldValue($field_name);
-			if (is_null($value) || $value == "") {
-				return true;
-			}
-			return false;
+		private function isEmpty($value) {
+			return is_empty($value) || $value == "";
 		}
 		
 		private function raiseError($error_field, $error_message) {
