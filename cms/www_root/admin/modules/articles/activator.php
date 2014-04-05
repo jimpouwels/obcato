@@ -13,6 +13,7 @@
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/article_pre_handler.php";
 	require_once FRONTEND_REQUEST . "modules/articles/term_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/articles/target_pages_pre_handler.php";
 
 	class ArticleModuleVisual extends ModuleVisual {
 	
@@ -29,6 +30,7 @@
 		private $_article_module;
 		private $_article_pre_handler;
 		private $_term_pre_handler;
+		private $_target_pages_pre_handler;
 		
 		public function __construct($article_module) {
 			$this->_article_module = $article_module;
@@ -36,6 +38,7 @@
 			$this->_article_dao = ArticleDao::getInstance();
 			$this->_article_pre_handler = new ArticlePreHandler();
 			$this->_term_pre_handler = new TermPreHandler();
+			$this->_target_pages_pre_handler = new TargetPagesPreHandler();
 		}
 	
 		public function render() {
@@ -104,9 +107,9 @@
 		}
 		
 		public function preHandle() {
-			include_once FRONTEND_REQUEST . "modules/articles/pre_handler.php";
 			$this->_article_pre_handler->handle();
 			$this->_term_pre_handler->handle();
+			$this->_target_pages_pre_handler->handle();
 			$this->_current_article = $this->_article_pre_handler->getCurrentArticle();
 			$this->_current_term = $this->_term_pre_handler->getCurrentTerm();
 		}

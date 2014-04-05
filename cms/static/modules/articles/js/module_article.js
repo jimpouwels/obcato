@@ -72,7 +72,7 @@ $(document).ready(function() {
 	});
 	
 	// update options
-	$('#update_article_options').click(function() {
+	$('#update_target_pages').click(function() {
 		$('#update_target_page_form').submit();
 	});
 	
@@ -99,6 +99,6 @@ $(document).ready(function() {
 // article options make default target page
 function changeDefaultTargetPage(pageId) {
 	$('#action').attr('value', 'change_default_target_page');
-	$('#change_default_value').attr('value', pageId);
+	$('#new_default_target_page').attr('value', pageId);
 	$('#update_target_page_form').submit();
 }

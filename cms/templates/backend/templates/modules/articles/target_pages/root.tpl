@@ -2,10 +2,10 @@
 	<fieldset class="admin_fieldset target_pages_fieldset">
 		<div class="fieldset-title">Beschikbare doelpagina's</div>
 		
-		<input type="hidden" id="change_default_value" name="change_default_value" />
-		<input type="hidden" name="action" id="action" value="update_article_option" />
+		<input type="hidden" id="new_default_target_page" name="new_default_target_page" />
+		<input type="hidden" name="action" id="action" value="target_page_to_add" /" />
 		
-		<a href="#" id="update_article_options" class="displaynone"></a>
+		<a href="#" id="update_target_pages" class="displaynone"></a>
 		
 		{if !is_null($target_pages) && count($target_pages) > 0}
 			<table cellspacing="0" cellpadding="5" border="0" class="targetpage-table">

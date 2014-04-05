@@ -386,7 +386,7 @@
 			$result = $mysql_database->executeSelectQuery($query);
 			$page = null;
 			while ($row = mysql_fetch_assoc($result)) {
-				$page = Page::findById($row['element_holder_id']);
+				$page = $this->_page_dao->getPage($row["element_holder_id"]);
 				break;
 			}
 			
