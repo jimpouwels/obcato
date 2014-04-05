@@ -8,6 +8,7 @@
 	require_once FRONTEND_REQUEST . "pre_handlers/element_pre_handler.php";
 	require_once FRONTEND_REQUEST . "pre_handlers/module_pre_handler.php";
 	require_once FRONTEND_REQUEST . "view/views/cms.php";
+	require_once FRONTEND_REQUEST . "core/data/settings.php";
 	require_once FRONTEND_REQUEST . "view/views/popup.php";
 	
 	class Backend {

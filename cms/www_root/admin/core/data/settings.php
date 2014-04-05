@@ -160,9 +160,6 @@
 			$mysql_database->executeQuery($query);
 		}
 		
-		public function delete() {
-		}
-		
 		public static function find() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			$query = "SELECT * FROM settings";
