@@ -46,7 +46,7 @@
 		
 		private function deleteLeadImageIfNeeded() {
 			if ($this->getFieldValue("delete_lead_image_field") == "true") {
-				$this->_current_article->setImageId(null);
+				$this->_article->setImageId(null);
 			}
 		}
 		

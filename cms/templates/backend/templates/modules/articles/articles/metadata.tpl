@@ -4,7 +4,14 @@
 	<li>{$published_field}</li>
 	<li>{$publication_date_field}</li>
 	<li>{$target_pages_field}</li>
-	<li>{$image_picker_field}</li>
+	<li>
+		<div>
+			{$image_picker_field}
+		</div>
+		<div>
+			{$delete_lead_image_button}
+		</div>
+	</li>
 	{if !is_null($lead_image_id)}
 		<li>
 			<label class="admin_label"></label>
