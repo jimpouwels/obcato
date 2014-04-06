@@ -21,16 +21,17 @@
 	
 		public function loadFields() {
 			$this->_term->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
-			if ($this->termExists()) {
-				$this->raiseError("name", "Er bestaat al een term met deze naam");
-			}
-			if ($this->hasErrors())
+			if ($this->hasErrors() || $this->termExists())
 				throw new FormException();
 		}
 		
 		private function termExists() {
 			$existing_term = $this->_article_dao->getTermByName($this->_term->getName());
-			return !is_null($existing_term) && $this->_term->getId() != $existing_term->getId();
+			if (!is_null($existing_term) && $this->_term->getId() != $existing_term->getId()) {
+				$this->raiseError("name", "Er bestaat al een term met deze naam");
+				return true;
+			}
+			return false;
 		}
 	
 	}
