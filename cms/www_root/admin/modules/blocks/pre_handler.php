@@ -19,12 +19,6 @@
 						deleteBlock($element_holder_id);
 					}
 					break;
-				case 'update_element_holder':
-					if (isset($_POST['element_holder_id'])) {
-						$element_holder_id = $_POST['element_holder_id'];
-						updateBlock($element_holder_id);
-					}
-					break;
 			}
 		} else if (isset($_POST['add_block_action'])) {
 			addBlock();
@@ -48,39 +42,6 @@
 		Notifications::setSuccessMessage("Blok succesvol aangemaakt");
 		header('Location: /admin/index.php?block=' . $new_block->getId());
 		exit();
-	}
-	
-	// block is being updated
-	function updateBlock($element_holder_id) {
-		global $errors;
-		
-		$block_dao = BlockDao::getInstance();
-		$element_dao = ElementDao::getInstance();
-		$title = FormValidator::checkEmpty('title', 'Titel is verplicht');
-		$current_element_holder = $block_dao->getBlock($element_holder_id);
-		$published = FormHandler::getFieldValue('published');
-		$template_id = FormHandler::getFieldValue('block_template');
-		$position_id = FormHandler::getFieldValue('block_position');
-		$element_order = FormHandler::getFieldValue('element_order');
-	
-		if (count($errors) == 0) {
-			$element_dao->updateElementOrder($element_order, $current_element_holder);
-			$current_element_holder->setTitle($title);
-			$current_element_holder->setTemplateId($template_id);
-			$current_element_holder->setPositionId($position_id);
-				
-			$published_value = 0;
-			if ($published == 'on') {
-				$published_value = 1;
-			}
-			
-			$current_element_holder->setPublished($published_value);
-			$block_dao->updateBlock($current_element_holder);
-			
-			Notifications::setSuccessMessage("Blok succesvol opgeslagen");
-		} else {
-			Notifications::setFailedMessage("Blok niet opgeslagen, verwerk de fouten");
-		}
 	}
 	
 	// ========================= POSITIONS ===================================================================

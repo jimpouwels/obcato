@@ -7,8 +7,8 @@
 	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
-	require_once FRONTEND_REQUEST . "modules/blocks/visuals/blocks/block_manager.php";
-	require_once FRONTEND_REQUEST . "modules/blocks/visuals/positions/position_manager.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/visuals/blocks/block_tab.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/visuals/positions/position_tab.php";
 	require_once FRONTEND_REQUEST . "modules/blocks/block_pre_handler.php";
 
 	class BlockModuleVisual extends ModuleVisual {
@@ -40,9 +40,9 @@
 			
 			$content = null;
 			if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB) {
-				$content = new BlockManager($this->_current_block);
+				$content = new BlockTab($this->_current_block);
 			} else if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB) {
-				$content = new PositionManager($this->_current_position);
+				$content = new PositionTab($this->_current_position);
 			}
 			if (!is_null($content)) {
 				$this->_template_engine->assign("content", $content->render());
@@ -64,7 +64,7 @@
 				$action_buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
 			}
 			if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB) {
-				if (!is_null($this->_current_position) || PositionManager::isEditPositionMode()) {
+				if (!is_null($this->_current_position) || PositionTab::isEditPositionMode()) {
 					$action_buttons[] = new ActionButton("Opslaan", "update_position", "icon_apply");
 				}
 				$action_buttons[] = new ActionButton("Toevoegen", "add_position", "icon_add");
@@ -80,11 +80,12 @@
 		
 		public function preHandle() {
 			include_once FRONTEND_REQUEST . "modules/blocks/pre_handler.php";
+			$this->_block_pre_handler->handle();
+			$this->_current_block = $this->_block_pre_handler->getCurrentBlock();
 			$this->initialize();
 		}
 		
 		private function initialize() {
-			$this->_current_block = $this->getCurrentBlock();
 			$this->_current_position = $this->getCurrentPosition();
 		}
 		
