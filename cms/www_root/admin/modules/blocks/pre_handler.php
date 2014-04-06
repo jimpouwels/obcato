@@ -11,29 +11,10 @@
 	
 	// handle post requests
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (isset($_POST['action'])) {
-			switch ($_POST['action']) {
-				case 'delete_block':
-					if (isset($_POST['element_holder_id'])) {
-						$element_holder_id = $_POST['element_holder_id'];
-						deleteBlock($element_holder_id);
-					}
-					break;
-			}
-		} else if (isset($_POST['add_block_action'])) {
+		if (isset($_POST['add_block_action'])) {
 			addBlock();
 		}
 	}
-	
-	// block must be deleted
-	function deleteBlock($element_holder_id) {
-		$block_dao = BlockDao::getInstance();
-		$block = $block_dao->getBlock($element_holder_id);
-		$block_dao->deleteBlock($block);
-		Notifications::setSuccessMessage("Blok succesvol verwijderd");
-		header('Location: /admin/index.php');
-		exit();
-	} 
 	
 	// a new block must be created
 	function addBlock() {
