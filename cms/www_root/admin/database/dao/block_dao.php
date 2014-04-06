@@ -330,8 +330,11 @@
 		*/
 		public function createBlockPosition() {
 			$new_position = new BlockPosition();
-			$new_position->setName('Nieuwe positie');
-			
+			$postfix = 1;
+			while (!is_null($this->getBlockPositionByName($new_position->getName()))) {
+				$new_position->setName("Nieuwe positie " . $postfix);
+				$postfix++;
+			}
 			$new_id = $this->persistBlockPosition($new_position);
 			$new_position->setId($new_id);
 			

@@ -36,7 +36,7 @@ $(document).ready(function() {
 
 	// add position
 	$('#add_position').click(function() {
-		window.location.replace("/admin/index.php?new_position=true");
+		$('#add_position_form').submit();
 	});
 	
 	// delete position button

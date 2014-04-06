@@ -78,7 +78,6 @@
 		}
 		
 		public function preHandle() {
-			include_once FRONTEND_REQUEST . "modules/blocks/pre_handler.php";
 			$this->_block_pre_handler->handle();
 			$this->_position_pre_handler->handle();
 			$this->_current_block = $this->_block_pre_handler->getCurrentBlock();
