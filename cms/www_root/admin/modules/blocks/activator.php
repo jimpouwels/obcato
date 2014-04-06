@@ -10,13 +10,12 @@
 	require_once FRONTEND_REQUEST . "modules/blocks/visuals/blocks/block_tab.php";
 	require_once FRONTEND_REQUEST . "modules/blocks/visuals/positions/position_tab.php";
 	require_once FRONTEND_REQUEST . "modules/blocks/block_pre_handler.php";
+	require_once FRONTEND_REQUEST . "modules/blocks/position_pre_handler.php";
 
 	class BlockModuleVisual extends ModuleVisual {
 	
 		private static $TEMPLATE = "blocks/root.tpl";
 		private static $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
-		private static $BLOCK_QUERYSTRING_KEY = "block";
-		private static $POSITION_QUERYSTRING_KEY = "position";
 		private static $BLOCKS_TAB = 0;
 		private static $POSITIONS_TAB = 1;
 		
@@ -26,18 +25,18 @@
 		private $_template_engine;
 		private $_block_module;
 		private $_block_pre_handler;
+		private $_position_pre_handler;
 	
 		public function __construct($block_module) {
 			$this->_block_module = $block_module;
 			$this->_block_pre_handler = new BlockPreHandler();
+			$this->_position_pre_handler = new PositionPreHandler();
 			$this->_block_dao = BlockDao::getInstance();
 			$this->_template_engine = TemplateEngine::getInstance();
-			$this->initialize();
 		}
 	
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-			
 			$content = null;
 			if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB) {
 				$content = new BlockTab($this->_current_block);
@@ -81,29 +80,9 @@
 		public function preHandle() {
 			include_once FRONTEND_REQUEST . "modules/blocks/pre_handler.php";
 			$this->_block_pre_handler->handle();
+			$this->_position_pre_handler->handle();
 			$this->_current_block = $this->_block_pre_handler->getCurrentBlock();
-			$this->initialize();
-		}
-		
-		private function initialize() {
-			$this->_current_position = $this->getCurrentPosition();
-		}
-		
-		private function getCurrentBlock() {
-			$current_block = null;
-			if (isset($_GET[self::$BLOCK_QUERYSTRING_KEY]) && $_GET[self::$BLOCK_QUERYSTRING_KEY] != "") {
-				$current_block = $this->_block_dao->getBlock($_GET[self::$BLOCK_QUERYSTRING_KEY]);
-			}
-			return $current_block;
-		}
-		
-		private function getCurrentPosition() {
-			$current_position = null;
-			if (isset($_GET[self::$POSITION_QUERYSTRING_KEY])) {
-				$position_id = $_GET[self::$POSITION_QUERYSTRING_KEY];
-				$current_position = $this->_block_dao->getBlockPosition($position_id);
-			}
-			return $current_position;
+			$this->_current_position = $this->_position_pre_handler->getCurrentPosition();
 		}
 		
 		private function renderTabMenu() {
