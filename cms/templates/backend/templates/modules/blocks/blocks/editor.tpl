@@ -7,7 +7,6 @@
 		<input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 		<input type="hidden" id="{$delete_element_form_id}" name="{$delete_element_form_id}" value="" />
 		<input type="hidden" id="{$element_order_id}" name="{$element_order_id}" value="" />
-		<input type="hidden" name="delete_lead_image_field" value="" id="delete_lead_image_field" />
 		
 		{$block_metadata}
 		
