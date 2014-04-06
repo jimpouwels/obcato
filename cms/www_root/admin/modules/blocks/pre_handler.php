@@ -7,24 +7,6 @@
 	include_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 	include_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 	
-	// =================================== BLOCKS ============================================================
-	
-	// handle post requests
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (isset($_POST['add_block_action'])) {
-			addBlock();
-		}
-	}
-	
-	// a new block must be created
-	function addBlock() {
-		$block_dao = BlockDao::getInstance();
-		$new_block = $block_dao->createBlock();
-		Notifications::setSuccessMessage("Blok succesvol aangemaakt");
-		header('Location: /admin/index.php?block=' . $new_block->getId());
-		exit();
-	}
-	
 	// ========================= POSITIONS ===================================================================
 	
 	// handle post requests
