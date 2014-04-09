@@ -6,49 +6,30 @@
 	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
 	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
 	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
+	require_once FRONTEND_REQUEST . "modules/settings/settings_form.php";
 
 	class SettingsPreHandler extends ModuleRequestHandler {
+	
+		private $_settings_dao;
+		
+		public function __construct() {
+			$this->_settings_dao = SettingsDao::getInstance();
+		}
 	
 		public function handleGet() {
 		}
 		
 		public function handlePost() {
-			$website_title = FormValidator::checkEmpty("website_title", "Website titel is verplicht");
-			$frontend_hostname = FormValidator::checkEmpty("frontend_hostname", "Frontend hostname is verplicht");
-			$backend_hostname = FormValidator::checkEmpty("backend_hostname", "Backend hostname is verplicht");
-			$root_dir = FormValidator::checkEmpty("root_dir", "Root directory is verplicht");
-			$frontend_template_dir = FormValidator::checkEmpty("frontend_template_dir", "Template directory is verplicht");
-			$smtp_host = FormHandler::getFieldValue("smtp_host");
-			$email_address = FormValidator::checkEmailAddress("email_address", true, "Ongeldig email adres");
-			$static_dir = FormValidator::checkEmpty("static_dir", "Static directory is verplicht");
-			$config_dir = FormValidator::checkEmpty("config_dir", "Configuration directory is verplicht");
-			$upload_dir = FormValidator::checkEmpty("upload_dir", "Upload directory is verplicht");
-			$component_dir = FormValidator::checkEmpty("component_dir", "Component directory is verplicht");
-			$backend_template_dir = FormValidator::checkEmpty("backend_template_dir", "Template Engine directory is verplicht");
-			$homepage_id = FormValidator::checkEmpty("homepage_page_id", "De website heeft een homepage nodig");
-
-			if ($this->getErrorCount() == 0) {
-				$settings = Settings::find();
-				$settings->setWebsiteTitle($website_title);
-				$settings->setBackendHostname($backend_hostname);
-				$settings->setFrontendHostname($frontend_hostname);
-				$settings->setEmailAddress($email_address);
-				$settings->setSmtpHost($smtp_host);
-				$settings->setRootDir($root_dir);
-				$settings->setFrontendTemplateDir($frontend_template_dir);
-				$settings->setStaticDir($static_dir);
-				$settings->setConfigDir($config_dir);
-				$settings->setUploadDir($upload_dir);
-				$settings->setComponentDir($component_dir);
-				$settings->setBackendTemplateDir($backend_template_dir);
-				$settings->update();
-				
-				include_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
-				$settings_dao = SettingsDao::getInstance();
-				$settings_dao->setHomepage($homepage_id);
-				
+			$settings = $this->_settings_dao->getSettings();
+			$settings_form = new SettingsForm($settings);
+			try {
+				$settings_form->loadFields();
+				$this->_settings_dao->update($settings);
+				$this->_settings_dao->setHomepage($settings_form->getHomepageId());
 				Notifications::setSuccessMessage("Instellingen succesvol opgeslagen");
-			} else {
+			} catch (FormException $e) {
+				global $errors;
+				var_dump($errors);
 				Notifications::setFailedMessage("Instellingen niet opgeslagen, verwerk de fouten");
 			}
 		}

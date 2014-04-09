@@ -38,7 +38,7 @@
 			return $email_address;
 		}
 		
-		public function getEmailAddress($field_name, $error_message) {
+		public function getEmailAddress($field_name) {
 			$value = $this->getFieldValue($field_name);
 			$valid_email = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
 			if (!$this->isEmpty($value) && !$valid_email)
@@ -54,7 +54,7 @@
 			return $number;
 		}
 		
-		public function getNumber($field_name, $error_message) {
+		public function getNumber($field_name) {
 			$number = $this->getFieldValue($field_name);
 			if (!$this->isEmpty($number) && !is_numeric($number))
 				$this->raiseError($field_name, $error_message);

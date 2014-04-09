@@ -19,7 +19,7 @@
 }
 
 .settings_form {
-	float: left;
+	clear: both;
 }
 
 .information-block {

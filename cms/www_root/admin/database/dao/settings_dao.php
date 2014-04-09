@@ -22,12 +22,24 @@
 			return self::$instance;
 		}
 		
+		public function update($settings) {
+			$mysql_database = MysqlConnector::getInstance();
+			$query = "UPDATE settings SET website_title = '" . $settings->getWebsiteTitle() . "', backend_hostname = '" . 
+					 $settings->getBackEndHostname() . "', frontend_hostname = '" . $settings->getFrontEndHostname() . "',
+					 smtp_host = '" . $settings->getSmtpHost() . "', email_address = '" . $settings->getEmailAddress() . "',
+					 frontend_template_dir = '" . $settings->getFrontendTemplateDir() . "', root_dir = '" . $settings->getRootDir() . "',
+					 static_files_dir = '" . $settings->getStaticDir() . "', config_dir = '" . $settings->getConfigDir() . "',
+					 upload_dir = '" . $settings->getUploadDir() . "', database_version = '" . $settings->getDatabaseVersion() . "',
+					 component_dir = '" . $settings->getComponentDir() . "', backend_template_dir = '" . $settings->getBackendTemplateDir() . "'";
+			$mysql_database->executeQuery($query);
+		}
+		
 		public function getSettings() {
 			$query = "SELECT * FROM settings";
 			$result = $this->_mysql_database->executeSelectQuery($query);
 			$settings = null;
 			while ($row = mysql_fetch_assoc($result)) {
-				$settings = self::constructFromRecord($row);
+				$settings = Settings::constructFromRecord($row);
 			}
 			return $settings;
 		}

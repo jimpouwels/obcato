@@ -8,6 +8,7 @@
 	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "view/views/warning_message.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
+	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 	require_once FRONTEND_REQUEST . "modules/settings/visuals/settings_editor.php";
 	require_once FRONTEND_REQUEST . "modules/settings/settings_pre_handler.php";
 
@@ -17,10 +18,12 @@
 		private static $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
 		private $_templage_engine;
 		private $_settings_module;
+		private $_settings_dao;
 		private $_settings_pre_handler;
 	
 		public function __construct($settings_module) {
 			$this->_settings_module = $settings_module;
+			$this->_settings_dao = SettingsDao::getInstance();
 			$this->_template_engine = TemplateEngine::getInstance();
 			$this->_settings_pre_handler = new SettingsPreHandler();
 		}
@@ -52,7 +55,7 @@
 		}
 		
 		private function renderSettingsEditor() {
-			$settings_editor = new SettingsEditor(Settings::find());
+			$settings_editor = new SettingsEditor($this->_settings_dao->getSettings());
 			return $settings_editor->render();
 		}
 		
