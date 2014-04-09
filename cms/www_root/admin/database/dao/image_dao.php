@@ -167,6 +167,20 @@
 			$image->setId(mysql_insert_id());
 		}
 
+		public function createLabel() {
+			$new_label = new ImageLabel();
+			$new_label->setName("Nieuw label");
+			$postfix = 1;
+			while (!is_null($this->getLabelByName($new_label->getName()))) {
+				$new_label->setName("Nieuw label " . $postfix);
+				$postfix++;
+			}
+			$new_id = $this->persistLabel($new_label);
+			$new_label->setId($new_id);
+			
+			return $new_label;
+		}
+
 		public function getAllLabels() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -217,7 +231,7 @@
 			$query = "INSERT INTO image_labels (name) VALUES  ('" . $label->getName() . "')";
 		
 			$mysql_database->executeQuery($query);
-			$label->setId(mysql_insert_id());
+			return mysql_insert_id();
 		}
 		
 		public function updateLabel($label) {

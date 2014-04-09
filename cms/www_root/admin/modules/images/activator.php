@@ -78,9 +78,9 @@
 			if ($this->_current_tab_id == self::$LABELS_TAB) {
 				if (!is_null($this->_label_pre_handler->getCurrentLabel())) {
 					$action_buttons[] = new ActionButton("Opslaan", "update_label", "icon_apply");
-					$action_buttons[] = new ActionButton("Verwijder", "delete_labels", "icon_delete");
 				}
-				$action_buttons[] = new ActionButton("Toevoegen", "add_label", "icon_add");		
+				$action_buttons[] = new ActionButton("Toevoegen", "add_label", "icon_add");
+				$action_buttons[] = new ActionButton("Verwijder", "delete_labels", "icon_delete");
 			}
 			if ($this->_current_tab_id == self::$IMPORT_TAB) {
 				$action_buttons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");		
