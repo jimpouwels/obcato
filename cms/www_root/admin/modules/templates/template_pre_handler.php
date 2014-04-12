@@ -75,17 +75,22 @@
 				if ($template_form->isFileUploaded()) {
 					$this->removeOldFile($old_file_path);
 					$this->copyUploadToTemplateDir($template_form->getPathToUploadedFile());
-				} else if ($old_file_name != "" && $old_file_name != $this->_current_template->getFileName()) {
-					if ($this->_current_template->getFileName() != "" && file_exists($old_file_path)) {
-						rename($this->_template_dir . "/" . $old_file_name, $this->_template_dir . "/" . $this->_current_template->getFileName());
-					}
-					$this->_current_template->setFileName($file_name);
+				} else if ($this->isTemplateRenamed($old_file_name) && file_exists($old_file_path) ) {
+					$this->renameTemplateFile($old_file_name);
 				}
 				$this->_template_dao->updateTemplate($this->_current_template);
 				Notifications::setSuccessMessage("Template succesvol opgeslagen");
 			} catch (FormException $e) {
 				Notifications::setFailedMessage("Template niet opgeslagen, verwerk de fouten");
 			}
+		}
+		
+		private function renameTemplateFile($old_file_name) {
+			rename($this->_template_dir . "/" . $old_file_name, $this->_template_dir . "/" . $this->_current_template->getFileName());
+		}
+		
+		private function isTemplateRenamed($old_file_name) {
+			return ($old_file_name != "" && $old_file_name != $this->_current_template->getFileName());
 		}
 		
 		private function removeOldFile($old_file_path) {
