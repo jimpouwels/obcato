@@ -95,6 +95,18 @@
 			return $value;
 		}
 		
+		public function getUploadFilePath($field_name) {
+			if (is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
+				return $_FILES[$field_name]["tmp_name"];
+			}
+		}
+		
+		public function getUploadedFileName($field_name) {
+			if (is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
+				return $_FILES[$field_name]["name"];
+			}
+		}
+		
 		protected function hasErrors() {
 			global $errors;
 			return count($errors) > 0;

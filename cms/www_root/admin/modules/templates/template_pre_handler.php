@@ -3,11 +3,13 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
 	require_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
 	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
 	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
+	require_once FRONTEND_REQUEST . "modules/templates/template_form.php";
 	
 	class TemplatePreHandler extends ModuleRequestHandler {
 	
@@ -15,10 +17,16 @@
 		private static $TEMPLATE_ID_POST = "template_id";
 
 		private $_template_dao;
+		private $_settings_dao;
 		private $_current_template;
+		private $_settings;
+		private $_template_dir;
 		
 		public function __construct() {
 			$this->_template_dao = TemplateDao::getInstance();
+			$this->_settings_dao = SettingsDao::getInstance();
+			$this->_settings = $this->_settings_dao->getSettings();
+			$this->_template_dir = $this->_settings->getFrontEndTemplateDir();
 		}
 	
 		public function handleGet() {
@@ -45,13 +53,13 @@
 		private function addTemplate() {
 			$new_template = $this->_template_dao->createTemplate();
 			Notifications::setSuccessMessage("Template succesvol aangemaakt");
-			header('Location: /admin/index.php?template=' . $new_template->getId());
+			header("Location: /admin/index.php?template=" . $new_template->getId());
 			exit();
 		}
 		
 		private function deleteTemplates() {
 			foreach ($this->_template_dao->getTemplates() as $template) {
-				if (isset($_POST['template_' . $template->getId() . '_delete'])) {
+				if (isset($_POST["template_" . $template->getId() . "_delete"])) {
 					$this->_template_dao->deleteTemplate($template);
 				}
 			}
@@ -59,57 +67,35 @@
 		}
 		
 		private function updateTemplate() {
-			if (isset($this->_current_template) && !is_null($this->_current_template)) {
-				// get the template dir
-				$template_dir = Settings::find()->getFrontendTemplateDir();
-			
-				$name = FormValidator::checkEmpty("name", "Naam is verplicht");
-				$file_name = FormHandler::getFieldValue("file_name", "Bestandsnaam is verplicht");
-				
-				// check if the filename does not exist already
-				if ($file_name != $this->_current_template->getFileName() && !is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
-					$check_template = $this->_template_dao->getTemplateByFileName($file_name);
-					if (!is_null($check_template)) {
-						$this->setRequestError("file_name_error", "Deze bestandsnaam bestaat al voor een ander template");
+			$template_form = new TemplateForm($this->_current_template);
+			$old_file_path = $this->_template_dir . "/" . $this->_current_template->getFileName();
+			$old_file_name = $this->_current_template->getFileName();
+			try {
+				$template_form->loadFields();
+				if ($template_form->isFileUploaded()) {
+					$this->removeOldFile($old_file_path);
+					$this->copyUploadToTemplateDir($template_form->getPathToUploadedFile());
+				} else if ($old_file_name != "" && $old_file_name != $this->_current_template->getFileName()) {
+					if ($this->_current_template->getFileName() != "" && file_exists($old_file_path)) {
+						rename($this->_template_dir . "/" . $old_file_name, $this->_template_dir . "/" . $this->_current_template->getFileName());
 					}
+					$this->_current_template->setFileName($file_name);
 				}
-				// check if the uploaded file already exists
-				if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
-					// check if the filename does not exist yet for another template
-					if (file_exists($template_dir . "/" . $_FILES["template_file"]["name"]) && $this->_current_template->getName() != $_FILES["template_file"]["name"]) {
-						$this->setRequestError("template_file_error", "Er bestaat al een ander template met dezelfde naam");
-					}
-				}
-				$scopeId = FormValidator::checkEmpty("scope", "Scope is verplicht");
-				if ($this->getErrorCount() == 0) {
-					// check uploaded template file
-					$old_file_name = $template_dir . "/" . $this->_current_template->getFileName();
-					if (is_uploaded_file($_FILES["template_file"]["tmp_name"])) {
-						// first delete the old file
-						if (file_exists($old_file_name) && $this->_current_template->getFileName() != "") {
-							unlink($old_file_name);
-						}
-						move_uploaded_file($_FILES["template_file"]["tmp_name"], $template_dir . "/" . $_FILES["template_file"]["name"]);
-						$this->_current_template->setFileName($_FILES["template_file"]["name"]);
-					} else if ($file_name != '') {
-						// rename the file
-						if ($this->_current_template->getFileName() != "" && file_exists($old_file_name)) {
-							rename($template_dir . "/" . $this->_current_template->getFileName(), $template_dir . "/" . $file_name);
-						}
-						
-						$this->_current_template->setFileName($file_name);
-					}
-				
-					$this->_current_template->setName($name);
-					$this->_current_template->setScopeId($scopeId);
-					
-					$this->_template_dao->updateTemplate($this->_current_template);
-
-					Notifications::setSuccessMessage("Template succesvol opgeslagen");
-				} else {
-					Notifications::setFailedMessage("Template niet opgeslagen, verwerk de fouten");
-				}
+				$this->_template_dao->updateTemplate($this->_current_template);
+				Notifications::setSuccessMessage("Template succesvol opgeslagen");
+			} catch (FormException $e) {
+				Notifications::setFailedMessage("Template niet opgeslagen, verwerk de fouten");
 			}
+		}
+		
+		private function removeOldFile($old_file_path) {
+			if (file_exists($old_file_path)) {
+				unlink($old_file_path);
+			}
+		}
+		
+		private function copyUploadToTemplateDir($path_to_uploaded_file) {
+			move_uploaded_file($path_to_uploaded_file, $this->_template_dir . "/" . $this->_current_template->getFileName());
 		}
 
 		private function getTemplateFromPostRequest() {
