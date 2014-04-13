@@ -1,12 +1,3 @@
-$(document).ready(function() {
-	$("#grid").kendoGrid({
-		height: 350,
-		sortable: {
-		  allowUnsort: false
-		}
-	});
-});
-
 // handles the 'add element' click in the navigation menu
 function addElement(elementTypeId) {
 	var $inputField = $('#add_element_type_id');

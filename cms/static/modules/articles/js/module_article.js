@@ -3,6 +3,16 @@
 	Date: August 16th, 2011
 */
 $(document).ready(function() {
+	$("#article_list").kendoGrid({
+		sortable: {
+		  allowUnsort: false
+		},
+		pageable: {
+			refresh: true,
+			pageSize: 10,
+			buttonCount: 5
+		}
+	});
 
 	$('#add_element_holder').click(function() {
 		$('#add_article_action').attr('value', 'add_article');
