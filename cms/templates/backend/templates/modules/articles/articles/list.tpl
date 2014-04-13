@@ -7,7 +7,7 @@
 		{if !is_null($search_term)}
 		<strong><em>Term: </em></strong>&nbsp;'{$search_term}'</p>
 		{/if}
-		<table class="listing search_results" width="800px" cellspacing="0" cellpadding="5" border="0">
+		<table id="grid" width="800px" cellspacing="0" cellpadding="5" border="0">
 			<colgroup width="350px"></colgroup>
 			<colgroup width="200px"></colgroup>
 			<colgroup width="150px"></colgroup>
