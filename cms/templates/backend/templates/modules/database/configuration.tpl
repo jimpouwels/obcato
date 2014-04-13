@@ -1,28 +1,23 @@
-<fieldset class="admin_fieldset">
+<fieldset class="admin_fieldset configuration_fieldset">
 	<div class="fieldset-title">Database configuratie</div>
-	
-	<div class="database_info_row">
-		<span class="label">Host</span>
-		<span class="value">
-			{$hostname}
-		</span>
-	</div>
-	<div class="database_info_row">
-		<span class="label">Database naam</span>
-		<span class="value">
-			{$database_name}
-		</span>
-	</div>
-	<div class="database_info_row">
-		<span class="label">Type</span>
-		<span class="value">
-			{$database_type}
-		</span>
-	</div>
-	<div class="database_info_row">
-		<span class="label">Versie</span>
-		<span class="value">
-			{$database_version}
-		</span>
-	</div>
+	<table>
+		<tbody>
+			<tr>
+				<td class="db_property">Host</td>
+				<td>{$hostname}</td>
+			</tr>
+			<tr>
+				<td class="db_property">Database naam</td>
+				<td>{$database_name}</td>
+			</tr>
+			<tr>
+				<td class="db_property">Type</td>
+				<td>{$database_type}</td>
+			</tr>
+			<tr>
+				<td class="db_property">Versie</td>
+				<td>{$database_version}</td>
+			</tr>
+		</tbody>
+	</table>
 </fieldset>
