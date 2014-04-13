@@ -1,6 +1,8 @@
 <fieldset class="admin_fieldset configuration_fieldset">
 	<div class="fieldset-title">Database configuratie</div>
 	<table>
+		<colgroup width="150px"></colgroup>
+		<colgroup ></colgroup>
 		<tbody>
 			<tr>
 				<td class="db_property">Host</td>
