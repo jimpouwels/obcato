@@ -5,6 +5,16 @@
 
 // initialize event handlers
 $(document).ready(function() {
+	$("#images_list").kendoGrid({
+		sortable: {
+		  allowUnsort: false
+		},
+		pageable: {
+			refresh: true,
+			pageSize: 10,
+			buttonCount: 5
+		}
+	});
 	
 	// update image button
 	$('#update_image').click(function() {

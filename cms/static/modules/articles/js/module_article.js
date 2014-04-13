@@ -4,14 +4,17 @@
 */
 $(document).ready(function() {
 	$("#article_list").kendoGrid({
-		sortable: {
-		  allowUnsort: false
-		},
+		sortable: true,
 		pageable: {
 			refresh: true,
 			pageSize: 10,
 			buttonCount: 5
-		}
+		},
+        columns: [
+            { field: 'Title', title: 'Titel' },
+            { field: 'CreationDate', title: 'Aangemaakt op' },
+            { field: 'CreatedBy', title: 'Aangemaakt door' },
+            { field: 'Published', title: 'Gepubliceerd' }]
 	});
 
 	$('#add_element_holder').click(function() {
