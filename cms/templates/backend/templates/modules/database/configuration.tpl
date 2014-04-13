@@ -8,12 +8,6 @@
 		</span>
 	</div>
 	<div class="database_info_row">
-		<span class="label">Poort</span>
-		<span class="value">
-			{$port}
-		</span>
-	</div>
-	<div class="database_info_row">
 		<span class="label">Database naam</span>
 		<span class="value">
 			{$database_name}
