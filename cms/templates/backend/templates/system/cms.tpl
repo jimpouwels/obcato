@@ -7,11 +7,8 @@
 		
 		<link rel="stylesheet" href="/admin/static.php?static=/default/css/styles.css" type="text/css" />	
 		<link rel="stylesheet" href="/admin/static.php?static=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />
-		<link rel="stylesheet" href="/admin/static.php?static=/default/css/kendo.common.min.css" type="text/css" />
-		<link rel="stylesheet" href="/admin/static.php?static=/default/css/kendo.default.min.css" type="text/css" />
 		
 		<script type="text/javascript" src="/admin/static.php?static=/default/js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="/admin/static.php?static=/default/js/kendo.all.min.js"></script>
 		<script type="text/javascript" src="/admin/static.php?static=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
 		<script type="text/javascript" src="/admin/static.php?static=/default/js/functions.js"></script>
 		
