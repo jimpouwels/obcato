@@ -20,18 +20,8 @@
 	height: 30%;
 }
 
-.article_list_fieldset {
+.article_list {
 	margin-left: 350px;
-}
-
-#article_list a {
-	text-decoration: none;
-	color: gray;
-}
-
-#article_list a:hover {
-	text-decoration: underline;
-	color: gray;
 }
 
 .article_meta {

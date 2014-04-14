@@ -1,4 +1,4 @@
-<fieldset class="admin_fieldset article_list_fieldset">
+<fieldset class="admin_fieldset article_list">
 	<div class="fieldset-title">Gevonden artikelen</div>
 	{if count($search_results) > 0}
 		{if !is_null($search_query)}
