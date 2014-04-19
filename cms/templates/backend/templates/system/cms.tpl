@@ -5,12 +5,12 @@
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		
-		<link rel="stylesheet" href="/admin/static.php?static=/default/css/styles.css" type="text/css" />	
-		<link rel="stylesheet" href="/admin/static.php?static=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />
+		<link rel="stylesheet" href="/admin/static.php?file=/default/css/styles.css" type="text/css" />	
+		<link rel="stylesheet" href="/admin/static.php?file=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />
 		
-		<script type="text/javascript" src="/admin/static.php?static=/default/js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="/admin/static.php?static=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
-		<script type="text/javascript" src="/admin/static.php?static=/default/js/functions.js"></script>
+		<script type="text/javascript" src="/admin/static.php?file=/default/js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="/admin/static.php?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
+		<script type="text/javascript" src="/admin/static.php?file=/default/js/functions.js"></script>
 		
 		{if isset($module_head_includes)}
 			{$module_head_includes}

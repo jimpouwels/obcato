@@ -32,7 +32,7 @@
 	define("ROOT_DIR", $website_settings->getRootDir());
 	define("COMPONENT_DIR", $website_settings->getComponentDir());
 	define("TEMPLATE_ENGINE_DIR", $website_settings->getBackendTemplateDir());
-	define("STATIC_FILES_URL", "/admin/static.php?static=");
+	define("STATIC_FILES_URL", "/admin/static.php?file=");
 	define("DEFAULT_ELEMENT_ICON_URL", STATIC_FILES_URL . "/default/img/element_icons/");
 	
 ?>

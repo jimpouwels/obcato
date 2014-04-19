@@ -3,12 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "core/data/session.php";
+	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 	require_once FRONTEND_REQUEST . "pre_handlers/link_pre_handler.php";
 	require_once FRONTEND_REQUEST . "pre_handlers/element_pre_handler.php";
 	require_once FRONTEND_REQUEST . "pre_handlers/module_pre_handler.php";
 	require_once FRONTEND_REQUEST . "view/views/cms.php";
 	require_once FRONTEND_REQUEST . "core/data/settings.php";
+	require_once FRONTEND_REQUEST . "core/data/session.php";
 	require_once FRONTEND_REQUEST . "view/views/popup.php";
 	
 	class Backend {
@@ -23,7 +24,7 @@
 		public function __construct($identifier) {
 			$this->_identifier = $identifier;
 			$this->_session = new Session();
-			$this->_settings = Settings::find();
+			$this->_settings = SettingsDao::getInstance()->getSettings();
 			$this->initializePreHandlers();
 		}
 		

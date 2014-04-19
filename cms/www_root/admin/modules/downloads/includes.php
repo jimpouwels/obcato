@@ -3,4 +3,4 @@
 	defined('_ACCESS') or die;
 ?>
 
-<script type="text/javascript" src="/admin/static.php?static=/modules/<?= $current_module->getIdentifier(); ?>/js/module_downloads.js"></script>
+<script type="text/javascript" src="/admin/static.php?file=/modules/<?= $current_module->getIdentifier(); ?>/js/module_downloads.js"></script>

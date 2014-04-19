@@ -67,9 +67,9 @@
 							<td><?= DateUtility::mysqlDateToString($message->getPostedAt(), '-'); ?></td>
 							<td class="acknowledge_column">
 								<?php if ($message->isAcknowledged()): ?>
-									<img src="/admin/static.php?static=/default/img/default_icons/green_flag.png" alt="Goedgekeurd" />
+									<img src="/admin/static.php?file=/default/img/default_icons/green_flag.png" alt="Goedgekeurd" />
 								<?php else: ?>
-									<img src="/admin/static.php?static=/default/img/default_icons/red_flag.png" alt="Niet goedgekeurd" />
+									<img src="/admin/static.php?file=/default/img/default_icons/red_flag.png" alt="Niet goedgekeurd" />
 								<?php endif; ?>
 							</td>
 							<td class="delete_column">

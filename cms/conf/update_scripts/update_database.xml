@@ -53,7 +53,7 @@
 			</query>
 			<query>
 				INSERT INTO modules VALUES (13,
-				'Gastenboeken', '/admin/static.php?static=/guestbooks/img/guestbooks.png',
+				'Gastenboeken', '/admin/static.php?file=/guestbooks/img/guestbooks.png',
 				2, 0, 0, 'guestbooks', 1, 1, 'form/guestbook_handler.php')
 			</query>
 			<query>
@@ -134,7 +134,7 @@
 				ALTER TABLE pages ADD COLUMN description LONGTEXT AFTER is_homepage;
 			</query>
 			<query>
-				UPDATE element_types SET icon_url = REPLACE(icon_url, '/admin/static.php?static=/default/img/element_icons/', '');
+				UPDATE element_types SET icon_url = REPLACE(icon_url, '/admin/static.php?file=/default/img/element_icons/', '');
 			</query>
 			<query>
 				ALTER TABLE element_types CHANGE location identifier varchar(255);
@@ -146,7 +146,7 @@
 				UPDATE modules SET pre_handler = 'handler/download_handler.php' WHERE identifier = 'downloads';
 			</query>
 			<query>
-				UPDATE modules SET icon_url = REPLACE(icon_url, '/admin/static.php?static=', '');
+				UPDATE modules SET icon_url = REPLACE(icon_url, '/admin/static.php?file=', '');
 			</query>
 			<query>
 				UPDATE modules SET pre_handler = 'pre_handler.php' WHERE identifier = 'modules';

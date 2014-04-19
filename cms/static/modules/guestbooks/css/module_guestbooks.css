@@ -24,7 +24,7 @@
 }
 
 .guestbook_list_item {
-	list-style-image: url(/admin/static.php?static=/guestbooks/img/guestbooks.png);
+	list-style-image: url(/admin/static.php?file=/guestbooks/img/guestbooks.png);
 	font-style: normal;
 }
 

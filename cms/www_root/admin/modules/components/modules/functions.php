@@ -5,7 +5,7 @@
 	function renderModuleItems($modules) {
 		echo '<ul>';
 		foreach ($modules as $module) {
-			echo '<li style="list-style-image: url(/admin/static.php?static=/modules' . $module->getIconUrl() . '">';
+			echo '<li style="list-style-image: url(/admin/static.php?file=/modules' . $module->getIconUrl() . '">';
 			$selected_module_id = null;
 			if (isset($_GET['module'])) {
 				$selected_module_id = $_GET['module'];

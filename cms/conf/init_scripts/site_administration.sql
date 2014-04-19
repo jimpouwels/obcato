@@ -315,11 +315,11 @@ CREATE TABLE `element_types` (
 
 /*!40000 ALTER TABLE `element_types` DISABLE KEYS */;
 INSERT INTO `element_types` (`id`,`classname`,`edit_presentation`,`icon_url`,`name`,`domain_object`,`scope_id`,`location`,`system_default`) VALUES 
- (1,'TextElement','edit_text_element.php','/admin/static.php?static=/default/img/element_icons/text_element.png','Paragraaf','text_element.php',1,'elements/text_element',1),
- (2,'ListElement','edit_list_element.php','/admin/static.php?static=/default/img/element_icons/list_element.png','Lijst','list_element.php',2,'elements/list_element',1),
- (3,'ImageElement','edit_image_element.php','/admin/static.php?static=/default/img/element_icons/image_element.png','Afbeelding','image_element.php',3,'elements/image_element',1),
- (4,'DownloadElement','edit_download_element.php','/admin/static.php?static=/default/img/element_icons/download_element.png','Download','download_element.php',4,'elements/download_element',1),
- (5,'ArticleOverviewElement','edit_article_overview_element.php','/admin/static.php?static=/default/img/element_icons/article_overview_element.png','Artikel overzicht','article_overview_element.php',7,'elements/article_overview_element',1);
+ (1,'TextElement','edit_text_element.php','/admin/static.php?file=/default/img/element_icons/text_element.png','Paragraaf','text_element.php',1,'elements/text_element',1),
+ (2,'ListElement','edit_list_element.php','/admin/static.php?file=/default/img/element_icons/list_element.png','Lijst','list_element.php',2,'elements/list_element',1),
+ (3,'ImageElement','edit_image_element.php','/admin/static.php?file=/default/img/element_icons/image_element.png','Afbeelding','image_element.php',3,'elements/image_element',1),
+ (4,'DownloadElement','edit_download_element.php','/admin/static.php?file=/default/img/element_icons/download_element.png','Download','download_element.php',4,'elements/download_element',1),
+ (5,'ArticleOverviewElement','edit_article_overview_element.php','/admin/static.php?file=/default/img/element_icons/article_overview_element.png','Artikel overzicht','article_overview_element.php',7,'elements/article_overview_element',1);
 /*!40000 ALTER TABLE `element_types` ENABLE KEYS */;
 
 
@@ -593,19 +593,19 @@ CREATE TABLE `modules` (
 
 /*!40000 ALTER TABLE `modules` DISABLE KEYS */;
 INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`home_item`,`popup`,`identifier`,`enabled`,`system_default`,`pre_handler`) VALUES 
- (1,'Uitloggen','/admin/static.php?static=/logout/img/logout.png',1,0,0,'logout',1,1,'form/handler.php'),
- (2,'Instellingen','/admin/static.php?static=/settings/img/settings.png',3,0,0,'settings',1,1,'forms/settings_form_handler.php'),
- (3,'Pagina\'s','/admin/static.php?static=/pages/img/page.png',2,1,0,'pages',1,1,'form/page_editor_handler.php'),
- (4,'Database','/admin/static.php?static=/database/img/database.png',3,0,0,'database',1,1,NULL),
- (5,'Artikelen','/admin/static.php?static=/articles/img/articles.png',2,1,0,'articles',1,1,'form/article_handler.php'),
- (6,'Blokken','/admin/static.php?static=/blocks/img/blocks.png',2,1,0,'blocks',1,1,'form/block_editor_handler.php'),
- (7,'Modules','/admin/static.php?static=/modules/img/modules.png',3,1,0,'modules',1,1,NULL),
- (8,'Afbeeldingen','/admin/static.php?static=/images/img/images.png',2,1,0,'images',1,1,'form/form_handler.php'),
- (9,'Templates','/admin/static.php?static=/templates/img/templates.png',4,1,0,'templates',1,1,'handler.php');
+ (1,'Uitloggen','/admin/static.php?file=/logout/img/logout.png',1,0,0,'logout',1,1,'form/handler.php'),
+ (2,'Instellingen','/admin/static.php?file=/settings/img/settings.png',3,0,0,'settings',1,1,'forms/settings_form_handler.php'),
+ (3,'Pagina\'s','/admin/static.php?file=/pages/img/page.png',2,1,0,'pages',1,1,'form/page_editor_handler.php'),
+ (4,'Database','/admin/static.php?file=/database/img/database.png',3,0,0,'database',1,1,NULL),
+ (5,'Artikelen','/admin/static.php?file=/articles/img/articles.png',2,1,0,'articles',1,1,'form/article_handler.php'),
+ (6,'Blokken','/admin/static.php?file=/blocks/img/blocks.png',2,1,0,'blocks',1,1,'form/block_editor_handler.php'),
+ (7,'Modules','/admin/static.php?file=/modules/img/modules.png',3,1,0,'modules',1,1,NULL),
+ (8,'Afbeeldingen','/admin/static.php?file=/images/img/images.png',2,1,0,'images',1,1,'form/form_handler.php'),
+ (9,'Templates','/admin/static.php?file=/templates/img/templates.png',4,1,0,'templates',1,1,'handler.php');
 INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`home_item`,`popup`,`identifier`,`enabled`,`system_default`,`pre_handler`) VALUES 
- (10,'Downloads','/admin/static.php?static=/downloads/img/downloads.png',2,1,0,'downloads',1,1,NULL),
- (11,'Berichten','/admin/static.php?static=/messages/img/messages.png',1,1,0,'messages',1,1,NULL),
- (12,'Authorisatie','/admin/static.php?static=/authorization/img/authorization.png',3,1,0,'authorization',1,1,'handler/user_handler.php');
+ (10,'Downloads','/admin/static.php?file=/downloads/img/downloads.png',2,1,0,'downloads',1,1,NULL),
+ (11,'Berichten','/admin/static.php?file=/messages/img/messages.png',1,1,0,'messages',1,1,NULL),
+ (12,'Authorisatie','/admin/static.php?file=/authorization/img/authorization.png',3,1,0,'authorization',1,1,'handler/user_handler.php');
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 
 
