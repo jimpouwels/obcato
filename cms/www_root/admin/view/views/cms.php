@@ -49,11 +49,10 @@
 		}
 		
 		private function renderContentPane() {
-			$template_engine = TemplateEngine::getInstance();
 			if (!is_null($this->_module_visual)) {
 				return $this->_module_visual->render($this);
 			} else {
-				return $template_engine->fetch("system/home_wrapper.tpl");
+				return $this->_template_engine->fetch("system/home_wrapper.tpl");
 			}
 		}
 		

@@ -6,7 +6,6 @@
 	
 	// INCLUDE SYSTEM CONSTANTS
 	include_once FRONTEND_REQUEST . "libraries/system/constants.php";
-		
 	include_once FRONTEND_REQUEST . "core/data/session.php";
 	include_once FRONTEND_REQUEST . "libraries/system/constants.php";
 	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
@@ -30,7 +29,7 @@
 			$doc = new DOMDocument();
 			$doc->load($update_script);
 			
-			$new_version = NULL;
+			$new_version = null;
 			$current_version_found = false;
 			$versions = $doc->getElementsByTagName("version");
 			

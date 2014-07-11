@@ -9,7 +9,9 @@
 		
 		abstract function getHeadIncludes();
 		
-		abstract function preHandle();
+		abstract function getPreHandlers();
+		
+		abstract function onPreHandled();
 		
 		abstract function getTitle();
 	

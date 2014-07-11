@@ -78,27 +78,7 @@
 	display: none;
 }
 
-.targetpage-table {
-	margin: 10px;
-	text-align: left;
-	width: 590px;
-}
-
-.targetpage-table thead {
-	background-color: gray;
-	color: white;
-}
-
-.targetpage-table tbody td {
-	border-bottom: 1px solid lightgray;
-}
-
-.targetpage-table a {
-	text-decoration: underline;
-	color: gray;
-}
-
-.center_column {
+.listing .center_column {
 	text-align: center;
 }
 

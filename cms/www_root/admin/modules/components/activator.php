@@ -22,7 +22,12 @@
 		public function getHeadIncludes() {
 		}
 		
-		public function preHandle() {
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 		}
 		
 		public function getTitle() {

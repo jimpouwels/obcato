@@ -8,7 +8,7 @@
 		<a href="#" id="update_target_pages" class="displaynone"></a>
 		
 		{if !is_null($target_pages) && count($target_pages) > 0}
-			<table cellspacing="0" cellpadding="5" border="0" class="targetpage-table">
+			<table cellspacing="0" cellpadding="5" border="0" class="listing">
 				<colgroup width="225px"></colgroup>
 				<colgroup width="50px"></colgroup>
 				<colgroup width="20px"></colgroup>

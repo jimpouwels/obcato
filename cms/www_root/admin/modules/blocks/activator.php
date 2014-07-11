@@ -77,9 +77,14 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_block_pre_handler->handle();
-			$this->_position_pre_handler->handle();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_block_pre_handler;
+			$pre_handlers[] = $this->_position_pre_handler;
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 			$this->_current_block = $this->_block_pre_handler->getCurrentBlock();
 			$this->_current_position = $this->_position_pre_handler->getCurrentPosition();
 		}

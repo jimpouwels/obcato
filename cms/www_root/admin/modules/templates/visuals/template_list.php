@@ -9,6 +9,7 @@
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/information_message.php";
 	require_once FRONTEND_REQUEST . "view/views/form_checkbox_single.php";
+	require_once FRONTEND_REQUEST . "modules/templates/visuals/scope_selector.php";
 
 	class TemplateList extends Visual {
 		
@@ -25,9 +26,14 @@
 		}
 		
 		public function render() {
+			$this->_template_engine->assign("scope_selector", $this->getScopeSelector()->render());
 			$this->_template_engine->assign("scopes", $this->getAllScopes());
 			$this->_template_engine->assign("information_message", $this->renderInformationMessage());
 			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
+		}
+		
+		private function getScopeSelector() {
+			return new ScopeSelector();
 		}
 		
 		private function getAllScopes() {

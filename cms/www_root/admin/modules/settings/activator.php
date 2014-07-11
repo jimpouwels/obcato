@@ -50,8 +50,13 @@
 			return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_settings_pre_handler->handle();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_settings_pre_handler;
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 		}
 		
 		private function renderSettingsEditor() {

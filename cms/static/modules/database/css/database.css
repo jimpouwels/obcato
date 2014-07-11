@@ -3,6 +3,14 @@
 	margin-left: 10px;
 }
 
+.table_selector {
+	float: left;
+}
+
+.table_details {
+	float: left;
+}
+
 .queries_form_wrapper {
 	margin-left: 10px;
 	width: 595px;

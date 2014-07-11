@@ -93,10 +93,15 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_images_pre_handler->handle();
-			$this->_label_pre_handler->handle();
-			$this->_import_pre_handler->handle();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_images_pre_handler;
+			$pre_handlers[] = $this->_label_pre_handler;
+			$pre_handlers[] = $this->_import_pre_handler;
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 		}
 		
 		private function renderTabMenu() {

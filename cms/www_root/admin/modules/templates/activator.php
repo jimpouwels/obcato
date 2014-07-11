@@ -30,9 +30,10 @@
 			if (!is_null($this->_current_template))
 				$this->_template_engine->assign("template_editor", $this->renderTemplateEditor());
 			else
-				$this->_template_engine->assign("template_list", $this->renderTemplateList());
+				$this->_template_engine->assign("scope_selector", $this->getScopeSelector());
 			return $this->_template_engine->fetch(self::$TEMPLATE_MODULE_TEMPLATE);
 		}
+		
 	
 		public function getActionButtons() {
 			$action_buttons = array();
@@ -49,13 +50,23 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_template_pre_handler->handle();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_template_pre_handler;
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 			$this->_current_template = $this->_template_pre_handler->getCurrentTemplate();
 		}
 		
 		public function getTitle() {
 			return $this->_template_module->getTitle();
+		}
+		
+		private function getScopeSelector() {
+			$scope_selector = new ScopeSelector();
+			return $scope_selector->render();
 		}
 		
 		private function renderTemplateEditor() {

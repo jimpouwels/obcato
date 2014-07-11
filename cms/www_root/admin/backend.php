@@ -36,10 +36,8 @@
 		}
 		
 		public function isAuthenticated() {
-			$authenticated = $this->_session->isAuthenticated();
-			if (!$authenticated) {
+			if (!$this->_session->isAuthenticated())
 				$this->redirectToLoginPage();
-			}
 		}
 		
 		/*
@@ -73,7 +71,9 @@
 		
 		private function runModulePreHandler() {
 			if (!is_null($this->_module_visual)) {
-				$this->_module_visual->preHandle();
+				foreach ($this->_module_visual->getPreHandlers() as $pre_handler)
+					$pre_handler->handle();
+				$this->_module_visual->onPreHandled();
 			}
 		}
 		

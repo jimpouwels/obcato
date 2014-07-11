@@ -61,6 +61,14 @@
 		public function getTitle() {
 			return $this->_article_module->getTitle();
 		}
+		
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_article_pre_handler;
+			$pre_handlers[] = $this->_term_pre_handler;
+			$pre_handlers[] = $this->_target_pages_pre_handler;
+			return $pre_handlers;
+		}
 	
 		public function getActionButtons() {
 			$action_buttons = array();
@@ -106,10 +114,7 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_article_pre_handler->handle();
-			$this->_term_pre_handler->handle();
-			$this->_target_pages_pre_handler->handle();
+		public function onPreHandled() {
 			$this->_current_article = $this->_article_pre_handler->getCurrentArticle();
 			$this->_current_term = $this->_term_pre_handler->getCurrentTerm();
 		}

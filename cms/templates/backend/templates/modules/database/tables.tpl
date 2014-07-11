@@ -1,5 +1,9 @@
+<fieldset class="admin_fieldset table_selector">
+	<div class="fieldset-title">Tabellen</div>
+</fieldset>
+
 {foreach $tables as $table}
-	<fieldset class="admin_fieldset">
+	<fieldset class="admin_fieldset table_details displaynone">
 		<div class="fieldset-title">{$table.name}</div>
 		<table class="table_listing" width="700px" cellspacing="0">
 			<colgroup width="33%"></colgroup>

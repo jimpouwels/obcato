@@ -41,9 +41,8 @@
 			$action_buttons = array();
 			if (!is_null($this->_current_user)) {
 				$action_buttons[] = new ActionButton("Opslaan", "update_user", "icon_apply");
-				if (!$this->_current_user->isLoggedInUser()) {
+				if (!$this->_current_user->isLoggedInUser())
 					$action_buttons[] = new ActionButton("Verwijderen", "delete_user", "icon_delete");
-				}
 			}
 			$action_buttons[] = new ActionButton("Toevoegen", "add_user", "icon_add");
 			return $action_buttons;
@@ -53,12 +52,15 @@
 			return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function preHandle() {
-			$this->_authorization_pre_handler->handle();
-			$this->_current_user = $this->_authorization_pre_handler->getCurrentUser();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_authorization_pre_handler;
+			return $pre_handlers;
 		}
 		
-		
+		public function onPreHandled() {
+			$this->_current_user = $this->_authorization_pre_handler->getCurrentUser();
+		}
 	
 	}
 	
