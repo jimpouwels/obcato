@@ -19,7 +19,7 @@
 				<tbody>
 					{foreach from=$templates item=template}
 						<tr>
-							<td>{$template.name}</a></td>
+							<td><a href="/admin/index.php?template={$template.id}" title="{$template.name}">{$template.name}</a></td>
 							<td>{$template.filename}</td>
 							<td class="center">
 								{if $template.exists}
