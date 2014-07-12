@@ -29,11 +29,10 @@
 			$this->_template_engine->assign("current_template_id", $this->getCurrentTemplateId());
 			if (!is_null($this->_current_template)) {
 				$this->_template_engine->assign("template_editor", $this->renderTemplateEditor());
-			} else {
-				$this->_template_engine->assign("scope_selector", $this->getScopeSelector());
-				if (!is_null($this->_current_scope)) {
-					$this->_template_engine->assign("template_list", $this->renderTemplateList());
-				}
+			}
+			$this->_template_engine->assign("scope_selector", $this->getScopeSelector());
+			if (!is_null($this->_current_scope)) {
+				$this->_template_engine->assign("template_list", $this->renderTemplateList());
 			}
 			return $this->_template_engine->fetch(self::$TEMPLATE_MODULE_TEMPLATE);
 		}

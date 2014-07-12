@@ -1,5 +1,5 @@
 <fieldset class="admin_fieldset template_list_fieldset">
-	<form id="template_form" method="post" action="/admin/index.php?scope={$scope}">
+	<form id="template_delete_form" name="template_delete_form" method="post" action="/admin/index.php?scope={$scope}">
 		<input type="hidden" name="action" id="action" value="delete_templates" />
 		<div class="fieldset-title">{$scope} templates</div>
 		{if count($templates) > 0}

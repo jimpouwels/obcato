@@ -24,6 +24,11 @@
 	width: 300px;
 }
 
+.template_editor_fieldset {
+	float: left;
+	margin-left: 50px;
+}
+
 .admin_fieldset .back a {
 	color: black;
 	color: gray;

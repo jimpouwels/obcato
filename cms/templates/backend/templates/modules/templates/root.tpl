@@ -1,11 +1,10 @@
-<form id="template_form" name="template_form" method="post" action"/admin/index.php">
+<form id="template_add_form" name="template_add_form" method="post" action"/admin/index.php">
 	<input type="hidden" name="action" id="action" value="add_template" />
 </form>
+{$scope_selector}
 {if isset($template_editor)}
 	{$template_editor}
-{elseif isset($scope_selector)}
-	{$scope_selector}
-	{if isset($template_list)}
-		{$template_list}
-	{/if}
+{/if}
+{if isset($template_list)}
+	{$template_list}
 {/if}

@@ -41,6 +41,7 @@
 		
 		public function handlePost() {
 			$this->_current_template = $this->getTemplateFromPostRequest();
+			$this->_current_scope = $this->getScopeFromGetRequest();
 			if ($this->isUpdateAction()) {
 				$this->updateTemplate();
 			} else if ($this->isAddTemplateAction()) {
@@ -143,7 +144,7 @@
 		}
 		
 		private function isDeleteAction() {
-			return isset($_POST["action"]) && $_POST["action"] == "delete_template";
+			return isset($_POST["action"]) && $_POST["action"] == "delete_templates";
 		}
 
 	}

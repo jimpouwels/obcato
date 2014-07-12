@@ -5,7 +5,7 @@ $(document).ready(function() {
 			alert('Fout: Kan de actie niet bepalen');
 		} else {
 			$actionField.attr('value', 'update_template');
-			var $template_form = $('#template_form');
+			var $template_form = $('#template_editor_form');
 			if ($template_form.length == 0) {
 				alert('Fout: Kan template niet opslaan');
 			} else {
@@ -20,7 +20,7 @@ $(document).ready(function() {
 			alert('Fout: Kan de actie niet bepalen');
 		} else {
 			$actionField.attr('value', 'add_template');
-			var $template_form = $('#template_form');
+			var $template_form = $('#template_add_form');
 			if ($template_form.length == 0) {
 				alert('Fout: Kan geen nieuw template toevoegen');
 			} else {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 			} else {
 				var confirmed = confirm('Weet u zeker dat u de geselecteerde templates wilt verwijderen?');
 				if (confirmed) {
-					var $template_form = $('#template_form');
+					var $template_form = $('#template_delete_form');
 					if ($template_form.length == 0) {
 						alert('Fout: Kan geselecteerde templates niet verwijderen');
 					} else {
