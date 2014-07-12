@@ -3,6 +3,7 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
+	require_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
 	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
 	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
 	require_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
@@ -14,25 +15,28 @@
 	class TemplatePreHandler extends ModuleRequestHandler {
 	
 		private static $TEMPLATE_ID_GET = "template";
+		private static $SCOPE_NAME_GET = "scope";
 		private static $TEMPLATE_ID_POST = "template_id";
 
 		private $_template_dao;
 		private $_settings_dao;
+		private $_scope_dao;
 		private $_current_template;
-		private $_settings;
 		private $_template_dir;
+		private $_current_scope;
 		
 		public function __construct() {
 			$this->_template_dao = TemplateDao::getInstance();
 			$this->_settings_dao = SettingsDao::getInstance();
-			$this->_settings = $this->_settings_dao->getSettings();
-			$this->_template_dir = $this->_settings->getFrontEndTemplateDir();
+			$this->_scope_dao = ScopeDao::getInstance();
+			$this->_template_dir = $this->_settings_dao->getSettings()->getFrontEndTemplateDir();
 		}
 	
 		public function handleGet() {
 			if ($this->isCurrentTemplateShown()) {
 				$this->_current_template = $this->getTemplateFromGetRequest();
 			}
+			$this->_current_scope = $this->getScopeFromGetRequest();
 		}
 		
 		public function handlePost() {
@@ -48,6 +52,10 @@
 		
 		public function getCurrentTemplate() {
 			return $this->_current_template;
+		}
+		
+		public function getCurrentScope() {
+			return $this->_current_scope;
 		}
 		
 		private function addTemplate() {
@@ -113,6 +121,13 @@
 		
 		private function getTemplateFromGetRequest() {
 			return $this->_template_dao->getTemplate($_GET[self::$TEMPLATE_ID_GET]);
+		}
+		
+		private function getScopeFromGetRequest() {
+			if (isset($_GET[self::$SCOPE_NAME_GET])) {
+				$scope_name = $_GET[self::$SCOPE_NAME_GET];
+				return $this->_scope_dao->getScopeByName($scope_name);
+			}
 		}
 		
 		private function isCurrentTemplateShown() {

@@ -5,7 +5,6 @@
 
 	require_once FRONTEND_REQUEST . "view/views/visual.php";
 	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/information_message.php";
 	require_once FRONTEND_REQUEST . "view/views/form_checkbox_single.php";
@@ -15,36 +14,25 @@
 		
 		private static $TEMPLATE_LIST_TEMPLATE = "templates/template_list.tpl";
 
-		private $_template_dao;
-		private $_scope_dao;
 		private $_template_engine;
+		private $_template_dao;
+		private $_scope;
 		
-		public function __construct() {
-			$this->_template_dao = TemplateDao::getInstance();
-			$this->_scope_dao = ScopeDao::getInstance();
+		public function __construct($scope) {
+			$this->_scope = $scope;
 			$this->_template_engine = TemplateEngine::getInstance();
+			$this->_template_dao = TemplateDao::getInstance();
 		}
 		
 		public function render() {
-			$this->_template_engine->assign("scope_selector", $this->getScopeSelector()->render());
-			$this->_template_engine->assign("scopes", $this->getAllScopes());
+			$this->_template_engine->assign("scope", $this->_scope->getName());
+			$this->_template_engine->assign("templates", $this->getTemplatesForScope($this->_scope));
 			$this->_template_engine->assign("information_message", $this->renderInformationMessage());
 			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
 		}
 		
 		private function getScopeSelector() {
 			return new ScopeSelector();
-		}
-		
-		private function getAllScopes() {
-			$scopes_data = array();
-			foreach ($this->_scope_dao->getScopes() as $scope) {
-				$scope_data = array();
-				$scope_data["name"] = $scope->getName();
-				$scope_data["templates"] = $this->getTemplatesForScope($scope);
-				$scopes_data[] = $scope_data;
-			}
-			return $scopes_data;
 		}
 		
 		private function getTemplatesForScope($scope) {

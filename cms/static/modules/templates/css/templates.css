@@ -15,10 +15,6 @@
 	padding-top: 12px;
 }
 
-.delete_column .admin_label {
-	padding-top: 0px;
-}
-
 .admin_form select {
 	margin-top: 12px;
 }
@@ -48,6 +44,28 @@
 	float: left;
 }
 
-.file_column, .delete_column{
-	text-align: center;
+/* TEMPLATE SELECTOR */
+.scope_selector_fieldset {
+	float: left;
+	width: 230px;
+}
+
+.scope_selector_fieldset ul {
+	padding: 0px;
+	margin-left: 10px;
+}
+
+.scope_selector_fieldset li {
+	list-style-type: none;
+	line-height: 20px;
+}
+
+/* TEMPLATE LIST */
+.template_list_fieldset {
+	float: left;
+	margin-left: 50px;
+}
+
+.template_listing .last .admin_label {
+	display: none;
 }
