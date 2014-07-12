@@ -17,7 +17,7 @@
 					<th>Titel</th>
 					<th>Aangemaakt op</th>
 					<th>Aangemaakt door</th>
-					<th>Gepubliceerd</th>
+					<th class="center">Gepubliceerd</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +26,7 @@
 						<td><a href="/admin/index.php?article={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
 						<td>{$search_result.created_at}</td>
 						<td>{$search_result.created_by}</td>
-						<td>
+						<td class="center">
 							{if $search_result.published}
 								<img alt="Publiceren" src="/admin/static.php?file=/default/img/default_icons/green_flag.png" />
 							{else}

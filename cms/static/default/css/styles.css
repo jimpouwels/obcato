@@ -819,3 +819,8 @@ body a {
 .admin_fieldset a:hover {
 	text-decoration: underline;
 }
+
+/* SYSTEM CLASSES */
+.center {
+	text-align: center;
+}

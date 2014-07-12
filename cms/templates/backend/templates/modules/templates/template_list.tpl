@@ -12,8 +12,8 @@
 					<tr>
 						<th>Naam</th>
 						<th>Bestandsnaam</th>
-						<th>Templatebestand aanwezig</th>
-						<th>Verwijderen</th>
+						<th class="center">Templatebestand aanwezig</th>
+						<th class="center">Verwijderen</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,14 +21,14 @@
 						<tr>
 							<td>{$template.name}</a></td>
 							<td>{$template.filename}</td>
-							<td>
+							<td class="center">
 								{if $template.exists}
 									<img src="/admin/static.php?file=/modules/templates/img/check.gif" alt="Bestand aanwezig" />
 								{else}
 									<img src="/admin/static.php?file=/modules/templates/img/delete.png" alt="Bestand ontbreekt" />
 								{/if}
 							</td>
-							<td class="last">
+							<td class="center last">
 								{$template.delete_checkbox}
 							</td>
 						</tr>
