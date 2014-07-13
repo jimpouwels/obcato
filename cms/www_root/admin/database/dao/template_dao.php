@@ -6,9 +6,6 @@
 	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	include_once FRONTEND_REQUEST . "core/data/template.php";
 
-	/*
-		This class takes care of all persistance actions for a Template object.
-	*/
 	class TemplateDao {
 
 		private static $instance;
