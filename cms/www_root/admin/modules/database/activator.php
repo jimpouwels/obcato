@@ -8,7 +8,6 @@
 	require_once FRONTEND_REQUEST . "modules/database/visuals/configuration.php";
 	require_once FRONTEND_REQUEST . "modules/database/visuals/tables.php";
 	require_once FRONTEND_REQUEST . "modules/database/visuals/queries.php";
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 
 	class DatabaseModuleVisual extends ModuleVisual {

@@ -1,8 +1,7 @@
 <?php
 	// No direct access
 	defined('_ACCESS') or die;
-	
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
+
 	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
 	require_once FRONTEND_REQUEST . "database/dao/database_dao.php";
 	

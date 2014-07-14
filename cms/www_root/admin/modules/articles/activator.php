@@ -6,7 +6,6 @@
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
 	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/articles/articles_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/terms/terms_tab.php";
 	require_once FRONTEND_REQUEST . "modules/articles/visuals/target_pages/target_pages_tab.php";

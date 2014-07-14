@@ -2,10 +2,6 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
-	require_once FRONTEND_REQUEST . "view/views/form_textarea.php";
-	require_once FRONTEND_REQUEST . "view/views/button.php";
-	
 	class Queries extends Visual {
 	
 		private static $TABLES_TEMPLATE = "modules/database/queries.tpl";

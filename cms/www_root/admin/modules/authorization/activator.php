@@ -7,7 +7,6 @@
 	require_once "modules/authorization/authorization_pre_handler.php";
 	require_once "modules/authorization/visuals/user_list.php";
 	require_once "modules/authorization/visuals/user_editor.php";
-	require_once "view/template_engine.php";
 
 	class AuthorizationModuleVisual extends ModuleVisual {
 	

@@ -2,12 +2,9 @@
 
 	// No direct access
 	defined('_ACCESS') or die;
-	
-	require_once FRONTEND_REQUEST . "view/views/visual.php";
-	require_once FRONTEND_REQUEST . "view/views/form_textfield.php";
+
 	require_once FRONTEND_REQUEST . "view/views/information_message.php";
 	require_once FRONTEND_REQUEST . "view/views/object_picker.php";
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	
 	class LinkEditor extends Visual {
 	

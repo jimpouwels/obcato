@@ -2,8 +2,7 @@
 
 	// No direct access
 	defined('_ACCESS') or die;
-	
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
+
 	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
 	
 	class NotificationBar extends Visual {

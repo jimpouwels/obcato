@@ -3,9 +3,6 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/views/visual.php";
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
-	
 	class TabMenu extends Visual {
 	
 		private static $TEMPLATE = "system/tab_menu.tpl";

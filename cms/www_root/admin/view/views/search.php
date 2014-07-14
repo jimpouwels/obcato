@@ -3,7 +3,6 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/element_holder_search.php";
 	require_once FRONTEND_REQUEST . "view/views/image_search_box.php";
 	

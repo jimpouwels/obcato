@@ -4,7 +4,6 @@
 	defined('_ACCESS') or die;
 
 	require_once FRONTEND_REQUEST . "core/data/entity.php";
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 
 	class Module extends Entity {
 	
