@@ -5,7 +5,6 @@
 	
 	require_once FRONTEND_REQUEST . "core/data/settings.php";
 	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
-	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "view/views/warning_message.php";
 	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";

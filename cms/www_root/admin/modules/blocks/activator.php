@@ -4,7 +4,6 @@
 	defined('_ACCESS') or die;
 	
 	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
-	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
 	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
 	require_once FRONTEND_REQUEST . "modules/blocks/visuals/blocks/block_tab.php";

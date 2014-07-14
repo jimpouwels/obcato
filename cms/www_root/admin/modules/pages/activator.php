@@ -5,7 +5,6 @@
 	
 	require_once FRONTEND_REQUEST . "core/data/page.php";
 	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
-	require_once FRONTEND_REQUEST . "view/views/action_button.php";
 	require_once FRONTEND_REQUEST . "modules/pages/visuals/page_tree.php";
 	require_once FRONTEND_REQUEST . "modules/pages/visuals/page_editor.php";
 	require_once FRONTEND_REQUEST . "modules/pages/page_pre_handler.php";
@@ -27,8 +26,8 @@
 		}
 	
 		public function render() {
-			$page_tree = new PageTree(Settings::find()->getHomepage(), $this->_current_page, $this->_page_module->getIdentifier());
-			$page_editor = new PageEditor($this->_current_page, $this->_page_module->getIdentifier());
+			$page_tree = new PageTree(Settings::find()->getHomepage(), $this->_current_page);
+			$page_editor = new PageEditor($this->_current_page);
 			
 			$this->_template_engine->assign("tree", $page_tree->render());
 			$this->_template_engine->assign("editor", $page_editor->render());

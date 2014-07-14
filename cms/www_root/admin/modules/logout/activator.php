@@ -25,8 +25,13 @@
 		public function getHeadIncludes() {
 		}
 		
-		public function preHandle() {
-			$this->_logout_pre_handler->handle();
+		public function getPreHandlers() {
+			$pre_handlers = array();
+			$pre_handlers[] = $this->_logout_pre_handler;
+			return $pre_handlers;
+		}
+		
+		public function onPreHandled() {
 		}
 		
 		public function getTitle() {

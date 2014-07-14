@@ -4,7 +4,6 @@
 {$scope_selector}
 {if isset($template_editor)}
 	{$template_editor}
-{/if}
-{if isset($template_list)}
+{elseif isset($template_list)}
 	{$template_list}
 {/if}

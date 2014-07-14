@@ -3,11 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/template_engine.php";
 	require_once FRONTEND_REQUEST . "view/views/search.php";
-	require_once FRONTEND_REQUEST . "view/views/form_textfield.php";
-	require_once FRONTEND_REQUEST . "view/views/form_pulldown.php";
-	require_once FRONTEND_REQUEST . "view/views/button.php";
 	require_once FRONTEND_REQUEST . "view/views/information_message.php";
 	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
 	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";

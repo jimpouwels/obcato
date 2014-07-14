@@ -2,15 +2,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
+	require_once "libraries/utilities/string_utility.php";
+	require_once "database/dao/authorization_dao.php";
 
 	class Session {
 	
 		public function isAuthenticated() {
-			include_once FRONTEND_REQUEST . "libraries/system/constants.php";
-			
 			$authenticated = false;
 			session_start();
 			$authorization_dao = AuthorizationDao::getInstance();
@@ -23,7 +20,6 @@
 					}
 				}
 			}
-			
 			return $authenticated;
 		}
 		

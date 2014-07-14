@@ -4,7 +4,6 @@
 	defined('_ACCESS') or die;
 	
 	require_once "view/views/module_visual.php";
-	require_once "view/views/action_button.php";
 	require_once "modules/authorization/authorization_pre_handler.php";
 	require_once "modules/authorization/visuals/user_list.php";
 	require_once "modules/authorization/visuals/user_editor.php";

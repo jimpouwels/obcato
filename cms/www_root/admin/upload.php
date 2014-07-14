@@ -3,7 +3,8 @@
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
 	
-	include_once FRONTEND_REQUEST . "backend.php";
+	require_once FRONTEND_REQUEST . "constants.php";
+	require_once FRONTEND_REQUEST . "backend.php";
 	
 	$backend = new Backend("site_administrator");
 	
