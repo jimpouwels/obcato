@@ -63,19 +63,7 @@
 		
 		public function updateMetaData() {
 			$this->myMetaDataProvider->updateMetaData($this);
-		}
-		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function update() {
-			parent::update();
-		}
-		
-		public function delete() {
-			parent::delete();
-		}
+        }
 		
 	}
 	
