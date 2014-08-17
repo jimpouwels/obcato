@@ -8,9 +8,11 @@
 		<div>
 			{$image_picker_field}
 		</div>
-		<div>
-			{$delete_lead_image_button}
-		</div>
+        {if !is_null($lead_image_id)}
+            <div>
+                {$delete_lead_image_button}
+            </div>
+        {/if}
 	</li>
 	{if !is_null($lead_image_id)}
 		<li>
