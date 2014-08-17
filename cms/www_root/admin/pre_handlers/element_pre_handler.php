@@ -44,7 +44,14 @@
 				if (!is_null($element_holder)) {
 					foreach ($element_holder->getElements() as $element) {
 						$element_type = $element->getType();
-						include $element_type->getRootDirectory() . "/handler/update_element.php";
+                        if ($element_type->getIdentifier() == 'text_element') {
+                            include $element_type->getRootDirectory() . "/" . $element_type->getIdentifier() . "_pre_handler.php";
+                            $pre_handler_class_name = $element_type->getClassName() . "PreHandler";
+                            $element_pre_handler = new $pre_handler_class_name($element);
+                            $element_pre_handler->handle();
+                        } else {
+						    include $element_type->getRootDirectory() . "/handler/update_element.php";
+                        }
 					}
 				}
 			}

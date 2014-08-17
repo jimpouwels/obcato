@@ -54,7 +54,7 @@
 		}
 		
 		public function getEditForm() {
-			return new TextElementForm($this);
+			return new TextElementFormVisual($this);
 		}
 		
 		public function initializeMetaData() {
