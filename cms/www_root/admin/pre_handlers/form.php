@@ -4,7 +4,7 @@
 	
 	abstract class Form {
 		
-		public abstract function LoadFields();
+		public abstract function loadFields();
 		
 		public function getMandatoryFieldValue($field_name, $error_message) {
 			$value = $this->getFieldValue($field_name);

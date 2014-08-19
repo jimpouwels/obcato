@@ -12,7 +12,7 @@
             $this->_list_element = $list_element;
         }
 
-        public function LoadFields()
+        public function loadFields()
         {
             $this->_list_element->setTitle($this->getFieldValue('element_' . $this->_list_element->getId() . '_title'));
             $this->_list_element->setTemplateId($this->getFieldValue('element_' . $this->_list_element->getId() . '_template'));

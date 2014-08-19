@@ -20,7 +20,7 @@
 
         public function handle()
         {
-            $this->_text_element_form->LoadFields();
+            $this->_text_element_form->loadFields();
             $this->_element_dao->updateElement($this->_text_element);
         }
     }
