@@ -11,7 +11,6 @@
 		private $_element_order;
 		private $_selected_terms;
 		private $_target_page_id;
-		private $_delete_lead_image;
 	
 		public function __construct($article) {
 			$this->_article = $article;
