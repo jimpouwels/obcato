@@ -2,20 +2,23 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once FRONTEND_REQUEST . "pre_handlers/form.php";
-	include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
-	
+	require_once "pre_handlers/form.php";
+    require_once "database/dao/article_dao.php";
+    require_once "libraries/utilities/date_utility.php";
+
 	class ArticleForm extends Form {
 	
 		private $_article;
 		private $_element_order;
 		private $_selected_terms;
 		private $_target_page_id;
-	
+        private $_article_dao;
+
 		public function __construct($article) {
 			$this->_article = $article;
+            $this->_article_dao = ArticleDao::getInstance();
 		}
-	
+
 		public function loadFields() {
 			$this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
 			$this->_article->setDescription($this->getFieldValue("article_description"));
@@ -42,6 +45,15 @@
 		public function getTargetPageId() {
 			return $this->_target_page_id;
 		}
+
+        public function getTermsToDelete() {
+            $terms_to_delete = array();
+            $article_terms = $this->_article_dao->getTermsForArticle($this->_article->getId());
+            foreach ($article_terms as $article_term)
+                if (!is_null($this->getFieldValue("term_" . $this->_article->getId() . "_" . $article_term->getId() . "_delete")))
+                    $terms_to_delete[] = $article_term;
+            return $terms_to_delete;
+        }
 		
 		private function deleteLeadImageIfNeeded() {
 			if ($this->getFieldValue("delete_lead_image_field") == "true") {
