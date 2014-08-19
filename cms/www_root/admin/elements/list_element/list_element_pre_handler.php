@@ -21,22 +21,11 @@
         public function handle()
         {
             $this->_list_element_form->LoadFields();
-            $this->updateListItems();
+            foreach ($this->_list_element_form->getListItemsToDelete() as $list_item_to_delete)
+                $this->_list_element->deleteListItem($list_item_to_delete);
             if ($this->isAddListItemAction())
                 $this->_list_element->addListItem();
             $this->_element_dao->updateElement($this->_list_element);
-        }
-
-        private function updateListItems()
-        {
-            foreach ($this->_list_element->getListItems() as $list_item) {
-                if (isset($_POST['listitem_' . $list_item->getId() . '_delete'])
-                    && $_POST['listitem_' . $list_item->getId() . '_delete'] != '') {
-                    $this->_list_element->deleteListItem($list_item);
-                } else {
-                    $list_item->setText($_POST['listitem_' . $list_item->getId() . '_text']);
-                }
-            }
         }
 
         private function isAddListItemAction()
