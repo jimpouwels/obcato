@@ -17,6 +17,7 @@
 		private $_template_engine;
 		private $_template_pre_handler;
 		private $_current_template;
+        private $_current_scope;
 		
 		public function __construct($template_module) {
 			$this->_template_module = $template_module;
@@ -39,11 +40,11 @@
 	
 		public function getActionButtons() {
 			$action_buttons = array();
-			if (!is_null($this->_current_template)) {
+			if (!is_null($this->_current_template))
 				$action_buttons[] = new ActionButton("Opslaan", "update_template", "icon_apply");
-			}
-			$action_buttons[] = new ActionButton("Toevoegen", "add_template", "icon_add");
-			$action_buttons[] = new ActionButton("Verwijderen", "delete_template", "icon_delete");
+            $action_buttons[] = new ActionButton("Toevoegen", "add_template", "icon_add");
+            if (!is_null($this->_current_scope))
+                $action_buttons[] = new ActionButton("Verwijderen", "delete_template", "icon_delete");
 			return $action_buttons;
 		}
 		
