@@ -10,16 +10,8 @@
 /*!40101 SET NAMES utf8 */;
 
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-
---
--- Create schema site_administration
---
-
-CREATE DATABASE IF NOT EXISTS site_administration;
-USE site_administration;
 
 --
 -- Definition of table `article_overview_elements_metadata`
@@ -68,7 +60,7 @@ CREATE TABLE `article_target_pages` (
 
 /*!40000 ALTER TABLE `article_target_pages` DISABLE KEYS */;
 INSERT INTO `article_target_pages` (`id`,`element_holder_id`,`is_default`) VALUES 
- (24,1,0);
+ (27,1,1);
 /*!40000 ALTER TABLE `article_target_pages` ENABLE KEYS */;
 
 
@@ -88,6 +80,10 @@ CREATE TABLE `article_terms` (
 --
 
 /*!40000 ALTER TABLE `article_terms` DISABLE KEYS */;
+INSERT INTO `article_terms` (`id`,`name`) VALUES 
+ (2,'test'),
+ (43,'Nieuwe term'),
+ (44,'Nieuwe term1');
 /*!40000 ALTER TABLE `article_terms` ENABLE KEYS */;
 
 
@@ -115,6 +111,18 @@ CREATE TABLE `articles` (
 --
 
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
+INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`) VALUES 
+ (5,'',NULL,9,'2014-04-03 20:59:12',NULL),
+ (7,'111',1,12,'2014-04-04 22:00:07',1),
+ (8,NULL,NULL,14,'2014-04-13 17:04:39',NULL),
+ (9,NULL,NULL,15,'2014-04-13 17:04:42',NULL),
+ (10,NULL,NULL,16,'2014-04-13 17:04:44',NULL),
+ (11,'',NULL,17,'2014-04-13 17:04:46',NULL),
+ (12,NULL,NULL,18,'2014-04-13 17:04:49',NULL),
+ (13,NULL,NULL,19,'2014-04-13 17:33:04',NULL),
+ (14,NULL,NULL,20,'2014-04-13 17:33:07',NULL),
+ (15,'',NULL,21,'2014-04-13 17:33:09',NULL),
+ (16,NULL,NULL,22,'2014-04-13 17:33:11',NULL);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 
 
@@ -163,6 +171,8 @@ CREATE TABLE `articles_terms` (
 --
 
 /*!40000 ALTER TABLE `articles_terms` DISABLE KEYS */;
+INSERT INTO `articles_terms` (`id`,`article_id`,`term_id`) VALUES 
+ (2,17,43);
 /*!40000 ALTER TABLE `articles_terms` ENABLE KEYS */;
 
 
@@ -287,7 +297,18 @@ CREATE TABLE `element_holders` (
 
 /*!40000 ALTER TABLE `element_holders` DISABLE KEYS */;
 INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (1,15,'Home',1,5,'2011-12-25 12:06:52',NULL,'ELEMENT_HOLDER_PAGE');
+ (1,14,'Homepage',1,5,'2014-08-20 16:28:48',NULL,'ELEMENT_HOLDER_PAGE'),
+ (9,NULL,'Nieuw artikelqqqqq',0,10,'2014-04-03 20:59:23',2,'ELEMENT_HOLDER_ARTICLE'),
+ (12,NULL,'Nieuw artikel111',1,9,'2014-04-04 22:00:15',2,'ELEMENT_HOLDER_ARTICLE'),
+ (14,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:39',2,'ELEMENT_HOLDER_ARTICLE'),
+ (15,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:42',2,'ELEMENT_HOLDER_ARTICLE'),
+ (16,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:44',2,'ELEMENT_HOLDER_ARTICLE'),
+ (17,NULL,'bbbbbbbbbbbb111',0,9,'2014-07-11 16:25:57',2,'ELEMENT_HOLDER_ARTICLE'),
+ (18,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:48',2,'ELEMENT_HOLDER_ARTICLE'),
+ (19,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:04',2,'ELEMENT_HOLDER_ARTICLE'),
+ (20,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:07',2,'ELEMENT_HOLDER_ARTICLE'),
+ (21,NULL,'aaaaaaaaaaaaaaaaaa',0,9,'2014-04-13 20:00:11',2,'ELEMENT_HOLDER_ARTICLE'),
+ (22,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:11',2,'ELEMENT_HOLDER_ARTICLE');
 /*!40000 ALTER TABLE `element_holders` ENABLE KEYS */;
 
 
@@ -304,8 +325,9 @@ CREATE TABLE `element_types` (
   `name` varchar(45) NOT NULL,
   `domain_object` varchar(255) NOT NULL,
   `scope_id` int(10) unsigned default NULL,
-  `location` varchar(255) NOT NULL,
+  `identifier` varchar(255) default NULL,
   `system_default` tinyint(1) NOT NULL,
+  `destroy_script` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -314,12 +336,12 @@ CREATE TABLE `element_types` (
 --
 
 /*!40000 ALTER TABLE `element_types` DISABLE KEYS */;
-INSERT INTO `element_types` (`id`,`classname`,`edit_presentation`,`icon_url`,`name`,`domain_object`,`scope_id`,`location`,`system_default`) VALUES 
- (1,'TextElement','edit_text_element.php','/admin/static.php?file=/default/img/element_icons/text_element.png','Paragraaf','text_element.php',1,'elements/text_element',1),
- (2,'ListElement','edit_list_element.php','/admin/static.php?file=/default/img/element_icons/list_element.png','Lijst','list_element.php',2,'elements/list_element',1),
- (3,'ImageElement','edit_image_element.php','/admin/static.php?file=/default/img/element_icons/image_element.png','Afbeelding','image_element.php',3,'elements/image_element',1),
- (4,'DownloadElement','edit_download_element.php','/admin/static.php?file=/default/img/element_icons/download_element.png','Download','download_element.php',4,'elements/download_element',1),
- (5,'ArticleOverviewElement','edit_article_overview_element.php','/admin/static.php?file=/default/img/element_icons/article_overview_element.png','Artikel overzicht','article_overview_element.php',7,'elements/article_overview_element',1);
+INSERT INTO `element_types` (`id`,`classname`,`edit_presentation`,`icon_url`,`name`,`domain_object`,`scope_id`,`identifier`,`system_default`,`destroy_script`) VALUES 
+ (1,'TextElement','edit_text_element.php','text_element.png','Paragraaf','text_element.php',1,'text_element',1,NULL),
+ (2,'ListElement','edit_list_element.php','list_element.png','Lijst','list_element.php',2,'list_element',1,NULL),
+ (3,'ImageElement','edit_image_element.php','image_element.png','Afbeelding','image_element.php',3,'image_element',1,NULL),
+ (4,'DownloadElement','edit_download_element.php','download_element.png','Download','download_element.php',4,'download_element',1,NULL),
+ (5,'ArticleOverviewElement','edit_article_overview_element.php','article_overview_element.png','Artikel overzicht','article_overview_element.php',7,'article_overview_element',1,NULL);
 /*!40000 ALTER TABLE `element_types` ENABLE KEYS */;
 
 
@@ -345,6 +367,81 @@ CREATE TABLE `elements` (
 
 /*!40000 ALTER TABLE `elements` DISABLE KEYS */;
 /*!40000 ALTER TABLE `elements` ENABLE KEYS */;
+
+
+--
+-- Definition of table `guestbook_elements_metadata`
+--
+
+DROP TABLE IF EXISTS `guestbook_elements_metadata`;
+CREATE TABLE `guestbook_elements_metadata` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `guestbook_id` int(10) unsigned default NULL,
+  `element_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `element_guestbooks` (`guestbook_id`),
+  KEY `guestbook_metadata_elements` (`element_id`),
+  CONSTRAINT `element_guestbooks` FOREIGN KEY (`guestbook_id`) REFERENCES `guestbooks` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `guestbook_metadata_elements` FOREIGN KEY (`element_id`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `guestbook_elements_metadata`
+--
+
+/*!40000 ALTER TABLE `guestbook_elements_metadata` DISABLE KEYS */;
+/*!40000 ALTER TABLE `guestbook_elements_metadata` ENABLE KEYS */;
+
+
+--
+-- Definition of table `guestbook_messages`
+--
+
+DROP TABLE IF EXISTS `guestbook_messages`;
+CREATE TABLE `guestbook_messages` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `message` longtext NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `email_address` varchar(255) default NULL,
+  `posted_at` datetime NOT NULL,
+  `acknowledged` tinyint(1) NOT NULL,
+  `guestbook_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `guestbooks_messages` (`guestbook_id`),
+  CONSTRAINT `guestbooks_messages` FOREIGN KEY (`guestbook_id`) REFERENCES `guestbooks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `guestbook_messages`
+--
+
+/*!40000 ALTER TABLE `guestbook_messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `guestbook_messages` ENABLE KEYS */;
+
+
+--
+-- Definition of table `guestbooks`
+--
+
+DROP TABLE IF EXISTS `guestbooks`;
+CREATE TABLE `guestbooks` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL,
+  `closed` tinyint(1) NOT NULL,
+  `auto_acknowledge` tinyint(1) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `guestbooks_user` (`created_by`),
+  CONSTRAINT `guestbooks_user` FOREIGN KEY (`created_by`) REFERENCES `auth_users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `guestbooks`
+--
+
+/*!40000 ALTER TABLE `guestbooks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `guestbooks` ENABLE KEYS */;
 
 
 --
@@ -390,6 +487,11 @@ CREATE TABLE `image_labels` (
 --
 
 /*!40000 ALTER TABLE `image_labels` DISABLE KEYS */;
+INSERT INTO `image_labels` (`id`,`name`) VALUES 
+ (12,'Nieuw label 1'),
+ (13,'Nieuw label 2'),
+ (14,'Nieuw label'),
+ (15,'Nieuw label 22');
 /*!40000 ALTER TABLE `image_labels` ENABLE KEYS */;
 
 
@@ -468,9 +570,6 @@ CREATE TABLE `links` (
 --
 
 /*!40000 ALTER TABLE `links` DISABLE KEYS */;
-INSERT INTO `links` (`id`,`title`,`target_address`,`type`,`code`,`target_element_holder`,`parent_element_holder`) VALUES 
- (2,'Nieuwe link','','INTERNAL','2',NULL,1),
- (3,'Nieuwe link','wefwef','EXTERNAL','3',NULL,1);
 /*!40000 ALTER TABLE `links` ENABLE KEYS */;
 
 
@@ -578,12 +677,11 @@ CREATE TABLE `modules` (
   `title` varchar(45) NOT NULL,
   `icon_url` varchar(255) default NULL,
   `module_group_id` int(10) unsigned NOT NULL,
-  `home_item` tinyint(1) NOT NULL,
   `popup` tinyint(1) NOT NULL,
   `identifier` varchar(255) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   `system_default` tinyint(1) NOT NULL,
-  `pre_handler` varchar(255) default NULL,
+  `class` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -592,20 +690,21 @@ CREATE TABLE `modules` (
 --
 
 /*!40000 ALTER TABLE `modules` DISABLE KEYS */;
-INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`home_item`,`popup`,`identifier`,`enabled`,`system_default`,`pre_handler`) VALUES 
- (1,'Uitloggen','/admin/static.php?file=/logout/img/logout.png',1,0,0,'logout',1,1,'form/handler.php'),
- (2,'Instellingen','/admin/static.php?file=/settings/img/settings.png',3,0,0,'settings',1,1,'forms/settings_form_handler.php'),
- (3,'Pagina\'s','/admin/static.php?file=/pages/img/page.png',2,1,0,'pages',1,1,'form/page_editor_handler.php'),
- (4,'Database','/admin/static.php?file=/database/img/database.png',3,0,0,'database',1,1,NULL),
- (5,'Artikelen','/admin/static.php?file=/articles/img/articles.png',2,1,0,'articles',1,1,'form/article_handler.php'),
- (6,'Blokken','/admin/static.php?file=/blocks/img/blocks.png',2,1,0,'blocks',1,1,'form/block_editor_handler.php'),
- (7,'Modules','/admin/static.php?file=/modules/img/modules.png',3,1,0,'modules',1,1,NULL),
- (8,'Afbeeldingen','/admin/static.php?file=/images/img/images.png',2,1,0,'images',1,1,'form/form_handler.php'),
- (9,'Templates','/admin/static.php?file=/templates/img/templates.png',4,1,0,'templates',1,1,'handler.php');
-INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`home_item`,`popup`,`identifier`,`enabled`,`system_default`,`pre_handler`) VALUES 
- (10,'Downloads','/admin/static.php?file=/downloads/img/downloads.png',2,1,0,'downloads',1,1,NULL),
- (11,'Berichten','/admin/static.php?file=/messages/img/messages.png',1,1,0,'messages',1,1,NULL),
- (12,'Authorisatie','/admin/static.php?file=/authorization/img/authorization.png',3,1,0,'authorization',1,1,'handler/user_handler.php');
+INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`popup`,`identifier`,`enabled`,`system_default`,`class`) VALUES 
+ (1,'Uitloggen','/logout/img/logout.png',1,0,'logout',1,1,'LogoutModuleVisual'),
+ (2,'Instellingen','/settings/img/settings.png',3,0,'settings',1,1,'SettingsModuleVisual'),
+ (3,'Pagina\'s','/pages/img/page.png',2,0,'pages',1,1,'PageModuleVisual'),
+ (4,'Database','/database/img/database.png',3,0,'database',1,1,'DatabaseModuleVisual'),
+ (5,'Artikelen','/articles/img/articles.png',2,0,'articles',1,1,'ArticleModuleVisual'),
+ (6,'Blokken','/blocks/img/blocks.png',2,0,'blocks',1,1,'BlockModuleVisual'),
+ (7,'Componenten','/components/img/modules.png',3,0,'components',1,1,'ComponentModuleVisual'),
+ (8,'Afbeeldingen','/images/img/images.png',2,0,'images',1,1,'ImageModuleVisual'),
+ (9,'Templates','/templates/img/templates.png',4,0,'templates',1,1,'TemplateModuleVisual'),
+ (10,'Downloads','/downloads/img/downloads.png',2,0,'downloads',1,1,'DownloadModuleVisual'),
+ (11,'Berichten','/messages/img/messages.png',1,0,'messages',1,1,NULL),
+ (12,'Authorisatie','/authorization/img/authorization.png',3,0,'authorization',1,1,'AuthorizationModuleVisual');
+INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`popup`,`identifier`,`enabled`,`system_default`,`class`) VALUES 
+ (13,'Gastenboeken','/guestbooks/img/guestbooks.png',2,0,'guestbooks',1,1,'GuestbookModuleVisual');
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 
 
@@ -622,6 +721,8 @@ CREATE TABLE `pages` (
   `include_in_searchindex` tinyint(3) unsigned NOT NULL,
   `element_holder_id` int(11) unsigned NOT NULL,
   `follow_up` int(10) unsigned NOT NULL,
+  `is_homepage` tinyint(1) default NULL,
+  `description` longtext,
   PRIMARY KEY  (`id`),
   KEY `holder_page` (`element_holder_id`),
   KEY `page_parent` (`parent_id`),
@@ -634,8 +735,8 @@ CREATE TABLE `pages` (
 --
 
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-INSERT INTO `pages` (`id`,`navigation_title`,`parent_id`,`show_in_navigation`,`include_in_searchindex`,`element_holder_id`,`follow_up`) VALUES 
- (1,'Home',NULL,1,1,1,2);
+INSERT INTO `pages` (`id`,`navigation_title`,`parent_id`,`show_in_navigation`,`include_in_searchindex`,`element_holder_id`,`follow_up`,`is_homepage`,`description`) VALUES 
+ (1,'Homepage',NULL,0,1,1,2,1,'');
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 
 
@@ -663,8 +764,9 @@ INSERT INTO `scopes` (`id`,`name`) VALUES
  (5,'Pagina'),
  (6,'Blok'),
  (7,'Artikel overzicht'),
- (8,'Youtube');
- (9,'Artikel');
+ (8,'Youtube'),
+ (9,'Article'),
+ (10,'Gastenboek');
 /*!40000 ALTER TABLE `scopes` ENABLE KEYS */;
 
 
@@ -680,12 +782,14 @@ CREATE TABLE `settings` (
   `backend_hostname` varchar(255) default NULL,
   `email_address` varchar(45) default NULL,
   `smtp_host` varchar(45) default NULL,
-  `template_dir` varchar(255) default NULL,
+  `frontend_template_dir` varchar(255) default NULL,
   `root_dir` longtext,
   `static_files_dir` varchar(255) default NULL,
   `config_dir` varchar(255) NOT NULL,
   `upload_dir` varchar(255) default NULL,
   `database_version` varchar(45) NOT NULL,
+  `component_dir` varchar(255) default NULL,
+  `backend_template_dir` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -694,8 +798,8 @@ CREATE TABLE `settings` (
 --
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`template_dir`,`root_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`) VALUES 
- (1,'Test Website','localhost','localhost','jim.pouwels@gmail.com','smtp.chello.nl','D:/Jim/websites/pouwels/cms/trunk/templates','D:/Jim/websites/pouwels/cms/trunk','D:/Jim/websites/pouwels/cms/trunk/static','D:/Jim/websites/pouwels/cms/trunk/conf','D:/Jim/websites/pouwels/cms/trunk/upload','0.0.2');
+INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`root_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`) VALUES 
+ (1,'Test Website1','localhost','localhost','jim.pouwels@gmail.com','smtp.chello.nl','D:/Jim/websites/site_administrator/cms/templates/frontend','D:/Jim/websites/site_administrator/cms/www_root','D:/Jim/websites/site_administrator/cms/static','D:/Jim/websites/site_administrator/cms/conf','D:/Jim/websites/site_administrator/cms/upload','0.0.4','D:/Jim/websites/site_administrator/cms/templates/backend','D:/Jim/websites/site_administrator/cms/templates/backend');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
@@ -717,16 +821,6 @@ CREATE TABLE `templates` (
 --
 
 /*!40000 ALTER TABLE `templates` DISABLE KEYS */;
-INSERT INTO `templates` (`id`,`filename`,`name`,`scope_id`) VALUES 
- (3,'','Nieuw template',NULL),
- (4,'','Nieuw template',NULL),
- (7,'','Nieuw template',NULL),
- (8,'','Nieuw template',NULL),
- (9,'','Nieuw template',NULL),
- (10,'','Nieuw template',NULL),
- (11,'','Nieuw template',NULL),
- (12,'','Nieuw template',NULL),
- (13,'','Nieuw template',NULL);
 /*!40000 ALTER TABLE `templates` ENABLE KEYS */;
 
 

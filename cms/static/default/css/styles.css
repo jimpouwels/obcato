@@ -1,8 +1,3 @@
-@font-face{
-	font-family:GeosansLight;
-	src:url(/admin/static.php?file=/default/fonts/GeosansLight.ttf);
-}
-
 /*
 =========== MAIN STYLES
 */
@@ -46,7 +41,7 @@ body {
 	height: 70px;
 	overflow: hidden;
 	z-index: -1;
-	background: url(/admin/static.php?file=/default/img/header-gradient.png) repeat-x;
+	background: url(/admin/static/img/header-gradient.png) repeat-x;
 }
 
 #top .title {
@@ -260,88 +255,6 @@ h1 {
 }
 
 /*
-============ GLOBAL FORM STYLES
-*/
-.admin_fieldset {
-	border: 1px solid #CCCCCC;
-	background-color: #F7F7F7;
-	padding: 0px;
-	padding-bottom: 10px;
-	margin-bottom: 15px;
-	margin-right: 10px;
-}
-
-.fieldset-title {
-	font-weight: bold;
-	font-size: 1.2em;
-	color: white;
-	font-family: GeosansLight;
-	text-transform: uppercase;
-	height: 30px;
-	background: url(/admin/static.php?file=/default/img/heading-gradient.png) repeat-x;
-	padding-top: 5px;
-	padding-left: 5px;
-	margin: 0px;
-}
-
-.fieldset-title p {
-	margin: 0px;
-}
-
-legend {
-	border-left: 1px solid #CCCCCC;
-	border-right: 1px solid #CCCCCC;
-	white-space: normal;
-	border-top: 1px solid #CCCCCC;
-	margin-top: -25px;
-	margin-left: -10px;
-	color: black;
-	font-weight: bold;
-	background: #F7F7F7;
-	padding: 5px;
-}
-
-.mandatory_star {
-	color: red;
-}
-
-.invalid {
-	border: 2px solid red;
-}
-
-.field_error_message {
-	margin-bottom: 0px;
-	margin-top: 10px;
-	font-size: 0.9em;
-	color: red;
-	font-style: italic;
-}
-
-.button {
-	background: url(/admin/static/img/login-button.png) repeat-x scroll 0 0 transparent;
-    border: 1px solid #6E93B0;
-    border-radius: 2px 2px 2px 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    color: #234E70;
-    display: inline;
-    float: left;
-    font-size: 1em;
-    height: 27px;
-    line-height: 26px;
-    margin-right: 5px;
-    padding: 0 10px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	text-decoration: none;
-	margin-bottom: 5px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.button:active {
-    background-position: 0 bottom;
-}
-
-/*
 ============ TAB STYLES
 */
 
@@ -442,31 +355,8 @@ legend {
 	padding: 0px;
 }
 
-/* EDITOR */
-.admin_form li {
-	list-style: none outside none;
-	clear: both;
-}
-
-.admin_form {
-	padding: 0px;
-	margin-top: 0px;
-	margin-left: 10px;
-}
-
-.admin_form select {
+.admin_form_list select {
 	margin-top: 7px;
-}
-
-.admin_label {
-	min-width: 135px;
-	float: left;
-	padding-top: 12px;
-}
-
-.admin_field {
-	margin-top: 8px;
-	width: 300px;
 }
 
 .admin_field_text {
