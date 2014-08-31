@@ -13,6 +13,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+
+--
+-- Create schema site_administration
+--
+
+CREATE DATABASE IF NOT EXISTS site_administration;
+USE site_administration;
+
 --
 -- Definition of table `article_overview_elements_metadata`
 --
@@ -783,7 +791,6 @@ CREATE TABLE `settings` (
   `email_address` varchar(45) default NULL,
   `smtp_host` varchar(45) default NULL,
   `frontend_template_dir` varchar(255) default NULL,
-  `root_dir` longtext,
   `static_files_dir` varchar(255) default NULL,
   `config_dir` varchar(255) NOT NULL,
   `upload_dir` varchar(255) default NULL,
@@ -798,8 +805,8 @@ CREATE TABLE `settings` (
 --
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`root_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`) VALUES 
- (1,'Test Website1','localhost','localhost','jim.pouwels@gmail.com','smtp.chello.nl','D:/Jim/websites/site_administrator/cms/templates/frontend','D:/Jim/websites/site_administrator/cms/www_root','D:/Jim/websites/site_administrator/cms/static','D:/Jim/websites/site_administrator/cms/conf','D:/Jim/websites/site_administrator/cms/upload','0.0.4','D:/Jim/websites/site_administrator/cms/templates/backend','D:/Jim/websites/site_administrator/cms/templates/backend');
+INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`) VALUES 
+ (1,'Test Website1','localhost','localhost','jim.pouwels@gmail.com','smtp.chello.nl','D:/Jim/websites/site_administrator/cms/templates/frontend','D:/Jim/websites/site_administrator/cms/static','D:/Jim/websites/site_administrator/cms/conf','D:/Jim/websites/site_administrator/cms/upload','0.0.4','D:/Jim/websites/site_administrator/cms/templates/backend','D:/Jim/websites/site_administrator/cms/templates/backend');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 

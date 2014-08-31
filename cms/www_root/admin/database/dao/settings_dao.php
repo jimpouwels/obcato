@@ -27,7 +27,7 @@
 			$query = "UPDATE settings SET website_title = '" . $settings->getWebsiteTitle() . "', backend_hostname = '" . 
 					 $settings->getBackEndHostname() . "', frontend_hostname = '" . $settings->getFrontEndHostname() . "',
 					 smtp_host = '" . $settings->getSmtpHost() . "', email_address = '" . $settings->getEmailAddress() . "',
-					 frontend_template_dir = '" . $settings->getFrontendTemplateDir() . "', root_dir = '" . $settings->getRootDir() . "',
+					 frontend_template_dir = '" . $settings->getFrontendTemplateDir() . "',
 					 static_files_dir = '" . $settings->getStaticDir() . "', config_dir = '" . $settings->getConfigDir() . "',
 					 upload_dir = '" . $settings->getUploadDir() . "', database_version = '" . $settings->getDatabaseVersion() . "',
 					 component_dir = '" . $settings->getComponentDir() . "', backend_template_dir = '" . $settings->getBackendTemplateDir() . "'";

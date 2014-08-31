@@ -14,7 +14,6 @@
 		private $_backend_hostname;
 		private $_email_address;
 		private $_smtp_host;
-		private $_root_dir;
 		private $_frontend_template_dir;
 		private $_static_dir;
 		private $_config_dir;
@@ -65,10 +64,6 @@
 				
 		public function setRootDir($root_dir) {
 			$this->_root_dir = $root_dir;
-		}
-		
-		public function getRootDir() {
-			return $this->_root_dir;
 		}
 				
 		public function setFrontendTemplateDir($frontend_template_dir) {
@@ -153,7 +148,7 @@
 			$query = "UPDATE settings SET website_title = '" . $this->getWebsiteTitle() . "', backend_hostname = '" . 
 					 $this->getBackEndHostname() . "', frontend_hostname = '" . $this->getFrontEndHostname() . "',
 					 smtp_host = '" . $this->getSmtpHost() . "', email_address = '" . $this->getEmailAddress() . "',
-					 frontend_template_dir = '" . $this->getFrontendTemplateDir() . "', root_dir = '" . $this->getRootDir() . "',
+					 frontend_template_dir = '" . $this->getFrontendTemplateDir() . "',
 					 static_files_dir = '" . $this->getStaticDir() . "', config_dir = '" . $this->getConfigDir() . "',
 					 upload_dir = '" . $this->getUploadDir() . "', database_version = '" . $this->getDatabaseVersion() . "',
 					 component_dir = '" . $this->getComponentDir() . "', backend_template_dir = '" . $this->getBackendTemplateDir() . "'";

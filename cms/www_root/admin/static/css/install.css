@@ -6,10 +6,8 @@
 .admin_fieldset {
     position: absolute;
     left: 50%;
-    top: 50%;
     width: 350px;
     margin-left: -175px;
-    margin-top: -175px;
 }
 
 body {
@@ -21,7 +19,7 @@ body {
     padding: 10px;
 }
 
-.database_submit_button {
+.install_submit_button {
     margin-top: 15px;
 }
 

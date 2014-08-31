@@ -1,7 +1,8 @@
 <?php
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
-	
+
+    require_once "database_config.php";
 	require_once "constants.php";
 	require_once "includes.php";
 	require_once 'core/data/session.php';

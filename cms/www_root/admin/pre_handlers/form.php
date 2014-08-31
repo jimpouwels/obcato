@@ -1,6 +1,8 @@
 <?php
 	// No direct access
 	defined('_ACCESS') or die;
+
+    require_once "libraries/utilities/string_utility.php";
 	
 	abstract class Form {
 		

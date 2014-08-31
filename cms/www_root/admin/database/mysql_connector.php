@@ -8,7 +8,6 @@
 		private static $instance;
 		private $conn;
 		private $_host;
-		private $_databse_name;
 		
 		public static function getInstance() {
 			if (is_null(self::$instance)) {
@@ -18,7 +17,6 @@
 		}
 		
 		private function __construct() {
-			include_once FRONTEND_REQUEST . "database_config.php";
 			$this->_host = HOST;
 			$this->_database_name = DATABASE_NAME;
 			$this->conn = mysql_connect($this->_host, USERNAME, PASSWORD) or die("Error connecting to MySQL database");
@@ -46,6 +44,12 @@
 				return $row['next_id'] + 1;
 			}
 		}
+
+        public function executeSql($sql) {
+            $mysqli = new mysqli(HOST, USERNAME, PASSWORD, DATABASE_NAME);
+            mysqli_multi_query($mysqli, $sql);
+            $mysqli->close();
+        }
 		
 		public function getDatabaseName() {
 			return $this->_database_name;

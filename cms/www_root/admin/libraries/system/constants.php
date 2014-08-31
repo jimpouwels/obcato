@@ -29,7 +29,6 @@
 	// DEFINE DB-VERSION
 	define("DB_VERSION", $website_settings->getDatabaseVersion());
 	define("STATIC_FILES_DIR", $website_settings->getStaticDir());
-	define("ROOT_DIR", $website_settings->getRootDir());
 	define("COMPONENT_DIR", $website_settings->getComponentDir());
 	define("TEMPLATE_ENGINE_DIR", $website_settings->getBackendTemplateDir());
 	define("STATIC_FILES_URL", "/admin/static.php?file=");

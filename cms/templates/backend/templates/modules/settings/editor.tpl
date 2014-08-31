@@ -25,7 +25,6 @@
 			<div class="fieldset-title">Directory instellingen</div>
 			
 			<ul class="admin_form">
-				<li>{$root_dir}</li>
 				<li>{$static_dir}</li>
 				<li>{$config_dir}</li>
 				<li>{$upload_dir}</li>
