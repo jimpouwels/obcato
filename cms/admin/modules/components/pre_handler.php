@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "libraries/system/notifications.php";
+	include_once CMS_ROOT . "/libraries/system/notifications.php";
 
 	// handle post requests
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,7 +20,7 @@
 	
 	// ============ UNINSTALL ELEMENT ===============================================================================
 	function uninstallElement() {
-		include_once CMS_ROOT . "services/component_service.php";
+		include_once CMS_ROOT . "/services/component_service.php";
 		$element_id = $_POST['element_id_to_uninstall'];
 		$component_service = ComponentService::getInstance();
 		$component_service->uninstallElement($element_id);
@@ -32,8 +32,8 @@
 	// ============ INSTALL COMPONENT ===============================================================================
 	
 	function installComponent() {	
-		include_once CMS_ROOT . "services/component_service.php";
-		include_once CMS_ROOT . "core/exceptions/component_exception.php";
+		include_once CMS_ROOT . "/services/component_service.php";
+		include_once CMS_ROOT . "/core/exceptions/component_exception.php";
 	
 		global $process_log;
 		global $install_errors;

@@ -3,16 +3,16 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "core/data/component.php";
-	include_once CMS_ROOT . "core/data/module.php";
-	include_once CMS_ROOT . "core/data/element_type.php";
-	include_once CMS_ROOT . "libraries/validators/component_validator.php";
-	include_once CMS_ROOT . "libraries/utilities/string_utility.php";
-	include_once CMS_ROOT . "libraries/utilities/file_utility.php";
-	include_once CMS_ROOT . "core/exceptions/component_properties_exception.php";
-	include_once CMS_ROOT . "core/exceptions/component_descriptor_exception.php";
-	include_once CMS_ROOT . "database/dao/scope_dao.php";
-	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "/core/data/component.php";
+	include_once CMS_ROOT . "/core/data/module.php";
+	include_once CMS_ROOT . "/core/data/element_type.php";
+	include_once CMS_ROOT . "/libraries/validators/component_validator.php";
+	include_once CMS_ROOT . "/libraries/utilities/string_utility.php";
+	include_once CMS_ROOT . "/libraries/utilities/file_utility.php";
+	include_once CMS_ROOT . "/core/exceptions/component_properties_exception.php";
+	include_once CMS_ROOT . "/core/exceptions/component_descriptor_exception.php";
+	include_once CMS_ROOT . "/database/dao/scope_dao.php";
+	include_once CMS_ROOT . "/database/dao/element_dao.php";
 	
 	class ComponentService {
 	

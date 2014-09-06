@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "view/views/visual.php";
+	require_once CMS_ROOT . "/view/views/visual.php";
 	
 	class InformationMessage extends Visual {
 	

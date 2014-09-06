@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "core/exceptions/component_properties_exception.php";
+	include_once CMS_ROOT . "/core/exceptions/component_properties_exception.php";
 	
 	class ComponentValidator {
 		

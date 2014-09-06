@@ -2,14 +2,14 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "pre_handlers/pre_handler.php";
+	include_once CMS_ROOT . "/pre_handlers/pre_handler.php";
 	
 	class LinkPreHandler extends PreHandler {
 	
 		public function handle() {
 			// Adds a link to the current element holder
 			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'add_link' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				include_once CMS_ROOT . "database/dao/link_dao.php";
+				include_once CMS_ROOT . "/database/dao/link_dao.php";
 			
 				// first obtain the element holder
 				$element_holder_id = $_POST[EDIT_ELEMENT_HOLDER_ID];
@@ -21,8 +21,8 @@
 			
 			// Updates all links in the element holder
 			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'update_element_holder' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				include_once CMS_ROOT . "database/dao/link_dao.php";
-				include_once CMS_ROOT . "libraries/handlers/form_handler.php";
+				include_once CMS_ROOT . "/database/dao/link_dao.php";
+				include_once CMS_ROOT . "/libraries/handlers/form_handler.php";
 				
 				$link_dao = LinkDao::getInstance();
 				$links = $link_dao->getLinksForElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);

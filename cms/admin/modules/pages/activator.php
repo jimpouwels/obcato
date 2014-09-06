@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "core/data/page.php";
-	require_once CMS_ROOT . "view/views/module_visual.php";
-	require_once CMS_ROOT . "modules/pages/visuals/page_tree.php";
-	require_once CMS_ROOT . "modules/pages/visuals/page_editor.php";
-	require_once CMS_ROOT . "modules/pages/page_pre_handler.php";
+	require_once CMS_ROOT . "/core/data/page.php";
+	require_once CMS_ROOT . "/view/views/module_visual.php";
+	require_once CMS_ROOT . "/modules/pages/visuals/page_tree.php";
+	require_once CMS_ROOT . "/modules/pages/visuals/page_editor.php";
+	require_once CMS_ROOT . "/modules/pages/page_pre_handler.php";
 
 	class PageModuleVisual extends ModuleVisual {
 

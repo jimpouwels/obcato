@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "view/views/module_visual.php";
-	require_once CMS_ROOT . "view/views/tab_menu.php";
-	require_once CMS_ROOT . "database/dao/block_dao.php";
-	require_once CMS_ROOT . "modules/blocks/visuals/blocks/block_tab.php";
-	require_once CMS_ROOT . "modules/blocks/visuals/positions/position_tab.php";
-	require_once CMS_ROOT . "modules/blocks/block_pre_handler.php";
-	require_once CMS_ROOT . "modules/blocks/position_pre_handler.php";
+	require_once CMS_ROOT . "/view/views/module_visual.php";
+	require_once CMS_ROOT . "/view/views/tab_menu.php";
+	require_once CMS_ROOT . "/database/dao/block_dao.php";
+	require_once CMS_ROOT . "/modules/blocks/visuals/blocks/block_tab.php";
+	require_once CMS_ROOT . "/modules/blocks/visuals/positions/position_tab.php";
+	require_once CMS_ROOT . "/modules/blocks/block_pre_handler.php";
+	require_once CMS_ROOT . "/modules/blocks/position_pre_handler.php";
 
 	class BlockModuleVisual extends ModuleVisual {
 	

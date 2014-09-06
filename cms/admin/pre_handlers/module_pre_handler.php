@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "pre_handlers/pre_handler.php";
+	include_once CMS_ROOT . "/pre_handlers/pre_handler.php";
 	
 	class ModulePreHandler extends PreHandler {
 			

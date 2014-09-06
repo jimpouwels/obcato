@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "core/data/entity.php";
-	include_once CMS_ROOT . "libraries/utilities/link_utility.php";
+	include_once CMS_ROOT . "/core/data/entity.php";
+	include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
 
 	class Link extends Entity {
 		

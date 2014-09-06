@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "database/dao/element_holder_dao.php";
-	require_once CMS_ROOT . "pre_handlers/pre_handler.php";
+	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+	require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
 	
 	class ElementPreHandler extends PreHandler {
 	

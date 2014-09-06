@@ -3,7 +3,7 @@
 	// No direct access
 	defined("_ACCESS") or die;
 
-	require_once CMS_ROOT . "view/views/page_picker.php";
+	require_once CMS_ROOT . "/view/views/page_picker.php";
 	
 	class SettingsEditor extends Visual {
 	

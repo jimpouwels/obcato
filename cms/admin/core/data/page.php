@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "core/data/element_holder.php";
-	require_once CMS_ROOT . "database/dao/block_dao.php";
-	require_once CMS_ROOT . "database/dao/page_dao.php";
+	require_once CMS_ROOT . "/core/data/element_holder.php";
+	require_once CMS_ROOT . "/database/dao/block_dao.php";
+	require_once CMS_ROOT . "/database/dao/page_dao.php";
 
 	class Page extends ElementHolder {
 	
@@ -32,7 +32,7 @@
 			//	$text = nl2br($text);
 				
 				// replace link codes with HTML anchors
-			//	include_once CMS_ROOT . "libraries/utilities/link_utility.php";
+			//	include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
 			//	$text = LinkUtility::createLinksInString($text, $this);
 			//}
 			return $text;

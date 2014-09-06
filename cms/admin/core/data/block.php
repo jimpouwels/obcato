@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "core/data/element_holder.php";
+	include_once CMS_ROOT . "/core/data/element_holder.php";
 
 	class Block extends ElementHolder {
 	

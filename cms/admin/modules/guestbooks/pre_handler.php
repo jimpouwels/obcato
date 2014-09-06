@@ -2,10 +2,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	include_once CMS_ROOT . "libraries/validators/form_validator.php";
-	include_once CMS_ROOT . "libraries/handlers/form_handler.php";
-	include_once CMS_ROOT . "libraries/system/notifications.php";
-	include_once CMS_ROOT . "database/dao/guestbook_dao.php";
+	include_once CMS_ROOT . "/libraries/validators/form_validator.php";
+	include_once CMS_ROOT . "/libraries/handlers/form_handler.php";
+	include_once CMS_ROOT . "/libraries/system/notifications.php";
+	include_once CMS_ROOT . "/database/dao/guestbook_dao.php";
 	
 	// handle post requests
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {

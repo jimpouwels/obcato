@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "view/views/module_visual.php";
-	require_once CMS_ROOT . "modules/templates/template_pre_handler.php";
-	require_once CMS_ROOT . "modules/templates/visuals/template_list.php";
-	require_once CMS_ROOT . "modules/templates/visuals/template_editor.php";
+	require_once CMS_ROOT . "/view/views/module_visual.php";
+	require_once CMS_ROOT . "/modules/templates/template_pre_handler.php";
+	require_once CMS_ROOT . "/modules/templates/visuals/template_list.php";
+	require_once CMS_ROOT . "/modules/templates/visuals/template_editor.php";
 
 	class TemplateModuleVisual extends ModuleVisual {
 	

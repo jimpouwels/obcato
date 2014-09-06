@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "database/mysql_connector.php";
-	include_once CMS_ROOT . "core/data/element_type.php";
-	include_once CMS_ROOT . "core/data/element.php";
+	include_once CMS_ROOT . "/database/mysql_connector.php";
+	include_once CMS_ROOT . "/core/data/element_type.php";
+	include_once CMS_ROOT . "/core/data/element.php";
 
 	class ElementDao {
 	
@@ -250,7 +250,7 @@
 			$element_ids = array();
 			$element_ids = explode(',', $element_order);
 			if (count($element_ids) > 0 && $element_ids[0] != '') {
-				include_once CMS_ROOT . "database/dao/element_dao.php";
+				include_once CMS_ROOT . "/database/dao/element_dao.php";
 				
 				$element_dao = ElementDao::getInstance();
 				

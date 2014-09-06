@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "core/data/entity.php";
+	include_once CMS_ROOT . "/core/data/entity.php";
 
 	class ListItem extends Entity {
 			
@@ -16,7 +16,7 @@
 		}
 		
 		public function getText() {
-			//include_once CMS_ROOT . "libraries/utilities/link_utility.php";
+			//include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
 			$text = $this->myText;
 			//if (CMS_ROOT != '') {
 			//	$text = LinkUtility::createLinksInString($text, $this->getElement()->getElementHolder());

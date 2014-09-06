@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "database/mysql_connector.php";
-	include_once CMS_ROOT . "core/data/image_label.php";
-	include_once CMS_ROOT . "core/data/image.php";
+	include_once CMS_ROOT . "/database/mysql_connector.php";
+	include_once CMS_ROOT . "/core/data/image_label.php";
+	include_once CMS_ROOT . "/core/data/image.php";
 	
 	class ImageDao {
 

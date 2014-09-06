@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "core/data/entity.php";
-	require_once CMS_ROOT . "database/dao/block_dao.php";
+	require_once CMS_ROOT . "/core/data/entity.php";
+	require_once CMS_ROOT . "/database/dao/block_dao.php";
 
 	class BlockPosition extends Entity {
 	

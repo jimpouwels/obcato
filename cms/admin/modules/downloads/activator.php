@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "core/data/module.php";
+	include_once CMS_ROOT . "/core/data/module.php";
 
 	class DownloadModule extends Module {
 	

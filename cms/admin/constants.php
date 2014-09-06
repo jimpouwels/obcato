@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "core/data/settings.php";
+	require_once CMS_ROOT . "/core/data/settings.php";
 	
 	// EDITOR FORM CONSTANTS
 	define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
@@ -30,7 +30,6 @@
 	define("DB_VERSION", $website_settings->getDatabaseVersion());
 	define("STATIC_FILES_DIR", $website_settings->getStaticDir());
 	define("COMPONENT_DIR", $website_settings->getComponentDir());
-	define("TEMPLATE_ENGINE_DIR", $website_settings->getBackendTemplateDir());
 	define("STATIC_FILES_URL", "/admin/static.php?file=");
 	define("DEFAULT_ELEMENT_ICON_URL", STATIC_FILES_URL . "/default/img/element_icons/");
 	

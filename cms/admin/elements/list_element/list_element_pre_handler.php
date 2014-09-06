@@ -2,9 +2,9 @@
     // No direct access
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "pre_handlers/pre_handler.php";
-    require_once CMS_ROOT . "elements/list_element/list_element_form.php";
-    require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
+    require_once CMS_ROOT . "/elements/list_element/list_element_form.php";
+    require_once CMS_ROOT . "/database/dao/element_dao.php";
 
     class ListElementPreHandler extends PreHandler {
 
