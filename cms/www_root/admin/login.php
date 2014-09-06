@@ -1,5 +1,6 @@
 <?php
 	define("_ACCESS", "GRANTED");
+    define("FRONTEND_REQUEST", '');
 
     if (!file_exists("database_config.php"))
         header("Location: /admin/index.php");
