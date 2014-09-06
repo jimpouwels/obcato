@@ -9,7 +9,7 @@
 	
 	$backend = new Backend("site_administrator");
 	
-	include_once FRONTEND_REQUEST . "database/dao/image_dao.php";
+	include_once "database/dao/image_dao.php";
 	
 	$upload_dir = Settings::find()->getUploadDir();
 	
@@ -21,7 +21,7 @@
 		if ($image->isPublished()) {
 			$render_image = true;
 		} else {
-			include_once FRONTEND_REQUEST . "core/data/session.php";
+			include_once "core/data/session.php";
 			$backend->isAuthenticated();
 		}
 		

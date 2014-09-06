@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "core/data/user.php";
-	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	include_once "core/data/user.php";
+	include_once "libraries/utilities/string_utility.php";
+	include_once "database/mysql_connector.php";
 
 	class AuthorizationDao {
 	
@@ -151,7 +151,7 @@
 			@param $user The user to persist
 		*/
 		private function persistUser($user) {
-			include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
+			include_once "libraries/utilities/string_utility.php";
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			

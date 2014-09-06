@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
-	require_once FRONTEND_REQUEST . "view/views/information_message.php";
-	require_once FRONTEND_REQUEST . "modules/templates/visuals/scope_selector.php";
+	require_once "database/dao/template_dao.php";
+	require_once "view/views/information_message.php";
+	require_once "modules/templates/visuals/scope_selector.php";
 
 	class TemplateList extends Visual {
 		

@@ -2,8 +2,8 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once FRONTEND_REQUEST . "pre_handlers/form.php";
-	require_once FRONTEND_REQUEST . "database/dao/image_dao.php";
+	require_once "pre_handlers/form.php";
+	require_once "database/dao/image_dao.php";
 	
 	class LabelForm extends Form {
 	

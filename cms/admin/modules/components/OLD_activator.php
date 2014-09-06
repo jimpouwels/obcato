@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/renderers/main_renderer.php";
+	include_once "libraries/renderers/main_renderer.php";
 ?>
 
 <div class="module_header_wrapper">

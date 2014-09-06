@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "view/views/information_message.php";
-	require_once FRONTEND_REQUEST . "view/views/object_picker.php";
+	require_once "view/views/information_message.php";
+	require_once "view/views/object_picker.php";
 	
 	class LinkEditor extends Visual {
 	

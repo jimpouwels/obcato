@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "core/data/settings.php";
-	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
-	require_once FRONTEND_REQUEST . "view/views/warning_message.php";
-	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
-	require_once FRONTEND_REQUEST . "modules/settings/visuals/settings_editor.php";
-	require_once FRONTEND_REQUEST . "modules/settings/settings_pre_handler.php";
+	require_once "core/data/settings.php";
+	require_once "view/views/module_visual.php";
+	require_once "view/views/warning_message.php";
+	require_once "database/dao/settings_dao.php";
+	require_once "modules/settings/visuals/settings_editor.php";
+	require_once "modules/settings/settings_pre_handler.php";
 
 	class SettingsModuleVisual extends ModuleVisual {
 	

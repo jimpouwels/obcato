@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "database/dao/link_dao.php";
+	include_once "database/mysql_connector.php";
+	include_once "database/dao/link_dao.php";
 	
 	class LinkUtility {
 		
@@ -58,13 +58,13 @@
 			$target_element_holder_type = $target_element_holder->getType();
 			switch ($target_element_holder_type) {
 				case 'ELEMENT_HOLDER_PAGE':
-					include_once FRONTEND_REQUEST . 'database/dao/page_dao.php';
+					include_once 'database/dao/page_dao.php';
 					$page_dao = PageDao::getInstance();
 					$target_page = $page_dao->getPage($target_element_holder->getId());
 					return $target_page->getFrontendUrl();
 					break;
 				case 'ELEMENT_HOLDER_ARTICLE':
-					include_once FRONTEND_REQUEST . 'database/dao/article_dao.php';
+					include_once 'database/dao/article_dao.php';
 					$article_dao = ArticleDao::getInstance();
 					$target_article = $article_dao->getArticle($target_element_holder->getId());
 					

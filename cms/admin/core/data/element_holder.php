@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "core/data/presentable.php";
-	require_once FRONTEND_REQUEST . "database/dao/element_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/link_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
+	require_once "core/data/presentable.php";
+	require_once "database/dao/element_dao.php";
+	require_once "database/dao/link_dao.php";
+	require_once "database/dao/authorization_dao.php";
 
 	class ElementHolder extends Presentable {
 		

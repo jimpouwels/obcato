@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "pre_handlers/pre_handler.php";
-	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
+	require_once "pre_handlers/pre_handler.php";
+	require_once "database/dao/settings_dao.php";
 	
 	class StaticsRequestHandler extends PreHandler {
 		

@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "core/data/entity.php";
-	include_once FRONTEND_REQUEST . "database/dao/guestbook_dao.php";
+	include_once "core/data/entity.php";
+	include_once "database/dao/guestbook_dao.php";
 
 	class GuestBookMessage extends Entity {
 	

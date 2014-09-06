@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/views/module_visual.php";
-	require_once FRONTEND_REQUEST . "modules/database/database_pre_handler.php";
-	require_once FRONTEND_REQUEST . "modules/database/visuals/configuration.php";
-	require_once FRONTEND_REQUEST . "modules/database/visuals/tables.php";
-	require_once FRONTEND_REQUEST . "modules/database/visuals/queries.php";
-	require_once FRONTEND_REQUEST . "view/views/tab_menu.php";
+	require_once "view/views/module_visual.php";
+	require_once "modules/database/database_pre_handler.php";
+	require_once "modules/database/visuals/configuration.php";
+	require_once "modules/database/visuals/tables.php";
+	require_once "modules/database/visuals/queries.php";
+	require_once "view/views/tab_menu.php";
 
 	class DatabaseModuleVisual extends ModuleVisual {
 	

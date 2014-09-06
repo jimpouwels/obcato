@@ -3,16 +3,16 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/component.php";
-	include_once FRONTEND_REQUEST . "core/data/module.php";
-	include_once FRONTEND_REQUEST . "core/data/element_type.php";
-	include_once FRONTEND_REQUEST . "libraries/validators/component_validator.php";
-	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
-	include_once FRONTEND_REQUEST . "libraries/utilities/file_utility.php";
-	include_once FRONTEND_REQUEST . "core/exceptions/component_properties_exception.php";
-	include_once FRONTEND_REQUEST . "core/exceptions/component_descriptor_exception.php";
-	include_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
-	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+	include_once "core/data/component.php";
+	include_once "core/data/module.php";
+	include_once "core/data/element_type.php";
+	include_once "libraries/validators/component_validator.php";
+	include_once "libraries/utilities/string_utility.php";
+	include_once "libraries/utilities/file_utility.php";
+	include_once "core/exceptions/component_properties_exception.php";
+	include_once "core/exceptions/component_descriptor_exception.php";
+	include_once "database/dao/scope_dao.php";
+	include_once "database/dao/element_dao.php";
 	
 	class ComponentService {
 	

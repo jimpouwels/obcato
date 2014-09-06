@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "core/data/element_holder.php";
-	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
+	require_once "core/data/element_holder.php";
+	require_once "database/dao/block_dao.php";
+	require_once "database/dao/page_dao.php";
 
 	class Page extends ElementHolder {
 	
@@ -32,7 +32,7 @@
 				$text = nl2br($text);
 				
 				// replace link codes with HTML anchors
-				include_once FRONTEND_REQUEST . "libraries/utilities/link_utility.php";
+				include_once "libraries/utilities/link_utility.php";
 				$text = LinkUtility::createLinksInString($text, $this);
 			}
 			return $text;

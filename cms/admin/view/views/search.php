@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/views/element_holder_search.php";
-	require_once FRONTEND_REQUEST . "view/views/image_search_box.php";
+	require_once "view/views/element_holder_search.php";
+	require_once "view/views/image_search_box.php";
 	
 	class Search extends Visual {
 		

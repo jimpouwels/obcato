@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "core/data/element.php";
-	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "database/dao/article_dao.php";
-	require_once FRONTEND_REQUEST . "elements/article_overview_element/visuals/article_overview_element_statics.php";
-	require_once FRONTEND_REQUEST . "elements/article_overview_element/visuals/article_overview_element_form.php";
+	require_once "core/data/element.php";
+	require_once "database/mysql_connector.php";
+	require_once "database/dao/article_dao.php";
+	require_once "elements/article_overview_element/visuals/article_overview_element_statics.php";
+	require_once "elements/article_overview_element/visuals/article_overview_element_form.php";
 
 	class ArticleOverviewElement extends Element {
 	
@@ -113,8 +113,8 @@
 		}
 		
 		public function getArticles() {
-			include_once FRONTEND_REQUEST . "database/dao/article_dao.php";
-			include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
+			include_once "database/dao/article_dao.php";
+			include_once "libraries/utilities/date_utility.php";
 			$article_dao = ArticleDao::getInstance();
 			
 			$_show_to = NULL;

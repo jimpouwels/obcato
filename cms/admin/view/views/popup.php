@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "view/views/search.php";
+	require_once "view/views/search.php";
 	
 	class Popup extends Visual {
 		

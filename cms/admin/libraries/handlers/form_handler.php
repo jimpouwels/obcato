@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
+	include_once "libraries/utilities/string_utility.php";
 	
 	class FormHandler {
 		

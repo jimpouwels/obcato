@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/views/visual.php";
-	require_once FRONTEND_REQUEST . "view/views/form_template_picker.php";
+	require_once "view/views/visual.php";
+	require_once "view/views/form_template_picker.php";
 	
 	abstract class ElementVisual extends Visual {
 	

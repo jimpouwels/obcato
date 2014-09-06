@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/handlers/form_handler.php";
+	include_once "libraries/handlers/form_handler.php";
 	
 	class FormValidator {
 		

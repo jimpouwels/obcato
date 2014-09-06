@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "libraries/utilities/date_utility.php";
-	include_once FRONTEND_REQUEST . "libraries/utilities/string_utility.php";
+	include_once "libraries/utilities/date_utility.php";
+	include_once "libraries/utilities/string_utility.php";
 	
 ?>
 
@@ -87,7 +87,7 @@
 			<br />
 		<?php else: ?>
 			<?php 
-				include_once FRONTEND_REQUEST . "libraries/renderers/main_renderer.php";
+				include_once "libraries/renderers/main_renderer.php";
 				
 				MainRenderer::renderInformationMessage("Er zijn nog geen berichten in dit gastenboek geplaatst.");
 			?>

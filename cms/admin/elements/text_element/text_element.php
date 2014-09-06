@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "core/data/element.php";
-	require_once FRONTEND_REQUEST . "elements/text_element/visuals/text_element_form.php";
-	require_once FRONTEND_REQUEST . "elements/text_element/visuals/text_element_statics.php";
-	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
+	require_once "core/data/element.php";
+	require_once "elements/text_element/visuals/text_element_form.php";
+	require_once "elements/text_element/visuals/text_element_statics.php";
+	require_once "database/mysql_connector.php";
 
 	class TextElement extends Element {
 	
@@ -25,7 +25,7 @@
 		}
 		
 		public function getTitle() {
-			include_once FRONTEND_REQUEST . "libraries/utilities/link_utility.php";
+			include_once "libraries/utilities/link_utility.php";
 			$title = $this->_title;
 			if (FRONTEND_REQUEST != '') {
 				$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
@@ -38,7 +38,7 @@
 		}
 		
 		public function getText() {
-			include_once FRONTEND_REQUEST . "libraries/utilities/link_utility.php";
+			include_once "libraries/utilities/link_utility.php";
 			$text = $this->_text;
 			if (FRONTEND_REQUEST != '') {
 				// replace newlines with HTML breaks

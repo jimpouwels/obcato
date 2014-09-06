@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "database/dao/database_dao.php";
+	require_once "database/mysql_connector.php";
+	require_once "database/dao/database_dao.php";
 	
 	class Tables extends Visual {
 	

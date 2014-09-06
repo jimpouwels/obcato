@@ -2,9 +2,9 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once FRONTEND_REQUEST . "pre_handlers/form.php";
-	require_once FRONTEND_REQUEST . "database/dao/template_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
+	require_once "pre_handlers/form.php";
+	require_once "database/dao/template_dao.php";
+	require_once "database/dao/settings_dao.php";
 	
 	class TemplateForm extends Form {
 	

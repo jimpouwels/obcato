@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/entity.php";
+	include_once "core/data/entity.php";
 	
 	class User extends Entity {
 	

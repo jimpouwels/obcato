@@ -5,10 +5,10 @@
 	define("FRONTEND_REQUEST", '');
 	
 	// INCLUDE SYSTEM CONSTANTS
-	require_once FRONTEND_REQUEST . "constants.php";
-	require_once FRONTEND_REQUEST . "core/data/session.php";
-	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "backend.php";
+	require_once "constants.php";
+	require_once "core/data/session.php";
+	require_once "database/mysql_connector.php";
+	require_once "backend.php";
 	
 	// AUTHENTICATE
 	$backend = new Backend("site_administrator");

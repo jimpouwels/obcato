@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
-	include_once FRONTEND_REQUEST . "database/dao/element_holder_dao.php";
-	include_once FRONTEND_REQUEST . "database/dao/block_dao.php";
-	include_once FRONTEND_REQUEST . "database/dao/template_dao.php";
-	include_once FRONTEND_REQUEST . "core/data/page.php";
-	include_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
+	include_once "database/mysql_connector.php";
+	include_once "database/dao/element_dao.php";
+	include_once "database/dao/element_holder_dao.php";
+	include_once "database/dao/block_dao.php";
+	include_once "database/dao/template_dao.php";
+	include_once "core/data/page.php";
+	include_once "database/dao/authorization_dao.php";
 
 	class PageDao {
 

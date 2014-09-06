@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/presentable.php";
-	include_once FRONTEND_REQUEST . "database/dao/scope_dao.php";
+	include_once "core/data/presentable.php";
+	include_once "database/dao/scope_dao.php";
 
 	class ElementType extends Entity {
 	

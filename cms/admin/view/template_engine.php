@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	require_once FRONTEND_REQUEST . "view/smarty/Smarty.class.php";
+	require_once "view/smarty/Smarty.class.php";
 	
 	class TemplateEngine
 	{

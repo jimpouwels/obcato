@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "core/data/element_type.php";
-	include_once FRONTEND_REQUEST . "core/data/element.php";
+	include_once "database/mysql_connector.php";
+	include_once "core/data/element_type.php";
+	include_once "core/data/element.php";
 
 	class ElementDao {
 	
@@ -250,7 +250,7 @@
 			$element_ids = array();
 			$element_ids = explode(',', $element_order);
 			if (count($element_ids) > 0 && $element_ids[0] != '') {
-				include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
+				include_once "database/dao/element_dao.php";
 				
 				$element_dao = ElementDao::getInstance();
 				

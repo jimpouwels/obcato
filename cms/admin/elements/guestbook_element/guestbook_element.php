@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once FRONTEND_REQUEST . "core/data/element.php";
-	require_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	require_once FRONTEND_REQUEST . "database/dao/guestbook_dao.php";
-	require_once FRONTEND_REQUEST . "elements/guestbook_element/visuals/guestbook_element_statics.php";
-	require_once FRONTEND_REQUEST . "elements/guestbook_element/visuals/guestbook_element_form.php";
+	require_once "core/data/element.php";
+	require_once "database/mysql_connector.php";
+	require_once "database/dao/guestbook_dao.php";
+	require_once "elements/guestbook_element/visuals/guestbook_element_statics.php";
+	require_once "elements/guestbook_element/visuals/guestbook_element_form.php";
 
 	class GuestBookElement extends Element {
 	

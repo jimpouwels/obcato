@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "database/mysql_connector.php";
-	include_once FRONTEND_REQUEST . "core/data/scope.php";
+	include_once "database/mysql_connector.php";
+	include_once "core/data/scope.php";
 
 	/*
 		This class takes care of all persistance actions for a Template object.

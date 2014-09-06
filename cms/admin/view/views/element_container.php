@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once FRONTEND_REQUEST . "view/views/information_message.php";
+	require_once "view/views/information_message.php";
 	
 	class ElementContainer extends Visual {
 	

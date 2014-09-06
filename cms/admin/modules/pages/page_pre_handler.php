@@ -2,13 +2,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 		
-	require_once FRONTEND_REQUEST . "database/dao/page_dao.php";
-	require_once FRONTEND_REQUEST . "modules/pages/page_form.php";
-	require_once FRONTEND_REQUEST . "database/dao/block_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/element_dao.php";
-	require_once FRONTEND_REQUEST . "database/dao/authorization_dao.php";
-	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
-	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
+	require_once "database/dao/page_dao.php";
+	require_once "modules/pages/page_form.php";
+	require_once "database/dao/block_dao.php";
+	require_once "database/dao/element_dao.php";
+	require_once "database/dao/authorization_dao.php";
+	require_once "libraries/system/notifications.php";
+	require_once "view/request_handlers/module_request_handler.php";
 	
 	class PagePreHandler extends ModuleRequestHandler {
 	

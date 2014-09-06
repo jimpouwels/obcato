@@ -2,7 +2,7 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once FRONTEND_REQUEST . "pre_handlers/form.php";
+	require_once "pre_handlers/form.php";
 	
 	class SettingsForm extends Form {
 	

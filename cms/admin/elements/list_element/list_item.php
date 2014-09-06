@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once FRONTEND_REQUEST . "core/data/entity.php";
+	include_once "core/data/entity.php";
 
 	class ListItem extends Entity {
 			
@@ -16,7 +16,7 @@
 		}
 		
 		public function getText() {
-			include_once FRONTEND_REQUEST . "libraries/utilities/link_utility.php";
+			include_once "libraries/utilities/link_utility.php";
 			$text = $this->myText;
 			if (FRONTEND_REQUEST != '') {
 				$text = LinkUtility::createLinksInString($text, $this->getElement()->getElementHolder());
@@ -41,7 +41,7 @@
 		}
 		
 		public function getElement() {
-			include_once FRONTEND_REQUEST . "/dao/element_dao.php";
+			include_once "/dao/element_dao.php";
 			$element_dao = ElementDao::getInstance();
 			return $element_dao->getElement($this->myElementId);
 		}

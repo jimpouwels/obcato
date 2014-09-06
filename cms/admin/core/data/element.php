@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once FRONTEND_REQUEST . "core/data/presentable.php";
-	include_once FRONTEND_REQUEST . "database/dao/element_dao.php";
-	include_once FRONTEND_REQUEST . "database/dao/element_holder_dao.php";
+	include_once "core/data/presentable.php";
+	include_once "database/dao/element_dao.php";
+	include_once "database/dao/element_holder_dao.php";
 
 	abstract class Element extends Presentable {
 	

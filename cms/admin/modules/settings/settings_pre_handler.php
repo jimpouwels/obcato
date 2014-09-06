@@ -2,11 +2,11 @@
 	// No direct access
 	defined("_ACCESS") or die;
 	
-	require_once FRONTEND_REQUEST . "database/dao/settings_dao.php";
-	require_once FRONTEND_REQUEST . "view/request_handlers/module_request_handler.php";
-	require_once FRONTEND_REQUEST . "libraries/validators/form_validator.php";
-	require_once FRONTEND_REQUEST . "libraries/system/notifications.php";
-	require_once FRONTEND_REQUEST . "modules/settings/settings_form.php";
+	require_once "database/dao/settings_dao.php";
+	require_once "view/request_handlers/module_request_handler.php";
+	require_once "libraries/validators/form_validator.php";
+	require_once "libraries/system/notifications.php";
+	require_once "modules/settings/settings_form.php";
 
 	class SettingsPreHandler extends ModuleRequestHandler {
 	
