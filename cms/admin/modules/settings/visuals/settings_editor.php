@@ -40,7 +40,6 @@
 				$this->_template_engine->assign("current_homepage_title", $current_homepage->getTitle());
 			}
 			$this->_template_engine->assign("homepage_picker", $homepage_picker->render());
-			$this->_template_engine->assign("root_dir", $root_dir->render());
 			$this->_template_engine->assign("static_dir", $static_dir->render());
 			$this->_template_engine->assign("config_dir", $config_dir->render());
 			$this->_template_engine->assign("upload_dir", $upload_dir->render());

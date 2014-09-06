@@ -111,18 +111,6 @@ CREATE TABLE `articles` (
 --
 
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`) VALUES 
- (5,'',NULL,9,'2014-04-03 20:59:12',NULL),
- (7,'111',1,12,'2014-04-04 22:00:07',1),
- (8,NULL,NULL,14,'2014-04-13 17:04:39',NULL),
- (9,NULL,NULL,15,'2014-04-13 17:04:42',NULL),
- (10,NULL,NULL,16,'2014-04-13 17:04:44',NULL),
- (11,'',NULL,17,'2014-04-13 17:04:46',NULL),
- (12,NULL,NULL,18,'2014-04-13 17:04:49',NULL),
- (13,NULL,NULL,19,'2014-04-13 17:33:04',NULL),
- (14,NULL,NULL,20,'2014-04-13 17:33:07',NULL),
- (15,'',NULL,21,'2014-04-13 17:33:09',NULL),
- (16,NULL,NULL,22,'2014-04-13 17:33:11',NULL);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 
 
@@ -171,8 +159,6 @@ CREATE TABLE `articles_terms` (
 --
 
 /*!40000 ALTER TABLE `articles_terms` DISABLE KEYS */;
-INSERT INTO `articles_terms` (`id`,`article_id`,`term_id`) VALUES 
- (2,17,43);
 /*!40000 ALTER TABLE `articles_terms` ENABLE KEYS */;
 
 
@@ -297,18 +283,7 @@ CREATE TABLE `element_holders` (
 
 /*!40000 ALTER TABLE `element_holders` DISABLE KEYS */;
 INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (1,14,'Homepage',1,5,'2014-08-20 16:28:48',NULL,'ELEMENT_HOLDER_PAGE'),
- (9,NULL,'Nieuw artikelqqqqq',0,10,'2014-04-03 20:59:23',2,'ELEMENT_HOLDER_ARTICLE'),
- (12,NULL,'Nieuw artikel111',1,9,'2014-04-04 22:00:15',2,'ELEMENT_HOLDER_ARTICLE'),
- (14,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:39',2,'ELEMENT_HOLDER_ARTICLE'),
- (15,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:42',2,'ELEMENT_HOLDER_ARTICLE'),
- (16,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:44',2,'ELEMENT_HOLDER_ARTICLE'),
- (17,NULL,'bbbbbbbbbbbb111',0,9,'2014-07-11 16:25:57',2,'ELEMENT_HOLDER_ARTICLE'),
- (18,NULL,'Nieuw artikel',0,9,'2014-04-13 17:04:48',2,'ELEMENT_HOLDER_ARTICLE'),
- (19,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:04',2,'ELEMENT_HOLDER_ARTICLE'),
- (20,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:07',2,'ELEMENT_HOLDER_ARTICLE'),
- (21,NULL,'aaaaaaaaaaaaaaaaaa',0,9,'2014-04-13 20:00:11',2,'ELEMENT_HOLDER_ARTICLE'),
- (22,NULL,'Nieuw artikel',0,9,'2014-04-13 17:33:11',2,'ELEMENT_HOLDER_ARTICLE');
+ (1,14,'Homepage',1,5,'2014-08-20 16:28:48',NULL,'ELEMENT_HOLDER_PAGE');
 /*!40000 ALTER TABLE `element_holders` ENABLE KEYS */;
 
 
@@ -798,7 +773,7 @@ CREATE TABLE `settings` (
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
 INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`) VALUES 
- (1,'Test Website1','localhost','localhost','jim.pouwels@gmail.com','smtp.chello.nl','D:/Jim/websites/site_administrator/cms/templates/frontend','D:/Jim/websites/site_administrator/cms/static','D:/Jim/websites/site_administrator/cms/conf','D:/Jim/websites/site_administrator/cms/upload','0.0.4','D:/Jim/websites/site_administrator/cms/templates/backend','D:/Jim/websites/site_administrator/cms/templates/backend');
+ (1,'Nieuwe website','','','','','','','','','0.0.4','','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
