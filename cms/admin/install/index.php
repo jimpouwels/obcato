@@ -33,7 +33,7 @@
             }
         } else if (getStepFromPostRequest() == "2") {
             $mysql_connector = MySqlConnector::getInstance();
-            $mysql_connector->executeQuery("CREATE DATABASE [IF NOT EXISTS] " . DATABASE_NAME);
+            $mysql_connector->executeQuery("CREATE DATABASE IF NOT EXISTS " . DATABASE_NAME);
             $mysql_connector->executeSql(file_get_contents(getcwd() . "\\install\\install_script.sql"));
             header("Location: /admin/index.php?mode=install&step=3");
         } else if (getStepFromPostRequest() == "3") {
