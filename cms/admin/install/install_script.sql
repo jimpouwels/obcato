@@ -76,18 +76,6 @@ CREATE TABLE `article_terms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `article_terms`
---
-
-/*!40000 ALTER TABLE `article_terms` DISABLE KEYS */;
-INSERT INTO `article_terms` (`id`,`name`) VALUES 
- (2,'test'),
- (43,'Nieuwe term'),
- (44,'Nieuwe term1');
-/*!40000 ALTER TABLE `article_terms` ENABLE KEYS */;
-
-
---
 -- Definition of table `articles`
 --
 
