@@ -74,7 +74,22 @@
     }
 
     function deleteInstallationFiles() {
-        
+        $full_path = getcwd();
+        deleteFolder($full_path . "/install");
+        deleteFile($full_path . "/static/css/install.css");
+        deleteFile($full_path . "/static/js/install.js");
+    }
+
+    function deleteFolder($dir) {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? deleteFolder("$dir/$file") : deleteFile("$dir/$file");
+        }
+        return rmdir($dir);
+    }
+
+    function deleteFile($path) {
+        unlink($path);
     }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
