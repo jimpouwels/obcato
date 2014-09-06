@@ -14,6 +14,7 @@
 		private $_backend_hostname;
 		private $_email_address;
 		private $_smtp_host;
+        private $_root_dir;
 		private $_frontend_template_dir;
 		private $_static_dir;
 		private $_config_dir;
@@ -61,6 +62,10 @@
 		public function getSmtpHost() {
 			return $this->_smtp_host;
 		}
+
+        public function getRootDir() {
+            return $this->_root_dir;
+        }
 				
 		public function setRootDir($root_dir) {
 			$this->_root_dir = $root_dir;
@@ -143,18 +148,6 @@
 		public function persist() {
 		}
 		
-		public function update() {
-			$mysql_database = MysqlConnector::getInstance();
-			$query = "UPDATE settings SET website_title = '" . $this->getWebsiteTitle() . "', backend_hostname = '" . 
-					 $this->getBackEndHostname() . "', frontend_hostname = '" . $this->getFrontEndHostname() . "',
-					 smtp_host = '" . $this->getSmtpHost() . "', email_address = '" . $this->getEmailAddress() . "',
-					 frontend_template_dir = '" . $this->getFrontendTemplateDir() . "',
-					 static_files_dir = '" . $this->getStaticDir() . "', config_dir = '" . $this->getConfigDir() . "',
-					 upload_dir = '" . $this->getUploadDir() . "', database_version = '" . $this->getDatabaseVersion() . "',
-					 component_dir = '" . $this->getComponentDir() . "', backend_template_dir = '" . $this->getBackendTemplateDir() . "'";
-			$mysql_database->executeQuery($query);
-		}
-		
 		public static function find() {
 			$mysql_database = MysqlConnector::getInstance(); 
 			$query = "SELECT * FROM settings";
@@ -174,6 +167,7 @@
 			$settings->setBackEndHostname($record['backend_hostname']);
 			$settings->setEmailAddress($record['email_address']);
 			$settings->setSmtpHost($record['smtp_host']);
+            $settings->setRootDir($record['root_dir']);
 			$settings->setFrontendTemplateDir($record['frontend_template_dir']);
 			$settings->setStaticDir($record['static_files_dir']);
 			$settings->setConfigDir($record['config_dir']);

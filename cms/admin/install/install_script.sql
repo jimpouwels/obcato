@@ -76,6 +76,14 @@ CREATE TABLE `article_terms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `article_terms`
+--
+
+/*!40000 ALTER TABLE `article_terms` DISABLE KEYS */;
+/*!40000 ALTER TABLE `article_terms` ENABLE KEYS */;
+
+
+--
 -- Definition of table `articles`
 --
 
@@ -99,6 +107,8 @@ CREATE TABLE `articles` (
 --
 
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
+INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`) VALUES 
+ (1,'',NULL,2,'2014-09-06 13:40:37',NULL);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 
 
@@ -271,7 +281,8 @@ CREATE TABLE `element_holders` (
 
 /*!40000 ALTER TABLE `element_holders` DISABLE KEYS */;
 INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (1,14,'Homepage',1,5,'2014-08-20 16:28:48',NULL,'ELEMENT_HOLDER_PAGE');
+ (1,14,'Homepage',1,5,'2014-08-20 16:28:48',NULL,'ELEMENT_HOLDER_PAGE'),
+ (2,NULL,'Nieuw artikel',0,9,'2014-09-06 13:40:37',2,'ELEMENT_HOLDER_ARTICLE');
 /*!40000 ALTER TABLE `element_holders` ENABLE KEYS */;
 
 
@@ -329,6 +340,9 @@ CREATE TABLE `elements` (
 --
 
 /*!40000 ALTER TABLE `elements` DISABLE KEYS */;
+INSERT INTO `elements` (`id`,`follow_up`,`type_id`,`element_holder_id`,`template_id`) VALUES 
+ (1,1,1,2,0),
+ (2,0,1,2,0);
 /*!40000 ALTER TABLE `elements` ENABLE KEYS */;
 
 
@@ -752,6 +766,7 @@ CREATE TABLE `settings` (
   `database_version` varchar(45) NOT NULL,
   `component_dir` varchar(255) default NULL,
   `backend_template_dir` varchar(255) default NULL,
+  `root_dir` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -760,8 +775,8 @@ CREATE TABLE `settings` (
 --
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`) VALUES 
- (1,'Nieuwe website','','','','','','','','','0.0.4','','');
+INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`,`root_dir`) VALUES 
+ (1,'Nieuwe website','localhost','localhost','','','','','','','0.0.4','','','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
@@ -806,6 +821,9 @@ CREATE TABLE `text_elements_metadata` (
 --
 
 /*!40000 ALTER TABLE `text_elements_metadata` DISABLE KEYS */;
+INSERT INTO `text_elements_metadata` (`id`,`title`,`text`,`element_id`) VALUES 
+ (1,'dvdvdvvd','kojoij',1),
+ (2,'oiijo','ooiuh',2);
 /*!40000 ALTER TABLE `text_elements_metadata` ENABLE KEYS */;
 
 

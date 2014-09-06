@@ -22,6 +22,7 @@
 			$website_title = new TextField("website_title", "Website titel", $this->_settings->getWebsiteTitle(), true, false, null);
 			$email_field = new TextField("email_address", "Email adres", $this->_settings->getEmailAddress(), false, false, null);
 			$homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "Selecteer pagina", "apply_settings", "pick_homepage");
+            $root_dir = new TextField("root_dir", "Root directory", $this->_settings->getRootDir(), true, false, null);
 			$static_dir = new TextField("static_dir", "Static directory", $this->_settings->getStaticDir(), true, false, null);
 			$config_dir = new TextField("config_dir", "Configuration directory", $this->_settings->getConfigDir(), true, false, null);
 			$upload_dir = new TextField("upload_dir", "Upload directory", $this->_settings->getUploadDir(), true, false, null);
@@ -40,6 +41,7 @@
 				$this->_template_engine->assign("current_homepage_title", $current_homepage->getTitle());
 			}
 			$this->_template_engine->assign("homepage_picker", $homepage_picker->render());
+            $this->_template_engine->assign("root_dir", $root_dir->render());
 			$this->_template_engine->assign("static_dir", $static_dir->render());
 			$this->_template_engine->assign("config_dir", $config_dir->render());
 			$this->_template_engine->assign("upload_dir", $upload_dir->render());

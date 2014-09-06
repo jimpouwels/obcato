@@ -168,6 +168,10 @@
                                 Huidige map: <?= dirname(__FILE__) ?>
                             </li>
                             <li>
+                                <label class="admin_label" for="root_dir">CMS root map</label>
+                                <input type="text"  value="<?= isset($form) ? $form->getRootDir() : "" ?>" id="root_dir" name="root_dir" class="admin_field">
+                            </li>
+                            <li>
                                 <label class="admin_label" for="frontend_template_dir">Frontend templates map</label>
                                 <input type="text"  value="<?= isset($form) ? $form->getFrontendTemplatesDir() : "" ?>" id="frontend_template_dir" name="frontend_template_dir" class="admin_field">
                             </li>
