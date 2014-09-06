@@ -3,15 +3,15 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/tab_menu.php";
-	require_once "view/views/module_visual.php";
-	require_once "database/dao/article_dao.php";
-	require_once "modules/articles/visuals/articles/articles_tab.php";
-	require_once "modules/articles/visuals/terms/terms_tab.php";
-	require_once "modules/articles/visuals/target_pages/target_pages_tab.php";
-	require_once "modules/articles/article_pre_handler.php";
-	require_once "modules/articles/term_pre_handler.php";
-	require_once "modules/articles/target_pages_pre_handler.php";
+	require_once CMS_ROOT . "view/views/tab_menu.php";
+	require_once CMS_ROOT . "view/views/module_visual.php";
+	require_once CMS_ROOT . "database/dao/article_dao.php";
+	require_once CMS_ROOT . "modules/articles/visuals/articles/articles_tab.php";
+	require_once CMS_ROOT . "modules/articles/visuals/terms/terms_tab.php";
+	require_once CMS_ROOT . "modules/articles/visuals/target_pages/target_pages_tab.php";
+	require_once CMS_ROOT . "modules/articles/article_pre_handler.php";
+	require_once CMS_ROOT . "modules/articles/term_pre_handler.php";
+	require_once CMS_ROOT . "modules/articles/target_pages_pre_handler.php";
 
 	class ArticleModuleVisual extends ModuleVisual {
 	

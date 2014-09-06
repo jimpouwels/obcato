@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "database/mysql_connector.php";
-	include_once "database/dao/authorization_dao.php";
-	include_once "core/data/guestbook.php";
-	include_once "core/data/guestbook_message.php";
-	include_once "libraries/utilities/string_utility.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "database/dao/authorization_dao.php";
+	include_once CMS_ROOT . "core/data/guestbook.php";
+	include_once CMS_ROOT . "core/data/guestbook_message.php";
+	include_once CMS_ROOT . "libraries/utilities/string_utility.php";
 
 	/*
 		This class takes care of all persistance actions for a Template object.

@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "libraries/utilities/string_utility.php";
-	require_once "database/dao/authorization_dao.php";
+	require_once CMS_ROOT . "libraries/utilities/string_utility.php";
+	require_once CMS_ROOT . "database/dao/authorization_dao.php";
 
 	class Session {
 	

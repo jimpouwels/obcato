@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/data/entity.php";
-	require_once "database/mysql_connector.php";
-	require_once "database/dao/page_dao.php";
+	require_once CMS_ROOT . "core/data/entity.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+	require_once CMS_ROOT . "database/dao/page_dao.php";
 
 	class Settings extends Entity {
 		

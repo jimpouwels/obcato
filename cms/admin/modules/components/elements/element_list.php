@@ -2,7 +2,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "services/url_service.php";
+	include_once CMS_ROOT . "services/url_service.php";
 	
 	$url_service = UrlService::getInstance();
 	
@@ -32,7 +32,7 @@
 				</ul>
 				<?php else: ?>
 				<?php 
-					include_once "libraries/renderers/main_renderer.php";
+					include_once CMS_ROOT . "libraries/renderers/main_renderer.php";
 					MainRenderer::renderInformationMessage("Geen elementen gevonden.");
 				?>
 				<?php endif; ?>
@@ -59,7 +59,7 @@
 			</ul>
 			<?php else: ?>
 			<?php 
-				include_once "libraries/renderers/main_renderer.php";
+				include_once CMS_ROOT . "libraries/renderers/main_renderer.php";
 				MainRenderer::renderInformationMessage("Geen elementen gevonden.");
 			?>
 			<?php endif; ?>

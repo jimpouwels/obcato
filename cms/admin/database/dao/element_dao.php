@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "database/mysql_connector.php";
-	include_once "core/data/element_type.php";
-	include_once "core/data/element.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "core/data/element_type.php";
+	include_once CMS_ROOT . "core/data/element.php";
 
 	class ElementDao {
 	
@@ -207,7 +207,7 @@
 			if (!$element_type->getSystemDefault()) {
 				$element_location_base = COMPONENT_DIR . "/";
 			}
-			include_once $element_location_base . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
+			include_once CMS_ROOT . $element_location_base . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
 			$element_classname = $element_type->getClassName();
 			$new_element = new $element_classname;
 	
@@ -250,7 +250,7 @@
 			$element_ids = array();
 			$element_ids = explode(',', $element_order);
 			if (count($element_ids) > 0 && $element_ids[0] != '') {
-				include_once "database/dao/element_dao.php";
+				include_once CMS_ROOT . "database/dao/element_dao.php";
 				
 				$element_dao = ElementDao::getInstance();
 				

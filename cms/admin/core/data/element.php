@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "core/data/presentable.php";
-	include_once "database/dao/element_dao.php";
-	include_once "database/dao/element_holder_dao.php";
+	include_once CMS_ROOT . "core/data/presentable.php";
+	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "database/dao/element_holder_dao.php";
 
 	abstract class Element extends Presentable {
 	
@@ -47,12 +47,12 @@
 			$element_dao = ElementDao::getInstance();
 			$element_type = $element_dao->getElementTypeForElement($record['id']);
 			if ($element_type->getSystemDefault()) {
-				$element_location_base = FRONTEND_REQUEST;
+				$element_location_base = CMS_ROOT;
 			} else {
 				$element_location_base = COMPONENT_DIR . "/";
 			}
 			
-			include_once $element_location_base . 'elements/' . $record['identifier'] . '/' . $record['domain_object'];
+			include_once CMS_ROOT . $element_location_base . 'elements/' . $record['identifier'] . '/' . $record['domain_object'];
 			
 			// first get the element type
 			$element_type = $record['classname'];

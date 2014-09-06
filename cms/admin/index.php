@@ -13,10 +13,10 @@
     }
 
     function runBackend() {
-        require_once "database_config.php";
-        require_once "includes.php";
-        require_once "constants.php";
-        require_once "backend.php";
+        require_once CMS_ROOT . "database_config.php";
+        require_once CMS_ROOT . "includes.php";
+        require_once CMS_ROOT . "constants.php";
+        require_once CMS_ROOT . "backend.php";
         $backend = new Backend("site_administrator");
         $backend->start();
     }

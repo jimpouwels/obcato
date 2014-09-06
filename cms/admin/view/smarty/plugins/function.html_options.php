@@ -35,7 +35,7 @@
  */
 function smarty_function_html_options($params, $template)
 {
-    require_once(SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php');
+    require_once CMS_ROOT .(SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php');
 
     $name = null;
     $values = null;

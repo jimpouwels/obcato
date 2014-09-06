@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "view/views/page_picker.php";
-	require_once "database/dao/article_dao.php";
+	require_once CMS_ROOT . "view/views/page_picker.php";
+	require_once CMS_ROOT . "database/dao/article_dao.php";
 	
 	class TargetPagesTab extends Visual {
 	

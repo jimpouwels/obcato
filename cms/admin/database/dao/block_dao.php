@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "database/mysql_connector.php";
-	include_once "database/dao/element_dao.php";
-	include_once "database/dao/template_dao.php";
-	include_once "core/data/block.php";
-	include_once "core/data/block_position.php";
-	include_once "database/dao/authorization_dao.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "database/dao/template_dao.php";
+	include_once CMS_ROOT . "core/data/block.php";
+	include_once CMS_ROOT . "core/data/block_position.php";
+	include_once CMS_ROOT . "database/dao/authorization_dao.php";
 
 	class BlockDao {
 	
@@ -113,7 +113,7 @@
 					 " AND bps.name = '" . $position_name . "'" . 
 					 " AND b.position_id = bps.id";
 			
-			if (FRONTEND_REQUEST != "") {
+			if (CMS_ROOT != "") {
 				$query = $query . " AND e.published = 1";
 			}
 			

@@ -1,16 +1,16 @@
 <?php
 	define("_ACCESS", "GRANTED");
-    define("FRONTEND_REQUEST", '');
+    define("CMS_ROOT", '');
 
     if (!file_exists("database_config.php"))
         header("Location: /admin/index.php");
 
 
-    require_once "database_config.php";
-	require_once "constants.php";
-	require_once "includes.php";
-	require_once 'core/data/session.php';
-	require_once "libraries/utilities/string_utility.php";
+    require_once CMS_ROOT . "database_config.php";
+	require_once CMS_ROOT . "constants.php";
+	require_once CMS_ROOT . "includes.php";
+	require_once CMS_ROOT . 'core/data/session.php';
+	require_once CMS_ROOT . "libraries/utilities/string_utility.php";
 	
 	$errors = array();
 

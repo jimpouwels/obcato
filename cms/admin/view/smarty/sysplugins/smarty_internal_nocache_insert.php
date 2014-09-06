@@ -33,7 +33,7 @@ class Smarty_Internal_Nocache_Insert {
         if ($_script != 'null') {
             // script which must be included
             // code for script file loading
-            $_output .= "require_once '{$_script}';";
+            $_output .= "require_once CMS_ROOT . '{$_script}';";
         }
         // call insert
         if (isset($_assign)) {

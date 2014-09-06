@@ -1,15 +1,15 @@
 <?php
 	
 	define("_ACCESS", "GRANTED");
-	define("FRONTEND_REQUEST", '');
+    define("CMS_ROOT", '');
 
-    require_once "database_config.php";
-	require_once "constants.php";
-	require_once "backend.php";
+    require_once CMS_ROOT . "database_config.php";
+	require_once CMS_ROOT . "constants.php";
+	require_once CMS_ROOT . "backend.php";
 	
 	$backend = new Backend("site_administrator");
 	
-	include_once "database/dao/image_dao.php";
+	include_once CMS_ROOT . "database/dao/image_dao.php";
 	
 	$upload_dir = Settings::find()->getUploadDir();
 	
@@ -21,7 +21,7 @@
 		if ($image->isPublished()) {
 			$render_image = true;
 		} else {
-			include_once "core/data/session.php";
+			include_once CMS_ROOT . "core/data/session.php";
 			$backend->isAuthenticated();
 		}
 		

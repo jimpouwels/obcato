@@ -3,14 +3,14 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
-	require_once "modules/images/visuals/import/import_tab.php";
-	require_once "modules/images/visuals/images/images_tab.php";
-	require_once "modules/images/visuals/labels/labels_tab.php";
-	require_once "view/views/tab_menu.php";
-	require_once "modules/images/image_pre_handler.php";
-	require_once "modules/images/label_pre_handler.php";
-	require_once "modules/images/import_pre_handler.php";
+	require_once CMS_ROOT . "view/views/module_visual.php";
+	require_once CMS_ROOT . "modules/images/visuals/import/import_tab.php";
+	require_once CMS_ROOT . "modules/images/visuals/images/images_tab.php";
+	require_once CMS_ROOT . "modules/images/visuals/labels/labels_tab.php";
+	require_once CMS_ROOT . "view/views/tab_menu.php";
+	require_once CMS_ROOT . "modules/images/image_pre_handler.php";
+	require_once CMS_ROOT . "modules/images/label_pre_handler.php";
+	require_once CMS_ROOT . "modules/images/import_pre_handler.php";
 
 	class ImageModuleVisual extends ModuleVisual {
 	

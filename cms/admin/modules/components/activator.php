@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/module_visual.php";
+	require_once CMS_ROOT . "view/views/module_visual.php";
 
 	class ComponentModuleVisual extends ModuleVisual {
 		private $_component_module;

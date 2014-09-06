@@ -95,8 +95,8 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
                 $compiler->trigger_template_error("{insert} missing script file '{$_script}'", $compiler->lex->taglineno);
             }
             // code for script file loading
-            $_output .= "require_once '{$_filepath}' ;";
-            require_once $_filepath;
+            $_output .= "require_once CMS_ROOT . '{$_filepath}' ;";
+            require_once CMS_ROOT . $_filepath;
             if (!is_callable($_function)) {
                 $compiler->trigger_template_error(" {insert} function '{$_function}' is not callable in script file '{$_script}'", $compiler->lex->taglineno);
             }

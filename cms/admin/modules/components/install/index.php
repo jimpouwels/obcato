@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/renderers/form_renderer.php";
-	include_once "libraries/renderers/main_renderer.php";
+	include_once CMS_ROOT . "libraries/renderers/form_renderer.php";
+	include_once CMS_ROOT . "libraries/renderers/main_renderer.php";
 	
 	global $install_errors;
 ?>

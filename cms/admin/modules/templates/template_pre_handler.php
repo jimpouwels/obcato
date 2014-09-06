@@ -2,15 +2,15 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "database/dao/template_dao.php";
-	require_once "database/dao/scope_dao.php";
-	require_once "database/dao/settings_dao.php";
-	require_once "libraries/validators/form_validator.php";
-	require_once "libraries/handlers/form_handler.php";
-	require_once "libraries/system/notifications.php";
-	require_once "view/request_handlers/module_request_handler.php";
-	require_once "libraries/system/notifications.php";
-	require_once "modules/templates/template_form.php";
+	require_once CMS_ROOT . "database/dao/template_dao.php";
+	require_once CMS_ROOT . "database/dao/scope_dao.php";
+	require_once CMS_ROOT . "database/dao/settings_dao.php";
+	require_once CMS_ROOT . "libraries/validators/form_validator.php";
+	require_once CMS_ROOT . "libraries/handlers/form_handler.php";
+	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "view/request_handlers/module_request_handler.php";
+	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "modules/templates/template_form.php";
 	
 	class TemplatePreHandler extends ModuleRequestHandler {
 	

@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "view/views/search.php";
-	require_once "view/views/information_message.php";
-	require_once "database/dao/image_dao.php";
+	require_once CMS_ROOT . "view/views/search.php";
+	require_once CMS_ROOT . "view/views/information_message.php";
+	require_once CMS_ROOT . "database/dao/image_dao.php";
 	
 	class ImageSearchBox extends Visual {
 		

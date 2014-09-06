@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "core/data/entity.php";
-	include_once "libraries/utilities/link_utility.php";
+	include_once CMS_ROOT . "core/data/entity.php";
+	include_once CMS_ROOT . "libraries/utilities/link_utility.php";
 
 	class Link extends Entity {
 		
@@ -93,7 +93,7 @@
 		}
 		
 		private function getElementHolder($element_holder_id) {
-			include_once 'database/dao/element_holder_dao.php';
+			include_once CMS_ROOT . 'database/dao/element_holder_dao.php';
 			$element_holder_dao = ElementHolderDao::getInstance();
 			$element_holder = $element_holder_dao->getElementHolder($element_holder_id);
 			return $element_holder;

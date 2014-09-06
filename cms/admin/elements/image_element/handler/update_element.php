@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "libraries/handlers/form_handler.php";
+	include_once CMS_ROOT . "libraries/handlers/form_handler.php";
 	
 	if (isset($_POST['action']) && $_POST['action'] == 'update_element_holder') {
-		include_once "libraries/utilities/string_utility.php";
+		include_once CMS_ROOT . "libraries/utilities/string_utility.php";
 		$element->setTitle(FormHandler::getFieldValue('element_' . $element->getId() . '_title'));
 		$element->setAlternativeText(FormHandler::getFieldValue('element_' . $element->getId() . '_alternative_text'));
 		$element->setAlign(FormHandler::getFieldValue('element_' . $element->getId() . '_align'));

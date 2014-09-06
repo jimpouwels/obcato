@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "database/mysql_connector.php";
-	include_once "core/data/link.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "core/data/link.php";
 
 	class LinkDao {
 	

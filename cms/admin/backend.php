@@ -3,14 +3,14 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "database/dao/settings_dao.php";
-	require_once "pre_handlers/link_pre_handler.php";
-	require_once "pre_handlers/element_pre_handler.php";
-	require_once "pre_handlers/module_pre_handler.php";
-	require_once "view/views/cms.php";
-	require_once "core/data/settings.php";
-	require_once "core/data/session.php";
-	require_once "view/views/popup.php";
+	require_once CMS_ROOT . "database/dao/settings_dao.php";
+	require_once CMS_ROOT . "pre_handlers/link_pre_handler.php";
+	require_once CMS_ROOT . "pre_handlers/element_pre_handler.php";
+	require_once CMS_ROOT . "pre_handlers/module_pre_handler.php";
+	require_once CMS_ROOT . "view/views/cms.php";
+	require_once CMS_ROOT . "core/data/settings.php";
+	require_once CMS_ROOT . "core/data/session.php";
+	require_once CMS_ROOT . "view/views/popup.php";
 	
 	class Backend {
 	
@@ -46,7 +46,7 @@
 		public function setCurrentModule($current_module) {
 			if (!is_null($current_module)) {
 				$this->_current_module = $current_module;
-				require_once "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
+				require_once CMS_ROOT . "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
 				$class = $this->_current_module->getClass();
 				$this->_module_visual = new $class($this->_current_module);
 			}

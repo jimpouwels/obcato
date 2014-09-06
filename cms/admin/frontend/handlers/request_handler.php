@@ -3,8 +3,8 @@
 	// No direct access
 	defined("_ACCESS") or die;
 	
-	require_once "core/data/settings.php";
-	require_once "database/dao/page_dao.php";
+	require_once CMS_ROOT . "core/data/settings.php";
+	require_once CMS_ROOT . "database/dao/page_dao.php";
 	
 	class RequestHandler {
 		
@@ -39,7 +39,7 @@
 		}
 		
 		private function getArticleFromRequest() {
-			include_once "database/dao/article_dao.php";
+			include_once CMS_ROOT . "database/dao/article_dao.php";
 			
 			$article_dao = ArticleDao::getInstance();
 			

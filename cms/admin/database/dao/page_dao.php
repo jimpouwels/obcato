@@ -3,13 +3,13 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "database/mysql_connector.php";
-	include_once "database/dao/element_dao.php";
-	include_once "database/dao/element_holder_dao.php";
-	include_once "database/dao/block_dao.php";
-	include_once "database/dao/template_dao.php";
-	include_once "core/data/page.php";
-	include_once "database/dao/authorization_dao.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "database/dao/element_holder_dao.php";
+	include_once CMS_ROOT . "database/dao/block_dao.php";
+	include_once CMS_ROOT . "database/dao/template_dao.php";
+	include_once CMS_ROOT . "core/data/page.php";
+	include_once CMS_ROOT . "database/dao/authorization_dao.php";
 
 	class PageDao {
 
@@ -37,7 +37,7 @@
 		public function getPage($id) {
 			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE e.id = " . $id . "
 					  AND e.id = p.element_holder_id";
-			if (FRONTEND_REQUEST != '') {
+			if (CMS_ROOT != '') {
 				$query = $query . " AND e.published = 1";
 			}
 			$result = $this->_mysql_connector->executeSelectQuery($query);
@@ -65,7 +65,7 @@
 		public function getSubPages($page) {
 			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE p.parent_id = " . $page->getId() . 
 					  " AND p.element_holder_id = e.id";
-			if (FRONTEND_REQUEST != '') {
+			if (CMS_ROOT != '') {
 				$query = $query . ' AND published = 1';
 			}
 			

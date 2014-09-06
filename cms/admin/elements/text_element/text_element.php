@@ -3,10 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "core/data/element.php";
-	require_once "elements/text_element/visuals/text_element_form.php";
-	require_once "elements/text_element/visuals/text_element_statics.php";
-	require_once "database/mysql_connector.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "elements/text_element/visuals/text_element_form.php";
+	require_once CMS_ROOT . "elements/text_element/visuals/text_element_statics.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
 
 	class TextElement extends Element {
 	
@@ -25,11 +25,11 @@
 		}
 		
 		public function getTitle() {
-			include_once "libraries/utilities/link_utility.php";
+			//include_once CMS_ROOT . "libraries/utilities/link_utility.php";
 			$title = $this->_title;
-			if (FRONTEND_REQUEST != '') {
-				$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
-			}
+			//if (CMS_ROOT != '') {
+			//	$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
+			//}
 			return $title;
 		}
 		
@@ -38,14 +38,14 @@
 		}
 		
 		public function getText() {
-			include_once "libraries/utilities/link_utility.php";
+			//include_once CMS_ROOT . "libraries/utilities/link_utility.php";
 			$text = $this->_text;
-			if (FRONTEND_REQUEST != '') {
-				// replace newlines with HTML breaks
-				$text = nl2br($text);
-				// replace link codes with actual links
-				$text = LinkUtility::createLinksInString($text, $this->getElementHolder());
-			}
+			//if (CMS_ROOT != '') {
+			//	// replace newlines with HTML breaks
+			//	$text = nl2br($text);
+			//	// replace link codes with actual links
+			//	$text = LinkUtility::createLinksInString($text, $this->getElementHolder());
+			//}
 			return $text;
 		}
 		

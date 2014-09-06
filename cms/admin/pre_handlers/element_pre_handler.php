@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "database/dao/element_holder_dao.php";
-	require_once "pre_handlers/pre_handler.php";
+	require_once CMS_ROOT . "database/dao/element_holder_dao.php";
+	require_once CMS_ROOT . "pre_handlers/pre_handler.php";
 	
 	class ElementPreHandler extends PreHandler {
 	
@@ -46,7 +46,7 @@
 						$element_type = $element->getType();
                         if ($element_type->getIdentifier() == 'text_element' ||
                             $element_type->getIdentifier() == 'list_element') {
-                            include_once $element_type->getRootDirectory() . "/" . $element_type->getIdentifier() . "_pre_handler.php";
+                            include_once CMS_ROOT . $element_type->getRootDirectory() . "/" . $element_type->getIdentifier() . "_pre_handler.php";
                             $pre_handler_class_name = $element_type->getClassName() . "PreHandler";
                             $element_pre_handler = new $pre_handler_class_name($element);
                             $element_pre_handler->handle();

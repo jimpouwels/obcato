@@ -3,12 +3,12 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	require_once "core/data/settings.php";
-	require_once "view/views/module_visual.php";
-	require_once "view/views/warning_message.php";
-	require_once "database/dao/settings_dao.php";
-	require_once "modules/settings/visuals/settings_editor.php";
-	require_once "modules/settings/settings_pre_handler.php";
+	require_once CMS_ROOT . "core/data/settings.php";
+	require_once CMS_ROOT . "view/views/module_visual.php";
+	require_once CMS_ROOT . "view/views/warning_message.php";
+	require_once CMS_ROOT . "database/dao/settings_dao.php";
+	require_once CMS_ROOT . "modules/settings/visuals/settings_editor.php";
+	require_once CMS_ROOT . "modules/settings/settings_pre_handler.php";
 
 	class SettingsModuleVisual extends ModuleVisual {
 	

@@ -2,8 +2,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once "database/dao/guestbook_dao.php";
-	include_once "libraries/renderers/form_renderer.php";
+	include_once CMS_ROOT . "database/dao/guestbook_dao.php";
+	include_once CMS_ROOT . "libraries/renderers/form_renderer.php";
 	
 	// get the current page
 	$guestbook_dao = GuestBookDao::getInstance();
@@ -50,8 +50,8 @@
 
 <?php
 	
-	include_once 'modules/' . $current_module->getIdentifier() . '/guestbook_list.php';
+	include_once CMS_ROOT . 'modules/' . $current_module->getIdentifier() . '/guestbook_list.php';
 
-	include_once 'modules/' . $current_module->getIdentifier() . '/guestbook_editor.php';
+	include_once CMS_ROOT . 'modules/' . $current_module->getIdentifier() . '/guestbook_editor.php';
 	
 ?>

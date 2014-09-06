@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "core/data/entity.php";
-	include_once "database/dao/guestbook_dao.php";
+	include_once CMS_ROOT . "core/data/entity.php";
+	include_once CMS_ROOT . "database/dao/guestbook_dao.php";
 
 	class GuestBookMessage extends Entity {
 	

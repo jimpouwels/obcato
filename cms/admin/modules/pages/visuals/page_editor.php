@@ -2,10 +2,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "view/views/form_template_picker.php";
-	require_once "view/views/element_container.php";
-	require_once "view/views/link_editor.php";
-	require_once "view/views/block_selector.php";
+	require_once CMS_ROOT . "view/views/form_template_picker.php";
+	require_once CMS_ROOT . "view/views/element_container.php";
+	require_once CMS_ROOT . "view/views/link_editor.php";
+	require_once CMS_ROOT . "view/views/block_selector.php";
 	
 	class PageEditor extends Visual {
 	

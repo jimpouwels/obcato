@@ -3,8 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once "core/data/element_holder.php";
-	include_once "database/dao/article_dao.php";
+	include_once CMS_ROOT . "core/data/element_holder.php";
+	include_once CMS_ROOT . "database/dao/article_dao.php";
 	
 	class Article extends ElementHolder {
 	
@@ -21,12 +21,12 @@
 		
 		public function getDescription() {
 			$description = $this->_description;
-			if (FRONTEND_REQUEST != '') {
-				include_once "libraries/utilities/link_utility.php";
-				// replace newlines with HTML breaks
-				$description = nl2br($description);
-				$description = LinkUtility::createLinksInString($description, $this);
-			}
+			//if (CMS_ROOT != '') {
+			//	include_once CMS_ROOT . "libraries/utilities/link_utility.php";
+			//	// replace newlines with HTML breaks
+			//	$description = nl2br($description);
+			//	$description = LinkUtility::createLinksInString($description, $this);
+			//}
 			return $description;
 		}
 		
@@ -45,7 +45,7 @@
 		public function getImage() {
 			$image = null;
 			if ($this->_image_id != '' && !is_null($this->_image_id)) {
-				include_once "database/dao/image_dao.php";
+				include_once CMS_ROOT . "database/dao/image_dao.php";
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
 			}
@@ -90,7 +90,7 @@
 					$target_page_id = $target_page->getId();
 				}
 			} elseif (is_null($target_page_id) || $target_page_id == "") {
-				include_once "/dao/settings_dao.php";
+				include_once CMS_ROOT . "/dao/settings_dao.php";
 				$target_page_id = SettingsDao::getInstance()->getHomepage()->getId();
 			}
 			return "/show.php?id=" . $target_page_id . "&amp;articleid=" . $this->getId();

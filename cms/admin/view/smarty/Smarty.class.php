@@ -92,13 +92,13 @@ if (SMARTY_SPL_AUTOLOAD && set_include_path(get_include_path() . PATH_SEPARATOR 
 /**
  * Load always needed external class files
  */
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_data.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_templatebase.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_template.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_resource.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_resource_file.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_cacheresource.php';
-include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_cacheresource_file.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_internal_data.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_internal_templatebase.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_internal_template.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_resource.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_internal_resource_file.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_cacheresource.php';
+include_once CMS_ROOT . SMARTY_SYSPLUGINS_DIR.'smarty_internal_cacheresource_file.php';
 
 /**
  * This is the main Smarty class
@@ -1273,7 +1273,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if (strtolower($_name_parts[1]) == 'internal') {
             $file = SMARTY_SYSPLUGINS_DIR . strtolower($plugin_name) . '.php';
             if (file_exists($file)) {
-                require_once($file);
+                require_once CMS_ROOT .($file);
                 return $file;
             } else {
                 return false;
@@ -1292,7 +1292,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             );
             foreach ($names as $file) {
                 if (file_exists($file)) {
-                    require_once($file);
+                    require_once CMS_ROOT .($file);
                     return $file;
                 }
                 if ($this->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir)) {
@@ -1304,7 +1304,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                     }
 
                     if ($file !== false) {
-                        require_once($file);
+                        require_once CMS_ROOT .($file);
                         return $file;
                     }
                 }

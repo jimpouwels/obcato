@@ -5,7 +5,7 @@
 	$modules = $module_dao->getDefaultModules();
 	$custom_modules = $module_dao->getCustomModules();
 	
-	include_once "modules/"  . $current_module->getIdentifier() . "/modules/functions.php";
+	include_once CMS_ROOT . "modules/"  . $current_module->getIdentifier() . "/modules/functions.php";
 ?>
 
 <div class="module_list">
@@ -16,7 +16,7 @@
 				if (!is_null($modules) && count($modules) > 0) {
 					renderModuleItems($modules);
 				} else {
-					include_once "libraries/renderers/main_renderer.php";
+					include_once CMS_ROOT . "libraries/renderers/main_renderer.php";
 					MainRenderer::renderInformationMessage("Geen modules gevonden.");
 				}
 			?>
@@ -29,7 +29,7 @@
 				if (!is_null($custom_modules) && count($custom_modules) > 0) {
 					renderModuleItems($custom_modules);
 				} else {
-					include_once "libraries/renderers/main_renderer.php";
+					include_once CMS_ROOT . "libraries/renderers/main_renderer.php";
 					MainRenderer::renderInformationMessage("Geen modules gevonden.");
 				}
 			?>

@@ -3,9 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "core/data/element_holder.php";
-	require_once "database/dao/block_dao.php";
-	require_once "database/dao/page_dao.php";
+	require_once CMS_ROOT . "core/data/element_holder.php";
+	require_once CMS_ROOT . "database/dao/block_dao.php";
+	require_once CMS_ROOT . "database/dao/page_dao.php";
 
 	class Page extends ElementHolder {
 	
@@ -27,14 +27,14 @@
 		
 		public function getDescription() {
 			$text = $this->_description;
-			if (defined(FRONTEND_REQUEST)) {
-				// replace newlines with HTML breaks
-				$text = nl2br($text);
+			//if (defined(FRONTEND_REQUEST)) {
+			//	// replace newlines with HTML breaks
+			//	$text = nl2br($text);
 				
 				// replace link codes with HTML anchors
-				include_once "libraries/utilities/link_utility.php";
-				$text = LinkUtility::createLinksInString($text, $this);
-			}
+			//	include_once CMS_ROOT . "libraries/utilities/link_utility.php";
+			//	$text = LinkUtility::createLinksInString($text, $this);
+			//}
 			return $text;
 		}
 		

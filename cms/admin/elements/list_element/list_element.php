@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "core/data/element.php";
-	require_once "database/mysql_connector.php";
-	require_once "elements/list_element/list_item.php";
-	require_once "elements/list_element/visuals/list_element_statics.php";
-	require_once "elements/list_element/visuals/list_element_form.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+	require_once CMS_ROOT . "elements/list_element/list_item.php";
+	require_once CMS_ROOT . "elements/list_element/visuals/list_element_statics.php";
+	require_once CMS_ROOT . "elements/list_element/visuals/list_element_form.php";
 
 	class ListElement extends Element {
 	
@@ -27,11 +27,11 @@
 		}
 		
 		public function getTitle() {
-			include_once "libraries/utilities/link_utility.php";
+			//include_once CMS_ROOT . "libraries/utilities/link_utility.php";
 			$title = $this->_title;
-			if (FRONTEND_REQUEST != '') {
-				$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
-			}
+			//if (CMS_ROOT != '') {
+			//	$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
+			//}
 			return $title;
 		}
 		

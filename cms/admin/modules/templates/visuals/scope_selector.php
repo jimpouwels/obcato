@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "database/dao/scope_dao.php";
+	require_once CMS_ROOT . "database/dao/scope_dao.php";
 
 	class ScopeSelector extends Visual {
 		

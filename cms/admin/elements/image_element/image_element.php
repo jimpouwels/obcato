@@ -3,11 +3,11 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once "core/data/element.php";
-	require_once "database/mysql_connector.php";
-	require_once "database/dao/image_dao.php";
-	require_once "elements/image_element/visuals/image_element_statics.php";
-	require_once "elements/image_element/visuals/image_element_form.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+	require_once CMS_ROOT . "database/dao/image_dao.php";
+	require_once CMS_ROOT . "elements/image_element/visuals/image_element_statics.php";
+	require_once CMS_ROOT . "elements/image_element/visuals/image_element_form.php";
 
 	class ImageElement extends Element {
 	
@@ -62,7 +62,7 @@
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
 				
-				if (FRONTEND_REQUEST != '' && $image->isPublished() != 1) {
+				if (CMS_ROOT != '' && $image->isPublished() != 1) {
 					$image = null;
 				}
 			}	
