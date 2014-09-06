@@ -2,10 +2,11 @@
 	
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
-	
-	require_once FRONTEND_REQUEST . "constants.php";
-	require_once FRONTEND_REQUEST . "backend.php";
-	require_once FRONTEND_REQUEST . "pre_handlers/statics_request_handler.php";
+
+    require_once "database_config.php";
+	require_once "constants.php";
+	require_once "backend.php";
+	require_once "pre_handlers/statics_request_handler.php";
 	
 	$backend = new Backend("site_administrator");
 	$backend->isAuthenticated();

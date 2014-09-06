@@ -2,9 +2,10 @@
 	
 	define("_ACCESS", "GRANTED");
 	define("FRONTEND_REQUEST", '');
-	
-	require_once FRONTEND_REQUEST . "constants.php";
-	require_once FRONTEND_REQUEST . "backend.php";
+
+    require_once "database_config.php";
+	require_once "constants.php";
+	require_once "backend.php";
 	
 	$backend = new Backend("site_administrator");
 	

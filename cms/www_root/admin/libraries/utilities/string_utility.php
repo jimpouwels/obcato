@@ -30,14 +30,13 @@
 			$string_value = str_replace("&gt;", ">", $string_value);
 			$string_value = str_replace("&amp;", "&", $string_value);
 			$string_value = str_replace("&quot;", '"', $string_value);
-			$string_value = str_replace("&ndash;", "–", $string_value);
-			$string_value = str_replace("&mdash;", "—", $string_value);
-			$string_value = str_replace("&copy;", "©", $string_value);
-			$string_value = str_replace("&iexcl;", "¡", $string_value);
-			$string_value = str_replace("&iquest;", "¿", $string_value);
-			$string_value = str_replace("&ldquo;", "“", $string_value);
-			$string_value = str_replace("&rdquo;", "”", $string_value);
-			$string_value = stripslashes($string_value);
+			$string_value = str_replace("&ndash;", "ï¿½", $string_value);
+			$string_value = str_replace("&mdash;", "ï¿½", $string_value);
+			$string_value = str_replace("&copy;", "ï¿½", $string_value);
+			$string_value = str_replace("&iexcl;", "ï¿½", $string_value);
+			$string_value = str_replace("&iquest;", "ï¿½", $string_value);
+			$string_value = str_replace("&ldquo;", "ï¿½", $string_value);
+			$string_value = str_replace("&rdquo;", "ï¿½", $string_value);
 			return $string_value;
 		}
 		
@@ -51,14 +50,14 @@
 			$string_value = str_replace(">", "&gt;", $string_value);
 			$string_value = str_replace("&", "&amp;", $string_value);
 			$string_value = str_replace("\"", "&quot;", $string_value);
-			$string_value = str_replace("–", "&ndash;", $string_value);
-			$string_value = str_replace("—", "&mdash;", $string_value);
-			$string_value = str_replace("©", "&copy;", $string_value);
-			$string_value = str_replace("¡", "&iexcl;", $string_value);
-			$string_value = str_replace("¿", "&iquest;", $string_value);
+			$string_value = str_replace("ï¿½", "&ndash;", $string_value);
+			$string_value = str_replace("ï¿½", "&mdash;", $string_value);
+			$string_value = str_replace("ï¿½", "&copy;", $string_value);
+			$string_value = str_replace("ï¿½", "&iexcl;", $string_value);
+			$string_value = str_replace("ï¿½", "&iquest;", $string_value);
 			$string_value = str_replace("'", "&#39;", $string_value);
-			$string_value = str_replace("“", "&ldquo;", $string_value);
-			$string_value = str_replace("”", "&rdquo;", $string_value);
+			$string_value = str_replace("ï¿½", "&ldquo;", $string_value);
+			$string_value = str_replace("ï¿½", "&rdquo;", $string_value);
 			return $string_value;
 		}
 		

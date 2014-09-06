@@ -174,7 +174,6 @@
 			$settings->setBackEndHostname($record['backend_hostname']);
 			$settings->setEmailAddress($record['email_address']);
 			$settings->setSmtpHost($record['smtp_host']);
-			$settings->setRootDir($record['root_dir']);
 			$settings->setFrontendTemplateDir($record['frontend_template_dir']);
 			$settings->setStaticDir($record['static_files_dir']);
 			$settings->setConfigDir($record['config_dir']);

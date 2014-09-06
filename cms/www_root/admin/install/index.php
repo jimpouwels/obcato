@@ -4,6 +4,7 @@
 
     require_once "database/mysql_connector.php";
     require_once "install/install_folders_form.php";
+    require_once "database/dao/settings_dao.php";
 
     if (file_exists("database_config.php")) {
         require_once "database_config.php";
@@ -27,22 +28,29 @@
                 }
                 else {
                     createDatabaseConfig($database_url, $database_port, $database_username, $database_password, $database_name);
-                    header("Location: /admin/install/index.php?mode=install&step=2");
+                    header("Location: /admin/index.php?mode=install&step=2");
                 }
             }
         } else if (getStepFromPostRequest() == "2") {
             $mysql_connector = MySqlConnector::getInstance();
             $mysql_connector->executeQuery("CREATE DATABASE " . DATABASE_NAME);
             $mysql_connector->executeSql(file_get_contents("install_script.sql"));
-            header("Location: /admin/install/index.php?mode=install&step=3");
+            header("Location: /admin/index.php?mode=install&step=3");
         } else if (getStepFromPostRequest() == "3") {
-            $form = new InstallFoldersForm();
+            $settings_dao = SettingsDao::getInstance();
+            $settings = $settings_dao->getSettings();
+            $form = new InstallFoldersForm($settings);
             try {
                 $form->loadFields();
-                header("Location: /admin/install/index.php?mode=install&step=4");
+                $settings_dao->update($settings);
+                header("Location: /admin/index.php?mode=install&step=4");
             } catch (FormException $e) {
                 global $errors;
             }
+        } else if (getStepFromPostRequest() == "4") {
+            if ($_POST["installation_finish_type"] == "delete_install_files")
+                deleteInstallationFiles();
+            header("Location: /admin/login.php");
         }
     }
 
@@ -63,6 +71,10 @@
             return $_POST["step"];
         else
             return "";
+    }
+
+    function deleteInstallationFiles() {
+        
     }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -142,31 +154,27 @@
                             </li>
                             <li>
                                 <label class="admin_label" for="frontend_template_dir">Frontend templates map</label>
-                                <input type="text"  value="<?= isset($frontend_template_dir) ? $frontend_template_dir : "" ?>" id="frontend_template_dir" name="frontend_template_dir" class="admin_field">
-                            </li>
-                            <li>
-                                <label class="admin_label" for="$backend_root_dir">Configuration map</label>
-                                <input type="text" value="<?= isset($backend_root_dir) ? $backend_root_dir : "" ?>" id="$backend_root_dir" name="$backend_root_dir" class="admin_field">
-                            </li>
-                            <li>
-                                <label class="admin_label" for="backend_static_files_dir">Backend statische bestanden map</label>
-                                <input type="text" value="<?= isset($backend_static_files_dir) ? $backend_static_files_dir : "" ?>" id="$backend_static_files_dir" name="$backend_static_files_dir" class="admin_field">
-                            </li>
-                            <li>
-                                <label class="admin_label" for="config_dir">Configuratie map</label>
-                                <input type="text" value="<?= isset($config_dir) ? $config_dir : "" ?>" id="config_dir" name="config_dir" class="admin_field">
-                            </li>
-                            <li>
-                                <label class="admin_label" for="upload_dir">Upload map</label>
-                                <input type="text" value="<?= isset($upload_dir) ? $upload_dir : "" ?>" id="upload_dir" name="upload_dir" class="admin_field">
+                                <input type="text"  value="<?= isset($form) ? $form->getFrontendTemplatesDir() : "" ?>" id="frontend_template_dir" name="frontend_template_dir" class="admin_field">
                             </li>
                             <li>
                                 <label class="admin_label" for="backend_template_dir">Backend templates map</label>
-                                <input type="text" value="<?= isset($backend_template_dir) ? $backend_template_dir : "" ?>" id="backend_template_dir" name="backend_template_dir" class="admin_field">
+                                <input type="text" value="<?= isset($form) ? $form->getBackendTemplatesDir() : "" ?>" id="backend_template_dir" name="backend_template_dir" class="admin_field">
+                            </li>
+                            <li>
+                                <label class="admin_label" for="backend_static_files_dir">Backend statische bestanden map</label>
+                                <input type="text" value="<?= isset($form) ? $form->getBackendStaticFilesDir() : "" ?>" id="backend_static_files_dir" name="backend_static_files_dir" class="admin_field">
+                            </li>
+                            <li>
+                                <label class="admin_label" for="config_dir">Configuratie map</label>
+                                <input type="text" value="<?= isset($form) ? $form->getConfigDir() : "" ?>" id="config_dir" name="config_dir" class="admin_field">
+                            </li>
+                            <li>
+                                <label class="admin_label" for="upload_dir">Upload map</label>
+                                <input type="text" value="<?= isset($form) ? $form->getUploadDir() : "" ?>" id="upload_dir" name="upload_dir" class="admin_field">
                             </li>
                             <li>
                                 <label class="admin_label" for="component_dir">Component map</label>
-                                <input type="text" value="<?= isset($component_dir) ? $component_dir : "" ?>" id="component_dir" name="component_dir" class="admin_field">
+                                <input type="text" value="<?= isset($form) ? $form->getComponentDir() : "" ?>" id="component_dir" name="component_dir" class="admin_field">
                             </li>
                             <li>
                                 <a href="#" onClick="return false;" class="button install_submit_button" title="Sla mappen op">Sla mappen op</a>
@@ -176,6 +184,23 @@
                                 <p class="error">Vul a.u.b. alle velden in</p>
                             </li>
                             <?php endif; ?>
+                        </ul>
+                    </div>
+                <?php elseif ($_GET["step"] == "4"): ?>
+                    <div class="fieldset-title">Installatie succesvol</div>
+                    <div class="content">
+                        <input type="hidden" id="step" name="step" value="4" />
+                        <ul class="admin_form">
+                            <input type="hidden" value="" name="installation_finish_type" id="installation_finish_type" />
+                            <li>
+                                <p>De installatie is succesvol afgerond. Wilt u de installatiebestanden verwijderen?</p>
+                            </li>
+                            <li>
+                                <a href="#" onClick="return false;" class="button delete_install_files_button" title="Verwijder installatiebestanden">Verwijder installatiebestanden</a>
+                            </li>
+                            <li>
+                                <a href="#" onClick="return false;" class="button redirect_to_login" title="Direct naar de loginpagina">Direct naar de loginpagina</a>
+                            </li>
                         </ul>
                     </div>
                 <?php endif; ?>
