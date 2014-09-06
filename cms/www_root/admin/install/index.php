@@ -33,8 +33,8 @@
             }
         } else if (getStepFromPostRequest() == "2") {
             $mysql_connector = MySqlConnector::getInstance();
-            $mysql_connector->executeQuery("CREATE DATABASE " . DATABASE_NAME);
-            $mysql_connector->executeSql(file_get_contents("install_script.sql"));
+            $mysql_connector->executeQuery("CREATE DATABASE [IF NOT EXISTS] " . DATABASE_NAME);
+            $mysql_connector->executeSql(file_get_contents(getcwd() . "\\install\\install_script.sql"));
             header("Location: /admin/index.php?mode=install&step=3");
         } else if (getStepFromPostRequest() == "3") {
             $settings_dao = SettingsDao::getInstance();
@@ -55,7 +55,7 @@
     }
 
     function createDatabaseConfig($url, $port, $username, $password, $name) {
-        $db_config_file = fopen("../database_config.php", "w") or die("No write access to create database configuration");
+        $db_config_file = fopen("database_config.php", "w") or die("No write access to create database configuration");
         fwrite($db_config_file, "<?php\n");
         fwrite($db_config_file, "defined('_ACCESS') or die;\n");
         fwrite($db_config_file, "define(\"HOST\", \"" . $url . "\");\n");

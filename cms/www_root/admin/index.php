@@ -5,6 +5,8 @@
 	define("FRONTEND_REQUEST", '');
 
     if (!file_exists("database_config.php") || isInstallMode()) {
+        if (!isset($_GET["mode"]))
+            header("Location: /admin/index.php?mode=install&step=1");
         runInstaller();
     } else {
         runBackend();

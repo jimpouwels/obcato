@@ -13,14 +13,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
---
--- Create schema site_administration
---
-
-CREATE DATABASE IF NOT EXISTS site_administration;
-USE site_administration;
-
 --
 -- Definition of table `article_overview_elements_metadata`
 --
