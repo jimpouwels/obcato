@@ -41,7 +41,7 @@ body {
 	height: 70px;
 	overflow: hidden;
 	z-index: -1;
-	background: url(/admin/static/img/header-gradient.png) repeat-x;
+	background: url(/admin/static.php?file=/default/img/header-gradient.png) repeat-x;
 }
 
 #top .title {
