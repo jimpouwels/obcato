@@ -3,16 +3,19 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/database/mysql_connector.php";
-	include_once CMS_ROOT . "/database/dao/element_dao.php";
-	include_once CMS_ROOT . "/database/dao/template_dao.php";
-	include_once CMS_ROOT . "/core/data/block.php";
-	include_once CMS_ROOT . "/core/data/block_position.php";
-	include_once CMS_ROOT . "/database/dao/authorization_dao.php";
+	require_once CMS_ROOT . "/database/mysql_connector.php";
+    require_once CMS_ROOT . "/database/dao/element_dao.php";
+    require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+    require_once CMS_ROOT . "/database/dao/template_dao.php";
+    require_once CMS_ROOT . "/core/data/block.php";
+    require_once CMS_ROOT . "/core/data/block_position.php";
+    require_once CMS_ROOT . "/database/dao/authorization_dao.php";
 
 	class BlockDao {
-	
-		// Holds the list of columns that are to be collected
+
+        private $_element_holder_dao;
+
+        // Holds the list of columns that are to be collected
 		public static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id, 
 					  e.created_at, e.created_by, e.type, b.position_id";
 					  
@@ -21,11 +24,9 @@
 			a getInstance() method instead.
 		*/
 		private static $instance;
-		
-		/*
-			Private constructor.
-		*/
+
 		private function __construct() {
+            $this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 		
 		/*
@@ -239,7 +240,6 @@
 			Creates and persists a new block.
 		*/
 		public function createBlock() {
-			$mysql_database = MysqlConnector::getInstance(); 
 			$new_block = new Block();
 			$new_block->setPublished(false);
 			$new_block->setTitle('Nieuw block');
@@ -250,10 +250,8 @@
 			$new_block->setType(ELEMENT_HOLDER_BLOCK);
 			
 			$new_block->setScopeId(6);
-			$new_id = $this->persistBlock($new_block);
-			$new_block->setId($new_id);
-			
-			return $new_block;
+			$this->persistBlock($new_block);
+            return $new_block;
 		}
 		
 		/*
@@ -263,24 +261,9 @@
 		*/
 		private function persistBlock($block) {
 			$mysql_database = MysqlConnector::getInstance(); 
-			
-			$published_value = $block->isPublished();
-			if (!isset($published_value) || $published_value == '') {
-				$published_value = 0;
-			}
-			$query1 = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type)
-					   VALUES  (NULL, '" . $block->getTitle() . "', " . $published_value . ",
-					   " . $block->getScopeId() . ", now(), " . $block->getCreatedBy()->getId() . ", '" . $block->getType() . "')";
-		
-			$mysql_database->executeQuery($query1);
-			
-			$new_id = mysql_insert_id();
-			
-			$query2 = "INSERT INTO blocks (position_id, element_holder_id) VALUES (NULL, " . $new_id . ")";
-					   
-			$mysql_database->executeQuery($query2);
-			
-			return $new_id;
+			$this->_element_holder_dao->persist($block);
+			$query = "INSERT INTO blocks (position_id, element_holder_id) VALUES (NULL, " . $block->getId() . ")";
+		    $mysql_database->executeQuery($query);
 		}
 		
 		/*

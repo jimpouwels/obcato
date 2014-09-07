@@ -96,10 +96,6 @@
 			return $element_statics;
 		}
 		
-		public function persist() {
-			$this->_element_holder_dao->persist($this);
-		}
-		
 		public function update() {
 			$this->_element_holder_dao->update($this);
 		}

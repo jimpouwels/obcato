@@ -115,7 +115,7 @@
 			$user = $authorization_dao->getUser($_SESSION["username"]);
 			$new_page->setCreatedById($user->getId());
 			$new_page->setType(ELEMENT_HOLDER_PAGE);
-			$new_page->persist();
+			$this->_page_dao->persist($new_page);
 			
 			$parent = $this->_page_dao->getPage($this->_current_page->getId());
 			$current_level_pages = $parent->getSubPages();

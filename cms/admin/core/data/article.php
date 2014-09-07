@@ -3,8 +3,9 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/core/data/element_holder.php";
-	include_once CMS_ROOT . "/database/dao/article_dao.php";
+	require_once CMS_ROOT . "/core/data/element_holder.php";
+	require_once CMS_ROOT . "/database/dao/article_dao.php";
+    require_once CMS_ROOT . "/database/dao/page_dao.php";
 	
 	class Article extends ElementHolder {
 	
@@ -12,21 +13,17 @@
 		private $_image_id;
 		private $_publication_date;
 		private $_target_page_id;
+        private $_page_dao;
 		
 		public function __construct() {
 			parent::__construct();
+            $this->_page_dao = PageDao::getInstance();
 			$this->setScopeId(9);
 			$this->setPublished(false);
 		}
 		
 		public function getDescription() {
 			$description = $this->_description;
-			//if (CMS_ROOT != '') {
-			//	include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			//	// replace newlines with HTML breaks
-			//	$description = nl2br($description);
-			//	$description = LinkUtility::createLinksInString($description, $this);
-			//}
 			return $description;
 		}
 		
@@ -70,38 +67,14 @@
 		
 		public function getTargetPage() {
 			$target_page = null;
-			if (!is_null($this->_target_page_id) && $this->_target_page_id != '') {
-				$target_page = Page::findById($this->_target_page_id);
-			}
+			if (!is_null($this->_target_page_id) && $this->_target_page_id != '')
+				$target_page = $this->_page_dao->getPage($this->_target_page_id);
 			return $target_page;
 		}
 		
 		public function getTerms() {
 			$article_dao = ArticleDao::getInstance();
 			return $article_dao->getTermsForArticle($this->getId());
-		}
-		
-		public function getFrontendUrl() {
-			$target_page_id = $_GET['id'];
-			if (!is_null($this->getTargetPageId()) && $this->getTargetPageId() != '') {
-				$target_page = $this->getTargetPage();
-				// check if it is published (result is null)
-				if (!is_null($target_page)) {
-					$target_page_id = $target_page->getId();
-				}
-			} elseif (is_null($target_page_id) || $target_page_id == "") {
-				include_once CMS_ROOT . "/dao/settings_dao.php";
-				$target_page_id = SettingsDao::getInstance()->getHomepage()->getId();
-			}
-			return "/show.php?id=" . $target_page_id . "&amp;articleid=" . $this->getId();
-		}
-		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function delete() {
-			parent::delete();
 		}
 		
 		public static function constructFromRecord($record) {

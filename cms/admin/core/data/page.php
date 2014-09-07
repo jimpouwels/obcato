@@ -26,16 +26,7 @@
 		}
 		
 		public function getDescription() {
-			$text = $this->_description;
-			//if (defined(FRONTEND_REQUEST)) {
-			//	// replace newlines with HTML breaks
-			//	$text = nl2br($text);
-				
-				// replace link codes with HTML anchors
-			//	include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			//	$text = LinkUtility::createLinksInString($text, $this);
-			//}
-			return $text;
+			return $this->_description;
 		}
 		
 		public function setDescription($description) {
@@ -165,15 +156,6 @@
 		public function deleteBlock($block) {
 			$block_dao = BlockDao::getInstance();
 			$block_dao->deleteBlockFromPage($block->getId(), $this);
-		}
-				
-		public function getFrontendUrl() {
-			return "/show.php?id=" . $this->getId();
-		}
-		
-		public function persist() {
-			parent::persist();
-			$this->_page_dao->persist($this);
 		}
 		
 		public function delete() {

@@ -175,7 +175,6 @@
 
 		public function createArticle() {
 			$new_article = new Article();
-			$mysql_database = MysqlConnector::getInstance(); 
 			$new_article->setPublished(false);
 			$new_article->setTitle('Nieuw artikel');
 			
@@ -184,34 +183,16 @@
 			$new_article->setCreatedById($user->getId());
 			$new_article->setType(ELEMENT_HOLDER_ARTICLE);
 			
-			$new_id = $this->persistArticle($new_article);
-			$new_article->setId($new_id);
-			
+			$this->persistArticle($new_article);
 			return $new_article;
 		}
 
 		private function persistArticle($article) {
-			$mysql_database = MysqlConnector::getInstance(); 
-			
-			$published_value = $article->isPublished();
-			if (!isset($published_value) || $published_value == '') {
-				$published_value = 0;
-			}
-			$query1 = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type)
-					   VALUES  (NULL, '" . $article->getTitle() . "', " . $published_value . ",
-					   " . $article->getScopeId() . ", now(), " . $article->getCreatedBy()->getId() . ", '" . $article->getType() . "')";
-		
-			
-			$mysql_database->executeQuery($query1);
-			
-			$new_id = mysql_insert_id();
-			
-			$query2 = "INSERT INTO articles (description, image_id, element_holder_id, publication_date, target_page) VALUES 
-					  (NULL, NULL, " . $new_id . ", now(), NULL)";
-			
-			$mysql_database->executeQuery($query2);
-			
-			return $new_id;
+            $mysql_database = MysqlConnector::getInstance();
+            $this->_element_holder_dao->persist($article);
+			$query = "INSERT INTO articles (description, image_id, element_holder_id, publication_date, target_page) VALUES
+					  (NULL, NULL, " . $article->getId() . ", now(), NULL)";
+            $mysql_database->executeQuery($query);
 		}
 
 		public function getAllTerms() {

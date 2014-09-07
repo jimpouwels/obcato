@@ -83,6 +83,7 @@
 		}
 
 		public function persist($page) {
+            $this->_element_holder_dao->persist($page);
 			$query = "INSERT INTO pages (navigation_title, parent_id, show_in_navigation, include_in_searchindex, element_holder_id,
 					 follow_up, is_homepage, description) VALUES ('" . $page->getNavigationTitle() . "', " . $page->getParentId() . "," 
 					 . $page->getShowInNavigation() . ", 1, " . $page->getId() . ", 1, 0, '')";
@@ -90,8 +91,6 @@
 		}
 
 		public function updatePage($page) {
-			$mysql_database = MysqlConnector::getInstance(); 
-			
 			$query = "UPDATE pages SET navigation_title = '" . $page->getNavigationTitle() . "', show_in_navigation = " . $page->getShowInNavigation() . ", 
 					include_in_searchindex = " . $page->getIncludeInSearchEngine() . ", follow_up = " . $page->getFollowUp() . ", description = '" . 
 					  $page->getDescription() . "'";

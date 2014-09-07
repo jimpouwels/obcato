@@ -23,7 +23,6 @@
         }
 
 		public function handleRequest() {
-			$this->_page_dao = PageDao::getInstance();
 			$page = $this->getPageFromRequest();
 			$article = $this->getArticleFromRequest();
 			$this->renderPage($page, $article);
@@ -36,7 +35,7 @@
             }
 		}
 		
-		private function getPageFromRequest() {					
+		private function getPageFromRequest() {
 			if (isset($_GET["id"]) && $_GET["id"] != "") {
 				$page_id = $_GET["id"];
 				$page = $this->_page_dao->getPage($page_id);

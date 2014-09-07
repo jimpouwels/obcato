@@ -3,8 +3,10 @@
 	// No direct access
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "/core/data/entity.php";
-	include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
+	require_once CMS_ROOT . "/core/data/entity.php";
+    require_once CMS_ROOT . "/libraries/utilities/link_utility.php";
+    require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+
 
 	class Link extends Entity {
 		
@@ -17,7 +19,12 @@
 		private $myCode;
 		private $myTargetElementHolderId;
 		private $myParentElementHolderId;
-		
+        private $_element_holder_dao;
+
+        public function __construct() {
+            $this->_element_holder_dao = ElementHolderDao::getInstance();
+        }
+
 		public function getTitle() {
 			return $this->myTitle;
 		}
@@ -93,19 +100,7 @@
 		}
 		
 		private function getElementHolder($element_holder_id) {
-			include_once CMS_ROOT . 'database/dao/element_holder_dao.php';
-			$element_holder_dao = ElementHolderDao::getInstance();
-			$element_holder = $element_holder_dao->getElementHolder($element_holder_id);
-			return $element_holder;
-		}
-		
-		public function persist() {
-		}
-		
-		public function update() {
-		}
-		
-		public function delete() {
+			return $this->_element_holder_dao->getElementHolder($element_holder_id);
 		}
 		
 		public static function constructFromRecord($record) {

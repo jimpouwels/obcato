@@ -30,18 +30,6 @@
 			$this->_position_id = $position_id;
 		}
 		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function update() {
-			parent::update();
-		}
-		
-		public function delete() {
-			parent::delete();
-		}
-		
 		public static function constructFromRecord($record) {
 			$block = new Block();
 			$block->setId($record['id']);
