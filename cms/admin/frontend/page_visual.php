@@ -18,7 +18,7 @@
 
         public function render()
         {
-            $this->_template_engine->assign("content", $this->renderPageContent());
+            $this->_template_engine->assign("elements", $this->renderPageContent());
             $this->_template_engine->assign("title", $this->_page->getTitle());
             $this->_template_engine->assign("navigation_title", $this->_page->getNavigationTitle());
             $this->_template_engine->assign("description", $this->toHtml($this->_page->getDescription(), $this->_page));
@@ -27,9 +27,9 @@
         }
 
         private function renderPageContent() {
-            $content_html = "";
+            $elements_content = array();
             foreach ($this->_page->getElements() as $element)
-               $content_html .= $element->getFrontendVisual($this->_current_page)->render();
-            return $content_html;
+               $elements_content[] = $element->getFrontendVisual($this->_current_page)->render();
+            return $elements_content;
         }
     }
