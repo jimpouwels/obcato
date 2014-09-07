@@ -28,19 +28,14 @@
 		}
 
 		public static function getInstance() {
-			if (!self::$instance) {
+			if (!self::$instance)
 				self::$instance = new ArticleDao();
-			}
 			return self::$instance;
 		}
 
 		public function getArticle($id) {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = " . $id
 					 . " AND e.id = a.element_holder_id";
-			if (CMS_ROOT != '') {
-				$query = $query . " AND e.published = 1";
-			}
-			
 			$result = $this->_mysql_connector->executeSelectQuery($query);
 			$article = null;
 			

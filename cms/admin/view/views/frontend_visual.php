@@ -28,30 +28,26 @@
 
         private function createLinksInString($value, $element_holder) {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
-            $value = str_replace("[/LINK]", "</a>", $value);
             foreach ($links as $link) {
                 if ($this->containsLink($value, $link)) {
                     if (!is_null($link->getTargetElementHolderId()))
                         $url = $this->createUrlFromLink($link);
                     else
                         $url = $link->getTargetAddress();
-                    $value = str_replace($this->getOpeningTag($link), $this->createLinkTag($link->getTitle(), $url), $value);
+                    $value = $this->replaceLinkCodeTags($value, $link, $url);
                 }
             }
             return $value;
         }
 
-        private function createLinkTag($title, $url) {
-            return "<a title=\"" . $title . "\" href=\"" . $url . "\">";
+        private function replaceLinkCodeTags($value, $link, $url) {
+            $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $url), $value);
+            $value = str_replace("[/LINK]", "</a>", $value);
+            return $value;
         }
 
         private function containsLink($value, $link) {
-            $pos = strpos($value, $this->getOpeningTag($link));
-            return $pos > 0;
-        }
-
-        private function getOpeningTag($link) {
-            return "[LINK C=\"" . $link->getCode() . "\"]";
+            return strpos($value, $this->getLinkCodeOpeningTag($link)) > 0;
         }
 
         private function createUrlFromLink($link) {
@@ -68,6 +64,14 @@
                     return $this->getArticleFrontendUrl($target_article);
                     break;
             }
+        }
+
+        private function getLinkCodeOpeningTag($link) {
+            return "[LINK C=\"" . $link->getCode() . "\"]";
+        }
+
+        private function createHyperlinkOpeningTag($title, $url) {
+            return "<a title=\"" . $title . "\" href=\"" . $url . "\">";
         }
 
         private function getPageFrontendUrl($page) {
