@@ -19,7 +19,6 @@
 		private $_metadata_provider;
 			
 		public function __construct() {
-			// set all text element specific metadata
 			$this->_metadata_provider = new ListElementMetaDataProvider();
 		}
 		
@@ -28,12 +27,7 @@
 		}
 		
 		public function getTitle() {
-			//include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			$title = $this->_title;
-			//if (CMS_ROOT != '') {
-			//	$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
-			//}
-			return $title;
+			return $this->_title;
 		}
 		
 		public function getListItems() {
@@ -62,8 +56,8 @@
 			return new ListElementFormVisual($this);
 		}
 
-        public function getFrontendVisual() {
-            return null;
+        public function getFrontendVisual($current_page) {
+            return new ListElementFrontendVisual($current_page, $this);
         }
 		
 		public function initializeMetaData() {

@@ -7,43 +7,38 @@
 
 	class ListItem extends Entity {
 			
-		private $myText;
-		private $myIndent;
-		private $myElementId;
+		private $_text;
+		private $_indent;
+		private $_elementId;
 		
 		public function setText($text) {
-			$this->myText = $text;
+			$this->_text = $text;
 		}
 		
 		public function getText() {
-			//include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			$text = $this->myText;
-			//if (CMS_ROOT != '') {
-			//	$text = LinkUtility::createLinksInString($text, $this->getElement()->getElementHolder());
-			//}
-			return $text;
+			return $this->_text;
 		}
 		
 		public function setIndent($indent) {
-			$this->myIndent = $indent;
+			$this->_indent = $indent;
 		}
 		
 		public function getIndent() {
-			return $this->myIndent;
+			return $this->_indent;
 		}
 		
 		public function getElementId() {
-			return $this->myElementId;
+			return $this->_elementId;
 		}
 		
 		public function setElementId($element_id) {
-			$this->myElementId = $element_id;
+			$this->_elementId = $element_id;
 		}
 		
 		public function getElement() {
 			include_once CMS_ROOT . "/dao/element_dao.php";
 			$element_dao = ElementDao::getInstance();
-			return $element_dao->getElement($this->myElementId);
+			return $element_dao->getElement($this->_elementId);
 		}
 		
 	}

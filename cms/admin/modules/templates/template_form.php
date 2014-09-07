@@ -27,9 +27,10 @@
 			$this->_uploaded_file_name = $this->getUploadedFileName("template_file");
 			$this->_path_to_uploaded_file = $this->getUploadFilePath("template_file");
 			$this->_is_file_uploaded = $this->getUploadedFileName("template_file") != "";
-			if ($this->_is_file_uploaded && !$this->fileExists()) {
+			if ($this->_is_file_uploaded && !$this->fileExists())
 				$this->_template->setFileName($this->_uploaded_file_name);
-			}
+			else
+                $this->_template->setFileName($this->getFieldValue("file_name"));
 			if ($this->hasErrors() || $this->fileNameExists())
 				throw new FormException();
 		}

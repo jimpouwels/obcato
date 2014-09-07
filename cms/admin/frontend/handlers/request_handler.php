@@ -19,7 +19,6 @@
             $this->_settings_dao = SettingsDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
-            DEFINE("TEMPLATE_DIR", SettingsDao::getInstance()->getSettings()->getFrontEndTemplateDir() . "/");
         }
 
 		public function handleRequest() {

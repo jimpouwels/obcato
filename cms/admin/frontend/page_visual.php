@@ -23,7 +23,7 @@
             $this->_template_engine->assign("navigation_title", $this->_page->getNavigationTitle());
             $this->_template_engine->assign("description", $this->toHtml($this->_page->getDescription(), $this->_page));
             $this->_template_engine->assign("show_in_navigation", $this->_page->getShowInNavigation());
-            $this->_template_engine->display(TEMPLATE_DIR . $this->_page->getTemplate()->getFileName());
+            $this->_template_engine->display($this->getTemplateDir() . "/" . $this->_page->getTemplate()->getFileName());
         }
 
         private function renderPageContent() {
