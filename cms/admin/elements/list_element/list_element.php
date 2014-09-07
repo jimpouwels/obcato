@@ -8,6 +8,7 @@
 	require_once CMS_ROOT . "/elements/list_element/list_item.php";
 	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
 	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_form.php";
+    require_once CMS_ROOT . "/frontend/list_element_visual.php";
 
 	class ListElement extends Element {
 	
@@ -57,9 +58,13 @@
 			return new ListElementStatics();
 		}
 		
-		public function getEditForm() {
+		public function getBackendVisual() {
 			return new ListElementFormVisual($this);
 		}
+
+        public function getFrontendVisual() {
+            return null;
+        }
 		
 		public function initializeMetaData() {
 			$this->_metadata_provider->getMetaData($this);

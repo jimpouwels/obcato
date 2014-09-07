@@ -8,6 +8,7 @@
 	require_once CMS_ROOT . "/database/dao/article_dao.php";
 	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
 	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_form.php";
+    require_once CMS_ROOT . "/frontend/article_overview_element_visual.php";
 
 	class ArticleOverviewElement extends Element {
 	
@@ -131,9 +132,13 @@
 			return new ArticleOverviewElementStatics();
 		}
 		
-		public function getEditForm() {
+		public function getBackendVisual() {
 			return new ArticleOverviewElementForm($this);
 		}
+
+        public function getFrontendVisual() {
+            return null;
+        }
 		
 		public function initializeMetaData() {
 			$this->_metadata_provider->getMetaData($this);

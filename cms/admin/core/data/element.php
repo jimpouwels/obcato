@@ -49,10 +49,9 @@
 			if ($element_type->getSystemDefault()) {
 				$element_location_base = CMS_ROOT;
 			} else {
-				$element_location_base = COMPONENT_DIR . "/";
+				$element_location_base = COMPONENT_DIR;
 			}
-			
-			include_once CMS_ROOT . $element_location_base . 'elements/' . $record['identifier'] . '/' . $record['domain_object'];
+			include_once $element_location_base . '/elements/' . $record['identifier'] . '/' . $record['domain_object'];
 			
 			// first get the element type
 			$element_type = $record['classname'];
@@ -73,7 +72,9 @@
 		
 		public abstract function getStatics();
 		
-		public abstract function getEditForm();
+		public abstract function getBackendVisual();
+
+        public abstract function getFrontendVisual($current_page);
 		
 		public abstract function initializeMetaData();
 		

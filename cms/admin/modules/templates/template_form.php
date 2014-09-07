@@ -13,6 +13,7 @@
 		private $_template_dir;
 		private $_path_to_uploaded_file;
 		private $_is_file_uploaded;
+        private $_uploaded_file_name;
 	
 		public function __construct($template) {
 			$this->_template = $template;
@@ -22,7 +23,6 @@
 	
 		public function loadFields() {
 			$this->_template->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
-			$this->_template->setFileName($this->getFieldValue("file_name"));
 			$this->_template->setScopeId($this->getMandatoryFieldValue("scope", "Scope is verplicht"));
 			$this->_uploaded_file_name = $this->getUploadedFileName("template_file");
 			$this->_path_to_uploaded_file = $this->getUploadFilePath("template_file");
@@ -43,7 +43,6 @@
 		}
 		
 		private function fileExists() {
-			echo $this->_template_dir . "/" . $this->_uploaded_file_name;
 			if (file_exists($this->_template_dir . "/" . $this->_uploaded_file_name) && !$this->uploadedFileIsCurrentTemplateFile()) {
 				$this->raiseError("template_file", "Er bestaat al een ander template met dezelfde naam");
 				return true;

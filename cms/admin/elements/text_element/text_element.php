@@ -7,6 +7,7 @@
 	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_form.php";
 	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
 	require_once CMS_ROOT . "/database/mysql_connector.php";
+    require_once CMS_ROOT . "/frontend/text_element_visual.php";
 
 	class TextElement extends Element {
 	
@@ -53,9 +54,13 @@
 			return new TextElementStatics();
 		}
 		
-		public function getEditForm() {
+		public function getBackendVisual() {
 			return new TextElementFormVisual($this);
 		}
+
+        public function getFrontendVisual($current_page) {
+            return new TextElementFrontendVisual($current_page, $this);
+        }
 		
 		public function initializeMetaData() {
 			$this->myMetaDataProvider->getMetaData($this);

@@ -8,6 +8,7 @@
 	require_once CMS_ROOT . "/database/dao/image_dao.php";
 	require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";
 	require_once CMS_ROOT . "/elements/image_element/visuals/image_element_form.php";
+    require_once CMS_ROOT . "/frontend/image_element_visual.php";
 
 	class ImageElement extends Element {
 	
@@ -73,9 +74,13 @@
 			return new ImageElementStatics();
 		}
 		
-		public function getEditForm() {
+		public function getBackendVisual() {
 			return new ImageElementForm($this);
 		}
+
+        public function getFrontendVisual() {
+            return null;
+        }
 		
 		public function initializeMetaData() {
 			$this->_metadata_provider->getMetaData($this);

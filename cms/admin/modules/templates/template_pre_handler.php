@@ -77,7 +77,7 @@
 		
 		private function updateTemplate() {
 			$template_form = new TemplateForm($this->_current_template);
-			$old_file_path = $this->_template_dir . "/" . $this->_current_template->getFileName();
+			$old_file_path = $this->_template_dir . "\\" . $this->_current_template->getFileName();
 			$old_file_name = $this->_current_template->getFileName();
 			try {
 				$template_form->loadFields();

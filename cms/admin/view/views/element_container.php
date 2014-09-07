@@ -35,7 +35,7 @@
 		private function renderElements() {
 			$elements = array();
 			foreach ($this->_elements as $element) {
-				$elements[] = $element->getEditForm()->render();
+				$elements[] = $element->getBackendVisual()->render();
 			}
 			
 			return $elements;

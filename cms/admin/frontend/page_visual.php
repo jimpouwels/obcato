@@ -3,7 +3,7 @@
     // No direct access
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "/view/views/frontend_visual.php";
+    require_once CMS_ROOT . "/frontend/frontend_visual.php";
 
     class PageVisual extends FrontendVisual {
 
@@ -18,10 +18,18 @@
 
         public function render()
         {
+            $this->_template_engine->assign("content", $this->renderPageContent());
             $this->_template_engine->assign("title", $this->_page->getTitle());
             $this->_template_engine->assign("navigation_title", $this->_page->getNavigationTitle());
             $this->_template_engine->assign("description", $this->toHtml($this->_page->getDescription(), $this->_page));
             $this->_template_engine->assign("show_in_navigation", $this->_page->getShowInNavigation());
             $this->_template_engine->display(TEMPLATE_DIR . $this->_page->getTemplate()->getFileName());
+        }
+
+        private function renderPageContent() {
+            $content_html = "";
+            foreach ($this->_page->getElements() as $element)
+               $content_html .= $element->getFrontendVisual($this->_current_page)->render();
+            return $content_html;
         }
     }

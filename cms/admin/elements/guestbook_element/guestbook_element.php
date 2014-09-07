@@ -8,6 +8,7 @@
 	require_once CMS_ROOT . "/database/dao/guestbook_dao.php";
 	require_once CMS_ROOT . "/elements/guestbook_element/visuals/guestbook_element_statics.php";
 	require_once CMS_ROOT . "/elements/guestbook_element/visuals/guestbook_element_form.php";
+    require_once CMS_ROOT . "/frontend/guestbook_element_visual.php";
 
 	class GuestBookElement extends Element {
 	
@@ -41,9 +42,13 @@
 			return new GuestBookElementStatics();
 		}
 		
-		public function getEditForm() {
+		public function getBackendVisual() {
 			return new GuestBookElementForm($this);
 		}
+
+        public function getFrontendVisual() {
+            return null;
+        }
 		
 		public function initializeMetaData() {
 			$this->myMetaDataProvider->getMetaData($this);
