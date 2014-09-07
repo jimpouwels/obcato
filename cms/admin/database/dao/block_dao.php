@@ -198,11 +198,7 @@
 		}
 
 		public function deleteBlock($block) {
-			$query = "DELETE FROM element_holders WHERE id = " . $block->getId();
-			$element_dao = ElementDao::getInstance();
-			foreach ($block->getElements() as $element)
-				$element_dao->deleteElement($element);
-            $this->_mysql_connector->executeQuery($query);
+            $this->_element_holder_dao->delete($block);
 		}
 
 		public function createBlockPosition() {

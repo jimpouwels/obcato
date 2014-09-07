@@ -8,7 +8,9 @@
     require_once CMS_ROOT . "/database/dao/page_dao.php";
 	
 	class Article extends ElementHolder {
-	
+
+	    const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
+
 		private $_description;
 		private $_image_id;
 		private $_publication_date;

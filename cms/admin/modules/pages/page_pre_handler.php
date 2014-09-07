@@ -96,8 +96,8 @@
 		}
 		
 		private function deletePage() {
-			$parent = $this->_current_page->getParent();
-			$this->_current_page->delete();
+			$this->_page_dao->deletePage($this->_current_page);
+            $parent = $this->_current_page->getParent();
 			$current_level_pages = $parent->getSubPages();
 			$this->updateFollowUp($current_level_pages);
 			Notifications::setSuccessMessage("Pagina succesvol verwijderd");

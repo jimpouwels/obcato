@@ -3,6 +3,8 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "/core/data/article.php";
+    require_once CMS_ROOT . "/core/data/page.php";
     require_once CMS_ROOT . "/view/views/visual.php";
     require_once CMS_ROOT . "/database/dao/link_dao.php";
     require_once CMS_ROOT . "/database/dao/page_dao.php";
@@ -53,13 +55,12 @@
         private function createUrlFromLink($link) {
             $url = null;
             $target_element_holder = $link->getTargetElementHolder();
-            $target_element_holder_type = $target_element_holder->getType();
-            switch ($target_element_holder_type) {
-                case "ELEMENT_HOLDER_PAGE":
+            switch ($target_element_holder->getType()) {
+                case Page::ElementHolderType:
                     $target_page = $this->_page_dao->getPage($target_element_holder->getId());
                     return $this->getPageFrontendUrl($target_page);
                     break;
-                case "ELEMENT_HOLDER_ARTICLE":
+                case Article::ElementHolderType:
                     $target_article = $this->_article_dao->getArticle($target_element_holder->getId());
                     return $this->getArticleFrontendUrl($target_article);
                     break;

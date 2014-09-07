@@ -103,6 +103,10 @@
 			$this->_element_holder_dao->update($page);
 		}
 
+        public function deletePage($page) {
+            $this->_element_holder_dao->delete($page);
+        }
+
 		public function searchByTerm($term) {
 			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE e.id = p.element_holder_id 
 			          AND title like '" . $term . "%'";

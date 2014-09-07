@@ -8,7 +8,9 @@
 	require_once CMS_ROOT . "/database/dao/page_dao.php";
 
 	class Page extends ElementHolder {
-	
+
+        const ElementHolderType = "ELEMENT_HOLDER_PAGE";
+
 		private static $TABLE_NAME = "pages";
 		
 		private $_page_dao;
@@ -156,13 +158,6 @@
 		public function deleteBlock($block) {
 			$block_dao = BlockDao::getInstance();
 			$block_dao->deleteBlockFromPage($block->getId(), $this);
-		}
-		
-		public function delete() {
-			foreach ($this->getSubPages() as $sub_page) {
-				$sub_page->delete();
-			}
-			parent::delete();
 		}
 		
 		public function moveUp() {

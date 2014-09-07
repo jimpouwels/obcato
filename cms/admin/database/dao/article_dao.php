@@ -146,11 +146,7 @@
 		}
 
 		public function deleteArticle($article) {
-			$query = "DELETE FROM element_holders WHERE id = " . $article->getId();
-			$element_dao = ElementDao::getInstance();
-			foreach ($article->getElements() as $element)
-				$element_dao->deleteElement($element);
-            $this->_mysql_connector->executeQuery($query);
+			$this->_element_holder_dao->delete($article);
 		}
 
 		public function createArticle() {
