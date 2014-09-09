@@ -73,6 +73,11 @@
 		public function setCreatedById($created_by_id) {
 			$this->_created_by_id = $created_by_id;
 		}
+
+        public function getExtension() {
+            $parts = explode(".", $this->getFileName());
+            return $parts[count($parts) - 1];
+        }
 		
 		public static function constructFromRecord($record) {
 			$image = new Image();

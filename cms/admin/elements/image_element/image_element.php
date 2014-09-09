@@ -62,10 +62,6 @@
 			if ($this->_image_id != null) {
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
-				
-				if (CMS_ROOT != '' && $image->isPublished() != 1) {
-					$image = null;
-				}
 			}	
 			return $image;
 		}
@@ -78,8 +74,8 @@
 			return new ImageElementForm($this);
 		}
 
-        public function getFrontendVisual() {
-            return null;
+        public function getFrontendVisual($current_page) {
+            return new ImageElementFrontendVisual($current_page, $this);
         }
 		
 		public function initializeMetaData() {
@@ -88,18 +84,6 @@
 		
 		public function updateMetaData() {
 			$this->_metadata_provider->updateMetaData($this);
-		}
-		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function update() {
-			parent::update();
-		}
-		
-		public function delete() {
-			parent::delete();
 		}
 		
 	}

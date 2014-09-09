@@ -15,7 +15,7 @@
 	
 		public function loadFields() {
 			$this->_image->setTitle($this->getMandatoryFieldValue("image_title", "Titel is verplicht"));
-			$this->_image->setPublished($this->getCheckboxValue("published"));
+			$this->_image->setPublished($this->getCheckboxValue("image_published"));
 			$this->_selected_labels = $this->getFieldValue("image_select_labels");
 			if ($this->hasErrors())
 				throw new FormException();
