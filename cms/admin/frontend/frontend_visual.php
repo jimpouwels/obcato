@@ -35,6 +35,10 @@
             return $this->_settings_dao->getSettings()->getFrontEndTemplateDir();
         }
 
+        protected function getImageUrl($image) {
+            return "/index.php?image=" . $image->getId();
+        }
+
         private function createLinksInString($value, $element_holder) {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {

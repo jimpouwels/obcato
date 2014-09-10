@@ -25,8 +25,7 @@
 		}
 		
 		public function getDescription() {
-			$description = $this->_description;
-			return $description;
+			return $this->_description;
 		}
 		
 		public function setDescription($description) {

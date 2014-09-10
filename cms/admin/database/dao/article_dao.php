@@ -83,7 +83,7 @@
 			return $articles;
 		}
 
-		public function searchArticlesFrontend($from_date, $to_date, $order_by, $terms, $max_results) {
+		public function searchPublishedArticles($from_date, $to_date, $order_by, $terms, $max_results) {
 			$from = " FROM element_holders e, articles a";
 			$where = " WHERE
 					  e.id = a.element_holder_id";
