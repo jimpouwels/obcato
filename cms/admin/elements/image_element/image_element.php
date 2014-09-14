@@ -85,8 +85,11 @@
 		public function updateMetaData() {
 			$this->_metadata_provider->updateMetaData($this);
 		}
-		
-	}
+
+        public function getRequestHandler() {
+            return null;
+        }
+    }
 	
 	class ImageElementMetaDataProvider {
 		

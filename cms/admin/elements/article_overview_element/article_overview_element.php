@@ -11,8 +11,6 @@
     require_once CMS_ROOT . "/frontend/article_overview_element_visual.php";
 
 	class ArticleOverviewElement extends Element {
-	
-		private static $TABLE_NAME = "article_overview_elements_metadata";
 			
 		private $_title;
 		private $_show_from;
@@ -146,8 +144,11 @@
 		public function updateMetaData() {
 			$this->_metadata_provider->updateMetaData($this);
 		}
-		
-	}
+
+        public function getRequestHandler() {
+            return null;
+        }
+    }
 	
 	class ArticleOverviewElementMetaDataProvider {
 		

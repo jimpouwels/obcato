@@ -6,6 +6,7 @@
 	require_once CMS_ROOT . "/core/data/element.php";
 	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_form.php";
 	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
+    require_once CMS_ROOT . "/elements/text_element/text_element_pre_handler.php";
 	require_once CMS_ROOT . "/database/mysql_connector.php";
     require_once CMS_ROOT . "/frontend/text_element_visual.php";
 
@@ -39,15 +40,7 @@
 		}
 		
 		public function getText() {
-			//include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			$text = $this->_text;
-			//if (CMS_ROOT != '') {
-			//	// replace newlines with HTML breaks
-			//	$text = nl2br($text);
-			//	// replace link codes with actual links
-			//	$text = LinkUtility::createLinksInString($text, $this->getElementHolder());
-			//}
-			return $text;
+			return $this->_text;
 		}
 		
 		public function getStatics() {
@@ -68,6 +61,10 @@
 		
 		public function updateMetaData() {
 			$this->myMetaDataProvider->updateMetaData($this);
+        }
+
+        public function getRequestHandler() {
+            return new TextElementPreHandler($this);
         }
 		
 	}

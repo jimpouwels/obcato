@@ -3,11 +3,10 @@
 	defined('_ACCESS') or die;
 	
 	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
-	require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
     require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
 	
-	class ElementHolderRequestHandler extends ModuleRequestHandler {
-	
+	abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
+
 		private $_element_dao;
 		private $_element_holder_dao;
 		
@@ -20,47 +19,65 @@
         }
 
         function handlePost() {
-			// Adds an element to the current element holder
-			if (isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != '' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				// first obtain the element holder
-				$element_holder_id = $_POST[EDIT_ELEMENT_HOLDER_ID];
-				$element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
-				
-				$element_type = $this->_element_dao->getElementType($element_type_to_add);
-				if (!is_null($element_type)) {
-				    $this->_element_dao->createElement($element_type, $element_holder_id);
-				}
-			}
-			
-			// Check if we need to delete an element
-			if (isset($_POST[DELETE_ELEMENT_FORM_ID]) && $_POST[DELETE_ELEMENT_FORM_ID] != "") {
-				$element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
-				if (!is_null($element_to_delete)) {
-					$element_to_delete->delete();
-				}
-			}
-			
-			// Updates all elements in the element holder
-			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'update_element_holder' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-				// first obtain the element holder
-				$element_holder_id = $_POST[EDIT_ELEMENT_HOLDER_ID];
-				$element_holder = $this->_element_holder_dao->getElementHolder($element_holder_id);
-				if (!is_null($element_holder)) {
-					foreach ($element_holder->getElements() as $element) {
-						$element_type = $element->getType();
-                        if ($element_type->getIdentifier() == 'text_element' ||
-                            $element_type->getIdentifier() == 'list_element') {
-                            include_once CMS_ROOT . $element_type->getRootDirectory() . "/" . $element_type->getIdentifier() . "_pre_handler.php";
-                            $pre_handler_class_name = $element_type->getClassName() . "PreHandler";
-                            $element_pre_handler = new $pre_handler_class_name($element);
-                            $element_pre_handler->handle();
-                        } else {
-						    include $element_type->getRootDirectory() . "/handler/update_element.php";
-                        }
-					}
-				}
-			}
+			if ($this->isAddElementAction())
+                $this->addElement();
+			if ($this->isDeleteElementAction())
+                $this->deleteElement();
+			if ($this->isUpdateElementAction())
+                $this->updateElements();
 		}
+
+        private function updateElements()
+        {
+            $element_holder = $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
+            foreach ($element_holder->getElements() as $element) {
+                $this->updateElement($element);
+            }
+        }
+
+        private function updateElement($element)
+        {
+            $element_type = $element->getType();
+            if ($element_type->getIdentifier() == "text_element" || $element_type->getIdentifier() == "list_element")
+                $element->getRequestHandler()->handle();
+            else
+                include $element_type->getRootDirectory() . "/handler/update_element.php";
+        }
+
+        private function addElement()
+        {
+            $element_type = $this->GetElementTypeToAdd();
+            if (!is_null($element_type))
+                $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
+        }
+
+        private function deleteElement()
+        {
+            $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
+            if (!is_null($element_to_delete))
+                $element_to_delete->delete();
+        }
+
+        private function GetElementTypeToAdd() {
+            $element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
+            $element_type = $this->_element_dao->getElementType($element_type_to_add);
+            return $element_type;
+        }
+
+        private function isAddElementAction()
+        {
+            return $_POST[ADD_ELEMENT_FORM_ID] != "";
+        }
+
+        private function isUpdateElementAction()
+        {
+            return $_POST[ACTION_FORM_ID] == "update_element_holder";
+        }
+
+        private function isDeleteElementAction()
+        {
+            return $_POST[DELETE_ELEMENT_FORM_ID] != "";
+        }
     }
 
 ?>

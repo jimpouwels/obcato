@@ -9,11 +9,10 @@
 	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
 	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_form.php";
     require_once CMS_ROOT . "/frontend/list_element_visual.php";
+    require_once CMS_ROOT . "/elements/list_element/list_element_pre_handler.php";
 
 	class ListElement extends Element {
-	
-		private static $TABLE_NAME = "list_elements_metadata";
-			
+
 		private $_title;
 		private $_list_items;
 		private $_metadata_provider;
@@ -66,21 +65,12 @@
 		
 		public function updateMetaData() {
 			$this->_metadata_provider->updateMetaData($this);
-		}
-		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function update() {
-			parent::update();
-		}
-		
-		public function delete() {
-			parent::delete();
-		}
-		
-	}
+        }
+
+        public function getRequestHandler() {
+            return new ListElementPreHandler($this);
+        }
+    }
 	
 	class ListElementMetaDataProvider {
 		

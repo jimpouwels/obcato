@@ -46,11 +46,10 @@
 		public static function constructFromRecord($record) {
 			$element_dao = ElementDao::getInstance();
 			$element_type = $element_dao->getElementTypeForElement($record['id']);
-			if ($element_type->getSystemDefault()) {
+			if ($element_type->getSystemDefault())
 				$element_location_base = CMS_ROOT;
-			} else {
+			else
 				$element_location_base = COMPONENT_DIR;
-			}
 			include_once $element_location_base . '/elements/' . $record['identifier'] . '/' . $record['domain_object'];
 			
 			// first get the element type
@@ -75,6 +74,8 @@
 		public abstract function getBackendVisual();
 
         public abstract function getFrontendVisual($current_page);
+
+        public abstract function getRequestHandler();
 		
 		public abstract function initializeMetaData();
 		

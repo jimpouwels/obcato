@@ -11,9 +11,7 @@
     require_once CMS_ROOT . "/frontend/guestbook_element_visual.php";
 
 	class GuestBookElement extends Element {
-	
-		private static $TABLE_NAME = "guestbook_elements_metadata";
-			
+
 		private $_guestbook_id;
 			
 		public function __construct() {
@@ -57,20 +55,11 @@
 		public function updateMetaData() {
 			$this->myMetaDataProvider->updateMetaData($this);
 		}
-		
-		public function persist() {
-			parent::persist();
-		}
-		
-		public function update() {
-			parent::update();
-		}
-		
-		public function delete() {
-			parent::delete();
-		}
-		
-	}
+
+        public function getRequestHandler() {
+            return null;
+        }
+    }
 	
 	class GuestBookElementMetaDataProvider {
 		
