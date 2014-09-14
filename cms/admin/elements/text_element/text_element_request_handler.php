@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "/database/dao/element_dao.php";
     require_once CMS_ROOT . "/elements/text_element/text_element_form.php";
 
-    class TextElementPreHandler extends PreHandler {
+    class TextElementRequestHandler extends PreHandler {
 
         private $_text_element;
         private $_element_dao;
