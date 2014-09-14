@@ -5,7 +5,6 @@
 	
 	require_once CMS_ROOT . "/database/dao/settings_dao.php";
 	require_once CMS_ROOT . "/pre_handlers/link_pre_handler.php";
-	require_once CMS_ROOT . "/pre_handlers/element_pre_handler.php";
 	require_once CMS_ROOT . "/pre_handlers/module_pre_handler.php";
 	require_once CMS_ROOT . "/view/views/cms.php";
 	require_once CMS_ROOT . "/core/data/settings.php";
@@ -80,7 +79,6 @@
 		private function initializePreHandlers() {
 			$this->_pre_handlers = array();
 			$this->_pre_handlers[] = new LinkPreHandler();
-			$this->_pre_handlers[] = new ElementPreHandler();
 			$this->_pre_handlers[] = new ModulePreHandler($this);
 		}
 		

@@ -4,8 +4,9 @@
 	
 	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
 	require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
+    require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
 	
-	class ElementPreHandler extends PreHandler {
+	class ElementHolderRequestHandler extends ModuleRequestHandler {
 	
 		private $_element_dao;
 		private $_element_holder_dao;
@@ -14,8 +15,11 @@
 			$this->_element_dao = ElementDao::getInstance();
 			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
-	
-		public function handle() {
+
+        function handleGet() {
+        }
+
+        function handlePost() {
 			// Adds an element to the current element holder
 			if (isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != '' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
 				// first obtain the element holder
@@ -24,7 +28,7 @@
 				
 				$element_type = $this->_element_dao->getElementType($element_type_to_add);
 				if (!is_null($element_type)) {
-					$element = $this->_element_dao->createElement($element_type, $element_holder_id);
+				    $this->_element_dao->createElement($element_type, $element_holder_id);
 				}
 			}
 			
@@ -57,7 +61,6 @@
 				}
 			}
 		}
-		
-	}
+    }
 
 ?>

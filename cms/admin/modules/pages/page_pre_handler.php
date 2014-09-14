@@ -8,9 +8,9 @@
 	require_once CMS_ROOT . "/database/dao/element_dao.php";
 	require_once CMS_ROOT . "/database/dao/authorization_dao.php";
 	require_once CMS_ROOT . "/libraries/system/notifications.php";
-	require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
+	require_once CMS_ROOT . "/view/request_handlers/element_holder_request_handler.php";
 	
-	class PagePreHandler extends ModuleRequestHandler {
+	class PagePreHandler extends ElementHolderRequestHandler {
 	
 		private static $PAGE_ID_POST = "element_holder_id";
 		private static $PAGE_ID_GET = "page";
@@ -22,6 +22,7 @@
 		private $_element_dao;
 		
 		public function __construct() {
+            parent::__construct();
 			$this->_page_dao = PageDao::getInstance();
 			$this->_block_dao = BlockDao::getInstance();
 			$this->_element_dao = ElementDao::getInstance();
@@ -32,6 +33,7 @@
 		}
 		
 		public function handlePost() {
+            parent::handlePost();
 			$this->_current_page = $this->getPageFromPostRequest();
 			if ($this->isUpdatePageAction())
 				$this->updatePage();
