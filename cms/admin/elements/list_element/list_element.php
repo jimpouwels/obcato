@@ -7,9 +7,9 @@
 	require_once CMS_ROOT . "/database/mysql_connector.php";
 	require_once CMS_ROOT . "/elements/list_element/list_item.php";
 	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
-	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_form.php";
+	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_editor.php";
     require_once CMS_ROOT . "/frontend/list_element_visual.php";
-    require_once CMS_ROOT . "/elements/list_element/list_element_pre_handler.php";
+    require_once CMS_ROOT . "/elements/list_element/list_element_request_handler.php";
 
 	class ListElement extends Element {
 
@@ -52,7 +52,7 @@
 		}
 		
 		public function getBackendVisual() {
-			return new ListElementFormVisual($this);
+			return new ListElementEditorVisual($this);
 		}
 
         public function getFrontendVisual($current_page) {
@@ -68,7 +68,7 @@
         }
 
         public function getRequestHandler() {
-            return new ListElementPreHandler($this);
+            return new ListElementRequestHandler($this);
         }
     }
 	

@@ -7,12 +7,11 @@
 	require_once CMS_ROOT . "/database/mysql_connector.php";
 	require_once CMS_ROOT . "/database/dao/image_dao.php";
 	require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";
-	require_once CMS_ROOT . "/elements/image_element/visuals/image_element_form.php";
+	require_once CMS_ROOT . "/elements/image_element/visuals/image_element_editor.php";
+    require_once CMS_ROOT . "/elements/image_element/image_element_request_handler.php";
     require_once CMS_ROOT . "/frontend/image_element_visual.php";
 
 	class ImageElement extends Element {
-	
-		private static $TABLE_NAME = "image_elements_metadata";
 			
 		private $_title;
 		private $_alternative_text;
@@ -71,7 +70,7 @@
 		}
 		
 		public function getBackendVisual() {
-			return new ImageElementForm($this);
+			return new ImageElementEditorVisual($this);
 		}
 
         public function getFrontendVisual($current_page) {
@@ -87,7 +86,7 @@
 		}
 
         public function getRequestHandler() {
-            return null;
+            return new ImageElementRequestHandler($this);
         }
     }
 	

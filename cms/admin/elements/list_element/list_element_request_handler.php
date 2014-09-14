@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "/elements/list_element/list_element_form.php";
     require_once CMS_ROOT . "/database/dao/element_dao.php";
 
-    class ListElementPreHandler extends PreHandler {
+    class ListElementRequestHandler extends PreHandler {
 
         private $_list_element;
         private $_list_element_form;

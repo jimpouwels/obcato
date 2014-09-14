@@ -38,8 +38,13 @@
         private function updateElement($element)
         {
             $element_type = $element->getType();
-            if ($element_type->getIdentifier() == "text_element" || $element_type->getIdentifier() == "list_element")
+
+            // new way of calling request handler for an element
+            if ($element_type->getIdentifier() == "text_element" ||
+                $element_type->getIdentifier() == "list_element" ||
+                $element_type->getIdentifier() == "image_element")
                 $element->getRequestHandler()->handle();
+            // old way (TODO: Refactor of calling elements request handler)
             else
                 include $element_type->getRootDirectory() . "/handler/update_element.php";
         }

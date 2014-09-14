@@ -4,21 +4,18 @@
 	defined('_ACCESS') or die;
 
 	require_once CMS_ROOT . "/core/data/element.php";
-	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_form.php";
+	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_editor.php";
 	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
-    require_once CMS_ROOT . "/elements/text_element/text_element_pre_handler.php";
+    require_once CMS_ROOT . "/elements/text_element/text_element_request_handler.php";
 	require_once CMS_ROOT . "/database/mysql_connector.php";
     require_once CMS_ROOT . "/frontend/text_element_visual.php";
 
 	class TextElement extends Element {
-	
-		private static $TABLE_NAME = "text_elements_metadata";
 			
 		private $_title;
 		private $_text;
 			
 		public function __construct() {
-			// set all text element specific metadata
 			$this->myMetaDataProvider = new TextElementMetaDataProvider();
 		}
 		
@@ -27,12 +24,7 @@
 		}
 		
 		public function getTitle() {
-			//include_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-			$title = $this->_title;
-			//if (CMS_ROOT != '') {
-			//	$title = LinkUtility::createLinksInString($title, $this->getElementHolder());
-			//}
-			return $title;
+			return $this->_title;
 		}
 		
 		public function setText($text) {
@@ -48,7 +40,7 @@
 		}
 		
 		public function getBackendVisual() {
-			return new TextElementFormVisual($this);
+			return new TextElementEditorVisual($this);
 		}
 
         public function getFrontendVisual($current_page) {
@@ -64,7 +56,7 @@
         }
 
         public function getRequestHandler() {
-            return new TextElementPreHandler($this);
+            return new TextElementRequestHandler($this);
         }
 		
 	}
