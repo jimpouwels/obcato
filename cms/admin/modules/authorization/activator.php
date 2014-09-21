@@ -50,7 +50,7 @@
 			return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function getPreHandlers() {
+		public function getRequestHandlers() {
 			$pre_handlers = array();
 			$pre_handlers[] = $this->_authorization_pre_handler;
 			return $pre_handlers;

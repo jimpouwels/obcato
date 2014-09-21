@@ -1,20 +1,19 @@
 <?php
 	// No direct access
 	defined('_ACCESS') or die;
-	
-	require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
+
+    require_once CMS_ROOT . "/view/request_handlers/http_request_handler.php";
 	require_once CMS_ROOT . "/database/dao/settings_dao.php";
 	
-	class StaticsRequestHandler extends PreHandler {
-		
-		private static $FILE_QUERYSTRING_KEY;
+	class StaticsRequestHandler extends HttpRequestHandler {
+
 		private $_settings;
 		
 		public function __construct() {
 			$this->_settings = SettingsDao::getInstance()->getSettings();
 		}
-		
-		public function handle() {
+
+        public function handleGet() {
 			$relative_path = $this->getRelativePathFromGetRequest();
 			if (!empty($relative_path)) {
 				$absolute_path = $this->getAbsolutePathFor($relative_path);
@@ -22,6 +21,9 @@
 				readfile($absolute_path);
 			}
 		}
+
+        public function handlePost() {
+        }
 		
 		private function setResponseContentType($absolute_path) {
 			$path_parts = explode(".", $absolute_path);

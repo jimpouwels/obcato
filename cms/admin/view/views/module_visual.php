@@ -9,7 +9,7 @@
 		
 		abstract function getHeadIncludes();
 		
-		abstract function getPreHandlers();
+		abstract function getRequestHandlers();
 		
 		abstract function onPreHandled();
 		

@@ -53,10 +53,10 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function getPreHandlers() {
-			$pre_handlers = array();
-			$pre_handlers[] = $this->_template_pre_handler;
-			return $pre_handlers;
+		public function getRequestHandlers() {
+            $request_handlers = array();
+            $request_handlers[] = $this->_template_pre_handler;
+			return $request_handlers;
 		}
 		
 		public function onPreHandled() {

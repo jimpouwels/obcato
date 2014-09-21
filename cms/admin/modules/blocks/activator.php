@@ -76,7 +76,7 @@
 			return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
 		}
 		
-		public function getPreHandlers() {
+		public function getRequestHandlers() {
 			$pre_handlers = array();
 			$pre_handlers[] = $this->_block_pre_handler;
 			$pre_handlers[] = $this->_position_pre_handler;

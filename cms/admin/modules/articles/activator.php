@@ -60,7 +60,7 @@
 			return $this->_article_module->getTitle();
 		}
 		
-		public function getPreHandlers() {
+		public function getRequestHandlers() {
 			$pre_handlers = array();
 			$pre_handlers[] = $this->_article_pre_handler;
 			$pre_handlers[] = $this->_term_pre_handler;

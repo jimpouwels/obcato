@@ -21,7 +21,7 @@
 		public function getHeadIncludes() {
 		}
 		
-		public function getPreHandlers() {
+		public function getRequestHandlers() {
 			$pre_handlers = array();
 			return $pre_handlers;
 		}

@@ -1,12 +1,15 @@
 <?php
 	// No direct access
 	defined('_ACCESS') or die;
+
+    require_once CMS_ROOT . "/view/request_handlers/http_request_handler.php";
 	
-	include_once CMS_ROOT . "/pre_handlers/pre_handler.php";
-	
-	class LinkPreHandler extends PreHandler {
-	
-		public function handle() {
+	class LinkRequestHandler extends HttpRequestHandler {
+
+        public function handleGet() {
+        }
+
+		public function handlePost() {
 			// Adds a link to the current element holder
 			if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'add_link' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
 				include_once CMS_ROOT . "/database/dao/link_dao.php";

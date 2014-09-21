@@ -7,7 +7,8 @@
 	require_once CMS_ROOT . "/database/mysql_connector.php";
 	require_once CMS_ROOT . "/database/dao/article_dao.php";
 	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
-	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_form.php";
+	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
+    require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_request_handler.php";
     require_once CMS_ROOT . "/frontend/article_overview_element_visual.php";
 
 	class ArticleOverviewElement extends Element {
@@ -130,7 +131,7 @@
 		}
 		
 		public function getBackendVisual() {
-			return new ArticleOverviewElementForm($this);
+			return new ArticleOverviewElementEditor($this);
 		}
 
         public function getFrontendVisual($current_page) {
@@ -146,7 +147,7 @@
 		}
 
         public function getRequestHandler() {
-            return null;
+            return new ArticleOverviewElementRequestHandler($this);
         }
     }
 	

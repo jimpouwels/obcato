@@ -4,8 +4,8 @@
 	defined('_ACCESS') or die;
 	
 	require_once CMS_ROOT . "/database/dao/settings_dao.php";
-	require_once CMS_ROOT . "/pre_handlers/link_pre_handler.php";
-	require_once CMS_ROOT . "/pre_handlers/module_pre_handler.php";
+	require_once CMS_ROOT . "/view/request_handlers/link_request_handler.php";
+	require_once CMS_ROOT . "/view/request_handlers/backend_request_handler.php";
 	require_once CMS_ROOT . "/view/views/cms.php";
 	require_once CMS_ROOT . "/core/data/settings.php";
 	require_once CMS_ROOT . "/core/data/session.php";
@@ -15,7 +15,7 @@
 	
 		private $_identifier;
 		private $_session;
-		private $_pre_handlers;
+		private $_request_handlers;
 		private $_settings;
 		private $_current_module;
 		private $_module_visual;
@@ -24,13 +24,13 @@
 			$this->_identifier = $identifier;
 			$this->_session = new Session();
 			$this->_settings = SettingsDao::getInstance()->getSettings();
-			$this->initializePreHandlers();
+			$this->initializeRequestHandlers();
 		}
 		
 		public function start() {
 			$this->isAuthenticated();
-			$this->runPreHandlers();
-			$this->runModulePreHandler();
+			$this->runRequestHandlers();
+			$this->runModuleRequestHandler();
 			$this->renderCms();
 		}
 		
@@ -40,7 +40,7 @@
 		}
 		
 		/*
-			Callback invocation for ModulePreHandler.
+			Callback invocation for BackendRequestHandler.
 		*/
 		public function setCurrentModule($current_module) {
 			if (!is_null($current_module)) {
@@ -68,25 +68,23 @@
 			$popup->render();
 		}
 		
-		private function runModulePreHandler() {
+		private function runModuleRequestHandler() {
 			if (!is_null($this->_module_visual)) {
-				foreach ($this->_module_visual->getPreHandlers() as $pre_handler)
-					$pre_handler->handle();
+				foreach ($this->_module_visual->getRequestHandlers() as $request_handler)
+                    $request_handler->handle();
 				$this->_module_visual->onPreHandled();
 			}
 		}
 		
-		private function initializePreHandlers() {
-			$this->_pre_handlers = array();
-			$this->_pre_handlers[] = new LinkPreHandler();
-			$this->_pre_handlers[] = new ModulePreHandler($this);
+		private function initializeRequestHandlers() {
+			$this->_request_handlers = array();
+			$this->_request_handlers[] = new LinkRequestHandler();
+			$this->_request_handlers[] = new BackendRequestHandler($this);
 		}
 		
-		private function runPreHandlers() {
-			foreach ($this->_pre_handlers as $pre_handler) {
-				if ($pre_handler instanceof PreHandler)
-					$pre_handler->handle();
-			}
+		private function runRequestHandlers() {
+			foreach ($this->_request_handlers as $request_handler)
+                $request_handler->handle();
 		}
 		
 		private function redirectToLoginPage() {

@@ -25,10 +25,10 @@
 		public function getHeadIncludes() {
 		}
 		
-		public function getPreHandlers() {
-			$pre_handlers = array();
-			$pre_handlers[] = $this->_logout_pre_handler;
-			return $pre_handlers;
+		public function getRequestHandlers() {
+            $request_handlers = array();
+            $request_handlers[] = $this->_logout_pre_handler;
+			return $request_handlers;
 		}
 		
 		public function onPreHandled() {

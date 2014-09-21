@@ -29,7 +29,7 @@
         public function getHeadIncludes() {
         }
 
-        public function getPreHandlers() {
+        public function getRequestHandlers() {
         }
 
         public function onPreHandled() {
