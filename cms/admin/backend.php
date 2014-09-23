@@ -90,9 +90,8 @@
 		private function redirectToLoginPage() {
 			session_destroy();
 			$org_url = null;
-			if ($_SERVER['REQUEST_URI'] != '/admin/') {
+			if ($_SERVER['REQUEST_URI'] != '/admin/')
 				$org_url = '?org_url=' . urlencode($_SERVER['REQUEST_URI']);
-			}
 			header('Location: /admin/login.php' . $org_url);
 			exit();
 		}

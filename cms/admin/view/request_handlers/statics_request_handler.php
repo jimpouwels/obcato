@@ -48,9 +48,8 @@
 		}
 		
 		private function getRelativePathFromGetRequest() {
-			if (isset($_GET["file"]) && $_GET["file"] != "") {
+			if (isset($_GET["file"]) && $_GET["file"] != "")
 				return $_GET["file"];
-			}
 		}
 	}
 ?>
