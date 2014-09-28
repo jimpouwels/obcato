@@ -12,12 +12,10 @@
 		
 		private $_element_holder_dao;
 		private $_title;
-		private $_elements;
 		private $_published;
 		private $_include_in_search_engine;
 		private $_created_at;
 		private $_created_by_id;
-		private $_type;
 		
 		public function __construct() {
 			$this->_element_holder_dao = ElementHolderDao::getInstance();

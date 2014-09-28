@@ -30,6 +30,7 @@
         }
 
         public function getRequestHandlers() {
+            return array();
         }
 
         public function onPreHandled() {

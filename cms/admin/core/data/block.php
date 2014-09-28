@@ -3,7 +3,7 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/core/data/element_holder.php";
+	require_once CMS_ROOT . "/core/data/element_holder.php";
 
 	class Block extends ElementHolder {
 	
@@ -41,7 +41,6 @@
 			$block->setCreatedAt($record['created_at']);
 			$block->setCreatedById($record['created_by']);
 			$block->setType($record['type']);
-			
 			return $block;
 		}
 	

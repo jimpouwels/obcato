@@ -11,26 +11,15 @@
 
         private $_mysql_connector;
 
-		/*
-			This DAO is a singleton, no constructur but
-			a getInstance() method instead.
-		*/
 		private static $instance;
-		
-		/*
-			Private constructor.
-		*/
+
 		private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
 		}
-		
-		/*
-			Creates (if not exists) and returns an instance.
-		*/
+
 		public static function getInstance() {
-			if (!self::$instance) {
+			if (!self::$instance)
 				self::$instance = new AuthorizationDao();
-			}
 			return self::$instance;
 		}
 
@@ -78,7 +67,6 @@
 								  uuid = '" . $user->getUuid() . "'";
 			if (!is_null($user->getPassword()) && $user->getPassword() != '')
 				$query = $query . ", password = '" . StringUtility::hashStringValue($user->getPassword()) . "'";
-								  
 			$query = $query . " WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("i", $user->getId());
@@ -93,13 +81,11 @@
 
 		public function createUser() {
 			$new_user = new User();
-			$new_user->setUsername('user' . $new_user->getId());
+			$new_user->setUsername("user" . $new_user->getId());
 			$new_user->setFirstName('Nieuwe');
 			$new_user->setLastName('Gebruiker');
-			
 			$new_id = $this->persistUser($new_user);
 			$new_user->setId($new_id);
-			
 			return $new_user;
 		}
 

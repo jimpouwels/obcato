@@ -16,14 +16,9 @@
         private $_element_holder_dao;
         private $_mysql_connector;
 
-        // Holds the list of columns that are to be collected
 		public static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id, 
 					  e.created_at, e.created_by, e.type, b.position_id";
-					  
-		/*
-			This DAO is a singleton, no constructur but
-			a getInstance() method instead.
-		*/
+
 		private static $instance;
 
 		private function __construct() {
@@ -32,9 +27,8 @@
 		}
 
 		public static function getInstance() {
-			if (!self::$instance) {
+			if (!self::$instance)
 				self::$instance = new BlockDao();
-			}
 			return self::$instance;
 		}
 
@@ -42,7 +36,6 @@
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE e.id = b.element_holder_id";
 			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
-			
 			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
@@ -51,11 +44,12 @@
 		}
 
 		public function getBlocksByPosition($position) {
-			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE b.position_id = " 
-			          . $position->getId() . " AND e.id = b.element_holder_id";
-			$result = $this->_mysql_connector->executeQuery($query);
+			$statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
+			                                                        element_holders e, blocks b WHERE b.position_id = ?
+			                                                        AND e.id = b.element_holder_id");
+            $statement->bind_param("i", $position->getId());
+			$result = $this->_mysql_connector->executeStatement($statement);
 			$blocks = array();
-			
 			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
@@ -68,7 +62,6 @@
 					 NULL AND e.id = b.element_holder_id";
 			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
-			
 			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
@@ -84,11 +77,6 @@
 					 " AND bp.page_id = " . $page->getId() .
 					 " AND bps.name = '" . $position_name . "'" . 
 					 " AND b.position_id = bps.id";
-			
-			if (CMS_ROOT != "") {
-				$query = $query . " AND e.published = 1";
-			}
-			
 		    $result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 			
@@ -205,7 +193,7 @@
 			$new_position = new BlockPosition();
 			$postfix = 1;
 			while (!is_null($this->getBlockPositionByName($new_position->getName()))) {
-				$new_position->setName("Nieuwe positie " . $postfix);
+				$new_position->setName("nieuwe_positie_" . $postfix);
 				$postfix++;
 			}
 			$this->persistBlockPosition($new_position);

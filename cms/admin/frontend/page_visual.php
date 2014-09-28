@@ -21,6 +21,7 @@
         public function render() {
             $this->_template_engine->assign("children", $this->renderChildren($this->_page));
             $this->_template_engine->assign("elements", $this->renderElementHolderContent($this->_page));
+            $this->_template_engine->assign("blocks", $this->renderBlocks());
             $this->_template_engine->assign("article", $this->renderArticle());
             $this->_template_engine->assign("title", $this->_page->getTitle());
             $this->_template_engine->assign("navigation_title", $this->_page->getNavigationTitle());
@@ -57,6 +58,32 @@
                 $article_content["elements"] = $this->renderElementHolderContent($this->_article);
             }
             return $article_content;
+        }
+
+        private function renderBlocks() {
+            $blocks = array();
+            $blocks["no_position"] = array();
+            foreach ($this->_page->getBlocks() as $block) {
+                if (!$block->isPublished()) continue;
+                $position = $block->getPosition();
+                if (!is_null($position)) {
+                    $positionName = $position->getName();
+                    if (!isset($blocks[$positionName]))
+                        $blocks[$positionName] = array();
+                    $blocks[$positionName][] = $this->renderBlock($block);
+                } else {
+                    $blocks["no_position"][] = $this->renderBlock($block);
+                }
+            }
+            return $blocks;
+        }
+
+        private function renderBlock($block) {
+            $block_content = array();
+            $block_content["id"] = $block->getId();
+            $block_content["title"] = $block->getTitle();
+            $block_content["elements"] = $this->renderElementHolderContent($block);
+            return $block_content;
         }
 
         private function renderElementHolderContent($element_holder) {
