@@ -39,11 +39,15 @@
             return "/index.php?image=" . $image->getId();
         }
 
-        protected function getArticleFrontendUrl($article) {
+        protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
             if (is_null($target_page))
                 $target_page = $this->_current_page;
             return "/index.php?id=" . $target_page->getId() . "&amp;articleid=" . $article->getId();
+        }
+
+        protected function getPageUrl($page) {
+            return "/index.php?id=" . $page->getId();
         }
 
         private function createLinksInString($value, $element_holder) {
@@ -80,7 +84,7 @@
                     break;
                 case Article::ElementHolderType:
                     $target_article = $this->_article_dao->getArticle($target_element_holder->getId());
-                    return $this->getArticleFrontendUrl($target_article);
+                    return $this->getArticleUrl($target_article);
                     break;
             }
         }

@@ -38,6 +38,7 @@
                 $child["navigation_title"] = $subPage->getNavigationTitle();
                 $child["description"] = $subPage->getDescription();
                 $child["show_in_navigation"] = $subPage->getShowInNavigation();
+                $child["url"] = $this->getPageUrl($subPage);
                 $child["children"] = $this->renderChildren($subPage);
                 $children[] = $child;
             }
