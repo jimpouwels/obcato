@@ -19,13 +19,13 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SHOW TABLES";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			
 			$mysql_database = MysqlConnector::getInstance();
 			$database_name = $mysql_database->getDatabaseName();
 			$tables = array();
 			
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$tables[] = $row['Tables_in_' . $database_name];;
 			}
 			return $tables;
@@ -35,10 +35,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = 'SHOW columns FROM ' . $table_name;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			
 			$columns = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$column = array();
 				$column['name'] = $row['Field'];
 				$column['type'] = $row['Type'];

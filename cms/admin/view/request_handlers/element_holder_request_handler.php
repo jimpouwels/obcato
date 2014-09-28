@@ -71,17 +71,17 @@
 
         private function isAddElementAction()
         {
-            return $_POST[ADD_ELEMENT_FORM_ID] != "";
+            return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
         }
 
         private function isUpdateElementAction()
         {
-            return $_POST[ACTION_FORM_ID] == "update_element_holder";
+            return isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == "update_element_holder";
         }
 
         private function isDeleteElementAction()
         {
-            return $_POST[DELETE_ELEMENT_FORM_ID] != "";
+            return isset($_POST[DELETE_ELEMENT_FORM_ID]) && $_POST[DELETE_ELEMENT_FORM_ID] != "";
         }
     }
 

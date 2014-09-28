@@ -64,7 +64,7 @@
 
 			$mysql_database->executeQuery($query);
 			
-			return mysql_insert_id();
+			return $mysql_database->getInsertId();
 		}
 		
 		/*
@@ -76,9 +76,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM links WHERE parent_element_holder = " . $element_holder_id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$links = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$link = Link::constructFromRecord($row);
 				
 				$links[] = $link;
@@ -133,9 +133,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM links WHERE target_address IS NULL AND target_element_holder IS NULL";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$links = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$link = Link::constructFromRecord($row);
 				
 				$links[] = $link;

@@ -19,36 +19,38 @@
 		private function __construct() {
 			$this->_host = HOST;
 			$this->_database_name = DATABASE_NAME;
-			$this->conn = mysql_connect($this->_host, USERNAME, PASSWORD) or die("Error connecting to MySQL database");
-			mysql_select_db($this->_database_name, $this->conn);
+			$this->conn = new mysqli($this->_host, USERNAME, PASSWORD, $this->_database_name) or die("Error connecting to MySQL database");
 		}
 
 		public function getConnection() {
 			return $this->conn; 
 		}
 
-		public function executeSelectQuery($query) {
-			$result = null;
-			$result = mysql_query($query, $this->conn);		
-			return $result;
-		}
-		
-		public function executeQuery($query) {
-			$result = mysql_query($query, $this->conn);
-		}
-		
-		public function getNextIdValue($table_name) {
-			$query = "SELECT MAX(id) as next_id FROM " . $table_name;
-			$result = self::executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
-				return $row['next_id'] + 1;
-			}
-		}
+        public function prepareStatement($query) {
+            return $this->conn->prepare($query);
+        }
+
+        public function executeStatement($statement) {
+            $statement->execute();
+            $result = $statement->get_result();
+            $statement->close();
+            return $result;
+        }
+
+        public function executeQuery($query) {
+            $statement = $this->prepareStatement($query);
+            $statement->execute();
+            $result = $statement->get_result();
+            $statement->close();
+            return $result;
+        }
 
         public function executeSql($sql) {
-            $mysqli = new mysqli(HOST, USERNAME, PASSWORD, DATABASE_NAME);
-            mysqli_multi_query($mysqli, $sql);
-            $mysqli->close();
+            mysqli_multi_query($this->conn, $sql);
+        }
+
+        public function getInsertId() {
+            return $this->conn->insert_id;
         }
 		
 		public function getDatabaseName() {
@@ -65,8 +67,8 @@
 		
 		public function getDatabaseVersion() {
 			$query = "select version() AS version";
-			$result = self::executeSelectQuery($query);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = self::executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				return $row['version'];
 			}
 		}

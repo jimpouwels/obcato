@@ -14,7 +14,7 @@
 	class ArticleDao {
 
 		private static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id, 
-					  e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.target_page";
+					  e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page";
 
 		private static $instance;
 		private $_page_dao;
@@ -34,29 +34,26 @@
 		}
 
 		public function getArticle($id) {
-			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = " . $id
-					 . " AND e.id = a.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
+                                                                    element_holders e, articles a WHERE e.id = ?
+                                                                    AND e.id = a.element_holder_id");
+            $statement->bind_param("i", $id);
+            $result = $this->_mysql_connector->executeStatement($statement);
 			$article = null;
-			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc())
 				$article = Article::constructFromRecord($row);
-			}
 			return $article;
 		}
 
 		public function getAllArticles() {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
 					  order by created_at DESC";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$articles = array();
-			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$article = Article::constructFromRecord($row);
-				
 				array_push($articles, $article);
 			}
-			
 			return $articles;
 		}
 
@@ -64,19 +61,17 @@
 			$from = " FROM element_holders e, articles a";
 			$where = " WHERE
 					  e.id = a.element_holder_id";
-			
-			if (!is_null($keyword) && $keyword != '') {
+			if (!is_null($keyword) && $keyword != "")
 				$where = $where . " AND e.title LIKE '" . $keyword . "%'";
-			}
 			if (!is_null($term_id)) {
 				$from = $from . ", articles_terms ats";
 				$where = $where . " AND ats.term_id = " . $term_id . " AND ats.article_id = e.id";
 			}
 			
 			$query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$articles = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$article = Article::constructFromRecord($row);
 				array_push($articles, $article);
 			}
@@ -109,17 +104,23 @@
 			}
 			
 			if (!is_null($order_by) && $order_by != '') {
-				if ($order_by == 'Alfabet') {
-					$order = 'e.title';
-				} else {
-					$order = 'a.publication_date DESC';
+                switch ($order_by) {
+                    case "Alphabet":
+                        $order = 'e.title';
+                        break;
+                    case "PublicationDate":
+					    $order = 'a.publication_date DESC';
+                        break;
+                    case "SortDate":
+                        $order = 'a.sort_date DESC';
+                        break;
 				}
 			}
 			
 			$query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$articles = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$article = Article::constructFromRecord($row);
 				
 				array_push($articles, $article);
@@ -165,17 +166,17 @@
 
 		private function persistArticle($article) {
             $this->_element_holder_dao->persist($article);
-			$query = "INSERT INTO articles (description, image_id, element_holder_id, publication_date, target_page) VALUES
-					  (NULL, NULL, " . $article->getId() . ", now(), NULL)";
+			$query = "INSERT INTO articles (description, image_id, element_holder_id, sort_date, publication_date, target_page) VALUES
+					  (NULL, NULL, " . $article->getId() . ", now(), now(), NULL)";
             $this->_mysql_connector->executeQuery($query);
 		}
 
 		public function getAllTerms() {
 			$query = "SELECT * FROM article_terms";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$terms = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$term = new ArticleTerm();
 				$term->setId($row['id']);
 				$term->setName($row['name']);
@@ -188,10 +189,10 @@
 
 		public function getTerm($id) {
 			$query = "SELECT * FROM article_terms WHERE id = " . $id;
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$term = null;
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$term = new ArticleTerm();
 				$term->setId($row['id']);
 				$term->setName($row['name']);
@@ -201,10 +202,10 @@
 
 		public function getTermByName($name) {
 			$query = "SELECT * FROM article_terms WHERE name = '" . $name . "'";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$term = NULL;
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$term = new ArticleTerm();
 				$term->setId($row['id']);
 				$term->setName($row['name']);
@@ -228,7 +229,7 @@
 		private function persistTerm($term) {
 			$query = "INSERT INTO article_terms (name) VALUES  ('" . $term->getName() . "')";
             $this->_mysql_connector->executeQuery($query);
-            $term->setId(mysql_insert_id());
+            $term->setId($this->_mysql_connector->getInsertId());
 		}
 
 		public function updateTerm($term) {
@@ -247,10 +248,10 @@
 					  element_holders e WHERE ats.article_id = " . $article_id . " AND ats.article_id =
 					  e.id AND at.id = ats.term_id";
 					  
-		    $result = $this->_mysql_connector->executeSelectQuery($query);
+		    $result = $this->_mysql_connector->executeQuery($query);
 			$terms = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$term = new ArticleTerm();
 				$term->setId($row['id']);
 				$term->setName($row['name']);
@@ -274,9 +275,9 @@
 
 		public function getTargetPages() {
 			$query = "SELECT element_holder_id FROM article_target_pages";			
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$pages = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$pages[] = $this->_page_dao->getPage($row['element_holder_id']);
             }
 			return $pages;
@@ -284,8 +285,8 @@
 
 		public function addTargetPage($target_page_id) {
 			$duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $target_page_id;
-			$result = $this->_mysql_connector->executeSelectQuery($duplicate_check_query);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = $this->_mysql_connector->executeQuery($duplicate_check_query);
+			while ($row = $result->fetch_assoc()) {
 				$count = $row['number_of'];
 				break;
 			}
@@ -309,9 +310,9 @@
 
 		public function getDefaultTargetPage() {
 			$query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";			
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$page = null;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$page = $this->_page_dao->getPage($row["element_holder_id"]);
 				break;
 			}

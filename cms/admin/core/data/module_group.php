@@ -30,9 +30,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM modules WHERE module_group_id = " . $this->getId();
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$modules = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$module = Module::constructFromRecord($row);
 				if (!is_null($module)) {
 					array_push($modules, $module);

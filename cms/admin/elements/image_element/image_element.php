@@ -96,8 +96,8 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT title, image_id, align, alternative_text FROM image_elements_metadata WHERE element_id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$element->setTitle($row['title']);
 				$element->setAlternativeText($row['alternative_text']);
 				$element->setAlign($row['align']);
@@ -131,8 +131,8 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			$query = "SELECT t.id, e.id FROM image_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
 					  AND e.id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				return true;
 			}
 			return false;

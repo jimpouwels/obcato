@@ -163,8 +163,8 @@
 			
 			$query = "SELECT title, show_from, show_to, show_until_today, order_by, number_of_results FROM article_overview_elements_metadata " . 
 					 "WHERE element_id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$element->setTitle($row['title']);
 				$element->setShowFrom($row['show_from']);
 				$element->setShowTo($row['show_to']);
@@ -185,9 +185,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM articles_element_terms WHERE element_id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$term_ids = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				array_push($term_ids, $row['term_id']);
 			}
 			return $term_ids;
@@ -269,8 +269,8 @@
 			$query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
 					. $element->getId() . " AND e.id = " . $element->getId();
 			$mysql_database = MysqlConnector::getInstance(); 
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				return true;
 			}
 			return false;

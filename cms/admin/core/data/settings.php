@@ -129,18 +129,13 @@
 		
 		public function getHomepage() {
 			$mysql_database = MysqlConnector::getInstance();
-			$query = "SELECT element_holder_id FROM pages WHERE is_homepage = 1";
-			$result = $mysql_database->executeSelectQuery($query);
-			
-			$homepage = NULL;
-			$homepage_id = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+            $result = $mysql_database->executeQuery("SELECT element_holder_id FROM pages WHERE is_homepage = 1");
+			$homepage = null;
+			$homepage_id = null;
+			while ($row = $result->fetch_assoc())
 				$homepage_id = $row['element_holder_id'];
-			}
-		
-			if (!is_null($homepage_id)) {
+			if (!is_null($homepage_id))
 				$homepage = PageDao::getInstance()->getPage($homepage_id);
-			}
 			
 			return $homepage;
 		}
@@ -149,14 +144,11 @@
 		}
 		
 		public static function find() {
-			$mysql_database = MysqlConnector::getInstance(); 
-			$query = "SELECT * FROM settings";
-			$result = $mysql_database->executeSelectQuery($query);
+			$mysql_database = MysqlConnector::getInstance();
+            $result = $mysql_database->executeQuery("SELECT * FROM settings");
 			$settings = null;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc())
 				$settings = self::constructFromRecord($row);
-			}
-			
 			return $settings;
 		}
 		

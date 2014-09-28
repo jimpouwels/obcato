@@ -43,37 +43,28 @@
 		*/
 		public function getElementHolder($id) {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e WHERE e.id = " . $id;
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$element_holder = NULL;
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_holder = ElementHolder::constructFromRecord($row);
 
 				break;
 			}
 			return $element_holder;
 		}
-		
-		/*
-			Persists the element holder.
-			
-			@param $element_holder The element holder to persist
-		*/
+
 		public function persist($element_holder) {
 			$query = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type) VALUES
 					  (NULL, '" . $element_holder->getTitle() . "', 0," . $element_holder->getScopeId() . ", now(), " . $element_holder->getCreatedBy()->getId() . "
 					  , '" . $element_holder->getType() . "')";
 		   
 			$this->_mysql_connector->executeQuery($query);
-			$element_holder->setId(mysql_insert_id());
+			$element_holder->setId($this->_mysql_connector->getInsertId());
 		}
-		
-		/*
-			Updates the element holder.
-			
-			@param $element_holder The element holder to update
-		*/
+
 		public function update($element_holder) {
-			$query = "UPDATE element_holders SET title = '" . $element_holder->getTitle() . "', published = " . $element_holder->isPublished() . ",
+            $published_value = ($element_holder->isPublished()) ? 1 : 0;
+			$query = "UPDATE element_holders SET title = '" . $element_holder->getTitle() . "', published = " . $published_value . ",
 					  scope_id = " . $element_holder->getScopeId();
 			if ($element_holder->getTemplateId() != "" && !is_null($element_holder->getTemplateId())) {
 				$query .= ", template_id = " . $element_holder->getTemplateId();
@@ -81,12 +72,7 @@
 			$query .= " WHERE id = " . $element_holder->getId();
 			$this->_mysql_connector->executeQuery($query);
 		}
-		
-		/*
-			Deletes the element holder.
-			
-			@param $element_holder The element holder to delete
-		*/
+
 		public function delete($element_holder) {
 			$query = "DELETE FROM element_holders WHERE id = " . $element_holder->getId();				  
 			$this->_mysql_connector->executeQuery($query);

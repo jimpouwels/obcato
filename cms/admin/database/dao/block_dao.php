@@ -40,10 +40,10 @@
 
 		public function getAllBlocks() {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE e.id = b.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
 			}
@@ -53,10 +53,10 @@
 		public function getBlocksByPosition($position) {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE b.position_id = " 
 			          . $position->getId() . " AND e.id = b.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
 			}
@@ -66,10 +66,10 @@
 		public function getBlocksWithoutPosition() {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE b.position_id IS  
 					 NULL AND e.id = b.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
 			}
@@ -89,10 +89,10 @@
 				$query = $query . " AND e.published = 1";
 			}
 			
-		    $result = $this->_mysql_connector->executeSelectQuery($query);
+		    $result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
 			}
@@ -102,10 +102,10 @@
 		public function getBlocksByPage($page) {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b, blocks_pages bps WHERE e.id = b.element_holder_id
 			          AND bps.page_id = " . $page->getId() . " AND bps.block_id = e.id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$blocks = array();
 
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				array_push($blocks, $block);
 			}
@@ -114,10 +114,10 @@
 
 		public function getBlockPositions() {
 			$query = "SELECT * FROM block_positions ORDER BY name";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$positions = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$position = BlockPosition::constructFromRecord($row);
 				array_push($positions, $position);
 			}
@@ -128,9 +128,9 @@
 			$position = NULL;
 			if (!is_null($position_id) && $position_id != '') {
 				$query = "SELECT * FROM block_positions WHERE id = " . $position_id;
-				$result = $this->_mysql_connector->executeSelectQuery($query);
+				$result = $this->_mysql_connector->executeQuery($query);
 				
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = $result->fetch_assoc()) {
 					$position = BlockPosition::constructFromRecord($row);
 					break;
 				}
@@ -142,9 +142,9 @@
 			$position = NULL;
 			if (!is_null($position_name) && $position_name != '') {
 				$query = "SELECT * FROM block_positions WHERE name = '" . $position_name . "'";
-				$result = $this->_mysql_connector->executeSelectQuery($query);
+				$result = $this->_mysql_connector->executeQuery($query);
 				
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = $result->fetch_assoc()) {
 					$position = BlockPosition::constructFromRecord($row);
 					break;
 				}
@@ -155,10 +155,10 @@
 		public function getBlock($id) {
 			$query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE e.id = " . $id
 					 . " AND e.id = b.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$block = null;
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$block = Block::constructFromRecord($row);
 				break;
 			}
@@ -215,7 +215,7 @@
 		private function persistBlockPosition($position) {
 			$query = "INSERT INTO block_positions (name, explanation) VALUES  ('" . $position->getName() . "', NULL)";
             $this->_mysql_connector->executeQuery($query);
-            $position->setId(mysql_insert_id());
+            $position->setId($this->_mysql_connector->getInsertId());
 		}
 
 		public function updateBlockPosition($position) {

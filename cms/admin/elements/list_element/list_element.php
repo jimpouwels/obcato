@@ -82,8 +82,8 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT title FROM list_elements_metadata WHERE element_id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$element->setTitle($row['title']);
 			}
 			
@@ -121,9 +121,8 @@
 						$query = "UPDATE list_element_items SET text = '" . $list_item->getText() . "', indent = " . $list_item->getIndent() . "
 								  WHERE id = " . $list_item->getId();
 					} else {
-						$list_item->setId($mysql_database->getNextIdValue('list_element_items'));
-						$query = "INSERT INTO list_element_items (id, text, indent, element_id) VALUES
-							(" . $list_item->getId() . ", '" . $list_item->getText() . "', " . $list_item->getIndent() . ", " . $element->getId() . ")";
+						$query = "INSERT INTO list_element_items (text, indent, element_id) VALUES
+							('" . $list_item->getText() . "', " . $list_item->getIndent() . ", " . $element->getId() . ")";
 					}
 					$mysql_database->executeQuery($query);
 				}
@@ -135,8 +134,8 @@
 			$query = "SELECT t.id, e.id FROM list_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
 					  AND e.id = " . $element->getId();
 			$mysql_database = MysqlConnector::getInstance(); 
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				return true;
 			}
 			return false;
@@ -148,10 +147,10 @@
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM list_element_items i, elements e WHERE i.element_id = " . $element->getId() .
 					  " AND e.id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$list_items = array();
 			$list_item = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$list_item = new ListItem();
 				$list_item->setId($row['id']);
 				$list_item->setText($row['text']);

@@ -22,11 +22,11 @@
 		public function loadFields() {
 			$this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
 			$this->_article->setDescription($this->getFieldValue("article_description"));
-			$this->_article->setDescription($this->getFieldValue("article_description"));
 			$this->_article->setPublished($this->getCheckboxValue("article_published"));
 			$this->_article->setImageId($this->getFieldValue("article_image_ref_" . $this->_article->getId()));
 			$this->_article->setTargetPageId($this->getFieldValue("article_target_page"));
 			$this->loadPublicationDate();
+            $this->loadSortDate();
 			$this->deleteLeadImageIfNeeded();
 			$this->_element_order = $this->getFieldValue("element_order");		
 			$this->_selected_terms = $this->getFieldValue("select_terms_" . $this->_article->getId());
@@ -65,6 +65,11 @@
 			$publication_date = $this->getMandatoryDate("publication_date", "Vul een datum in (bijv. 31-12-2010)");
 			$this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
 		}
+
+        private function loadSortDate() {
+            $sort_date = $this->getMandatoryDate("sort_date", "Vul een datum in (bijv. 31-12-2010)");
+            $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
+        }
 	
 	}
 	

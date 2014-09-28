@@ -46,9 +46,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM guestbooks g ORDER BY created_at DESC";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$guestbooks = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$guestbook = GuestBook::constructFromRecord($row);
 
 				array_push($guestbooks, $guestbook);
@@ -65,9 +65,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM guestbooks g WHERE g.id = " . $id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$guestbook = NULL;
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$guestbook = GuestBook::constructFromRecord($row);
 				
 				break;
@@ -103,7 +103,7 @@
 		    
 			$mysql_database->executeQuery($query);
 			
-			return mysql_insert_id();
+			return $mysql_database->getInsertId();
 		}
 		
 		/*
@@ -143,9 +143,9 @@
 			$mysql_database = MysqlConnector::getInstance();
 			
 			$query = "SELECT * FROM guestbook_messages WHERE id = " . $message_id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$message = NULL;
-			while($row = mysql_fetch_array($result)) {
+			while($row = $result->fetch_assoc()) {
 				$message = GuestbookMessage::constructFromRecord($row);
 				
 				break;
@@ -162,9 +162,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM guestbook_messages g WHERE g.guestbook_id = " . $guestbook_id . " ORDER BY posted_at DESC";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$messages = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$message = GuestbookMessage::constructFromRecord($row);
 				
 				array_push($messages, $message);
@@ -184,9 +184,9 @@
 			
 			$query = "SELECT * FROM guestbook_messages g WHERE g.guestbook_id = " . $guestbook_id . 
 					 " ORDER BY posted_at DESC LIMIT " . $from . ", " . ($to - $from);
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$messages = array();
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$message = GuestbookMessage::constructFromRecord($row);
 				
 				array_push($messages, $message);
@@ -202,9 +202,9 @@
 			
 			$query = "SELECT count(*) AS message_count FROM guestbook_messages WHERE guestbook_id = " . $guestbook_id;
 
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$count = 0;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$count = $row['message_count'];
 			}
 			return $count;

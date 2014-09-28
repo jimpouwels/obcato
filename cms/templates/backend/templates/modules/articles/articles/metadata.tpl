@@ -3,6 +3,7 @@
 	<li>{$description_field}</li>
 	<li>{$published_field}</li>
 	<li>{$publication_date_field}</li>
+    <li>{$sort_date_field}</li>
 	<li>{$target_pages_field}</li>
 	<li>
 		<div>

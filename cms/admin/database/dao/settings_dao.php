@@ -36,10 +36,9 @@
 		}
 		
 		public function getSettings() {
-			$query = "SELECT * FROM settings";
-			$result = $this->_mysql_database->executeSelectQuery($query);
+            $result = $this->_mysql_database->executeQuery("SELECT * FROM settings");
 			$settings = null;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$settings = Settings::constructFromRecord($row);
 			}
 			return $settings;

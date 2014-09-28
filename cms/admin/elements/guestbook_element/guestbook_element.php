@@ -67,8 +67,8 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT guestbook_id FROM guestbook_elements_metadata WHERE element_id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$element->setGuestBookId($row['guestbook_id']);
 			}
 		}
@@ -96,8 +96,8 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			$query = "SELECT t.id, e.id FROM guestbook_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
 					  AND e.id = " . $element->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				return true;
 			}
 			return false;

@@ -46,25 +46,21 @@
 		
 		// Authenticates the given username with the given password
 		private function authenticate($username, $password) {
-			// open DB connection
-			$mysql_database = MysqlConnector::getInstance(); 
-			
-			
-			// prevent SQL injection
-			$username = mysql_real_escape_string($username);
+			$mysql_database = MysqlConnector::getInstance();
 			// hash the password
 			$password = StringUtility::hashStringValue($password);
 			
 			// execute the query
-			$auth_query = "SELECT * FROM auth_users WHERE username = '" . $username . "' AND password = '" . $password . "';";
-			
-			$result = $mysql_database->executeSelectQuery($auth_query);
+			$auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
+            $statement = $mysql_database->prepareStatement($auth_query);
+            $statement->bind_param("ss", $username, $password);
+            $result = $mysql_database->executeStatement($statement);
 			
 			$authenticated = false;
-			if (mysql_num_rows($result) > 0) {
+			if ($result->num_rows > 0) {
 				$authenticated = true;
 			}
-			
+            $statement->close();
 			return $authenticated;
 		}
 		

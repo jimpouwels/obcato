@@ -28,9 +28,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			$elements_info_query = "SELECT " . self::$myAllColumns . " FROM elements e, element_types t WHERE element_holder_id 
 									= " . $element_holder->getId() . " AND t.id = e.type_id ORDER BY e.follow_up ASC";
-			$result = $mysql_database->executeSelectQuery($elements_info_query);
+			$result = $mysql_database->executeQuery($elements_info_query);
 			$elements = array();
-			while ($row = mysql_fetch_assoc($result)) {		
+			while ($row = $result->fetch_assoc()) {		
 				$element = Element::constructFromRecord($row);
 				
 				array_push($elements, $element);
@@ -44,8 +44,8 @@
 			$element = NULL;
 			$query = "SELECT " . self::$myAllColumns . " FROM elements e, element_types t WHERE e.id = " . $id . " 
 					  AND e.type_id = t.id;";
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$element = Element::constructFromRecord($row);
 			}
 			return $element;
@@ -60,7 +60,7 @@
 				$set = $set . ', template_id = ' . $element->getTemplateId();
 			}
 			$query = "UPDATE elements SET " . $set . "	WHERE id = " . $element->getId();
-			$mysql_database->executeSelectQuery($query);
+			$mysql_database->executeQuery($query);
 			$element->updateMetaData();
 		}
 		
@@ -75,10 +75,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM element_types ORDER BY name";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_types = array();
 			$element_type = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				array_push($element_types, $element_type);
@@ -116,7 +116,7 @@
 					 "'" . $element_type->getIdentifier() . "', " . $system_default_val . ", '" . $element_type->getDestroyScript() . "')";
 			$mysql_database->executeQuery($query);
 			
-			return mysql_insert_id();
+			return $mysql_database->getInsertId();
 		}
 		
 		public function deleteElementType($element_type_id) {
@@ -130,10 +130,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM element_types WHERE system_default = 1 ORDER BY name";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_types = array();
 			$element_type = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				array_push($element_types, $element_type);
@@ -146,10 +146,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM element_types WHERE system_default = 0 ORDER BY name";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_types = array();
 			$element_type = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				array_push($element_types, $element_type);
@@ -161,9 +161,9 @@
 		public function getElementType($element_type_id) {
 			$mysql_database = MysqlConnector::getInstance();
 			$query = "SELECT * FROM element_types WHERE id = " . $element_type_id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_type = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				break;
@@ -176,9 +176,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM element_types WHERE identifier = '$identifier'";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_type = null;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				break;
@@ -191,9 +191,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM element_types t, elements e WHERE e.id = " . $element_id . " AND t.id = e.type_id";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$element_type = null;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$element_type = ElementType::constructFromRecord($row);
 				
 				break;
@@ -223,7 +223,7 @@
 			$query = "INSERT INTO elements(follow_up,type_id, element_holder_id, template_id) VALUES (" . $element->getIndex() . " 
 			          , " . $element_type->getId() . ", " . $element_holder_id . ", 0)";
 			$mysql_database->executeQuery($query);
-			$element->setId(mysql_insert_id());
+			$element->setId($mysql_database->getInsertId());
 			$element->updateMetaData();
 		}
 		
@@ -231,9 +231,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			$query = "SELECT max(follow_up) AS next_available_index FROM elements WHERE element_holder_id = " . $element_holder_id;
 			
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$next_index = NULL;
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$next_index = $row['next_available_index'];
 				if (is_null($next_index)) {
 					$next_index = 0;

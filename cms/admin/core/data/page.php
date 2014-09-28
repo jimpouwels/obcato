@@ -95,8 +95,8 @@
 			$query = "SELECT element_holder_id FROM " . self::$TABLE_NAME . " WHERE follow_up = (SELECT MAX(follow_up)"
 					 . " FROM " . self::$TABLE_NAME . " WHERE parent_id = " . $this->getParent()->getId() . ") AND"
 					 . " parent_id = " . $this->getParent()->getId();
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$id = $row['element_holder_id'];
 				break;
 			}
@@ -114,8 +114,8 @@
 					 . " FROM " . self::$TABLE_NAME . " WHERE parent_id = " . $this->getParent()->getId() . ") AND"
 					 . " parent_id = " . $this->getParent()->getId();
 					 
-			$result = $mysql_database->executeSelectQuery($query);
-			while ($row = mysql_fetch_array($result)) {
+			$result = $mysql_database->executeQuery($query);
+			while ($row = $result->fetch_assoc()) {
 				$id = $row['element_holder_id'];
 				break;
 			}

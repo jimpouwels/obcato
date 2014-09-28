@@ -14,6 +14,7 @@
 		private $_description;
 		private $_image_id;
 		private $_publication_date;
+        private $_sort_date;
 		private $_target_page_id;
         private $_page_dao;
 		
@@ -57,6 +58,14 @@
 		public function setPublicationDate($publication_date) {
 			$this->_publication_date = $publication_date;
 		}
+
+        public function getSortDate() {
+            return $this->_sort_date;
+        }
+
+        public function setSortDate($sort_date) {
+            $this->_sort_date = $sort_date;
+        }
 		
 		public function getTargetPageId() {
 			return $this->_target_page_id;
@@ -90,6 +99,7 @@
 			$article->setCreatedById($record['created_by']);
 			$article->setType($record['type']);
 			$article->setPublicationDate($record['publication_date']);
+            $article->setSortDate($record['sort_date']);
 			$article->setTargetPageId($record['target_page']);
 			
 			return $article;

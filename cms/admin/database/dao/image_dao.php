@@ -27,9 +27,9 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $image_id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$image = null;
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$image = Image::constructFromRecord($row);
 			}
 			
@@ -49,10 +49,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT " . self::$myAllColumns . " FROM images i";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$images = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$image = Image::constructFromRecord($row);
 				
 				array_push($images, $image);
@@ -67,10 +67,10 @@
 			$query = "SELECT " . self::$myAllColumns . " FROM images i LEFT JOIN images_labels ils ON i.id = ils.image_id 
 			          WHERE ils.image_id IS NULL";
 					  
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$images = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$image = Image::constructFromRecord($row);
 				
 				array_push($images, $image);
@@ -106,10 +106,10 @@
 				$query = $query . " i.file_name LIKE '" . $filename . "%'";
 			}
 			$query = $query . " ORDER BY created_at";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$images = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$image = Image::constructFromRecord($row);
 				
 				array_push($images, $image);
@@ -164,7 +164,7 @@
 					  VALUES ('" . $image->getTitle() . "', " . $published_value . ", now(), " . 
 					  $image->getCreatedBy()->getId() . ", NULL, NULL)";
 			$mysql_database->executeQuery($query);
-			$image->setId(mysql_insert_id());
+			$image->setId($mysql_database->getInsertId());
 		}
 
 		public function createLabel() {
@@ -185,10 +185,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM image_labels";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$labels = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$label = ImageLabel::constructFromRecord($row);
 				
 				array_push($labels, $label);
@@ -201,10 +201,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM image_labels WHERE id = " . $id;
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$label = NULL;
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$label = ImageLabel::constructFromRecord($row);
 			}
 			
@@ -215,10 +215,10 @@
 			$mysql_database = MysqlConnector::getInstance(); 
 			
 			$query = "SELECT * FROM image_labels WHERE name = '" . $name . "'";
-			$result = $mysql_database->executeSelectQuery($query);
+			$result = $mysql_database->executeQuery($query);
 			$label = NULL;
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$label = ImageLabel::constructFromRecord($row);
 			}
 			
@@ -231,7 +231,7 @@
 			$query = "INSERT INTO image_labels (name) VALUES  ('" . $label->getName() . "')";
 		
 			$mysql_database->executeQuery($query);
-			return mysql_insert_id();
+			return $mysql_database->getInsertId();
 		}
 		
 		public function updateLabel($label) {
@@ -274,10 +274,10 @@
 					  images i WHERE ils.image_id = " . $image_id . " AND ils.image_id =
 					  i.id AND il.id = ils.label_id";
 					  
-		    $result = $mysql_database->executeSelectQuery($query);
+		    $result = $mysql_database->executeQuery($query);
 			$labels = array();
 			
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$label = ImageLabel::constructFromRecord($row);
 				
 				array_push($labels, $label);

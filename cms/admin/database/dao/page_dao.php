@@ -28,21 +28,18 @@
 		}
 
 		public static function getInstance() {
-			if (!self::$instance) {
+			if (!self::$instance)
 				self::$instance = new PageDao();
-			}
 			return self::$instance;
 		}
 
 		public function getPage($id) {
-			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE e.id = " . $id . "
-					  AND e.id = p.element_holder_id";
-			if (CMS_ROOT != '') {
-				$query = $query . " AND e.published = 1";
-			}
-			$result = $this->_mysql_connector->executeSelectQuery($query);
-			$page = NULL;
-			while ($row = mysql_fetch_array($result)) {
+			$statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
+			                                                        element_holders e WHERE e.id = ? AND e.id = p.element_holder_id");
+            $statement->bind_param("i", $id);
+			$result = $this->_mysql_connector->executeStatement($statement);
+			$page = null;
+			while ($row = $result->fetch_assoc()) {
 				$page = Page::constructFromRecord($row);
 				break;
 			}
@@ -52,30 +49,24 @@
 		public function getRootPages() {
 			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE p.parent_id IS NULL
 			          AND e.id = p.element_holder_id";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$pages = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$page = Page::constructFromRecord($row);
 				array_push($pages, $page);
 			}
-
 			return $pages;
 		}
 
 		public function getSubPages($page) {
-			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE p.parent_id = " . $page->getId() . 
-					  " AND p.element_holder_id = e.id";
-			if (CMS_ROOT != '') {
-				$query = $query . ' AND published = 1';
-			}
-			
-			$query = $query . " ORDER BY p.follow_up";
-			
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
+                                                                    element_holders e WHERE p.parent_id = ?
+                                                                    AND p.element_holder_id = e.id ORDER BY p.follow_up");
+            $statement->bind_param("i", $page->getId());
+            $result = $this->_mysql_connector->executeStatement($statement);
 			$pages = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$page = Page::constructFromRecord($row);
-				
 				$pages[] = $page;
 			}
 			
@@ -110,9 +101,9 @@
 		public function searchByTerm($term) {
 			$query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE e.id = p.element_holder_id 
 			          AND title like '" . $term . "%'";
-			$result = $this->_mysql_connector->executeSelectQuery($query);
+			$result = $this->_mysql_connector->executeQuery($query);
 			$pages = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = $result->fetch_assoc()) {
 				$page = Page::constructFromRecord($row);
 				
 				$pages[] = $page;
