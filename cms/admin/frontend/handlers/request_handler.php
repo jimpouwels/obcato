@@ -28,9 +28,9 @@
         }
 
 		public function handleRequest() {
-            switch ($this->getRequestObject()) {
+            switch ($this->getRequestedObject()) {
                 case self::REQUEST_OBJECT_PAGE:
-                    $this->renderPage($this->getPageFromRequest());
+                    $this->renderPage($this->getPageFromRequest(), $this->getArticleFromRequest());
                     break;
                 case self::REQUEST_OBJECT_IMAGE:
                     $this->loadImage();
@@ -41,12 +41,14 @@
 		}
 
         private function renderHomepage() {
-            $this->renderPage($this->_settings_dao->getSettings()->getHomepage());
+            $homePage = $this->_settings_dao->getSettings()->getHomepage();
+            if ($homePage->isPublished())
+                $this->renderPage($homePage, null);
         }
 		
-		private function renderPage($page) {
-			if (!is_null($page)) {
-                $page_visual = new PageVisual($page);
+		private function renderPage($page, $article) {
+			if (!is_null($page) && $page->isPublished()) {
+                $page_visual = new PageVisual($page, $article);
                 $page_visual->render();
             }
 		}
@@ -74,14 +76,14 @@
             return $this->_image_dao->getImage($_GET["image"]);
         }
 		
-		//private function getArticleFromRequest() {
-		//	$article = null;
-		//	if (isset($_GET["articleid"]) && $_GET["articleid"] != "")
-		//		$article = $this->_article_dao->getArticle($_GET["articleid"]);
-		//	return $article;
-		//}
+		private function getArticleFromRequest() {
+			$article = null;
+			if (isset($_GET["articleid"]) && $_GET["articleid"] != "")
+				$article = $this->_article_dao->getArticle($_GET["articleid"]);
+			return $article;
+		}
 
-        private function getRequestObject() {
+        private function getRequestedObject() {
             if (isset($_GET["id"]))
                 return self::REQUEST_OBJECT_PAGE;
             else if (isset($_GET["image"]))

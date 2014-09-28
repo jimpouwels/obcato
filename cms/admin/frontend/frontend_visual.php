@@ -39,6 +39,13 @@
             return "/index.php?image=" . $image->getId();
         }
 
+        protected function getArticleFrontendUrl($article) {
+            $target_page = $article->getTargetPage();
+            if (is_null($target_page))
+                $target_page = $this->_current_page;
+            return "/index.php?id=" . $target_page->getId() . "&amp;articleid=" . $article->getId();
+        }
+
         private function createLinksInString($value, $element_holder) {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {
@@ -88,13 +95,6 @@
 
         private function getPageFrontendUrl($page) {
             return "/index.php?id=" . $page->getId();
-        }
-
-        private function getArticleFrontendUrl($article) {
-            $target_page = $article->getTargetPage();
-            if (is_null($target_page))
-                $target_page = $this->_current_page;
-            return "/index.php?id=" . $target_page->getId() . "&amp;articleid=" . $article->getId();
         }
 	}
 
