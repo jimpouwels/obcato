@@ -4,30 +4,40 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "/frontend/frontend_visual.php";
+    require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
     class PageVisual extends FrontendVisual {
 
         private $_template_engine;
         private $_page;
         private $_article;
+        private $_settings_dao;
 
         public function __construct($current_page, $current_article) {
             parent::__construct($current_page);
             $this->_page = $current_page;
             $this->_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
+            $this->_settings_dao = SettingsDao::getInstance();
         }
 
         public function render() {
-            $this->_template_engine->assign("children", $this->renderChildren($this->_page));
-            $this->_template_engine->assign("elements", $this->renderElementHolderContent($this->_page));
-            $this->_template_engine->assign("blocks", $this->renderBlocks());
-            $this->_template_engine->assign("article", $this->renderArticle());
-            $this->_template_engine->assign("title", $this->_page->getTitle());
-            $this->_template_engine->assign("navigation_title", $this->_page->getNavigationTitle());
-            $this->_template_engine->assign("description", $this->toHtml($this->_page->getDescription(), $this->_page));
-            $this->_template_engine->assign("show_in_navigation", $this->_page->getShowInNavigation());
-            $this->_template_engine->display($this->getTemplateDir() . "/" . $this->_page->getTemplate()->getFileName());
+            $this->_template_engine->assign("website_title", $this->_settings_dao->getSettings()->getWebsiteTitle());
+            $this->_template_engine->assign("page", $this->getPageData());
+            return $this->_template_engine->display($this->getTemplateDir() . "/" . $this->_page->getTemplate()->getFileName());
+        }
+
+        private function getPageData() {
+            $page_data = array();
+            $page_data["children"] = $this->renderChildren($this->_page);
+            $page_data["elements"] = $this->renderElementHolderContent($this->_page);
+            $page_data["blocks"] = $this->renderBlocks();
+            $page_data["article"] = $this->renderArticle();
+            $page_data["title"] = $this->_page->getTitle();
+            $page_data["navigation_title"] = $this->_page->getNavigationTitle();
+            $page_data["description"] = $this->toHtml($this->_page->getDescription(), $this->_page);
+            $page_data["show_in_navigation"] = $this->_page->getShowInNavigation();
+            return $page_data;
         }
 
         private function renderChildren($page) {

@@ -20,7 +20,7 @@
 			$this->_settings->setRootDir($this->preserveBackSlashes($this->getMandatoryFieldValue("root_dir", "Root directory is verplicht")));
 			$this->_settings->setFrontendTemplateDir($this->preserveBackSlashes($this->getMandatoryFieldValue("frontend_template_dir", "Template directory is verplicht")));
 			$this->_settings->setSmtpHost($this->getFieldValue("smtp_host"));
-			$this->_settings->setEmailAddress($this->getEmailAddress("email_address"));
+			$this->_settings->setEmailAddress($this->getEmailAddress("email_address", "Vul een geldig email adres in"));
 			$this->_settings->setStaticDir($this->preserveBackSlashes($this->getMandatoryFieldValue("static_dir", "Static directory is verplicht")));
 			$this->_settings->setConfigDir($this->preserveBackSlashes($this->getMandatoryFieldValue("config_dir", "Configuration directory is verplicht")));
 			$this->_settings->setUploadDir($this->preserveBackSlashes($this->getMandatoryFieldValue("upload_dir", "Upload directory is verplicht")));
