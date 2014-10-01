@@ -6,12 +6,14 @@
 	require_once CMS_ROOT . "/view/views/module_visual.php";
     require_once CMS_ROOT . "/view/views/action_button.php";
     require_once CMS_ROOT . "/modules/downloads/visuals/list_visual.php";
+    require_once CMS_ROOT . "/modules/downloads/visuals/editor_visual.php";
     require_once CMS_ROOT . "/modules/downloads/download_request_handler.php";
 
 	class DownloadModuleVisual extends ModuleVisual {
 
         private static $TEMPLATE = "modules/downloads/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
+        private $_current_download;
         private $_template_engine;
         private $_download_request_handler;
 
@@ -21,15 +23,20 @@
         }
 
         public function render() {
-            $list = new ListVisual();
-            $this->_template_engine->assign("list", $list->render());
+            if ($this->_current_download)
+                $this->_template_engine->assign('editor', $this->renderEditor());
+            else
+                $this->_template_engine->assign("list", $this->renderList());
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
 
-        public function getActionButtons()
-        {
+        public function getActionButtons() {
             $action_buttons = array();
-            $action_buttons[] = new ActionButton("Toevoegen", "add_download", "icon_add");
+            if ($this->_current_download) {
+                $action_buttons[] = new ActionButton('Opslaan', 'update_download', 'icon_apply');
+                $action_buttons[] = new ActionButton('Verwijderen', 'delete_download', 'icon_delete');
+            }
+            $action_buttons[] = new ActionButton('Toevoegen', 'add_download', 'icon_add');
             return $action_buttons;
         }
 
@@ -44,10 +51,21 @@
         }
 
         public function onPreHandled() {
+            $this->_current_download = $this->_download_request_handler->getCurrentDownload();
         }
 
         public function getTitle() {
             return "Downloads";
+        }
+
+        private function renderList() {
+            $list = new ListVisual();
+            return $list->render();
+        }
+
+        private function renderEditor() {
+            $editor = new EditorVisual($this->_current_download);
+            return $editor->render();
         }
     }
 	

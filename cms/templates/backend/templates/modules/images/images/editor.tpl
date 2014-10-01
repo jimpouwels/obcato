@@ -49,7 +49,6 @@
 	</fieldset>
 	<fieldset class="admin_fieldset image_editor">
 		<div class="fieldset-title">Afbeelding</div>
-		
 		{if !empty($url)}
 			<img title="{$title}" alt="{$title}" src="{$url}" />
 		{/if}

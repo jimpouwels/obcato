@@ -1,4 +1,4 @@
-<fieldset class="admin_fieldset images_list">
+<fieldset class="admin_fieldset">
     <div class="fieldset-title">Gevonden downloads</div>
     {if count($search_results) > 0}
         <table class="listing" width="95%" cellspacing="0" cellpadding="5" border="0">
@@ -18,7 +18,7 @@
             <tbody>
             {foreach from=$search_results item=search_result}
                 <tr>
-                    <td><a href="/admin/index.php?image={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
+                    <td><a href="/admin/index.php?download={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
                     <td>{$search_result.created_at}</td>
                     <td>{$search_result.created_by}</td>
                     <td>

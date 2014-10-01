@@ -1,5 +1,7 @@
 {if isset($list)}
     {$list}
+{else}
+    {$editor}
 {/if}
 
 <form id="add_form_hidden" class="displaynone" method="post" action="/admin/index.php">

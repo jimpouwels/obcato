@@ -21,16 +21,14 @@
 			// first delete the old file
 			if (!is_null($image->getFileName()) && $image->getFileName() != '') {
 				$old_file_name = $upload_dir . "/" . $image->getFileName();
-				if (file_exists($old_file_name)) {
+				if (file_exists($old_file_name))
 					unlink($old_file_name);
-				}
 			}
 			// now delete the thumb
 			if (!is_null($image->getThumbFileName()) && $image->getThumbFileName() != '') {
 				$old_file_name = $upload_dir . "/" . $image->getThumbFileName();
-				if (file_exists($old_file_name)) {
+				if (file_exists($old_file_name))
 					unlink($old_file_name);
-				}
 			}
 		}
 		
