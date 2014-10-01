@@ -92,7 +92,7 @@
 
         private function getNewDownloadFilename($download_file_name) {
             $current_download_id = $this->_current_download->getId();
-            return "UPLIMG-00$current_download_id" . "_$download_file_name";
+            return "UPLDWNL-00$current_download_id" . "_$download_file_name";
         }
 
         private function getDownloadFromGetRequest() {
