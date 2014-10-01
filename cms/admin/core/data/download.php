@@ -2,6 +2,8 @@
     // No direct access
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+
     class Download extends Entity {
 
         private $_authorization_dao;
@@ -30,6 +32,7 @@
         public function getFileName() {
             return $this->_file_name;
         }
+
         public function isPublished() {
             return $this->_published;
         }
