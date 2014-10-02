@@ -25,12 +25,6 @@
 	list-style-type: none;
 }
 
-.query_result_listing {
-	text-align: left;
-	margin-left: 10px;
-	width: 99%;
-}
-
 .button {
 	margin-top: 5px;
 	float: right;
