@@ -8,9 +8,8 @@
         if (!isset($_GET["mode"]))
             header("Location: /admin/index.php?mode=install&step=1");
         runInstaller();
-    } else {
+    } else
         runBackend();
-    }
 
     function runBackend() {
         require_once CMS_ROOT . "/database_config.php";

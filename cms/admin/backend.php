@@ -25,6 +25,7 @@
 			$this->_session = new Session();
 			$this->_settings = SettingsDao::getInstance()->getSettings();
 			$this->initializeRequestHandlers();
+            $this->setGlobalSettings();
 		}
 		
 		public function start() {
@@ -86,6 +87,13 @@
 			foreach ($this->_request_handlers as $request_handler)
                 $request_handler->handle();
 		}
+
+        private function setGlobalSettings() {
+            define("UPLOAD_DIR", $this->_settings->getUploadDir());
+            define("FRONTEND_TEMPLATE_DIR", $this->_settings->getFrontendTemplateDir());
+            define("BACKEND_TEMPLATE_DIR", $this->_settings->getBackendTemplateDir());
+            define("STATIC_DIR", $this->_settings->getStaticDir());
+        }
 		
 		private function redirectToLoginPage() {
 			session_destroy();

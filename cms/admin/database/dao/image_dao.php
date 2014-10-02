@@ -139,9 +139,8 @@
 	
 			// delete the uploaded images
 			if (!is_null($image->getFileName()) && $image->getFileName() != '') {
-				$upload_dir = Settings::find()->getUploadDir();
-				$file_path = $upload_dir . "/" . $image->getFileName();
-				$thumb_file_path = $upload_dir . "/" . $image->getThumbFileName();
+				$file_path = UPLOAD_DIR . "/" . $image->getFileName();
+				$thumb_file_path = UPLOAD_DIR . "/" . $image->getThumbFileName();
 				if (file_exists($file_path)) {
 					unlink($file_path);
 				}

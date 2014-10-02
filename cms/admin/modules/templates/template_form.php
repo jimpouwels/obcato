@@ -4,13 +4,11 @@
 	
 	require_once CMS_ROOT . "/view/form.php";
 	require_once CMS_ROOT . "/database/dao/template_dao.php";
-	require_once CMS_ROOT . "/database/dao/settings_dao.php";
 	
 	class TemplateForm extends Form {
 	
 		private $_template;
 		private $_template_dao;
-		private $_template_dir;
 		private $_path_to_uploaded_file;
 		private $_is_file_uploaded;
         private $_uploaded_file_name;
@@ -18,7 +16,6 @@
 		public function __construct($template) {
 			$this->_template = $template;
 			$this->_template_dao = TemplateDao::getInstance();
-			$this->_template_dir = SettingsDao::getInstance()->getSettings()->getFrontendTemplateDir();
 		}
 	
 		public function loadFields() {
@@ -44,12 +41,11 @@
 		}
 		
 		private function fileExists() {
-			if (file_exists($this->_template_dir . "/" . $this->_uploaded_file_name) && !$this->uploadedFileIsCurrentTemplateFile()) {
+			if (file_exists(FRONTEND_TEMPLATE_DIR . "/" . $this->_uploaded_file_name) && !$this->uploadedFileIsCurrentTemplateFile()) {
 				$this->raiseError("template_file", "Er bestaat al een ander template met dezelfde naam");
 				return true;
-			} else {
+			} else
 				return false;
-			}
 		}
 		
 		private function uploadedFileIsCurrentTemplateFile() {
@@ -58,9 +54,8 @@
 		
 		private function fileNameExists() {
 			$existing_template = $this->_template_dao->getTemplateByFileName($this->_template->getFileName());
-			if (!is_null($existing_template) && $existing_template->getId() != $this->_template->getId()) {
+			if (!is_null($existing_template) && $existing_template->getId() != $this->_template->getId())
 				$this->raiseError("file_name_error", "Deze bestandsnaam bestaat al voor een ander template");
-			}
 		}
 	
 	}

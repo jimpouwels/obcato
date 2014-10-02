@@ -6,7 +6,6 @@
     require_once CMS_ROOT . "/libraries/system/notifications.php";
     require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
     require_once CMS_ROOT . "/database/dao/download_dao.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
     require_once CMS_ROOT . "/modules/downloads/download_form.php";
     require_once CMS_ROOT . "/core/data/download.php";
 
@@ -14,11 +13,9 @@
 
         private $_download_dao;
         private $_current_download;
-        private $_settings;
 
         public function __construct() {
             $this->_download_dao = DownloadDao::getInstance();
-            $this->_settings = SettingsDao::getInstance()->getSettings();
         }
 
         public function handleGet() {
@@ -77,15 +74,13 @@
         }
 
         private function moveDownloadToUploadDirectory($from_dir, $new_file_name) {
-            $upload_dir = $this->_settings->getUploadDir();
-            rename($from_dir, $upload_dir . '/' . $new_file_name);
+            rename($from_dir, UPLOAD_DIR . '/' . $new_file_name);
             $this->_current_download->setFileName($new_file_name);
         }
 
         private function deleteDownloadFile($file_name) {
             if (!$file_name) return;
-            $upload_dir = $this->_settings->getUploadDir();
-            $file_path = $upload_dir . '/' . $file_name;
+            $file_path = UPLOAD_DIR . '/' . $file_name;
             if (file_exists($file_path))
                 unlink($file_path);
         }

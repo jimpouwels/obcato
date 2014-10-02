@@ -4,14 +4,12 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "/view/views/visual.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
     class EditorVisual extends Visual {
 
         private static $TEMPLATE = "downloads/editor.tpl";
         private $_download;
         private $_template_engine;
-        private $_settings;
 
         public function __construct($download) {
             $this->_download = $download;
@@ -33,7 +31,7 @@
         }
 
         private function getFileData() {
-            $file_path = $this->_settings->getUploadDir() . '/' . $this->_download->getFileName();
+            $file_path = UPLOAD_DIR . '/' . $this->_download->getFileName();
             $file_exists = file_exists($file_path);
             $file_data = array();
             $file_data['name'] = $this->_download->getFileName();

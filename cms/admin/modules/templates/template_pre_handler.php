@@ -4,7 +4,6 @@
 
 	require_once CMS_ROOT . "/database/dao/template_dao.php";
 	require_once CMS_ROOT . "/database/dao/scope_dao.php";
-	require_once CMS_ROOT . "/database/dao/settings_dao.php";
 	require_once CMS_ROOT . "/libraries/validators/form_validator.php";
 	require_once CMS_ROOT . "/libraries/handlers/form_handler.php";
 	require_once CMS_ROOT . "/libraries/system/notifications.php";
@@ -19,17 +18,13 @@
 		private static $TEMPLATE_ID_POST = "template_id";
 
 		private $_template_dao;
-		private $_settings_dao;
 		private $_scope_dao;
 		private $_current_template;
-		private $_template_dir;
 		private $_current_scope;
 		
 		public function __construct() {
 			$this->_template_dao = TemplateDao::getInstance();
-			$this->_settings_dao = SettingsDao::getInstance();
 			$this->_scope_dao = ScopeDao::getInstance();
-			$this->_template_dir = $this->_settings_dao->getSettings()->getFrontEndTemplateDir();
 		}
 	
 		public function handleGet() {
@@ -77,7 +72,7 @@
 		
 		private function updateTemplate() {
 			$template_form = new TemplateForm($this->_current_template);
-			$old_file_path = $this->_template_dir . "\\" . $this->_current_template->getFileName();
+			$old_file_path = FRONTEND_TEMPLATE_DIR . "\\" . $this->_current_template->getFileName();
 			$old_file_name = $this->_current_template->getFileName();
 			try {
 				$template_form->loadFields();
@@ -95,7 +90,7 @@
 		}
 		
 		private function renameTemplateFile($old_file_name) {
-			rename($this->_template_dir . "/" . $old_file_name, $this->_template_dir . "/" . $this->_current_template->getFileName());
+			rename(FRONTEND_TEMPLATE_DIR . "/" . $old_file_name, FRONTEND_TEMPLATE_DIR . "/" . $this->_current_template->getFileName());
 		}
 		
 		private function isTemplateRenamed($old_file_name) {
@@ -109,7 +104,7 @@
 		}
 		
 		private function copyUploadToTemplateDir($path_to_uploaded_file) {
-			move_uploaded_file($path_to_uploaded_file, $this->_template_dir . "/" . $this->_current_template->getFileName());
+			move_uploaded_file($path_to_uploaded_file, FRONTEND_TEMPLATE_DIR . "/" . $this->_current_template->getFileName());
 		}
 
 		private function getTemplateFromPostRequest() {

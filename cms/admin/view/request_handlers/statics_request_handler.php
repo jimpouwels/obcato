@@ -3,14 +3,12 @@
 	defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "/view/request_handlers/http_request_handler.php";
-	require_once CMS_ROOT . "/database/dao/settings_dao.php";
 	
 	class StaticsRequestHandler extends HttpRequestHandler {
 
 		private $_settings;
 		
 		public function __construct() {
-			$this->_settings = SettingsDao::getInstance()->getSettings();
 		}
 
         public function handleGet() {
@@ -44,7 +42,7 @@
 		}
 		
 		private function getAbsolutePathFor($relative_path) {
-			return $this->_settings->getStaticDir() . $relative_path;
+			return STATIC_DIR . $relative_path;
 		}
 		
 		private function getRelativePathFromGetRequest() {
