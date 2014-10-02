@@ -11,8 +11,6 @@
 	
 	include_once CMS_ROOT . "/database/dao/image_dao.php";
 	
-	$upload_dir = Settings::find()->getUploadDir();
-	
 	if (isset($_GET['image']) && $_GET['image'] != '') {
 		$image_dao = ImageDao::getInstance();
 		$image = $image_dao->getImage($_GET['image']);
@@ -32,7 +30,7 @@
 			$file_name = $image->getFileName();
 		}
 		
-		$path = $upload_dir . "/" . $file_name;
+		$path = UPLOAD_DIR . "/" . $file_name;
 		$splits = explode('.', $file_name);
 		$extension = $splits[count($splits) - 1];
 		

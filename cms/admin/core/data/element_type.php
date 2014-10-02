@@ -69,7 +69,7 @@
 		
 		public function getIconUrlAbsolute() {
 			if ($this->_system_default) {
-				$path = DEFAULT_ELEMENT_ICON_URL . $this->_icon_url;
+				$path = '/default/img/element_icons/' . $this->_icon_url;
 			} else {
 				$path = STATIC_FILES_URL . "/elements/" . $this->_identifier . "/" . $this->_icon_url;
 			}

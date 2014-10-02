@@ -2,12 +2,10 @@
 
 	// No direct access
 	defined('_ACCESS') or die;
-	
-	require_once CMS_ROOT . "/database/dao/settings_dao.php";
+
 	require_once CMS_ROOT . "/view/request_handlers/link_request_handler.php";
 	require_once CMS_ROOT . "/view/request_handlers/backend_request_handler.php";
 	require_once CMS_ROOT . "/view/views/cms.php";
-	require_once CMS_ROOT . "/core/data/settings.php";
 	require_once CMS_ROOT . "/core/data/session.php";
 	require_once CMS_ROOT . "/view/views/popup.php";
 	
@@ -16,16 +14,13 @@
 		private $_identifier;
 		private $_session;
 		private $_request_handlers;
-		private $_settings;
 		private $_current_module;
 		private $_module_visual;
 	
 		public function __construct($identifier) {
 			$this->_identifier = $identifier;
 			$this->_session = new Session();
-			$this->_settings = SettingsDao::getInstance()->getSettings();
 			$this->initializeRequestHandlers();
-            $this->setGlobalSettings();
 		}
 		
 		public function start() {
@@ -60,7 +55,7 @@
 		}
 		
 		private function renderCmsView() {
-			$cms = new Cms($this->_module_visual, $this->_settings->getWebsiteTitle());
+			$cms = new Cms($this->_module_visual, WEBSITE_TITLE);
 			$cms->render();
 		}
 
@@ -87,13 +82,6 @@
 			foreach ($this->_request_handlers as $request_handler)
                 $request_handler->handle();
 		}
-
-        private function setGlobalSettings() {
-            define("UPLOAD_DIR", $this->_settings->getUploadDir());
-            define("FRONTEND_TEMPLATE_DIR", $this->_settings->getFrontendTemplateDir());
-            define("BACKEND_TEMPLATE_DIR", $this->_settings->getBackendTemplateDir());
-            define("STATIC_DIR", $this->_settings->getStaticDir());
-        }
 		
 		private function redirectToLoginPage() {
 			session_destroy();

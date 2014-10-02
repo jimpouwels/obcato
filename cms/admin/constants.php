@@ -4,6 +4,8 @@
 	defined('_ACCESS') or die;
 	
 	require_once CMS_ROOT . "/core/data/settings.php";
+
+    $website_settings = Settings::find();
 	
 	// EDITOR FORM CONSTANTS
 	define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
@@ -19,18 +21,19 @@
 	define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
 	
 	// DEFINE SYSTEM VFERSION
-	define("SYSTEM_VERSION", "0.0.5");
+	define("SYSTEM_VERSION", "1.0.0");
+    define("DB_VERSION", $website_settings->getDatabaseVersion());
 	
 	// DEFINE TIME OUT
 	define("SESSION_TIMEOUT", 1800);
-	
-	$website_settings = Settings::find();
-	
-	// DEFINE DB-VERSION
-	define("DB_VERSION", $website_settings->getDatabaseVersion());
-	define("STATIC_FILES_DIR", $website_settings->getStaticDir());
+
+    // DIRECTORIES
 	define("COMPONENT_DIR", $website_settings->getComponentDir());
-	define("STATIC_FILES_URL", "/admin/static.php?file=");
-	define("DEFAULT_ELEMENT_ICON_URL", STATIC_FILES_URL . "/default/img/element_icons/");
-	
+    define("UPLOAD_DIR", $website_settings->getUploadDir());
+    define("FRONTEND_TEMPLATE_DIR", $website_settings->getFrontendTemplateDir());
+    define("BACKEND_TEMPLATE_DIR", $website_settings->getBackendTemplateDir());
+    define("STATIC_DIR", $website_settings->getStaticDir());
+
+    // OTHER
+    define("WEBSITE_TITLE", $website_settings->getWebsiteTitle());
 ?>
