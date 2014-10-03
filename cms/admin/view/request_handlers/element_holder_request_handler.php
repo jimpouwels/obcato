@@ -20,17 +20,16 @@
 			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 
-        function handleGet() {
+        public function handleGet() {
         }
 
-        function handlePost() {
+        public function handlePost() {
             $this->_current_element_holder = $this->getElementHolderFromPostRequest();
+            $this->updateElementHolder();
 			if ($this->isAddElementAction())
                 $this->addElement();
 			else if ($this->isDeleteElementAction())
                 $this->deleteElement();
-            else if ($this->isUpdateElementHolderAction())
-                $this->updateElementHolder();
             else if ($this->isAddLinkAction())
                 $this->addLink();
 		}
@@ -108,11 +107,6 @@
         private function isAddElementAction()
         {
             return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
-        }
-
-        private function isUpdateElementHolderAction()
-        {
-            return isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == "update_element_holder";
         }
 
         private function isDeleteElementAction()
