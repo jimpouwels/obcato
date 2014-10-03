@@ -3,15 +3,18 @@
 	defined('_ACCESS') or die;
 	
 	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+    require_once CMS_ROOT . "/database/dao/link_dao.php";
     require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
 	
 	abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 
 		private $_element_dao;
+        private $_link_dao;
 		private $_element_holder_dao;
 		
 		public function __construct() {
 			$this->_element_dao = ElementDao::getInstance();
+            $this->_link_dao = LinkDao::getInstance();
 			$this->_element_holder_dao = ElementHolderDao::getInstance();
 		}
 
@@ -19,12 +22,15 @@
         }
 
         function handlePost() {
+            $this->updateLinks();
 			if ($this->isAddElementAction())
                 $this->addElement();
-			if ($this->isDeleteElementAction())
+			else if ($this->isDeleteElementAction())
                 $this->deleteElement();
-			if ($this->isUpdateElementAction())
+            else if ($this->isUpdateElementAction())
                 $this->updateElements();
+            else if ($this->isAddLinkAction())
+                $this->addLink();
 		}
 
         private function updateElements()
@@ -38,7 +44,6 @@
         private function updateElement($element)
         {
             $element_type = $element->getType();
-
             // new way of calling request handler for an element
             if ($element_type->getIdentifier() == "text_element" ||
                 $element_type->getIdentifier() == "list_element" ||
@@ -69,6 +74,44 @@
             return $element_type;
         }
 
+        private function addLink() {
+            $this->_link_dao->createLink($_POST[EDIT_ELEMENT_HOLDER_ID]);
+        }
+
+        private function updateLinks() {
+            // Updates all links in the element holder
+            if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'update_element_holder' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
+                include_once CMS_ROOT . "/database/dao/link_dao.php";
+                include_once CMS_ROOT . "/libraries/handlers/form_handler.php";
+
+                $link_dao = LinkDao::getInstance();
+                $links = $link_dao->getLinksForElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
+
+                foreach ($links as $link) {
+                    if (isset($_POST['link_' . $link->getId() . '_delete'])) {
+                        $link_dao->deleteLink($link);
+                    } else {
+                        if (isset($_POST['link_' . $link->getId() . '_title'])) {
+                            $link->setTitle(FormHandler::getFieldValue('link_' . $link->getId() . '_title'));
+                        }
+                        if (isset($_POST['link_' . $link->getId() . '_url'])) {
+                            $link->setTargetAddress(FormHandler::getFieldValue('link_' . $link->getId() . '_url'));
+                        }
+                        if (isset($_POST['link_' . $link->getId() . '_code'])) {
+                            $link->setCode(FormHandler::getFieldValue('link_' . $link->getId() . '_code'));
+                        }
+                        if (isset($_POST['link_element_holder_ref_' . $link->getId()])) {
+                            $link->setTargetElementHolderId(FormHandler::getFieldValue('link_element_holder_ref_' . $link->getId()));
+                        }
+                        if (isset($_POST['delete_link_target']) && ($_POST['delete_link_target'] == $link->getId())) {
+                            $link->setTargetElementHolderId(NULL);
+                        }
+                    }
+                    $link_dao->updateLink($link);
+                }
+            }
+        }
+
         private function isAddElementAction()
         {
             return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
@@ -82,6 +125,10 @@
         private function isDeleteElementAction()
         {
             return isset($_POST[DELETE_ELEMENT_FORM_ID]) && $_POST[DELETE_ELEMENT_FORM_ID] != "";
+        }
+
+        private function isAddLinkAction() {
+            return isset($_POST['action']) && $_POST['action'] == 'add_link';
         }
     }
 

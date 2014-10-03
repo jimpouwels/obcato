@@ -3,7 +3,6 @@
 	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/view/request_handlers/link_request_handler.php";
 	require_once CMS_ROOT . "/view/request_handlers/backend_request_handler.php";
 	require_once CMS_ROOT . "/view/views/cms.php";
 	require_once CMS_ROOT . "/core/data/session.php";
@@ -74,7 +73,6 @@
 		
 		private function initializeRequestHandlers() {
 			$this->_request_handlers = array();
-			$this->_request_handlers[] = new LinkRequestHandler();
 			$this->_request_handlers[] = new BackendRequestHandler($this);
 		}
 		

@@ -68,11 +68,10 @@
 		}
 		
 		public function getIconUrlAbsolute() {
-			if ($this->_system_default) {
-				$path = '/default/img/element_icons/' . $this->_icon_url;
-			} else {
+			if ($this->_system_default)
+				$path = '/admin/static.php?file=/default/img/element_icons/' . $this->_icon_url;
+			else
 				$path = STATIC_FILES_URL . "/elements/" . $this->_identifier . "/" . $this->_icon_url;
-			}
 			return $path;
 		}
 		
