@@ -4,6 +4,7 @@
 	
 	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "/database/dao/link_dao.php";
+    require_once CMS_ROOT . "/database/dao/element_dao.php";
     require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
 	
 	abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
@@ -11,6 +12,7 @@
 		private $_element_dao;
         private $_link_dao;
 		private $_element_holder_dao;
+        private $_current_element_holder;
 		
 		public function __construct() {
 			$this->_element_dao = ElementDao::getInstance();
@@ -22,23 +24,22 @@
         }
 
         function handlePost() {
-            $this->updateLinks();
+            $this->_current_element_holder = $this->getElementHolderFromPostRequest();
 			if ($this->isAddElementAction())
                 $this->addElement();
 			else if ($this->isDeleteElementAction())
                 $this->deleteElement();
-            else if ($this->isUpdateElementAction())
-                $this->updateElements();
+            else if ($this->isUpdateElementHolderAction())
+                $this->updateElementHolder();
             else if ($this->isAddLinkAction())
                 $this->addLink();
 		}
 
-        private function updateElements()
+        private function updateElementHolder()
         {
-            $element_holder = $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
-            foreach ($element_holder->getElements() as $element) {
+            $this->updateLinks();
+            foreach ($this->_current_element_holder->getElements() as $element)
                 $this->updateElement($element);
-            }
         }
 
         private function updateElement($element)
@@ -75,41 +76,33 @@
         }
 
         private function addLink() {
-            $this->_link_dao->createLink($_POST[EDIT_ELEMENT_HOLDER_ID]);
+            $this->_link_dao->createLink($this->_current_element_holder->getId());
         }
 
         private function updateLinks() {
-            // Updates all links in the element holder
-            if (isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == 'update_element_holder' && isset($_POST[EDIT_ELEMENT_HOLDER_ID])) {
-                include_once CMS_ROOT . "/database/dao/link_dao.php";
-                include_once CMS_ROOT . "/libraries/handlers/form_handler.php";
+            $links = $this->_link_dao->getLinksForElementHolder($this->_current_element_holder->getId());
 
-                $link_dao = LinkDao::getInstance();
-                $links = $link_dao->getLinksForElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
-
-                foreach ($links as $link) {
-                    if (isset($_POST['link_' . $link->getId() . '_delete'])) {
-                        $link_dao->deleteLink($link);
-                    } else {
-                        if (isset($_POST['link_' . $link->getId() . '_title'])) {
-                            $link->setTitle(FormHandler::getFieldValue('link_' . $link->getId() . '_title'));
-                        }
-                        if (isset($_POST['link_' . $link->getId() . '_url'])) {
-                            $link->setTargetAddress(FormHandler::getFieldValue('link_' . $link->getId() . '_url'));
-                        }
-                        if (isset($_POST['link_' . $link->getId() . '_code'])) {
-                            $link->setCode(FormHandler::getFieldValue('link_' . $link->getId() . '_code'));
-                        }
-                        if (isset($_POST['link_element_holder_ref_' . $link->getId()])) {
-                            $link->setTargetElementHolderId(FormHandler::getFieldValue('link_element_holder_ref_' . $link->getId()));
-                        }
-                        if (isset($_POST['delete_link_target']) && ($_POST['delete_link_target'] == $link->getId())) {
-                            $link->setTargetElementHolderId(NULL);
-                        }
-                    }
-                    $link_dao->updateLink($link);
+            foreach ($links as $link) {
+                if (isset($_POST['link_' . $link->getId() . '_delete']))
+                    $this->_link_dao->deleteLink($link);
+                else {
+                    if (isset($_POST['link_' . $link->getId() . '_title']))
+                        $link->setTitle($_POST['link_' . $link->getId() . '_title']);
+                    if (isset($_POST['link_' . $link->getId() . '_url']))
+                        $link->setTargetAddress($_POST['link_' . $link->getId() . '_url']);
+                    if (isset($_POST['link_' . $link->getId() . '_code']))
+                        $link->setCode($_POST['link_' . $link->getId() . '_code']);
+                    if (isset($_POST['link_element_holder_ref_' . $link->getId()]))
+                        $link->setTargetElementHolderId($_POST['link_element_holder_ref_' . $link->getId()]);
+                    if (isset($_POST['delete_link_target']) && ($_POST['delete_link_target'] == $link->getId()))
+                        $link->setTargetElementHolderId(null);
                 }
+                $this->_link_dao->updateLink($link);
             }
+        }
+
+        private function getElementHolderFromPostRequest() {
+            return $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
         private function isAddElementAction()
@@ -117,7 +110,7 @@
             return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
         }
 
-        private function isUpdateElementAction()
+        private function isUpdateElementHolderAction()
         {
             return isset($_POST[ACTION_FORM_ID]) && $_POST[ACTION_FORM_ID] == "update_element_holder";
         }
