@@ -26,9 +26,9 @@
             $this->_current_download = $this->getDownloadFromPostRequest();
             if ($this->isAddDownloadAction())
                 $this->addDownload();
-            if ($this->isDeleteDownloadAction())
+            else if ($this->isDeleteDownloadAction())
                 $this->deleteDownload();
-            if ($this->isUpdateDownloadAction())
+            else if ($this->isUpdateDownloadAction())
                 $this->updateDownload();
         }
 
