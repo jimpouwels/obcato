@@ -28,8 +28,6 @@
 				$this->_settings_dao->setHomepage($settings_form->getHomepageId());
 				Notifications::setSuccessMessage("Instellingen succesvol opgeslagen");
 			} catch (FormException $e) {
-				global $errors;
-				var_dump($errors);
 				Notifications::setFailedMessage("Instellingen niet opgeslagen, verwerk de fouten");
 			}
 		}

@@ -4,27 +4,24 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "/frontend/frontend_visual.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
     class PageVisual extends FrontendVisual {
 
         private $_template_engine;
         private $_page;
         private $_article;
-        private $_settings_dao;
 
         public function __construct($current_page, $current_article) {
             parent::__construct($current_page);
             $this->_page = $current_page;
             $this->_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
-            $this->_settings_dao = SettingsDao::getInstance();
         }
 
         public function render() {
-            $this->_template_engine->assign("website_title", $this->_settings_dao->getSettings()->getWebsiteTitle());
+            $this->_template_engine->assign("website_title", WEBSITE_TITLE);
             $this->_template_engine->assign("page", $this->getPageData());
-            return $this->_template_engine->display($this->getTemplateDir() . "/" . $this->_page->getTemplate()->getFileName());
+            return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 
         private function getPageData() {

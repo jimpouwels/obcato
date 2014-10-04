@@ -64,7 +64,7 @@
                     header("Content-Type: img/png");
                 else
                     header("Content-Type: image/" . $image->getExtension());
-                readfile($this->_settings_dao->getSettings()->getUploadDir() . "/" . $image->getFileName());
+                readfile(UPLOAD_DIR . "/" . $image->getFileName());
             }
         }
 		

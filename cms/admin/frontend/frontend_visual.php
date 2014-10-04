@@ -9,30 +9,23 @@
     require_once CMS_ROOT . "/database/dao/link_dao.php";
     require_once CMS_ROOT . "/database/dao/page_dao.php";
     require_once CMS_ROOT . "/database/dao/article_dao.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
 	abstract class FrontendVisual extends Visual {
 
         private $_link_dao;
         private $_page_dao;
         private $_article_dao;
-        private $_settings_dao;
 
         public function __construct($current_page) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_settings_dao = SettingsDao::getInstance();
             $this->_current_page = $current_page;
         }
 
 		protected function toHtml($value, $element_holder) {
             $value = nl2br($value);
             return $this->createLinksInString($value, $element_holder);
-        }
-
-        protected function getTemplateDir() {
-            return $this->_settings_dao->getSettings()->getFrontEndTemplateDir();
         }
 
         protected function getImageUrl($image) {

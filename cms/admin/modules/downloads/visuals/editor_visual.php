@@ -14,7 +14,6 @@
         public function __construct($download) {
             $this->_download = $download;
             $this->_template_engine = TemplateEngine::getInstance();
-            $this->_settings = SettingsDao::getInstance()->getSettings();
         }
 
         public function render() {
