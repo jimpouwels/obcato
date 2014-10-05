@@ -32,10 +32,12 @@
 			return $this->getFieldValue($field_name) == "on" ? 1 : 0;
 		}
 		
-		public function getMandatoryEmailAddress($field_name, $error_message) {
-			$email_address = $this->getEmailAddress($field_name, $error_message);
-			if ($this->isEmpty($email_address))
-				$this->raiseError($field_name, $error_message);
+		public function getMandatoryEmailAddress($field_name, $error_message, $invalid_email_message) {
+			$email_address = $this->getEmailAddress($field_name, $error_message, $invalid_email_message);
+            if (!$this->hasError($field_name)) {
+                if ($this->isEmpty($email_address))
+                    $this->raiseError($field_name, $error_message);
+                }
 			return $email_address;
 		}
 		
@@ -47,10 +49,12 @@
 			return $value;
 		}
 		
-		public function getMandatoryNumber($field_name, $error_message) {
-			$number = $this->getNumber($field_name, $error_message);
-			if ($this->isEmpty($number))
-				$this->raiseError($field_name, $error_message);
+		public function getMandatoryNumber($field_name, $error_message, $invalid_number_message) {
+			$number = $this->getNumber($field_name, $invalid_number_message);
+            if (!$this->hasError($field_name)) {
+                if ($this->isEmpty($number))
+                    $this->raiseError($field_name, $error_message);
+            }
 			return $number;
 		}
 		
@@ -61,10 +65,12 @@
 			return $number;
 		}
 		
-		public function getMandatoryDate($field_name, $error_message) {
-			$date = $this->getDate($field_name, $error_message);
-			if ($this->isEmpty($date))
-				$this->raiseError($field_name, $error_message);
+		public function getMandatoryDate($field_name, $error_message, $invalid_date_message) {
+			$date = $this->getDate($field_name, $invalid_date_message);
+            if (!$this->hasError($field_name)) {
+                if ($this->isEmpty($date))
+                    $this->raiseError($field_name, $error_message);
+            }
 			return $date;
 		}
 		
@@ -76,20 +82,16 @@
 			return $value;
 		}
 		
-		public function getPassword($field_name, $password1, $password2) {
-			$value = "";
+		public function getPassword($password1, $password2) {
 			$value1 = $this->getFieldValue($password1);
 			$value2 = $this->getFieldValue($password2);
-			
-			if (($value1 == "" || is_null($value1)) && ($value2 != "" || !is_null($value2)))
-				$this->raiseError($field_name, "Vul beide wachtwoordvelden in");
-			else if (($value2 == "" || is_null($value2)) && ($value1 != "" || !is_null($value1)))
-				$this->raiseError($field_name, "Herhaal het wachtwoord");
+			if ((!$value1 && $value2))
+				$this->raiseError($password1, "Vul beide wachtwoordvelden in");
+			else if ($value1 && !$value2)
+				$this->raiseError($password2, "Herhaal het wachtwoord");
 			else if ($value1 != $value2)
-				$this->raiseError($field_name, "De wachtwoorden zijn niet gelijk");
-			else
-				$value = $value1;
-			return $value;
+				$this->raiseError($password2, "De wachtwoorden zijn niet gelijk");
+			return $value1;
 		}
 		
 		public function getUploadFilePath($field_name) {
@@ -115,6 +117,11 @@
 		protected function isEmpty($value) {
 			return empty($value) || $value == "";
 		}
+
+        private function hasError($field_name) {
+            global $errors;
+            return isset($errors[$field_name]);
+        }
 	
 	}
 	

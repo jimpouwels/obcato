@@ -93,7 +93,6 @@
 			$user->setLastName($record['last_name']);
 			$user->setPrefix($record['prefix']);
 			$user->setUuid($record['uuid']);
-			
 			return $user;
 		}
 	}

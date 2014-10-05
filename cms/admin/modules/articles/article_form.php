@@ -62,12 +62,12 @@
 		}
 		
 		private function loadPublicationDate() {
-			$publication_date = $this->getMandatoryDate("publication_date", "Vul een datum in (bijv. 31-12-2010)");
+			$publication_date = $this->getMandatoryDate("publication_date", "Datum is verplicht", "Vul een datum in (bijv. 31-12-2010)");
 			$this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
 		}
 
         private function loadSortDate() {
-            $sort_date = $this->getMandatoryDate("sort_date", "Vul een datum in (bijv. 31-12-2010)");
+            $sort_date = $this->getMandatoryDate("sort_date", "Datum is verplicht", "Vul een geldige datum in (bijv. 31-12-2010)");
             $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
         }
 	
