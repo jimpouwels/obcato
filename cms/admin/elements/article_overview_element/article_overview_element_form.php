@@ -22,6 +22,7 @@
             $show_from = $this->getDate('element_' . $element_id . '_show_from', 'Vul een datum in (bijv. 31-12-2010)');
             $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', 'Vul een geldig getal in');
             $order_by = $this->getFieldValue('element_' . $element_id . '_order_by');
+            $template_id = $this->getFieldValue('element_' . $element_id . '_template');
             if ($this->hasErrors())
                 throw new FormException();
             else {
@@ -30,6 +31,7 @@
                 $this->_article_overview_element->setShowFrom(DateUtility::stringMySqlDate($show_from));
                 $this->_article_overview_element->setNumberOfResults($number_of_results);
                 $this->_article_overview_element->setOrderBy($order_by);
+                $this->_article_overview_element->setTemplateId($template_id);
             }
 
             $this->_selected_terms = $this->getFieldValue('select_terms_' . $this->_article_overview_element->getId());

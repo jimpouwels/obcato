@@ -77,7 +77,8 @@
 		}
 
         public function addTerm($term) {
-            $this->_terms[] = $term;
+            if (!in_array($term, $this->_terms))
+                $this->_terms[] = $term;
         }
 
         public function removeTerm($term) {
@@ -207,12 +208,10 @@
 
         private function addTerms() {
             foreach ($this->_element->getTerms() as $term) {
-                if (!in_array($term, $this->getTerms())) {
-                    $mysql_database = MysqlConnector::getInstance();
-                    $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
-                    $statement->bind_param('ii', $this->_element->getId(), $term->getId());
-                    $mysql_database->executeStatement($statement);
-                }
+                $mysql_database = MysqlConnector::getInstance();
+                $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
+                $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+                $mysql_database->executeStatement($statement);
             }
 		}
 
