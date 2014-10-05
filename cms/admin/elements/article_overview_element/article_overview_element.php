@@ -98,9 +98,8 @@
 			include_once CMS_ROOT . "/libraries/utilities/date_utility.php";
 			$article_dao = ArticleDao::getInstance();
 			$_show_to = null;
-			if ($this->_show_until_today != 1) {
+			if ($this->_show_until_today != 1)
 				$_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
-			}
 			$articles = $article_dao->searchPublishedArticles(DateUtility::mysqlDateToString($this->_show_from, '-'),
 															 $_show_to, $this->_order_by, $this->_term_ids, 
 															 $this->_number_of_results);
