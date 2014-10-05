@@ -42,16 +42,14 @@
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
 			$content = null;
-			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB) {
+			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB)
 				$content = new ArticleTab($this->_current_article, $this->_article_module->getIdentifier());
-			} else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB) {
+			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB)
 				$content = new TermTab($this->_current_term, $this->_article_module->getIdentifier());
-			} else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
+			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB)
 				$content = new TargetPagesTab($this->_article_module->getIdentifier());
-			}
-			if (!is_null($content)) {
+			if (!is_null($content))
 				$this->_template_engine->assign("content", $content->render());
-			}
 			
 			return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
 		}
@@ -62,9 +60,12 @@
 		
 		public function getRequestHandlers() {
 			$pre_handlers = array();
-			$pre_handlers[] = $this->_article_pre_handler;
-			$pre_handlers[] = $this->_term_pre_handler;
-			$pre_handlers[] = $this->_target_pages_pre_handler;
+            if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB)
+                $pre_handlers[] = $this->_article_pre_handler;
+            else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB)
+                $pre_handlers[] = $this->_term_pre_handler;
+            else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB)
+                $pre_handlers[] = $this->_target_pages_pre_handler;
 			return $pre_handlers;
 		}
 	

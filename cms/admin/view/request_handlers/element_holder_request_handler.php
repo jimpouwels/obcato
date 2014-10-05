@@ -45,24 +45,23 @@
         {
             $element_type = $element->getType();
             // new way of calling request handler for an element
-            if ($element_type->getIdentifier() == "text_element" ||
-                $element_type->getIdentifier() == "list_element" ||
-                $element_type->getIdentifier() == "image_element")
+            if ($element_type->getIdentifier() == 'text_element' ||
+                $element_type->getIdentifier() == 'list_element' ||
+                $element_type->getIdentifier() == 'image_element' ||
+                $element_type->getIdentifier() == 'article_overview_element')
                 $element->getRequestHandler()->handle();
             // old way (TODO: Refactor of calling elements request handler)
             else
                 include $element_type->getRootDirectory() . "/handler/update_element.php";
         }
 
-        private function addElement()
-        {
+        private function addElement() {
             $element_type = $this->GetElementTypeToAdd();
             if (!is_null($element_type))
                 $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
-        private function deleteElement()
-        {
+        private function deleteElement() {
             $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
             if (!is_null($element_to_delete))
                 $element_to_delete->delete();

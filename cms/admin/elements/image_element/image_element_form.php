@@ -2,7 +2,7 @@
     // No direct access
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "/view/form.php";
+    require_once CMS_ROOT . "/view/forms/form.php";
 
     class ImageElementForm extends Form {
 

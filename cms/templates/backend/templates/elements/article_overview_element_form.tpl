@@ -7,9 +7,6 @@
 	</td>
 </tr>
 <tr>
-	<td>{$show_until_today_field}</td>
-</tr>
-<tr>
 	<td>{$max_results_field}</td>
 </tr>
 <tr>

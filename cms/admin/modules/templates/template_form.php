@@ -2,7 +2,7 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once CMS_ROOT . "/view/form.php";
+	require_once CMS_ROOT . "/view/forms/form.php";
 	require_once CMS_ROOT . "/database/dao/template_dao.php";
 	
 	class TemplateForm extends Form {

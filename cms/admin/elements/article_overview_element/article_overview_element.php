@@ -18,17 +18,14 @@
 		private $_show_to;
 		private $_show_until_today;
 		private $_order_by;
+        private $_terms;
 		private $_number_of_results;
-		private $_term_ids;
-		private $_add_term_ids;
-		private $_remove_term_ids;
 		private $_metadata_provider;
 			
 		public function __construct() {
 			// set all text element specific metadata
-			$this->_metadata_provider = new ArticleOverviewElementMetaDataProvider();
-			$this->_add_term_ids = array();
-			$this->_remove_term_ids = array();
+            $this->_terms = array();
+			$this->_metadata_provider = new ArticleOverviewElementMetaDataProvider($this);
 		}
 		
 		public function setTitle($title) {
@@ -78,38 +75,22 @@
 		public function getOrderBy() {
 			return $this->_order_by;
 		}
+
+        public function addTerm($term) {
+            $this->_terms[] = $term;
+        }
+
+        public function removeTerm($term) {
+            if(($key = array_search($term, $this->_terms, true)) !== false)
+                unset($this->_terms[$key]);
+        }
+
+        public function setTerms($terms) {
+            $this->_terms = $terms;
+        }
 		
 		public function getTerms() {
-			$article_dao = ArticleDao::getInstance();
-			$terms = array();
-			foreach ($this->_term_ids as $term_id) {
-				array_push($terms, $article_dao->getTerm($term_id));
-			}
-			return $terms;
-		}
-		
-		public function getTermIds() {
-			return $this->_term_ids;
-		}
-		
-		public function setTermIds($term_ids) {
-			$this->_term_ids = $term_ids;
-		}
-		
-		public function addTerm($term_id) {
-			array_push($this->_add_term_ids, $term_id);
-		}
-		
-		public function getAddTermIds() {
-			return $this->_add_term_ids;
-		}
-		
-		public function removeTerm($term_id) {
-			array_push($this->_remove_term_ids, $term_id);
-		}
-	
-		public function getRemoveTermIds() {
-			return $this->_remove_term_ids;
+			return $this->_terms;
 		}
 		
 		public function getArticles() {
@@ -152,52 +133,41 @@
     }
 	
 	class ArticleOverviewElementMetaDataProvider {
-		
-		/*
-			Sets the meta data to the given element.
-			
-			@param $element The element to set the metadata for
-		*/
+
+        private $_article_dao;
+        private $_element;
+
+        public function __construct($element) {
+            $this->_element = $element;
+            $this->_article_dao = ArticleDao::getInstance();
+        }
+
 		public function getMetaData($element) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
-			$query = "SELECT title, show_from, show_to, show_until_today, order_by, number_of_results FROM article_overview_elements_metadata " . 
-					 "WHERE element_id = " . $element->getId();
+			$query = "SELECT * FROM article_overview_elements_metadata " . "WHERE element_id = " . $element->getId();
 			$result = $mysql_database->executeQuery($query);
 			while ($row = $result->fetch_assoc()) {
 				$element->setTitle($row['title']);
 				$element->setShowFrom($row['show_from']);
 				$element->setShowTo($row['show_to']);
-				$element->setShowUntilToday($row['show_until_today'] == 1 ? true : false);
 				$element->setOrderBy($row['order_by']);
 				$element->setNumberOfResults($row['number_of_results']);
 			}
 			
-			$element->setTermIds($this->getTerms($element));
+			$element->setTerms($this->getTerms());
 		}
-		
-		/*
-			Returns the terms for the given element.
-			
-			@param $element The element to get the terms for
-		*/
-		public function getTerms($element) {
+
+		private function getTerms() {
 			$mysql_database = MysqlConnector::getInstance(); 
-			
-			$query = "SELECT * FROM articles_element_terms WHERE element_id = " . $element->getId();
+			$query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
 			$result = $mysql_database->executeQuery($query);
-			$term_ids = array();
-			while ($row = $result->fetch_assoc()) {
-				array_push($term_ids, $row['term_id']);
-			}
-			return $term_ids;
+            $terms = array();
+			while ($row = $result->fetch_assoc())
+				array_push($terms, $this->_article_dao->getTerm($row['term_id']));
+			return $terms;
 		}
-		
-		/*
-			Updates the metadata for the given element.
-			
-			@param $element The element to update the metadata for
-		*/
+
 		public function updateMetaData($element) {
 			$mysql_database = MysqlConnector::getInstance(); 
 			
@@ -217,62 +187,42 @@
 				} else {
 					$query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";
 				}
-				$query = $query . " show_until_today = " . $element->getShowUntilToday() . ", order_by = '" . $element->getOrderBy() .
+				$query = $query . " order_by = '" . $element->getOrderBy() .
 						 "' WHERE element_id = " . $element->getId();
 			} else {
 				$query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, show_until_today, order_by, element_id, number_of_results) VALUES 
 				          ('" . $element->getTitle() . "', NULL, NULL, 1, 'DATE', " . $element->getId() . ", NULL)"; 
 			}
 			$mysql_database->executeQuery($query);
-			$this->addTerms($element);
-			$this->removeTerms($element);
+            $this->removeAllTerms();
+            $this->addTerms();
 		}
-		
-		/*
-			Removes the terms that have been selected for deletion for the given element.
-			
-			@param $element The element to delete terms for
-		*/
-		private function removeTerms($element) {
-			$terms_ids_to_delete = $element->getRemoveTermIds();
-			$mysql_database = MysqlConnector::getInstance(); 
-			
-			
-			foreach ($terms_ids_to_delete as $term_id) {
-				$query = "DELETE FROM articles_element_terms WHERE element_id = " . $element->getId() . " AND term_id = " . $term_id;
-				$mysql_database->executeQuery($query);	
-			}
+
+        private function removeAllTerms() {
+			$mysql_database = MysqlConnector::getInstance();
+            $statement = $mysql_database->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ?");
+            $statement->bind_param('i', $this->_element->getId());
+            $mysql_database->executeStatement($statement);
 		}
-		
-		/*
-			Adds the terms that have been selected for adding for the given element.
-			
-			@param $element The element to add terms for
-		*/
-		private function addTerms($element) {
-			$terms_ids_to_add = $element->getAddTermIds();
-			$mysql_database = MysqlConnector::getInstance(); 
-			
-			
-			foreach ($terms_ids_to_add as $term_id) {
-				$query = "INSERT INTO articles_element_terms (element_id, term_id) VALUES (" . $element->getId() . ", " . $term_id . ")";
-				$mysql_database->executeQuery($query);	
-			}
+
+        private function addTerms() {
+            foreach ($this->_element->getTerms() as $term) {
+                if (!in_array($term, $this->getTerms())) {
+                    $mysql_database = MysqlConnector::getInstance();
+                    $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
+                    $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+                    $mysql_database->executeStatement($statement);
+                }
+            }
 		}
-		
-		/*
-			Checks if the metadata for the given element is persisted.
-			
-			@param $element The element to check
-		*/
-		private function metaDataPersisted($element) {
+
+        private function metaDataPersisted($element) {
 			$query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
 					. $element->getId() . " AND e.id = " . $element->getId();
 			$mysql_database = MysqlConnector::getInstance(); 
 			$result = $mysql_database->executeQuery($query);
-			while ($row = $result->fetch_assoc()) {
+			while ($row = $result->fetch_assoc())
 				return true;
-			}
 			return false;
 		}
 		
