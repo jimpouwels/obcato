@@ -77,8 +77,7 @@
 		}
 
         public function addTerm($term) {
-            if (!in_array($term, $this->_terms))
-                $this->_terms[] = $term;
+            $this->_terms[] = $term;
         }
 
         public function removeTerm($term) {
@@ -195,25 +194,31 @@
 				          ('" . $element->getTitle() . "', NULL, NULL, 1, 'DATE', " . $element->getId() . ", NULL)"; 
 			}
 			$mysql_database->executeQuery($query);
-            $this->removeAllTerms();
             $this->addTerms();
 		}
 
-        private function removeAllTerms() {
-			$mysql_database = MysqlConnector::getInstance();
-            $statement = $mysql_database->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ?");
-            $statement->bind_param('i', $this->_element->getId());
-            $mysql_database->executeStatement($statement);
-		}
-
         private function addTerms() {
+            $existing_terms = $this->getTerms();
+            foreach ($existing_terms as $existing_term) {
+                if (!in_array($existing_term, $this->_element->getTerms()))
+                    $this->removeTerm($existing_term);
+            }
             foreach ($this->_element->getTerms() as $term) {
-                $mysql_database = MysqlConnector::getInstance();
-                $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
-                $statement->bind_param('ii', $this->_element->getId(), $term->getId());
-                $mysql_database->executeStatement($statement);
+                if (!in_array($term, $existing_terms)) {
+                    $mysql_database = MysqlConnector::getInstance();
+                    $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
+                    $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+                    $mysql_database->executeStatement($statement);
+                }
             }
 		}
+
+        private function removeTerm($term) {
+            $mysql_database = MysqlConnector::getInstance();
+            $statement = $mysql_database->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ? AND term_id = ?");
+            $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+            $mysql_database->executeStatement($statement);
+        }
 
         private function metaDataPersisted($element) {
 			$query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
