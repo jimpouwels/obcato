@@ -33,11 +33,9 @@
 		}
 		
 		public function getMandatoryEmailAddress($field_name, $error_message, $invalid_email_message) {
-			$email_address = $this->getEmailAddress($field_name, $error_message, $invalid_email_message);
-            if (!$this->hasError($field_name)) {
-                if ($this->isEmpty($email_address))
-                    $this->raiseError($field_name, $error_message);
-                }
+			$email_address = $this->getEmailAddress($field_name, $invalid_email_message);
+            if ($this->isEmpty($email_address))
+                $this->raiseError($field_name, $error_message);
 			return $email_address;
 		}
 		
@@ -50,11 +48,9 @@
 		}
 		
 		public function getMandatoryNumber($field_name, $error_message, $invalid_number_message) {
-			$number = $this->getNumber($field_name, $invalid_number_message);
-            if (!$this->hasError($field_name)) {
-                if ($this->isEmpty($number))
-                    $this->raiseError($field_name, $error_message);
-            }
+            $number = $this->getNumber($field_name, $invalid_number_message);
+            if ($this->isEmpty($number))
+                $this->raiseError($field_name, $error_message);
 			return $number;
 		}
 		
@@ -67,10 +63,8 @@
 		
 		public function getMandatoryDate($field_name, $error_message, $invalid_date_message) {
 			$date = $this->getDate($field_name, $invalid_date_message);
-            if (!$this->hasError($field_name)) {
-                if ($this->isEmpty($date))
-                    $this->raiseError($field_name, $error_message);
-            }
+            if ($this->isEmpty($date))
+                $this->raiseError($field_name, $error_message);
 			return $date;
 		}
 		
@@ -111,7 +105,8 @@
 		
 		protected function raiseError($error_field, $error_message) {
 			global $errors;
-			$errors[$error_field . "_error"] = $error_message;
+            if (!$this->hasError($error_field))
+                $errors[$error_field . '_error'] = $error_message;
 		}
 		
 		protected function isEmpty($value) {
@@ -120,7 +115,7 @@
 
         private function hasError($field_name) {
             global $errors;
-            return isset($errors[$field_name]);
+            return isset($errors[$field_name . '_error']);
         }
 	
 	}
