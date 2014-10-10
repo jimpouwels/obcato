@@ -84,8 +84,7 @@
 					  e.id = a.element_holder_id";
 			$order = '';
 			$limit = '';
-			
-			$where = $where . " AND published = 1";
+
 			$where = $where . " AND publication_date <= now()";
 			if (!is_null($to_date) && $to_date != '') {
 				$where = $where . " AND publication_date <= '" . DateUtility::stringMySqlDate($to_date) . "'";
@@ -96,7 +95,7 @@
 			if (!is_null($terms) && count($terms) > 0) {
 				$from = $from . ", articles_terms at";
 				foreach ($terms as $term) {
-					$where = $where . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term . ")";
+					$where = $where . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
 				}
 			}
 			if (!is_null($max_results) && $max_results != '') {
@@ -130,7 +129,9 @@
 		}
 
 		public function updateArticle($article) {
-			$query = "UPDATE articles SET description = '" . mysql_real_escape_string($article->getDescription()) . "'";
+			$query = "UPDATE articles SET description = '" . mysql_real_escape_string($article->getDescription()) . "',
+			          publication_date = '" . $article->getPublicationDate() . "',
+			          sort_date = '" . $article->getSortDate() . "'";
             if (!is_null($article->getImageId()) && $article->getImageId() != '') {
 				$query = $query . ", image_id = " . $article->getImageId();
 			} else {

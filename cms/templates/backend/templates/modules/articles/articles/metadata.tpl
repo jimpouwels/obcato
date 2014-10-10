@@ -15,7 +15,7 @@
             </div>
         {/if}
 	</li>
-	{if !is_null($lead_image_id)}
+	{if $lead_image_id}
 		<li>
 			<label class="admin_label"></label>
 			<img class="article_selected_image" title="Afbeelding verwijderen" src="/admin/upload.php?image={$lead_image_id}&amp;thumb=true" />

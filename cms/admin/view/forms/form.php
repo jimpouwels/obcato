@@ -22,7 +22,6 @@
 				$value = $_POST[$field_name];
 				if (!is_array($_POST[$field_name])) {
 					$value = StringUtility::unescapeXml($value);
-					$value = str_replace("'", "\\'", $value);
 				}
 			}
 			return $value;

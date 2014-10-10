@@ -101,7 +101,7 @@
 			if ($this->_show_until_today != 1)
 				$_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
 			$articles = $article_dao->searchPublishedArticles(DateUtility::mysqlDateToString($this->_show_from, '-'),
-															 $_show_to, $this->_order_by, $this->_term_ids, 
+															 $_show_to, $this->_order_by, $this->_terms,
 															 $this->_number_of_results);
 			return $articles;
 		}
