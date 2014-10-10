@@ -19,11 +19,9 @@
 	</head>
 	<body>
 		<div id="header-wrapper">
-			<div class="header" id="top">
-				<a href="index.php" class="title"><img class="header-text" alt="Site Administration" src="/admin/static/img/header_text.png" /></a>
-			</div>
-			<div class="version_info">
-				<p>SYS-version: {$system_version} / DB-version: {$db_version}</p>
+			<div id="top">
+                <p class="title">Site Administrator</p>
+                <p class="version">SYS-version: {$system_version} / DB-version: {$db_version}</p>
 			</div>
 			
 			{$navigation_menu}

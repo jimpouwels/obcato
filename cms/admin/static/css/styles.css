@@ -8,8 +8,8 @@
 ============ GLOBAL FORM STYLES
 */
 .admin_fieldset {
-    border: 1px solid #CCCCCC;
-    background-color: #F7F7F7;
+    border: 1px solid #cccccc;
+    background-color: #fbf9ee;
     padding: 0px 0px 10px;
     margin-bottom: 15px;
     margin-right: 10px;
@@ -18,11 +18,11 @@
 .fieldset-title {
     font-weight: bold;
     font-size: 1.2em;
-    color: white;
+    color: #363636;
     font-family: GeosansLight;
     text-transform: uppercase;
-    height: 30px;
-    background: url(/admin/static/img/heading-gradient.png) repeat-x;
+    height: 25px;
+    background-color: #dadada;
     padding-top: 5px;
     padding-left: 5px;
     margin: 0px;
@@ -58,11 +58,11 @@ legend {
 }
 
 .button {
-    background: url(/admin/static/img/button-background.png) repeat-x scroll 0 0 transparent;
+    background-color: #1f8dd6;
     border: 1px solid #6E93B0;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    color: #234E70;
+    color: #FFFFFF;
     display: inline;
     float: left;
     font-size: 1em;
@@ -70,11 +70,14 @@ legend {
     line-height: 26px;
     margin-right: 5px;
     padding: 0 10px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-weight: bold;
     text-decoration: none;
     margin-bottom: 5px;
-    font-weight: bold;
     cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1670AB;
 }
 
 .button:active {

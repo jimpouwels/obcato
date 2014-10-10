@@ -52,32 +52,6 @@ body {
 	margin-top: 20px;
 }
 
-.button {
-	background: url(/admin/static/img/button-background.png) repeat-x scroll 0 0 transparent;
-    border: 1px solid #6E93B0;
-    border-radius: 2px 2px 2px 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    color: #234E70;
-    display: inline;
-    float: left;
-    font-size: 1em;
-    height: 27px;
-    line-height: 26px;
-    margin-right: 5px;
-    padding: 0 10px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.button:active {
-    background-position: 0 bottom;
-}
-
-.button:hover {
-	text-decoration: underline;
-}
-
 .error {
     text-align: center;
 	color: red;
