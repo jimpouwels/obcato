@@ -25,7 +25,8 @@
 
         public function handlePost() {
             $this->_current_element_holder = $this->getElementHolderFromPostRequest();
-            $this->updateElementHolder();
+            if ($this->_current_element_holder)
+                $this->updateElementHolder();
 			if ($this->isAddElementAction())
                 $this->addElement();
 			else if ($this->isDeleteElementAction())
@@ -100,6 +101,7 @@
         }
 
         private function getElementHolderFromPostRequest() {
+            if (!isset($_POST[EDIT_ELEMENT_HOLDER_ID])) return null;
             return $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
