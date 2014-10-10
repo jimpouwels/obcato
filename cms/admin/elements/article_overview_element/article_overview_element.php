@@ -189,8 +189,8 @@
 				$query = $query . " order_by = '" . $element->getOrderBy() .
 						 "' WHERE element_id = " . $element->getId();
 			} else {
-				$query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, show_until_today, order_by, element_id, number_of_results) VALUES 
-				          ('" . $element->getTitle() . "', NULL, NULL, 1, 'DATE', " . $element->getId() . ", NULL)"; 
+				$query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, element_id, number_of_results) VALUES
+				          ('" . $element->getTitle() . "', NULL, NULL, 'DATE', " . $element->getId() . ", NULL)";
 			}
 			$mysql_database->executeQuery($query);
             $this->addTerms();

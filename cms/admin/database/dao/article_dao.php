@@ -130,7 +130,7 @@
 		}
 
 		public function updateArticle($article) {
-			$query = "UPDATE articles SET description = '" . $article->getDescription() . "'";
+			$query = "UPDATE articles SET description = '" . mysql_real_escape_string($article->getDescription()) . "'";
             if (!is_null($article->getImageId()) && $article->getImageId() != '') {
 				$query = $query . ", image_id = " . $article->getImageId();
 			} else {
