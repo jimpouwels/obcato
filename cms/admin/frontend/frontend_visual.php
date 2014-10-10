@@ -64,7 +64,7 @@
         }
 
         private function containsLink($value, $link) {
-            return strpos($value, $this->getLinkCodeOpeningTag($link)) > 0;
+            return strpos($value, $this->getLinkCodeOpeningTag($link)) > -1;
         }
 
         private function createUrlFromLink($link) {

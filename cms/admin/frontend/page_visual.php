@@ -4,15 +4,18 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "/frontend/frontend_visual.php";
+    require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
     class PageVisual extends FrontendVisual {
 
         private $_template_engine;
         private $_page;
         private $_article;
+        private $_settings;
 
         public function __construct($current_page, $current_article) {
             parent::__construct($current_page);
+            $this->_settings = SettingsDao::getInstance()->getSettings();
             $this->_page = $current_page;
             $this->_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
@@ -20,20 +23,17 @@
 
         public function render() {
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
-            $this->_template_engine->assign("page", $this->getPageData());
+            $this->_template_engine->assign("page", $this->getPageData($this->_page));
+            $this->_template_engine->assign("article", $this->renderArticle());
+            $this->_template_engine->assign("root_page", $this->getPageData($this->_settings->getHomepage()));
             return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 
-        private function getPageData() {
+        private function getPageData($page) {
             $page_data = array();
-            $page_data["children"] = $this->renderChildren($this->_page);
-            $page_data["elements"] = $this->renderElementHolderContent($this->_page);
+            $page_data["elements"] = $this->renderElementHolderContent($page);
             $page_data["blocks"] = $this->renderBlocks();
-            $page_data["article"] = $this->renderArticle();
-            $page_data["title"] = $this->_page->getTitle();
-            $page_data["navigation_title"] = $this->_page->getNavigationTitle();
-            $page_data["description"] = $this->toHtml($this->_page->getDescription(), $this->_page);
-            $page_data["show_in_navigation"] = $this->_page->getShowInNavigation();
+            $this->addPageData($page, $page_data);
             return $page_data;
         }
 
@@ -42,15 +42,20 @@
             foreach ($page->getSubPages() as $subPage) {
                 if (!$subPage->isPublished()) continue;
                 $child = array();
-                $child["title"] = $subPage->getTitle();
-                $child["navigation_title"] = $subPage->getNavigationTitle();
-                $child["description"] = $subPage->getDescription();
-                $child["show_in_navigation"] = $subPage->getShowInNavigation();
-                $child["url"] = $this->getPageUrl($subPage);
-                $child["children"] = $this->renderChildren($subPage);
+                $this->addPageData($subPage, $child);
                 $children[] = $child;
             }
             return $children;
+        }
+
+        private function addPageData($page, &$page_data) {
+            $page_data["is_current_page"] = $this->_current_page->getId() == $page->getId();
+            $page_data["title"] = $page->getTitle();
+            $page_data["url"] = $this->getPageUrl($page);
+            $page_data["navigation_title"] = $page->getNavigationTitle();
+            $page_data["description"] = $this->toHtml($page->getDescription(), $page);
+            $page_data["show_in_navigation"] = $page->getShowInNavigation();
+            $page_data["children"] = $this->renderChildren($page);
         }
 
         private function renderArticle() {

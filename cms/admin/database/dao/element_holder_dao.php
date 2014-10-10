@@ -64,7 +64,7 @@
 
 		public function update($element_holder) {
             $published_value = ($element_holder->isPublished()) ? 1 : 0;
-			$query = "UPDATE element_holders SET title = '" . $element_holder->getTitle() . "', published = " . $published_value . ",
+			$query = "UPDATE element_holders SET title = '" . mysql_real_escape_string($element_holder->getTitle()) . "', published = " . $published_value . ",
 					  scope_id = " . $element_holder->getScopeId();
 			if ($element_holder->getTemplateId() != "" && !is_null($element_holder->getTemplateId())) {
 				$query .= ", template_id = " . $element_holder->getTemplateId();

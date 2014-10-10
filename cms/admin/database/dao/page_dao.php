@@ -82,13 +82,9 @@
 		}
 
 		public function updatePage($page) {
-			$query = "UPDATE pages SET navigation_title = '" . $page->getNavigationTitle() . "', show_in_navigation = " . $page->getShowInNavigation() . ", 
+			$query = "UPDATE pages SET navigation_title = '" . mysql_real_escape_string($page->getNavigationTitle()) . "', show_in_navigation = " . $page->getShowInNavigation() . ",
 					include_in_searchindex = " . $page->getIncludeInSearchEngine() . ", follow_up = " . $page->getFollowUp() . ", description = '" . 
 					  $page->getDescription() . "'";
-			
-			if ($page->getParentId() != "" && !is_null($page->getParentId())) {
-				$query .= ", parent_id = " . $page->getParentId();
-			}
 			$query .= " WHERE element_holder_id = " . $page->getId();
 			$this->_mysql_connector->executeQuery($query);
 			$this->_element_holder_dao->update($page);
