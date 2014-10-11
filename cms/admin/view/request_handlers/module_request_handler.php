@@ -1,9 +1,9 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/view/request_handlers/http_request_handler.php";
+	require_once CMS_ROOT . "view/request_handlers/http_request_handler.php";
 	
 	abstract class ModuleRequestHandler extends HttpRequestHandler {
 				

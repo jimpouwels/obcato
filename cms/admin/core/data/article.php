@@ -1,11 +1,11 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/core/data/element_holder.php";
-	require_once CMS_ROOT . "/database/dao/article_dao.php";
-    require_once CMS_ROOT . "/database/dao/page_dao.php";
+	require_once CMS_ROOT . "core/data/element_holder.php";
+	require_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . "database/dao/page_dao.php";
 	
 	class Article extends ElementHolder {
 
@@ -44,7 +44,7 @@
 		public function getImage() {
 			$image = null;
 			if ($this->_image_id != '' && !is_null($this->_image_id)) {
-				include_once CMS_ROOT . "/database/dao/image_dao.php";
+				include_once CMS_ROOT . "database/dao/image_dao.php";
 				$image_dao = ImageDao::getInstance();
 				$image = $image_dao->getImage($this->_image_id);
 			}

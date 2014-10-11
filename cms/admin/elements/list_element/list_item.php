@@ -1,9 +1,9 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/core/data/entity.php";
+	include_once CMS_ROOT . "core/data/entity.php";
 
 	class ListItem extends Entity {
 			
@@ -36,7 +36,7 @@
 		}
 		
 		public function getElement() {
-			include_once CMS_ROOT . "/dao/element_dao.php";
+			include_once CMS_ROOT . "dao/element_dao.php";
 			$element_dao = ElementDao::getInstance();
 			return $element_dao->getElement($this->_elementId);
 		}

@@ -2,9 +2,9 @@
 
 	defined("_ACCESS") or die;
 	
-	require_once CMS_ROOT . "/view/forms/form.php";
-    require_once CMS_ROOT . "/database/dao/article_dao.php";
-    require_once CMS_ROOT . "/libraries/utilities/date_utility.php";
+	require_once CMS_ROOT . "view/forms/form.php";
+    require_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . "libraries/utilities/date_utility.php";
 
 	class ArticleForm extends Form {
 	

@@ -1,7 +1,7 @@
 <?php
 	
-	require_once CMS_ROOT . "/core/data/session.php";
-	require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
+	require_once CMS_ROOT . "core/data/session.php";
+	require_once CMS_ROOT . "view/request_handlers/module_request_handler.php";
 	
 	class LogoutPreHandler extends ModuleRequestHandler {
 	

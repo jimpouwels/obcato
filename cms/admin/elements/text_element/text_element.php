@@ -1,14 +1,13 @@
 <?php
 
-	// No direct access
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/core/data/element.php";
-	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_editor.php";
-	require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
-    require_once CMS_ROOT . "/elements/text_element/text_element_request_handler.php";
-	require_once CMS_ROOT . "/database/mysql_connector.php";
-    require_once CMS_ROOT . "/frontend/text_element_visual.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "elements/text_element/visuals/text_element_editor.php";
+	require_once CMS_ROOT . "elements/text_element/visuals/text_element_statics.php";
+    require_once CMS_ROOT . "elements/text_element/text_element_request_handler.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "frontend/text_element_visual.php";
 
 	class TextElement extends Element {
 			
@@ -80,8 +79,8 @@
 			
 			
 			if ($this->persisted($element)) {
-				$query = "UPDATE text_elements_metadata SET title = '" . $element->getTitle() . "', text = '" 
-						  . $element->getText() . "' WHERE element_id = " . $element->getId();
+				$query = "UPDATE text_elements_metadata SET title = '" . $mysql_database->realEscapeString($element->getTitle()) . "', text = '"
+						  . $mysql_database->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
 			} else {
 				$query = "INSERT INTO text_elements_metadata (title, text, element_id) VALUES 
 				          ('" . $element->getTitle() . "', '" . $element->getText() . "', " . $element->getId() . ")"; 

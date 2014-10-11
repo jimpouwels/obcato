@@ -1,14 +1,14 @@
 <?php
-	// No direct access
+	
 	defined('_ACCESS') or die;
 		
-	require_once CMS_ROOT . "/database/dao/page_dao.php";
-	require_once CMS_ROOT . "/modules/pages/page_form.php";
-	require_once CMS_ROOT . "/database/dao/block_dao.php";
-	require_once CMS_ROOT . "/database/dao/element_dao.php";
-	require_once CMS_ROOT . "/database/dao/authorization_dao.php";
-	require_once CMS_ROOT . "/libraries/system/notifications.php";
-	require_once CMS_ROOT . "/view/request_handlers/element_holder_request_handler.php";
+	require_once CMS_ROOT . "database/dao/page_dao.php";
+	require_once CMS_ROOT . "modules/pages/page_form.php";
+	require_once CMS_ROOT . "database/dao/block_dao.php";
+	require_once CMS_ROOT . "database/dao/element_dao.php";
+	require_once CMS_ROOT . "database/dao/authorization_dao.php";
+	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "view/request_handlers/element_holder_request_handler.php";
 	
 	class PagePreHandler extends ElementHolderRequestHandler {
 	

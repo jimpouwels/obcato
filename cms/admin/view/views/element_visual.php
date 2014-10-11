@@ -1,10 +1,10 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/view/views/visual.php";
-	require_once CMS_ROOT . "/view/views/form_template_picker.php";
+	require_once CMS_ROOT . "view/views/visual.php";
+	require_once CMS_ROOT . "view/views/form_template_picker.php";
 	
 	abstract class ElementVisual extends Visual {
 	

@@ -1,11 +1,10 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/core/data/entity.php";
-    require_once CMS_ROOT . "/libraries/utilities/link_utility.php";
-    require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+	require_once CMS_ROOT . "core/data/entity.php";
+    require_once CMS_ROOT . "database/dao/element_holder_dao.php";
 
 
 	class Link extends Entity {
@@ -31,16 +30,6 @@
 		
 		public function setTitle($title) {
 			$this->myTitle = $title;
-		}
-		
-		public function getUrl() {
-			$url = NULL;
-			if ($this->myType == Link::EXTERNAL) {
-				$url = LinkUtil::createUrlFromLink($this);
-			} else {
-				$url = $this->myUrl;
-			}
-			return $url;
 		}
 		
 		public function getTargetAddress() {

@@ -1,15 +1,15 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/core/data/element.php";
-	require_once CMS_ROOT . "/database/mysql_connector.php";
-	require_once CMS_ROOT . "/elements/list_element/list_item.php";
-	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
-	require_once CMS_ROOT . "/elements/list_element/visuals/list_element_editor.php";
-    require_once CMS_ROOT . "/frontend/list_element_visual.php";
-    require_once CMS_ROOT . "/elements/list_element/list_element_request_handler.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+	require_once CMS_ROOT . "elements/list_element/list_item.php";
+	require_once CMS_ROOT . "elements/list_element/visuals/list_element_statics.php";
+	require_once CMS_ROOT . "elements/list_element/visuals/list_element_editor.php";
+    require_once CMS_ROOT . "frontend/list_element_visual.php";
+    require_once CMS_ROOT . "elements/list_element/list_element_request_handler.php";
 
 	class ListElement extends Element {
 

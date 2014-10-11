@@ -1,5 +1,5 @@
 <?php
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
 	class Queries extends Visual {

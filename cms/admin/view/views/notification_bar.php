@@ -1,9 +1,9 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/libraries/system/notifications.php";
+	require_once CMS_ROOT . "libraries/system/notifications.php";
 	
 	class NotificationBar extends Visual {
 	

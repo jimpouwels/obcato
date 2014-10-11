@@ -1,12 +1,12 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/database/dao/module_dao.php";
-	require_once CMS_ROOT . "/view/views/navigation_menu.php";
-	require_once CMS_ROOT . "/view/views/actions_menu.php";
-	require_once CMS_ROOT . "/view/views/notification_bar.php";
+	require_once CMS_ROOT . "database/dao/module_dao.php";
+	require_once CMS_ROOT . "view/views/navigation_menu.php";
+	require_once CMS_ROOT . "view/views/actions_menu.php";
+	require_once CMS_ROOT . "view/views/notification_bar.php";
 	
 	class Cms extends Visual {
 		

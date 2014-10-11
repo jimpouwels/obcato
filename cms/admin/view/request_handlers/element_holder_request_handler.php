@@ -1,11 +1,11 @@
 <?php
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
-    require_once CMS_ROOT . "/database/dao/link_dao.php";
-    require_once CMS_ROOT . "/database/dao/element_dao.php";
-    require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
+	require_once CMS_ROOT . "database/dao/element_holder_dao.php";
+    require_once CMS_ROOT . "database/dao/link_dao.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "view/request_handlers/module_request_handler.php";
 	
 	abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 

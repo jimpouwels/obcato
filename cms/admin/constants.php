@@ -1,9 +1,9 @@
 <?php
 	
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/core/data/settings.php";
+	require_once CMS_ROOT . "core/data/settings.php";
 
     $website_settings = Settings::find();
 	

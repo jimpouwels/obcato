@@ -1,12 +1,11 @@
 <?php
-	// No direct access
+	
 	defined("_ACCESS") or die;
 	
-	require_once CMS_ROOT . "/database/dao/settings_dao.php";
-	require_once CMS_ROOT . "/view/request_handlers/module_request_handler.php";
-	require_once CMS_ROOT . "/libraries/validators/form_validator.php";
-	require_once CMS_ROOT . "/libraries/system/notifications.php";
-	require_once CMS_ROOT . "/modules/settings/settings_form.php";
+	require_once CMS_ROOT . "database/dao/settings_dao.php";
+	require_once CMS_ROOT . "view/request_handlers/module_request_handler.php";
+	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "modules/settings/settings_form.php";
 
 	class SettingsPreHandler extends ModuleRequestHandler {
 	

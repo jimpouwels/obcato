@@ -1,10 +1,10 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "/database/mysql_connector.php";
-	include_once CMS_ROOT . "/core/data/element_holder.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "core/data/element_holder.php";
 
 	class ElementHolderDao {
 	
@@ -64,7 +64,7 @@
 
 		public function update($element_holder) {
             $published_value = ($element_holder->isPublished()) ? 1 : 0;
-			$query = "UPDATE element_holders SET title = '" . mysql_real_escape_string($element_holder->getTitle()) . "', published = " . $published_value . ",
+			$query = "UPDATE element_holders SET title = '" . $this->_mysql_connector->realEscapeString($element_holder->getTitle()) . "', published = " . $published_value . ",
 					  scope_id = " . $element_holder->getScopeId();
 			if ($element_holder->getTemplateId() != "" && !is_null($element_holder->getTemplateId())) {
 				$query .= ", template_id = " . $element_holder->getTemplateId();

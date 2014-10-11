@@ -1,13 +1,13 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	require_once CMS_ROOT . "/view/views/module_visual.php";
-    require_once CMS_ROOT . "/view/views/action_button.php";
-    require_once CMS_ROOT . "/modules/downloads/visuals/list_visual.php";
-    require_once CMS_ROOT . "/modules/downloads/visuals/editor_visual.php";
-    require_once CMS_ROOT . "/modules/downloads/download_request_handler.php";
+	require_once CMS_ROOT . "view/views/module_visual.php";
+    require_once CMS_ROOT . "view/views/action_button.php";
+    require_once CMS_ROOT . "modules/downloads/visuals/list_visual.php";
+    require_once CMS_ROOT . "modules/downloads/visuals/editor_visual.php";
+    require_once CMS_ROOT . "modules/downloads/download_request_handler.php";
 
 	class DownloadModuleVisual extends ModuleVisual {
 

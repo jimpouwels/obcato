@@ -1,6 +1,6 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
 	abstract class ModuleVisual extends Visual {

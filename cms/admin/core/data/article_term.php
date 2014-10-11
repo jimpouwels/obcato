@@ -1,10 +1,10 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/core/data/entity.php";
-	include_once CMS_ROOT . "/database/dao/article_dao.php";
+	include_once CMS_ROOT . "core/data/entity.php";
+	include_once CMS_ROOT . "database/dao/article_dao.php";
 
 	class ArticleTerm extends Entity {
 	

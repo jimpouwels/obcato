@@ -1,15 +1,15 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "/core/data/element.php";
-	require_once CMS_ROOT . "/database/mysql_connector.php";
-	require_once CMS_ROOT . "/database/dao/article_dao.php";
-	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
-	require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
-    require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_request_handler.php";
-    require_once CMS_ROOT . "/frontend/article_overview_element_visual.php";
+	require_once CMS_ROOT . "core/data/element.php";
+	require_once CMS_ROOT . "database/mysql_connector.php";
+	require_once CMS_ROOT . "database/dao/article_dao.php";
+	require_once CMS_ROOT . "elements/article_overview_element/visuals/article_overview_element_statics.php";
+	require_once CMS_ROOT . "elements/article_overview_element/visuals/article_overview_element_editor.php";
+    require_once CMS_ROOT . "elements/article_overview_element/article_overview_element_request_handler.php";
+    require_once CMS_ROOT . "frontend/article_overview_element_visual.php";
 
 	class ArticleOverviewElement extends Element {
 			
@@ -94,8 +94,8 @@
 		}
 		
 		public function getArticles() {
-			include_once CMS_ROOT . "/database/dao/article_dao.php";
-			include_once CMS_ROOT . "/libraries/utilities/date_utility.php";
+			include_once CMS_ROOT . "database/dao/article_dao.php";
+			include_once CMS_ROOT . "libraries/utilities/date_utility.php";
 			$article_dao = ArticleDao::getInstance();
 			$_show_to = null;
 			if ($this->_show_until_today != 1)

@@ -1,14 +1,14 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/core/data/article.php";
-    require_once CMS_ROOT . "/core/data/page.php";
-    require_once CMS_ROOT . "/view/views/visual.php";
-    require_once CMS_ROOT . "/database/dao/link_dao.php";
-    require_once CMS_ROOT . "/database/dao/page_dao.php";
-    require_once CMS_ROOT . "/database/dao/article_dao.php";
+    require_once CMS_ROOT . "core/data/article.php";
+    require_once CMS_ROOT . "core/data/page.php";
+    require_once CMS_ROOT . "view/views/visual.php";
+    require_once CMS_ROOT . "database/dao/link_dao.php";
+    require_once CMS_ROOT . "database/dao/page_dao.php";
+    require_once CMS_ROOT . "database/dao/article_dao.php";
 
 	abstract class FrontendVisual extends Visual {
 

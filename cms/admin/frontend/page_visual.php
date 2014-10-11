@@ -1,10 +1,10 @@
 <?php
 
-    // No direct access
+    
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "/frontend/frontend_visual.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
+    require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "database/dao/settings_dao.php";
 
     class PageVisual extends FrontendVisual {
 

@@ -1,10 +1,10 @@
 <?php
-// No direct access
+
 defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/pre_handlers/pre_handler.php";
-    require_once CMS_ROOT . "/elements/image_element/image_element_form.php";
-    require_once CMS_ROOT . "/database/dao/element_dao.php";
+    require_once CMS_ROOT . "pre_handlers/pre_handler.php";
+    require_once CMS_ROOT . "elements/image_element/image_element_form.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
 
     class ImageElementRequestHandler extends PreHandler {
 

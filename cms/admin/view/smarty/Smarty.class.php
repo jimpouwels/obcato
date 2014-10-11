@@ -1292,7 +1292,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             );
             foreach ($names as $file) {
                 if (file_exists($file)) {
-                    require_once CMS_ROOT .($file);
+                    require_once ($file);
                     return $file;
                 }
                 if ($this->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir)) {

@@ -3,13 +3,13 @@
 	define("_ACCESS", "GRANTED");
     define("CMS_ROOT", '');
 
-    require_once CMS_ROOT . "/database_config.php";
-	require_once CMS_ROOT . "/constants.php";
-	require_once CMS_ROOT . "/backend.php";
+    require_once CMS_ROOT . "database_config.php";
+	require_once CMS_ROOT . "constants.php";
+	require_once CMS_ROOT . "backend.php";
 	
 	$backend = new Backend("site_administrator");
 	
-	include_once CMS_ROOT . "/database/dao/image_dao.php";
+	include_once CMS_ROOT . "database/dao/image_dao.php";
 	
 	if (isset($_GET['image']) && $_GET['image'] != '') {
 		$image_dao = ImageDao::getInstance();
@@ -19,7 +19,7 @@
 		if ($image->isPublished()) {
 			$render_image = true;
 		} else {
-			include_once CMS_ROOT . "/core/data/session.php";
+			include_once CMS_ROOT . "core/data/session.php";
 			$backend->isAuthenticated();
 		}
 		

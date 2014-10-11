@@ -1,13 +1,13 @@
 <?php
-    // No direct access
+    
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/database/mysql_connector.php";
-    require_once CMS_ROOT . "/install/install_folders_form.php";
-    require_once CMS_ROOT . "/database/dao/settings_dao.php";
+    require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "install/install_folders_form.php";
+    require_once CMS_ROOT . "database/dao/settings_dao.php";
 
     if (file_exists("database_config.php")) {
-        require_once CMS_ROOT . "/database_config.php";
+        require_once CMS_ROOT . "database_config.php";
         $mysql_connector = MySqlConnector::getInstance();
     }
 

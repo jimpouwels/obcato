@@ -1,6 +1,6 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
 	class MysqlConnector {
@@ -47,6 +47,10 @@
 
         public function executeSql($sql) {
             mysqli_multi_query($this->conn, $sql);
+        }
+
+        public function realEscapeString($value) {
+            return $this->conn->real_escape_string($value);
         }
 
         public function getInsertId() {

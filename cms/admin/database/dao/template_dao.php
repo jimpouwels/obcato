@@ -1,10 +1,10 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "/database/mysql_connector.php";
-	include_once CMS_ROOT . "/core/data/template.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "core/data/template.php";
 
 	class TemplateDao {
 
@@ -39,7 +39,8 @@
 			$templates = array();
 			if (!is_null($scope) && $scope != "") {
 				$statement = $this->_mysql_connector->prepareStatement("SELECT * FROM templates WHERE scope_id = ?");
-                $statement->bind_param("i", $scope->getId());
+                $scope_id = $scope->getId();
+                $statement->bind_param("i", $scope_id);
 				$result = $this->_mysql_connector->executeStatement($statement);
 				$template = null;
 				while ($row = $result->fetch_assoc()) {

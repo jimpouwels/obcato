@@ -1,9 +1,9 @@
 <?php
-    // No direct access
+    
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/database/mysql_connector.php";
-    require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+    require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "database/dao/authorization_dao.php";
 
     class DownloadDao {
 

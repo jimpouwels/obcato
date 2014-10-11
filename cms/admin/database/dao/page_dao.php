@@ -1,15 +1,15 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "/database/mysql_connector.php";
-	include_once CMS_ROOT . "/database/dao/element_dao.php";
-	include_once CMS_ROOT . "/database/dao/element_holder_dao.php";
-	include_once CMS_ROOT . "/database/dao/block_dao.php";
-	include_once CMS_ROOT . "/database/dao/template_dao.php";
-	include_once CMS_ROOT . "/core/data/page.php";
-	include_once CMS_ROOT . "/database/dao/authorization_dao.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "database/dao/element_holder_dao.php";
+	include_once CMS_ROOT . "database/dao/block_dao.php";
+	include_once CMS_ROOT . "database/dao/template_dao.php";
+	include_once CMS_ROOT . "core/data/page.php";
+	include_once CMS_ROOT . "database/dao/authorization_dao.php";
 
 	class PageDao {
 
@@ -62,7 +62,8 @@
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
                                                                     element_holders e WHERE p.parent_id = ?
                                                                     AND p.element_holder_id = e.id ORDER BY p.follow_up");
-            $statement->bind_param("i", $page->getId());
+            $id = $page->getId();
+            $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
 			$pages = array();
 			while ($row = $result->fetch_assoc()) {
@@ -82,7 +83,7 @@
 		}
 
 		public function updatePage($page) {
-			$query = "UPDATE pages SET navigation_title = '" . mysql_real_escape_string($page->getNavigationTitle()) . "', show_in_navigation = " . $page->getShowInNavigation() . ",
+			$query = "UPDATE pages SET navigation_title = '" . $this->_mysql_connector->realEscapeString($page->getNavigationTitle()) . "', show_in_navigation = " . $page->getShowInNavigation() . ",
 					include_in_searchindex = " . $page->getIncludeInSearchEngine() . ", follow_up = " . $page->getFollowUp() . ", description = '" . 
 					  $page->getDescription() . "'";
 			$query .= " WHERE element_holder_id = " . $page->getId();

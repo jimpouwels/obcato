@@ -1,15 +1,15 @@
 <?php
 
-	// No direct access
+	
 	defined('_ACCESS') or die;
 	
-	include_once CMS_ROOT . "/database/mysql_connector.php";
-	include_once CMS_ROOT . "/database/dao/element_dao.php";
-	include_once CMS_ROOT . "/database/dao/element_holder_dao.php";
-	include_once CMS_ROOT . "/core/data/article.php";
-	include_once CMS_ROOT . "/core/data/article_term.php";
-	include_once CMS_ROOT . "/database/dao/authorization_dao.php";
-	include_once CMS_ROOT . "/libraries/utilities/date_utility.php";
+	include_once CMS_ROOT . "database/mysql_connector.php";
+	include_once CMS_ROOT . "database/dao/element_dao.php";
+	include_once CMS_ROOT . "database/dao/element_holder_dao.php";
+	include_once CMS_ROOT . "core/data/article.php";
+	include_once CMS_ROOT . "core/data/article_term.php";
+	include_once CMS_ROOT . "database/dao/authorization_dao.php";
+	include_once CMS_ROOT . "libraries/utilities/date_utility.php";
 	
 	class ArticleDao {
 
@@ -129,7 +129,7 @@
 		}
 
 		public function updateArticle($article) {
-			$query = "UPDATE articles SET description = '" . mysql_real_escape_string($article->getDescription()) . "',
+			$query = "UPDATE articles SET description = '" . $this->_mysql_connector->realEscapeString($article->getDescription()) . "',
 			          publication_date = '" . $article->getPublicationDate() . "',
 			          sort_date = '" . $article->getSortDate() . "'";
             if (!is_null($article->getImageId()) && $article->getImageId() != '') {

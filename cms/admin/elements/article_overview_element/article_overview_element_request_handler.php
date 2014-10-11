@@ -1,11 +1,11 @@
 <?php
-    // No direct access
+    
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/view/request_handlers/http_request_handler.php";
-    require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_form.php";
-    require_once CMS_ROOT . "/database/dao/element_dao.php";
-    require_once CMS_ROOT . "/database/dao/article_dao.php";
+    require_once CMS_ROOT . "view/request_handlers/http_request_handler.php";
+    require_once CMS_ROOT . "elements/article_overview_element/article_overview_element_form.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "database/dao/article_dao.php";
 
     class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
 

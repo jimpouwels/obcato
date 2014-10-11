@@ -1,8 +1,8 @@
 <?php
-	// No direct access
+	
 	defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "/libraries/utilities/string_utility.php";
+    require_once CMS_ROOT . "libraries/utilities/string_utility.php";
 	
 	abstract class Form {
 		
