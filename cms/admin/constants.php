@@ -21,7 +21,7 @@
 	define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
 	
 	// DEFINE SYSTEM VFERSION
-	define("SYSTEM_VERSION", "1.0.0.1");
+	define("SYSTEM_VERSION", "1.0.0.2");
     define("DB_VERSION", $website_settings->getDatabaseVersion());
 	
 	// DEFINE TIME OUT
