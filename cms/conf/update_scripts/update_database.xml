@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <versions>
 	<version>
+        <number>1.0.0</number>
+    </version>
+    <version>
         <number>1.0.0.1</number>
         <queries>
+			<query>ALTER TABLE `cms`.`article_overview_elements_metadata` ADD COLUMN `order_type` VARCHAR(45) NOT NULL AFTER `number_of_results`</query>
+            <query>UPDATE article_overview_elements_metadata SET order_type = 'asc'</query>
         </queries>
 	</version>
 </versions>

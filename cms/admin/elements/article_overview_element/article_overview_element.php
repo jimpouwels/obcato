@@ -18,6 +18,7 @@
 		private $_show_to;
 		private $_show_until_today;
 		private $_order_by;
+        private $_order_type;
         private $_terms;
 		private $_number_of_results;
 		private $_metadata_provider;
@@ -67,14 +68,22 @@
 		public function getNumberOfResults() {
 			return $this->_number_of_results;
 		}
-		
-		public function setOrderBy($order_by) {
-			$this->_order_by = $order_by;
-		}
-		
-		public function getOrderBy() {
-			return $this->_order_by;
-		}
+
+        public function setOrderBy($order_by) {
+            $this->_order_by = $order_by;
+        }
+
+        public function getOrderBy() {
+            return $this->_order_by;
+        }
+
+        public function setOrderType($order_type) {
+            $this->_order_type = $order_type;
+        }
+
+        public function getOrderType() {
+            return $this->_order_type;
+        }
 
         public function addTerm($term) {
             $this->_terms[] = $term;
@@ -101,7 +110,7 @@
 			if ($this->_show_until_today != 1)
 				$_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
 			$articles = $article_dao->searchPublishedArticles(DateUtility::mysqlDateToString($this->_show_from, '-'),
-															 $_show_to, $this->_order_by, $this->_terms,
+															 $_show_to, $this->_order_by, $this->getOrderType(), $this->_terms,
 															 $this->_number_of_results);
 			return $articles;
 		}
@@ -151,6 +160,7 @@
 				$element->setShowFrom($row['show_from']);
 				$element->setShowTo($row['show_to']);
 				$element->setOrderBy($row['order_by']);
+                $element->setOrderType($row['order_type']);
 				$element->setNumberOfResults($row['number_of_results']);
 			}
 			
@@ -186,11 +196,11 @@
 				} else {
 					$query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";
 				}
-				$query = $query . " order_by = '" . $element->getOrderBy() .
+				$query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() .
 						 "' WHERE element_id = " . $element->getId();
 			} else {
-				$query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, element_id, number_of_results) VALUES
-				          ('" . $element->getTitle() . "', NULL, NULL, 'DATE', " . $element->getId() . ", NULL)";
+				$query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, order_type, element_id, number_of_results) VALUES
+				          ('" . $element->getTitle() . "', NULL, NULL, 'PublicationDate', 'asc', " . $element->getId() . ", NULL)";
 			}
 			$mysql_database->executeQuery($query);
             $this->addTerms();

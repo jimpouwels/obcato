@@ -45,7 +45,7 @@
 					$new_version = $version->getElementsByTagName('number')->item(0)->nodeValue;
 				} else {			
 					$version_number = $version->getElementsByTagName('number')->item(0)->nodeValue;
-					if ($version_number == $website_settings->getDatabaseVersion()) {
+					if ($version_number == $website_settings->getDatabaseVersion() || !$website_settings->getDatabaseVersion()) {
 						$current_version_found = true;
 					}
 				}

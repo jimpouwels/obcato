@@ -13,5 +13,8 @@
 	<td>{$order_by_field}</td>
 </tr>
 <tr>
+    <td>{$order_type_field}</td>
+</tr>
+<tr>
 	<td>{$term_select_field}</td>
 </tr>

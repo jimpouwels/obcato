@@ -78,7 +78,7 @@
 			return $articles;
 		}
 
-		public function searchPublishedArticles($from_date, $to_date, $order_by, $terms, $max_results) {
+		public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results) {
 			$from = " FROM element_holders e, articles a";
 			$where = " WHERE
 					  e.id = a.element_holder_id";
@@ -108,10 +108,10 @@
                         $order = 'e.title';
                         break;
                     case "PublicationDate":
-					    $order = 'a.publication_date DESC';
+					    $order = 'a.publication_date ' . $order_type;
                         break;
                     case "SortDate":
-                        $order = 'a.sort_date ASC';
+                        $order = 'a.sort_date ' . $order_type;
                         break;
 				}
 			}
