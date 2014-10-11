@@ -116,11 +116,18 @@ body {
 	display: none;
 	background-color: #F8F8F8;
 	position: absolute;
-	margin-top: 9px;
+    margin-top: 11px;
 	width: 210px;
     margin-right: 0px;
     padding-right: 0px;
     box-shadow: 0 2px 2px #3c3a3d;
+}
+
+/* fix navigation position for Firefox */
+@-moz-document url-prefix() {
+    #menu .submenu {
+        margin-top: 9px;
+    }
 }
 
 #submenu ul {
