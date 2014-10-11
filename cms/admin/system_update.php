@@ -5,10 +5,12 @@
     define("CMS_ROOT", '');
 	
 	// INCLUDE SYSTEM CONSTANTS
+	require_once CMS_ROOT . "database_config.php";
 	require_once CMS_ROOT . "constants.php";
 	require_once CMS_ROOT . "core/data/session.php";
 	require_once CMS_ROOT . "database/mysql_connector.php";
 	require_once CMS_ROOT . "backend.php";
+    require_once CMS_ROOT . "database/dao/settings_dao.php";
 	
 	// AUTHENTICATE
 	$backend = new Backend("site_administrator");
@@ -19,8 +21,9 @@
 		header('Location: /admin/login.php');
 		exit();
 	}
-	
-	$website_settings = Settings::find();
+
+    $settings_dao = SettingsDao::getInstance();
+    $website_settings = $settings_dao->getSettings();
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($_POST['action'] == 'update_database') {
@@ -47,6 +50,8 @@
 					}
 				}
 			}
+            $website_settings->setDatabaseVersion($new_version);
+            $settings_dao->update($website_settings);
 		}
 	}
 	// update settings object
