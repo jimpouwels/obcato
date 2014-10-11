@@ -51,7 +51,7 @@
 			<form id="form-login" method="post" action="/admin/login.php">
 				<fieldset class="loginform">
 					<div class="header">
-						<img src="/admin/static/img/header_text.png" height="60px" width="450px" />
+						<p>Site Administrator</p>
 					</div>
 					<div class="fields">
 						<?php if (isset($_GET['org_url']) && $_GET['org_url'] != ''): ?>

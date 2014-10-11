@@ -30,10 +30,6 @@
 		}
 	
 		public function render() {
-			if (isset($_POST[$this->myName])) {
-				$field_value = StringUtility::unescapeXml($_POST[$this->myName]);
-			}
-			
 			$css_classes = array();
 			if ($this->myLinkable) {
 				array_push($css_classes, 'linkable');

@@ -1,7 +1,3 @@
-body {
-	background-color: #E2E2E2;
-}
-
 #login-form-box {
 	position: absolute;
 	top: 50%;
@@ -12,13 +8,15 @@ body {
     height: 300px;
 	width: 500px;
 	border: 1px solid gray;
-    background: white url(/admin/static/img/login_header.png) no-repeat;
     font-family: verdana;
 	font-size: 0.8em;
+    background-color: #fbf9ee;
 }
 
 .loginform {
 	border: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .admin_label {
@@ -38,8 +36,17 @@ body {
 }
 
 .header {
-	width: 450px;
-	margin: auto;
+	width: 100%;
+    background-color: #1f8dd6;
+    font-family: GeosansLight;
+    color: #ffffff;
+}
+
+.header p {
+    margin: 0px;
+    padding: 8px;
+    font-size: 1.4em;
+    font-weight: bold;
 }
 
 .header img {

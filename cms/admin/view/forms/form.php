@@ -18,12 +18,8 @@
 		
 		public function getFieldValue($field_name) {
 			$value = null;
-			if (isset($_POST[$field_name])) {
+			if (isset($_POST[$field_name]))
 				$value = $_POST[$field_name];
-				if (!is_array($_POST[$field_name])) {
-					$value = StringUtility::unescapeXml($value);
-				}
-			}
 			return $value;
 		}
 		
