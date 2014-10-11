@@ -111,7 +111,7 @@
 					    $order = 'a.publication_date DESC';
                         break;
                     case "SortDate":
-                        $order = 'a.sort_date DESC';
+                        $order = 'a.sort_date ASC';
                         break;
 				}
 			}
