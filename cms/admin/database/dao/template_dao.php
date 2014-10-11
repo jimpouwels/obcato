@@ -103,11 +103,13 @@
 
 		public function deleteTemplate($template) {
 			$statement = $this->_mysql_connector->prepareStatement("DELETE FROM templates WHERE id = ?");
-            $statement->bind_param("i", $template->getId());
+            $temlate_id = $template->getId();
+            $statement->bind_param("i", $temlate_id);
             $this->_mysql_connector->executeStatement($statement);
 			if ($template->getFileName() != "") {
-				$settings = Settings::find();
-				unlink($settings->getFrontendTemplateDir() . "/" . $template->getFileName());
+                $file_name = FRONTEND_TEMPLATE_DIR . "/" . $template->getFileName();
+                if (file_exists($file_name))
+				    unlink($file_name);
 			}
 		}
 	}
