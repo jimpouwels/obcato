@@ -60,7 +60,6 @@
 			if ($result->num_rows > 0) {
 				$authenticated = true;
 			}
-            $statement->close();
 			return $authenticated;
 		}
 		
