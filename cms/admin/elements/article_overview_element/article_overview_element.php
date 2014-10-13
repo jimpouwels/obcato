@@ -216,7 +216,8 @@
                 if (!in_array($term, $existing_terms)) {
                     $mysql_database = MysqlConnector::getInstance();
                     $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
-                    $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+                    $term_id = $term->getId();
+                    $statement->bind_param('ii', $this->_element->getId(), $term_id);
                     $mysql_database->executeStatement($statement);
                 }
             }
