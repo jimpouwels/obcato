@@ -760,14 +760,11 @@ INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`popup`,`identi
  (4,'Database','/database/img/database.png',3,0,'database',1,1,'DatabaseModuleVisual'),
  (5,'Artikelen','/articles/img/articles.png',2,0,'articles',1,1,'ArticleModuleVisual'),
  (6,'Blokken','/blocks/img/blocks.png',2,0,'blocks',1,1,'BlockModuleVisual'),
- (7,'Componenten','/components/img/modules.png',3,0,'components',1,1,'ComponentModuleVisual'),
- (8,'Afbeeldingen','/images/img/images.png',2,0,'images',1,1,'ImageModuleVisual'),
- (9,'Templates','/templates/img/templates.png',4,0,'templates',1,1,'TemplateModuleVisual'),
- (10,'Downloads','/downloads/img/downloads.png',2,0,'downloads',1,1,'DownloadModuleVisual'),
- (11,'Berichten','/messages/img/messages.png',1,0,'messages',1,1,NULL),
- (12,'Authorisatie','/authorization/img/authorization.png',3,0,'authorization',1,1,'AuthorizationModuleVisual');
-INSERT INTO `modules` (`id`,`title`,`icon_url`,`module_group_id`,`popup`,`identifier`,`enabled`,`system_default`,`class`) VALUES 
- (13,'Gastenboeken','/guestbooks/img/guestbooks.png',2,0,'guestbooks',1,1,'GuestbookModuleVisual');
+ (7,'Afbeeldingen','/images/img/images.png',2,0,'images',1,1,'ImageModuleVisual'),
+ (8,'Templates','/templates/img/templates.png',4,0,'templates',1,1,'TemplateModuleVisual'),
+ (9,'Downloads','/downloads/img/downloads.png',2,0,'downloads',1,1,'DownloadModuleVisual'),
+ (10,'Berichten','/messages/img/messages.png',1,0,'messages',1,1,NULL),
+ (11,'Authorisatie','/authorization/img/authorization.png',3,0,'authorization',1,1,'AuthorizationModuleVisual');
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 
 
