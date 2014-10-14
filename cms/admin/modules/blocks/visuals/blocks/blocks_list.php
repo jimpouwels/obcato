@@ -51,15 +51,12 @@
 
         private function getBlocks($position) {
             $blocks = array();
-            if (!is_null($position)) {
-                foreach ($position->getBlocks() as $block) {
+            if (!is_null($position))
+                foreach ($position->getBlocks() as $block)
                     $blocks[] = $this->toArray($block);
-                }
-            } else {
-                foreach ($this->_block_dao->getBlocksWithoutPosition() as $block) {
+            else
+                foreach ($this->_block_dao->getBlocksWithoutPosition() as $block)
                     $blocks[] = $this->toArray($block);
-                }
-            }
             return $blocks;
         }
 
