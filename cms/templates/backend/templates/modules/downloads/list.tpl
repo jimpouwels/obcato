@@ -32,5 +32,7 @@
             {/foreach}
             </tbody>
         </table>
+    {else}
+        {$no_results_message}
     {/if}
 </fieldset>

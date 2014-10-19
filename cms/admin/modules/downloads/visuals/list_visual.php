@@ -5,6 +5,7 @@
 
     require_once CMS_ROOT . "view/views/visual.php";
     require_once CMS_ROOT . "database/dao/download_dao.php";
+    require_once CMS_ROOT . "view/views/information_message.php";
 
     class ListVisual extends Visual {
 
@@ -18,7 +19,10 @@
         }
 
         public function render() {
+            $search_results = $this->getSearchResults();
             $this->_template_engine->assign("search_results", $this->getSearchResults());
+            if (count($search_results) == 0)
+                $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
         }
 
@@ -36,5 +40,10 @@
                 $downloads[] = $download_value;
             }
             return $downloads;
+        }
+
+        private function renderNoResultsMessage() {
+            $message = new InformationMessage("Geen downloads gevonden");
+            return $message->render();
         }
     }
