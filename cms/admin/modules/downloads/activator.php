@@ -7,6 +7,7 @@
     require_once CMS_ROOT . "view/views/action_button.php";
     require_once CMS_ROOT . "modules/downloads/visuals/list_visual.php";
     require_once CMS_ROOT . "modules/downloads/visuals/editor_visual.php";
+    require_once CMS_ROOT . "modules/downloads/visuals/search_box_visual.php";
     require_once CMS_ROOT . "modules/downloads/download_request_handler.php";
 
 	class DownloadModuleVisual extends ModuleVisual {
@@ -23,6 +24,7 @@
         }
 
         public function render() {
+            $this->_template_engine->assign('search_box', $this->renderSearchBox());
             if ($this->_current_download)
                 $this->_template_engine->assign('editor', $this->renderEditor());
             else
@@ -56,6 +58,11 @@
 
         public function getTitle() {
             return "Downloads";
+        }
+
+        private function renderSearchBox() {
+            $search_box = new SearchBoxVisual($this->_download_request_handler);
+            return $search_box->render();
         }
 
         private function renderList() {

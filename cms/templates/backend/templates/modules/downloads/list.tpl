@@ -1,4 +1,4 @@
-<fieldset class="admin_fieldset">
+<fieldset class="admin_fieldset download_list">
     <div class="fieldset-title">Gevonden downloads</div>
     {if count($search_results) > 0}
         <table class="listing" width="95%" cellspacing="0" cellpadding="5" border="0">

@@ -1,3 +1,4 @@
+{$search_box}
 {if isset($list)}
     {$list}
 {else}

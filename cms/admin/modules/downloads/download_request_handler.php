@@ -36,6 +36,11 @@
             return $this->_current_download;
         }
 
+        public function getSearchQuery() {
+            if (isset($_GET['search_query']))
+                return $_GET['search_query'];
+        }
+
         private function addDownload() {
             $download = new Download();
             $download->setTitle("Nieuwe download");
