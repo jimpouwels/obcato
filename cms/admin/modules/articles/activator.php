@@ -43,7 +43,7 @@
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
 			$content = null;
 			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB)
-				$content = new ArticleTab($this->_current_article, $this->_article_module->getIdentifier());
+				$content = new ArticleTab($this->_article_pre_handler);
 			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB)
 				$content = new TermTab($this->_current_term, $this->_article_module->getIdentifier());
 			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB)
