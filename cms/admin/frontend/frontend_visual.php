@@ -73,7 +73,7 @@
             switch ($target_element_holder->getType()) {
                 case Page::ElementHolderType:
                     $target_page = $this->_page_dao->getPage($target_element_holder->getId());
-                    return $this->getPageFrontendUrl($target_page);
+                    return $this->getPageUrl($target_page);
                     break;
                 case Article::ElementHolderType:
                     $target_article = $this->_article_dao->getArticle($target_element_holder->getId());
@@ -88,10 +88,6 @@
 
         private function createHyperlinkOpeningTag($title, $url) {
             return "<a title=\"" . $title . "\" href=\"" . $url . "\">";
-        }
-
-        private function getPageFrontendUrl($page) {
-            return "/index.php?id=" . $page->getId();
         }
 	}
 
