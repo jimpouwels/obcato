@@ -53,6 +53,17 @@
             return $downloads;
         }
 
+        public function searchDownloads($search_query) {
+            $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM downloads WHERE title LIKE ?');
+            $query_wildcard = $search_query . '%';
+            $statement->bind_param('s', $query_wildcard);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            $downloads = array();
+            while ($row = $result->fetch_assoc())
+                $downloads[] = Download::constructFromRecord($row);
+            return $downloads;
+        }
+
         public function deleteDownload($id) {
             $statement = $this->_mysql_connector->prepareStatement('DELETE FROM downloads WHERE id = ?');
             $statement->bind_param('i', $id);

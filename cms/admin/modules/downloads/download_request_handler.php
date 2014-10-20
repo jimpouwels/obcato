@@ -36,6 +36,10 @@
             return $this->_current_download;
         }
 
+        public function isSearchAction() {
+            return isset($_GET['search_query']);
+        }
+
         public function getSearchQuery() {
             if (isset($_GET['search_query']))
                 return $_GET['search_query'];

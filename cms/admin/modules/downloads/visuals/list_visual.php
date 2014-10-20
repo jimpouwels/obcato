@@ -10,23 +10,35 @@
         private static $TEMPLATE = "downloads/list.tpl";
         private $_download_dao;
         private $_template_engine;
+        private $_download_request_handler;
 
-        public function __construct() {
+        public function __construct($download_request_handler) {
+            $this->_download_request_handler = $download_request_handler;
             $this->_download_dao = DownloadDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render() {
-            $search_results = $this->getSearchResults();
-            $this->_template_engine->assign("search_results", $this->getSearchResults());
-            if (count($search_results) == 0)
-                $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
+            $this->_template_engine->assign("search_results", $this->getDownloads());
+            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
         }
 
+        public function getDownloads() {
+            if ($this->_download_request_handler->isSearchAction())
+                return $this->getSearchResults();
+            else
+                return $this->getDownloadData($this->_download_dao->getAllDownloads());
+        }
+
         private function getSearchResults() {
-            $downloads = array();
-            foreach ($this->_download_dao->getAllDownloads() as $download) {
+            $search_query = $this->_download_request_handler->getSearchQuery();
+            return $this->getDownloadData($this->_download_dao->searchDownloads($search_query));
+        }
+
+        private function getDownloadData($downloads) {
+            $downloads_values = array();
+            foreach ($downloads as $download) {
                 $download_value = array();
                 $download_value["id"] = $download->getId();
                 $download_value["title"] = $download->getTitle();
@@ -35,9 +47,9 @@
                 $created_by = $download->getCreatedBy();
                 if (!is_null($created_by))
                     $download_value["created_by"] = $created_by->getUsername();
-                $downloads[] = $download_value;
+                $downloads_values[] = $download_value;
             }
-            return $downloads;
+            return $downloads_values;
         }
 
         private function renderNoResultsMessage() {

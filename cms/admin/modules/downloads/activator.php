@@ -66,7 +66,7 @@
         }
 
         private function renderList() {
-            $list = new ListVisual();
+            $list = new ListVisual($this->_download_request_handler);
             return $list->render();
         }
 
