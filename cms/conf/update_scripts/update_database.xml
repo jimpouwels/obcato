@@ -10,4 +10,10 @@
             <query>UPDATE article_overview_elements_metadata SET order_type = 'asc'</query>
         </queries>
 	</version>
+    <version>
+        <number>1.0.0.2</number>
+        <queries>
+            <query>INSERT INTO modules (title, icon_url, module_group_id, popup, identifier, enabled, system_default, class) VALUES ('Componenten', '/components/img/components.png', 3, 0, 'components', 1, 1, 'ComponentsModuleVisual')</query>
+        </queries>
+    </version>
 </versions>
