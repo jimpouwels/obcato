@@ -82,14 +82,21 @@
 				$this->raiseError($password2, "De wachtwoorden zijn niet gelijk");
 			return $value1;
 		}
+
+        public function getMandatoryUploadFilePath($field_name, $error_message) {
+            $file_path = $this->getUploadFilePath($field_name);
+            if ($file_path)
+                return $file_path;
+            $this->raiseError($field_name, $error_message);
+        }
 		
 		public function getUploadFilePath($field_name) {
-			if (is_uploaded_file($_FILES[$field_name]["tmp_name"]))
+			if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]))
 				return $_FILES[$field_name]["tmp_name"];
 		}
 		
 		public function getUploadedFileName($field_name) {
-			if (is_uploaded_file($_FILES[$field_name]["tmp_name"]))
+			if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]))
 				return $_FILES[$field_name]["name"];
 		}
 		
@@ -108,6 +115,12 @@
 			return empty($value) || $value == "";
 		}
 
+        protected function getError($field_name) {
+            global $errors;
+            if (isset($errors[$field_name . '_error']))
+                return $errors[$field_name . '_error'];
+        }
+
         private function hasError($field_name) {
             global $errors;
             return isset($errors[$field_name . '_error']);
@@ -116,6 +129,11 @@
 	}
 	
 	class FormException extends Exception {
+
+        public function __construct($error_message = '') {
+            parent::__construct($error_message);
+        }
+
 	}
 	
 ?>

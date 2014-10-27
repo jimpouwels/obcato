@@ -5,8 +5,10 @@
 
         private static $TEMPLATE = 'component_install_form.tpl';
         private $_template_engine;
+        private $_install_request_handler;
 
-        public function __construct() {
+        public function __construct($install_request_handler) {
+            $this->_install_request_handler = $install_request_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
@@ -16,7 +18,7 @@
         }
 
         private function renderUploadField() {
-            $upload_field = new UploadField('upload_component', 'Upload component', true, "");
+            $upload_field = new UploadField('upload_field', 'Upload component', true, "");
             return $upload_field->render();
         }
     }

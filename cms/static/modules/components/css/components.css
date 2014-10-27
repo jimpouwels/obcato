@@ -5,3 +5,7 @@
 #install_component_form {
     margin-left: 15px;
 }
+
+#install_component_form .error {
+    color: #ff0000;
+}
