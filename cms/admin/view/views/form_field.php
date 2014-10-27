@@ -1,9 +1,6 @@
 <?php
-
-	
 	defined('_ACCESS') or die;
 
-	
 	abstract class FormField extends Visual {
 		
 		public function getInputLabelHtml($field_label, $field_name, $mandatory) {
