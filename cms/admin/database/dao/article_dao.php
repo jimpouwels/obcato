@@ -9,7 +9,7 @@
 	include_once CMS_ROOT . "core/data/article.php";
 	include_once CMS_ROOT . "core/data/article_term.php";
 	include_once CMS_ROOT . "database/dao/authorization_dao.php";
-	include_once CMS_ROOT . "libraries/utilities/date_utility.php";
+	include_once CMS_ROOT . "utilities/date_utility.php";
 	
 	class ArticleDao {
 

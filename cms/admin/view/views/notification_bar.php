@@ -3,7 +3,7 @@
 	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "notifications.php";
 	
 	class NotificationBar extends Visual {
 	

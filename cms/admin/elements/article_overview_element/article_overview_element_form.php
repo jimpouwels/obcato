@@ -3,7 +3,7 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "view/forms/form.php";
-    require_once CMS_ROOT . "libraries/utilities/date_utility.php";
+    require_once CMS_ROOT . "utilities/date_utility.php";
 
     class ArticleOverviewElementForm extends Form {
 

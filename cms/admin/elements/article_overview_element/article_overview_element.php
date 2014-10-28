@@ -104,7 +104,7 @@
 		
 		public function getArticles() {
 			include_once CMS_ROOT . "database/dao/article_dao.php";
-			include_once CMS_ROOT . "libraries/utilities/date_utility.php";
+			include_once CMS_ROOT . "utilities/date_utility.php";
 			$article_dao = ArticleDao::getInstance();
 			$_show_to = null;
 			if ($this->_show_until_today != 1)

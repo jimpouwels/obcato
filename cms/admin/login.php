@@ -10,7 +10,7 @@
 	require_once CMS_ROOT . "constants.php";
 	require_once CMS_ROOT . "includes.php";
 	require_once CMS_ROOT . 'core/data/session.php';
-	require_once CMS_ROOT . "libraries/utilities/string_utility.php";
+	require_once CMS_ROOT . "utilities/string_utility.php";
 	
 	$errors = array();
 

@@ -4,9 +4,9 @@
 
 	require_once CMS_ROOT . "database/dao/template_dao.php";
 	require_once CMS_ROOT . "database/dao/scope_dao.php";
-	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "view/request_handlers/module_request_handler.php";
-	require_once CMS_ROOT . "libraries/system/notifications.php";
+	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "modules/templates/template_form.php";
 	
 	class TemplatePreHandler extends ModuleRequestHandler {

@@ -1,9 +1,9 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . '/view/views/module_visual.php';
-    require_once CMS_ROOT . '/modules/components/visuals/component_install_form_visual.php';
-    require_once CMS_ROOT . '/modules/components/install_request_handler.php';
+    require_once CMS_ROOT . 'view/views/module_visual.php';
+    require_once CMS_ROOT . 'modules/components/visuals/component_install_form_visual.php';
+    require_once CMS_ROOT . 'modules/components/install_request_handler.php';
 
     class ComponentsModuleVisual extends ModuleVisual {
 
