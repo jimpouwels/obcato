@@ -1,1 +1,0 @@
-DROP TABLE youtube_elements_metadata;
