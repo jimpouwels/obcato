@@ -29,6 +29,7 @@
 
     // DIRECTORIES
 	define("COMPONENT_DIR", $website_settings->getComponentDir());
+    define("COMPONENT_TEMP_DIR", $website_settings->getComponentDir() . "/temp");
     define("UPLOAD_DIR", $website_settings->getUploadDir());
     define("FRONTEND_TEMPLATE_DIR", $website_settings->getFrontendTemplateDir());
     define("BACKEND_TEMPLATE_DIR", $website_settings->getBackendTemplateDir());
