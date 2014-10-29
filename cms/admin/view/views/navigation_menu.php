@@ -20,11 +20,10 @@
 			$menu_items = array();			
 			foreach ($this->myModuleGroups as $module_group) {
 				$title = $module_group->getTitle();
-				if ($module_group->isElementGroup()) {
+				if ($module_group->isElementGroup())
 					$menu_items[$title] = $this->renderElementsMenuItem($module_group);
-				} else {
+				else
 					$menu_items[$title] = $this->renderMenuItem($module_group);
-				}
 			}
 			
 			$template_engine = TemplateEngine::getInstance();
@@ -40,7 +39,6 @@
 				$sub_items[] = $this->renderSubItem($module, $count == count($modules) ? true : false);
 				$count++;
 			}
-			
 			return $sub_items;
 		}
 		
@@ -64,7 +62,7 @@
 			$template_engine->assign("title", $module->getTitle());
 			$template_engine->assign("id", $module->getId());
 			$template_engine->assign("popup", $module->isPopUp());
-			$template_engine->assign("icon_url", $module->getIconUrl());
+			$template_engine->assign("icon_url", $module->getIdentifier() . '/' . $module->getIconUrl());
 			$template_engine->assign("last", $last_item);
 			
 			return $template_engine->fetch("system/navigation_menu_sub_item.tpl");

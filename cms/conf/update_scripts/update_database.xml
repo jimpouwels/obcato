@@ -14,6 +14,18 @@
         <number>1.0.0.2</number>
         <queries>
             <query>INSERT INTO modules (title, icon_url, module_group_id, popup, identifier, enabled, system_default, class) VALUES ('Componenten', '/components/img/components.png', 3, 0, 'components', 1, 1, 'ComponentsModuleVisual')</query>
+            <query>UPDATE modules SET icon_url = '/img/logout.png' WHERE identifier = 'logout'</query>
+            <query>UPDATE modules SET icon_url = '/img/settings.png' WHERE identifier = 'settings'</query>
+            <query>UPDATE modules SET icon_url = '/img/page.png' WHERE identifier = 'pages'</query>
+            <query>UPDATE modules SET icon_url = '/img/database.png' WHERE identifier = 'database'</query>
+            <query>UPDATE modules SET icon_url = '/img/articles.png' WHERE identifier = 'articles'</query>
+            <query>UPDATE modules SET icon_url = '/img/blocks.png' WHERE identifier = 'blocks'</query>
+            <query>UPDATE modules SET icon_url = '/img/images.png' WHERE identifier = 'images'</query>
+            <query>UPDATE modules SET icon_url = '/img/templates.png' WHERE identifier = 'templates'</query>
+            <query>UPDATE modules SET icon_url = '/img/downloads.png' WHERE identifier = 'downloads'</query>
+            <query>UPDATE modules SET icon_url = '/img/authorization.png' WHERE identifier = 'authorization'</query>
+            <query>UPDATE modules SET icon_url = '/img/components.png' WHERE identifier = 'components'</query>
+            <query>DELETE FROM modules WHERE identifier = 'messages'</query>
         </queries>
     </version>
 </versions>
