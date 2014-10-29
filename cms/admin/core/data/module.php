@@ -6,8 +6,7 @@
 	require_once CMS_ROOT . "core/data/entity.php";
 
 	class Module extends Entity {
-	
-		private $_id;
+
 		private $_title;
 		private $_icon_url;
 		private $_identifier;
@@ -15,7 +14,6 @@
 		private $_enabled;
 		private $_is_system_default;
 		private $_module_group_id;
-		private $_current_tab_id;
 		private $_class;
 		
 		public function getTitle() {
