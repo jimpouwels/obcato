@@ -69,36 +69,20 @@
 		*/
 		public static function moveDirectoryContents($source, $target, $delete_source_dir = false) {
 			$files = scandir($source);
-			$delete_dirs = array();
-			$delete_files = array();
-			// Cycle through all source files
 			foreach ($files as $file) {
-				// exclude navigation folders
 				if ($file != "." && $file != "..") {
 					$source_file = "$source/$file";
 					$target_file = "$target/$file";
-					if (!is_dir($source_file)) {
-						if (copy($source_file, $target_file)) {
-						// If we copied this successfully, mark it for deletion
-							$delete_files[] = $source_file;
-						}
-					} else {
-						if (!is_dir($target_file)) {
-							mkdir($target_file, 0777);
-						}
+					if (!is_dir($source_file))
+						copy($source_file, $target_file);
+					else {
+						if (!is_dir($target_file))
+							mkdir($target_file);
 						self::moveDirectoryContents($source_file, $target_file);
-						$delete_dirs[] = $source_file;
 					}
 				}
 			}
-			// Delete all successfully-copied files
-			foreach ($delete_files as $file) {
-				unlink($file);
-			}
-			// Delete all remaining dirs
-			foreach ($delete_dirs as $dir) {
-				rmdir($dir);
-			}
+			self::recursiveDelete($source);
 			
 			if ($delete_source_dir) {
 				rmdir($source);

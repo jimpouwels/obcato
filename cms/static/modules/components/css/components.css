@@ -1,13 +1,13 @@
-.admin_fieldset {
-    width: 450px;
-}
-
 #install_component_form {
     margin-left: 15px;
 }
 
 #install_component_form .error {
     color: #ff0000;
+}
+
+.install-form-fieldset {
+    width: 450px;
 }
 
 .install-log {
