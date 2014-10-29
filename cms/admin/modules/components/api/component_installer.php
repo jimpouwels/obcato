@@ -2,26 +2,50 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'utilities/file_utility.php';
+    require_once CMS_ROOT . 'database/dao/module_dao.php';
+    require_once CMS_ROOT . 'core/data/module.php';
 
     abstract class ComponentInstaller {
 
         public static $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
         private $_logger;
+        private $_module_dao;
 
         public function __construct($logger) {
             $this->_logger = $logger;
+            $this->_module_dao = ModuleDao::getInstance();
         }
 
         abstract function getIdentifier();
         abstract function getTitle();
         abstract function getStaticDirectory();
         abstract function getBackendTemplateDirectory();
+        abstract function getModuleIconPath();
+        abstract function getModuleGroup();
+        abstract function isPopup();
+        abstract function getActivatorClassName();
 
         public function install() {
             $this->_logger->log('Installer voor component \'' . $this->getTitle() . '\' gestart');
+            $this->installModule();
             $this->installStaticFiles();
             $this->installBackendTemplates();
             $this->installModuleFiles();
+        }
+
+        private function installModule() {
+            $module = new Module();
+            $module->setTitle($this->getTitle());
+            $module->setIdentifier($this->getIdentifier());
+            $module->setIconUrl($this->getModuleIconPath());
+            $module->setModuleGroupId($this->_module_dao->getModuleGroupByTitle($this->getModuleGroup())->getId());
+            $module->setPopUp($this->isPopup());
+            $module->setEnabled(true);
+            $module->setClass($this->getActivatorClassName());
+            if (!$this->_module_dao->getModuleByIdentifier($module->getIdentifier()))
+                $this->_module_dao->persistModule($module);
+            else
+                $this->_module_dao->updateModule($module);
         }
 
         private function installModuleFiles() {
