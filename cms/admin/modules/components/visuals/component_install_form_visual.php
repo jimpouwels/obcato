@@ -14,6 +14,7 @@
 
         public function render() {
             $this->_template_engine->assign('upload_field', $this->renderUploadField());
+            $this->_template_engine->assign('log_messages', $this->_install_request_handler->getLogMessages());
             return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);
         }
 

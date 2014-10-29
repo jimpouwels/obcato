@@ -9,3 +9,10 @@
 #install_component_form .error {
     color: #ff0000;
 }
+
+.install-log {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-style: italic;
+    line-height: 20px;
+}

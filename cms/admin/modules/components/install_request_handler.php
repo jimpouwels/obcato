@@ -5,8 +5,11 @@
     require_once CMS_ROOT . 'modules/components/install_component_form.php';
     require_once CMS_ROOT . 'notifications.php';
     require_once CMS_ROOT . 'utilities/file_utility.php';
+    require_once CMS_ROOT . 'modules/components/api/installation_exception.php';
 
     class InstallRequestHandler extends ModuleRequestHandler {
+
+        private $_log_messages = array();
 
         public function handleGet() {
         }
@@ -16,6 +19,10 @@
                 $this->installComponent();
         }
 
+        public function getLogMessages() {
+            return $this->_log_messages;
+        }
+
         private function installComponent() {
             $form = new InstallComponentForm();
             try {
@@ -23,12 +30,8 @@
                 $this->handleComponentZip($form->getFilePath());
             } catch (FormException $e) {
                 Notifications::setFailedMessage('U dient een component archief te kiezen');
-            } catch (InvalidComponentArchiveException $e) {
-                Notifications::setFailedMessage('Dit is geen geldig ZIP archief');
-            } catch (InstallerNotFoundException $e) {
-                Notifications::setFailedMessage('Er is geen installer.php bestand gevonden');
-            } catch (InstallerClassNotFoundException $e) {
-                Notifications::setFailedMessage('Class niet gevonden in installer.php');
+            } catch (InstallationException $e) {
+                Notifications::setFailedMessage('Installatie van component mislukt');
             }
         }
 
@@ -36,7 +39,11 @@
             $zip_archive = new ZipArchive();
             $zip = $zip_archive->open($file_path);
             try {
-                if (is_numeric($zip)) throw new InvalidComponentArchiveException('Invalid ZIP archive');
+                if (is_numeric($zip)) {
+                    $this->log('Invalide ZIP archief');
+                    throw new InstallationException();
+                }
+                $this->log('ZIP archief gevonden');
                 $this->extractZip($zip_archive);
                 $this->runInstaller();
             } finally {
@@ -46,42 +53,41 @@
         }
 
         private function runInstaller() {
-            if (!file_exists(COMPONENT_TEMP_DIR . '/installer.php'))
-                throw new InstallerNotFoundException('Installer file could not be found');
+            $this->checkInstallerFileProvided();
             require_once COMPONENT_TEMP_DIR . '/installer.php';
-            if (!class_exists('CustomModuleInstaller'))
-                throw new InstallerClassNotFoundException('Class CustomModuleInstaller not found');
+            $this->checkIfValidInstallerClassIsProvided();
             $installer = new CustomModuleInstaller();
-            echo $installer->getTitle();
+            $this->log('Installer uitvoeren');
+            $installer->install();
+        }
+
+        private function checkIfValidInstallerClassIsProvided() {
+            if (!class_exists('CustomModuleInstaller')) {
+                $this->log('Class CustomModuleInstaller niet gevonden');
+                throw new InstallationException();
+            }
+            $this->log('CustomModuleInstaller class gevonden');
+        }
+
+        private function checkInstallerFileProvided() {
+            if (!file_exists(COMPONENT_TEMP_DIR . '/installer.php')) {
+                $this->log('installer.php bestand niet gevonden');
+                throw new InstallationException();
+            }
+            $this->log('installer.php bestand gevonden');
         }
 
         private function extractZip($zip_archive) {
             if (!file_exists(COMPONENT_TEMP_DIR)) mkdir(COMPONENT_TEMP_DIR);
+            $this->log('ZIP archief uitpakken naar ' . COMPONENT_TEMP_DIR);
             $zip_archive->extractTo(COMPONENT_TEMP_DIR);
         }
 
         private function isInstallComponentAction() {
             return isset($_POST['action']) && $_POST['action'] == 'install_component';
         }
-    }
 
-    class InvalidComponentArchiveException extends Exception {
-
-        public function __construct($message = "") {
-            parent::__construct($message);
+        private function log($message) {
+            $this->_log_messages[] = date('H:m:s') . ': ' . $message;
         }
     }
-
-    class InstallerNotFoundException extends Exception {
-
-        public function __construct($message = "") {
-            parent::__construct($message);
-        }
-    }
-
-class InstallerClassNotFoundException extends Exception {
-
-    public function __construct($message = "") {
-        parent::__construct($message);
-    }
-}

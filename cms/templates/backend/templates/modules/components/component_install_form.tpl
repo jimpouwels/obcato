@@ -5,3 +5,13 @@
         {$upload_field}
     </form>
 </fieldset>
+{if count($log_messages) > 0}
+    <fieldset class="admin_fieldset">
+        <div class="fieldset-title">Installatie log</div>
+        <div class="install-log">
+            {foreach from=$log_messages item=message}
+                {$message}<br />
+            {/foreach}
+        </div>
+    </fieldset>
+{/if}
