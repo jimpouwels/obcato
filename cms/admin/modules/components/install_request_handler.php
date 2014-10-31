@@ -61,6 +61,7 @@
             require_once COMPONENT_TEMP_DIR . '/installer.php';
             $this->checkIfValidInstallerClassIsProvided();
             $installer = new CustomModuleInstaller($this->_logger);
+            $this->checkIfInstallerIsOfCorrectType($installer);
             $this->_logger->log('Installer uitvoeren');
             $installer->install();
         }
@@ -71,6 +72,13 @@
                 throw new InstallationException();
             }
             $this->_logger->log(ComponentInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' class gevonden');
+        }
+
+        private function checkIfInstallerIsOfCorrectType($installer) {
+            if (!$installer instanceof ComponentInstaller) {
+                $this->_logger->log('Installer class moet een implementatie zijn van ComponentInstaller');
+                throw new InstallationException();
+            }
         }
 
         private function checkInstallerFileProvided() {
