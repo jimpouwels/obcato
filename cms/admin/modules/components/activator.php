@@ -25,9 +25,9 @@
 
         public function render() {
             $this->_template_engine->assign('tab_menu', $this->renderTabMenu());
-            if ($this->_install_request_handler->getCurrentTabId() == self::$COMPONENTS_TAB)
+            if ($this->getCurrentTabId() == self::$COMPONENTS_TAB)
                 $content = new ComponentsTabVisual();
-            else if ($this->_install_request_handler->getCurrentTabId() == self::$INSTALLATION_TAB)
+            else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
                 $content = new InstallationTabVisual($this->_install_request_handler);
             $this->_template_engine->assign('content', $content->render());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
@@ -52,7 +52,8 @@
 
         public function getActionButtons() {
             $action_buttons = array();
-            $action_buttons[] = new ActionButton("Opslaan", "upload_component", "icon_apply");
+            if ($this->getCurrentTabId() ==  self::$INSTALLATION_TAB)
+                $action_buttons[] = new ActionButton("Opslaan", "upload_component", "icon_apply");
             return $action_buttons;
         }
 
@@ -62,5 +63,9 @@
             $tab_items[self::$INSTALLATION_TAB] = "Installeren";
             $tab_menu = new TabMenu($tab_items, $this->_install_request_handler->getCurrentTabId());
             return $tab_menu->render();
+        }
+
+        private function getCurrentTabId() {
+            return $this->_install_request_handler->getCurrentTabId();
         }
     }

@@ -42,11 +42,11 @@
 		public function render() {
 			$this->_template_engine->assign("tab_menu", $this->renderTabMenu());
 			$content = null;
-			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB)
+			if ($this->getCurrentTabId() == self::$ARTICLES_TAB)
 				$content = new ArticleTab($this->_article_pre_handler);
-			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB)
+			else if ($this->getCurrentTabId() == self::$TERMS_TAB)
 				$content = new TermTab($this->_current_term, $this->_article_module->getIdentifier());
-			else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB)
+			else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB)
 				$content = new TargetPagesTab($this->_article_module->getIdentifier());
 			if (!is_null($content))
 				$this->_template_engine->assign("content", $content->render());
@@ -60,18 +60,18 @@
 		
 		public function getRequestHandlers() {
 			$pre_handlers = array();
-            if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB)
+            if ($this->getCurrentTabId() == self::$ARTICLES_TAB)
                 $pre_handlers[] = $this->_article_pre_handler;
-            else if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB)
+            else if ($this->getCurrentTabId() == self::$TERMS_TAB)
                 $pre_handlers[] = $this->_term_pre_handler;
-            else if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB)
+            else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB)
                 $pre_handlers[] = $this->_target_pages_pre_handler;
 			return $pre_handlers;
 		}
 	
 		public function getActionButtons() {
 			$action_buttons = array();
-			if ($this->_article_pre_handler->getCurrentTabId() == self::$ARTICLES_TAB) {
+			if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
 				$save_button = null;
 				$delete_button = null;
 				if (!is_null($this->_current_article)) {
@@ -82,14 +82,14 @@
 				$action_buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
 				$action_buttons[] = $delete_button;				
 			}
-			if ($this->_article_pre_handler->getCurrentTabId() == self::$TERMS_TAB) {
+			if ($this->getCurrentTabId() == self::$TERMS_TAB) {
 				if (!is_null($this->_current_term) || TermTab::isEditTermMode()) {
 					$action_buttons[] = new ActionButton("Opslaan", "update_term", "icon_apply");
 				}
 				$action_buttons[] = new ActionButton("Toevoegen", "add_term", "icon_add");
 				$action_buttons[] = new ActionButton("Verwijderen", "delete_terms", "icon_delete");
 			}
-			if ($this->_article_pre_handler->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
+			if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
 				$action_buttons[] = new ActionButton("Verwijderen", "delete_target_pages", "icon_delete");
 			}
 			
@@ -126,6 +126,10 @@
 			$tab_menu = new TabMenu($tab_items, $this->_article_pre_handler->getCurrentTabId());
 			return $tab_menu->render();
 		}
+
+        private function getCurrentTabId() {
+            return $this->_article_pre_handler->getCurrentTabId();
+        }
 	
 	}
 	
