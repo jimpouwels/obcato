@@ -42,10 +42,13 @@
             $module->setPopUp($this->isPopup());
             $module->setEnabled(true);
             $module->setClass($this->getActivatorClassName());
-            if (!$this->_module_dao->getModuleByIdentifier($module->getIdentifier()))
+            if (!$this->_module_dao->getModuleByIdentifier($module->getIdentifier())) {
+                $this->_logger->log('Module wordt toegevoegd aan de database');
                 $this->_module_dao->persistModule($module);
-            else
+            } else {
+                $this->_logger->log('Module database record wordt geupdate');
                 $this->_module_dao->updateModule($module);
+            }
         }
 
         private function installModuleFiles() {
