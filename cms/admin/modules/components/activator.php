@@ -61,7 +61,7 @@
             $tab_items = array();
             $tab_items[self::$COMPONENTS_TAB] = "Componenten";
             $tab_items[self::$INSTALLATION_TAB] = "Installeren";
-            $tab_menu = new TabMenu($tab_items, $this->_install_request_handler->getCurrentTabId());
+            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
             return $tab_menu->render();
         }
 
