@@ -1,1 +1,1 @@
-Components
+{$list}

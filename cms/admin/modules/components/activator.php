@@ -6,6 +6,7 @@
     require_once CMS_ROOT . 'modules/components/visuals/installation/installation_tab_visual.php';
     require_once CMS_ROOT . 'modules/components/visuals/components/components_tab_visual.php';
     require_once CMS_ROOT . 'modules/components/install_request_handler.php';
+    require_once CMS_ROOT . 'modules/components/component_request_handler.php';
 
     class ComponentsModuleVisual extends ModuleVisual {
 
@@ -16,17 +17,19 @@
         private $_module;
         private $_template_engine;
         private $_install_request_handler;
+        private $_component_request_handler;
 
         public function __construct($components_module) {
             $this->_module = $components_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_install_request_handler = new InstallRequestHandler();
+            $this->_component_request_handler = new ComponentRequestHandler();
         }
 
         public function render() {
             $this->_template_engine->assign('tab_menu', $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$COMPONENTS_TAB)
-                $content = new ComponentsTabVisual();
+                $content = new ComponentsTabVisual($this->_component_request_handler);
             else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
                 $content = new InstallationTabVisual($this->_install_request_handler);
             $this->_template_engine->assign('content', $content->render());
@@ -39,7 +42,10 @@
 
         public function getRequestHandlers() {
             $request_handlers = array();
-            $request_handlers[] = $this->_install_request_handler;
+            if ($this->getCurrentTabId() == self::$COMPONENTS_TAB)
+                $request_handlers[] = $this->_component_request_handler;
+            if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
+                $request_handlers[] = $this->_install_request_handler;
             return $request_handlers;
         }
 

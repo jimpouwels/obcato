@@ -23,15 +23,14 @@
 			return self::$instance;
 		}
 
-		public function getDefaultModules() {
-			$query = "SELECT * FROM modules WHERE system_default = 1 ORDER BY title";
+		public function getAllModules() {
+			$query = "SELECT * FROM modules ORDER BY title";
 			$result = $this->_mysql_connector->executeQuery($query);
 			$modules = array();
 			while ($row = $result->fetch_assoc()) {
 				$module = Module::constructFromRecord($row);
 				array_push($modules, $module);
-			}
-			
+            }
 			return $modules;
 		}
 

@@ -727,6 +727,10 @@ body a {
 	color: gray;
 }
 
+body a:hover {
+    text-decoration: underline;
+}
+
 /* SYSTEM CLASSES */
 .center {
 	text-align: center;
