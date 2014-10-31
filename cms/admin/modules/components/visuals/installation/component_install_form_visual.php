@@ -3,7 +3,7 @@
 
     class ComponentInstallFormVisual extends Visual {
 
-        private static $TEMPLATE = 'component_install_form.tpl';
+        private static $TEMPLATE = 'installation/component_install_form.tpl';
         private $_template_engine;
         private $_install_request_handler;
 

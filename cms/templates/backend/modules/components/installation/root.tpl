@@ -1,0 +1,1 @@
+{$component_install_form}

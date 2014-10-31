@@ -2,13 +2,17 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'view/views/module_visual.php';
-    require_once CMS_ROOT . 'modules/components/visuals/component_install_form_visual.php';
+    require_once CMS_ROOT . 'view/views/tab_menu.php';
+    require_once CMS_ROOT . 'modules/components/visuals/installation/installation_tab_visual.php';
+    require_once CMS_ROOT . 'modules/components/visuals/components/components_tab_visual.php';
     require_once CMS_ROOT . 'modules/components/install_request_handler.php';
 
     class ComponentsModuleVisual extends ModuleVisual {
 
-        private static $TEMPLATE = "components/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "components/head_includes.tpl";
+        private static $TEMPLATE = 'components/root.tpl';
+        private static $HEAD_INCLUDES_TEMPLATE = 'components/head_includes.tpl';
+        private static $COMPONENTS_TAB = 0;
+        private static $INSTALLATION_TAB = 1;
         private $_module;
         private $_template_engine;
         private $_install_request_handler;
@@ -20,7 +24,12 @@
         }
 
         public function render() {
-            $this->_template_engine->assign("component_install_form", $this->renderComponentInstallForm());
+            $this->_template_engine->assign('tab_menu', $this->renderTabMenu());
+            if ($this->_install_request_handler->getCurrentTabId() == self::$COMPONENTS_TAB)
+                $content = new ComponentsTabVisual();
+            else if ($this->_install_request_handler->getCurrentTabId() == self::$INSTALLATION_TAB)
+                $content = new InstallationTabVisual($this->_install_request_handler);
+            $this->_template_engine->assign('content', $content->render());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
         }
 
@@ -47,8 +56,11 @@
             return $action_buttons;
         }
 
-        private function renderComponentInstallForm() {
-            $component_install_form = new ComponentInstallFormVisual($this->_install_request_handler);
-            return $component_install_form->render();
+        private function renderTabMenu() {
+            $tab_items = array();
+            $tab_items[self::$COMPONENTS_TAB] = "Componenten";
+            $tab_items[self::$INSTALLATION_TAB] = "Installeren";
+            $tab_menu = new TabMenu($tab_items, $this->_install_request_handler->getCurrentTabId());
+            return $tab_menu->render();
         }
     }

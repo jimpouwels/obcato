@@ -1,1 +1,2 @@
-{$component_install_form}
+{$tab_menu}
+{$content}
