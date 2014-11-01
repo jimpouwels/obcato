@@ -5,8 +5,8 @@
     require_once CMS_ROOT . 'modules/components/install_component_form.php';
     require_once CMS_ROOT . 'notifications.php';
     require_once CMS_ROOT . 'utilities/file_utility.php';
-    require_once CMS_ROOT . 'modules/components/api/installation_exception.php';
-    require_once CMS_ROOT . 'modules/components/api/logger.php';
+    require_once CMS_ROOT . 'modules/components/installer/installation_exception.php';
+    require_once CMS_ROOT . 'modules/components/installer/logger.php';
 
     class InstallRequestHandler extends ModuleRequestHandler {
 

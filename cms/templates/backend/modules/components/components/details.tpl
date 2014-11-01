@@ -61,5 +61,13 @@
                 {/if}
             </tbody>
         </table>
+        <form id="uninstall_component_form" method="POST" action="/admin/index.php" class="displaynone">
+            <input type="hidden" name="action" id="action" value="" />
+            {if !is_null($current_module)}
+                <input type="hidden" name="module_id" id="module_id" value="{$current_module.id}" />
+            {else}
+                <input type="hidden" name="element_id" id="element_id" value="{$current_element.id}" />
+            {/if}
+        </form>
     </fieldset>
 {/if}

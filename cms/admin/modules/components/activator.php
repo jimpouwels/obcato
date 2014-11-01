@@ -60,7 +60,19 @@
             $action_buttons = array();
             if ($this->getCurrentTabId() ==  self::$INSTALLATION_TAB)
                 $action_buttons[] = new ActionButton("Opslaan", "upload_component", "icon_apply");
+            if ($this->isCurrentComponentUninstallable())
+                $action_buttons[] = new ActionButton("Verwijderen", "uninstall_component", "icon_delete");
             return $action_buttons;
+        }
+
+        private function isCurrentComponentUninstallable() {
+            $current_module = $this->_component_request_handler->getCurrentModule();
+            if ($current_module && !$current_module->isSystemDefault())
+                return true;
+            $current_element = $this->_component_request_handler->getCurrentElement();
+            if ($current_element && !$current_element->getSystemDefault())
+                return true;
+            return false;
         }
 
         private function renderTabMenu() {

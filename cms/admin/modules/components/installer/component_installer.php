@@ -38,6 +38,10 @@
             $this->installModuleFiles();
         }
 
+        public function unInstall() {
+            echo 'Uninstall gestart!';
+        }
+
         private function installModule() {
             $module = new Module();
             $module->setTitle($this->getTitle());
