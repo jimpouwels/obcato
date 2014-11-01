@@ -38,21 +38,8 @@
 			return $this->_edit_presentation;
 		}
 		
-		public function getEditPresentationAbsolute() {
-			$base = "";
-			if (!$this->_system_default) {
-				$base = COMPONENT_DIR . "/";
-			}
-			return $base . "elements/" . $this->_identifier . "/" . $this->_edit_presentation;
-		}
-		
 		public function getRootDirectory() {
-			$path = CMS_ROOT;
-			if (!$this->_system_default) {
-				$path .= COMPONENT_DIR . "/";
-			}
-			$path .= "elements/" . $this->_identifier;
-			return $path;
+			return  "elements/" . $this->_identifier;
 		}
 		
 		public function setEditPresentation($edit_presentation) {
@@ -60,18 +47,11 @@
 		}
 		
 		public function getIconUrl() {
-			return $this->_icon_url;
+			return '/elements/' . $this->_identifier . $this->_icon_url;
 		}
 		
 		public function setIconUrl($icon_url) {
 			$this->_icon_url = $icon_url;
-		}
-		
-		public function getIconUrlAbsolute() {
-			if ($this->_system_default)
-				return '/admin/static.php?file=/default/img/element_icons/' . $this->_icon_url;
-			else
-				return STATIC_FILES_URL . "/elements/" . $this->_identifier . "/" . $this->_icon_url;
 		}
 		
 		public function getIdentifier() {

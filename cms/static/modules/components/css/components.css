@@ -17,9 +17,12 @@
     line-height: 20px;
 }
 
-.modules-list-fieldset {
-    width: 300px;
+.components-list {
     float: left;
+}
+
+.component-list-fieldset {
+    width: 300px;
 }
 
 .component-details-fieldset {
@@ -28,13 +31,13 @@
     width: 550px;
 }
 
-.modules-list-fieldset ul {
+.component-list-fieldset ul {
     margin-left: 35px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0px;
 }
 
-.modules-list-fieldset li {
+.component-list-fieldset li {
     line-height: 20px;
 }

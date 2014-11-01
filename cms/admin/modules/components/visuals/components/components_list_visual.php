@@ -2,15 +2,18 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . '/database/dao/module_dao.php';
+    require_once CMS_ROOT . '/database/dao/element_dao.php';
 
     class ComponentsListVisual extends Visual {
 
         private static $TEMPLATE = 'components/list.tpl';
         private $_module_dao;
+        private $_element_dao;
         private $_template_engine;
 
         public function __construct() {
             $this->_module_dao = ModuleDao::getInstance();
+            $this->_element_dao = ElementDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
@@ -26,13 +29,21 @@
                 $module_data = array();
                 $module_data['id'] = $module->getId();
                 $module_data['title'] = $module->getTitle();
-                $module_data['icon_url'] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . $module->getIconUrl();
+                $module_data['icon_url'] = '/admin/static.php?file='. $module->getIconUrl();
                 $modules_data[] = $module_data;
             }
             return $modules_data;
         }
 
         private function getElementsData() {
-            return array();
+            $elements_data = array();
+            foreach ($this->_element_dao->getElementTypes() as $element_type) {
+                $element_data = array();
+                $element_data['id'] = $element_type->getId();
+                $element_data['name'] = $element_type->getName();
+                $element_data['icon_url'] = '/admin/static.php?file=' . $element_type->getIconUrl();
+                $elements_data[] = $element_data;
+            }
+            return $elements_data;
         }
     }

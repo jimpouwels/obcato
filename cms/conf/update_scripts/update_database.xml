@@ -26,6 +26,11 @@
             <query>UPDATE modules SET icon_url = '/img/authorization.png' WHERE identifier = 'authorization'</query>
             <query>UPDATE modules SET icon_url = '/img/components.png' WHERE identifier = 'components'</query>
             <query>DELETE FROM modules WHERE identifier = 'messages'</query>
+            <query>UPDATE element_types SET icon_url = '/img/text_element.png' WHERE identifier = 'text_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/list_element.png' WHERE identifier = 'list_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/image_element.png' WHERE identifier = 'image_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/download_element.png' WHERE identifier = 'download_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/article_overview_element.png' WHERE identifier = 'article_overview_element'</query>
         </queries>
     </version>
 </versions>

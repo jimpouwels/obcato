@@ -32,6 +32,13 @@
         }
 
         private function getCurrentElementData() {
-            return null;
+            $current_element = $this->_component_request_handler->getCurrentElement();
+            if ($current_element) {
+                $element_data = array();
+                $element_data['id'] = $current_element->getId();
+                $element_data['name'] = $current_element->getName();
+                $element_data['system_default'] = $current_element->getSystemDefault();
+                return $element_data;
+            }
         }
     }

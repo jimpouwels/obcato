@@ -62,7 +62,7 @@
 			$template_engine->assign("title", $module->getTitle());
 			$template_engine->assign("id", $module->getId());
 			$template_engine->assign("popup", $module->isPopUp());
-			$template_engine->assign("icon_url", $module->getIdentifier() . '/' . $module->getIconUrl());
+			$template_engine->assign("icon_url", '/admin/static.php?file=' . $module->getIconUrl());
 			$template_engine->assign("last", $last_item);
 			
 			return $template_engine->fetch("system/navigation_menu_sub_item.tpl");
@@ -72,7 +72,7 @@
 			$template_engine = TemplateEngine::getInstance();
 			$template_engine->assign("id", $element_type->getId());
 			$template_engine->assign("name", $element_type->getName());
-			$template_engine->assign("icon_url", $element_type->getIconUrlAbsolute());
+			$template_engine->assign("icon_url", '/admin/static.php?file=' . $element_type->getIconUrl());
 			
 			return $template_engine->fetch("system/navigation_menu_element_sub_item.tpl");
 		}
