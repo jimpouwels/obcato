@@ -67,16 +67,16 @@
         }
 
         private function checkIfValidInstallerClassIsProvided() {
-            if (!class_exists(ComponentInstaller::$CUSTOM_INSTALLER_CLASSNAME)) {
-                $this->_logger->log('Class ' . ComponentInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' niet gevonden');
+            if (!class_exists(ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME)) {
+                $this->_logger->log('Class ' . ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' niet gevonden');
                 throw new InstallationException();
             }
-            $this->_logger->log(ComponentInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' class gevonden');
+            $this->_logger->log(ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' class gevonden');
         }
 
         private function checkIfInstallerIsOfCorrectType($installer) {
-            if (!$installer instanceof ComponentInstaller) {
-                $this->_logger->log('Installer class moet een implementatie zijn van ComponentInstaller');
+            if (!$installer instanceof ModuleInstaller) {
+                $this->_logger->log('Installer class moet een implementatie zijn van ModuleInstaller');
                 throw new InstallationException();
             }
         }

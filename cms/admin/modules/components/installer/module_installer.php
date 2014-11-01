@@ -6,7 +6,7 @@
     require_once CMS_ROOT . 'core/data/module.php';
     require_once CMS_ROOT . 'database/mysql_connector.php';
 
-    abstract class ComponentInstaller {
+    abstract class ModuleInstaller {
 
         public static $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
         private $_logger;
