@@ -4,6 +4,7 @@
     require_once CMS_ROOT . 'database/dao/module_dao.php';
     require_once CMS_ROOT . 'database/dao/element_dao.php';
     require_once CMS_ROOT . 'modules/components/installer/logger.php';
+    require_once CMS_ROOT . 'notifications.php';
 
     class ComponentRequestHandler extends ModuleRequestHandler {
 
@@ -47,6 +48,7 @@
             include_once CMS_ROOT . '/modules/' . $module->getIdentifier() . '/installer.php';
             $installer = new CustomModuleInstaller(new Logger());
             $installer->uninstall();
+            Notifications::setSuccessMessage('Component succesvol verwijderd');
         }
 
         private function uninstallElement() {

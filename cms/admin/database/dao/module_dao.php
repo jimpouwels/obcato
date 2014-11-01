@@ -47,6 +47,12 @@
 			return $module;
 		}
 
+        public function removeModule($identifier) {
+            $statement = $this->_mysql_connector->prepareStatement('DELETE FROM modules WHERE identifier = ?');
+            $statement->bind_param('s', $identifier);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
         public function persistModule($module) {
             $query = 'INSERT INTO modules (title, icon_url, module_group_id, popup, identifier, enabled, system_default, class)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)';

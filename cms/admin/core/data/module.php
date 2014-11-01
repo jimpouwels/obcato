@@ -33,7 +33,7 @@
 		}
 		
 		public function getIconUrl() {
-			return '/modules/' . $this->_identifier . $this->_icon_url;
+			return $this->_icon_url;
 		}
 		
 		public function setIconUrl($icon_url) {

@@ -29,7 +29,7 @@
                 $module_data = array();
                 $module_data['id'] = $module->getId();
                 $module_data['title'] = $module->getTitle();
-                $module_data['icon_url'] = '/admin/static.php?file='. $module->getIconUrl();
+                $module_data['icon_url'] = '/admin/static.php?file=/modules/'. $module->getIdentifier() . $module->getIconUrl();
                 $modules_data[] = $module_data;
             }
             return $modules_data;

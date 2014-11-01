@@ -39,7 +39,11 @@
         }
 
         public function unInstall() {
-            echo 'Uninstall gestart!';
+            $this->uninstallModule();
+            $this->uninstallStaticFiles();
+            $this->uninstallBackendTemplates();
+            $this->uninstallModuleFiles();
+            $this->runUninstallQueries();
         }
 
         private function installModule() {
@@ -61,11 +65,19 @@
             }
         }
 
+        private function uninstallModule() {
+            $this->_module_dao->removeModule($this->getIdentifier());
+        }
+
         private function installModuleFiles() {
             $target_dir = CMS_ROOT . 'modules/' . $this->getIdentifier();
             $this->createDir($target_dir);
             $this->_logger->log('Overige bestanden kopiëren naar ' . $target_dir);
             FileUtility::moveDirectoryContents(COMPONENT_TEMP_DIR, $target_dir);
+        }
+
+        private function uninstallModuleFiles() {
+            FileUtility::recursiveDelete(CMS_ROOT . 'modules/' . $this->getIdentifier(), true);
         }
 
         private function installStaticFiles() {
@@ -80,6 +92,10 @@
                 $this->_logger->log('Geen statische bestanden gevonden');
         }
 
+        private function uninstallStaticFiles() {
+            FileUtility::recursiveDelete(STATIC_DIR . '/modules/' . $this->getIdentifier(), true);
+        }
+
         private function installBackendTemplates() {
             $source_dir = COMPONENT_TEMP_DIR . '/' . $this->getBackendTemplateDirectory();
             if ($this->getBackendTemplateDirectory() && file_exists($source_dir)) {
@@ -91,6 +107,10 @@
                 $this->_logger->log('Geen backend templates gevonden');
         }
 
+        private function uninstallBackendTemplates() {
+            FileUtility::recursiveDelete(BACKEND_TEMPLATE_DIR . '/modules/' . $this->getIdentifier(), true);
+        }
+
         private function runInstallQueries() {
             $this->_logger->log('Installtiequeries uitvoeren');
             $queries = $this->getInstallQueries();
@@ -99,6 +119,13 @@
                 $this->_logger->log('Query uitvoeren: ' . $query);
                 $this->_mysql_connector->executeQuery($query);
             }
+        }
+
+        private function runUninstallQueries() {
+            $uninstall_queries = $this->getUninstallQueries();
+            if (!is_array($uninstall_queries)) return;
+            foreach ($uninstall_queries as $query)
+                $this->_mysql_connector->executeQuery($query);
         }
 
         private function createDir($target_dir) {
