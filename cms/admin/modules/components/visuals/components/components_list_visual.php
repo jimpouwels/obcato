@@ -8,10 +8,8 @@
         private static $TEMPLATE = 'components/list.tpl';
         private $_module_dao;
         private $_template_engine;
-        private $_component_request_handler;
 
-        public function __construct($component_request_handler) {
-            $this->_component_request_handler = $component_request_handler;
+        public function __construct() {
             $this->_module_dao = ModuleDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }

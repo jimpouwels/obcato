@@ -16,7 +16,7 @@
         }
 
         public function render() {
-            $list = new ComponentsListVisual($this->_component_request_handler);
+            $list = new ComponentsListVisual();
             $details = new ComponentsDetailsVisual($this->_component_request_handler);
             $this->_template_engine->assign('list', $list->render());
             $this->_template_engine->assign('details', $details->render());
