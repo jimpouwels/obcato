@@ -25,7 +25,9 @@
             if ($current_module) {
                 $module_data = array();
                 $module_data['id'] = $current_module->getId();
+                $module_data['identifier'] = $current_module->getIdentifier();
                 $module_data['title'] = $current_module->getTitle();
+                $module_data['class'] = $current_module->getClass();
                 $module_data['system_default'] = $current_module->isSystemDefault();
                 return $module_data;
             }
@@ -36,7 +38,10 @@
             if ($current_element) {
                 $element_data = array();
                 $element_data['id'] = $current_element->getId();
+                $element_data['identifier'] = $current_element->getIdentifier();
                 $element_data['name'] = $current_element->getName();
+                $element_data['class'] = $current_element->getClassName();
+                $element_data['object_file'] = $current_element->getDomainObject();
                 $element_data['system_default'] = $current_element->getSystemDefault();
                 return $element_data;
             }
