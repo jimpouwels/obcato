@@ -32,6 +32,7 @@
             <query>UPDATE element_types SET icon_url = '/img/download_element.png' WHERE identifier = 'download_element'</query>
             <query>UPDATE element_types SET icon_url = '/img/article_overview_element.png' WHERE identifier = 'article_overview_element'</query>
             <query>ALTER TABLE element_types DROP edit_presentation</query>
+            <query>ALTER TABLE element_types DROP destroy_script</query>
         </queries>
     </version>
 </versions>

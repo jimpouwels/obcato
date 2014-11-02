@@ -1,6 +1,4 @@
 <?php
-
-	
 	defined('_ACCESS') or die;
 	
 	include_once CMS_ROOT . "core/data/presentable.php";
@@ -10,10 +8,9 @@
 	
 		private $_name;
 		private $_class_name;
+        private $_domain_object;
 		private $_icon_url;
 		private $_identifier;
-		private $_domain_object;
-		private $_destroy_script;
 		private $_scope_id;
 		private $_system_default;
 		
@@ -82,14 +79,6 @@
 			$this->_system_default = $system_default;
 		}
 		
-		public function setDestroyScript($destroy_script) {
-			$this->_destroy_script = $destroy_script;
-		}
-		
-		public function getDestroyScript() {
-			return $this->_destroy_script;
-		}
-		
 		public static function constructFromRecord($record) {
 			$element_type = new ElementType();
 			$element_type->setId($record['id']);
@@ -100,7 +89,6 @@
 			$element_type->setDomainObject($record['domain_object']);
 			$element_type->setScopeId($record['scope_id']);
 			$element_type->setSystemDefault($record['system_default']);
-			$element_type->setDestroyScript($record['destroy_script']);
 			
 			return $element_type;
 		}

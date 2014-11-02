@@ -97,7 +97,7 @@
 			$query = "UPDATE element_types SET classname = '" . $element_type->getClassName() . "', icon_url = '" . $element_type->getIconUrl() . "', name = '" .
 					  $element_type->getName() . "', domain_object = '" . $element_type->getDomainObject() . "', scope_id = " . 
 					  $element_type->getScopeId() . ", identifier = '" . $element_type->getIdentifier() . "', system_default = " . 
-					  $system_default_val . ", destroy_script = '" . $element_type->getDestroyScript() . "' WHERE id = " . $element_type->getId();
+					  $system_default_val . " WHERE id = " . $element_type->getId();
 					  
 			$mysql_database->executeQuery($query);
 		}
@@ -109,10 +109,10 @@
 			if ($element_type->getSystemDefault()) {
 				$system_default_val = 1;
 			}
-			$query = "INSERT INTO element_types (classname, icon_url, name, domain_object, scope_id, identifier, system_default, destroy_script)" .
+			$query = "INSERT INTO element_types (classname, icon_url, name, domain_object, scope_id, identifier, system_default)" .
 					 " VALUES ('" . $element_type->getClassName() . "', '" . $element_type->getIconUrl() .
 					 "', '" . $element_type->getName() . "', '" . $element_type->getDomainObject() . "', " . $element_type->getScopeId() . ", " . 
-					 "'" . $element_type->getIdentifier() . "', " . $system_default_val . ", '" . $element_type->getDestroyScript() . "')";
+					 "'" . $element_type->getIdentifier() . "', " . $system_default_val . ")";
 			$mysql_database->executeQuery($query);
 			
 			return $mysql_database->getInsertId();
