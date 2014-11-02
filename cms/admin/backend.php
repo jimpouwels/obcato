@@ -3,7 +3,7 @@
 	
 	defined('_ACCESS') or die;
 
-	require_once CMS_ROOT . "view/request_handlers/backend_request_handler.php";
+	require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
 	require_once CMS_ROOT . "view/views/cms.php";
 	require_once CMS_ROOT . "core/data/session.php";
 	require_once CMS_ROOT . "view/views/popup.php";

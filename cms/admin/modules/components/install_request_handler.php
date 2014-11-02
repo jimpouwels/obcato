@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . 'view/request_handlers/module_request_handler.php';
+    require_once CMS_ROOT . 'request_handlers/module_request_handler.php';
     require_once CMS_ROOT . 'modules/components/install_component_form.php';
     require_once CMS_ROOT . 'notifications.php';
     require_once CMS_ROOT . 'utilities/file_utility.php';
