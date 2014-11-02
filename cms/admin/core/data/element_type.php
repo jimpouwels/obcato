@@ -10,7 +10,6 @@
 	
 		private $_name;
 		private $_class_name;
-		private $_edit_presentation;
 		private $_icon_url;
 		private $_identifier;
 		private $_domain_object;
@@ -34,16 +33,8 @@
 			$this->_class_name = $class_name;
 		}
 		
-		public function getEditPresentation() {
-			return $this->_edit_presentation;
-		}
-		
 		public function getRootDirectory() {
 			return  "elements/" . $this->_identifier;
-		}
-		
-		public function setEditPresentation($edit_presentation) {
-			$this->_edit_presentation = $edit_presentation;
 		}
 		
 		public function getIconUrl() {
@@ -104,7 +95,6 @@
 			$element_type->setId($record['id']);
 			$element_type->setName($record['name']);
 			$element_type->setClassName($record['classname']);
-			$element_type->setEditPresentation($record['edit_presentation']);
 			$element_type->setIconUrl($record['icon_url']);
 			$element_type->setIdentifier($record['identifier']);
 			$element_type->setDomainObject($record['domain_object']);

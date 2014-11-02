@@ -35,25 +35,10 @@
                 $this->addLink();
 		}
 
-        private function updateElementHolder()
-        {
+        private function updateElementHolder() {
             $this->updateLinks();
             foreach ($this->_current_element_holder->getElements() as $element)
-                $this->updateElement($element);
-        }
-
-        private function updateElement($element)
-        {
-            $element_type = $element->getType();
-            // new way of calling request handler for an element
-            if ($element_type->getIdentifier() == 'text_element' ||
-                $element_type->getIdentifier() == 'list_element' ||
-                $element_type->getIdentifier() == 'image_element' ||
-                $element_type->getIdentifier() == 'article_overview_element')
                 $element->getRequestHandler()->handle();
-            // old way (TODO: Refactor of calling elements request handler)
-            else
-                include $element_type->getRootDirectory() . "/handler/update_element.php";
         }
 
         private function addElement() {
