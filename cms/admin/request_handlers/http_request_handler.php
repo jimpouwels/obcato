@@ -6,9 +6,9 @@
 	abstract class HttpRequestHandler {
 	
 		public function handle() {
-			if ($_SERVER["REQUEST_METHOD"] === "POST") {
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$this->handlePost();
-			} else if ($_SERVER["REQUEST_METHOD"] === "GET") {
+			} else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				$this->handleGet();
 			}
 		}
@@ -21,8 +21,13 @@
             Notifications::setSuccessMessage($message);
         }
 
-        protected static function sendErrorMessage($message) {
+        protected function sendErrorMessage($message) {
             Notifications::setFailedMessage($message);
+        }
+
+        protected function redirectTo($url) {
+            header("Location: $url");
+            exit();
         }
 
 	}

@@ -53,15 +53,13 @@
 		private function addTemplate() {
 			$new_template = $this->_template_dao->createTemplate();
             $this->sendSuccessMessage("Template succesvol aangemaakt");
-			header("Location: /admin/index.php?template=" . $new_template->getId());
-			exit();
+            $this->redirectTo("/admin/index.php?template=" . $new_template->getId());
 		}
 		
 		private function deleteTemplates() {
 			foreach ($this->_template_dao->getTemplates() as $template) {
-				if (isset($_POST["template_" . $template->getId() . "_delete"])) {
+				if (isset($_POST["template_" . $template->getId() . "_delete"]))
 					$this->_template_dao->deleteTemplate($template);
-				}
 			}
             $this->sendSuccessMessage("Template(s) succesvol verwijderd");
 		}

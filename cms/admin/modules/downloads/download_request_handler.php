@@ -49,8 +49,7 @@
             $download->setTitle("Nieuwe download");
             $this->_download_dao->persistDownload($download);
             $this->sendSuccessMessage("Download succesvol toegevoegd");
-            header("Location: /admin/index.php?download=" . $download->getId());
-            exit();
+            $this->redirectTo("/admin/index.php?download=" . $download->getId());
         }
 
         private function updateDownload() {
@@ -69,8 +68,7 @@
             $this->deleteDownloadFile($this->_current_download->getFileName());
             $this->_download_dao->deleteDownload($this->_current_download->getId());
             $this->sendSuccessMessage('Download succesvol verwijderd');
-            header('Location: /admin/index.php');
-            exit();
+            $this->redirectTo('/admin/index.php');
         }
 
         private function saveUploadedFile($download_form) {

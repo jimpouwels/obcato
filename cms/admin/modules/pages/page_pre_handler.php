@@ -101,9 +101,8 @@
 			$current_level_pages = $parent->getSubPages();
 			$this->updateFollowUp($current_level_pages);
             $this->sendSuccessMessage("Pagina succesvol verwijderd");
-			header("Location: /admin/index.php?page=1");
-			exit();
-		}
+            $this->redirectTo("/admin/index.php?page=1");
+        }
 		
 		private function addSubPage() {
 			$new_page = new Page();
@@ -122,8 +121,7 @@
 			$this->updateFollowUp($current_level_pages);
 
             $this->sendSuccessMessage("Pagina succesvol aangemaakt");
-			header("Location: /admin/index.php?page=" . $new_page->getId());
-			exit();
+            $this->redirectTo("/admin/index.php?page=" . $new_page->getId());
 		}
 		
 		private function moveUp() {
