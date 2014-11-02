@@ -2,7 +2,7 @@
     
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "view/forms/form.php";
+    require_once CMS_ROOT . "request_handlers/form.php";
 
     class ListElementForm extends Form {
 
