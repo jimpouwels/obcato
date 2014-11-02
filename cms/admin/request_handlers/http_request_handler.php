@@ -1,7 +1,7 @@
 <?php
-
-	
 	defined('_ACCESS') or die;
+
+    require_once CMS_ROOT . 'request_handlers/notifications.php';
 	
 	abstract class HttpRequestHandler {
 	
@@ -16,5 +16,13 @@
 		abstract function handleGet();
 		
 		abstract function handlePost();
+
+        protected function sendSuccessMessage($message) {
+            Notifications::setSuccessMessage($message);
+        }
+
+        protected static function sendErrorMessage($message) {
+            Notifications::setFailedMessage($message);
+        }
 
 	}

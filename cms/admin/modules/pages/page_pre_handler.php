@@ -7,7 +7,6 @@
 	require_once CMS_ROOT . "database/dao/block_dao.php";
 	require_once CMS_ROOT . "database/dao/element_dao.php";
 	require_once CMS_ROOT . "database/dao/authorization_dao.php";
-	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "request_handlers/element_holder_request_handler.php";
 	
 	class PagePreHandler extends ElementHolderRequestHandler {
@@ -59,9 +58,9 @@
 				$this->addSelectedBlocks($page_form->getSelectedBlocks());
 				$this->deleteSelectedBlocksFromPage();
 				$this->_page_dao->updatePage($this->_current_page);
-				Notifications::setSuccessMessage("Pagina succesvol opgeslagen");
+                $this->sendSuccessMessage("Pagina succesvol opgeslagen");
 			} catch (FormException $e) {
-				Notifications::setFailedMessage("Pagina niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage("Pagina niet opgeslagen, verwerk de fouten");
 			}
 		}
 		
@@ -69,9 +68,8 @@
 			if (count($selected_blocks) == 0) return;
 			$current_page_blocks = $this->_current_page->getBlocks();
 			foreach ($selected_blocks as $selected_block_id) {
-				if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
+				if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks))
 					$this->_current_page->addBlock($this->_block_dao->getBlock($selected_block_id));
-				}
 			}
 		}
 		
@@ -102,7 +100,7 @@
             $parent = $this->_current_page->getParent();
 			$current_level_pages = $parent->getSubPages();
 			$this->updateFollowUp($current_level_pages);
-			Notifications::setSuccessMessage("Pagina succesvol verwijderd");
+            $this->sendSuccessMessage("Pagina succesvol verwijderd");
 			header("Location: /admin/index.php?page=1");
 			exit();
 		}
@@ -122,8 +120,8 @@
 			$parent = $this->_page_dao->getPage($this->_current_page->getId());
 			$current_level_pages = $parent->getSubPages();
 			$this->updateFollowUp($current_level_pages);
-			
-			Notifications::setSuccessMessage("Pagina succesvol aangemaakt");
+
+            $this->sendSuccessMessage("Pagina succesvol aangemaakt");
 			header("Location: /admin/index.php?page=" . $new_page->getId());
 			exit();
 		}

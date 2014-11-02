@@ -4,7 +4,6 @@
 	
 	require_once CMS_ROOT . "database/dao/settings_dao.php";
 	require_once CMS_ROOT . "request_handlers/module_request_handler.php";
-	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "modules/settings/settings_form.php";
 
 	class SettingsPreHandler extends ModuleRequestHandler {
@@ -25,9 +24,9 @@
 				$settings_form->loadFields();
 				$this->_settings_dao->update($settings);
 				$this->_settings_dao->setHomepage($settings_form->getHomepageId());
-				Notifications::setSuccessMessage("Instellingen succesvol opgeslagen");
+                $this->sendSuccessMessage("Instellingen succesvol opgeslagen");
 			} catch (FormException $e) {
-				Notifications::setFailedMessage("Instellingen niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage("Instellingen niet opgeslagen, verwerk de fouten");
 			}
 		}
 	}

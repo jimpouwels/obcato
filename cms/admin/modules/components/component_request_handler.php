@@ -48,7 +48,7 @@
             include_once CMS_ROOT . '/modules/' . $module->getIdentifier() . '/installer.php';
             $installer = new CustomModuleInstaller(new Logger());
             $installer->uninstall();
-            Notifications::setSuccessMessage('Component succesvol verwijderd');
+            $this->sendSuccessMessage('Component succesvol verwijderd');
         }
 
         private function uninstallElement() {

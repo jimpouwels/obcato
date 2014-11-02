@@ -45,9 +45,9 @@
                 }
                 zip_close($zip);
                 if ($number_imported == 0) {
-                    Notifications::setFailedMessage("Geen afbeeldingen gevonden in ZIP bestand");
+                    $this->sendErrorMessage("Geen afbeeldingen gevonden in ZIP bestand");
                 } else {
-                    Notifications::setSuccessMessage($number_imported . " afbeeldingen geimporteerd");
+                    $this->sendSuccessMessage($number_imported . " afbeeldingen geimporteerd");
                 }
             }
         }

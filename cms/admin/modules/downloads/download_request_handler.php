@@ -3,7 +3,6 @@
     
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "notifications.php";
     require_once CMS_ROOT . "request_handlers/module_request_handler.php";
     require_once CMS_ROOT . "database/dao/download_dao.php";
     require_once CMS_ROOT . "modules/downloads/download_form.php";
@@ -49,7 +48,7 @@
             $download = new Download();
             $download->setTitle("Nieuwe download");
             $this->_download_dao->persistDownload($download);
-            Notifications::setSuccessMessage("Download succesvol toegevoegd");
+            $this->sendSuccessMessage("Download succesvol toegevoegd");
             header("Location: /admin/index.php?download=" . $download->getId());
             exit();
         }
@@ -60,16 +59,16 @@
                 $download_form->loadFields();
                 $this->saveUploadedFile($download_form);
                 $this->_download_dao->updateDownload($this->_current_download);
-                Notifications::setSuccessMessage("Download succesvol opgeslagen");
+                $this->sendSuccessMessage("Download succesvol opgeslagen");
             } catch (FormException $e) {
-                Notifications::setFailedMessage("Download niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage("Download niet opgeslagen, verwerk de fouten");
             }
         }
 
         private function deleteDownload() {
             $this->deleteDownloadFile($this->_current_download->getFileName());
             $this->_download_dao->deleteDownload($this->_current_download->getId());
-            Notifications::setSuccessMessage('Download succesvol verwijderd');
+            $this->sendSuccessMessage('Download succesvol verwijderd');
             header('Location: /admin/index.php');
             exit();
         }

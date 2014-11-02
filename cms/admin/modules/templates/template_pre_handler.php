@@ -4,9 +4,7 @@
 
 	require_once CMS_ROOT . "database/dao/template_dao.php";
 	require_once CMS_ROOT . "database/dao/scope_dao.php";
-	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "request_handlers/module_request_handler.php";
-	require_once CMS_ROOT . "notifications.php";
 	require_once CMS_ROOT . "modules/templates/template_form.php";
 	
 	class TemplatePreHandler extends ModuleRequestHandler {
@@ -54,7 +52,7 @@
 		
 		private function addTemplate() {
 			$new_template = $this->_template_dao->createTemplate();
-			Notifications::setSuccessMessage("Template succesvol aangemaakt");
+            $this->sendSuccessMessage("Template succesvol aangemaakt");
 			header("Location: /admin/index.php?template=" . $new_template->getId());
 			exit();
 		}
@@ -65,7 +63,7 @@
 					$this->_template_dao->deleteTemplate($template);
 				}
 			}
-			Notifications::setSuccessMessage("Template(s) succesvol verwijderd");
+            $this->sendSuccessMessage("Template(s) succesvol verwijderd");
 		}
 		
 		private function updateTemplate() {
@@ -81,9 +79,9 @@
 					$this->renameTemplateFile($old_file_name);
 				}
 				$this->_template_dao->updateTemplate($this->_current_template);
-				Notifications::setSuccessMessage("Template succesvol opgeslagen");
+                $this->sendSuccessMessage("Template succesvol opgeslagen");
 			} catch (FormException $e) {
-				Notifications::setFailedMessage("Template niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage("Template niet opgeslagen, verwerk de fouten");
 			}
 		}
 		

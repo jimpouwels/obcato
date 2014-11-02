@@ -34,9 +34,9 @@
                 $form->loadFields();
                 $this->handleComponentZip($form->getFilePath());
             } catch (FormException $e) {
-                Notifications::setFailedMessage('U dient een component archief te kiezen');
+                $this->sendErrorMessage('U dient een component archief te kiezen');
             } catch (InstallationException $e) {
-                Notifications::setFailedMessage('Installatie van component mislukt');
+                $this->sendErrorMessage('Installatie van component mislukt');
             }
         }
 
