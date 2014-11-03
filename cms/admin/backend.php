@@ -1,6 +1,4 @@
 <?php
-
-	
 	defined('_ACCESS') or die;
 
 	require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
