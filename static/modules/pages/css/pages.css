@@ -1,0 +1,93 @@
+/* PAGE TREE */
+.page_tree {
+	height: 100%;
+	width: 300px;
+	overflow-x: scroll;
+	border: 0px;
+	padding-left: 8px;
+}
+
+.page_tree_fieldset {
+	width: 315px;
+	float: left;
+}
+
+.page_tree_fieldset a {
+	color: #000000;
+}
+
+.page_meta {
+	margin-left: 350px;;
+	height: 30%;
+}
+
+.page_blocks {
+	margin-left: 350px;;
+	height: 100%;
+}
+
+.page_tree ul {
+	padding-left: 25px;
+}
+
+.page_tree  ul  li{
+	list-style-type: none;
+	margin-top: 5px;
+}
+
+.published {
+	list-style-image: url(/admin/static.php?file=/modules/pages/img/page.png);
+	font-style: normal;
+}
+
+.depublished {
+	list-style-image: url(/admin/static.php?file=/modules/pages/img/page_non_published.png);
+	font-style: italic;
+}
+
+.page_tree  ul  li em{
+	color: gray;
+}
+
+.page_tree_link {
+	text-decoration: none;
+	color: black;
+}
+
+.page_tree_link:hover {
+	text-decoration: underline;
+}
+
+.not_in_navigation {
+	color: gray;
+}
+
+.active {
+	font-weight: bold;
+}
+
+.block-selector {
+	margin-left: 10px;
+	float: left;
+	width: 150px;
+}
+
+.selected-blocks {
+	text-align: left;
+	margin-left: 10px;
+	float: left;
+	width: 400px;
+}
+
+.selected-blocks th {
+	text-align: left;
+}
+
+.delete_column .admin_label {
+    display: none;
+}
+
+.unpublished {
+	color: red;
+	font-style: italic;
+}

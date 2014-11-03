@@ -1,0 +1,96 @@
+.article_search {
+	width: 300px;
+	float: left;
+}
+
+.article_search .admin_label {
+	width: 100%;
+}
+
+.button_container {
+	float: right;
+}
+
+.button {
+	margin: 10px;
+}
+
+.search_results {
+	margin: 10px;
+	height: 30%;
+}
+
+.article_list {
+	margin-left: 350px;
+}
+
+.article_meta {
+	margin-left: 350px;
+	height: 30%;
+}
+
+.show_all_link {
+	float: left;
+	clear: both;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+.show_all_link  a {
+	color: gray;
+}
+
+.term-selector {
+	float: left;
+	margin-left: 5px;
+	width: 150px;
+}
+
+.selected-terms {
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	float: left;
+	width: 400px;
+}
+
+.selected-terms th {
+	text-align: left;
+}
+
+.delete_column .admin_label {
+	display: none;
+}
+
+.admin_field  {
+	width: 275px;
+}
+
+.datepicker {
+	width: 75px;
+}
+
+.add_image_button {
+	margin-top: 8px;
+}
+
+.target_pages_fieldset .admin_label {
+	display: none;
+}
+
+.listing .center_column {
+	text-align: center;
+}
+
+.button {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.search_job {
+	margin-left: 10px;
+}
+
+.terms_listing {
+	margin: 10px;
+}

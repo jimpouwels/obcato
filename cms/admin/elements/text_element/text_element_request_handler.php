@@ -2,11 +2,11 @@
     
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "pre_handlers/pre_handler.php";
+    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "elements/text_element/text_element_form.php";
 
-    class TextElementRequestHandler extends PreHandler {
+    class TextElementRequestHandler extends HttpRequestHandler {
 
         private $_text_element;
         private $_element_dao;
@@ -18,8 +18,11 @@
             $this->_text_element_form = new TextElementForm($this->_text_element);
         }
 
-        public function handle()
-        {
+        public function handleGet() {
+
+        }
+
+        public function handlePost() {
             $this->_text_element_form->loadFields();
             $this->_element_dao->updateElement($this->_text_element);
         }

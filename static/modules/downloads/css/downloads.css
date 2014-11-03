@@ -1,0 +1,23 @@
+.download_search {
+    width: 300px;
+    float: left;
+    margin-right: 30px;
+}
+
+.download_search .admin_field {
+    width: 250px;
+}
+
+.download_search .button {
+    margin-left: 10px;
+}
+
+.download_search .show_all_link {
+    clear: left;
+    margin-left: 10px;
+    margin-top: 60px;
+}
+
+.download_list {
+    overflow: hidden;
+}

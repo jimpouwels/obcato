@@ -1,0 +1,57 @@
+.guestbook_list {
+	width: 315px;
+	height: 100%;
+	float: left;
+}
+
+.guestbook_tree ul {
+	margin-left: 10px;
+	padding-left: 25px;
+}
+
+.guestbook_tree  ul  li{
+	list-style-type: none;
+	margin-top: 5px;
+}
+
+.guestbook_tree a {
+	text-decoration: none;
+	color: black;
+}
+
+.guestbook_tree a:hover {
+	text-decoration: underline;
+}
+
+.guestbook_list_item {
+	list-style-image: url(/admin/static.php?file=/guestbooks/img/guestbooks.png);
+	font-style: normal;
+}
+
+.guestbook_meta {
+	margin-left: 350px;;
+}
+
+.admin_label {
+	width: 180px;
+}
+
+.messages_list {
+	margin-left: 350px;;
+}
+
+.acknowledge_column, .delete_column{
+	text-align: center;
+}
+
+.delete_column .admin_label {
+	display: none;
+}
+
+.message_column {
+	background-color: #FFFFBF;
+}
+
+.guestbook_message {
+	background: #F0F0F0;
+}

@@ -1,0 +1,40 @@
+.table_listing {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.table_selector {
+	float: left;
+}
+
+.table_details {
+	float: left;
+}
+
+.queries_form_wrapper {
+	margin-left: 10px;
+	width: 595px;
+}
+
+.queries_form_wrapper ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.queries_form_wrapper li {
+	list-style-type: none;
+}
+
+.button {
+	margin-top: 5px;
+	float: right;
+}
+
+.configuration_fieldset {
+	width: 400px;
+}
+
+.configuration_fieldset .db_property {
+	font-weight: bold;
+	padding-left: 5px;
+}

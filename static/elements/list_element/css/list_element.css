@@ -1,0 +1,20 @@
+.list_element_items .admin_label {
+	display: none;
+}
+
+.list-fieldset {
+	margin-top: 10px;
+	width: 450px;
+}
+
+.list-fieldset legend {
+	margin-left: -8px;
+}
+
+.add_list_item_button {
+	margin-top: 5px;
+}
+
+.list-fieldset em {
+	margin-left: 5px;
+}
