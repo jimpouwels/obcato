@@ -65,9 +65,17 @@
 
 		public function persistScope($scope) {
 			$statement = $this->_mysql_connector->prepareStatement("INSERT INTO scopes (name) VALUES (?)");
-            $statement->bind_param("s", $scope->getName());
+            $scope_name = $scope->getName();
+            $statement->bind_param("s", $scope_name);
             $this->_mysql_connector->executeStatement($statement);
-			return $this->_mysql_connector->getInsertId();
+			$scope->setId($this->_mysql_connector->getInsertId());
 		}
+
+        public function deleteScope($scope) {
+            $statement = $this->_mysql_connector->prepareStatement('DELETE FROM scopes WHERE id = ?');
+            $scope_id = $scope->getId();
+            $statement->bind_param('s', $scope_id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
 	}
 ?>

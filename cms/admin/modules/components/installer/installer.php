@@ -59,6 +59,12 @@
                 $this->_logger->log('Geen backend templates gevonden');
         }
 
+        protected function installComponentFiles($target_dir) {
+            $this->createDir($target_dir);
+            $this->_logger->log('Overige bestanden kopiëren naar ' . $target_dir);
+            FileUtility::moveDirectoryContents(COMPONENT_TEMP_DIR, $target_dir);
+        }
+
         protected function createDir($target_dir) {
             if (file_exists($target_dir))
                 FileUtility::recursiveDelete($target_dir);

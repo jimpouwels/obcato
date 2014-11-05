@@ -51,11 +51,19 @@
         }
 
         private function uninstallElement() {
-
+            $element = $this->getElementFromPostRequest();
+            include_once CMS_ROOT . '/elements/' . $element->getIdentifier() . '/installer.php';
+            $installer = new CustomElementInstaller(new Logger());
+            $installer->uninstall();
+            $this->sendSuccessMessage('Component succesvol verwijderd');
         }
 
         private function getModuleFromPostRequest() {
             return $this->_module_dao->getModule($_POST['module_id']);
+        }
+
+        private function getElementFromPostRequest() {
+            return $this->_element_dao->getElementType($_POST['element_id']);
         }
 
         private function getModuleFromGetRequest() {

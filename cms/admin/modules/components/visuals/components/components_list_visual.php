@@ -41,7 +41,7 @@
                 $element_data = array();
                 $element_data['id'] = $element_type->getId();
                 $element_data['name'] = $element_type->getName();
-                $element_data['icon_url'] = '/admin/static.php?file=' . $element_type->getIconUrl();
+                $element_data['icon_url'] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
                 $elements_data[] = $element_data;
             }
             return $elements_data;

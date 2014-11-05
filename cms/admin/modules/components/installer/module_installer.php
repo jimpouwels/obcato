@@ -29,7 +29,7 @@
             $this->installModule();
             $this->installStaticFiles(STATIC_DIR . '/modules/' . $this->getIdentifier());
             $this->installBackendTemplates(BACKEND_TEMPLATE_DIR . '/modules/' . $this->getIdentifier());
-            $this->installModuleFiles();
+            $this->installComponentFiles(CMS_ROOT . 'modules/' . $this->getIdentifier());
         }
 
         public function unInstall() {
@@ -61,13 +61,6 @@
 
         private function uninstallModule() {
             $this->_module_dao->removeModule($this->getIdentifier());
-        }
-
-        private function installModuleFiles() {
-            $target_dir = CMS_ROOT . 'modules/' . $this->getIdentifier();
-            $this->createDir($target_dir);
-            $this->_logger->log('Overige bestanden kopiëren naar ' . $target_dir);
-            FileUtility::moveDirectoryContents(COMPONENT_TEMP_DIR, $target_dir);
         }
 
         private function uninstallModuleFiles() {

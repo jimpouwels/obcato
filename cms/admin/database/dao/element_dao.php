@@ -118,10 +118,9 @@
 			return $mysql_database->getInsertId();
 		}
 		
-		public function deleteElementType($element_type_id) {
+		public function deleteElementType($element_type) {
 			$mysql_database = MysqlConnector::getInstance();
-			$query = "DELETE FROM element_types WHERE id = $element_type_id";
-			
+			$query = "DELETE FROM element_types WHERE id = " . $element_type->getId();
 			$mysql_database->executeQuery($query);
 		}
 		

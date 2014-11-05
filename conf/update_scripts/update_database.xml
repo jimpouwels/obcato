@@ -33,6 +33,8 @@
             <query>UPDATE element_types SET icon_url = '/img/article_overview_element.png' WHERE identifier = 'article_overview_element'</query>
             <query>ALTER TABLE element_types DROP edit_presentation</query>
             <query>ALTER TABLE element_types DROP destroy_script</query>
+			<query>ALTER TABLE element_types MODIFY COLUMN scope_id INTEGER UNSIGNED NOT NULL</query>
+			<query>ALTER TABLE element_types ADD CONSTRAINT element_types_scopes FOREIGN KEY element_types_scopes (scope_id) REFERENCES scopes (id) ON DELETE CASCADE ON UPDATE RESTRICT</query>
         </queries>
     </version>
 </versions>

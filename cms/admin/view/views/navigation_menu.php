@@ -72,7 +72,7 @@
 			$template_engine = TemplateEngine::getInstance();
 			$template_engine->assign("id", $element_type->getId());
 			$template_engine->assign("name", $element_type->getName());
-			$template_engine->assign("icon_url", '/admin/static.php?file=' . $element_type->getIconUrl());
+			$template_engine->assign("icon_url", '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl());
 			
 			return $template_engine->fetch("system/navigation_menu_element_sub_item.tpl");
 		}
