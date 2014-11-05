@@ -1,9 +1,9 @@
 <?php
 
-	
-	defined('_ACCESS') or die;
+    
+    defined('_ACCESS') or die;
 
-	class UnauthorizedDaoException extends Exception {
-	}
+    class UnauthorizedDaoException extends Exception {
+    }
 
 ?>

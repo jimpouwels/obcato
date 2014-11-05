@@ -5,16 +5,16 @@
     require_once CMS_ROOT . "frontend/frontend_visual.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
-	class ArticleOverviewElementFrontendVisual extends FrontendVisual {
+    class ArticleOverviewElementFrontendVisual extends FrontendVisual {
 
-		private $_template_engine;
-		private $_article_overview_element;
+        private $_template_engine;
+        private $_article_overview_element;
 
-		public function __construct($current_page, $article_overview_element) {
+        public function __construct($current_page, $article_overview_element) {
             parent::__construct($current_page);
-			$this->_template_engine = TemplateEngine::getInstance();
-			$this->_article_overview_element = $article_overview_element;
-		}
+            $this->_template_engine = TemplateEngine::getInstance();
+            $this->_article_overview_element = $article_overview_element;
+        }
 
         public function render()
         {

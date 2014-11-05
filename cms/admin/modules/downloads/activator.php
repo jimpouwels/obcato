@@ -1,16 +1,16 @@
 <?php
 
-	
-	defined('_ACCESS') or die;
-	
-	require_once CMS_ROOT . "view/views/module_visual.php";
+    
+    defined('_ACCESS') or die;
+    
+    require_once CMS_ROOT . "view/views/module_visual.php";
     require_once CMS_ROOT . "view/views/action_button.php";
     require_once CMS_ROOT . "modules/downloads/visuals/list_visual.php";
     require_once CMS_ROOT . "modules/downloads/visuals/editor_visual.php";
     require_once CMS_ROOT . "modules/downloads/visuals/search_box_visual.php";
     require_once CMS_ROOT . "modules/downloads/download_request_handler.php";
 
-	class DownloadModuleVisual extends ModuleVisual {
+    class DownloadModuleVisual extends ModuleVisual {
 
         private static $TEMPLATE = "modules/downloads/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
@@ -75,5 +75,5 @@
             return $editor->render();
         }
     }
-	
+    
 ?>

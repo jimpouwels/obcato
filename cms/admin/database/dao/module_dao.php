@@ -1,51 +1,51 @@
 <?php
 
-	
-	defined('_ACCESS') or die;
+    
+    defined('_ACCESS') or die;
 
-	include_once CMS_ROOT . "database/mysql_connector.php";
-	include_once CMS_ROOT . "core/data/module_group.php";
-	include_once CMS_ROOT . "core/data/module.php";
+    include_once CMS_ROOT . "database/mysql_connector.php";
+    include_once CMS_ROOT . "core/data/module_group.php";
+    include_once CMS_ROOT . "core/data/module.php";
 
-	class ModuleDao {
+    class ModuleDao {
 
-		private static $instance;
+        private static $instance;
         private $_mysql_connector;
 
-		private function __construct() {
+        private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
-		}
-
-		public static function getInstance() {
-			if (!self::$instance) {
-				self::$instance = new ModuleDao();
-			}
-			return self::$instance;
-		}
-
-		public function getAllModules() {
-			$query = "SELECT * FROM modules ORDER BY title";
-			$result = $this->_mysql_connector->executeQuery($query);
-			$modules = array();
-			while ($row = $result->fetch_assoc()) {
-				$module = Module::constructFromRecord($row);
-				array_push($modules, $module);
+        }
+        
+        public static function getInstance() {
+            if (!self::$instance) {
+                self::$instance = new ModuleDao();
             }
-			return $modules;
-		}
+            return self::$instance;
+        }
 
-		public function getModule($id) {
-			$query = "SELECT * FROM modules WHERE id = " . $id;
-			$result = $this->_mysql_connector->executeQuery($query);
-			
-			$module = NULL;
-			while ($row = $result->fetch_assoc()) {
-				$module = Module::constructFromRecord($row);
-				
-				break;
-			}
-			return $module;
-		}
+        public function getAllModules() {
+            $query = "SELECT * FROM modules ORDER BY title";
+            $result = $this->_mysql_connector->executeQuery($query);
+            $modules = array();
+            while ($row = $result->fetch_assoc()) {
+                $module = Module::constructFromRecord($row);
+                array_push($modules, $module);
+            }
+            return $modules;
+        }
+
+        public function getModule($id) {
+            $query = "SELECT * FROM modules WHERE id = " . $id;
+            $result = $this->_mysql_connector->executeQuery($query);
+            
+            $module = NULL;
+            while ($row = $result->fetch_assoc()) {
+                $module = Module::constructFromRecord($row);
+                
+                break;
+            }
+            return $module;
+        }
 
         public function removeModule($identifier) {
             $statement = $this->_mysql_connector->prepareStatement('DELETE FROM modules WHERE identifier = ?');
@@ -82,29 +82,29 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-		public function getModuleByIdentifier($identifier) {
-			$query = "SELECT * FROM modules WHERE identifier = '" . $identifier . "'";
-			$result = $this->_mysql_connector->executeQuery($query);
-			
-			$module = NULL;
-			while ($row = $result->fetch_assoc()) {
-				$module = Module::constructFromRecord($row);
-				break;
-			}
-			return $module;
-		}
+        public function getModuleByIdentifier($identifier) {
+            $query = "SELECT * FROM modules WHERE identifier = '" . $identifier . "'";
+            $result = $this->_mysql_connector->executeQuery($query);
+            
+            $module = NULL;
+            while ($row = $result->fetch_assoc()) {
+                $module = Module::constructFromRecord($row);
+                break;
+            }
+            return $module;
+        }
 
-		public function getModuleGroups() {
-			$query = "SELECT * FROM module_groups ORDER BY follow_up";
-			$result = $this->_mysql_connector->executeQuery($query);
-			$groups = array();
-			
-			while ($row = $result->fetch_assoc()) {
-				$module_group = ModuleGroup::constructFromRecord($row);
-				array_push($groups, $module_group);
-			}
-			return $groups;
-		}
+        public function getModuleGroups() {
+            $query = "SELECT * FROM module_groups ORDER BY follow_up";
+            $result = $this->_mysql_connector->executeQuery($query);
+            $groups = array();
+            
+            while ($row = $result->fetch_assoc()) {
+                $module_group = ModuleGroup::constructFromRecord($row);
+                array_push($groups, $module_group);
+            }
+            return $groups;
+        }
 
         public function getModuleGroupByTitle($title) {
             $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE title = ?');
@@ -114,6 +114,6 @@
                 return ModuleGroup::constructFromRecord($row);
             }
         }
-		
-	}
+        
+    }
 ?>

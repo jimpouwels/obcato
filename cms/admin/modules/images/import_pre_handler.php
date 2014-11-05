@@ -6,7 +6,7 @@
     class ImportPreHandler extends ModuleRequestHandler {
         private static $ZIP_FILE_ID = "import_zip_file";
         private $_image_dao;
-        public function handleGet() {				}
+        public function handleGet() {                }
         public function handlePost() {
             if (isset($_FILES[self::$ZIP_FILE_ID]) && is_uploaded_file($_FILES[self::$ZIP_FILE_ID]["tmp_name"])) {
                 $number_imported = 0;
@@ -34,7 +34,7 @@
                             $thumb_file_name = "THUMB-" . $new_file_name;
                             FileUtility::saveThumb($new_file_name, UPLOAD_DIR, $thumb_file_name, 50, 50);
                             $new_image->setThumbFileName($thumb_file_name);
-                            					// save the label
+                                                // save the label
                             if (isset($_POST["import_label"]) && $_POST["import_label"] != "") {
                                 $this->_image_dao->addLabelToImage($_POST["import_label"], $new_image);
                             }

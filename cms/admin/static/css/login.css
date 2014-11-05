@@ -1,33 +1,33 @@
 #login-form-box {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -250px;
-	margin-top: -150px;
-	display:block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -150px;
+    display:block;
     height: 250px;
-	width: 500px;
-	border: 1px solid gray;
+    width: 500px;
+    border: 1px solid gray;
     font-family: verdana;
-	font-size: 0.8em;
+    font-size: 0.8em;
     background-color: #fbf9ee;
 }
 
 .loginform {
-	border: 0px;
+    border: 0px;
     padding: 0px;
     margin: 0px;
 }
 
 .admin_label {
-	min-width: 135px;
-	padding-top: 12px;
-	display: block;
+    min-width: 135px;
+    padding-top: 12px;
+    display: block;
 }
 
 .admin_field {
-	margin-top: 8px;
-	width: 200px;
+    margin-top: 8px;
+    width: 200px;
 }
 
 .fields {
@@ -36,7 +36,7 @@
 }
 
 .header {
-	width: 100%;
+    width: 100%;
     background-color: #1f8dd6;
     font-family: GeosansLight;
     color: #ffffff;
@@ -50,19 +50,19 @@
 }
 
 .header img {
-	margin-top: 3px;
+    margin-top: 3px;
 }
 
 .button-holder {
-	width: 80px;
-	float: right;
-	margin-top: 20px;
+    width: 80px;
+    float: right;
+    margin-top: 20px;
 }
 
 .error {
     text-align: center;
-	color: red;
+    color: red;
     margin: 60px auto auto;
     clear: both;
-	width: 450px;
+    width: 450px;
 }

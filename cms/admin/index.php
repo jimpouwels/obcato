@@ -1,8 +1,8 @@
 <?php
 
-	// DIRECT ACCESS GRANTED
-	define("_ACCESS", "GRANTED");
-	define("CMS_ROOT", '');
+    // DIRECT ACCESS GRANTED
+    define("_ACCESS", "GRANTED");
+    define("CMS_ROOT", '');
 
     if (!file_exists("database_config.php") || isInstallMode()) {
         if (!isset($_GET["mode"]))

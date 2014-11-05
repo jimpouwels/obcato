@@ -1,7 +1,7 @@
 <?php
 
-	
-	defined('_ACCESS') or die;
+    
+    defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/data/article.php";
     require_once CMS_ROOT . "core/data/page.php";
@@ -10,7 +10,7 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
 
-	abstract class FrontendVisual extends Visual {
+    abstract class FrontendVisual extends Visual {
 
         private $_link_dao;
         private $_page_dao;
@@ -23,7 +23,7 @@
             $this->_current_page = $current_page;
         }
 
-		protected function toHtml($value, $element_holder) {
+        protected function toHtml($value, $element_holder) {
             $value = nl2br($value);
             return $this->createLinksInString($value, $element_holder);
         }
@@ -89,6 +89,6 @@
         private function createHyperlinkOpeningTag($title, $url) {
             return "<a title=\"" . $title . "\" href=\"" . $url . "\">";
         }
-	}
+    }
 
 ?>

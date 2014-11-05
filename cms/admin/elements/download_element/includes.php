@@ -1,4 +1,4 @@
 <?php
-	
-	defined('_ACCESS') or die;
+    
+    defined('_ACCESS') or die;
 ?>

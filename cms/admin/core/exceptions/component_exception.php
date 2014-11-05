@@ -1,9 +1,9 @@
 <?php
 
-	
-	defined('_ACCESS') or die;
+    
+    defined('_ACCESS') or die;
 
-	class ComponentException extends Exception {
-	}
+    class ComponentException extends Exception {
+    }
 
 ?>

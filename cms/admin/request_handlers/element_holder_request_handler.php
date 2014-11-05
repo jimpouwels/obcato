@@ -1,24 +1,24 @@
 <?php
-	
-	defined('_ACCESS') or die;
-	
-	require_once CMS_ROOT . "database/dao/element_holder_dao.php";
+    
+    defined('_ACCESS') or die;
+    
+    require_once CMS_ROOT . "database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "request_handlers/module_request_handler.php";
-	
-	abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
+    
+    abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 
-		private $_element_dao;
+        private $_element_dao;
         private $_link_dao;
-		private $_element_holder_dao;
+        private $_element_holder_dao;
         private $_current_element_holder;
-		
-		public function __construct() {
-			$this->_element_dao = ElementDao::getInstance();
+        
+        public function __construct() {
+            $this->_element_dao = ElementDao::getInstance();
             $this->_link_dao = LinkDao::getInstance();
-			$this->_element_holder_dao = ElementHolderDao::getInstance();
-		}
+            $this->_element_holder_dao = ElementHolderDao::getInstance();
+        }
 
         public function handleGet() {
         }
@@ -27,13 +27,13 @@
             $this->_current_element_holder = $this->getElementHolderFromPostRequest();
             if ($this->_current_element_holder)
                 $this->updateElementHolder();
-			if ($this->isAddElementAction())
+            if ($this->isAddElementAction())
                 $this->addElement();
-			else if ($this->isDeleteElementAction())
+            else if ($this->isDeleteElementAction())
                 $this->deleteElement();
             else if ($this->isAddLinkAction())
                 $this->addLink();
-		}
+        }
 
         private function updateElementHolder() {
             $this->updateLinks();
