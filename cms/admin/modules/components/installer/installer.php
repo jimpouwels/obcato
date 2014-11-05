@@ -9,6 +9,8 @@
 
         private $_mysql_connector;
         private $_logger;
+        private static $STATIC_DIR = 'static';
+        private static $TEMPLATE_DIR = 'templates';
 
         public function __construct($logger) {
             $this->_logger = $logger;
@@ -17,8 +19,6 @@
 
         abstract function getInstallQueries();
         abstract function getUninstallQueries();
-        abstract function getStaticDirectory();
-        abstract function getBackendTemplateDirectory();
         abstract function getIconPath();
 
         protected function runInstallQueries() {
@@ -39,8 +39,8 @@
         }
 
         protected function installStaticFiles($target_dir) {
-            $source_dir = COMPONENT_TEMP_DIR . '/' . $this->getStaticDirectory();
-            if ($this->getStaticDirectory() && file_exists($source_dir)) {
+            $source_dir = COMPONENT_TEMP_DIR . '/' . self::$STATIC_DIR;
+            if (self::$STATIC_DIR && file_exists($source_dir)) {
                 $this->createDir($target_dir);
                 $this->_logger->log('Statische bestanden kopiëren naar ' . $target_dir);
                 FileUtility::moveDirectoryContents($source_dir, $target_dir, true);
@@ -50,8 +50,8 @@
         }
 
         protected function installBackendTemplates($target_dir) {
-            $source_dir = COMPONENT_TEMP_DIR . '/' . $this->getBackendTemplateDirectory();
-            if ($this->getBackendTemplateDirectory() && file_exists($source_dir)) {
+            $source_dir = COMPONENT_TEMP_DIR . '/' . self::$TEMPLATE_DIR;
+            if (self::$TEMPLATE_DIR && file_exists($source_dir)) {
                 $this->createDir($target_dir);
                 $this->_logger->log('Backend templates kopiëren naar ' . $target_dir);
                 FileUtility::moveDirectoryContents($source_dir, $target_dir, true);
