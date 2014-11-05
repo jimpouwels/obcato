@@ -5,6 +5,8 @@
     require_once CMS_ROOT . 'modules/components/install_component_form.php';
     require_once CMS_ROOT . 'utilities/file_utility.php';
     require_once CMS_ROOT . 'modules/components/installer/installation_exception.php';
+    require_once CMS_ROOT . 'modules/components/installer/module_installer.php';
+    require_once CMS_ROOT . 'modules/components/installer/element_installer.php';
     require_once CMS_ROOT . 'modules/components/installer/logger.php';
 
     class InstallRequestHandler extends ModuleRequestHandler {
@@ -58,24 +60,49 @@
         private function runInstaller() {
             $this->checkInstallerFileProvided();
             require_once COMPONENT_TEMP_DIR . '/installer.php';
-            $this->checkIfValidInstallerClassIsProvided();
-            $installer = new CustomModuleInstaller($this->_logger);
-            $this->checkIfInstallerIsOfCorrectType($installer);
+            $installer = null;
+            if ($this->uploadedFileIs(ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME))
+                $installer = $this->getModuleInstaller();
+            else if ($this->uploadedFileIs(ElementInstaller::$CUSTOM_INSTALLER_CLASSNAME))
+                $installer = $this->getElementInstaller();
+            else {
+                $this->_logger->log('Er is geen geldige installer implementatie gevonden');
+                throw new InstallationException();
+            }
             $this->_logger->log('Installer uitvoeren');
             $installer->install();
         }
 
-        private function checkIfValidInstallerClassIsProvided() {
-            if (!class_exists(ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME)) {
-                $this->_logger->log('Class ' . ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' niet gevonden');
-                throw new InstallationException();
+        private function uploadedFileIs($installer_classname) {
+            if (class_exists($installer_classname)) {
+                $this->_logger->log($installer_classname . ' class gevonden');
+                return true;
             }
-            $this->_logger->log(ModuleInstaller::$CUSTOM_INSTALLER_CLASSNAME . ' class gevonden');
+            return false;
         }
 
-        private function checkIfInstallerIsOfCorrectType($installer) {
+        private function getModuleInstaller() {
+            $installer = new CustomModuleInstaller($this->_logger);
+            $this->isModuleInstaller($installer);
+            return $installer;
+        }
+
+        private function getElementInstaller() {
+            $installer = new CustomElementInstaller($this->_logger);
+            $this->isElementInstaller($installer);
+            return $installer;
+        }
+
+        private function isModuleInstaller($installer) {
             if (!$installer instanceof ModuleInstaller) {
                 $this->_logger->log('Installer class moet een implementatie zijn van ModuleInstaller');
+                throw new InstallationException();
+            }
+        }
+
+        private function isElementInstaller($installer) {
+            if (!$installer instanceof ElementInstaller) {
+                $this->_logger->log('Installer class moet een implementatie zijn van ElementInstaller');
                 throw new InstallationException();
             }
         }
