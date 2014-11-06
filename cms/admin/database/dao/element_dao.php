@@ -97,8 +97,7 @@
             $query = "UPDATE element_types SET classname = '" . $element_type->getClassName() . "', icon_url = '" . $element_type->getIconUrl() . "', name = '" .
                       $element_type->getName() . "', domain_object = '" . $element_type->getDomainObject() . "', scope_id = " . 
                       $element_type->getScopeId() . ", identifier = '" . $element_type->getIdentifier() . "', system_default = " . 
-                      $system_default_val . " WHERE id = " . $element_type->getId();
-
+                      $system_default_val . " WHERE identifier = '" . $element_type->getIdentifier() . "'";
             $mysql_database->executeQuery($query);
         }
 

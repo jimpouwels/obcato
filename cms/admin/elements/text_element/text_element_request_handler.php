@@ -19,7 +19,6 @@
         }
 
         public function handleGet() {
-
         }
 
         public function handlePost() {

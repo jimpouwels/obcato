@@ -52,7 +52,14 @@
             $element_type->setSystemDefault(false);
             $element_type->setClassName($this->getClassName());
             $element_type->setDomainObject($this->getClassFile());
-            $this->_element_dao->persistElementType($element_type);
+            if (!$this->_element_dao->getElementTypeByIdentifier($element_type->getIdentifier())) {
+                $this->runInstallQueries();
+                $this->_logger->log('Element wordt toegevoegd aan de database');
+                $this->_element_dao->persistElementType($element_type);
+            } else {
+                $this->_logger->log('Element database record wordt geupdate');
+                $this->_element_dao->updateElementType($element_type);
+            }
         }
 
         private function createNewScope() {
