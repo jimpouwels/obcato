@@ -53,8 +53,6 @@
 
         public function updateElement($element) {
             $mysql_database = MysqlConnector::getInstance(); 
-
-
             $set = 'follow_up = ' . $element->getIndex();
             if (!is_null($element->getTemplateId()) && $element->getTemplateId() != '') {
                 $set = $set . ', template_id = ' . $element->getTemplateId();
@@ -200,11 +198,7 @@
         }
 
         public function createElement($element_type, $element_holder_id) {
-            $element_location_base = "";
-            if (!$element_type->getSystemDefault()) {
-                $element_location_base = COMPONENT_DIR . "/";
-            }
-            include_once CMS_ROOT . $element_location_base . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
+            include_once CMS_ROOT . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
             $element_classname = $element_type->getClassName();
             $new_element = new $element_classname;
 

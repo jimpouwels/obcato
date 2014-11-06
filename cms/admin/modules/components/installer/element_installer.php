@@ -47,16 +47,17 @@
             $element_type = new ElementType();
             $element_type->setName($this->getName());
             $element_type->setIdentifier($this->getIdentifier());
-            $element_type->setScopeId($this->createNewScope()->getId());
             $element_type->setIconUrl($this->getIconPath());
             $element_type->setSystemDefault(false);
             $element_type->setClassName($this->getClassName());
             $element_type->setDomainObject($this->getClassFile());
-            if (!$this->_element_dao->getElementTypeByIdentifier($element_type->getIdentifier())) {
+            if (!$this->_element_dao->getElementTypeByIdentifier($this->getIdentifier())) {
+                $element_type->setScopeId($this->createNewScope()->getId());
                 $this->runInstallQueries();
                 $this->_logger->log('Element wordt toegevoegd aan de database');
                 $this->_element_dao->persistElementType($element_type);
             } else {
+                $element_type->setScopeId($this->_scope_dao->getScopeByName($this->getScope())->getId());
                 $this->_logger->log('Element database record wordt geupdate');
                 $this->_element_dao->updateElementType($element_type);
             }
