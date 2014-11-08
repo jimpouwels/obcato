@@ -38,6 +38,7 @@
 
         public function unInstall() {
             $this->_scope_dao->deleteScope($this->_scope_dao->getScopeByName($this->getScope()));
+            $this->runUninstallQueries();
             $this->uninstallStaticFiles();
             $this->uninstallBackendTemplates();
             $this->uninstallComponentFiles();
