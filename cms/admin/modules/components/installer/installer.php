@@ -22,7 +22,7 @@
         abstract function getIconPath();
 
         protected function runInstallQueries() {
-            $this->_logger->log('Installtiequeries uitvoeren');
+            $this->_logger->log('Installatiequeries uitvoeren');
             $queries = $this->getInstallQueries();
             if (!is_array($queries)) return;
             foreach ($queries as $query) {
