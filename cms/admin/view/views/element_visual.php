@@ -20,7 +20,7 @@
             $template_engine->assign("element_form", $this->renderElementForm());
             $template_engine->assign("index", $element->getIndex());
             $template_engine->assign("id", $element->getId());
-            $template_engine->assign("icon_url", '/admin/static.php?file=' . $element->getType()->getIconUrl());
+            $template_engine->assign("icon_url", '/admin/static.php?file=/elements/' . $element->getType()->getIdentifier() . '/' . $element->getType()->getIconUrl());
             $template_engine->assign("type", $element->getType()->getName());
             $template_engine->assign("template_picker", $template_picker->render());
             $template_engine->assign("identifier", $element->getType()->getIdentifier());
