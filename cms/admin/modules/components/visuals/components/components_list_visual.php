@@ -10,8 +10,10 @@
         private $_module_dao;
         private $_element_dao;
         private $_template_engine;
+        private $_components_request_handler;
 
-        public function __construct() {
+        public function __construct($components_request_handler) {
+            $this->_components_request_handler = $components_request_handler;
             $this->_module_dao = ModuleDao::getInstance();
             $this->_element_dao = ElementDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
@@ -30,6 +32,7 @@
                 $module_data['id'] = $module->getId();
                 $module_data['title'] = $module->getTitle();
                 $module_data['icon_url'] = '/admin/static.php?file=/modules/'. $module->getIdentifier() . $module->getIconUrl();
+                $module_data['is_current'] = $this->isCurrentModule($module);
                 $modules_data[] = $module_data;
             }
             return $modules_data;
@@ -42,8 +45,19 @@
                 $element_data['id'] = $element_type->getId();
                 $element_data['name'] = $element_type->getName();
                 $element_data['icon_url'] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
+                $element_data['is_current'] = $this->isCurrentElement($element_type);
                 $elements_data[] = $element_data;
             }
             return $elements_data;
+        }
+
+        private function isCurrentModule($module) {
+            $current_module = $this->_components_request_handler->getCurrentModule();
+            return $current_module && $current_module->getId() == $module->getId();
+        }
+
+        private function isCurrentElement($element) {
+            $current_element = $this->_components_request_handler->getCurrentElement();
+            return $current_element && $current_element->getId() == $element->getId();
         }
     }

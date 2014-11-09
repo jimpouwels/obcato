@@ -41,3 +41,8 @@
 .component-list-fieldset li {
     line-height: 20px;
 }
+
+.component-list-fieldset .active {
+    font-weight: bold;
+    color: #000000;
+}
