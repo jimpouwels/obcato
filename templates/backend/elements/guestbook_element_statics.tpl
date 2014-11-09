@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="/admin/static.php?file=/elements/guestbook_element/css/guestbook_element.css" type="text/css" />
