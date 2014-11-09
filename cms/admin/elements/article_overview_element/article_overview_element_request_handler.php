@@ -24,8 +24,7 @@
         public function handleGet() {
         }
 
-        public function handlePost()
-        {
+        public function handlePost() {
             try {
                 $this->_article_overview_element_form->loadFields();
                 $this->removeSelectedTerms();

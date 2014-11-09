@@ -2,20 +2,20 @@
     
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "request_handlers/form.php";
+    require_once CMS_ROOT . "request_handlers/element_form.php";
 
-    class ListElementForm extends Form {
+    class ListElementForm extends ElementForm {
 
         private $_list_element;
 
         public function __construct($list_element) {
+            parent::__construct($list_element);
             $this->_list_element = $list_element;
         }
 
-        public function loadFields()
-        {
+        public function loadFields() {
+            parent::loadFields();
             $this->_list_element->setTitle($this->getFieldValue('element_' . $this->_list_element->getId() . '_title'));
-            $this->_list_element->setTemplateId($this->getFieldValue('element_' . $this->_list_element->getId() . '_template'));
             $this->loadListItemsFields();
         }
 
