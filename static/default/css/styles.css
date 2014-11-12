@@ -325,9 +325,11 @@ h1 {
 
 .element_wrapper {
 	cursor: move;
-	width: 100%;
-	border: 1px solid gray;
+	border: 1px solid #d3d3d3;
 	padding-bottom: 5px;
+    margin: 20px;
+    box-shadow: 5px 5px 5px #888888;
+    background-color: #ffffff;
 }
 
 .element_wrapper select {
@@ -339,8 +341,9 @@ h1 {
 }
 
 .element_header {
-	color: white;
-	background-color: #95AEC9;
+	color: #000000;
+    font-size: 1.3em;
+    font-family: "Trebuchet MS",Arial,Verdana;
 	text-align: left;
 }
 
