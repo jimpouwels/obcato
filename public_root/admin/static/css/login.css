@@ -11,6 +11,7 @@
     font-family: verdana;
     font-size: 0.8em;
     background-color: #fbf9ee;
+	box-shadow: 5px 5px 5px #888888;
 }
 
 .loginform {
