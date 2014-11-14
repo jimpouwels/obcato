@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "core/data/entity.php";
@@ -12,12 +10,12 @@
         const INTERNAL = "INTERNAL";
         const EXTERNAL = "EXTERNAL";
     
-        private $myTitle;
-        private $myUrl;
-        private $myType;
-        private $myCode;
-        private $myTargetElementHolderId;
-        private $myParentElementHolderId;
+        private $_title;
+        private $_url;
+        private $_type;
+        private $_code;
+        private $_targetElementHolderId;
+        private $_parentElementHolderId;
         private $_target;
         private $_element_holder_dao;
 
@@ -26,67 +24,67 @@
         }
 
         public function getTitle() {
-            return $this->myTitle;
+            return $this->_title;
         }
         
         public function setTitle($title) {
-            $this->myTitle = $title;
+            $this->_title = $title;
         }
         
         public function getTargetAddress() {
-            return $this->myUrl;
+            return $this->_url;
         }
         
         public function setTargetAddress($url) {
-            $this->myUrl = $url;
+            $this->_url = $url;
         }
         
         public function getType() {
-            return $this->myType;
+            return $this->_type;
         }
         
         public function setType($type) {
-            $this->myType = $type;
+            $this->_type = $type;
         }
         
         public function getTargetElementHolder() {
             $element_holder = NULL;
-            if (!is_null($this->myTargetElementHolderId) && $this->myTargetElementHolderId != '') {
-                $element_holder = $this->getElementHolder($this->myTargetElementHolderId);
+            if (!is_null($this->_targetElementHolderId) && $this->_targetElementHolderId != '') {
+                $element_holder = $this->getElementHolder($this->_targetElementHolderId);
             }
             return $element_holder;
         }
         
         public function getParentElementHolder() {
             $element_holder = NULL;
-            if (!is_null($this->myParentElementHolderId) && $this->myParentElementHolderId != '') {
-                $element_holder = $this->getElementHolder($this->myParentElementHolderId);
+            if (!is_null($this->_parentElementHolderId) && $this->_parentElementHolderId != '') {
+                $element_holder = $this->getElementHolder($this->_parentElementHolderId);
             }
             return $element_holder;
         }
         
         public function getTargetElementHolderId() {
-            return $this->myTargetElementHolderId;
+            return $this->_targetElementHolderId;
         }
         
         public function setTargetElementHolderId($target_element_holder_id) {
-            $this->myTargetElementHolderId = $target_element_holder_id;
+            $this->_targetElementHolderId = $target_element_holder_id;
         }
         
         public function getParentElementHolderId() {
-            return $this->myParentElementHolderId;
+            return $this->_parentElementHolderId;
         }
         
         public function setParentElementHolderId($parent_element_holder_id) {
-            $this->myParentElementHolderId = $parent_element_holder_id;
+            $this->_parentElementHolderId = $parent_element_holder_id;
         }
         
         public function getCode() {
-            return $this->myCode;
+            return $this->_code;
         }
         
         public function setCode($code) {
-            $this->myCode = $code;
+            $this->_code = $code;
         }
 
         public function getTarget() {
