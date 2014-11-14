@@ -76,6 +76,8 @@
                         $link->setTargetAddress($_POST['link_' . $link->getId() . '_url']);
                     if (isset($_POST['link_' . $link->getId() . '_code']))
                         $link->setCode($_POST['link_' . $link->getId() . '_code']);
+                    if (isset($_POST['link_' . $link->getId() . '_target']))
+                        $link->setTarget($_POST['link_' . $link->getId() . '_target']);
                     if (isset($_POST['link_element_holder_ref_' . $link->getId()]))
                         $link->setTargetElementHolderId($_POST['link_element_holder_ref_' . $link->getId()]);
                     if (isset($_POST['delete_link_target']) && ($_POST['delete_link_target'] == $link->getId()))

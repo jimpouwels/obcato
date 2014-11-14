@@ -19,8 +19,8 @@
     
         public function render() {
             $links_html = array();
-            
-            if (count($this->_links) > 0) {
+
+                if (count($this->_links) > 0) {
                 foreach ($this->_links as $link) {
                     $link_html = array();
                     $link_html['id'] = $link->getId();
@@ -39,6 +39,8 @@
                     $link_html['code_field'] = $code_field->render();
                     $delete_field = new SingleCheckbox("link_" . $link->getId() . "_delete", "", false, false, "");
                     $link_html['delete_field'] = $delete_field->render();
+                    $target_field = new Pulldown('link_' . $link->getId() . '_target', 'Openen in', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
+                    $link_html['target_screen_field'] = $target_field->render();
                     $element_holder_picker = new ObjectPicker("", $link->getTargetElementHolderId(), "link_element_holder_ref_" . $link->getId(), "Selecteer linkdoel", "update_element_holder");
                     $link_html['element_holder_picker'] = $element_holder_picker->render();
                     
@@ -61,6 +63,14 @@
                 $link_target_field = $target_text_field->render();
             }
             return $link_target_field;
+        }
+
+        private function getTargetOptions() {
+            $options = array();
+            $options[] = array('name' => 'Zelfde venster', 'value' => '_self');
+            $options[] = array('name' => 'Nieuw tab', 'value' => '_blank');
+            $options[] = array('name' => 'Popup', 'value' => '[popup]');
+            return $options;
         }
     }
 

@@ -26,10 +26,6 @@
         }
     
         public function render() {
-            //if (isset($_POST[$this->_name])) {
-            //    $field_value = StringUtility::escapeXml($_POST[$this->_name]);
-            //}
-            
             $css_classes = array();
             array_push($css_classes, $this->_classname);
             $error_class = $this->errorClass($this->_name);

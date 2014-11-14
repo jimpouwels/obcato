@@ -58,7 +58,7 @@
         }
 
         private function replaceLinkCodeTags($value, $link, $url) {
-            $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $url), $value);
+            $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $link->getTarget(), $url), $value);
             $value = str_replace("[/LINK]", "</a>", $value);
             return $value;
         }
@@ -86,8 +86,12 @@
             return "[LINK C=\"" . $link->getCode() . "\"]";
         }
 
-        private function createHyperlinkOpeningTag($title, $url) {
-            return "<a title=\"" . $title . "\" href=\"" . $url . "\">";
+        private function createHyperlinkOpeningTag($title, $target, $url) {
+            if ($target == '[popup]')
+                $target_html = "onclick=\"window.open('$url','$title', 'width=800,height=600, scrollbars=no,toolbar=no,location=no'); return false\"";
+            else
+                $target_html = "target=\"$target\"";
+            return '<a title="' . $title . '"' . $target_html . 'href="' . $url . '">';
         }
     }
 

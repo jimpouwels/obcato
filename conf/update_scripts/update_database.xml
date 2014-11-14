@@ -35,6 +35,7 @@
             <query>ALTER TABLE element_types DROP destroy_script</query>
 			<query>ALTER TABLE element_types MODIFY COLUMN scope_id INTEGER UNSIGNED NOT NULL</query>
 			<query>ALTER TABLE element_types ADD CONSTRAINT element_types_scopes FOREIGN KEY element_types_scopes (scope_id) REFERENCES scopes (id) ON DELETE CASCADE ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE links ADD COLUMN target VARCHAR(45) DEFAULT NULL</query>
         </queries>
     </version>
 </versions>

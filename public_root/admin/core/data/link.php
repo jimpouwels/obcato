@@ -18,6 +18,7 @@
         private $myCode;
         private $myTargetElementHolderId;
         private $myParentElementHolderId;
+        private $_target;
         private $_element_holder_dao;
 
         public function __construct() {
@@ -87,6 +88,14 @@
         public function setCode($code) {
             $this->myCode = $code;
         }
+
+        public function getTarget() {
+            return $this->_target;
+        }
+
+        public function setTarget($target) {
+            $this->_target = $target;
+        }
         
         private function getElementHolder($element_holder_id) {
             return $this->_element_holder_dao->getElementHolder($element_holder_id);
@@ -99,6 +108,7 @@
             $link->setTargetAddress($record['target_address']);
             $link->setType($record['type']);
             $link->setCode($record['code']);
+            $link->setTarget($record['target']);
             $link->setParentElementHolderId($record['parent_element_holder']);
             $link->setTargetElementHolderId($record['target_element_holder']);
             

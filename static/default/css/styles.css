@@ -510,6 +510,10 @@ h1 {
 	margin: 0px;
 }
 
+.link_target_selector {
+    width: 150px;
+}
+
 /*
 =========== GLOBAL LISTING STYLES
 */

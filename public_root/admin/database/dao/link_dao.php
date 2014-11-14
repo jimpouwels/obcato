@@ -11,9 +11,6 @@
         // singleton
         private static $instance;
         
-        // Holds the list of columns that are to be collected
-        private static $myAllColumns = "id, title, target_address, type, code, parent_element_holder, target_element_holder";
-        
         /*
             Private constructor.
         */
@@ -37,7 +34,6 @@
             @param $element_holder_id The element holder to add the link to
         */
         public function createLink($element_holder_id) {
-            $mysql_database = MysqlConnector::getInstance(); 
             $new_link = new Link();
             $new_link->setTitle('Nieuwe link');
             $new_link->setCode($new_link->getId());
@@ -58,9 +54,9 @@
         public function persistLink($new_link) {
             $mysql_database = MysqlConnector::getInstance(); 
             
-            $query = "INSERT INTO links (title, target_address, type, code, target_element_holder, parent_element_holder) 
+            $query = "INSERT INTO links (title, target_address, type, code, target, target_element_holder, parent_element_holder)
                       VALUES ('" . $new_link->getTitle() . "', NULL, '" . $new_link->getType() . 
-                      "', '" . $new_link->getCode() . "', NULL, " . $new_link->getParentElementHolderId() . ")";
+                      "', '" . $new_link->getCode() . "', '_self', NULL, " . $new_link->getParentElementHolderId() . ")";
 
             $mysql_database->executeQuery($query);
             
@@ -75,7 +71,7 @@
         public function getLinksForElementHolder($element_holder_id) {
             $mysql_database = MysqlConnector::getInstance(); 
             
-            $query = "SELECT " . self::$myAllColumns . " FROM links WHERE parent_element_holder = " . $element_holder_id;
+            $query = "SELECT * FROM links WHERE parent_element_holder = " . $element_holder_id;
             $result = $mysql_database->executeQuery($query);
             $links = array();
             while ($row = $result->fetch_assoc()) {
@@ -114,7 +110,7 @@
             }
             
             $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = '" . $link->getTargetAddress() . "',
-                      code = '" . $link->getCode() . "', type = '" . $link->getType() . "'";
+                      code = '" . $link->getCode() . "', target = '" . $link->getTarget() . "', type = '" . $link->getType() . "'";
             
             if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId())) {
                 $query = $query . ", target_element_holder = " . $link->getTargetElementHolderId();
@@ -132,7 +128,7 @@
         public function getBrokenLinks() {
             $mysql_database = MysqlConnector::getInstance(); 
             
-            $query = "SELECT " . self::$myAllColumns . " FROM links WHERE target_address IS NULL AND target_element_holder IS NULL";
+            $query = "SELECT * FROM links WHERE target_address IS NULL AND target_element_holder IS NULL";
             $result = $mysql_database->executeQuery($query);
             $links = array();
             while ($row = $result->fetch_assoc()) {
