@@ -24,9 +24,24 @@
 	width: 300px;
 }
 
+.template_editor_wrapper {
+    float: left;
+}
+
 .template_editor_fieldset {
 	float: left;
 	margin-left: 50px;
+}
+
+.template_content_fieldset {
+    margin-left: 50px;
+    font-size: 1.2em;
+    clear: both;
+}
+
+.template_content_fieldset .markup {
+    margin: 10px;
+    color: gray;
 }
 
 .admin_fieldset .back a {
