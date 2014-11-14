@@ -4,6 +4,7 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "frontend/block_visual.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
 
     class PageVisual extends FrontendVisual {
@@ -74,7 +75,7 @@
 
         private function renderBlocks() {
             $blocks = array();
-            $blocks["no_position"] = array();
+            $blocks['no_position'] = array();
             foreach ($this->_page->getBlocks() as $block) {
                 if (!$block->isPublished()) continue;
                 $position = $block->getPosition();
@@ -91,11 +92,8 @@
         }
 
         private function renderBlock($block) {
-            $block_content = array();
-            $block_content["id"] = $block->getId();
-            $block_content["title"] = $block->getTitle();
-            $block_content["elements"] = $this->renderElementHolderContent($block);
-            return $block_content;
+            $block_visual = new BlockVisual($block);
+            return $block_visual->render();
         }
 
         private function renderElementHolderContent($element_holder) {
