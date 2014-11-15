@@ -34,14 +34,20 @@
             $user = $this->_authorization_dao->getUser($_SESSION['username']);
             $statement = $this->_mysql_connector->prepareStatement('INSERT INTO downloads
                     (title, file_name, published, created_at, created_by) VALUES (?, ?, ?, now(), ?)');
-            $statement->bind_param('ssii', $download->getTitle(), $download->getFileName(), $published = 0, $user->getId());
+            $title = $download->getTitle();
+            $filename = $download->getFileName();
+            $user_id = $user->getId();
+            $statement->bind_param('ssii', $title, $filename, $published = 0, $user_id);
             $this->_mysql_connector->executeStatement($statement);
             $download->setId($this->_mysql_connector->getInsertId());
         }
 
         public function updateDownload($download) {
             $statement = $this->_mysql_connector->prepareStatement('UPDATE downloads SET title = ?, published = ?, file_name = ?');
-            $statement->bind_param('sis', $download->getTitle(), $download->isPublished(), $download->getFileName());
+            $title = $download->getTitle();
+            $filename = $download->getFileName();
+            $published = $download->isPublished();
+            $statement->bind_param('sis', $title, $published, $$filename);
             $this->_mysql_connector->executeStatement($statement);
         }
 

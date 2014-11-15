@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     include_once CMS_ROOT . "database/mysql_connector.php";
@@ -50,10 +48,8 @@
                       order by created_at DESC";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc()) {
-                $article = Article::constructFromRecord($row);
-                array_push($articles, $article);
-            }
+            while ($row = $result->fetch_assoc())
+                $articles[] = Article::constructFromRecord($row);
             return $articles;
         }
 
@@ -71,10 +67,8 @@
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc()) {
-                $article = Article::constructFromRecord($row);
-                array_push($articles, $article);
-            }
+            while ($row = $result->fetch_assoc())
+                $articles[] = Article::constructFromRecord($row);
             return $articles;
         }
 
@@ -119,12 +113,8 @@
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc()) {
-                $article = Article::constructFromRecord($row);
-                
-                array_push($articles, $article);
-            }
-            
+            while ($row = $result->fetch_assoc())
+                $articles[] = Article::constructFromRecord($row);
             return $articles;
         }
 
@@ -174,45 +164,25 @@
 
         public function getAllTerms() {
             $query = "SELECT * FROM article_terms";
-            $result = $this->_mysql_connector->executeQuery($query);
             $terms = array();
-            
-            while ($row = $result->fetch_assoc()) {
-                $term = new ArticleTerm();
-                $term->setId($row['id']);
-                $term->setName($row['name']);
-                
-                array_push($terms, $term);
-            }
-            
+            $result = $this->_mysql_connector->executeQuery($query);
+            while ($row = $result->fetch_assoc())
+                $terms[] = ArticleTerm::constructFromRecord($row);
             return $terms;
         }
 
         public function getTerm($id) {
             $query = "SELECT * FROM article_terms WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            $term = null;
-            
-            while ($row = $result->fetch_assoc()) {
-                $term = new ArticleTerm();
-                $term->setId($row['id']);
-                $term->setName($row['name']);
-            }
-            return $term;
+            while ($row = $result->fetch_assoc())
+                return ArticleTerm::constructFromRecord($row);
         }
 
         public function getTermByName($name) {
             $query = "SELECT * FROM article_terms WHERE name = '" . $name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            $term = NULL;
-            
-            while ($row = $result->fetch_assoc()) {
-                $term = new ArticleTerm();
-                $term->setId($row['id']);
-                $term->setName($row['name']);
-            }
-            
-            return $term;
+            while ($row = $result->fetch_assoc())
+                return ArticleTerm::constructFromRecord($row);
         }
 
         public function createTerm() {
@@ -251,14 +221,8 @@
                       
             $result = $this->_mysql_connector->executeQuery($query);
             $terms = array();
-            
-            while ($row = $result->fetch_assoc()) {
-                $term = new ArticleTerm();
-                $term->setId($row['id']);
-                $term->setName($row['name']);
-                array_push($terms, $term);
-            }
-            
+            while ($row = $result->fetch_assoc())
+                $terms[] = ArticleTerm::constructFromRecord($row);
             return $terms;
         }
 
@@ -270,7 +234,6 @@
         public function deleteTermFromArticle($term_id, $article) {
             $query = "DELETE FROM articles_terms WHERE article_id = " . $article->getId() ."
                       AND term_id = " . $term_id;
-
             $this->_mysql_connector->executeQuery($query);
         }
 
@@ -278,9 +241,8 @@
             $query = "SELECT element_holder_id FROM article_target_pages";            
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc())
                 $pages[] = $this->_page_dao->getPage($row['element_holder_id']);
-            }
             return $pages;
         }
 
@@ -312,12 +274,8 @@
         public function getDefaultTargetPage() {
             $query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";            
             $result = $this->_mysql_connector->executeQuery($query);
-            $page = null;
-            while ($row = $result->fetch_assoc()) {
-                $page = $this->_page_dao->getPage($row["element_holder_id"]);
-                break;
-            }
-            return $page;
+            while ($row = $result->fetch_assoc())
+                return $this->_page_dao->getPage($row["element_holder_id"]);
         }
 
         public function setDefaultArticleTargetPage($target_page_id) {

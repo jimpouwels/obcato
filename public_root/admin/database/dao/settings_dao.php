@@ -16,9 +16,8 @@
         }
         
         public static function getInstance() {
-            if (!self::$instance) {
+            if (!self::$instance)
                 self::$instance = new SettingsDao();
-            }
             return self::$instance;
         }
         
@@ -37,11 +36,8 @@
         
         public function getSettings() {
             $result = $this->_mysql_database->executeQuery("SELECT * FROM settings");
-            $settings = null;
-            while ($row = $result->fetch_assoc()) {
-                $settings = Settings::constructFromRecord($row);
-            }
-            return $settings;
+            while ($row = $result->fetch_assoc())
+                return Settings::constructFromRecord($row);
         }
         
         public function setHomepage($homepage_id) {

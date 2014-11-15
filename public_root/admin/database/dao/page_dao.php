@@ -38,12 +38,8 @@
                                                                     element_holders e WHERE e.id = ? AND e.id = p.element_holder_id");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
-            $page = null;
-            while ($row = $result->fetch_assoc()) {
-                $page = Page::constructFromRecord($row);
-                break;
-            }
-            return $page;
+            while ($row = $result->fetch_assoc())
+                return Page::constructFromRecord($row);
         }
 
         public function getRootPages() {
@@ -51,10 +47,8 @@
                       AND e.id = p.element_holder_id";
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
-            while ($row = $result->fetch_assoc()) {
-                $page = Page::constructFromRecord($row);
-                array_push($pages, $page);
-            }
+            while ($row = $result->fetch_assoc())
+                $pages[] = Page::constructFromRecord($row);
             return $pages;
         }
 
@@ -66,11 +60,8 @@
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
             $pages = array();
-            while ($row = $result->fetch_assoc()) {
-                $page = Page::constructFromRecord($row);
-                $pages[] = $page;
-            }
-            
+            while ($row = $result->fetch_assoc())
+                $pages[] = Page::constructFromRecord($row);
             return $pages;
         }
 
@@ -100,11 +91,8 @@
                       AND title like '" . $term . "%'";
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
-            while ($row = $result->fetch_assoc()) {
-                $page = Page::constructFromRecord($row);
-                
-                $pages[] = $page;
-            }
+            while ($row = $result->fetch_assoc())
+                $pages[] = Page::constructFromRecord($row);
             return $pages;
         }
 

@@ -16,23 +16,19 @@
         }
 
         public static function getInstance() {
-            if (!self::$instance) {
+            if (!self::$instance)
                 self::$instance = new TemplateDao();
-            }
             return self::$instance;
         }
         
         public function getTemplate($id) {
-            $template = null;
             if (!is_null($id)) {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM templates WHERE id = ?");
                 $statement->bind_param("i", $id);
                 $result = $this->_mysql_connector->executeStatement($statement);
                 while ($row = $result->fetch_assoc())
-                    $template = Template::constructFromRecord($row);
+                    return Template::constructFromRecord($row);
             }
-            
-            return $template;
         }
 
         public function getTemplatesByScope($scope) {
@@ -43,10 +39,8 @@
                 $statement->bind_param("i", $scope_id);
                 $result = $this->_mysql_connector->executeStatement($statement);
                 $template = null;
-                while ($row = $result->fetch_assoc()) {
-                    $template = Template::constructFromRecord($row);
-                    array_push($templates, $template);
-                }
+                while ($row = $result->fetch_assoc())
+                    $templates[] = Template::constructFromRecord($row);
             }
             
             return $templates;
@@ -55,15 +49,9 @@
         public function getTemplates() {
             $query = "SELECT * FROM templates";
             $result = $this->_mysql_connector->executeQuery($query);
-            
-            $template = NULL;
             $templates = array();
-            while ($row = $result->fetch_assoc()) {
-                $template = Template::constructFromRecord($row);
-                
-                array_push($templates, $template);
-            }
-            
+            while ($row = $result->fetch_assoc())
+                $templates[] = Template::constructFromRecord($row);
             return $templates;
         }
 
@@ -78,12 +66,8 @@
         public function getTemplateByFileName($file_name) {
             $query = "SELECT * FROM templates WHERE filename = '" . $file_name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            $template = NULL;
-            while ($row = $result->fetch_assoc()) {
-                $template = Template::constructFromRecord($row);
-            }
-            
-            return $template;
+            while ($row = $result->fetch_assoc())
+                return Template::constructFromRecord($row);
         }
 
         public function persistTemplate($new_template) {

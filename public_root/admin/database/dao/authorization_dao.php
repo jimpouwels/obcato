@@ -28,33 +28,23 @@
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("s", $username);
             $result = $this->_mysql_connector->executeStatement($statement);
-            $user = null;
-            while ($row = $result->fetch_assoc()) {
-                $user = User::constructFromRecord($row);
-                break;
-            }
-            return $user;
+            while ($row = $result->fetch_assoc())
+                return User::constructFromRecord($row);
         }
 
         public function getUserById($id) {
             $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM auth_users WHERE id = ?");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
-            $user = NULL;
-            while ($row = $result->fetch_assoc()) {
-                $user = User::constructFromRecord($row);
-                break;
-            }
-            return $user;
+            while ($row = $result->fetch_assoc())
+                return User::constructFromRecord($row);
         }
 
         public function getAllUsers() {
             $result = $this->_mysql_connector->executeQuery("SELECT * FROM auth_users ORDER BY first_name, last_name");
             $users = array();
-            while ($row = $result->fetch_assoc()) {
-                $user = User::constructFromRecord($row);
-                array_push($users, $user);
-            }
+            while ($row = $result->fetch_assoc())
+                $users[] = User::constructFromRecord($row);
             return $users;
         }
 

@@ -37,14 +37,8 @@
         public function getModule($id) {
             $query = "SELECT * FROM modules WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            
-            $module = NULL;
-            while ($row = $result->fetch_assoc()) {
-                $module = Module::constructFromRecord($row);
-                
-                break;
-            }
-            return $module;
+            while ($row = $result->fetch_assoc())
+                return Module::constructFromRecord($row);
         }
 
         public function removeModule($identifier) {
@@ -85,24 +79,16 @@
         public function getModuleByIdentifier($identifier) {
             $query = "SELECT * FROM modules WHERE identifier = '" . $identifier . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            
-            $module = NULL;
-            while ($row = $result->fetch_assoc()) {
-                $module = Module::constructFromRecord($row);
-                break;
-            }
-            return $module;
+            while ($row = $result->fetch_assoc())
+                return Module::constructFromRecord($row);
         }
 
         public function getModuleGroups() {
             $query = "SELECT * FROM module_groups ORDER BY follow_up";
             $result = $this->_mysql_connector->executeQuery($query);
             $groups = array();
-            
-            while ($row = $result->fetch_assoc()) {
-                $module_group = ModuleGroup::constructFromRecord($row);
-                array_push($groups, $module_group);
-            }
+            while ($row = $result->fetch_assoc())
+                $groups[] = ModuleGroup::constructFromRecord($row);
             return $groups;
         }
 
@@ -110,9 +96,8 @@
             $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE title = ?');
             $statement->bind_param('s', $title);
             $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc())
                 return ModuleGroup::constructFromRecord($row);
-            }
         }
         
     }

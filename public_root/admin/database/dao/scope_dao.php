@@ -16,9 +16,8 @@
         }
 
         public static function getInstance() {
-            if (!self::$instance) {
+            if (!self::$instance)
                 self::$instance = new ScopeDao();
-            }
             return self::$instance;
         }
 
@@ -27,40 +26,29 @@
             $result = $this->_mysql_connector->executeQuery($query);
             $scope = null;
             $scopes = array();
-            while ($row = $result->fetch_assoc()) {
-                $scope = Scope::constructFromRecord($row);
-                array_push($scopes, $scope);
-            }
+            while ($row = $result->fetch_assoc())
+                $scopes[] = Scope::constructFromRecord($row);
             return $scopes;
         }
 
         public function getScope($id) {
-            $scope = null;
             if (!is_null($id) && $id != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE id = ?");
                 $statement->bind_param("i", $id);
                 $result = $this->_mysql_connector->executeStatement($statement);
-                while ($row = $result->fetch_assoc()) {
-                    $scope = Scope::constructFromRecord($row);
-                    break;
-                }
+                while ($row = $result->fetch_assoc())
+                    return Scope::constructFromRecord($row);
             }
-            return $scope;
         }
 
         public function getScopeByName($name) {
-            $scope = null;
             if (!is_null($name) && $name != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE name = ?");
                 $statement->bind_param("s", $name);
                 $result = $this->_mysql_connector->executeStatement($statement);
-                while ($row = $result->fetch_assoc()) {
-                    $scope = Scope::constructFromRecord($row);
-                    break;
-                }
+                while ($row = $result->fetch_assoc())
+                    return Scope::constructFromRecord($row);
             }
-            
-            return $scope;
         }
 
         public function persistScope($scope) {

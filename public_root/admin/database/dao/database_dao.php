@@ -7,6 +7,7 @@
     class DatabaseDao {
         
         private static $instance;
+        private $_mysql_connector;
 
         public static function getInstance() {
             if (!self::$instance) {
@@ -14,12 +15,14 @@
             }
             return self::$instance;
         }
+
+        private function __construct() {
+            $this->_mysql_connector = MysqlConnector::getInstance();
+        }
         
         public function getTables() {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
             $query = "SHOW TABLES";
-            $result = $mysql_database->executeQuery($query);
+            $result = $this->_mysql_connector->executeQuery($query);
             
             $mysql_database = MysqlConnector::getInstance();
             $database_name = $mysql_database->getDatabaseName();
@@ -32,10 +35,8 @@
         }
         
         public function getColumns($table_name) {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
             $query = 'SHOW columns FROM ' . $table_name;
-            $result = $mysql_database->executeQuery($query);
+            $result = $this->_mysql_connector->executeQuery($query);
             
             $columns = array();
             while ($row = $result->fetch_assoc()) {

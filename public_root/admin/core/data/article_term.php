@@ -1,10 +1,8 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
-    include_once CMS_ROOT . "core/data/entity.php";
-    include_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . "core/data/entity.php";
+require_once CMS_ROOT . "database/dao/article_dao.php";
 
     class ArticleTerm extends Entity {
     
@@ -18,17 +16,11 @@
             $this->_name = $name;
         }
         
-        public function persist() {
-        }
-        
-        public function update() {
-        }
-        
-        public function delete() {
-        }
-        
         public static function constructFromRecord($record) {
-            return null;
+            $term = new ArticleTerm();
+            $term->setId($record['id']);
+            $term->setName($record['name']);
+            return $term;
         }
 
     }

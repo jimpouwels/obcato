@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
     include_once CMS_ROOT . "database/mysql_connector.php";
@@ -16,9 +14,8 @@
         }
 
         public static function getInstance() {
-            if (!self::$instance) {
+            if (!self::$instance)
                 self::$instance = new LinkDao();
-            }
             return self::$instance;
         }
 
@@ -36,7 +33,6 @@
             $query = "INSERT INTO links (title, target_address, type, code, target, target_element_holder, parent_element_holder)
                       VALUES ('" . $new_link->getTitle() . "', NULL, '" . $new_link->getType() . 
                       "', '" . $new_link->getCode() . "', '_self', NULL, " . $new_link->getParentElementHolderId() . ")";
-
             $this->_mysql_connector->executeQuery($query);
             $new_link->setId($this->_mysql_connector->getInsertId());
         }
@@ -45,10 +41,8 @@
             $query = "SELECT * FROM links WHERE parent_element_holder = " . $element_holder_id;
             $result = $this->_mysql_connector->executeQuery($query);
             $links = array();
-            while ($row = $result->fetch_assoc()) {
-                $link = Link::constructFromRecord($row);
-                $links[] = $link;
-            }
+            while ($row = $result->fetch_assoc())
+                $links[] = Link::constructFromRecord($row);
             return $links;
         }
 
@@ -80,10 +74,8 @@
             $query = "SELECT * FROM links WHERE target_address IS NULL AND target_element_holder IS NULL";
             $result = $this->_mysql_connector->executeQuery($query);
             $links = array();
-            while ($row = $result->fetch_assoc()) {
-                $link = Link::constructFromRecord($row);
-                $links[] = $link;
-            }
+            while ($row = $result->fetch_assoc())
+                $links[] = Link::constructFromRecord($row);
             return $links;            
         }
         
