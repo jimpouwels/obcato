@@ -44,17 +44,11 @@
         private function authenticate($username, $password) {
             $mysql_database = MysqlConnector::getInstance();
             $password = StringUtility::hashStringValue($password);
-
             $auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
             $statement = $mysql_database->prepareStatement($auth_query);
             $statement->bind_param("ss", $username, $password);
             $result = $mysql_database->executeStatement($statement);
-            
-            $authenticated = false;
-            if ($result->num_rows > 0) {
-                $authenticated = true;
-            }
-            return $authenticated;
+            return $result->num_rows > 0;
         }
         
     }
