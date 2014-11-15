@@ -14,7 +14,7 @@
         }
 
         public function render() {
-            $this->_template_engine->assign('username', Authenticator::getCurrentUser()->getUsername());
+            $this->_template_engine->assign('username', Authenticator::getCurrentUser()->getFullName());
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
     }
