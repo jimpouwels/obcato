@@ -1,14 +1,12 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/information_message.php";
-    require_once CMS_ROOT . "view/views/object_picker.php";
+    require_once CMS_ROOT . 'view/views/information_message.php';
+    require_once CMS_ROOT . 'view/views/object_picker.php';
     
     class LinkEditor extends Visual {
     
-        private static $TEMPLATE = "system/link_editor.tpl";
+        private static $TEMPLATE = 'system/link_editor.tpl';
         private $_links;
         private $_template_engine;
     
@@ -18,51 +16,76 @@
         }
     
         public function render() {
-            $links_html = array();
-
-                if (count($this->_links) > 0) {
-                foreach ($this->_links as $link) {
-                    $link_html = array();
-                    $link_html['id'] = $link->getId();
-                    $link_html['code'] = $link->getCode();
-                    $title_field = new TextField("link_" . $link->getId() . "_title", "Titel", $link->getTitle(), false, false, null);
-                    $link_html['title_field'] = $title_field->render();
-                    $link_html['target_field'] = $this->getLinkTargetField($link);
-                    
-                    $link_target = $link->getTargetElementHolder();
-                    $target_title = "";
-                    if (!is_null($link_target)) {
-                        $target_title = $link_target->getTitle();
-                    }
-                    $link_html['target_title'] = $target_title;
-                    $code_field = new TextField("link_" . $link->getId() . "_code", "Code", $link->getCode(), false, false, null);
-                    $link_html['code_field'] = $code_field->render();
-                    $delete_field = new SingleCheckbox("link_" . $link->getId() . "_delete", "", false, false, "");
-                    $link_html['delete_field'] = $delete_field->render();
-                    $target_field = new Pulldown('link_' . $link->getId() . '_target', 'Openen in', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
-                    $link_html['target_screen_field'] = $target_field->render();
-                    $element_holder_picker = new ObjectPicker("", $link->getTargetElementHolderId(), "link_element_holder_ref_" . $link->getId(), "Selecteer linkdoel", "update_element_holder");
-                    $link_html['element_holder_picker'] = $element_holder_picker->render();
-                    
-                    $links_html[] = $link_html;
-                }
-                $this->_template_engine->assign("links", $links_html);
-            } else {
-                $message = new InformationMessage("Geen links gevonden. Klik op &quot;Invoegen&quot; &gt; &quot;Link&quot; om een nieuwe link toe te voegen.");
-                $this->_template_engine->assign("message", $message->render());
-            }
-            
+            if (count($this->_links) > 0)
+                $this->_template_engine->assign('links', $this->getLinksData());
+            else
+                $this->_template_engine->assign('message', $this->renderNoLinksFoundMessage());
             return $this->_template_engine->fetch(self::$TEMPLATE);
+        }
+
+        private function getLinksData() {
+            $links_data = array();
+            foreach ($this->_links as $link)
+                $link_data = array();
+                $link_data['id'] = $link->getId();
+                $link_data['code'] = $link->getCode();
+                $link_data['title_field'] = $this->renderTitleField($link);
+                $link_data['target_field'] = $this->getLinkTargetField($link);
+                $link_data['target_title'] = $this->getLinkTitle($link);
+                $link_data['code_field'] = $this->renderCodeField($link);
+                $link_data['delete_field'] = $this->renderDeleteField($link);
+                $link_data['target_screen_field'] = $this->renderBrowserTargetField($link);
+                $link_data['element_holder_picker'] = $this->renderLinkTargetPicker($link);
+                $links_data[] = $link_data;
+            return $links_data;
         }
         
         private function getLinkTargetField($link) {
             $link_target_field = null;
             $link_target = $link->getTargetElementHolder();
             if (is_null($link_target)) {
-                $target_text_field = new TextField("link_" . $link->getId() . "_url", "Titel", $link->getTargetAddress(), false, false, null);
+                $target_text_field = new TextField('link_' . $link->getId() . '_url', 'Titel', $link->getTargetAddress(), false, false, null);
                 $link_target_field = $target_text_field->render();
             }
             return $link_target_field;
+        }
+
+        private function renderTitleField($link) {
+            $title_field = new TextField('link_' . $link->getId() . '_title', 'Titel', $link->getTitle(), false, false, null);
+            return $title_field->render();
+        }
+
+        private function getLinkTitle($link) {
+            $link_target = $link->getTargetElementHolder();
+            $target_title = '';
+            if (!is_null($link_target))
+                $target_title = $link_target->getTitle();
+            return $target_title;
+        }
+
+        private function renderCodeField($link) {
+            $code_field = new TextField('link_' . $link->getId() . '_code', 'Code', $link->getCode(), false, false, null);
+            return $code_field->render();
+        }
+
+        private function renderDeleteField($link) {
+            $delete_field = new SingleCheckbox('link_' . $link->getId() . '_delete', '', false, false, '');
+            return $delete_field->render();
+        }
+
+        private function renderBrowserTargetField($link) {
+            $target_field = new Pulldown('link_' . $link->getId() . '_target', 'Openen in', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
+            return $target_field->render();
+        }
+
+        private function renderLinkTargetPicker($link) {
+            $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), 'Selecteer linkdoel', 'update_element_holder');
+            return $element_holder_picker->render();
+        }
+
+        private function renderNoLinksFoundMessage() {
+            $message = new InformationMessage('Geen links gevonden. Klik op &quot;Invoegen&quot; &gt; &quot;Link&quot; om een nieuwe link toe te voegen.');
+            return $message->render();
         }
 
         private function getTargetOptions() {
