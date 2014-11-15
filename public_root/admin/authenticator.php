@@ -8,19 +8,17 @@
     class Authenticator {
     
         public static function isAuthenticated() {
-            $authenticated = false;
             session_start();
             $authorization_dao = AuthorizationDao::getInstance();
             if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)) {
                 if (isset($_SESSION['username'])) {
                     $user = $authorization_dao->getUser($_SESSION['username']);
                     if ($user->getUuid() == $_SESSION['uuid']) {
-                        $authenticated = true;
                         $_SESSION['last_activity'] = time();
+                        return true;
                     }
                 }
             }
-            return $authenticated;
         }
         
         public static function logIn($username, $password) {
