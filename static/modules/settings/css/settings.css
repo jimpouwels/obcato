@@ -1,40 +1,40 @@
 .admin_form li {
-	list-style: none outside none;
+    list-style: none outside none;
 }
 
 .admin_form {
-	padding: 0px;
-	margin: 10px;
+    padding: 0px;
+    margin: 10px;
 }
 
 .admin_label {
-	min-width: 175px;
-	float: left;
-	padding-top: 12px;
+    min-width: 175px;
+    float: left;
+    padding-top: 12px;
 }
 
 .admin_field {
-	margin-top: 8px;
-	width: 450px;
+    margin-top: 8px;
+    width: 450px;
 }
 
 .settings_form {
-	clear: both;
+    clear: both;
 }
 
 .information-block {
-	margin-left: 2px;
+    margin-left: 2px;
 }
 
 .button {
-	margin-top: 5px;
+    margin-top: 5px;
 }
 
 .picker_selection {
-	margin-left: 110px;
+    margin-left: 110px;
 }
 
 .link {
-	text-decoration: none;
-	color: gray
+    text-decoration: none;
+    color: gray
 }

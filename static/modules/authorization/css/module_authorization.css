@@ -1,58 +1,58 @@
 .user_tree_fieldset {
-	width: 315px;
-	height: 100%;
-	float: left;
+    width: 315px;
+    height: 100%;
+    float: left;
 }
 
 .user_tree {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .user_tree ul {
-	padding-left: 25px;
-	margin: 0px;
+    padding-left: 25px;
+    margin: 0px;
 }
 
 .user_tree  ul  li{
-	list-style-type: none;
-	margin-top: 5px;
+    list-style-type: none;
+    margin-top: 5px;
 }
 
 .user_tree a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .user_tree a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .user_list_item {
-	list-style-image: url(/admin/static.php?file=/modules/authorization/img/user_icon.png);
-	font-style: normal;
+    list-style-image: url(/admin/static.php?file=/modules/authorization/img/user_icon.png);
+    font-style: normal;
 }
 
 .user_meta {
-	margin-left: 350px;;
-	height: 30%;
+    margin-left: 350px;;
+    height: 30%;
 }
 
 .user_prefix_field {
-	width: 60px;
+    width: 60px;
 }
 
 .user_firstname_field {
-	width: 150px;
+    width: 150px;
 }
 
 .user_lastname_field {
-	width: 150px;
+    width: 150px;
 }
 
 .user_email_field {
-	width: 350px;
+    width: 350px;
 }
 
 .user_password_field {
-	width: 250px;
+    width: 250px;
 }
