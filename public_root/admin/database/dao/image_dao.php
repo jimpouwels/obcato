@@ -1,11 +1,10 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
-    include_once CMS_ROOT . "database/mysql_connector.php";
-    include_once CMS_ROOT . "core/data/image_label.php";
-    include_once CMS_ROOT . "core/data/image.php";
+
+    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "core/data/image_label.php";
+    require_once CMS_ROOT . "core/data/image.php";
     
     class ImageDao {
 
@@ -94,10 +93,7 @@
             $new_image = new Image();
             $new_image->setPublished(false);
             $new_image->setTitle('Nieuwe afbeelding');
-            
-            $authorization_dao = AuthorizationDao::getInstance();
-            $user = $authorization_dao->getUser($_SESSION['username']);
-            $new_image->setCreatedById($user->getId());
+            $new_image->setCreatedById(Authenticator::getCurrentUser()->getId());
             $this->persistImage($new_image);
             return $new_image;
         }
