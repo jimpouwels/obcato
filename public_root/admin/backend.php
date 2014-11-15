@@ -1,22 +1,20 @@
 <?php
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "authenticator.php";
     require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
     require_once CMS_ROOT . "view/views/cms.php";
-    require_once CMS_ROOT . "core/data/session.php";
     require_once CMS_ROOT . "view/views/popup.php";
     
     class Backend {
     
         private $_identifier;
-        private $_session;
         private $_request_handlers;
         private $_current_module;
         private $_module_visual;
     
         public function __construct($identifier) {
             $this->_identifier = $identifier;
-            $this->_session = new Session();
             $this->initializeRequestHandlers();
         }
         
@@ -28,7 +26,7 @@
         }
         
         public function isAuthenticated() {
-            if (!$this->_session->isAuthenticated())
+            if (!Authenticator::isAuthenticated())
                 $this->redirectToLoginPage();
         }
         

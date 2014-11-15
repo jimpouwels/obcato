@@ -5,16 +5,15 @@
     define("CMS_ROOT", '');
     
     // INCLUDE SYSTEM CONSTANTS
+    require_once CMS_ROOT . "authenticator.php";
     require_once CMS_ROOT . "database_config.php";
     require_once CMS_ROOT . "constants.php";
-    require_once CMS_ROOT . "core/data/session.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "backend.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
     
     // AUTHENTICATE
-    $backend = new Backend("site_administrator");
-    $backend->isAuthenticated();
+    Authenticator::isAuthenticated();
     
     // only Developer account may access this section
     if ($_SESSION['username'] != "Developer") {

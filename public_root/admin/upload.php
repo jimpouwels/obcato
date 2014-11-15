@@ -3,6 +3,7 @@
     define("_ACCESS", "GRANTED");
     define("CMS_ROOT", '');
 
+    require_once CMS_ROOT . "authenticator.php";
     require_once CMS_ROOT . "database_config.php";
     require_once CMS_ROOT . "constants.php";
     require_once CMS_ROOT . "backend.php";
@@ -16,12 +17,10 @@
         $image = $image_dao->getImage($_GET['image']);
         
         $render_image = false;
-        if ($image->isPublished()) {
+        if ($image->isPublished())
             $render_image = true;
-        } else {
-            include_once CMS_ROOT . "core/data/session.php";
-            $backend->isAuthenticated();
-        }
+        else
+            Authenticator::isAuthenticated();
         
         $file_name = NULL;
         if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {

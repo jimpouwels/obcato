@@ -5,9 +5,9 @@
     require_once CMS_ROOT . "utilities/string_utility.php";
     require_once CMS_ROOT . "database/dao/authorization_dao.php";
 
-    class Session {
+    class Authenticator {
     
-        public function isAuthenticated() {
+        public static function isAuthenticated() {
             $authenticated = false;
             session_start();
             $authorization_dao = AuthorizationDao::getInstance();
@@ -23,8 +23,7 @@
             return $authenticated;
         }
         
-        public function logIn($username, $password) {
-            $authenticated = false;
+        public static function logIn($username, $password) {
             if (self::authenticate($username, $password)) {
                 session_start();
                 $authorization_dao = AuthorizationDao::getInstance();
@@ -32,25 +31,20 @@
                 $_SESSION['username'] = $username;
                 $_SESSION['uuid'] = $user->getUuid();
                 $_SESSION['last_activity'] = time();
-                $authenticated = true;
             }
-            return $authenticated;
         }
 
-        public function logOut($username) {
+        public static function logOut() {
             session_start();
             session_destroy();
             header('Location: /admin/login.php');
             exit();
         }
-        
-        // Authenticates the given username with the given password
+
         private function authenticate($username, $password) {
             $mysql_database = MysqlConnector::getInstance();
-            // hash the password
             $password = StringUtility::hashStringValue($password);
-            
-            // execute the query
+
             $auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
             $statement = $mysql_database->prepareStatement($auth_query);
             $statement->bind_param("ss", $username, $password);
