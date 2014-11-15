@@ -4,6 +4,23 @@
 }
 
 /*
+============= DEFAULT TAG STYLES
+*/
+body a {
+    text-decoration: none;
+    color: gray;
+}
+
+body a:hover {
+    text-decoration: underline;
+}
+
+/* SYSTEM CLASSES */
+.center {
+    text-align: center;
+}
+
+/*
 =========== MAIN STYLES
 */
 html {
@@ -67,15 +84,19 @@ body {
 /*
 =========== MENU STYLES
 */
-
-#navigation-box {
-    float: left;
+#navigation_wrapper {
     width: 100%;
+    overflow: auto;
     background: -moz-linear-gradient(center top , #3c3a3d, #1a171b) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: -webkit-linear-gradient(top, #3c3a3d, #1a171b);
     background: -moz-linear-gradient(top, #3c3a3d, #1a171b);
     background: -ms-linear-gradient(top, #3c3a3d, #1a171b);
     background: -o-linear-gradient(top, #3c3a3d, #1a171b);
+}
+
+#navigation-menu {
+    float: left;
+    width: 70%;
 }
 
 #menu li {
@@ -174,6 +195,14 @@ body {
     text-decoration: none;
     color: #000000;
     font-size: 1.0em;
+}
+
+#current_user_indicator {
+    float: right;
+    color: #ffffff;
+    margin-top: 9px;
+    margin-right: 10px;
+    font-style: italic;
 }
 
 /*
@@ -722,22 +751,4 @@ h1 {
 
 .popup_search_fieldset .button {
     margin-left: 10px;
-}
-
-
-/*
-============= DEFAULT TAG STYLES
-*/
-body a {
-    text-decoration: none;
-    color: gray;
-}
-
-body a:hover {
-    text-decoration: underline;
-}
-
-/* SYSTEM CLASSES */
-.center {
-    text-align: center;
 }

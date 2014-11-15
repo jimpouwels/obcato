@@ -39,6 +39,11 @@
             exit();
         }
 
+        public static function getCurrentUser() {
+            $authorization_dao = AuthorizationDao::getInstance();
+            return $authorization_dao->getUser($_SESSION["username"]);
+        }
+
         private function authenticate($username, $password) {
             $mysql_database = MysqlConnector::getInstance();
             $password = StringUtility::hashStringValue($password);

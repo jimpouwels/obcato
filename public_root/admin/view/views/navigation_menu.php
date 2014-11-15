@@ -42,7 +42,7 @@
             return $sub_items;
         }
         
-        private function renderElementsMenuItem($module_group) {
+        private function renderElementsMenuItem() {
             $element_dao = ElementDao::getInstance();
             $element_types = $element_dao->getElementTypes();
             

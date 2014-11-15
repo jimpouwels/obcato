@@ -1,13 +1,14 @@
 <?php
     defined('_ACCESS') or die;
-    
-    include_once CMS_ROOT . "database/mysql_connector.php";
-    include_once CMS_ROOT . "database/dao/element_dao.php";
-    include_once CMS_ROOT . "database/dao/element_holder_dao.php";
-    include_once CMS_ROOT . "core/data/article.php";
-    include_once CMS_ROOT . "core/data/article_term.php";
-    include_once CMS_ROOT . "database/dao/authorization_dao.php";
-    include_once CMS_ROOT . "utilities/date_utility.php";
+
+    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "database/dao/element_holder_dao.php";
+    require_once CMS_ROOT . "core/data/article.php";
+    require_once CMS_ROOT . "core/data/article_term.php";
+    require_once CMS_ROOT . "database/dao/authorization_dao.php";
+    require_once CMS_ROOT . "utilities/date_utility.php";
     
     class ArticleDao {
 
@@ -145,10 +146,7 @@
             $new_article = new Article();
             $new_article->setPublished(false);
             $new_article->setTitle('Nieuw artikel');
-            
-            $authorization_dao = AuthorizationDao::getInstance();
-            $user = $authorization_dao->getUser($_SESSION["username"]);
-            $new_article->setCreatedById($user->getId());
+            $new_article->setCreatedById(Authenticator::getCurrentUser()->getId());
             $new_article->setType(ELEMENT_HOLDER_ARTICLE);
             
             $this->persistArticle($new_article);

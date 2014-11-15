@@ -1,8 +1,7 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "authenticator.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
@@ -128,10 +127,7 @@
             $new_block = new Block();
             $new_block->setPublished(false);
             $new_block->setTitle('Nieuw block');
-            
-            $authorization_dao = AuthorizationDao::getInstance();
-            $user = $authorization_dao->getUser($_SESSION['username']);
-            $new_block->setCreatedById($user->getId());
+            $new_block->setCreatedById(Authenticator::getCurrentUser()->getId());
             $new_block->setType(ELEMENT_HOLDER_BLOCK);
             
             $new_block->setScopeId(6);

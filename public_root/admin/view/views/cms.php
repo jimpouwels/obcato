@@ -5,6 +5,7 @@
     
     require_once CMS_ROOT . "database/dao/module_dao.php";
     require_once CMS_ROOT . "view/views/navigation_menu.php";
+    require_once CMS_ROOT . "view/views/current_user_indicator.php";
     require_once CMS_ROOT . "view/views/actions_menu.php";
     require_once CMS_ROOT . "view/views/notification_bar.php";
     
@@ -27,6 +28,7 @@
         public function render() {
             $navigation_menu = new NavigationMenu($this->_module_dao->getModuleGroups());
             $notification_bar = new NotificationBar();
+            $current_user_indicator = new CurrentUserIndicator();
             
             $template_engine = TemplateEngine::getInstance();
             if (!is_null($this->_module_visual)) {
@@ -38,6 +40,7 @@
             
             $template_engine->assign("website_title", $this->_website_title);
             $template_engine->assign("navigation_menu", $navigation_menu->render());
+            $template_engine->assign("current_user_indicator", $current_user_indicator->render());
             $template_engine->assign("notification_bar", $notification_bar->render());
             $template_engine->assign("content_pane", $this->renderContentPane($this->_module_visual));
             $template_engine->assign("system_version", SYSTEM_VERSION);

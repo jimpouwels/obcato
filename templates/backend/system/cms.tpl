@@ -23,9 +23,12 @@
                 <p class="title">Site Administrator</p>
                 <p class="version">SYS-version: {$system_version} / DB-version: {$db_version}</p>
 			</div>
-			
-			{$navigation_menu}
-			
+
+            <div id="navigation_wrapper">
+                {$navigation_menu}
+                {$current_user_indicator}
+			</div>
+
 			{$notification_bar}
 			
 		

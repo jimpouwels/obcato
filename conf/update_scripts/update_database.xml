@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <versions>
-	<version>
+    <version>
         <number>1.0.0</number>
     </version>
     <version>
         <number>1.0.0.1</number>
         <queries>
-			<query>ALTER TABLE article_overview_elements_metadata ADD COLUMN order_type VARCHAR(45) NOT NULL AFTER number_of_results</query>
+            <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN order_type VARCHAR(45) NOT NULL AFTER number_of_results</query>
             <query>UPDATE article_overview_elements_metadata SET order_type = 'asc'</query>
         </queries>
-	</version>
+    </version>
     <version>
         <number>1.0.0.2</number>
         <queries>
@@ -33,9 +33,11 @@
             <query>UPDATE element_types SET icon_url = '/img/article_overview_element.png' WHERE identifier = 'article_overview_element'</query>
             <query>ALTER TABLE element_types DROP edit_presentation</query>
             <query>ALTER TABLE element_types DROP destroy_script</query>
-			<query>ALTER TABLE element_types MODIFY COLUMN scope_id INTEGER UNSIGNED NOT NULL</query>
-			<query>ALTER TABLE element_types ADD CONSTRAINT element_types_scopes FOREIGN KEY element_types_scopes (scope_id) REFERENCES scopes (id) ON DELETE CASCADE ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE element_types MODIFY COLUMN scope_id INTEGER UNSIGNED NOT NULL</query>
+            <query>ALTER TABLE element_types ADD CONSTRAINT element_types_scopes FOREIGN KEY element_types_scopes (scope_id) REFERENCES scopes (id) ON DELETE CASCADE ON UPDATE RESTRICT</query>
             <query>ALTER TABLE links ADD COLUMN target VARCHAR(45) DEFAULT NULL</query>
+            <query>ALTER TABLE modules MODIFY COLUMN module_group_id INTEGER UNSIGNED DEFAULT NULL</query>
+            <query>DELETE FROM module_groups WHERE title = 'Bestand'</query>
         </queries>
     </version>
 </versions>

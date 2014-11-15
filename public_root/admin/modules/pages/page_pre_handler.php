@@ -1,12 +1,12 @@
 <?php
     
     defined('_ACCESS') or die;
-        
+
+    require_once CMS_ROOT . "authenticator.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "modules/pages/page_form.php";
     require_once CMS_ROOT . "database/dao/block_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
-    require_once CMS_ROOT . "database/dao/authorization_dao.php";
     require_once CMS_ROOT . "request_handlers/element_holder_request_handler.php";
     
     class PagePreHandler extends ElementHolderRequestHandler {
@@ -110,8 +110,7 @@
             $new_page->setShowInNavigation(true);
             $new_page->setNavigationTitle("Nieuwe pagina");
             $new_page->setTitle("Nieuwe pagina");
-            $authorization_dao = AuthorizationDao::getInstance();
-            $user = $authorization_dao->getUser($_SESSION["username"]);
+            $user = Authenticator::getCurrentUser();
             $new_page->setCreatedById($user->getId());
             $new_page->setType(ELEMENT_HOLDER_PAGE);
             $this->_page_dao->persist($new_page);
