@@ -68,12 +68,14 @@
 
 .block-selector {
 	margin-left: 10px;
+    margin-top: 10px;
 	float: left;
 	width: 150px;
 }
 
 .selected-blocks {
 	text-align: left;
+    margin-top: 10px;
 	margin-left: 10px;
 	float: left;
 	width: 400px;
