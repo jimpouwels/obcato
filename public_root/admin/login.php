@@ -5,7 +5,8 @@
     if (!file_exists("database_config.php"))
         header("Location: /admin/index.php");
 
-    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "authentication/authenticator.php";
+    require_once CMS_ROOT . "authentication/session.php";
     require_once CMS_ROOT . "database_config.php";
     require_once CMS_ROOT . "constants.php";
     require_once CMS_ROOT . "includes.php";
@@ -19,6 +20,7 @@
         $password = $_POST['password'];
 
         Authenticator::logIn($username, $password);
+        Session::setCurrentLanguage($_POST['language']);
         if (Authenticator::isAuthenticated()) {
             $redirect_to = '/admin/index.php';
             if (isset($_POST['org_url']) && $_POST['org_url'] != '') {
@@ -57,10 +59,15 @@
                         <?php endif; ?>
                         
                         <?php
-                            $username = new TextField('username', 'Gebruikersnaam', "", true, false, NULL);
+                            $username = new TextField('username', 'Gebruikersnaam', "", true, false, null);
                             echo $username->render();
-                            $password = new PasswordField('password', 'Wachtwoord', "", true, false, NULL);
+                            $password = new PasswordField('password', 'Wachtwoord', "", true, false, null);
                             echo $password->render();
+                            $languages = array();
+                            $languages[] = array('name' => 'Nederlands', 'value' => 'nl');
+                            $languages[] = array('name' => 'English', 'value' => 'en');
+                            $language = new Pulldown('language', 'Taal', 'nl', $languages, '', false);
+                            echo $language->render();
                         ?>
 
                         <div class="button-holder">

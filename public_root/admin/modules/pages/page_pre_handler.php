@@ -1,8 +1,7 @@
 <?php
-    
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "modules/pages/page_form.php";
     require_once CMS_ROOT . "database/dao/block_dao.php";

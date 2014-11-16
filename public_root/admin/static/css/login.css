@@ -5,7 +5,7 @@
     margin-left: -250px;
     margin-top: -150px;
     display:block;
-    height: 250px;
+    overflow: auto;
     width: 500px;
     border: 1px solid gray;
     font-family: verdana;

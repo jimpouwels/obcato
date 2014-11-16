@@ -1,0 +1,3 @@
+welcome_message_prefix: Welcome to the admin page of
+current_user_indicator_logout_text: Logout
+current_user_indicator_welcome_text: Welcome

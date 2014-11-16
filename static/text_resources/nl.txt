@@ -1,0 +1,3 @@
+welcome_message_prefix: Welkom bij de beheermodule van
+current_user_indicator_logout_text: Uitloggen
+current_user_indicator_welcome_text: Welkom

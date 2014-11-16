@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
     require_once CMS_ROOT . "view/views/cms.php";
     require_once CMS_ROOT . "view/views/popup.php";

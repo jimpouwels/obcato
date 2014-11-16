@@ -1,8 +1,7 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
+
+    require_once CMS_ROOT . "text_resource_loader.php";
     require_once CMS_ROOT . "database/dao/module_dao.php";
     require_once CMS_ROOT . "view/views/navigation_menu.php";
     require_once CMS_ROOT . "view/views/current_user_indicator.php";
@@ -17,12 +16,14 @@
         private $_module_visual;
         private $_website_title;
         private $_module_dao;
+        private $_text_resource_loader;
         
         public function __construct($module_visual, $website_title) {
             $this->_module_dao = ModuleDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_visual = $module_visual;
             $this->_website_title = $website_title;
+            $this->_text_resource_loader = new TextResourceLoader();
         }
         
         public function render() {
@@ -31,6 +32,7 @@
             $current_user_indicator = new CurrentUserIndicator();
             
             $template_engine = TemplateEngine::getInstance();
+            $template_engine->assign("text_resources", $this->_text_resource_loader->loadTextResources());
             if (!is_null($this->_module_visual)) {
                 $actions_menu = new ActionsMenu($this->_module_visual->getActionButtons());
                 $template_engine->assign("actions_menu", $actions_menu->render());
@@ -58,5 +60,3 @@
         }
         
     }
-
-?>

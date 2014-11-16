@@ -5,7 +5,7 @@
     define("CMS_ROOT", '');
     
     // INCLUDE SYSTEM CONSTANTS
-    require_once CMS_ROOT . "authenticator.php";
+    require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "database_config.php";
     require_once CMS_ROOT . "constants.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
