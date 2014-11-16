@@ -96,5 +96,3 @@
             return $options;
         }
     }
-
-?>

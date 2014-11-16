@@ -4,7 +4,7 @@
 	   type="checkbox" 
 	   name="{$field_name}" 
 	   id="{$field_name}" 
-	   {if $checked}
+	   {if $field_value == 'on' || $field_value == '1'}
 			checked="checked"
 	   {/if}
 />

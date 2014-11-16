@@ -1,5 +1,4 @@
 <?php
-
     defined("_ACCESS") or die;
     
     require_once CMS_ROOT . "request_handlers/form.php";
@@ -25,13 +24,17 @@
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
             $this->_article->setImageId($this->getFieldValue("article_image_ref_" . $this->_article->getId()));
             $this->_article->setTargetPageId($this->getFieldValue("article_target_page"));
-            $this->loadPublicationDate();
-            $this->loadSortDate();
+            $publication_date = $this->loadPublicationDate();
+            $sort_date = $this->loadSortDate();
             $this->deleteLeadImageIfNeeded();
             $this->_element_order = $this->getFieldValue("element_order");        
             $this->_selected_terms = $this->getFieldValue("select_terms_" . $this->_article->getId());
             if ($this->hasErrors())
                 throw new FormException();
+            else {
+                $this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
+                $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
+            }
         }
         
         public function getElementOrder() {
@@ -62,13 +65,11 @@
         }
         
         private function loadPublicationDate() {
-            $publication_date = $this->getMandatoryDate("publication_date", "Datum is verplicht", "Vul een datum in (bijv. 31-12-2010)");
-            $this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
+            return $this->getMandatoryDate("publication_date", "Datum is verplicht", "Vul een datum in (bijv. 31-12-2010)");
         }
 
         private function loadSortDate() {
-            $sort_date = $this->getMandatoryDate("sort_date", "Datum is verplicht", "Vul een geldige datum in (bijv. 31-12-2010)");
-            $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
+            return $this->getMandatoryDate("sort_date", "Datum is verplicht", "Vul een geldige datum in (bijv. 31-12-2010)");
         }
     
     }

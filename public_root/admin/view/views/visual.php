@@ -12,5 +12,3 @@
             return TextResourceLoader::getTextResource($identifier);
         }
     }
-
-?>

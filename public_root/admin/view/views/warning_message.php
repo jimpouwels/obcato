@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     class WarningMessage extends Visual {

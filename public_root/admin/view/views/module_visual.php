@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     abstract class ModuleVisual extends Visual {
@@ -16,5 +14,3 @@
         abstract function getTitle();
     
     }
-
-?>

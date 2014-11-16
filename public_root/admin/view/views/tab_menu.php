@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     class TabMenu extends Visual {
@@ -22,5 +20,3 @@
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
     }
-
-?>

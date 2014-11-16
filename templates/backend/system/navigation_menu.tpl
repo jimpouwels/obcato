@@ -1,13 +1,29 @@
 <div id="navigation-menu">
 	<ul id="menu">
-		{foreach from=$menu_items key=title item=menu_item}
+		{foreach from=$groups item=group}
 			<li class="module-group">
-				<a href="#" class="parent" onclick="return false;">{$title}</a>
+				<a href="#" class="parent" onclick="return false;">{$group.title}</a>
 				<div class="submenu">
 					<ul>
-						{foreach from=$menu_item item=sub_item}
-							{$sub_item}
-						{/foreach}
+                        {if isset($group.elements)}
+                            {foreach from=$group.elements item=element}
+                                <li>
+                                    <img src="{$element.icon_url}" alt="{$element.name}" />
+                                    <a href="#" onclick="addElement('{$element.id}'); return false;">{$element.name}</a>
+                                </li>
+                            {/foreach}
+                            <li class="last">
+                                <img alt="Link toevoegen" src="/admin/static.php?file=/default/img/element_icons/link.png" />
+                                <a href="#" onclick="addLink(); return false;">Link</a>
+                            </li>
+                        {else}
+                            {foreach from=$group.modules item=module}
+                                <li{if $module.last} class="last"{/if}>
+                                    <img src="{$module.icon_url}" alt="{$module.title}" />
+                                    <a {if {$module.popup}}onclick="window.open('/admin/popup_entity.php?module_id={$module.id}','{$module.title}','width=640,height=480'); return false;"{/if} href="/admin/index.php?module_id={$module.id}">{$module.title}</a>
+                                </li>
+                            {/foreach}
+                        {/if}
 					</ul>
 				</div>
 			</li>

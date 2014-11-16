@@ -66,7 +66,7 @@
         public function getDate($field_name, $error_message) {
             $value = $this->getFieldValue($field_name);
             $valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-            if (!$this->isEmpty($value) && !$valid_date)
+            if (!$valid_date)
                 $this->raiseError($field_name, $error_message);
             return $value;
         }

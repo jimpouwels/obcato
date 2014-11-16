@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/dao/block_dao.php";
@@ -30,7 +28,6 @@
         
         private function getTermsToSelect() {
             $terms_to_select = array();
-            
             foreach ($this->_article_dao->getAllTerms() as $term) {
                 if (!in_array($term, $this->_selected_terms)) {
                     $term_to_select['id'] = $term->getId();
@@ -46,7 +43,6 @@
             foreach ($this->_selected_terms as $selected_term) {
                 $selected_term_item = array();
                 $selected_term_item['name'] = $selected_term->getName();
-                
                 $delete_field = new SingleCheckbox("term_" . $this->_context_id . "_" . $selected_term->getId() . "_delete", "", false, false, "");
                 $selected_term_item['delete_field'] = $delete_field->render();
                 $selected_terms[] = $selected_term_item;

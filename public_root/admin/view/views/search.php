@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/element_holder_search.php";
@@ -18,8 +16,6 @@
         public static $OBJECT_TO_SEARCH_KEY = "object";
         public static $POPUP_TYPE_KEY = "popup";
         
-        private static $TEMPLATE = "system/search.tpl";
-        
         private $_template_engine;
         private $_back_click_id;
         private $_backfill_id;
@@ -36,11 +32,10 @@
         
         public function render() {
             $search = null;
-            if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES) {
+            if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES)
                 $search = new ImageSearchBox($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search);
-            } else {
+            else
                 $search = new ElementHolderSearch($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search);
-            }
             $this->_template_engine->assign("popup_type", $this->_popup_type);
             return $search->render();
         }

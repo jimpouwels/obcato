@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/visual.php";
@@ -10,25 +8,29 @@
     class NavigationMenu extends Visual {
     
         private static $TEMPLATE = "system/navigation_menu.tpl";
-        private $myModuleGroups;
+        private $_module_groups;
+        private $_template_engine;
+        private $_element_dao;
     
         public function __construct($module_groups) {
-            $this->myModuleGroups = $module_groups;
+            $this->_template_engine = TemplateEngine::getInstance();
+            $this->_module_groups = $module_groups;
+            $this->_element_dao = ElementDao::getInstance();
         }
     
         public function render() {
-            $menu_items = array();            
-            foreach ($this->myModuleGroups as $module_group) {
-                $title = $module_group->getTitle();
+            $groups = array();
+            foreach ($this->_module_groups as $module_group) {
+                $group = array();
+                $group['title'] = $module_group->getTitle();
                 if ($module_group->isElementGroup())
-                    $menu_items[$title] = $this->renderElementsMenuItem($module_group);
+                    $group['elements'] = $this->renderElementsMenuItem($module_group);
                 else
-                    $menu_items[$title] = $this->renderMenuItem($module_group);
+                    $group['modules'] = $this->renderMenuItem($module_group);
+                $groups[] = $group;
             }
-            
-            $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("menu_items", $menu_items);
-            return $template_engine->fetch(self::$TEMPLATE);
+            $this->_template_engine->assign('groups', $groups);
+            return $this->_template_engine->fetch(self::$TEMPLATE);
         }
         
         private function renderMenuItem($module_group) {
@@ -36,47 +38,28 @@
             $modules = $module_group->getModules();
             $count = 1;
             foreach ($modules as $module) {
-                $sub_items[] = $this->renderSubItem($module, $count == count($modules) ? true : false);
+                $sub_item = array();
+                $sub_item["title"] = $this->getTextResource($module->getTitleTextResourceIdentifier());
+                $sub_item["id"] = $module->getId();
+                $sub_item["popup"] = $module->isPopUp();
+                $sub_item["icon_url"] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . $module->getIconUrl();
+                $sub_item["last"] = ($count == count($modules));
                 $count++;
+                $sub_items[] = $sub_item;
             }
             return $sub_items;
         }
         
         private function renderElementsMenuItem() {
-            $element_dao = ElementDao::getInstance();
-            $element_types = $element_dao->getElementTypes();
-            
             $sub_items = array();
-            foreach ($element_types as $element_type) {
-                $sub_items[] = $this->renderElementSubItem($element_type);
+            foreach ($this->_element_dao->getElementTypes() as $element_type) {
+                $sub_item = array();
+                $sub_item["id"] = $element_type->getId();
+                $sub_item["name"] = $element_type->getName();
+                $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
+                $sub_items[] = $sub_item;
             }
-            // FIXME: Hardcoded link element - special element type
-            $template_engine = TemplateEngine::getInstance();
-            $sub_items[] = $template_engine->fetch("system/navigation_menu_link_element_item.tpl");
-                    
             return $sub_items;
-        }
-        
-        private function renderSubItem($module, $last_item) {
-            $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("title", $this->getTextResource($module->getTitleTextResourceIdentifier()));
-            $template_engine->assign("id", $module->getId());
-            $template_engine->assign("popup", $module->isPopUp());
-            $template_engine->assign("icon_url", '/admin/static.php?file=/modules/' . $module->getIdentifier() . $module->getIconUrl());
-            $template_engine->assign("last", $last_item);
-            
-            return $template_engine->fetch("system/navigation_menu_sub_item.tpl");
-        }
-        
-        private function renderElementSubItem($element_type) {
-            $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("id", $element_type->getId());
-            $template_engine->assign("name", $element_type->getName());
-            $template_engine->assign("icon_url", '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl());
-            
-            return $template_engine->fetch("system/navigation_menu_element_sub_item.tpl");
         }
     
     }
-
-?>

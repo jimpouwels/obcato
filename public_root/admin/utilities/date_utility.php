@@ -34,14 +34,12 @@
             @param $date The string to convert
         */
         public static function stringMySqlDate($date_string) {
-            $new_value = NULL;
             if (!is_null($date_string) && $date_string != '') {
                 $splitted = explode('-', $date_string);
-                $new_value = $splitted[2] . '-' . $splitted[1] . '-' . $splitted[0];
+                return $splitted[2] . '-' . $splitted[1] . '-' . $splitted[0];
             }
-            return $new_value;
         }
-        
+
     }
-    
+
 ?>

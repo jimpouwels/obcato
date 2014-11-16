@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/form_field.php";
@@ -8,37 +6,16 @@
     class UploadField extends FormField {
     
         private static $TEMPLATE = "system/form_upload_field.tpl";
-    
-        private $_name;
-        private $_label;
-        private $_is_mandatory;
-        private $_classname;
-    
+        private $_template_engine;
+
         public function __construct($name, $label, $mandatory, $class_name) {
-            $this->_name = $name;
-            $this->_label = $label;
-            $this->_is_mandatory = $mandatory;
-            $this->_classname = $class_name;
+            parent::__construct($name, null, $label, $mandatory, false, $class_name);
+            $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render() {            
-            $css_classes = array();
-            array_push($css_classes, $this->_classname);
-            
-            $error_class = $this->errorClass($this->_name);
-            if (!is_null($error_class) && $error_class != '') {
-                array_push($css_classes, $error_class);                
-            }
-            
-            $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("field_name", $this->_name);
-            $template_engine->assign("error", $this->getErrorHtml($this->_name));
-            $template_engine->assign("label", $this->getInputLabelHtml($this->_label, $this->_name, $this->_is_mandatory));
-            $template_engine->assign("classes", $this->getCssClassesHtml($css_classes));
-            
-            return $template_engine->fetch(self::$TEMPLATE);
+        public function render() {
+            parent::render();
+            return $this->_template_engine->fetch(self::$TEMPLATE);
         }
     
     }
-
-?>
