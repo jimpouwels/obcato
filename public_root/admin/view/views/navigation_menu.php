@@ -59,7 +59,7 @@
         
         private function renderSubItem($module, $last_item) {
             $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("title", $module->getTitle());
+            $template_engine->assign("title", $this->getTextResource($module->getTitleTextResourceIdentifier()));
             $template_engine->assign("id", $module->getId());
             $template_engine->assign("popup", $module->isPopUp());
             $template_engine->assign("icon_url", '/admin/static.php?file=/modules/' . $module->getIdentifier() . $module->getIconUrl());

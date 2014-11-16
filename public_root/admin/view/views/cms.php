@@ -16,14 +16,14 @@
         private $_module_visual;
         private $_website_title;
         private $_module_dao;
-        private $_text_resource_loader;
+        private $_text_resources;
         
-        public function __construct($module_visual, $website_title) {
+        public function __construct($module_visual, $text_resources, $website_title) {
             $this->_module_dao = ModuleDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_visual = $module_visual;
             $this->_website_title = $website_title;
-            $this->_text_resource_loader = new TextResourceLoader();
+            $this->_text_resources = $text_resources;
         }
         
         public function render() {
@@ -32,7 +32,7 @@
             $current_user_indicator = new CurrentUserIndicator();
             
             $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("text_resources", $this->_text_resource_loader->loadTextResources());
+            $template_engine->assign("text_resources", $this->_text_resources);
             if (!is_null($this->_module_visual)) {
                 $actions_menu = new ActionsMenu($this->_module_visual->getActionButtons());
                 $template_engine->assign("actions_menu", $actions_menu->render());

@@ -30,7 +30,7 @@
             foreach ($this->_module_dao->getAllModules() as $module) {
                 $module_data = array();
                 $module_data['id'] = $module->getId();
-                $module_data['title'] = $module->getTitle();
+                $module_data['title'] = $this->getTextResource($module->getTitleTextResourceIdentifier());
                 $module_data['icon_url'] = '/admin/static.php?file=/modules/'. $module->getIdentifier() . $module->getIconUrl();
                 $module_data['is_current'] = $this->isCurrentModule($module);
                 $modules_data[] = $module_data;

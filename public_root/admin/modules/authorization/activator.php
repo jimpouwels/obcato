@@ -32,7 +32,7 @@
         }
         
         public function getTitle() {
-            return $this->_authorization_module->getTitle();
+            return $this->getTextResource($this->_authorization_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

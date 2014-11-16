@@ -24,7 +24,7 @@
         }
 
         public function getAllModules() {
-            $query = "SELECT * FROM modules ORDER BY title";
+            $query = "SELECT * FROM modules ORDER BY identifier";
             $result = $this->_mysql_connector->executeQuery($query);
             $modules = array();
             while ($row = $result->fetch_assoc()) {
@@ -48,10 +48,10 @@
         }
 
         public function persistModule($module) {
-            $query = 'INSERT INTO modules (title, icon_url, module_group_id, popup, identifier, enabled, system_default, class)
+            $query = 'INSERT INTO modules (title_text_resource_identifier, icon_url, module_group_id, popup, identifier, enabled, system_default, class)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $title = $module->getTitle();
+            $title_text_resource_identifier = $module->getTitleTextResourceIdentifier();
             $icon_url = $module->getIconUrl();
             $module_group_id = $module->getModuleGroupId();
             $popup = $module->isPopup() ? 1 : 0;
@@ -59,20 +59,20 @@
             $enabled = $module->isEnabled() ? 1 : 0;
             $system_default = $module->isSystemDefault() ? 1 : 0;
             $class = $module->getClass();
-            $statement->bind_param('ssiisiis', $title, $icon_url, $module_group_id, $popup, $identifier, $enabled, $system_default, $class);
+            $statement->bind_param('ssiisiis', $title_text_resource_identifier, $icon_url, $module_group_id, $popup, $identifier, $enabled, $system_default, $class);
             $this->_mysql_connector->executeStatement($statement);
         }
 
         public function updateModule($module) {
-            $query = 'UPDATE modules set title = ?, icon_url = ?, module_group_id = ?, popup = ?, class = ? WHERE identifier = ?';
+            $query = 'UPDATE modules set title_text_resource_identifier = ?, icon_url = ?, module_group_id = ?, popup = ?, class = ? WHERE identifier = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $title = $module->getTitle();
+            $title_text_resource_identifier = $module->getTitleTextResourceIdentifier();
             $icon_url = $module->getIconUrl();
             $module_group_id = $module->getModuleGroupId();
             $popup = $module->isPopup() ? 1 : 0;
             $class = $module->getClass();
             $identifier = $module->getIdentifier();
-            $statement->bind_param('ssiiss', $title, $icon_url, $module_group_id, $popup, $class, $identifier);
+            $statement->bind_param('ssiiss', $title_text_resource_identifier, $icon_url, $module_group_id, $popup, $class, $identifier);
             $this->_mysql_connector->executeStatement($statement);
         }
 

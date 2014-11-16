@@ -35,7 +35,7 @@
         }
         
         public function getTitle() {
-            return $this->_page_module->getTitle();
+            return $this->getTextResource($this->_page_module->getTitleTextResourceIdentifier());
         }
         
         public function getActionButtons() {

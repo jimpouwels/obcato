@@ -49,7 +49,7 @@
         }
         
         public function getTitle() {
-            return $this->_block_module->getTitle();
+            return $this->getTextResource($this->_block_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

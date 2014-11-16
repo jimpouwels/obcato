@@ -65,7 +65,7 @@
         }
         
         public function getTitle() {
-            return $this->_template_module->getTitle();
+            return $this->getTextResource($this->_template_module->getTitleTextResourceIdentifier());
         }
         
         private function getScopeSelector() {

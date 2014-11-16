@@ -19,7 +19,7 @@
         private static $QUERY_TAB = 2;
         private $_database_module;
         private $_database_pre_handler;
-        private $_templage_engine;
+        private $_template_engine;
     
         public function __construct($database_module) {
             $this->_database_module = $database_module;
@@ -60,7 +60,7 @@
         }
         
         public function getTitle() {
-            return $this->_database_module->getTitle();
+            return $this->getTextResource($this->_database_module->getTitleTextResourceIdentifier());
         }
         
         private function renderTabMenu() {

@@ -38,6 +38,18 @@
             <query>ALTER TABLE links ADD COLUMN target VARCHAR(45) DEFAULT NULL</query>
             <query>ALTER TABLE modules MODIFY COLUMN module_group_id INTEGER UNSIGNED DEFAULT NULL</query>
             <query>DELETE FROM module_groups WHERE title = 'Bestand'</query>
+            <query>UPDATE modules SET title = 'pages_module_title' WHERE identifier = 'pages'</query>
+            <query>UPDATE modules SET title = 'articles_module_title' WHERE identifier = 'articles'</query>
+            <query>UPDATE modules SET title = 'blocks_module_title' WHERE identifier = 'blocks'</query>
+            <query>UPDATE modules SET title = 'templates_module_title' WHERE identifier = 'templates'</query>
+            <query>UPDATE modules SET title = 'downloads_module_title' WHERE identifier = 'downloads'</query>
+            <query>UPDATE modules SET title = 'images_module_title' WHERE identifier = 'images'</query>
+            <query>UPDATE modules SET title = 'components_module_title' WHERE identifier = 'components'</query>
+            <query>UPDATE modules SET title = 'settings_module_title' WHERE identifier = 'settings'</query>
+            <query>UPDATE modules SET title = 'authorization_module_title' WHERE identifier = 'authorization'</query>
+            <query>UPDATE modules SET title = 'database_module_title' WHERE identifier = 'database'</query>
+            <query>UPDATE modules SET title = 'logout_module_title' WHERE identifier = 'logout'</query>
+            <query>ALTER TABLE modules CHANGE COLUMN title title_text_resource_identifier VARCHAR(255) NOT NULL</query>
         </queries>
     </version>
 </versions>

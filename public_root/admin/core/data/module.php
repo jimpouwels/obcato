@@ -1,13 +1,11 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/data/entity.php";
 
     class Module extends Entity {
 
-        private $_title;
+        private $_title_text_resource_identifier;
         private $_icon_url;
         private $_identifier;
         private $_popup;
@@ -16,12 +14,12 @@
         private $_module_group_id;
         private $_class;
         
-        public function getTitle() {
-            return $this->_title;
+        public function getTitleTextResourceIdentifier() {
+            return $this->_title_text_resource_identifier;
         }
         
-        public function setTitle($title) {
-            $this->_title = $title;
+        public function setTitleTextResourceIdentifier($title_text_resource_identifier) {
+            $this->_title_text_resource_identifier = $title_text_resource_identifier;
         }
         
         public function getClass() {
@@ -95,7 +93,7 @@
             if (!is_null($class) && $class != '') {
                 $module = new Module();
                 $module->setId($record['id']);
-                $module->setTitle($record['title']);
+                $module->setTitleTextResourceIdentifier($record['title_text_resource_identifier']);
                 $module->setIconUrl($record['icon_url']);
                 $module->setIdentifier($identifier);
                 $module->setPopUp($record['popup']);

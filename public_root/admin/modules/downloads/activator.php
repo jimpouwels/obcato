@@ -17,8 +17,10 @@
         private $_current_download;
         private $_template_engine;
         private $_download_request_handler;
+        private $_module;
 
-        public function __construct() {
+        public function __construct($module) {
+            $this->_module = $module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_download_request_handler = new DownloadRequestHandler();
         }
@@ -57,7 +59,7 @@
         }
 
         public function getTitle() {
-            return "Downloads";
+            return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
         }
 
         private function renderSearchBox() {

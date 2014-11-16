@@ -19,13 +19,13 @@
         }
 
         abstract function getIdentifier();
-        abstract function getTitle();
+        abstract function getTitleTextResourceIdentifier();
         abstract function isPopup();
         abstract function getModuleGroup();
         abstract function getActivatorClassName();
 
         public function install() {
-            $this->_logger->log('Installer voor component \'' . $this->getTitle() . '\' gestart');
+            $this->_logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
             $this->installModule();
             $this->installStaticFiles(STATIC_DIR . '/modules/' . $this->getIdentifier());
             $this->installBackendTemplates(BACKEND_TEMPLATE_DIR . '/modules/' . $this->getIdentifier());
@@ -42,7 +42,7 @@
 
         private function installModule() {
             $module = new Module();
-            $module->setTitle($this->getTitle());
+            $module->setTitleTextResourceIdentifier($this->getTitleTextResourceIdentifier());
             $module->setIdentifier($this->getIdentifier());
             $module->setIconUrl($this->getIconPath());
             $module->setModuleGroupId($this->_module_dao->getModuleGroupByTitle($this->getModuleGroup())->getId());

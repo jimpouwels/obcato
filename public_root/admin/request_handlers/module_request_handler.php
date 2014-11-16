@@ -1,9 +1,8 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
+    require_once CMS_ROOT . "text_resource_loader.php";
     
     abstract class ModuleRequestHandler extends HttpRequestHandler {
                 
@@ -15,6 +14,10 @@
         public function getErrorCount() {
             global $errors;
             return count($errors);
+        }
+
+        protected function getTextResource($identifier) {
+            TextResourceLoader::getTextResource($identifier);
         }
         
         private function getModuleTabFromGetRequest() {

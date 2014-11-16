@@ -55,7 +55,7 @@
         }
         
         public function getTitle() {
-            return $this->_article_module->getTitle();
+            return $this->getTextResource($this->_article_module->getTitleTextResourceIdentifier());
         }
         
         public function getRequestHandlers() {

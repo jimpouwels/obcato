@@ -33,7 +33,7 @@
         }
         
         public function getTitle() {
-            return $this->_settings_module->getTitle();
+            return $this->getTextResource($this->_settings_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

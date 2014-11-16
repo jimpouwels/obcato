@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
     require_once CMS_ROOT . "view/views/cms.php";
     require_once CMS_ROOT . "view/views/popup.php";
+    require_once CMS_ROOT . "text_resource_loader.php";
     
     class Backend {
     
@@ -50,7 +51,8 @@
         }
         
         private function renderCmsView() {
-            $cms = new Cms($this->_module_visual, WEBSITE_TITLE);
+            TextResourceLoader::loadTextResources();
+            $cms = new Cms($this->_module_visual, TextResourceLoader::getTextResources(), WEBSITE_TITLE);
             $cms->render();
         }
 
