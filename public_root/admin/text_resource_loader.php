@@ -38,9 +38,10 @@
             $file = fopen($file_path, 'rb');
             while (!feof($file)) {
                 $line = fgets($file);
-                if (!self::isComment($line)) {
+                if (!self::isComment($line) && !self::isEmptyLine($line)) {
                     $parts = explode(':', $line);
-                    $resources[trim($parts[0])] = trim($parts[1]);
+                    if (count($parts) > 1)
+                        $resources[trim($parts[0])] = trim($parts[1]);
                 }
             }
             return $resources;
@@ -48,6 +49,10 @@
 
         private static function isComment($line) {
             return StringUtility::startsWith(trim($line), '#');
+        }
+
+        private static function isEmptyLine($line) {
+            return trim($line) == '';
         }
 
     }

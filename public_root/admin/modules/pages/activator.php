@@ -40,19 +40,19 @@
         
         public function getActionButtons() {
             $buttons = array();
-            $buttons[] = new ActionButton("Opslaan", "update_element_holder", "icon_apply");
+            $buttons[] = new ActionButton($this->getTextResource('action_button_save'), "update_element_holder", "icon_apply");
             if (!is_null($this->_current_page)) {
                 if ($this->_current_page->getId() != 1) {
-                    $buttons[] = new ActionButton("Verwijderen", "delete_element_holder", "icon_delete");
+                    $buttons[] = new ActionButton($this->getTextResource('action_button_delete'), "delete_element_holder", "icon_delete");
                 }
             }
-            $buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
+            $buttons[] = new ActionButton($this->getTextResource('action_button_add'), "add_element_holder", "icon_add");
             if ($this->_current_page->getId() != 1) {
                 if (!$this->_current_page->isFirst()) {
-                    $buttons[] = new ActionButton("Omhoog", "moveup_element_holder", "icon_moveup");
+                    $buttons[] = new ActionButton($this->getTextResource('action_button_up'), "moveup_element_holder", "icon_moveup");
                 }
                 if (!$this->_current_page->isLast()) {
-                    $buttons[] = new ActionButton("Omlaag", "movedown_element_holder", "icon_movedown");
+                    $buttons[] = new ActionButton($this->getTextResource('action_button_down'), "movedown_element_holder", "icon_movedown");
                 }
             }
             

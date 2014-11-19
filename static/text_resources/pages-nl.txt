@@ -1,1 +1,6 @@
 pages_module_title: Pagina's
+action_button_save: Opslaan
+action_button_delete: Verwijderen
+action_button_add: Toevoegen
+action_button_up: Omhoog
+action_button_down: Omlaag

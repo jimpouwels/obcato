@@ -1,3 +1,21 @@
 welcome_message_prefix: Welcome to the admin page of
+
+# CURRENT USER
 current_user_indicator_logout_text: Logout
 current_user_indicator_welcome_text: Welcome
+
+# LINK EDITOR
+link_editor_target_same_page: Same page
+link_editor_target_new_tab: New tab
+link_editor_target_popup: Popup
+link_editor_link_browser_target: Open in
+link_editor_no_links_found_message: No links found. Go to &quot;Insert&quot; &gt; &quot;Link&quot; to add a new link.
+place_link: Place link
+link_title: Title
+link_target: Target
+link_code: Code
+link_open_in: Open in
+link_delete: Delete
+
+# FORM FIELDS
+object_picker_button_title: Select

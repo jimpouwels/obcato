@@ -1,1 +1,6 @@
 pages_module_title: Pages
+action_button_save: Save
+action_button_delete: Delete
+action_button_add: Add
+action_button_up: Up
+action_button_down: Down

@@ -44,14 +44,14 @@
             $link_target_field = null;
             $link_target = $link->getTargetElementHolder();
             if (is_null($link_target)) {
-                $target_text_field = new TextField('link_' . $link->getId() . '_url', 'Titel', $link->getTargetAddress(), false, false, null);
+                $target_text_field = new TextField('link_' . $link->getId() . '_url', '', $link->getTargetAddress(), false, false, null);
                 $link_target_field = $target_text_field->render();
             }
             return $link_target_field;
         }
 
         private function renderTitleField($link) {
-            $title_field = new TextField('link_' . $link->getId() . '_title', 'Titel', $link->getTitle(), false, false, null);
+            $title_field = new TextField('link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, null);
             return $title_field->render();
         }
 
@@ -74,25 +74,26 @@
         }
 
         private function renderBrowserTargetField($link) {
-            $target_field = new Pulldown('link_' . $link->getId() . '_target', 'Openen in', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
+            $target_field = new Pulldown('link_' . $link->getId() . '_target', '', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
             return $target_field->render();
         }
 
         private function renderLinkTargetPicker($link) {
-            $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), 'Selecteer linkdoel', 'update_element_holder');
+            $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), '', 'update_element_holder');
             return $element_holder_picker->render();
         }
 
         private function renderNoLinksFoundMessage() {
-            $message = new InformationMessage('Geen links gevonden. Klik op &quot;Invoegen&quot; &gt; &quot;Link&quot; om een nieuwe link toe te voegen.');
+            $message = $this->getTextResource('link_editor_no_links_found_message');
+            $message = new InformationMessage($message);
             return $message->render();
         }
 
         private function getTargetOptions() {
             $options = array();
-            $options[] = array('name' => 'Zelfde venster', 'value' => '_self');
-            $options[] = array('name' => 'Nieuw tab', 'value' => '_blank');
-            $options[] = array('name' => 'Popup', 'value' => '[popup]');
+            $options[] = array('name' => $this->getTextResource('link_editor_target_same_page'), 'value' => '_self');
+            $options[] = array('name' => $this->getTextResource('link_editor_target_new_tab'), 'value' => '_blank');
+            $options[] = array('name' => $this->getTextResource('link_editor_target_popup'), 'value' => '[popup]');
             return $options;
         }
     }
