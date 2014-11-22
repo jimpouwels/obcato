@@ -25,7 +25,7 @@
 
         private function getLinksData() {
             $links_data = array();
-            foreach ($this->_links as $link)
+            foreach ($this->_links as $link) {
                 $link_data = array();
                 $link_data['id'] = $link->getId();
                 $link_data['code'] = $link->getCode();
@@ -37,6 +37,7 @@
                 $link_data['target_screen_field'] = $this->renderBrowserTargetField($link);
                 $link_data['element_holder_picker'] = $this->renderLinkTargetPicker($link);
                 $links_data[] = $link_data;
+            }
             return $links_data;
         }
         
