@@ -57,6 +57,7 @@
                 $this->addSelectedBlocks($page_form->getSelectedBlocks());
                 $this->deleteSelectedBlocksFromPage();
                 $this->_page_dao->updatePage($this->_current_page);
+                $this->updateElementHolder($this->_current_page);
                 $this->sendSuccessMessage("Pagina succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Pagina niet opgeslagen, verwerk de fouten");

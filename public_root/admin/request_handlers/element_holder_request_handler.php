@@ -12,7 +12,6 @@
         private $_element_dao;
         private $_link_dao;
         private $_element_holder_dao;
-        private $_current_element_holder;
         
         public function __construct() {
             $this->_element_dao = ElementDao::getInstance();
@@ -24,25 +23,23 @@
         }
 
         public function handlePost() {
-            $this->_current_element_holder = $this->getElementHolderFromPostRequest();
-            if ($this->_current_element_holder)
-                $this->updateElementHolder();
+            $element_holder = $this->getElementHolderFromPostRequest();
             if ($this->isAddElementAction())
                 $this->addElement();
             else if ($this->isDeleteElementAction())
                 $this->deleteElement();
             else if ($this->isAddLinkAction())
-                $this->addLink();
+                $this->addLink($element_holder);
         }
 
-        private function updateElementHolder() {
-            $this->updateLinks();
-            foreach ($this->_current_element_holder->getElements() as $element)
+        protected function updateElementHolder($element_holder) {
+            $this->updateLinks($element_holder);
+            foreach ($element_holder->getElements() as $element)
                 $element->getRequestHandler()->handle();
         }
 
         private function addElement() {
-            $element_type = $this->GetElementTypeToAdd();
+            $element_type = $this->getElementTypeToAdd();
             if (!is_null($element_type))
                 $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
@@ -53,19 +50,18 @@
                 $element_to_delete->delete();
         }
 
-        private function GetElementTypeToAdd() {
+        private function getElementTypeToAdd() {
             $element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
             $element_type = $this->_element_dao->getElementType($element_type_to_add);
             return $element_type;
         }
 
-        private function addLink() {
-            $this->_link_dao->createLink($this->_current_element_holder->getId());
+        private function addLink($element_holder) {
+            $this->_link_dao->createLink($element_holder->getId());
         }
 
-        private function updateLinks() {
-            $links = $this->_link_dao->getLinksForElementHolder($this->_current_element_holder->getId());
-
+        private function updateLinks($element_holder) {
+            $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {
                 if (isset($_POST['link_' . $link->getId() . '_delete']))
                     $this->_link_dao->deleteLink($link);
