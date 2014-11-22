@@ -21,6 +21,7 @@
         
         public function start() {
             $this->isAuthenticated();
+            $this->loadTextResources();
             $this->runRequestHandlers();
             $this->runModuleRequestHandler();
             $this->renderCms();
@@ -51,8 +52,7 @@
         }
         
         private function renderCmsView() {
-            TextResourceLoader::loadTextResources();
-            $cms = new Cms($this->_module_visual, TextResourceLoader::getTextResources(), WEBSITE_TITLE);
+            $cms = new Cms($this->_module_visual, WEBSITE_TITLE);
             $cms->render();
         }
 
@@ -86,6 +86,11 @@
                 $org_url = '?org_url=' . urlencode($_SERVER['REQUEST_URI']);
             header('Location: /admin/login.php' . $org_url);
             exit();
+        }
+
+        private function loadTextResources() {
+            TextResourceLoader::loadTextResources();
+            TemplateEngine::getInstance()->assign("text_resources", TextResourceLoader::getTextResources());
         }
                 
         private function isPopupView() {

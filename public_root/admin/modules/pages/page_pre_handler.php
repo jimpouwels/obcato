@@ -60,7 +60,7 @@
                 $this->updateElementHolder($this->_current_page);
                 $this->sendSuccessMessage("Pagina succesvol opgeslagen");
             } catch (FormException $e) {
-                $this->sendErrorMessage("Pagina niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
             }
         }
         

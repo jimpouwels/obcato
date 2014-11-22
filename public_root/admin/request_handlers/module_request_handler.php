@@ -17,7 +17,7 @@
         }
 
         protected function getTextResource($identifier) {
-            TextResourceLoader::getTextResource($identifier);
+            return TextResourceLoader::getTextResource($identifier);
         }
         
         private function getModuleTabFromGetRequest() {

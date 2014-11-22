@@ -1,6 +1,11 @@
 pages_module_title: Pagina's
+
+# ACTION BUTTONS
 action_button_save: Opslaan
 action_button_delete: Verwijderen
 action_button_add: Toevoegen
 action_button_up: Omhoog
 action_button_down: Omlaag
+
+# ERRORS
+page_not_saved_error_message: Pagina niet opgeslagen, verwerk de fouten
