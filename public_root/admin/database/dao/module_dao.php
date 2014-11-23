@@ -92,9 +92,9 @@
             return $groups;
         }
 
-        public function getModuleGroupByTitle($title) {
-            $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE title = ?');
-            $statement->bind_param('s', $title);
+        public function getModuleGroupByIdentifier($identifier) {
+            $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE identifier = ?');
+            $statement->bind_param('s', $identifier);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc())
                 return ModuleGroup::constructFromRecord($row);

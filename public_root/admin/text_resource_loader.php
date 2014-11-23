@@ -35,13 +35,15 @@
 
         private static function getTextResourcesFromFile($file_path) {
             $resources = array();
-            $file = fopen($file_path, 'rb');
-            while (!feof($file)) {
-                $line = fgets($file);
-                if (!self::isComment($line) && !self::isEmptyLine($line)) {
-                    $parts = explode(':', $line);
-                    if (count($parts) > 1)
-                        $resources[trim($parts[0])] = trim($parts[1]);
+            if (file_exists($file_path)) {
+                $file = fopen($file_path, 'rb');
+                while (!feof($file)) {
+                    $line = fgets($file);
+                    if (!self::isComment($line) && !self::isEmptyLine($line)) {
+                        $parts = explode(':', $line);
+                        if (count($parts) > 1)
+                            $resources[trim($parts[0])] = trim($parts[1]);
+                    }
                 }
             }
             return $resources;

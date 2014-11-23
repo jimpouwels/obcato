@@ -26,7 +26,7 @@
                 $module_data = array();
                 $module_data['id'] = $current_module->getId();
                 $module_data['identifier'] = $current_module->getIdentifier();
-                $module_data['title'] = $current_module->getTitle();
+                $module_data['title'] = $this->getTextResource($current_module->getTitleTextResourceIdentifier());
                 $module_data['class'] = $current_module->getClass();
                 $module_data['system_default'] = $current_module->isSystemDefault();
                 return $module_data;

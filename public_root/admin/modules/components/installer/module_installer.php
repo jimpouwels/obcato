@@ -45,7 +45,7 @@
             $module->setTitleTextResourceIdentifier($this->getTitleTextResourceIdentifier());
             $module->setIdentifier($this->getIdentifier());
             $module->setIconUrl($this->getIconPath());
-            $module->setModuleGroupId($this->_module_dao->getModuleGroupByTitle($this->getModuleGroup())->getId());
+            $module->setModuleGroupId($this->_module_dao->getModuleGroupByIdentifier($this->getModuleGroup())->getId());
             $module->setPopUp($this->isPopup());
             $module->setEnabled(true);
             $module->setClass($this->getActivatorClassName());

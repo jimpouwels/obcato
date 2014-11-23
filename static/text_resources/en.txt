@@ -4,6 +4,12 @@ welcome_message_prefix: Welcome to the admin page of
 current_user_indicator_logout_text: Logout
 current_user_indicator_welcome_text: Welcome
 
+# NAVIGATION MENU
+menu_item_maintain: Maintain
+menu_item_design: Design
+menu_item_configure: Configure
+menu_item_insert: Insert
+
 # LINK EDITOR
 link_editor_target_same_page: Same page
 link_editor_target_new_tab: New tab

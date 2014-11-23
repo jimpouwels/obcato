@@ -7,15 +7,15 @@
     
     class ModuleGroup extends Entity {
     
-        private $_title;
+        private $_identifier;
         private $_element_group;
         
-        public function getTitle() {
-            return $this->_title;
+        public function getIdentifier() {
+            return $this->_identifier;
         }
         
-        public function setTitle($title) {
-            $this->_title = $title;
+        public function setIdentifier($identifier) {
+            $this->_identifier = $identifier;
         }
         
         public function isElementGroup() {
@@ -45,7 +45,7 @@
         public static function constructFromRecord($record) {
             $module_group = new ModuleGroup();
             $module_group->setId($record['id']);
-            $module_group->setTitle($record['title']);
+            $module_group->setIdentifier($record['identifier']);
             $module_group->setElementGroup($record['element_group']);
             
             return $module_group;

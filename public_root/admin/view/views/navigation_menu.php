@@ -22,7 +22,7 @@
             $groups = array();
             foreach ($this->_module_groups as $module_group) {
                 $group = array();
-                $group['title'] = $module_group->getTitle();
+                $group['title'] = $this->getTextResource('menu_item_' . $module_group->getIdentifier());
                 if ($module_group->isElementGroup())
                     $group['elements'] = $this->renderElementsMenuItem($module_group);
                 else

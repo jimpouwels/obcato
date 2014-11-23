@@ -4,6 +4,12 @@ welcome_message_prefix: Welkom bij de beheermodule van
 current_user_indicator_logout_text: Uitloggen
 current_user_indicator_welcome_text: Welkom
 
+# NAVIGATION MENU
+menu_item_maintain: Beheer
+menu_item_design: Vormgeving
+menu_item_configure: Configuratie
+menu_item_insert: Invoegen
+
 # LINK EDITOR
 link_editor_target_same_page: Zelfde pagina
 link_editor_target_new_tab: Nieuw tab
