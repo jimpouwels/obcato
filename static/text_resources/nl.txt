@@ -10,6 +10,13 @@ menu_item_design: Vormgeving
 menu_item_configure: Configuratie
 menu_item_insert: Invoegen
 
+# ACTION BUTTONS
+action_button_save: Opslaan
+action_button_delete: Verwijderen
+action_button_add: Toevoegen
+action_button_up: Omhoog
+action_button_down: Omlaag
+
 # LINK EDITOR
 link_editor_target_same_page: Zelfde pagina
 link_editor_target_new_tab: Nieuw tab

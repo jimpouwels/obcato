@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "core/data/page.php";
@@ -40,22 +38,16 @@
         
         public function getActionButtons() {
             $buttons = array();
-            $buttons[] = new ActionButton($this->getTextResource('action_button_save'), "update_element_holder", "icon_apply");
-            if (!is_null($this->_current_page)) {
-                if ($this->_current_page->getId() != 1) {
-                    $buttons[] = new ActionButton($this->getTextResource('action_button_delete'), "delete_element_holder", "icon_delete");
-                }
-            }
-            $buttons[] = new ActionButton($this->getTextResource('action_button_add'), "add_element_holder", "icon_add");
+            $buttons[] = new ActionButtonSave('update_element_holder');
+            if (!$this->currentPageIsHomepage())
+                $buttons[] = new ActionButtonDelete('delete_element_holder');
+            $buttons[] = new ActionButtonAdd('add_element_holder');
             if ($this->_current_page->getId() != 1) {
-                if (!$this->_current_page->isFirst()) {
-                    $buttons[] = new ActionButton($this->getTextResource('action_button_up'), "moveup_element_holder", "icon_moveup");
-                }
-                if (!$this->_current_page->isLast()) {
-                    $buttons[] = new ActionButton($this->getTextResource('action_button_down'), "movedown_element_holder", "icon_movedown");
-                }
+                if (!$this->_current_page->isFirst())
+                    $buttons[] = new ActionButtonUp('moveup_element_holder');
+                if (!$this->_current_page->isLast())
+                    $buttons[] = new ActionButtonDown('movedown_element_holder');
             }
-            
             return $buttons;
         }
         
@@ -81,7 +73,9 @@
         public function onPreHandled() {
             $this->_current_page = $this->_page_pre_handler->getCurrentPage();
         }
+
+        private function currentPageIsHomepage() {
+            return !is_null($this->_current_page) && $this->_current_page->getId() == 1;
+        }
     
     }
-    
-?>

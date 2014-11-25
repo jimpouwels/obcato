@@ -1,11 +1,4 @@
 pages_module_title: Pages
 
-# ACTION BUTTONS
-action_button_save: Save
-action_button_delete: Delete
-action_button_add: Add
-action_button_up: Up
-action_button_down: Down
-
 # ERRORS
 page_not_saved_error_message: Page could not be saved, please resolve the errors

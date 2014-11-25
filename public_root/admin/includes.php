@@ -5,6 +5,11 @@
     require_once CMS_ROOT . "view/views/visual.php";
     require_once CMS_ROOT . "view/template_engine.php";
     require_once CMS_ROOT . "view/views/action_button.php";
+    require_once CMS_ROOT . "view/views/action_button_save.php";
+    require_once CMS_ROOT . "view/views/action_button_delete.php";
+    require_once CMS_ROOT . "view/views/action_button_add.php";
+    require_once CMS_ROOT . "view/views/action_button_up.php";
+    require_once CMS_ROOT . "view/views/action_button_down.php";
     require_once CMS_ROOT . "view/views/button.php";
     require_once CMS_ROOT . "view/views/form_checkbox_single.php";
     require_once CMS_ROOT . "view/views/form_date.php";

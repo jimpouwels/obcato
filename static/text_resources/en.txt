@@ -10,6 +10,13 @@ menu_item_design: Design
 menu_item_configure: Configure
 menu_item_insert: Insert
 
+# ACTION BUTTONS
+action_button_save: Save
+action_button_delete: Delete
+action_button_add: Add
+action_button_up: Up
+action_button_down: Down
+
 # LINK EDITOR
 link_editor_target_same_page: Same page
 link_editor_target_new_tab: New tab
