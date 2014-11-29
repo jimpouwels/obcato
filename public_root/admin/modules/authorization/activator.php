@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
@@ -38,11 +36,11 @@
         public function getActionButtons() {
             $action_buttons = array();
             if (!is_null($this->_current_user)) {
-                $action_buttons[] = new ActionButton("Opslaan", "update_user", "icon_apply");
+                $action_buttons[] = new ActionButtonSave('update_user');
                 if (!$this->_current_user->isLoggedInUser())
-                    $action_buttons[] = new ActionButton("Verwijderen", "delete_user", "icon_delete");
+                    $action_buttons[] = new ActionButtonDelete('delete_user');
             }
-            $action_buttons[] = new ActionButton("Toevoegen", "add_user", "icon_add");
+            $action_buttons[] = new ActionButtonAdd('add_user');
             return $action_buttons;
         }
         

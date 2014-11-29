@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/tab_menu.php";
@@ -75,22 +73,22 @@
                 $save_button = null;
                 $delete_button = null;
                 if (!is_null($this->_current_article)) {
-                    $save_button = new ActionButton("Opslaan", "update_element_holder", "icon_apply");
-                    $delete_button = new ActionButton("Verwijderen", "delete_element_holder", "icon_delete");
+                    $save_button = new ActionButtonSave('update_element_holder');
+                    $delete_button = new ActionButtonDelete('delete_element_holder');
                 }
                 $action_buttons[] = $save_button;
-                $action_buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
+                $action_buttons[] = new ActionButtonAdd('add_element_holder');
                 $action_buttons[] = $delete_button;                
             }
             if ($this->getCurrentTabId() == self::$TERMS_TAB) {
                 if (!is_null($this->_current_term) || TermTab::isEditTermMode()) {
-                    $action_buttons[] = new ActionButton("Opslaan", "update_term", "icon_apply");
+                    $action_buttons[] = new ActionButtonSave('update_term');
                 }
-                $action_buttons[] = new ActionButton("Toevoegen", "add_term", "icon_add");
-                $action_buttons[] = new ActionButton("Verwijderen", "delete_terms", "icon_delete");
+                $action_buttons[] = new ActionButtonAdd('add_term');
+                $action_buttons[] = new ActionButtonDelete('delete_terms');
             }
             if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-                $action_buttons[] = new ActionButton("Verwijderen", "delete_target_pages", "icon_delete");
+                $action_buttons[] = new ActionButtonDelete('delete_target_pages');
             }
             
             return $action_buttons;

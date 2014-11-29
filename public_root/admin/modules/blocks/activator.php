@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
@@ -37,14 +35,12 @@
         public function render() {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
             $content = null;
-            if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB) {
+            if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB)
                 $content = new BlockTab($this->_current_block);
-            } else if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB) {
+            else if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB)
                 $content = new PositionTab($this->_current_position);
-            }
-            if (!is_null($content)) {
+            if (!is_null($content))
                 $this->_template_engine->assign("content", $content->render());
-            }
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
         }
         
@@ -56,17 +52,16 @@
             $action_buttons = array();
             if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB) {
                 if (!is_null($this->_current_block)) {
-                    $action_buttons[] = new ActionButton("Opslaan", "update_element_holder", "icon_apply");
-                    $action_buttons[] = new ActionButton("Verwijderen", "delete_element_holder", "icon_delete");
+                    $action_buttons[] = new ActionButtonSave('update_element_holder');
+                    $action_buttons[] = new ActionButtonDelete('delete_element_holder');
                 }
-                $action_buttons[] = new ActionButton("Toevoegen", "add_element_holder", "icon_add");
+                $action_buttons[] = new ActionButtonAdd('add_element_holder');
             }
             if ($this->_block_pre_handler->getCurrentTabId() == self::$POSITIONS_TAB) {
-                if (!is_null($this->_current_position) || PositionTab::isEditPositionMode()) {
-                    $action_buttons[] = new ActionButton("Opslaan", "update_position", "icon_apply");
-                }
-                $action_buttons[] = new ActionButton("Toevoegen", "add_position", "icon_add");
-                $action_buttons[] = new ActionButton("Verwijderen", "delete_positions", "icon_delete");
+                if (!is_null($this->_current_position) || PositionTab::isEditPositionMode())
+                    $action_buttons[] = new ActionButtonSave('update_position');
+                $action_buttons[] = new ActionButtonAdd('add_position');
+                $action_buttons[] = new ActionButtonDelete('delete_positions');
             }
             return $action_buttons;
         }
