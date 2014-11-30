@@ -59,9 +59,9 @@
         public function getActionButtons() {
             $action_buttons = array();
             if ($this->getCurrentTabId() ==  self::$INSTALLATION_TAB)
-                $action_buttons[] = new ActionButton("Opslaan", "upload_component", "icon_apply");
+                $action_buttons[] = new ActionButtonSave('upload_component');
             if ($this->isCurrentComponentUninstallable())
-                $action_buttons[] = new ActionButton("Verwijderen", "uninstall_component", "icon_delete");
+                $action_buttons[] = new ActionButtonDelete('uninstall_component');
             return $action_buttons;
         }
 

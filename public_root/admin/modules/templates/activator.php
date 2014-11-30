@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
@@ -41,10 +39,10 @@
         public function getActionButtons() {
             $action_buttons = array();
             if (!is_null($this->_current_template))
-                $action_buttons[] = new ActionButton("Opslaan", "update_template", "icon_apply");
-            $action_buttons[] = new ActionButton("Toevoegen", "add_template", "icon_add");
+                $action_buttons[] = new ActionButtonSave('update_template');
+            $action_buttons[] = new ActionButtonAdd('add_template');
             if (!is_null($this->_current_scope))
-                $action_buttons[] = new ActionButton("Verwijderen", "delete_template", "icon_delete");
+                $action_buttons[] = new ActionButtonDelete('delete_template');
             return $action_buttons;
         }
         

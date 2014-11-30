@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "core/data/settings.php";
@@ -38,8 +36,7 @@
     
         public function getActionButtons() {
             $action_buttons = array();
-            $action_buttons[] = new ActionButton("Opslaan", "apply_settings", "icon_apply");
-            
+            $action_buttons[] = new ActionButtonSave('apply_settings');
             return $action_buttons;
         }
         

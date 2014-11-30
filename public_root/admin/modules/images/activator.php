@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
@@ -66,19 +64,19 @@
                 $save_button = null;
                 $delete_button = null;
                 if (!is_null($this->_images_pre_handler->getCurrentImage())) {
-                    $save_button = new ActionButton("Opslaan", "update_image", "icon_apply");
-                    $delete_button = new ActionButton("Verwijderen", "delete_image", "icon_delete");
+                    $save_button = new ActionButtonSave('update_image');
+                    $delete_button = new ActionButtonDelete('delete_image');
                 }
                 $action_buttons[] = $save_button;
-                $action_buttons[] = new ActionButton("Toevoegen", "add_image", "icon_add");
+                $action_buttons[] = new ActionButtonAdd('add_image');
                 $action_buttons[] = $delete_button;                
             }
             if ($this->_current_tab_id == self::$LABELS_TAB) {
                 if (!is_null($this->_label_pre_handler->getCurrentLabel())) {
-                    $action_buttons[] = new ActionButton("Opslaan", "update_label", "icon_apply");
+                    $action_buttons[] = new ActionButtonSave('update_label');
                 }
-                $action_buttons[] = new ActionButton("Toevoegen", "add_label", "icon_add");
-                $action_buttons[] = new ActionButton("Verwijder", "delete_labels", "icon_delete");
+                $action_buttons[] = new ActionButtonAdd('add_label');
+                $action_buttons[] = new ActionButtonDelete('delete_labels');
             }
             if ($this->_current_tab_id == self::$IMPORT_TAB) {
                 $action_buttons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");        

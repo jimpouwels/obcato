@@ -1,10 +1,7 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
-    require_once CMS_ROOT . "view/views/action_button.php";
     require_once CMS_ROOT . "modules/downloads/visuals/list_visual.php";
     require_once CMS_ROOT . "modules/downloads/visuals/editor_visual.php";
     require_once CMS_ROOT . "modules/downloads/visuals/search_box_visual.php";
@@ -37,10 +34,10 @@
         public function getActionButtons() {
             $action_buttons = array();
             if ($this->_current_download) {
-                $action_buttons[] = new ActionButton('Opslaan', 'update_download', 'icon_apply');
-                $action_buttons[] = new ActionButton('Verwijderen', 'delete_download', 'icon_delete');
+                $action_buttons[] = new ActionButtonSave('update_download');
+                $action_buttons[] = new ActionButtonDelete('delete_download');
             }
-            $action_buttons[] = new ActionButton('Toevoegen', 'add_download', 'icon_add');
+            $action_buttons[] = new ActionButtonAdd('add_download');
             return $action_buttons;
         }
 
