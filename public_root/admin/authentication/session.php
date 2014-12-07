@@ -11,4 +11,12 @@
             $_SESSION['language'] = $language;
         }
 
+        public static function setValue($name, $text_resources) {
+            $_SESSION[$name] = $text_resources;
+        }
+
+        public static function getValue($name) {
+            if (isset($_SESSION[$name]))
+                return $_SESSION[$name];
+        }
     }

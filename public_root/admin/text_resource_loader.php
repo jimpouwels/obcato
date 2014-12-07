@@ -7,22 +7,25 @@
 
     class TextResourceLoader {
 
-        private static $_resources = array();
+        private static $resource_cache;
 
         public static function loadTextResources() {
+            if (self::$resource_cache) return;
             $language = Session::getCurrentLanguage();
-            self::$_resources = array_merge(self::$_resources, self::getGlobalTextResources($language));
+            self::$resource_cache = self::getGlobalTextResources($language);
             foreach (ModuleDao::getInstance()->getAllModules() as $module)
-                self::$_resources = array_merge(self::$_resources, self::getModuleTextResources($module, $language));
+                self::$resource_cache = array_merge(self::$resource_cache, self::getModuleTextResources($module, $language));
+            Session::setValue('text_resources', self::$resource_cache);
         }
 
         public static function getTextResources() {
-            return self::$_resources;
+            return Session::getValue('text_resources');
         }
 
         public static function getTextResource($identifier) {
-            if (isset(self::$_resources[$identifier]))
-                return self::$_resources[$identifier];
+            $resources = Session::getValue('text_resources');
+            if (isset($resources[$identifier]))
+                return $resources[$identifier];
         }
 
         private static function getGlobalTextResources($language) {
