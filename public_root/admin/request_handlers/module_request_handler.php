@@ -2,7 +2,6 @@
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-    require_once CMS_ROOT . "text_resource_loader.php";
     
     abstract class ModuleRequestHandler extends HttpRequestHandler {
                 
@@ -17,7 +16,7 @@
         }
 
         protected function getTextResource($identifier) {
-            return TextResourceLoader::getTextResource($identifier);
+            return Session::getTextResource($identifier);
         }
         
         private function getModuleTabFromGetRequest() {

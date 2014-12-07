@@ -89,8 +89,21 @@
         }
 
         private function loadTextResources() {
-            TextResourceLoader::loadTextResources();
-            TemplateEngine::getInstance()->assign("text_resources", TextResourceLoader::getTextResources());
+            if (Session::areTextResourcesLoaded())
+                return $this->loadTextResourcesFromMemory();
+            else
+                return $this->loadTextResourcesFromDisk();
+        }
+
+        private function loadTextResourcesFromMemory() {
+            return Session::getTextResources();
+        }
+
+        private function loadTextResourcesFromDisk() {
+            $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
+            $text_resources = $text_resource_loader->loadTextResources();
+            Session::setTextResources($text_resources);
+            return $text_resources;
         }
                 
         private function isPopupView() {

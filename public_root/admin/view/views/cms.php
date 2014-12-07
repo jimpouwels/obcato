@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "text_resource_loader.php";
+    require_once CMS_ROOT . "authentication/session.php";
     require_once CMS_ROOT . "database/dao/module_dao.php";
     require_once CMS_ROOT . "view/views/navigation_menu.php";
     require_once CMS_ROOT . "view/views/current_user_indicator.php";
@@ -30,6 +30,7 @@
             $current_user_indicator = new CurrentUserIndicator();
             
             $template_engine = TemplateEngine::getInstance();
+            $template_engine->assign("text_resources", Session::getTextResources());
             if (!is_null($this->_module_visual)) {
                 $actions_menu = new ActionsMenu($this->_module_visual->getActionButtons());
                 $template_engine->assign("actions_menu", $actions_menu->render());

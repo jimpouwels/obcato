@@ -11,12 +11,20 @@
             $_SESSION['language'] = $language;
         }
 
-        public static function setValue($name, $text_resources) {
-            $_SESSION[$name] = $text_resources;
+        public static function setTextResources($text_resources) {
+            $_SESSION['text_resources'] = $text_resources;
         }
 
-        public static function getValue($name) {
-            if (isset($_SESSION[$name]))
-                return $_SESSION[$name];
+        public static function getTextResources() {
+            return $_SESSION['text_resources'];
+        }
+
+        public static function getTextResource($name) {
+            if (isset($_SESSION['text_resources'][$name]))
+                return $_SESSION['text_resources'][$name];
+        }
+
+        public static function areTextResourcesLoaded() {
+            return isset($_SESSION['text_resources']);
         }
     }
