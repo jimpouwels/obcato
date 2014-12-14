@@ -32,3 +32,13 @@ link_delete: Verwijderen
 
 # FORM FIELDS
 object_picker_button_title: Selecteer
+
+# ELEMENT HOLDER
+element_holder_content_title: Inhoud
+no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een nieuw element toe te voegen.
+
+# BLOCK SELECTOR
+selected_blocks_header: Geselecteerde blokken
+selected_blocks_position: Positie
+selected_blocks_delete: Verwijderen
+no_selected_blocks_found_message: Geen blokken geselecteerd

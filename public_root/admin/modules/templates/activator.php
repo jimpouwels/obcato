@@ -18,6 +18,7 @@
         private $_current_scope;
         
         public function __construct($template_module) {
+            parent::__construct($template_module);
             $this->_template_module = $template_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_template_pre_handler = new TemplatePreHandler();

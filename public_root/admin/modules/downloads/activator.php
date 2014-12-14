@@ -17,6 +17,7 @@
         private $_module;
 
         public function __construct($module) {
+            parent::__construct($module);
             $this->_module = $module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_download_request_handler = new DownloadRequestHandler();
@@ -53,10 +54,6 @@
 
         public function onPreHandled() {
             $this->_current_download = $this->_download_request_handler->getCurrentDownload();
-        }
-
-        public function getTitle() {
-            return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
         }
 
         private function renderSearchBox() {

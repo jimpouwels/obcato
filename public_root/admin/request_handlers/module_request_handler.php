@@ -9,11 +9,6 @@
             $this->getModuleTabFromGetRequest();
             return $this->getModuleTabFromSession();
         }
-        
-        public function getErrorCount() {
-            global $errors;
-            return count($errors);
-        }
 
         protected function getTextResource($identifier) {
             return Session::getTextResource($identifier);

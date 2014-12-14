@@ -25,7 +25,7 @@
         }
 
         private function getModuleTextResources($module) {
-            return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/' . $module->getIdentifier() . '-' . $this->_language . '.txt');
+            return $this->getTextResourcesFromFile($this->getModuleResourceFilePath($module->getIdentifier()));
         }
 
         private function getTextResourcesFromFile($file_path) {
@@ -42,6 +42,14 @@
                 }
             }
             return $resources;
+        }
+
+        private function getModuleResourceFilePath($module_identifier) {
+            $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-' . $this->_language . '.txt';
+            if (!file_exists($path)) {
+                $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-nl.txt';
+            }
+            return $path;
         }
 
         private function isComment($line) {

@@ -22,7 +22,6 @@
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
-        abstract function getIdentifier();
         abstract function getName();
         abstract function getClassName();
         abstract function getClassFile();

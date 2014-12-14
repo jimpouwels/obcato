@@ -18,6 +18,7 @@
         private $_page_pre_handler;
     
         public function __construct($page_module) {
+            parent::__construct($page_module);
             $this->_page_module = $page_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_page_pre_handler = new PagePreHandler();
@@ -30,10 +31,6 @@
             $this->_template_engine->assign("tree", $page_tree->render());
             $this->_template_engine->assign("editor", $page_editor->render());
             return $this->_template_engine->fetch(self::$PAGE_MODULE_TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_page_module->getTitleTextResourceIdentifier());
         }
         
         public function getActionButtons() {

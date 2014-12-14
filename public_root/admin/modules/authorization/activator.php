@@ -16,6 +16,7 @@
         private $_authorization_module;
         
         public function __construct($authorization_module) {
+            parent::__construct($authorization_module);
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_authorization_pre_handler = new AuthorizationPreHandler();
             $this->_authorization_module = $authorization_module;
@@ -27,10 +28,6 @@
             $this->_template_engine->assign("user_list", $user_list->render());
             $this->_template_engine->assign("user_editor", $user_editor->render());
             return $this->_template_engine->fetch(self::$AUTHORIZATION_MODULE_TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_authorization_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

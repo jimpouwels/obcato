@@ -1,5 +1,4 @@
 <?php
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "view/views/form_template_picker.php";
@@ -32,12 +31,12 @@
         }
         
         private function renderPageMetaData() {
-            $title_field = new TextField("page_title", "Titel", $this->_current_page->getTitle(), true, false, null);
-            $navigation_title_field = new TextField("navigation_title", "Navigatietitel", $this->_current_page->getNavigationTitle(), true, false, null);
-            $description_field = new TextArea("description", "Beschrijving", $this->_current_page->getDescription(), 200, 8, false, true, null);
-            $published_field = new SingleCheckbox("published", "Gepubliceerd", $this->_current_page->isPublished(), false, "");
-            $show_in_navigation_field = new SingleCheckbox("show_in_navigation", "Tonen in navigatie", $this->_current_page->getShowInNavigation(), false, "");
-            $template_picker_field = new TemplatePicker("page_template", "Presentatie", false, "", $this->_current_page->getTemplate(), $this->_current_page->getScope());
+            $title_field = new TextField("page_title", $this->getTextResource('title_field_label'), $this->_current_page->getTitle(), true, false, null);
+            $navigation_title_field = new TextField("navigation_title", $this->getTextResource('navigation_title_field_label'), $this->_current_page->getNavigationTitle(), true, false, null);
+            $description_field = new TextArea("description", $this->getTextResource('description_field_label'), $this->_current_page->getDescription(), 200, 8, false, true, null);
+            $published_field = new SingleCheckbox("published", $this->getTextResource('ispublished_field_label'), $this->_current_page->isPublished(), false, "");
+            $show_in_navigation_field = new SingleCheckbox("show_in_navigation", $this->getTextResource('showinnavigation_field_label'), $this->_current_page->getShowInNavigation(), false, "");
+            $template_picker_field = new TemplatePicker("page_template", $this->getTextResource('template_field_label'), false, "", $this->_current_page->getTemplate(), $this->_current_page->getScope());
             
             $this->_template_engine->assign("page_title_field", $title_field->render());
             $this->_template_engine->assign("navigation_title_field", $navigation_title_field->render());

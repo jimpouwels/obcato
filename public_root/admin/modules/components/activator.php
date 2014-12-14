@@ -20,6 +20,7 @@
         private $_component_request_handler;
 
         public function __construct($components_module) {
+            parent::__construct($components_module);
             $this->_module = $components_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_install_request_handler = new InstallRequestHandler();
@@ -50,10 +51,6 @@
         }
 
         public function onPreHandled() {
-        }
-
-        public function getTitle() {
-            return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
         }
 
         public function getActionButtons() {

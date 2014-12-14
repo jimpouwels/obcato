@@ -12,12 +12,13 @@
     
         private static $TEMPLATE = "settings/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
-        private $_templage_engine;
+        private $_template_engine;
         private $_settings_module;
         private $_settings_dao;
         private $_settings_pre_handler;
     
         public function __construct($settings_module) {
+            parent::__construct($settings_module);
             $this->_settings_module = $settings_module;
             $this->_settings_dao = SettingsDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
@@ -28,10 +29,6 @@
             $this->_template_engine->assign("warning_message", $this->renderWarningMessage());
             $this->_template_engine->assign("settings_editor", $this->renderSettingsEditor());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_settings_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

@@ -18,7 +18,6 @@
             $this->_module_dao = ModuleDao::getInstance();
         }
 
-        abstract function getIdentifier();
         abstract function getTitleTextResourceIdentifier();
         abstract function isPopup();
         abstract function getModuleGroup();
@@ -28,6 +27,7 @@
             $this->_logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
             $this->installModule();
             $this->installStaticFiles(STATIC_DIR . '/modules/' . $this->getIdentifier());
+            $this->installTextResources(STATIC_DIR . '/text_resources');
             $this->installBackendTemplates(BACKEND_TEMPLATE_DIR . '/modules/' . $this->getIdentifier());
             $this->installComponentFiles(CMS_ROOT . 'modules/' . $this->getIdentifier());
         }
@@ -35,6 +35,7 @@
         public function unInstall() {
             $this->uninstallModule();
             $this->uninstallStaticFiles();
+            $this->uninstallTextResources();
             $this->uninstallBackendTemplates();
             $this->uninstallModuleFiles();
             $this->runUninstallQueries();

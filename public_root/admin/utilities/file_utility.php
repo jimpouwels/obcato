@@ -1,8 +1,8 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
+
+    require_once CMS_ROOT . 'utilities/string_utility.php';
+
     class FileUtility {
         
         /*
@@ -110,6 +110,16 @@
             }
             if (is_dir($path) && $remove_path_dir) {
                 rmdir($path);
+            }
+        }
+
+        public function deleteFilesStartingWith($path, $start_with_string) {
+            $files = scandir($path);
+            foreach ($files as $file) {
+                if (StringUtility::startsWith($file, $start_with_string)) {
+                    $source_file = "$path/$file";
+                    unlink($source_file);
+                }
             }
         }
         

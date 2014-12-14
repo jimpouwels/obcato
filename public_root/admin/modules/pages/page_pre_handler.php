@@ -58,7 +58,7 @@
                 $this->deleteSelectedBlocksFromPage();
                 $this->_page_dao->updatePage($this->_current_page);
                 $this->updateElementHolder($this->_current_page);
-                $this->sendSuccessMessage("Pagina succesvol opgeslagen");
+                $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
             }
@@ -100,7 +100,7 @@
             $parent = $this->_current_page->getParent();
             $current_level_pages = $parent->getSubPages();
             $this->updateFollowUp($current_level_pages);
-            $this->sendSuccessMessage("Pagina succesvol verwijderd");
+            $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
             $this->redirectTo("/admin/index.php?page=1");
         }
         
@@ -108,8 +108,8 @@
             $new_page = new Page();
             $new_page->setParentId($this->_current_page->getId());
             $new_page->setShowInNavigation(true);
-            $new_page->setNavigationTitle("Nieuwe pagina");
-            $new_page->setTitle("Nieuwe pagina");
+            $new_page->setNavigationTitle($this->getTextResource('new_page_default_navigation_title'));
+            $new_page->setTitle($this->getTextResource('new_page_default_title'));
             $user = Authenticator::getCurrentUser();
             $new_page->setCreatedById($user->getId());
             $new_page->setType(ELEMENT_HOLDER_PAGE);
@@ -119,7 +119,7 @@
             $current_level_pages = $parent->getSubPages();
             $this->updateFollowUp($current_level_pages);
 
-            $this->sendSuccessMessage("Pagina succesvol aangemaakt");
+            $this->sendSuccessMessage($this->getTextResource('page_added_message'));
             $this->redirectTo("/admin/index.php?page=" . $new_page->getId());
         }
         

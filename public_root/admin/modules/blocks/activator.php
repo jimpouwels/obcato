@@ -25,6 +25,7 @@
         private $_position_pre_handler;
     
         public function __construct($block_module) {
+            parent::__construct($block_module);
             $this->_block_module = $block_module;
             $this->_block_pre_handler = new BlockPreHandler();
             $this->_position_pre_handler = new PositionPreHandler();
@@ -42,10 +43,6 @@
             if (!is_null($content))
                 $this->_template_engine->assign("content", $content->render());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_block_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

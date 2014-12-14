@@ -29,6 +29,7 @@
         private $_target_pages_pre_handler;
         
         public function __construct($article_module) {
+            parent::__construct($article_module);
             $this->_article_module = $article_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
@@ -50,10 +51,6 @@
                 $this->_template_engine->assign("content", $content->render());
             
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_article_module->getTitleTextResourceIdentifier());
         }
         
         public function getRequestHandlers() {

@@ -28,7 +28,7 @@
         }
         
         private function renderInformationMessage() {
-            $information_message = new InformationMessage("Geen elementen gevonden. Ga naar \"Invoegen\" om een nieuw element toe te voegen.");
+            $information_message = new InformationMessage($this->getTextResource('no_elements_found_message'));
             return $information_message->render();
         }
         

@@ -12,6 +12,7 @@
         private $_logout_pre_handler;
     
         public function __construct($module) {
+            parent::__construct($module);
             $this->_module = $module;
             $this->_logout_pre_handler = new LogoutPreHandler();
         }
@@ -32,10 +33,6 @@
         }
         
         public function onPreHandled() {
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
         }
     
     }

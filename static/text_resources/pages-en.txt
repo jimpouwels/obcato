@@ -1,4 +1,23 @@
-pages_module_title: Pages
-
-# ERRORS
+# MESSAGES
 page_not_saved_error_message: Page could not be saved, please resolve the errors
+page_saved_message: Page saved succesfully
+page_deleted_message: Page deleted succesfully
+page_added_message: Page added succesfully
+
+# TITLES
+page_tree_title: Tree
+edit_metadata_title: Edit metadata
+pages_module_title: Pages
+block_selection_title: Blocks
+
+# METADATA LABELS
+title_field_label: Title
+navigation_title_field_label: Navigation title
+description_field_label: Description
+ispublished_field_label: Published
+showinnavigation_field_label: Show in navigation
+template_field_label: Template
+
+# NEW PAGE DEFAULT DATA
+new_page_default_title: New page
+new_page_default_navigation_title: New page

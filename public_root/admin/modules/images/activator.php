@@ -27,6 +27,7 @@
         private $_current_tab_id;
         
         public function __construct($image_module) {
+            parent::__construct($image_module);
             $this->_image_module = $image_module;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_dao = ImageDao::getInstance();
@@ -52,10 +53,6 @@
             }
             
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_image_module->getTitleTextResourceIdentifier());
         }
     
         public function getActionButtons() {

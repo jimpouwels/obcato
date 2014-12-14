@@ -20,6 +20,7 @@
         private $_template_engine;
     
         public function __construct($database_module) {
+            parent::__construct($database_module);
             $this->_database_module = $database_module;
             $this->_database_pre_handler = new DatabasePreHandler();
             $this->_template_engine = TemplateEngine::getInstance();
@@ -55,10 +56,6 @@
         }
         
         public function onPreHandled() {
-        }
-        
-        public function getTitle() {
-            return $this->getTextResource($this->_database_module->getTitleTextResourceIdentifier());
         }
         
         private function renderTabMenu() {
