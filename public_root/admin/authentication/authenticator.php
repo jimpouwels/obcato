@@ -44,7 +44,7 @@
             return $authorization_dao->getUser($_SESSION["username"]);
         }
 
-        private function authenticate($username, $password) {
+        private static function authenticate($username, $password) {
             $mysql_database = MysqlConnector::getInstance();
             $password = StringUtility::hashStringValue($password);
             $auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
