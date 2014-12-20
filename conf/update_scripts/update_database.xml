@@ -51,10 +51,10 @@
             <query>UPDATE modules SET title = 'logout_module_title' WHERE identifier = 'logout'</query>
             <query>ALTER TABLE modules CHANGE COLUMN title title_text_resource_identifier VARCHAR(255) NOT NULL</query>
             <query>ALTER TABLE module_groups CHANGE COLUMN title identifier VARCHAR(255) NOT NULL</query>
-            <query>UPDATE module_groups SET title_text_resource = 'maintain' where identifier = 'Beheer'</query>
-            <query>UPDATE module_groups SET title_text_resource = 'configure' where identifier = 'Configuratie'</query>
-            <query>UPDATE module_groups SET title_text_resource = 'design' where identifier = 'Vormgeving'</query>
-            <query>UPDATE module_groups SET title_text_resource = 'insert' where identifier = 'Invoegen'</query>
+            <query>UPDATE module_groups SET identifier = 'maintain' where identifier = 'Beheer'</query>
+            <query>UPDATE module_groups SET identifier = 'configure' where identifier = 'Configuratie'</query>
+            <query>UPDATE module_groups SET identifier = 'design' where identifier = 'Vormgeving'</query>
+            <query>UPDATE module_groups SET identifier = 'insert' where identifier = 'Invoegen'</query>
         </queries>
     </version>
 </versions>
