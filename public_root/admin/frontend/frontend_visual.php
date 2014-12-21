@@ -90,7 +90,7 @@
                 $target_html = "onclick=\"window.open('$url','$title', 'width=800,height=600, scrollbars=no,toolbar=no,location=no'); return false\"";
             else
                 $target_html = "target=\"$target\"";
-            return '<a title="' . $title . '"' . $target_html . 'href="' . $url . '">';
+            return '<a title="' . $title . '" ' . $target_html . ' href="' . $url . '">';
         }
     }
 
