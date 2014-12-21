@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . '/modules/components/visuals/installation/component_install_form_visual.php';
+    require_once CMS_ROOT . 'modules/components/visuals/installation/component_install_form_visual.php';
 
     class InstallationTabVisual extends Visual {
 
