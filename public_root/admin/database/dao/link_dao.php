@@ -59,7 +59,7 @@
             else
                 $link->setType(Link::EXTERNAL);
             
-            $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = '" . $link->getTargetAddress() . "',
+            $query = "UPDATE links SET title = '" . mysql_real_escape_string($link->getTitle()) . "', target_address = '" . $link->getTargetAddress() . "',
                       code = '" . $link->getCode() . "', target = '" . $link->getTarget() . "', type = '" . $link->getType() . "'";
             
             if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId()))
