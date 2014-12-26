@@ -1,5 +1,4 @@
 <?php
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "request_handlers/form.php";
@@ -17,5 +16,3 @@
             $this->_element->setTemplateId($template_id);
         }
     }
-
-?>

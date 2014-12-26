@@ -22,8 +22,7 @@
             $this->setCurrentModule();
         }
 
-        public function setCurrentModule()
-        {
+        public function setCurrentModule() {
             $current_module = null;
             if (isset($_GET['home'])) {
                 unset($_SESSION['module_id']);

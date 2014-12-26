@@ -30,6 +30,11 @@ link_code: Code
 link_open_in: Open in
 link_delete: Delete
 
+# LINK ERROR MESSAGES
+link_not_saved_error: A link could not be saved, resolve the error(s)
+link_code_field_missing: Link code is mandatory
+link_code_field_invalid: Fill in a valid number
+
 # FORM FIELDS
 object_picker_button_title: Select
 

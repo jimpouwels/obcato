@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "request_handlers/module_request_handler.php";
+    require_once CMS_ROOT . "request_handlers/link_form.php";
     
     abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 
@@ -63,23 +64,21 @@
         private function updateLinks($element_holder) {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {
-                if (isset($_POST['link_' . $link->getId() . '_delete']))
+                $link_form = new LinkForm($link);
+                if ($link_form->isSelectedForDeletion())
                     $this->_link_dao->deleteLink($link);
                 else {
-                    if (isset($_POST['link_' . $link->getId() . '_title']))
-                        $link->setTitle($_POST['link_' . $link->getId() . '_title']);
-                    if (isset($_POST['link_' . $link->getId() . '_url']))
-                        $link->setTargetAddress($_POST['link_' . $link->getId() . '_url']);
-                    if (isset($_POST['link_' . $link->getId() . '_code']))
-                        $link->setCode($_POST['link_' . $link->getId() . '_code']);
-                    if (isset($_POST['link_' . $link->getId() . '_target']))
-                        $link->setTarget($_POST['link_' . $link->getId() . '_target']);
-                    if (isset($_POST['link_element_holder_ref_' . $link->getId()]))
-                        $link->setTargetElementHolderId($_POST['link_element_holder_ref_' . $link->getId()]);
-                    if (isset($_POST['delete_link_target']) && ($_POST['delete_link_target'] == $link->getId()))
-                        $link->setTargetElementHolderId(null);
+                    $this->updateLink($link, $link_form);
                 }
+            }
+        }
+
+        private function updateLink($link, $link_form) {
+            try {
+                $link_form->loadFields();
                 $this->_link_dao->updateLink($link);
+            } catch (FormException $e) {
+                $this->sendErrorMessage($this->getTextResource('link_not_saved_error'));
             }
         }
 
@@ -88,13 +87,11 @@
             return $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
-        private function isAddElementAction()
-        {
+        private function isAddElementAction() {
             return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
         }
 
-        private function isDeleteElementAction()
-        {
+        private function isDeleteElementAction() {
             return isset($_POST[DELETE_ELEMENT_FORM_ID]) && $_POST[DELETE_ELEMENT_FORM_ID] != "";
         }
 

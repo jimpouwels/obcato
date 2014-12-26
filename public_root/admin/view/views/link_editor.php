@@ -45,27 +45,19 @@
             $link_target_field = null;
             $link_target = $link->getTargetElementHolder();
             if (is_null($link_target)) {
-                $target_text_field = new TextField('link_' . $link->getId() . '_url', '', $link->getTargetAddress(), false, false, null);
+                $target_text_field = new TextField('link_' . $link->getId() . '_url', '', $link->getTargetAddress(), false, false, '');
                 $link_target_field = $target_text_field->render();
             }
             return $link_target_field;
         }
 
         private function renderTitleField($link) {
-            $title_field = new TextField('link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, null);
+            $title_field = new TextField('link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, '');
             return $title_field->render();
         }
 
-        private function getLinkTitle($link) {
-            $link_target = $link->getTargetElementHolder();
-            $target_title = '';
-            if (!is_null($link_target))
-                $target_title = $link_target->getTitle();
-            return $target_title;
-        }
-
         private function renderCodeField($link) {
-            $code_field = new TextField('link_' . $link->getId() . '_code', 'Code', $link->getCode(), false, false, null);
+            $code_field = new TextField('link_' . $link->getId() . '_code', 'Code', $link->getCode(), true, false, '');
             return $code_field->render();
         }
 
@@ -82,6 +74,14 @@
         private function renderLinkTargetPicker($link) {
             $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), '', 'update_element_holder');
             return $element_holder_picker->render();
+        }
+
+        private function getLinkTitle($link) {
+            $link_target = $link->getTargetElementHolder();
+            $target_title = '';
+            if (!is_null($link_target))
+                $target_title = $link_target->getTitle();
+            return $target_title;
         }
 
         private function renderNoLinksFoundMessage() {

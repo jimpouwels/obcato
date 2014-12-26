@@ -30,6 +30,11 @@ link_code: Code
 link_open_in: Openen in
 link_delete: Verwijderen
 
+# LINK ERROR MESSAGES
+link_not_saved_error: Er is een link niet opgeslagen, verwerk de fout(en)
+link_code_field_missing: Link code is verplicht
+link_code_field_invalid: Vul een geldig getal in
+
 # FORM FIELDS
 object_picker_button_title: Selecteer
 

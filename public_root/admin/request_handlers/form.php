@@ -5,7 +5,9 @@
     require_once CMS_ROOT . "utilities/string_utility.php";
     
     abstract class Form {
-        
+
+        private $_error_count;
+
         public abstract function loadFields();
         
         public function getMandatoryFieldValue($field_name, $error_message) {
@@ -101,14 +103,15 @@
         }
         
         protected function hasErrors() {
-            global $errors;
-            return count($errors) > 0;
+            return $this->_error_count > 0;
         }
         
         protected function raiseError($error_field, $error_message) {
             global $errors;
-            if (!$this->hasError($error_field))
+            if (!$this->hasError($error_field)) {
                 $errors[$error_field . '_error'] = $error_message;
+                $this->_error_count++;
+            }
         }
         
         protected function isEmpty($value) {
@@ -124,6 +127,10 @@
         private function hasError($field_name) {
             global $errors;
             return isset($errors[$field_name . '_error']);
+        }
+
+        protected function getTextResource($identifier) {
+            return Session::getTextResource($identifier);
         }
     
     }

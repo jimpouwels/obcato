@@ -29,4 +29,8 @@
             exit();
         }
 
+        protected function getTextResource($identifier) {
+            return Session::getTextResource($identifier);
+        }
+
     }

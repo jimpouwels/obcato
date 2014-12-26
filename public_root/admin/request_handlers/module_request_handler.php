@@ -9,10 +9,6 @@
             $this->getModuleTabFromGetRequest();
             return $this->getModuleTabFromSession();
         }
-
-        protected function getTextResource($identifier) {
-            return Session::getTextResource($identifier);
-        }
         
         private function getModuleTabFromGetRequest() {
             if (isset($_GET["module_tab"]))
