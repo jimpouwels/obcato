@@ -1,6 +1,4 @@
 <?php
-    
-    
     defined('_ACCESS') or die;
     
     class Notifications {
@@ -17,8 +15,10 @@
             @param $message The message to set
         */
         public static function setSuccessMessage($message) {
-            $_SESSION['success'] = true;
-            $_SESSION['cms_notification'] = $message;
+            if (!self::getMessage()) {
+                $_SESSION['success'] = true;
+                self::setMessage($message);
+            }
         }
         
         /*
@@ -27,19 +27,19 @@
             @param $message The message to set
         */
         public static function setFailedMessage($message) {
-            $_SESSION['success'] = false;
-            $_SESSION['cms_notification'] = $message;
+            if (!self::getMessage()) {
+                $_SESSION['success'] = false;
+                self::setMessage($message);
+            }
         }
         
         /*
             Returns the message in the session.
         */
         public static function getMessage() {
-            $message = NULL;
             if (isset($_SESSION['cms_notification']) && !is_null($_SESSION['cms_notification'])) {
-                $message = $_SESSION['cms_notification'];
+                return $_SESSION['cms_notification'];
             }
-            return $message;
         }
         
         /*
@@ -63,6 +63,10 @@
             if (isset($_SESSION['success']) && !is_null($_SESSION['success'])) {
                 unset($_SESSION['success']);
             }
+        }
+
+        private static function setMessage($message) {
+            $_SESSION['cms_notification'] = $message;
         }
     
     }

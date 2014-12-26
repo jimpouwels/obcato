@@ -31,7 +31,7 @@
                 $this->addSelectedTerms();
                 $this->_element_dao->updateElement($this->_article_overview_element);
             } catch (FormException $e) {
-                $this->sendErrorMessage("Er is een artikeloverzicht niet opgeslagen, verwerk de fouten");
+                $this->sendErrorMessage('Er is een element niet opgeslagen, verwerk de fouten');
             }
         }
 
