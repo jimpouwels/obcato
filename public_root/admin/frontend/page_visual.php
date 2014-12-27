@@ -1,6 +1,4 @@
 <?php
-
-    
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "frontend/frontend_visual.php";
@@ -26,7 +24,9 @@
         public function render() {
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
             $this->_template_engine->assign("page", $this->getPageData($this->_page));
-            $this->_template_engine->assign("article", $this->renderArticle());
+            if (!is_null($this->_article) && $this->_article->isPublished()) {
+                $this->_template_engine->assign("article", $this->renderArticle());
+            }
             $this->_template_engine->assign("root_page", $this->getPageData($this->_settings->getHomepage()));
             return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
@@ -61,16 +61,13 @@
         }
 
         private function renderArticle() {
-            $article_content = null;
-            if (!is_null($this->_article) && $this->_article->isPublished()) {
-                $article_content = array();
-                $article_content["id"] = $this->_article->getId();
-                $article_content["title"] = $this->_article->getTitle();
-                $article_content["description"] = $this->_article->getDescription();
-                $article_content["publication_date"] = $this->_article->getPublicationDate();
-                $article_content["image"] = $this->getImageData($this->_article->getImage());
-                $article_content["elements"] = $this->renderElementHolderContent($this->_article);
-            }
+            $article_content = array();
+            $article_content["id"] = $this->_article->getId();
+            $article_content["title"] = $this->_article->getTitle();
+            $article_content["description"] = $this->_article->getDescription();
+            $article_content["publication_date"] = $this->_article->getPublicationDate();
+            $article_content["image"] = $this->getImageData($this->_article->getImage());
+            $article_content["elements"] = $this->renderElementHolderContent($this->_article);
             return $article_content;
         }
 
