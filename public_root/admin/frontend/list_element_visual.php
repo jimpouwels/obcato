@@ -4,7 +4,7 @@
     require_once CMS_ROOT . "frontend/frontend_visual.php";
 
     class ListElementFrontendVisual extends FrontendVisual {
-    
+
         private $_template_engine;
         private $_list_element;
 
