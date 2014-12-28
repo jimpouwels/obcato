@@ -208,58 +208,11 @@ body {
 /*
 =========== ACTION BUTTON STYLES
 */
-.icon_apply {
-    background: url("/admin/static.php?file=/default/img/default_icons/apply.png") no-repeat scroll 5px 0;
+.action_button {
+    background: no-repeat scroll 5px 0;
     display: block;
     height: 32px;
     padding: 0px;
-    width: 36px;
-    margin-left: 6px;
-}
-
-.icon_delete {
-    background: url("/admin/static.php?file=/default/img/default_icons/delete.png") no-repeat scroll 5px 0;
-    display: block;
-    height: 32px;
-    padding: 0px;
-    width: 37px;
-    margin-left: 6px;
-}
-
-.icon_upload {
-    background: url("/admin/static.php?file=/default/img/default_icons/upload.png") no-repeat scroll 5px 0;
-    display: block;
-    height: 32px;
-    padding: 0px;
-    width: 32px;
-    margin-left: 4px;
-}
-
-.icon_add {
-    background: url("/admin/static.php?file=/default/img/default_icons/add.png") no-repeat scroll 5px 0;
-    display: block;
-    height: 32px;
-    padding: 0px;
-    width: 38px;
-    margin-left: 5px;
-}
-
-.icon_moveup {
-    background: url("/admin/static.php?file=/default/img/default_icons/up.png") no-repeat scroll 5px 0;
-    display: block;
-    height: 32px;
-    padding: 0px;
-    width: 36px;
-    margin-left: 7px;
-}
-
-.icon_movedown{
-    background: url("/admin/static.php?file=/default/img/default_icons/down.png") no-repeat scroll 5px 0;
-    display: block;
-    height: 32px;
-    padding: 0px;
-    width: 36px;
-    margin-left: 7px;
 }
 
 #actions_menu {
@@ -292,6 +245,42 @@ body {
     text-decoration: none;
     color: #146295;
     font-size: 0.9em;
+}
+
+.icon_apply {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/apply.png");
+    width: 36px;
+    margin-left: 6px;
+}
+
+.icon_delete {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/delete.png");
+    width: 37px;
+    margin-left: 6px;
+}
+
+.icon_upload {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/upload.png");
+    width: 32px;
+    margin-left: 8px;
+}
+
+.icon_add {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/add.png");
+    width: 38px;
+    margin-left: 5px;
+}
+
+.icon_moveup {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/up.png");
+    width: 36px;
+    margin-left: 7px;
+}
+
+.icon_movedown{
+    background: url("/admin/static.php?file=/default/img/default_icons/down.png");
+    width: 36px;
+    margin-left: 14px;
 }
 
 /*

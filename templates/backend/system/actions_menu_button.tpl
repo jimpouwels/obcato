@@ -1,6 +1,6 @@
 <li>
 	<a id="{$action_id}" href="#">
-		<span class="{$icon_class}"></span>
+		<span class="action_button {$icon_class}"></span>
 		{$label}
 	</a>
 </li>
