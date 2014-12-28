@@ -355,6 +355,7 @@ h1 {
 .element_wrapper {
     cursor: move;
     border: 1px solid #d3d3d3;
+    padding-left: 10px;
     padding-bottom: 5px;
     margin: 20px;
     box-shadow: 5px 5px 5px #888888;
@@ -375,10 +376,6 @@ h1 {
     font-family: "Trebuchet MS",Arial,Verdana;
     text-align: left;
     margin-top: 10px;
-}
-
-.element_header th, .element_wrapper td {
-    padding-left: 10px;
 }
 
 .element_header .delete_button {

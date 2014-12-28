@@ -3,8 +3,13 @@
 </tr>
 <tr>
 	<td>
-		{$show_from_field}{$show_to_field}
+          {$show_from_field}
 	</td>
+</tr>
+<tr>
+    <td>
+        {$show_to_field}
+    </td>
 </tr>
 <tr>
 	<td>{$max_results_field}</td>
