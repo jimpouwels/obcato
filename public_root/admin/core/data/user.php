@@ -5,76 +5,76 @@
     
     class User extends Entity {
     
-        private $myUsername;
-        private $myEmailAddress;
-        private $myFirstName;
-        private $myLastName;
-        private $myPassword;
-        private $myPrefix;
-        private $myUuid;
+        private $_username;
+        private $_email_address;
+        private $_first_name;
+        private $_prefix;
+        private $_last_name;
+        private $_password;
+        private $_uuid;
         
         public function getUsername() {
-            return $this->myUsername;
+            return $this->_username;
         }
         
         public function setUsername($username) {
-            $this->myUsername = $username;
+            $this->_username = $username;
         }
         
         public function getPassword() {
-            return $this->myPassword;
+            return $this->_password;
         }
         
         public function setPassword($password) {
-            $this->myPassword = $password;
+            $this->_password = $password;
         }
         
         public function getEmailAddress() {
-            return $this->myEmailAddress;
+            return $this->_email_address;
         }
         
         public function setEmailAddress($email_address) {
-            $this->myEmailAddress = $email_address;
+            $this->_email_address = $email_address;
         }
         
         public function getFirstName() {
-            return $this->myFirstName;
+            return $this->_first_name;
         }
         
         public function setFirstName($first_name) {
-            $this->myFirstName = $first_name;
+            $this->_first_name = $first_name;
         }
         
         public function getLastName() {
-            return $this->myLastName;
+            return $this->_last_name;
         }
         
         public function setLastName($last_name) {
-            $this->myLastName = $last_name;
+            $this->_last_name = $last_name;
         }
         
         public function getPrefix() {
-            return $this->myPrefix;
+            return $this->_prefix;
         }
         
         public function setPrefix($prefix) {
-            $this->myPrefix = $prefix;
+            $this->_prefix = $prefix;
         }
         
         public function getUuid() {
-            return $this->myUuid;
+            return $this->_uuid;
         }
         
         public function setUuid($uuid) {
-            $this->myUuid = $uuid;
+            $this->_uuid = $uuid;
         }
         
         public function getFullName() {
-            $full_name = $this->myFirstName;
-            if (!is_null($this->myPrefix) && $this->myPrefix != '') {
-                $full_name = $full_name . ' ' . $this->myPrefix;
+            $full_name = $this->getFirstName();
+            if (!is_null($this->getPrefix()) && $this->getPrefix() != '') {
+                $full_name = $full_name . ' ' . $this->getPrefix();
             }
-            $full_name = $full_name . ' ' . $this->myLastName;
+            $full_name = $full_name . ' ' . $this->getLastName();
             return $full_name;
         }
         
