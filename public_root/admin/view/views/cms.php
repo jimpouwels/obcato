@@ -31,13 +31,12 @@
             
             $template_engine = TemplateEngine::getInstance();
             $template_engine->assign("text_resources", Session::getTextResources());
+
             if (!is_null($this->_module_visual)) {
-                $actions_menu = new ActionsMenu($this->_module_visual->getActionButtons());
-                $template_engine->assign("actions_menu", $actions_menu->render());
                 $template_engine->assign("page_title", $this->_module_visual->getTitle());
                 $template_engine->assign("module_head_includes", $this->_module_visual->getHeadIncludes());
             }
-            
+            $template_engine->assign("actions_menu", $this->getActionsMenu()->render());
             $template_engine->assign("website_title", $this->_website_title);
             $template_engine->assign("navigation_menu", $navigation_menu->render());
             $template_engine->assign("current_user_indicator", $current_user_indicator->render());
@@ -47,6 +46,13 @@
             $template_engine->assign("db_version", DB_VERSION);
             
             $this->_template_engine->display(self::$TEMPLATE);
+        }
+
+        private function getActionsMenu() {
+            $action_buttons = array();
+            if (!is_null($this->_module_visual))
+                $action_buttons = $this->_module_visual->getActionButtons();
+            return new ActionsMenu($action_buttons);
         }
         
         private function renderContentPane() {

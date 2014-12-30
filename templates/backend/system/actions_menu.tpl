@@ -1,9 +1,9 @@
-{if count($buttons) > 0}
-	<div id="actions_menu">
-		<div class="action_buttons_wrapper">
-			<ul>
-				{$buttons}
-			</ul>
-		</div>
-	</div>
-{/if}
+<div id="actions_menu">
+    {if count($buttons) > 0}
+        <ul>
+            {foreach from=$buttons item=button}
+                {$button}
+            {/foreach}
+        </ul>
+    {/if}
+</div>

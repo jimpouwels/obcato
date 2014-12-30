@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/visual.php";
@@ -15,18 +13,16 @@
         }
     
         public function render() {
-            $buttons_html = $this->getActionButtonsHtml();
-            
             $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("buttons", $buttons_html);
+            $template_engine->assign("buttons", $this->getActionButtonsHtml());
             return $template_engine->fetch(self::$TEMPLATE);
         }
         
         private function getActionButtonsHtml() {
-            $buttons_html = "";
+            $buttons_html = array();
             foreach ($this->_action_buttons as $action_button) {
                 if (!is_null($action_button)) {
-                    $buttons_html .= $action_button->render();
+                    $buttons_html[] = $action_button->render();
                 }
             }
             return $buttons_html;
