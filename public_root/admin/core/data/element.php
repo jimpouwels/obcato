@@ -1,9 +1,9 @@
 <?php
     defined('_ACCESS') or die;
-    
-    include_once CMS_ROOT . "core/data/presentable.php";
-    include_once CMS_ROOT . "database/dao/element_dao.php";
-    include_once CMS_ROOT . "database/dao/element_holder_dao.php";
+
+    require_once CMS_ROOT . "core/data/presentable.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "database/dao/element_holder_dao.php";
 
     abstract class Element extends Presentable {
     

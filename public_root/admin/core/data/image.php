@@ -1,10 +1,8 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
-    include_once CMS_ROOT . "core/data/entity.php";
-    include_once CMS_ROOT . "database/dao/authorization_dao.php";
+
+    require_once CMS_ROOT . "core/data/entity.php";
+    require_once CMS_ROOT . "database/dao/authorization_dao.php";
 
     class Image extends Entity {
     

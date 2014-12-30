@@ -4,7 +4,6 @@
     require_once CMS_ROOT . "core/data/entity.php";
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
 
-
     class Link extends Entity {
         
         const INTERNAL = "INTERNAL";

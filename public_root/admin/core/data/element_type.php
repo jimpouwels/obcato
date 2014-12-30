@@ -1,8 +1,8 @@
 <?php
     defined('_ACCESS') or die;
     
-    include_once CMS_ROOT . "core/data/presentable.php";
-    include_once CMS_ROOT . "database/dao/scope_dao.php";
+    require_once CMS_ROOT . "core/data/presentable.php";
+    require_once CMS_ROOT . "database/dao/scope_dao.php";
 
     class ElementType extends Entity {
     

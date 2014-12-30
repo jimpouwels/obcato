@@ -1,9 +1,7 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
-    include_once CMS_ROOT . "core/data/entity.php";
+
+    require_once CMS_ROOT . "core/data/entity.php";
 
     class ImageLabel extends Entity {
     
