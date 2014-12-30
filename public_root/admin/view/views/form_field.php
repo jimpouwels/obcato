@@ -1,6 +1,8 @@
 <?php
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . 'authentication/session.php';
+
     abstract class FormField extends Visual {
 
         private $_template_engine;
@@ -40,11 +42,10 @@
         }
         
         public function getErrorHtml($field_name) {
-            global $errors;
             $error_html = "";
-            if ($this->hasError($field_name)) {
+            if (Session::hasError($field_name)) {
                 $template_engine = TemplateEngine::getInstance();
-                $template_engine->assign("error", $errors[$field_name . '_error']);
+                $template_engine->assign("error", Session::popError($field_name));
                 $error_html = $template_engine->fetch("system/form_error.tpl");
             }
             return $error_html;
@@ -60,13 +61,8 @@
         }
 
         public function errorClass($field_name) {
-            if ($this->hasError($field_name))
+            if (Session::hasError($field_name))
                 return "invalid ";
-        }
-        
-        private function hasError($field_name) {
-            global $errors;
-            return isset($errors[$field_name . "_error"]) && $errors[$field_name . "_error"];
         }
     }
 
