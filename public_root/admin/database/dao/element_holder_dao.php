@@ -27,10 +27,8 @@
         public function getElementHolder($id) {
             $query = "SELECT " . self::$myAllColumns . " FROM element_holders e WHERE e.id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            $element_holder = NULL;
             while ($row = $result->fetch_assoc())
                 return ElementHolder::constructFromRecord($row);
-            return $element_holder;
         }
 
         public function persist($element_holder) {

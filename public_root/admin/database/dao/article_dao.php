@@ -38,7 +38,6 @@
                                                                     AND e.id = a.element_holder_id");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
-            $article = null;
             while ($row = $result->fetch_assoc())
                 $article = Article::constructFromRecord($row);
             return $article;

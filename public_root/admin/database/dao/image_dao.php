@@ -151,10 +151,8 @@
         public function getLabel($id) {
             $query = "SELECT * FROM image_labels WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            $label = NULL;
             while ($row = $result->fetch_assoc())
                 return ImageLabel::constructFromRecord($row);
-            return $label;
         }
 
         public function getLabelByName($name) {

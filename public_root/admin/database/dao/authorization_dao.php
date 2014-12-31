@@ -1,6 +1,4 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/data/user.php";

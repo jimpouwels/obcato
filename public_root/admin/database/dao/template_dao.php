@@ -38,7 +38,6 @@
                 $scope_id = $scope->getId();
                 $statement->bind_param("i", $scope_id);
                 $result = $this->_mysql_connector->executeStatement($statement);
-                $template = null;
                 while ($row = $result->fetch_assoc())
                     $templates[] = Template::constructFromRecord($row);
             }
