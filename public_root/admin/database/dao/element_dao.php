@@ -1,11 +1,9 @@
 <?php
-
-
     defined('_ACCESS') or die;
 
-    include_once CMS_ROOT . "database/mysql_connector.php";
-    include_once CMS_ROOT . "core/data/element_type.php";
-    include_once CMS_ROOT . "core/data/element.php";
+    require_once CMS_ROOT . "database/mysql_connector.php";
+    require_once CMS_ROOT . "core/data/element_type.php";
+    require_once CMS_ROOT . "core/data/element.php";
 
     class ElementDao {
 
@@ -63,7 +61,6 @@
             $query = "SELECT * FROM element_types ORDER BY name";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
-            $element_type = NULL;
             while ($row = $result->fetch_assoc())
                 $element_types[] = ElementType::constructFromRecord($row);
             return $element_types;
@@ -102,7 +99,6 @@
             $query = "SELECT * FROM element_types WHERE system_default = 1 ORDER BY name";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
-            $element_type = NULL;
             while ($row = $result->fetch_assoc())
                 $element_types[] = ElementType::constructFromRecord($row);
             return $element_types;
@@ -112,7 +108,6 @@
             $query = "SELECT * FROM element_types WHERE system_default = 0 ORDER BY name";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
-            $element_type = NULL;
             while ($row = $result->fetch_assoc())
                 $element_types[] = ElementType::constructFromRecord($row);
             return $element_types;
@@ -121,7 +116,6 @@
         public function getElementType($element_type_id) {
             $query = "SELECT * FROM element_types WHERE id = " . $element_type_id;
             $result = $this->_mysql_connector->executeQuery($query);
-            $element_type = NULL;
             while ($row = $result->fetch_assoc())
                 return ElementType::constructFromRecord($row);
         }
@@ -129,7 +123,6 @@
         public function getElementTypeByIdentifier($identifier) {
             $query = "SELECT * FROM element_types WHERE identifier = '$identifier'";
             $result = $this->_mysql_connector->executeQuery($query);
-            $element_type = null;
             while ($row = $result->fetch_assoc())
                 return ElementType::constructFromRecord($row);
         }
@@ -137,7 +130,6 @@
         public function getElementTypeForElement($element_id) {
             $query = "SELECT * FROM element_types t, elements e WHERE e.id = " . $element_id . " AND t.id = e.type_id";
             $result = $this->_mysql_connector->executeQuery($query);
-            $element_type = null;
             while ($row = $result->fetch_assoc())
                 return ElementType::constructFromRecord($row);
         }
