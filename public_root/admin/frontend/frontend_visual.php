@@ -1,8 +1,8 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/data/article.php";
-    require_once CMS_ROOT . "core/data/page.php";
+    require_once CMS_ROOT . "core/model/article.php";
+    require_once CMS_ROOT . "core/model/page.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";

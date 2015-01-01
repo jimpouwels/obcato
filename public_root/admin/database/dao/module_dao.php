@@ -4,8 +4,8 @@
     defined('_ACCESS') or die;
 
     include_once CMS_ROOT . "database/mysql_connector.php";
-    include_once CMS_ROOT . "core/data/module_group.php";
-    include_once CMS_ROOT . "core/data/module.php";
+    include_once CMS_ROOT . "core/model/module_group.php";
+    include_once CMS_ROOT . "core/model/module.php";
 
     class ModuleDao {
 

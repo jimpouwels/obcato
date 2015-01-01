@@ -8,7 +8,7 @@
     include_once CMS_ROOT . "database/dao/element_holder_dao.php";
     include_once CMS_ROOT . "database/dao/block_dao.php";
     include_once CMS_ROOT . "database/dao/template_dao.php";
-    include_once CMS_ROOT . "core/data/page.php";
+    include_once CMS_ROOT . "core/model/page.php";
     include_once CMS_ROOT . "database/dao/authorization_dao.php";
 
     class PageDao {

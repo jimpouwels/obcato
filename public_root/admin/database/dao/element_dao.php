@@ -2,8 +2,8 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/mysql_connector.php";
-    require_once CMS_ROOT . "core/data/element_type.php";
-    require_once CMS_ROOT . "core/data/element.php";
+    require_once CMS_ROOT . "core/model/element_type.php";
+    require_once CMS_ROOT . "core/model/element.php";
 
     class ElementDao {
 

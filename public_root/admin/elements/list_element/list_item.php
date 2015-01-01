@@ -3,7 +3,7 @@
     
     defined('_ACCESS') or die;
 
-    include_once CMS_ROOT . "core/data/entity.php";
+    include_once CMS_ROOT . "core/model/entity.php";
 
     class ListItem extends Entity {
             

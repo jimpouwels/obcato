@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/data/element_holder.php";
+    require_once CMS_ROOT . "core/model/element_holder.php";
 
     class Block extends ElementHolder {
     

@@ -3,7 +3,7 @@
     
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/data/element.php";
+    require_once CMS_ROOT . "core/model/element.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "elements/article_overview_element/visuals/article_overview_element_statics.php";

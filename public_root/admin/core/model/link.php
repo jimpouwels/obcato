@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
     
-    require_once CMS_ROOT . "core/data/entity.php";
+    require_once CMS_ROOT . "core/model/entity.php";
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
 
     class Link extends Entity {
