@@ -1,1 +1,13 @@
 articles_module_title: Artikelen
+articles_search_results_title: Gevonden artikelen
+articles_search_results_title_column: Titel
+articles_search_creation_date_column: Aangemaakt op
+articles_search_author_column: Aangemaakt door
+articles_search_results_published_column: Gepubliceerd
+
+# SEARCH BOX
+articles_search_box_title: Zoeken
+articles_search_box_query: Zoekterm
+articles_search_box_term: Term
+articles_search_box_show_all: Toon allen
+articles_search_box_search_button: Zoeken

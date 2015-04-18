@@ -37,6 +37,7 @@ link_code_field_invalid: Fill in a valid number
 
 # FORM FIELDS
 object_picker_button_title: Select
+select_field_default_text: &gt; Select
 
 # ELEMENT HOLDER
 element_holder_content_title: Content

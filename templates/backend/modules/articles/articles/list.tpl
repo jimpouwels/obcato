@@ -1,5 +1,5 @@
 <fieldset class="admin_fieldset article_list">
-	<div class="fieldset-title">Gevonden artikelen</div>
+	<div class="fieldset-title">{$text_resources.articles_search_results_title}</div>
 	{if count($search_results) > 0}
 		{if !is_null($search_query)}
 		<p class="search_job"><strong><em>Zoekterm: </em></strong>&nbsp;'{$search_query}'<br />
@@ -14,10 +14,10 @@
 			<colgroup width="100px"></colgroup>
 			<thead>
 				<tr>
-					<th>Titel</th>
-					<th>Aangemaakt op</th>
-					<th>Aangemaakt door</th>
-					<th class="center">Gepubliceerd</th>
+					<th>{$text_resources.articles_search_results_title_column}</th>
+					<th>{$text_resources.articles_search_creation_date_column}</th>
+					<th>{$text_resources.articles_search_author_column}</th>
+					<th class="center">{$text_resources.articles_search_results_published_column}</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -1,1 +1,14 @@
+# SEARCH RESULT
 articles_module_title: Articles
+articles_search_results_title: Found articles
+articles_search_results_title_column: Title
+articles_search_creation_date_column: Created at
+articles_search_author_column: Created by
+articles_search_results_published_column: Published
+
+# SEARCH BOX
+articles_search_box_title: Search
+articles_search_box_query: Query
+articles_search_box_term: Term
+articles_search_box_show_all: Show all
+articles_search_box_search_button: Search

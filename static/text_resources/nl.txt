@@ -37,6 +37,7 @@ link_code_field_invalid: Vul een geldig getal in
 
 # FORM FIELDS
 object_picker_button_title: Selecteer
+select_field_default_text: &gt; Selecteer
 
 # ELEMENT HOLDER
 element_holder_content_title: Inhoud

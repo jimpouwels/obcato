@@ -4,10 +4,10 @@ Version 1.0.0.3
 
 1.0.0.3
 --------------------------------------------------
-SA0031: BUG: Cannot save links of which the titel contains a quote
+SA0031: BUG: Cannot save links of which the title contains a quote
 SA0032: BUG: Links on frontend are invalid HTML (no spaces between attributes)
 SA0033: BUG: Components module contains invalid includes
-SA0036: As a user, I want to see an global error message when the article overview element contains errors
+SA0036: As a user, I want to see a global error message when the article overview element contains errors
 SA0037: As a user, I want the system to protect me from saving a link without an empty or non-numerical link code
 SA0038: BUG: An error occurs when creating a new template
 SA0039: BUG: Publication date from-to in article overview element is not shown correctly
