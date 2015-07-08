@@ -89,21 +89,11 @@
         }
 
         private function loadTextResources() {
-            if (Session::areTextResourcesLoaded())
-                return $this->loadTextResourcesFromMemory();
-            else
-                return $this->loadTextResourcesFromDisk();
-        }
-
-        private function loadTextResourcesFromMemory() {
-            return Session::getTextResources();
-        }
-
-        private function loadTextResourcesFromDisk() {
-            $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
-            $text_resources = $text_resource_loader->loadTextResources();
-            Session::setTextResources($text_resources);
-            return $text_resources;
+            if (!Session::areTextResourcesLoaded()) {
+                $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
+                $text_resources = $text_resource_loader->loadTextResources();
+                Session::setTextResources($text_resources);
+            }
         }
                 
         private function isPopupView() {
