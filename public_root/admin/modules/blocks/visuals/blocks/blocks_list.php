@@ -28,7 +28,7 @@
         }
 
         private function renderNoResultsMessage() {
-            $no_result_message = new InformationMessage("Geen blokken gevonden");
+            $no_result_message = new InformationMessage($this->getTextResource("blocks_no_blocks_found"));
             return $no_result_message->render();
         }
 

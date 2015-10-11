@@ -1,1 +1,20 @@
 blocks_module_title: Blocks
+
+# TAB MENU
+blocks_tabmenu_blocks: Blocks
+blocks_tabmenu_positions: Positions
+
+# LIST
+blocks_without_position_title: Without position
+
+# INFO MESSAGES
+blocks_no_blocks_found: No blocks found
+blocks_no_positions_found: No positions found
+
+# POSITION EDITOR
+blocks_default_position_title: New position
+blocks_edit_position_title: Edit position
+blocks_position_name_field: Name
+blocks_positions_list_name_column: Name
+blocks_positions_list_description_column: Description
+blocks_positions_list_delete_column: Delete

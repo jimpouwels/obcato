@@ -11,7 +11,6 @@
         private $_block_dao;
         
         public function __construct() {
-            $this->_name = 'Nieuwe positie';
             $this->_block_dao = BlockDao::getInstance();
         }
         

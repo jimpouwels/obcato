@@ -82,8 +82,8 @@
         
         private function renderTabMenu() {
             $tab_items = array();
-            $tab_items[self::$BLOCKS_TAB] = "Blokken";
-            $tab_items[self::$POSITIONS_TAB] = "Posities";
+            $tab_items[self::$BLOCKS_TAB] = $this->getTextResource("blocks_tabmenu_blocks");
+            $tab_items[self::$POSITIONS_TAB] = $this->getTextResource("blocks_tabmenu_positions");
             $tab_menu = new TabMenu($tab_items, $this->_block_pre_handler->getCurrentTabId());
             return $tab_menu->render();
         }

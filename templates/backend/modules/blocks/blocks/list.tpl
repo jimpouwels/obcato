@@ -5,7 +5,7 @@
 				{if !is_null($block_list.position)}
 					{$block_list.position}
 				{else}
-					Zonder positie
+					{$text_resources.blocks_without_position_title}
 				{/if}
 			</div>
 			<div class="block_tree">

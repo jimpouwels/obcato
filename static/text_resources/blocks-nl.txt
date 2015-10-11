@@ -1,1 +1,20 @@
 blocks_module_title: Blokken
+
+# TAB MENU
+blocks_tabmenu_blocks: Blokken
+blocks_tabmenu_positions: Posities
+
+# LIST
+blocks_without_position_title: Zonder positie
+
+# INFO MESSAGES
+blocks_no_blocks_found: Geen blokken gevonden
+blocks_no_positions_found: Geen posities gevonden
+
+# POSITION EDITOR
+blocks_default_position_title: Nieuwe positie
+blocks_edit_position_title: Positie bewerken
+blocks_position_name_field: Naam
+blocks_positions_list_name_column: Naam
+blocks_positions_list_description_column: Beschrijving
+blocks_positions_list_delete_column: Verwijderen
