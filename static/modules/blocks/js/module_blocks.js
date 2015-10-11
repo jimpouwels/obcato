@@ -1,9 +1,3 @@
-/*
-	Author: Jim Pouwels
-	Date: June 11th, 2011
-*/
-
-// initialize event handlers
 $(document).ready(function() {
 	// update block button
 	$('#update_element_holder').click(function() {
