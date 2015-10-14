@@ -23,8 +23,12 @@
         }
 
         public function handlePost() {
-            $this->_image_element_form->loadFields();
-            $this->_element_dao->updateElement($this->_image_element);
+            try {
+                $this->_image_element_form->loadFields();
+                $this->_element_dao->updateElement($this->_image_element);
+            } catch (FormException $e) {
+                $this->sendErrorMessage('Er is een element niet opgeslagen, verwerk de fouten');
+            }
         }
     }
 ?>

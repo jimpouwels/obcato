@@ -55,6 +55,8 @@
             <query>UPDATE module_groups SET identifier = 'configure' where identifier = 'Configuratie'</query>
             <query>UPDATE module_groups SET identifier = 'design' where identifier = 'Vormgeving'</query>
             <query>UPDATE module_groups SET identifier = 'insert' where identifier = 'Invoegen'</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN width int DEFAULT NULL</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN height int DEFAULT NULL</query>
         </queries>
     </version>
 </versions>

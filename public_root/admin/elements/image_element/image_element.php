@@ -16,11 +16,12 @@
         private $_title;
         private $_alternative_text;
         private $_align;
+        private $_int;
+        private $_height;
         private $_image_id;
         private $_metadata_provider;
             
         public function __construct() {
-            // set all image element specific metadata
             $this->_metadata_provider = new ImageElementMetaDataProvider();
         }
         
@@ -46,6 +47,22 @@
         
         public function getAlign() {
             return $this->_align;
+        }
+        
+        public function getWidth() {
+            return $this->_width;
+        }
+        
+        public function setWidth($width) {
+            $this->_width = $width;
+        }
+        
+        public function getHeight() {
+            return $this->_height;
+        }
+        
+        public function setHeight($height) {
+            $this->_height = $height;
         }
         
         public function setImageId($image_id) {
@@ -95,21 +112,20 @@
         public function getMetaData($element) {
             $mysql_database = MysqlConnector::getInstance(); 
             
-            $query = "SELECT title, image_id, align, alternative_text FROM image_elements_metadata WHERE element_id = " . $element->getId();
+            $query = "SELECT title, image_id, align, alternative_text, width, height FROM image_elements_metadata WHERE element_id = " . $element->getId();
             $result = $mysql_database->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 $element->setTitle($row['title']);
                 $element->setAlternativeText($row['alternative_text']);
                 $element->setAlign($row['align']);
                 $element->setImageId($row['image_id']);
+                $element->setWidth($row['width']);
+                $element->setHeight($row['height']);
             }
         }
         
         public function updateMetaData($element) {
-            // check if the metadata exists first
-            $mysql_database = MysqlConnector::getInstance(); 
-            
-            
+            $mysql_database = MysqlConnector::getInstance();    
             if ($this->persisted($element)) {
                 $image_id = "NULL";
                 if ($element->getImageId() != '' && !is_null($element->getImageId())) {
@@ -117,16 +133,16 @@
                 }
                 $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', alternative_text = '"
                            . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = " 
-                           . $image_id . " WHERE element_id = " . $element->getId();
+                           . $image_id . ", width = " . $element->getWidth() . ", height = " . $element->getHeight() . ""
+                           . " WHERE element_id = " . $element->getId();
             } else {
-                $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, image_id, element_id) VALUES 
-                          ('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "', 
-                           NULL, " . $element->getId() . ")";
+                $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, image_id, element_id) VALUES "
+                          . "('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "'"
+                          . ", NULL, " . $element->getId() . ")";
             }
             $mysql_database->executeQuery($query);        
         }
-        
-        // checks if the metadata is already persisted
+
         private function persisted($element) {
             $mysql_database = MysqlConnector::getInstance(); 
             $query = "SELECT t.id, e.id FROM image_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "

@@ -39,6 +39,9 @@ link_code_field_invalid: Vul een geldig getal in
 object_picker_button_title: Selecteer
 select_field_default_text: &gt; Selecteer
 
+# FORM FIELD ERROR MESSAGES
+form_invalid_number_error: Deze waarde is geen getal
+
 # ELEMENT HOLDER
 element_holder_content_title: Inhoud
 no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een nieuw element toe te voegen.

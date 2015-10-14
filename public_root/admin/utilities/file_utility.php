@@ -5,18 +5,10 @@
 
     class FileUtility {
         
-        /*
-            Private constructor.
-        */
         private function __construct() {
         }
     
-        /*
-            Deletes all images that belong to the given image.
-            
-            @param $image The image to delete the files for
-            @param $upload_dir The location of the files
-        */
+
         public static function deleteImage($image, $upload_dir) {
             // first delete the old file
             if (!is_null($image->getFileName()) && $image->getFileName() != '') {
@@ -31,16 +23,7 @@
                     unlink($old_file_name);
             }
         }
-        
-        /*
-            Saves a thumb nail for the given parameters.
-            
-            @param $source_image_filename The file name of the source image
-            @param $directory The directory where the source image and the thumb will be placed in
-            @param $thumb_file_name The name of the new thumbnail
-            @param $thumb_width The width of the thumbnail to create
-            @param $thumb_height The height of the thumbnail to create
-        */
+
         public static function saveThumb($source_image_filename, $directory, $thumb_file_name, $thumb_width, $thumb_height) {
             $splits = explode('.', $source_image_filename);
             $extension = $splits[count($splits) - 1];

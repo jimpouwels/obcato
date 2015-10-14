@@ -5,18 +5,9 @@
     
     class DateUtility {
         
-        /*
-            Private constructor.
-        */
         private function __construct() {
         }
-    
-        /*
-            Creates a string value for the given date with the given delimiter.
-            
-            @param $date The date to convert to string
-            @param $target_delimiter The delimiter to use for the date
-        */
+        
         public static function mysqlDateToString($date, $target_delimiter) {
             $new_date_value = NULL;
             if (!is_null($date) && $date != '') {
@@ -27,12 +18,7 @@
             }
             return $new_date_value;
         }
-        
-        /*
-            Creates a new date for the given string.
-            
-            @param $date The string to convert
-        */
+
         public static function stringMySqlDate($date_string) {
             if (!is_null($date_string) && $date_string != '') {
                 $splitted = explode('-', $date_string);

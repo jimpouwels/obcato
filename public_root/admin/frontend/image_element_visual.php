@@ -19,6 +19,8 @@
             $this->_template_engine->assign("title", $this->_image_element->getTitle());
             $this->_template_engine->assign("alternative_text", $this->toHtml($this->_image_element->getAlternativeText(), $element_holder));
             $this->_template_engine->assign("align", $this->_image_element->getAlign());
+            $this->_template_engine->assign("width", $this->_image_element->getWidth());
+            $this->_template_engine->assign("height", $this->_image_element->getHeight());
             $this->_template_engine->assign("image_url", $this->createImageUrl());
             $this->_template_engine->assign("extension", $this->getExtension());
             return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_image_element->getTemplate()->getFileName());
