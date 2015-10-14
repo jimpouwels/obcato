@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "elements/image_element/image_element_form.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
+    require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
 
     class ImageElementRequestHandler extends HttpRequestHandler {
 
@@ -27,7 +28,7 @@
                 $this->_image_element_form->loadFields();
                 $this->_element_dao->updateElement($this->_image_element);
             } catch (FormException $e) {
-                $this->sendErrorMessage('Er is een element niet opgeslagen, verwerk de fouten');
+                throw new ElementContainsErrorsException("Article overview element contains errors");
             }
         }
     }

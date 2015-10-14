@@ -1,5 +1,4 @@
 <?php
-    
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
@@ -7,6 +6,8 @@
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "request_handlers/module_request_handler.php";
     require_once CMS_ROOT . "request_handlers/link_form.php";
+    require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
+    require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
     
     abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 
@@ -35,8 +36,13 @@
 
         protected function updateElementHolder($element_holder) {
             $this->updateLinks($element_holder);
-            foreach ($element_holder->getElements() as $element)
-                $element->getRequestHandler()->handle();
+            foreach ($element_holder->getElements() as $element) {
+                try {
+                    $element->getRequestHandler()->handle();
+                } catch (ElementContainsErrorsException $e) {
+                    throw new ElementHolderContainsErrorsException($e->getMessage());
+                }
+            }
         }
 
         private function addElement() {

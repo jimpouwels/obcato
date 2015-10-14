@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "elements/article_overview_element/article_overview_element_form.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
 
     class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
 
@@ -31,7 +32,7 @@
                 $this->addSelectedTerms();
                 $this->_element_dao->updateElement($this->_article_overview_element);
             } catch (FormException $e) {
-                $this->sendErrorMessage('Er is een element niet opgeslagen, verwerk de fouten');
+                throw new ElementContainsErrorsException("Article overview element contains errors");
             }
         }
 
