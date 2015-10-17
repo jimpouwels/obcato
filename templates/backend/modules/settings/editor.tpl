@@ -1,9 +1,9 @@
 <div class="settings_form">
-	
+
 	<form action="/admin/index.php" method="post" id="settings_form">
 		<fieldset class="admin_fieldset">
 			<div class="fieldset-title">Algemene instellingen</div>
-			
+
 			<ul class="admin_form">
 				<li>{$website_title}</li>
 				<li>{$email_field}</li>
@@ -23,9 +23,9 @@
 		</fieldset>
 		<fieldset class="admin_fieldset">
 			<div class="fieldset-title">Directory instellingen</div>
-			
+
 			<ul class="admin_form">
-                <li>{$root_dir}</li>
+                <li>{$cms_root_dir}</li>
 				<li>{$static_dir}</li>
 				<li>{$config_dir}</li>
 				<li>{$upload_dir}</li>

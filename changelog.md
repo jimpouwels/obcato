@@ -4,6 +4,7 @@ Version 1.0.0.3
 
 1.0.0.3
 --------------------------------------------------
+SA0012: As a user I want to determine the size of an image in an image element
 SA0031: BUG: Cannot save links of which the title contains a quote
 SA0032: BUG: Links on frontend are invalid HTML (no spaces between attributes)
 SA0033: BUG: Components module contains invalid includes

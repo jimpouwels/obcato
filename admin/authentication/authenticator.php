@@ -1,12 +1,12 @@
 <?php
-    
+
     defined('_ACCESS') or die;
-    
+
     require_once CMS_ROOT . "utilities/string_utility.php";
     require_once CMS_ROOT . "database/dao/authorization_dao.php";
 
     class Authenticator {
-    
+
         public static function isAuthenticated() {
             session_start();
             $authorization_dao = AuthorizationDao::getInstance();
@@ -20,7 +20,7 @@
                 }
             }
         }
-        
+
         public static function logIn($username, $password) {
             if (self::authenticate($username, $password)) {
                 session_start();
@@ -53,7 +53,7 @@
             $result = $mysql_database->executeStatement($statement);
             return $result->num_rows > 0;
         }
-        
+
     }
-    
+
 ?>
