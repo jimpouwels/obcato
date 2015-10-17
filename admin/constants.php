@@ -1,27 +1,27 @@
 <?php
     defined('_ACCESS') or die;
-    
+
     require_once CMS_ROOT . "core/model/settings.php";
 
     $website_settings = Settings::find();
-    
+
     // EDITOR FORM CONSTANTS
     define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
     define("EDIT_ELEMENT_HOLDER_ID", 'element_holder_id');
     define("ACTION_FORM_ID", 'action');
     define("DELETE_ELEMENT_FORM_ID", 'delete_element');
     define('ELEMENT_HOLDER_FORM_ID', 'element_holder_form_id');
-    define('ELEMENT_ORDER_ID', 'element_order'); 
-    
+    define('ELEMENT_ORDER_ID', 'element_order');
+
     // ELEMENT HOLDER TYPES
     define("ELEMENT_HOLDER_PAGE", 'ELEMENT_HOLDER_PAGE');
     define("ELEMENT_HOLDER_ARTICLE", 'ELEMENT_HOLDER_ARTICLE');
     define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
-    
+
     // DEFINE SYSTEM VFERSION
-    define("SYSTEM_VERSION", "1.0.0.3");
+    define("SYSTEM_VERSION", "1.0.0.4");
     define("DB_VERSION", $website_settings->getDatabaseVersion());
-    
+
     // DEFINE TIME OUT
     define("SESSION_TIMEOUT", 1800);
 
