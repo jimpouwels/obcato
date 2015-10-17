@@ -3,7 +3,7 @@
     // DIRECT ACCESS GRANTED
     define("_ACCESS", "GRANTED");
     define("CMS_ROOT", '');
-    
+
     // INCLUDE SYSTEM CONSTANTS
     require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "database_config.php";
@@ -11,10 +11,10 @@
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "backend.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
-    
+
     // AUTHENTICATE
     Authenticator::isAuthenticated();
-    
+
     // only Developer account may access this section
     if ($_SESSION['username'] != "Developer") {
         header('Location: /admin/login.php');
@@ -23,17 +23,17 @@
 
     $settings_dao = SettingsDao::getInstance();
     $website_settings = $settings_dao->getSettings();
-    
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'update_database') {
             $update_script = $website_settings->getConfigDir() . '/update_scripts/update_database.xml';
             $doc = new DOMDocument();
             $doc->load($update_script);
-            
+
             $new_version = null;
             $current_version_found = false;
             $versions = $doc->getElementsByTagName("version");
-            
+
             $mysql_database = MysqlConnector::getInstance();
             foreach($versions as $version) {
                 if ($current_version_found) {
@@ -42,7 +42,7 @@
                         $mysql_database->executeQuery($query->nodeValue);
                     }
                     $new_version = $version->getElementsByTagName('number')->item(0)->nodeValue;
-                } else {            
+                } else {
                     $version_number = $version->getElementsByTagName('number')->item(0)->nodeValue;
                     if ($version_number == $website_settings->getDatabaseVersion() || !$website_settings->getDatabaseVersion()) {
                         $current_version_found = true;
@@ -55,7 +55,7 @@
     }
     // update settings object
     $website_settings = Settings::find();
-    
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

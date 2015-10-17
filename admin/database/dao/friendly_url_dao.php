@@ -49,7 +49,8 @@
         public function getUrlFromPage($page) {
             $query = "SELECT url FROM friendly_urls WHERE element_holder_id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $statement->bind_param("i", $page->getId());
+            $page_id = $page->getId();
+            $statement->bind_param("i", $page_id);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc())
                 return $row['url'];
