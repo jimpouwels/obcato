@@ -8,7 +8,7 @@
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "request_handlers/element_holder_request_handler.php";
     require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
-    require_once CMS_ROOT . 'frontend/friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     class PagePreHandler extends ElementHolderRequestHandler {
 
@@ -62,7 +62,7 @@
                 $this->deleteSelectedBlocksFromPage();
                 $this->_page_dao->updatePage($this->_current_page);
                 $this->updateElementHolder($this->_current_page);
-                $this->_friendly_url_manager->addFriendlyUrlForPage($this->_current_page);
+                $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForPage($this->_current_page);
                 $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
             } catch (ElementHolderContainsErrorsException $e) {
                 $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));

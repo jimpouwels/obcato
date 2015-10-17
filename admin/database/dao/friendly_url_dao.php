@@ -22,7 +22,7 @@
         }
 
         public function insertOrUpdateFriendlyUrl($url, $page) {
-            if ($this->getPageFromUrl($url) != null)
+            if ($this->getUrlFromPage($page))
                 $this->updateFriendlyUrl($url, $page);
             else
                 $this->insertFriendlyUrl($url, $page);

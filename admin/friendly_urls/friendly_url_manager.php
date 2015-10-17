@@ -15,7 +15,7 @@
             $this->writeHtaccessFileIfNotExists();
         }
 
-        public function addFriendlyUrlForPage($page) {
+        public function insertOrUpdateFriendlyUrlForPage($page) {
             $target_url = $this->toFriendlyUrlTitle($page->getNavigationTitle());
             $this->_friendly_url_dao->insertOrUpdateFriendlyUrl($target_url, $page);
         }

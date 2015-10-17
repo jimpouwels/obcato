@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
-    require_once CMS_ROOT . 'frontend/friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     abstract class FrontendVisual {
 

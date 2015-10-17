@@ -7,7 +7,7 @@
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
     require_once CMS_ROOT . "frontend/page_visual.php";
-    require_once CMS_ROOT . 'frontend/friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     class RequestHandler {
 
