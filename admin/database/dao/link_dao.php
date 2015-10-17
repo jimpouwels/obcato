@@ -31,7 +31,7 @@
 
         public function persistLink($new_link) {
             $query = "INSERT INTO links (title, target_address, type, code, target, target_element_holder, parent_element_holder)
-                      VALUES ('" . $new_link->getTitle() . "', NULL, '" . $new_link->getType() . 
+                      VALUES ('" . $new_link->getTitle() . "', NULL, '" . $new_link->getType() .
                       "', '" . $new_link->getCode() . "', '_self', NULL, " . $new_link->getParentElementHolderId() . ")";
             $this->_mysql_connector->executeQuery($query);
             $new_link->setId($this->_mysql_connector->getInsertId());
@@ -58,10 +58,10 @@
                 $link->setType(Link::INTERNAL);
             else
                 $link->setType(Link::EXTERNAL);
-            
-            $query = "UPDATE links SET title = '" . mysql_real_escape_string($link->getTitle()) . "', target_address = '" . $link->getTargetAddress() . "',
+
+            $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = '" . $link->getTargetAddress() . "',
                       code = '" . $link->getCode() . "', target = '" . $link->getTarget() . "', type = '" . $link->getType() . "'";
-            
+
             if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId()))
                 $query = $query . ", target_element_holder = " . $link->getTargetElementHolderId();
             else
@@ -76,8 +76,8 @@
             $links = array();
             while ($row = $result->fetch_assoc())
                 $links[] = Link::constructFromRecord($row);
-            return $links;            
+            return $links;
         }
-        
+
     }
 ?>

@@ -1,21 +1,21 @@
 <?php
 
-    
+
     defined('_ACCESS') or die;
 
     class MysqlConnector {
-    
+
         private static $instance;
         private $conn;
         private $_host;
-        
+
         public static function getInstance() {
             if (is_null(self::$instance)) {
-                self::$instance = new MysqlConnector();                
+                self::$instance = new MysqlConnector();
             }
             return self::$instance;
         }
-        
+
         private function __construct() {
             $this->_host = HOST;
             $this->_database_name = DATABASE_NAME;
@@ -23,7 +23,7 @@
         }
 
         public function getConnection() {
-            return $this->conn; 
+            return $this->conn;
         }
 
         public function prepareStatement($query) {
@@ -56,19 +56,19 @@
         public function getInsertId() {
             return $this->conn->insert_id;
         }
-        
+
         public function getDatabaseName() {
             return $this->_database_name;
         }
-        
+
         public function getHostName() {
             return $this->_host;
         }
-        
+
         public function getDatabaseType() {
             return "MySQL";
         }
-        
+
         public function getDatabaseVersion() {
             $query = "select version() AS version";
             $result = self::executeQuery($query);
@@ -77,5 +77,5 @@
             }
         }
     }
-    
+
 ?>
