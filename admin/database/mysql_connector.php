@@ -53,6 +53,10 @@
             return $this->conn->real_escape_string($value);
         }
 
+        public function getNumberOfAffectedRows() {
+            return mysqli_affected_rows($this->conn);
+        }
+
         public function getInsertId() {
             return $this->conn->insert_id;
         }
