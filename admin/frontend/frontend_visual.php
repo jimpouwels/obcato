@@ -6,18 +6,21 @@
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . 'frontend/friendly_urls/friendly_url_manager.php';
 
     abstract class FrontendVisual {
 
         private $_link_dao;
         private $_page_dao;
         private $_article_dao;
+        private $_friendly_url_manager;
 
         public function __construct($current_page) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_current_page = $current_page;
+            $this->_friendly_url_manager = new FriendlyUrlManager();
         }
 
         public abstract function render();
@@ -28,18 +31,18 @@
         }
 
         protected function getImageUrl($image) {
-            return "/index.php?image=" . $image->getId();
+            return $this->getPageUrl($this->_current_page) . '?image=' . $image->getId();
         }
 
         protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
             if (is_null($target_page))
                 $target_page = $this->_current_page;
-            return "/index.php?id=" . $target_page->getId() . "&amp;articleid=" . $article->getId();
+            return $this->getPageUrl($target_page) . "?articleid=" . $article->getId();
         }
 
         protected function getPageUrl($page) {
-            return "/index.php?id=" . $page->getId();
+            return $this->_friendly_url_manager->getFriendlyUrlForPage($page);
         }
 
         private function createLinksInString($value, $element_holder) {

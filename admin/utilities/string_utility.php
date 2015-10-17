@@ -1,8 +1,6 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
+
     class StringUtility {
 
         private function __construct() {
@@ -48,7 +46,7 @@
         public static function startsWith($full_string, $start) {
             return substr($full_string, 0, strlen($start)) === $start;
         }
-        
+
     }
-    
+
 ?>

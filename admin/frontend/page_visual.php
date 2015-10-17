@@ -24,9 +24,11 @@
         public function render() {
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
             $this->_template_engine->assign("page", $this->getPageData($this->_page));
+            $rendered_article = null;
             if (!is_null($this->_article) && $this->_article->isPublished()) {
-                $this->_template_engine->assign("article", $this->renderArticle());
+                $rendered_article = $this->renderArticle();
             }
+            $this->_template_engine->assign('article', $rendered_article);
             $this->_template_engine->assign("root_page", $this->getPageData($this->_settings->getHomepage()));
             return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
