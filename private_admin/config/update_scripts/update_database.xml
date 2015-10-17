@@ -59,6 +59,7 @@
             <query>ALTER TABLE image_elements_metadata ADD COLUMN height int DEFAULT NULL</query>
             <query>ALTER TABLE settings CHANGE COLUMN root_dir cms_root_dir TEXT NOT NULL</query>
             <query>ALTER TABLE settings ADD COLUMN public_root_dir TEXT NOT NULL</query>
-            <query>CREATE TABLE 'friendly_urls' ('id' INT NOT NULL AUTO_INCREMENT, 'url' TEXT NOT NULL, 'element_holder_id' INT unsigned NOT NULL, PRIMARY KEY ('id'), KEY 'friendly_url_to_element_holder' ('element_holder_id'), CONSTRAINT 'friendly_url_to_element_holder' FOREIGN KEY ('element_holder_id') REFERENCES 'element_holders' ('id') ON DELETE CASCADE ON UPDATE CASCADE)</queries>
+            <query>CREATE TABLE 'friendly_urls' ('id' INT NOT NULL AUTO_INCREMENT, 'url' TEXT NOT NULL, 'element_holder_id' INT unsigned NOT NULL, PRIMARY KEY ('id'), KEY 'friendly_url_to_element_holder' ('element_holder_id'), CONSTRAINT 'friendly_url_to_element_holder' FOREIGN KEY ('element_holder_id') REFERENCES 'element_holders' ('id') ON DELETE CASCADE ON UPDATE CASCADE)</query>
+        </queries>
     </version>
 </versions>
