@@ -30,7 +30,7 @@
                      static_files_dir = '" . $settings->getStaticDir() . "', config_dir = '" . $settings->getConfigDir() . "',
                      upload_dir = '" . $settings->getUploadDir() . "', database_version = '" . $settings->getDatabaseVersion() . "',
                      component_dir = '" . $settings->getComponentDir() . "', backend_template_dir = '" . $settings->getBackendTemplateDir() . "',
-                     cms_root_dir = '" . $settings->getCmsRootDir() . "'";
+                     cms_root_dir = '" . $settings->getCmsRootDir() . "', public_root_dir = '" . $settings->getPublicRootDir() . "'";
             $mysql_database->executeQuery($query);
         }
 

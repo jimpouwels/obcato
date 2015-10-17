@@ -18,6 +18,7 @@
             $this->_settings->setFrontendHostname($this->getMandatoryFieldValue("frontend_hostname", "Frontend hostname is verplicht"));
             $this->_settings->setBackendHostname($this->getMandatoryFieldValue("backend_hostname", "Backend hostname is verplicht"));
             $this->_settings->setCmsRootDir($this->preserveBackSlashes($this->getMandatoryFieldValue("cms_root_dir", "Cms Root directory is verplicht")));
+            $this->_settings->setPublicRootDir($this->preserveBackSlashes($this->getMandatoryFieldValue("public_root_dir", "Public root directory is verplicht")));
             $this->_settings->setFrontendTemplateDir($this->preserveBackSlashes($this->getMandatoryFieldValue("frontend_template_dir", "Template directory is verplicht")));
             $this->_settings->setSmtpHost($this->getFieldValue("smtp_host"));
             $this->_settings->setEmailAddress($this->getEmailAddress("email_address", "Vul een geldig email adres in"));

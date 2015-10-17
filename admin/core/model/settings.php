@@ -13,6 +13,7 @@
         private $_email_address;
         private $_smtp_host;
         private $_cms_root_dir;
+        private $_public_root_dir;
         private $_frontend_template_dir;
         private $_static_dir;
         private $_config_dir;
@@ -67,6 +68,14 @@
 
         public function setCmsRootDir($cms_root_dir) {
             $this->_cms_root_dir = $cms_root_dir;
+        }
+
+        public function getPublicRootDir() {
+          return $this->_public_root_dir;
+        }
+
+        public function setPublicRootDir($public_root_dir) {
+          $this->_public_root_dir = $public_root_dir;
         }
 
         public function setFrontendTemplateDir($frontend_template_dir) {
@@ -158,6 +167,7 @@
             $settings->setEmailAddress($record['email_address']);
             $settings->setSmtpHost($record['smtp_host']);
             $settings->setCmsRootDir($record['cms_root_dir']);
+            $settings->setPublicRootDir($record['public_root_dir']);
             $settings->setFrontendTemplateDir($record['frontend_template_dir']);
             $settings->setStaticDir($record['static_files_dir']);
             $settings->setConfigDir($record['config_dir']);
