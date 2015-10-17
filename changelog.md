@@ -13,6 +13,7 @@ SA0037: As a user, I want the system to protect me from saving a link without an
 SA0038: BUG: An error occurs when creating a new template
 SA0039: BUG: Publication date from-to in article overview element is not shown correctly
 SA0040: As a user I always want to see the action buttons section, even when no buttons are shown
+SA0042: As a user I want to see friendly URL's for pages in the CMS
 
 
 1.0.0.2
