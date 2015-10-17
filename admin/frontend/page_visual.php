@@ -4,21 +4,21 @@
     require_once CMS_ROOT . "frontend/frontend_visual.php";
     require_once CMS_ROOT . "view/template_engine.php";
     require_once CMS_ROOT . "frontend/block_visual.php";
-    require_once CMS_ROOT . "database/dao/settings_dao.php";
+    require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
 
         private $_template_engine;
         private $_page;
         private $_article;
-        private $_settings;
+        private $_page_dao;
 
         public function __construct($current_page, $current_article) {
             parent::__construct($current_page);
-            $this->_settings = SettingsDao::getInstance()->getSettings();
             $this->_page = $current_page;
             $this->_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
+            $this->_page_dao = PageDao::getInstance();
         }
 
         public function render() {
@@ -29,7 +29,7 @@
                 $rendered_article = $this->renderArticle();
             }
             $this->_template_engine->assign('article', $rendered_article);
-            $this->_template_engine->assign("root_page", $this->getPageData($this->_settings->getHomepage()));
+            $this->_template_engine->assign("root_page", $this->getPageData($this->_page_dao->getRootPage()));
             return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 

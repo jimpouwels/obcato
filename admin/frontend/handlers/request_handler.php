@@ -28,8 +28,13 @@
         public function handleRequest() {
             if ($this->isImageRequest())
                 $this->loadImage();
-            else
-                $this->renderPage($this->getPageFromRequest(), $this->getArticleFromRequest());
+            else {
+                $page = $this->getPageFromRequest();
+                if ($page)
+                    $this->renderPage($page, $this->getArticleFromRequest());
+                else
+                    $this->renderHomepage();
+            }
         }
 
         private function renderHomepage() {
@@ -62,8 +67,8 @@
 
         private function getPageFromRequest() {
             $page = $this->_friendly_url_manager->getPageFromUrl(ltrim($_SERVER['REQUEST_URI'], '/'));
-            if ($page == null)
-                return $this->_page_dao->getPage($_GET["id"]);
+            if ($page == null && isset($_GET['id']))
+                return $this->_page_dao->getPage($_GET['id']);
             else
                 return $page;
         }

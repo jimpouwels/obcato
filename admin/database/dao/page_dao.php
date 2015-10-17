@@ -51,14 +51,13 @@
                 return Page::constructFromRecord($row);
         }
 
-        public function getRootPages() {
+        public function getRootPage() {
             $query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE p.parent_id IS NULL
                       AND e.id = p.element_holder_id";
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
             while ($row = $result->fetch_assoc())
-                $pages[] = Page::constructFromRecord($row);
-            return $pages;
+                return Page::constructFromRecord($row);
         }
 
         public function getSubPages($page) {

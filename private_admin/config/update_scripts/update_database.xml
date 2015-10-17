@@ -62,4 +62,9 @@
             <query>CREATE TABLE friendly_urls (id INT NOT NULL AUTO_INCREMENT, url TEXT NOT NULL, element_holder_id INT unsigned NOT NULL, PRIMARY KEY (id), KEY friendly_url_to_element_holder (element_holder_id), CONSTRAINT friendly_url_to_element_holder FOREIGN KEY (element_holder_id) REFERENCES element_holders (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
         </queries>
     </version>
+    <version>
+        <number>1.0.0.3</number>
+        <queries>
+        </queries>
+    </version>
 </versions>
