@@ -42,15 +42,15 @@
         }
 
         private function appendNumberIfFriendlyUrlExists($url, $page) {
-            $original_url = $url;
+            $new_url = $url;
             $existing_page = $this->getPageFromUrl($url);
             $number = 1;
             while ($existing_page != null && $existing_page->getId() != $page->getId()) {
-                $url = $original_url . $number;
+                $new_url = $url . $number;
                 $number++;
-                $existing_page = $this->getPageFromUrl($url);
+                $existing_page = $this->getPageFromUrl($new_url);
             }
-            return $url;
+            return $new_url;
         }
 
         private function replaceSpecialCharacters($value) {
