@@ -3,21 +3,24 @@
 
     require_once CMS_ROOT . 'database/dao/friendly_url_dao.php';
     require_once CMS_ROOT . 'database/dao/settings_dao.php';
+    require_once CMS_ROOT . 'database/dao/page_dao.php';
 
     class FriendlyUrlManager {
 
         private $_friendly_url_dao;
         private $_settings_dao;
+        private $_page_dao;
 
         public function __construct() {
             $this->_friendly_url_dao = FriendlyUrlDao::getInstance();
             $this->_settings_dao = SettingsDao::getInstance();
+            $this->_page_dao = PageDao::getInstance();
             $this->writeHtaccessFileIfNotExists();
         }
 
         public function insertOrUpdateFriendlyUrlForPage($page) {
-            $target_url = $this->toFriendlyUrlTitle($page->getNavigationTitle());
-            $this->_friendly_url_dao->insertOrUpdateFriendlyUrl($target_url, $page);
+            $url = '/' . $this->createNewUrlFor($page);
+            $this->_friendly_url_dao->insertOrUpdateFriendlyUrl($url, $page);
         }
 
         public function getPageFromUrl($url) {
@@ -28,7 +31,15 @@
             return $this->_friendly_url_dao->getUrlFromPage($page);
         }
 
-        private function toFriendlyUrlTitle($value) {
+        private function createNewUrlFor($page) {
+            $url = $this->replaceSpecialCharacters($page->getNavigationTitle());
+            $parent_page = $page->getParent();
+            if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId())
+                $url = $this->createNewUrlFor($page->getParent()) . "/" . $url;
+            return $url;
+        }
+
+        private function replaceSpecialCharacters($value) {
             $value = strtolower($value);
             $value = str_replace(' ', '-', $value);
             $value = preg_replace('/[^a-z-0-9]/', '', $value);
