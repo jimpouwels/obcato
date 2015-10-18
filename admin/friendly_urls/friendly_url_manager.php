@@ -20,10 +20,12 @@
 
         public function insertOrUpdateFriendlyUrlForPage($page) {
             $url = '/' . $this->createNewUrlFor($page);
+            $url = $this->appendNumberIfFriendlyUrlExists($url, $page);
             $this->_friendly_url_dao->insertOrUpdateFriendlyUrl($url, $page);
         }
 
         public function getPageFromUrl($url) {
+            $url = rtrim($url, '/');
             return $this->_friendly_url_dao->getPageFromUrl($url);
         }
 
@@ -36,6 +38,18 @@
             $parent_page = $page->getParent();
             if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId())
                 $url = $this->createNewUrlFor($page->getParent()) . "/" . $url;
+            return $url;
+        }
+
+        private function appendNumberIfFriendlyUrlExists($url, $page) {
+            $original_url = $url;
+            $existing_page = $this->getPageFromUrl($url);
+            $number = 1;
+            while ($existing_page != null && $existing_page->getId() != $page->getId()) {
+                $url = $original_url . $number;
+                $number++;
+                $existing_page = $this->getPageFromUrl($url);
+            }
             return $url;
         }
 
