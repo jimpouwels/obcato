@@ -9,10 +9,10 @@
     require_once CMS_ROOT . "core/model/article_term.php";
     require_once CMS_ROOT . "database/dao/authorization_dao.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
-    
+
     class ArticleDao {
 
-        private static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id, 
+        private static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page";
 
         private static $instance;
@@ -63,7 +63,7 @@
                 $from = $from . ", articles_terms ats";
                 $where = $where . " AND ats.term_id = " . $term_id . " AND ats.article_id = e.id";
             }
-            
+
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
@@ -95,7 +95,7 @@
             if (!is_null($max_results) && $max_results != '') {
                 $limit = " LIMIT " . $max_results;
             }
-            
+
             if (!is_null($order_by) && $order_by != '') {
                 switch ($order_by) {
                     case "Alphabet":
@@ -109,7 +109,7 @@
                         break;
                 }
             }
-            
+
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
@@ -147,7 +147,7 @@
             $new_article->setTitle('Nieuw artikel');
             $new_article->setCreatedById(Authenticator::getCurrentUser()->getId());
             $new_article->setType(ELEMENT_HOLDER_ARTICLE);
-            
+
             $this->persistArticle($new_article);
             return $new_article;
         }
@@ -201,7 +201,7 @@
         }
 
         public function updateTerm($term) {
-            $query = "UPDATE article_terms SET name = '" . $term->getName() . 
+            $query = "UPDATE article_terms SET name = '" . $term->getName() .
                       "' WHERE id = " . $term->getId();
             $this->_mysql_connector->executeQuery($query);
         }
@@ -212,10 +212,10 @@
         }
 
         public function getTermsForArticle($article_id) {
-            $query = "SELECT at.id, at.name FROM article_terms at, articles_terms ats, 
+            $query = "SELECT at.id, at.name FROM article_terms at, articles_terms ats,
                       element_holders e WHERE ats.article_id = " . $article_id . " AND ats.article_id =
                       e.id AND at.id = ats.term_id";
-                      
+
             $result = $this->_mysql_connector->executeQuery($query);
             $terms = array();
             while ($row = $result->fetch_assoc())
@@ -235,7 +235,7 @@
         }
 
         public function getTargetPages() {
-            $query = "SELECT element_holder_id FROM article_target_pages";            
+            $query = "SELECT element_holder_id FROM article_target_pages";
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
             while ($row = $result->fetch_assoc())
@@ -250,33 +250,33 @@
                 $count = $row['number_of'];
                 break;
             }
-            
+
             if ($count == 0) {
                 $query = "INSERT INTO article_target_pages (element_holder_id, is_default) VALUES (" . $target_page_id . ", 0)";
                 $this->_mysql_connector->executeQuery($query);
-                
+
                 // check if only one target page is present
                 $this->updateDefaultArticleTargetPage();
             }
-        }    
+        }
 
         public function deleteTargetPage($target_page_id) {;
             $query = "DELETE FROM article_target_pages where element_holder_id = " . $target_page_id;
             $this->_mysql_connector->executeQuery($query);
-            
+
             // check if only one target page is present
             $this->updateDefaultArticleTargetPage();
         }
 
         public function getDefaultTargetPage() {
-            $query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";            
+            $query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc())
                 return $this->_page_dao->getPage($row["element_holder_id"]);
         }
 
         public function setDefaultArticleTargetPage($target_page_id) {
-            $query1 = "UPDATE article_target_pages SET is_default = 0 WHERE is_default = 1";    
+            $query1 = "UPDATE article_target_pages SET is_default = 0 WHERE is_default = 1";
             $query2 = "UPDATE article_target_pages SET is_default = 1 WHERE element_holder_id = " . $target_page_id;
             $this->_mysql_connector->executeQuery($query1);
             $this->_mysql_connector->executeQuery($query2);
@@ -289,7 +289,7 @@
                 $this->_mysql_connector->executeQuery($query);
             }
         }
-        
+
     }
-    
+
 ?>

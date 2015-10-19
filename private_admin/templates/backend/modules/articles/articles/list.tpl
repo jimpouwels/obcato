@@ -2,10 +2,10 @@
 	<div class="fieldset-title">{$text_resources.articles_search_results_title}</div>
 	{if count($search_results) > 0}
 		{if !is_null($search_query)}
-		<p class="search_job"><strong><em>Zoekterm: </em></strong>&nbsp;'{$search_query}'<br />
+			<p class="search_job"><strong><em>Zoekterm: </em></strong>&nbsp;'{$search_query}'<br />
 		{/if}
 		{if !is_null($search_term)}
-		<strong><em>Term: </em></strong>&nbsp;'{$search_term}'</p>
+			<strong><em>Term: </em></strong>&nbsp;'{$search_term}'</p>
 		{/if}
 		<table class="listing search_results" width="800px" cellspacing="0" cellpadding="5" border="0">
 			<colgroup width="350px"></colgroup>
