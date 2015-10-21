@@ -10,4 +10,17 @@
                 return $url . '?' . $name . '=' . $value;
         }
 
+        public static function splitIntoParts($url) {
+            $url = self::removeQueryStringFrom($url);
+            return explode('/', $url);
+        }
+
+        public static function removeQueryStringFrom($url) {
+            return strtok(rtrim($url, '/'), '?');
+        }
+
+        public static function removeLastPartFromUrl($url) {
+            return substr($url, 0, strrpos($url, '/'));
+        }
+
     }

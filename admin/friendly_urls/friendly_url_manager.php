@@ -32,11 +32,11 @@
         }
 
         public function getPageFromUrl($url) {
-            $url = $this->removeQueryStringFrom($url);
+            $url = UrlHelper::removeQueryStringFrom($url);
             $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
             if (is_null($page)) {
-                $page_part_of_url = substr($url, 0, strrpos($url, '/'));
+                $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
                 $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
                 $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
             }
@@ -44,11 +44,10 @@
         }
 
         public function getArticleFromUrl($url) {
-            $url = $this->removeQueryStringFrom($url);
-            $element_holder = null;
-            $url_parts = explode('/', $url);
+            $url_parts = UrlHelper::splitIntoParts($url);
             if (count($url_parts) > 1) {
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl(substr($url, strrpos($url, '/'), strlen($url) - 1));
+                $last_url_part = $url_parts[count($url_parts) - 1];
+                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl('/' . $last_url_part);
                 return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
             }
         }
@@ -87,10 +86,6 @@
                 $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($new_url);
             }
             return $new_url;
-        }
-
-        private function removeQueryStringFrom($url) {
-            return strtok(rtrim($url, '/'), '?');
         }
 
         private function replaceSpecialCharacters($value) {
