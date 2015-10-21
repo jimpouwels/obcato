@@ -7,6 +7,7 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . 'utilities/url_helper.php';
 
     abstract class FrontendVisual {
 
@@ -38,11 +39,19 @@
             $target_page = $article->getTargetPage();
             if (is_null($target_page))
                 $target_page = $this->_current_page;
-            return $this->getPageUrl($target_page) . "?articleid=" . $article->getId();
+            $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
+            if ($url == null)
+                $url = UrlHelper::addQueryStringParameter($this->getPageUrl($target_page), 'articleid', $article->getId());
+            else
+                $url = $this->getPageUrl($target_page) . $url;
+            return $url;
         }
 
         protected function getPageUrl($page) {
-            return $this->_friendly_url_manager->getFriendlyUrlForPage($page);
+            $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
+            if ($url == null)
+                $url = '/index.php?id=' . $page->getId();
+            return $url;
         }
 
         private function createLinksInString($value, $element_holder) {

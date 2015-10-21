@@ -71,15 +71,16 @@
                 return $page;
         }
 
-        private function getImageFromRequest() {
-            return $this->_image_dao->getImage($_GET["image"]);
+        private function getArticleFromRequest() {
+            $article = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
+            if ($article == null && isset($_GET['articleid']))
+                return $this->_article_dao->getArticle($_GET['articleid']);
+            else
+                return $article;
         }
 
-        private function getArticleFromRequest() {
-            $article = null;
-            if (isset($_GET["articleid"]) && $_GET["articleid"] != "")
-                $article = $this->_article_dao->getArticle($_GET["articleid"]);
-            return $article;
+        private function getImageFromRequest() {
+            return $this->_image_dao->getImage($_GET["image"]);
         }
 
         private function isImageRequest() {

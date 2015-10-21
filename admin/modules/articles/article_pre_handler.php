@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "modules/articles/article_form.php";
+    require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     class ArticlePreHandler extends ElementHolderRequestHandler {
 
@@ -13,11 +14,13 @@
         private $_current_article;
         private $_element_dao;
         private $_article_dao;
+        private $_friendly_url_manager;
 
         public function __construct() {
             parent::__construct();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_element_dao = ElementDao::getInstance();
+            $this->_friendly_url_manager = new FriendlyUrlManager();
         }
 
         public function handleGet() {
@@ -62,6 +65,7 @@
                 $this->updateElementHolder($this->_current_article);
                 $this->updateSelectedTerms($article_form->getSelectedTerms());
                 $this->deleteSelectedTerms($article_form);
+                $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($this->_current_article);
                 $this->sendSuccessMessage("Artikel succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");

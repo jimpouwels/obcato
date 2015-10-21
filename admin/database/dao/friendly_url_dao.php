@@ -1,18 +1,13 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . 'database/dao/page_dao.php';
-
     class FriendlyUrlDao {
 
         private static $instance;
         private $_mysql_connector;
-        private $_page_dao;
 
         private function __construct() {
-            $this->_page_dao = PageDao::getInstance();
             $this->_mysql_connector = MysqlConnector::getInstance();
-            $this->_page_dao = PageDao::getInstance();
         }
 
         public static function getInstance() {
@@ -21,18 +16,11 @@
             return self::$instance;
         }
 
-        public function insertOrUpdateFriendlyUrl($url, $page) {
-            if ($this->getUrlFromPage($page))
-                $this->updateFriendlyUrl($url, $page);
-            else
-                $this->insertFriendlyUrl($url, $page);
-        }
-
-        public function insertFriendlyUrl($url, $page) {
+        public function insertFriendlyUrl($url, $element_holder) {
             $query = "INSERT INTO friendly_urls (url, element_holder_id) VALUES (?, ?)";
             $statement = $this->_mysql_connector->prepareStatement($query);
 
-            $element_holder_id = $page->getId();
+            $element_holder_id = $element_holder->getId();
             $statement->bind_param("si", $url, $element_holder_id);
             $this->_mysql_connector->executeStatement($statement);
         }
@@ -46,23 +34,22 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function getUrlFromPage($page) {
+        public function getUrlFromElementHolder($element_holder) {
             $query = "SELECT url FROM friendly_urls WHERE element_holder_id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $page_id = $page->getId();
-            $statement->bind_param("i", $page_id);
+            $element_holder_id = $element_holder->getId();
+            $statement->bind_param("i", $element_holder_id);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc())
                 return $row['url'];
         }
 
-        public function getPageFromUrl($url) {
+        public function getElementHolderIdFromUrl($url) {
             $query = "SELECT element_holder_id FROM friendly_urls WHERE url = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("s", $url);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc())
-                return $this->_page_dao->getPageByElementHolderId($row['element_holder_id']);
+                return $row['element_holder_id'];
         }
-
     }

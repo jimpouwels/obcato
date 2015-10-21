@@ -39,8 +39,17 @@
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc())
-                $article = Article::constructFromRecord($row);
-            return $article;
+                return Article::constructFromRecord($row);
+        }
+
+        public function getArticleByElementHolderId($element_holder_id) {
+            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
+                                                                    element_holders e, articles a WHERE a.element_holder_id = ?
+                                                                    AND e.id = a.element_holder_id");
+            $statement->bind_param("i", $element_holder_id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc())
+                return Article::constructFromRecord($row);
         }
 
         public function getAllArticles() {

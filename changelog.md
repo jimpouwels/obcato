@@ -9,6 +9,7 @@
 * SA0044: Number of affected rows error when executing query in database panel
 * SA0045: As a user I want to see friendly URL's for subpages that contains all its parents as a path
 * SA0046: If a friendly URL already exists, I want the system to append a number to make it unique
+* SA0048: As a visitor I want to see friendly URL's for articles
 
 #### 1.0.0.3
 ***
