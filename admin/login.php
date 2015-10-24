@@ -11,12 +11,12 @@
     require_once CMS_ROOT . "constants.php";
     require_once CMS_ROOT . "includes.php";
     require_once CMS_ROOT . "utilities/string_utility.php";
-    
+
     $errors = array();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // get values
-        $username = $_POST['username']; 
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
         Authenticator::logIn($username, $password);
@@ -29,20 +29,20 @@
             header('Location: ' . $redirect_to);
             exit();
         }
-        
+
         $errors['login_unsuccessful'] = 'Verkeerde gebruikersnaam / wachtwoord combinatie';
     }
 ?>
-        
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
     <head>
         <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css" />
         <link rel="stylesheet" href="/admin/static/css/login.css" type="text/css" />
-        
+
         <script type="text/javascript" src="/admin/static/js/jquery-1.6.1.min.js"></script>
         <script type="text/javascript" src="/admin/static/js/login_functions.js"></script>
-        
+
         <title>Site Administrator</title>
         <meta name="robots" content="noindex" />
     </head>
@@ -55,9 +55,9 @@
                     </div>
                     <div class="fields">
                         <?php if (isset($_GET['org_url']) && $_GET['org_url'] != ''): ?>
-                        <input type="hidden" name="org_url" value="<?= urldecode($_GET['org_url']); ?>" />
+                            <input type="hidden" name="org_url" value="<?= urldecode($_GET['org_url']); ?>" />
                         <?php endif; ?>
-                        
+
                         <?php
                             $username = new TextField('username', 'Gebruikersnaam', "", true, false, null);
                             echo $username->render();

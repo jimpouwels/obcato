@@ -1,5 +1,6 @@
 <ul class="admin_form">
 	<li>{$title_field}</li>
+	<li>{$url_field}</li>
 	<li>{$description_field}</li>
 	<li>{$published_field}</li>
 	<li>{$publication_date_field}</li>

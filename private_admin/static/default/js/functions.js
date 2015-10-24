@@ -44,7 +44,7 @@ function deleteElement(elementId, formFieldId) {
 // initializes sortable elements
 $(document).ready(function(){
 	$(function() {
-		$("#sortable").sortable({ opacity: 0.6, cursor: 'move', update: function() {
+		$("#element_container").sortable({ opacity: 0.6, cursor: 'move', update: function() {
 			var idString = '';
 			$('.element_id_holder').each(function() {
 				if (idString != '') {
@@ -78,7 +78,7 @@ function addLink() {
 	} else {
 		var $actionField = $('#action');
 		$actionField.attr('value', 'add_link');
-		$elementHolderForm.submit();		
+		$elementHolderForm.submit();
 	}
 }
 
@@ -131,7 +131,7 @@ function deleteLink(linkId) {
 $(document).ready(function() {
 	$('.module-group').mouseover(function() {
 		var $submenu = $(this).find('.submenu');
-		$submenu.show();	
+		$submenu.show();
 	});
 	$('#menu > li').mouseout(function() {
 		var $submenu = $(this).find('.submenu');

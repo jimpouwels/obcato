@@ -10,6 +10,7 @@
 * SA0045: As a user I want to see friendly URL's for subpages that contains all its parents as a path
 * SA0046: If a friendly URL already exists, I want the system to append a number to make it unique
 * SA0048: As a visitor I want to see friendly URL's for articles
+* SA0050: As a webmaster, I want to see what URL a page or article has
 
 #### 1.0.0.3
 ***
