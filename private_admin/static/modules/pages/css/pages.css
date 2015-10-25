@@ -12,10 +12,6 @@
     float: left;
 }
 
-.page_tree_fieldset a {
-    color: #000000;
-}
-
 .page_meta {
     margin-left: 350px;;
     height: 30%;
@@ -45,13 +41,8 @@
     font-style: italic;
 }
 
-.page_tree  ul  li em{
-    color: gray;
-}
-
 .page_tree_link {
     text-decoration: none;
-    color: black;
 }
 
 .page_tree_link:hover {

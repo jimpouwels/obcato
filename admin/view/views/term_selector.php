@@ -2,30 +2,35 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/dao/block_dao.php";
-    
-    class TermSelector extends Visual {
-    
+
+    class TermSelector extends Panel {
+
         private static $TEMPLATE = "system/term_selector.tpl";
         private $_template_engine;
         private $_selected_terms;
         private $_article_dao;
         private $_context_id;
-        
+
         public function __construct($selected_terms, $context_id) {
+            parent::__construct('Termen', 'term_selector');
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_selected_terms = $selected_terms;
             $this->_article_dao = ArticleDao::getInstance();
             $this->_context_id = $context_id;
         }
-        
+
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("terms_to_select", $this->getTermsToSelect());
             $this->_template_engine->assign("selected_terms", $this->getSelectedTermsHtml());
             $this->_template_engine->assign("context_id", $this->_context_id);
-            
+
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
-        
+
         private function getTermsToSelect() {
             $terms_to_select = array();
             foreach ($this->_article_dao->getAllTerms() as $term) {
@@ -37,7 +42,7 @@
             }
             return $terms_to_select;
         }
-        
+
         private function getSelectedTermsHtml() {
             $selected_terms = array();
             foreach ($this->_selected_terms as $selected_term) {
@@ -49,7 +54,7 @@
             }
             return $selected_terms;
         }
-        
+
     }
 
 ?>

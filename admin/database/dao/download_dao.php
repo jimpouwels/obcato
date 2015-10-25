@@ -44,7 +44,7 @@
             $title = $download->getTitle();
             $filename = $download->getFileName();
             $published = $download->isPublished();
-            $statement->bind_param('sis', $title, $published, $$filename);
+            $statement->bind_param('sis', $title, $published, $filename);
             $this->_mysql_connector->executeStatement($statement);
         }
 

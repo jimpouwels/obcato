@@ -21,27 +21,6 @@
     color: gray;
 }
 
-.label-selector {
-    margin-left: 10px;
-    float: left;
-    width: 150px;
-}
-
-.selected-labels {
-    text-align: left;
-    margin-left: 5px;
-    float: left;
-    width: 400px;
-}
-
-.selected-labels th {
-    text-align: left;
-}
-
-.delete_column .admin_label {
-    display: none;
-}
-
 .images_list {
     margin-left: 350px;;
     height: 30%;
@@ -65,4 +44,8 @@
     margin-left: 10px;
     margin-bottom: 0px;
     margin-top: 5px;
+}
+
+.image_label_selector {
+    margin-left: 350px;
 }

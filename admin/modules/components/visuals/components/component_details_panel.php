@@ -3,18 +3,23 @@
 
     require_once CMS_ROOT . 'database/dao/module_dao.php';
 
-    class ComponentsDetailsVisual extends Visual {
+    class ComponentsDetailsPanel extends Panel {
 
         private static $TEMPLATE = 'components/details.tpl';
         private $_template_engine;
         private $_component_request_handler;
 
         public function __construct($component_request_handler) {
+            parent::__construct('Component details', 'component-details-fieldset');
             $this->_component_request_handler = $component_request_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign('current_element', $this->getCurrentElementData());
             $this->_template_engine->assign('current_module', $this->getCurrentModuleData());
             return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);

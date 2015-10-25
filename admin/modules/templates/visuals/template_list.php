@@ -1,37 +1,40 @@
 <?php
-
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/dao/template_dao.php";
     require_once CMS_ROOT . "view/views/information_message.php";
     require_once CMS_ROOT . "modules/templates/visuals/scope_selector.php";
 
-    class TemplateList extends Visual {
-        
+    class TemplateList extends Panel {
+
         private static $TEMPLATE_LIST_TEMPLATE = "templates/template_list.tpl";
 
         private $_template_engine;
         private $_template_dao;
         private $_scope;
-        
+
         public function __construct($scope) {
+            parent::__construct($scope->getName() . ' templates', 'template_list_fieldset');
             $this->_scope = $scope;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_template_dao = TemplateDao::getInstance();
         }
-        
+
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("scope", $this->_scope->getName());
             $this->_template_engine->assign("templates", $this->getTemplatesForScope($this->_scope));
             $this->_template_engine->assign("information_message", $this->renderInformationMessage());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
         }
-        
+
         private function getScopeSelector() {
             return new ScopeSelector();
         }
-        
+
         private function getTemplatesForScope($scope) {
             $templates_data = array();
             foreach ($this->_template_dao->getTemplatesByScope($scope) as $template) {
@@ -45,15 +48,15 @@
             }
             return $templates_data;
         }
-        
+
         private function renderDeleteCheckBox($template) {
             $checkbox = new SingleCheckbox("template_" . $template->getId() . "_delete", "", "", false, "");
             return $checkbox->render();
         }
-        
+
         private function renderInformationMessage() {
             $information_message = new InformationMessage("Geen templates gevonden. Klik op 'toevoegen' om een nieuw template te maken.");
             return $information_message->render();
         }
-        
+
     }

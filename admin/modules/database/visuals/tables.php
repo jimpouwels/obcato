@@ -1,38 +1,39 @@
 <?php
-    
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "database/dao/database_dao.php";
-    
+    require_once CMS_ROOT . 'modules/database/visuals/table.php';
+
     class Tables extends Visual {
-    
+
         private static $TABLES_TEMPLATE = "modules/database/tables.tpl";
         private $_template_engine;
         private $_database_dao;
-    
+
         public function __construct() {
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_database_dao = DatabaseDao::getInstance();
         }
-    
-        public function render() {        
-            $this->_template_engine->assign("tables", $this->getTables());
+
+        public function render() {
+            $this->_template_engine->assign('tables', $this->getTables());
             return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
         }
-        
+
         private function getTables() {
             $tables = $this->_database_dao->getTables();
-            $tables_array = array();
+            $table_panels = array();
             foreach ($tables as $table) {
                 $table_value = array();
                 $table_value["name"] = $table;
                 $table_value["columns"] = $this->getColumns($table);
-                $tables_array[] = $table_value;
+                $table_panel = new TablePanel($table_value);
+                $table_panels[] = $table_panel->render();
             }
-            return $tables_array;
+            return $table_panels;
         }
-        
+
         private function getColumns($table) {
             $columns_array = array();
             foreach ($this->_database_dao->getColumns($table) as $column) {
@@ -45,5 +46,3 @@
             return $columns_array;
         }
     }
-    
-?>

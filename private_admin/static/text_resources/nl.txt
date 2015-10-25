@@ -29,6 +29,7 @@ link_target: Doel
 link_code: Code
 link_open_in: Openen in
 link_delete: Verwijderen
+link_editor_title: Links
 
 # LINK ERROR MESSAGES
 link_not_saved_error: Er is een link niet opgeslagen, verwerk de fout(en)

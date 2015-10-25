@@ -5,7 +5,7 @@
     require_once CMS_ROOT . "database/dao/download_dao.php";
     require_once CMS_ROOT . "view/views/information_message.php";
 
-    class ListVisual extends Visual {
+    class ListVisual extends Panel {
 
         private static $TEMPLATE = "downloads/list.tpl";
         private $_download_dao;
@@ -13,12 +13,17 @@
         private $_download_request_handler;
 
         public function __construct($download_request_handler) {
+            parent::__construct('Gevonden downloads', 'download_list');
             $this->_download_request_handler = $download_request_handler;
             $this->_download_dao = DownloadDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("search_results", $this->getDownloads());
             $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);

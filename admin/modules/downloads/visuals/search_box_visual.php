@@ -1,17 +1,22 @@
 <?php
     defined('_ACCESS') or die;
 
-    class SearchBoxVisual extends Visual {
+    class SearchBoxVisual extends Panel {
 
         private static $TEMPLATE = "downloads/search_box.tpl";
         private $_download_request_handler;
 
         public function __construct($download_request_handler) {
+            parent::__construct('Zoeken', 'download_search');
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_download_request_handler = $download_request_handler;
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign('search_query_field', $this->renderSearchQueryField());
             $this->_template_engine->assign('search_button', $this->renderSearchButton());
             return $this->_template_engine->fetch('modules/' . self::$TEMPLATE);

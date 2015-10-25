@@ -24,7 +24,7 @@
     margin-left: 350px;
 }
 
-.article_meta {
+.article_meta, .term_selector {
     margin-left: 350px;
     height: 30%;
 }
@@ -38,32 +38,6 @@
 
 .show_all_link  a {
     color: gray;
-}
-
-.term-selector {
-    float: left;
-    margin-left: 5px;
-    width: 150px;
-}
-
-.selected-terms {
-    text-align: left;
-    margin-left: 10px;
-    margin-top: 10px;
-    float: left;
-    width: 400px;
-}
-
-.selected-terms th {
-    text-align: left;
-}
-
-.delete_column .admin_label {
-    display: none;
-}
-
-.admin_field  {
-    width: 275px;
 }
 
 .datepicker {

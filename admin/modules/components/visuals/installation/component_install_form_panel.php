@@ -1,20 +1,22 @@
 <?php
     defined('_ACCESS') or die;
 
-    class ComponentInstallFormVisual extends Visual {
+    class ComponentInstallFormPanel extends Panel {
 
         private static $TEMPLATE = 'installation/component_install_form.tpl';
         private $_template_engine;
-        private $_install_request_handler;
 
-        public function __construct($install_request_handler) {
-            $this->_install_request_handler = $install_request_handler;
+        public function __construct() {
+            parent::__construct('Instaleer component', 'install-form-fieldset');
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign('upload_field', $this->renderUploadField());
-            $this->_template_engine->assign('log_messages', $this->_install_request_handler->getLogMessages());
             return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);
         }
 

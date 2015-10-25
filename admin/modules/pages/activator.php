@@ -30,7 +30,6 @@
         public function render() {
             $page_tree = new PageTree($this->_page_dao->getRootPage(), $this->_current_page);
             $page_editor = new PageEditor($this->_current_page);
-
             $this->_template_engine->assign("tree", $page_tree->render());
             $this->_template_engine->assign("editor", $page_editor->render());
             return $this->_template_engine->fetch(self::$PAGE_MODULE_TEMPLATE);

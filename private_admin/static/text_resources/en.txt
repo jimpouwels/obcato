@@ -29,6 +29,7 @@ link_target: Target
 link_code: Code
 link_open_in: Open in
 link_delete: Delete
+link_editor_title: Links
 
 # LINK ERROR MESSAGES
 link_not_saved_error: A link could not be saved, resolve the error(s)

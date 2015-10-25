@@ -3,7 +3,7 @@
 
     require_once CMS_ROOT . "database/dao/scope_dao.php";
 
-    class TemplateEditor extends Visual {
+    class TemplateEditor extends Panel {
 
         private static $TEMPLATE_EDITOR_TEMPLATE = "templates/template_editor.tpl";
 
@@ -12,15 +12,19 @@
         private $_scope_dao;
 
         public function __construct($template) {
+            parent::__construct('Template bewerken', 'template_editor_fieldset');
             $this->_template = $template;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("template_id", $this->_template->getId());
             $this->assignEditFields();
-            $this->_template_engine->assign('file_content', $this->getTemplateCode());
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
         }
 
@@ -42,13 +46,6 @@
             $current_scope = $this->_template->getScope();
             $scopes_field = new PullDown("scope", "Scope", (is_null($current_scope) ? null : $current_scope->getId()), $scopes_name_value_pair, 200, true);
             return $scopes_field->render();
-        }
-
-        private function getTemplateCode() {
-            $file_path = FRONTEND_TEMPLATE_DIR . '/' . $this->_template->getFilename();
-            if (is_file($file_path) && file_exists($file_path)) {
-                return htmlspecialchars(file_get_contents($file_path));
-            }
         }
 
     }

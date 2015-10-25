@@ -3,19 +3,24 @@
 
     require_once CMS_ROOT . 'view/views/information_message.php';
     require_once CMS_ROOT . 'view/views/object_picker.php';
-    
-    class LinkEditor extends Visual {
-    
+
+    class LinkEditor extends Panel {
+
         private static $TEMPLATE = 'system/link_editor.tpl';
         private $_links;
         private $_template_engine;
-    
+
         public function __construct($links) {
+            parent::__construct($this->getTextResource('link_editor_title'), 'element_holder_links');
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_links = $links;
         }
-    
+
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             if (count($this->_links) > 0)
                 $this->_template_engine->assign('links', $this->getLinksData());
             else
@@ -40,7 +45,7 @@
             }
             return $links_data;
         }
-        
+
         private function getLinkTargetField($link) {
             $link_target_field = null;
             $link_target = $link->getTargetElementHolder();

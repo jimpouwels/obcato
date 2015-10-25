@@ -547,10 +547,6 @@ h1 {
     text-align: left;
 }
 
-.listing a {
-    color: gray;
-}
-
 .listing thead {
     background-color: #95AEC9;
     color: white;
@@ -568,11 +564,37 @@ h1 {
     display: none;
 }
 
+.selector_panel {
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+/* IMAGE LABEL SELECTOR */
+.label-selector {
+    float: left;
+    width: 150px;
+}
+
+.image_label_selector .selected-labels {
+    text-align: left;
+    margin-left: 5px;
+    float: left;
+    width: 400px;
+}
+
+.image_label_selector .selected-labels th {
+    text-align: left;
+}
+
+.image_label_selector .delete_column .admin_label {
+    display: none;
+}
+
 /*
 =========== TERM SELECTOR
 */
 .term-selector {
-    margin-top: 10px;
     width: 150px;
     float: left;
 }

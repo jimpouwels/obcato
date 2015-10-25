@@ -3,7 +3,7 @@
 
     require_once CMS_ROOT . "view/views/information_message.php";
 
-    class BlocksList extends Visual {
+    class BlocksList extends Panel {
 
         private static $TEMPLATE = "blocks/blocks/list.tpl";
         private $_template_engine;
@@ -11,12 +11,17 @@
         private $_block_dao;
 
         public function __construct($current_block) {
+            parent::__construct('Blokken', 'block_list');
             $this->_current_block = $current_block;
             $this->_block_dao = BlockDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("block_lists", $this->getBlockLists());
             $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
             $current_block_value = null;

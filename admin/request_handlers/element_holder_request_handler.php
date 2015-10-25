@@ -1,6 +1,6 @@
 <?php
     defined('_ACCESS') or die;
-    
+
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
@@ -8,13 +8,13 @@
     require_once CMS_ROOT . "request_handlers/link_form.php";
     require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
     require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
-    
+
     abstract class ElementHolderRequestHandler extends ModuleRequestHandler {
 
         private $_element_dao;
         private $_link_dao;
         private $_element_holder_dao;
-        
+
         public function __construct() {
             $this->_element_dao = ElementDao::getInstance();
             $this->_link_dao = LinkDao::getInstance();

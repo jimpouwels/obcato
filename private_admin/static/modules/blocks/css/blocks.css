@@ -1,33 +1,31 @@
 .block_list {
     width: 325px;
     float: left;
-}
-
-.block_tree {
-    height: 100%;
     overflow-x: scroll;
-    border: 0px;
-    padding-left: 5px;
 }
 
-.block_tree a {
+.block_list .position_label {
+    margin-left: 10px;
+}
+
+.block_list a {
     text-decoration: none;
-    color: black;
 }
 
-.block_tree a:hover {
+.block_list a:hover {
     text-decoration: underline;
 }
 
-.block_tree ul {
+.block_list ul {
     padding-left: 25px;
 }
 
-.block_tree  ul  li{
+.block_list ul li{
+    margin-left: 20px;
     list-style-type: none;
 }
 
-.block_tree .information-block {
+.block_list .information-block {
     margin-left: 0px;
     margin-bottom: 5px;
 }
@@ -49,4 +47,8 @@
 
 .reset {
     clear: both;
+}
+
+.position_label {
+    font-weight: bold;
 }
