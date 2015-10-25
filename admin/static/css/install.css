@@ -3,7 +3,7 @@
     src:url(/admin/static/fonts/GeosansLight.ttf);
 }
 
-.admin_fieldset {
+.panel {
     position: absolute;
     left: 50%;
     width: 350px;

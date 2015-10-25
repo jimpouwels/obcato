@@ -6,14 +6,15 @@
 /*
 ============ GLOBAL FORM STYLES
 */
-.admin_fieldset {
+.panel {
     border: 1px solid #cccccc;
     background-color: #fbf9ee;
     padding: 0px 0px 10px;
     margin-bottom: 15px;
+    overflow: auto;
 }
 
-.fieldset-title {
+.panel-title {
     font-weight: bold;
     font-size: 1.2em;
     color: #363636;
@@ -26,21 +27,8 @@
     margin: 0px;
 }
 
-.fieldset-title p {
+.panel-title p {
     margin: 0px;
-}
-
-legend {
-    border-left: 1px solid #CCCCCC;
-    border-right: 1px solid #CCCCCC;
-    white-space: normal;
-    border-top: 1px solid #CCCCCC;
-    margin-top: -25px;
-    margin-left: -10px;
-    color: black;
-    font-weight: bold;
-    background: #F7F7F7;
-    padding: 5px;
 }
 
 .invalid {

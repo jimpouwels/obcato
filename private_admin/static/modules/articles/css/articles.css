@@ -1,6 +1,10 @@
 .article_search {
-    width: 300px;
+    width: 315px;
     float: left;
+}
+
+.article_search .admin_field {
+    width: 250px;
 }
 
 .article_search .admin_label {

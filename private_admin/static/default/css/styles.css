@@ -650,66 +650,6 @@ h1 {
     color: gray;
 }
 
-/*
-=========== HOME STYLES
-*/
-
-.disclaimer_fieldset {
-    width: 990px;
-    float: left;
-    margin-top: 5px;
-}
-
-.disclaimer_fieldset ul li {
-    line-height: 1.3em;
-    font-family: Verdana;
-    color: gray;
-    font-style: italic;
-    margin-right: 10px;
-}
-
-.home_inbox_fieldset {
-    float: left;
-    width: 480px;
-}
-
-.home_inbox_fieldset .information-block {
-    width: 460px;
-}
-
-.home_linkchecker_fieldset .information-block {
-    width: 460px;
-}
-
-.home_linkchecker_fieldset {
-    float: left;
-    width: 480px;
-    margin-left: 20px;
-}
-
-.home_linkchecker_fieldset ul {
-    margin-left: 0px;
-    padding-left: 0px;
-}
-
-.home_linkchecker_fieldset ul li {
-    line-height: 2em;
-    padding-left: 30px;
-    list-style-type: none;
-}
-
-.home_linkchecker_fieldset .page{
-    background: url(/admin/static.php?file=/pages/img/page.png) 0px 3px no-repeat;
-}
-
-.home_linkchecker_fieldset .article{
-    background: url(/admin/static.php?file=/articles/img/articles.png) 0px 3px no-repeat;
-}
-
-.home_linkchecker_fieldset .block{
-    background: url(/admin/static.php?file=/blocks/img/blocks.png) 0px 3px no-repeat;
-}
-
 .displaynone {
     display: none;
 }

@@ -1,20 +1,16 @@
 <form id="search_form" method="get">
-	<div class="popup_search_container">
-		<fieldset class="admin_fieldset popup_search_fieldset">
-			<div class="fieldset-title">Zoeken</div>
-					
-			<input type="hidden" name="object" value="{$search_object}" />
-			<input type="hidden" name="backfill" value="{$backfill}" />
-			<input type="hidden" name="back_click_id" value="{$back_click_id}" />
-			<input type="hidden" name="popup" value="{$popup_type}" />
-			
-			<ul class="admin_form">
-				<li>{$search_field}</li>
-				<li>{$search_options}</li>
-			</ul>
+	<div class="popup_search_container">			
+		<input type="hidden" name="object" value="{$search_object}" />
+		<input type="hidden" name="backfill" value="{$backfill}" />
+		<input type="hidden" name="back_click_id" value="{$back_click_id}" />
+		<input type="hidden" name="popup" value="{$popup_type}" />
 
-			{$search_button}
-		</fieldset>
+		<ul class="admin_form">
+			<li>{$search_field}</li>
+			<li>{$search_options}</li>
+		</ul>
+
+		{$search_button}
 	</div>
 
 	<div class="popup_search_results_container">

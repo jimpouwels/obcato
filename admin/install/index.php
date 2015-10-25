@@ -1,5 +1,5 @@
 <?php
-    
+
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/mysql_connector.php";
@@ -106,9 +106,9 @@
     </head>
     <body>
         <form id="install_form" method="post" action="/admin/index.php?mode=install&amp;step=<?= $_GET["step"] ?>">
-            <fieldset class="admin_fieldset">
+            <fieldset class="panel">
                 <?php if ($_GET["step"] == "1"): ?>
-                <div class="fieldset-title">Configureer database</div>
+                <div class="panel-title">Configureer database</div>
                 <div class="content">
                     <p>Site Administrator vereist opslag van data in een MySQL database met InnoDB als storage engine.
                        Vul de volgende gegevens van uw database in om het systeem correct te laten werken.</p>
@@ -144,7 +144,7 @@
                     </ul>
                 </div>
                 <?php elseif ($_GET["step"] == "2"): ?>
-                    <div class="fieldset-title">Initialiseer database</div>
+                    <div class="panel-title">Initialiseer database</div>
                     <input type="hidden" id="step" name="step" value="2" />
                     <ul class="admin_form">
                         <li class="success">
@@ -155,7 +155,7 @@
                         </li>
                     </ul>
                 <?php elseif ($_GET["step"] == "3"): ?>
-                    <div class="fieldset-title">Configureer mappen</div>
+                    <div class="panel-title">Configureer mappen</div>
                     <div class="content">
                         <input type="hidden" id="step" name="step" value="3" />
                         <ul class="admin_form">
@@ -206,7 +206,7 @@
                         </ul>
                     </div>
                 <?php elseif ($_GET["step"] == "4"): ?>
-                    <div class="fieldset-title">Installatie succesvol</div>
+                    <div class="panel-title">Installatie succesvol</div>
                     <div class="content">
                         <input type="hidden" id="step" name="step" value="4" />
                         <ul class="admin_form">

@@ -1,16 +1,15 @@
 <?php
-
-    
     defined('_ACCESS') or die;
-    
+
     require_once CMS_ROOT . "view/views/search.php";
     require_once CMS_ROOT . "view/views/information_message.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "core/model/page.php";
-    
-    class ElementHolderSearch extends Visual {
-        
+    require_once CMS_ROOT . 'view/views/panel.php';
+
+    class ElementHolderSearch extends Panel {
+
         private static $OBJECT_TYPE_KEY = "s_element_holder";
         private static $SEARCH_QUERY_KEY = "s_term";
         private static $TEMPLATE = "system/element_holder_search.tpl";
@@ -20,8 +19,9 @@
         private $_backfill_id;
         private $_article_dao;
         private $_page_dao;
-        
+
         public function __construct($back_click_id, $backfill_id, $objects_to_search) {
+            parent::__construct('Zoeken', 'popup_search_fieldset');
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_objects_to_search = $objects_to_search;
             $this->_back_click_id = $back_click_id;
@@ -29,30 +29,34 @@
             $this->_article_dao = ArticleDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
         }
-        
+
         public function render() {
+            return parent::render();
+        }
+
+        public function renderPanelContent() {
             $this->_template_engine->assign("search_object", $this->_objects_to_search);
             $this->_template_engine->assign("backfill", $this->_backfill_id);
             $this->_template_engine->assign("back_click_id", $this->_back_click_id);
-            
+
             $this->_template_engine->assign("search_field", $this->renderSearchField());
             $this->_template_engine->assign("search_options", $this->renderSearchOptionsField());
             $this->_template_engine->assign("search_button", $this->renderSearchButton());
             $this->_template_engine->assign("search_results", $this->renderSearchResults());
             $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
-            
+
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
-        
+
         private function renderSearchField() {
             $search_query = $this->getCurrentSearchQuery();
             $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, false, null);
             return $search_field->render();
         }
-        
+
         private function renderSearchResults() {
             $search_results_value = array();
-            
+
             $search_query = $this->getCurrentSearchQuery();
             $search_results = null;
             if (isset($_GET[self::$OBJECT_TYPE_KEY])) {
@@ -72,7 +76,7 @@
             }
             return $search_results_value;
         }
-        
+
         private function renderSearchOptionsField() {
             $search_options = array();
             switch ($this->_objects_to_search) {
@@ -94,12 +98,12 @@
             $search_options_field = new Pulldown(self::$OBJECT_TYPE_KEY, "Type", $current_search_option, $search_options, false, null);
             return $search_options_field->render();
         }
-        
+
         private function renderNoResultsMessage() {
             $information_message = new InformationMessage("Geen resultaten gevonden");
             return $information_message->render();
         }
-        
+
         private function getCurrentSearchQuery() {
             $search_title = "";
             if (isset($_GET[self::$SEARCH_QUERY_KEY])) {
@@ -107,20 +111,20 @@
             }
             return $search_title;
         }
-        
+
         private function renderSearchButton() {
             $search_button = new Button("", "Zoeken", "document.getElementById('search_form').submit(); return false;");
             return $search_button->render();
         }
-        
+
         private function addPageOption(&$options) {
             $options[] = array("name" => "Pagina", "value" => "element_holder_page");
         }
-        
+
         private function addArticleOption(&$options) {
             $options[] = array("name" => "Artikel", "value" => "element_holder_article");
         }
-        
+
     }
 
 ?>

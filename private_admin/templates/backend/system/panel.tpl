@@ -1,6 +1,6 @@
-<fieldset class="admin_fieldset {$class}">
-	<div class="fieldset-title">
+<div class="panel {$class}">
+	<div class="panel-title">
 		<p>{$title}</p>
 	</div>
 	{$content}
-</fieldset>
+</div>

@@ -44,26 +44,6 @@
     color: gray;
 }
 
-.admin_fieldset .back a {
-    color: black;
-    color: gray;
-    text-decoration: none;
-}
-
-.admin_fieldset .back a:hover {
-    text-decoration: underline;
-}
-.admin_fieldset .back {
-    margin: 0px;
-    float: left;
-}
-.admin_fieldset .back-image {
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: -2px;
-    float: left;
-}
-
 /* TEMPLATE SELECTOR */
 .scope_selector_fieldset {
     float: left;
