@@ -6,8 +6,9 @@
     color: #ff0000;
 }
 
-.install-form-fieldset {
+.install-form-panel {
     width: 450px;
+    margin-bottom: 25px;
 }
 
 .install-log {

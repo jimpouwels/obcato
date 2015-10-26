@@ -1,4 +1,4 @@
-<table class="table_listing" width="700px" cellspacing="0">
+<table class="table_listing" width="90%" cellspacing="0">
     <colgroup width="33%"></colgroup>
     <colgroup width="33%"></colgroup>
     <colgroup width="33%"></colgroup>

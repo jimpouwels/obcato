@@ -7,7 +7,7 @@
         private $_template_engine;
 
         public function __construct() {
-            parent::__construct('Instaleer component', 'install-form-fieldset');
+            parent::__construct('Instaleer component', 'install-form-panel');
             $this->_template_engine = TemplateEngine::getInstance();
         }
 

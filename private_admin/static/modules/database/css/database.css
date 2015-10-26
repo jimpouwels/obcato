@@ -1,3 +1,7 @@
+.tables_wrapper {
+    width: 100%;
+}
+
 .table_listing {
     text-align: left;
     margin-left: 10px;
@@ -7,13 +11,20 @@
     float: left;
 }
 
-.table_details {
+.table_details_panel {
+    width: 700px;
     float: left;
+    overflow: auto;
+    margin-bottom: 25px;
+    margin-right: 25px;
 }
 
 .queries_form_wrapper {
-    margin-left: 10px;
-    width: 595px;
+    width: 800px;
+}
+
+.query_result_panel {
+    width: 100%;
 }
 
 .queries_form_wrapper ul {
@@ -30,11 +41,11 @@
     float: right;
 }
 
-.configuration_fieldset {
+.configuration_panel {
     width: 400px;
 }
 
-.configuration_fieldset .db_property {
+.configuration_panel .db_property {
     font-weight: bold;
     padding-left: 5px;
 }

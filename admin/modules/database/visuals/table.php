@@ -11,7 +11,7 @@
         private $_table;
 
         public function __construct($table) {
-            parent::__construct($table['name'], 'table_details');
+            parent::__construct($table['name'], 'table_details_panel');
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_table = $table;
         }

@@ -52,7 +52,7 @@
     margin-top: 8px;
 }
 
-.target_pages_fieldset .admin_label {
+.admin_label {
     display: none;
 }
 
@@ -82,4 +82,9 @@
 
 .terms_listing {
     margin: 10px;
+}
+
+.target_pages_fieldset {
+    width: 800px;
+    margin: auto;
 }

@@ -22,8 +22,16 @@
     clear: both;
 }
 
+.settings_form .panel {
+    margin: auto;
+    width: 900px;
+    margin-bottom: 25px;
+}
+
 .information-block {
-    margin-left: 2px;
+    margin: auto;
+    margin-bottom: 25px;
+    width: 900px;
 }
 
 .button {

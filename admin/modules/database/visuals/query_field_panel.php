@@ -8,7 +8,7 @@
         private $_pre_handler;
 
         public function __construct($pre_handler) {
-            parent::__construct('Query editor');
+            parent::__construct('Query editor', 'queries_form_wrapper');
             $this->_pre_handler = $pre_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }

@@ -8,7 +8,7 @@
         private $_pre_handler;
 
         public function __construct($pre_handler) {
-            parent::__construct('Resultaten');
+            parent::__construct('Resultaten', 'query_result_panel');
             $this->_pre_handler = $pre_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }

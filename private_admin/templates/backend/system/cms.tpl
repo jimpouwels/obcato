@@ -44,8 +44,9 @@
 					{/if}
 				</h1>
 			</div>
-
-			{$content_pane}
+			<div id="content-pane-wrapper">
+				{$content_pane}
+			</div>
 		</div>
 	</body>
 </html>
