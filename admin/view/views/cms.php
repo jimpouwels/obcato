@@ -7,28 +7,27 @@
     require_once CMS_ROOT . "view/views/current_user_indicator.php";
     require_once CMS_ROOT . "view/views/actions_menu.php";
     require_once CMS_ROOT . "view/views/notification_bar.php";
-    
+
     class Cms extends Visual {
-        
         private static $TEMPLATE = "system/cms.tpl";
-        
+
         private $_template_engine;
         private $_module_visual;
         private $_website_title;
         private $_module_dao;
-        
+
         public function __construct($module_visual, $website_title) {
             $this->_module_dao = ModuleDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_visual = $module_visual;
             $this->_website_title = $website_title;
         }
-        
+
         public function render() {
             $navigation_menu = new NavigationMenu($this->_module_dao->getModuleGroups());
             $notification_bar = new NotificationBar();
             $current_user_indicator = new CurrentUserIndicator();
-            
+
             $template_engine = TemplateEngine::getInstance();
             $template_engine->assign("text_resources", Session::getTextResources());
 
@@ -44,7 +43,7 @@
             $template_engine->assign("content_pane", $this->renderContentPane($this->_module_visual));
             $template_engine->assign("system_version", SYSTEM_VERSION);
             $template_engine->assign("db_version", DB_VERSION);
-            
+
             $this->_template_engine->display(self::$TEMPLATE);
         }
 
@@ -54,7 +53,7 @@
                 $action_buttons = $this->_module_visual->getActionButtons();
             return new ActionsMenu($action_buttons);
         }
-        
+
         private function renderContentPane() {
             if (!is_null($this->_module_visual)) {
                 return $this->_module_visual->render($this);
@@ -62,5 +61,5 @@
                 return $this->_template_engine->fetch("system/home_wrapper.tpl");
             }
         }
-        
+
     }

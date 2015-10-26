@@ -12,7 +12,7 @@
         private $_template_engine;
 
         public function __construct() {
-            parent::__construct('Presenteerbare componenten', 'scope_selector_fieldset');
+            parent::__construct('Componenten', 'scope_selector_fieldset');
             $this->_template_dao = TemplateDao::getInstance();
             $this->_scope_dao = ScopeDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();

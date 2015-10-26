@@ -4,7 +4,11 @@
 	</fieldset>
 </form>
 
-{$blocks_list}
-{if isset($editor)}
-	{$editor}
-{/if}
+<div class="content_left_column">
+	{$blocks_list}
+</div>
+<div class="content_right_column">
+	{if isset($editor)}
+		{$editor}
+	{/if}
+</div>

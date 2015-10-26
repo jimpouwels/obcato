@@ -1,6 +1,6 @@
 <div class="panel {$class}">
 	<div class="panel-title">
-		<p>{$title}</p>
+		<p>{$panel_title}</p>
 	</div>
 	{$content}
 </div>

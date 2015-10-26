@@ -17,18 +17,8 @@
     line-height: 20px;
 }
 
-.components-list {
-    float: left;
-}
-
 .component-list-fieldset {
     width: 300px;
-}
-
-.component-details-fieldset {
-    float: left;
-    margin-left: 30px;
-    width: 550px;
 }
 
 .component-list-fieldset ul {

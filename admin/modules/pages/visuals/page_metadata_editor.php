@@ -12,7 +12,7 @@
         private $_friendly_url_manager;
 
         public function __construct($current_page) {
-            parent::__construct($this->getTextResource('edit_metadata_title'), 'page_meta');
+            parent::__construct($this->getTextResource('edit_metadata_title'));
             $this->_current_page = $current_page;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_friendly_url_manager = new FriendlyUrlManager();

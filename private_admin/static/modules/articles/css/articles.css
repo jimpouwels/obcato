@@ -69,6 +69,17 @@
     margin-left: 10px;
 }
 
+.term_editor_panel {
+    margin: auto;
+    width: 800px;
+    margin-bottom: 25px;
+}
+
+.term_list_panel {
+    margin: auto;
+    width: 800px;
+}
+
 .terms_listing {
     margin: 10px;
 }

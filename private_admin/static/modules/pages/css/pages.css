@@ -1,6 +1,5 @@
 /* PAGE TREE */
 .page_tree {
-    height: 100%;
     width: 300px;
     overflow-x: scroll;
     border: 0px;
@@ -10,11 +9,6 @@
 .page_tree_fieldset {
     width: 315px;
     float: left;
-}
-
-.page_meta {
-    margin-left: 350px;;
-    height: 30%;
 }
 
 .page_blocks {

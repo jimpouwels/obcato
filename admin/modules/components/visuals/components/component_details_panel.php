@@ -10,7 +10,7 @@
         private $_component_request_handler;
 
         public function __construct($component_request_handler) {
-            parent::__construct('Component details', 'component-details-fieldset');
+            parent::__construct('Component details');
             $this->_component_request_handler = $component_request_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }

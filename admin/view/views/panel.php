@@ -18,8 +18,8 @@
         }
 
         public function render() {
-            $this->_template_engine->assign('title', $this->_title);
             $this->_template_engine->assign('content', $this->renderPanelContent());
+            $this->_template_engine->assign('panel_title', $this->_title);
             $this->_template_engine->assign('class', $this->_class);
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }

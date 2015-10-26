@@ -6,30 +6,6 @@
 /*
 ============ GLOBAL FORM STYLES
 */
-.panel {
-    border: 1px solid #cccccc;
-    background-color: #fbf9ee;
-    padding: 0px 0px 10px;
-    margin-bottom: 15px;
-    overflow: auto;
-}
-
-.panel-title {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #363636;
-    font-family: GeosansLight;
-    text-transform: uppercase;
-    height: 25px;
-    background-color: #dadada;
-    padding-top: 5px;
-    padding-left: 5px;
-    margin: 0px;
-}
-
-.panel-title p {
-    margin: 0px;
-}
 
 .invalid {
     border: 2px solid red;

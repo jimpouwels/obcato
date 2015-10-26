@@ -4,10 +4,14 @@
 	</fieldset>
 </form>
 
-{$search}
-{if isset($list)}
-	{$list}
-{/if}
-{if isset($editor)}
-	{$editor}
-{/if}
+<div class="content_left_column">
+	{$search}
+</div>
+<div class="content_right_column">
+	{if isset($list)}
+		{$list}
+	{/if}
+	{if isset($editor)}
+		{$editor}
+	{/if}
+</div>
