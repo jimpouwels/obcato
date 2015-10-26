@@ -32,6 +32,8 @@
                 $page = $this->getPageFromRequest();
                 if ($page)
                     $this->renderPage($page, $this->getArticleFromRequest());
+                else
+                    $this->renderHomepage();
             }
         }
 
