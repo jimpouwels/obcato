@@ -78,6 +78,7 @@ body {
 */
 #content-wrapper {
     background: url('/admin/static.php?file=/default/img/cms_background.jpg') no-repeat center top fixed;
+    background-attachment: scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
