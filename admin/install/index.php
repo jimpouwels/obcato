@@ -22,7 +22,7 @@
                 $_SESSION["step1_error"] = "Geef een database naam op";
             } else {
                 error_reporting(E_ERROR); // don't show mysql errors
-                $link = mysql_connect($database_url . ":" . $database_port, $database_username, $database_password);
+                $link = mysqli_connect($database_url . ":" . $database_port, $database_username, $database_password);
                 if (!$link || empty($database_url)) {
                     $_SESSION["step1_error"] = "Kan niet verbinden met de database, controleer de gegevens";
                 }
