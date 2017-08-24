@@ -83,7 +83,7 @@
         }
         
         public static function constructFromRecord($record) {
-            $user = new User($record['role_id']);
+            $user = new User();
             $user->setId($record['id']);
             $user->setUsername($record['username']);
             $user->setEmailAddress($record['email_address']);

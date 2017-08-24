@@ -36,14 +36,6 @@ CREATE TABLE `article_overview_elements_metadata` (
 -- Dumping data for table `article_overview_elements_metadata`
 --
 
-/*!40000 ALTER TABLE `article_overview_elements_metadata` DISABLE KEYS */;
-INSERT INTO `article_overview_elements_metadata` (`id`,`show_from`,`show_to`,`order_by`,`title`,`element_id`,`number_of_results`) VALUES 
- (1,NULL,NULL,'PublicationDate','',21,NULL),
- (5,NULL,NULL,'SortDate','',25,NULL),
- (6,NULL,NULL,'PublicationDate','',26,NULL);
-/*!40000 ALTER TABLE `article_overview_elements_metadata` ENABLE KEYS */;
-
-
 --
 -- Definition of table `article_target_pages`
 --
@@ -62,12 +54,6 @@ CREATE TABLE `article_target_pages` (
 -- Dumping data for table `article_target_pages`
 --
 
-/*!40000 ALTER TABLE `article_target_pages` DISABLE KEYS */;
-INSERT INTO `article_target_pages` (`id`,`element_holder_id`,`is_default`) VALUES 
- (27,1,1);
-/*!40000 ALTER TABLE `article_target_pages` ENABLE KEYS */;
-
-
 --
 -- Definition of table `article_terms`
 --
@@ -82,14 +68,6 @@ CREATE TABLE `article_terms` (
 --
 -- Dumping data for table `article_terms`
 --
-
-/*!40000 ALTER TABLE `article_terms` DISABLE KEYS */;
-INSERT INTO `article_terms` (`id`,`name`) VALUES 
- (3,'Bandleden'),
- (4,'Agenda'),
- (5,'Nieuws');
-/*!40000 ALTER TABLE `article_terms` ENABLE KEYS */;
-
 
 --
 -- Definition of table `articles`
@@ -115,45 +93,6 @@ CREATE TABLE `articles` (
 -- Dumping data for table `articles`
 --
 
-/*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (3,'Gitaar en zang.\r\nwebsite beheer,social media beheer.\r\n\r\n<strong>In het kort</strong> Enorm fan van \"The Beatles\" en verder zo\\\\\\\'n beetje alles wat oud (en soms ook nieuw) is (Rock \\\\\\\'n Roll/Rock a Billy/Blues/60\\\\\\\'s etc.).',2,21,'2014-09-28 17:13:12',NULL,'2014-09-28 17:13:12'),
- (4,'Basgitaar en zang.',3,47,'2014-10-10 22:58:56',NULL,'2014-10-10 22:58:56'),
- (5,'Gitaar en zang\r\n\r\n<strong>In het kort:</strong>\r\nHoudt van een pilske (meestal 1 teveel). Houdt van alle muzieksoorten maar voornamelijk het ruigere rockwerk.',5,48,'2014-10-10 22:59:25',NULL,'2014-10-10 22:59:25'),
- (6,'Drums en zang.\r\n\r\n<strong>In het kort:</strong>\r\nHoudt van alle muziek maar voornamelijk het ouder spul (aangezien hij zelf ook al bij het ouder spul hoort).',4,49,'2014-10-10 23:00:15',NULL,'2014-10-10 23:00:15'),
- (7,'Op Vrijdag 17 Oktober staan wij naar aanleiding van een benefietavond voor de nierstichting samen met de bands \'Life\' en \'The Fashions\' op de planken bij Cafe Zeezicht aan de Steenweg 2-4 in Helmond.\r\n\r\nAanvang: nog niet bekend\r\nEntree: nog niet bekend ',NULL,51,'2014-10-10 00:00:00',NULL,'2014-10-17 00:00:00'),
- (8,'Op Zaterdag 11 Oktober staan wij wederom op de planken bij Buurthuis St. Anna aan de Hoogeindsestraat 24 in Helmond.\r\n\r\nAanvang: 20:30\r\nEntree: nog niet bekend',NULL,52,'2014-10-10 00:00:00',NULL,'2014-10-11 00:00:00');
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (9,'Op vrijdagavond 22 Augustus staan wij weer op de planken bij Cafe In den Sleutel (bij velen gewoon bekend als cafÃ© Van Hoof) in Deurne.\r\n\r\nEntree: Gratis\r\nAanvang: 20:30u\r\n\r\nWordt wederom een gezellige avond dus wees er op tijd bij! \r\n\r\nHopelijk tot dan!',NULL,53,'2014-08-20 00:00:00',NULL,'2014-08-22 00:00:00'),
- (10,'Op Donderdag 29 Mei staan wij tijdens Hemelvaart bij Cafe Franske aan het Havenplein in Helmond!\r\nAanvang: 16:30 \r\nEntree: Gratis!',NULL,54,'2014-10-11 00:00:00',NULL,'2014-05-29 00:00:00'),
- (11,'Zaterdag Avond 14 Juni staan wij tijden Tungelroy Kermis in CafÃ¨-Zaal Kimpe Veld aan het St. Barbaraplein 2 in Tungelroy.\r\nAanvang: ongeveer 20:30 \r\nEntree: Gratis',NULL,55,'2014-10-11 00:00:00',NULL,'2014-06-14 00:00:00'),
- (12,'Op Dinsdag 24 Juni Staan wij tijdens Deurne Kermis in Cafe In Den Sleutel aan de Stationsstraat 8 in Deurne.\r\nAanvang omstreeks 20.30u',NULL,56,'2014-10-11 00:00:00',NULL,'2014-06-24 00:00:00'),
- (13,'Op Zondag 25 Mei geven wij een benefiet optreden voor de Stichting Kindervakantieweek Helmond-Oost. Het begint rond de klok van 3 uur en de 3 euro entree komt ten goede aan de kinder vakantieweek dus komt allen dan heb je naast een leuke middag ook nog eens een goed doel gesteund :)',NULL,57,'2014-10-11 00:00:00',NULL,'2014-05-25 00:00:00');
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (14,'Op Zaterdag 21 December spelen we bij Cafe Franske aan de Havenweg 4 in Helmond. \r\nAanvang 20:30u',NULL,58,'2014-10-11 00:00:00',NULL,'2013-12-21 00:00:00'),
- (15,'Op Vrijdag 13 December spelen wij bij Cafe Bar De Bascule op de Havenweg in Helmond! \r\nAanvang 21:00',NULL,59,'2014-10-11 00:00:00',NULL,'2013-12-13 00:00:00'),
- (16,'Op Zaterdagavond 2 November spelen wij weer bij Cafe Biljart Den Tram aan de Marktstraat 20 in Helmond.\r\nAanvang 20:30 en gratis entree.\r\n',NULL,60,'2014-10-11 00:00:00',NULL,'2013-11-02 00:00:00'),
- (17,'Op zaterdagavond 23 November spelen wij in de kantine van SC Oranje Zwart aan sportpark De Braak.\r\nAanvang 20:30, gratis entree en open voor iedereen!',NULL,61,'2014-10-11 00:00:00',NULL,'2013-11-23 00:00:00'),
- (18,'Op Zaterdagavond 19 Oktober spelen wij op een helaas besloten feest en zijn wij niet meer te boeken.',NULL,62,'2014-10-11 00:00:00',NULL,'2013-10-19 00:00:00'),
- (19,'Op Zaterdagavond 12 Oktober staan wij in cafe Plein 5 aan het  Wilhelmina Plein 5 in Someren.\r\nAanvang rond de klok van half 9 en de toegang is gratis!',NULL,63,'2014-10-11 00:00:00',NULL,'2013-10-12 00:00:00');
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (20,'Na lang wachten (no offense Jim) is ie dan vanaf nu online en (als het goed is ook) operationeel. Vanaf nu kun je dus deze website in de gaten houden voor info over de band,optredens,media en nog veel meer! We gaan meteen aan de slag dus check regelmatig om op de hoogte te blijven!',NULL,64,'2011-12-06 00:00:00',NULL,'2014-10-11 00:00:00'),
- (21,'Op Zaterdag 14 Januari treden wij op in Buurthuis St. Anna op de Hoogeindsestraat in Helmond (op d\'n olliemeule!). Maar omdat we dan toevallig ook 1 jaar bestaan willen we het iets groter aanpakken dan anders. We hopen daarom dat jij ook komt om er een super gezellige avond van te maken! De entree is â‚¬2,50 maarrrr..... het bier is een stuk goedkoper dus die entree heb je zo terug ;) We zien je (hopelijk) op de 14e!',NULL,65,'2011-12-06 00:00:00',NULL,'2014-10-11 00:00:00'),
- (22,'Wood 88 Wenst iedereen een gezond en voorspoedig 2012!',NULL,66,'2012-01-01 00:00:00',NULL,'2014-10-11 00:00:00'),
- (23,'Gister avond was het dan zover,ons optreden bij buurthuis St. Anna en daarmee de viering van ons eenjarig bestaan...',NULL,67,'2012-01-15 00:00:00',NULL,'2014-10-11 00:00:00');
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (24,'Voornamelijk omdat ik (Sander) erg lui ben geweest is er de afgelopen tijd (lees: heul veul tijd) weinig nieuws op de site te lezen geweest.\r\nMaar dat wil natuurlijk niet zeggen dat er niks gebeurd is in en om de band de afgelopen tijd.\r\n',NULL,68,'2012-09-28 00:00:00',NULL,'2014-10-11 00:00:00'),
- (25,'Sinds gister avond omstreeks 11 uur zijn Gerrit en Sanne van Lierop de ouders geworden van de mooie Lily!\r\nmoeder en dochter maken het goed, vader heeft het erg druk ;-). ',NULL,69,'2012-09-28 00:00:00',NULL,'2014-10-11 00:00:00'),
- (26,'Ja mensen, ondanks dat het niet mee valt nu Cindy weg is gaan de repetities weer steeds beter. We zijn druk bezig met nieuwe nummers en hopen binnenkort toch weer ergens een of ander podium onveilig te maken. Tot snel!',NULL,70,'2012-10-20 00:00:00',NULL,'2014-10-11 00:00:00'),
- (27,'Kreeg ik gister avond toch ineens te horen dat ik ons optreden bij St. Anna niet op de website geplaatst had. Mooie webmaster ben ik. Dus daarvoor mijn excuses.\r\nMaar ondanks dat wist iedereen het mede dankzij Facebook gelukkig goed te vinden want het was weer volle bak.\r\nWe hebben echt een gezellige avond gehad en ik wil iedereen die erbij was heel erg bedanken voor jullie enthousiasme.\r\nDat werkte echt goed op ons door en het dak ging er weer af.\r\nNu genieten we even na en gaan meteen aan de slag voor nieuwe optredens en nieuwe nummers voor jullie.\r\nNamens de band nogmaals iedereen bedankt en hopelijk tot de volgende keer!\r\n\r\nSander van de Kerkhof',NULL,71,'2013-04-21 00:00:00',NULL,'2014-10-11 00:00:00'),
- (28,'Na een lange tijd hard werken begint het eindelijk een beetje te lopen wat betreft optredens! klik snel op het kopje agenda in het menu links aan de pagina en kijk waar we binnekort zoal staan. ',NULL,72,'2013-10-11 00:00:00',NULL,'2014-10-11 00:00:00');
-INSERT INTO `articles` (`id`,`description`,`image_id`,`element_holder_id`,`publication_date`,`target_page`,`sort_date`) VALUES 
- (29,'Let op!! er zijn een aantal veranderingen in de data van onze optredens. Klik op het kopje agenda links in het menu om de nieuwe data en tijden te zien. Onze excuses voor het ongemak.',NULL,73,'2013-10-11 00:00:00',NULL,'2014-10-11 00:00:00'),
- (30,'Ondanks dat de site al een tijdje niet meer geupdate is zijn wij de laatste maanden toch druk bezig geweest met optredens, het verbouwen van ons repetitie hok en het regelen van nieuwe optredens. Met name dat laatste is weer goed gelukt en onder het kopje agenda vind je meer info. kijk regelmatig want we zijn nog met allerhande partijen in gesprek. :)',NULL,74,'2014-03-20 00:00:00',NULL,'2014-10-11 00:00:00'),
- (31,'De Repetities gaan lekker, er komen steeds meer nummers bij en we maken steeds meer nummers eigen, de optredens druppelen langzaam maar zeker binnen en de band zit lekker in zijn vel.\r\nKortom: we gaan lekker!',NULL,75,'2014-05-14 00:00:00',NULL,'2014-10-11 00:00:00');
-/*!40000 ALTER TABLE `articles` ENABLE KEYS */;
-
-
 --
 -- Definition of table `articles_element_terms`
 --
@@ -174,14 +113,6 @@ CREATE TABLE `articles_element_terms` (
 -- Dumping data for table `articles_element_terms`
 --
 
-/*!40000 ALTER TABLE `articles_element_terms` DISABLE KEYS */;
-INSERT INTO `articles_element_terms` (`id`,`element_id`,`term_id`) VALUES 
- (1,21,3),
- (2,25,4),
- (3,26,5);
-/*!40000 ALTER TABLE `articles_element_terms` ENABLE KEYS */;
-
-
 --
 -- Definition of table `articles_terms`
 --
@@ -201,40 +132,6 @@ CREATE TABLE `articles_terms` (
 --
 -- Dumping data for table `articles_terms`
 --
-
-/*!40000 ALTER TABLE `articles_terms` DISABLE KEYS */;
-INSERT INTO `articles_terms` (`id`,`article_id`,`term_id`) VALUES 
- (1,49,3),
- (2,47,3),
- (3,48,3),
- (4,21,3),
- (5,51,4),
- (6,52,4),
- (7,53,4),
- (8,54,4),
- (9,55,4),
- (10,56,4),
- (11,57,4),
- (12,58,4),
- (13,59,4),
- (14,60,4),
- (15,61,4),
- (16,62,4),
- (17,63,4),
- (18,64,5),
- (19,65,5),
- (20,66,5),
- (21,67,5),
- (22,68,5),
- (23,69,5),
- (24,70,5),
- (25,71,5),
- (26,72,5),
- (27,73,5),
- (28,74,5),
- (29,75,5);
-/*!40000 ALTER TABLE `articles_terms` ENABLE KEYS */;
-
 
 --
 -- Definition of table `auth_users`
@@ -260,8 +157,7 @@ CREATE TABLE `auth_users` (
 
 /*!40000 ALTER TABLE `auth_users` DISABLE KEYS */;
 INSERT INTO `auth_users` (`id`,`username`,`password`,`email_address`,`first_name`,`last_name`,`prefix`,`created_at`,`uuid`) VALUES 
- (2,'Developer','5c08dfd8c8ade29ff8485a8cc0409cf6','jim.pouwels@gmail.com','Jim','Pouwels','','2011-10-30 12:42:05','4ebbf2bdbc13e'),
- (3,'sandervdk','c638adce80ea884bd78bb5e373389f30','sandervandekerkhof@gmail.com','Sander','Kerkhof','van de','2011-12-06 18:36:17','4ede60a19fd86');
+ (2,'Developer','5c08dfd8c8ade29ff8485a8cc0409cf6','jim.pouwels@gmail.com','Jim','Pouwels','','2011-10-30 12:42:05','4ebbf2bdbc13e');
 /*!40000 ALTER TABLE `auth_users` ENABLE KEYS */;
 
 
@@ -381,53 +277,6 @@ CREATE TABLE `element_holders` (
 -- Dumping data for table `element_holders`
 --
 
-/*!40000 ALTER TABLE `element_holders` DISABLE KEYS */;
-INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (1,1,'Homepage',1,5,'2014-09-07 10:37:10',NULL,'ELEMENT_HOLDER_PAGE'),
- (21,NULL,'Sander van de Kerkhof',1,9,'2014-10-10 22:57:11',2,'ELEMENT_HOLDER_ARTICLE'),
- (34,1,'SubSub',1,5,'2014-09-28 18:18:25',2,'ELEMENT_HOLDER_PAGE'),
- (35,1,'Nieuws',1,5,'2014-10-10 21:55:27',2,'ELEMENT_HOLDER_PAGE'),
- (36,1,'Foto\'s',1,5,'2014-10-10 22:25:11',2,'ELEMENT_HOLDER_PAGE'),
- (39,NULL,'Nieuwe pagina',0,5,'2014-10-10 22:27:35',2,'ELEMENT_HOLDER_PAGE'),
- (40,1,'De band',1,5,'2014-10-10 22:35:58',2,'ELEMENT_HOLDER_PAGE'),
- (44,1,'Playlist',1,5,'2014-10-10 22:36:37',2,'ELEMENT_HOLDER_PAGE'),
- (45,1,'Media',1,5,'2014-10-10 22:43:04',2,'ELEMENT_HOLDER_PAGE'),
- (46,1,'Contact',1,5,'2014-10-10 22:44:34',2,'ELEMENT_HOLDER_PAGE'),
- (47,NULL,'Mark Heldens',1,9,'2014-10-10 22:59:22',2,'ELEMENT_HOLDER_ARTICLE'),
- (48,NULL,'Ron van der Bruggen',1,9,'2014-10-10 22:59:56',2,'ELEMENT_HOLDER_ARTICLE'),
- (49,NULL,'Gerrit van Lierop',1,9,'2014-10-10 23:00:27',2,'ELEMENT_HOLDER_ARTICLE');
-INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (50,1,'Agenda',1,5,'2014-10-10 23:15:57',2,'ELEMENT_HOLDER_PAGE'),
- (51,NULL,'Vrijdag 17 Oktober Cafe Zeezicht',1,9,'2014-10-10 23:21:31',2,'ELEMENT_HOLDER_ARTICLE'),
- (52,NULL,'Zaterdag 11 Oktober St. Anna ',1,9,'2014-10-10 23:26:20',2,'ELEMENT_HOLDER_ARTICLE'),
- (53,NULL,'Vrijdag 22 Aug. Cafe In Den Sleutel Deurne',1,9,'2014-10-10 23:53:30',2,'ELEMENT_HOLDER_ARTICLE'),
- (54,NULL,'Cafe Franske @ Hemelvaart!',1,9,'2014-10-11 07:14:04',2,'ELEMENT_HOLDER_ARTICLE'),
- (55,NULL,'Tungelroy Kermis',1,9,'2014-10-11 07:14:49',2,'ELEMENT_HOLDER_ARTICLE'),
- (56,NULL,'Deurne Kermis - Cafe In Den Sleutel',1,9,'2014-10-11 07:15:10',2,'ELEMENT_HOLDER_ARTICLE'),
- (57,NULL,'Benefiet optreden wijkhuis De Lier',1,9,'2014-10-11 07:15:36',2,'ELEMENT_HOLDER_ARTICLE'),
- (58,NULL,'Cafe Franske',1,9,'2014-10-11 07:15:59',2,'ELEMENT_HOLDER_ARTICLE'),
- (59,NULL,'Bascule 2013',1,9,'2014-10-11 07:16:19',2,'ELEMENT_HOLDER_ARTICLE'),
- (60,NULL,'Cafe Biljart D\'n Tram',1,9,'2014-10-11 07:16:39',2,'ELEMENT_HOLDER_ARTICLE');
-INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (61,NULL,'SC Oranje Zwart',1,9,'2014-10-11 07:16:59',2,'ELEMENT_HOLDER_ARTICLE'),
- (62,NULL,'Besloten Optreden',1,9,'2014-10-11 07:17:23',2,'ELEMENT_HOLDER_ARTICLE'),
- (63,NULL,'Cafe Plein 5 Someren',1,9,'2014-10-11 07:18:05',2,'ELEMENT_HOLDER_ARTICLE'),
- (64,NULL,'Vernieuwde website!',1,9,'2014-10-11 07:19:18',2,'ELEMENT_HOLDER_ARTICLE'),
- (65,NULL,'Wood 88 bestaat 1 jaar!!',1,9,'2014-10-11 07:22:21',2,'ELEMENT_HOLDER_ARTICLE'),
- (66,NULL,'Gelukkig nieuwjaar!',1,9,'2014-10-11 07:23:31',2,'ELEMENT_HOLDER_ARTICLE'),
- (67,NULL,'Buurthuis St. Anna',1,9,'2014-10-11 07:24:16',2,'ELEMENT_HOLDER_ARTICLE'),
- (68,NULL,'Heel veel nieuws!',1,9,'2014-10-11 07:24:38',2,'ELEMENT_HOLDER_ARTICLE'),
- (69,NULL,'Gerrit van Lierop vader geworden!',1,9,'2014-10-11 07:25:02',2,'ELEMENT_HOLDER_ARTICLE'),
- (70,NULL,'Opkrabbelen',1,9,'2014-10-11 07:25:26',2,'ELEMENT_HOLDER_ARTICLE'),
- (71,NULL,'Buurthuis St. Anna 2013',1,9,'2014-10-11 07:27:51',2,'ELEMENT_HOLDER_ARTICLE'),
- (72,NULL,'Nieuwe optredens!',1,9,'2014-10-11 07:28:11',2,'ELEMENT_HOLDER_ARTICLE');
-INSERT INTO `element_holders` (`id`,`template_id`,`title`,`published`,`scope_id`,`created_at`,`created_by`,`type`) VALUES 
- (73,NULL,'BELANGRIJK: Data gewijzigd!',1,9,'2014-10-11 07:28:29',2,'ELEMENT_HOLDER_ARTICLE'),
- (74,NULL,'Nieuwe optredens!',1,9,'2014-10-11 07:28:50',2,'ELEMENT_HOLDER_ARTICLE'),
- (75,NULL,'We gaan lekker!',1,9,'2014-10-11 07:29:10',2,'ELEMENT_HOLDER_ARTICLE');
-/*!40000 ALTER TABLE `element_holders` ENABLE KEYS */;
-
-
 --
 -- Definition of table `element_types`
 --
@@ -480,27 +329,6 @@ CREATE TABLE `elements` (
 --
 -- Dumping data for table `elements`
 --
-
-/*!40000 ALTER TABLE `elements` DISABLE KEYS */;
-INSERT INTO `elements` (`id`,`follow_up`,`type_id`,`element_holder_id`,`template_id`) VALUES 
- (11,0,1,36,4),
- (12,1,1,36,4),
- (13,0,1,40,4),
- (14,0,1,44,4),
- (15,1,1,44,4),
- (16,0,1,45,4),
- (17,1,1,45,4),
- (18,0,1,46,4),
- (19,1,1,46,4),
- (20,2,1,46,4),
- (21,1,5,40,7),
- (25,0,5,50,8),
- (26,0,5,35,9),
- (27,0,1,67,4),
- (28,1,1,67,0),
- (29,2,1,67,0);
-/*!40000 ALTER TABLE `elements` ENABLE KEYS */;
-
 
 --
 -- Definition of table `image_elements_metadata`
@@ -570,15 +398,6 @@ CREATE TABLE `images` (
 -- Dumping data for table `images`
 --
 
-/*!40000 ALTER TABLE `images` DISABLE KEYS */;
-INSERT INTO `images` (`id`,`title`,`published`,`created_at`,`created_by`,`file_name`,`thumb_file_name`) VALUES 
- (2,'Sander',1,'2014-10-10 22:54:42',2,'UPLIMG-002_sander.jpg','THUMB-UPLIMG-002_sander.jpg'),
- (3,'Mark',1,'2014-10-10 22:55:20',2,'UPLIMG-003_mark.jpg','THUMB-UPLIMG-003_mark.jpg'),
- (4,'Gerrit',1,'2014-10-10 22:55:31',2,'UPLIMG-004_gerrit.jpg','THUMB-UPLIMG-004_gerrit.jpg'),
- (5,'Ron',1,'2014-10-10 22:55:42',2,'UPLIMG-005_ron.jpg','THUMB-UPLIMG-005_ron.jpg');
-/*!40000 ALTER TABLE `images` ENABLE KEYS */;
-
-
 --
 -- Definition of table `images_labels`
 --
@@ -626,15 +445,6 @@ CREATE TABLE `links` (
 --
 -- Dumping data for table `links`
 --
-
-/*!40000 ALTER TABLE `links` DISABLE KEYS */;
-INSERT INTO `links` (`id`,`title`,`target_address`,`type`,`code`,`target_element_holder`,`parent_element_holder`) VALUES 
- (1,'Mail naar Wood 88','mailto:info@wood88.nl','EXTERNAL','1',NULL,44),
- (2,'Mail naar Wood88','mailto:info@wood88.nl','EXTERNAL','1',NULL,46),
- (3,'Facebook','http://www.facebook.com/band.wood88','EXTERNAL','2',NULL,46),
- (4,'Twitter','http://twitter.com/wood88','EXTERNAL','3',NULL,46);
-/*!40000 ALTER TABLE `links` ENABLE KEYS */;
-
 
 --
 -- Definition of table `list_element_items`
@@ -794,20 +604,6 @@ CREATE TABLE `pages` (
 -- Dumping data for table `pages`
 --
 
-/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-INSERT INTO `pages` (`id`,`navigation_title`,`parent_id`,`show_in_navigation`,`include_in_searchindex`,`element_holder_id`,`follow_up`,`is_homepage`,`description`) VALUES 
- (1,'Navigatietitel van de homepage',NULL,1,1,1,3,1,'Dit is de beschrijving van de pagina: Ga naar [LINK C=\"1\"]google[/LINK]'),
- (16,'SubSub',33,1,1,34,0,0,''),
- (17,'Nieuws',1,1,1,35,0,0,''),
- (18,'Foto\'s',1,1,1,36,4,0,''),
- (22,'De band',1,1,1,40,1,0,''),
- (26,'Playlist',1,1,1,44,3,0,''),
- (27,'Media',1,1,1,45,5,0,''),
- (28,'Contact',1,1,1,46,6,0,''),
- (29,'Agenda',1,1,1,50,2,0,'');
-/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
-
-
 --
 -- Definition of table `scopes`
 --
@@ -857,7 +653,8 @@ CREATE TABLE `settings` (
   `database_version` varchar(45) NOT NULL,
   `component_dir` varchar(255) default NULL,
   `backend_template_dir` varchar(255) default NULL,
-  `root_dir` varchar(255) default NULL,
+  `cms_root_dir` varchar(255) default NULL,
+  `public_root_dir` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -866,8 +663,8 @@ CREATE TABLE `settings` (
 --
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`,`root_dir`) VALUES 
- (1,'Wood 88','www.wood88.nl','www.wood88.nl','','','','','','','1.0.0','','','');
+INSERT INTO `settings` (`id`,`website_title`,`frontend_hostname`,`backend_hostname`,`email_address`,`smtp_host`,`frontend_template_dir`,`static_files_dir`,`config_dir`,`upload_dir`,`database_version`,`component_dir`,`backend_template_dir`,`cms_root_dir`, `public_root_dir`) VALUES 
+ (1,'','','','','','','','','','1.0.0','','','', '');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
@@ -888,18 +685,6 @@ CREATE TABLE `templates` (
 -- Dumping data for table `templates`
 --
 
-/*!40000 ALTER TABLE `templates` DISABLE KEYS */;
-INSERT INTO `templates` (`id`,`filename`,`name`,`scope_id`) VALUES 
- (1,'page.tpl','Pagina template',5),
- (4,'paragraph.tpl','Paragraaf template',1),
- (5,'list_default.tpl','Nieuw template',2),
- (6,'image_default.tpl','Nieuw template',3),
- (7,'article_overview_band.tpl','De Band',7),
- (8,'article_overview_agenda.tpl','Agenda',7),
- (9,'article_overview_nieuws.tpl','Nieuws',7);
-/*!40000 ALTER TABLE `templates` ENABLE KEYS */;
-
-
 --
 -- Definition of table `text_elements_metadata`
 --
@@ -918,28 +703,6 @@ CREATE TABLE `text_elements_metadata` (
 --
 -- Dumping data for table `text_elements_metadata`
 --
-
-/*!40000 ALTER TABLE `text_elements_metadata` DISABLE KEYS */;
-INSERT INTO `text_elements_metadata` (`id`,`title`,`text`,`element_id`) VALUES 
- (4,'Bandpics','<embed type=\"application/x-shockwave-flash\" src=\"https://static.googleusercontent.com/external_content/picasaweb.googleusercontent.com/slideshow.swf\" width=\"600\" height=\"400\" flashvars=\"host=picasaweb.google.com&hl=nl&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F107050669382382702973%2Falbumid%2F5954624562704346497%3Falt%3Drss%26kind%3Dphoto%26hl%3Dnl\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\"></embed>',11),
- (5,'Bascule 2013','<embed type=\"application/x-shockwave-flash\" src=\"https://static.googleusercontent.com/external_content/picasaweb.googleusercontent.com/slideshow.swf\" width=\"600\" height=\"400\" flashvars=\"host=picasaweb.google.com&hl=nl&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F107050669382382702973%2Falbumid%2F5957612911517344049%3Falt%3Drss%26kind%3Dphoto%26hl%3Dnl\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\"></embed>',12),
- (6,'','Wij zijn een pop/rock/rock \'n roll georienteerde band uit Helmond met tot nog toe alleen maar covers. Aan eigen werk wordt nog hard gewerkt. Zoek je een band voor een avond of voor een uurtje? Alles kan en wij nemen onze eigen geluidsinstallatie en geluidsman mee dus die hoef je ook niet meer in te huren!\r\n\r\nHieronder worden de bendeleden voorgesteld: ',13);
-INSERT INTO `text_elements_metadata` (`id`,`title`,`text`,`element_id`) VALUES 
- (7,'Hieronder een greep uit ons repertoire.','Ain\'t No Sunshine \r\nAnother 45 Miles\r\nApache\r\nBad Case Of Loving You\r\nBad Moon Rising\r\nBlauw\r\nBorn To Be Wild\r\nBrown Eyed Girl\r\nBudapest\r\nCan\'t Get Enough Of Your Love\r\nCocaine\r\nCocaine Blues\r\nDrivin\' My Life Away\r\nF.B.I.\r\nFolsom Prison Blues\r\nGimme All Your Lovin\'\r\nHave You Ever Seen The Rain\r\nHound Dog\r\nIedereen Is Van De Wereld\r\nIf God Was A Woman\r\nI Will Folow\r\nJimmy\r\nLa Bamba\r\nLearn To Fly\r\nLife In The Fast Lane\r\nMake Me Smile\r\nMove It\r\nMustang Sally\r\nNeed Your Love So Bad\r\nNever Be Clever\r\nOnly Wanna Be With You\r\nPeter Gunn Theme\r\nRave On\r\nRockin\' in a Free World\r\nSchoolplein\r\nSex On Fire\r\nSharp Dressed Man\r\nShooting Star\r\nThe One I Love\r\nWhat I Like About You\r\nWhen You Walk In The Room\r\nWherever You Will Go\r\nWhiskey In The Jar\r\nWhite Room\r\nWhole Lot Of Leavin\'',14),
- (8,'Mail je suggestie!','vind jij dat hier jou nummer bij hoort te staan?\r\n[LINK C=\"1\"]Mail[/LINK] ons je suggestie en we kijken wat we voor je kunnen doen. ',15);
-INSERT INTO `text_elements_metadata` (`id`,`title`,`text`,`element_id`) VALUES 
- (9,'','Hieronder kun je video- en geluidsfragmenten terugvinden van verschillende optredens van Wood 88 in het verleden.\r\n\r\n',16),
- (10,'F.B.I. Bij Cafe plein 5 Someren','<iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/22C8LRo5GRA\" frameborder=\"0\" allowfullscreen></iframe>',17),
- (11,'Voor meer informatie, vragen over deze site of boekingen:','E-mail: [LINK C=\"1\"]info@wood88.nl[/LINK]\r\n\r\n',18),
- (12,'Voor boekingen telefonisch:','Ron van den Bruggen:   06 41 29 51 76\r\nSander van de Kerkhof: 06 53 28 68 96\r\n\r\n\r\n',19),
- (13,'Social media:','[LINK C=\"2\"]Facebook[/LINK]\r\n[LINK C=\"3\"]Twitter[/LINK]',20),
- (14,'Het optreden','Rond de klok van 9 uur begon het vol te lopen en om kwart over 9 tikten we af. De Sfeer zat er vanaf het begin al meteen goed in en naarmate de avond vorderde kwam iedereen inclusief de band steeds meer los.\r\nMet Self esteem als afsluiter vloog het bier in de rondte en werd er van alle kanten gesprongen en mee gezongen/geschreeuwd. Kortom een zeer geslaagde avond.',27),
- (15,'Afscheid Dennis Dankers','Vlak voor het einde van de avond hadden we het enige minpuntje namelijk het afscheid van onze altijd rockende bassist Dennis Dankers. Na het krijgen van een bos bloemen (die hij meteen de zaal in mieterde zoals het een echte rocker betaamt) kwam hij nog meer los en tijdens de laatste nummers ging het dak eraf.  We kunnen alleen maar hopen dat de volgende bassist minstens een beetje van Dennis\' enthousiasme in zich heeft maar dat zal niet meevallen.',28);
-INSERT INTO `text_elements_metadata` (`id`,`title`,`text`,`element_id`) VALUES 
- (16,'Bedankt!','Alle aanwezigen hardstikke bedankt voor jullie enthousiasme en de gezelligheid en we hopen snel weer terug te zijn met nieuwe optredens.',29);
-/*!40000 ALTER TABLE `text_elements_metadata` ENABLE KEYS */;
-
-
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
