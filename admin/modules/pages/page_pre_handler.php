@@ -70,7 +70,7 @@
         }
 
         private function addSelectedBlocks($selected_blocks) {
-            if (count($selected_blocks) == 0) return;
+            if (is_null($selected_blocks) || count($selected_blocks) == 0) return;
             $current_page_blocks = $this->_current_page->getBlocks();
             foreach ($selected_blocks as $selected_block_id) {
                 if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks))
