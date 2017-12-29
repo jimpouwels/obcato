@@ -5,7 +5,6 @@
     require_once CMS_ROOT . "view/views/module_visual.php";
     require_once CMS_ROOT . "view/views/warning_message.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
-    require_once CMS_ROOT . "modules/settings/visuals/settings_editor.php";
     require_once CMS_ROOT . "modules/settings/settings_pre_handler.php";
     require_once CMS_ROOT . "modules/settings/visuals/global_settings.php";
     require_once CMS_ROOT . "modules/settings/visuals/domain_settings.php";
