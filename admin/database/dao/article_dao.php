@@ -196,7 +196,7 @@
             $new_term->setName($term_name);
             $postfix = 1;
             while (!is_null($this->getTermByName($new_term->getName()))) {
-                $new_term->setName("Nieuwe term " . $postfix);
+                $new_term->setName($term_name . " " . $postfix);
                 $postfix++;
             }
             $this->persistTerm($new_term);
