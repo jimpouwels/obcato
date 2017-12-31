@@ -77,7 +77,6 @@
             // check if the metadata exists first
             $mysql_database = MysqlConnector::getInstance(); 
             
-            
             if ($this->persisted($element)) {
                 $query = "UPDATE text_elements_metadata SET title = '" . $mysql_database->realEscapeString($element->getTitle()) . "', text = '"
                           . $mysql_database->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();

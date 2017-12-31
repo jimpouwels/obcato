@@ -1,4 +1,9 @@
-# SEARCH RESULT
+# TABS
+articles_tab_articles: Articles
+articles_tab_terms: Terms
+articles_tab_target_pages: Target pages
+
+# SEARCH RESULTS
 articles_module_title: Articles
 articles_search_results_title: Found articles
 articles_search_results_title_column: Title

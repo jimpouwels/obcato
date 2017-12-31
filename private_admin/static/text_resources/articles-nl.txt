@@ -1,3 +1,9 @@
+# TABS
+articles_tab_articles: Artikelen
+articles_tab_terms: Termen
+articles_tab_target_pages: Doelpagina's
+
+# SEARCH RESULTS
 articles_module_title: Artikelen
 articles_search_results_title: Gevonden artikelen
 articles_search_results_title_column: Titel

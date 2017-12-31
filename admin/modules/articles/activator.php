@@ -115,9 +115,9 @@
 
         private function renderTabMenu() {
             $tab_items = array();
-            $tab_items[self::$ARTICLES_TAB] = "Artikelen";
-            $tab_items[self::$TERMS_TAB] = "Termen";
-            $tab_items[self::$TARGET_PAGES_TAB] = "Doelpagina's";
+            $tab_items[self::$ARTICLES_TAB] = $this->getTextResource("articles_tab_articles");
+            $tab_items[self::$TERMS_TAB] = $this->getTextResource("articles_tab_terms");
+            $tab_items[self::$TARGET_PAGES_TAB] = $this->getTextResource("articles_tab_target_pages");
             $tab_menu = new TabMenu($tab_items, $this->_article_pre_handler->getCurrentTabId());
             return $tab_menu->render();
         }
