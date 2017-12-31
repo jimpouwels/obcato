@@ -23,21 +23,27 @@
 
         public function render() {
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
-            $this->_template_engine->assign("page", $this->getPageData($this->_page));
+            $this->_template_engine->assign("page", $this->getPageContentAndMetaData($this->_page));
             $rendered_article = null;
             if (!is_null($this->_article) && $this->_article->isPublished()) {
                 $rendered_article = $this->renderArticle();
             }
             $this->_template_engine->assign('article', $rendered_article);
-            $this->_template_engine->assign("root_page", $this->getPageData($this->_page_dao->getRootPage()));
+            $this->_template_engine->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
             return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 
-        private function getPageData($page) {
+        private function getPageContentAndMetaData($page) {
             $page_data = array();
             $page_data["elements"] = $this->renderElementHolderContent($page);
             $page_data["blocks"] = $this->renderBlocks();
-            $this->addPageData($page, $page_data);
+            $this->addPageMetaData($page, $page_data);
+            return $page_data;
+        }
+
+        private function getPageMetaData($page) {
+            $page_data = array();
+            $this->addPageMetaData($page, $page_data);
             return $page_data;
         }
 
@@ -46,13 +52,13 @@
             foreach ($page->getSubPages() as $subPage) {
                 if (!$subPage->isPublished()) continue;
                 $child = array();
-                $this->addPageData($subPage, $child);
+                $this->addPageMetaData($subPage, $child);
                 $children[] = $child;
             }
             return $children;
         }
 
-        private function addPageData($page, &$page_data) {
+        private function addPageMetaData($page, &$page_data) {
             $page_data["is_current_page"] = $this->_current_page->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
             $page_data["url"] = $this->getPageUrl($page);

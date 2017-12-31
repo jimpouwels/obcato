@@ -11,12 +11,12 @@ pages_module_title: Pagina's
 block_selection_title: Blokken
 
 # METADATA LABELS
-title_field_label: Titel
-navigation_title_field_label: Navigatietitel
-description_field_label: Beschrijving
-ispublished_field_label: Gepubliceerd
-showinnavigation_field_label: Tonen in navigatie
-template_field_label: Template
+pages_edit_metadata_title_field_label: Titel
+pages_edit_metadata_navigation_title_field_label: Navigatietitel
+pages_edit_metadata_description_field_label: Beschrijving
+pages_edit_metadata_ispublished_field_label: Gepubliceerd
+pages_edit_metadata_showinnavigation_field_label: Tonen in navigatie
+pages_edit_metadata_template_field_label: Template
 
 # NEW PAGE DEFAULT DATA
 new_page_default_title: Nieuwe pagina
