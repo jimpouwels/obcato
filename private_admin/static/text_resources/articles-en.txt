@@ -27,3 +27,12 @@ article_editor_sort_date_label: Sort date
 article_editor_target_page_label: Target page
 article_editor_image_label: Image
 article_editor_delete_image_button_label: Delete image
+
+# TERMS EDITOR
+articles_terms_editor_title: Edit term
+articles_terms_editor_name_field: Name
+articles_terms_default_term_name: New term
+articles_terms_term_create_success_message: New term successfully created
+articles_terms_term_save_success_message: Term successfully saved
+articles_terms_term_delete_success_message: Term(s) successfully deleted
+articles_terms_term_save_error_message: Term not saved, resolve the errors

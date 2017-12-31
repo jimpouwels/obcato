@@ -27,3 +27,12 @@ article_editor_sort_date_label: Sorteerdatum
 article_editor_target_page_label: Doelpagina
 article_editor_image_label: Afbeelding
 article_editor_delete_image_button_label: Afbeelding verwijderen
+
+# TERMS EDITOR
+articles_terms_editor_title: Term bewerken
+articles_terms_editor_name_field: Naam
+articles_terms_default_term_name: Nieuwe term
+articles_terms_term_create_success_message: Nieuwe term succesvol aangemaakt
+articles_terms_term_save_success_message: Term succesvol opgeslagen
+articles_terms_term_delete_success_message: Termen succesvol verwijderd
+articles_terms_term_save_error_message: Term niet opgeslagen, verwerk de fouten

@@ -191,9 +191,9 @@
                 return ArticleTerm::constructFromRecord($row);
         }
 
-        public function createTerm() {
+        public function createTerm($term_name) {
             $new_term = new ArticleTerm();
-            $new_term->setName("Nieuwe term");
+            $new_term->setName($term_name);
             $postfix = 1;
             while (!is_null($this->getTermByName($new_term->getName()))) {
                 $new_term->setName("Nieuwe term " . $postfix);
