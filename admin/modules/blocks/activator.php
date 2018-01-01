@@ -65,6 +65,16 @@
         
         public function getHeadIncludes() {
             $this->_template_engine->assign("path", $this->_block_module->getIdentifier());
+            $element_statics_values = array();
+            if (!is_null($this->_current_block)) {
+                $element_statics = $this->_current_block->getElementStatics();
+                if (count($element_statics) > 0) {
+                    foreach ($element_statics as $element_static) {
+                        $element_statics_values[] = $element_static->render();
+                    }
+                }
+            }
+            $this->_template_engine->assign("element_statics", $element_statics_values);
             return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
         

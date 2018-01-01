@@ -44,7 +44,8 @@
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, blocks b WHERE b.position_id = ?
                                                                     AND e.id = b.element_holder_id");
-            $statement->bind_param("i", $position->getId());
+            $position_id = $position->getId();
+            $statement->bind_param("i", $position_id);
             $result = $this->_mysql_connector->executeStatement($statement);
             $blocks = array();
             while ($row = $result->fetch_assoc())

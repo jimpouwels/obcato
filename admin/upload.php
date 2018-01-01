@@ -16,10 +16,7 @@
         $image_dao = ImageDao::getInstance();
         $image = $image_dao->getImage($_GET['image']);
         
-        $render_image = false;
-        if ($image->isPublished())
-            $render_image = true;
-        else
+        if (!$image->isPublished())
             Authenticator::isAuthenticated();
         
         $file_name = NULL;
