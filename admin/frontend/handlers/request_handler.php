@@ -39,12 +39,11 @@
 
         private function renderHomepage() {
             $homePage = $this->_settings_dao->getSettings()->getHomepage();
-            if ($homePage->isPublished())
-                $this->renderPage($homePage, null);
+            $this->renderPage($homePage, null);
         }
 
         private function renderPage($page, $article) {
-            if (!is_null($page) && $page->isPublished()) {
+            if ($page->isPublished()) {
                 $page_visual = new PageVisual($page, $article);
                 $page_visual->render();
             }
