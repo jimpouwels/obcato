@@ -147,9 +147,6 @@
             return $homepage;
         }
 
-        public function persist() {
-        }
-
         public static function find() {
             $mysql_database = MysqlConnector::getInstance();
             $result = $mysql_database->executeQuery("SELECT * FROM settings");

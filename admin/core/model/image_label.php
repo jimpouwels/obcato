@@ -15,15 +15,6 @@
             return $this->_name;
         }
         
-        public function persist() {
-        }
-        
-        public function update() {
-        }
-        
-        public function delete() {
-        }
-        
         public static function constructFromRecord($record) {
             $label = new ImageLabel();
             $label->setId($record['id']);

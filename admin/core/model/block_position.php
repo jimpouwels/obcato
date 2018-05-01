@@ -34,15 +34,6 @@
             return $this->_block_dao->getBlocksByPosition($this);
         }
         
-        public function persist() {
-        }
-        
-        public function update() {
-        }
-        
-        public function delete() {
-        }
-        
         public static function constructFromRecord($record) {
             $position = new BlockPosition();
             $position->setId($record['id']);
