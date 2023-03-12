@@ -40,8 +40,7 @@
                     , database_version, component_dir, backend_template_dir, cms_root_dir, public_root_dir) VALUES (
                     'Default','" . $settings->getBackendHostname() . "', '" . $settings->getFrontendHostname() . "','" .
                     $settings->getSmtpHost() . "', '" . $settings->getEmailAddress() . "','" . $settings->getFrontendTemplateDir() . "','" .
-                     $settings->getConfigDir() . "','" . $settings->getStaticDir() . "','" . $settings->getUploadDir() . "','" .
-                     0 . "','" . $settings->getComponentDir() . "','" . $settings->getBackendTemplateDir() . "', '" . 
+                     $settings->getConfigDir() . "','" . $settings->getStaticDir() . "','" . $settings->getUploadDir() . "','1.0.0.4','" . $settings->getComponentDir() . "','" . $settings->getBackendTemplateDir() . "', '" . 
                      $settings->getCmsRootDir() . "','" . $settings->getPublicRootDir() . "')";
             $mysql_database->executeQuery($query);
         }
