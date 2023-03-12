@@ -38,11 +38,11 @@
             header("Location: /admin/index.php?mode=install&step=3");
         } else if (getStepFromPostRequest() == "3") {
             $settings_dao = SettingsDao::getInstance();
-            $settings = $settings_dao->getSettings();
+            $settings = new Settings();
             $form = new InstallFoldersForm($settings);
             try {
                 $form->loadFields();
-                $settings_dao->update($settings);
+                $settings_dao->insert($settings);
                 header("Location: /admin/index.php?mode=install&step=4");
             } catch (FormException $e) {
                 global $errors;

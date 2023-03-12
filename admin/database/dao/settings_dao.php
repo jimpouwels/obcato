@@ -1,6 +1,5 @@
 <?php
 
-
     defined('_ACCESS') or die;
 
     include_once CMS_ROOT . "database/mysql_connector.php";
@@ -31,6 +30,19 @@
                      upload_dir = '" . $settings->getUploadDir() . "', database_version = '" . $settings->getDatabaseVersion() . "',
                      component_dir = '" . $settings->getComponentDir() . "', backend_template_dir = '" . $settings->getBackendTemplateDir() . "',
                      cms_root_dir = '" . $settings->getCmsRootDir() . "', public_root_dir = '" . $settings->getPublicRootDir() . "'";
+            $mysql_database->executeQuery($query);
+        }
+        
+        public function insert($settings) {
+            $mysql_database = MysqlConnector::getInstance();
+            $query = "INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host 
+                    , email_address, frontend_template_dir, config_dir, static_files_dir, upload_dir
+                    , database_version, component_dir, backend_template_dir, cms_root_dir, public_root_dir) VALUES (
+                    'Default','" . $settings->getBackendHostname() . "', '" . $settings->getFrontendHostname() . "','" .
+                    $settings->getSmtpHost() . "', '" . $settings->getEmailAddress() . "','" . $settings->getFrontendTemplateDir() . "','" .
+                     $settings->getConfigDir() . "','" . $settings->getStaticDir() . "','" . $settings->getUploadDir() . "','" .
+                     0 . "','" . $settings->getComponentDir() . "','" . $settings->getBackendTemplateDir() . "', '" . 
+                     $settings->getCmsRootDir() . "','" . $settings->getPublicRootDir() . "')";
             $mysql_database->executeQuery($query);
         }
 
