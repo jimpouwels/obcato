@@ -1,5 +1,4 @@
 <?php
-
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "utilities/string_utility.php";
