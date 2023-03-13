@@ -15,6 +15,7 @@
         private $_page_dao;
         private $_article_dao;
         private $_friendly_url_manager;
+        private $_current_page;
 
         public function __construct($current_page) {
             $this->_link_dao = LinkDao::getInstance();

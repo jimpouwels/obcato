@@ -13,9 +13,10 @@
             
         private $_title;
         private $_text;
+        private $_metadata_provider;
             
         public function __construct() {
-            $this->myMetaDataProvider = new TextElementMetaDataProvider();
+            $this->_metadata_provider = new TextElementMetaDataProvider();
         }
         
         public function setTitle($title) {
@@ -47,11 +48,11 @@
         }
         
         public function initializeMetaData() {
-            $this->myMetaDataProvider->getMetaData($this);
+            $this->_metadata_provider->getMetaData($this);
         }
         
         public function updateMetaData() {
-            $this->myMetaDataProvider->updateMetaData($this);
+            $this->_metadata_provider->updateMetaData($this);
         }
 
         public function getRequestHandler() {

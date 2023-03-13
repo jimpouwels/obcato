@@ -8,7 +8,9 @@
     class Authenticator {
 
         public static function isAuthenticated() {
-            session_start();
+            if(!isset($_SESSION)) {
+                session_start();
+            }
             $authorization_dao = AuthorizationDao::getInstance();
             if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)) {
                 if (isset($_SESSION['username'])) {

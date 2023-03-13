@@ -14,6 +14,7 @@
         private $_include_in_search_engine;
         private $_created_at;
         private $_created_by_id;
+        private $_type;
         
         public function __construct() {
             $this->_element_holder_dao = ElementHolderDao::getInstance();
@@ -66,11 +67,11 @@
         }
         
         public function getType() {
-            return $this->myType;
+            return $this->_type;
         }
         
         public function setType($type) {
-            $this->myType = $type;
+            $this->_type = $type;
         }
         
         public function getLinks() {

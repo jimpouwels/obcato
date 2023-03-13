@@ -1,6 +1,5 @@
 <?php
 
-
     defined('_ACCESS') or die;
 
     class MysqlConnector {
@@ -8,6 +7,7 @@
         private static $instance;
         private $conn;
         private $_host;
+        private $_database_name;
 
         public static function getInstance() {
             if (is_null(self::$instance)) {

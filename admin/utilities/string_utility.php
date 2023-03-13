@@ -26,6 +26,9 @@
         }
 
         public static function escapeXml($string_value) {
+            if (empty($string_value)) {
+                return $string_value;
+            }
             $string_value = str_replace("&", "&amp;", $string_value);
             $string_value = str_replace("\"", "&quot;", $string_value);
             $string_value = str_replace("�", "&ndash;", $string_value);

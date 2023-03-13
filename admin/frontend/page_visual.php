@@ -59,7 +59,7 @@
         }
 
         private function addPageMetaData($page, &$page_data) {
-            $page_data["is_current_page"] = $this->_current_page->getId() == $page->getId();
+            $page_data["is_current_page"] = $this->_page->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
             $page_data["url"] = $this->getPageUrl($page);
             $page_data["navigation_title"] = $page->getNavigationTitle();
