@@ -28,7 +28,7 @@
             $sort_date = $this->loadSortDate();
             $this->deleteLeadImageIfNeeded();
             $this->_element_order = $this->getFieldValue("element_order");        
-            $this->_selected_terms = $this->getFieldValue("select_terms_" . $this->_article->getId());
+            $this->_selected_terms = $this->getSelectValue("select_terms_" . $this->_article->getId());
             if ($this->hasErrors())
                 throw new FormException();
             else {

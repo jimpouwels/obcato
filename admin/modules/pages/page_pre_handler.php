@@ -113,6 +113,7 @@
             $new_page = new Page();
             $new_page->setParentId($this->_current_page->getId());
             $new_page->setShowInNavigation(true);
+            $new_page->setDescription($this->getTextResource('new_page_default_title'));
             $new_page->setNavigationTitle($this->getTextResource('new_page_default_navigation_title'));
             $new_page->setTitle($this->getTextResource('new_page_default_title'));
             $user = Authenticator::getCurrentUser();

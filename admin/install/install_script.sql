@@ -737,7 +737,7 @@ CREATE TABLE `pages` (
   `navigation_title` varchar(255) DEFAULT NULL,
   `parent_id` int(10) unsigned DEFAULT NULL,
   `show_in_navigation` tinyint(1) unsigned NOT NULL,
-  `include_in_searchindex` tinyint(3) unsigned NOT NULL,
+  `include_in_searchindex` tinyint(1) unsigned NOT NULL,
   `element_holder_id` int(11) unsigned NOT NULL,
   `follow_up` int(10) unsigned NOT NULL,
   `is_homepage` tinyint(1) DEFAULT NULL,

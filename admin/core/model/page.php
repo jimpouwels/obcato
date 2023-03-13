@@ -176,14 +176,13 @@
             $page->setNavigationTitle($record['navigation_title']);
             $page->setShowInNavigation($record['show_in_navigation'] == 1 ? true : false);
             $page->setTemplateId($record['template_id']);
-            $page->setIncludeInSearchEngine($record['include_in_searchindex']);
+            $page->setIncludeInSearchEngine($record['include_in_searchindex'] == 1 ? true : false);
             $page->setScopeId($record['scope_id']);
             $page->setCreatedAt($record['created_at']);
             $page->setCreatedById($record['created_by']);
             $page->setType($record['type']);
             $page->setFollowUp($record['follow_up']);
             $page->setIsHomepage($record['is_homepage'] == 1 ? true : false);
-            
             return $page;
         }
     

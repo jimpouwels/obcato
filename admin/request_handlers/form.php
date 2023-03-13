@@ -24,6 +24,13 @@
                 $value = $_POST[$field_name];
             return $value;
         }
+
+        public function getSelectValue($field_name) {
+            $value = [];
+            if (isset($_POST[$field_name]))
+                $value = $_POST[$field_name];
+            return $value;
+        }
         
         public function getCheckboxValue($field_name) {
             return $this->getFieldValue($field_name) == "on" ? 1 : 0;

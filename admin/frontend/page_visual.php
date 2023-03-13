@@ -25,8 +25,10 @@
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
             $this->_template_engine->assign("page", $this->getPageContentAndMetaData($this->_page));
             $rendered_article = null;
+            $this->_template_engine->assign("page_title", $this->_page->getTitle());
             if (!is_null($this->_article) && $this->_article->isPublished()) {
                 $rendered_article = $this->renderArticle();
+                $this->_template_engine->assign("page_title", $this->_article->getTitle());
             }
             $this->_template_engine->assign('article', $rendered_article);
             $this->_template_engine->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));

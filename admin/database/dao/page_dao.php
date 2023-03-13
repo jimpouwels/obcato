@@ -82,8 +82,8 @@
         }
 
         public function updatePage($page) {
-            $query = "UPDATE pages SET navigation_title = '" . $this->_mysql_connector->realEscapeString($page->getNavigationTitle()) . "', show_in_navigation = " . $page->getShowInNavigation() . ",
-                    include_in_searchindex = " . $page->getIncludeInSearchEngine() . ", follow_up = " . $page->getFollowUp() . ", description = '" .
+            $query = "UPDATE pages SET navigation_title = '" . $this->_mysql_connector->realEscapeString($page->getNavigationTitle()) . "', show_in_navigation = " . ($page->getShowInNavigation() ? 1 : 0) . ",
+                    include_in_searchindex = " . ($page->getIncludeInSearchEngine() ? 1 : 0) . ", follow_up = " . $page->getFollowUp() . ", description = '" .
                       $page->getDescription() . "'";
             $query .= " WHERE element_holder_id = " . $page->getId();
             $this->_mysql_connector->executeQuery($query);
