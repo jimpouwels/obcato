@@ -66,7 +66,7 @@ $(document).ready(function(){
 	// slides in the notification bar
 	$("#notification-slider").animate({
 		marginTop: "0"
-	}, 1000 );
+	}, 1000);
 });
 
 // handles add link
@@ -108,7 +108,6 @@ function putLink(linkCode) {
 			newText = "[LINK C=\"" + linkCode + "\"]" + selectedText + "[/LINK]";
 			var result = value.replace(selectedText, newText);
 			lastFocussedField.value = lastFocussedField.value.substring(0,start) + newText + lastFocussedField.value.substring(end,len);
-			alert("Link succesvol toegevoegd");
 		} else {
 			alert(errorMessage);
 		}
