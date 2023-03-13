@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "view/views/cms.php";
     require_once CMS_ROOT . "view/views/popup.php";
     require_once CMS_ROOT . "text_resource_loader.php";
-    
+
     class Backend {
     
         private $_identifier;
