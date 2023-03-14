@@ -33,7 +33,7 @@
         }
 
         protected function getImageUrl($image) {
-            return $this->getPageUrl($this->_current_page) . '?image=' . $image->getId();
+            return $this->getPageUrl($this->_current_page) . '&amp;image=' . $image->getId();
         }
 
         protected function getArticleUrl($article) {

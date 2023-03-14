@@ -26,9 +26,9 @@
         }
 
         public function handleRequest() {
-            if ($this->isImageRequest())
+            if ($this->isImageRequest()) {
                 $this->loadImage();
-            else {
+            } else {
                 $page = $this->getPageFromRequest();
                 if ($page) {
                     $this->renderPage($page, $this->getArticleFromRequest());
@@ -53,14 +53,15 @@
         private function loadImage() {
             $image = $this->getImageFromRequest();
             if ($image->isPublished()) {
-                if ($image->getExtension() == "jpg")
+                if ($image->getExtension() == "jpg") {
                     header("Content-Type: image/jpeg");
-                else if ($image->getExtension() == "gif")
+                } else if ($image->getExtension() == "gif") {
                     header("Content-Type: image/gif");
-                else if ($image->getExtension() == "png")
+                } else if ($image->getExtension() == "png") {
                     header("Content-Type: img/png");
-                else
+                } else {
                     header("Content-Type: image/" . $image->getExtension());
+                }
                 readfile(UPLOAD_DIR . "/" . $image->getFileName());
             }
         }

@@ -22,8 +22,9 @@
 
         private function renderElements() {
             $elements_content = array();
-            foreach ($this->_block->getElements() as $element)
+            foreach ($this->_block->getElements() as $element) {
                 $elements_content[] = $element->getFrontendVisual($this->_block)->render();
+            }
             return $elements_content;
         }
     }
