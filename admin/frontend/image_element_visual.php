@@ -28,8 +28,9 @@
 
         private function createImageUrl() {
             $image_url = "";
-            if (!is_null($this->_image_element->getImage()))
+            if (!is_null($this->_image_element->getImage())) {
                 $image_url = $this->getImageUrl($this->_image_element->getImage());
+            }
             return $image_url;
         }
 

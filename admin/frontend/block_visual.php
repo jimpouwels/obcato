@@ -7,9 +7,12 @@
 
         private $_block;
         private $_template_engine;
+        private $_current_page;
 
-        public function __construct($block) {
+        public function __construct($block, $current_page) {
+            parent::__construct($current_page);
             $this->_block = $block;
+            $this->_current_page = $current_page;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
@@ -23,7 +26,7 @@
         private function renderElements() {
             $elements_content = array();
             foreach ($this->_block->getElements() as $element) {
-                $elements_content[] = $element->getFrontendVisual($this->_block)->render();
+                $elements_content[] = $element->getFrontendVisual($this->_current_page)->render();
             }
             return $elements_content;
         }

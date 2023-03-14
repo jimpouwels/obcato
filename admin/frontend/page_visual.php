@@ -100,14 +100,15 @@
         }
 
         private function renderBlock($block) {
-            $block_visual = new BlockVisual($block);
+            $block_visual = new BlockVisual($block, $this->_page);
             return $block_visual->render();
         }
 
         private function renderElementHolderContent($element_holder) {
             $elements_content = array();
-            foreach ($element_holder->getElements() as $element)
+            foreach ($element_holder->getElements() as $element) {
                $elements_content[] = $element->getFrontendVisual($element_holder)->render();
+            }
             return $elements_content;
         }
 

@@ -33,25 +33,28 @@
         }
 
         protected function getImageUrl($image) {
-            return $this->getPageUrl($this->_current_page) . '&amp;image=' . $image->getId();
+            return $this->getPageUrl($this->_current_page) . '?image=' . $image->getId();
         }
 
         protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
-            if (is_null($target_page))
+            if (is_null($target_page)) {
                 $target_page = $this->_current_page;
+            }
             $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
-            if ($url == null)
+            if ($url == null) {
                 $url = UrlHelper::addQueryStringParameter($this->getPageUrl($target_page), 'articleid', $article->getId());
-            else
+            } else {
                 $url = $this->getPageUrl($target_page) . $url;
+            }
             return $url;
         }
 
         protected function getPageUrl($page) {
             $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
-            if ($url == null)
+            if ($url == null) {
                 $url = '/index.php?id=' . $page->getId();
+            }
             return $url;
         }
 
