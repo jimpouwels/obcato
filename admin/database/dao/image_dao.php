@@ -56,6 +56,14 @@
             return $images;
         }
 
+        public function searchImagesByLabels($labels) {
+            $all_images = [];
+            foreach ($labels as $label) {
+                array_merge($all_images, $this->searchImages(null, null, $label->getId()));
+            }
+            return $all_images;
+        }
+
         public function searchImages($keyword, $filename, $label_id) {
             $query = "SELECT DISTINCT " . self::$myAllColumns . " FROM images i";
                         

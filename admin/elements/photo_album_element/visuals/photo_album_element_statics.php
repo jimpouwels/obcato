@@ -4,9 +4,9 @@
     
     require_once CMS_ROOT . "view/views/visual.php";
 
-    class ArticleOverviewElementStatics extends Visual {
+    class PhotoAlbumElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/article_overview_element/article_overview_element_statics.tpl";
+        private static $TEMPLATE = "elements/photo_album_element/photo_album_element_statics.tpl";
         
         private $_template_engine;
     

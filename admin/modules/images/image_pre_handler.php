@@ -115,7 +115,7 @@
         private function deleteSelectedLabelsFromImage() {
             $image_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
             foreach ($image_labels as $image_label)
-                if (isset($_POST["label_" . $image_label->getId() . "_delete"]))
+                if (isset($_POST["label_" . $this->_current_image->getId() . "_" . $image_label->getId() . "_delete"]))
                     $this->_image_dao->deleteLabelForImage($image_label->getId(), $this->_current_image);
         }
 

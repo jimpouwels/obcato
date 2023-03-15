@@ -57,7 +57,7 @@
         }
 
         private function renderSelectedLabelCheckbox($label) {
-            $checkbox = new SingleCheckbox("label_" . $label->getId() . "_delete", "", 0, false, "");
+            $checkbox = new SingleCheckbox("label_" . $this->_context_id . "_" . $label->getId() . "_delete", "", 0, false, "");
             return $checkbox->render();
         }
 

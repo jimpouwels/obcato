@@ -1,0 +1,11 @@
+<table>
+    <tr>
+            <td>{$title_field}</td>
+    </tr>
+    <tr>
+            <td>{$max_results_field}</td>
+    </tr>
+    <tr>
+            <td>{$label_select_field}</td>
+    </tr>
+</table>

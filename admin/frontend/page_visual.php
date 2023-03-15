@@ -54,20 +54,22 @@
             foreach ($page->getSubPages() as $subPage) {
                 if (!$subPage->isPublished()) continue;
                 $child = array();
-                $this->addPageMetaData($subPage, $child);
+                $this->addPageMetaData($subPage, $child, false);
                 $children[] = $child;
             }
             return $children;
         }
 
-        private function addPageMetaData($page, &$page_data) {
+        private function addPageMetaData($page, &$page_data, $render_childen = true) {
             $page_data["is_current_page"] = $this->_page->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
             $page_data["url"] = $this->getPageUrl($page);
             $page_data["navigation_title"] = $page->getNavigationTitle();
             $page_data["description"] = $this->toHtml($page->getDescription(), $page);
             $page_data["show_in_navigation"] = $page->getShowInNavigation();
-            $page_data["children"] = $this->renderChildren($page);
+            if ($render_childen) {
+                $page_data["children"] = $this->renderChildren($page);
+            }
         }
 
         private function renderArticle() {
