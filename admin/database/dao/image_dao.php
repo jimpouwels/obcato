@@ -51,15 +51,16 @@
                       WHERE ils.image_id IS NULL";
             $result = $this->_mysql_connector->executeQuery($query);
             $images = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $images[] = Image::constructFromRecord($row);
+            }
             return $images;
         }
 
         public function searchImagesByLabels($labels) {
-            $all_images = [];
+            $all_images = array();
             foreach ($labels as $label) {
-                array_merge($all_images, $this->searchImages(null, null, $label->getId()));
+                array_push($all_images, ...$this->searchImages(null, null, $label->getId()));
             }
             return $all_images;
         }
@@ -92,8 +93,9 @@
             $result = $this->_mysql_connector->executeQuery($query);
             $images = array();
             
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $images[] = Image::constructFromRecord($row);
+            }
             return $images;
         }
 

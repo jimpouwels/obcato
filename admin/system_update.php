@@ -16,7 +16,7 @@
     Authenticator::isAuthenticated();
 
     // only Developer account may access this section
-    if ($_SESSION['username'] != "Developer") {
+    if ($_SESSION['username'] != "jim.pouwels@gmail.com") {
         header('Location: /admin/login.php');
         exit();
     }

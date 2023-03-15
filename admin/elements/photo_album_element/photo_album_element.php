@@ -56,7 +56,6 @@
         }
         
         public function getImages() {
-            include_once CMS_ROOT . "database/dao/image_dao.php";
             $image_dao = ImageDao::getInstance();
             $images = $image_dao->searchImagesByLabels($this->_labels);
             return $images;

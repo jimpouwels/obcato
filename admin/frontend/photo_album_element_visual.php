@@ -26,18 +26,14 @@
             $images = $this->_photo_album_element->getImages();
             $images_arr = array();
             foreach ($images as $image) {
-                if (!$this->isPublished($image)) continue;
+                if (!$image->isPublished()) continue;
                 $image_item = array();
-                $image_item["id"] = $article->getId();
-                $image_item["title"] = $article->getTitle();
-                $image_item["url"] = $this->getImageUrl($article->getImage());
+                $image_item["id"] = $image->getId();
+                $image_item["title"] = $image->getTitle();
+                $image_item["url"] = $this->getImageUrl($image);
                 $images_arr[] = $image_item;
             }
             return $images_arr;
-        }
-
-        private function isPublished($article) {
-            return $article->isPublished() && strtotime($article->getPublicationDate()) < strtotime('now');
         }
     }
 

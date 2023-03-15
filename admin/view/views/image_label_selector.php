@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/dao/image_dao.php";
+    require_once CMS_ROOT . "view/views/panel.php";
 
     class ImageLabelSelector extends Panel {
 
