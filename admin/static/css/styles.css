@@ -57,10 +57,8 @@
     width: 300px;
 }
 
-.admin_form {
+.admin_form ul {
     padding: 0px;
-    margin-top: 0px;
-    margin-left: 10px;
 }
 
 .admin_form li {

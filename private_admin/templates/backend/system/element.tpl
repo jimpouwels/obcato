@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="element_form">
+        <div class="element_form admin_form">
             {$element_form}
         </div>
     </div>

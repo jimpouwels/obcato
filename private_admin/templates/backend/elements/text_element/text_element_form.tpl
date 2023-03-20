@@ -1,4 +1,4 @@
-<ul class="admin_form">
+<ul>
     <li>
         {$title_field}
     </li>
