@@ -412,8 +412,7 @@ h1 {
 .element_wrapper {
     cursor: move;
     border: 1px solid #d3d3d3;
-    padding-left: 10px;
-    padding-bottom: 5px;
+    padding: 10px;
     margin: 20px;
     box-shadow: 5px 5px 5px #888888;
     background-color: #ffffff;
@@ -433,15 +432,24 @@ h1 {
 }
 
 .element_header {
+    width: 100%;
     color: #000000;
     font-size: 1.3em;
     font-family: "Trebuchet MS",Arial,Verdana;
     text-align: left;
-    margin-top: 10px;
 }
 
-.element_header .delete_button {
-    text-align: right;
+.element_header .element_header_right {
+    float: right;
+    display: flex;
+}
+
+.element_header .admin_label {
+    display: none;
+}
+
+.element_header .template_picker {
+    width: 300px;
 }
 
 .element_header select {
@@ -449,21 +457,16 @@ h1 {
     margin-bottom: 2px;
 }
 
-.element_header .delete_button img {
-    border: 0px;
-}
-
 .element_header .delete_button {
-    width: 3%;
+    margin-left: 10px;
 }
 
-.element_header .template_picker {
-    text-align: right;
-    width: 25%;
+.element_wrapper .element_form {
+    width: 100%;
 }
 
-.element_header .template_picker .admin_label {
-    padding: 0px;
+.element_wrapper .element_form table {
+    width: 100%;
 }
 
 .admin_form_list select {
@@ -479,7 +482,6 @@ h1 {
 .admin_field_text_area {
     margin-top: 10px;
     height: 150px;
-    width: 450px;
 }
 
 .admin_field_checkbox {

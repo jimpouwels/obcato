@@ -24,7 +24,7 @@
         }
 
         private function renderQueryField() {
-            $query_field = new TextArea('query', "Query", $this->_pre_handler->getQuery(), 55, 10, true, false, "");
+            $query_field = new TextArea('query', "Query", $this->_pre_handler->getQuery(), true, false, "");
             return $query_field->render();
         }
 

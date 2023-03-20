@@ -78,3 +78,7 @@
     color: red;
     font-style: italic;
 }
+
+.page_metadata_editor textarea {
+    width: 500px;
+}

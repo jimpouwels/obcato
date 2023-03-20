@@ -28,9 +28,13 @@
     margin-left: 350px;
 }
 
-.article_meta, .term_selector {
+.article_metadata_editor, .term_selector {
     margin-left: 350px;
     height: 30%;
+}
+
+.article_metadata_editor textarea {
+    width: 500px;
 }
 
 .show_all_link {

@@ -1,12 +1,8 @@
-<table>
-    <tr>
-        <td>
-            {$title_field}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {$text_field}
-        </td>
-    </tr>
-</table>
+<ul class="admin_form">
+    <li>
+        {$title_field}
+    </li>
+    <li>
+        {$text_field}
+    </li>
+</ul>
