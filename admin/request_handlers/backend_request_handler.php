@@ -31,8 +31,9 @@
                 unset($_SESSION['module_tab']);
             }
 
-            if (isset($_SESSION['module_id']))
+            if (isset($_SESSION['module_id'])) {
                 $current_module = $this->_module_dao->getModule($_SESSION['module_id']);
+            }
             $this->_callback->setCurrentModule($current_module);
         }
         

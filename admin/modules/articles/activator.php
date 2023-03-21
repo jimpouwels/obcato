@@ -55,12 +55,13 @@
 
         public function getRequestHandlers() {
             $pre_handlers = array();
-            if ($this->getCurrentTabId() == self::$ARTICLES_TAB)
+            if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $pre_handlers[] = $this->_article_pre_handler;
-            else if ($this->getCurrentTabId() == self::$TERMS_TAB)
+            } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
                 $pre_handlers[] = $this->_term_pre_handler;
-            else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB)
+            } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
                 $pre_handlers[] = $this->_target_pages_pre_handler;
+            }
             return $pre_handlers;
         }
 

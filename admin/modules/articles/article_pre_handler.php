@@ -30,12 +30,13 @@
         public function handlePost() {
             parent::handlePost();
             $this->_current_article = $this->getArticleFromPostRequest();
-            if ($this->isUpdateArticleAction())
+            if ($this->isUpdateArticleAction()) {
                 $this->updateArticle();
-            else if ($this->isDeleteArticleAction())
+            } else if ($this->isDeleteArticleAction()) {
                 $this->deleteArticle();
-            else if ($this->isAddArticleAction())
+            } else if ($this->isAddArticleAction()) {
                 $this->addArticle();
+            }
         }
 
         public function getCurrentArticle() {
@@ -43,13 +44,15 @@
         }
 
         public function getSearchQuery() {
-            if (isset($_GET['search_query']))
+            if (isset($_GET['search_query'])) {
                 return $_GET['search_query'];
+            }
         }
 
         public function getSearchTerm() {
-            if (isset($_GET['s_term']))
+            if (isset($_GET['s_term'])) {
                 return $_GET['s_term'];
+            }
         }
 
         public function isSearchAction() {
@@ -70,6 +73,7 @@
             } catch (FormException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
+            $this->redirectTo('/admin/index.php?article=' . $this->_current_article->getId());
         }
 
         private function addArticle() {
