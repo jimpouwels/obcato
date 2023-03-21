@@ -87,7 +87,7 @@
             return $article_dao->getTermsForArticle($this->getId());
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord($record): Article {
             $article = new Article();
             $article->setId($record['id']);
             $article->setTitle($record['title']);

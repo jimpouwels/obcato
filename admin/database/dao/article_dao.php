@@ -26,43 +26,49 @@
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public static function getInstance() {
-            if (!self::$instance)
+        public static function getInstance(): ArticleDao {
+            if (!self::$instance) {
                 self::$instance = new ArticleDao();
+            }
             return self::$instance;
         }
 
-        public function getArticle($id) {
+        public function getArticle($id): Article {
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, articles a WHERE e.id = ?
                                                                     AND e.id = a.element_holder_id");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Article::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("Article could not be found for id %s", $id));
         }
 
-        public function getArticleByElementHolderId($element_holder_id) {
+        public function getArticleByElementHolderId($element_holder_id): Article {
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, articles a WHERE a.element_holder_id = ?
                                                                     AND e.id = a.element_holder_id");
             $statement->bind_param("i", $element_holder_id);
             $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Article::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("Article could not be found for element holder id %s", $element_holder_id));
         }
 
-        public function getAllArticles() {
+        public function getAllArticles(): array {
             $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
                       order by created_at DESC";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $articles[] = Article::constructFromRecord($row);
+            }
             return $articles;
         }
 
-        public function searchArticles($keyword, $term_id) {
+        public function searchArticles($keyword, $term_id): array {
             $from = " FROM element_holders e, articles a";
             $where = " WHERE
                       e.id = a.element_holder_id";
@@ -76,12 +82,13 @@
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $articles[] = Article::constructFromRecord($row);
+            }
             return $articles;
         }
 
-        public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results) {
+        public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results): array {
             $from = " FROM element_holders e, articles a";
             $where = " WHERE
                       e.id = a.element_holder_id";
@@ -122,12 +129,13 @@
             $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $articles[] = Article::constructFromRecord($row);
+            }
             return $articles;
         }
 
-        public function updateArticle($article) {
+        public function updateArticle($article): void {
             $query = "UPDATE articles SET description = '" . $this->_mysql_connector->realEscapeString($article->getDescription()) . "',
                       publication_date = '" . $article->getPublicationDate() . "',
                       sort_date = '" . $article->getSortDate() . "'";
@@ -146,11 +154,11 @@
             $this->_element_holder_dao->update($article);
         }
 
-        public function deleteArticle($article) {
+        public function deleteArticle($article): void {
             $this->_element_holder_dao->delete($article);
         }
 
-        public function createArticle() {
+        public function createArticle(): Article {
             $new_article = new Article();
             $new_article->setPublished(false);
             $new_article->setTitle('Nieuw artikel');
@@ -161,37 +169,42 @@
             return $new_article;
         }
 
-        private function persistArticle($article) {
+        private function persistArticle($article): void {
             $this->_element_holder_dao->persist($article);
             $query = "INSERT INTO articles (description, image_id, element_holder_id, sort_date, publication_date, target_page) VALUES
                       (NULL, NULL, " . $article->getId() . ", now(), now(), NULL)";
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function getAllTerms() {
+        public function getAllTerms(): array {
             $query = "SELECT * FROM article_terms";
             $terms = array();
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $terms[] = ArticleTerm::constructFromRecord($row);
+            }
             return $terms;
         }
 
-        public function getTerm($id) {
+        public function getTerm($id): ArticleTerm {
             $query = "SELECT * FROM article_terms WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ArticleTerm::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("No ArticleTerm found for id %s", $id));
         }
 
         public function getTermByName($name) {
             $query = "SELECT * FROM article_terms WHERE name = '" . $name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ArticleTerm::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("No ArticleTerm found for name %s", $name));
         }
 
-        public function createTerm($term_name) {
+        public function createTerm($term_name): ArticleTerm {
             $new_term = new ArticleTerm();
             $new_term->setName($term_name);
             $postfix = 1;
@@ -203,56 +216,58 @@
             return $new_term;
         }
 
-        private function persistTerm($term) {
+        private function persistTerm($term): void {
             $query = "INSERT INTO article_terms (name) VALUES  ('" . $term->getName() . "')";
             $this->_mysql_connector->executeQuery($query);
             $term->setId($this->_mysql_connector->getInsertId());
         }
 
-        public function updateTerm($term) {
+        public function updateTerm($term): void {
             $query = "UPDATE article_terms SET name = '" . $term->getName() .
                       "' WHERE id = " . $term->getId();
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function deleteTerm($term) {
+        public function deleteTerm($term): void {
             $query = "DELETE FROM article_terms WHERE id = " . $term->getId();
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function getTermsForArticle($article_id) {
+        public function getTermsForArticle($article_id): array {
             $query = "SELECT at.id, at.name FROM article_terms at, articles_terms ats,
                       element_holders e WHERE ats.article_id = " . $article_id . " AND ats.article_id =
                       e.id AND at.id = ats.term_id";
 
             $result = $this->_mysql_connector->executeQuery($query);
             $terms = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $terms[] = ArticleTerm::constructFromRecord($row);
+            }
             return $terms;
         }
 
-        public function addTermToArticle($term_id, $article) {
+        public function addTermToArticle($term_id, $article): void {
             $query = "INSERT INTO articles_terms (article_id, term_id) VALUES (" . $article->getId() . ", " . $term_id . ")";
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function deleteTermFromArticle($term_id, $article) {
+        public function deleteTermFromArticle($term_id, $article): void {
             $query = "DELETE FROM articles_terms WHERE article_id = " . $article->getId() ."
                       AND term_id = " . $term_id;
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function getTargetPages() {
+        public function getTargetPages(): array {
             $query = "SELECT element_holder_id FROM article_target_pages";
             $result = $this->_mysql_connector->executeQuery($query);
             $pages = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $pages[] = $this->_page_dao->getPage($row['element_holder_id']);
+            }
             return $pages;
         }
 
-        public function addTargetPage($target_page_id) {
+        public function addTargetPage($target_page_id): void {
             $duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $target_page_id;
             $result = $this->_mysql_connector->executeQuery($duplicate_check_query);
             while ($row = $result->fetch_assoc()) {
@@ -269,7 +284,7 @@
             }
         }
 
-        public function deleteTargetPage($target_page_id) {;
+        public function deleteTargetPage($target_page_id): void {
             $query = "DELETE FROM article_target_pages where element_holder_id = " . $target_page_id;
             $this->_mysql_connector->executeQuery($query);
 
@@ -277,21 +292,23 @@
             $this->updateDefaultArticleTargetPage();
         }
 
-        public function getDefaultTargetPage() {
+        public function getDefaultTargetPage(): Page {
             $query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return $this->_page_dao->getPage($row["element_holder_id"]);
+            }
+            throw new DaoException("Default target page not found");
         }
 
-        public function setDefaultArticleTargetPage($target_page_id) {
+        public function setDefaultArticleTargetPage($target_page_id): void {
             $query1 = "UPDATE article_target_pages SET is_default = 0 WHERE is_default = 1";
             $query2 = "UPDATE article_target_pages SET is_default = 1 WHERE element_holder_id = " . $target_page_id;
             $this->_mysql_connector->executeQuery($query1);
             $this->_mysql_connector->executeQuery($query2);
         }
 
-        private function updateDefaultArticleTargetPage() {
+        private function updateDefaultArticleTargetPage(): void {
             $target_pages = $this->getTargetPages();
             if (!is_null($target_pages) && count($target_pages) == 1) {
                 $query = "UPDATE article_target_pages SET is_default = 1";

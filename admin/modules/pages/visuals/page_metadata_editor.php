@@ -15,7 +15,7 @@
             parent::__construct($this->getTextResource('edit_metadata_title'), "page_metadata_editor");
             $this->_current_page = $current_page;
             $this->_template_engine = TemplateEngine::getInstance();
-            $this->_friendly_url_manager = new FriendlyUrlManager();
+            $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
         public function render() {

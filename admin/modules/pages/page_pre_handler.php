@@ -27,7 +27,7 @@
             $this->_page_dao = PageDao::getInstance();
             $this->_block_dao = BlockDao::getInstance();
             $this->_element_dao = ElementDao::getInstance();
-            $this->_friendly_url_manager = new FriendlyUrlManager();
+            $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
         public function handleGet() {

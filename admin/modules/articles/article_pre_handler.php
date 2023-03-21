@@ -20,7 +20,7 @@
             parent::__construct();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_element_dao = ElementDao::getInstance();
-            $this->_friendly_url_manager = new FriendlyUrlManager();
+            $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
         public function handleGet() {

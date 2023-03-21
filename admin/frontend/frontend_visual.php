@@ -22,7 +22,7 @@
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_current_page = $current_page;
-            $this->_friendly_url_manager = new FriendlyUrlManager();
+            $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
         public abstract function render();

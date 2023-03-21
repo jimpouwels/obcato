@@ -19,7 +19,7 @@
             $this->_current_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_friendly_url_manager = new FriendlyUrlManager();
+            $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
         public function render() {

@@ -8,6 +8,7 @@
 
     class FriendlyUrlManager {
 
+        private static $instance;
         private $_friendly_url_dao;
         private $_settings_dao;
         private $_page_dao;
@@ -19,6 +20,13 @@
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->writeHtaccessFileIfNotExists();
+        }
+        
+        public static function getInstance() {
+            if (!self::$instance) {
+                self::$instance = new FriendlyUrlManager();
+            }
+            return self::$instance;
         }
 
         public function insertOrUpdateFriendlyUrlForPage($page) {
