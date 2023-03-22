@@ -1,1 +1,4 @@
 images_module_title: Afbeeldingen
+
+image_successfully_published: Afbeelding succesvol gepubliceerd
+image_successfully_depublished: Afbeelding succesvol gedepubliceerd

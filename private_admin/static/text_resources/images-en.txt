@@ -1,1 +1,4 @@
 images_module_title: Images
+
+image_successfully_published: Image successfully published
+image_successfully_depublished: Image successfully depublished

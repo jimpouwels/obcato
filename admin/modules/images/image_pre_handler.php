@@ -75,6 +75,11 @@
                 $image_to_toggle = $this->_image_dao->getImage($image_list_form->getImageId());
                 $image_to_toggle->setPublished(!$image_to_toggle->isPublished());
                 $this->_image_dao->updateImage(($image_to_toggle));
+                $success_message_text_resource = "image_successfully_depublished";
+                if ($image_to_toggle->isPublished()) {
+                    $success_message_text_resource = "image_successfully_published";
+                }
+                $this->sendSuccessMessage(Session::getTextResource($success_message_text_resource));
                 $this->redirectTo("/admin/index.php");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Afbeelding niet worden ge(de)publiseerd");
