@@ -41,14 +41,19 @@
 
         public function getPageFromUrl($url) {
             $url = UrlHelper::removeQueryStringFrom($url);
-            $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
-            $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
-            if (is_null($page)) {
-                $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
+            $page = null;
+            if ($url == '' || $url == '/') {
+                $page = $this->_settings_dao->getSettings()->getHomepage();
+            } else {
+                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
                 $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+                if (is_null($page)) {
+                    $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
+                    $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
+                    $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+                }
             }
-            return $page;
+        return $page;
         }
 
         public function getArticleFromUrl($url): ?Article {
@@ -59,9 +64,9 @@
                 try {
                     return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
                 } catch (DaoException $e) {
-                    return null;
                 }
             }
+            return null;
         }
 
         public function getFriendlyUrlForElementHolder($element_holder) {

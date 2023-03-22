@@ -76,10 +76,11 @@
 
         private function getArticleFromRequest() {
             $article = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
-            if ($article == null && isset($_GET['articleid']))
+            if ($article == null && isset($_GET['articleid'])) {
                 return $this->_article_dao->getArticle($_GET['articleid']);
-            else
+            } else {
                 return $article;
+            }
         }
 
         private function getImageFromRequest() {
