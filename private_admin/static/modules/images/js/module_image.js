@@ -68,3 +68,10 @@ $(document).ready(function() {
 	});
 	
 });
+
+// toggle image published
+function toggleImagePublished(image_id) {
+	$('#action').attr('value', 'toggle_image_published');
+	$('#image_id').attr('value', image_id);
+	$('#toggle_image_published_form').submit();
+}

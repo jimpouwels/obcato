@@ -45,35 +45,35 @@
             return $result;
         }
 
-        public function executeSql($sql) {
+        public function executeSql($sql): void {
             mysqli_multi_query($this->conn, $sql);
         }
 
-        public function realEscapeString($value) {
+        public function realEscapeString($value): string {
             return $this->conn->real_escape_string($value);
         }
 
-        public function getNumberOfAffectedRows() {
+        public function getNumberOfAffectedRows(): int {
             return mysqli_affected_rows($this->conn);
         }
 
-        public function getInsertId() {
+        public function getInsertId(): string {
             return $this->conn->insert_id;
         }
 
-        public function getDatabaseName() {
+        public function getDatabaseName(): string {
             return $this->_database_name;
         }
 
-        public function getHostName() {
+        public function getHostName(): string {
             return $this->_host;
         }
 
-        public function getDatabaseType() {
+        public function getDatabaseType(): string {
             return "MySQL";
         }
 
-        public function getDatabaseVersion() {
+        public function getDatabaseVersion(): string {
             $query = "select version() AS version";
             $result = self::executeQuery($query);
             while ($row = $result->fetch_assoc()) {

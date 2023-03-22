@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "request_handlers/module_request_handler.php";
     require_once CMS_ROOT . "utilities/file_utility.php";
     require_once CMS_ROOT . "modules/images/image_form.php";
+    require_once CMS_ROOT . "modules/images/image_list_form.php";
     
     class ImagePreHandler extends ModuleRequestHandler {
 
@@ -26,12 +27,15 @@
         
         public function handlePost() {
             $this->_current_image = $this->getImageFromPostRequest();
-            if ($this->isUpdateImageAction())
+            if ($this->isUpdateImageAction()) {
                 $this->updateImage();
-            else if ($this->isDeleteImageAction())
+            } else if ($this->isDeleteImageAction()) {
                 $this->deleteImage();
-            else if ($this->isAddImageAction())
+            } else if ($this->isAddImageAction()) {
                 $this->addImage();
+            } else if ($this->isToggleImagePublishedAction()) {
+                $this->toggleImagePublished();
+            }
         }
         
         public function getCurrentImage() {
@@ -61,6 +65,19 @@
                 $this->sendSuccessMessage("Afbeelding succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Afbeelding niet opgeslagen, verwerk de fouten");
+            }
+        }
+
+        private function toggleImagePublished() {
+            $image_list_form = new ImageListForm();
+            try {
+                $image_list_form->loadFields();
+                $image_to_toggle = $this->_image_dao->getImage($image_list_form->getImageId());
+                $image_to_toggle->setPublished(!$image_to_toggle->isPublished());
+                $this->_image_dao->updateImage(($image_to_toggle));
+                $this->redirectTo("/admin/index.php");
+            } catch (FormException $e) {
+                $this->sendErrorMessage("Afbeelding niet worden ge(de)publiseerd");
             }
         }
 
@@ -158,6 +175,10 @@
         
         private function isAddImageAction() {
             return isset($_POST["add_image_action"]) && $_POST["add_image_action"] == "add_image";
+        }
+
+        private function isToggleImagePublishedAction() {
+            return isset($_POST["action"]) && $_POST["action"] == "toggle_image_published";
         }
         
         private function isDeleteImageAction() {

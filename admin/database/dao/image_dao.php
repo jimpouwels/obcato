@@ -17,36 +17,40 @@
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public static function getInstance() {
-            if (!self::$instance)
+        public static function getInstance(): ImageDao {
+            if (!self::$instance) {
                 self::$instance = new ImageDao();
+            }
             return self::$instance;
         }
 
-        public function getImage($image_id) {
+        public function getImage($image_id): Image {
             $query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $image_id;
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Image::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("Coud not find image by id %s", $image_id));
         }
 
-        public function updateImage($image) {
+        public function updateImage($image): void {
             $query = "UPDATE images SET title = '" . $image->getTitle() . "', 
-                      published = " . $image->isPublished() . ", file_name = '" . $image->getFileName() . "'
+                      published = " . ($image->isPublished() ? 1 : 0) . ", file_name = '" . $image->getFileName() . "'
                       , thumb_file_name = '" . $image->getThumbFileName() . "' WHERE id = " . $image->getId();
             $this->_mysql_connector->executeQuery($query);
         }
 
-        public function getAllImages() {
+        public function getAllImages(): array {
             $query = "SELECT " . self::$myAllColumns . " FROM images i";
             $result = $this->_mysql_connector->executeQuery($query);
             $images = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $images[] = Image::constructFromRecord($row);
+            }
             return $images;
         }
 
-        public function getAllImagesWithoutLabel() {
+        public function getAllImagesWithoutLabel(): array {
             $query = "SELECT " . self::$myAllColumns . " FROM images i LEFT JOIN images_labels ils ON i.id = ils.image_id 
                       WHERE ils.image_id IS NULL";
             $result = $this->_mysql_connector->executeQuery($query);
@@ -57,7 +61,7 @@
             return $images;
         }
 
-        public function searchImagesByLabels($labels) {
+        public function searchImagesByLabels($labels): array {
             $all_images = array();
             foreach ($labels as $label) {
                 array_push($all_images, ...$this->searchImages(null, null, $label->getId()));
@@ -65,7 +69,7 @@
             return $all_images;
         }
 
-        public function searchImages($keyword, $filename, $label_id) {
+        public function searchImages($keyword, $filename, $label_id): array {
             $query = "SELECT DISTINCT " . self::$myAllColumns . " FROM images i";
                         
             if (!is_null($label_id) && $label_id != '') {
@@ -99,7 +103,7 @@
             return $images;
         }
 
-        public function createImage() {
+        public function createImage(): Image {
             $new_image = new Image();
             $new_image->setPublished(false);
             $new_image->setTitle('Nieuwe afbeelding');
@@ -108,7 +112,7 @@
             return $new_image;
         }
 
-        public function deleteImage($image) {
+        public function deleteImage($image): void {
             $query = "DELETE FROM images WHERE id = " . $image->getId();
     
             // delete the uploaded images
@@ -123,19 +127,15 @@
             $this->_mysql_connector->executeQuery($query);
         }
 
-        private function persistImage($image) {
-            $published_value = $image->isPublished();
-            if (!isset($published_value) || $published_value == '') {
-                $published_value = 0;
-            }
+        private function persistImage($image): void {
             $query = "INSERT INTO images (title, published, created_at, created_by, file_name, thumb_file_name)
-                      VALUES ('" . $image->getTitle() . "', " . $published_value . ", now(), " . 
+                      VALUES ('" . $image->getTitle() . "', " . ($image->isPublished() ? 1 : 0) . ", now(), " . 
                       $image->getCreatedBy()->getId() . ", NULL, NULL)";
             $this->_mysql_connector->executeQuery($query);
             $image->setId($this->_mysql_connector->getInsertId());
         }
 
-        public function createLabel() {
+        public function createLabel(): ImageLabel {
             $new_label = new ImageLabel();
             $new_label->setName("Nieuw label");
             $postfix = 1;
@@ -149,65 +149,71 @@
             return $new_label;
         }
 
-        public function getAllLabels() {
+        public function getAllLabels(): array {
             $query = "SELECT * FROM image_labels";
             $result = $this->_mysql_connector->executeQuery($query);
             $labels = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $labels[] = ImageLabel::constructFromRecord($row);
+            }
             return $labels;
         }
 
-        public function getLabel($id) {
+        public function getLabel($id): ImageLabel {
             $query = "SELECT * FROM image_labels WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ImageLabel::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("Could not get label by id %s", $id));
         }
 
-        public function getLabelByName($name) {
+        public function getLabelByName($name): ImageLabel {
             $query = "SELECT * FROM image_labels WHERE name = '" . $name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ImageLabel::constructFromRecord($row);
+            }
+            throw new DaoException(sprintf("Could not get label by name %s", $name));
         }
         
-        public function persistLabel($label) {
+        public function persistLabel($label): string {
             $query = "INSERT INTO image_labels (name) VALUES  ('" . $label->getName() . "')";
             $this->_mysql_connector->executeQuery($query);
             return $this->_mysql_connector->getInsertId();
         }
         
-        public function updateLabel($label) {
+        public function updateLabel($label): void {
             $query = "UPDATE image_labels SET name = '" . $label->getName() . 
                       "' WHERE id = " . $label->getId();
             $this->_mysql_connector->executeQuery($query);
         }
         
-        public function deleteLabel($label) {
+        public function deleteLabel($label): void {
             $query = "DELETE FROM image_labels WHERE id = " . $label->getId();
             $this->_mysql_connector->executeQuery($query);
         }
         
-        public function addLabelToImage($label_id, $image) {
+        public function addLabelToImage($label_id, $image): void {
             $query = "INSERT INTO images_labels (image_id, label_id) VALUES (" . $image->getId() . ", " . $label_id . ")";
             $this->_mysql_connector->executeQuery($query);
         }
         
-        public function deleteLabelForImage($label_id, $image) {
+        public function deleteLabelForImage($label_id, $image): void {
             $query = "DELETE FROM images_labels WHERE image_id = " . $image->getId() ."
                       AND label_id = " . $label_id;
             $this->_mysql_connector->executeQuery($query);
         }
         
-        public function getLabelsForImage($image_id) {
+        public function getLabelsForImage($image_id): array {
             $query = "SELECT il.id, il.name FROM image_labels il, images_labels ils, 
                       images i WHERE ils.image_id = " . $image_id . " AND ils.image_id =
                       i.id AND il.id = ils.label_id";
             $result = $this->_mysql_connector->executeQuery($query);
             $labels = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $labels[] = ImageLabel::constructFromRecord($row);
+            }
             
             return $labels;
         }

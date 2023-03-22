@@ -7,7 +7,6 @@
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "core/model/article.php";
     require_once CMS_ROOT . "core/model/article_term.php";
-    require_once CMS_ROOT . "database/dao/authorization_dao.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
     class ArticleDao {

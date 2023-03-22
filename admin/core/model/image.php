@@ -81,7 +81,7 @@
             $image = new Image();
             $image->setId($record['id']);
             $image->setTitle($record['title']);
-            $image->setPublished($record['published']);
+            $image->setPublished($record['published']) == 1 ? true : false;
             $image->setCreatedAt($record['created_at']);
             $image->setCreatedById($record['created_by']);
             $image->setFileName($record['file_name']);
