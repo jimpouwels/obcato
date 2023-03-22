@@ -51,12 +51,16 @@
             return $page;
         }
 
-        public function getArticleFromUrl($url) {
+        public function getArticleFromUrl($url): ?Article {
             $url_parts = UrlHelper::splitIntoParts($url);
             if (count($url_parts) > 1) {
                 $last_url_part = $url_parts[count($url_parts) - 1];
                 $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl('/' . $last_url_part);
-                return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
+                try {
+                    return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
+                } catch (DaoException $e) {
+                    return null;
+                }
             }
         }
 
