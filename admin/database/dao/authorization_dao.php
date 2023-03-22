@@ -22,7 +22,7 @@
             return self::$instance;
         }
 
-        public function getUser($username): User {
+        public function getUser($username): ?User {
             $query = "SELECT * FROM auth_users WHERE username = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("s", $username);
@@ -30,17 +30,17 @@
             while ($row = $result->fetch_assoc()) {
                 return User::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("User not found for username %s", $username));
+            return null;
         }
 
-        public function getUserById($id): User {
+        public function getUserById($id): ?User {
             $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM auth_users WHERE id = ?");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc()) {
                 return User::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("User not found for id %s", $id));
+            return null;
         }
 
         public function getAllUsers(): array {

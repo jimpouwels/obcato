@@ -46,7 +46,7 @@
             while ($row = $result->fetch_assoc()) {
                 return $row['url'];
             }
-            throw new DaoException(sprintf("URL not found for element holder %s", $element_holder->getId()));
+            return "";
         }
 
         public function getElementHolderIdFromUrl($url): string {
@@ -57,6 +57,6 @@
             while ($row = $result->fetch_assoc()) {
                 return $row['element_holder_id'];
             }
-            throw new DaoException(sprintf("ElementHolderId could not be found from URL %s", $url));
+            return "";
         }
     }

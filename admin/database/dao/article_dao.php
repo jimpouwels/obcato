@@ -32,7 +32,7 @@
             return self::$instance;
         }
 
-        public function getArticle($id): Article {
+        public function getArticle($id): ?Article {
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, articles a WHERE e.id = ?
                                                                     AND e.id = a.element_holder_id");
@@ -41,10 +41,10 @@
             while ($row = $result->fetch_assoc()) {
                 return Article::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Article could not be found for id %s", $id));
+            return null;
         }
 
-        public function getArticleByElementHolderId($element_holder_id): Article {
+        public function getArticleByElementHolderId($element_holder_id): ?Article {
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, articles a WHERE a.element_holder_id = ?
                                                                     AND e.id = a.element_holder_id");
@@ -53,7 +53,7 @@
             while ($row = $result->fetch_assoc()) {
                 return Article::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Article could not be found for element holder id %s", $element_holder_id));
+            return null;
         }
 
         public function getAllArticles(): array {
@@ -185,22 +185,22 @@
             return $terms;
         }
 
-        public function getTerm($id): ArticleTerm {
+        public function getTerm($id): ?ArticleTerm {
             $query = "SELECT * FROM article_terms WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return ArticleTerm::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("No ArticleTerm found for id %s", $id));
+            return null;
         }
 
-        public function getTermByName($name) {
+        public function getTermByName($name): ?ArticleTerm {
             $query = "SELECT * FROM article_terms WHERE name = '" . $name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return ArticleTerm::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("No ArticleTerm found for name %s", $name));
+            return null;
         }
 
         public function createTerm($term_name): ArticleTerm {
@@ -291,13 +291,13 @@
             $this->updateDefaultArticleTargetPage();
         }
 
-        public function getDefaultTargetPage(): Page {
+        public function getDefaultTargetPage(): ?Page {
             $query = "SELECT element_holder_id FROM article_target_pages WHERE is_default = 1";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return $this->_page_dao->getPage($row["element_holder_id"]);
             }
-            throw new DaoException("Default target page not found");
+            return null;
         }
 
         public function setDefaultArticleTargetPage($target_page_id): void {

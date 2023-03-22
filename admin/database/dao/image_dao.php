@@ -24,13 +24,13 @@
             return self::$instance;
         }
 
-        public function getImage($image_id): Image {
+        public function getImage($image_id): ?Image {
             $query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $image_id;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return Image::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Coud not find image by id %s", $image_id));
+            return null;
         }
 
         public function updateImage($image): void {
@@ -159,22 +159,22 @@
             return $labels;
         }
 
-        public function getLabel($id): ImageLabel {
+        public function getLabel($id): ?ImageLabel {
             $query = "SELECT * FROM image_labels WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return ImageLabel::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Could not get label by id %s", $id));
+            return null;
         }
 
-        public function getLabelByName($name): ImageLabel {
+        public function getLabelByName($name): ?ImageLabel {
             $query = "SELECT * FROM image_labels WHERE name = '" . $name . "'";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return ImageLabel::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Could not get label by name %s", $name));
+            return null;
         }
         
         public function persistLabel($label): string {

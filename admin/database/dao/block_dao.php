@@ -105,7 +105,7 @@
             return $positions;
         }
 
-        public function getBlockPosition($position_id): BlockPosition {
+        public function getBlockPosition($position_id): ?BlockPosition {
             if (!is_null($position_id) && $position_id != '') {
                 $query = "SELECT * FROM block_positions WHERE id = " . $position_id;
                 $result = $this->_mysql_connector->executeQuery($query);
@@ -113,10 +113,10 @@
                     return BlockPosition::constructFromRecord($row);
                 }
             }
-            throw new DaoException(sprintf("Could not find BlockPosition by id %s", $position_id));
+            return null;
         }
 
-        public function getBlockPositionByName($position_name): BlockPosition {
+        public function getBlockPositionByName($position_name): ?BlockPosition {
             if (!is_null($position_name) && $position_name != '') {
                 $query = "SELECT * FROM block_positions WHERE name = '" . $position_name . "'";
                 $result = $this->_mysql_connector->executeQuery($query);
@@ -124,17 +124,17 @@
                     return BlockPosition::constructFromRecord($row);
                 }
             }
-            throw new DaoException(sprintf("Could not find BlockPosition by name %s", $position_name));
+            return null;
         }
 
-        public function getBlock($id): Block {
+        public function getBlock($id): ?Block {
             $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b WHERE e.id = " . $id
                      . " AND e.id = b.element_holder_id";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return Block::constructFromRecord($row);
             }
-            throw new DaoException(sprintf("Could not find Block by id %s", $id));
+            return null;
         }
 
         public function createBlock(): Block {
