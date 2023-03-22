@@ -32,7 +32,7 @@
                         if ($extension == "jpeg" || $extension == "jpg" || $extension == "gif" || $extension == "png") {
                             $new_image = $this->_image_dao->createImage();
                             $new_image->setTitle($file_entry_name);
-                            $new_image->setPublished(0);
+                            $new_image->setPublished(1);
                             $new_file_name = "UPLIMG-00" . $new_image->getId() . "00" . $file_entry_name;
                             $file_contents = $zip->getFromIndex($i);
                             $new_file = fopen(UPLOAD_DIR . "/" . $new_file_name, "w");
