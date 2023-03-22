@@ -39,12 +39,10 @@
             $this->insertOrUpateFriendlyUrl($url, $article);
         }
 
-        public function getPageFromUrl($url) {
-            $url = UrlHelper::removeQueryStringFrom($url);
+        public function getPageFromUrl($url): ?Page {
             $page = null;
-            if ($url == '' || $url == '/') {
-                $page = $this->_settings_dao->getSettings()->getHomepage();
-            } else {
+            try {
+                $url = UrlHelper::removeQueryStringFrom($url);
                 $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
                 $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
                 if (is_null($page)) {
@@ -52,8 +50,10 @@
                     $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
                     $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
                 }
+                return $page;
+            } catch (DaoException $e) {
             }
-        return $page;
+            return $page;
         }
 
         public function getArticleFromUrl($url): ?Article {

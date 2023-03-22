@@ -32,9 +32,9 @@
                 $page = $this->getPageFromRequest();
                 if ($page) {
                     $this->renderPage($page, $this->getArticleFromRequest());
-                }
-                else
+                } else {
                     $this->renderHomepage();
+                }
             }
         }
 
@@ -68,10 +68,11 @@
 
         private function getPageFromRequest() {
             $page = $this->_friendly_url_manager->getPageFromUrl($_SERVER['REQUEST_URI']);
-            if ($page == null && isset($_GET['id']))
+            if ($page == null && isset($_GET['id'])) {
                 return $this->_page_dao->getPage($_GET['id']);
-            else
+            } else {
                 return $page;
+            }
         }
 
         private function getArticleFromRequest() {
