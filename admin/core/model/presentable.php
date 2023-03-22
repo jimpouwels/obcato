@@ -8,12 +8,13 @@
         private $_template_id;
         private $_scope_id;
         
-        public function getTemplate() {
+        public function getTemplate(): ?Template {
             $dao = TemplateDao::getInstance();
-            if ($this->_template_id)
+            if ($this->_template_id) {
                 return $dao->getTemplate($this->_template_id);
-            else
+            } else {
                 return null;
+            }
         }
         
         public function setTemplate($template) {

@@ -1,11 +1,20 @@
+.image_search_wrapper {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+
 .image_search {
-    width: 300px;
+    width: 350px;
     float: left;
 }
 
+.image_search_form {
+    width: 293px;
+}
+
 .button_container {
-    margin-top: 40px;
-    float: right;
+    margin-top: 10px;
 }
 
 .search_button {
@@ -13,6 +22,7 @@
 }
 
 .show_all_link {
+    margin-top: 5px;
     clear: both;
 }
 
@@ -37,6 +47,10 @@
 
 .admin_field  {
     width: 275px;
+}
+
+.admin_form {
+    padding: 0px;
 }
 
 .article_list_searched_by_text {

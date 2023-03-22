@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "database/exception/dao_exception.php";
-
     class FriendlyUrlDao {
 
         private static $instance;
