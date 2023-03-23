@@ -6,10 +6,11 @@
     abstract class HttpRequestHandler {
     
         public function handle() {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST')
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->handlePost();
-            else if ($_SERVER['REQUEST_METHOD'] === 'GET')
+            } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $this->handleGet();
+            }
         }
     
         abstract function handleGet();

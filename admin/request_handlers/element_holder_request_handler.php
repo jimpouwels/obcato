@@ -26,12 +26,13 @@
 
         public function handlePost() {
             $element_holder = $this->getElementHolderFromPostRequest();
-            if ($this->isAddElementAction())
+            if ($this->isAddElementAction()) {
                 $this->addElement();
-            else if ($this->isDeleteElementAction())
+            } else if ($this->isDeleteElementAction()) {
                 $this->deleteElement();
-            else if ($this->isAddLinkAction())
+            } else if ($this->isAddLinkAction()) {
                 $this->addLink($element_holder);
+            }
         }
 
         protected function updateElementHolder($element_holder) {

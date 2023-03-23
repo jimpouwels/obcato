@@ -11,10 +11,10 @@
                     {$template_picker}
                 </div>
                 <div class="delete_button">
-                    <a href="#" onclick="minimizeElement('{$id}'); return false;" title="Minimaliseer">
+                    <a href="#" onclick="toggleElement('{$id}'); return false;" title="Minimaliseer">
                         <img src="/admin/static.php?file=/default/img/default_icons/minimize.png" width="16px" height="16px" alt="Minimize" title="Minimize" />
                     </a>
-                    <a href="#" onclick="minimizeAllElements(); return false;" title="Minimaliseer alle">
+                    <a href="#" onclick="toggleAllElements(); return false;" title="Minimaliseer alle">
                         <img src="/admin/static.php?file=/default/img/default_icons/minimize_all.png" width="16px" height="16px" alt="Minimize all" title="Minimize all" />
                     </a>
                     <a href="#" onclick="deleteElement('{$id}','{$delete_element_form_id}'); return false;" title="Verwijder element">

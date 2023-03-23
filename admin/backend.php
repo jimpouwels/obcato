@@ -1,7 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
     require_once CMS_ROOT . "view/views/cms.php";
     require_once CMS_ROOT . "view/views/popup.php";
@@ -20,17 +19,10 @@
         }
         
         public function start() {
-            $this->isAuthenticated();
             $this->loadTextResources();
             $this->runRequestHandlers();
             $this->runModuleRequestHandler();
             $this->renderCms();
-        }
-        
-        public function isAuthenticated() {
-            if (!Authenticator::isAuthenticated()) {
-                $this->redirectToLoginPage();
-            }
         }
         
         /*
@@ -81,16 +73,6 @@
             foreach ($this->_request_handlers as $request_handler) {
                 $request_handler->handle();
             }
-        }
-        
-        private function redirectToLoginPage() {
-            session_destroy();
-            $org_url = null;
-            if ($_SERVER['REQUEST_URI'] != '/admin/') {
-                $org_url = '?org_url=' . urlencode($_SERVER['REQUEST_URI']);
-            }
-            header('Location: /admin/login.php' . $org_url);
-            exit();
         }
 
         private function loadTextResources() {

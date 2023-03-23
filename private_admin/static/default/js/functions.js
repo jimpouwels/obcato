@@ -41,22 +41,41 @@ function deleteElement(elementId, formFieldId) {
 	}
 }
 
-function minimizeElement(elementId) {
+// elements visability
+$(document).ready(function() {
+	if (localStorage.getItem("sa_all_elements_minimized") == "true") {
+		$('.element_editor_body').each(function() {
+			$(this).hide();
+		});
+		$('.element_summary_text').each(function() {
+			$(this).hide();
+		});
+	}
+});
+
+function toggleElement(elementId) {
 	$('#element_editor_body_' + elementId).toggle();
 	$('#element_summary_text_' + elementId).toggle();
 }
 
-function minimizeAllElements(elementId) {
+function toggleAllElements() {
 	$('.element_editor_body').each(function() {
 		$(this).toggle();
 	});
 	$('.element_summary_text').each(function() {
 		$(this).toggle();
 	});
+	if (localStorage.getItem("sa_all_elements_minimized") == "true") {
+		localStorage.setItem("sa_all_elements_minimized", "false");
+		console.log('not minimized');
+	} else {
+		localStorage.setItem("sa_all_elements_minimized", "true");
+		console.log('minimized');
+	}
 }
 
 // initializes sortable elements
-$(document).ready(function(){
+$(document).ready(function() {
 	$(function() {
 		$("#element_container").sortable({ opacity: 0.6, cursor: 'move', update: function() {
 			var idString = '';
