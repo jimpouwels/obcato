@@ -43,43 +43,64 @@ function deleteElement(elementId, formFieldId) {
 
 // elements visability
 $(document).ready(function() {
-	if (localStorage.getItem("sa_all_elements_minimized") == "true") {
-		hideElements('.element_editor_body');
-		showElements('.element_summary_text');
-	}
+	getAllElements().each(function() {
+		var elementId = getElementIdFromElementNode($(this));
+		if (!isVisible(elementId)) {
+			hideElement(elementId);
+		}
+	});
 });
 
 function toggleElement(elementId) {
-	$('#element_editor_body_' + elementId).toggle();
-	$('#element_summary_text_' + elementId).toggle();
+	if (isVisible(elementId)) {
+		hideElement(elementId);
+	} else {
+		showElement(elementId);
+	}
 }
 
 function toggleAllElements(elementId) {
 	if (isVisible(elementId)) {
-		hideElements('.element_editor_body');
-		showElements('.element_summary_text');
-		localStorage.setItem("sa_all_elements_minimized", "true");
+		hideElements();
 	} else {
-		showElements('.element_editor_body');
-		hideElements('.element_summary_text');
-		localStorage.setItem("sa_all_elements_minimized", "false");
+		showElements();
 	}
 }
 
+function hideElements() {
+	getAllElements().each(function() {
+		hideElement(getElementIdFromElementNode($(this)));
+	});
+}
+
+function showElements() {
+	getAllElements().each(function() {
+		showElement(getElementIdFromElementNode($(this)));
+	});
+}
+
+function hideElement(elementId) {
+	$('#element_editor_body_' + elementId).hide();
+	$('#element_summary_text_' + elementId).show();
+	localStorage.setItem("sa_element_visible_" + elementId, "false");
+}
+
+function showElement(elementId) {
+	$('#element_editor_body_' + elementId).show();
+	$('#element_summary_text_' + elementId).hide();
+	localStorage.setItem("sa_element_visible_" + elementId, "true");
+}
+
 function isVisible(elementId) {
-	return $('#element_editor_body_' + elementId).is(":visible");
+	return localStorage.getItem('sa_element_visible_' + elementId) != 'false';
 }
 
-function hideElements(selector) {
-	$(selector).each(function() {
-		$(this).hide();
-	});
+function getAllElements() {
+	return $('.element_root_wrapper');
 }
 
-function showElements(selector) {
-	$(selector).each(function() {
-		$(this).show();
-	});
+function getElementIdFromElementNode(elementNode) {
+	return elementNode.find('.element_id_holder').text()
 }
 
 // initializes sortable elements

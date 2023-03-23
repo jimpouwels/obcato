@@ -1,4 +1,4 @@
-<div id="element_index_{$index}">
+<div class="element_root_wrapper" id="element_index_{$index}">
     <span class="element_id_holder displaynone">{$id}</span>
     <div class="element_wrapper {$identifier}">
         <div class="element_header">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="element_editor_body admin_form" id="element_editor_body_{$id}">
+        <div id="element_editor_body_{$id}" class="element_editor_body admin_form">
             {$element_form}
         </div>
     </div>
