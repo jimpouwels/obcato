@@ -84,6 +84,18 @@
         public function getRequestHandler() {
             return new PhotoAlbumElementRequestHandler($this);
         }
+        
+        public function getSummaryText() {
+            $summary_text = $this->getTitle();
+            if ($this->getLabels()) {
+                $summary_text .= " (Labels:";
+                foreach ($this->getLabels() as $label) {
+                    $summary_text .= " " . $label->getName();
+                }
+                $summary_text .= ")";
+            }
+            return $summary_text;
+        }
     }
     
     class PhotoAlbumElementMetaDataProvider {

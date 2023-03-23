@@ -43,10 +43,14 @@ function deleteElement(elementId, formFieldId) {
 
 function minimizeElement(elementId) {
 	$('#element_editor_body_' + elementId).toggle();
+	$('#element_summary_text_' + elementId).toggle();
 }
 
 function minimizeAllElements(elementId) {
-	$('.element_editor').each(function() {
+	$('.element_editor_body').each(function() {
+		$(this).toggle();
+	});
+	$('.element_summary_text').each(function() {
 		$(this).toggle();
 	});
 }

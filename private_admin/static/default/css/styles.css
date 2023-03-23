@@ -432,6 +432,7 @@ h1 {
 }
 
 .element_header {
+    overflow-y: auto;
     width: 100%;
     color: #000000;
     font-size: 1.3em;
@@ -442,6 +443,10 @@ h1 {
 .element_header .element_header_right {
     float: right;
     display: flex;
+}
+
+.element_header .element_header_left {
+    float: left;
 }
 
 .element_header .admin_label {
@@ -461,8 +466,15 @@ h1 {
     margin-left: 10px;
 }
 
-.element_wrapper .element_editor {
+.element_wrapper .element_editor_body {
     width: 100%;
+}
+
+.element_summary_text {
+    font-size: 0.9em;
+    margin-bottom: 0px;
+    display: none;
+    font-style: italic;
 }
 
 .admin_form_list select {

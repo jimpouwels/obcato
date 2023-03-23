@@ -60,17 +60,18 @@
 
             return $element;
         }
-
+        
         public abstract function getStatics();
-
+        
         public abstract function getBackendVisual();
-
+        
         public abstract function getFrontendVisual($current_page);
-
+        
         public abstract function getRequestHandler();
-
+        
         public abstract function initializeMetaData();
-
+        
         public abstract function updateMetaData();
-
+        
+        public abstract function getSummaryText();
     }

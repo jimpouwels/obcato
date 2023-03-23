@@ -97,7 +97,7 @@
             $this->_terms = $terms;
         }
         
-        public function getTerms() {
+        public function getTerms(): array {
             return $this->_terms;
         }
         
@@ -137,6 +137,18 @@
         public function getRequestHandler() {
             return new ArticleOverviewElementRequestHandler($this);
         }
+
+        public function getSummaryText() {
+            $summary_text = $this->getTitle();
+            if ($this->getTerms()) {
+                $summary_text .= " (Termen:";
+                foreach ($this->getTerms() as $term) {
+                    $summary_text .= " " . $term->getName();
+                }
+                $summary_text .= ")";
+            }
+            return $summary_text;
+        }
     }
     
     class ArticleOverviewElementMetaDataProvider {
@@ -171,8 +183,9 @@
             $query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
             $result = $mysql_database->executeQuery($query);
             $terms = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 array_push($terms, $this->_article_dao->getTerm($row['term_id']));
+            }
             return $terms;
         }
 
@@ -216,7 +229,8 @@
                     $mysql_database = MysqlConnector::getInstance();
                     $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
                     $term_id = $term->getId();
-                    $statement->bind_param('ii', $this->_element->getId(), $term_id);
+                    $element_id = $this->_element->getId();
+                    $statement->bind_param('ii', $element_id, $term_id);
                     $mysql_database->executeStatement($statement);
                 }
             }

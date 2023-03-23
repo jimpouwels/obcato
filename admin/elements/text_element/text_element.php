@@ -58,6 +58,12 @@
         public function getRequestHandler() {
             return new TextElementRequestHandler($this);
         }
+
+        public function getSummaryText() {
+            $summary_text = $this->getTitle();
+            $summary_text .= ': \'' . substr($this->getText(), 0, 35) . '...\'';
+            return $summary_text;
+        }
         
     }
     

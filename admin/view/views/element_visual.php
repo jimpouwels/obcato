@@ -25,6 +25,7 @@
             $template_engine->assign("template_picker", $template_picker->render());
             $template_engine->assign("identifier", $element->getType()->getIdentifier());
             $template_engine->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
+            $template_engine->assign("summary_text", $element->getSummaryText());
             return $template_engine->fetch(self::$TEMPLATE);
         }
     }

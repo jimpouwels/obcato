@@ -70,6 +70,10 @@
         public function getRequestHandler() {
             return new ListElementRequestHandler($this);
         }
+
+        public function getSummaryText() {
+            return $this->getTitle();            
+        }
     }
     
     class ListElementMetaDataProvider {

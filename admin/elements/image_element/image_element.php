@@ -104,6 +104,15 @@
         public function getRequestHandler() {
             return new ImageElementRequestHandler($this);
         }
+
+        public function getSummaryText() {
+            $summary_text = $this->getTitle();
+            $image = $this->getImage();
+            if ($image) {
+                $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFileName() . ')';
+            }
+            return $summary_text;            
+        }
     }
 
     class ImageElementMetaDataProvider {

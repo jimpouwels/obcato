@@ -2,7 +2,10 @@
     <span class="element_id_holder displaynone">{$id}</span>
     <div class="element_wrapper {$identifier}">
         <div class="element_header">
-            <img src="{$icon_url}" alt="{$type}" />&nbsp;{$type}
+            <div class="element_header_left">
+                <img src="{$icon_url}" alt="{$type}" />&nbsp;{$type}
+                <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
+            </div>
             <div class="element_header_right">
                 <div class="template_picker">
                     {$template_picker}
@@ -20,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="element_editor admin_form" id="element_editor_body_{$id}">
+        <div class="element_editor_body admin_form" id="element_editor_body_{$id}">
             {$element_form}
         </div>
     </div>
