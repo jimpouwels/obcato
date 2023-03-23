@@ -61,7 +61,7 @@
 
         public function getSummaryText() {
             $summary_text = $this->getTitle();
-            $summary_text .= ': \'' . substr($this->getText(), 0, 35) . '...\'';
+            $summary_text .= ' (\'' . substr($this->getText(), 0, 50) . '...\')';
             return $summary_text;
         }
         
