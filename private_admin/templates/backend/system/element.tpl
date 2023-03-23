@@ -8,13 +8,19 @@
                     {$template_picker}
                 </div>
                 <div class="delete_button">
-                    <a href="#" onclick="deleteElement('{$id}','{$delete_element_form_id}');" title="Verwijder element">
+                    <a href="#" onclick="minimizeElement('{$id}'); return false;" title="Minimaliseer">
+                        <img src="/admin/static.php?file=/default/img/default_icons/minimize.png" width="16px" height="16px" alt="Minimize" title="Minimize" />
+                    </a>
+                    <a href="#" onclick="minimizeAllElements(); return false;" title="Minimaliseer alle">
+                        <img src="/admin/static.php?file=/default/img/default_icons/minimize_all.png" width="16px" height="16px" alt="Minimize all" title="Minimize all" />
+                    </a>
+                    <a href="#" onclick="deleteElement('{$id}','{$delete_element_form_id}'); return false;" title="Verwijder element">
                         <img src="/admin/static.php?file=/default/img/default_icons/delete_small.png" alt="Verwijderen" title="Verwijderen" />
                     </a>
                 </div>
             </div>
         </div>
-        <div class="element_form admin_form">
+        <div class="element_editor admin_form" id="element_editor_body_{$id}">
             {$element_form}
         </div>
     </div>

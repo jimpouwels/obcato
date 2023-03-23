@@ -41,6 +41,16 @@ function deleteElement(elementId, formFieldId) {
 	}
 }
 
+function minimizeElement(elementId) {
+	$('#element_editor_body_' + elementId).toggle();
+}
+
+function minimizeAllElements(elementId) {
+	$('.element_editor').each(function() {
+		$(this).toggle();
+	});
+}
+
 // initializes sortable elements
 $(document).ready(function(){
 	$(function() {
