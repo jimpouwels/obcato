@@ -44,12 +44,8 @@ function deleteElement(elementId, formFieldId) {
 // elements visability
 $(document).ready(function() {
 	if (localStorage.getItem("sa_all_elements_minimized") == "true") {
-		$('.element_editor_body').each(function() {
-			$(this).hide();
-		});
-		$('.element_summary_text').each(function() {
-			$(this).show();
-		});
+		hideElements('.element_editor_body');
+		showElements('.element_summary_text');
 	}
 });
 
@@ -58,20 +54,32 @@ function toggleElement(elementId) {
 	$('#element_summary_text_' + elementId).toggle();
 }
 
-function toggleAllElements() {
-	$('.element_editor_body').each(function() {
-		$(this).toggle();
-	});
-	$('.element_summary_text').each(function() {
-		$(this).toggle();
-	});
-	if (localStorage.getItem("sa_all_elements_minimized") == "true") {
-		localStorage.setItem("sa_all_elements_minimized", "false");
-		console.log('not minimized');
-	} else {
+function toggleAllElements(elementId) {
+	if (isVisible(elementId)) {
+		hideElements('.element_editor_body');
+		showElements('.element_summary_text');
 		localStorage.setItem("sa_all_elements_minimized", "true");
-		console.log('minimized');
+	} else {
+		showElements('.element_editor_body');
+		hideElements('.element_summary_text');
+		localStorage.setItem("sa_all_elements_minimized", "false");
 	}
+}
+
+function isVisible(elementId) {
+	return $('#element_editor_body_' + elementId).is(":visible");
+}
+
+function hideElements(selector) {
+	$(selector).each(function() {
+		$(this).hide();
+	});
+}
+
+function showElements(selector) {
+	$(selector).each(function() {
+		$(this).show();
+	});
 }
 
 // initializes sortable elements
