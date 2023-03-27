@@ -1,0 +1,77 @@
+body {
+    background: url(/admin/static.php?file=/default/img/cms_background.jpg) no-repeat center top fixed;
+}
+
+/*
+======= SEARCH POPUP STYLES ======
+*/
+.popup_search_container {
+    margin: 10px;
+    overflow-y: auto;
+}
+
+.popup_search_container .admin_form {
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.popup_search_container .admin_label {
+    width: 100%;
+}
+
+.popup_search_container .button {
+    margin-right: 10px;
+}
+
+.popup_search_results_container {
+    margin: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.popup_search_results_container .information-block {
+    margin: 0px;
+    width: 100%;
+}
+
+.popup_search_result_table {
+    width: 100%;
+}
+
+.popup_search_result_table thead {
+    background-color: gray;
+    color: white;
+}
+
+.popup_search_result_table tbody tr td {
+    border-bottom: 1px solid gray;
+}
+.popup_search_result_table a {
+    color: gray;
+}
+
+.popup_search_fieldset {
+    margin: auto;
+    width: 92%;
+    margin-top: 10px;
+}
+
+.popup_search_fieldset .button {
+    margin-left: 10px;
+}
+
+.images_search_result {
+    width: 100%;
+    overflow-x: auto;
+    margin-left: 10px;
+}
+
+.image_search_result {
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+.image_search_result .image_unpublished {
+    color: red;
+}

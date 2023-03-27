@@ -41,7 +41,7 @@ function deleteElement(elementId, formFieldId) {
 	}
 }
 
-// elements visability
+// elements visibility
 $(document).ready(function() {
 	getAllElements().each(function() {
 		var elementId = getElementIdFromElementNode($(this));
