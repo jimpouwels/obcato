@@ -40,18 +40,13 @@
         }
 
         public function getPageFromUrl($url): ?Page {
-            $page = null;
-            try {
-                $url = UrlHelper::removeQueryStringFrom($url);
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
+            $url = UrlHelper::removeQueryStringFrom($url);
+            $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
+            $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+            if (is_null($page)) {
+                $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
+                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
                 $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
-                if (is_null($page)) {
-                    $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
-                    $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
-                    $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
-                }
-                return $page;
-            } catch (DaoException $e) {
             }
             return $page;
         }
@@ -108,7 +103,14 @@
         private function replaceSpecialCharacters($value) {
             $value = strtolower($value);
             $value = str_replace(' ', '-', $value);
-            $value = preg_replace('/[^a-z-0-9]/', '', $value);
+            $value = urlencode($value);
+            return $value;
+        }
+
+        private function replaceChars($value, $new_char, ...$old_chars) {
+            foreach ($old_chars as $old_char) {
+                $value = str_replace($old_char, $new_char, $value);
+            }
             return $value;
         }
 
