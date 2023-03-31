@@ -109,7 +109,9 @@
         private function renderElementHolderContent($element_holder) {
             $elements_content = array();
             foreach ($element_holder->getElements() as $element) {
-               $elements_content[] = $element->getFrontendVisual($element_holder)->render();
+                if ($element->getTemplate()) {
+                    $elements_content[] = $element->getFrontendVisual($element_holder)->render();
+                }
             }
             return $elements_content;
         }

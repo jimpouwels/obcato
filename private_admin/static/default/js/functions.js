@@ -126,9 +126,17 @@ $(document).ready(function() {
 // starts sliding in the notification bar
 $(document).ready(function(){
 	// slides in the notification bar
-	$("#notification-slider").animate({
+	var slider = $("#notification-slider");
+	console.log(slider);
+	var originalMarginTop = slider.css('margin-top');
+	slider.animate({
 		marginTop: "0"
 	}, 1000);
+	setTimeout(function() {
+		slider.animate({
+			marginTop: originalMarginTop
+		}, 1000);
+	}, 3000);
 });
 
 // handles add link

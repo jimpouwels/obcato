@@ -35,8 +35,9 @@
 
         private function renderElements() {
             $elements = array();
-            foreach ($this->_elements as $element)
+            foreach ($this->_elements as $element) {
                 $elements[] = $element->getBackendVisual()->render();
+            }
             return $elements;
         }
     }

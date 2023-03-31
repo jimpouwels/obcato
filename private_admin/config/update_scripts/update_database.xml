@@ -79,6 +79,7 @@
             <query>CREATE TABLE photo_album_element_labels (id int(10) unsigned NOT NULL AUTO_INCREMENT, element_id int(10) unsigned NOT NULL, label_id int(10) unsigned NOT NULL, PRIMARY KEY (id) USING BTREE, KEY labels_key (label_id), KEY elements_id_key (element_id), CONSTRAINT element_id_to_element2 FOREIGN KEY (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT label_id_to_image_label2 FOREIGN KEY (label_id) REFERENCES image_labels (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
             <query>INSERT INTO scopes (id, name) VALUES (11, 'Fotoalbum')</query>
             <query>INSERT INTO element_types VALUES (8 ,'PhotoAlbumElement','/img/photo_album_element.png','Fotoalbum','photo_album_element.php',11,'photo_album_element',1)</query>
+            <query>ALTER TABLE elements MODIFY template_id int(10)</query>
         </queries>
     </version>
 </versions>

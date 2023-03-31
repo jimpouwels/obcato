@@ -21,6 +21,7 @@
         }
 
         public function render() {
+            $this->_template_engine->assign("page_id", $this->_current_page->getId());
             $this->_template_engine->assign("page_metadata", $this->renderPageMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainerPanel());
             $this->_template_engine->assign("link_editor", $this->renderLinkEditorPanel());

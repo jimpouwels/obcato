@@ -28,8 +28,9 @@
                                     = " . $element_holder->getId() . " AND t.id = e.type_id ORDER BY e.follow_up ASC";
             $result = $this->_mysql_connector->executeQuery($elements_info_query);
             $elements = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $elements[] = Element::constructFromRecord($row);
+            }
             return $elements;
         }
 
@@ -37,14 +38,18 @@
             $query = "SELECT " . self::$myAllColumns . " FROM elements e, element_types t WHERE e.id = " . $id . " 
                       AND e.type_id = t.id;";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Element::constructFromRecord($row);
+            }
         }
 
         public function updateElement($element) {
             $set = 'follow_up = ' . $element->getIndex();
-            if (!is_null($element->getTemplateId()) && $element->getTemplateId() != '')
+            if (!is_null($element->getTemplateId()) && $element->getTemplateId() != '') {
                 $set = $set . ', template_id = ' . $element->getTemplateId();
+            } else {
+                $set = $set . ', template_id = NULL';
+            }
             $query = "UPDATE elements SET " . $set . "    WHERE id = " . $element->getId();
             $this->_mysql_connector->executeQuery($query);
             $element->updateMetaData();
