@@ -36,6 +36,7 @@ articles_terms_term_create_success_message: New term successfully created
 articles_terms_term_save_success_message: Term successfully saved
 articles_terms_term_delete_success_message: Term(s) successfully deleted
 articles_terms_term_save_error_message: Term not saved, resolve the errors
+articles_edit_metadata_friendly_url_label: URL
 
 # TERMS LIST
 articles_terms_list_name: Name

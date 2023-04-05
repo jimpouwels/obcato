@@ -49,6 +49,8 @@
                 $this->sendSuccessMessage("Blok succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Blok niet opgeslagen, verwerk de fouten");
+            } catch (ElementHolderContainsErrorsException $e) {
+                $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
         }
 

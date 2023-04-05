@@ -30,7 +30,7 @@
             $this->_popup_type = $_GET[self::$POPUP_TYPE_KEY];
         }
         
-        public function render() {
+        public function render(): string {
             $search = null;
             if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES)
                 $search = new ImageSearchBox($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search);

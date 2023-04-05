@@ -5,9 +5,9 @@
     
     abstract class Visual {
         
-        abstract function render();
+        abstract function render(): string;
 
-        protected function getTextResource($identifier) {
+        protected function getTextResource($identifier): string {
             return Session::getTextResource($identifier);
         }
     }

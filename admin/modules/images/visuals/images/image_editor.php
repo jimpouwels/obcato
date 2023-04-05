@@ -21,7 +21,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->assignMetadataEditor();
             $this->assignLabelSelector();
             $this->assignImageViewer();

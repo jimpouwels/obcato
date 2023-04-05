@@ -16,7 +16,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $modules_list = new ModulesListPanel($this->_component_request_handler);
             $elements_list = new ElementsListPanel($this->_component_request_handler);
             $details = new ComponentsDetailsPanel($this->_component_request_handler);

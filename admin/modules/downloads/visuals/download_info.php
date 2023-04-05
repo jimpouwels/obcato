@@ -16,7 +16,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

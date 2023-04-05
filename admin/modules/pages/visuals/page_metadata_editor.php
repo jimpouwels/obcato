@@ -18,7 +18,7 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

@@ -12,7 +12,7 @@
         
         abstract function renderElementForm();
     
-        public function render() {
+        public function render(): string {
             $element = $this->getElement();
             $template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "", $element->getTemplate(), $element->getType()->getScope());
             $template_engine = TemplateEngine::getInstance();

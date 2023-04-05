@@ -12,7 +12,7 @@
             $this->_action_buttons = $action_buttons;
         }
     
-        public function render() {
+        public function render(): string {
             $template_engine = TemplateEngine::getInstance();
             $template_engine->assign("buttons", $this->getActionButtonsHtml());
             return $template_engine->fetch(self::$TEMPLATE);

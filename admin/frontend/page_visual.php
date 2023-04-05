@@ -21,7 +21,7 @@
             $this->_page_dao = PageDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("website_title", WEBSITE_TITLE);
             $this->_template_engine->assign("page", $this->getPageContentAndMetaData($this->_page));
             $rendered_article = null;

@@ -16,7 +16,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $metadata_editor = new DownloadMetadataEditor($this->_download);
             $download_info = new DownloadInfo($this->_download);
             $this->_template_engine->assign('metadata_editor', $metadata_editor->render());

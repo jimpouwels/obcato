@@ -12,7 +12,7 @@
             $this->_download_request_handler = $download_request_handler;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

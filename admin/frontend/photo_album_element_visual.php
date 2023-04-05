@@ -15,7 +15,7 @@
             $this->_photo_album_element = $photo_album_element;
         }
 
-        public function render() {
+        public function render(): string {
             $element_holder = $this->_photo_album_element->getElementHolder();
             $this->_template_engine->assign("title", $this->toHtml($this->_photo_album_element->getTitle(), $element_holder));
             $this->_template_engine->assign("images", $this->getImages());

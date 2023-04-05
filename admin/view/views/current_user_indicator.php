@@ -13,7 +13,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign('username', Authenticator::getCurrentUser()->getFullName());
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }

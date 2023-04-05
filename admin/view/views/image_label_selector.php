@@ -20,7 +20,7 @@
             $this->_context_id = $context_id;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

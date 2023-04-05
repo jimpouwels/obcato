@@ -1,5 +1,3 @@
-{$error}
-{$label}
 <select name="{$field_name}" id="{$field_name}" class="admin_field {$classes}">
 	{foreach from=$options item=value}
 		{assign var='selected' value=''}

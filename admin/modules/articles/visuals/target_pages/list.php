@@ -17,7 +17,7 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

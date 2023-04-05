@@ -72,6 +72,8 @@
                 $this->sendSuccessMessage("Artikel succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
+            } catch (ElementHolderContainsErrorsException $e) {
+                $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
             $this->redirectTo('/admin/index.php?article=' . $this->_current_article->getId());
         }

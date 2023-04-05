@@ -14,9 +14,8 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render() {
-            parent::render();
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+        public function render(): string {
+            return parent::render() . $this->_template_engine->fetch(self::$TEMPLATE);
         }
     
     }

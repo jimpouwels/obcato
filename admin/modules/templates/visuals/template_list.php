@@ -20,7 +20,7 @@
             $this->_template_dao = TemplateDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

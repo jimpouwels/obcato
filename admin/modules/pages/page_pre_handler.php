@@ -66,6 +66,8 @@
                 $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
             } catch (ElementHolderContainsErrorsException $e) {
                 $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
+            } catch (FormException $e) {
+                $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
             }
         }
 

@@ -16,7 +16,7 @@
             $this->_article_overview_element = $article_overview_element;
         }
 
-        public function render() {
+        public function render(): string {
             $element_holder = $this->_article_overview_element->getElementHolder();
             $this->_template_engine->assign("title", $this->toHtml($this->_article_overview_element->getTitle(), $element_holder));
             $this->_template_engine->assign("articles", $this->getArticles());

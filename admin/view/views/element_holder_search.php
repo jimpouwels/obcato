@@ -30,7 +30,7 @@
             $this->_page_dao = PageDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

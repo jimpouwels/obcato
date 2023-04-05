@@ -33,7 +33,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_block_pre_handler->getCurrentTabId() == self::$BLOCKS_TAB)

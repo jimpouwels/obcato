@@ -16,7 +16,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign('id', $this->_block->getId());
             $this->_template_engine->assign('title', $this->_block->getTitle());
             $this->_template_engine->assign('elements', $this->renderElements());

@@ -19,7 +19,7 @@
             $this->_selected_blocks = $selected_blocks;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

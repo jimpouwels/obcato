@@ -14,7 +14,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
         
-        public function render() {
+        public function render(): string {
             $content = null;
             if ($this->_popup_type == "search") {
                 $content = new Search();

@@ -96,7 +96,7 @@
             }
         }
 
-        public function deleteFilesStartingWith($path, $start_with_string) {
+        public static function deleteFilesStartingWith($path, $start_with_string) {
             $files = scandir($path);
             foreach ($files as $file) {
                 if (StringUtility::startsWith($file, $start_with_string)) {

@@ -17,6 +17,7 @@ pages_edit_metadata_description_field_label: Description
 pages_edit_metadata_ispublished_field_label: Published
 pages_edit_metadata_showinnavigation_field_label: Show in navigation
 pages_edit_metadata_template_field_label: Template
+pages_edit_metadata_friendly_url_label: URL
 
 # NEW PAGE DEFAULT DATA
 new_page_default_title: New page

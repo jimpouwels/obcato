@@ -20,7 +20,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("page_id", $this->_current_page->getId());
             $this->_template_engine->assign("page_metadata", $this->renderPageMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainerPanel());

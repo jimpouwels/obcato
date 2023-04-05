@@ -20,11 +20,11 @@
             $this->_context_id = $context_id;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->_template_engine->assign("terms_to_select", $this->getTermsToSelect());
             $this->_template_engine->assign("selected_terms", $this->getSelectedTermsHtml());
             $this->_template_engine->assign("context_id", $this->_context_id);
@@ -32,7 +32,7 @@
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
 
-        private function getTermsToSelect() {
+        private function getTermsToSelect(): array {
             $terms_to_select = array();
             foreach ($this->_article_dao->getAllTerms() as $term) {
                 if (!in_array($term, $this->_selected_terms)) {
@@ -44,7 +44,7 @@
             return $terms_to_select;
         }
 
-        private function getSelectedTermsHtml() {
+        private function getSelectedTermsHtml(): array {
             $selected_terms = array();
             foreach ($this->_selected_terms as $selected_term) {
                 $selected_term_item = array();

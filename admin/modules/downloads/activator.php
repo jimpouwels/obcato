@@ -23,7 +23,7 @@
             $this->_download_request_handler = new DownloadRequestHandler();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign('search_box', $this->renderSearchBox());
             if ($this->_current_download)
                 $this->_template_engine->assign('editor', $this->renderEditor());

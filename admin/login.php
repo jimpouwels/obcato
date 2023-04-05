@@ -61,7 +61,7 @@
                         <?php
                             $username = new TextField('username', 'Gebruikersnaam', "", true, false, null);
                             echo $username->render();
-                            $password = new PasswordField('password', 'Wachtwoord', "", true, false, null);
+                            $password = new PasswordField('password', 'Wachtwoord', "", true, false);
                             echo $password->render();
                             $languages = array();
                             $languages[] = array('name' => 'Nederlands', 'value' => 'nl');

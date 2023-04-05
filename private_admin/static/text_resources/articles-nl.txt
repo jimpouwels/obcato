@@ -36,6 +36,7 @@ articles_terms_term_create_success_message: Nieuwe term succesvol aangemaakt
 articles_terms_term_save_success_message: Term succesvol opgeslagen
 articles_terms_term_delete_success_message: Termen succesvol verwijderd
 articles_terms_term_save_error_message: Term niet opgeslagen, verwerk de fouten
+articles_edit_metadata_friendly_url_label: URL
 
 # TERMS LIST
 articles_terms_list_name: Naam

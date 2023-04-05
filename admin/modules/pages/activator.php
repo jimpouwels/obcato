@@ -27,7 +27,7 @@
             $this->_page_dao = PageDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $page_tree = new PageTree($this->_page_dao->getRootPage(), $this->_current_page);
             $page_editor = new PageEditor($this->_current_page);
             $this->_template_engine->assign("tree", $page_tree->render());

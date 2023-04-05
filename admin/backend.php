@@ -47,7 +47,7 @@
         
         private function renderCmsView() {
             $cms = new Cms($this->_module_visual, WEBSITE_TITLE);
-            $cms->render();
+            echo $cms->render();
         }
 
         private function renderPopupView() {

@@ -16,7 +16,7 @@
             $this->_links = $links;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

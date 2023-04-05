@@ -16,10 +16,9 @@
             $this->_options = $options;
         }
     
-        public function render() {
-            parent::render();
+        public function render(): string {
             $this->_template_engine->assign("options", $this->_options);
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return parent::render() . $this->_template_engine->fetch(self::$TEMPLATE);
         }
     
     }

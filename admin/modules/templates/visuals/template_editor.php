@@ -18,7 +18,7 @@
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

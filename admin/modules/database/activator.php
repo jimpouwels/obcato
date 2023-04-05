@@ -26,7 +26,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
             if ($this->_database_pre_handler->getCurrentTabId() == self::$CONFIGURATION_TAB)
                 $content = new Configuration();

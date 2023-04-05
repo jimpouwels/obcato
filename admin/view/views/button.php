@@ -18,7 +18,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
         
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("id", $this->_id);
             $this->_template_engine->assign("label", $this->_label);
             $this->_template_engine->assign("onclick", $this->_onclick);

@@ -12,7 +12,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
         
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("message", Notifications::getMessage());
             $this->_template_engine->assign("success", Notifications::getSuccess());
             Notifications::clearMessage();

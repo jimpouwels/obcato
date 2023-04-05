@@ -22,7 +22,7 @@
             $this->_authorization_module = $authorization_module;
         }
     
-        public function render() {
+        public function render(): string {
             $user_list = new UserList($this->_current_user);
             $user_editor = new UserEditor($this->_current_user);
             $this->_template_engine->assign("user_list", $user_list->render());

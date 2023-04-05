@@ -19,7 +19,7 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

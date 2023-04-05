@@ -14,7 +14,7 @@
             $this->_icon_class = $icon_class;
         }
 
-        public function render() {
+        public function render(): string {
             $template_engine = TemplateEngine::getInstance();
 
             $template_engine->assign("action_id", $this->_action_id);

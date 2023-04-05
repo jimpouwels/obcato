@@ -14,7 +14,7 @@
             $this->_list_element = $list_element;
         }
 
-        public function render() {
+        public function render(): string {
             $element_holder = $this->_list_element->getElementHolder();
             $this->_template_engine->assign("title", $this->toHtml($this->_list_element->getTitle(), $element_holder));
             $this->_template_engine->assign("items", $this->renderListItems($element_holder));

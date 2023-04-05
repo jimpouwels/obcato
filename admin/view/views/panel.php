@@ -17,7 +17,7 @@
             $this->_class = $class;
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign('content', $this->renderPanelContent());
             $this->_template_engine->assign('panel_title', $this->_title);
             $this->_template_engine->assign('class', $this->_class);

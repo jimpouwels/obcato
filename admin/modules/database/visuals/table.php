@@ -16,7 +16,7 @@
             $this->_table = $table;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

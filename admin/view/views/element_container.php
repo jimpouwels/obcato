@@ -16,7 +16,7 @@
             $this->_elements = $elements;
         }
 
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
 

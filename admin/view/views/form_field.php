@@ -4,7 +4,8 @@
     require_once CMS_ROOT . 'authentication/session.php';
 
     abstract class FormField extends Visual {
-
+        
+        private static $TEMPLATE = "system/form_field.tpl";
         private $_template_engine;
         private $_css_class;
         private $_field_name;
@@ -23,15 +24,17 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign('classes',$this->getCssClassesHtml());
             $this->_template_engine->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
             $this->_template_engine->assign("field_name", $this->_field_name);
-            if (isset($_POST[$this->_field_name]))
+            if (isset($_POST[$this->_field_name])) {
                 $this->_template_engine->assign("field_value", StringUtility::escapeXml($_POST[$this->_field_name]));
-            else
+            } else {
                 $this->_template_engine->assign("field_value", StringUtility::escapeXml($this->_value));
+            }
             $this->_template_engine->assign("error", $this->getErrorHtml($this->_field_name));
+            return $this->_template_engine->fetch(self::$TEMPLATE);
         }
 
         public function getInputLabelHtml($field_label, $field_name, $mandatory) {

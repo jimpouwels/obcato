@@ -15,7 +15,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("component_install_form", $this->renderComponentInstallFormPanel());
             $this->_template_engine->assign("component_install_log", $this->renderComponentInstallLogPanel());
             return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);

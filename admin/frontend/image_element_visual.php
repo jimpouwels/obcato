@@ -14,7 +14,7 @@
             $this->_image_element = $image_element;
         }
 
-        public function render() {
+        public function render(): string {
             $element_holder = $this->_image_element->getElementHolder();
             $this->_template_engine->assign("title", $this->_image_element->getTitle());
             $this->_template_engine->assign("alternative_text", $this->toHtml($this->_image_element->getAlternativeText(), $element_holder));

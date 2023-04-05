@@ -23,7 +23,7 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render() {
+        public function render(): string {
             $this->_template_engine->assign("article_metadata", $this->renderArticleMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainer());
             $this->_template_engine->assign("link_editor", $this->renderLinkEditor());
@@ -33,31 +33,31 @@
         }
 
 
-        private function renderArticleMetaDataPanel() {
+        private function renderArticleMetaDataPanel(): string {
             $metadata_panel = new ArticleMetadataEditor($this->_current_article);
             return $metadata_panel->render();
         }
 
-        private function getDateValue($date) {
+        private function getDateValue($date): string {
             return DateUtility::mysqlDateToString($date, '-');
         }
 
-        private function renderElementContainer() {
+        private function renderElementContainer(): string {
             $element_container = new ElementContainer($this->_current_article->getElements());
             return $element_container->render();
         }
 
-        private function renderLinkEditor() {
+        private function renderLinkEditor(): string {
             $link_editor = new LinkEditor($this->_current_article->getLinks());
             return $link_editor->render();
         }
 
-        private function renderTermSelector() {
+        private function renderTermSelector(): string {
             $term_selector = new TermSelector($this->_current_article->getTerms(), $this->_current_article->getId());
             return $term_selector->render();
         }
 
-        private function getTargetPageOptions() {
+        private function getTargetPageOptions(): array {
             $target_page_options = array();
             array_push($target_page_options, array("name" => "&gt; Selecteer", "value" => ""));
 
@@ -68,7 +68,7 @@
             return $target_page_options;
         }
 
-        private function assignElementHolderFormIds() {
+        private function assignElementHolderFormIds(): void {
             $this->_template_engine->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
             $this->_template_engine->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
             $this->_template_engine->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);

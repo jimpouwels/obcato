@@ -15,7 +15,7 @@
             parent::__construct($name, $label, $current_template_id, $options, $mandatory, $class_name);
         }
     
-        public function render() {
+        public function render(): string {
             return parent::render();
         }
         
