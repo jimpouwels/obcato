@@ -32,7 +32,7 @@
             }
             $this->_template_engine->assign('article', $rendered_article);
             $this->_template_engine->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
-            return $this->_template_engine->display(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
+            return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 
         private function getPageContentAndMetaData($page) {

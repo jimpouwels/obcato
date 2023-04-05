@@ -46,7 +46,7 @@
         private function renderPage($page, $article) {
             if ($page->isPublished()) {
                 $page_visual = new PageVisual($page, $article);
-                $page_visual->render();
+                echo $page_visual->render();
             }
         }
 
