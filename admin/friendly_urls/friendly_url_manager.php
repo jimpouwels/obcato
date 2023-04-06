@@ -56,10 +56,7 @@
             if (count($url_parts) > 1) {
                 $last_url_part = $url_parts[count($url_parts) - 1];
                 $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl('/' . $last_url_part);
-                try {
-                    return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
-                } catch (DaoException $e) {
-                }
+                return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
             }
             return null;
         }
