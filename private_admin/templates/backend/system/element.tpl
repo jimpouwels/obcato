@@ -4,7 +4,6 @@
         <div class="element_header">
             <div class="element_header_left">
                 <img src="{$icon_url}" alt="{$type}" />&nbsp;{$type}
-                <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
             </div>
             <div class="element_header_right">
                 {if $include_in_table_of_contents}
@@ -28,8 +27,11 @@
                 </div>
             </div>
         </div>
-        <div id="element_editor_body_{$id}" class="element_editor_body admin_form">
-            {$element_form}
+        <div class="element_editor_body">
+            <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
+            <div id="element_editor_body_{$id}" class="admin_form">
+                {$element_form}
+            </div>
         </div>
     </div>
 </div>
