@@ -35,7 +35,7 @@
             $this->_elementId = $element_id;
         }
         
-        public function getElement() {
+        public function getElement(): Element {
             include_once CMS_ROOT . "dao/element_dao.php";
             $element_dao = ElementDao::getInstance();
             return $element_dao->getElement($this->_elementId);

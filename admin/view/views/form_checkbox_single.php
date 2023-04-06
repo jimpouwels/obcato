@@ -15,8 +15,7 @@
         }
     
         public function render(): string {
-            parent::render();
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return parent::render() . $this->_template_engine->fetch(self::$TEMPLATE);
         }
     
     }

@@ -11,7 +11,6 @@
 
     class ImageElement extends Element {
 
-        private $_title;
         private $_alternative_text;
         private $_align;
         private $_int;
@@ -22,14 +21,6 @@
 
         public function __construct() {
             $this->_metadata_provider = new ImageElementMetaDataProvider();
-        }
-
-        public function setTitle($title) {
-            $this->_title = $title;
-        }
-
-        public function getTitle() {
-            return $this->_title;
         }
 
         public function setAlternativeText($alternative_text) {

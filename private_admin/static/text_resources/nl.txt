@@ -45,6 +45,7 @@ friendly_url_label: URL
 form_invalid_number_error: Deze waarde is geen getal
 
 # ELEMENT HOLDER
+element_include_in_table_of_contents: Inhoudsopgave
 element_holder_content_title: Inhoud
 no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een nieuw element toe te voegen.
 

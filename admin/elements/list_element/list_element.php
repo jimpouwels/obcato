@@ -11,20 +11,11 @@
 
     class ListElement extends Element {
 
-        private $_title;
         private $_list_items;
         private $_metadata_provider;
             
         public function __construct() {
             $this->_metadata_provider = new ListElementMetaDataProvider();
-        }
-        
-        public function setTitle($title) {
-            $this->_title = $title;
-        }
-        
-        public function getTitle() {
-            return $this->_title;
         }
         
         public function getListItems() {

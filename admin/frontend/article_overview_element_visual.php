@@ -2,21 +2,21 @@
 
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "frontend/element_visual.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
-    class ArticleOverviewElementFrontendVisual extends FrontendVisual {
+    class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
         private $_template_engine;
         private $_article_overview_element;
 
         public function __construct($current_page, $article_overview_element) {
-            parent::__construct($current_page);
+            parent::__construct($current_page, $article_overview_element);
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_overview_element = $article_overview_element;
         }
 
-        public function render(): string {
+        public function renderElement(): string {
             $element_holder = $this->_article_overview_element->getElementHolder();
             $this->_template_engine->assign("title", $this->toHtml($this->_article_overview_element->getTitle(), $element_holder));
             $this->_template_engine->assign("articles", $this->getArticles());

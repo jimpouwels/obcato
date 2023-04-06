@@ -12,7 +12,6 @@
 
     class PhotoAlbumElement extends Element {
             
-        private $_title;
         private $_labels;
         private $_number_of_results;
         private $_metadata_provider;
@@ -20,14 +19,6 @@
         public function __construct() {
             $this->_labels = array();
             $this->_metadata_provider = new PhotoAlbumElementMetaDataProvider($this);
-        }
-        
-        public function setTitle($title) {
-            $this->_title = $title;
-        }
-        
-        public function getTitle() {
-            return $this->_title;
         }
         
         public function setNumberOfResults($number_of_results) {

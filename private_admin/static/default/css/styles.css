@@ -449,8 +449,24 @@ h1 {
     float: left;
 }
 
-.element_header .admin_label {
+.element_header .template_picker .admin_label {
     display: none;
+}
+
+.element_header .include_in_table_of_contents .admin_field_checkbox {
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+.element_header .include_in_table_of_contents .admin_label {
+    margin-top: 0px;
+    margin-right: 10px;
+    min-width: initial;
+}
+
+.element_header .admin_label {
+    padding-top: 0px;
+    font-size: 0.9em;
 }
 
 .element_header .template_picker {

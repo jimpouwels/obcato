@@ -1,20 +1,20 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "frontend/element_visual.php";
 
-    class ListElementFrontendVisual extends FrontendVisual {
+    class ListElementFrontendVisual extends ElementFrontendVisual {
 
         private $_template_engine;
         private $_list_element;
 
         public function __construct($current_page, $list_element) {
-            parent::__construct($current_page);
+            parent::__construct($current_page, $list_element);
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_list_element = $list_element;
         }
 
-        public function render(): string {
+        public function renderElement(): string {
             $element_holder = $this->_list_element->getElementHolder();
             $this->_template_engine->assign("title", $this->toHtml($this->_list_element->getTitle(), $element_holder));
             $this->_template_engine->assign("items", $this->renderListItems($element_holder));

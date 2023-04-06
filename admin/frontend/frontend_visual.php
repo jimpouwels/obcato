@@ -36,6 +36,10 @@
             return $this->getPageUrl($this->_current_page) . '?image=' . $image->getId();
         }
 
+        protected function getPage(): Page {
+            return $this->_current_page;
+        }
+
         protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {
@@ -62,10 +66,11 @@
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {
                 if ($this->containsLink($value, $link)) {
-                    if (!is_null($link->getTargetElementHolderId()))
+                    if (!is_null($link->getTargetElementHolderId())) {
                         $url = $this->createUrlFromLink($link);
-                    else
+                    } else {
                         $url = $link->getTargetAddress();
+                    }
                     $value = $this->replaceLinkCodeTags($value, $link, $url);
                 }
             }

@@ -8,7 +8,9 @@
     abstract class Element extends Presentable {
 
         private $_index;
+        private $_title;
         private $_element_holder_id;
+        private $_include_in_table_of_contents;
 
         public function setIndex($index) {
             $this->_index = $index;
@@ -18,9 +20,25 @@
             return $this->_index;
         }
 
-        public function getType() {
+        public function setTitle($title): void {
+            $this->_title = $title;
+        }
+
+        public function getTitle() {
+            return $this->_title;
+        }
+
+        public function getType(): ElementType {
             $element_dao = ElementDao::getInstance();
             return $element_dao->getElementTypeForElement($this->getId());
+        }
+
+        public function setIncludeInTableOfContents($_include_in_table_of_contents): void {
+            $this->_include_in_table_of_contents = $_include_in_table_of_contents;
+        }
+
+        public function includeInTableOfContents(): bool {
+            return $this->_include_in_table_of_contents;
         }
 
         public function getElementHolderId() {
@@ -53,6 +71,7 @@
             $element->setId($record['id']);
             $element->setIndex($record['follow_up']);
             $element->setTemplateId($record['template_id']);
+            $element->setIncludeInTableOfContents($record['include_in_table_of_contents'] == 1 ? true : false);
             $element->setElementHolderId($record['element_holder_id']);
 
             // initialize element specific metadata

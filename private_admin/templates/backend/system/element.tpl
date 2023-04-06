@@ -7,6 +7,11 @@
                 <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
             </div>
             <div class="element_header_right">
+                {if isset($include_in_table_of_contents)}
+                    <div class="include_in_table_of_contents">
+                        {$include_in_table_of_contents}
+                    </div>
+                {/if}
                 <div class="template_picker">
                     {$template_picker}
                 </div>

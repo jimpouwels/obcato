@@ -12,7 +12,6 @@
 
     class ArticleOverviewElement extends Element {
             
-        private $_title;
         private $_show_from;
         private $_show_to;
         private $_show_until_today;
@@ -26,14 +25,6 @@
             // set all text element specific metadata
             $this->_terms = array();
             $this->_metadata_provider = new ArticleOverviewElementMetaDataProvider($this);
-        }
-        
-        public function setTitle($title) {
-            $this->_title = $title;
-        }
-        
-        public function getTitle() {
-            return $this->_title;
         }
         
         public function setShowFrom($show_from) {
@@ -149,6 +140,7 @@
             }
             return $summary_text;
         }
+
     }
     
     class ArticleOverviewElementMetaDataProvider {

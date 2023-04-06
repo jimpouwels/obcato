@@ -80,6 +80,10 @@
             <query>INSERT INTO scopes (id, name) VALUES (11, 'Fotoalbum')</query>
             <query>INSERT INTO element_types VALUES (8 ,'PhotoAlbumElement','/img/photo_album_element.png','Fotoalbum','photo_album_element.php',11,'photo_album_element',1)</query>
             <query>ALTER TABLE elements MODIFY template_id int(10)</query>
+            <query>CREATE TABLE table_of_contents_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, element_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY toc_metadata_to_element (element_id), CONSTRAINT toc_metadata_to_element FOREIGN KEY (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
+            <query>INSERT INTO scopes (id, name) VALUES (12, 'Inhoudsopgave')</query>
+            <query>INSERT INTO element_types VALUES (9 ,'TableOfContentsElement','/img/table_of_contents_element.png','Inhoudsopgave','table_of_contents_element.php',12,'table_of_contents_element',1)</query>
+            <query>ALTER TABLE elements ADD COLUMN include_in_table_of_contents BOOL NOT NULL DEFAULT 0</query>
         </queries>
     </version>
 </versions>

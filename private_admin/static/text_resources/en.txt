@@ -45,6 +45,7 @@ friendly_url_label: URL
 form_invalid_number_error: This value is not numeric
 
 # ELEMENT HOLDER
+element_include_in_table_of_contents: Table of contents
 element_holder_content_title: Content
 no_elements_found_message: No elements found. Go to "Insert" to add a new element.
 

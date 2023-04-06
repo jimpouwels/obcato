@@ -19,7 +19,7 @@
             $this->_text_element = $text_element;
         }
     
-        public function getElement() {
+        public function getElement(): Element {
             return $this->_text_element;
         }
         

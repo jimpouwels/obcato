@@ -1,11 +1,11 @@
 <table>
     <tr>
-            <td>{$title_field}</td>
+        <td>{$title_field}</td>
     </tr>
     <tr>
-            <td>
-              {$show_from_field}
-            </td>
+        <td>
+        {$show_from_field}
+        </td>
     </tr>
     <tr>
         <td>
@@ -13,15 +13,15 @@
         </td>
     </tr>
     <tr>
-            <td>{$max_results_field}</td>
+        <td>{$max_results_field}</td>
     </tr>
     <tr>
-            <td>{$order_by_field}</td>
+        <td>{$order_by_field}</td>
     </tr>
     <tr>
         <td>{$order_type_field}</td>
     </tr>
     <tr>
-            <td>{$term_select_field}</td>
+        <td>{$term_select_field}</td>
     </tr>
 </table>

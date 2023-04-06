@@ -7,7 +7,7 @@
 
     class ElementDao {
 
-        private static $myAllColumns = "e.id, e.follow_up, e.template_id, t.classname, t.identifier, 
+        private static $myAllColumns = "e.id, e.follow_up, e.template_id, e.include_in_table_of_contents, t.classname, t.identifier, 
                                         t.domain_object, e.element_holder_id";
 
         private static $instance;
@@ -46,10 +46,11 @@
         public function updateElement($element) {
             $set = 'follow_up = ' . $element->getIndex();
             if (!is_null($element->getTemplateId()) && $element->getTemplateId() != '') {
-                $set = $set . ', template_id = ' . $element->getTemplateId();
+                $set .= ', template_id = ' . $element->getTemplateId();
             } else {
-                $set = $set . ', template_id = NULL';
+                $set .= ', template_id = NULL';
             }
+            $set .= ', include_in_table_of_contents = ' . ($element->includeInTableOfContents() ? '1' : '0');
             $query = "UPDATE elements SET " . $set . "    WHERE id = " . $element->getId();
             $this->_mysql_connector->executeQuery($query);
             $element->updateMetaData();
@@ -66,15 +67,17 @@
             $query = "SELECT * FROM element_types ORDER BY name";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $element_types[] = ElementType::constructFromRecord($row);
+            }
             return $element_types;
         }
 
         public function updateElementType($element_type) {
             $system_default_val = 0;
-            if ($element_type->getSystemDefault())
+            if ($element_type->getSystemDefault()) {
                 $system_default_val = 1;
+            }
             $query = "UPDATE element_types SET classname = '" . $element_type->getClassName() . "', icon_url = '" . $element_type->getIconUrl() . "', name = '" .
                       $element_type->getName() . "', domain_object = '" . $element_type->getDomainObject() . "', scope_id = " . 
                       $element_type->getScopeId() . ", identifier = '" . $element_type->getIdentifier() . "', system_default = " . 
@@ -132,11 +135,13 @@
                 return ElementType::constructFromRecord($row);
         }
 
-        public function getElementTypeForElement($element_id) {
+        public function getElementTypeForElement($element_id): ?ElementType {
             $query = "SELECT * FROM element_types t, elements e WHERE e.id = " . $element_id . " AND t.id = e.type_id";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ElementType::constructFromRecord($row);
+            }
+            return null;
         }
 
         public function createElement($element_type, $element_holder_id) {

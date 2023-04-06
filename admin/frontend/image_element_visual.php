@@ -1,20 +1,20 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "frontend/element_visual.php";
 
-    class ImageElementFrontendVisual extends FrontendVisual {
+    class ImageElementFrontendVisual extends ElementFrontendVisual {
 
         private $_template_engine;
         private $_image_element;
 
         public function __construct($current_page, $image_element) {
-            parent::__construct($current_page);
+            parent::__construct($current_page, $image_element);
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_element = $image_element;
         }
 
-        public function render(): string {
+        public function renderElement(): string {
             $element_holder = $this->_image_element->getElementHolder();
             $this->_template_engine->assign("title", $this->_image_element->getTitle());
             $this->_template_engine->assign("alternative_text", $this->toHtml($this->_image_element->getAlternativeText(), $element_holder));

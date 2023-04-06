@@ -32,7 +32,7 @@
             return $value;
         }
         
-        public function getCheckboxValue($field_name) {
+        public function getCheckboxValue($field_name): int {
             return $this->getFieldValue($field_name) == "on" ? 1 : 0;
         }
         
