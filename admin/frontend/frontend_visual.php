@@ -63,7 +63,11 @@
         }
 
         protected function toAnchorValue($value): string {
-            $anchor_value = str_replace(" ", '-', strtolower($value));
+            $anchor_value = strtolower($value);
+            $anchor_value = str_replace("-", " ", $anchor_value);
+            $anchor_value = str_replace("  ", " ", $anchor_value);
+            $anchor_value = str_replace(" ", "-", $anchor_value);
+            $anchor_value = str_replace("--", "-", $anchor_value);
             return urlencode($anchor_value);
         }
 
