@@ -62,6 +62,11 @@
             return $url;
         }
 
+        protected function toAnchorValue($value): string {
+            $anchor_value = str_replace(" ", '-', strtolower($value));
+            return urlencode($anchor_value);
+        }
+
         private function createLinksInString($value, $element_holder) {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {

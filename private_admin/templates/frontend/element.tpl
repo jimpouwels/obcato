@@ -1,4 +1,4 @@
 {if $include_in_table_of_contents}
- <a class="anchor" id="anchor_{$element_id}"></a>
+ <a class="anchor" id="{$toc_reference}"></a>
 {/if}
 {$element_html}

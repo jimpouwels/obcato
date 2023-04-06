@@ -27,7 +27,7 @@
                 if ($element->includeInTableOfContents()) {
                     $item = array();
                     $item["title"] = $element->getTitle();
-                    $item["reference"] = "anchor_" . $element->getId();
+                    $item["reference"] = $this->toAnchorValue($element->getTitle());
                     $items[] = $item;
                 }
             }
