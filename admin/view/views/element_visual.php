@@ -25,10 +25,12 @@
             $template_engine->assign("type", $element->getType()->getName());
             $template_engine->assign("template_picker", $template_picker->render());
             
+            $table_of_contents_html = "";
             if ($element->getType()->getName() != 'Inhoudsopgave') {
                 $include_in_table_of_contents_field = new SingleCheckbox("element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
-                $template_engine->assign("include_in_table_of_contents", $include_in_table_of_contents_field->render());
+                $table_of_contents_html = $include_in_table_of_contents_field->render();
             }
+            $template_engine->assign("include_in_table_of_contents", $table_of_contents_html);
             $template_engine->assign("identifier", $element->getType()->getIdentifier());
             $template_engine->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
             $template_engine->assign("summary_text", $element->getSummaryText());
