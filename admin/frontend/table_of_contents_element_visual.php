@@ -23,7 +23,7 @@
 
         public function renderItems(): array {
             $items = array();
-            foreach ($this->getPage()->getElements() as $element) {
+            foreach ($this->getElementHolder()->getElements() as $element) {
                 if ($element->includeInTableOfContents()) {
                     $item = array();
                     $item["title"] = $element->getTitle();

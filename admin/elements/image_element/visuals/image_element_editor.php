@@ -17,7 +17,7 @@
             $this->_image_element = $image_element;
         }
 
-        public function getElement() {
+        public function getElement(): Element {
             return $this->_image_element;
         }
 

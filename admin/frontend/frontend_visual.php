@@ -15,13 +15,13 @@
         private $_page_dao;
         private $_article_dao;
         private $_friendly_url_manager;
-        private $_current_page;
+        private $_current_element_holder;
 
-        public function __construct($current_page) {
+        public function __construct($element_holder) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_current_page = $current_page;
+            $this->_current_element_holder = $element_holder;
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
@@ -33,17 +33,17 @@
         }
 
         protected function getImageUrl($image) {
-            return $this->getPageUrl($this->_current_page) . '?image=' . $image->getId();
+            return $this->getPageUrl($this->_current_element_holder) . '?image=' . $image->getId();
         }
 
-        protected function getPage(): Page {
-            return $this->_current_page;
+        protected function getElementHolder(): ElementHolder {
+            return $this->_current_element_holder;
         }
 
         protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {
-                $target_page = $this->_current_page;
+                $target_page = $this->_current_element_holder;
             }
             $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
             if ($url == null) {
@@ -54,7 +54,7 @@
             return $url;
         }
 
-        protected function getPageUrl($page) {
+        protected function getPageUrl($page): string {
             $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
             if ($url == null) {
                 $url = '/index.php?id=' . $page->getId();
