@@ -6,7 +6,6 @@
     class UserList extends Panel {
 
         private static $USER_LIST_TEMPLATE = "modules/authorization/user_list.tpl";
-        private $_template_engine;
         private $_authorization_dao;
         private $_current_user;
 
@@ -14,7 +13,6 @@
             parent::__construct('Gebruikers', 'user_tree_fieldset');
             $this->_current_user = $current_user;
             $this->_authorization_dao = AuthorizationDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -22,8 +20,8 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("users", $this->getAllUsers());
-            return $this->_template_engine->fetch(self::$USER_LIST_TEMPLATE);
+            $this->getTemplateEngine()->assign("users", $this->getAllUsers());
+            return $this->getTemplateEngine()->fetch(self::$USER_LIST_TEMPLATE);
         }
 
         public function getAllUsers() {

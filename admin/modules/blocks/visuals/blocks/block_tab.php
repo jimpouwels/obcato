@@ -9,22 +9,20 @@
     
         private static $TEMPLATE = "blocks/blocks/root.tpl";
     
-        private $_template_engine;
         private $_current_block;
     
         public function __construct($current_block) {
             parent::__construct();
             $this->_current_block = $current_block;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
     
         public function renderVisual(): string {
-            $this->_template_engine->assign("blocks_list", $this->renderBlocksList());
+            $this->getTemplateEngine()->assign("blocks_list", $this->renderBlocksList());
             if (!is_null($this->_current_block)) {
-                $this->_template_engine->assign("editor", $this->renderBlockEditor());
+                $this->getTemplateEngine()->assign("editor", $this->renderBlockEditor());
             }
         
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
         private function renderBlocksList() {

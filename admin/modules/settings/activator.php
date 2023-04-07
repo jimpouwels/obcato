@@ -14,7 +14,6 @@
 
         private static $TEMPLATE = "settings/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
-        private $_template_engine;
         private $_settings_module;
         private $_settings;
         private $_settings_pre_handler;
@@ -23,16 +22,15 @@
             parent::__construct($settings_module);
             $this->_settings_module = $settings_module;
             $this->_settings = SettingsDao::getInstance()->getSettings();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_settings_pre_handler = new SettingsPreHandler();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("warning_message", $this->renderWarningMessage());
-            $this->_template_engine->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
-            $this->_template_engine->assign("directory_settings_panel", $this->renderDirectorySettingsPanel());
-            $this->_template_engine->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("warning_message", $this->renderWarningMessage());
+            $this->getTemplateEngine()->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
+            $this->getTemplateEngine()->assign("directory_settings_panel", $this->renderDirectorySettingsPanel());
+            $this->getTemplateEngine()->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         public function getActionButtons() {
@@ -42,8 +40,8 @@
         }
 
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_settings_module->getIdentifier());
-            return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("path", $this->_settings_module->getIdentifier());
+            return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

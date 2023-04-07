@@ -8,18 +8,16 @@
     class Tables extends Visual {
 
         private static $TABLES_TEMPLATE = "modules/database/tables.tpl";
-        private $_template_engine;
         private $_database_dao;
 
         public function __construct() {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_database_dao = DatabaseDao::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('tables', $this->getTables());
-            return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
+            $this->getTemplateEngine()->assign('tables', $this->getTables());
+            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
 
         private function getTables() {

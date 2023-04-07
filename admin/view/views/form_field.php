@@ -6,7 +6,7 @@
     abstract class FormField extends Visual {
         
         private static $TEMPLATE = "system/form_field.tpl";
-        private $_template_engine;
+
         private $_css_class;
         private $_field_name;
         private $_label;
@@ -22,35 +22,33 @@
             $this->_mandatory = $mandatory;
             $this->_linkable = $linkable;
             $this->_value = $value;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('classes',$this->getCssClassesHtml());
-            $this->_template_engine->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
-            $this->_template_engine->assign("field_name", $this->_field_name);
+            $this->getTemplateEngine()->assign('classes',$this->getCssClassesHtml());
+            $this->getTemplateEngine()->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
+            $this->getTemplateEngine()->assign("field_name", $this->_field_name);
             if (isset($_POST[$this->_field_name])) {
-                $this->_template_engine->assign("field_value", StringUtility::escapeXml($_POST[$this->_field_name]));
+                $this->getTemplateEngine()->assign("field_value", StringUtility::escapeXml($_POST[$this->_field_name]));
             } else {
-                $this->_template_engine->assign("field_value", StringUtility::escapeXml($this->_value));
+                $this->getTemplateEngine()->assign("field_value", StringUtility::escapeXml($this->_value));
             }
-            $this->_template_engine->assign("error", $this->getErrorHtml($this->_field_name));
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("error", $this->getErrorHtml($this->_field_name));
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         public function getInputLabelHtml($field_label, $field_name, $mandatory) {
-            $this->_template_engine->assign("label", $field_label);
-            $this->_template_engine->assign("name", $field_name);
-            $this->_template_engine->assign("mandatory", $mandatory);
-            return $this->_template_engine->fetch("system/form_label.tpl");
+            $this->getTemplateEngine()->assign("label", $field_label);
+            $this->getTemplateEngine()->assign("name", $field_name);
+            $this->getTemplateEngine()->assign("mandatory", $mandatory);
+            return $this->getTemplateEngine()->fetch("system/form_label.tpl");
         }
         
         public function getErrorHtml($field_name) {
             $error_html = "";
             if (Session::hasError($field_name)) {
-                $template_engine = TemplateEngine::getInstance();
-                $template_engine->assign("error", Session::popError($field_name));
-                $error_html = $template_engine->fetch("system/form_error.tpl");
+                $this->getTemplateEngine()->assign("error", Session::popError($field_name));
+                $error_html = $this->getTemplateEngine()->fetch("system/form_error.tpl");
             }
             return $error_html;
         }

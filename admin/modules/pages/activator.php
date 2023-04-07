@@ -14,7 +14,6 @@
         private static $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
 
         private $_current_page;
-        private $_template_engine;
         private $_page_module;
         private $_page_pre_handler;
         private $_page_dao;
@@ -22,7 +21,6 @@
         public function __construct($page_module) {
             parent::__construct($page_module);
             $this->_page_module = $page_module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_page_pre_handler = new PagePreHandler();
             $this->_page_dao = PageDao::getInstance();
         }
@@ -30,9 +28,9 @@
         public function renderVisual(): string {
             $page_tree = new PageTree($this->_page_dao->getRootPage(), $this->_current_page);
             $page_editor = new PageEditor($this->_current_page);
-            $this->_template_engine->assign("tree", $page_tree->render());
-            $this->_template_engine->assign("editor", $page_editor->render());
-            return $this->_template_engine->fetch(self::$PAGE_MODULE_TEMPLATE);
+            $this->getTemplateEngine()->assign("tree", $page_tree->render());
+            $this->getTemplateEngine()->assign("editor", $page_editor->render());
+            return $this->getTemplateEngine()->fetch(self::$PAGE_MODULE_TEMPLATE);
         }
 
         public function getActionButtons() {
@@ -51,14 +49,14 @@
         }
 
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_page_module->getIdentifier());
+            $this->getTemplateEngine()->assign("path", $this->_page_module->getIdentifier());
             $element_statics_values = array();
             $element_statics = $this->_current_page->getElementStatics();
             foreach ($element_statics as $element_static) {
                 $element_statics_values[] = $element_static->render();
             }
-            $this->_template_engine->assign("element_statics", $element_statics_values);
-            return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("element_statics", $element_statics_values);
+            return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

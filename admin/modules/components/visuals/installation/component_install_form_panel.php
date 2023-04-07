@@ -4,11 +4,9 @@
     class ComponentInstallFormPanel extends Panel {
 
         private static $TEMPLATE = 'installation/component_install_form.tpl';
-        private $_template_engine;
 
         public function __construct() {
             parent::__construct('Instaleer component', 'install-form-panel');
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -16,8 +14,8 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign('upload_field', $this->renderUploadField());
-            return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('upload_field', $this->renderUploadField());
+            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
         }
 
         private function renderUploadField() {

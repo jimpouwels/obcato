@@ -13,7 +13,6 @@
         private static $HEAD_INCLUDES_TEMPLATE = "templates/head_includes.tpl";
 
         private $_template_module;
-        private $_template_engine;
         private $_template_pre_handler;
         private $_current_template;
         private $_current_scope;
@@ -21,20 +20,19 @@
         public function __construct($template_module) {
             parent::__construct($template_module);
             $this->_template_module = $template_module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_template_pre_handler = new TemplatePreHandler();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("current_template_id", $this->getCurrentTemplateId());
+            $this->getTemplateEngine()->assign("current_template_id", $this->getCurrentTemplateId());
             if (!is_null($this->_current_template)) {
-                $this->_template_engine->assign("template_editor", $this->renderTemplateEditor());
-                $this->_template_engine->assign('template_code_viewer', $this->renderTemplateCodeViewer());
+                $this->getTemplateEngine()->assign("template_editor", $this->renderTemplateEditor());
+                $this->getTemplateEngine()->assign('template_code_viewer', $this->renderTemplateCodeViewer());
             }
-            $this->_template_engine->assign("scope_selector", $this->getScopeSelector());
+            $this->getTemplateEngine()->assign("scope_selector", $this->getScopeSelector());
             if (!is_null($this->_current_scope))
-                $this->_template_engine->assign("template_list", $this->renderTemplateList());
-            return $this->_template_engine->fetch(self::$TEMPLATE_MODULE_TEMPLATE);
+                $this->getTemplateEngine()->assign("template_list", $this->renderTemplateList());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE_MODULE_TEMPLATE);
         }
 
         public function getActionButtons() {
@@ -48,8 +46,8 @@
         }
 
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_template_module->getIdentifier());
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("path", $this->_template_module->getIdentifier());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

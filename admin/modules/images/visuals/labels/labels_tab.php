@@ -12,21 +12,19 @@
 
         private $_current_label;
         private $_label_pre_handler;
-        private $_template_engine;
         
         public function __construct($label_pre_handler) {
             parent::__construct();
             $this->_label_pre_handler = $label_pre_handler;
             $this->_current_label = $this->_label_pre_handler->getCurrentLabel();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
     
         public function renderVisual(): string {
             if (!is_null($this->_current_label)) {
-                $this->_template_engine->assign("label_editor", $this->renderLabelEditor());
+                $this->getTemplateEngine()->assign("label_editor", $this->renderLabelEditor());
             }
-            $this->_template_engine->assign("labels_list", $this->renderLabelsList());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("labels_list", $this->renderLabelsList());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
         private function renderLabelEditor() {

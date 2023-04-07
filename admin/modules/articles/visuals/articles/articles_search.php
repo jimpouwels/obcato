@@ -5,14 +5,12 @@
 
         private static $TEMPLATE = "articles/articles/search.tpl";
 
-        private $_template_engine;
         private $_article_dao;
         private $_article_request_handler;
 
         public function __construct($article_request_handler) {
             parent::__construct($this->getTextResource('articles_search_box_title'), 'article_search');
             $this->_article_request_handler = $article_request_handler;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
         }
 
@@ -21,11 +19,11 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("search_query_field", $this->renderSearchQueryField());
-            $this->_template_engine->assign("term_query_field", $this->renderTermQueryField());
-            $this->_template_engine->assign("search_button", $this->renderSearchButton());
+            $this->getTemplateEngine()->assign("search_query_field", $this->renderSearchQueryField());
+            $this->getTemplateEngine()->assign("term_query_field", $this->renderTermQueryField());
+            $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderSearchQueryField() {

@@ -7,14 +7,12 @@
     class TermSelector extends Panel {
 
         private static $TEMPLATE = "system/term_selector.tpl";
-        private $_template_engine;
         private $_selected_terms;
         private $_article_dao;
         private $_context_id;
 
         public function __construct($selected_terms, $context_id) {
             parent::__construct('Termen', 'term_selector');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_selected_terms = $selected_terms;
             $this->_article_dao = ArticleDao::getInstance();
             $this->_context_id = $context_id;
@@ -25,11 +23,11 @@
         }
 
         public function renderPanelContent(): string {
-            $this->_template_engine->assign("terms_to_select", $this->getTermsToSelect());
-            $this->_template_engine->assign("selected_terms", $this->getSelectedTermsHtml());
-            $this->_template_engine->assign("context_id", $this->_context_id);
+            $this->getTemplateEngine()->assign("terms_to_select", $this->getTermsToSelect());
+            $this->getTemplateEngine()->assign("selected_terms", $this->getSelectedTermsHtml());
+            $this->getTemplateEngine()->assign("context_id", $this->_context_id);
 
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getTermsToSelect(): array {

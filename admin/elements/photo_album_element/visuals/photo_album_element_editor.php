@@ -9,13 +9,10 @@
     class PhotoAlbumElementEditor extends ElementVisual {
     
         private static $TEMPLATE = "elements/photo_album_element/photo_album_element_form.tpl";
-        
-        private $_template_engine;
         private $_element;
     
         public function __construct($_element) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_element = $_element;
         }
     
@@ -28,11 +25,11 @@
             $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", "Max. aantal resultaten", $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
             $label_select_field = new ImageLabelSelector($this->_element->getLabels(), $this->_element->getId());
 
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("max_results_field", $max_results_field->render());
-            $this->_template_engine->assign("label_select_field", $label_select_field->render());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("max_results_field", $max_results_field->render());
+            $this->getTemplateEngine()->assign("label_select_field", $label_select_field->render());
             
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
     }

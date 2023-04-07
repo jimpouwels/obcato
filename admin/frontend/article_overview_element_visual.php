@@ -7,20 +7,18 @@
 
     class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_template_engine;
         private $_article_overview_element;
 
         public function __construct($current_page, $article_overview_element) {
             parent::__construct($current_page, $article_overview_element);
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_overview_element = $article_overview_element;
         }
 
         public function renderElement(): string {
             $element_holder = $this->_article_overview_element->getElementHolder();
-            $this->_template_engine->assign("title", $this->toHtml($this->_article_overview_element->getTitle(), $element_holder));
-            $this->_template_engine->assign("articles", $this->getArticles());
-            return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_article_overview_element->getTemplate()->getFileName());
+            $this->getTemplateEngine()->assign("title", $this->toHtml($this->_article_overview_element->getTitle(), $element_holder));
+            $this->getTemplateEngine()->assign("articles", $this->getArticles());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_article_overview_element->getTemplate()->getFileName());
         }
 
         private function getArticles() {

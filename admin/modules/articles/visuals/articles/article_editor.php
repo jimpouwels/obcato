@@ -13,25 +13,23 @@
         private static $ARTICLE_EDITOR_TEMPLATE = "articles/articles/editor.tpl";
         private static $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
 
-        private $_template_engine;
         private $_current_article;
         private $_article_dao;
 
         public function __construct($current_article) {
             parent::__construct();
             $this->_current_article = $current_article;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("article_id", $this->getBackendBaseUrl() . "&article=" . $this->_current_article->getId());
-            $this->_template_engine->assign("article_metadata", $this->renderArticleMetaDataPanel());
-            $this->_template_engine->assign("element_container", $this->renderElementContainer());
-            $this->_template_engine->assign("link_editor", $this->renderLinkEditor());
-            $this->_template_engine->assign("term_selector", $this->renderTermSelector());
+            $this->getTemplateEngine()->assign("article_id", $this->getBackendBaseUrl() . "&article=" . $this->_current_article->getId());
+            $this->getTemplateEngine()->assign("article_metadata", $this->renderArticleMetaDataPanel());
+            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainer());
+            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditor());
+            $this->getTemplateEngine()->assign("term_selector", $this->renderTermSelector());
 
-            return $this->_template_engine->fetch("modules/" . self::$ARTICLE_EDITOR_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$ARTICLE_EDITOR_TEMPLATE);
         }
 
 

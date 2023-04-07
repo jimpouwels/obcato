@@ -11,22 +11,20 @@
         private static $TERM_QUERYSTRING_KEY = "term";
         private static $NEW_TERM_QUERYSTRING_KEY = "new_term";
     
-        private $_template_engine;
         private $_current_term;
     
         public function __construct($current_term) {
             parent::__construct();
             $this->_current_term = $current_term;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
     
         public function renderVisual(): string {
             if ($this->isEditTermMode()) {
-                $this->_template_engine->assign("term_editor", $this->renderTermEditor());
+                $this->getTemplateEngine()->assign("term_editor", $this->renderTermEditor());
             }
-            $this->_template_engine->assign("term_list", $this->renderTermsList());
+            $this->getTemplateEngine()->assign("term_list", $this->renderTermsList());
             
-            return $this->_template_engine->fetch("modules/" . self::$TERM_MANAGER_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TERM_MANAGER_TEMPLATE);
         }
         
         public static function isEditTermMode() {

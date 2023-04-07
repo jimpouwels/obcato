@@ -8,22 +8,20 @@
     class ComponentsTabVisual extends Visual {
 
         private static $TEMPLATE = 'components/root.tpl';
-        private $_template_engine;
         private $_component_request_handler;
 
         public function __construct($component_request_handler) {
             parent::__construct();
             $this->_component_request_handler = $component_request_handler;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
             $modules_list = new ModulesListPanel($this->_component_request_handler);
             $elements_list = new ElementsListPanel($this->_component_request_handler);
             $details = new ComponentsDetailsPanel($this->_component_request_handler);
-            $this->_template_engine->assign('modules_list', $modules_list->render());
-            $this->_template_engine->assign('elements_list', $elements_list->render());
-            $this->_template_engine->assign('details', $details->render());
-            return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('modules_list', $modules_list->render());
+            $this->getTemplateEngine()->assign('elements_list', $elements_list->render());
+            $this->getTemplateEngine()->assign('details', $details->render());
+            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
         }
     }

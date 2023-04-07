@@ -12,24 +12,23 @@
         private static $TEMPLATE = "modules/downloads/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
         private $_current_download;
-        private $_template_engine;
         private $_download_request_handler;
         private $_module;
 
         public function __construct($module) {
             parent::__construct($module);
             $this->_module = $module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_download_request_handler = new DownloadRequestHandler();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('search_box', $this->renderSearchBox());
-            if ($this->_current_download)
-                $this->_template_engine->assign('editor', $this->renderEditor());
-            else
-                $this->_template_engine->assign("list", $this->renderList());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('search_box', $this->renderSearchBox());
+            if ($this->_current_download) {
+                $this->getTemplateEngine()->assign('editor', $this->renderEditor());
+            } else {
+                $this->getTemplateEngine()->assign("list", $this->renderList());
+            }
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         public function getActionButtons() {
@@ -43,7 +42,7 @@
         }
 
         public function getHeadIncludes() {
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

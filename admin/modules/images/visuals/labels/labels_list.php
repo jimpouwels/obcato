@@ -10,12 +10,10 @@
 
         private static $TEMPLATE = "images/labels/list.tpl";
 
-        private $_template_engine;
         private $_image_dao;
 
         public function __construct() {
             parent::__construct('Labels');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_dao = ImageDao::getInstance();
         }
 
@@ -24,9 +22,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("all_labels", $this->getAllLabels());
-            $this->_template_engine->assign("no_labels_message", $this->getNoLabelsMessage());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("all_labels", $this->getAllLabels());
+            $this->getTemplateEngine()->assign("no_labels_message", $this->getNoLabelsMessage());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getAllLabels() {

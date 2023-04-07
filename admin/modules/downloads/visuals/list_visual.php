@@ -9,14 +9,12 @@
 
         private static $TEMPLATE = "downloads/list.tpl";
         private $_download_dao;
-        private $_template_engine;
         private $_download_request_handler;
 
         public function __construct($download_request_handler) {
             parent::__construct('Gevonden downloads', 'download_list');
             $this->_download_request_handler = $download_request_handler;
             $this->_download_dao = DownloadDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -24,9 +22,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("search_results", $this->getDownloads());
-            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("search_results", $this->getDownloads());
+            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         public function getDownloads() {

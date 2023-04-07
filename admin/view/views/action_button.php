@@ -16,12 +16,10 @@
         }
 
         public function renderVisual(): string {
-            $template_engine = TemplateEngine::getInstance();
-
-            $template_engine->assign("action_id", $this->_action_id);
-            $template_engine->assign("icon_class", $this->_icon_class);
-            $template_engine->assign("label", $this->_label);
-            return $template_engine->fetch($this->TEMPLATE);
+            $this->getTemplateEngine()->assign("action_id", $this->_action_id);
+            $this->getTemplateEngine()->assign("icon_class", $this->_icon_class);
+            $this->getTemplateEngine()->assign("label", $this->_label);
+            return $this->getTemplateEngine()->fetch($this->TEMPLATE);
         }
 
     }

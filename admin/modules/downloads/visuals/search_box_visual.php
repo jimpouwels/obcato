@@ -8,7 +8,6 @@
 
         public function __construct($download_request_handler) {
             parent::__construct('Zoeken', 'download_search');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_download_request_handler = $download_request_handler;
         }
 
@@ -17,9 +16,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign('search_query_field', $this->renderSearchQueryField());
-            $this->_template_engine->assign('search_button', $this->renderSearchButton());
-            return $this->_template_engine->fetch('modules/' . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('search_query_field', $this->renderSearchQueryField());
+            $this->getTemplateEngine()->assign('search_button', $this->renderSearchButton());
+            return $this->getTemplateEngine()->fetch('modules/' . self::$TEMPLATE);
         }
 
         private function renderSearchQueryField() {

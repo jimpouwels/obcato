@@ -6,19 +6,17 @@
 
     class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_template_engine;
         private $_table_of_contents_element;
 
         public function __construct($current_page, $_table_of_contents_element) {
             parent::__construct($current_page, $_table_of_contents_element);
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_table_of_contents_element = $_table_of_contents_element;
         }
 
         public function renderElement(): string {
-            $this->_template_engine->assign("title", $this->_table_of_contents_element->getTitle());
-            $this->_template_engine->assign("items", $this->renderItems());
-            return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_table_of_contents_element->getTemplate()->getFileName());
+            $this->getTemplateEngine()->assign("title", $this->_table_of_contents_element->getTitle());
+            $this->getTemplateEngine()->assign("items", $this->renderItems());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_table_of_contents_element->getTemplate()->getFileName());
         }
 
         public function renderItems(): array {

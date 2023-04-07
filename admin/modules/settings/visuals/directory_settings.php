@@ -5,12 +5,10 @@
 
         private static $TEMPLATE = "modules/settings/directory_settings_panel.tpl";
         private $_settings;
-        private $_template_engine;
 
         public function __construct($settings) {
             parent::__construct('Directory instellingen');
             $this->_settings = $settings;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -27,16 +25,16 @@
             $backend_template_dir = new TextField("backend_template_dir", "Backend templates directory", $this->_settings->getBackendTemplateDir(), true, false, null);
             $component_dir = new TextField("component_dir", "Component directory", $this->_settings->getComponentDir(), true, false, null);
 
-            $this->_template_engine->assign("cms_root_dir", $cms_root_dir->render());
-            $this->_template_engine->assign("public_root_dir", $public_root_dir->render());
-            $this->_template_engine->assign("static_dir", $static_dir->render());
-            $this->_template_engine->assign("config_dir", $config_dir->render());
-            $this->_template_engine->assign("upload_dir", $upload_dir->render());
-            $this->_template_engine->assign("frontend_template_dir", $frontend_template_dir->render());
-            $this->_template_engine->assign("backend_template_dir", $backend_template_dir->render());
-            $this->_template_engine->assign("component_dir", $component_dir->render());
+            $this->getTemplateEngine()->assign("cms_root_dir", $cms_root_dir->render());
+            $this->getTemplateEngine()->assign("public_root_dir", $public_root_dir->render());
+            $this->getTemplateEngine()->assign("static_dir", $static_dir->render());
+            $this->getTemplateEngine()->assign("config_dir", $config_dir->render());
+            $this->getTemplateEngine()->assign("upload_dir", $upload_dir->render());
+            $this->getTemplateEngine()->assign("frontend_template_dir", $frontend_template_dir->render());
+            $this->getTemplateEngine()->assign("backend_template_dir", $backend_template_dir->render());
+            $this->getTemplateEngine()->assign("component_dir", $component_dir->render());
 
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
     }

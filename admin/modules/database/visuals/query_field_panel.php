@@ -4,13 +4,11 @@
     class QueryFieldPanel extends Panel {
 
         private static $TABLES_TEMPLATE = "modules/database/query_field_panel.tpl";
-        private $_template_engine;
         private $_pre_handler;
 
         public function __construct($pre_handler) {
             parent::__construct('Query editor', 'queries_form_wrapper');
             $this->_pre_handler = $pre_handler;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -18,9 +16,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("query_field", $this->renderQueryField());
-            $this->_template_engine->assign("execute_query_button", $this->renderExecuteButton());
-            return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
+            $this->getTemplateEngine()->assign("query_field", $this->renderQueryField());
+            $this->getTemplateEngine()->assign("execute_query_button", $this->renderExecuteButton());
+            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
 
         private function renderQueryField() {

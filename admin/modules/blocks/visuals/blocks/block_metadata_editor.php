@@ -10,7 +10,6 @@
 
         private static $BLOCK_METADATA_TEMPLATE = "modules/blocks/blocks/metadata.tpl";
 
-        private $_template_engine;
         private $_current_block;
         private $_block_dao;
 
@@ -18,7 +17,6 @@
             parent::__construct('Algemeen', 'block_meta');
             $this->_current_block = $current_block;
             $this->_block_dao = BlockDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -31,12 +29,12 @@
             $template_picker_field = new TemplatePicker("block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->_current_block->getTemplate(), $this->_current_block->getScope());
 
             $this->assignElementHolderFormIds();
-            $this->_template_engine->assign("current_block_id", $this->_current_block->getId());
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("published_field", $published_field->render());
-            $this->_template_engine->assign("template_picker_field", $template_picker_field->render());
-            $this->_template_engine->assign("positions_field", $this->renderPositionsField());
-            return $this->_template_engine->fetch(self::$BLOCK_METADATA_TEMPLATE);
+            $this->getTemplateEngine()->assign("current_block_id", $this->_current_block->getId());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("published_field", $published_field->render());
+            $this->getTemplateEngine()->assign("template_picker_field", $template_picker_field->render());
+            $this->getTemplateEngine()->assign("positions_field", $this->renderPositionsField());
+            return $this->getTemplateEngine()->fetch(self::$BLOCK_METADATA_TEMPLATE);
         }
 
         private function renderPositionsField() {
@@ -53,17 +51,13 @@
             return $positions_field->render();
         }
 
-        private function getPublicationDateValue($publication_date) {
-            return DateUtility::mysqlDateToString($this->_current_block->getPublicationDate(), '-');
-        }
-
         private function assignElementHolderFormIds() {
-            $this->_template_engine->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
-            $this->_template_engine->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
-            $this->_template_engine->assign("action_form_id", ACTION_FORM_ID);
-            $this->_template_engine->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("element_order_id", ELEMENT_ORDER_ID);
+            $this->getTemplateEngine()->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
+            $this->getTemplateEngine()->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
+            $this->getTemplateEngine()->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
+            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
+            $this->getTemplateEngine()->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
+            $this->getTemplateEngine()->assign("element_order_id", ELEMENT_ORDER_ID);
         }
 
     }

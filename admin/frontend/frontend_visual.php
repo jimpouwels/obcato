@@ -11,6 +11,7 @@
 
     abstract class FrontendVisual {
 
+        private Smarty $_template_engine;
         private $_link_dao;
         private $_page_dao;
         private $_article_dao;
@@ -22,6 +23,7 @@
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_current_element_holder = $element_holder;
+            $this->_template_engine = TemplateEngine::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
@@ -38,6 +40,10 @@
 
         protected function getElementHolder(): ElementHolder {
             return $this->_current_element_holder;
+        }
+
+        protected function getTemplateEngine(): Smarty {
+            return $this->_template_engine;
         }
 
         protected function getArticleUrl($article) {

@@ -17,25 +17,24 @@
         private static $QUERY_TAB = 2;
         private $_database_module;
         private $_database_pre_handler;
-        private $_template_engine;
 
         public function __construct($database_module) {
             parent::__construct($database_module);
             $this->_database_module = $database_module;
             $this->_database_pre_handler = new DatabasePreHandler();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-            if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB)
+            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
+            if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
                 $content = new Configuration();
-            else if ($this->getCurrentTabId() == self::$TABLES_TAB)
+            } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
                 $content = new Tables();
-            else if ($this->getCurrentTabId() == self::$QUERY_TAB)
+            } else if ($this->getCurrentTabId() == self::$QUERY_TAB) {
                 $content = new QueriesTab($this->_database_pre_handler);
-            $this->_template_engine->assign("content", $content->render());
-            return $this->_template_engine->fetch(self::$DATABASE_MODULE_TEMPLATE);
+            }
+            $this->getTemplateEngine()->assign("content", $content->render());
+            return $this->getTemplateEngine()->fetch(self::$DATABASE_MODULE_TEMPLATE);
         }
 
         public function getActionButtons() {
@@ -44,8 +43,8 @@
         }
 
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_database_module->getIdentifier());
-            return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("path", $this->_database_module->getIdentifier());
+            return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

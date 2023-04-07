@@ -11,22 +11,20 @@
         private static $POSITION_QUERYSTRING_KEY = "position";
         private static $NEW_POSITION_QUERYSTRING_KEY = "new_position";
     
-        private $_template_engine;
         private $_current_position;
     
         public function __construct($current_position) {
             parent::__construct();
             $this->_current_position = $current_position;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
     
         public function renderVisual(): string {
             if ($this->isEditPositionMode()) {
-                $this->_template_engine->assign("position_editor", $this->renderPositionEditor());
+                $this->getTemplateEngine()->assign("position_editor", $this->renderPositionEditor());
             }
-            $this->_template_engine->assign("position_list", $this->renderPositionList());
+            $this->getTemplateEngine()->assign("position_list", $this->renderPositionList());
             
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
         public static function isEditPositionMode() {

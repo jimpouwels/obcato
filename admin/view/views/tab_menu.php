@@ -6,18 +6,16 @@
         private static $TEMPLATE = "system/tab_menu.tpl";
         private $_tab_items;
         private $_current_tab;
-        private $_template_engine;
     
         public function __construct($tab_items, $current_tab) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_tab_items = $tab_items;
             $this->_current_tab = $current_tab;
         }
     
         public function renderVisual(): string {
-            $this->_template_engine->assign("tab_items", $this->_tab_items);
-            $this->_template_engine->assign("current_tab", $this->_current_tab);
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("tab_items", $this->_tab_items);
+            $this->getTemplateEngine()->assign("current_tab", $this->_current_tab);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     }

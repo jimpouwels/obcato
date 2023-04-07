@@ -9,13 +9,10 @@
     class ListElementEditorVisual extends ElementVisual {
     
         private static $TEMPLATE = "elements/list_element/list_element_form.tpl";
-        
-        private $_template_engine;
         private $_list_element;
     
         public function __construct($list_element) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_list_element = $list_element;
         }
     
@@ -27,11 +24,11 @@
             $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', 'Titel', $this->_list_element->getTitle(), false, true, null);
             $add_item_button = new Button("", "Lijst item toevoegen", "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
-            $this->_template_engine->assign("list_items", $this->getListItems());
-            $this->_template_engine->assign("add_item_button", $add_item_button->render());
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("id", $this->_list_element->getId());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("list_items", $this->getListItems());
+            $this->getTemplateEngine()->assign("add_item_button", $add_item_button->render());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("id", $this->_list_element->getId());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
         private function getListItems() {

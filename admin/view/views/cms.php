@@ -10,8 +10,6 @@
 
     class Cms extends Visual {
         private static $TEMPLATE = "system/cms.tpl";
-
-        private $_template_engine;
         private $_module_visual;
         private $_website_title;
         private $_module_dao;
@@ -19,7 +17,6 @@
         public function __construct($module_visual, $website_title) {
             parent::__construct();
             $this->_module_dao = ModuleDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_visual = $module_visual;
             $this->_website_title = $website_title;
         }
@@ -29,22 +26,22 @@
             $notification_bar = new NotificationBar();
             $current_user_indicator = new CurrentUserIndicator();
 
-            $this->_template_engine->assign("text_resources", Session::getTextResources());
+            $this->getTemplateEngine()->assign("text_resources", Session::getTextResources());
 
             if (!is_null($this->_module_visual)) {
-                $this->_template_engine->assign("page_title", $this->_module_visual->getTitle());
-                $this->_template_engine->assign("module_head_includes", $this->_module_visual->getHeadIncludes());
+                $this->getTemplateEngine()->assign("page_title", $this->_module_visual->getTitle());
+                $this->getTemplateEngine()->assign("module_head_includes", $this->_module_visual->getHeadIncludes());
             }
-            $this->_template_engine->assign("actions_menu", $this->getActionsMenu()->render());
-            $this->_template_engine->assign("website_title", $this->_website_title);
-            $this->_template_engine->assign("navigation_menu", $navigation_menu->render());
-            $this->_template_engine->assign("current_user_indicator", $current_user_indicator->render());
-            $this->_template_engine->assign("notification_bar", $notification_bar->render());
-            $this->_template_engine->assign("content_pane", $this->renderContentPane());
-            $this->_template_engine->assign("system_version", SYSTEM_VERSION);
-            $this->_template_engine->assign("db_version", DB_VERSION);
+            $this->getTemplateEngine()->assign("actions_menu", $this->getActionsMenu()->render());
+            $this->getTemplateEngine()->assign("website_title", $this->_website_title);
+            $this->getTemplateEngine()->assign("navigation_menu", $navigation_menu->render());
+            $this->getTemplateEngine()->assign("current_user_indicator", $current_user_indicator->render());
+            $this->getTemplateEngine()->assign("notification_bar", $notification_bar->render());
+            $this->getTemplateEngine()->assign("content_pane", $this->renderContentPane());
+            $this->getTemplateEngine()->assign("system_version", SYSTEM_VERSION);
+            $this->getTemplateEngine()->assign("db_version", DB_VERSION);
 
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getActionsMenu(): ActionsMenu {
@@ -59,7 +56,7 @@
             if (!is_null($this->_module_visual)) {
                 return $this->_module_visual->render($this);
             } else {
-                return $this->_template_engine->fetch("system/home_wrapper.tpl");
+                return $this->getTemplateEngine()->fetch("system/home_wrapper.tpl");
             }
         }
 

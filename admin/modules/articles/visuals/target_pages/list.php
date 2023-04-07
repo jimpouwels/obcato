@@ -8,12 +8,10 @@
 
         private static $TEMPLATE = "articles/target_pages/list.tpl";
 
-        private $_template_engine;
         private $_article_dao;
 
         public function __construct() {
             parent::__construct('Beschikbare doelpagina\'s', 'target_pages_fieldset');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
         }
 
@@ -22,13 +20,13 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("target_pages", $this->getTargetPages());
-            $this->_template_engine->assign("default_target_page", $this->getDefaultTargetPage());
+            $this->getTemplateEngine()->assign("target_pages", $this->getTargetPages());
+            $this->getTemplateEngine()->assign("default_target_page", $this->getDefaultTargetPage());
 
             $page_picker = new PagePicker("", null, "add_target_page_ref", "Doelpagina toevoegen", "update_target_pages", "articles");
-            $this->_template_engine->assign("page_picker", $page_picker->render());
+            $this->getTemplateEngine()->assign("page_picker", $page_picker->render());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getDefaultTargetPage() {

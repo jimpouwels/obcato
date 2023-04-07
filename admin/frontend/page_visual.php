@@ -7,8 +7,6 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
-
-        private $_template_engine;
         private $_page;
         private $_article;
         private $_page_dao;
@@ -17,22 +15,21 @@
             parent::__construct($current_page);
             $this->_page = $current_page;
             $this->_article = $current_article;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_page_dao = PageDao::getInstance();
         }
 
         public function render(): string {
-            $this->_template_engine->assign("website_title", WEBSITE_TITLE);
-            $this->_template_engine->assign("page", $this->getPageContentAndMetaData($this->_page));
+            $this->getTemplateEngine()->assign("website_title", WEBSITE_TITLE);
+            $this->getTemplateEngine()->assign("page", $this->getPageContentAndMetaData($this->_page));
             $rendered_article = null;
-            $this->_template_engine->assign("page_title", $this->_page->getTitle());
+            $this->getTemplateEngine()->assign("page_title", $this->_page->getTitle());
             if (!is_null($this->_article) && $this->_article->isPublished()) {
                 $rendered_article = $this->renderArticle();
-                $this->_template_engine->assign("page_title", $this->_article->getTitle());
+                $this->getTemplateEngine()->assign("page_title", $this->_article->getTitle());
             }
-            $this->_template_engine->assign('article', $rendered_article);
-            $this->_template_engine->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
-            return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
+            $this->getTemplateEngine()->assign('article', $rendered_article);
+            $this->getTemplateEngine()->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
         }
 
         private function getPageContentAndMetaData($page) {

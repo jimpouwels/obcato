@@ -7,12 +7,10 @@
 
         private static $TEMPLATE = "blocks/positions/list.tpl";
 
-        private $_template_engine;
         private $_block_dao;
 
         public function __construct() {
             parent::__construct('Posities');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_block_dao = BlockDao::getInstance();
         }
 
@@ -21,11 +19,11 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("all_positions", $this->getAllPositions());
+            $this->getTemplateEngine()->assign("all_positions", $this->getAllPositions());
             $no_positions_message = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
-            $this->_template_engine->assign("no_positions_message", $no_positions_message->render());
+            $this->getTemplateEngine()->assign("no_positions_message", $no_positions_message->render());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getAllPositions() {

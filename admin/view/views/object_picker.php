@@ -14,7 +14,6 @@
         private $_button_label;
         private $_button_id;
         private $_opener_submit_id;
-        private $_template_engine;
         
         public function __construct($label, $value, $backing_field_id, $button_label, $opener_submit_id, $button_id = "") {
             parent::__construct(null, $value, $label, false, false, null);
@@ -24,7 +23,6 @@
             $this->_button_label = $button_label;
             $this->_button_id = $button_id;
             $this->_opener_submit_id = $opener_submit_id;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
         
         public function getType() {
@@ -38,14 +36,14 @@
                                         . "&amp;" . Search::$BACKFILL_KEY . "=" . $this->_backing_field_id . "', '" . $this->_button_label 
                                         . "', 'width=950,height=600,scrollbars=yes,toolbar=no,location=yes'); return false;");
 
-            $this->_template_engine->assign("picker_button", $picker_button->render());
-            $this->_template_engine->assign("backing_field_id", $this->_backing_field_id);
-            $this->_template_engine->assign("value", $this->_value);
-            $this->_template_engine->assign("button_label", $this->_button_label);
-            $this->_template_engine->assign("opener_submit_id", $this->_opener_submit_id);
-            $this->_template_engine->assign("label", $this->getInputLabelHtml($this->_label, $this->_backing_field_id, false));
+            $this->getTemplateEngine()->assign("picker_button", $picker_button->render());
+            $this->getTemplateEngine()->assign("backing_field_id", $this->_backing_field_id);
+            $this->getTemplateEngine()->assign("value", $this->_value);
+            $this->getTemplateEngine()->assign("button_label", $this->_button_label);
+            $this->getTemplateEngine()->assign("opener_submit_id", $this->_opener_submit_id);
+            $this->getTemplateEngine()->assign("label", $this->getInputLabelHtml($this->_label, $this->_backing_field_id, false));
             
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     
     }

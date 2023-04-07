@@ -7,12 +7,10 @@
     class TablePanel extends Panel {
 
         private static $TABLES_TEMPLATE = "modules/database/table.tpl";
-        private $_template_engine;
         private $_table;
 
         public function __construct($table) {
             parent::__construct($table['name'], 'table_details_panel');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_table = $table;
         }
 
@@ -21,7 +19,7 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("table", $this->_table);
-            return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
+            $this->getTemplateEngine()->assign("table", $this->_table);
+            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
     }

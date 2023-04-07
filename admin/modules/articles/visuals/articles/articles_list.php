@@ -7,7 +7,6 @@
 
         private static $TEMPLATE = "articles/articles/list.tpl";
 
-        private $_template_engine;
         private $_article_dao;
         private $_article_request_handler;
 
@@ -15,7 +14,6 @@
             parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
             $this->_article_request_handler = $article_request_handler;
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -23,11 +21,11 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("search_results", $this->renderSearchResults());
-            $this->_template_engine->assign("search_query", $this->_article_request_handler->getSearchQuery());
-            $this->_template_engine->assign("search_term", $this->getSearchTermName());
-            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
+            $this->getTemplateEngine()->assign("search_query", $this->_article_request_handler->getSearchQuery());
+            $this->getTemplateEngine()->assign("search_term", $this->getSearchTermName());
+            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderSearchResults() {

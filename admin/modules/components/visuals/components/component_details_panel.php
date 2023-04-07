@@ -6,13 +6,11 @@
     class ComponentsDetailsPanel extends Panel {
 
         private static $TEMPLATE = 'components/details.tpl';
-        private $_template_engine;
         private $_component_request_handler;
 
         public function __construct($component_request_handler) {
             parent::__construct('Component details');
             $this->_component_request_handler = $component_request_handler;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -20,9 +18,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign('current_element', $this->getCurrentElementData());
-            $this->_template_engine->assign('current_module', $this->getCurrentModuleData());
-            return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('current_element', $this->getCurrentElementData());
+            $this->getTemplateEngine()->assign('current_module', $this->getCurrentModuleData());
+            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
         }
 
         private function getCurrentModuleData() {

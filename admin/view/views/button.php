@@ -9,22 +9,20 @@
         private $_id;
         private $_label;
         private $_onclick;
-        private $_template_engine;
         
         public function __construct($id, $label, $onclick) {
             parent::__construct();
             $this->_id = $id;
             $this->_label = $label;
             $this->_onclick = $onclick;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
         
         public function renderVisual(): string {
-            $this->_template_engine->assign("id", $this->_id);
-            $this->_template_engine->assign("label", $this->_label);
-            $this->_template_engine->assign("onclick", $this->_onclick);
+            $this->getTemplateEngine()->assign("id", $this->_id);
+            $this->getTemplateEngine()->assign("label", $this->_label);
+            $this->getTemplateEngine()->assign("onclick", $this->_onclick);
             
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
     }

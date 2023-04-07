@@ -7,12 +7,10 @@
     class ImportTab extends Panel {
 
         private static $TEMPLATE = "images/import/root.tpl";
-        private $_template_engine;
         private $_image_dao;
 
         public function __construct() {
             parent::__construct('Importeren');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_dao = ImageDao::getInstance();
         }
 
@@ -21,10 +19,10 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("upload_field", $this->renderUploadField());
-            $this->_template_engine->assign("labels_pulldown", $this->renderLabelPullDown());
+            $this->getTemplateEngine()->assign("upload_field", $this->renderUploadField());
+            $this->getTemplateEngine()->assign("labels_pulldown", $this->renderLabelPullDown());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderUploadField() {

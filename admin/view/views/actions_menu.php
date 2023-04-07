@@ -14,9 +14,8 @@
         }
     
         public function renderVisual(): string {
-            $template_engine = TemplateEngine::getInstance();
-            $template_engine->assign("buttons", $this->getActionButtonsHtml());
-            return $template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("buttons", $this->getActionButtonsHtml());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
         private function getActionButtonsHtml() {

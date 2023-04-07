@@ -5,13 +5,11 @@
 
         private static $TEMPLATE = "articles/terms/editor.tpl";
 
-        private $_template_engine;
         private $_current_term;
 
         public function __construct($current_term) {
             parent::__construct($this->getTextResource("articles_terms_editor_title"), 'term_editor_panel');
             $this->_current_term = $current_term;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -19,9 +17,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("id", $this->_current_term->getId());
-            $this->_template_engine->assign("name_field", $this->renderNameField());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("id", $this->_current_term->getId());
+            $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderNameField() {

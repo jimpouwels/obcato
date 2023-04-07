@@ -7,7 +7,6 @@
 
         private static $TEMPLATE = "images/images/list.tpl";
 
-        private $_template_engine;
         private $_current_image;
         private $_image_dao;
         private $_images_pre_handler;
@@ -17,7 +16,6 @@
             $this->_current_image = $current_image;
             $this->_images_pre_handler = $images_pre_handler;
             $this->_image_dao = ImageDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -25,14 +23,14 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("search_results", $this->getSearchResults());
-            $this->_template_engine->assign("action_form_id", ACTION_FORM_ID);
-            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
-            $this->_template_engine->assign("current_search_title", $this->_images_pre_handler->getCurrentSearchTitleFromGetRequest());
-            $this->_template_engine->assign("current_search_filename", $this->_images_pre_handler->getCurrentSearchFilenameFromGetRequest());
-            $this->_template_engine->assign("current_search_label", $this->getCurrentSearchLabel());
+            $this->getTemplateEngine()->assign("search_results", $this->getSearchResults());
+            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
+            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
+            $this->getTemplateEngine()->assign("current_search_title", $this->_images_pre_handler->getCurrentSearchTitleFromGetRequest());
+            $this->getTemplateEngine()->assign("current_search_filename", $this->_images_pre_handler->getCurrentSearchFilenameFromGetRequest());
+            $this->getTemplateEngine()->assign("current_search_label", $this->getCurrentSearchLabel());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getCurrentSearchLabel() {

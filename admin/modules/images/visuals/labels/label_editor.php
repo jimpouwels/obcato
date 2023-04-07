@@ -8,13 +8,11 @@
 
         private static $TEMPLATE = "images/labels/editor.tpl";
 
-        private $_template_engine;
         private $_current_label;
 
         public function __construct($current_label) {
             parent::__construct('Label bewerken');
             $this->_current_label = $current_label;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -22,9 +20,9 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("id", $this->_current_label->getId());
-            $this->_template_engine->assign("label_name_field", $this->renderLabelNameField());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("id", $this->_current_label->getId());
+            $this->getTemplateEngine()->assign("label_name_field", $this->renderLabelNameField());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderLabelNameField() {

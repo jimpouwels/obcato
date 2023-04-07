@@ -12,22 +12,20 @@
         private static $PAGE_EDITOR_TEMPLATE = "pages/editor.tpl";
         private static $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
 
-        private $_template_engine;
         private $_current_page;
 
         public function __construct($current_page) {
             parent::__construct();
             $this->_current_page = $current_page;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("page_id", $this->_current_page->getId());
-            $this->_template_engine->assign("page_metadata", $this->renderPageMetaDataPanel());
-            $this->_template_engine->assign("element_container", $this->renderElementContainerPanel());
-            $this->_template_engine->assign("link_editor", $this->renderLinkEditorPanel());
-            $this->_template_engine->assign("block_selector", $this->renderBlockSelectorPanel());
-            return $this->_template_engine->fetch("modules/" . self::$PAGE_EDITOR_TEMPLATE);
+            $this->getTemplateEngine()->assign("page_id", $this->_current_page->getId());
+            $this->getTemplateEngine()->assign("page_metadata", $this->renderPageMetaDataPanel());
+            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainerPanel());
+            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditorPanel());
+            $this->getTemplateEngine()->assign("block_selector", $this->renderBlockSelectorPanel());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$PAGE_EDITOR_TEMPLATE);
         }
 
         private function renderPageMetaDataPanel() {

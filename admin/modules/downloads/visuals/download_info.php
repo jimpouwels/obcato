@@ -8,12 +8,10 @@
 
         private static $TEMPLATE = "downloads/download_info.tpl";
         private $_download;
-        private $_template_engine;
 
         public function __construct($download) {
             parent::__construct('Bestandsinformatie');
             $this->_download = $download;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -21,8 +19,8 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("file", $this->getFileData());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("file", $this->getFileData());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getFileData() {

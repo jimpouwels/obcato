@@ -10,7 +10,6 @@
 
         private static $TEMPLATE = "articles/articles/root.tpl";
 
-        private $_template_engine;
         private $_current_article;
         private $_article_request_handler;
 
@@ -18,17 +17,16 @@
             parent::__construct();
             $this->_article_request_handler = $article_request_handler;
             $this->_current_article = $article_request_handler->getCurrentArticle();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("search", $this->renderArticlesSearchPanel());
+            $this->getTemplateEngine()->assign("search", $this->renderArticlesSearchPanel());
             if (!is_null($this->_current_article))
-                $this->_template_engine->assign("editor", $this->renderArticleEditor());
+                $this->getTemplateEngine()->assign("editor", $this->renderArticleEditor());
             else
-                $this->_template_engine->assign("list", $this->renderArticlesList());
+                $this->getTemplateEngine()->assign("list", $this->renderArticlesList());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderArticlesSearchPanel() {

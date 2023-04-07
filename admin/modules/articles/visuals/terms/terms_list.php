@@ -8,12 +8,10 @@
 
         private static $TEMPLATE = "articles/terms/list.tpl";
 
-        private $_template_engine;
         private $_article_dao;
 
         public function __construct() {
             parent::__construct('Termen', 'term_list_panel');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
         }
 
@@ -22,11 +20,11 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("all_terms", $this->getAllTerms());
+            $this->getTemplateEngine()->assign("all_terms", $this->getAllTerms());
             $no_terms_message = new InformationMessage("Geen termen gevonden");
-            $this->_template_engine->assign("no_terms_message", $no_terms_message->render());
+            $this->getTemplateEngine()->assign("no_terms_message", $no_terms_message->render());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getAllTerms() {

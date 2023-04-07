@@ -8,13 +8,10 @@
     class ImageElementEditorVisual extends ElementVisual {
 
         private static $TEMPLATE = "elements/image_element/image_element_form.tpl";
-
-        private $_template_engine;
         private $_image_element;
 
         public function __construct($image_element) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_element = $image_element;
         }
 
@@ -29,15 +26,15 @@
             $width_field = new TextField($this->createFieldId("width"), "Breedte", $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), "Hoogte", $this->_image_element->getHeight(), false, false, "size_field");
 
-            $this->_template_engine->assign("alignment_field", $this->getAlignmentField());
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("alternative_text_field", $alternative_text_field->render());
-            $this->_template_engine->assign("width_field", $width_field->render());
-            $this->_template_engine->assign("height_field", $height_field->render());
-            $this->_template_engine->assign("image_picker", $image_picker->render());
-            $this->_template_engine->assign("image_id", $this->_image_element->getImageId());
-            $this->_template_engine->assign("selected_image_title", $this->getSelectedImageTitle());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("alignment_field", $this->getAlignmentField());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("alternative_text_field", $alternative_text_field->render());
+            $this->getTemplateEngine()->assign("width_field", $width_field->render());
+            $this->getTemplateEngine()->assign("height_field", $height_field->render());
+            $this->getTemplateEngine()->assign("image_picker", $image_picker->render());
+            $this->getTemplateEngine()->assign("image_id", $this->_image_element->getImageId());
+            $this->getTemplateEngine()->assign("selected_image_title", $this->getSelectedImageTitle());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getAlignmentField() {

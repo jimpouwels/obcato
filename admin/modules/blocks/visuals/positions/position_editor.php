@@ -5,13 +5,11 @@
 
         private static $TEMPLATE = "blocks/positions/editor.tpl";
 
-        private $_template_engine;
         private $_current_position;
 
         public function __construct($current_position) {
             parent::__construct($this->getTextResource('blocks_edit_position_title'));
             $this->_current_position = $current_position;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -25,10 +23,10 @@
                 $new_position = false;
                 $position_id = $this->_current_position->getId();
             }
-            $this->_template_engine->assign("id", $position_id);
-            $this->_template_engine->assign("new_position", $new_position);
-            $this->_template_engine->assign("name_field", $this->renderNameField());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("id", $position_id);
+            $this->getTemplateEngine()->assign("new_position", $new_position);
+            $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderNameField() {

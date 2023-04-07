@@ -8,12 +8,10 @@
         private static $TEMPLATE_EDITOR_TEMPLATE = "templates/template_code_viewer.tpl";
 
         private $_template;
-        private $_template_engine;
 
         public function __construct($template) {
             parent::__construct('Markup', 'template_content_fieldset');
             $this->_template = $template;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -21,8 +19,8 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign('file_content', $this->getTemplateCode());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
+            $this->getTemplateEngine()->assign('file_content', $this->getTemplateCode());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
         }
 
         private function getTemplateCode() {

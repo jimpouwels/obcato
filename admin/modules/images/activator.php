@@ -18,7 +18,6 @@
         private static $LABELS_TAB = 1;
         private static $IMPORT_TAB = 2;
 
-        private $_template_engine;
         private $_image_dao;
         private $_images_pre_handler;
         private $_label_pre_handler;
@@ -29,7 +28,6 @@
         public function __construct($image_module) {
             parent::__construct($image_module);
             $this->_image_module = $image_module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_dao = ImageDao::getInstance();
             $this->_images_pre_handler = new ImagePreHandler();
             $this->_label_pre_handler = new LabelPreHandler();
@@ -38,7 +36,7 @@
         }
         
         public function renderVisual(): string {
-            $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
+            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
                 $content = new ImagesTab($this->_images_pre_handler);
@@ -49,10 +47,10 @@
             }
             
             if (!is_null($content)) {
-                $this->_template_engine->assign("content", $content->render());
+                $this->getTemplateEngine()->assign("content", $content->render());
             }
             
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
         public function getActionButtons() {
@@ -82,8 +80,8 @@
         }
         
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_image_module->getIdentifier());
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("path", $this->_image_module->getIdentifier());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
         
         public function getRequestHandlers() {

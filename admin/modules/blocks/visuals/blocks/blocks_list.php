@@ -6,7 +6,6 @@
     class BlocksList extends Panel {
 
         private static $TEMPLATE = "blocks/blocks/list.tpl";
-        private $_template_engine;
         private $_current_block;
         private $_block_dao;
 
@@ -14,7 +13,6 @@
             parent::__construct('Blokken', 'block_list');
             $this->_current_block = $current_block;
             $this->_block_dao = BlockDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -22,14 +20,14 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("block_lists", $this->getBlockLists());
-            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
+            $this->getTemplateEngine()->assign("block_lists", $this->getBlockLists());
+            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
             $current_block_value = null;
             if (!is_null($this->_current_block)) {
                 $current_block_value = $this->toArray($this->_current_block);
             }
-            $this->_template_engine->assign("current_block", $current_block_value);
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("current_block", $current_block_value);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderNoResultsMessage() {

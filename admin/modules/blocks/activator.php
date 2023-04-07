@@ -19,7 +19,6 @@
         private $_current_block;
         private $_current_position;
         private $_block_dao;
-        private $_template_engine;
         private $_block_module;
         private $_block_pre_handler;
         private $_position_pre_handler;
@@ -30,19 +29,20 @@
             $this->_block_pre_handler = new BlockPreHandler();
             $this->_position_pre_handler = new PositionPreHandler();
             $this->_block_dao = BlockDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
     
         public function renderVisual(): string {
-            $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
+            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
-            if ($this->getCurrentTabId() == self::$BLOCKS_TAB)
+            if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
                 $content = new BlockTab($this->_current_block);
-            else if ($this->getCurrentTabId() == self::$POSITIONS_TAB)
+            } else if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
                 $content = new PositionTab($this->_current_position);
-            if (!is_null($content))
-                $this->_template_engine->assign("content", $content->render());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            }
+            if (!is_null($content)) {
+                $this->getTemplateEngine()->assign("content", $content->render());
+            }
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
         public function getActionButtons() {
@@ -64,7 +64,7 @@
         }
         
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_block_module->getIdentifier());
+            $this->getTemplateEngine()->assign("path", $this->_block_module->getIdentifier());
             $element_statics_values = array();
             if (!is_null($this->_current_block)) {
                 $element_statics = $this->_current_block->getElementStatics();
@@ -72,8 +72,8 @@
                     $element_statics_values[] = $element_static->render();
                 }
             }
-            $this->_template_engine->assign("element_statics", $element_statics_values);
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("element_statics", $element_statics_values);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
         
         public function getRequestHandlers() {

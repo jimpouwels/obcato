@@ -9,12 +9,10 @@
     
         private static $TEMPLATE = "system/navigation_menu.tpl";
         private $_module_groups;
-        private $_template_engine;
         private $_element_dao;
     
         public function __construct($module_groups) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_groups = $module_groups;
             $this->_element_dao = ElementDao::getInstance();
         }
@@ -31,8 +29,8 @@
                 }
                 $groups[] = $group;
             }
-            $this->_template_engine->assign('groups', $groups);
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('groups', $groups);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
         private function renderMenuItem($module_group) {

@@ -13,7 +13,6 @@
         private static $OBJECT_TYPE_KEY = "s_element_holder";
         private static $SEARCH_QUERY_KEY = "s_term";
         private static $TEMPLATE = "system/element_holder_search.tpl";
-        private $_template_engine;
         private $_objects_to_search;
         private $_back_click_id;
         private $_backfill_id;
@@ -22,7 +21,6 @@
 
         public function __construct($back_click_id, $backfill_id, $objects_to_search) {
             parent::__construct('Zoeken', 'popup_search_fieldset');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_objects_to_search = $objects_to_search;
             $this->_back_click_id = $back_click_id;
             $this->_backfill_id = $backfill_id;
@@ -35,22 +33,22 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("search_object", $this->_objects_to_search);
-            $this->_template_engine->assign("backfill", $this->_backfill_id);
-            $this->_template_engine->assign("back_click_id", $this->_back_click_id);
+            $this->getTemplateEngine()->assign("search_object", $this->_objects_to_search);
+            $this->getTemplateEngine()->assign("backfill", $this->_backfill_id);
+            $this->getTemplateEngine()->assign("back_click_id", $this->_back_click_id);
 
-            $this->_template_engine->assign("search_field", $this->renderSearchField());
-            $this->_template_engine->assign("search_options", $this->renderSearchOptionsField());
-            $this->_template_engine->assign("search_button", $this->renderSearchButton());
-            $this->_template_engine->assign("search_results", $this->renderSearchResults());
-            $this->_template_engine->assign("no_results_message", $this->renderNoResultsMessage());
+            $this->getTemplateEngine()->assign("search_field", $this->renderSearchField());
+            $this->getTemplateEngine()->assign("search_options", $this->renderSearchOptionsField());
+            $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
+            $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
+            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
 
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function renderSearchField() {
             $search_query = $this->getCurrentSearchQuery();
-            $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, false, null);
+            $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
             return $search_field->render();
         }
 

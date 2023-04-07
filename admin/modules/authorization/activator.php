@@ -10,14 +10,12 @@
     
         private static $AUTHORIZATION_MODULE_TEMPLATE = "modules/authorization/root.tpl";
         private static $HEAD_INCLUDES_TEMPLATE = "modules/authorization/head_includes.tpl";
-        private $_template_engine;
         private $_current_user;
         private $_authorization_pre_handler;
         private $_authorization_module;
         
         public function __construct($authorization_module) {
             parent::__construct($authorization_module);
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_authorization_pre_handler = new AuthorizationPreHandler();
             $this->_authorization_module = $authorization_module;
         }
@@ -25,9 +23,9 @@
         public function renderVisual(): string {
             $user_list = new UserList($this->_current_user);
             $user_editor = new UserEditor($this->_current_user);
-            $this->_template_engine->assign("user_list", $user_list->render());
-            $this->_template_engine->assign("user_editor", $user_editor->render());
-            return $this->_template_engine->fetch(self::$AUTHORIZATION_MODULE_TEMPLATE);
+            $this->getTemplateEngine()->assign("user_list", $user_list->render());
+            $this->getTemplateEngine()->assign("user_editor", $user_editor->render());
+            return $this->getTemplateEngine()->fetch(self::$AUTHORIZATION_MODULE_TEMPLATE);
         }
     
         public function getActionButtons() {
@@ -42,7 +40,7 @@
         }
         
         public function getHeadIncludes() {
-            return $this->_template_engine->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
         
         public function getRequestHandlers() {

@@ -9,14 +9,12 @@
 
         private static $TEMPLATE_LIST_TEMPLATE = "templates/template_list.tpl";
 
-        private $_template_engine;
         private $_template_dao;
         private $_scope;
 
         public function __construct($scope) {
             parent::__construct($scope->getName() . ' templates', 'template_list_fieldset');
             $this->_scope = $scope;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_template_dao = TemplateDao::getInstance();
         }
 
@@ -25,10 +23,10 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("scope", $this->_scope->getName());
-            $this->_template_engine->assign("templates", $this->getTemplatesForScope($this->_scope));
-            $this->_template_engine->assign("information_message", $this->renderInformationMessage());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
+            $this->getTemplateEngine()->assign("scope", $this->_scope->getName());
+            $this->getTemplateEngine()->assign("templates", $this->getTemplatesForScope($this->_scope));
+            $this->getTemplateEngine()->assign("information_message", $this->renderInformationMessage());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
         }
 
         private function getScopeSelector() {

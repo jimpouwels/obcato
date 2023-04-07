@@ -8,11 +8,9 @@
 
         private static $TEMPLATE = 'system/link_editor.tpl';
         private $_links;
-        private $_template_engine;
 
         public function __construct($links) {
             parent::__construct($this->getTextResource('link_editor_title'), 'element_holder_links');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_links = $links;
         }
 
@@ -22,10 +20,10 @@
 
         public function renderPanelContent() {
             if (count($this->_links) > 0)
-                $this->_template_engine->assign('links', $this->getLinksData());
+                $this->getTemplateEngine()->assign('links', $this->getLinksData());
             else
-                $this->_template_engine->assign('message', $this->renderNoLinksFoundMessage());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+                $this->getTemplateEngine()->assign('message', $this->renderNoLinksFoundMessage());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getLinksData() {

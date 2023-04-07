@@ -15,31 +15,29 @@
         private static $COMPONENTS_TAB = 0;
         private static $INSTALLATION_TAB = 1;
         private $_module;
-        private $_template_engine;
         private $_install_request_handler;
         private $_component_request_handler;
 
         public function __construct($components_module) {
             parent::__construct($components_module);
             $this->_module = $components_module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_install_request_handler = new InstallRequestHandler();
             $this->_component_request_handler = new ComponentRequestHandler();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('tab_menu', $this->renderTabMenu());
+            $this->getTemplateEngine()->assign('tab_menu', $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
                 $content = new ComponentsTabVisual($this->_component_request_handler);
             } else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB) {
                 $content = new InstallationTabVisual($this->_install_request_handler);
             }
-            $this->_template_engine->assign('content', $content->render());
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('content', $content->render());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         public function getHeadIncludes() {
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function getRequestHandlers() {

@@ -7,12 +7,10 @@
 
         private static $TEMPLATE = "modules/settings/global_settings_panel.tpl";
         private $_settings;
-        private $_template_engine;
 
         public function __construct($settings) {
             parent::__construct('Algemene instellingen');
             $this->_settings = $settings;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -26,14 +24,14 @@
             $email_field = new TextField("email_address", "Email adres", $this->_settings->getEmailAddress(), false, false, null);
             $homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "Selecteer pagina", "apply_settings", "pick_homepage");
 
-            $this->_template_engine->assign("website_title", $website_title->render());
-            $this->_template_engine->assign("email_field", $email_field->render());
+            $this->getTemplateEngine()->assign("website_title", $website_title->render());
+            $this->getTemplateEngine()->assign("email_field", $email_field->render());
 
             if (!is_null($current_homepage)) {
-                $this->_template_engine->assign("current_homepage_id", $current_homepage->getId());
-                $this->_template_engine->assign("current_homepage_title", $current_homepage->getTitle());
+                $this->getTemplateEngine()->assign("current_homepage_id", $current_homepage->getId());
+                $this->getTemplateEngine()->assign("current_homepage_title", $current_homepage->getTitle());
             }
-            $this->_template_engine->assign("homepage_picker", $homepage_picker->render());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("homepage_picker", $homepage_picker->render());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     }

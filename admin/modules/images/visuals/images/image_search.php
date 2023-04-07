@@ -5,14 +5,12 @@
 
         private static $TEMPLATE = "images/images/search.tpl";
 
-        private $_template_engine;
         private $_image_dao;
         private $_images_pre_handler;
 
         public function __construct($images_pre_handler) {
             parent::__construct('Zoeken', 'image_search');
             $this->_image_dao = ImageDao::getInstance();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_images_pre_handler = $images_pre_handler;
         }
 
@@ -21,12 +19,12 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("title_search_field", $this->getTitleSearchField()->render());
-            $this->_template_engine->assign("filename_search_field", $this->getFileNameSearchField()->render());
-            $this->_template_engine->assign("labels_search_field", $this->getLabelPullDown()->render());
-            $this->_template_engine->assign("search_button", $this->getSearchButton()->render());
+            $this->getTemplateEngine()->assign("title_search_field", $this->getTitleSearchField()->render());
+            $this->getTemplateEngine()->assign("filename_search_field", $this->getFileNameSearchField()->render());
+            $this->getTemplateEngine()->assign("labels_search_field", $this->getLabelPullDown()->render());
+            $this->getTemplateEngine()->assign("search_button", $this->getSearchButton()->render());
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function getTitleSearchField() {

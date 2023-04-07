@@ -18,8 +18,6 @@
         private static $ARTICLES_TAB = 0;
         private static $TERMS_TAB = 1;
         private static $TARGET_PAGES_TAB = 2;
-
-        private $_template_engine;
         private $_article_dao;
         private $_current_term;
         private $_current_article;
@@ -31,7 +29,6 @@
         public function __construct($article_module) {
             parent::__construct($article_module);
             $this->_article_module = $article_module;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_article_pre_handler = new ArticlePreHandler();
             $this->_term_pre_handler = new TermPreHandler();
@@ -39,7 +36,7 @@
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
+            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $content = new ArticleTab($this->_article_pre_handler);
@@ -49,10 +46,10 @@
                 $content = new TargetPagesList();
             }
             if (!is_null($content)) {
-                $this->_template_engine->assign("content", $content->render());
+                $this->getTemplateEngine()->assign("content", $content->render());
             }
 
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         public function getRequestHandlers() {
@@ -95,7 +92,7 @@
         }
 
         public function getHeadIncludes() {
-            $this->_template_engine->assign("path", $this->_article_module->getIdentifier());
+            $this->getTemplateEngine()->assign("path", $this->_article_module->getIdentifier());
 
             $element_statics_values = array();
             if (!is_null($this->_current_article)) {
@@ -104,9 +101,9 @@
                     $element_statics_values[] = $element_static->render();
                 }
             }
-            $this->_template_engine->assign("element_statics", $element_statics_values);
-            $this->_template_engine->assign("path", $this->_article_module->getIdentifier());
-            return $this->_template_engine->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            $this->getTemplateEngine()->assign("element_statics", $element_statics_values);
+            $this->getTemplateEngine()->assign("path", $this->_article_module->getIdentifier());
+            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
         public function onPreHandled() {

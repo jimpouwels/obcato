@@ -10,25 +10,23 @@
     
         private static $TEMPLATE = "images/images/root.tpl";
     
-        private $_template_engine;
         private $_current_image;
         private $_images_pre_handler;
     
         public function __construct($images_pre_handler) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_images_pre_handler = $images_pre_handler;
             $this->_current_image = $this->_images_pre_handler->getCurrentImage();
         }
     
         public function renderVisual(): string {
-            $this->_template_engine->assign("search", $this->renderImageSearch());
+            $this->getTemplateEngine()->assign("search", $this->renderImageSearch());
             if (!is_null($this->_current_image)) {
-                $this->_template_engine->assign("editor", $this->renderImageEditor());
+                $this->getTemplateEngine()->assign("editor", $this->renderImageEditor());
             } else {
-                $this->_template_engine->assign("list", $this->renderImageList());
+                $this->getTemplateEngine()->assign("list", $this->renderImageList());
             }
-            return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
         private function renderImageSearch() {

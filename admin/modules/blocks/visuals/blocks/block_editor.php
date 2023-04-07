@@ -10,21 +10,19 @@
 
         private static $BLOCK_EDITOR_TEMPLATE = "modules/blocks/blocks/editor.tpl";
 
-        private $_template_engine;
         private $_current_block;
 
         public function __construct($current_block) {
             parent::__construct();
             $this->_current_block = $current_block;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign("block_metadata", $this->renderBlockMetaDataPanel());
-            $this->_template_engine->assign("element_container", $this->renderElementContainer());
-            $this->_template_engine->assign("link_editor", $this->renderLinkEditor());
+            $this->getTemplateEngine()->assign("block_metadata", $this->renderBlockMetaDataPanel());
+            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainer());
+            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditor());
 
-            return $this->_template_engine->fetch(self::$BLOCK_EDITOR_TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$BLOCK_EDITOR_TEMPLATE);
         }
 
         private function renderBlockMetaDataPanel() {

@@ -9,7 +9,6 @@
 
         private static $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
 
-        private $_template_engine;
         private $_current_article;
         private $_article_dao;
         private $_friendly_url_manager;
@@ -17,7 +16,6 @@
         public function __construct($current_article) {
             parent::__construct('Algemeen', 'article_metadata_editor');
             $this->_current_article = $current_article;
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
@@ -38,19 +36,19 @@
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
 
             $this->assignElementHolderFormIds();
-            $this->_template_engine->assign("current_article_id", $this->_current_article->getId());
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign('url_field', $url_field->render());
-            $this->_template_engine->assign("description_field", $description_field->render());
-            $this->_template_engine->assign("published_field", $published_field->render());
-            $this->_template_engine->assign("publication_date_field", $publication_date_field->render());
-            $this->_template_engine->assign("sort_date_field", $sort_date_field->render());
-            $this->_template_engine->assign("target_pages_field", $target_pages_field->render());
-            $this->_template_engine->assign("image_picker_field", $image_picker_field->render());
-            $this->_template_engine->assign("lead_image_id", $this->_current_article->getImageId());
-            $this->_template_engine->assign("delete_lead_image_button", $image_delete_button->render());
+            $this->getTemplateEngine()->assign("current_article_id", $this->_current_article->getId());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign('url_field', $url_field->render());
+            $this->getTemplateEngine()->assign("description_field", $description_field->render());
+            $this->getTemplateEngine()->assign("published_field", $published_field->render());
+            $this->getTemplateEngine()->assign("publication_date_field", $publication_date_field->render());
+            $this->getTemplateEngine()->assign("sort_date_field", $sort_date_field->render());
+            $this->getTemplateEngine()->assign("target_pages_field", $target_pages_field->render());
+            $this->getTemplateEngine()->assign("image_picker_field", $image_picker_field->render());
+            $this->getTemplateEngine()->assign("lead_image_id", $this->_current_article->getImageId());
+            $this->getTemplateEngine()->assign("delete_lead_image_button", $image_delete_button->render());
 
-            return $this->_template_engine->fetch("modules/" . self::$ARTICLE_METADATA_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/" . self::$ARTICLE_METADATA_TEMPLATE);
         }
 
         private function getDateValue($date) {
@@ -69,12 +67,12 @@
         }
 
         private function assignElementHolderFormIds() {
-            $this->_template_engine->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
-            $this->_template_engine->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
-            $this->_template_engine->assign("action_form_id", ACTION_FORM_ID);
-            $this->_template_engine->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("element_order_id", ELEMENT_ORDER_ID);
+            $this->getTemplateEngine()->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
+            $this->getTemplateEngine()->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
+            $this->getTemplateEngine()->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
+            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
+            $this->getTemplateEngine()->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
+            $this->getTemplateEngine()->assign("element_order_id", ELEMENT_ORDER_ID);
         }
 
     }

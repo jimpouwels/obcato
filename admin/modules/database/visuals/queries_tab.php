@@ -7,19 +7,17 @@
     class QueriesTab extends Visual {
 
         private static $TABLES_TEMPLATE = "modules/database/queries_tab.tpl";
-        private $_template_engine;
         private $_pre_handler;
 
         public function __construct($pre_handler) {
             parent::__construct();
             $this->_pre_handler = $pre_handler;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('query_field_panel', $this->renderQueryFieldPanel());
-            $this->_template_engine->assign('query_result_panel', $this->renderQueryResultPanel());
-            return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
+            $this->getTemplateEngine()->assign('query_field_panel', $this->renderQueryFieldPanel());
+            $this->getTemplateEngine()->assign('query_result_panel', $this->renderQueryResultPanel());
+            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
 
         private function renderQueryFieldPanel() {

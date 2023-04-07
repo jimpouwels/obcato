@@ -4,13 +4,11 @@
     class UserEditor extends Panel {
 
         private static $USER_EDITOR_TEMPLATE = "modules/authorization/user_editor.tpl";
-        private $_template_engine;
         private $_current_user;
 
         public function __construct($current_user) {
             parent::__construct('Algemeen', 'user_meta');
             $this->_current_user = $current_user;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
@@ -18,17 +16,17 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("user_id", $this->_current_user->getId());
-            $this->_template_engine->assign("username_field", $this->renderUserNameField());
-            $this->_template_engine->assign("firstname_field", $this->renderFirstNameField());
-            $this->_template_engine->assign("prefix_field", $this->renderPrefixField());
-            $this->_template_engine->assign("lastname_field", $this->renderLastNameField());
-            $this->_template_engine->assign("email_field", $this->renderEmailField());
+            $this->getTemplateEngine()->assign("user_id", $this->_current_user->getId());
+            $this->getTemplateEngine()->assign("username_field", $this->renderUserNameField());
+            $this->getTemplateEngine()->assign("firstname_field", $this->renderFirstNameField());
+            $this->getTemplateEngine()->assign("prefix_field", $this->renderPrefixField());
+            $this->getTemplateEngine()->assign("lastname_field", $this->renderLastNameField());
+            $this->getTemplateEngine()->assign("email_field", $this->renderEmailField());
             if ($this->_current_user->isLoggedInUser()) {
-                $this->_template_engine->assign("new_password_first", $this->renderFirstPasswordField());
-                $this->_template_engine->assign("new_password_second", $this->renderSecondPasswordField());
+                $this->getTemplateEngine()->assign("new_password_first", $this->renderFirstPasswordField());
+                $this->getTemplateEngine()->assign("new_password_second", $this->renderSecondPasswordField());
             }
-            return $this->_template_engine->fetch(self::$USER_EDITOR_TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$USER_EDITOR_TEMPLATE);
         }
 
         private function renderUserNameField() {

@@ -10,13 +10,11 @@
     class TextElementEditorVisual extends ElementVisual {
     
         private static $TEMPLATE = "elements/text_element/text_element_form.tpl";
-        
-        private $_template_engine;
+    
         private $_text_element;
     
         public function __construct($text_element) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_text_element = $text_element;
         }
     
@@ -28,9 +26,9 @@
             $title_field = new TextField('element_' . $this->_text_element->getId() . '_title', 'Titel', $this->_text_element->getTitle(), false, true, null);
             $text_field = new TextArea('element_' . $this->_text_element->getId() . '_text', 'Tekst', $this->_text_element->getText(), false, true, null);
             
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("text_field", $text_field->render());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("text_field", $text_field->render());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     
     }

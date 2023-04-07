@@ -7,15 +7,13 @@
     class CurrentUserIndicator extends Visual {
     
         private static $TEMPLATE = "system/current_user_indicator.tpl";
-        private $_template_engine;
 
         public function __construct() {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function renderVisual(): string {
-            $this->_template_engine->assign('username', Authenticator::getCurrentUser()->getFullName());
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign('username', Authenticator::getCurrentUser()->getFullName());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     }

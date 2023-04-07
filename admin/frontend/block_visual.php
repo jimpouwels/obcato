@@ -6,21 +6,19 @@
     class BlockVisual extends FrontendVisual {
 
         private $_block;
-        private $_template_engine;
         private $_current_page;
 
         public function __construct($block, $current_page) {
             parent::__construct($current_page);
             $this->_block = $block;
             $this->_current_page = $current_page;
-            $this->_template_engine = TemplateEngine::getInstance();
         }
 
         public function render(): string {
-            $this->_template_engine->assign('id', $this->_block->getId());
-            $this->_template_engine->assign('title', $this->_block->getTitle());
-            $this->_template_engine->assign('elements', $this->renderElements());
-            return $this->_template_engine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName());
+            $this->getTemplateEngine()->assign('id', $this->_block->getId());
+            $this->getTemplateEngine()->assign('title', $this->_block->getTitle());
+            $this->getTemplateEngine()->assign('elements', $this->renderElements());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName());
         }
 
         private function renderElements() {

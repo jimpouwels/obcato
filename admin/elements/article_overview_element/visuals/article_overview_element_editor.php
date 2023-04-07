@@ -9,13 +9,10 @@
     class ArticleOverviewElementEditor extends ElementVisual {
     
         private static $TEMPLATE = "elements/article_overview_element/article_overview_element_form.tpl";
-        
-        private $_template_engine;
         private $_element;
     
         public function __construct($_element) {
             parent::__construct();
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_element = $_element;
         }
     
@@ -32,15 +29,15 @@
             $order_type_field = new Pulldown("element_" . $this->_element->getId() . "_order_type", "Volgorde", $this->_element->getOrderType(), $this->getOrderTypeOptions(), false, "");
             $term_select_field = new TermSelector($this->_element->getTerms(), $this->_element->getId());
 
-            $this->_template_engine->assign("title_field", $title_field->render());
-            $this->_template_engine->assign("show_from_field", $show_from_field->render());
-            $this->_template_engine->assign("show_to_field", $show_to_field->render());
-            $this->_template_engine->assign("max_results_field", $max_results_field->render());
-            $this->_template_engine->assign("order_by_field", $order_by_field->render());
-            $this->_template_engine->assign("order_type_field", $order_type_field->render());
-            $this->_template_engine->assign("term_select_field", $term_select_field->render());
+            $this->getTemplateEngine()->assign("title_field", $title_field->render());
+            $this->getTemplateEngine()->assign("show_from_field", $show_from_field->render());
+            $this->getTemplateEngine()->assign("show_to_field", $show_to_field->render());
+            $this->getTemplateEngine()->assign("max_results_field", $max_results_field->render());
+            $this->getTemplateEngine()->assign("order_by_field", $order_by_field->render());
+            $this->getTemplateEngine()->assign("order_type_field", $order_type_field->render());
+            $this->getTemplateEngine()->assign("term_select_field", $term_select_field->render());
             
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
         private function getDateValue($date) {            

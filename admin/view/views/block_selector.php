@@ -6,14 +6,12 @@
     class BlockSelector extends Panel {
 
         private static $TEMPLATE = "system/block_selector.tpl";
-        private $_template_engine;
         private $_selected_blocks;
         private $_block_dao;
         private $_context_id;
 
         public function __construct($selected_blocks, $context_id) {
             parent::__construct($this->getTextResource('block_selection_title'), 'page_blocks');
-            $this->_template_engine = TemplateEngine::getInstance();
             $this->_block_dao = BlockDao::getInstance();
             $this->_context_id = $context_id;
             $this->_selected_blocks = $selected_blocks;
@@ -24,10 +22,10 @@
         }
 
         public function renderPanelContent() {
-            $this->_template_engine->assign("blocks_to_select", $this->getBlocksToSelect());
-            $this->_template_engine->assign("selected_blocks", $this->getSelectedBlocksHtml());
-            $this->_template_engine->assign("context_id", $this->_context_id);
-            return $this->_template_engine->fetch(self::$TEMPLATE);
+            $this->getTemplateEngine()->assign("blocks_to_select", $this->getBlocksToSelect());
+            $this->getTemplateEngine()->assign("selected_blocks", $this->getSelectedBlocksHtml());
+            $this->getTemplateEngine()->assign("context_id", $this->_context_id);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getBlocksToSelect() {
