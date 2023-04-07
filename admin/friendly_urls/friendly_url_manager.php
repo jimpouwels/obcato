@@ -67,10 +67,11 @@
 
         private function insertOrUpateFriendlyUrl($url, $element_holder) {
             $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
-            if (is_null($this->getFriendlyUrlForElementHolder($element_holder)))
+            if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
                 $this->_friendly_url_dao->insertFriendlyUrl($url, $element_holder);
-            else
+            } else {
                 $this->_friendly_url_dao->updateFriendlyUrl($url, $element_holder);
+            }
         }
 
         private function createUrlForPage($page) {
