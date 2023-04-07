@@ -17,7 +17,7 @@
             $this->_logout_pre_handler = new LogoutPreHandler();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
         }
     
         public function getActionButtons() {

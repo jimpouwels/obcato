@@ -9,10 +9,11 @@
         private $_action_buttons;
     
         public function __construct($action_buttons) {
+            parent::__construct();
             $this->_action_buttons = $action_buttons;
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $template_engine = TemplateEngine::getInstance();
             $template_engine->assign("buttons", $this->getActionButtonsHtml());
             return $template_engine->fetch(self::$TEMPLATE);

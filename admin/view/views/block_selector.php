@@ -19,8 +19,8 @@
             $this->_selected_blocks = $selected_blocks;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function renderVisual(): string {
+            return parent::renderVisual();
         }
 
         public function renderPanelContent() {

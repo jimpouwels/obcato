@@ -3,7 +3,7 @@
 
     require_once CMS_ROOT . "database/dao/image_dao.php";
 
-    class ImportPreHandler extends ModuleRequestHandler {
+    class ImportPreHandler extends HttpRequestHandler {
         private static $ZIP_FILE_ID = "import_zip_file";
         private $_image_dao;
 

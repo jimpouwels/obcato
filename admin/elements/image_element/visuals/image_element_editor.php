@@ -13,6 +13,7 @@
         private $_image_element;
 
         public function __construct($image_element) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_image_element = $image_element;
         }

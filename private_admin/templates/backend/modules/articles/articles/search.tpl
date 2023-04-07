@@ -1,4 +1,4 @@
-<form id="article_search" action="/admin/index.php" method="get">
+<form id="article_search" action="{$backend_base_url}" method="get">
 	<ul class="admin_form">
 		<li class="displaynone">
 			<input type="hidden" name="action" value="search" />
@@ -10,6 +10,6 @@
 		{$search_button}
 	</div>
 	<div class="show_all_link">
-		<a href="/admin/index.php" title="Toon alle artikelen">{$text_resources.articles_search_box_show_all}</a>
+		<a href="{$backend_base_url}" title="Toon alle artikelen">{$text_resources.articles_search_box_show_all}</a>
 	</div>
 </form>

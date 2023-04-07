@@ -1,3 +1,8 @@
+# TABS
+images_tab_images: Afbeeldingen
+images_tab_labels: Labels
+images_tab_target_pages: Doelpagina's
+
 images_module_title: Afbeeldingen
 
 image_successfully_published: Afbeelding succesvol gepubliceerd

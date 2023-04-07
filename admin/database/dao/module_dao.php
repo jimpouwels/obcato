@@ -34,11 +34,13 @@
             return $modules;
         }
 
-        public function getModule($id) {
+        public function getModule($id): ?Module {
             $query = "SELECT * FROM modules WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Module::constructFromRecord($row);
+            }
+            return null;
         }
 
         public function removeModule($identifier) {

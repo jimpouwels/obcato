@@ -12,11 +12,12 @@
         private $_database_dao;
 
         public function __construct() {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_database_dao = DatabaseDao::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign('tables', $this->getTables());
             return $this->_template_engine->fetch(self::$TABLES_TEMPLATE);
         }

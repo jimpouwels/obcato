@@ -11,11 +11,12 @@
         private $_install_request_handler;
 
         public function __construct($install_request_handler) {
+            parent::__construct();
             $this->_install_request_handler = $install_request_handler;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("component_install_form", $this->renderComponentInstallFormPanel());
             $this->_template_engine->assign("component_install_log", $this->renderComponentInstallLogPanel());
             return $this->_template_engine->fetch('modules/components/' . self::$TEMPLATE);

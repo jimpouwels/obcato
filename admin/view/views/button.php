@@ -12,13 +12,14 @@
         private $_template_engine;
         
         public function __construct($id, $label, $onclick) {
+            parent::__construct();
             $this->_id = $id;
             $this->_label = $label;
             $this->_onclick = $onclick;
             $this->_template_engine = TemplateEngine::getInstance();
         }
         
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("id", $this->_id);
             $this->_template_engine->assign("label", $this->_label);
             $this->_template_engine->assign("onclick", $this->_onclick);

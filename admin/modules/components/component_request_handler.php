@@ -5,7 +5,7 @@
     require_once CMS_ROOT . 'database/dao/element_dao.php';
     require_once CMS_ROOT . 'modules/components/installer/logger.php';
 
-    class ComponentRequestHandler extends ModuleRequestHandler {
+    class ComponentRequestHandler extends HttpRequestHandler {
 
         private $_module_dao;
         private $_element_dao;

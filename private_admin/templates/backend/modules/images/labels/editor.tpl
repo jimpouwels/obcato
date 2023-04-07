@@ -1,4 +1,4 @@
-<form id="label_form" method="post" action="/admin/index.php?label={$id}">
+<form id="label_form" method="post" action="{$backend_base_url}&label={$id}">
 	<input type="hidden" value="" name="action" id="action" />
 	<input type="hidden" value="{$id}" name="label_id" id="label_id" />
 

@@ -16,7 +16,7 @@
         <tbody>
         {foreach from=$search_results item=search_result}
             <tr>
-                <td><a href="/admin/index.php?download={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
+                <td><a href="{$backend_base_url}&download={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
                 <td>{$search_result.created_at}</td>
                 <td>{$search_result.created_by}</td>
                 <td>

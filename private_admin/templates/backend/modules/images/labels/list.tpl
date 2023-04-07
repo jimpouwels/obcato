@@ -1,4 +1,4 @@
-<form id="label_delete_form" method="post" action="/admin/index.php">
+<form id="label_delete_form" method="post" action="{$backend_base_url}">
 	<input type="hidden" name="label_delete_action" id="label_delete_action" value="" />
 
 	{if (count($all_labels) > 0)}
@@ -14,7 +14,7 @@
 			<tbody>
 				{foreach from=$all_labels item=label}
 					<tr>
-						<td><a href="/admin/index.php?label={$label.id}" title="{$label.name}">{$label.name}</a></td>
+						<td><a href="{$backend_base_url}&label={$label.id}" title="{$label.name}">{$label.name}</a></td>
 						<td class="delete_column">
 							{$label.delete_checkbox}
 						</td>

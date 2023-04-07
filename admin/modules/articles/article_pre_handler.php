@@ -63,7 +63,7 @@
             $article_form = new ArticleForm($this->_current_article);
             try {
                 $article_form->loadFields();
-                $this->_element_dao->updateElementOrder($article_form->getElementOrder(), $this->_current_article);
+                $this->_element_dao->updateElementOrder($article_form->getElementOrder());
                 $this->_article_dao->updateArticle($this->_current_article);
                 $this->updateElementHolder($this->_current_article);
                 $this->updateSelectedTerms($article_form->getSelectedTerms());
@@ -75,19 +75,19 @@
             } catch (ElementHolderContainsErrorsException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
-            $this->redirectTo('/admin/index.php?article=' . $this->_current_article->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . '&article=' . $this->_current_article->getId());
         }
 
         private function addArticle() {
             $new_article = $this->_article_dao->createArticle();
             $this->sendSuccessMessage("Artikel succesvol aangemaakt");
-            $this->redirectTo('/admin/index.php?article=' . $new_article->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . '&article=' . $new_article->getId());
         }
 
         private function deleteArticle() {
             $this->_article_dao->deleteArticle($this->_current_article);
             $this->sendSuccessMessage("Artikel succesvol verwijderd");
-            $this->redirectTo('/admin/index.php');
+            $this->redirectTo($this->getBackendBaseUrl());
         }
 
         private function updateSelectedTerms($selected_terms) {

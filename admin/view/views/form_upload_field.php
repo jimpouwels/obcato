@@ -13,8 +13,8 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render(): string {
-            parent::render();
+        public function renderVisual(): string {
+            parent::renderVisual();
             return $this->_template_engine->fetch(self::$TEMPLATE);
         }
     

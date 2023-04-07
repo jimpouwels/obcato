@@ -52,7 +52,7 @@
 
         private function renderPopupView() {
             $popup = new Popup($_GET['popup']);
-            $popup->render();
+            echo $popup->render();
         }
         
         private function runModuleRequestHandler() {

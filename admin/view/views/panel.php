@@ -12,12 +12,13 @@
         private $_template_engine;
 
         public function __construct($title, $class = "") {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_title = $title;
             $this->_class = $class;
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign('content', $this->renderPanelContent());
             $this->_template_engine->assign('panel_title', $this->_title);
             $this->_template_engine->assign('class', $this->_class);

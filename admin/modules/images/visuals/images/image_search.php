@@ -16,8 +16,8 @@
             $this->_images_pre_handler = $images_pre_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function renderVisual(): string {
+            return parent::renderVisual();
         }
 
         public function renderPanelContent() {

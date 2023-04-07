@@ -10,17 +10,18 @@
         private $_template_engine;
         
         public function __construct($popup_type) {
+            parent::__construct();
             $this->_popup_type = $popup_type;
             $this->_template_engine = TemplateEngine::getInstance();
         }
         
-        public function render(): string {
+        public function renderVisual(): string {
             $content = null;
             if ($this->_popup_type == "search") {
                 $content = new Search();
             }
             $this->_template_engine->assign("content", $content->render());
-            $this->_template_engine->display(self::$TEMPLATE);
+            return $this->_template_engine->fetch(self::$TEMPLATE);
         }
         
     }

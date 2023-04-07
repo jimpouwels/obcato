@@ -15,11 +15,12 @@
         private $_current_term;
     
         public function __construct($current_term) {
+            parent::__construct();
             $this->_current_term = $current_term;
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             if ($this->isEditTermMode()) {
                 $this->_template_engine->assign("term_editor", $this->renderTermEditor());
             }

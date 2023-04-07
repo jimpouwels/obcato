@@ -9,12 +9,13 @@
         private $_icon_class;
 
         public function __construct($label, $action_id, $icon_class) {
+            parent::__construct();
             $this->_label = $label;
             $this->_action_id = $action_id;
             $this->_icon_class = $icon_class;
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $template_engine = TemplateEngine::getInstance();
 
             $template_engine->assign("action_id", $this->_action_id);

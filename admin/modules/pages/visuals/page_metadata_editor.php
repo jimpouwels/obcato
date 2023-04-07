@@ -18,8 +18,8 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function renderVisual(): string {
+            return parent::renderVisual();
         }
 
         public function renderPanelContent() {

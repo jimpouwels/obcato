@@ -2,7 +2,7 @@
 
     defined("_ACCESS") or die;
     
-    require_once CMS_ROOT . "request_handlers/form.php";
+    require_once CMS_ROOT . "core/form/form.php";
     
     class BlockForm extends Form {
     
@@ -19,8 +19,9 @@
             $this->_block->setPositionId($this->getFieldValue("block_position"));
             $this->_block->setTemplateId($this->getFieldValue("block_template"));
             $this->_element_order = $this->getFieldValue("element_order");
-            if ($this->hasErrors())
+            if ($this->hasErrors()) {
                 throw new FormException();
+            }
         }
         
         public function getElementOrder() {

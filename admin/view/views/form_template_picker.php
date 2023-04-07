@@ -15,8 +15,8 @@
             parent::__construct($name, $label, $current_template_id, $options, $mandatory, $class_name);
         }
     
-        public function render(): string {
-            return parent::render();
+        public function renderVisual(): string {
+            return parent::renderVisual();
         }
         
         private function getOptions($scope) {

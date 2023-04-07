@@ -18,12 +18,14 @@
         private $_article_dao;
 
         public function __construct($current_article) {
+            parent::__construct();
             $this->_current_article = $current_article;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
+            $this->_template_engine->assign("article_id", $this->getBackendBaseUrl() . "&article=" . $this->_current_article->getId());
             $this->_template_engine->assign("article_metadata", $this->renderArticleMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainer());
             $this->_template_engine->assign("link_editor", $this->renderLinkEditor());
@@ -66,15 +68,6 @@
                 array_push($target_page_options, array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId()));
             }
             return $target_page_options;
-        }
-
-        private function assignElementHolderFormIds(): void {
-            $this->_template_engine->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
-            $this->_template_engine->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
-            $this->_template_engine->assign("action_form_id", ACTION_FORM_ID);
-            $this->_template_engine->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-            $this->_template_engine->assign("element_order_id", ELEMENT_ORDER_ID);
         }
 
     }

@@ -1,4 +1,4 @@
-<form action="/admin/index.php?download={$download_id}" method="post" id="download-editor-form" enctype="multipart/form-data">
+<form action="{$backend_base_url}&download={$download_id}" method="post" id="download-editor-form" enctype="multipart/form-data">
     <input type="hidden" id="action" name="action" value="" />
     <input type="hidden" id="download_id" name="download_id" value="{$download_id}" />
 

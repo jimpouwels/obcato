@@ -16,11 +16,12 @@
         private $_current_page;
 
         public function __construct($current_page) {
+            parent::__construct();
             $this->_current_page = $current_page;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("page_id", $this->_current_page->getId());
             $this->_template_engine->assign("page_metadata", $this->renderPageMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainerPanel());

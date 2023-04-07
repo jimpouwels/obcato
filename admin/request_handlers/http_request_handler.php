@@ -34,4 +34,8 @@
             return Session::getTextResource($identifier);
         }
 
+        protected function getBackendBaseUrl(): string {
+            return BlackBoard::getBackendBaseUrl();
+        }
+
     }

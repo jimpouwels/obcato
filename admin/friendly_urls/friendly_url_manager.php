@@ -77,8 +77,9 @@
         private function createUrlForPage($page) {
             $url = $this->replaceSpecialCharacters($page->getNavigationTitle());
             $parent_page = $page->getParent();
-            if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId())
+            if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
                 $url = $this->createUrlForPage($page->getParent()) . "/" . $url;
+            }
             return $url;
         }
 

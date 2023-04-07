@@ -26,13 +26,13 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
-            if ($this->_database_pre_handler->getCurrentTabId() == self::$CONFIGURATION_TAB)
+            if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB)
                 $content = new Configuration();
-            else if ($this->_database_pre_handler->getCurrentTabId() == self::$TABLES_TAB)
+            else if ($this->getCurrentTabId() == self::$TABLES_TAB)
                 $content = new Tables();
-            else if ($this->_database_pre_handler->getCurrentTabId() == self::$QUERY_TAB)
+            else if ($this->getCurrentTabId() == self::$QUERY_TAB)
                 $content = new QueriesTab($this->_database_pre_handler);
             $this->_template_engine->assign("content", $content->render());
             return $this->_template_engine->fetch(self::$DATABASE_MODULE_TEMPLATE);
@@ -59,10 +59,23 @@
 
         private function renderTabMenu() {
             $tab_items = array();
-            $tab_items[self::$CONFIGURATION_TAB] = "Configuratie";
-            $tab_items[self::$TABLES_TAB] = "Tabellen";
-            $tab_items[self::$QUERY_TAB] = "Query";
-            $tab_menu = new TabMenu($tab_items, $this->_database_pre_handler->getCurrentTabId());
+            
+            $tab_item = array();
+            $tab_item["text"] = "Configuratie";
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$CONFIGURATION_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_item = array();
+            $tab_item["text"] = "Tabellen";
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TABLES_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_item = array();
+            $tab_item["text"] = "Query";
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$QUERY_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
             return $tab_menu->render();
         }
 

@@ -4,10 +4,10 @@
 
     require_once CMS_ROOT . "database/dao/template_dao.php";
     require_once CMS_ROOT . "database/dao/scope_dao.php";
-    require_once CMS_ROOT . "request_handlers/module_request_handler.php";
+    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/templates/template_form.php";
     
-    class TemplatePreHandler extends ModuleRequestHandler {
+    class TemplatePreHandler extends HttpRequestHandler {
     
         private static $TEMPLATE_ID_GET = "template";
         private static $SCOPE_NAME_GET = "scope";
@@ -53,7 +53,7 @@
         private function addTemplate() {
             $new_template = $this->_template_dao->createTemplate();
             $this->sendSuccessMessage("Template succesvol aangemaakt");
-            $this->redirectTo("/admin/index.php?template=" . $new_template->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&template=" . $new_template->getId());
         }
         
         private function deleteTemplates() {

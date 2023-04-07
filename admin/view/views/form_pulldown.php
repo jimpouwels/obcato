@@ -16,9 +16,9 @@
             $this->_options = $options;
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("options", $this->_options);
-            return parent::render() . $this->_template_engine->fetch(self::$TEMPLATE);
+            return parent::renderVisual() . $this->_template_engine->fetch(self::$TEMPLATE);
         }
     
     }

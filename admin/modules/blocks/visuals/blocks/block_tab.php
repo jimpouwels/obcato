@@ -13,11 +13,12 @@
         private $_current_block;
     
         public function __construct($current_block) {
+            parent::__construct();
             $this->_current_block = $current_block;
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("blocks_list", $this->renderBlocksList());
             if (!is_null($this->_current_block)) {
                 $this->_template_engine->assign("editor", $this->renderBlockEditor());

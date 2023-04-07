@@ -1,4 +1,4 @@
-<form method="post" id="update_target_page_form" action="/admin/index.php">
+<form method="post" id="update_target_page_form" action="{$backend_base_url}">
 	<input type="hidden" id="new_default_target_page" name="new_default_target_page" />
 	<input type="hidden" name="action" id="action" value="target_page_to_add" />
 

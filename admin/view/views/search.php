@@ -23,6 +23,7 @@
         private $_popup_type;
         
         public function __construct() {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_back_click_id = $_GET[self::$BACK_CLICK_ID_KEY];
             $this->_backfill_id = $_GET[self::$BACKFILL_KEY];
@@ -30,7 +31,7 @@
             $this->_popup_type = $_GET[self::$POPUP_TYPE_KEY];
         }
         
-        public function render(): string {
+        public function renderVisual(): string {
             $search = null;
             if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES)
                 $search = new ImageSearchBox($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search);

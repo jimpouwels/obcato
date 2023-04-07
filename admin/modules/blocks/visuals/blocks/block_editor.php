@@ -14,11 +14,12 @@
         private $_current_block;
 
         public function __construct($current_block) {
+            parent::__construct();
             $this->_current_block = $current_block;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("block_metadata", $this->renderBlockMetaDataPanel());
             $this->_template_engine->assign("element_container", $this->renderElementContainer());
             $this->_template_engine->assign("link_editor", $this->renderLinkEditor());

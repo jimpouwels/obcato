@@ -15,12 +15,13 @@
         private $_images_pre_handler;
     
         public function __construct($images_pre_handler) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_images_pre_handler = $images_pre_handler;
             $this->_current_image = $this->_images_pre_handler->getCurrentImage();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("search", $this->renderImageSearch());
             if (!is_null($this->_current_image)) {
                 $this->_template_engine->assign("editor", $this->renderImageEditor());

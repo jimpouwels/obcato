@@ -12,11 +12,12 @@
         private $_template_engine;
 
         public function __construct($download) {
+            parent::__construct();
             $this->_download = $download;
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $metadata_editor = new DownloadMetadataEditor($this->_download);
             $download_info = new DownloadInfo($this->_download);
             $this->_template_engine->assign('metadata_editor', $metadata_editor->render());

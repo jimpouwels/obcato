@@ -15,6 +15,7 @@
         private $_text_element;
     
         public function __construct($text_element) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_text_element = $text_element;
         }

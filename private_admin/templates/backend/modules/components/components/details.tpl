@@ -59,7 +59,7 @@
             {/if}
         </tbody>
     </table>
-    <form id="uninstall_component_form" method="POST" action="/admin/index.php" class="displaynone">
+    <form id="uninstall_component_form" method="POST" action="{$backend_base_url}&" class="displaynone">
         <input type="hidden" name="action" id="action" value="" />
         {if !is_null($current_module)}
             <input type="hidden" name="module_id" id="module_id" value="{$current_module.id}" />

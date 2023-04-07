@@ -7,7 +7,7 @@
 				{assign var='class' value='tab_item_active'}
 			{/if}
 			<li class="{$class}">
-				<a href="/admin/index.php?module_tab={$index}" title="{$tab_item}">{$tab_item}</a>
+				<a href="{$tab_item.url}" title="{$tab_item.text}">{$tab_item.text}</a>
 			</li>
 			{assign var='index' value=$index + 1}
 		{/foreach}

@@ -17,7 +17,7 @@
 					{if !is_null($current_block) && $current_block.id == $block.id}
 						<strong>
 					{/if}
-					<a href="/admin/index.php?block={$block.id}" title="{$block.title}">{$block.title}</a>
+					<a href="{$backend_base_url}&block={$block.id}" title="{$block.title}">{$block.title}</a>
 					{if !is_null($current_block) && $current_block.id == $block.id}
 						</strong>
 					{/if}

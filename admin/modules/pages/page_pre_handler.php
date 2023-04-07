@@ -57,7 +57,7 @@
             $page_form = new PageForm($this->_current_page);
             try {
                 $page_form->loadFields();
-                $this->_element_dao->updateElementOrder($page_form->getElementOrder(), $this->_current_page);
+                $this->_element_dao->updateElementOrder($page_form->getElementOrder());
                 $this->addSelectedBlocks($page_form->getSelectedBlocks());
                 $this->deleteSelectedBlocksFromPage();
                 $this->_page_dao->updatePage($this->_current_page);
@@ -108,7 +108,7 @@
             $current_level_pages = $parent->getSubPages();
             $this->updateFollowUp($current_level_pages);
             $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
-            $this->redirectTo("/admin/index.php?page=1");
+            $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
         }
 
         private function addSubPage() {
@@ -128,7 +128,7 @@
             $this->updateFollowUp($current_level_pages);
 
             $this->sendSuccessMessage($this->getTextResource('page_added_message'));
-            $this->redirectTo("/admin/index.php?page=" . $new_page->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $new_page->getId());
         }
 
         private function moveUp() {

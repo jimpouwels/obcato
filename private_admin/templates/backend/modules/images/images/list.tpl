@@ -1,5 +1,5 @@
 {if $search_results}
-	<form action="/admin/index.php" method="post" id="toggle_image_published_form" enctype="multipart/form-data">
+	<form action="{$backend_base_url}" method="post" id="toggle_image_published_form" enctype="multipart/form-data">
 		<input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 		<input type="hidden" id="image_id" name="image_id" value="" />
 	</form>
@@ -37,7 +37,7 @@
 			{foreach from=$search_results item=search_result}
 				<tr>
 					<td><img title="{$search_result.title}" src="{$search_result.thumb}" alt="{$search_result.title}" /></td>
-					<td><a href="/admin/index.php?image={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
+					<td><a href="{$backend_base_url}&image={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
 					<td>{$search_result.created_at}</td>
 					<td>{$search_result.created_by}</td>
 					<td>

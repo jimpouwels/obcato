@@ -6,6 +6,7 @@
         private $_module;
 
         protected function __construct($module) {
+            parent::__construct();
             $this->_module = $module;
         }
 

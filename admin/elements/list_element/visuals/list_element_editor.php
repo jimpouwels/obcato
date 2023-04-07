@@ -14,6 +14,7 @@
         private $_list_element;
     
         public function __construct($list_element) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_list_element = $list_element;
         }

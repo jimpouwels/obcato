@@ -15,11 +15,12 @@
         private $_current_position;
     
         public function __construct($current_position) {
+            parent::__construct();
             $this->_current_position = $current_position;
             $this->_template_engine = TemplateEngine::getInstance();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             if ($this->isEditPositionMode()) {
                 $this->_template_engine->assign("position_editor", $this->renderPositionEditor());
             }

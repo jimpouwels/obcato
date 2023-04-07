@@ -1,5 +1,5 @@
 <div class="image_search_wrapper">
-	<form id="image_search" class="image_search_form" action="/admin/index.php" method="get">
+	<form id="image_search" class="image_search_form" action="{$backend_base_url}" method="get">
 		<ul class="admin_form">
 			<li class="displaynone">
 				<input type="hidden" name="action" value="search" />
@@ -12,10 +12,10 @@
 			{$search_button}
 		</div>
 		<div class="show_all_link">
-			<a href="/admin/index.php" title="Toon alle afbeeldingen">Toon allen</a>
+			<a href="{$backend_base_url}" title="Toon alle afbeeldingen">Toon allen</a>
 		</div>
 		<div class="show_all_link">
-			<a href="/admin/index.php?no_labels=true" title="Toon alle afbeeldingen zonder label">Toon allen zonder label</a>
+			<a href="{$backend_base_url}&no_labels=true" title="Toon alle afbeeldingen zonder label">Toon allen zonder label</a>
 		</div>
 	</form>
 </div>

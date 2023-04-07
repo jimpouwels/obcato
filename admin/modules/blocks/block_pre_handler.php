@@ -43,7 +43,7 @@
             $block_form = new BlockForm($this->_current_block);
             try {
                 $block_form->loadFields();
-                $this->_element_dao->updateElementOrder($block_form->getElementOrder(), $this->_current_block);
+                $this->_element_dao->updateElementOrder($block_form->getElementOrder());
                 $this->_block_dao->updateBlock($this->_current_block);
                 $this->updateElementHolder($this->_current_block);
                 $this->sendSuccessMessage("Blok succesvol opgeslagen");
@@ -57,13 +57,13 @@
         private function deleteBlock() {
             $this->_block_dao->deleteBlock($this->_current_block);
             $this->sendSuccessMessage("Blok succesvol verwijderd");
-            $this->redirectTo("/admin/index.php");
+            $this->redirectTo($this->getBackendBaseUrl());
         }
 
         private function addBlock() {
             $new_block = $this->_block_dao->createBlock();
             $this->sendSuccessMessage("Blok succesvol aangemaakt");
-            $this->redirectTo("/admin/index.php?block=" . $new_block->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&block=" . $new_block->getId());
         }
 
         private function getBlockFromGetRequest() {

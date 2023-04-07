@@ -15,6 +15,7 @@
         private $_value;
 
         protected function __construct($field_name, $value, $label, $mandatory, $linkable, $css_class) {
+            parent::__construct();
             $this->_field_name = $field_name;
             $this->_css_class = $css_class;
             $this->_label = $label;
@@ -24,7 +25,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign('classes',$this->getCssClassesHtml());
             $this->_template_engine->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
             $this->_template_engine->assign("field_name", $this->_field_name);

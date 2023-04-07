@@ -38,17 +38,19 @@
             $this->_target_pages_pre_handler = new TargetPagesPreHandler();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
             $content = null;
-            if ($this->getCurrentTabId() == self::$ARTICLES_TAB)
+            if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $content = new ArticleTab($this->_article_pre_handler);
-            else if ($this->getCurrentTabId() == self::$TERMS_TAB)
-                $content = new TermTab($this->_current_term, $this->_article_module->getIdentifier());
-            else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB)
+            } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
+                $content = new TermTab($this->_current_term);
+            } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
                 $content = new TargetPagesList();
-            if (!is_null($content))
+            }
+            if (!is_null($content)) {
                 $this->_template_engine->assign("content", $content->render());
+            }
 
             return $this->_template_engine->fetch("modules/" . self::$TEMPLATE);
         }
@@ -114,15 +116,24 @@
 
         private function renderTabMenu() {
             $tab_items = array();
-            $tab_items[self::$ARTICLES_TAB] = $this->getTextResource("articles_tab_articles");
-            $tab_items[self::$TERMS_TAB] = $this->getTextResource("articles_tab_terms");
-            $tab_items[self::$TARGET_PAGES_TAB] = $this->getTextResource("articles_tab_target_pages");
-            $tab_menu = new TabMenu($tab_items, $this->_article_pre_handler->getCurrentTabId());
-            return $tab_menu->render();
-        }
+            
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("articles_tab_articles");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$ARTICLES_TAB;
+            $tab_items[] = $tab_item;
 
-        private function getCurrentTabId() {
-            return $this->_article_pre_handler->getCurrentTabId();
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("articles_tab_terms");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TERMS_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("articles_tab_target_pages");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TARGET_PAGES_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+            return $tab_menu->render();
         }
 
     }

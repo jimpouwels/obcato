@@ -1,4 +1,4 @@
-<form action="/admin/index.php" method="post" id="query_execute_form">
+<form action="{$backend_base_url}" method="post" id="query_execute_form">
 	<ul>
 		<li>
 			{$query_field}

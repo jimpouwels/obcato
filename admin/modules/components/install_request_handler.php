@@ -1,7 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . 'request_handlers/module_request_handler.php';
+    require_once CMS_ROOT . 'request_handlers/http_request_handler.php';
     require_once CMS_ROOT . 'modules/components/install_component_form.php';
     require_once CMS_ROOT . 'utilities/file_utility.php';
     require_once CMS_ROOT . 'modules/components/installer/installation_exception.php';
@@ -9,7 +9,7 @@
     require_once CMS_ROOT . 'modules/components/installer/element_installer.php';
     require_once CMS_ROOT . 'modules/components/installer/logger.php';
 
-    class InstallRequestHandler extends ModuleRequestHandler {
+    class InstallRequestHandler extends HttpRequestHandler {
 
         private $_logger;
 

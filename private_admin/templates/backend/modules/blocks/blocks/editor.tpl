@@ -1,4 +1,4 @@
-<form action="/admin/index.php?block={$current_block_id}" method="post" id="{$element_holder_form_id}">
+<form action="{$backend_base_url}&block={$current_block_id}" method="post" id="{$element_holder_form_id}">
 	{$block_metadata}
 
 	{$element_container}

@@ -13,20 +13,22 @@
         private $_element_dao;
     
         public function __construct($module_groups) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_module_groups = $module_groups;
             $this->_element_dao = ElementDao::getInstance();
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $groups = array();
             foreach ($this->_module_groups as $module_group) {
                 $group = array();
                 $group['title'] = $this->getTextResource('menu_item_' . $module_group->getIdentifier());
-                if ($module_group->isElementGroup())
-                    $group['elements'] = $this->renderElementsMenuItem($module_group);
-                else
+                if ($module_group->isElementGroup()) {
+                    $group['elements'] = $this->renderElementsMenuItem();
+                } else {
                     $group['modules'] = $this->renderMenuItem($module_group);
+                }
                 $groups[] = $group;
             }
             $this->_template_engine->assign('groups', $groups);

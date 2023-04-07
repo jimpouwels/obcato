@@ -8,11 +8,12 @@
         private $_template_engine;
     
         public function __construct($message) {
+            parent::__construct();
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_message = $message;
         }
     
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("message", $this->_message);
             
             return $this->_template_engine->fetch(self::$TEMPLATE);

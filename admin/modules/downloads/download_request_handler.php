@@ -3,12 +3,12 @@
     
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "request_handlers/module_request_handler.php";
+    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "database/dao/download_dao.php";
     require_once CMS_ROOT . "modules/downloads/download_form.php";
     require_once CMS_ROOT . "core/model/download.php";
 
-    class DownloadRequestHandler extends ModuleRequestHandler {
+    class DownloadRequestHandler extends HttpRequestHandler {
 
         private $_download_dao;
         private $_current_download;
@@ -49,7 +49,7 @@
             $download->setTitle("Nieuwe download");
             $this->_download_dao->persistDownload($download);
             $this->sendSuccessMessage("Download succesvol toegevoegd");
-            $this->redirectTo("/admin/index.php?download=" . $download->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&download=" . $download->getId());
         }
 
         private function updateDownload() {
@@ -68,7 +68,7 @@
             $this->deleteDownloadFile($this->_current_download->getFileName());
             $this->_download_dao->deleteDownload($this->_current_download->getId());
             $this->sendSuccessMessage('Download succesvol verwijderd');
-            $this->redirectTo('/admin/index.php');
+            $this->redirectTo($this->getBackendBaseUrl());
         }
 
         private function saveUploadedFile($download_form) {

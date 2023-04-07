@@ -2,12 +2,12 @@
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "database/dao/image_dao.php";
-    require_once CMS_ROOT . "request_handlers/module_request_handler.php";
+    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "utilities/file_utility.php";
     require_once CMS_ROOT . "modules/images/image_form.php";
     require_once CMS_ROOT . "modules/images/image_list_form.php";
     
-    class ImagePreHandler extends ModuleRequestHandler {
+    class ImagePreHandler extends HttpRequestHandler {
 
         private static $IMAGE_QUERYSTRING_KEY = "image";
         private static $TITLE_SEARCH_QUERYSTRING_KEY = "s_title";
@@ -80,7 +80,7 @@
                     $success_message_text_resource = "image_successfully_published";
                 }
                 $this->sendSuccessMessage(Session::getTextResource($success_message_text_resource));
-                $this->redirectTo("/admin/index.php");
+                $this->redirectTo($this->getBackendBaseUrl());
             } catch (FormException $e) {
                 $this->sendErrorMessage("Afbeelding niet worden ge(de)publiseerd");
             }
@@ -89,13 +89,13 @@
         private function deleteImage() {
             $this->_image_dao->deleteImage($this->_current_image);
             $this->sendSuccessMessage("Afbeelding succesvol verwijderd");
-            $this->redirectTo("/admin/index.php");
+            $this->redirectTo($this->getBackendBaseUrl());
         }
 
         private function addImage() {
             $new_image = $this->_image_dao->createImage();
             $this->sendSuccessMessage("Afbeelding succesvol aangemaakt");
-            $this->redirectTo("/admin/index.php?image=" . $new_image->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $new_image->getId());
         }
         
         private function getImageFromPostRequest() {
@@ -108,8 +108,9 @@
         
         private function getImageFromGetRequest() {
             $current_image = null;
-            if (isset($_GET[self::$IMAGE_QUERYSTRING_KEY]) && $_GET[self::$IMAGE_QUERYSTRING_KEY] != "")
+            if (isset($_GET[self::$IMAGE_QUERYSTRING_KEY]) && $_GET[self::$IMAGE_QUERYSTRING_KEY] != "") {
                 $current_image = $this->_image_dao->getImage($_GET[self::$IMAGE_QUERYSTRING_KEY]);
+            }
             return $current_image;
         }
         

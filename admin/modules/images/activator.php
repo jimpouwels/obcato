@@ -34,10 +34,10 @@
             $this->_images_pre_handler = new ImagePreHandler();
             $this->_label_pre_handler = new LabelPreHandler();
             $this->_import_pre_handler = new ImportPreHandler();
-            $this->_current_tab_id = $this->_images_pre_handler->getCurrentTabId();
+            $this->_current_tab_id = $this->getCurrentTabId();
         }
         
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
@@ -99,10 +99,23 @@
         
         private function renderTabMenu() {
             $tab_items = array();
-            $tab_items[self::$IMAGES_TAB] = "Afbeeldingen";
-            $tab_items[self::$LABELS_TAB] = "Labels";
-            $tab_items[self::$IMPORT_TAB] = "Import";
-            $tab_menu = new TabMenu($tab_items, $this->_current_tab_id);
+            
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("images_tab_images");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$IMAGES_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("images_tab_labels");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$LABELS_TAB;
+            $tab_items[] = $tab_item;
+
+            $tab_item = array();
+            $tab_item["text"] = $this->getTextResource("images_tab_target_pages");
+            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$IMPORT_TAB;
+            $tab_items[] = $tab_item;
+            
+            $tab_menu = new TabMenu($tab_items, BlackBoard::$MODULE_TAB_ID);
             return $tab_menu->render();
         }
     

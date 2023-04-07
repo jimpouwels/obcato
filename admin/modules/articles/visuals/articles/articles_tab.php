@@ -15,12 +15,13 @@
         private $_article_request_handler;
 
         public function __construct($article_request_handler) {
+            parent::__construct();
             $this->_article_request_handler = $article_request_handler;
             $this->_current_article = $article_request_handler->getCurrentArticle();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->_template_engine->assign("search", $this->renderArticlesSearchPanel());
             if (!is_null($this->_current_article))
                 $this->_template_engine->assign("editor", $this->renderArticleEditor());

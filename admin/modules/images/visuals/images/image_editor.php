@@ -16,12 +16,13 @@
         private $_image_dao;
 
         public function __construct($current_image) {
+            parent::__construct();
             $this->_current_image = $current_image;
             $this->_image_dao = ImageDao::getInstance();
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
+        public function renderVisual(): string {
             $this->assignMetadataEditor();
             $this->assignLabelSelector();
             $this->assignImageViewer();
