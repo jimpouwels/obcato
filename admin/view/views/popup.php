@@ -13,7 +13,7 @@
             $this->_popup_type = $popup_type;
         }
         
-        public function renderVisual(): string {
+        public function render(): string {
             $content = null;
             if ($this->_popup_type == "search") {
                 $content = new Search();

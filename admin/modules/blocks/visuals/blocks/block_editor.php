@@ -17,7 +17,7 @@
             $this->_current_block = $current_block;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("block_metadata", $this->renderBlockMetaDataPanel());
             $this->getTemplateEngine()->assign("element_container", $this->renderElementContainer());
             $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditor());

@@ -19,7 +19,7 @@
             $this->_current_page = $current_page;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("page_id", $this->_current_page->getId());
             $this->getTemplateEngine()->assign("page_metadata", $this->renderPageMetaDataPanel());
             $this->getTemplateEngine()->assign("element_container", $this->renderElementContainerPanel());

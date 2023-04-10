@@ -13,7 +13,7 @@
             $this->_action_buttons = $action_buttons;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("buttons", $this->getActionButtonsHtml());
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }

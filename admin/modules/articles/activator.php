@@ -35,7 +35,7 @@
             $this->_target_pages_pre_handler = new TargetPagesPreHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {

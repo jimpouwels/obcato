@@ -15,7 +15,7 @@
             $this->_database_dao = DatabaseDao::getInstance();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('tables', $this->getTables());
             return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }

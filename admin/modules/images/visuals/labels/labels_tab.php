@@ -19,7 +19,7 @@
             $this->_current_label = $this->_label_pre_handler->getCurrentLabel();
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             if (!is_null($this->_current_label)) {
                 $this->getTemplateEngine()->assign("label_editor", $this->renderLabelEditor());
             }

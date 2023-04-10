@@ -25,7 +25,7 @@
             $this->_component_request_handler = new ComponentRequestHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('tab_menu', $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
                 $content = new ComponentsTabVisual($this->_component_request_handler);

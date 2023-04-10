@@ -16,7 +16,7 @@
             $this->_current_block = $current_block;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("blocks_list", $this->renderBlocksList());
             if (!is_null($this->_current_block)) {
                 $this->getTemplateEngine()->assign("editor", $this->renderBlockEditor());

@@ -17,7 +17,7 @@
             $this->_onclick = $onclick;
         }
         
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("id", $this->_id);
             $this->getTemplateEngine()->assign("label", $this->_label);
             $this->getTemplateEngine()->assign("onclick", $this->_onclick);

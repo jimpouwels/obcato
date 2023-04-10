@@ -13,8 +13,8 @@
             $this->_settings = $settings;
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent() {

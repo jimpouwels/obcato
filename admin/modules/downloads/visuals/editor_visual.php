@@ -15,7 +15,7 @@
             $this->_download = $download;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $metadata_editor = new DownloadMetadataEditor($this->_download);
             $download_info = new DownloadInfo($this->_download);
             $this->getTemplateEngine()->assign('metadata_editor', $metadata_editor->render());

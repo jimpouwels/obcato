@@ -11,7 +11,7 @@
             parent::__construct();
         }
         
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("message", Notifications::getMessage());
             $this->getTemplateEngine()->assign("success", Notifications::getSuccess());
             Notifications::clearMessage();

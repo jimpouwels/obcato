@@ -21,7 +21,7 @@
             $this->_download_request_handler = new DownloadRequestHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('search_box', $this->renderSearchBox());
             if ($this->_current_download) {
                 $this->getTemplateEngine()->assign('editor', $this->renderEditor());

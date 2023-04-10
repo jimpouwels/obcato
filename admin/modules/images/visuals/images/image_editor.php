@@ -20,7 +20,7 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->assignMetadataEditor();
             $this->assignLabelSelector();
             $this->assignImageViewer();

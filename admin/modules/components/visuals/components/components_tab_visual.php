@@ -15,7 +15,7 @@
             $this->_component_request_handler = $component_request_handler;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $modules_list = new ModulesListPanel($this->_component_request_handler);
             $elements_list = new ElementsListPanel($this->_component_request_handler);
             $details = new ComponentsDetailsPanel($this->_component_request_handler);

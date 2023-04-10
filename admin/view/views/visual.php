@@ -12,13 +12,7 @@
             $this->_template_engine = TemplateEngine::getInstance();
         }
 
-        public function render(): string {
-            $this->_template_engine->assign("backend_base_url", $this->getBackendBaseUrl());
-            $this->_template_engine->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
-            return $this->renderVisual();
-        }
-
-        abstract function renderVisual(): string;
+        abstract function render(): string;
 
         protected function getTemplateEngine(): Smarty {
             return $this->_template_engine;

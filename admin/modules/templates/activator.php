@@ -23,7 +23,7 @@
             $this->_template_pre_handler = new TemplatePreHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("current_template_id", $this->getCurrentTemplateId());
             if (!is_null($this->_current_template)) {
                 $this->getTemplateEngine()->assign("template_editor", $this->renderTemplateEditor());

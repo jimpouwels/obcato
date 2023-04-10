@@ -14,7 +14,7 @@
             $this->_pre_handler = $pre_handler;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('query_field_panel', $this->renderQueryFieldPanel());
             $this->getTemplateEngine()->assign('query_result_panel', $this->renderQueryResultPanel());
             return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);

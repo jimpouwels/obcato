@@ -9,8 +9,8 @@
             parent::__construct('Instaleer component', 'install-form-panel');
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent() {

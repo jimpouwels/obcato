@@ -15,7 +15,7 @@
             $this->_icon_class = $icon_class;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("action_id", $this->_action_id);
             $this->getTemplateEngine()->assign("icon_class", $this->_icon_class);
             $this->getTemplateEngine()->assign("label", $this->_label);

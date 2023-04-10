@@ -21,7 +21,10 @@
             $this->_website_title = $website_title;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
+            $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
+            $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
+
             $navigation_menu = new NavigationMenu($this->_module_dao->getModuleGroups());
             $notification_bar = new NotificationBar();
             $current_user_indicator = new CurrentUserIndicator();

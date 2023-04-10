@@ -13,7 +13,7 @@
             $this->_message = $message;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("message", $this->_message);
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }

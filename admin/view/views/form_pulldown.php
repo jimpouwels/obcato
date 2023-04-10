@@ -13,9 +13,9 @@
             $this->_options = $options;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("options", $this->_options);
-            return parent::renderVisual() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            return parent::render() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     
     }

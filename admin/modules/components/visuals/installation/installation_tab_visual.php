@@ -14,7 +14,7 @@
             $this->_install_request_handler = $install_request_handler;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("component_install_form", $this->renderComponentInstallFormPanel());
             $this->getTemplateEngine()->assign("component_install_log", $this->renderComponentInstallLogPanel());
             return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);

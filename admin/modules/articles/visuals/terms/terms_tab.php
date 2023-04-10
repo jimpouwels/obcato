@@ -18,7 +18,7 @@
             $this->_current_term = $current_term;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             if ($this->isEditTermMode()) {
                 $this->getTemplateEngine()->assign("term_editor", $this->renderTermEditor());
             }

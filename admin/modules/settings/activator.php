@@ -25,7 +25,7 @@
             $this->_settings_pre_handler = new SettingsPreHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("warning_message", $this->renderWarningMessage());
             $this->getTemplateEngine()->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
             $this->getTemplateEngine()->assign("directory_settings_panel", $this->renderDirectorySettingsPanel());

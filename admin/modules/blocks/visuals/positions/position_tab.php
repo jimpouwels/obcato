@@ -18,7 +18,7 @@
             $this->_current_position = $current_position;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             if ($this->isEditPositionMode()) {
                 $this->getTemplateEngine()->assign("position_editor", $this->renderPositionEditor());
             }

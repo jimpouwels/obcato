@@ -19,7 +19,7 @@
             $this->_current_article = $article_request_handler->getCurrentArticle();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("search", $this->renderArticlesSearchPanel());
             if (!is_null($this->_current_article))
                 $this->getTemplateEngine()->assign("editor", $this->renderArticleEditor());

@@ -17,7 +17,7 @@
             $this->_element_dao = ElementDao::getInstance();
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $groups = array();
             foreach ($this->_module_groups as $module_group) {
                 $group = array();

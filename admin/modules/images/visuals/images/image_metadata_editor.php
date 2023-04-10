@@ -15,8 +15,8 @@
             $this->_current_image = $current_image;
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent() {

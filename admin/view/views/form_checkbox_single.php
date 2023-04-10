@@ -11,8 +11,8 @@
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
         }
     
-        public function renderVisual(): string {
-            return parent::renderVisual() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function render(): string {
+            return parent::render() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     
     }

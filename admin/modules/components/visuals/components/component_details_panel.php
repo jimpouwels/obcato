@@ -13,8 +13,8 @@
             $this->_component_request_handler = $component_request_handler;
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent() {

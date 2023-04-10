@@ -19,7 +19,7 @@
             $this->_current_image = $this->_images_pre_handler->getCurrentImage();
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("search", $this->renderImageSearch());
             if (!is_null($this->_current_image)) {
                 $this->getTemplateEngine()->assign("editor", $this->renderImageEditor());

@@ -12,7 +12,7 @@
             parent::__construct();
         }
         
-        public function renderVisual(): string {
+        public function render(): string {
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     

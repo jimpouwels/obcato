@@ -16,7 +16,7 @@
             $this->_class = $class;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('content', $this->renderPanelContent());
             $this->getTemplateEngine()->assign('panel_title', $this->_title);
             $this->getTemplateEngine()->assign('class', $this->_class);

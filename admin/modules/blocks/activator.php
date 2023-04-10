@@ -31,7 +31,7 @@
             $this->_block_dao = BlockDao::getInstance();
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {

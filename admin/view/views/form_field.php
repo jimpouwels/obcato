@@ -24,7 +24,7 @@
             $this->_value = $value;
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign('classes',$this->getCssClassesHtml());
             $this->getTemplateEngine()->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
             $this->getTemplateEngine()->assign("field_name", $this->_field_name);

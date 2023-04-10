@@ -15,8 +15,8 @@
             $this->_selected_page = $selected_page;
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent(): string {

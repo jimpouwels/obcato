@@ -13,7 +13,7 @@
         
         abstract function renderElementForm();
     
-        public function renderVisual(): string {
+        public function render(): string {
             $element = $this->getElement();
             $template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $element->getType()->getScope());
             

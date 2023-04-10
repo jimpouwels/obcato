@@ -35,7 +35,7 @@
             $this->_current_tab_id = $this->getCurrentTabId();
         }
         
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {

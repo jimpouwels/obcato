@@ -11,8 +11,8 @@
             $this->_current_user = $current_user;
         }
 
-        public function renderVisual(): string {
-            return parent::renderVisual();
+        public function render(): string {
+            return parent::render();
         }
 
         public function renderPanelContent() {

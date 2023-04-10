@@ -13,7 +13,7 @@
             $this->_current_tab = $current_tab;
         }
     
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("tab_items", $this->_tab_items);
             $this->getTemplateEngine()->assign("current_tab", $this->_current_tab);
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);

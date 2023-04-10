@@ -24,7 +24,7 @@
             $this->_database_pre_handler = new DatabasePreHandler();
         }
 
-        public function renderVisual(): string {
+        public function render(): string {
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
                 $content = new Configuration();
