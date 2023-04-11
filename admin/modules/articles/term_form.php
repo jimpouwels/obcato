@@ -19,7 +19,7 @@
             $this->_term = $term;
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_term->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
             if ($this->hasErrors() || $this->termExists())
                 throw new FormException();

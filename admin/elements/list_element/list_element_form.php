@@ -13,7 +13,7 @@
             $this->_list_element = $list_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             parent::loadFields();
             $this->_list_element->setTitle($this->getFieldValue('element_' . $this->_list_element->getId() . '_title'));
             $this->loadListItemsFields();

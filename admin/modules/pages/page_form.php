@@ -14,7 +14,7 @@
             $this->_page = $page;
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_page->setTitle($this->getMandatoryFieldValue("page_title", "Titel is verplicht"));
             $this->_page->setPublished($this->getCheckboxValue("published"));
             $this->_page->setNavigationTitle($this->getMandatoryFieldValue("navigation_title", "Navigatietitel is verplicht"));

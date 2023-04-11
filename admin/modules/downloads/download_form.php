@@ -12,7 +12,7 @@
             $this->_download = $download;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_download->setTitle($this->getMandatoryFieldValue("download_title", "Titel is verplicht"));
             $this->_download->setPublished($this->getCheckboxValue("download_published"));
             if ($this->hasErrors())

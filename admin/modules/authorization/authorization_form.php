@@ -13,7 +13,7 @@
             $this->_authorization_dao = $authorization_dao;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $username = $this->getFieldValue("user_username", 'Gebruikersnaam is verplicht');
             if ($this->userExists($username))
                 $this->raiseError('user_username', 'Er bestaat al een gebruiker met deze gebruikersnaam');

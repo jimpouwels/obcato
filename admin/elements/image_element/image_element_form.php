@@ -12,7 +12,7 @@
             $this->_image_element = $image_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             parent::loadFields();
             $this->_image_element->setTitle($this->getFieldValue('element_' . $this->_image_element->getId() . '_title'));
             $this->_image_element->setAlternativeText($this->getFieldValue('element_' . $this->_image_element->getId() . '_alternative_text'));

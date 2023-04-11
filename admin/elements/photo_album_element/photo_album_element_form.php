@@ -15,7 +15,7 @@
             $this->_photo_album_element = $photo_album_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $element_id = $this->_photo_album_element->getId();
             $title = $this->getFieldValue('element_' . $element_id . '_title');
             $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', 'Vul een geldig getal in');

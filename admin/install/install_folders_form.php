@@ -18,7 +18,7 @@
             $this->_settings = $settings;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_root_dir = $this->getMandatoryFieldValue("root_dir", "Dit veld is verplicht");
             $this->_frontend_templates_dir = $this->getMandatoryFieldValue("frontend_template_dir", "Dit veld is verplicht");
             $this->_backend_templates_dir = $this->getMandatoryFieldValue("backend_template_dir", "Dit veld is verplicht");

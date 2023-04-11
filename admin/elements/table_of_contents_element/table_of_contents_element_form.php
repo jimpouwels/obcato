@@ -14,7 +14,7 @@
             $this->_table_of_contents_element = $_table_of_contents_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $element_id = $this->_table_of_contents_element->getId();
             $title = $this->getFieldValue('element_' . $element_id . '_title');
             if ($this->hasErrors())

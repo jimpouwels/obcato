@@ -18,7 +18,7 @@
             $this->_template_dao = TemplateDao::getInstance();
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_template->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
             $this->_template->setScopeId($this->getMandatoryFieldValue("scope", "Scope is verplicht"));
             $this->_uploaded_file_name = $this->getUploadedFileName("template_file");

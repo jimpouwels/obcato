@@ -11,7 +11,7 @@
             $this->_element = $element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $template_id = $this->getFieldValue('element_' . $this->_element->getId() . '_template');
             $include_in_toc = $this->getCheckboxValue('element_' . $this->_element->getId() . '_toc');
             $this->_element->setTemplateId($template_id);

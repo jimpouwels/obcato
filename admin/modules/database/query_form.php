@@ -7,7 +7,7 @@
 
         private $_query;
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_query = $this->getMandatoryFieldValue('query', 'U heeft geen query ingevoerd');
             if ($this->hasErrors())
                 throw new FormException();

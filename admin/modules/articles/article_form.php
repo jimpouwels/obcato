@@ -18,7 +18,7 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
             $this->_article->setDescription($this->getFieldValue("article_description"));
             $this->_article->setPublished($this->getCheckboxValue("article_published"));

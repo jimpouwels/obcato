@@ -16,7 +16,7 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_target_page_to_add = $this->getFieldValue("add_target_page_ref");
             $this->_new_default_target_page = $this->getFieldValue("new_default_target_page");
             $this->loadTargetPagesToDelete();

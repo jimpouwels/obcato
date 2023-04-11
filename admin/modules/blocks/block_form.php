@@ -13,7 +13,7 @@
             $this->_block = $block;
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_block->setTitle($this->getMandatoryFieldValue("title", "Titel is verplicht"));
             $this->_block->setPublished($this->getCheckboxValue("published"));
             $this->_block->setPositionId($this->getFieldValue("block_position"));

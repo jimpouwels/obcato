@@ -13,7 +13,7 @@
             $this->_text_element = $text_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             parent::loadFields();
             $this->_text_element->setTitle($this->getFieldValue('element_' . $this->_text_element->getId() . '_title'));
             $this->_text_element->setText($this->getFieldValue('element_' . $this->_text_element->getId() . '_text'));

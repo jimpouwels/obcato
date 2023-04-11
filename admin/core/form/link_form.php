@@ -11,7 +11,7 @@
             $this->_link = $link;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_link->setTitle($this->getFieldValue('link_' . $this->_link->getId() . '_title'));
             $this->_link->setTargetAddress($this->getFieldValue('link_' . $this->_link->getId() . '_url'));
             $this->_link->setCode($this->getMandatoryNumber('link_' . $this->_link->getId() . '_code',

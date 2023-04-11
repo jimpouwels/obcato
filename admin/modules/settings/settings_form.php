@@ -13,7 +13,7 @@
             $this->_settings = $settings;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_settings->setWebsiteTitle($this->getMandatoryFieldValue("website_title", "Titel is verplicht"));
             $this->_settings->setFrontendHostname($this->getMandatoryFieldValue("frontend_hostname", "Frontend hostname is verplicht"));
             $this->_settings->setBackendHostname($this->getMandatoryFieldValue("backend_hostname", "Backend hostname is verplicht"));

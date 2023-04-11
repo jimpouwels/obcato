@@ -16,7 +16,7 @@
             $this->_article_overview_element = $article_overview_element;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $element_id = $this->_article_overview_element->getId();
             $title = $this->getFieldValue('element_' . $element_id . '_title');
             $show_to = $this->getDate('element_' . $element_id . '_show_to', 'Vul een datum in (bijv. 31-12-2010)');

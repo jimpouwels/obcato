@@ -14,7 +14,7 @@
             $this->_block_dao = BlockDao::getInstance();
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $positionName = str_replace(" ", "_", $this->getMandatoryFieldValue("name", "Naam is verplicht"));
             $this->_position->setName($positionName);
             if ($this->hasErrors() || $this->positionAlreadyExists())

@@ -15,7 +15,7 @@
             $this->_image_dao = ImageDao::getInstance();
         }
     
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_label->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
             if ($this->hasErrors() || $this->labelExists())
                 throw new FormException();

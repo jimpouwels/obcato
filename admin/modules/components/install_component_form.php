@@ -8,7 +8,7 @@
         private $_file_path;
         private $_file_name;
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_file_path = $this->getMandatoryUploadFilePath('upload_field', 'Selecteer een component');
             $this->_file_name = $this->getUploadedFileName('upload_field');
             if ($this->hasErrors())

@@ -13,7 +13,7 @@
             $this->_image = $image;
         }
 
-        public function loadFields() {
+        public function loadFields(): void {
             $this->_image->setTitle($this->getMandatoryFieldValue("image_title", "Titel is verplicht"));
             $this->_image->setPublished($this->getCheckboxValue("image_published"));
             $this->_selected_labels = $this->getSelectValue("select_labels_" . $this->_image->getId());
