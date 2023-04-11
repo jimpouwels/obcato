@@ -2,12 +2,13 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/form/form.php";
+    require_once CMS_ROOT . "core/model/link.php";
     
     class LinkForm extends Form {
 
-        private $_link;
+        private Link $_link;
 
-        public function __construct($link) {
+        public function __construct(Link $link) {
             $this->_link = $link;
         }
 
@@ -26,7 +27,7 @@
             }
         }
 
-        public function isSelectedForDeletion() {
-            return $this->getFieldValue('link_' . $this->_link->getId() . '_delete');
+        public function isSelectedForDeletion(): bool {
+            return $this->getFieldValue('link_' . $this->_link->getId() . '_delete') != null;
         }
     }

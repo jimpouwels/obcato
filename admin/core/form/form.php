@@ -68,7 +68,7 @@
             if (!$this->isEmpty($number) && !is_numeric($number)) {
                 $this->raiseError($field_name, $error_message);
             }
-            return $number;
+            return intval($number);
         }
         
         public function getMandatoryDate(string $field_name, string $error_message, string $invalid_date_message) {

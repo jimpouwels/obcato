@@ -6,23 +6,24 @@
 
     class Authenticator {
 
-        public static function isAuthenticated() {
-            if(!isset($_SESSION)) {
+        public static function isAuthenticated(): bool {
+            if (!isset($_SESSION)) {
                 session_start();
             }
             $authorization_dao = AuthorizationDao::getInstance();
-            if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)) {
-                if (isset($_SESSION['username'])) {
-                    $user = $authorization_dao->getUser($_SESSION['username']);
-                    if ($user->getUuid() == $_SESSION['uuid']) {
-                        $_SESSION['last_activity'] = time();
-                        return true;
-                    }
+            if (isset($_SESSION['last_activity'])
+                && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)
+                && isset($_SESSION['username'])) {
+                $user = $authorization_dao->getUser($_SESSION['username']);
+                if ($user->getUuid() == $_SESSION['uuid']) {
+                    $_SESSION['last_activity'] = time();
+                    return true;
                 }
             }
+            return false;
         }
 
-        public static function logIn($username, $password) {
+        public static function logIn(string $username, string $password): void {
             if (self::authenticate($username, $password)) {
                 session_start();
                 $authorization_dao = AuthorizationDao::getInstance();
@@ -33,19 +34,19 @@
             }
         }
 
-        public static function logOut() {
+        public static function logOut(): void {
             session_start();
             session_destroy();
             header('Location: /admin/login.php');
             exit();
         }
 
-        public static function getCurrentUser() {
+        public static function getCurrentUser(): User {
             $authorization_dao = AuthorizationDao::getInstance();
             return $authorization_dao->getUser($_SESSION["username"]);
         }
 
-        private static function authenticate($username, $password) {
+        private static function authenticate(string $username, string $password): bool {
             $mysql_database = MysqlConnector::getInstance();
             $password = StringUtility::hashStringValue($password);
             $auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
