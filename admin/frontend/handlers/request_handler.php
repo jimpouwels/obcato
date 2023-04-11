@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "database/dao/image_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
-    require_once CMS_ROOT . "frontend/page_visual.php";
+    require_once CMS_ROOT . "frontend/website_visual.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     class RequestHandler {
@@ -43,11 +43,9 @@
             $this->renderPage($homePage, null);
         }
 
-        private function renderPage($page, $article) {
-            if ($page->isPublished()) {
-                $page_visual = new PageVisual($page, $article);
-                echo $page_visual->render();
-            }
+        private function renderPage(Page $page, ?Article $article) {
+            $website = new WebsiteVisual($page, $article);
+            echo $website->render();
         }
 
         private function loadImage() {

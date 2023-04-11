@@ -37,12 +37,13 @@
             $new_link->setId($this->_mysql_connector->getInsertId());
         }
 
-        public function getLinksForElementHolder($element_holder_id) {
+        public function getLinksForElementHolder($element_holder_id): array {
             $query = "SELECT * FROM links WHERE parent_element_holder = " . $element_holder_id;
             $result = $this->_mysql_connector->executeQuery($query);
             $links = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $links[] = Link::constructFromRecord($row);
+            }
             return $links;
         }
 

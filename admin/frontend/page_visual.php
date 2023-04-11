@@ -7,29 +7,27 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
-        private $_page;
         private $_article;
         private $_page_dao;
 
         public function __construct($current_page, $current_article) {
             parent::__construct($current_page);
-            $this->_page = $current_page;
             $this->_article = $current_article;
             $this->_page_dao = PageDao::getInstance();
         }
 
         public function render(): string {
             $this->getTemplateEngine()->assign("website_title", WEBSITE_TITLE);
-            $this->getTemplateEngine()->assign("page", $this->getPageContentAndMetaData($this->_page));
+            $this->getTemplateEngine()->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $rendered_article = null;
-            $this->getTemplateEngine()->assign("page_title", $this->_page->getTitle());
+            $this->getTemplateEngine()->assign("page_title", $this->getPage()->getTitle());
             if (!is_null($this->_article) && $this->_article->isPublished()) {
                 $rendered_article = $this->renderArticle();
                 $this->getTemplateEngine()->assign("page_title", $this->_article->getTitle());
             }
             $this->getTemplateEngine()->assign('article', $rendered_article);
             $this->getTemplateEngine()->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_page->getTemplate()->getFileName());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getPage()->getTemplate()->getFileName());
         }
 
         private function getPageContentAndMetaData($page) {
@@ -58,7 +56,7 @@
         }
 
         private function addPageMetaData($page, &$page_data, $render_childen = true) {
-            $page_data["is_current_page"] = $this->_page->getId() == $page->getId();
+            $page_data["is_current_page"] = $this->getPage()->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
             $page_data["url"] = $this->getPageUrl($page);
             $page_data["navigation_title"] = $page->getNavigationTitle();
@@ -83,7 +81,7 @@
         private function renderBlocks() {
             $blocks = array();
             $blocks['no_position'] = array();
-            foreach ($this->_page->getBlocks() as $block) {
+            foreach ($this->getPage()->getBlocks() as $block) {
                 if (!$block->isPublished()) continue;
                 $position = $block->getPosition();
                 if (!is_null($position)) {
@@ -99,7 +97,7 @@
         }
 
         private function renderBlock($block) {
-            $block_visual = new BlockVisual($block, $this->_page);
+            $block_visual = new BlockVisual($block, $this->getPage());
             return $block_visual->render();
         }
 

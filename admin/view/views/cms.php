@@ -22,8 +22,6 @@
         }
 
         public function render(): string {
-            $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
-            $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
 
             $navigation_menu = new NavigationMenu($this->_module_dao->getModuleGroups());
             $notification_bar = new NotificationBar();
@@ -35,6 +33,8 @@
                 $this->getTemplateEngine()->assign("page_title", $this->_module_visual->getTitle());
                 $this->getTemplateEngine()->assign("module_head_includes", $this->_module_visual->getHeadIncludes());
             }
+            $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
+            $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
             $this->getTemplateEngine()->assign("actions_menu", $this->getActionsMenu()->render());
             $this->getTemplateEngine()->assign("website_title", $this->_website_title);
             $this->getTemplateEngine()->assign("navigation_menu", $navigation_menu->render());

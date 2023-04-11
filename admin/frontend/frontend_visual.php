@@ -7,22 +7,23 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . "view/template_engine.php";
     require_once CMS_ROOT . 'utilities/url_helper.php';
 
     abstract class FrontendVisual {
 
         private Smarty $_template_engine;
-        private $_link_dao;
+        private LinkDao $_link_dao;
         private $_page_dao;
         private $_article_dao;
         private $_friendly_url_manager;
-        private $_current_element_holder;
+        private $_page;
 
-        public function __construct($element_holder) {
+        public function __construct($page) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_current_element_holder = $element_holder;
+            $this->_page = $page;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
@@ -35,11 +36,11 @@
         }
 
         protected function getImageUrl($image) {
-            return $this->getPageUrl($this->_current_element_holder) . '?image=' . $image->getId();
+            return $this->getPageUrl($this->_page) . '?image=' . $image->getId();
         }
 
-        protected function getElementHolder(): ElementHolder {
-            return $this->_current_element_holder;
+        protected function getPage(): ElementHolder {
+            return $this->_page;
         }
 
         protected function getTemplateEngine(): Smarty {
@@ -49,7 +50,7 @@
         protected function getArticleUrl($article) {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {
-                $target_page = $this->_current_element_holder;
+                $target_page = $this->_page;
             }
             $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
             if ($url == null) {
@@ -109,11 +110,9 @@
                 case Page::ElementHolderType:
                     $target_page = $this->_page_dao->getPage($target_element_holder->getId());
                     return $this->getPageUrl($target_page);
-                    break;
                 case Article::ElementHolderType:
                     $target_article = $this->_article_dao->getArticle($target_element_holder->getId());
                     return $this->getArticleUrl($target_article);
-                    break;
             }
         }
 
@@ -122,10 +121,11 @@
         }
 
         private function createHyperlinkOpeningTag($title, $target, $url) {
-            if ($target == '[popup]')
+            if ($target == '[popup]') {
                 $target_html = "onclick=\"window.open('$url','$title', 'width=800,height=600, scrollbars=no,toolbar=no,location=no'); return false\"";
-            else
+            } else {
                 $target_html = "target=\"$target\"";
+            }
             return '<a title="' . $title . '" ' . $target_html . ' href="' . $url . '">';
         }
     }
