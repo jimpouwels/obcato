@@ -26,14 +26,17 @@
             $this->getTemplateEngine()->assign("id", $position_id);
             $this->getTemplateEngine()->assign("new_position", $new_position);
             $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
+            $this->getTemplateEngine()->assign("explanation_field", $this->renderExplanationField());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         private function renderNameField() {
-            $name_value = null;
-            if (isset($this->_current_position))
-                $name_value = $this->_current_position->getName();
-            $name_field = new TextField("name", $this->getTextResource("blocks_position_name_field"), $name_value, true, false, null);
+            $name_field = new TextField("name", $this->getTextResource("blocks_position_name_field"), $this->_current_position->getName(), true, false, null);
             return $name_field->render();
+        }
+
+        private function renderExplanationField() {
+            $explanation_field = new TextField("explanation", $this->getTextResource("blocks_position_explanation_field"), $this->_current_position->getExplanation(), true, false, null);
+            return $explanation_field->render();
         }
     }

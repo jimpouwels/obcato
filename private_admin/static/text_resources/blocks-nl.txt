@@ -19,6 +19,7 @@ blocks_position_could_not_be_updated_error: Positie niet opgeslagen, verwerk de 
 blocks_default_position_title: Nieuwe positie
 blocks_edit_position_title: Positie bewerken
 blocks_position_name_field: Naam
+blocks_position_explanation_field: Beschrijving
 blocks_positions_list_name_column: Naam
 blocks_positions_list_description_column: Beschrijving
 blocks_positions_list_delete_column: Verwijderen

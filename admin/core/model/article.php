@@ -6,17 +6,18 @@
     require_once CMS_ROOT . "core/model/element_holder.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
+    include_once CMS_ROOT . "database/dao/image_dao.php";
     
     class Article extends ElementHolder {
 
         const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
 
-        private $_description;
-        private $_image_id;
-        private $_publication_date;
-        private $_sort_date;
-        private $_target_page_id;
-        private $_page_dao;
+        private string $_description;
+        private string $_image_id;
+        private string $_publication_date;
+        private string $_sort_date;
+        private int $_target_page_id;
+        private PageDao $_page_dao;
         
         public function __construct() {
             parent::__construct();
@@ -25,64 +26,64 @@
             $this->setPublished(false);
         }
         
-        public function getDescription() {
+        public function getDescription(): string {
             return $this->_description;
         }
         
-        public function setDescription($description) {
+        public function setDescription(string $description): void {
             $this->_description = $description;
         }
         
-        public function getImageId() {
+        public function getImageId(): string {
             return $this->_image_id;
         }
         
-        public function setImageId($image_id) {
+        public function setImageId(string $image_id): void {
             $this->_image_id = $image_id;
         }
         
-        public function getImage() {
+        public function getImage(): Image {
             $image = null;
             if ($this->_image_id != '' && !is_null($this->_image_id)) {
-                include_once CMS_ROOT . "database/dao/image_dao.php";
                 $image_dao = ImageDao::getInstance();
                 $image = $image_dao->getImage($this->_image_id);
             }
             return $image;
         }
         
-        public function getPublicationDate() {
+        public function getPublicationDate(): string {
             return $this->_publication_date;
         }
         
-        public function setPublicationDate($publication_date) {
+        public function setPublicationDate(string $publication_date): void {
             $this->_publication_date = $publication_date;
         }
 
-        public function getSortDate() {
+        public function getSortDate(): string {
             return $this->_sort_date;
         }
 
-        public function setSortDate($sort_date) {
+        public function setSortDate(string $sort_date) {
             $this->_sort_date = $sort_date;
         }
         
-        public function getTargetPageId() {
+        public function getTargetPageId(): string {
             return $this->_target_page_id;
         }
         
-        public function setTargetPageId($target_page_id) {
+        public function setTargetPageId(int $target_page_id): void {
             $this->_target_page_id = $target_page_id;
         }
         
-        public function getTargetPage() {
+        public function getTargetPage(): ?Page {
             $target_page = null;
-            if (!is_null($this->_target_page_id) && $this->_target_page_id != '')
+            if (!is_null($this->_target_page_id) && $this->_target_page_id != '') {
                 $target_page = $this->_page_dao->getPage($this->_target_page_id);
+            }
             return $target_page;
         }
         
-        public function getTerms() {
+        public function getTerms(): array {
             $article_dao = ArticleDao::getInstance();
             return $article_dao->getTermsForArticle($this->getId());
         }
@@ -100,7 +101,7 @@
             $article->setType($record['type']);
             $article->setPublicationDate($record['publication_date']);
             $article->setSortDate($record['sort_date']);
-            $article->setTargetPageId($record['target_page']);
+            $article->setTargetPageId(intval($record['target_page']));
             
             return $article;
         }

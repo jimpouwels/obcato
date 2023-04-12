@@ -6,8 +6,8 @@
     
     class PositionForm extends Form {
     
-        private $_position;
-        private $_block_dao;
+        private BlockPosition $_position;
+        private BlockDao $_block_dao;
     
         public function __construct($position) {
             $this->_position = $position;
@@ -17,8 +17,10 @@
         public function loadFields(): void {
             $positionName = str_replace(" ", "_", $this->getMandatoryFieldValue("name", "Naam is verplicht"));
             $this->_position->setName($positionName);
-            if ($this->hasErrors() || $this->positionAlreadyExists())
+            $this->_position->setExplanation($this->getFieldValue("explanation"));
+            if ($this->hasErrors() || $this->positionAlreadyExists()) {
                 throw new FormException();
+            }
         }
         
         private function positionAlreadyExists() {

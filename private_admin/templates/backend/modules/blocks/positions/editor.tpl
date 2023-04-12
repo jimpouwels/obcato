@@ -4,5 +4,6 @@
 
     <ul class="admin_form">
         <li>{$name_field}</li>
+        <li>{$explanation_field}</li>
     </ul>
 </form>

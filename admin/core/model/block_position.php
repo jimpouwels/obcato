@@ -6,35 +6,35 @@
 
     class BlockPosition extends Entity {
     
-        private $_name;
-        private $_explanation;
-        private $_block_dao;
+        private string $_name = "";
+        private string $_explanation = "";
+        private BlockDao $_block_dao;
         
         public function __construct() {
             $this->_block_dao = BlockDao::getInstance();
         }
         
-        public function getName() {
+        public function getName(): string {
             return $this->_name;
         }
         
-        public function setName($name) {
+        public function setName($name): void {
             $this->_name = $name;
         }
         
-        public function getExplanation() {
+        public function getExplanation(): string {
             return $this->_explanation;
         }
         
-        public function setExplanation($explanation) {
+        public function setExplanation(string $explanation): void {
             $this->_explanation = $explanation;
         }
         
-        public function getBlocks() {
+        public function getBlocks(): array {
             return $this->_block_dao->getBlocksByPosition($this);
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord($record): BlockPosition {
             $position = new BlockPosition();
             $position->setId($record['id']);
             $position->setName($record['name']);
