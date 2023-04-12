@@ -34,7 +34,7 @@
             return $this->_block_dao->getBlocksByPosition($this);
         }
         
-        public static function constructFromRecord($record): BlockPosition {
+        public static function constructFromRecord(array $record): BlockPosition {
             $position = new BlockPosition();
             $position->setId($record['id']);
             $position->setName($record['name']);

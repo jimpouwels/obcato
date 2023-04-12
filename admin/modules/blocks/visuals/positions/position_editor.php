@@ -36,7 +36,7 @@
         }
 
         private function renderExplanationField() {
-            $explanation_field = new TextField("explanation", $this->getTextResource("blocks_position_explanation_field"), $this->_current_position->getExplanation(), true, false, null);
+            $explanation_field = new TextField("explanation", $this->getTextResource("blocks_position_explanation_field"), $this->_current_position->getExplanation(), false, false, null);
             return $explanation_field->render();
         }
     }
