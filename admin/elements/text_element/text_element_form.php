@@ -6,9 +6,9 @@
 
     class TextElementForm extends ElementForm {
 
-        private $_text_element;
+        private TextElement $_text_element;
 
-        public function __construct($text_element) {
+        public function __construct(TextElement $text_element) {
             parent::__construct($text_element);
             $this->_text_element = $text_element;
         }

@@ -5,30 +5,31 @@
 
     class Block extends ElementHolder {
     
-        private $_position_id;
+        private int $_position_id;
         
-        public function getPosition() {
+        public function getPositionId(): int {
+            return $this->_position_id;
+        }
+        
+        public function setPositionId(int $position_id): void {
+            $this->_position_id = $position_id;
+        }
+        
+        public function getPosition(): BlockPosition {
             $dao = BlockDao::getInstance();
             return $dao->getBlockPosition($this->_position_id);
         }
         
-        public function getPositionName() {
+        public function getPositionName(): string {
             $position_name = "";
             $position = $this->getPosition();
-            if (!is_null($position))
+            if (!is_null($position)) {
                 $position_name = $position->getName();
+            }
             return $position_name;
         }
         
-        public function getPositionId() {
-            return $this->_position_id;
-        }
-        
-        public function setPositionId($position_id) {
-            $this->_position_id = $position_id;
-        }
-        
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Block {
             $block = new Block();
             $block->setId($record['id']);
             $block->setTitle($record['title']);

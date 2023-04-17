@@ -11,13 +11,13 @@
 
     class ArticleDao {
 
-        private static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
+        private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page";
 
-        private static $instance;
-        private $_page_dao;
-        private $_element_holder_dao;
-        private $_mysql_connector;
+        private static ?ArticleDao $instance = null;
+        private PageDao $_page_dao;
+        private ElementHolderDao $_element_holder_dao;
+        private MysqlConnector $_mysql_connector;
 
         private function __construct() {
             $this->_page_dao = PageDao::getInstance();

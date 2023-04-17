@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/model/element.php";
+    require_once CMS_ROOT . "core/model/element_metadata_provider.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "database/dao/image_dao.php";
     require_once CMS_ROOT . "elements/image_element/visuals/image_element_statics.php";
@@ -11,59 +12,57 @@
 
     class ImageElement extends Element {
 
-        private $_alternative_text;
-        private $_align;
-        private $_int;
-        private $_height;
-        private $_width;
-        private $_image_id;
-        private $_metadata_provider;
+        private string $_alternative_text;
+        private string $_align;
+        private int $_height;
+        private int $_width;
+        private int $_image_id;
 
         public function __construct() {
-            $this->_metadata_provider = new ImageElementMetaDataProvider();
+            parent::__construct(new ImageElementMetadataProvider($this));
         }
 
-        public function setAlternativeText($alternative_text) {
+        public function setAlternativeText(string $alternative_text): void {
             $this->_alternative_text = $alternative_text;
         }
 
-        public function getAlternativeText() {
+        public function getAlternativeText(): string {
             return $this->_alternative_text;
         }
 
-        public function setAlign($align) {
+        public function setAlign(string $align): void {
             $this->_align = $align;
         }
 
-        public function getAlign() {
+        public function getAlign(): string {
             return $this->_align;
         }
 
-        public function getWidth() {
+        public function getWidth(): int {
             return $this->_width;
         }
 
-        public function setWidth($width) {
+        public function setWidth(int $width): void {
             $this->_width = $width;
         }
 
-        public function getHeight() {
+        public function getHeight(): int {
             return $this->_height;
         }
 
-        public function setHeight($height) {
+        public function setHeight(int $height): void {
             $this->_height = $height;
         }
 
-        public function setImageId($image_id) {
+        public function setImageId(int $image_id): void {
             $this->_image_id = $image_id;
         }
 
-        public function getImageId() {
+        public function getImageId(): int {
             return $this->_image_id;
         }
 
-        public function getImage() {
+        public function getImage(): Image {
             $image = null;
             if ($this->_image_id != null) {
                 $image_dao = ImageDao::getInstance();
@@ -72,31 +71,23 @@
             return $image;
         }
 
-        public function getStatics() {
+        public function getStatics(): Visual {
             return new ImageElementStatics();
         }
 
-        public function getBackendVisual() {
+        public function getBackendVisual(): ElementVisual {
             return new ImageElementEditorVisual($this);
         }
 
-        public function getFrontendVisual($current_page) {
+        public function getFrontendVisual(Page $current_page): ImageElementFrontendVisual {
             return new ImageElementFrontendVisual($current_page, $this);
         }
 
-        public function initializeMetaData() {
-            $this->_metadata_provider->getMetaData($this);
-        }
-
-        public function updateMetaData() {
-            $this->_metadata_provider->updateMetaData($this);
-        }
-
-        public function getRequestHandler() {
+        public function getRequestHandler(): HttpRequestHandler {
             return new ImageElementRequestHandler($this);
         }
 
-        public function getSummaryText() {
+        public function getSummaryText(): string {
             $summary_text = $this->getTitle();
             $image = $this->getImage();
             if ($image) {
@@ -106,26 +97,28 @@
         }
     }
 
-    class ImageElementMetaDataProvider {
-
-        public function getMetaData($element) {
-            $mysql_database = MysqlConnector::getInstance();
-
-            $query = "SELECT title, image_id, align, alternative_text, width, height FROM image_elements_metadata WHERE element_id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $element->setTitle($row['title']);
-                $element->setAlternativeText($row['alternative_text']);
-                $element->setAlign($row['align']);
-                $element->setImageId($row['image_id']);
-                $element->setWidth($row['width']);
-                $element->setHeight($row['height']);
-            }
+    class ImageElementMetadataProvider extends ElementMetadataProvider {
+        
+        public function __construct(Element $element) {
+            parent::__construct($element);
+        }
+        
+        public function getTableName(): string {
+            return "image_elements_metadata";
         }
 
-        public function updateMetaData($element) {
+        public function constructMetaData(array $row, $element): void {
+            $element->setTitle($row['title']);
+            $element->setAlternativeText($row['alternative_text']);
+            $element->setAlign($row['align']);
+            $element->setImageId($row['image_id']);
+            $element->setWidth($row['width']);
+            $element->setHeight($row['height']);
+        }
+
+        public function updateMetaData(Element $element): void {
             $mysql_database = MysqlConnector::getInstance();
-            if ($this->persisted($element)) {
+            if ($this->isPersisted($element)) {
                 $image_id = "NULL";
                 if ($element->getImageId() != '' && !is_null($element->getImageId())) {
                     $image_id = $element->getImageId();
@@ -142,7 +135,7 @@
             $mysql_database->executeQuery($query);
         }
 
-        private function persisted($element) {
+        private function isPersisted(Element $element): bool {
             $mysql_database = MysqlConnector::getInstance();
             $query = "SELECT t.id, e.id FROM image_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
                       AND e.id = " . $element->getId();

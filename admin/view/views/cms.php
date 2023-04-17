@@ -35,6 +35,7 @@
             }
             $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
             $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
+            $this->getTemplateEngine()->assign("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
             $this->getTemplateEngine()->assign("actions_menu", $this->getActionsMenu()->render());
             $this->getTemplateEngine()->assign("website_title", $this->_website_title);
             $this->getTemplateEngine()->assign("navigation_menu", $navigation_menu->render());

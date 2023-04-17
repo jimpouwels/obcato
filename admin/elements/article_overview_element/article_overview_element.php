@@ -3,8 +3,10 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/model/element.php";
+    require_once CMS_ROOT . "core/model/element_metadata_provider.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
+    include_once CMS_ROOT . "utilities/date_utility.php";
     require_once CMS_ROOT . "elements/article_overview_element/visuals/article_overview_element_statics.php";
     require_once CMS_ROOT . "elements/article_overview_element/visuals/article_overview_element_editor.php";
     require_once CMS_ROOT . "elements/article_overview_element/article_overview_element_request_handler.php";
@@ -12,79 +14,78 @@
 
     class ArticleOverviewElement extends Element {
             
-        private $_show_from;
-        private $_show_to;
-        private $_show_until_today;
-        private $_order_by;
-        private $_order_type;
-        private $_terms;
-        private $_number_of_results;
-        private $_metadata_provider;
+        private string $_show_from;
+        private string $_show_to;
+        private bool $_show_until_today;
+        private string $_order_by;
+        private string $_order_type;
+        private array $_terms;
+        private int $_number_of_results;
             
         public function __construct() {
-            // set all text element specific metadata
+            parent::__construct(new ArticleOverviewElementMetadataProvider($this));
             $this->_terms = array();
-            $this->_metadata_provider = new ArticleOverviewElementMetaDataProvider($this);
         }
         
-        public function setShowFrom($show_from) {
+        public function setShowFrom(string $show_from): void {
             $this->_show_from = $show_from;
         }
         
-        public function getShowFrom() {
+        public function getShowFrom(): string {
             return $this->_show_from;
         }
         
-        public function setShowTo($show_to) {
+        public function setShowTo(string $show_to): void {
             $this->_show_to = $show_to;
         }
         
-        public function getShowTo() {
+        public function getShowTo(): string {
             return $this->_show_to;
         }
         
-        public function setShowUntilToday($show_until_today) {
+        public function setShowUntilToday(bool $show_until_today): void {
             $this->_show_until_today = $show_until_today;
         }
         
-        public function getShowUntilToday() {
+        public function getShowUntilToday(): bool {
             return $this->_show_until_today;
         }
         
-        public function setNumberOfResults($number_of_results) {
+        public function setNumberOfResults(int $number_of_results): void {
             $this->_number_of_results = $number_of_results;
         }
         
-        public function getNumberOfResults() {
+        public function getNumberOfResults(): int {
             return $this->_number_of_results;
         }
 
-        public function setOrderBy($order_by) {
+        public function setOrderBy(string $order_by): void {
             $this->_order_by = $order_by;
         }
 
-        public function getOrderBy() {
+        public function getOrderBy(): string {
             return $this->_order_by;
         }
 
-        public function setOrderType($order_type) {
+        public function setOrderType(string $order_type): void {
             $this->_order_type = $order_type;
         }
 
-        public function getOrderType() {
+        public function getOrderType(): string {
             return $this->_order_type;
         }
 
-        public function addTerm($term) {
+        public function addTerm(ArticleTerm $term): void {
             $this->_terms[] = $term;
         }
 
-        public function removeTerm($term) {
-            if(($key = array_search($term, $this->_terms, true)) !== false)
+        public function removeTerm(ArticleTerm $term): void {
+            if(($key = array_search($term, $this->_terms, true)) !== false) {
                 unset($this->_terms[$key]);
+            }
         }
 
-        public function setTerms($terms) {
+        public function setTerms(array $terms): void {
             $this->_terms = $terms;
         }
         
@@ -92,44 +93,35 @@
             return $this->_terms;
         }
         
-        public function getArticles() {
-            include_once CMS_ROOT . "database/dao/article_dao.php";
-            include_once CMS_ROOT . "utilities/date_utility.php";
+        public function getArticles(): array {
             $article_dao = ArticleDao::getInstance();
             $_show_to = null;
-            if ($this->_show_until_today != 1)
+            if ($this->_show_until_today != 1) {
                 $_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
+            }
             $articles = $article_dao->searchPublishedArticles(DateUtility::mysqlDateToString($this->_show_from, '-'),
                                                              $_show_to, $this->_order_by, $this->getOrderType(), $this->_terms,
                                                              $this->_number_of_results);
             return $articles;
         }
         
-        public function getStatics() {
+        public function getStatics(): Visual {
             return new ArticleOverviewElementStatics();
         }
         
-        public function getBackendVisual() {
+        public function getBackendVisual(): ElementVisual {
             return new ArticleOverviewElementEditor($this);
         }
 
-        public function getFrontendVisual($current_page) {
+        public function getFrontendVisual(Page $current_page): FrontendVisual {
             return new ArticleOverviewElementFrontendVisual($current_page, $this);
         }
         
-        public function initializeMetaData() {
-            $this->_metadata_provider->getMetaData($this);
-        }
-        
-        public function updateMetaData() {
-            $this->_metadata_provider->updateMetaData($this);
-        }
-
-        public function getRequestHandler() {
+        public function getRequestHandler(): HttpRequestHandler {
             return new ArticleOverviewElementRequestHandler($this);
         }
 
-        public function getSummaryText() {
+        public function getSummaryText(): string {
             $summary_text = $this->getTitle();
             if ($this->getTerms()) {
                 $summary_text .= " (Termen:";
@@ -143,45 +135,32 @@
 
     }
     
-    class ArticleOverviewElementMetaDataProvider {
+    class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider {
 
-        private $_article_dao;
-        private $_element;
+        private ArticleDao $_article_dao;
+        private Element $_element;
 
         public function __construct($element) {
+            parent::__construct($element);
             $this->_element = $element;
             $this->_article_dao = ArticleDao::getInstance();
         }
+        
+        public function getTableName(): string {
+            return "article_overview_elements_metadata";
+        }
 
-        public function getMetaData($element) {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
-            $query = "SELECT * FROM article_overview_elements_metadata " . "WHERE element_id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $element->setTitle($row['title']);
-                $element->setShowFrom($row['show_from']);
-                $element->setShowTo($row['show_to']);
-                $element->setOrderBy($row['order_by']);
-                $element->setOrderType($row['order_type']);
-                $element->setNumberOfResults($row['number_of_results']);
-            }
-            
+        public function constructMetaData(array $row, $element): void {
+            $element->setTitle($row['title']);
+            $element->setShowFrom($row['show_from']);
+            $element->setShowTo($row['show_to']);
+            $element->setOrderBy($row['order_by']);
+            $element->setOrderType($row['order_type']);
+            $element->setNumberOfResults($row['number_of_results']);
             $element->setTerms($this->getTerms());
         }
 
-        private function getTerms() {
-            $mysql_database = MysqlConnector::getInstance(); 
-            $query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
-            $result = $mysql_database->executeQuery($query);
-            $terms = array();
-            while ($row = $result->fetch_assoc()) {
-                array_push($terms, $this->_article_dao->getTerm($row['term_id']));
-            }
-            return $terms;
-        }
-
-        public function updateMetaData($element) {
+        public function updateMetaData(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
             
             if ($this->metaDataPersisted($element)) {
@@ -210,11 +189,34 @@
             $this->addTerms();
         }
 
-        private function addTerms() {
+        private function getTerms(): array {
+            $mysql_database = MysqlConnector::getInstance(); 
+            $query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
+            $result = $mysql_database->executeQuery($query);
+            $terms = array();
+            while ($row = $result->fetch_assoc()) {
+                array_push($terms, $this->_article_dao->getTerm($row['term_id']));
+            }
+            return $terms;
+        }
+
+        private function metaDataPersisted(Element $element): bool {
+            $query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
+                    . $element->getId() . " AND e.id = " . $element->getId();
+            $mysql_database = MysqlConnector::getInstance(); 
+            $result = $mysql_database->executeQuery($query);
+            while ($row = $result->fetch_assoc()) {
+                return true;
+            }
+            return false;
+        }
+
+        private function addTerms(): void {
             $existing_terms = $this->getTerms();
             foreach ($existing_terms as $existing_term) {
-                if (!in_array($existing_term, $this->_element->getTerms()))
+                if (!in_array($existing_term, $this->_element->getTerms())) {
                     $this->removeTerm($existing_term);
+                }
             }
             foreach ($this->_element->getTerms() as $term) {
                 if (!in_array($term, $existing_terms)) {
@@ -228,21 +230,13 @@
             }
         }
 
-        private function removeTerm($term) {
+        private function removeTerm(ArticleTerm $term): void {
             $mysql_database = MysqlConnector::getInstance();
             $statement = $mysql_database->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ? AND term_id = ?");
-            $statement->bind_param('ii', $this->_element->getId(), $term->getId());
+            $elementId = $this->_element->getId();
+            $termId = $term->getId();
+            $statement->bind_param('ii', $elementId, $termId);
             $mysql_database->executeStatement($statement);
-        }
-
-        private function metaDataPersisted($element) {
-            $query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
-                    . $element->getId() . " AND e.id = " . $element->getId();
-            $mysql_database = MysqlConnector::getInstance(); 
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc())
-                return true;
-            return false;
         }
         
     }

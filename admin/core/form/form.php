@@ -25,6 +25,14 @@
             }
             return $value;
         }
+        
+        public function getFieldValues(string $field_name): array {
+            $value = null;
+            if (isset($_POST[$field_name])) {
+                $value = $_POST[$field_name];
+            }
+            return $value;
+        }
 
         public function getSelectValue(string $field_name): ?string {
             $value = [];

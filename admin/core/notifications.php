@@ -3,60 +3,39 @@
     
     class Notifications {
         
-        /*
-            Private constructor.
-        */
         private function __construct() {
         }
         
-        /*
-            Sets a success message to the session.
-            
-            @param $message The message to set
-        */
-        public static function setSuccessMessage($message) {
+        public static function setSuccessMessage(string $message): void {
             if (!self::getMessage()) {
                 $_SESSION['success'] = true;
                 self::setMessage($message);
             }
         }
         
-        /*
-            Sets a failed message to the session.
-            
-            @param $message The message to set
-        */
-        public static function setFailedMessage($message) {
+        public static function setFailedMessage(string $message): void {
             if (!self::getMessage()) {
                 $_SESSION['success'] = false;
                 self::setMessage($message);
             }
         }
         
-        /*
-            Returns the message in the session.
-        */
-        public static function getMessage() {
+        public static function getMessage(): ?string {
             if (isset($_SESSION['cms_notification']) && !is_null($_SESSION['cms_notification'])) {
                 return $_SESSION['cms_notification'];
             }
+            return null;
         }
         
-        /*
-            Returns the success value from the session.
-        */
-        public static function getSuccess() {
-            $success = NULL;
+        public static function getSuccess(): ?string {
+            $success = null;
             if (isset($_SESSION['success']) && !is_null($_SESSION['success'])) {
                 $success = $_SESSION['success'];
             }
             return $success;
         }
         
-        /*
-            Clears the notification.
-        */
-        public static function clearMessage() {
+        public static function clearMessage(): void {
             if (isset($_SESSION['cms_notification']) && !is_null($_SESSION['cms_notification'])) {
                 unset($_SESSION['cms_notification']);
             }
@@ -65,7 +44,7 @@
             }
         }
 
-        private static function setMessage($message) {
+        private static function setMessage(string $message): void {
             $_SESSION['cms_notification'] = $message;
         }
     

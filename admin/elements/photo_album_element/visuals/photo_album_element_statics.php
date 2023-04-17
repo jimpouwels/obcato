@@ -6,7 +6,7 @@
 
     class PhotoAlbumElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/photo_album_element/photo_album_element_statics.tpl";
+        private static string $TEMPLATE = "elements/photo_album_element/photo_album_element_statics.tpl";
     
         public function __construct() {
             parent::__construct();

@@ -5,87 +5,87 @@
 
     class Module extends Entity {
 
-        private $_title_text_resource_identifier;
-        private $_icon_url;
-        private $_identifier;
-        private $_popup;
-        private $_enabled;
-        private $_is_system_default;
-        private $_module_group_id;
-        private $_class;
+        private string $_title_text_resource_identifier;
+        private string $_icon_url;
+        private string $_identifier;
+        private bool $_popup;
+        private bool $_enabled;
+        private bool $_is_system_default;
+        private int $_module_group_id;
+        private string $_class;
         
-        public function getTitleTextResourceIdentifier() {
+        public function getTitleTextResourceIdentifier(): string {
             return $this->_title_text_resource_identifier;
         }
         
-        public function setTitleTextResourceIdentifier($title_text_resource_identifier) {
+        public function setTitleTextResourceIdentifier(string $title_text_resource_identifier): void {
             $this->_title_text_resource_identifier = $title_text_resource_identifier;
         }
         
-        public function getClass() {
+        public function getClass(): string {
             return $this->_class;
         }
         
-        public function setClass($class) {
+        public function setClass(string $class): void {
             $this->_class = $class;
         }
         
-        public function getIconUrl() {
+        public function getIconUrl(): string {
             return $this->_icon_url;
         }
         
-        public function setIconUrl($icon_url) {
+        public function setIconUrl(string $icon_url): void {
             $this->_icon_url = $icon_url;
         }
         
-        public function getIdentifier() {
+        public function getIdentifier(): string {
             return $this->_identifier;
         }
         
-        public function setIdentifier($identifier) {
+        public function setIdentifier(string $identifier): void {
             $this->_identifier = $identifier;
         }
         
-        public function isPopUp() {
+        public function isPopUp(): bool {
             return $this->_popup;
         }
         
-        public function setPopUp($pop_up) {
+        public function setPopUp(bool $pop_up): void {
             $this->_popup = $pop_up;
         }
         
-        public function setEnabled($enabled) {
+        public function setEnabled(bool $enabled): void {
             $this->_enabled = $enabled;
         }
         
-        public function isEnabled() {
+        public function isEnabled(): bool {
             return $this->_enabled;
         }
         
-        public function setSystemDefault($system_default) {
+        public function setSystemDefault(bool $system_default): void {
             $this->_is_system_default = $system_default;
         }
     
-        public function isSystemDefault() {
+        public function isSystemDefault(): bool {
             return $this->_is_system_default;
         }
         
-        public function setModuleGroupId($module_group_id) {
+        public function setModuleGroupId(int $module_group_id): void {
             $this->_module_group_id = $module_group_id;
         }
     
-        public function getModuleGroupId() {
+        public function getModuleGroupId(): int {
             return $this->_module_group_id;
         }
         
-        public function getModuleGroup() {
+        public function getModuleGroup(): ModuleGroup {
             include_once CMS_ROOT . "database/dao/module_dao.php";
             $module_dao = ModuleDao::getInstance();
             $module_group = $module_dao->getModule($this->_module_group_id);
             return $module_group;
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Module {
             $module = null;
         
             $class = $record['class'];

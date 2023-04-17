@@ -6,59 +6,59 @@
 
     class ElementType extends Entity {
     
-        private $_name;
-        private $_class_name;
-        private $_domain_object;
-        private $_icon_url;
-        private $_identifier;
-        private $_scope_id;
-        private $_system_default;
+        private string $_name;
+        private string $_class_name;
+        private string $_domain_object;
+        private string $_icon_url;
+        private string $_identifier;
+        private int $_scope_id;
+        private bool $_system_default;
         
-        public function getName() {
+        public function getName(): string {
             return $this->_name;
         }
         
-        public function setName($name) {
+        public function setName(string $name): void {
             $this->_name = $name;
         }
         
-        public function getClassName() {
+        public function getClassName(): string {
             return $this->_class_name;
         }
         
-        public function setClassName($class_name) {
+        public function setClassName(string $class_name): void {
             $this->_class_name = $class_name;
         }
         
-        public function getRootDirectory() {
+        public function getRootDirectory(): string {
             return  "elements/" . $this->_identifier;
         }
         
-        public function getIconUrl() {
+        public function getIconUrl(): string {
             return $this->_icon_url;
         }
         
-        public function setIconUrl($icon_url) {
+        public function setIconUrl(string $icon_url): void {
             $this->_icon_url = $icon_url;
         }
         
-        public function getIdentifier() {
+        public function getIdentifier(): string {
             return $this->_identifier;
         }
         
-        public function setIdentifier($identifier) {
+        public function setIdentifier(string $identifier): void {
             $this->_identifier = $identifier;
         }
         
-        public function getDomainObject() {
+        public function getDomainObject(): string {
             return $this->_domain_object;
         }
         
-        public function setDomainObject($domain_object) {
+        public function setDomainObject(string $domain_object): void {
             $this->_domain_object = $domain_object;
         }
         
-        public function getScope() {
+        public function getScope(): Scope {
             $dao = ScopeDao::getInstance();
             return $dao->getScope($this->_scope_id);
         }

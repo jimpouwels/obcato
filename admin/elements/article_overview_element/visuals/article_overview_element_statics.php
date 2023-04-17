@@ -6,7 +6,7 @@
 
     class ArticleOverviewElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/article_overview_element/article_overview_element_statics.tpl";
+        private static string $TEMPLATE = "elements/article_overview_element/article_overview_element_statics.tpl";
     
         public function __construct() {
             parent::__construct();

@@ -9,11 +9,11 @@
 
     class TextElementEditorVisual extends ElementVisual {
     
-        private static $TEMPLATE = "elements/text_element/text_element_form.tpl";
+        private static string $TEMPLATE = "elements/text_element/text_element_form.tpl";
     
-        private $_text_element;
+        private TextElement $_text_element;
     
-        public function __construct($text_element) {
+        public function __construct(TextElement $text_element) {
             parent::__construct();
             $this->_text_element = $text_element;
         }
@@ -22,7 +22,7 @@
             return $this->_text_element;
         }
         
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField('element_' . $this->_text_element->getId() . '_title', 'Titel', $this->_text_element->getTitle(), false, true, null);
             $text_field = new TextArea('element_' . $this->_text_element->getId() . '_text', 'Tekst', $this->_text_element->getText(), false, true, null);
             

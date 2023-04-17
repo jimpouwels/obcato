@@ -5,7 +5,7 @@
 
     class ImageElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/image_element/image_element_statics.tpl";
+        private static string $TEMPLATE = "elements/image_element/image_element_statics.tpl";
     
         public function __construct() {
             parent::__construct();

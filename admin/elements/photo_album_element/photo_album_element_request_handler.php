@@ -10,22 +10,22 @@
 
     class PhotoAlbumElementRequestHandler extends HttpRequestHandler {
 
-        private $_photo_album_element;
-        private $_element_dao;
-        private $_image_dao;
-        private $_photo_album_element_form;
+        private PhotoAlbumElement $_photo_album_element;
+        private ElementDao $_element_dao;
+        private ImageDao $_image_dao;
+        private PhotoAlbumElementForm $_photo_album_element_form;
 
-        public function __construct($photo_album_element) {
+        public function __construct(PhotoAlbumElement $photo_album_element) {
             $this->_photo_album_element = $photo_album_element;
             $this->_element_dao = ElementDao::getInstance();
             $this->_image_dao = ImageDao::getInstance();
             $this->_photo_album_element_form = new PhotoAlbumElementForm($photo_album_element);
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             try {
                 $this->_photo_album_element_form->loadFields();
                 $this->removeSelectedLabels();
@@ -36,7 +36,7 @@
             }
         }
 
-        private function addSelectedLabels() {
+        private function addSelectedLabels(): void {
             $selected_labels = $this->_photo_album_element_form->getSelectedLabels();
             if ($selected_labels) {
                 foreach ($selected_labels as $selected_label_id) {
@@ -46,9 +46,10 @@
             }
         }
 
-        private function removeSelectedLabels() {
-            foreach ($this->_photo_album_element_form->getLabelsToRemove() as $label)
+        private function removeSelectedLabels(): void {
+            foreach ($this->_photo_album_element_form->getLabelsToRemove() as $label) {
                 $this->_photo_album_element->removeLabel($label);
+            }
         }
     }
 ?>

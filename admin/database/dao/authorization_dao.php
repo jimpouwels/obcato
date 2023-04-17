@@ -7,9 +7,9 @@
 
     class AuthorizationDao {
 
-        private $_mysql_connector;
+        private MysqlConnector $_mysql_connector;
 
-        private static $instance;
+        private static ?AuthorizationDao $instance = null;
 
         private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
@@ -22,7 +22,7 @@
             return self::$instance;
         }
 
-        public function getUser($username): ?User {
+        public function getUser(string $username): ?User {
             $query = "SELECT * FROM auth_users WHERE username = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("s", $username);
@@ -33,7 +33,7 @@
             return null;
         }
 
-        public function getUserById($id): ?User {
+        public function getUserById(int $id): ?User {
             $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM auth_users WHERE id = ?");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
@@ -52,7 +52,7 @@
             return $users;
         }
 
-        public function updateUser($user): void {
+        public function updateUser(User $user): void {
             $query = "UPDATE auth_users SET username = '" . $user->getUsername() . "', 
                                   first_name = '" . $user->getFirstName() . "', 
                                   last_name = '" . $user->getLastName() . "',
@@ -68,7 +68,7 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function deleteUser($user_id): void {
+        public function deleteUser(int $user_id): void {
             $statement = $this->_mysql_connector->prepareStatement("DELETE FROM auth_users WHERE id = ?");
             $statement->bind_param("i", $user_id);
             $this->_mysql_connector->executeStatement($statement);
@@ -83,7 +83,7 @@
             return $new_user;
         }
 
-        private function persistUser($user): string {
+        private function persistUser(User $user): string {
             $query = "INSERT INTO auth_users (username, password, email_address, first_name, last_name, prefix,
                       created_at, uuid) VALUES ('" . $user->getUsername() . "', '" . StringUtility::hashStringValue('123456') . 
                       "', NULL, '" . $user->getFirstName() . "', '" . $user->getLastName() . "', NULL, now(), '" . $user->getUuid() . "')";

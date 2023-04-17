@@ -8,78 +8,78 @@
 
     class ElementHolder extends Presentable {
         
-        private $_element_holder_dao;
-        private $_title;
-        private $_published;
-        private $_include_in_search_engine;
-        private $_created_at;
-        private $_created_by_id;
-        private $_type;
+        private ElementHolderDao $_element_holder_dao;
+        private string $_title;
+        private bool $_published;
+        private bool $_include_in_search_engine;
+        private string $_created_at;
+        private int $_created_by_id;
+        private string $_type;
         
         public function __construct() {
             $this->_element_holder_dao = ElementHolderDao::getInstance();
         }
         
-        public function isPublished() {
+        public function isPublished(): bool {
             return $this->_published;
         }
         
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->_title;
         }
         
-        public function setTitle($title) {
+        public function setTitle(string $title): void {
             $this->_title = $title;
         }
         
-        public function setPublished($published) {
+        public function setPublished(bool $published): void {
             $this->_published = $published;
         }
         
-        public function getIncludeInSearchEngine() {
+        public function getIncludeInSearchEngine(): bool {
             return $this->_include_in_search_engine;
         }
         
-        public function setIncludeInSearchEngine($include_in_search_engine) {
+        public function setIncludeInSearchEngine(bool $include_in_search_engine): void {
             $this->_include_in_search_engine = $include_in_search_engine;
         }
         
-        public function getElements() {
+        public function getElements(): array {
             $dao = ElementDao::getInstance();
             return $dao->getElements($this);
         }
         
-        public function getCreatedAt() {
+        public function getCreatedAt(): string {
             return $this->_created_at;
         }
         
-        public function setCreatedAt($created_at) {
+        public function setCreatedAt(string $created_at): void {
             $this->_created_at = $created_at;
         }
         
-        public function getCreatedBy() {
+        public function getCreatedBy(): User {
             $authorization_dao = AuthorizationDao::getInstance();
             return $authorization_dao->getUserById($this->_created_by_id);
         }
         
-        public function setCreatedById($created_by_id) {
+        public function setCreatedById(int $created_by_id): void {
             $this->_created_by_id = $created_by_id;
         }
         
-        public function getType() {
+        public function getType(): string {
             return $this->_type;
         }
         
-        public function setType($type) {
+        public function setType(string $type): void {
             $this->_type = $type;
         }
         
-        public function getLinks() {
+        public function getLinks(): array {
             $link_dao = LinkDao::getInstance();
             return $link_dao->getLinksForElementHolder($this->getId());
         }
         
-        public function getElementStatics() {
+        public function getElementStatics(): array {
             $element_statics = array();
             foreach ($this->getElements() as $element) {
                 $key = $element->getType()->getName();
@@ -93,15 +93,15 @@
             return $element_statics;
         }
         
-        public function update() {
+        public function update(): void {
             $this->_element_holder_dao->update($this);
         }
         
-        public function delete() {
+        public function delete(): void {
             $this->_element_holder_dao->delete($this);
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): ElementHolder {
             $element_holder = new ElementHolder();
             $element_holder->setId($record['id']);
             $element_holder->setPublished($record['published'] == 1 ? true : false);

@@ -5,63 +5,63 @@
 
     class Download extends Entity {
 
-        private $_authorization_dao;
-        private $_title;
-        private $_file_name;
-        private $_published;
-        private $_created_at;
-        private $_created_by_id;
+        private AuthorizationDao $_authorization_dao;
+        private string $_title;
+        private string $_file_name;
+        private bool $_published;
+        private string $_created_at;
+        private int $_created_by_id;
 
         public function __construct() {
             $this->_authorization_dao = AuthorizationDao::getInstance();
         }
 
-        public function setTitle($title) {
+        public function setTitle(string $title): void {
             $this->_title = $title;
         }
 
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->_title;
         }
 
-        public function setFileName($filename) {
+        public function setFileName(string $filename): void {
             $this->_file_name = $filename;
         }
 
-        public function getFileName() {
+        public function getFileName(): string {
             return $this->_file_name;
         }
 
-        public function isPublished() {
+        public function isPublished(): bool {
             return $this->_published;
         }
 
-        public function setPublished($published) {
+        public function setPublished(bool $published): void {
             $this->_published = $published;
         }
 
-        public function getCreatedAt() {
+        public function getCreatedAt(): string {
             return $this->_created_at;
         }
 
-        public function setCreatedAt($created_at) {
+        public function setCreatedAt(string $created_at): void {
             $this->_created_at = $created_at;
         }
 
-        public function getCreatedBy() {
+        public function getCreatedBy(): User {
             return $this->_authorization_dao->getUserById($this->_created_by_id);
         }
 
-        public function setCreatedById($created_by_id) {
+        public function setCreatedById(int $created_by_id): void {
             $this->_created_by_id = $created_by_id;
         }
 
-        public function getExtension() {
+        public function getExtension(): string {
             $parts = explode(".", $this->getFileName());
             return $parts[count($parts) - 1];
         }
 
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Download {
             $download = new Download();
             $download->setId($record['id']);
             $download->setTitle($record['title']);

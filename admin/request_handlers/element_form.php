@@ -5,9 +5,9 @@
     
     abstract class ElementForm extends Form {
 
-        private $_element;
+        private Element $_element;
 
-        public function __construct($element) {
+        public function __construct(Element $element) {
             $this->_element = $element;
         }
 

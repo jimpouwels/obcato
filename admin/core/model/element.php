@@ -7,24 +7,29 @@
 
     abstract class Element extends Presentable {
 
-        private $_index;
-        private $_title;
-        private $_element_holder_id;
-        private $_include_in_table_of_contents;
+        private int $_index;
+        private string $_title;
+        private int $_element_holder_id;
+        private bool $_include_in_table_of_contents;
+        private ElementMetadataProvider $_metadata_provider;
 
-        public function setIndex($index) {
+        public function __construct(ElementMetadataProvider $metadata_provider) {
+            $this->_metadata_provider = $metadata_provider;
+        }
+
+        public function setIndex(int $index): void {
             $this->_index = $index;
         }
 
-        public function getIndex() {
+        public function getIndex(): int {
             return $this->_index;
         }
 
-        public function setTitle($title): void {
+        public function setTitle(string $title): void {
             $this->_title = $title;
         }
 
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->_title;
         }
 
@@ -33,7 +38,7 @@
             return $element_dao->getElementTypeForElement($this->getId());
         }
 
-        public function setIncludeInTableOfContents($_include_in_table_of_contents): void {
+        public function setIncludeInTableOfContents(bool $_include_in_table_of_contents): void {
             $this->_include_in_table_of_contents = $_include_in_table_of_contents;
         }
 
@@ -41,25 +46,33 @@
             return $this->_include_in_table_of_contents;
         }
 
-        public function getElementHolderId() {
+        public function getElementHolderId(): int {
             return $this->_element_holder_id;
         }
 
-        public function setElementHolderId($element_holder_id) {
+        public function setElementHolderId(int $element_holder_id): void {
             $this->_element_holder_id = $element_holder_id;
         }
 
-        public function getElementHolder() {
+        public function getElementHolder(): ElementHolder {
             $element_holder_dao = ElementHolderDao::getInstance();
             return $element_holder_dao->getElementHolder($this->_element_holder_id);
         }
 
-        public function delete() {
+        public function delete(): void {
             $element_dao = ElementDao::getInstance();
             $element_dao->deleteElement($this);
         }
 
-        public static function constructFromRecord($record) {
+        public function initializeMetaData(): void {
+            $this->_metadata_provider->loadMetaData();
+        }
+
+        public function updateMetaData(): void {
+            $this->_metadata_provider->updateMetaData($this);
+        }
+
+        public static function constructFromRecord(array $record): Element {
             include_once CMS_ROOT . 'elements/' . $record['identifier'] . '/' . $record['domain_object'];
 
             // first get the element type
@@ -79,18 +92,18 @@
 
             return $element;
         }
+
+        protected function getMetaDataProvider(): ElementMetadataProvider {
+            return $this->_metadata_provider;
+        }
+
+        public abstract function getStatics(): Visual;
         
-        public abstract function getStatics();
+        public abstract function getBackendVisual(): ElementVisual;
         
-        public abstract function getBackendVisual();
+        public abstract function getFrontendVisual(Page $current_page): FrontendVisual;
         
-        public abstract function getFrontendVisual($current_page);
+        public abstract function getRequestHandler(): HttpRequestHandler;
         
-        public abstract function getRequestHandler();
-        
-        public abstract function initializeMetaData();
-        
-        public abstract function updateMetaData();
-        
-        public abstract function getSummaryText();
+        public abstract function getSummaryText(): string;
     }

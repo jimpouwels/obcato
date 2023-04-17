@@ -61,17 +61,17 @@
             
             $tab_item = array();
             $tab_item["text"] = "Configuratie";
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$CONFIGURATION_TAB;
+            $tab_item["id"] = self::$CONFIGURATION_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = "Tabellen";
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TABLES_TAB;
+            $tab_item["id"] = self::$TABLES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = "Query";
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$QUERY_TAB;
+            $tab_item["id"] = self::$QUERY_TAB;
             $tab_items[] = $tab_item;
 
             $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());

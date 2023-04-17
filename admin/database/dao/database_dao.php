@@ -6,10 +6,10 @@
     
     class DatabaseDao {
         
-        private static $instance;
-        private $_mysql_connector;
+        private static ?DatabaseDao $instance = null;
+        private MysqlConnector $_mysql_connector;
 
-        public static function getInstance() {
+        public static function getInstance(): DatabaseDao {
             if (!self::$instance) {
                 self::$instance = new DatabaseDao();
             }
@@ -20,7 +20,7 @@
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
         
-        public function getTables() {
+        public function getTables(): array {
             $query = "SHOW TABLES";
             $result = $this->_mysql_connector->executeQuery($query);
             
@@ -34,7 +34,7 @@
             return $tables;
         }
         
-        public function getColumns($table_name) {
+        public function getColumns(string $table_name): array {
             $query = 'SHOW columns FROM ' . $table_name;
             $result = $this->_mysql_connector->executeQuery($query);
             

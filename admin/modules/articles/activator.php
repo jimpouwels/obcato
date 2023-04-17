@@ -116,17 +116,17 @@
             
             $tab_item = array();
             $tab_item["text"] = $this->getTextResource("articles_tab_articles");
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$ARTICLES_TAB;
+            $tab_item["id"] = self::$ARTICLES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = $this->getTextResource("articles_tab_terms");
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TERMS_TAB;
+            $tab_item["id"] = self::$TERMS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = $this->getTextResource("articles_tab_target_pages");
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$TARGET_PAGES_TAB;
+            $tab_item["id"] = self::$TARGET_PAGES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());

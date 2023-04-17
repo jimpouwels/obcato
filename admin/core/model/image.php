@@ -6,14 +6,14 @@
 
     class Image extends Entity {
     
-        private $_title;
-        private $_file_name;
-        private $_thumbnail_file_name;
-        private $_published;
-        private $_created_at;
-        private $_created_by_id;
+        private string $_title;
+        private string $_file_name;
+        private string $_thumbnail_file_name;
+        private bool $_published;
+        private string $_created_at;
+        private int $_created_by_id;
         
-        public function setTitle($title) {
+        public function setTitle(string $title): void {
             $this->_title = $title;
         }
         
@@ -33,51 +33,51 @@
             $this->_thumbnail_file_name = $thumb_filename;
         }
         
-        public function getThumbUrl() {
+        public function getThumbUrl(): string {
             $id = $this->getId();
             return "/admin/upload.php?image=$id&amp;thumb=true";
         }
         
-        public function getUrl() {
+        public function getUrl(): string {
             $id = $this->getId();
             return "/admin/upload.php?image=$id";
         }
         
-        public function getThumbFileName() {
+        public function getThumbFileName(): string {
             return $this->_thumbnail_file_name;
         }
         
-        public function isPublished() {
+        public function isPublished(): bool {
             return $this->_published;
         }
         
-        public function setPublished($published) {
+        public function setPublished(bool $published): void {
             $this->_published = $published;
         }
         
-        public function getCreatedAt() {
+        public function getCreatedAt(): string {
             return $this->_created_at;
         }
         
-        public function setCreatedAt($created_at) {
+        public function setCreatedAt(string $created_at): void {
             $this->_created_at = $created_at;
         }
         
-        public function getCreatedBy() {
+        public function getCreatedBy(): User {
             $authorization_dao = AuthorizationDao::getInstance();
             return $authorization_dao->getUserById($this->_created_by_id);
         }
         
-        public function setCreatedById($created_by_id) {
+        public function setCreatedById(int $created_by_id): void {
             $this->_created_by_id = $created_by_id;
         }
 
-        public function getExtension() {
+        public function getExtension(): string {
             $parts = explode(".", $this->getFileName());
             return $parts[count($parts) - 1];
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Image {
             $image = new Image();
             $image->setId($record['id']);
             $image->setTitle($record['title']);

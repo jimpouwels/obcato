@@ -5,26 +5,26 @@
     
     class ModuleGroup extends Entity {
     
-        private $_identifier;
-        private $_element_group;
+        private string $_identifier;
+        private int $_element_group;
         
-        public function getIdentifier() {
+        public function getIdentifier(): string {
             return $this->_identifier;
         }
         
-        public function setIdentifier($identifier) {
+        public function setIdentifier(string $identifier): void {
             $this->_identifier = $identifier;
         }
         
-        public function isElementGroup() {
+        public function isElementGroup(): bool {
             return $this->_element_group;
         }
         
-        public function setElementGroup($element_group) {
+        public function setElementGroup(int $element_group): void {
             $this->_element_group = $element_group;
         }
                 
-        public function getModules() {
+        public function getModules(): array {
             $mysql_database = MysqlConnector::getInstance(); 
             
             $query = "SELECT * FROM modules WHERE module_group_id = " . $this->getId();
@@ -40,7 +40,7 @@
             return $modules;
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): ModuleGroup {
             $module_group = new ModuleGroup();
             $module_group->setId($record['id']);
             $module_group->setIdentifier($record['identifier']);

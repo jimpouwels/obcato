@@ -7,10 +7,10 @@
 
     class ImageElementEditorVisual extends ElementVisual {
 
-        private static $TEMPLATE = "elements/image_element/image_element_form.tpl";
-        private $_image_element;
+        private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
+        private ImageElement $_image_element;
 
-        public function __construct($image_element) {
+        public function __construct(ImageElement $image_element) {
             parent::__construct();
             $this->_image_element = $image_element;
         }
@@ -19,14 +19,14 @@
             return $this->_image_element;
         }
 
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField($this->createFieldId("title"), "Titel", htmlentities($this->_image_element->getTitle()), false, false, null);
             $alternative_text_field = new TextField($this->createFieldId("alternative_text"), "Alternatieve tekst", $this->_image_element->getAlternativeText(), false, true, null);
             $image_picker = new ImagePicker("Afbeelding", $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "Selecteer afbeelding", "update_element_holder", "");
             $width_field = new TextField($this->createFieldId("width"), "Breedte", $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), "Hoogte", $this->_image_element->getHeight(), false, false, "size_field");
 
-            $this->getTemplateEngine()->assign("alignment_field", $this->getAlignmentField());
+            $this->getTemplateEngine()->assign("alignment_field", $this->renderAlignmentField());
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
             $this->getTemplateEngine()->assign("alternative_text_field", $alternative_text_field->render());
             $this->getTemplateEngine()->assign("width_field", $width_field->render());
@@ -37,7 +37,7 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function getAlignmentField() {
+        private function renderAlignmentField(): string {
             $alignment_options = array();
             array_push($alignment_options, array("name" => "Links", "value" => "left"));
             array_push($alignment_options, array("name" => "Rechts", "value" => "right"));
@@ -47,7 +47,7 @@
             return $alignment_field->render();
         }
 
-        private function getSelectedImageTitle() {
+        private function getSelectedImageTitle(): string {
             $selected_image_title = "";
             $selected_image = $this->_image_element->getImage();
             if (!is_null($selected_image)) {
@@ -56,7 +56,7 @@
             return $selected_image_title;
         }
 
-        private function createFieldId($property_name) {
+        private function createFieldId($property_name): string {
             return "element_" . $this->_image_element->getId() . "_" . $property_name;
         }
 

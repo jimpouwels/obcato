@@ -6,7 +6,7 @@
 
     class ListElementForm extends ElementForm {
 
-        private $_list_element;
+        private ListElement $_list_element;
 
         public function __construct($list_element) {
             parent::__construct($list_element);
@@ -19,18 +19,21 @@
             $this->loadListItemsFields();
         }
 
-        public function getListItemsToDelete() {
+        public function getListItemsToDelete(): array {
             $list_items_to_delete = array();
-            foreach ($this->_list_element->getListItems() as $list_item)
-                if (!is_null($this->getFieldValue("listitem_" . $list_item->getId() . "_delete")))
+            foreach ($this->_list_element->getListItems() as $list_item) {
+                if (!is_null($this->getFieldValue("listitem_" . $list_item->getId() . "_delete"))) {
                     $list_items_to_delete[] = $list_item;
+                }
+            }
             return $list_items_to_delete;
         }
 
-        private function loadListItemsFields()
+        private function loadListItemsFields(): void
         {
-            foreach ($this->_list_element->getListItems() as $list_item)
+            foreach ($this->_list_element->getListItems() as $list_item) {
                 $list_item->setText($this->getFieldValue("listitem_" . $list_item->getId() . "_text"));
+            }
         }
 
     }

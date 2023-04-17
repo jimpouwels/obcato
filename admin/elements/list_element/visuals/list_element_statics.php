@@ -6,7 +6,7 @@
 
     class ListElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/list_element/list_element_statics.tpl";
+        private static string $TEMPLATE = "elements/list_element/list_element_statics.tpl";
     
         public function __construct() {
             parent::__construct();

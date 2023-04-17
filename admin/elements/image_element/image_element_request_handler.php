@@ -9,21 +9,20 @@
 
     class ImageElementRequestHandler extends HttpRequestHandler {
 
-        private $_image_element;
-        private $_image_element_form;
-        private $_element_dao;
+        private ImageElement $_image_element;
+        private ImageElementForm $_image_element_form;
+        private ElementDao $_element_dao;
 
-        public function __construct($image_element) {
+        public function __construct(ImageElement $image_element) {
             $this->_image_element = $image_element;
             $this->_image_element_form = new ImageElementForm($this->_image_element);
             $this->_element_dao = ElementDao::getInstance();
         }
 
-        public function handleGet() {
-
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             try {
                 $this->_image_element_form->loadFields();
                 $this->_element_dao->updateElement($this->_image_element);

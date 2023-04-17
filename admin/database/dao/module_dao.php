@@ -9,21 +9,21 @@
 
     class ModuleDao {
 
-        private static $instance;
-        private $_mysql_connector;
+        private static ?ModuleDao $instance = null;
+        private MysqlConnector $_mysql_connector;
 
         private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
         
-        public static function getInstance() {
+        public static function getInstance(): ModuleDao {
             if (!self::$instance) {
                 self::$instance = new ModuleDao();
             }
             return self::$instance;
         }
 
-        public function getAllModules() {
+        public function getAllModules(): array {
             $query = "SELECT * FROM modules ORDER BY identifier";
             $result = $this->_mysql_connector->executeQuery($query);
             $modules = array();
@@ -34,7 +34,7 @@
             return $modules;
         }
 
-        public function getModule($id): ?Module {
+        public function getModule(int $id): ?Module {
             $query = "SELECT * FROM modules WHERE id = " . $id;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
@@ -43,13 +43,13 @@
             return null;
         }
 
-        public function removeModule($identifier) {
+        public function removeModule(string $identifier): void {
             $statement = $this->_mysql_connector->prepareStatement('DELETE FROM modules WHERE identifier = ?');
             $statement->bind_param('s', $identifier);
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function persistModule($module) {
+        public function persistModule(Module $module): void {
             $query = 'INSERT INTO modules (title_text_resource_identifier, icon_url, module_group_id, popup, identifier, enabled, system_default, class)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             $statement = $this->_mysql_connector->prepareStatement($query);
@@ -65,7 +65,7 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function updateModule($module) {
+        public function updateModule(Module $module): void {
             $query = 'UPDATE modules set title_text_resource_identifier = ?, icon_url = ?, module_group_id = ?, popup = ?, class = ? WHERE identifier = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);
             $title_text_resource_identifier = $module->getTitleTextResourceIdentifier();
@@ -78,28 +78,33 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function getModuleByIdentifier($identifier) {
+        public function getModuleByIdentifier(string $identifier): ?Module {
             $query = "SELECT * FROM modules WHERE identifier = '" . $identifier . "'";
             $result = $this->_mysql_connector->executeQuery($query);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Module::constructFromRecord($row);
+            }
+            return null;
         }
 
-        public function getModuleGroups() {
+        public function getModuleGroups(): array {
             $query = "SELECT * FROM module_groups ORDER BY follow_up";
             $result = $this->_mysql_connector->executeQuery($query);
             $groups = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $groups[] = ModuleGroup::constructFromRecord($row);
+            }
             return $groups;
         }
 
-        public function getModuleGroupByIdentifier($identifier) {
+        public function getModuleGroupByIdentifier(string $identifier): ?ModuleGroup {
             $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE identifier = ?');
             $statement->bind_param('s', $identifier);
             $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return ModuleGroup::constructFromRecord($row);
+            }
+            return null;
         }
         
     }

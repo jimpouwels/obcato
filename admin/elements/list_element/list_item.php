@@ -1,42 +1,41 @@
 <?php
-
     
     defined('_ACCESS') or die;
 
     include_once CMS_ROOT . "core/model/entity.php";
+    include_once CMS_ROOT . "database/dao/element_dao.php";
 
     class ListItem extends Entity {
             
-        private $_text;
-        private $_indent;
-        private $_elementId;
+        private string  $_text;
+        private int $_indent;
+        private int $_elementId;
         
-        public function setText($text) {
+        public function setText(string $text): void {
             $this->_text = $text;
         }
         
-        public function getText() {
+        public function getText(): string {
             return $this->_text;
         }
         
-        public function setIndent($indent) {
+        public function setIndent(int $indent): void {
             $this->_indent = $indent;
         }
         
-        public function getIndent() {
+        public function getIndent(): int {
             return $this->_indent;
         }
         
-        public function getElementId() {
+        public function getElementId(): int {
             return $this->_elementId;
         }
         
-        public function setElementId($element_id) {
+        public function setElementId(int $element_id): void {
             $this->_elementId = $element_id;
         }
         
         public function getElement(): Element {
-            include_once CMS_ROOT . "dao/element_dao.php";
             $element_dao = ElementDao::getInstance();
             return $element_dao->getElement($this->_elementId);
         }

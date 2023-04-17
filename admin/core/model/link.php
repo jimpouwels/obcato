@@ -9,52 +9,52 @@
         const INTERNAL = "INTERNAL";
         const EXTERNAL = "EXTERNAL";
     
-        private $_title;
-        private $_url;
-        private $_type;
-        private $_code;
-        private $_targetElementHolderId;
-        private $_parentElementHolderId;
-        private $_target;
-        private $_element_holder_dao;
+        private string $_title;
+        private string $_url;
+        private string $_type;
+        private string $_code;
+        private ?int $_targetElementHolderId;
+        private int $_parentElementHolderId;
+        private string $_target;
+        private ElementHolderDao $_element_holder_dao;
 
         public function __construct() {
             $this->_element_holder_dao = ElementHolderDao::getInstance();
         }
 
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->_title;
         }
         
-        public function setTitle($title) {
+        public function setTitle(string $title): void {
             $this->_title = $title;
         }
         
-        public function getTargetAddress() {
+        public function getTargetAddress(): string {
             return $this->_url;
         }
         
-        public function setTargetAddress($url) {
+        public function setTargetAddress(string $url): void {
             $this->_url = $url;
         }
         
-        public function getType() {
+        public function getType(): string {
             return $this->_type;
         }
         
-        public function setType($type) {
+        public function setType(string $type): void {
             $this->_type = $type;
         }
         
-        public function getTargetElementHolder() {
-            $element_holder = NULL;
+        public function getTargetElementHolder(): ?ElementHolder {
+            $element_holder = null;
             if (!is_null($this->_targetElementHolderId) && $this->_targetElementHolderId != '') {
                 $element_holder = $this->getElementHolder($this->_targetElementHolderId);
             }
             return $element_holder;
         }
         
-        public function getParentElementHolder() {
+        public function getParentElementHolder(): ElementHolder {
             $element_holder = NULL;
             if (!is_null($this->_parentElementHolderId) && $this->_parentElementHolderId != '') {
                 $element_holder = $this->getElementHolder($this->_parentElementHolderId);
@@ -62,43 +62,43 @@
             return $element_holder;
         }
         
-        public function getTargetElementHolderId() {
+        public function getTargetElementHolderId(): ?int {
             return $this->_targetElementHolderId;
         }
         
-        public function setTargetElementHolderId($target_element_holder_id) {
+        public function setTargetElementHolderId(?int $target_element_holder_id): void {
             $this->_targetElementHolderId = $target_element_holder_id;
         }
         
-        public function getParentElementHolderId() {
+        public function getParentElementHolderId(): int {
             return $this->_parentElementHolderId;
         }
         
-        public function setParentElementHolderId($parent_element_holder_id) {
+        public function setParentElementHolderId(int $parent_element_holder_id): void {
             $this->_parentElementHolderId = $parent_element_holder_id;
         }
         
-        public function getCode() {
+        public function getCode(): string {
             return $this->_code;
         }
         
-        public function setCode($code) {
+        public function setCode(string $code): void {
             $this->_code = $code;
         }
 
-        public function getTarget() {
+        public function getTarget(): string {
             return $this->_target;
         }
 
-        public function setTarget($target) {
+        public function setTarget(string $target): void {
             $this->_target = $target;
         }
         
-        private function getElementHolder($element_holder_id) {
+        private function getElementHolder(int $element_holder_id): ElementHolder {
             return $this->_element_holder_dao->getElementHolder($element_holder_id);
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Link {
             $link = new Link();
             $link->setId($record['id']);
             $link->setTitle($record['title']);

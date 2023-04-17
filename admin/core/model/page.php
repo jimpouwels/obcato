@@ -9,15 +9,15 @@
 
         const ElementHolderType = "ELEMENT_HOLDER_PAGE";
 
-        private static $TABLE_NAME = "pages";
+        private static string $TABLE_NAME = "pages";
         
-        private $_page_dao;
-        private $_description;
-        private $_navigation_title;
-        private $_parent_id;
-        private $_show_in_navigation;
-        private $_followup;
-        private $_is_homepage;
+        private PageDao $_page_dao;
+        private string $_description;
+        private string $_navigation_title;
+        private ?int $_parent_id;
+        private bool $_show_in_navigation;
+        private int $_followup;
+        private bool $_is_homepage;
         
         public function __construct() {
             parent::__construct();
@@ -25,23 +25,23 @@
             $this->_page_dao = PageDao::getInstance();
         }
         
-        public function getDescription() {
+        public function getDescription(): string {
             return $this->_description;
         }
         
-        public function setDescription($description) {
+        public function setDescription(string $description): void {
             $this->_description = $description;
         }
         
-        public function getNavigationTitle() {
+        public function getNavigationTitle(): string {
             return $this->_navigation_title;
         }
         
-        public function setNavigationTitle($navigation_title) {
+        public function setNavigationTitle(string $navigation_title): void {
             $this->_navigation_title = $navigation_title;
         }
         
-        public function getParent() {
+        public function getParent(): ?Page {
             $parent = null;
             if (!is_null($this->_parent_id)) {
                 $parent = $this->_page_dao->getPage($this->_parent_id);
@@ -49,82 +49,53 @@
             return $parent;
         }
         
-        public function setParentId($parent_id) {
+        public function setParentId(?int $parent_id): void {
             $this->_parent_id = $parent_id;    
         }
         
-        public function getParentId() {
+        public function getParentId(): int {
             return $this->_parent_id;
         }
         
-        public function setParent($parent) {
+        public function setParent(Page $parent): void {
             if (!is_null($parent)) {
                 $this->_parent_id = $parent->getId();
             }
         }
         
-        public function getShowInNavigation() {
+        public function getShowInNavigation(): bool {
             return $this->_show_in_navigation;
         }
         
-        public function setShowInNavigation($show_in_navigation) {
+        public function setShowInNavigation(bool $show_in_navigation): void {
             $this->_show_in_navigation = $show_in_navigation;
         }
         
-        public function setFollowUp($follow_up) {
+        public function setFollowUp(int $follow_up): void {
             $this->_followup = $follow_up;
         }
         
-        public function getFollowup() {
+        public function getFollowup(): int {
             return $this->_followup;
         }
         
-        public function setIsHomepage($is_homepage) {
+        public function setIsHomepage(bool $is_homepage): void {
             $this->_is_homepage = $is_homepage;
         }
         
-        public function isHomepage() {
+        public function isHomepage(): bool {
             return $this->_is_homepage;
         }
         
-        public function isLast() {
-            $mysql_database = MysqlConnector::getInstance();
-                        
-            $query = "SELECT element_holder_id FROM " . self::$TABLE_NAME . " WHERE follow_up = (SELECT MAX(follow_up)"
-                     . " FROM " . self::$TABLE_NAME . " WHERE parent_id = " . $this->getParent()->getId() . ") AND"
-                     . " parent_id = " . $this->getParent()->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $id = $row['element_holder_id'];
-                break;
-            }
-            $last = false;
-            if ($this->getId() == $id) {
-                $last = true;
-            }
-            return $last;
+        public function isLast(): bool {
+            return $this->_page_dao->isLast($this);
         }
         
-        public function isFirst() {
-            $mysql_database = MysqlConnector::getInstance();
-                        
-            $query = "SELECT element_holder_id FROM " . self::$TABLE_NAME . " WHERE follow_up = (SELECT MIN(follow_up)"
-                     . " FROM " . self::$TABLE_NAME . " WHERE parent_id = " . $this->getParent()->getId() . ") AND"
-                     . " parent_id = " . $this->getParent()->getId();
-                     
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $id = $row['element_holder_id'];
-                break;
-            }
-            $first = false;
-            if ($this->getId() == $id) {
-                $first = true;
-            }
-            return $first;
+        public function isFirst(): bool {
+            return $this->_page_dao->isFirst($this);
         }
         
-        public function getParents() {
+        public function getParents(): array {
             $parents = array();
             array_unshift($parents, $this);
             $parent = $this->getParent();
@@ -134,39 +105,39 @@
             return $parents;
         }
         
-        public function getSubPages() {
+        public function getSubPages(): array {
             return $this->_page_dao->getSubPages($this);
         }
         
-        public function getBlocks() {
+        public function getBlocks(): array {
             $block_dao = BlockDao::getInstance();
             return $block_dao->getBlocksByPage($this);
         }
         
-        public function getBlocksByPosition($position) {
+        public function getBlocksByPosition($position): array {
             $block_dao = BlockDao::getInstance();
             return $block_dao->getBlocksByPageAndPosition($this, $position);
         }
         
-        public function addBlock($block) {
+        public function addBlock(Block $block): void {
             $block_dao = BlockDao::getInstance();
             $block_dao->addBlockToPage($block->getId(), $this);
         }
         
-        public function deleteBlock($block) {
+        public function deleteBlock(Block $block): void {
             $block_dao = BlockDao::getInstance();
             $block_dao->deleteBlockFromPage($block->getId(), $this);
         }
         
-        public function moveUp() {
+        public function moveUp(): void {
             $this->_page_dao->moveUp($this);
         }
         
-        public function moveDown() {
+        public function moveDown(): void {
             $this->_page_dao->moveDown($this);
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord(array $record): Page {
             $page = new Page();
             $page->setId($record['id']);
             $page->setParentId($record['parent_id']);

@@ -8,10 +8,10 @@
 
     class ArticleOverviewElementEditor extends ElementVisual {
     
-        private static $TEMPLATE = "elements/article_overview_element/article_overview_element_form.tpl";
-        private $_element;
+        private static string $TEMPLATE = "elements/article_overview_element/article_overview_element_form.tpl";
+        private ArticleOverviewElement $_element;
     
-        public function __construct($_element) {
+        public function __construct(ArticleOverviewElement $_element) {
             parent::__construct();
             $this->_element = $_element;
         }
@@ -20,7 +20,7 @@
             return $this->_element;
         }
         
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", "Titel", $this->_element->getTitle(), false, true, null);
             $show_from_field = new DateField("element_" . $this->_element->getId() . "_show_from", "Publicatiedatum vanaf", $this->getDateValue($this->_element->getShowFrom()), false, "datepicker");
             $show_to_field = new DateField("element_" . $this->_element->getId() . "_show_to", "Publicatiedatum tot", $this->getDateValue($this->_element->getShowTo()), false, "datepicker");
@@ -40,12 +40,12 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
-        private function getDateValue($date) {            
+        private function getDateValue(string $date): string {            
             $date_value = ($date == null) ? null : DateUtility::mysqlDateToString($date, '-');
             return $date_value;
         }
         
-        private function getOrderOptions() {
+        private function getOrderOptions(): array {
             $order_options = array();
             array_push($order_options, array('name' => 'Publicatiedatum', 'value' => 'PublicationDate'));
             array_push($order_options, array('name' => 'Sorteerdatum', 'value' => 'SortDate'));
@@ -53,7 +53,7 @@
             return $order_options;
         }
 
-        private function getOrderTypeOptions() {
+        private function getOrderTypeOptions(): array {
             $order_options = array();
             array_push($order_options, array('name' => 'Oplopend', 'value' => 'asc'));
             array_push($order_options, array('name' => 'Aflopend', 'value' => 'desc'));

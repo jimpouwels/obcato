@@ -76,12 +76,12 @@
             
             $tab_item = array();
             $tab_item["text"] = "Componenten";
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$COMPONENTS_TAB;
+            $tab_item["id"] = self::$COMPONENTS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = "Installeren";
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$INSTALLATION_TAB;
+            $tab_item["id"] = self::$INSTALLATION_TAB;
             $tab_items[] = $tab_item;
 
             $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());

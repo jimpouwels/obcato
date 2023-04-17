@@ -7,20 +7,21 @@
 
     class SettingsDao {
 
-        private static $instance;
-        private $_mysql_database;
+        private static ?SettingsDao $instance = null;
+        private MysqlConnector $_mysql_database;
 
         private function __construct() {
             $this->_mysql_database = MysqlConnector::getInstance();
         }
 
-        public static function getInstance() {
-            if (!self::$instance)
+        public static function getInstance(): SettingsDao {
+            if (!self::$instance) {
                 self::$instance = new SettingsDao();
+            }
             return self::$instance;
         }
 
-        public function update($settings) {
+        public function update(Settings $settings): void {
             $mysql_database = MysqlConnector::getInstance();
             $query = "UPDATE settings SET website_title = '" . $settings->getWebsiteTitle() . "', backend_hostname = '" .
                      $settings->getBackEndHostname() . "', frontend_hostname = '" . $settings->getFrontEndHostname() . "',
@@ -33,7 +34,7 @@
             $mysql_database->executeQuery($query);
         }
         
-        public function insert($settings) {
+        public function insert(Settings $settings): void {
             $mysql_database = MysqlConnector::getInstance();
             $query = "INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host 
                     , email_address, frontend_template_dir, config_dir, static_files_dir, upload_dir
@@ -45,13 +46,15 @@
             $mysql_database->executeQuery($query);
         }
 
-        public function getSettings() {
+        public function getSettings(): ?Settings {
             $result = $this->_mysql_database->executeQuery("SELECT * FROM settings");
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 return Settings::constructFromRecord($row);
+            }
+            return null;
         }
 
-        public function setHomepage($homepage_id) {
+        public function setHomepage(int $homepage_id): void {
             $this->_mysql_database = MysqlConnector::getInstance();
             $query1 = "UPDATE pages SET is_homepage = 0";
             $query2 = "UPDATE pages SET is_homepage = 1 WHERE element_holder_id = $homepage_id";

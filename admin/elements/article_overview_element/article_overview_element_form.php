@@ -7,9 +7,9 @@
 
     class ArticleOverviewElementForm extends ElementForm {
 
-        private $_article_overview_element;
-        private $_selected_terms;
-        private $_removed_terms;
+        private ArticleOverviewElement $_article_overview_element;
+        private array $_selected_terms;
+        private array $_removed_terms;
 
         public function __construct($article_overview_element) {
             parent::__construct($article_overview_element);
@@ -36,24 +36,25 @@
                 $this->_article_overview_element->setOrderType($order_type);
             }
 
-            $this->_selected_terms = $this->getFieldValue('select_terms_' . $this->_article_overview_element->getId());
+            $this->_selected_terms = $this->getFieldValues('select_terms_' . $this->_article_overview_element->getId());
             $this->_removed_terms = $this->getTermsToDeleteFromPostRequest();
         }
 
-        public function getSelectedTerms() {
+        public function getSelectedTerms(): array {
             return $this->_selected_terms;
         }
 
-        public function getTermsToRemove() {
+        public function getTermsToRemove(): array {
             return $this->_removed_terms;
         }
 
-        private function getTermsToDeleteFromPostRequest() {
+        private function getTermsToDeleteFromPostRequest(): array {
             $terms_to_remove = array();
             $element_terms = $this->_article_overview_element->getTerms();
             foreach ($element_terms as $element_term) {
-                if (isset($_POST['term_' . $this->_article_overview_element->getId() . '_' . $element_term->getId() . '_delete']))
+                if (isset($_POST['term_' . $this->_article_overview_element->getId() . '_' . $element_term->getId() . '_delete'])) {
                     $terms_to_remove[] = $element_term;
+                }
             }
             return $terms_to_remove;
         }

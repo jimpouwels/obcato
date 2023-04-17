@@ -6,50 +6,56 @@
 
     class ScopeDao {
 
-        private static $instance;
-        private $_mysql_connector;
+        private static ?ScopeDao $instance = null;
+        private MysqlConnector $_mysql_connector;
 
         private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public static function getInstance() {
-            if (!self::$instance)
+        public static function getInstance(): ScopeDao {
+            if (!self::$instance) {
                 self::$instance = new ScopeDao();
+            }
             return self::$instance;
         }
 
-        public function getScopes() {
+        public function getScopes(): array {
             $query = "SELECT * FROM scopes";
             $result = $this->_mysql_connector->executeQuery($query);
             $scope = null;
             $scopes = array();
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()) {
                 $scopes[] = Scope::constructFromRecord($row);
+            }
             return $scopes;
         }
 
-        public function getScope($id) {
+        public function getScope(int $id): ?Scope {
             if (!is_null($id) && $id != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE id = ?");
                 $statement->bind_param("i", $id);
                 $result = $this->_mysql_connector->executeStatement($statement);
-                while ($row = $result->fetch_assoc())
+                while ($row = $result->fetch_assoc()) {
                     return Scope::constructFromRecord($row);
+                }
             }
+            return null;
         }
 
-        public function getScopeByName($name) {
+        public function getScopeByName(string $name): ?Scope {
             if (!is_null($name) && $name != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE name = ?");
                 $statement->bind_param("s", $name);
                 $result = $this->_mysql_connector->executeStatement($statement);
-                while ($row = $result->fetch_assoc())
+                while ($row = $result->fetch_assoc()) {
                     return Scope::constructFromRecord($row);
+                }
             }
+            return null;
         }
 
-        public function persistScope($scope) {
+        public function persistScope(Scope $scope): void {
             $statement = $this->_mysql_connector->prepareStatement("INSERT INTO scopes (name) VALUES (?)");
             $scope_name = $scope->getName();
             $statement->bind_param("s", $scope_name);
@@ -57,7 +63,7 @@
             $scope->setId($this->_mysql_connector->getInsertId());
         }
 
-        public function deleteScope($scope) {
+        public function deleteScope(Scope $scope): void {
             $statement = $this->_mysql_connector->prepareStatement('DELETE FROM scopes WHERE id = ?');
             $scope_id = $scope->getId();
             $statement->bind_param('s', $scope_id);

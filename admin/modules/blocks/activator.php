@@ -93,12 +93,12 @@
             
             $tab_item = array();
             $tab_item["text"] = $this->getTextResource("blocks_tabmenu_blocks");
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$BLOCKS_TAB;
+            $tab_item["id"] = self::$BLOCKS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
             $tab_item["text"] = $this->getTextResource("blocks_tabmenu_positions");
-            $tab_item["url"] = $this->getBackendBaseUrlWithoutTab() . "&module_tab_id=" . self::$POSITIONS_TAB;
+            $tab_item["id"] = self::$POSITIONS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());

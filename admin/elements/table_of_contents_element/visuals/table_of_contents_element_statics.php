@@ -6,7 +6,7 @@
 
     class TableOfContentsElementStatics extends Visual {
     
-        private static $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_statics.tpl";
+        private static string $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_statics.tpl";
         
         public function __construct() {
             parent::__construct();

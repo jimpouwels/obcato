@@ -9,20 +9,20 @@
 
     class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 
-        private $_table_of_contents_element;
-        private $_element_dao;
-        private $_table_of_contents_element_form;
+        private TableOfContentsElement $_table_of_contents_element;
+        private ElementDao $_element_dao;
+        private TableOfContentsElementForm $_table_of_contents_element_form;
 
-        public function __construct($table_of_contents_element) {
+        public function __construct(TableOfContentsElement $table_of_contents_element) {
             $this->_table_of_contents_element = $table_of_contents_element;
             $this->_element_dao = ElementDao::getInstance();
             $this->_table_of_contents_element_form = new TableOfContentsElementForm($this->_table_of_contents_element);
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             try {
                 $this->_table_of_contents_element_form->loadFields();
                 $this->_element_dao->updateElement($this->_table_of_contents_element);

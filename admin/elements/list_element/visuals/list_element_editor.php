@@ -8,10 +8,10 @@
 
     class ListElementEditorVisual extends ElementVisual {
     
-        private static $TEMPLATE = "elements/list_element/list_element_form.tpl";
-        private $_list_element;
+        private static string $TEMPLATE = "elements/list_element/list_element_form.tpl";
+        private ListElement $_list_element;
     
-        public function __construct($list_element) {
+        public function __construct(ListElement $list_element) {
             parent::__construct();
             $this->_list_element = $list_element;
         }
@@ -20,7 +20,7 @@
             return $this->_list_element;
         }
         
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', 'Titel', $this->_list_element->getTitle(), false, true, null);
             $add_item_button = new Button("", "Lijst item toevoegen", "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
@@ -31,7 +31,7 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
-        private function getListItems() {
+        private function getListItems(): array {
             $list_items = array();
             foreach ($this->_list_element->getListItems() as $list_item) {
                 $list_item_values = array();

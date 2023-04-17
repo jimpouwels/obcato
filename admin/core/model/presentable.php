@@ -5,8 +5,8 @@
 
     abstract class Presentable extends Entity {
         
-        private $_template_id;
-        private $_scope_id;
+        private int $_template_id;
+        private int $_scope_id;
         
         public function getTemplate(): ?Template {
             $dao = TemplateDao::getInstance();
@@ -17,30 +17,30 @@
             }
         }
         
-        public function setTemplate($template) {
+        public function setTemplate(Template $template): void {
             if (!is_null($template)) {
                 $this->_template_id = $template->getId();
             }
         }
         
-        public function getTemplateId() {
+        public function getTemplateId(): int {
             return $this->_template_id;
         }
         
-        public function setTemplateId($template_id) {
+        public function setTemplateId(int $template_id): void {
             $this->_template_id = $template_id;
         }
         
-        public function getScope() {
+        public function getScope(): Scope {
             $dao = ScopeDao::getInstance();
             return $dao->getScope($this->_scope_id);
         }
         
-        public function getScopeId() {
+        public function getScopeId(): int {
             return $this->_scope_id;
         }
         
-        public function setScopeId($scope_id) {
+        public function setScopeId(int $scope_id): void {
             $this->_scope_id = $scope_id;
         }
     }

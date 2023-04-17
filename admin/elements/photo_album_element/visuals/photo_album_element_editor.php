@@ -8,8 +8,8 @@
 
     class PhotoAlbumElementEditor extends ElementVisual {
     
-        private static $TEMPLATE = "elements/photo_album_element/photo_album_element_form.tpl";
-        private $_element;
+        private static string $TEMPLATE = "elements/photo_album_element/photo_album_element_form.tpl";
+        private PhotoAlbumElement $_element;
     
         public function __construct($_element) {
             parent::__construct();
@@ -20,7 +20,7 @@
             return $this->_element;
         }
         
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", "Titel", $this->_element->getTitle(), false, true, null);
             $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", "Max. aantal resultaten", $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
             $label_select_field = new ImageLabelSelector($this->_element->getLabels(), $this->_element->getId());

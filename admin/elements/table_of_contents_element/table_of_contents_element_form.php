@@ -7,19 +7,19 @@
 
     class TableOfContentsElementForm extends ElementForm {
 
-        private $_table_of_contents_element;
+        private TableOfContentsElement $_table_of_contents_element;
 
-        public function __construct($_table_of_contents_element) {
-            parent::__construct($_table_of_contents_element);
-            $this->_table_of_contents_element = $_table_of_contents_element;
+        public function __construct(TableOfContentsElement $table_of_contents_element) {
+            parent::__construct($table_of_contents_element);
+            $this->_table_of_contents_element = $table_of_contents_element;
         }
 
         public function loadFields(): void {
             $element_id = $this->_table_of_contents_element->getId();
             $title = $this->getFieldValue('element_' . $element_id . '_title');
-            if ($this->hasErrors())
+            if ($this->hasErrors()) {
                 throw new FormException();
-            else {
+            } else {
                 parent::loadFields();
                 $this->_table_of_contents_element->setTitle($title);
             }

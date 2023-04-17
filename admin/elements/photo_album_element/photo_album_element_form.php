@@ -6,11 +6,11 @@
 
     class PhotoAlbumElementForm extends ElementForm {
 
-        private $_photo_album_element;
-        private $_selected_labels;
-        private $_removed_labels;
+        private PhotoAlbumElement $_photo_album_element;
+        private array $_selected_labels;
+        private array $_removed_labels;
 
-        public function __construct($photo_album_element) {
+        public function __construct(PhotoAlbumElement $photo_album_element) {
             parent::__construct($photo_album_element);
             $this->_photo_album_element = $photo_album_element;
         }
@@ -27,24 +27,25 @@
                 $this->_photo_album_element->setNumberOfResults($number_of_results);
             }
 
-            $this->_selected_labels = $this->getFieldValue('select_labels_' . $this->_photo_album_element->getId());
+            $this->_selected_labels = $this->getFieldValues('select_labels_' . $this->_photo_album_element->getId());
             $this->_removed_labels = $this->getLabelsToDeleteFromPostRequest();
         }
 
-        public function getSelectedLabels() {
+        public function getSelectedLabels(): array {
             return $this->_selected_labels;
         }
 
-        public function getLabelsToRemove() {
+        public function getLabelsToRemove(): array {
             return $this->_removed_labels;
         }
 
-        private function getLabelsToDeleteFromPostRequest() {
+        private function getLabelsToDeleteFromPostRequest(): array {
             $labels_to_remove = array();
             $element_labels = $this->_photo_album_element->getLabels();
             foreach ($element_labels as $element_label) {
-                if (isset($_POST['label_' . $this->_photo_album_element->getId() . '_' . $element_label->getId() . '_delete']))
+                if (isset($_POST['label_' . $this->_photo_album_element->getId() . '_' . $element_label->getId() . '_delete'])) {
                     $labels_to_remove[] = $element_label;
+                }
             }
             return $labels_to_remove;
         }

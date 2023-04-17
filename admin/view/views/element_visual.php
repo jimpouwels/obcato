@@ -11,7 +11,7 @@
     
         abstract function getElement(): Element;
         
-        abstract function renderElementForm();
+        abstract function renderElementForm(): string;
     
         public function render(): string {
             $element = $this->getElement();

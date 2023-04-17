@@ -3,6 +3,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/model/element.php";
+    require_once CMS_ROOT . "core/model/element_metadata_provider.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "elements/table_of_contents_element/visuals/table_of_contents_element_statics.php";
     require_once CMS_ROOT . "elements/table_of_contents_element/visuals/table_of_contents_element_editor.php";
@@ -11,61 +12,50 @@
 
     class TableOfContentsElement extends Element {
             
-        private TableOfContentsElementMetadataProvider $_metadata_provider;
-            
         public function __construct() {
-            $this->_metadata_provider = new TableOfContentsElementMetadataProvider($this);
+            parent::__construct(new TableOfContentsElementMetadataProvider($this));
         }
         
-        public function getStatics() {
+        public function getStatics(): Visual {
             return new TableOfContentsElementStatics();
         }
         
-        public function getBackendVisual() {
+        public function getBackendVisual(): ElementVisual {
             return new TableOfContentsElementEditor($this);
         }
 
-        public function getFrontendVisual($current_page) {
+        public function getFrontendVisual(Page $current_page): FrontendVisual {
             return new TableOfContentsElementFrontendVisual($current_page, $this);
         }
         
-        public function initializeMetaData() {
-            $this->_metadata_provider->getMetaData($this);
-        }
-        
-        public function updateMetaData() {
-            $this->_metadata_provider->updateMetaData($this);
-        }
-
-        public function getRequestHandler() {
+        public function getRequestHandler(): HttpRequestHandler {
             return new TableOfContentsElementRequestHandler($this);
         }
 
-        public function getSummaryText() {
+        public function getSummaryText(): string {
             return $this->getTitle();
         }
 
     }
     
-    class TableOfContentsElementMetadataProvider {
+    class TableOfContentsElementMetadataProvider extends ElementMetadataProvider {
 
         private $_element;
 
-        public function __construct($element) {
+        public function __construct(TableOfContentsElement $element) {
+            parent::__construct($element);
             $this->_element = $element;
         }
 
-        public function getMetaData($element) {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
-            $query = "SELECT * FROM table_of_contents_elements_metadata " . "WHERE element_id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $element->setTitle($row['title']);
-            }
+        public function getTableName(): string {
+            return "table_of_contents_elements_metadata";
         }
 
-        public function updateMetaData($element) {
+        public function constructMetaData(array $row, $element): void {
+            $element->setTitle($row['title']);
+        }
+
+        public function updateMetaData(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
             
             if ($this->metaDataPersisted($element)) {
@@ -76,7 +66,7 @@
             $mysql_database->executeQuery($query);
         }
 
-        private function metaDataPersisted($element) {
+        private function metaDataPersisted(Element $element): bool {
             $query = "SELECT t.id, e.id FROM table_of_contents_elements_metadata t, elements e WHERE t.element_id = " 
                     . $element->getId() . " AND e.id = " . $element->getId();
             $mysql_database = MysqlConnector::getInstance(); 

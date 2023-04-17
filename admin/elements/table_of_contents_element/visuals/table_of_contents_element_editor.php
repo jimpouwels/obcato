@@ -8,19 +8,19 @@
 
     class TableOfContentsElementEditor extends ElementVisual {
     
-        private static $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_form.tpl";
-        private $_element;
+        private static string $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_form.tpl";
+        private TableOfContentsElement $_element;
     
-        public function __construct($_element) {
+        public function __construct(TableOfContentsElement $element) {
             parent::__construct();
-            $this->_element = $_element;
+            $this->_element = $element;
         }
     
         public function getElement(): Element {
             return $this->_element;
         }
         
-        public function renderElementForm() {
+        public function renderElementForm(): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", "Titel", $this->_element->getTitle(), false, true, null);
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);

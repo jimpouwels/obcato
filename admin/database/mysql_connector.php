@@ -4,10 +4,10 @@
 
     class MysqlConnector {
 
-        private static $instance;
-        private $conn;
-        private $_host;
-        private $_database_name;
+        private static ?MysqlConnector $instance = null;
+        private mysqli $conn;
+        private string $_host;
+        private string $_database_name;
 
         public static function getInstance() {
             if (is_null(self::$instance)) {
@@ -22,22 +22,22 @@
             $this->conn = new mysqli($this->_host, USERNAME, PASSWORD, $this->_database_name) or die("Error connecting to MySQL database");
         }
 
-        public function getConnection() {
+        public function getConnection(): mysqli {
             return $this->conn;
         }
 
-        public function prepareStatement($query) {
+        public function prepareStatement(string $query): mysqli_stmt {
             return $this->conn->prepare($query);
         }
 
-        public function executeStatement($statement) {
+        public function executeStatement(mysqli_stmt $statement): bool|mysqli_result {
             $statement->execute();
             $result = $statement->get_result();
             $statement->close();
             return $result;
         }
 
-        public function executeQuery($query) {
+        public function executeQuery(string $query): bool|mysqli_result {
             $statement = $this->prepareStatement($query);
             $statement->execute();
             $result = $statement->get_result();
@@ -45,11 +45,11 @@
             return $result;
         }
 
-        public function executeSql($sql): void {
+        public function executeSql(string $sql): void {
             mysqli_multi_query($this->conn, $sql);
         }
 
-        public function realEscapeString($value): string {
+        public function realEscapeString(string $value): string {
             return $this->conn->real_escape_string($value);
         }
 
@@ -79,6 +79,7 @@
             while ($row = $result->fetch_assoc()) {
                 return $row['version'];
             }
+            return "";
         }
     }
 

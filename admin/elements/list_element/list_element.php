@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/model/element.php";
+    require_once CMS_ROOT . "core/model/element_metadata_provider.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "elements/list_element/list_item.php";
     require_once CMS_ROOT . "elements/list_element/visuals/list_element_statics.php";
@@ -12,79 +13,69 @@
     class ListElement extends Element {
 
         private $_list_items;
-        private $_metadata_provider;
             
         public function __construct() {
-            $this->_metadata_provider = new ListElementMetaDataProvider();
+            parent::__construct(new ListElementMetaDataProvider($this));
         }
         
-        public function getListItems() {
+        public function getListItems(): array {
             return $this->_list_items;
         }
         
-        public function setListItems($list_items) {
+        public function setListItems(array $list_items): void {
             $this->_list_items = $list_items;
         }
         
-        public function addListItem() {
+        public function addListItem(): void {
             $list_item = new ListItem();
             $list_item->setIndent(0);
             array_push($this->_list_items, $list_item);
         }
         
-        public function deleteListItem($list_item) {
-            $this->_metadata_provider->deleteListItem($this, $list_item);
+        public function deleteListItem(ListItem $list_item): void {
+            $this->getMetaDataProvider()->deleteListItem($this, $list_item);
         }
         
-        public function getStatics() {
+        public function getStatics(): Visual {
             return new ListElementStatics();
         }
         
-        public function getBackendVisual() {
+        public function getBackendVisual(): ElementVisual {
             return new ListElementEditorVisual($this);
         }
 
-        public function getFrontendVisual($current_page) {
+        public function getFrontendVisual(Page $current_page): FrontendVisual {
             return new ListElementFrontendVisual($current_page, $this);
         }
         
-        public function initializeMetaData() {
-            $this->_metadata_provider->getMetaData($this);
-        }
-        
-        public function updateMetaData() {
-            $this->_metadata_provider->updateMetaData($this);
-        }
-
-        public function getRequestHandler() {
+        public function getRequestHandler(): HttpRequestHandler {
             return new ListElementRequestHandler($this);
         }
 
-        public function getSummaryText() {
+        public function getSummaryText(): string {
             return $this->getTitle();            
         }
     }
     
-    class ListElementMetaDataProvider {
+    class ListElementMetaDataProvider extends ElementMetadataProvider {
         
         // Holds the list of columns that are to be collected
-        private static $myAllColumns = "i.id, i.text, i.indent, i.element_id";
+        private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id";
+
+        public function __construct(Element $element) {
+            parent::__construct($element);
+        }
         
-        public function getMetaData($element) {
-            // fetch default meta data first
-            $mysql_database = MysqlConnector::getInstance(); 
-            
-            $query = "SELECT title FROM list_elements_metadata WHERE element_id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                $element->setTitle($row['title']);
-            }
-            
-            // now fetch the list items
+        public function getTableName(): string {
+            return "list_elements_metadata";
+        }
+
+        public function constructMetaData(array $row, $element): void {
+            $element->setTitle($row['title']);
             $element->setListItems($this->getListItems($element));
         }
         
-        public function deleteListItem($element, $list_item) {
+        public function deleteListItem(Element $element, ListItem $list_item): void {
             // first delete it from the database
             $mysql_database = MysqlConnector::getInstance(); 
             
@@ -92,7 +83,7 @@
             $mysql_database->executeQuery($query);
         }
         
-        public function updateMetaData($element) {
+        public function updateMetaData(Element $element): void {
             // check if the metadata exists first
             $mysql_database = MysqlConnector::getInstance(); 
             
@@ -123,7 +114,7 @@
         }
         
         // checks if the metadata is already persisted
-        private function metaDataPersisted($element) {
+        private function metaDataPersisted(Element $element): bool {
             $query = "SELECT t.id, e.id FROM list_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
                       AND e.id = " . $element->getId();
             $mysql_database = MysqlConnector::getInstance(); 
@@ -135,7 +126,7 @@
         }
         
         // returns all list items
-        private function getListItems($element) {
+        private function getListItems(Element $element): array {
             $mysql_database = MysqlConnector::getInstance(); 
             
             $query = "SELECT " . self::$myAllColumns . " FROM list_element_items i, elements e WHERE i.element_id = " . $element->getId() .

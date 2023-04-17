@@ -12,13 +12,13 @@
 
     class BlockDao {
 
-        private $_element_holder_dao;
-        private $_mysql_connector;
+        private ElementHolderDao $_element_holder_dao;
+        private MysqlConnector $_mysql_connector;
 
         public static $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id, 
                       e.created_at, e.created_by, e.type, b.position_id";
 
-        private static $instance;
+        private static ?BlockDao $instance = null;
 
         private function __construct() {
             $this->_element_holder_dao = ElementHolderDao::getInstance();
@@ -42,7 +42,7 @@
             return $blocks;
         }
 
-        public function getBlocksByPosition($position): array {
+        public function getBlocksByPosition(BlockPosition $position): array {
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, blocks b WHERE b.position_id = ?
                                                                     AND e.id = b.element_holder_id");
@@ -67,7 +67,7 @@
             return $blocks;
         }
 
-        public function getBlocksByPageAndPosition($page, $position_name): array {
+        public function getBlocksByPageAndPosition(Page $page, string $position_name): array {
             $query = "SELECT " . self::$myAllColumns . 
                      " FROM element_holders e, blocks b, blocks_pages bp, block_positions bps" . 
                      " WHERE e.id = b.element_holder_id" . 
@@ -83,7 +83,7 @@
             return $blocks;
         }
 
-        public function getBlocksByPage($page): array {
+        public function getBlocksByPage(Page $page): array {
             $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, blocks b, blocks_pages bps WHERE e.id = b.element_holder_id
                       AND bps.page_id = " . $page->getId() . " AND bps.block_id = e.id";
             $result = $this->_mysql_connector->executeQuery($query);
