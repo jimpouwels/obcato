@@ -27,7 +27,7 @@
         }
         
         public function getFieldValues(string $field_name): array {
-            $value = null;
+            $value = array();
             if (isset($_POST[$field_name])) {
                 $value = $_POST[$field_name];
             }

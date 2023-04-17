@@ -8,11 +8,11 @@
 
     class FriendlyUrlManager {
 
-        private static $instance;
-        private $_friendly_url_dao;
-        private $_settings_dao;
-        private $_page_dao;
-        private $_article_dao;
+        private static ?FriendlyUrlManager $instance = null;
+        private FriendlyUrlDao $_friendly_url_dao;
+        private SettingsDao $_settings_dao;
+        private PageDao $_page_dao;
+        private ArticleDao $_article_dao;
 
         public function __construct() {
             $this->_friendly_url_dao = FriendlyUrlDao::getInstance();
@@ -22,24 +22,24 @@
             $this->writeHtaccessFileIfNotExists();
         }
         
-        public static function getInstance() {
+        public static function getInstance(): FriendlyUrlManager {
             if (!self::$instance) {
                 self::$instance = new FriendlyUrlManager();
             }
             return self::$instance;
         }
 
-        public function insertOrUpdateFriendlyUrlForPage($page) {
+        public function insertOrUpdateFriendlyUrlForPage(Page $page): void {
             $url = '/' . $this->createUrlForPage($page);
             $this->insertOrUpateFriendlyUrl($url, $page);
         }
 
-        public function insertOrUpdateFriendlyUrlForArticle($article) {
+        public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
             $url = '/' . $this->createUrlForArticle($article);
             $this->insertOrUpateFriendlyUrl($url, $article);
         }
 
-        public function getPageFromUrl($url): ?Page {
+        public function getPageFromUrl(string $url): ?Page {
             $url = UrlHelper::removeQueryStringFrom($url);
             $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
@@ -51,7 +51,7 @@
             return $page;
         }
 
-        public function getArticleFromUrl($url): ?Article {
+        public function getArticleFromUrl(string $url): ?Article {
             $url_parts = UrlHelper::splitIntoParts($url);
             if (count($url_parts) > 1) {
                 $last_url_part = $url_parts[count($url_parts) - 1];
@@ -61,11 +61,11 @@
             return null;
         }
 
-        public function getFriendlyUrlForElementHolder($element_holder) {
+        public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): string {
             return $this->_friendly_url_dao->getUrlFromElementHolder($element_holder);
         }
 
-        private function insertOrUpateFriendlyUrl($url, $element_holder) {
+        private function insertOrUpateFriendlyUrl(string $url, ElementHolder $element_holder): void {
             $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
             if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
                 $this->_friendly_url_dao->insertFriendlyUrl($url, $element_holder);
@@ -74,7 +74,7 @@
             }
         }
 
-        private function createUrlForPage($page) {
+        private function createUrlForPage(Page $page): string {
             $url = $this->replaceSpecialCharacters($page->getNavigationTitle());
             $parent_page = $page->getParent();
             if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
@@ -83,11 +83,11 @@
             return $url;
         }
 
-        private function createUrlForArticle($article) {
+        private function createUrlForArticle(Article $article): string {
             return $this->replaceSpecialCharacters($article->getTitle());
         }
 
-        private function appendNumberIfFriendlyUrlExists($url, $element_holder) {
+        private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {
             $new_url = $url;
             $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $number = 1;
@@ -99,21 +99,21 @@
             return $new_url;
         }
 
-        private function replaceSpecialCharacters($value) {
+        private function replaceSpecialCharacters(string $value): string {
             $value = strtolower($value);
             $value = str_replace(' ', '-', $value);
             $value = urlencode($value);
             return $value;
         }
 
-        private function replaceChars($value, $new_char, ...$old_chars) {
+        private function replaceChars(string $value, string $new_char, array ...$old_chars): string {
             foreach ($old_chars as $old_char) {
                 $value = str_replace($old_char, $new_char, $value);
             }
             return $value;
         }
 
-        private function writeHtaccessFileIfNotExists() {
+        private function writeHtaccessFileIfNotExists(): void {
             $public_root_dir = $this->_settings_dao->getSettings()->getPublicRootDir();
             $htaccess_file_path = $public_root_dir . '/.htaccess';
             if (file_exists($htaccess_file_path)) return;

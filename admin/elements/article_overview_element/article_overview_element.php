@@ -16,7 +16,7 @@
             
         private ?string $_show_from;
         private ?string $_show_to;
-        private bool $_show_until_today;
+        private bool $_show_until_today = false;
         private string $_order_by;
         private string $_order_type;
         private array $_terms;
