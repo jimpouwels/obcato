@@ -14,32 +14,32 @@
 
     class ArticleOverviewElement extends Element {
             
-        private string $_show_from;
-        private string $_show_to;
+        private ?string $_show_from;
+        private ?string $_show_to;
         private bool $_show_until_today;
         private string $_order_by;
         private string $_order_type;
         private array $_terms;
-        private int $_number_of_results;
+        private ?int $_number_of_results;
             
         public function __construct() {
             parent::__construct(new ArticleOverviewElementMetadataProvider($this));
             $this->_terms = array();
         }
         
-        public function setShowFrom(string $show_from): void {
+        public function setShowFrom(?string $show_from): void {
             $this->_show_from = $show_from;
         }
         
-        public function getShowFrom(): string {
+        public function getShowFrom(): ?string {
             return $this->_show_from;
         }
         
-        public function setShowTo(string $show_to): void {
+        public function setShowTo(?string $show_to): void {
             $this->_show_to = $show_to;
         }
         
-        public function getShowTo(): string {
+        public function getShowTo(): ?string {
             return $this->_show_to;
         }
         
@@ -51,11 +51,11 @@
             return $this->_show_until_today;
         }
         
-        public function setNumberOfResults(int $number_of_results): void {
+        public function setNumberOfResults(?int $number_of_results): void {
             $this->_number_of_results = $number_of_results;
         }
         
-        public function getNumberOfResults(): int {
+        public function getNumberOfResults(): ?int {
             return $this->_number_of_results;
         }
 

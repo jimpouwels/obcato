@@ -40,9 +40,8 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
-        private function getDateValue(string $date): string {            
-            $date_value = ($date == null) ? null : DateUtility::mysqlDateToString($date, '-');
-            return $date_value;
+        private function getDateValue(?string $date): ?string {            
+            return $date == null ? null : DateUtility::mysqlDateToString($date, '-');
         }
         
         private function getOrderOptions(): array {
