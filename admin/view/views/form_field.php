@@ -32,13 +32,6 @@
             $this->getTemplateEngine()->assign("error", $this->getErrorHtml($this->_field_name));
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
-
-        public function getInputLabelHtml($field_label, $field_name, $mandatory) {
-            $this->getTemplateEngine()->assign("label", $field_label);
-            $this->getTemplateEngine()->assign("name", $field_name);
-            $this->getTemplateEngine()->assign("mandatory", $mandatory);
-            return $this->getTemplateEngine()->fetch("system/form_label.tpl");
-        }
         
         public function getErrorHtml($field_name) {
             $error_html = "";
@@ -52,18 +45,29 @@
         public function getCssClassesHtml() {
             $css_class_html = $this->_css_class;
             $css_class_html .= ' ' . $this->errorClass($this->_field_name);
-            if ($this->_linkable)
+            if ($this->_linkable) {
                 $css_class_html .= 'linkable ';
+            }
             $css_class_html = trim($css_class_html);
             return $css_class_html;
         }
 
         public function errorClass($field_name) {
-            if (Session::hasError($field_name))
+            if (Session::hasError($field_name)) {
                 return "invalid ";
+            }
         }
 
-        private function getFieldValue(): string {
+        protected function getInputLabelHtml($field_label, $field_name, $mandatory) {
+            $data = $this->getTemplateEngine()->createData();
+            $data->assign("label", $field_label);
+            $data->assign("name", $field_name);
+            $data->assign("mandatory", $mandatory);
+            $tpl = $this->getTemplateEngine()->createTemplate("system/form_label.tpl", $data);
+            return $tpl->fetch();
+        }
+
+        private function getFieldValue(): ?string {
             if (isset($_POST[$this->_field_name])) {
                 return StringUtility::escapeXml($_POST[$this->_field_name]);
             } else {
