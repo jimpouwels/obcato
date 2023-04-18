@@ -5,18 +5,19 @@
 
     class AuthorizationForm extends Form {
 
-        private $_user;
-        private $_authorization_dao;
+        private User $_user;
+        private AuthorizationDao $_authorization_dao;
 
-        public function __construct($user, $authorization_dao) {
+        public function __construct(User $user, AuthorizationDao $authorization_dao) {
             $this->_user = $user;
             $this->_authorization_dao = $authorization_dao;
         }
 
         public function loadFields(): void {
-            $username = $this->getFieldValue("user_username", 'Gebruikersnaam is verplicht');
-            if ($this->userExists($username))
+            $username = $this->getMandatoryFieldValue("user_username", 'Gebruikersnaam is verplicht');
+            if ($this->userExists($username)) {
                 $this->raiseError('user_username', 'Er bestaat al een gebruiker met deze gebruikersnaam');
+            }
             $first_name = $this->getMandatoryFieldValue('user_firstname', 'Voornaam is verplicht');
             $last_name = $this->getMandatoryFieldValue('user_lastname', 'Voornaam is verplicht');
             $prefix = $this->getFieldValue('user_prefix');
@@ -36,7 +37,7 @@
             }
         }
 
-        private function userExists($username) {
+        private function userExists(string $username): bool {
             $existing_user = $this->_authorization_dao->getUser($username);
             return !is_null($existing_user) && ($existing_user->getId() != $this->_user->getId());
         }

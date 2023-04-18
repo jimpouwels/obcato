@@ -5,11 +5,11 @@
 
     class UserList extends Panel {
 
-        private static $USER_LIST_TEMPLATE = "modules/authorization/user_list.tpl";
-        private $_authorization_dao;
-        private $_current_user;
+        private static string $USER_LIST_TEMPLATE = "modules/authorization/user_list.tpl";
+        private AuthorizationDao $_authorization_dao;
+        private ?User $_current_user = null;
 
-        public function __construct($current_user) {
+        public function __construct(?User $current_user) {
             parent::__construct('Gebruikers', 'user_tree_fieldset');
             $this->_current_user = $current_user;
             $this->_authorization_dao = AuthorizationDao::getInstance();
@@ -19,12 +19,12 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("users", $this->getAllUsers());
             return $this->getTemplateEngine()->fetch(self::$USER_LIST_TEMPLATE);
         }
 
-        public function getAllUsers() {
+        public function getAllUsers(): array {
             $users = array();
             foreach ($this->_authorization_dao->getAllUsers() as $user) {
                 $user_values = array();

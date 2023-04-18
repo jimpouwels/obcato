@@ -38,8 +38,8 @@
             $this->getTemplateEngine()->assign("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 
             $module_id_text_field = new TextField("module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
-            $module_tab_id_text_field = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
             $this->getTemplateEngine()->assign("module_id_form_field", $module_id_text_field->render());
+            $module_tab_id_text_field = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
             $this->getTemplateEngine()->assign("module_tab_id_form_field", $module_tab_id_text_field->render());
 
             $this->getTemplateEngine()->assign("actions_menu", $this->getActionsMenu()->render());
