@@ -29,7 +29,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function getDefaultTargetPage(): ?Page {
+        private function getDefaultTargetPage(): array {
             $target_page = $this->_article_dao->getDefaultTargetPage();
             $target_page_value = null;
             if (!is_null($target_page)) {

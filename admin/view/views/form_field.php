@@ -26,7 +26,9 @@
 
         public function render(): string {
             $this->getTemplateEngine()->assign('classes',$this->getCssClassesHtml());
-            $this->getTemplateEngine()->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
+            if ($this->_label) {
+                $this->getTemplateEngine()->assign('label',$this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
+            }
             $this->getTemplateEngine()->assign("field_name", $this->_field_name);
             if (isset($_POST[$this->_field_name])) {
                 $this->getTemplateEngine()->assign("field_value", StringUtility::escapeXml($_POST[$this->_field_name]));

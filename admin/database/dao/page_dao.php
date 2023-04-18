@@ -136,7 +136,7 @@
             return $first;
         }
 
-        public function searchByTerm(ArticleTerm $term): array {
+        public function searchByTerm(string $term): array {
             $query = "SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE e.id = p.element_holder_id
                       AND title like '" . $term . "%'";
             $result = $this->_mysql_connector->executeQuery($query);

@@ -11,9 +11,9 @@
         private static string $TERM_QUERYSTRING_KEY = "term";
         private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";
     
-        private ArticleTerm $_current_term;
+        private ?ArticleTerm $_current_term;
     
-        public function __construct(ArticleTerm $current_term) {
+        public function __construct(?ArticleTerm $current_term) {
             parent::__construct();
             $this->_current_term = $current_term;
         }

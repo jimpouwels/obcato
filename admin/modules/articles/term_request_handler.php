@@ -9,7 +9,7 @@
     
     class TermRequestHandler extends HttpRequestHandler {
 
-        private ArticleTerm $_current_term;
+        private ?ArticleTerm $_current_term = null;
         private ArticleDao $_article_dao;
         
         public function __construct() {
@@ -31,7 +31,7 @@
             }
         }
         
-        public function getCurrentTerm(): ArticleTerm {
+        public function getCurrentTerm(): ?ArticleTerm {
             return $this->_current_term;
         }
         

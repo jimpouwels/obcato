@@ -19,8 +19,8 @@
         private static int $TERMS_TAB = 1;
         private static int $TARGET_PAGES_TAB = 2;
         private ArticleDao $_article_dao;
-        private ArticleTerm $_current_term;
-        private Article $_current_article;
+        private ?ArticleTerm $_current_term;
+        private ?Article $_current_article;
         private Module $_article_module;
         private ArticleRequestHandler $_article_request_handler;
         private TermRequestHandler $_term_request_handler;

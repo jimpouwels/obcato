@@ -1,2 +1,4 @@
 {$error}
-{$label}
+{if isset($label)}
+    {$label}
+{/if}

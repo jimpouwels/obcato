@@ -10,7 +10,7 @@
 
         private static string $TEMPLATE = "articles/articles/root.tpl";
 
-        private Article $_current_article;
+        private ?Article $_current_article;
         private ArticleRequestHandler $_article_request_handler;
 
         public function __construct(ArticleRequestHandler $article_request_handler) {

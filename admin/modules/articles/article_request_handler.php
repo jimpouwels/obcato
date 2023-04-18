@@ -11,7 +11,7 @@
 
         private static string $ARTICLE_ID_POST = "element_holder_id";
         private static string $ARTICLE_ID_GET = "article";
-        private Article $_current_article;
+        private ?Article $_current_article = null;
         private ElementDao $_element_dao;
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
@@ -39,7 +39,7 @@
             }
         }
 
-        public function getCurrentArticle(): Article {
+        public function getCurrentArticle(): ?Article {
             return $this->_current_article;
         }
 

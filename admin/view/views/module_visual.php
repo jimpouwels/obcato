@@ -21,5 +21,6 @@
         abstract function getRequestHandlers();
         
         public function onRequestHandled(): void {
+        }
     
     }
