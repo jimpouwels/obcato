@@ -6,10 +6,10 @@
 
     class SettingsForm extends Form {
 
-        private $_settings;
-        private $_homepage_id;
+        private Settings $_settings;
+        private int $_homepage_id;
 
-        public function __construct($settings) {
+        public function __construct(Settings $settings) {
             $this->_settings = $settings;
         }
 
@@ -27,17 +27,18 @@
             $this->_settings->setUploadDir($this->preserveBackSlashes($this->getMandatoryFieldValue("upload_dir", "Upload directory is verplicht")));
             $this->_settings->setComponentDir($this->preserveBackSlashes($this->getMandatoryFieldValue("component_dir", "Component directory is verplicht")));
             $this->_settings->setBackendTemplateDir($this->preserveBackSlashes($this->getMandatoryFieldValue("backend_template_dir", "Template Engine directory is verplicht")));
-            $this->_homepage_id = $this->getMandatoryFieldValue("homepage_page_id", "De website heeft een homepage nodig");
+            $this->_homepage_id = intval($this->getMandatoryFieldValue("homepage_page_id", "De website heeft een homepage nodig"));
 
-            if ($this->hasErrors())
+            if ($this->hasErrors()) {
                 throw new FormException();
+            }
         }
 
-        public function getHomepageId() {
+        public function getHomepageId(): int {
             return $this->_homepage_id;
         }
 
-        private function preserveBackSlashes($value) {
+        private function preserveBackSlashes(string $value): string {
             return str_replace("\\", "\\\\", $value);
         }
 

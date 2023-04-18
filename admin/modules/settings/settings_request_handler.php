@@ -6,7 +6,7 @@
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/settings/settings_form.php";
 
-    class SettingsPreHandler extends HttpRequestHandler {
+    class SettingsRequestHandler extends HttpRequestHandler {
     
         private $_settings_dao;
         

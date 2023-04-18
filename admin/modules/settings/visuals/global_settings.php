@@ -5,10 +5,10 @@
 
     class GlobalSettingsPanel extends Panel {
 
-        private static $TEMPLATE = "modules/settings/global_settings_panel.tpl";
-        private $_settings;
+        private static string $TEMPLATE = "modules/settings/global_settings_panel.tpl";
+        private Settings $_settings;
 
-        public function __construct($settings) {
+        public function __construct(Settings $settings) {
             parent::__construct('Algemene instellingen');
             $this->_settings = $settings;
         }
@@ -17,7 +17,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $current_homepage = $this->_settings->getHomepage();
 
             $website_title = new TextField("website_title", "Website titel", $this->_settings->getWebsiteTitle(), true, false, null);

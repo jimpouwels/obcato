@@ -5,24 +5,24 @@
     require_once CMS_ROOT . "view/views/module_visual.php";
     require_once CMS_ROOT . "view/views/warning_message.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
-    require_once CMS_ROOT . "modules/settings/settings_pre_handler.php";
+    require_once CMS_ROOT . "modules/settings/settings_request_handler.php";
     require_once CMS_ROOT . "modules/settings/visuals/global_settings.php";
     require_once CMS_ROOT . "modules/settings/visuals/domain_settings.php";
     require_once CMS_ROOT . "modules/settings/visuals/directory_settings.php";
 
     class SettingsModuleVisual extends ModuleVisual {
 
-        private static $TEMPLATE = "settings/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
-        private $_settings_module;
-        private $_settings;
-        private $_settings_pre_handler;
+        private static string $TEMPLATE = "settings/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
+        private Module $_settings_module;
+        private Settings $_settings;
+        private SettingsRequestHandler $_settings_request_handler;
 
-        public function __construct($settings_module) {
+        public function __construct(Module $settings_module) {
             parent::__construct($settings_module);
             $this->_settings_module = $settings_module;
             $this->_settings = SettingsDao::getInstance()->getSettings();
-            $this->_settings_pre_handler = new SettingsPreHandler();
+            $this->_settings_request_handler = new SettingsRequestHandler();
         }
 
         public function render(): string {
@@ -33,42 +33,42 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             $action_buttons[] = new ActionButtonSave('apply_settings');
             return $action_buttons;
         }
 
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_settings_module->getIdentifier());
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $request_handlers = array();
-            $request_handlers[] = $this->_settings_pre_handler;
+            $request_handlers[] = $this->_settings_request_handler;
             return $request_handlers;
         }
 
         public function onRequestHandled(): void {
         }
 
-        private function renderGlobalSettingsPanel() {
+        private function renderGlobalSettingsPanel(): string {
             $global_settings_panel = new GlobalSettingsPanel($this->_settings);
             return $global_settings_panel->render();
         }
 
-        private function renderDirectorySettingsPanel() {
+        private function renderDirectorySettingsPanel(): string {
             $directory_settings_panel = new DirectorySettingsPanel($this->_settings);
             return $directory_settings_panel->render();
         }
 
-        private function renderDomainSettingsPanel() {
+        private function renderDomainSettingsPanel(): string {
             $domain_settings_panel = new DomainSettingsPanel($this->_settings);
             return $domain_settings_panel->render();
         }
 
-        private function renderWarningMessage() {
+        private function renderWarningMessage(): string {
             $warning_message = new WarningMessage("Let op! Het incorrect wijzigen van de onderstaande instellingen kan zorgen voor een niet (goed) meer werkende website!");
             return $warning_message->render();
         }
