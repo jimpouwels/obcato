@@ -1,7 +1,7 @@
 .image_search_wrapper {
     margin: auto;
     width: 100%;
-    padding: 10px;
+    padding: 0px;
 }
 
 .image_search {
@@ -15,6 +15,7 @@
 
 .button_container {
     margin-top: 10px;
+    padding-left: 15px;
 }
 
 .search_button {
@@ -24,9 +25,10 @@
 .show_all_link {
     margin-top: 5px;
     clear: both;
+    padding-left: 15px;
 }
 
-.show_all_link  a {
+.show_all_link a {
     color: gray;
 }
 

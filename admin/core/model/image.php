@@ -7,8 +7,8 @@
     class Image extends Entity {
     
         private string $_title;
-        private string $_file_name;
-        private string $_thumbnail_file_name;
+        private ?string $_file_name;
+        private ?string $_thumbnail_file_name;
         private bool $_published;
         private string $_created_at;
         private int $_created_by_id;
@@ -17,19 +17,19 @@
             $this->_title = $title;
         }
         
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->_title;
         }
         
-        public function setFileName($filename) {
+        public function setFileName(?string $filename): void {
             $this->_file_name = $filename;
         }
         
-        public function getFileName() {
+        public function getFileName(): ?string {
             return $this->_file_name;
         }
         
-        public function setThumbFileName($thumb_filename) {
+        public function setThumbFileName(?string $thumb_filename): void {
             $this->_thumbnail_file_name = $thumb_filename;
         }
         
@@ -43,7 +43,7 @@
             return "/admin/upload.php?image=$id";
         }
         
-        public function getThumbFileName(): string {
+        public function getThumbFileName(): ?string {
             return $this->_thumbnail_file_name;
         }
         

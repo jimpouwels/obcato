@@ -14,7 +14,7 @@
 
         private static string $PAGE_ID_POST = "element_holder_id";
         private static string $PAGE_ID_GET = "page";
-        private static string $FALLBACK_PAGE_ID = 1;
+        private static int $FALLBACK_PAGE_ID = 1;
 
         private Page $_current_page;
         private PageDao $_page_dao;

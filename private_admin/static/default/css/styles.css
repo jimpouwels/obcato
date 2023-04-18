@@ -125,6 +125,14 @@ body {
     border-bottom: 1px dotted lightgray;
 }
 
+.panel .admin_form {
+    padding-left: 0px;
+}
+
+.panel .admin_form {
+    padding-left: 15px;
+}
+
 .content_left_column {
     float: left;
     width: 330px;
