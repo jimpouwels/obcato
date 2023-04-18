@@ -497,6 +497,10 @@ h1 {
     width: 100%;
 }
 
+.element_wrapper .element_editor_body .admin_form {
+    padding-left: 0px;
+}
+
 .element_summary_text {
     margin-bottom: 0px;
     margin-top: 5px;
