@@ -9,13 +9,13 @@
 
     class DownloadModuleVisual extends ModuleVisual {
 
-        private static $TEMPLATE = "modules/downloads/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
-        private $_current_download;
-        private $_download_request_handler;
-        private $_module;
+        private static string $TEMPLATE = "modules/downloads/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
+        private ?Download $_current_download;
+        private DownloadRequestHandler $_download_request_handler;
+        private Module $_module;
 
-        public function __construct($module) {
+        public function __construct(Module $module) {
             parent::__construct($module);
             $this->_module = $module;
             $this->_download_request_handler = new DownloadRequestHandler();
@@ -31,7 +31,7 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             if ($this->_current_download) {
                 $action_buttons[] = new ActionButtonSave('update_download');
@@ -41,7 +41,7 @@
             return $action_buttons;
         }
 
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 

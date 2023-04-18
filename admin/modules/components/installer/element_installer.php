@@ -10,10 +10,10 @@
 
     abstract class ElementInstaller extends Installer {
 
-        public static $CUSTOM_INSTALLER_CLASSNAME = 'CustomElementInstaller';
+        public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomElementInstaller';
         private $_logger;
-        private $_element_dao;
-        private $_scope_dao;
+        private ElementDao $_element_dao;
+        private ScopeDao $_scope_dao;
 
         public function __construct($logger) {
             parent::__construct($logger);
@@ -22,12 +22,12 @@
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
-        abstract function getName();
-        abstract function getClassName();
-        abstract function getClassFile();
-        abstract function getScope();
+        abstract function getName(): string;
+        abstract function getClassName(): string;
+        abstract function getClassFile(): string;
+        abstract function getScope(): string;
 
-        public function install() {
+        public function install(): void {
             $this->_logger->log('Installer voor component \'' . $this->getName() . '\' gestart');
             $this->installElementType();
             $this->installStaticFiles(STATIC_DIR . '/elements/' . $this->getIdentifier());
@@ -35,7 +35,7 @@
             $this->installComponentFiles(CMS_ROOT . 'elements/' . $this->getIdentifier());
         }
 
-        public function unInstall() {
+        public function uninstall(): void {
             $this->_scope_dao->deleteScope($this->_scope_dao->getScopeByName($this->getScope()));
             $this->runUninstallQueries();
             $this->uninstallStaticFiles();
@@ -43,7 +43,7 @@
             $this->uninstallComponentFiles();
         }
 
-        private function installElementType() {
+        private function installElementType(): void {
             $element_type = new ElementType();
             $element_type->setName($this->getName());
             $element_type->setIdentifier($this->getIdentifier());
@@ -63,22 +63,22 @@
             }
         }
 
-        private function createNewScope() {
+        private function createNewScope(): Scope {
             $scope = new Scope();
             $scope->setName($this->getScope());
             $this->_scope_dao->persistScope($scope);
             return $scope;
         }
 
-        private function uninstallStaticFiles() {
+        private function uninstallStaticFiles(): void {
             FileUtility::recursiveDelete(STATIC_DIR . '/elements/' . $this->getIdentifier(), true);
         }
 
-        private function uninstallBackendTemplates() {
+        private function uninstallBackendTemplates(): void {
             FileUtility::recursiveDelete(BACKEND_TEMPLATE_DIR . '/elements/' . $this->getIdentifier(), true);
         }
 
-        private function uninstallComponentFiles() {
+        private function uninstallComponentFiles(): void {
             FileUtility::recursiveDelete(CMS_ROOT . 'elements/' . $this->getIdentifier(), true);
         }
     }

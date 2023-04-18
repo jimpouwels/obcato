@@ -6,9 +6,9 @@
 
     class DownloadForm extends Form {
 
-        private $_download;
+        private Download $_download;
 
-        public function __construct($download) {
+        public function __construct(Download $download) {
             $this->_download = $download;
         }
 
@@ -19,11 +19,11 @@
                 throw new FormException();
         }
 
-        public function getUploadPath() {
+        public function getUploadPath(): string {
             return $this->getUploadFilePath('download_file');
         }
 
-        public function getUploadFileName() {
+        public function getUploadFileName(): string {
             return $this->getUploadedFileName('download_file');
         }
 

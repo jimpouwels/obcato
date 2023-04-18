@@ -6,8 +6,8 @@
 
     class Configuration extends Panel {
 
-        private static $CONFIGURATION_TEMPLATE = "modules/database/configuration.tpl";
-        private $_mysql_connector;
+        private static string $CONFIGURATION_TEMPLATE = "modules/database/configuration.tpl";
+        private MysqlConnector $_mysql_connector;
 
         public function __construct() {
             parent::__construct('Database configuratie', 'configuration_panel');
@@ -18,7 +18,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("hostname", $this->_mysql_connector->getHostName());
             $this->getTemplateEngine()->assign("database_name", $this->_mysql_connector->getDatabaseName());
             $this->getTemplateEngine()->assign("database_type", $this->_mysql_connector->getDatabaseType());

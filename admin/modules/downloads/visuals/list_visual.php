@@ -7,11 +7,11 @@
 
     class ListVisual extends Panel {
 
-        private static $TEMPLATE = "downloads/list.tpl";
-        private $_download_dao;
-        private $_download_request_handler;
+        private static string $TEMPLATE = "downloads/list.tpl";
+        private DownloadDao $_download_dao;
+        private DownloadRequestHandler $_download_request_handler;
 
-        public function __construct($download_request_handler) {
+        public function __construct(DownloadRequestHandler $download_request_handler) {
             parent::__construct('Gevonden downloads', 'download_list');
             $this->_download_request_handler = $download_request_handler;
             $this->_download_dao = DownloadDao::getInstance();
@@ -21,25 +21,26 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("search_results", $this->getDownloads());
             $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        public function getDownloads() {
-            if ($this->_download_request_handler->isSearchAction())
+        public function getDownloads(): array {
+            if ($this->_download_request_handler->isSearchAction()) {
                 return $this->getSearchResults();
-            else
+            } else {
                 return $this->getDownloadData($this->_download_dao->getAllDownloads());
+            }
         }
 
-        private function getSearchResults() {
+        private function getSearchResults(): array {
             $search_query = $this->_download_request_handler->getSearchQuery();
             return $this->getDownloadData($this->_download_dao->searchDownloads($search_query));
         }
 
-        private function getDownloadData($downloads) {
+        private function getDownloadData(array $downloads): array {
             $downloads_values = array();
             foreach ($downloads as $download) {
                 $download_value = array();
@@ -55,7 +56,7 @@
             return $downloads_values;
         }
 
-        private function renderNoResultsMessage() {
+        private function renderNoResultsMessage(): string {
             $message = new InformationMessage("Geen downloads gevonden");
             return $message->render();
         }

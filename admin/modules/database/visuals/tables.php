@@ -7,8 +7,8 @@
 
     class Tables extends Visual {
 
-        private static $TABLES_TEMPLATE = "modules/database/tables.tpl";
-        private $_database_dao;
+        private static string $TABLES_TEMPLATE = "modules/database/tables.tpl";
+        private DatabaseDao $_database_dao;
 
         public function __construct() {
             parent::__construct();
@@ -20,7 +20,7 @@
             return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
 
-        private function getTables() {
+        private function getTables(): array {
             $tables = $this->_database_dao->getTables();
             $table_panels = array();
             foreach ($tables as $table) {
@@ -33,7 +33,7 @@
             return $table_panels;
         }
 
-        private function getColumns($table) {
+        private function getColumns(string $table): array {
             $columns_array = array();
             foreach ($this->_database_dao->getColumns($table) as $column) {
                 $column_value = array();

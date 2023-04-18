@@ -9,7 +9,7 @@
         private BlockPosition $_position;
         private BlockDao $_block_dao;
     
-        public function __construct($position) {
+        public function __construct(BlockPosition $position) {
             $this->_position = $position;
             $this->_block_dao = BlockDao::getInstance();
         }
@@ -23,7 +23,7 @@
             }
         }
         
-        private function positionAlreadyExists() {
+        private function positionAlreadyExists(): bool {
             $existing_pos = $this->_block_dao->getBlockPositionByName($this->_position->getName());
             if (!is_null($existing_pos) && $existing_pos->getId() != $this->_position->getId()) {
                 $this->raiseError("name", "Er bestaat al een positie met deze naam");

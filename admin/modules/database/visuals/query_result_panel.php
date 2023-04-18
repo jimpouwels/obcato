@@ -3,22 +3,22 @@
 
     class QueryResultPanel extends Panel {
 
-        private static $TABLES_TEMPLATE = "modules/database/query_result_panel.tpl";
-        private $_pre_handler;
+        private static string $TABLES_TEMPLATE = "modules/database/query_result_panel.tpl";
+        private DatabaseRequestHandler $_request_handler;
 
-        public function __construct($pre_handler) {
+        public function __construct(DatabaseRequestHandler $request_handler) {
             parent::__construct('Resultaten', 'query_result_panel');
-            $this->_pre_handler = $pre_handler;
+            $this->_request_handler = $request_handler;
         }
 
         public function render(): string {
             return parent::render();
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign("fields", $this->_pre_handler->getFields());
-            $this->getTemplateEngine()->assign("values", $this->_pre_handler->getValues());
-            $this->getTemplateEngine()->assign("affected_rows", $this->_pre_handler->getAffectedRows());
+        public function renderPanelContent(): string {
+            $this->getTemplateEngine()->assign("fields", $this->_request_handler->getFields());
+            $this->getTemplateEngine()->assign("values", $this->_request_handler->getValues());
+            $this->getTemplateEngine()->assign("affected_rows", $this->_request_handler->getAffectedRows());
             return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
     }

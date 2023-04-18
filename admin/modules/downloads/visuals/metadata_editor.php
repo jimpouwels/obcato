@@ -6,10 +6,10 @@
 
     class DownloadMetadataEditor extends Panel {
 
-        private static $TEMPLATE = "downloads/metadata_editor.tpl";
-        private $_download;
+        private static string $TEMPLATE = "downloads/metadata_editor.tpl";
+        private Download $_download;
 
-        public function __construct($download) {
+        public function __construct(Download $download) {
             parent::__construct('Algemeen');
             $this->_download = $download;
         }
@@ -18,7 +18,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $title_field = new TextField("download_title", "Titel", $this->_download->getTitle(), true, false, null);
             $published_field = new SingleCheckbox("download_published", "Gepubliceerd", $this->_download->isPublished(), false, null);
             $upload_field = new UploadField("download_file", "Bestand", false, null);

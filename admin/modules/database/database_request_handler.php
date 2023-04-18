@@ -5,21 +5,21 @@
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "modules/database/query_form.php";
 
-    class DatabasePreHandler extends HttpRequestHandler {
+    class DatabaseRequestHandler extends HttpRequestHandler {
 
-        private $_query;
-        private $_query_result;
-        private $_affected_rows;
-        private $_mysql_connector;
+        private string $_query;
+        private ?mysqli_result $_query_result;
+        private int $_affected_rows;
+        private MysqlConnector $_mysql_connector;
 
         public function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             $form = new QueryForm();
             try {
                 $form->loadFields();
@@ -34,31 +34,33 @@
             }
         }
 
-        public function getQuery() {
+        public function getQuery(): string {
             return $this->_query;
         }
 
-        public function getFields() {
+        public function getFields(): array {
             $fields = array();
             if (!$this->_query_result) return $fields;
-            foreach ($this->_query_result->fetch_fields() as $field)
+            foreach ($this->_query_result->fetch_fields() as $field) {
                 $fields[] = $field->name;
+            }
             return $fields;
         }
 
-        public function getValues() {
+        public function getValues(): array {
             if (is_null($this->_query_result)) return array();
             $values = array();
             while ($result_row = $this->_query_result->fetch_assoc()) {
                 $row = array();
-                foreach ($result_row as $cell)
+                foreach ($result_row as $cell) {
                     $row[] = $cell;
+                }
                 $values[] = $row;
             }
             return $values;
         }
 
-        public function getAffectedRows() {
+        public function getAffectedRows(): int {
             return $this->_affected_rows;
         }
 

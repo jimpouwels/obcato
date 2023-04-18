@@ -6,28 +6,28 @@
     require_once CMS_ROOT . "database/dao/block_dao.php";
     require_once CMS_ROOT . "modules/blocks/visuals/blocks/block_tab.php";
     require_once CMS_ROOT . "modules/blocks/visuals/positions/position_tab.php";
-    require_once CMS_ROOT . "modules/blocks/block_pre_handler.php";
-    require_once CMS_ROOT . "modules/blocks/position_pre_handler.php";
+    require_once CMS_ROOT . "modules/blocks/block_request_handler.php";
+    require_once CMS_ROOT . "modules/blocks/position_request_handler.php";
 
     class BlockModuleVisual extends ModuleVisual {
     
-        private static $TEMPLATE = "blocks/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
-        private static $BLOCKS_TAB = 0;
-        private static $POSITIONS_TAB = 1;
+        private static string $TEMPLATE = "blocks/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
+        private static int $BLOCKS_TAB = 0;
+        private static int $POSITIONS_TAB = 1;
         
-        private $_current_block;
-        private $_current_position;
-        private $_block_dao;
-        private $_block_module;
-        private $_block_pre_handler;
-        private $_position_pre_handler;
+        private ?Block $_current_block = null;
+        private ?BlockPosition $_current_position = null;
+        private BlockDao $_block_dao;
+        private Module $_block_module;
+        private BlockRequestHandler $_block_request_handler;
+        private PositionRequestHandler $_position_request_handler;
     
-        public function __construct($block_module) {
+        public function __construct(Module $block_module) {
             parent::__construct($block_module);
             $this->_block_module = $block_module;
-            $this->_block_pre_handler = new BlockPreHandler();
-            $this->_position_pre_handler = new PositionPreHandler();
+            $this->_block_request_handler = new BlockRequestHandler();
+            $this->_position_request_handler = new PositionRequestHandler();
             $this->_block_dao = BlockDao::getInstance();
         }
     
@@ -45,7 +45,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
                 if (!is_null($this->_current_block)) {
@@ -55,15 +55,16 @@
                 $action_buttons[] = new ActionButtonAdd('add_element_holder');
             }
             if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
-                if (!is_null($this->_current_position) || PositionTab::isEditPositionMode())
+                if (!is_null($this->_current_position) || PositionTab::isEditPositionMode()) {
                     $action_buttons[] = new ActionButtonSave('update_position');
+                }
                 $action_buttons[] = new ActionButtonAdd('add_position');
                 $action_buttons[] = new ActionButtonDelete('delete_positions');
             }
             return $action_buttons;
         }
         
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_block_module->getIdentifier());
             $element_statics_values = array();
             if (!is_null($this->_current_block)) {
@@ -76,19 +77,19 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
         
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $pre_handlers = array();
-            $pre_handlers[] = $this->_block_pre_handler;
-            $pre_handlers[] = $this->_position_pre_handler;
+            $pre_handlers[] = $this->_block_request_handler;
+            $pre_handlers[] = $this->_position_request_handler;
             return $pre_handlers;
         }
         
         public function onRequestHandled(): void {
-            $this->_current_block = $this->_block_pre_handler->getCurrentBlock();
-            $this->_current_position = $this->_position_pre_handler->getCurrentPosition();
+            $this->_current_block = $this->_block_request_handler->getCurrentBlock();
+            $this->_current_position = $this->_position_request_handler->getCurrentPosition();
         }
         
-        private function renderTabMenu() {
+        private function renderTabMenu(): string {
             $tab_items = array();
             
             $tab_item = array();

@@ -7,10 +7,10 @@
 
     class EditorVisual extends Visual {
 
-        private static $TEMPLATE = "downloads/editor.tpl";
-        private $_download;
+        private static string $TEMPLATE = "downloads/editor.tpl";
+        private Download $_download;
 
-        public function __construct($download) {
+        public function __construct(Download $download) {
             parent::__construct();
             $this->_download = $download;
         }

@@ -6,12 +6,12 @@
 
     class QueriesTab extends Visual {
 
-        private static $TABLES_TEMPLATE = "modules/database/queries_tab.tpl";
-        private $_pre_handler;
+        private static string $TABLES_TEMPLATE = "modules/database/queries_tab.tpl";
+        private DatabaseRequestHandler $_request_handler;
 
-        public function __construct($pre_handler) {
+        public function __construct($request_handler) {
             parent::__construct();
-            $this->_pre_handler = $pre_handler;
+            $this->_request_handler = $request_handler;
         }
 
         public function render(): string {
@@ -20,13 +20,13 @@
             return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
         }
 
-        private function renderQueryFieldPanel() {
-            $query_field_panel = new QueryFieldPanel($this->_pre_handler);
+        private function renderQueryFieldPanel(): string {
+            $query_field_panel = new QueryFieldPanel($this->_request_handler);
             return $query_field_panel->render();
         }
 
-        private function renderQueryResultPanel() {
-            $query_result_panel = new QueryResultPanel($this->_pre_handler);
+        private function renderQueryResultPanel(): string {
+            $query_result_panel = new QueryResultPanel($this->_request_handler);
             return $query_result_panel->render();
         }
     }

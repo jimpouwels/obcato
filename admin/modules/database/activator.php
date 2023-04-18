@@ -10,18 +10,18 @@
 
     class DatabaseModuleVisual extends ModuleVisual {
 
-        private static $DATABASE_MODULE_TEMPLATE = "modules/database/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "modules/database/head_includes.tpl";
-        private static $CONFIGURATION_TAB = 0;
-        private static $TABLES_TAB = 1;
-        private static $QUERY_TAB = 2;
-        private $_database_module;
-        private $_database_pre_handler;
+        private static string $DATABASE_MODULE_TEMPLATE = "modules/database/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "modules/database/head_includes.tpl";
+        private static int $CONFIGURATION_TAB = 0;
+        private static int $TABLES_TAB = 1;
+        private static int $QUERY_TAB = 2;
+        private Module $_database_module;
+        private DatabaseRequestHandler $_database_request_handler;
 
-        public function __construct($database_module) {
+        public function __construct(Module $database_module) {
             parent::__construct($database_module);
             $this->_database_module = $database_module;
-            $this->_database_pre_handler = new DatabasePreHandler();
+            $this->_database_request_handler = new DatabaseRequestHandler();
         }
 
         public function render(): string {
@@ -31,32 +31,31 @@
             } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
                 $content = new Tables();
             } else if ($this->getCurrentTabId() == self::$QUERY_TAB) {
-                $content = new QueriesTab($this->_database_pre_handler);
+                $content = new QueriesTab($this->_database_request_handler);
             }
             $this->getTemplateEngine()->assign("content", $content->render());
             return $this->getTemplateEngine()->fetch(self::$DATABASE_MODULE_TEMPLATE);
         }
 
-        public function getActionButtons() {
-            $action_buttons = array();
-            return $action_buttons;
+        public function getActionButtons(): array {
+            return array();
         }
 
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_database_module->getIdentifier());
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
-        public function getRequestHandlers() {
-            $pre_handlers = array();
-            $pre_handlers[] = $this->_database_pre_handler;
-            return $pre_handlers;
+        public function getRequestHandlers(): array {
+            $request_handlers = array();
+            $request_handlers[] = $this->_database_request_handler;
+            return $request_handlers;
         }
 
         public function onRequestHandled(): void {
         }
 
-        private function renderTabMenu() {
+        private function renderTabMenu(): string {
             $tab_items = array();
             
             $tab_item = array();

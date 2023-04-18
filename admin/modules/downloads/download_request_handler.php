@@ -10,41 +10,44 @@
 
     class DownloadRequestHandler extends HttpRequestHandler {
 
-        private $_download_dao;
-        private $_current_download;
+        private DownloadDao $_download_dao;
+        private ?Download $_current_download;
 
         public function __construct() {
             $this->_download_dao = DownloadDao::getInstance();
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
             $this->_current_download = $this->getDownloadFromGetRequest();
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             $this->_current_download = $this->getDownloadFromPostRequest();
-            if ($this->isAddDownloadAction())
+            if ($this->isAddDownloadAction()) {
                 $this->addDownload();
-            else if ($this->isDeleteDownloadAction())
+            } else if ($this->isDeleteDownloadAction()) {
                 $this->deleteDownload();
-            else if ($this->isUpdateDownloadAction())
+            } else if ($this->isUpdateDownloadAction()) {
                 $this->updateDownload();
+            }
         }
 
-        public function getCurrentDownload() {
+        public function getCurrentDownload(): ?Download {
             return $this->_current_download;
         }
 
-        public function isSearchAction() {
+        public function isSearchAction(): bool {
             return isset($_GET['search_query']);
         }
 
-        public function getSearchQuery() {
-            if (isset($_GET['search_query']))
+        public function getSearchQuery(): ?string {
+            if (isset($_GET['search_query'])) {
                 return $_GET['search_query'];
+            }
+            return null;
         }
 
-        private function addDownload() {
+        private function addDownload(): void {
             $download = new Download();
             $download->setTitle("Nieuwe download");
             $this->_download_dao->persistDownload($download);

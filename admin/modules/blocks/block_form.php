@@ -1,15 +1,14 @@
 <?php
-
     defined("_ACCESS") or die;
     
     require_once CMS_ROOT . "core/form/form.php";
     
     class BlockForm extends Form {
     
-        private $_block;
-        private $_element_order;
+        private Block $_block;
+        private string $_element_order;
     
-        public function __construct($block) {
+        public function __construct(Block $block) {
             $this->_block = $block;
         }
     
@@ -24,7 +23,7 @@
             }
         }
         
-        public function getElementOrder() {
+        public function getElementOrder(): string {
             return $this->_element_order;
         }
         

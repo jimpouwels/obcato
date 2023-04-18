@@ -29,7 +29,7 @@
             $tables = array();
             
             while ($row = $result->fetch_assoc()) {
-                $tables[] = $row['Tables_in_' . $database_name];;
+                $tables[] = $row['Tables_in_' . $database_name];
             }
             return $tables;
         }

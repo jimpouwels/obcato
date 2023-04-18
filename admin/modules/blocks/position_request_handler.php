@@ -5,36 +5,37 @@
     require_once CMS_ROOT . "database/dao/block_dao.php";
     require_once CMS_ROOT . "modules/blocks/position_form.php";
     
-    class PositionPreHandler extends HttpRequestHandler {
+    class PositionRequestHandler extends HttpRequestHandler {
 
-        private static $POSITION_ID_POST = "position_id";
-        private static $POSITION_ID_GET = "position";
-        private $_block_dao;
-        private $_current_position;
+        private static string $POSITION_ID_POST = "position_id";
+        private static string $POSITION_ID_GET = "position";
+        private BlockDao $_block_dao;
+        private ?BlockPosition $_current_position;
         
         public function __construct() {
             $this->_block_dao = BlockDao::getInstance();
         }
         
-        public function handleGet() {
+        public function handleGet(): void {
             $this->_current_position = $this->getPositionFromGetRequest();
         }
         
-        public function handlePost() {
+        public function handlePost(): void {
             $this->_current_position = $this->getPositionFromPostRequest();
-            if ($this->isAddPositionAction())
+            if ($this->isAddPositionAction()) {
                 $this->addPosition();
-            else if ($this->isUpdatePositionAction())
+            } else if ($this->isUpdatePositionAction()) {
                 $this->updatePosition();
-            else if ($this->isDeletePositionsAction())
+            } else if ($this->isDeletePositionsAction()) {
                 $this->deletePositions();
+            }
         }
         
-        public function getCurrentPosition() {
+        public function getCurrentPosition(): ?BlockPosition {
             return $this->_current_position;
         }
         
-        private function addPosition() {
+        private function addPosition(): void {
             $new_position = $this->_block_dao->createBlockPosition();
             $new_position->setName($this->getTextResource("blocks_default_position_title"));
             $this->_block_dao->updateBlockPosition($new_position);
@@ -42,7 +43,7 @@
             $this->redirectTo($this->getBackendBaseUrl() . "&position=" . $new_position->getId());
         }
         
-        private function updatePosition() {
+        private function updatePosition(): void {
             $position_form = new PositionForm($this->_current_position);
             try {
                 $position_form->loadFields();
