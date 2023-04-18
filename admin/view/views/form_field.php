@@ -26,17 +26,9 @@
 
         public function render(): string {
             $this->getTemplateEngine()->assign('classes',$this->getCssClassesHtml());
-            if ($this->_label) {
-                $this->getTemplateEngine()->assign('label', $this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory));
-            } else {
-                $this->getTemplateEngine()->assign('label', null);
-            }
+            $this->getTemplateEngine()->assign('label', $this->getLabelHtml());
             $this->getTemplateEngine()->assign("field_name", $this->_field_name);
-            if (isset($_POST[$this->_field_name])) {
-                $this->getTemplateEngine()->assign("field_value", StringUtility::escapeXml($_POST[$this->_field_name]));
-            } else {
-                $this->getTemplateEngine()->assign("field_value", StringUtility::escapeXml($this->_value));
-            }
+            $this->getTemplateEngine()->assign("field_value", $this->getFieldValue());
             $this->getTemplateEngine()->assign("error", $this->getErrorHtml($this->_field_name));
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
@@ -69,6 +61,22 @@
         public function errorClass($field_name) {
             if (Session::hasError($field_name))
                 return "invalid ";
+        }
+
+        private function getFieldValue(): string {
+            if (isset($_POST[$this->_field_name])) {
+                return StringUtility::escapeXml($_POST[$this->_field_name]);
+            } else {
+                return StringUtility::escapeXml($this->_value);
+            }
+        }
+
+        private function getLabelHtml(): ?string {
+            if ($this->_label) {
+                return $this->getInputLabelHtml($this->_label, $this->_field_name, $this->_mandatory);
+            } else {
+                return null;
+            }
         }
     }
 
