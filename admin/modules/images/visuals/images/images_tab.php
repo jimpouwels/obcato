@@ -8,8 +8,7 @@
     
     class ImagesTab extends Visual {
     
-        private static $TEMPLATE = "images/images/root.tpl";
-    
+        private static string $TEMPLATE = "images/images/root.tpl";
         private $_current_image;
         private $_images_pre_handler;
     
@@ -29,17 +28,17 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
-        private function renderImageSearch() {
+        private function renderImageSearch(): string {
             $image_search = new ImageSearch($this->_images_pre_handler);
             return $image_search->render();
         }
         
-        private function renderImageList() {
+        private function renderImageList(): string {
             $images_list = new ImageList($this->_current_image, $this->_images_pre_handler);
             return $images_list->render();
         }
         
-        private function renderImageEditor() {
+        private function renderImageEditor(): string {
             $image_editor = new ImageEditor($this->_current_image);
             return $image_editor->render();
         }

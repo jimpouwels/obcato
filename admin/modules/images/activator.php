@@ -12,26 +12,26 @@
 
     class ImageModuleVisual extends ModuleVisual {
     
-        private static $TEMPLATE = "images/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "images/head_includes.tpl";
-        private static $IMAGES_TAB = 0;
-        private static $LABELS_TAB = 1;
-        private static $IMPORT_TAB = 2;
+        private static string $TEMPLATE = "images/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "images/head_includes.tpl";
+        private static int $IMAGES_TAB = 0;
+        private static int $LABELS_TAB = 1;
+        private static int $IMPORT_TAB = 2;
 
-        private $_image_dao;
-        private $_images_pre_handler;
-        private $_label_pre_handler;
-        private $_import_pre_handler;
-        private $_image_module;
-        private $_current_tab_id;
+        private ImageDao $_image_dao;
+        private ImageRequestHandler $_images_request_handler;
+        private LabelRequestHandler $_label_request_handler;
+        private ImportRequestHandler $_import_request_handler;
+        private Module $_image_module;
+        private int $_current_tab_id;
         
-        public function __construct($image_module) {
+        public function __construct(Module $image_module) {
             parent::__construct($image_module);
             $this->_image_module = $image_module;
             $this->_image_dao = ImageDao::getInstance();
-            $this->_images_pre_handler = new ImagePreHandler();
-            $this->_label_pre_handler = new LabelPreHandler();
-            $this->_import_pre_handler = new ImportPreHandler();
+            $this->_images_request_handler = new ImageRequestHandler();
+            $this->_label_request_handler = new LabelRequestHandler();
+            $this->_import_request_handler = new ImportRequestHandler();
             $this->_current_tab_id = $this->getCurrentTabId();
         }
         
@@ -39,9 +39,9 @@
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
-                $content = new ImagesTab($this->_images_pre_handler);
+                $content = new ImagesTab($this->_images_request_handler);
             } else if ($this->_current_tab_id == self::$LABELS_TAB) {
-                $content = new LabelsTab($this->_label_pre_handler);
+                $content = new LabelsTab($this->_label_request_handler);
             } else if ($this->_current_tab_id == self::$IMPORT_TAB) {
                 $content = new ImportTab();
             }
@@ -53,12 +53,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
                 $save_button = null;
                 $delete_button = null;
-                if (!is_null($this->_images_pre_handler->getCurrentImage())) {
+                if (!is_null($this->_images_request_handler->getCurrentImage())) {
                     $save_button = new ActionButtonSave('update_image');
                     $delete_button = new ActionButtonDelete('delete_image');
                 }
@@ -67,7 +67,7 @@
                 $action_buttons[] = $delete_button;                
             }
             if ($this->_current_tab_id == self::$LABELS_TAB) {
-                if (!is_null($this->_label_pre_handler->getCurrentLabel())) {
+                if (!is_null($this->_label_request_handler->getCurrentLabel())) {
                     $action_buttons[] = new ActionButtonSave('update_label');
                 }
                 $action_buttons[] = new ActionButtonAdd('add_label');
@@ -79,23 +79,23 @@
             return $action_buttons;
         }
         
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_image_module->getIdentifier());
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
         
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $request_handlers = array();
-            $request_handlers[] = $this->_images_pre_handler;
-            $request_handlers[] = $this->_label_pre_handler;
-            $request_handlers[] = $this->_import_pre_handler;
+            $request_handlers[] = $this->_images_request_handler;
+            $request_handlers[] = $this->_label_request_handler;
+            $request_handlers[] = $this->_import_request_handler;
             return $request_handlers;
         }
         
         public function onRequestHandled(): void {
         }
         
-        private function renderTabMenu() {
+        private function renderTabMenu(): string {
             $tab_items = array();
             
             $tab_item = array();

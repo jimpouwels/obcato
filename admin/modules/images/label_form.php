@@ -7,10 +7,10 @@
     
     class LabelForm extends Form {
     
-        private $_label;
-        private $_image_dao;
+        private ImageLabel $_label;
+        private ImageDao $_image_dao;
     
-        public function __construct($label) {
+        public function __construct(ImageLabel $label) {
             $this->_label = $label;
             $this->_image_dao = ImageDao::getInstance();
         }
@@ -21,11 +21,7 @@
                 throw new FormException();
         }
         
-        public function getSelectedLabels() {
-            return $this->_selected_labels;
-        }
-        
-        private function labelExists() {
+        private function labelExists(): bool {
             $existing_label = $this->_image_dao->getLabelByName($this->_label->getName());
             if (!is_null($existing_label) && $existing_label->getId() != $this->_label->getId()) {
                 $this->raiseError("name", "Er bestaat al een label met deze naam");

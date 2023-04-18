@@ -8,9 +8,8 @@
 
     class LabelsList extends Panel {
 
-        private static $TEMPLATE = "images/labels/list.tpl";
-
-        private $_image_dao;
+        private static string $TEMPLATE = "images/labels/list.tpl";
+        private ImageDao $_image_dao;
 
         public function __construct() {
             parent::__construct('Labels');
@@ -21,13 +20,13 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("all_labels", $this->getAllLabels());
             $this->getTemplateEngine()->assign("no_labels_message", $this->getNoLabelsMessage());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function getAllLabels() {
+        private function getAllLabels(): array {
             $label_values = array();
             $all_labels = $this->_image_dao->getAllLabels();
             foreach ($all_labels as $label) {
@@ -36,12 +35,12 @@
             return $label_values;
         }
 
-        private function getNoLabelsMessage() {
+        private function getNoLabelsMessage(): string {
             $message = new InformationMessage("Geen labels gevonden");
             return $message->render();
         }
 
-        private function createLabelValue($label) {
+        private function createLabelValue(ImageLabel $label): array {
             $label_value = array();
             $label_value["id"] = $label->getId();
             $label_value["name"] = $label->getName();
@@ -49,7 +48,7 @@
             return $label_value;
         }
 
-        private function getDeleteCheckBox($label) {
+        private function getDeleteCheckBox(ImageLabel $label): string {
             $checkbox = new SingleCheckBox("label_" . $label->getId() . "_delete", "", 0, false, "");
             return $checkbox->render();
         }

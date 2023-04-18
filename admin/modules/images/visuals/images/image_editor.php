@@ -9,12 +9,11 @@
 
     class ImageEditor extends Visual {
 
-        private static $TEMPLATE = "images/images/editor.tpl";
+        private static string $TEMPLATE = "images/images/editor.tpl";
+        private Image $_current_image;
+        private ImageDao $_image_dao;
 
-        private $_current_image;
-        private $_image_dao;
-
-        public function __construct($current_image) {
+        public function __construct(Image $current_image) {
             parent::__construct();
             $this->_current_image = $current_image;
             $this->_image_dao = ImageDao::getInstance();
@@ -28,18 +27,18 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function assignMetadataEditor() {
+        private function assignMetadataEditor(): void {
             $metadata_editor = new ImageMetadataEditor($this->_current_image);
             $this->getTemplateEngine()->assign('metadata_editor', $metadata_editor->render());
         }
 
-        private function assignLabelSelector() {
+        private function assignLabelSelector(): void {
             $image_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
             $label_select = new ImageLabelSelector($image_labels, $this->_current_image->getId());
             $this->getTemplateEngine()->assign('label_selector', $label_select->render());
         }
 
-        private function assignImageViewer() {
+        private function assignImageViewer(): void {
             $image_viewer = new ImageViewer($this->_current_image);
             $this->getTemplateEngine()->assign('image_viewer', $image_viewer->render());
         }

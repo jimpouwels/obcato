@@ -3,16 +3,15 @@
 
     require_once CMS_ROOT . "database/dao/image_dao.php";
 
-    class ImportPreHandler extends HttpRequestHandler {
-        private static $ZIP_FILE_ID = "import_zip_file";
-        private $_image_dao;
+    class ImportRequestHandler extends HttpRequestHandler {
+        private static string $ZIP_FILE_ID = "import_zip_file";
+        private ImageDao $_image_dao;
 
         public function __construct() {
             $this->_image_dao = ImageDao::getInstance();
         }
 
         public function handleGet(): void {                
-
         }
 
         public function handlePost(): void {

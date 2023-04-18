@@ -8,15 +8,14 @@
     
     class LabelsTab extends Visual {
     
-        private static $TEMPLATE = "images/labels/root.tpl";
-
-        private $_current_label;
-        private $_label_pre_handler;
+        private static string $TEMPLATE = "images/labels/root.tpl";
+        private ?ImageLabel $_current_label;
+        private LabelRequestHandler $_label_request_handler;
         
-        public function __construct($label_pre_handler) {
+        public function __construct(LabelRequestHandler $label_request_handler) {
             parent::__construct();
-            $this->_label_pre_handler = $label_pre_handler;
-            $this->_current_label = $this->_label_pre_handler->getCurrentLabel();
+            $this->_label_request_handler = $label_request_handler;
+            $this->_current_label = $this->_label_request_handler->getCurrentLabel();
         }
     
         public function render(): string {
@@ -27,12 +26,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
-        private function renderLabelEditor() {
+        private function renderLabelEditor(): string {
             $label_editor = new LabelEditor($this->_current_label);
             return $label_editor->render();
         }
         
-        private function renderLabelsList() {
+        private function renderLabelsList(): string {
             $labels_list = new LabelsList();
             return $labels_list->render();
         }

@@ -6,8 +6,8 @@
 
     class ImportTab extends Panel {
 
-        private static $TEMPLATE = "images/import/root.tpl";
-        private $_image_dao;
+        private static string $TEMPLATE = "images/import/root.tpl";
+        private ImageDao $_image_dao;
 
         public function __construct() {
             parent::__construct('Importeren');
@@ -18,25 +18,25 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("upload_field", $this->renderUploadField());
             $this->getTemplateEngine()->assign("labels_pulldown", $this->renderLabelPullDown());
 
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderUploadField() {
+        private function renderUploadField(): string {
             $upload_field = new UploadField("import_zip_file", "ZIP bestand", false, "");
             return $upload_field->render();
         }
 
-        private function renderLabelPullDown() {
+        private function renderLabelPullDown(): string {
             $labels_name_value_pair = $this->getLabelsValuePair();
             $pulldown = new PullDown("import_label", "Label", null, $labels_name_value_pair, 200, false);
             return $pulldown->render();
         }
 
-        private function getLabelsValuePair() {
+        private function getLabelsValuePair(): array {
             $labels_name_value_pair = array();
             array_push($labels_name_value_pair, array("name" => "&gt; Selecteer", "value" => null));
             foreach ($this->_image_dao->getAllLabels() as $label) {

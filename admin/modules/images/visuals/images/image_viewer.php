@@ -5,11 +5,11 @@
 
     class ImageViewer extends Panel {
 
-        private static $TEMPLATE = "images/images/viewer.tpl";
+        private static string $TEMPLATE = "images/images/viewer.tpl";
 
-        private $_current_image;
+        private Image $_current_image;
 
-        public function __construct($current_image) {
+        public function __construct(Image $current_image) {
             parent::__construct('Afbeelding', 'image_editor');
             $this->_current_image = $current_image;
         }
@@ -18,7 +18,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("title", $this->_current_image->getTitle());
             $this->getTemplateEngine()->assign("url", $this->_current_image->getUrl());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);

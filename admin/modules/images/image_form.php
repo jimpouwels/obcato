@@ -6,10 +6,10 @@
 
     class ImageForm extends Form {
 
-        private $_image;
-        private $_selected_labels;
+        private Image $_image;
+        private array $_selected_labels;
 
-        public function __construct($image) {
+        public function __construct(Image $image) {
             $this->_image = $image;
         }
 
@@ -17,11 +17,12 @@
             $this->_image->setTitle($this->getMandatoryFieldValue("image_title", "Titel is verplicht"));
             $this->_image->setPublished($this->getCheckboxValue("image_published"));
             $this->_selected_labels = $this->getSelectValue("select_labels_" . $this->_image->getId());
-            if ($this->hasErrors())
+            if ($this->hasErrors()) {
                 throw new FormException();
+            }
         }
 
-        public function getSelectedLabels() {
+        public function getSelectedLabels(): array {
             return $this->_selected_labels;
         }
 

@@ -6,16 +6,16 @@
 
     class ImageListForm extends Form {
 
-        private $_image_id;
+        private int $_image_id;
 
         public function loadFields(): void {
-            $this->_image_id = $this->getMandatoryFieldValue("image_id", "");
+            $this->_image_id = intval($this->getMandatoryFieldValue("image_id", ""));
             if ($this->hasErrors()) {
                 throw new FormException();
             }
         }
 
-        public function getImageId() {
+        public function getImageId(): int {
             return $this->_image_id;
         }
 
