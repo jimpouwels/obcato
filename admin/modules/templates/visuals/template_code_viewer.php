@@ -5,11 +5,11 @@
 
     class TemplateCodeViewer extends Panel {
 
-        private static $TEMPLATE_EDITOR_TEMPLATE = "templates/template_code_viewer.tpl";
+        private static string $TEMPLATE_EDITOR_TEMPLATE = "templates/template_code_viewer.tpl";
 
-        private $_template;
+        private Template $_template;
 
-        public function __construct($template) {
+        public function __construct(Template $template) {
             parent::__construct('Markup', 'template_content_fieldset');
             $this->_template = $template;
         }
@@ -18,16 +18,17 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign('file_content', $this->getTemplateCode());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
         }
 
-        private function getTemplateCode() {
+        private function getTemplateCode(): ?string {
             $file_path = FRONTEND_TEMPLATE_DIR . '/' . $this->_template->getFilename();
             if (is_file($file_path) && file_exists($file_path)) {
                 return htmlspecialchars(file_get_contents($file_path));
             }
+            return null;
         }
 
     }

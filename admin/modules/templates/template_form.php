@@ -7,13 +7,13 @@
     
     class TemplateForm extends Form {
     
-        private $_template;
-        private $_template_dao;
-        private $_path_to_uploaded_file;
-        private $_is_file_uploaded;
-        private $_uploaded_file_name;
+        private Template $_template;
+        private TemplateDao $_template_dao;
+        private string $_path_to_uploaded_file;
+        private bool $_is_file_uploaded;
+        private string $_uploaded_file_name;
     
-        public function __construct($template) {
+        public function __construct(Template $template) {
             $this->_template = $template;
             $this->_template_dao = TemplateDao::getInstance();
         }
@@ -24,38 +24,42 @@
             $this->_uploaded_file_name = $this->getUploadedFileName("template_file");
             $this->_path_to_uploaded_file = $this->getUploadFilePath("template_file");
             $this->_is_file_uploaded = $this->getUploadedFileName("template_file") != "";
-            if ($this->_is_file_uploaded && !$this->fileExists())
+            if ($this->_is_file_uploaded && !$this->fileExists()) {
                 $this->_template->setFileName($this->_uploaded_file_name);
-            else
+            } else {
                 $this->_template->setFileName($this->getFieldValue("file_name"));
-            if ($this->hasErrors() || $this->fileNameExists())
+            }
+            if ($this->hasErrors() || $this->fileNameExists()) {
                 throw new FormException();
+            }
         }
         
-        public function isFileUploaded() {
+        public function isFileUploaded(): bool {
             return $this->_is_file_uploaded;
         }
         
-        public function getPathToUploadedFile() {
+        public function getPathToUploadedFile(): string {
             return $this->_path_to_uploaded_file;
         }
         
-        private function fileExists() {
+        private function fileExists(): bool {
             if (file_exists(FRONTEND_TEMPLATE_DIR . "/" . $this->_uploaded_file_name) && !$this->uploadedFileIsCurrentTemplateFile()) {
                 $this->raiseError("template_file", "Er bestaat al een ander template met dezelfde naam");
                 return true;
-            } else
+            } else {
                 return false;
+            }
         }
         
-        private function uploadedFileIsCurrentTemplateFile() {
+        private function uploadedFileIsCurrentTemplateFile(): bool {
             return $this->_uploaded_file_name == $this->_template->getFileName();
         }
         
-        private function fileNameExists() {
+        private function fileNameExists(): void {
             $existing_template = $this->_template_dao->getTemplateByFileName($this->_template->getFileName());
-            if (!is_null($existing_template) && $existing_template->getId() != $this->_template->getId())
+            if (!is_null($existing_template) && $existing_template->getId() != $this->_template->getId()) {
                 $this->raiseError("file_name_error", "Deze bestandsnaam bestaat al voor een ander template");
+            }
         }
     
     }

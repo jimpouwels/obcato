@@ -5,12 +5,11 @@
 
     class TemplateEditor extends Panel {
 
-        private static $TEMPLATE_EDITOR_TEMPLATE = "templates/template_editor.tpl";
+        private static string $TEMPLATE_EDITOR_TEMPLATE = "templates/template_editor.tpl";
+        private Template $_template;
+        private ScopeDao $_scope_dao;
 
-        private $_template;
-        private $_scope_dao;
-
-        public function __construct($template) {
+        public function __construct(Template $template) {
             parent::__construct('Template bewerken', 'template_editor_fieldset');
             $this->_template = $template;
             $this->_scope_dao = ScopeDao::getInstance();
@@ -20,13 +19,13 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("template_id", $this->_template->getId());
             $this->assignEditFields();
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
         }
 
-        private function assignEditFields() {
+        private function assignEditFields(): void {
             $name_field = new TextField("name", "Naam", $this->_template->getName(), true, false, null);
             $this->getTemplateEngine()->assign("name_field", $name_field->render());
             $filename_field = new TextField("file_name", "Bestandsnaam", $this->_template->getFileName(), false, false, null);
@@ -36,7 +35,7 @@
             $this->getTemplateEngine()->assign("scopes_field", $this->renderScopesField());
         }
 
-        private function renderScopesField() {
+        private function renderScopesField(): string {
             $scopes_name_value_pair = array();
             foreach ($this->_scope_dao->getScopes() as $scope) {
                 array_push($scopes_name_value_pair, array("name" => $scope->getName(), "value" => $scope->getId()));
