@@ -5,11 +5,11 @@
 
     class BlocksList extends Panel {
 
-        private static $TEMPLATE = "blocks/blocks/list.tpl";
-        private $_current_block;
-        private $_block_dao;
+        private static string $TEMPLATE = "blocks/blocks/list.tpl";
+        private ?Block $_current_block = null;
+        private BlockDao $_block_dao;
 
-        public function __construct($current_block) {
+        public function __construct(?Block $current_block) {
             parent::__construct('Blokken', 'block_list');
             $this->_current_block = $current_block;
             $this->_block_dao = BlockDao::getInstance();
@@ -19,7 +19,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("block_lists", $this->getBlockLists());
             $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
             $current_block_value = null;
@@ -30,12 +30,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderNoResultsMessage() {
+        private function renderNoResultsMessage(): string {
             $no_result_message = new InformationMessage($this->getTextResource("blocks_no_blocks_found"));
             return $no_result_message->render();
         }
 
-        private function getBlockLists() {
+        private function getBlockLists(): array {
             $block_lists = array();
             // blocks with position
             foreach ($this->_block_dao->getBlockPositions() as $position) {
@@ -52,18 +52,21 @@
             return $block_lists;
         }
 
-        private function getBlocks($position) {
+        private function getBlocks(?BlockPosition $position): array {
             $blocks = array();
-            if (!is_null($position))
-                foreach ($position->getBlocks() as $block)
+            if (!is_null($position)) {
+                foreach ($position->getBlocks() as $block) {
                     $blocks[] = $this->toArray($block);
-            else
-                foreach ($this->_block_dao->getBlocksWithoutPosition() as $block)
+                }
+            } else {
+                foreach ($this->_block_dao->getBlocksWithoutPosition() as $block) {
                     $blocks[] = $this->toArray($block);
+                }
+            }
             return $blocks;
         }
 
-        private function toArray($block) {
+        private function toArray(Block $block): array {
             $block_value = array();
             $block_value["id"] = $block->getId();
             $block_value["title"] = $block->getTitle();

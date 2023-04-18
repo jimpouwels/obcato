@@ -7,11 +7,11 @@
     
     class BlockTab extends Visual {
     
-        private static $TEMPLATE = "blocks/blocks/root.tpl";
+        private static string $TEMPLATE = "blocks/blocks/root.tpl";
     
-        private $_current_block;
+        private ?Block $_current_block = null;
     
-        public function __construct($current_block) {
+        public function __construct(?Block $current_block) {
             parent::__construct();
             $this->_current_block = $current_block;
         }
@@ -25,12 +25,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
-        private function renderBlocksList() {
+        private function renderBlocksList(): string {
             $blocks_list = new BlocksList($this->_current_block);
             return $blocks_list->render();
         }
         
-        private function renderBlockEditor() {
+        private function renderBlockEditor(): string {
             $block_editor = new BlockEditor($this->_current_block);
             return $block_editor->render();
         }

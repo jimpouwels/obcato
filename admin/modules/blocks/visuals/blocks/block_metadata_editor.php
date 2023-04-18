@@ -8,12 +8,12 @@
 
     class BlockMetadataEditor extends Panel {
 
-        private static $BLOCK_METADATA_TEMPLATE = "modules/blocks/blocks/metadata.tpl";
+        private static string $BLOCK_METADATA_TEMPLATE = "modules/blocks/blocks/metadata.tpl";
 
-        private $_current_block;
-        private $_block_dao;
+        private Block $_current_block;
+        private BlockDao $_block_dao;
 
-        public function __construct($current_block) {
+        public function __construct(Block $current_block) {
             parent::__construct('Algemeen', 'block_meta');
             $this->_current_block = $current_block;
             $this->_block_dao = BlockDao::getInstance();
@@ -23,7 +23,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $title_field = new TextField("title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->_current_block->getTitle(), true, false, null);
             $published_field = new SingleCheckbox("published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->_current_block->isPublished(), false, null);
             $template_picker_field = new TemplatePicker("block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->_current_block->getTemplate(), $this->_current_block->getScope());
@@ -37,7 +37,7 @@
             return $this->getTemplateEngine()->fetch(self::$BLOCK_METADATA_TEMPLATE);
         }
 
-        private function renderPositionsField() {
+        private function renderPositionsField(): string {
             $positions_options = array();
             array_push($positions_options, array("name" => $this->getTextResource("select_field_default_text"), "value" => null));
             foreach ($this->_block_dao->getBlockPositions() as $position) {
@@ -51,7 +51,7 @@
             return $positions_field->render();
         }
 
-        private function assignElementHolderFormIds() {
+        private function assignElementHolderFormIds(): void {
             $this->getTemplateEngine()->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
             $this->getTemplateEngine()->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
             $this->getTemplateEngine()->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);

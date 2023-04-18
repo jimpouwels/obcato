@@ -3,11 +3,11 @@
 
     class PositionEditor extends Panel {
 
-        private static $TEMPLATE = "blocks/positions/editor.tpl";
+        private static string $TEMPLATE = "blocks/positions/editor.tpl";
 
-        private $_current_position;
+        private BlockPosition $_current_position;
 
-        public function __construct($current_position) {
+        public function __construct(BlockPosition $current_position) {
             parent::__construct($this->getTextResource('blocks_edit_position_title'));
             $this->_current_position = $current_position;
         }
@@ -16,7 +16,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $new_position = true;
             $position_id = null;
             if (!is_null($this->_current_position)) {
@@ -30,12 +30,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderNameField() {
+        private function renderNameField(): string {
             $name_field = new TextField("name", $this->getTextResource("blocks_position_name_field"), $this->_current_position->getName(), true, false, null);
             return $name_field->render();
         }
 
-        private function renderExplanationField() {
+        private function renderExplanationField(): string {
             $explanation_field = new TextField("explanation", $this->getTextResource("blocks_position_explanation_field"), $this->_current_position->getExplanation(), false, false, null);
             return $explanation_field->render();
         }

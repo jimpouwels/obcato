@@ -5,9 +5,9 @@
 
     class PositionList extends Panel {
 
-        private static $TEMPLATE = "blocks/positions/list.tpl";
+        private static string $TEMPLATE = "blocks/positions/list.tpl";
 
-        private $_block_dao;
+        private BlockDao $_block_dao;
 
         public function __construct() {
             parent::__construct('Posities');
@@ -18,7 +18,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("all_positions", $this->getAllPositions());
             $no_positions_message = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
             $this->getTemplateEngine()->assign("no_positions_message", $no_positions_message->render());
@@ -26,7 +26,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function getAllPositions() {
+        private function getAllPositions(): array {
             $all_positions_values = array();
             $all_positions = $this->_block_dao->getBlockPositions();
 
