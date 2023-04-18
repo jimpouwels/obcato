@@ -5,7 +5,7 @@
 
     abstract class Presentable extends Entity {
         
-        private int $_template_id;
+        private ?int $_template_id = null;
         private int $_scope_id;
         
         public function getTemplate(): ?Template {
@@ -23,11 +23,11 @@
             }
         }
         
-        public function getTemplateId(): int {
+        public function getTemplateId(): ?int {
             return $this->_template_id;
         }
         
-        public function setTemplateId(int $template_id): void {
+        public function setTemplateId(?int $template_id): void {
             $this->_template_id = $template_id;
         }
         

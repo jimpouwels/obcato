@@ -2,7 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "view/views/module_visual.php";
-    require_once CMS_ROOT . "modules/database/database_pre_handler.php";
+    require_once CMS_ROOT . "modules/database/database_request_handler.php";
     require_once CMS_ROOT . "modules/database/visuals/configuration.php";
     require_once CMS_ROOT . "modules/database/visuals/tables.php";
     require_once CMS_ROOT . "modules/database/visuals/queries_tab.php";

@@ -8,7 +8,7 @@
     abstract class Element extends Presentable {
 
         private int $_index;
-        private string $_title;
+        private string $_title = "";
         private int $_element_holder_id;
         private bool $_include_in_table_of_contents;
         private ElementMetadataProvider $_metadata_provider;

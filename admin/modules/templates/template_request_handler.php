@@ -15,8 +15,8 @@
 
         private TemplateDao $_template_dao;
         private ScopeDao $_scope_dao;
-        private ?Template $_current_template;
-        private ?Scope $_current_scope;
+        private ?Template $_current_template = null;
+        private ?Scope $_current_scope = null;
         
         public function __construct() {
             $this->_template_dao = TemplateDao::getInstance();

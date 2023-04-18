@@ -6,7 +6,7 @@
 
     class Template extends Entity {
     
-        private string $_file_name;
+        private ?string $_file_name = null;
         private string $_scope;
         private string $_name;
         private int $_scope_id;
@@ -19,11 +19,11 @@
             return $this->_name;
         }
         
-        public function setFileName(string $file_name): void {
+        public function setFileName(?string $file_name): void {
             $this->_file_name = $file_name;
         }
         
-        public function getFileName(): string {
+        public function getFileName(): ?string {
             return $this->_file_name;
         }
         

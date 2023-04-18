@@ -14,13 +14,13 @@
 
     class ArticleOverviewElement extends Element {
             
-        private ?string $_show_from;
-        private ?string $_show_to;
+        private ?string $_show_from = null;
+        private ?string $_show_to = null;
         private bool $_show_until_today = false;
-        private string $_order_by;
-        private string $_order_type;
+        private ?string $_order_by = null;
+        private ?string $_order_type = null;
         private array $_terms;
-        private ?int $_number_of_results;
+        private ?int $_number_of_results = null;
             
         public function __construct() {
             parent::__construct(new ArticleOverviewElementMetadataProvider($this));
@@ -59,19 +59,19 @@
             return $this->_number_of_results;
         }
 
-        public function setOrderBy(string $order_by): void {
+        public function setOrderBy(?string $order_by): void {
             $this->_order_by = $order_by;
         }
 
-        public function getOrderBy(): string {
+        public function getOrderBy(): ?string {
             return $this->_order_by;
         }
 
-        public function setOrderType(string $order_type): void {
+        public function setOrderType(?string $order_type): void {
             $this->_order_type = $order_type;
         }
 
-        public function getOrderType(): string {
+        public function getOrderType(): ?string {
             return $this->_order_type;
         }
 

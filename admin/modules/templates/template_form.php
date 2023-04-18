@@ -9,9 +9,9 @@
     
         private Template $_template;
         private TemplateDao $_template_dao;
-        private string $_path_to_uploaded_file;
+        private ?string $_path_to_uploaded_file = null;
         private bool $_is_file_uploaded;
-        private string $_uploaded_file_name;
+        private ?string $_uploaded_file_name = null;
     
         public function __construct(Template $template) {
             $this->_template = $template;

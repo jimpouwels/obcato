@@ -7,9 +7,9 @@
 
     class DatabaseRequestHandler extends HttpRequestHandler {
 
-        private string $_query;
-        private ?mysqli_result $_query_result;
-        private int $_affected_rows;
+        private ?string $_query = null;
+        private ?mysqli_result $_query_result = null;
+        private int $_affected_rows = 0;
         private MysqlConnector $_mysql_connector;
 
         public function __construct() {
@@ -34,7 +34,7 @@
             }
         }
 
-        public function getQuery(): string {
+        public function getQuery(): ?string {
             return $this->_query;
         }
 
