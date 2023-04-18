@@ -42,7 +42,7 @@
             return $action_buttons;
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             $this->getTemplateEngine()->assign("path", $this->_database_module->getIdentifier());
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
@@ -53,7 +53,7 @@
             return $pre_handlers;
         }
 
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
         }
 
         private function renderTabMenu() {

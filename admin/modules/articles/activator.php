@@ -7,39 +7,39 @@
     require_once CMS_ROOT . "modules/articles/visuals/articles/articles_tab.php";
     require_once CMS_ROOT . "modules/articles/visuals/terms/terms_tab.php";
     require_once CMS_ROOT . "modules/articles/visuals/target_pages/list.php";
-    require_once CMS_ROOT . "modules/articles/article_pre_handler.php";
-    require_once CMS_ROOT . "modules/articles/term_pre_handler.php";
-    require_once CMS_ROOT . "modules/articles/target_pages_pre_handler.php";
+    require_once CMS_ROOT . "modules/articles/article_request_handler.php";
+    require_once CMS_ROOT . "modules/articles/term_request_handler.php";
+    require_once CMS_ROOT . "modules/articles/target_pages_request_handler.php";
 
     class ArticleModuleVisual extends ModuleVisual {
 
-        private static $TEMPLATE = "articles/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
-        private static $ARTICLES_TAB = 0;
-        private static $TERMS_TAB = 1;
-        private static $TARGET_PAGES_TAB = 2;
-        private $_article_dao;
-        private $_current_term;
-        private $_current_article;
-        private $_article_module;
-        private $_article_pre_handler;
-        private $_term_pre_handler;
-        private $_target_pages_pre_handler;
+        private static string $TEMPLATE = "articles/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
+        private static int $ARTICLES_TAB = 0;
+        private static int $TERMS_TAB = 1;
+        private static int $TARGET_PAGES_TAB = 2;
+        private ArticleDao $_article_dao;
+        private ArticleTerm $_current_term;
+        private Article $_current_article;
+        private Module $_article_module;
+        private ArticleRequestHandler $_article_request_handler;
+        private TermRequestHandler $_term_request_handler;
+        private TargetPagesRequestHandler $_target_pages_request_handler;
 
-        public function __construct($article_module) {
+        public function __construct(Module $article_module) {
             parent::__construct($article_module);
             $this->_article_module = $article_module;
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_article_pre_handler = new ArticlePreHandler();
-            $this->_term_pre_handler = new TermPreHandler();
-            $this->_target_pages_pre_handler = new TargetPagesPreHandler();
+            $this->_article_request_handler = new ArticleRequestHandler();
+            $this->_term_request_handler = new TermRequestHandler();
+            $this->_target_pages_request_handler = new TargetPagesRequestHandler();
         }
 
         public function render(): string {
             $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
-                $content = new ArticleTab($this->_article_pre_handler);
+                $content = new ArticleTab($this->_article_request_handler);
             } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
                 $content = new TermTab($this->_current_term);
             } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
@@ -55,16 +55,16 @@
         public function getRequestHandlers() {
             $pre_handlers = array();
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
-                $pre_handlers[] = $this->_article_pre_handler;
+                $pre_handlers[] = $this->_article_request_handler;
             } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
-                $pre_handlers[] = $this->_term_pre_handler;
+                $pre_handlers[] = $this->_term_request_handler;
             } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-                $pre_handlers[] = $this->_target_pages_pre_handler;
+                $pre_handlers[] = $this->_target_pages_request_handler;
             }
             return $pre_handlers;
         }
 
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $save_button = null;
@@ -91,7 +91,7 @@
             return $action_buttons;
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_article_module->getIdentifier());
 
             $element_statics_values = array();
@@ -106,12 +106,12 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
-        public function onPreHandled() {
-            $this->_current_article = $this->_article_pre_handler->getCurrentArticle();
-            $this->_current_term = $this->_term_pre_handler->getCurrentTerm();
+        public function onRequestHandled(): void {
+            $this->_current_article = $this->_article_request_handler->getCurrentArticle();
+            $this->_current_term = $this->_term_request_handler->getCurrentTerm();
         }
 
-        private function renderTabMenu() {
+        private function renderTabMenu(): string {
             $tab_items = array();
             
             $tab_item = array();

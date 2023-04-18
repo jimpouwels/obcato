@@ -4,9 +4,9 @@
     require_once CMS_ROOT . "frontend/element_visual.php";
 
     class ImageElementFrontendVisual extends ElementFrontendVisual {
-        private $_image_element;
+        private ImageElement $_image_element;
 
-        public function __construct($current_page, $image_element) {
+        public function __construct(Page $current_page, ImageElement $image_element) {
             parent::__construct($current_page, $image_element);
             $this->_image_element = $image_element;
         }
@@ -23,7 +23,7 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_image_element->getTemplate()->getFileName());
         }
 
-        private function createImageUrl() {
+        private function createImageUrl(): string {
             $image_url = "";
             if (!is_null($this->_image_element->getImage())) {
                 $image_url = $this->getImageUrl($this->_image_element->getImage());
@@ -31,10 +31,11 @@
             return $image_url;
         }
 
-        private function getExtension() {
+        private function getExtension(): string {
             $extension = "";
-                if (!is_null($this->_image_element->getImage()))
+            if (!is_null($this->_image_element->getImage())) {
                 $extension = $this->_image_element->getImage()->getExtension();
+            }
             return $extension;
         }
     }

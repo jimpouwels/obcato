@@ -5,9 +5,9 @@
     require_once CMS_ROOT . "frontend/element_visual.php";
 
     class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
-        private $_photo_album_element;
+        private PhotoAlbumElement $_photo_album_element;
 
-        public function __construct($current_page, $photo_album_element) {
+        public function __construct(Page $current_page, PhotoAlbumElement $photo_album_element) {
             parent::__construct($current_page, $photo_album_element);
             $this->_photo_album_element = $photo_album_element;
         }
@@ -19,7 +19,7 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_photo_album_element->getTemplate()->getFileName());
         }
 
-        private function getImages() {
+        private function getImages(): array {
             $images = $this->_photo_album_element->getImages();
             $images_arr = array();
             foreach ($images as $image) {

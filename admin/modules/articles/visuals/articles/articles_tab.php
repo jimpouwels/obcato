@@ -8,12 +8,12 @@
 
     class ArticleTab extends Visual {
 
-        private static $TEMPLATE = "articles/articles/root.tpl";
+        private static string $TEMPLATE = "articles/articles/root.tpl";
 
-        private $_current_article;
-        private $_article_request_handler;
+        private Article $_current_article;
+        private ArticleRequestHandler $_article_request_handler;
 
-        public function __construct($article_request_handler) {
+        public function __construct(ArticleRequestHandler $article_request_handler) {
             parent::__construct();
             $this->_article_request_handler = $article_request_handler;
             $this->_current_article = $article_request_handler->getCurrentArticle();
@@ -29,17 +29,17 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderArticlesSearchPanel() {
+        private function renderArticlesSearchPanel(): string {
             $articles_search_field = new ArticlesSearch($this->_article_request_handler);
             return $articles_search_field->render();
         }
 
-        private function renderArticlesList() {
+        private function renderArticlesList(): string {
             $articles_list = new ArticlesList($this->_article_request_handler);
             return $articles_list->render();
         }
 
-        private function renderArticleEditor() {
+        private function renderArticleEditor(): string {
             $article_editor = new ArticleEditor($this->_current_article);
             return $article_editor->render();
         }

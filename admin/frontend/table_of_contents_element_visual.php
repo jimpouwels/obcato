@@ -6,9 +6,9 @@
 
     class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_table_of_contents_element;
+        private TableOfContentsElement $_table_of_contents_element;
 
-        public function __construct($current_page, $_table_of_contents_element) {
+        public function __construct(Page $current_page, TableOfContentsElement $_table_of_contents_element) {
             parent::__construct($current_page, $_table_of_contents_element);
             $this->_table_of_contents_element = $_table_of_contents_element;
         }

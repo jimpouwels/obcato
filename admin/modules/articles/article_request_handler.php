@@ -7,14 +7,14 @@
     require_once CMS_ROOT . "modules/articles/article_form.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
-    class ArticlePreHandler extends ElementHolderRequestHandler {
+    class ArticleRequestHandler extends ElementHolderRequestHandler {
 
-        private static $ARTICLE_ID_POST = "element_holder_id";
-        private static $ARTICLE_ID_GET = "article";
-        private $_current_article;
-        private $_element_dao;
-        private $_article_dao;
-        private $_friendly_url_manager;
+        private static string $ARTICLE_ID_POST = "element_holder_id";
+        private static string $ARTICLE_ID_GET = "article";
+        private Article $_current_article;
+        private ElementDao $_element_dao;
+        private ArticleDao $_article_dao;
+        private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             parent::__construct();
@@ -23,11 +23,11 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
             $this->_current_article = $this->getArticleFromGetRequest();
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             parent::handlePost();
             $this->_current_article = $this->getArticleFromPostRequest();
             if ($this->isUpdateArticleAction()) {
@@ -39,27 +39,29 @@
             }
         }
 
-        public function getCurrentArticle() {
+        public function getCurrentArticle(): Article {
             return $this->_current_article;
         }
 
-        public function getSearchQuery() {
+        public function getSearchQuery(): ?string {
             if (isset($_GET['search_query'])) {
                 return $_GET['search_query'];
             }
+            return null;
         }
 
-        public function getSearchTerm() {
+        public function getSearchTerm(): ?string {
             if (isset($_GET['s_term'])) {
                 return $_GET['s_term'];
             }
+            return null;
         }
 
-        public function isSearchAction() {
+        public function isSearchAction(): bool {
             return isset($_GET['action']) && $_GET['action'] == 'search';
         }
 
-        private function updateArticle() {
+        private function updateArticle(): void {
             $article_form = new ArticleForm($this->_current_article);
             try {
                 $article_form->loadFields();
@@ -78,19 +80,19 @@
             $this->redirectTo($this->getBackendBaseUrl() . '&article=' . $this->_current_article->getId());
         }
 
-        private function addArticle() {
+        private function addArticle(): void {
             $new_article = $this->_article_dao->createArticle();
             $this->sendSuccessMessage("Artikel succesvol aangemaakt");
             $this->redirectTo($this->getBackendBaseUrl() . '&article=' . $new_article->getId());
         }
 
-        private function deleteArticle() {
+        private function deleteArticle(): void {
             $this->_article_dao->deleteArticle($this->_current_article);
             $this->sendSuccessMessage("Artikel succesvol verwijderd");
             $this->redirectTo($this->getBackendBaseUrl());
         }
 
-        private function updateSelectedTerms($selected_terms) {
+        private function updateSelectedTerms(array $selected_terms): void {
             if (count($selected_terms) == 0) return;
             $existing_terms = $this->_current_article->getTerms();
             foreach ($selected_terms as $selected_term_id) {
@@ -100,41 +102,48 @@
             }
         }
 
-        private function deleteSelectedTerms($article_form) {
-            foreach ($article_form->getTermsToDelete() as $term_to_delete)
+        private function deleteSelectedTerms(ArticleForm $article_form): void {
+            foreach ($article_form->getTermsToDelete() as $term_to_delete) {
                 $this->_article_dao->deleteTermFromArticle($term_to_delete->getId(), $this->_current_article);
+            }
         }
 
-        private function getArticleFromGetRequest() {
-            if (isset($_GET[self::$ARTICLE_ID_GET]))
+        private function getArticleFromGetRequest(): ?Article {
+            if (isset($_GET[self::$ARTICLE_ID_GET])) {
                 return $this->getArticleFromDatabase($_GET[self::$ARTICLE_ID_GET]);
+            }
+            return null;
         }
 
-        private function getArticleFromPostRequest() {
-            if (isset($_POST[self::$ARTICLE_ID_POST]))
+        private function getArticleFromPostRequest(): ?Article {
+            if (isset($_POST[self::$ARTICLE_ID_POST])) {
                 return $this->getArticleFromDatabase($_POST[self::$ARTICLE_ID_POST]);
+            }
+            return null;
         }
 
-        private function getArticleFromDatabase($article_id) {
+        private function getArticleFromDatabase(int $article_id): Article {
             return $this->_article_dao->getArticle($article_id);
         }
 
-        private function termAlreadyExists($term_id, $existing_terms) {
-            foreach ($existing_terms as $existing_term)
-                if ($existing_term->getId() == $term_id)
+        private function termAlreadyExists(int $term_id, array $existing_terms): bool {
+            foreach ($existing_terms as $existing_term) {
+                if ($existing_term->getId() == $term_id) {
                     return true;
+                }
+            }
             return false;
         }
 
-        private function isUpdateArticleAction() {
+        private function isUpdateArticleAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "update_element_holder";
         }
 
-        private function isDeleteArticleAction() {
+        private function isDeleteArticleAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "delete_article";
         }
 
-        private function isAddArticleAction() {
+        private function isAddArticleAction(): bool {
             return isset($_POST["add_article_action"]);
         }
 

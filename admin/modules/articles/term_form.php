@@ -7,15 +7,15 @@
     
     class TermForm extends Form {
     
-        private $_term;
-        private $_article_dao;
+        private ArticleTerm $_term;
+        private ArticleDao $_article_dao;
     
         public function __construct($term) {
             $this->_term = $term;
             $this->_article_dao = ArticleDao::getInstance();
         }
         
-        public function setTerm($term) {
+        public function setTerm(ArticleTerm $term): void {
             $this->_term = $term;
         }
     
@@ -25,7 +25,7 @@
                 throw new FormException();
         }
         
-        private function termExists() {
+        private function termExists(): bool {
             $existing_term = $this->_article_dao->getTermByName($this->_term->getName());
             if (!is_null($existing_term) && $this->_term->getId() != $existing_term->getId()) {
                 $this->raiseError("name", "Er bestaat al een term met deze naam");

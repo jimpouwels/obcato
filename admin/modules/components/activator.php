@@ -36,7 +36,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
@@ -49,7 +49,7 @@
             return $request_handlers;
         }
 
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
         }
 
         public function getActionButtons() {

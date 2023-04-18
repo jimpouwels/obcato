@@ -3,12 +3,12 @@
 
     class ArticlesSearch extends Panel {
 
-        private static $TEMPLATE = "articles/articles/search.tpl";
+        private static string $TEMPLATE = "articles/articles/search.tpl";
 
-        private $_article_dao;
-        private $_article_request_handler;
+        private ArticleDao $_article_dao;
+        private ArticleRequestHandler $_article_request_handler;
 
-        public function __construct($article_request_handler) {
+        public function __construct(ArticleRequestHandler $article_request_handler) {
             parent::__construct($this->getTextResource('articles_search_box_title'), 'article_search');
             $this->_article_request_handler = $article_request_handler;
             $this->_article_dao = ArticleDao::getInstance();
@@ -18,7 +18,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("search_query_field", $this->renderSearchQueryField());
             $this->getTemplateEngine()->assign("term_query_field", $this->renderTermQueryField());
             $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
@@ -26,13 +26,13 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderSearchQueryField() {
+        private function renderSearchQueryField(): string {
             $default_search_value = $this->_article_request_handler->getSearchQuery();
             $search_query_field = new TextField("search_query", $this->getTextResource('articles_search_box_query'), $default_search_value, false, false, null);
             return $search_query_field->render();
         }
 
-        private function renderTermQueryField() {
+        private function renderTermQueryField(): string {
             $term_options = array();
             array_push($term_options, array('name' => $this->getTextResource('select_field_default_text'), 'value' => NULL));
             foreach ($this->_article_dao->getAllTerms() as $term) {
@@ -43,7 +43,7 @@
             return $term_query_field->render();
         }
 
-        private function renderSearchButton() {
+        private function renderSearchButton(): string {
             $search_button = new Button("", $this->getTextResource('articles_search_box_search_button'), "document.getElementById('article_search').submit(); return false;");
             return $search_button->render();
         }

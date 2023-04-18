@@ -39,7 +39,7 @@
             return $action_buttons;
         }
         
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
         
@@ -49,7 +49,7 @@
             return $pre_handlers;
         }
         
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
             $this->_current_user = $this->_authorization_pre_handler->getCurrentUser();
         }
     

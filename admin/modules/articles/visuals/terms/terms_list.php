@@ -6,9 +6,9 @@
 
     class TermsList extends Panel {
 
-        private static $TEMPLATE = "articles/terms/list.tpl";
+        private static string $TEMPLATE = "articles/terms/list.tpl";
 
-        private $_article_dao;
+        private ArticleDao $_article_dao;
 
         public function __construct() {
             parent::__construct('Termen', 'term_list_panel');
@@ -19,7 +19,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("all_terms", $this->getAllTerms());
             $no_terms_message = new InformationMessage("Geen termen gevonden");
             $this->getTemplateEngine()->assign("no_terms_message", $no_terms_message->render());
@@ -27,7 +27,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function getAllTerms() {
+        private function getAllTerms(): array {
             $all_term_values = array();
             $all_terms = $this->_article_dao->getAllTerms();
 

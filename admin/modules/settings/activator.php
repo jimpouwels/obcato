@@ -39,7 +39,7 @@
             return $action_buttons;
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             $this->getTemplateEngine()->assign("path", $this->_settings_module->getIdentifier());
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
@@ -50,7 +50,7 @@
             return $request_handlers;
         }
 
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
         }
 
         private function renderGlobalSettingsPanel() {

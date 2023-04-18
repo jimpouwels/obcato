@@ -31,7 +31,7 @@
 
             if (!is_null($this->_module_visual)) {
                 $this->getTemplateEngine()->assign("page_title", $this->_module_visual->getTitle());
-                $this->getTemplateEngine()->assign("module_head_includes", $this->_module_visual->getHeadIncludes());
+                $this->getTemplateEngine()->assign("module_head_includes", $this->_module_visual->renderHeadIncludes());
             }
             $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
             $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());

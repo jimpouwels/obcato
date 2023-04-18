@@ -10,11 +10,11 @@
 
     class ArticleEditor extends Visual {
 
-        private static $ARTICLE_EDITOR_TEMPLATE = "articles/articles/editor.tpl";
-        private static $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
+        private static string $ARTICLE_EDITOR_TEMPLATE = "articles/articles/editor.tpl";
+        private static string $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
 
-        private $_current_article;
-        private $_article_dao;
+        private Article $_current_article;
+        private ArticleDao $_article_dao;
 
         public function __construct($current_article) {
             parent::__construct();
@@ -38,7 +38,7 @@
             return $metadata_panel->render();
         }
 
-        private function getDateValue($date): string {
+        private function getDateValue(string $date): string {
             return DateUtility::mysqlDateToString($date, '-');
         }
 

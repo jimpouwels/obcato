@@ -9,11 +9,11 @@
 
         private static $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
 
-        private $_current_article;
-        private $_article_dao;
-        private $_friendly_url_manager;
+        private Article $_current_article;
+        private ArticleDao $_article_dao;
+        private FriendlyUrlManager $_friendly_url_manager;
 
-        public function __construct($current_article) {
+        public function __construct(Article $current_article) {
             parent::__construct('Algemeen', 'article_metadata_editor');
             $this->_current_article = $current_article;
             $this->_article_dao = ArticleDao::getInstance();
@@ -24,7 +24,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $title_field = new TextField("article_title", $this->getTextResource('article_editor_title_label'), $this->_current_article->getTitle(), true, false, null);
             $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_article), '');
             $description_field = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->_current_article->getDescription(), false, true, null);
@@ -51,11 +51,11 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$ARTICLE_METADATA_TEMPLATE);
         }
 
-        private function getDateValue($date) {
+        private function getDateValue(string $date): string {
             return DateUtility::mysqlDateToString($date, '-');
         }
 
-        private function getTargetPageOptions() {
+        private function getTargetPageOptions(): array {
             $target_page_options = array();
             array_push($target_page_options, array("name" => "&gt; Selecteer", "value" => ""));
 
@@ -66,7 +66,7 @@
             return $target_page_options;
         }
 
-        private function assignElementHolderFormIds() {
+        private function assignElementHolderFormIds(): void {
             $this->getTemplateEngine()->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
             $this->getTemplateEngine()->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
             $this->getTemplateEngine()->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);

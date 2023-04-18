@@ -11,11 +11,11 @@
 
     class RequestHandler {
 
-        private $_page_dao;
-        private $_article_dao;
-        private $_image_dao;
-        private $_settings_dao;
-        private $_friendly_url_manager;
+        private PageDao $_page_dao;
+        private ArticleDao $_article_dao;
+        private ImageDao $_image_dao;
+        private SettingsDao $_settings_dao;
+        private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             $this->_settings_dao = SettingsDao::getInstance();
@@ -25,7 +25,7 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function handleRequest() {
+        public function handleRequest(): void {
             if ($this->isImageRequest()) {
                 $this->loadImage();
             } else {
@@ -38,17 +38,17 @@
             }
         }
 
-        private function renderHomepage() {
+        private function renderHomepage(): void {
             $homePage = $this->_settings_dao->getSettings()->getHomepage();
             $this->renderPage($homePage, null);
         }
 
-        private function renderPage(Page $page, ?Article $article) {
+        private function renderPage(Page $page, ?Article $article): void {
             $website = new WebsiteVisual($page, $article);
             echo $website->render();
         }
 
-        private function loadImage() {
+        private function loadImage(): void {
             $image = $this->getImageFromRequest();
             if ($image->isPublished()) {
                 if ($image->getExtension() == "jpg") {
@@ -64,7 +64,7 @@
             }
         }
 
-        private function getPageFromRequest() {
+        private function getPageFromRequest(): ?Page {
             $page = $this->_friendly_url_manager->getPageFromUrl($_SERVER['REQUEST_URI']);
             if ($page == null && isset($_GET['id'])) {
                 return $this->_page_dao->getPage($_GET['id']);
@@ -73,7 +73,7 @@
             }
         }
 
-        private function getArticleFromRequest() {
+        private function getArticleFromRequest(): ?Article {
             $article = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
             if ($article == null && isset($_GET['articleid'])) {
                 return $this->_article_dao->getArticle($_GET['articleid']);
@@ -82,11 +82,11 @@
             }
         }
 
-        private function getImageFromRequest() {
+        private function getImageFromRequest(): Image {
             return $this->_image_dao->getImage($_GET["image"]);
         }
 
-        private function isImageRequest() {
+        private function isImageRequest(): bool {
             return isset($_GET["image"]);
         }
 

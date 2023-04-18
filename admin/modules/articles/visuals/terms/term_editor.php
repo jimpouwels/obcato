@@ -3,11 +3,11 @@
 
     class TermEditor extends Panel {
 
-        private static $TEMPLATE = "articles/terms/editor.tpl";
+        private static string $TEMPLATE = "articles/terms/editor.tpl";
 
-        private $_current_term;
+        private ArticleTerm $_current_term;
 
-        public function __construct($current_term) {
+        public function __construct(ArticleTerm $current_term) {
             parent::__construct($this->getTextResource("articles_terms_editor_title"), 'term_editor_panel');
             $this->_current_term = $current_term;
         }
@@ -16,13 +16,13 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("id", $this->_current_term->getId());
             $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderNameField() {
+        private function renderNameField(): string {
             $name_value = null;
             if (isset($this->_current_term)) {
                 $name_value = $this->_current_term->getName();

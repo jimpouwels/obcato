@@ -45,7 +45,7 @@
             return $action_buttons;
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             $this->getTemplateEngine()->assign("path", $this->_template_module->getIdentifier());
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
@@ -56,7 +56,7 @@
             return $request_handlers;
         }
 
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
             $this->_current_template = $this->_template_pre_handler->getCurrentTemplate();
             $this->_current_scope = $this->_template_pre_handler->getCurrentScope();
         }

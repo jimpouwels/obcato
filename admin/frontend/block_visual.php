@@ -5,10 +5,10 @@
 
     class BlockVisual extends FrontendVisual {
 
-        private $_block;
-        private $_current_page;
+        private Block $_block;
+        private Page $_current_page;
 
-        public function __construct($block, $current_page) {
+        public function __construct(Block $block, Page $current_page) {
             parent::__construct($current_page);
             $this->_block = $block;
             $this->_current_page = $current_page;
@@ -21,7 +21,7 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName());
         }
 
-        private function renderElements() {
+        private function renderElements(): array {
             $elements_content = array();
             foreach ($this->_block->getElements() as $element) {
                 $elements_content[] = $element->getFrontendVisual($this->_current_page)->render();

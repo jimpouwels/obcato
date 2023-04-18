@@ -60,7 +60,7 @@
                 foreach ($this->_module_visual->getRequestHandlers() as $request_handler) {
                     $request_handler->handle();
                 }
-                $this->_module_visual->onPreHandled();
+                $this->_module_visual->onRequestHandled();
             }
         }
         

@@ -7,10 +7,10 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
-        private $_article;
-        private $_page_dao;
+        private Article $_article;
+        private PageDao $_page_dao;
 
-        public function __construct($current_page, $current_article) {
+        public function __construct(Page $current_page, Article $current_article) {
             parent::__construct($current_page);
             $this->_article = $current_article;
             $this->_page_dao = PageDao::getInstance();
@@ -30,7 +30,7 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getPage()->getTemplate()->getFileName());
         }
 
-        private function getPageContentAndMetaData($page) {
+        private function getPageContentAndMetaData(Page $page): array {
             $page_data = array();
             $page_data["elements"] = $this->renderElementHolderContent($page);
             $page_data["blocks"] = $this->renderBlocks();
@@ -38,13 +38,13 @@
             return $page_data;
         }
 
-        private function getPageMetaData($page) {
+        private function getPageMetaData(Page $page): array {
             $page_data = array();
             $this->addPageMetaData($page, $page_data);
             return $page_data;
         }
 
-        private function renderChildren($page) {
+        private function renderChildren(Page $page): array {
             $children = array();
             foreach ($page->getSubPages() as $subPage) {
                 if (!$subPage->isPublished()) continue;
@@ -55,7 +55,7 @@
             return $children;
         }
 
-        private function addPageMetaData($page, &$page_data, $render_childen = true) {
+        private function addPageMetaData(Page $page, array &$page_data, bool $render_childen = true): void {
             $page_data["is_current_page"] = $this->getPage()->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
             $page_data["url"] = $this->getPageUrl($page);
@@ -67,7 +67,7 @@
             }
         }
 
-        private function renderArticle() {
+        private function renderArticle(): array {
             $article_content = array();
             $article_content["id"] = $this->_article->getId();
             $article_content["title"] = $this->_article->getTitle();
@@ -78,7 +78,7 @@
             return $article_content;
         }
 
-        private function renderBlocks() {
+        private function renderBlocks(): array {
             $blocks = array();
             $blocks['no_position'] = array();
             foreach ($this->getPage()->getBlocks() as $block) {

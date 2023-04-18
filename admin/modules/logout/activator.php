@@ -18,12 +18,13 @@
         }
     
         public function render(): string {
+            return "";
         }
     
         public function getActionButtons() {
         }
         
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
         }
         
         public function getRequestHandlers() {
@@ -32,7 +33,7 @@
             return $request_handlers;
         }
         
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
         }
     
     }

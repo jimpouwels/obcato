@@ -106,6 +106,16 @@
             }
             return null;
         }
+
+        public function getModuleGroup(string $id): ?ModuleGroup {
+            $statement = $this->_mysql_connector->prepareStatement('SELECT * FROM module_groups WHERE id = ?');
+            $statement->bind_param('i', $id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc()) {
+                return ModuleGroup::constructFromRecord($row);
+            }
+            return null;
+        }
         
     }
 ?>

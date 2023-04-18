@@ -7,9 +7,9 @@
 
     class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_article_overview_element;
+        private ArticleOverviewElement $_article_overview_element;
 
-        public function __construct($current_page, $article_overview_element) {
+        public function __construct(Page $current_page, ArticleOverviewElement $article_overview_element) {
             parent::__construct($current_page, $article_overview_element);
             $this->_article_overview_element = $article_overview_element;
         }
@@ -21,7 +21,7 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_article_overview_element->getTemplate()->getFileName());
         }
 
-        private function getArticles() {
+        private function getArticles(): array {
             $articles = $this->_article_overview_element->getArticles();
             $articles_arr = array();
             foreach ($articles as $article) {
@@ -40,7 +40,7 @@
             return $articles_arr;
         }
 
-        private function getArticleImage($article) {
+        private function getArticleImage(Article $article): ?Image {
             $image = null;
             if (!is_null($article->getImage())) {
                 $image = array();
@@ -50,7 +50,7 @@
             return $image;
         }
 
-        private function isPublished($article) {
+        private function isPublished(Article $article): bool {
             return $article->isPublished() && strtotime($article->getPublicationDate()) < strtotime('now');
         }
     }

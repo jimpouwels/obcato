@@ -7,13 +7,13 @@
     
     class TermTab extends Visual {
     
-        private static $TERM_MANAGER_TEMPLATE = "articles/terms/root.tpl";
-        private static $TERM_QUERYSTRING_KEY = "term";
-        private static $NEW_TERM_QUERYSTRING_KEY = "new_term";
+        private static string $TERM_MANAGER_TEMPLATE = "articles/terms/root.tpl";
+        private static string $TERM_QUERYSTRING_KEY = "term";
+        private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";
     
-        private $_current_term;
+        private ArticleTerm $_current_term;
     
-        public function __construct($current_term) {
+        public function __construct(ArticleTerm $current_term) {
             parent::__construct();
             $this->_current_term = $current_term;
         }
@@ -27,17 +27,17 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TERM_MANAGER_TEMPLATE);
         }
         
-        public static function isEditTermMode() {
+        public static function isEditTermMode(): bool {
             return (isset($_GET[self::$TERM_QUERYSTRING_KEY]) && $_GET[self::$TERM_QUERYSTRING_KEY] != '') || 
                    (isset($_GET[self::$NEW_TERM_QUERYSTRING_KEY]) && $_GET[self::$NEW_TERM_QUERYSTRING_KEY] == 'true');
         }
         
-        private function renderTermEditor() {
+        private function renderTermEditor(): string {
             $term_editor = new TermEditor($this->_current_term);
             return $term_editor->render();
         }
         
-        private function renderTermsList() {
+        private function renderTermsList(): string {
             $term_list = new TermsList();
             return $term_list->render();
         }

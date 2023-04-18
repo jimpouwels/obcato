@@ -5,9 +5,9 @@
 
     class ListElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_list_element;
+        private ListElement $_list_element;
 
-        public function __construct($current_page, $list_element) {
+        public function __construct(Page $current_page, ListElement $list_element) {
             parent::__construct($current_page, $list_element);
             $this->_list_element = $list_element;
         }
@@ -19,10 +19,11 @@
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_list_element->getTemplate()->getFileName());
         }
 
-        private function renderListItems($element_holder) {
+        private function renderListItems(ElementHolder $element_holder): array {
             $list_items = array();
-            foreach ($this->_list_element->getListItems() as $list_item)
+            foreach ($this->_list_element->getListItems() as $list_item) {
                 $list_items[] = $this->toHtml($list_item->getText(), $element_holder);
+            }
             return $list_items;
         }
     }

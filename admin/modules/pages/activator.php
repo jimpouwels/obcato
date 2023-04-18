@@ -48,7 +48,7 @@
             return $buttons;
         }
 
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             $this->getTemplateEngine()->assign("path", $this->_page_module->getIdentifier());
             $element_statics_values = array();
             $element_statics = $this->_current_page->getElementStatics();
@@ -65,7 +65,7 @@
             return $request_handlers;
         }
 
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
             $this->_current_page = $this->_page_pre_handler->getCurrentPage();
         }
 

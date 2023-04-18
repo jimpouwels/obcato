@@ -5,9 +5,9 @@
 
     class TextElementFrontendVisual extends ElementFrontendVisual {
 
-        private $_text_element;
+        private TextElement $_text_element;
     
-        public function __construct($current_page, $text_element) {
+        public function __construct(Page $current_page, TextElement $text_element) {
             parent::__construct($current_page, $text_element);
             $this->_text_element = $text_element;
         }

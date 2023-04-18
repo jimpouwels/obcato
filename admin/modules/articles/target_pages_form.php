@@ -7,8 +7,8 @@
     
     class TargetPagesForm extends Form {
     
-        private $_target_page_to_add;
-        private $_new_default_target_page;
+        private string $_target_page_to_add;
+        private string $_new_default_target_page;
         private $_target_pages_to_delete;
         private $_article_dao;
     
@@ -22,19 +22,19 @@
             $this->loadTargetPagesToDelete();
         }
         
-        public function getTargetPageToAdd() {
+        public function getTargetPageToAdd(): string {
             return $this->_target_page_to_add;
         }
         
-        public function getNewDefaultTargetPage() {
+        public function getNewDefaultTargetPage(): string {
             return $this->_new_default_target_page;
         }
         
-        public function getTargetPagesToDelete() {
+        public function getTargetPagesToDelete(): array {
             return $this->_target_pages_to_delete;
         }
         
-        private function loadTargetPagesToDelete() {
+        private function loadTargetPagesToDelete(): void {
             $target_pages = $this->_article_dao->getTargetPages();
             foreach($target_pages as $target_page) {
                 $field_to_check = "target_page_" . $target_page->getId() . "_delete";

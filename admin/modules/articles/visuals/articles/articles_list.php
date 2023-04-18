@@ -5,12 +5,12 @@
 
     class ArticlesList extends Panel {
 
-        private static $TEMPLATE = "articles/articles/list.tpl";
+        private static string $TEMPLATE = "articles/articles/list.tpl";
 
-        private $_article_dao;
-        private $_article_request_handler;
+        private ArticleDao $_article_dao;
+        private ArticleRequestHandler $_article_request_handler;
 
-        public function __construct($article_request_handler) {
+        public function __construct(ArticleRequestHandler $article_request_handler) {
             parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
             $this->_article_request_handler = $article_request_handler;
             $this->_article_dao = ArticleDao::getInstance();
@@ -20,7 +20,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
             $this->getTemplateEngine()->assign("search_query", $this->_article_request_handler->getSearchQuery());
             $this->getTemplateEngine()->assign("search_term", $this->getSearchTermName());
@@ -28,7 +28,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        private function renderSearchResults() {
+        private function renderSearchResults(): array {
             $search_results = array();
 
             $articles = $this->getSearchResults();
@@ -47,30 +47,33 @@
             return $search_results;
         }
 
-        private function getSearchResults() {
-            if ($this->_article_request_handler->isSearchAction())
+        private function getSearchResults(): array {
+            if ($this->_article_request_handler->isSearchAction()) {
                 return $this->_article_dao->searchArticles($this->_article_request_handler->getSearchQuery(),  $this->getSearchTermId());
-            else
+            } else {
                 return $this->_article_dao->getAllArticles();
+            }
         }
 
-        private function getSearchTermId() {
+        private function getSearchTermId(): ?string {
             $search_term = $this->getSearchTerm();
-            return $search_term != null ? $search_term->getId() : null;
+            return $search_term ? $search_term->getId() : null;
         }
 
-        private function getSearchTermName() {
+        private function getSearchTermName(): ?string {
             $search_term = $this->getSearchTerm();
-            return $search_term != null ? $search_term->getName() : null;
+            return $search_term ? $search_term->getName() : null;
         }
 
-        private function getSearchTerm() {
+        private function getSearchTerm(): ?ArticleTerm {
             $search_term_name = $this->_article_request_handler->getSearchTerm();
-            if ($search_term_name)
+            if ($search_term_name) {
                 return $this->_article_dao->getTerm($search_term_name);
+            }
+            return null;
         }
 
-        private function renderNoResultsMessage() {
+        private function renderNoResultsMessage(): string {
             $message = new InformationMessage("Geen artikelen gevonden.");
             return $message->render();
         }

@@ -34,14 +34,14 @@
             return $value;
         }
 
-        public function getSelectValue(string $field_name): ?string {
+        public function getSelectValue(string $field_name): array {
             $value = [];
             if (isset($_POST[$field_name])) {
                 $value = $_POST[$field_name];
             }
             return $value;
         }
-        
+
         public function getCheckboxValue(string $field_name): int {
             return $this->getFieldValue($field_name) == "on" ? 1 : 0;
         }

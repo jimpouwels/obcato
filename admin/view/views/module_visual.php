@@ -16,10 +16,10 @@
         
         abstract function getActionButtons();
         
-        abstract function getHeadIncludes();
+        abstract function renderHeadIncludes();
         
         abstract function getRequestHandlers();
         
-        abstract function onPreHandled();
+        public function onRequestHandled(): void {
     
     }

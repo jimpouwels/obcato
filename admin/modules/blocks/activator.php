@@ -63,7 +63,7 @@
             return $action_buttons;
         }
         
-        public function getHeadIncludes() {
+        public function renderHeadIncludes() {
             $this->getTemplateEngine()->assign("path", $this->_block_module->getIdentifier());
             $element_statics_values = array();
             if (!is_null($this->_current_block)) {
@@ -83,7 +83,7 @@
             return $pre_handlers;
         }
         
-        public function onPreHandled() {
+        public function onRequestHandled(): void {
             $this->_current_block = $this->_block_pre_handler->getCurrentBlock();
             $this->_current_position = $this->_position_pre_handler->getCurrentPosition();
         }

@@ -7,7 +7,7 @@
 
         private Element $_element;
 
-        public function __construct($current_page, $element) {
+        public function __construct(Page $current_page, Element $element) {
             parent::__construct($current_page);
             $this->_element = $element;
         }
