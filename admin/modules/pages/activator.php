@@ -5,23 +5,22 @@
     require_once CMS_ROOT . "view/views/module_visual.php";
     require_once CMS_ROOT . "modules/pages/visuals/page_tree.php";
     require_once CMS_ROOT . "modules/pages/visuals/page_editor.php";
-    require_once CMS_ROOT . "modules/pages/page_pre_handler.php";
+    require_once CMS_ROOT . "modules/pages/page_request_handler.php";
     require_once CMS_ROOT . 'database/dao/page_dao.php';
 
     class PageModuleVisual extends ModuleVisual {
 
-        private static $PAGE_MODULE_TEMPLATE = "modules/pages/root.tpl";
-        private static $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
+        private static string $PAGE_MODULE_TEMPLATE = "modules/pages/root.tpl";
+        private static string $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
+        private ?Page $_current_page;
+        private Module $_page_module;
+        private PageRequestHandler $_page_request_handler;
+        private PageDao $_page_dao;
 
-        private $_current_page;
-        private $_page_module;
-        private $_page_pre_handler;
-        private $_page_dao;
-
-        public function __construct($page_module) {
+        public function __construct(Module $page_module) {
             parent::__construct($page_module);
             $this->_page_module = $page_module;
-            $this->_page_pre_handler = new PagePreHandler();
+            $this->_page_request_handler = new PageRequestHandler();
             $this->_page_dao = PageDao::getInstance();
         }
 
@@ -33,22 +32,25 @@
             return $this->getTemplateEngine()->fetch(self::$PAGE_MODULE_TEMPLATE);
         }
 
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $buttons = array();
             $buttons[] = new ActionButtonSave('update_element_holder');
-            if (!$this->currentPageIsHomepage())
+            if (!$this->currentPageIsHomepage()) {
                 $buttons[] = new ActionButtonDelete('delete_element_holder');
+            }
             $buttons[] = new ActionButtonAdd('add_element_holder');
             if ($this->_current_page->getId() != 1) {
-                if (!$this->_current_page->isFirst())
+                if (!$this->_current_page->isFirst()) {
                     $buttons[] = new ActionButtonUp('moveup_element_holder');
-                if (!$this->_current_page->isLast())
+                }
+                if (!$this->_current_page->isLast()) {
                     $buttons[] = new ActionButtonDown('movedown_element_holder');
+                }
             }
             return $buttons;
         }
 
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_page_module->getIdentifier());
             $element_statics_values = array();
             $element_statics = $this->_current_page->getElementStatics();
@@ -59,14 +61,14 @@
             return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
         }
 
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $request_handlers = array();
-            $request_handlers[] = $this->_page_pre_handler;
+            $request_handlers[] = $this->_page_request_handler;
             return $request_handlers;
         }
 
         public function onRequestHandled(): void {
-            $this->_current_page = $this->_page_pre_handler->getCurrentPage();
+            $this->_current_page = $this->_page_request_handler->getCurrentPage();
         }
 
         private function currentPageIsHomepage() {

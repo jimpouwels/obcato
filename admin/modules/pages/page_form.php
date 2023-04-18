@@ -6,11 +6,11 @@
     
     class PageForm extends Form {
     
-        private $_page;
-        private $_element_order;
-        private $_selected_blocks;
+        private Page $_page;
+        private string $_element_order;
+        private array $_selected_blocks;
     
-        public function __construct($page) {
+        public function __construct(Page $page) {
             $this->_page = $page;
         }
     
@@ -28,11 +28,11 @@
             }
         }
         
-        public function getElementOrder() {
+        public function getElementOrder(): string {
             return $this->_element_order;
         }
         
-        public function getSelectedBlocks() {
+        public function getSelectedBlocks(): array {
             return $this->_selected_blocks;
         }
     

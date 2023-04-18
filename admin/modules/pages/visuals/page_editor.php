@@ -9,12 +9,12 @@
 
     class PageEditor extends Visual {
 
-        private static $PAGE_EDITOR_TEMPLATE = "pages/editor.tpl";
-        private static $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
+        private static string $PAGE_EDITOR_TEMPLATE = "pages/editor.tpl";
+        private static string $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
 
-        private $_current_page;
+        private Page $_current_page;
 
-        public function __construct($current_page) {
+        public function __construct(Page $current_page) {
             parent::__construct();
             $this->_current_page = $current_page;
         }
@@ -28,22 +28,22 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$PAGE_EDITOR_TEMPLATE);
         }
 
-        private function renderPageMetaDataPanel() {
+        private function renderPageMetaDataPanel(): string {
             $metadata_editor = new MetadataEditor($this->_current_page);
             return $metadata_editor->render();
         }
 
-        private function renderElementContainerPanel() {
+        private function renderElementContainerPanel(): string {
             $element_container = new ElementContainer($this->_current_page->getElements());
             return $element_container->render();
         }
 
-        private function renderLinkEditorPanel() {
+        private function renderLinkEditorPanel(): string {
             $link_editor = new LinkEditor($this->_current_page->getLinks());
             return $link_editor->render();
         }
 
-        private function renderBlockSelectorPanel() {
+        private function renderBlockSelectorPanel(): string {
             $block_selector = new BlockSelector($this->_current_page->getBlocks(), $this->_current_page->getId());
             return $block_selector->render();
         }

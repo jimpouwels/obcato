@@ -3,13 +3,12 @@
 
     class PageTree extends Panel {
 
-        private $PAGES_TREE_TEMPLATE = "pages/tree.tpl";
-        private $PAGES_TREE_ITEM_TEMPLATE = "pages/tree_item.tpl";
+        private string $PAGES_TREE_TEMPLATE = "pages/tree.tpl";
+        private string $PAGES_TREE_ITEM_TEMPLATE = "pages/tree_item.tpl";
+        private Page $_root_page;
+        private Page $_selected_page;
 
-        private $_root_page;
-        private $_selected_page;
-
-        public function __construct($root_page, $selected_page) {
+        public function __construct(Page $root_page, Page $selected_page) {
             parent::__construct($this->getTextResource('page_tree_title'), 'page_tree_fieldset');
             $this->_root_page = $root_page;
             $this->_selected_page = $selected_page;

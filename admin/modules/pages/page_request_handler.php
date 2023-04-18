@@ -10,17 +10,17 @@
     require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
-    class PagePreHandler extends ElementHolderRequestHandler {
+    class PageRequestHandler extends ElementHolderRequestHandler {
 
-        private static $PAGE_ID_POST = "element_holder_id";
-        private static $PAGE_ID_GET = "page";
-        private static $FALLBACK_PAGE_ID = 1;
+        private static string $PAGE_ID_POST = "element_holder_id";
+        private static string $PAGE_ID_GET = "page";
+        private static string $FALLBACK_PAGE_ID = 1;
 
-        private $_current_page;
-        private $_page_dao;
-        private $_block_dao;
-        private $_element_dao;
-        private $_friendly_url_manager;
+        private Page $_current_page;
+        private PageDao $_page_dao;
+        private BlockDao $_block_dao;
+        private ElementDao $_element_dao;
+        private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             parent::__construct();
@@ -30,30 +30,31 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
             $this->_current_page = $this->getPageFromGetRequest();
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             parent::handlePost();
             $this->_current_page = $this->getPageFromPostRequest();
-            if ($this->isUpdatePageAction())
+            if ($this->isUpdatePageAction()) {
                 $this->updatePage();
-            else if ($this->isDeletePageAction())
+            } else if ($this->isDeletePageAction()) {
                 $this->deletePage();
-            else if ($this->isAddSubPageAction())
+            } else if ($this->isAddSubPageAction()) {
                 $this->addSubPage();
-            else if ($this->isMoveUpAction())
+            } else if ($this->isMoveUpAction()) {
                 $this->moveUp();
-            else if ($this->isMoveDownAction())
+            } else if ($this->isMoveDownAction()) {
                 $this->moveDown();
+            }
         }
 
-        public function getCurrentPage() {
+        public function getCurrentPage(): ?Page {
             return $this->_current_page;
         }
 
-        private function updatePage() {
+        private function updatePage(): void {
             $page_form = new PageForm($this->_current_page);
             try {
                 $page_form->loadFields();
@@ -71,16 +72,17 @@
             }
         }
 
-        private function addSelectedBlocks($selected_blocks) {
+        private function addSelectedBlocks(array $selected_blocks): void {
             if (is_null($selected_blocks) || count($selected_blocks) == 0) return;
             $current_page_blocks = $this->_current_page->getBlocks();
             foreach ($selected_blocks as $selected_block_id) {
-                if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks))
+                if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
                     $this->_current_page->addBlock($this->_block_dao->getBlock($selected_block_id));
+                }
             }
         }
 
-        private function blockAlreadyExists($selected_block_id, $current_page_blocks) {
+        private function blockAlreadyExists(int $selected_block_id, array $current_page_blocks): bool {
             foreach ($current_page_blocks as $current_page_block) {
                 if ($current_page_block->getId() == $selected_block_id) {
                     return true;
@@ -89,7 +91,7 @@
             return false;
         }
 
-        private function deleteSelectedBlocksFromPage() {
+        private function deleteSelectedBlocksFromPage(): void {
             $current_page_blocks = $this->_current_page->getBlocks();
             foreach ($current_page_blocks as $current_page_block) {
                 if ($this->isBlockSelectedForDeletion($current_page_block)) {
@@ -98,11 +100,11 @@
             }
         }
 
-        private function isBlockSelectedForDeletion($current_page_block) {
+        private function isBlockSelectedForDeletion(Block $current_page_block): bool {
             return isset($_POST["block_" . $this->_current_page->getId() . "_" . $current_page_block->getId() . "_delete"]);
         }
 
-        private function deletePage() {
+        private function deletePage(): void {
             $this->_page_dao->deletePage($this->_current_page);
             $parent = $this->_current_page->getParent();
             $current_level_pages = $parent->getSubPages();
@@ -111,7 +113,7 @@
             $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
         }
 
-        private function addSubPage() {
+        private function addSubPage(): void {
             $new_page = new Page();
             $new_page->setParentId($this->_current_page->getId());
             $new_page->setShowInNavigation(true);
@@ -131,49 +133,50 @@
             $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $new_page->getId());
         }
 
-        private function moveUp() {
+        private function moveUp(): void {
             $this->_current_page->moveUp();
         }
 
-        private function moveDown() {
+        private function moveDown(): void {
             $this->_current_page->moveDown();
         }
 
-        private function updateFollowUp($pages) {
+        private function updateFollowUp(array $pages): void {
             for ($i = 0; $i < count($pages); $i++) {
                 $pages[$i]->setFollowUp($i);
                 $this->_page_dao->updatePage($pages[$i]);
             }
         }
 
-        private function getPageFromPostRequest() {
+        private function getPageFromPostRequest(): Page {
             return $this->_page_dao->getPage($_POST[self::$PAGE_ID_POST]);
         }
 
-        private function getPageFromGetRequest() {
-            if (isset($_GET[self::$PAGE_ID_GET]))
+        private function getPageFromGetRequest(): Page {
+            if (isset($_GET[self::$PAGE_ID_GET])) {
                 return $this->_page_dao->getPage($_GET[self::$PAGE_ID_GET]);
-            else
+            } else {
                 return $this->_page_dao->getPage(self::$FALLBACK_PAGE_ID);
+            }
         }
 
-        private function isUpdatePageAction() {
+        private function isUpdatePageAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "update_element_holder";
         }
 
-        private function isDeletePageAction() {
+        private function isDeletePageAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "delete_page";
         }
 
-        private function isAddSubPageAction() {
+        private function isAddSubPageAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "sub_page";
         }
 
-        private function isMoveUpAction() {
+        private function isMoveUpAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "move_up";
         }
 
-        private function isMoveDownAction() {
+        private function isMoveDownAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "move_down";
         }
 

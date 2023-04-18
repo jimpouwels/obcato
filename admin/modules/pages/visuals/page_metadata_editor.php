@@ -5,11 +5,11 @@
 
     class MetadataEditor extends Panel {
 
-        private static $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
-        private $_current_page;
-        private $_friendly_url_manager;
+        private static string $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
+        private Page $_current_page;
+        private FriendlyUrlManager $_friendly_url_manager;
 
-        public function __construct($current_page) {
+        public function __construct(Page $current_page) {
             parent::__construct($this->getTextResource('edit_metadata_title'), "page_metadata_editor");
             $this->_current_page = $current_page;
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
@@ -19,7 +19,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $title_field = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->_current_page->getTitle(), true, false, null);
             $navigation_title_field = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->_current_page->getNavigationTitle(), true, false, null);
             $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_page), '');
