@@ -7,37 +7,38 @@
     
     class BackendRequestHandler extends HttpRequestHandler {
             
-        private $_module_dao;
-        private $_callback;
+        private ModuleDao $_module_dao;
+        private Module $_current_module;
         
-        public function __construct($callback) {
-            $this->_callback = $callback;
+        public function __construct() {
             $this->_module_dao = ModuleDao::getInstance();
         }
     
-        public function handleGet() {
-            $this->setCurrentModule();
+        public function handleGet(): void {
+            $this->loadCurrentModule();
         }
 
-        public function handlePost() {
-            $this->setCurrentModule();
+        public function handlePost(): void {
+            $this->loadCurrentModule();
         }
 
-        public function setCurrentModule() {
-            $current_module = null;
-            $module_id = $this->getParam('module_id');
+        public function getCurrentModule(): ?Module {
+            return $this->_current_module;
+        }
+
+        public function loadCurrentModule(): void {
+            $module_id = intval($this->getParam('module_id'));
             if ($module_id) {
-                $current_module = $this->_module_dao->getModule($module_id);
+                $this->_current_module = $this->_module_dao->getModule($module_id);
                 BlackBoard::$MODULE_ID = $module_id;
-                $module_tab_id = $this->getParam('module_tab_id');
+                $module_tab_id = intval($this->getParam('module_tab_id'));
                 if (!is_null($module_tab_id)) {
                     BlackBoard::$MODULE_TAB_ID = $module_tab_id;
                 }
             }
-            $this->_callback->setCurrentModule($current_module);
         }
 
-        private function getParam($name) {
+        private function getParam(string $name): ?string {
             $value = null;
             if (isset($_GET[$name])) {
                 $value = $_GET[$name];

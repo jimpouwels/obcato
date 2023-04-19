@@ -9,26 +9,25 @@
     class Backend {
     
         private $_identifier;
-        private $_request_handlers;
+        private $_backend_request_handler;
         private $_current_module;
         private $_module_visual;
     
         public function __construct($identifier) {
             $this->_identifier = $identifier;
-            $this->initializeRequestHandlers();
+            $this->_backend_request_handler = new BackendRequestHandler();
         }
         
         public function start() {
             $this->loadTextResources();
-            $this->runRequestHandlers();
+            $this->_backend_request_handler->handle();
+            $this->loadCurrentModule();
             $this->runModuleRequestHandler();
             $this->renderCms();
         }
         
-        /*
-            Callback invocation for BackendRequestHandler.
-        */
-        public function setCurrentModule($current_module) {
+        private function loadCurrentModule() {
+            $current_module = $this->_backend_request_handler->getCurrentModule();
             if (!is_null($current_module)) {
                 $this->_current_module = $current_module;
                 require_once CMS_ROOT . "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
@@ -64,17 +63,6 @@
             }
         }
         
-        private function initializeRequestHandlers() {
-            $this->_request_handlers = array();
-            $this->_request_handlers[] = new BackendRequestHandler($this);
-        }
-        
-        private function runRequestHandlers() {
-            foreach ($this->_request_handlers as $request_handler) {
-                $request_handler->handle();
-            }
-        }
-
         private function loadTextResources() {
             if (!Session::areTextResourcesLoaded()) {
                 $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
