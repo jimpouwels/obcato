@@ -55,12 +55,3 @@ selected_blocks_header: Selected blocks
 selected_blocks_position: Position
 selected_blocks_delete: Delete
 no_selected_blocks_found_message: No blocks selected
-
-# ELEMENTS
-text_element_label: Paragraph
-list_element_label: List
-image_element_label: Image
-download_element_label: Download
-article_overview_element_label: Article overview
-photo_album_element_label: Photo album
-table_of_contents_element_label: Table of contents

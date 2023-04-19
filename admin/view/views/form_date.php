@@ -7,7 +7,7 @@
     
         private static $TEMPLATE = "system/form_date.tpl";
     
-        public function __construct(string $name, string $label, string $value, bool $mandatory, ?string $class_name) {
+        public function __construct(string $name, string $label, ?string $value, bool $mandatory, ?string $class_name) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
         }
     

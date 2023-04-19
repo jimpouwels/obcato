@@ -1,0 +1,1 @@
+photo_album_element_label: Photo album

@@ -14,7 +14,7 @@
                 <div class="template_picker">
                     {$template_picker}
                 </div>
-                <div class="delete_button">
+                <div class="element_action_buttons">
                     <a href="#" onclick="toggleElement('{$id}'); return false;" title="Minimaliseer">
                         <img src="/admin/static.php?file=/default/img/default_icons/minimize.png" width="16px" height="16px" alt="Minimize" title="Minimize" />
                     </a>

@@ -4,19 +4,27 @@
     require_once CMS_ROOT . "authentication/session.php";
     require_once CMS_ROOT . "utilities/string_utility.php";
     require_once CMS_ROOT . "database/dao/module_dao.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
 
     class TextResourceLoader {
 
         private string $_language;
+        private ModuleDao $_module_dao;
+        private ElementDao $_element_dao;
 
         public function __construct(string $language) {
             $this->_language = $language;
+            $this->_module_dao = ModuleDao::getInstance();
+            $this->_element_dao = ElementDao::getInstance();
         }
 
         public function loadTextResources(): array {
             $text_resources = $this->getGlobalTextResources();
-            foreach (ModuleDao::getInstance()->getAllModules() as $module) {
+            foreach ($this->_module_dao->getAllModules() as $module) {
                 $text_resources = array_merge($text_resources, $this->getModuleTextResources($module));
+            }
+            foreach ($this->_element_dao->getElementTypes() as $element_type) {
+                $text_resources = array_merge($text_resources, $this->getElementTextResources($element_type));
             }
             return $text_resources;
         }
@@ -26,7 +34,11 @@
         }
 
         private function getModuleTextResources(Module $module): array {
-            return $this->getTextResourcesFromFile($this->getModuleResourceFilePath($module->getIdentifier()));
+            return $this->getTextResourcesFromFile($this->getResourceFilePath($module->getIdentifier()));
+        }
+        
+        private function getElementTextResources(ElementType $element_type): array {
+            return $this->getTextResourcesFromFile($this->getResourceFilePath($element_type->getIdentifier()));
         }
 
         private function getTextResourcesFromFile(string $file_path): array {
@@ -46,10 +58,10 @@
             return $resources;
         }
 
-        private function getModuleResourceFilePath(string $module_identifier): string {
-            $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-' . $this->_language . '.txt';
+        private function getResourceFilePath(string $identifier): string {
+            $path = STATIC_DIR . '/text_resources/' . $identifier . '-' . $this->_language . '.txt';
             if (!file_exists($path)) {
-                $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-nl.txt';
+                $path = STATIC_DIR . '/text_resources/' . $identifier . '-nl.txt';
             }
             return $path;
         }

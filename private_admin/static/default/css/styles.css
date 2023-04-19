@@ -489,8 +489,12 @@ h1 {
     margin-bottom: 2px;
 }
 
-.element_header .delete_button {
+.element_header .element_action_buttons {
     margin-left: 10px;
+}
+
+.element_header .element_action_buttons a:hover {
+    text-decoration: none;
 }
 
 .element_wrapper .element_editor_body {

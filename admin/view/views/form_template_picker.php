@@ -6,7 +6,7 @@
     
     class TemplatePicker extends Pulldown {
     
-        public function __construct(string $name, string $label, bool $mandatory, ?string $class_name, Template $current_template, Scope $scope) {
+        public function __construct(string $name, string $label, bool $mandatory, ?string $class_name, ?Template $current_template, Scope $scope) {
             $options = $this->getOptions($scope);
             $current_template_id = null;
             if (!is_null($current_template)) {
