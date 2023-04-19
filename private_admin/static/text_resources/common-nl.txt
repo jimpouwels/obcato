@@ -55,3 +55,12 @@ selected_blocks_header: Geselecteerde blokken
 selected_blocks_position: Positie
 selected_blocks_delete: Verwijderen
 no_selected_blocks_found_message: Geen blokken geselecteerd
+
+# ELEMENTS
+text_element_label: Paragraaf
+list_element_label: Lijst
+image_element_label: Afbeelding
+download_element_label: Download
+article_overview_element_label: Artikeloverzicht
+photo_album_element_label: Fotoalbum
+table_of_contents_element_label: Inhoudsopgave

@@ -55,7 +55,7 @@
             foreach ($this->_element_dao->getElementTypes() as $element_type) {
                 $sub_item = array();
                 $sub_item["id"] = $element_type->getId();
-                $sub_item["name"] = $element_type->getName();
+                $sub_item["name"] = $this->getTextResource($element_type->getIdentifier() . '_label');
                 $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
                 $sub_items[] = $sub_item;
             }

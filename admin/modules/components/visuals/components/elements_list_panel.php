@@ -29,7 +29,7 @@
             foreach ($this->_element_dao->getElementTypes() as $element_type) {
                 $element_data = array();
                 $element_data['id'] = $element_type->getId();
-                $element_data['name'] = $element_type->getName();
+                $element_data['name'] = $this->getTextResource($element_type->getIdentifier() . '_label');
                 $element_data['icon_url'] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
                 $element_data['is_current'] = $this->isCurrentElement($element_type);
                 $elements_data[] = $element_data;

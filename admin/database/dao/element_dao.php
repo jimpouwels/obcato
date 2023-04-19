@@ -65,7 +65,7 @@
         }
 
         public function getElementTypes(): array {
-            $query = "SELECT * FROM element_types ORDER BY name";
+            $query = "SELECT * FROM element_types ORDER BY identifier";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
             while ($row = $result->fetch_assoc()) {
@@ -79,8 +79,7 @@
             if ($element_type->getSystemDefault()) {
                 $system_default_val = 1;
             }
-            $query = "UPDATE element_types SET classname = '" . $element_type->getClassName() . "', icon_url = '" . $element_type->getIconUrl() . "', name = '" .
-                      $element_type->getName() . "', domain_object = '" . $element_type->getDomainObject() . "', scope_id = " . 
+            $query = "UPDATE element_types SET classname = '" . $element_type->getClassName() . "', icon_url = '" . $element_type->getIconUrl() . "', domain_object = '" . $element_type->getDomainObject() . "', scope_id = " . 
                       $element_type->getScopeId() . ", identifier = '" . $element_type->getIdentifier() . "', system_default = " . 
                       $system_default_val . " WHERE identifier = '" . $element_type->getIdentifier() . "'";
             $this->_mysql_connector->executeQuery($query);
@@ -91,9 +90,9 @@
             if ($element_type->getSystemDefault()) {
                 $system_default_val = 1;
             }
-            $query = "INSERT INTO element_types (classname, icon_url, name, domain_object, scope_id, identifier, system_default)" .
+            $query = "INSERT INTO element_types (classname, icon_url, domain_object, scope_id, identifier, system_default)" .
                      " VALUES ('" . $element_type->getClassName() . "', '" . $element_type->getIconUrl() .
-                     "', '" . $element_type->getName() . "', '" . $element_type->getDomainObject() . "', " . $element_type->getScopeId() . ", " . 
+                     "', '" . $element_type->getDomainObject() . "', " . $element_type->getScopeId() . ", " . 
                      "'" . $element_type->getIdentifier() . "', " . $system_default_val . ")";
             $this->_mysql_connector->executeQuery($query);
             $element_type->setId($this->_mysql_connector->getInsertId());
@@ -105,7 +104,7 @@
         }
 
         public function getDefaultElementTypes(): array {
-            $query = "SELECT * FROM element_types WHERE system_default = 1 ORDER BY name";
+            $query = "SELECT * FROM element_types WHERE system_default = 1 ORDER BY identifier";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
             while ($row = $result->fetch_assoc())
@@ -114,7 +113,7 @@
         }
 
         public function getCustomElementTypes(): array {
-            $query = "SELECT * FROM element_types WHERE system_default = 0 ORDER BY name";
+            $query = "SELECT * FROM element_types WHERE system_default = 0 ORDER BY identifier";
             $result = $this->_mysql_connector->executeQuery($query);
             $element_types = array();
             while ($row = $result->fetch_assoc()) {

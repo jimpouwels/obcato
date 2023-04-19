@@ -82,7 +82,7 @@
         public function getElementStatics(): array {
             $element_statics = array();
             foreach ($this->getElements() as $element) {
-                $key = $element->getType()->getName();
+                $key = $element->getType()->getIdentifier();
                 if (!array_key_exists($key, $element_statics)) {
                     $statics = $element->getStatics();
                     if (!is_null($statics)) {

@@ -84,6 +84,7 @@
             <query>INSERT INTO scopes (id, name) VALUES (12, 'Inhoudsopgave')</query>
             <query>INSERT INTO element_types VALUES (9 ,'TableOfContentsElement','/img/table_of_contents_element.png','Inhoudsopgave','table_of_contents_element.php',12,'table_of_contents_element',1)</query>
             <query>ALTER TABLE elements ADD COLUMN include_in_table_of_contents BOOL NOT NULL DEFAULT 0</query>
+            <query>ALTER TABLE element_types DROP COLUMN name</query>
         </queries>
     </version>
 </versions>

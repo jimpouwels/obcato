@@ -22,7 +22,7 @@
         }
 
         private function getGlobalTextResources(): array {
-            return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/' . $this->_language . '.txt');
+            return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/common-' . $this->_language . '.txt');
         }
 
         private function getModuleTextResources(Module $module): array {

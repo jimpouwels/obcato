@@ -6,21 +6,12 @@
 
     class ElementType extends Entity {
     
-        private string $_name;
         private string $_class_name;
         private string $_domain_object;
         private string $_icon_url;
         private string $_identifier;
         private int $_scope_id;
         private bool $_system_default;
-        
-        public function getName(): string {
-            return $this->_name;
-        }
-        
-        public function setName(string $name): void {
-            $this->_name = $name;
-        }
         
         public function getClassName(): string {
             return $this->_class_name;
@@ -82,7 +73,6 @@
         public static function constructFromRecord($record) {
             $element_type = new ElementType();
             $element_type->setId($record['id']);
-            $element_type->setName($record['name']);
             $element_type->setClassName($record['classname']);
             $element_type->setIconUrl($record['icon_url']);
             $element_type->setIdentifier($record['identifier']);

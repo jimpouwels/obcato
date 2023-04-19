@@ -21,11 +21,11 @@
             $this->getTemplateEngine()->assign("index", $element->getIndex());
             $this->getTemplateEngine()->assign("id", $element->getId());
             $this->getTemplateEngine()->assign("icon_url", '/admin/static.php?file=/elements/' . $element->getType()->getIdentifier() . '/' . $element->getType()->getIconUrl());
-            $this->getTemplateEngine()->assign("type", $element->getType()->getName());
+            $this->getTemplateEngine()->assign("type", $this->getTextResource($element->getType()->getIdentifier() . '_label'));
             $this->getTemplateEngine()->assign("template_picker", $template_picker->render());
             
             $table_of_contents_html = "";
-            if ($element->getType()->getName() != 'Inhoudsopgave') {
+            if ($element->getType()->getIdentifier() != 'table_of_contents_element') {
                 $include_in_table_of_contents_field = new SingleCheckbox("element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
                 $table_of_contents_html = $include_in_table_of_contents_field->render();
             }
