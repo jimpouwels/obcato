@@ -8,15 +8,15 @@
 
     class ImageSearchBox extends Panel {
 
-        private static $SEARCH_QUERY_KEY = "s_term";
-        private static $SEARCH_LABEL_KEY = "s_label";
-        private static $TEMPLATE = "system/image_search.tpl";
-        private $_back_click_id;
-        private $_backfill_id;
-        private $_objects_to_search;
-        private $_image_dao;
+        private static string $SEARCH_QUERY_KEY = "s_term";
+        private static string $SEARCH_LABEL_KEY = "s_label";
+        private static string $TEMPLATE = "system/image_search.tpl";
+        private string $_back_click_id;
+        private string $_backfill_id;
+        private string $_objects_to_search;
+        private ImageDao $_image_dao;
 
-        public function __construct($back_click_id, $backfill_id, $objects_to_search) {
+        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search) {
             parent::__construct('Zoeken', 'popup_search_fieldset');
             $this->_back_click_id = $back_click_id;
             $this->_backfill_id = $backfill_id;
@@ -28,7 +28,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("object", $this->_objects_to_search);
             $this->getTemplateEngine()->assign("backfill", $this->_backfill_id);
             $this->getTemplateEngine()->assign("back_click_id", $this->_back_click_id);
@@ -42,13 +42,13 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function renderSearchField() {
+        private function renderSearchField(): string {
             $search_query = $this->getCurrentSearchQuery();
             $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
             return $search_field->render();
         }
 
-        private function renderImageLabelsField() {
+        private function renderImageLabelsField(): string {
             $image_labels_values = array();
 
             $current_label_search = $this->getCurrentSearchLabel();
@@ -58,11 +58,11 @@
             foreach ($image_labels as $image_label) {
                 $image_labels_values[] = array("name" => $image_label->getName(), "value" => $image_label->getId());
             }
-            $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", $current_label_search, $image_labels_values, false, null);
+            $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null);
             return $image_labels_field->render();
         }
 
-        private function renderSearchResults() {
+        private function renderSearchResults(): array {
             $search_results_value = array();
             $search_results = null;
             $search_results = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, $this->getCurrentSearchLabel());
@@ -78,28 +78,28 @@
             return $search_results_value;
         }
 
-        private function renderNoResultsMessage() {
+        private function renderNoResultsMessage(): string {
             $information_message = new InformationMessage("Geen resultaten gevonden");
             return $information_message->render();
         }
 
-        private function getCurrentSearchQuery() {
-            $search_title = "";
+        private function getCurrentSearchQuery(): ?string {
+            $search_title = null;
             if (isset($_GET[self::$SEARCH_QUERY_KEY])) {
                 $search_title = $_GET[self::$SEARCH_QUERY_KEY];
             }
             return $search_title;
         }
 
-        private function getCurrentSearchLabel() {
+        private function getCurrentSearchLabel(): ?string {
             $current_search_label = null;
-            if (isset($_GET[self::$SEARCH_LABEL_KEY])) {
-                $current_search_label = $_GET[self::$SEARCH_LABEL_KEY];
+            if (isset($_GET[self::$SEARCH_LABEL_KEY]) && !empty($_GET[self::$SEARCH_LABEL_KEY])) {
+                $current_search_label = intval($_GET[self::$SEARCH_LABEL_KEY]);
             }
             return $current_search_label;
         }
 
-        private function renderSearchButton() {
+        private function renderSearchButton(): string {
             $search_button = new Button("", "Zoeken", "document.getElementById('search_form').submit(); return false;");
             return $search_button->render();
         }

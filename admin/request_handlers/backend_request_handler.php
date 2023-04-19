@@ -8,7 +8,7 @@
     class BackendRequestHandler extends HttpRequestHandler {
             
         private ModuleDao $_module_dao;
-        private Module $_current_module;
+        private ?Module $_current_module = null;
         
         public function __construct() {
             $this->_module_dao = ModuleDao::getInstance();

@@ -26,11 +26,11 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function updateFriendlyUrl(string $url, Page $page): void {
+        public function updateFriendlyUrl(string $url, ElementHolder $element_holder): void {
             $query = "UPDATE friendly_urls SET url = ? WHERE element_holder_id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
 
-            $element_holder_id = $page->getId();
+            $element_holder_id = $element_holder->getId();
             $statement->bind_param("si", $url, $element_holder_id);
             $this->_mysql_connector->executeStatement($statement);
         }

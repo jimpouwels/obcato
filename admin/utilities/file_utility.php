@@ -7,24 +7,25 @@
         
         private function __construct() {
         }
-    
 
-        public static function deleteImage($image, $upload_dir) {
+        public static function deleteImage(Image $image, string $upload_dir): void {
             // first delete the old file
             if (!is_null($image->getFileName()) && $image->getFileName() != '') {
                 $old_file_name = $upload_dir . "/" . $image->getFileName();
-                if (file_exists($old_file_name))
+                if (file_exists($old_file_name)) {
                     unlink($old_file_name);
+                }
             }
             // now delete the thumb
             if (!is_null($image->getThumbFileName()) && $image->getThumbFileName() != '') {
                 $old_file_name = $upload_dir . "/" . $image->getThumbFileName();
-                if (file_exists($old_file_name))
+                if (file_exists($old_file_name)) {
                     unlink($old_file_name);
+                }
             }
         }
 
-        public static function saveThumb($source_image_filename, $directory, $thumb_file_name, $thumb_width, $thumb_height) {
+        public static function saveThumb(string $source_image_filename, string $directory, string $thumb_file_name, int $thumb_width, int $thumb_height): void {
             $splits = explode('.', $source_image_filename);
             $extension = $splits[count($splits) - 1];
             $target_image = imagecreatetruecolor($thumb_width, $thumb_height);
@@ -50,15 +51,15 @@
             @param $target The target folder
             @param $delete_source_dir True if the source directory should be deleted
         */
-        public static function moveDirectoryContents($source, $target, $delete_source_dir = false) {
+        public static function moveDirectoryContents(string $source, string $target, bool $delete_source_dir = false): void {
             $files = scandir($source);
             foreach ($files as $file) {
                 if ($file != "." && $file != "..") {
                     $source_file = "$source/$file";
                     $target_file = "$target/$file";
-                    if (!is_dir($source_file))
+                    if (!is_dir($source_file)) {
                         copy($source_file, $target_file);
-                    else {
+                    } else {
                         if (!is_dir($target_file))
                             mkdir($target_file);
                         self::moveDirectoryContents($source_file, $target_file);
@@ -77,7 +78,7 @@
             
             @param $path The path to delete all contents from
         */
-        public static function recursiveDelete($path, $remove_path_dir = false) {
+        public static function recursiveDelete(string $path, bool $remove_path_dir = false): void {
             $files = scandir($path);
             // Cycle through all source files
             foreach ($files as $file) {
@@ -96,27 +97,14 @@
             }
         }
 
-        public static function deleteFilesStartingWith($path, $start_with_string) {
+        public static function deleteFilesStartingWith(string $path, string $start_with_string): void {
             $files = scandir($path);
             foreach ($files as $file) {
-                if (StringUtility::startsWith($file, $start_with_string)) {
+                if (str_starts_with($file, $start_with_string)) {
                     $source_file = "$path/$file";
                     unlink($source_file);
                 }
             }
-        }
-        
-        /*
-            Loads the contents of the given file.
-            
-            @param $path The path to the file
-        */
-        public static function loadFileContents($path) {
-            $file_contents = NULL;
-            if (!is_dir($path)) {
-                $file_contents = file_get_contents($path);
-            }
-            return $file_contents;
         }
         
     }

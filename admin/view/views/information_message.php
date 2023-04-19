@@ -5,10 +5,10 @@
     
     class InformationMessage extends Visual {
     
-        private static $TEMPLATE = "system/information_message.tpl";
-        private $_message;
+        private static string $TEMPLATE = "system/information_message.tpl";
+        private string $_message;
     
-        public function __construct($message) {
+        public function __construct(string $message) {
             parent::__construct();
             $this->_message = $message;
         }

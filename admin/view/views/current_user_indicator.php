@@ -6,7 +6,7 @@
     
     class CurrentUserIndicator extends Visual {
     
-        private static $TEMPLATE = "system/current_user_indicator.tpl";
+        private static string $TEMPLATE = "system/current_user_indicator.tpl";
 
         public function __construct() {
             parent::__construct();

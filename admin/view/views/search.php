@@ -6,19 +6,19 @@
     
     class Search extends Visual {
         
-        public static $ARTICLES = "articles";
-        public static $PAGES = "pages";
-        public static $IMAGES = "images";
-        public static $ELEMENT_HOLDERS = "element_holders";
+        public static string $ARTICLES = "articles";
+        public static string $PAGES = "pages";
+        public static string $IMAGES = "images";
+        public static string $ELEMENT_HOLDERS = "element_holders";
         
-        public static $BACK_CLICK_ID_KEY = "back_click_id";
-        public static $BACKFILL_KEY = "backfill";
-        public static $OBJECT_TO_SEARCH_KEY = "object";
-        public static $POPUP_TYPE_KEY = "popup";
-        private $_back_click_id;
-        private $_backfill_id;
-        private $_objects_to_search;
-        private $_popup_type;
+        public static string $BACK_CLICK_ID_KEY = "back_click_id";
+        public static string $BACKFILL_KEY = "backfill";
+        public static string $OBJECT_TO_SEARCH_KEY = "object";
+        public static string $POPUP_TYPE_KEY = "popup";
+        private string $_back_click_id;
+        private string$_backfill_id;
+        private string $_objects_to_search;
+        private string $_popup_type;
         
         public function __construct() {
             parent::__construct();

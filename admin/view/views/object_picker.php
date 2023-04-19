@@ -6,17 +6,17 @@
     
     class ObjectPicker extends FormField {
             
-        private static $TEMPLATE = "system/element_holder_picker.tpl";
+        private static string $TEMPLATE = "system/element_holder_picker.tpl";
         
-        private $_label;
-        private $_value;
-        private $_backing_field_id;
-        private $_button_label;
-        private $_button_id;
-        private $_opener_submit_id;
+        private string $_label;
+        private ?string $_value = null;
+        private string $_backing_field_id;
+        private string $_button_label;
+        private ?string $_button_id = null;
+        private string $_opener_submit_id;
         
-        public function __construct($label, $value, $backing_field_id, $button_label, $opener_submit_id, $button_id = "") {
-            parent::__construct(null, $value, $label, false, false, null);
+        public function __construct(string $label, ?string $value, string $backing_field_id, string $button_label, string $opener_submit_id, ?string $button_id = null) {
+            parent::__construct("", $value, $label, false, false, null);
             $this->_label = $label;
             $this->_value = $value;
             $this->_backing_field_id = $backing_field_id;
@@ -25,7 +25,7 @@
             $this->_opener_submit_id = $opener_submit_id;
         }
         
-        public function getType() {
+        public function getType(): string {
             return Search::$ELEMENT_HOLDERS;
         }
     

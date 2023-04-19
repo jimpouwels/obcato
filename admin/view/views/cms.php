@@ -9,12 +9,12 @@
     require_once CMS_ROOT . "view/views/notification_bar.php";
 
     class Cms extends Visual {
-        private static $TEMPLATE = "system/cms.tpl";
-        private $_module_visual;
-        private $_website_title;
-        private $_module_dao;
+        private static string $TEMPLATE = "system/cms.tpl";
+        private ModuleVisual $_module_visual;
+        private string $_website_title;
+        private ModuleDao $_module_dao;
 
-        public function __construct($module_visual, $website_title) {
+        public function __construct(ModuleVisual $module_visual, string $website_title) {
             parent::__construct();
             $this->_module_dao = ModuleDao::getInstance();
             $this->_module_visual = $module_visual;
@@ -64,7 +64,7 @@
 
         private function renderContentPane(): string {
             if (!is_null($this->_module_visual)) {
-                return $this->_module_visual->render($this);
+                return $this->_module_visual->render();
             } else {
                 return $this->getTemplateEngine()->fetch("system/home_wrapper.tpl");
             }

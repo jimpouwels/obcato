@@ -3,11 +3,11 @@
     
     class TabMenu extends Visual {
     
-        private static $TEMPLATE = "system/tab_menu.tpl";
-        private $_tab_items;
-        private $_current_tab;
+        private static string $TEMPLATE = "system/tab_menu.tpl";
+        private array $_tab_items;
+        private int $_current_tab;
     
-        public function __construct($tab_items, $current_tab) {
+        public function __construct(array $tab_items, int $current_tab) {
             parent::__construct();
             $this->_tab_items = $tab_items;
             $this->_current_tab = $current_tab;

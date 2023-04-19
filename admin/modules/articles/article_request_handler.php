@@ -43,18 +43,18 @@
             return $this->_current_article;
         }
 
-        public function getSearchQuery(): ?string {
+        public function getSearchQuery(): string {
             if (isset($_GET['search_query'])) {
                 return $_GET['search_query'];
             }
-            return null;
+            return "";
         }
 
         public function getSearchTerm(): ?string {
             if (isset($_GET['s_term'])) {
                 return $_GET['s_term'];
             }
-            return null;
+            return "";
         }
 
         public function isSearchAction(): bool {

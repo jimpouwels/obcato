@@ -11,9 +11,9 @@
 
     abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
-        private $_element_dao;
-        private $_link_dao;
-        private $_element_holder_dao;
+        private ElementDao $_element_dao;
+        private LinkDao $_link_dao;
+        private ElementHolderDao $_element_holder_dao;
 
         public function __construct() {
             $this->_element_dao = ElementDao::getInstance();
@@ -21,10 +21,10 @@
             $this->_element_holder_dao = ElementHolderDao::getInstance();
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             $element_holder = $this->getElementHolderFromPostRequest();
             if ($this->isAddElementAction()) {
                 $this->addElement();
@@ -35,7 +35,7 @@
             }
         }
 
-        protected function updateElementHolder($element_holder) {
+        protected function updateElementHolder(ElementHolder $element_holder): void {
             $this->updateLinks($element_holder);
             foreach ($element_holder->getElements() as $element) {
                 try {
@@ -46,29 +46,29 @@
             }
         }
 
-        private function addElement() {
+        private function addElement(): void {
             $element_type = $this->getElementTypeToAdd();
             if (!is_null($element_type))
                 $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
-        private function deleteElement() {
+        private function deleteElement(): void {
             $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
             if (!is_null($element_to_delete))
                 $element_to_delete->delete();
         }
 
-        private function getElementTypeToAdd() {
+        private function getElementTypeToAdd(): ElementType {
             $element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
             $element_type = $this->_element_dao->getElementType($element_type_to_add);
             return $element_type;
         }
 
-        private function addLink($element_holder) {
+        private function addLink(ElementHolder $element_holder): void {
             $this->_link_dao->createLink($element_holder->getId());
         }
 
-        private function updateLinks($element_holder) {
+        private function updateLinks(ElementHolder $element_holder): void {
             $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
             foreach ($links as $link) {
                 $link_form = new LinkForm($link);
@@ -80,7 +80,7 @@
             }
         }
 
-        private function updateLink($link, $link_form) {
+        private function updateLink(Link $link, LinkForm $link_form): void {
             try {
                 $link_form->loadFields();
                 $this->_link_dao->updateLink($link);
@@ -89,20 +89,20 @@
             }
         }
 
-        private function getElementHolderFromPostRequest() {
+        private function getElementHolderFromPostRequest(): ?ElementHolder {
             if (!isset($_POST[EDIT_ELEMENT_HOLDER_ID])) return null;
             return $this->_element_holder_dao->getElementHolder($_POST[EDIT_ELEMENT_HOLDER_ID]);
         }
 
-        private function isAddElementAction() {
+        private function isAddElementAction(): bool {
             return isset($_POST[ADD_ELEMENT_FORM_ID]) && $_POST[ADD_ELEMENT_FORM_ID] != "";
         }
 
-        private function isDeleteElementAction() {
+        private function isDeleteElementAction(): bool {
             return isset($_POST[DELETE_ELEMENT_FORM_ID]) && $_POST[DELETE_ELEMENT_FORM_ID] != "";
         }
 
-        private function isAddLinkAction() {
+        private function isAddLinkAction(): bool {
             return isset($_POST['action']) && $_POST['action'] == 'add_link';
         }
     }

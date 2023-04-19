@@ -5,12 +5,12 @@
 
     abstract class Panel extends Visual {
 
-        private static $TEMPLATE = "system/panel.tpl";
-        private $_title;
-        private $_html_content;
-        private $_class;
+        private static string $TEMPLATE = "system/panel.tpl";
+        private string $_title;
+        private string $_html_content;
+        private string $_class;
 
-        public function __construct($title, $class = "") {
+        public function __construct(string $title, string $class = "") {
             parent::__construct();
             $this->_title = $title;
             $this->_class = $class;

@@ -6,12 +6,12 @@
     
     class StaticsRequestHandler extends HttpRequestHandler {
 
-        private $_settings;
+        private Settings $_settings;
         
         public function __construct() {
         }
 
-        public function handleGet() {
+        public function handleGet(): void {
             $relative_path = $this->getRelativePathFromGetRequest();
             if (!empty($relative_path)) {
                 $absolute_path = $this->getAbsolutePathFor($relative_path);
@@ -20,10 +20,10 @@
             }
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
         }
         
-        private function setResponseContentType($absolute_path) {
+        private function setResponseContentType(string $absolute_path): void {
             $path_parts = explode(".", $absolute_path);
             $extension = $path_parts[count($path_parts) - 1];
             if ($extension == "jpg") {
@@ -41,13 +41,15 @@
             }
         }
         
-        private function getAbsolutePathFor($relative_path) {
+        private function getAbsolutePathFor(string $relative_path): string {
             return STATIC_DIR . $relative_path;
         }
         
-        private function getRelativePathFromGetRequest() {
-            if (isset($_GET["file"]) && $_GET["file"] != "")
+        private function getRelativePathFromGetRequest(): ?string {
+            if (isset($_GET["file"]) && $_GET["file"] != "") {
                 return $_GET["file"];
+            }
+            return null;
         }
     }
 ?>

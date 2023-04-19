@@ -23,7 +23,7 @@
             $this->_article->setDescription($this->getFieldValue("article_description"));
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
             $this->_article->setImageId($this->getFieldValue("article_image_ref_" . $this->_article->getId()));
-            $this->_article->setTargetPageId($this->getFieldValue("article_target_page"));
+            $this->_article->setTargetPageId($this->getFieldValueAsInt("article_target_page"));
             $publication_date = $this->loadPublicationDate();
             $sort_date = $this->loadSortDate();
             $this->deleteLeadImageIfNeeded();

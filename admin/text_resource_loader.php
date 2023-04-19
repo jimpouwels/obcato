@@ -7,9 +7,9 @@
 
     class TextResourceLoader {
 
-        private $_language;
+        private string $_language;
 
-        public function __construct($language) {
+        public function __construct(string $language) {
             $this->_language = $language;
         }
 
@@ -25,11 +25,11 @@
             return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/' . $this->_language . '.txt');
         }
 
-        private function getModuleTextResources($module): array {
+        private function getModuleTextResources(Module $module): array {
             return $this->getTextResourcesFromFile($this->getModuleResourceFilePath($module->getIdentifier()));
         }
 
-        private function getTextResourcesFromFile($file_path): array {
+        private function getTextResourcesFromFile(string $file_path): array {
             $resources = array();
             if (file_exists($file_path)) {
                 $file = fopen($file_path, 'rb');
@@ -46,7 +46,7 @@
             return $resources;
         }
 
-        private function getModuleResourceFilePath($module_identifier): string {
+        private function getModuleResourceFilePath(string $module_identifier): string {
             $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-' . $this->_language . '.txt';
             if (!file_exists($path)) {
                 $path = STATIC_DIR . '/text_resources/' . $module_identifier . '-nl.txt';
@@ -55,7 +55,7 @@
         }
 
         private function isComment($line): bool {
-            return StringUtility::startsWith(trim($line), '#');
+            return str_starts_with(trim($line), '#');
         }
 
         private function isEmptyLine($line): bool {

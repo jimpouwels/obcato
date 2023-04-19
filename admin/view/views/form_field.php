@@ -5,16 +5,16 @@
 
     abstract class FormField extends Visual {
         
-        private static $TEMPLATE = "system/form_field.tpl";
+        private static string $TEMPLATE = "system/form_field.tpl";
 
-        private $_css_class;
-        private $_field_name;
-        private $_label;
-        private $_mandatory;
-        private $_linkable;
-        private $_value;
+        private ?string $_css_class = null;
+        private string $_field_name;
+        private string $_label;
+        private bool $_mandatory;
+        private bool $_linkable;
+        private ?string $_value = null;
 
-        protected function __construct($field_name, $value, $label, $mandatory, $linkable, $css_class) {
+        protected function __construct(string $field_name, ?string $value, string $label, bool $mandatory, bool $linkable, ?string $css_class) {
             parent::__construct();
             $this->_field_name = $field_name;
             $this->_css_class = $css_class;
@@ -33,7 +33,7 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
-        public function getErrorHtml($field_name) {
+        public function getErrorHtml(string $field_name): string {
             $error_html = "";
             if (Session::hasError($field_name)) {
                 $this->getTemplateEngine()->assign("error", Session::popError($field_name));
@@ -42,7 +42,7 @@
             return $error_html;
         }
         
-        public function getCssClassesHtml() {
+        public function getCssClassesHtml(): string {
             $css_class_html = $this->_css_class;
             $css_class_html .= ' ' . $this->errorClass($this->_field_name);
             if ($this->_linkable) {
@@ -52,13 +52,14 @@
             return $css_class_html;
         }
 
-        public function errorClass($field_name) {
+        public function errorClass(string $field_name): string {
             if (Session::hasError($field_name)) {
                 return "invalid ";
             }
+            return "";
         }
 
-        protected function getInputLabelHtml($field_label, $field_name, $mandatory) {
+        protected function getInputLabelHtml(string $field_label, string $field_name, bool $mandatory) {
             $data = $this->getTemplateEngine()->createData();
             $data->assign("label", $field_label);
             $data->assign("name", $field_name);

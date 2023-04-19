@@ -5,12 +5,12 @@
 
     class BlockSelector extends Panel {
 
-        private static $TEMPLATE = "system/block_selector.tpl";
-        private $_selected_blocks;
-        private $_block_dao;
-        private $_context_id;
+        private static string $TEMPLATE = "system/block_selector.tpl";
+        private array $_selected_blocks;
+        private BlockDao $_block_dao;
+        private int $_context_id;
 
-        public function __construct($selected_blocks, $context_id) {
+        public function __construct(array $selected_blocks, int $context_id) {
             parent::__construct($this->getTextResource('block_selection_title'), 'page_blocks');
             $this->_block_dao = BlockDao::getInstance();
             $this->_context_id = $context_id;
@@ -21,14 +21,14 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("blocks_to_select", $this->getBlocksToSelect());
             $this->getTemplateEngine()->assign("selected_blocks", $this->getSelectedBlocksHtml());
             $this->getTemplateEngine()->assign("context_id", $this->_context_id);
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function getBlocksToSelect() {
+        private function getBlocksToSelect(): array {
             $blocks_to_select = array();
 
             foreach ($this->_block_dao->getAllBlocks() as $block) {
@@ -41,7 +41,7 @@
             return $blocks_to_select;
         }
 
-        private function getSelectedBlocksHtml() {
+        private function getSelectedBlocksHtml(): array {
             $selected_blocks = array();
             if (count($this->_selected_blocks) > 0) {
                 foreach ($this->_selected_blocks as $selected_block) {

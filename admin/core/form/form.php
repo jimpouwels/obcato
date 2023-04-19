@@ -26,6 +26,14 @@
             return $value;
         }
         
+        public function getFieldValueAsInt(string $field_name): ?int {
+            $value = null;
+            if (isset($_POST[$field_name]) && !empty($_POST[$field_name])) {
+                $value = intval($_POST[$field_name]);
+            }
+            return $value;
+        }
+        
         public function getFieldValues(string $field_name): array {
             $value = array();
             if (isset($_POST[$field_name])) {

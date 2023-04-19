@@ -5,10 +5,10 @@
 
     class TextField extends FormField {
 
-        private static $TEMPLATE = "system/form_textfield.tpl";
+        private static string $TEMPLATE = "system/form_textfield.tpl";
         private bool $_is_visible;
 
-        public function __construct($name, $label, $value, $mandatory, $linkable, $class_name, bool $is_visible = true) {
+        public function __construct(string $name, string $label, ?string $value, bool $mandatory, bool $linkable, ?string $class_name, bool $is_visible = true) {
             parent::__construct($name, $value, $label, $mandatory, $linkable, $class_name);
             $this->_is_visible = $is_visible;
         }

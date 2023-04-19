@@ -5,10 +5,10 @@
 
     class ElementContainer extends Panel {
 
-        private static $TEMPLATE = "system/element_container.tpl";
-        private $_elements;
+        private static string $TEMPLATE = "system/element_container.tpl";
+        private array $_elements;
 
-        public function __construct($elements) {
+        public function __construct(array $elements) {
             parent::__construct($this->getTextResource('element_holder_content_title'), 'element_container');
             $this->_elements = $elements;
         }
@@ -17,20 +17,21 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
-            if (count($this->_elements) > 0)
+        public function renderPanelContent(): string {
+            if (count($this->_elements) > 0) {
                 $this->getTemplateEngine()->assign("elements", $this->renderElements());
-            else
+            } else {
                 $this->getTemplateEngine()->assign("message", $this->renderInformationMessage());
+            }
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function renderInformationMessage() {
+        private function renderInformationMessage(): string {
             $information_message = new InformationMessage($this->getTextResource('no_elements_found_message'));
             return $information_message->render();
         }
 
-        private function renderElements() {
+        private function renderElements(): array {
             $elements = array();
             foreach ($this->_elements as $element) {
                 $elements[] = $element->getBackendVisual()->render();

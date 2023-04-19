@@ -134,7 +134,7 @@
             return $articles;
         }
 
-        public function updateArticle($article): void {
+        public function updateArticle(Article $article): void {
             $query = "UPDATE articles SET description = '" . $this->_mysql_connector->realEscapeString($article->getDescription()) . "',
                       publication_date = '" . $article->getPublicationDate() . "',
                       sort_date = '" . $article->getSortDate() . "'";

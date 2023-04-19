@@ -5,7 +5,7 @@
     
     class NotificationBar extends Visual {
     
-        private static $TEMPLATE = "system/notification_bar.tpl";
+        private static string $TEMPLATE = "system/notification_bar.tpl";
         
         public function __construct() {
             parent::__construct();

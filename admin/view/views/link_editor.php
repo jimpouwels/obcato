@@ -6,10 +6,10 @@
 
     class LinkEditor extends Panel {
 
-        private static $TEMPLATE = 'system/link_editor.tpl';
-        private $_links;
+        private static string $TEMPLATE = 'system/link_editor.tpl';
+        private array $_links;
 
-        public function __construct($links) {
+        public function __construct(array $links) {
             parent::__construct($this->getTextResource('link_editor_title'), 'element_holder_links');
             $this->_links = $links;
         }
@@ -18,15 +18,16 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
-            if (count($this->_links) > 0)
+        public function renderPanelContent(): string {
+            if (count($this->_links) > 0) {
                 $this->getTemplateEngine()->assign('links', $this->getLinksData());
-            else
+            } else {
                 $this->getTemplateEngine()->assign('message', $this->renderNoLinksFoundMessage());
+            }
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function getLinksData() {
+        private function getLinksData(): array {
             $links_data = array();
             foreach ($this->_links as $link) {
                 $link_data = array();
@@ -44,7 +45,7 @@
             return $links_data;
         }
 
-        private function getLinkTargetField($link) {
+        private function getLinkTargetField(Link $link): ?string {
             $link_target_field = null;
             $link_target = $link->getTargetElementHolder();
             if (is_null($link_target)) {
@@ -54,36 +55,37 @@
             return $link_target_field;
         }
 
-        private function renderTitleField($link) {
+        private function renderTitleField(Link $link): string {
             $title_field = new TextField('link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, '');
             return $title_field->render();
         }
 
-        private function renderCodeField($link) {
+        private function renderCodeField(Link $link): string {
             $code_field = new TextField('link_' . $link->getId() . '_code', 'Code', $link->getCode(), true, false, '');
             return $code_field->render();
         }
 
-        private function renderDeleteField($link) {
+        private function renderDeleteField(Link $link): string {
             $delete_field = new SingleCheckbox('link_' . $link->getId() . '_delete', '', false, false, '');
             return $delete_field->render();
         }
 
-        private function renderBrowserTargetField($link) {
+        private function renderBrowserTargetField(Link $link): string {
             $target_field = new Pulldown('link_' . $link->getId() . '_target', '', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
             return $target_field->render();
         }
 
-        private function renderLinkTargetPicker($link) {
+        private function renderLinkTargetPicker(Link $link): string {
             $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), '', 'update_element_holder');
             return $element_holder_picker->render();
         }
 
-        private function getLinkTitle($link) {
+        private function getLinkTitle(Link $link): string {
             $link_target = $link->getTargetElementHolder();
-            $target_title = '';
-            if (!is_null($link_target))
+            $target_title = "";
+            if (!is_null($link_target)) {
                 $target_title = $link_target->getTitle();
+            }
             return $target_title;
         }
 

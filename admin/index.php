@@ -13,7 +13,7 @@
         runBackend();
     }
 
-    function runBackend() {
+    function runBackend(): void {
         require_once CMS_ROOT . "database_config.php";
         require_once CMS_ROOT . "includes.php";
         require_once CMS_ROOT . "constants.php";
@@ -24,13 +24,13 @@
         $backend->start();
     }
         
-    function checkAuthentication() {
+    function checkAuthentication(): void {
         if (!Authenticator::isAuthenticated()) {
             redirectToLoginPage();
         }
     }
         
-    function redirectToLoginPage() {
+    function redirectToLoginPage(): void {
         session_destroy();
         $org_url = null;
         if ($_SERVER['REQUEST_URI'] != '/admin/') {
@@ -40,10 +40,10 @@
         exit();
     }
 
-    function runInstaller() {
+    function runInstaller(): void {
         include "install/index.php";
     }
 
-    function isInstallMode() {
+    function isInstallMode(): bool {
         return isset($_GET["mode"]) && $_GET["mode"] == "install";
     }

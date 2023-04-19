@@ -5,12 +5,12 @@
     
     class Button extends Visual {
         
-        private static $TEMPLATE = "system/button.tpl";
-        private $_id;
-        private $_label;
-        private $_onclick;
+        private static string $TEMPLATE = "system/button.tpl";
+        private ?string $_id = null;
+        private string $_label;
+        private ?string $_onclick = null;
         
-        public function __construct($id, $label, $onclick) {
+        public function __construct(?string $id, string $label, ?string $onclick) {
             parent::__construct();
             $this->_id = $id;
             $this->_label = $label;

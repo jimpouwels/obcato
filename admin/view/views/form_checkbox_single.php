@@ -5,9 +5,9 @@
     
     class SingleCheckbox extends FormField {
     
-        private static $TEMPLATE = "system/form_checkbox_single.tpl";
+        private static string $TEMPLATE = "system/form_checkbox_single.tpl";
     
-        public function __construct($name, $label, $value, $mandatory, $class_name) {
+        public function __construct(string $name, string $label, string $value, bool $mandatory, ?string $class_name) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
         }
     

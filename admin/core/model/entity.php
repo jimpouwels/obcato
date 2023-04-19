@@ -3,7 +3,7 @@
 
     abstract class Entity {
     
-        private int $_id;
+        private int $_id = -1;
         
         public function getId(): int {
             return $this->_id;

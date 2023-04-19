@@ -52,7 +52,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $pre_handlers = array();
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $pre_handlers[] = $this->_article_request_handler;

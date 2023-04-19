@@ -6,12 +6,12 @@
 
     class ImageLabelSelector extends Panel {
 
-        private static $TEMPLATE = "system/image_label_selector.tpl";
-        private $_selected_labels;
-        private $_image_dao;
-        private $_context_id;
+        private static string $TEMPLATE = "system/image_label_selector.tpl";
+        private array $_selected_labels;
+        private ImageDao $_image_dao;
+        private int $_context_id;
 
-        public function __construct($selected_labels, $context_id) {
+        public function __construct(array $selected_labels, int $context_id) {
             parent::__construct('Labels', 'image_label_selector');
             $this->_selected_labels = $selected_labels;
             $this->_image_dao = ImageDao::getInstance();
@@ -22,12 +22,12 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->assignLabelSelector();
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function assignLabelSelector() {
+        private function assignLabelSelector(): void {
             $all_label_values = $this->labelsToArray($this->_image_dao->getAllLabels(), $this->_selected_labels);
             $image_label_values = $this->selectedLabelsToArray($this->_selected_labels);
             $this->getTemplateEngine()->assign('context_id', $this->_context_id);
@@ -35,7 +35,7 @@
             $this->getTemplateEngine()->assign("image_labels", $image_label_values);
         }
 
-        private function labelsToArray($labels, $image_labels) {
+        private function labelsToArray(array $labels, array $image_labels): array {
             $label_values = array();
             foreach ($labels as $label) {
                 $label_value = $this->createLabelValue($label);
@@ -45,7 +45,7 @@
             return $label_values;
         }
 
-        private function selectedLabelsToArray($labels) {
+        private function selectedLabelsToArray(array $labels): array {
             $label_values = array();
             foreach ($labels as $label) {
                 $label_value = $this->createLabelValue($label);
@@ -55,12 +55,12 @@
             return $label_values;
         }
 
-        private function renderSelectedLabelCheckbox($label) {
+        private function renderSelectedLabelCheckbox(ImageLabel $label): string {
             $checkbox = new SingleCheckbox("label_" . $this->_context_id . "_" . $label->getId() . "_delete", "", 0, false, "");
             return $checkbox->render();
         }
 
-        private function createLabelValue($label) {
+        private function createLabelValue(ImageLabel $label): array {
             $label_value = array();
             $label_value["id"] = $label->getId();
             $label_value["name"] = $label->getName();

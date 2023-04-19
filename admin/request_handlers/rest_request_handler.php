@@ -5,10 +5,10 @@
     
     class RestRequestHandler extends HttpRequestHandler {
     
-        public function handleGet() {
+        public function handleGet(): void {
         }
 
-        public function handlePost() {
+        public function handlePost(): void {
             
         }
     }

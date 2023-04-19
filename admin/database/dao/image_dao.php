@@ -68,10 +68,10 @@
             return $all_images;
         }
 
-        public function searchImages(string $keyword, string $filename, int $label_id): array {
+        public function searchImages(?string $keyword, ?string $filename, ?int $label_id): array {
             $query = "SELECT DISTINCT " . self::$myAllColumns . " FROM images i";
                         
-            if (!is_null($label_id) && $label_id != '') {
+            if (!is_null($label_id)) {
                 $query = $query . ", images_labels ils WHERE ils.label_id = " . $label_id . " AND ils.image_id = i.id";
             }
             if (!is_null($keyword)) {
@@ -95,7 +95,6 @@
             $query = $query . " ORDER BY created_at";
             $result = $this->_mysql_connector->executeQuery($query);
             $images = array();
-            
             while ($row = $result->fetch_assoc()) {
                 $images[] = Image::constructFromRecord($row);
             }

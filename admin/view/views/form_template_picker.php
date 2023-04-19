@@ -6,7 +6,7 @@
     
     class TemplatePicker extends Pulldown {
     
-        public function __construct($name, $label, $mandatory, $class_name, $current_template, $scope) {
+        public function __construct(string $name, string $label, bool $mandatory, ?string $class_name, Template $current_template, Scope $scope) {
             $options = $this->getOptions($scope);
             $current_template_id = null;
             if (!is_null($current_template)) {
@@ -19,7 +19,7 @@
             return parent::render();
         }
         
-        private function getOptions($scope) {
+        private function getOptions(Scope $scope): array {
             $template_dao = TemplateDao::getInstance();
             $options = array();
             array_push($options, array("name" => $this->getTextResource("select_field_default_text"), "value" => null));

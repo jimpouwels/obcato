@@ -5,7 +5,7 @@
     
     abstract class HttpRequestHandler {
     
-        public function handle() {
+        public function handle(): void {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->handlePost();
             } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -13,24 +13,24 @@
             }
         }
     
-        abstract function handleGet();
+        abstract function handleGet(): void;
         
-        abstract function handlePost();
+        abstract function handlePost(): void;
 
-        protected function sendSuccessMessage($message) {
+        protected function sendSuccessMessage(string $message): void {
             Notifications::setSuccessMessage($message);
         }
 
-        protected function sendErrorMessage($message) {
+        protected function sendErrorMessage(string $message): void {
             Notifications::setFailedMessage($message);
         }
 
-        protected function redirectTo($url) {
+        protected function redirectTo(string $url): void {
             header("Location: $url");
             exit();
         }
 
-        protected function getTextResource($identifier) {
+        protected function getTextResource(string $identifier): string {
             return Session::getTextResource($identifier);
         }
 

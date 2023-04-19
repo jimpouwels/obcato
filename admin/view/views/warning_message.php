@@ -6,7 +6,7 @@
         private static $TEMPLATE = "system/warning_message.tpl";
         private $_message;
     
-        public function __construct($message) {
+        public function __construct(string $message) {
             parent::__construct();
             $this->_message = $message;
         }

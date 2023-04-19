@@ -8,17 +8,17 @@
 
     class Backend {
     
-        private $_identifier;
-        private $_backend_request_handler;
-        private $_current_module;
-        private $_module_visual;
+        private string $_identifier;
+        private BackendRequestHandler $_backend_request_handler;
+        private ?Module $_current_module = null;
+        private ?ModuleVisual $_module_visual = null;
     
         public function __construct($identifier) {
             $this->_identifier = $identifier;
             $this->_backend_request_handler = new BackendRequestHandler();
         }
         
-        public function start() {
+        public function start(): void {
             $this->loadTextResources();
             $this->_backend_request_handler->handle();
             $this->loadCurrentModule();
@@ -26,7 +26,7 @@
             $this->renderCms();
         }
         
-        private function loadCurrentModule() {
+        private function loadCurrentModule(): void {
             $current_module = $this->_backend_request_handler->getCurrentModule();
             if (!is_null($current_module)) {
                 $this->_current_module = $current_module;
@@ -36,7 +36,7 @@
             }
         }
         
-        private function renderCms() {
+        private function renderCms(): void {
             if ($this->isPopupView()) {
                 $this->renderPopupView();
             } else {
@@ -44,17 +44,17 @@
             }
         }
         
-        private function renderCmsView() {
+        private function renderCmsView(): void {
             $cms = new Cms($this->_module_visual, WEBSITE_TITLE);
             echo $cms->render();
         }
 
-        private function renderPopupView() {
+        private function renderPopupView(): void {
             $popup = new Popup($_GET['popup']);
             echo $popup->render();
         }
         
-        private function runModuleRequestHandler() {
+        private function runModuleRequestHandler(): void {
             if (!is_null($this->_module_visual)) {
                 foreach ($this->_module_visual->getRequestHandlers() as $request_handler) {
                     $request_handler->handle();
@@ -63,7 +63,7 @@
             }
         }
         
-        private function loadTextResources() {
+        private function loadTextResources(): void {
             if (!Session::areTextResourcesLoaded()) {
                 $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
                 $text_resources = $text_resource_loader->loadTextResources();
@@ -71,7 +71,7 @@
             }
         }
                 
-        private function isPopupView() {
+        private function isPopupView(): bool {
             return isset($_GET['popup']);
         }
         

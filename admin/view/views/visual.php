@@ -18,7 +18,7 @@
             return $this->_template_engine;
         }
 
-        protected function getTextResource($identifier): string {
+        protected function getTextResource(string $identifier): string {
             return Session::getTextResource($identifier);
         }
 

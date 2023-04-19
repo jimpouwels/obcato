@@ -10,7 +10,7 @@
         const EXTERNAL = "EXTERNAL";
     
         private string $_title;
-        private string $_url;
+        private ?string $_url = null;
         private string $_type;
         private string $_code;
         private ?int $_targetElementHolderId;
@@ -30,11 +30,11 @@
             $this->_title = $title;
         }
         
-        public function getTargetAddress(): string {
+        public function getTargetAddress(): ?string {
             return $this->_url;
         }
         
-        public function setTargetAddress(string $url): void {
+        public function setTargetAddress(?string $url): void {
             $this->_url = $url;
         }
         

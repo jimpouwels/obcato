@@ -10,16 +10,16 @@
 
     class ElementHolderSearch extends Panel {
 
-        private static $OBJECT_TYPE_KEY = "s_element_holder";
-        private static $SEARCH_QUERY_KEY = "s_term";
-        private static $TEMPLATE = "system/element_holder_search.tpl";
-        private $_objects_to_search;
-        private $_back_click_id;
-        private $_backfill_id;
-        private $_article_dao;
-        private $_page_dao;
+        private static string $OBJECT_TYPE_KEY = "s_element_holder";
+        private static string $SEARCH_QUERY_KEY = "s_term";
+        private static string $TEMPLATE = "system/element_holder_search.tpl";
+        private string $_objects_to_search;
+        private string $_back_click_id;
+        private string $_backfill_id;
+        private ArticleDao $_article_dao;
+        private PageDao $_page_dao;
 
-        public function __construct($back_click_id, $backfill_id, $objects_to_search) {
+        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search) {
             parent::__construct('Zoeken', 'popup_search_fieldset');
             $this->_objects_to_search = $objects_to_search;
             $this->_back_click_id = $back_click_id;
@@ -32,7 +32,7 @@
             return parent::render();
         }
 
-        public function renderPanelContent() {
+        public function renderPanelContent(): string {
             $this->getTemplateEngine()->assign("search_object", $this->_objects_to_search);
             $this->getTemplateEngine()->assign("backfill", $this->_backfill_id);
             $this->getTemplateEngine()->assign("back_click_id", $this->_back_click_id);
@@ -46,13 +46,13 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
-        private function renderSearchField() {
+        private function renderSearchField(): string {
             $search_query = $this->getCurrentSearchQuery();
             $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
             return $search_field->render();
         }
 
-        private function renderSearchResults() {
+        private function renderSearchResults(): array {
             $search_results_value = array();
 
             $search_query = $this->getCurrentSearchQuery();
@@ -75,7 +75,7 @@
             return $search_results_value;
         }
 
-        private function renderSearchOptionsField() {
+        private function renderSearchOptionsField(): string {
             $search_options = array();
             switch ($this->_objects_to_search) {
                 case Search::$PAGES:
@@ -97,12 +97,12 @@
             return $search_options_field->render();
         }
 
-        private function renderNoResultsMessage() {
+        private function renderNoResultsMessage(): string {
             $information_message = new InformationMessage("Geen resultaten gevonden");
             return $information_message->render();
         }
 
-        private function getCurrentSearchQuery() {
+        private function getCurrentSearchQuery(): string {
             $search_title = "";
             if (isset($_GET[self::$SEARCH_QUERY_KEY])) {
                 $search_title = $_GET[self::$SEARCH_QUERY_KEY];
@@ -110,16 +110,16 @@
             return $search_title;
         }
 
-        private function renderSearchButton() {
+        private function renderSearchButton(): string {
             $search_button = new Button("", "Zoeken", "document.getElementById('search_form').submit(); return false;");
             return $search_button->render();
         }
 
-        private function addPageOption(&$options) {
+        private function addPageOption(array &$options): void {
             $options[] = array("name" => "Pagina", "value" => "element_holder_page");
         }
 
-        private function addArticleOption(&$options) {
+        private function addArticleOption(array &$options): void {
             $options[] = array("name" => "Artikel", "value" => "element_holder_article");
         }
 

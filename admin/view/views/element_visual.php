@@ -7,7 +7,7 @@
     
     abstract class ElementVisual extends Visual {
     
-        private static $TEMPLATE = "system/element.tpl";
+        private static string $TEMPLATE = "system/element.tpl";
     
         abstract function getElement(): Element;
         

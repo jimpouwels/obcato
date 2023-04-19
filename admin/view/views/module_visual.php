@@ -3,22 +3,22 @@
     
     abstract class ModuleVisual extends Visual {
 
-        private $_module;
+        private Module $_module;
 
-        protected function __construct($module) {
+        protected function __construct(Module $module) {
             parent::__construct();
             $this->_module = $module;
         }
 
-        public function getTitle() {
+        public function getTitle(): string {
             return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
         }
         
-        abstract function getActionButtons();
+        abstract function getActionButtons(): array;
         
-        abstract function renderHeadIncludes();
+        abstract function renderHeadIncludes(): string;
         
-        abstract function getRequestHandlers();
+        abstract function getRequestHandlers(): array;
         
         public function onRequestHandled(): void {
         }

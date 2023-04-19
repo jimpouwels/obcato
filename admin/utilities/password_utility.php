@@ -5,16 +5,10 @@
     
     class PasswordUtility {
         
-        /*
-            Private constructor.
-        */
         private function __construct() {
         }
     
-        /*
-            Generates and returns a random password.
-        */
-        public static function generatePassword() {
+        public static function generatePassword(): string {
             $length=9;
             $strength=0;
             $vowels = 'aeuy';

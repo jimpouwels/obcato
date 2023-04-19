@@ -5,9 +5,9 @@
 
     class ReadonlyTextField extends FormField {
 
-        private static $TEMPLATE = 'system/form_readonly_textfield.tpl';
+        private static string $TEMPLATE = 'system/form_readonly_textfield.tpl';
 
-        public function __construct($name, $label, $value, $class_name) {
+        public function __construct(string $name, string $label, string $value, ?string $class_name) {
             parent::__construct($name, $value, $label, false, false, $class_name);
         }
 

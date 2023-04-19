@@ -16,7 +16,7 @@
         private string $_image_id;
         private string $_publication_date;
         private string $_sort_date;
-        private int $_target_page_id;
+        private ?int $_target_page_id;
         private PageDao $_page_dao;
         
         public function __construct() {
@@ -67,11 +67,11 @@
             $this->_sort_date = $sort_date;
         }
         
-        public function getTargetPageId(): string {
+        public function getTargetPageId(): ?int {
             return $this->_target_page_id;
         }
         
-        public function setTargetPageId(int $target_page_id): void {
+        public function setTargetPageId(?int $target_page_id): void {
             $this->_target_page_id = $target_page_id;
         }
         

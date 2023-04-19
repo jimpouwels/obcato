@@ -5,9 +5,9 @@
     
     class UploadField extends FormField {
     
-        private static $TEMPLATE = "system/form_upload_field.tpl";
+        private static string $TEMPLATE = "system/form_upload_field.tpl";
 
-        public function __construct($name, $label, $mandatory, $class_name) {
+        public function __construct(string $name, string $label, bool $mandatory, ?string $class_name) {
             parent::__construct($name, null, $label, $mandatory, false, $class_name);
         }
     

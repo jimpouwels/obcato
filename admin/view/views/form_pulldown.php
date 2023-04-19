@@ -5,10 +5,10 @@
     
     class Pulldown extends FormField {
     
-        private static $TEMPLATE = "system/form_pulldown.tpl";
-        private $_options;
+        private static string $TEMPLATE = "system/form_pulldown.tpl";
+        private array $_options;
     
-        public function __construct($name, $label, $value, $options, $mandatory, $class_name) {
+        public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $class_name) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
             $this->_options = $options;
         }

@@ -5,10 +5,10 @@
     
     class Popup extends Visual {
         
-        private static $TEMPLATE = "system/popup.tpl";
-        private $_popup_type;
+        private static string $TEMPLATE = "system/popup.tpl";
+        private string $_popup_type;
         
-        public function __construct($popup_type) {
+        public function __construct(string $popup_type) {
             parent::__construct();
             $this->_popup_type = $popup_type;
         }

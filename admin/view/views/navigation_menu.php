@@ -7,11 +7,11 @@
     
     class NavigationMenu extends Visual {
     
-        private static $TEMPLATE = "system/navigation_menu.tpl";
-        private $_module_groups;
-        private $_element_dao;
+        private static string $TEMPLATE = "system/navigation_menu.tpl";
+        private array $_module_groups;
+        private ElementDao $_element_dao;
     
-        public function __construct($module_groups) {
+        public function __construct(array $module_groups) {
             parent::__construct();
             $this->_module_groups = $module_groups;
             $this->_element_dao = ElementDao::getInstance();
@@ -33,7 +33,7 @@
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
-        private function renderMenuItem($module_group) {
+        private function renderMenuItem(ModuleGroup $module_group): array {
             $sub_items = array();
             $modules = $module_group->getModules();
             $count = 1;
@@ -50,7 +50,7 @@
             return $sub_items;
         }
         
-        private function renderElementsMenuItem() {
+        private function renderElementsMenuItem(): array {
             $sub_items = array();
             foreach ($this->_element_dao->getElementTypes() as $element_type) {
                 $sub_item = array();

@@ -6,12 +6,12 @@
 
     class TermSelector extends Panel {
 
-        private static $TEMPLATE = "system/term_selector.tpl";
-        private $_selected_terms;
-        private $_article_dao;
-        private $_context_id;
+        private static string $TEMPLATE = "system/term_selector.tpl";
+        private array $_selected_terms;
+        private ArticleDao $_article_dao;
+        private int $_context_id;
 
-        public function __construct($selected_terms, $context_id) {
+        public function __construct(array $selected_terms, int $context_id) {
             parent::__construct('Termen', 'term_selector');
             $this->_selected_terms = $selected_terms;
             $this->_article_dao = ArticleDao::getInstance();
