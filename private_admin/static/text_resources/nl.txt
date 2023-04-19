@@ -23,6 +23,7 @@ link_editor_target_new_tab: Nieuw tab
 link_editor_target_popup: Popup
 link_editor_link_browser_target: Openen in
 link_editor_no_links_found_message: Geen links gevonden. Klik op &quot;Invoegen&quot; &gt; &quot;Link&quot; om een nieuwe link toe te voegen.
+link_editor_new_link_title: Nieuwe link
 place_link: Plaats link
 link_title: Titel
 link_target: Doel

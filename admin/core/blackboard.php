@@ -3,7 +3,7 @@
 
     class BlackBoard {
 
-        static int $MODULE_ID;
+        static ?int $MODULE_ID = null;
         static int $MODULE_TAB_ID = 0;
 
         private function __construct() {

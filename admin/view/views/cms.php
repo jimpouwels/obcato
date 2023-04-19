@@ -10,11 +10,11 @@
 
     class Cms extends Visual {
         private static string $TEMPLATE = "system/cms.tpl";
-        private ModuleVisual $_module_visual;
+        private ?ModuleVisual $_module_visual = null;
         private string $_website_title;
         private ModuleDao $_module_dao;
 
-        public function __construct(ModuleVisual $module_visual, string $website_title) {
+        public function __construct(?ModuleVisual $module_visual, string $website_title) {
             parent::__construct();
             $this->_module_dao = ModuleDao::getInstance();
             $this->_module_visual = $module_visual;

@@ -20,9 +20,9 @@
             return self::$instance;
         }
 
-        public function createLink(int $element_holder_id): Link {
+        public function createLink(int $element_holder_id, $title): Link {
             $new_link = new Link();
-            $new_link->setTitle('Nieuwe link');
+            $new_link->setTitle($title);
             $new_link->setCode($new_link->getId());
             $new_link->setParentElementHolderId($element_holder_id);
             $new_link->setType(Link::INTERNAL);

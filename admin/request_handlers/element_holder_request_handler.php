@@ -65,7 +65,7 @@
         }
 
         private function addLink(ElementHolder $element_holder): void {
-            $this->_link_dao->createLink($element_holder->getId());
+            $this->_link_dao->createLink($element_holder->getId(), $this->getTextResource('link_editor_new_link_title'));
         }
 
         private function updateLinks(ElementHolder $element_holder): void {

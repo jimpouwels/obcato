@@ -23,6 +23,7 @@ link_editor_target_new_tab: New tab
 link_editor_target_popup: Popup
 link_editor_link_browser_target: Open in
 link_editor_no_links_found_message: No links found. Go to &quot;Insert&quot; &gt; &quot;Link&quot; to add a new link.
+link_editor_new_link_title: New link
 place_link: Place link
 link_title: Title
 link_target: Target
