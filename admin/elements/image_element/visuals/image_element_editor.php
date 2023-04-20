@@ -20,11 +20,11 @@
         }
 
         public function renderElementForm(): string {
-            $title_field = new TextField($this->createFieldId("title"), "Titel", htmlentities($this->_image_element->getTitle()), false, false, null);
-            $alternative_text_field = new TextField($this->createFieldId("alternative_text"), "Alternatieve tekst", $this->_image_element->getAlternativeText(), false, true, null);
-            $image_picker = new ImagePicker("Afbeelding", $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "update_element_holder", "");
-            $width_field = new TextField($this->createFieldId("width"), "Breedte", $this->_image_element->getWidth(), false, false, "size_field");
-            $height_field = new TextField($this->createFieldId("height"), "Hoogte", $this->_image_element->getHeight(), false, false, "size_field");
+            $title_field = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->_image_element->getTitle()), false, false, null);
+            $alternative_text_field = new TextField($this->createFieldId("alternative_text"), $this->getTextResource("image_element_editor_alternative_text"), $this->_image_element->getAlternativeText(), false, true, null);
+            $image_picker = new ImagePicker($this->getTextResource("image_element_editor_image"), $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "update_element_holder", "");
+            $width_field = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->_image_element->getWidth(), false, false, "size_field");
+            $height_field = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->_image_element->getHeight(), false, false, "size_field");
 
             $this->getTemplateEngine()->assign("alignment_field", $this->renderAlignmentField());
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
@@ -39,11 +39,11 @@
 
         private function renderAlignmentField(): string {
             $alignment_options = array();
-            array_push($alignment_options, array("name" => "Links", "value" => "left"));
-            array_push($alignment_options, array("name" => "Rechts", "value" => "right"));
-            array_push($alignment_options, array("name" => "Midden", "value" => "center"));
+            array_push($alignment_options, array("name" => $this->getTextResource("image_element_align_left"), "value" => "left"));
+            array_push($alignment_options, array("name" => $this->getTextResource("image_element_align_right"), "value" => "right"));
+            array_push($alignment_options, array("name" => $this->getTextResource("image_element_align_center"), "value" => "center"));
             $current_alignment = $this->_image_element->getAlign();
-            $alignment_field = new Pulldown("element_" . $this->_image_element->getId() . "_align", "Uitlijning", $current_alignment, $alignment_options, false, null);
+            $alignment_field = new Pulldown("element_" . $this->_image_element->getId() . "_align", $this->getTextResource("image_element_editor_alignment"), $current_alignment, $alignment_options, false, null);
             return $alignment_field->render();
         }
 

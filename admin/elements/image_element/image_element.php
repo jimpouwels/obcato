@@ -12,57 +12,57 @@
 
     class ImageElement extends Element {
 
-        private string $_alternative_text;
-        private string $_align;
-        private int $_height;
-        private int $_width;
-        private int $_image_id;
+        private ?string $_alternative_text = null;
+        private ?string $_align = null;
+        private ?int $_height = null;
+        private ?int $_width = null;
+        private ?int $_image_id = null;
 
         public function __construct() {
             parent::__construct(new ImageElementMetadataProvider($this));
         }
 
-        public function setAlternativeText(string $alternative_text): void {
+        public function setAlternativeText(?string $alternative_text): void {
             $this->_alternative_text = $alternative_text;
         }
 
-        public function getAlternativeText(): string {
+        public function getAlternativeText(): ?string {
             return $this->_alternative_text;
         }
 
-        public function setAlign(string $align): void {
+        public function setAlign(?string $align): void {
             $this->_align = $align;
         }
 
-        public function getAlign(): string {
+        public function getAlign(): ?string {
             return $this->_align;
         }
 
-        public function getWidth(): int {
+        public function getWidth(): ?int {
             return $this->_width;
         }
 
-        public function setWidth(int $width): void {
+        public function setWidth(?int $width): void {
             $this->_width = $width;
         }
 
-        public function getHeight(): int {
+        public function getHeight(): ?int {
             return $this->_height;
         }
 
-        public function setHeight(int $height): void {
+        public function setHeight(?int $height): void {
             $this->_height = $height;
         }
 
-        public function setImageId(int $image_id): void {
+        public function setImageId(?int $image_id): void {
             $this->_image_id = $image_id;
         }
 
-        public function getImageId(): int {
+        public function getImageId(): ?int {
             return $this->_image_id;
         }
 
-        public function getImage(): Image {
+        public function getImage(): ?Image {
             $image = null;
             if ($this->_image_id != null) {
                 $image_dao = ImageDao::getInstance();

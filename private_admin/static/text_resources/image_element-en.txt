@@ -1,1 +1,15 @@
+# GENERAL
 image_element_label: Image
+
+# EDITOR
+image_element_editor_title: Title
+image_element_editor_alternative_text: Alternative title
+image_element_editor_image: Image
+image_element_editor_width: Width
+image_element_editor_height: Height
+image_element_editor_alignment: Alignment
+
+# ALIGNMENT OPTIONS
+image_element_align_left: Left
+image_element_align_right: Right
+image_element_align_center: Center
