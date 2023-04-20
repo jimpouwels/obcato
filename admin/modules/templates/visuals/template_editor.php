@@ -38,7 +38,7 @@
         private function renderScopesField(): string {
             $scopes_identifier_value_pair = array();
             foreach ($this->_scope_dao->getScopes() as $scope) {
-                array_push($scopes_identifier_value_pair, array("name" => $scope->getIdentifier(), "value" => $scope->getId()));
+                array_push($scopes_identifier_value_pair, array("name" => $this->getTextResource($scope->getIdentifier() . '_scope_label'), "value" => $scope->getId()));
             }
             $current_scope = $this->_template->getScope();
             $scopes_field = new PullDown("scope", "Scope", (is_null($current_scope) ? null : $current_scope->getId()), $scopes_identifier_value_pair, 200, true);

@@ -43,13 +43,15 @@
             return null;
         }
 
-        public function getPageByElementHolderId(int $element_holder_id): ?Page {
-            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
-                                                                    element_holders e WHERE p.element_holder_id = ? AND e.id = p.element_holder_id");
-            $statement->bind_param("i", $element_holder_id);
-            $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc()) {
-                return Page::constructFromRecord($row);
+        public function getPageByElementHolderId(?int $element_holder_id): ?Page {
+            if ($element_holder_id) {
+                $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
+                                                                        element_holders e WHERE p.element_holder_id = ? AND e.id = p.element_holder_id");
+                $statement->bind_param("i", $element_holder_id);
+                $result = $this->_mysql_connector->executeStatement($statement);
+                while ($row = $result->fetch_assoc()) {
+                    return Page::constructFromRecord($row);
+                }
             }
             return null;
         }

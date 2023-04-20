@@ -47,7 +47,7 @@
             return "";
         }
 
-        public function getElementHolderIdFromUrl(string $url): string {
+        public function getElementHolderIdFromUrl(string $url): ?int {
             $query = "SELECT element_holder_id FROM friendly_urls WHERE url = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("s", $url);
@@ -55,6 +55,6 @@
             while ($row = $result->fetch_assoc()) {
                 return $row['element_holder_id'];
             }
-            return "";
+            return null;
         }
     }

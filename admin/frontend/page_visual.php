@@ -7,10 +7,10 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
-        private Article $_article;
+        private ?Article $_article = null;
         private PageDao $_page_dao;
 
-        public function __construct(Page $current_page, Article $current_article) {
+        public function __construct(Page $current_page, ?Article $current_article) {
             parent::__construct($current_page);
             $this->_article = $current_article;
             $this->_page_dao = PageDao::getInstance();

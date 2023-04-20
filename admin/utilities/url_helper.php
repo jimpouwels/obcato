@@ -11,7 +11,7 @@
             }
         }
 
-        public static function splitIntoParts(string $url): string {
+        public static function splitIntoParts(string $url): array {
             $url = self::removeQueryStringFrom($url);
             return explode('/', $url);
         }
