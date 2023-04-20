@@ -22,7 +22,7 @@
         public function renderElementForm(): string {
             $title_field = new TextField($this->createFieldId("title"), "Titel", htmlentities($this->_image_element->getTitle()), false, false, null);
             $alternative_text_field = new TextField($this->createFieldId("alternative_text"), "Alternatieve tekst", $this->_image_element->getAlternativeText(), false, true, null);
-            $image_picker = new ImagePicker("Afbeelding", $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "Selecteer afbeelding", "update_element_holder", "");
+            $image_picker = new ImagePicker("Afbeelding", $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "update_element_holder", "");
             $width_field = new TextField($this->createFieldId("width"), "Breedte", $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), "Hoogte", $this->_image_element->getHeight(), false, false, "size_field");
 

@@ -22,7 +22,7 @@
 
             $website_title = new TextField("website_title", "Website titel", $this->_settings->getWebsiteTitle(), true, false, null);
             $email_field = new TextField("email_address", "Email adres", $this->_settings->getEmailAddress(), false, false, null);
-            $homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "Selecteer pagina", "apply_settings", "pick_homepage");
+            $homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "apply_settings", "pick_homepage");
 
             $this->getTemplateEngine()->assign("website_title", $website_title->render());
             $this->getTemplateEngine()->assign("email_field", $email_field->render());

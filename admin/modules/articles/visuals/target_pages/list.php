@@ -23,7 +23,7 @@
             $this->getTemplateEngine()->assign("target_pages", $this->getTargetPages());
             $this->getTemplateEngine()->assign("default_target_page", $this->getDefaultTargetPage());
 
-            $page_picker = new PagePicker("", null, "add_target_page_ref", "Doelpagina toevoegen", "update_target_pages", "articles");
+            $page_picker = new PagePicker("", null, "add_target_page_ref", "update_target_pages", "articles");
             $this->getTemplateEngine()->assign("page_picker", $page_picker->render());
 
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
