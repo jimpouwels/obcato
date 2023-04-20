@@ -1,5 +1,6 @@
 # GENERAL
 article_overview_element_label: Artikeloverzicht
+article_overview_element_scope_label: Artikeloverzicht Element
 
 # EDITOR
 article_overview_element_editor_title: Titel

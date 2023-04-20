@@ -1,5 +1,6 @@
 # GENERAL
 list_element_label: List
+list_element_scope_label: List Element
 list_element_message_no_list_items: There are no items yet
 
 # EDITOR

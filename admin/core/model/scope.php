@@ -5,20 +5,20 @@
 
     class Scope extends Entity {
     
-        private string $_name;
+        private string $_identifier;
         
-        public function getName(): string {
-            return $this->_name;
+        public function getIdentifier(): string {
+            return $this->_identifier;
         }
         
-        public function setName(string $name): void {
-            $this->_name = $name;
+        public function setIdentifier(string $identifier): void {
+            $this->_identifier = $identifier;
         }
         
         public static function constructFromRecord(array $record): Scope {
             $scope = new Scope();
             $scope->setId($record['id']);
-            $scope->setName($record['name']);
+            $scope->setIdentifier($record['identifier']);
             
             return $scope;
         }

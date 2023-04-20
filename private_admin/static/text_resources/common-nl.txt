@@ -61,3 +61,8 @@ selected_blocks_header: Geselecteerde blokken
 selected_blocks_position: Positie
 selected_blocks_delete: Verwijderen
 no_selected_blocks_found_message: Geen blokken geselecteerd
+
+# SCOPE LABELS
+element_holder_article_scope_label: Artikel
+element_holder_page_scope_label: Pagina
+element_holder_block_scope_label: Blok

@@ -1,5 +1,6 @@
 # GENERAL
 text_element_label: Paragraph
+text_element_scope_label: Paragraph Element
 
 # EDITOR
 text_element_editor_title: Title

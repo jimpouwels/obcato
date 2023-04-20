@@ -36,7 +36,7 @@
         }
 
         public function uninstall(): void {
-            $this->_scope_dao->deleteScope($this->_scope_dao->getScopeByName($this->getScope()));
+            $this->_scope_dao->deleteScope($this->_scope_dao->getScopeByIdentifier($this->getScope()));
             $this->runUninstallQueries();
             $this->uninstallStaticFiles();
             $this->uninstallBackendTemplates();
@@ -45,7 +45,7 @@
 
         private function installElementType(): void {
             $element_type = new ElementType();
-            $element_type->setName($this->getName());
+            $element_type->setIdentifier($this->getIdentifier());
             $element_type->setIdentifier($this->getIdentifier());
             $element_type->setIconUrl($this->getIconPath());
             $element_type->setSystemDefault(false);
@@ -57,7 +57,7 @@
                 $this->_logger->log('Element wordt toegevoegd aan de database');
                 $this->_element_dao->persistElementType($element_type);
             } else {
-                $element_type->setScopeId($this->_scope_dao->getScopeByName($this->getScope())->getId());
+                $element_type->setScopeId($this->_scope_dao->getScopeByIdentifier($this->getScope())->getId());
                 $this->_logger->log('Element database record wordt geupdate');
                 $this->_element_dao->updateElementType($element_type);
             }
@@ -65,7 +65,7 @@
 
         private function createNewScope(): Scope {
             $scope = new Scope();
-            $scope->setName($this->getScope());
+            $scope->setIdentifier($this->getScope());
             $this->_scope_dao->persistScope($scope);
             return $scope;
         }

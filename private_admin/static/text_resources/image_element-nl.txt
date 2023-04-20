@@ -1,5 +1,6 @@
 # GENERAL
 image_element_label: Afbeelding
+image_element_scope_label: Afbeelding Element
 
 # EDITOR
 image_element_editor_title: Titel

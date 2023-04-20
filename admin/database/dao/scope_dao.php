@@ -43,10 +43,10 @@
             return null;
         }
 
-        public function getScopeByName(string $name): ?Scope {
-            if (!is_null($name) && $name != "") {
-                $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE name = ?");
-                $statement->bind_param("s", $name);
+        public function getScopeByIdentifier(string $identifier): ?Scope {
+            if (!is_null($identifier) && $identifier != "") {
+                $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE identifier = ?");
+                $statement->bind_param("s", $identifier);
                 $result = $this->_mysql_connector->executeStatement($statement);
                 while ($row = $result->fetch_assoc()) {
                     return Scope::constructFromRecord($row);
@@ -56,9 +56,9 @@
         }
 
         public function persistScope(Scope $scope): void {
-            $statement = $this->_mysql_connector->prepareStatement("INSERT INTO scopes (name) VALUES (?)");
-            $scope_name = $scope->getName();
-            $statement->bind_param("s", $scope_name);
+            $statement = $this->_mysql_connector->prepareStatement("INSERT INTO scopes (identifier) VALUES (?)");
+            $identifier = $scope->getIdentifier();
+            $statement->bind_param("s", $identifier);
             $this->_mysql_connector->executeStatement($statement);
             $scope->setId($this->_mysql_connector->getInsertId());
         }

@@ -13,7 +13,7 @@
         private Scope $_scope;
 
         public function __construct(Scope $scope) {
-            parent::__construct($scope->getName() . ' templates', 'template_list_fieldset');
+            parent::__construct($scope->getIdentifier() . ' templates', 'template_list_fieldset');
             $this->_scope = $scope;
             $this->_template_dao = TemplateDao::getInstance();
         }
@@ -23,7 +23,7 @@
         }
 
         public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("scope", $this->_scope->getName());
+            $this->getTemplateEngine()->assign("scope", $this->_scope->getIdentifier());
             $this->getTemplateEngine()->assign("templates", $this->getTemplatesForScope($this->_scope));
             $this->getTemplateEngine()->assign("information_message", $this->renderInformationMessage());
             return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);

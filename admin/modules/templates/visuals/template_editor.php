@@ -36,12 +36,12 @@
         }
 
         private function renderScopesField(): string {
-            $scopes_name_value_pair = array();
+            $scopes_identifier_value_pair = array();
             foreach ($this->_scope_dao->getScopes() as $scope) {
-                array_push($scopes_name_value_pair, array("name" => $scope->getName(), "value" => $scope->getId()));
+                array_push($scopes_identifier_value_pair, array("name" => $scope->getIdentifier(), "value" => $scope->getId()));
             }
             $current_scope = $this->_template->getScope();
-            $scopes_field = new PullDown("scope", "Scope", (is_null($current_scope) ? null : $current_scope->getId()), $scopes_name_value_pair, 200, true);
+            $scopes_field = new PullDown("scope", "Scope", (is_null($current_scope) ? null : $current_scope->getId()), $scopes_identifier_value_pair, 200, true);
             return $scopes_field->render();
         }
 

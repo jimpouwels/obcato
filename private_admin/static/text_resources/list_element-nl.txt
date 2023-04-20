@@ -1,5 +1,6 @@
 # GENERAL
 list_element_label: Lijst
+list_element_scope_label: Lijst Element
 list_element_message_no_list_items: Dit element heeft nog geen items
 
 # EDITOR

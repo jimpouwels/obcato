@@ -1,5 +1,6 @@
 # GENERAL
 photo_album_element_label: Photo album
+photo_album_element_scope_label: Photo Album Element
 
 # EDITOR
 photo_album_element_editor_title: Title

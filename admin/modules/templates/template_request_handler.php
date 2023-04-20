@@ -10,7 +10,7 @@
     class TemplateRequestHandler extends HttpRequestHandler {
     
         private static string $TEMPLATE_ID_GET = "template";
-        private static string $SCOPE_NAME_GET = "scope";
+        private static string $SCOPE_IDENTIFIER_GET = "scope";
         private static string $TEMPLATE_ID_POST = "template_id";
 
         private TemplateDao $_template_dao;
@@ -114,9 +114,9 @@
         }
         
         private function getScopeFromGetRequest(): ?Scope {
-            if (isset($_GET[self::$SCOPE_NAME_GET])) {
-                $scope_name = $_GET[self::$SCOPE_NAME_GET];
-                return $this->_scope_dao->getScopeByName($scope_name);
+            if (isset($_GET[self::$SCOPE_IDENTIFIER_GET])) {
+                $scope_identifier = $_GET[self::$SCOPE_IDENTIFIER_GET];
+                return $this->_scope_dao->getScopeByIdentifier($scope_identifier);
             }
             return null;
         }
