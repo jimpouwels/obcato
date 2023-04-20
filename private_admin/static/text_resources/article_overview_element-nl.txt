@@ -1,1 +1,19 @@
+# GENERAL
 article_overview_element_label: Artikeloverzicht
+
+# EDITOR
+article_overview_element_editor_title: Titel
+article_overview_element_editor_publication_date_from: Publicatiedatum vanaf
+article_overview_element_editor_publication_date_until: Publicatiedatum tot
+article_overview_element_editor_max_results: Max aantal resultaten
+article_overview_element_editor_sort_by: Sorteren op
+article_overview_element_editor_ordering: Volgorde
+
+# SORT OPTIONS
+article_overview_element_editor_sort_publication_date: Publication date
+article_overview_element_editor_sort_sort_date: Sorting date
+article_overview_element_editor_sort_alphabet: Alphabet
+
+# ORDER OPTIONS
+article_overview_element_editor_order_ascending: Oplopend
+article_overview_element_editor_order_descending: Aflopend
