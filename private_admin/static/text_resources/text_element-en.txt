@@ -1,1 +1,6 @@
+# GENERAL
 text_element_label: Paragraph
+
+# EDITOR
+text_element_editor_title: Title
+text_element_editor_text: Text

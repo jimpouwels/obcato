@@ -23,8 +23,8 @@
         }
         
         public function renderElementForm(): string {
-            $title_field = new TextField('element_' . $this->_text_element->getId() . '_title', 'Titel', $this->_text_element->getTitle(), false, true, null);
-            $text_field = new TextArea('element_' . $this->_text_element->getId() . '_text', 'Tekst', $this->_text_element->getText(), false, true, null);
+            $title_field = new TextField('element_' . $this->_text_element->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->_text_element->getTitle(), false, true, null);
+            $text_field = new TextArea('element_' . $this->_text_element->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->_text_element->getText(), false, true, null);
             
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
             $this->getTemplateEngine()->assign("text_field", $text_field->render());
