@@ -38,9 +38,7 @@
             $object_picker_template_data->assign("picker_button", $picker_button->render());
             $object_picker_template_data->assign("backing_field_id", $this->_backing_field_id);
             $object_picker_template_data->assign("value", $this->_value);
-            if ($this->_label) {
-                $$object_picker_template_data->assign("label", $this->getInputLabelHtml($this->_label, $this->_backing_field_id, false));
-            }
+            $object_picker_template_data->assign("label", $this->getInputLabelHtml($this->_label, $this->_backing_field_id, false));
             
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $object_picker_template_data);
         }

@@ -59,13 +59,16 @@
             return "";
         }
 
-        protected function getInputLabelHtml(string $field_label, string $field_name, bool $mandatory) {
-            $data = $this->getTemplateEngine()->createData();
-            $data->assign("label", $field_label);
-            $data->assign("name", $field_name);
-            $data->assign("mandatory", $mandatory);
-            $tpl = $this->getTemplateEngine()->createTemplate("system/form_label.tpl", $data);
-            return $tpl->fetch();
+        protected function getInputLabelHtml(string $field_label, string $field_name, bool $mandatory): string {
+            if ($field_label) {
+                $data = $this->getTemplateEngine()->createData();
+                $data->assign("label", $field_label);
+                $data->assign("name", $field_name);
+                $data->assign("mandatory", $mandatory);
+                $tpl = $this->getTemplateEngine()->createTemplate("system/form_label.tpl", $data);
+                return $tpl->fetch();
+            }
+            return "";
         }
 
         private function getFieldValue(): ?string {
