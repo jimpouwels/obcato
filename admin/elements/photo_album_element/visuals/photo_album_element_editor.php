@@ -21,8 +21,8 @@
         }
         
         public function renderElementForm(): string {
-            $title_field = new TextField("element_" . $this->_element->getId() . "_title", "Titel", $this->_element->getTitle(), false, true, null);
-            $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", "Max. aantal resultaten", $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
+            $title_field = new TextField("element_" . $this->_element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->_element->getTitle(), false, true, null);
+            $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
             $label_select_field = new ImageLabelSelector($this->_element->getLabels(), $this->_element->getId());
 
             $this->getTemplateEngine()->assign("title_field", $title_field->render());

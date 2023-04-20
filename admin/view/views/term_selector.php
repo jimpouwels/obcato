@@ -12,7 +12,7 @@
         private int $_context_id;
 
         public function __construct(array $selected_terms, int $context_id) {
-            parent::__construct('Termen', 'term_selector');
+            parent::__construct($this->getTextResource("term_selector_title"), 'term_selector');
             $this->_selected_terms = $selected_terms;
             $this->_article_dao = ArticleDao::getInstance();
             $this->_context_id = $context_id;
@@ -26,6 +26,10 @@
             $this->getTemplateEngine()->assign("terms_to_select", $this->getTermsToSelect());
             $this->getTemplateEngine()->assign("selected_terms", $this->getSelectedTermsHtml());
             $this->getTemplateEngine()->assign("context_id", $this->_context_id);
+
+            $this->getTemplateEngine()->assign("label_selected_terms", $this->getTextResource("term_selector_label_selected_terms"));
+            $this->getTemplateEngine()->assign("label_delete_selected_term", $this->getTextResource("term_selector_label_delete_selected_term"));
+            $this->getTemplateEngine()->assign("message_no_selected_terms", $this->getTextResource("term_selector_message_no_terms_selected"));
 
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }

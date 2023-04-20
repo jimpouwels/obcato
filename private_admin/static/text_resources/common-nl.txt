@@ -32,6 +32,12 @@ link_open_in: Openen in
 link_delete: Verwijderen
 link_editor_title: Links
 
+# TERM SELECTOR
+term_selector_title: Termen
+term_selector_label_selected_terms: Geselecteerde termen
+term_selector_label_delete_selected_term: Verwijder
+term_selector_message_no_terms_selected: Geen termen geselecteerd
+
 # LINK ERROR MESSAGES
 link_not_saved_error: Er is een link niet opgeslagen, verwerk de fout(en)
 link_code_field_missing: Link code is verplicht

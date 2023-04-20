@@ -32,6 +32,12 @@ link_open_in: Open in
 link_delete: Delete
 link_editor_title: Links
 
+# TERM SELECTOR
+term_selector_title: Terms
+term_selector_label_selected_terms: Selected terms
+term_selector_label_delete_selected_term: Delete
+term_selector_message_no_terms_selected: No terms selected
+
 # LINK ERROR MESSAGES
 link_not_saved_error: A link could not be saved, resolve the error(s)
 link_code_field_missing: Link code is mandatory

@@ -14,18 +14,18 @@
     class PhotoAlbumElement extends Element {
             
         private array $_labels;
-        private int $_number_of_results;
+        private ?int $_number_of_results = null;
             
         public function __construct() {
             parent::__construct(new PhotoAlbumElementMetadataProvider($this));
             $this->_labels = array();
         }
         
-        public function setNumberOfResults(int $number_of_results): void {
+        public function setNumberOfResults(?int $number_of_results): void {
             $this->_number_of_results = $number_of_results;
         }
         
-        public function getNumberOfResults(): int {
+        public function getNumberOfResults(): ?int {
             return $this->_number_of_results;
         }
 

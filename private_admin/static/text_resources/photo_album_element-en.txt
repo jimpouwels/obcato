@@ -1,1 +1,6 @@
+# GENERAL
 photo_album_element_label: Photo album
+
+# EDITOR
+photo_album_element_editor_title: Title
+photo_album_element_editor_max_results: Max number of results
