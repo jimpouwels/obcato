@@ -23,10 +23,12 @@
 
         public function handlePost(): void {
             $this->_list_element_form->loadFields();
-            foreach ($this->_list_element_form->getListItemsToDelete() as $list_item_to_delete)
+            foreach ($this->_list_element_form->getListItemsToDelete() as $list_item_to_delete) {
                 $this->_list_element->deleteListItem($list_item_to_delete);
-            if ($this->isAddListItemAction())
+            }
+            if ($this->isAddListItemAction()) {
                 $this->_list_element->addListItem();
+            }
             $this->_element_dao->updateElement($this->_list_element);
         }
 

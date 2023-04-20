@@ -3,13 +3,13 @@
 
     abstract class Entity {
     
-        private int $_id = -1;
+        private ?int $_id = null;
         
-        public function getId(): int {
+        public function getId(): ?int {
             return $this->_id;
         }
         
-        public function setId(int $id): void {
+        public function setId(?int $id): void {
             $this->_id = $id;
         }
     

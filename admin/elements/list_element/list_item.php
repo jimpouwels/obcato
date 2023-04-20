@@ -7,15 +7,15 @@
 
     class ListItem extends Entity {
             
-        private string  $_text;
-        private int $_indent;
+        private ?string  $_text = null;
+        private int $_indent = 0;
         private int $_elementId;
         
-        public function setText(string $text): void {
+        public function setText(?string $text): void {
             $this->_text = $text;
         }
         
-        public function getText(): string {
+        public function getText(): ?string {
             return $this->_text;
         }
         

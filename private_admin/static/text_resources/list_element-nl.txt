@@ -1,1 +1,9 @@
+# GENERAL
 list_element_label: Lijst
+list_element_message_no_list_items: Dit element heeft nog geen items
+
+# EDITOR
+list_element_editor_title: Titel
+list_element_editor_add_item: Lijst item toevoegen
+list_element_item_label_value: Waarde
+list_element_item_label_delete: Verwijderen

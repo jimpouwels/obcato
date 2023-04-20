@@ -12,7 +12,7 @@
 
     class ListElement extends Element {
 
-        private $_list_items;
+        private array $_list_items = array();
             
         public function __construct() {
             parent::__construct(new ListElementMetaDataProvider($this));

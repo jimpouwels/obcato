@@ -8,22 +8,22 @@
     <tr>
         <td>
             <fieldset class="panel list-fieldset">
-                    <div class="panel-title">Items</div>
+                <div class="panel-title">Items</div>
                     {if count($list_items) > 0}
-                            <table cellspacing="0" cellpadding="0" class="list_element_items">
-                                    <tr>
-                                            <td><em>Waarde</em></td>
-                                            <td><em>Verwijder</em></td>
-                                    </tr>
-                                    {foreach from=$list_items item=list_item}
-                                            <tr>
-                                                    <td>{$list_item.item_text_field}</td>
-                                                    <td>{$list_item.delete_field}</td>
-                                            </tr>
-                                    {/foreach}
-                            </table>
+                        <table cellspacing="0" cellpadding="0" class="list_element_items">
+                            <tr>
+                                <td><em>{$list_item_label_value}</em></td>
+                                <td><em>{$list_item_label_delete}</em></td>
+                            </tr>
+                            {foreach from=$list_items item=list_item}
+                                <tr>
+                                    <td>{$list_item.item_text_field}</td>
+                                    <td>{$list_item.delete_field}</td>
+                                </tr>
+                            {/foreach}
+                        </table>
                     {else}
-                            <em>Dit element bevat nog geen items</em>
+                        <em>{$message_no_list_items}</em>
                     {/if}
             </fieldset>
         </td>

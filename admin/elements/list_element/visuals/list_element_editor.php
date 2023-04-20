@@ -21,13 +21,17 @@
         }
         
         public function renderElementForm(): string {
-            $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', 'Titel', $this->_list_element->getTitle(), false, true, null);
-            $add_item_button = new Button("", "Lijst item toevoegen", "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
+            $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->_list_element->getTitle(), false, true, null);
+            $add_item_button = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
             $this->getTemplateEngine()->assign("list_items", $this->getListItems());
             $this->getTemplateEngine()->assign("add_item_button", $add_item_button->render());
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
             $this->getTemplateEngine()->assign("id", $this->_list_element->getId());
+
+            $this->getTemplateEngine()->assign("message_no_list_items", $this->getTextResource("list_element_message_no_list_items"));
+            $this->getTemplateEngine()->assign("list_item_label_value", $this->getTextResource("list_element_item_label_value"));
+            $this->getTemplateEngine()->assign("list_item_label_delete", $this->getTextResource("list_element_item_label_delete"));
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
