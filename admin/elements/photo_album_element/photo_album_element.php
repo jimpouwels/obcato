@@ -61,8 +61,8 @@
             return new PhotoAlbumElementEditor($this);
         }
 
-        public function getFrontendVisual(Page $current_page): FrontendVisual {
-            return new PhotoAlbumElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
+            return new PhotoAlbumElementFrontendVisual($page, $article, $this);
         }
         
         public function getRequestHandler(): HttpRequestHandler {

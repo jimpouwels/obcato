@@ -12,17 +12,17 @@
 
     class TextElement extends Element {
             
-        private string $_text;
+        private ?string $_text = null;
             
         public function __construct() {
             parent::__construct(new TextElementMetadataProvider($this));
         }
         
-        public function setText(string $text): void {
+        public function setText(?string $text): void {
             $this->_text = $text;
         }
         
-        public function getText(): string {
+        public function getText(): ?string {
             return $this->_text;
         }
         
@@ -34,8 +34,8 @@
             return new TextElementEditorVisual($this);
         }
 
-        public function getFrontendVisual(Page $current_page): FrontendVisual {
-            return new TextElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
+            return new TextElementFrontendVisual($page, $article, $this);
         }
         
         public function getRequestHandler(): HttpRequestHandler {

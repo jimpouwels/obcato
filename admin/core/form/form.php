@@ -26,14 +26,6 @@
             return $value;
         }
         
-        public function getFieldValueAsInt(string $field_name): ?int {
-            $value = null;
-            if (isset($_POST[$field_name]) && !empty($_POST[$field_name])) {
-                $value = intval($_POST[$field_name]);
-            }
-            return $value;
-        }
-        
         public function getFieldValues(string $field_name): array {
             $value = array();
             if (isset($_POST[$field_name])) {
@@ -80,55 +72,61 @@
         }
         
         public function getNumber(string $field_name, string $error_message): ?int {
-            $number = $this->getFieldValue($field_name);
-            if (!$this->isEmpty($number) && !is_numeric($number)) {
+            $number_as_string = $this->getFieldValue($field_name);
+            if (!$this->isEmpty($number_as_string) && !is_numeric($number_as_string)) {
                 $this->raiseError($field_name, $error_message);
             }
-            return intval($number);
+            return !$this->isEmpty($number_as_string) ? intval($number_as_string) : null;
         }
         
         public function getMandatoryDate(string $field_name, string $error_message, string $invalid_date_message) {
             $date = $this->getDate($field_name, $invalid_date_message);
-            if ($this->isEmpty($date))
+            if ($this->isEmpty($date)) {
                 $this->raiseError($field_name, $error_message);
+            }
             return $date;
         }
         
         public function getDate(string $field_name, string $error_message) {
             $value = $this->getFieldValue($field_name);
             $valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-            if (!$valid_date && $value != '')
+            if (!$valid_date && $value != '') {
                 $this->raiseError($field_name, $error_message);
+            }
             return $value;
         }
         
         public function getPassword(string $password1, string $password2) {
             $value1 = $this->getFieldValue($password1);
             $value2 = $this->getFieldValue($password2);
-            if ((!$value1 && $value2))
+            if ((!$value1 && $value2)) {
                 $this->raiseError($password1, "Vul beide wachtwoordvelden in");
-            else if ($value1 && !$value2)
+            } else if ($value1 && !$value2) {
                 $this->raiseError($password2, "Herhaal het wachtwoord");
-            else if ($value1 != $value2)
+            } else if ($value1 != $value2) {
                 $this->raiseError($password2, "De wachtwoorden zijn niet gelijk");
+            }
             return $value1;
         }
 
         public function getMandatoryUploadFilePath(string $field_name, string $error_message) {
             $file_path = $this->getUploadFilePath($field_name);
-            if ($file_path)
+            if ($file_path) {
                 return $file_path;
+            }
             $this->raiseError($field_name, $error_message);
         }
         
         public function getUploadFilePath(string $field_name) {
-            if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]))
+            if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
                 return $_FILES[$field_name]["tmp_name"];
+            }
         }
         
         public function getUploadedFileName(string $field_name) {
-            if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]))
+            if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
                 return $_FILES[$field_name]["name"];
+            }
         }
         
         protected function hasErrors() {

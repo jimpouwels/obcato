@@ -95,12 +95,16 @@
         
         public function getArticles(): array {
             $article_dao = ArticleDao::getInstance();
-            $_show_to = null;
-            if ($this->_show_until_today != 1) {
-                $_show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
+            $show_to = null;
+            if ($this->_show_until_today != 1 && $this->_show_to) {
+                $show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
             }
-            $articles = $article_dao->searchPublishedArticles(DateUtility::mysqlDateToString($this->_show_from, '-'),
-                                                             $_show_to, $this->_order_by, $this->getOrderType(), $this->_terms,
+            $show_from = null;
+            if ($this->_show_from) {
+                $show_from = DateUtility::mysqlDateToString($this->_show_from, '-');
+            }
+            $articles = $article_dao->searchPublishedArticles($show_from,
+                                                             $show_to, $this->_order_by, $this->getOrderType(), $this->_terms,
                                                              $this->_number_of_results);
             return $articles;
         }
@@ -113,8 +117,8 @@
             return new ArticleOverviewElementEditor($this);
         }
 
-        public function getFrontendVisual(Page $current_page): FrontendVisual {
-            return new ArticleOverviewElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
+            return new ArticleOverviewElementFrontendVisual($page, $article, $this);
         }
         
         public function getRequestHandler(): HttpRequestHandler {

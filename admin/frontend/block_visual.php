@@ -6,12 +6,10 @@
     class BlockVisual extends FrontendVisual {
 
         private Block $_block;
-        private Page $_current_page;
 
-        public function __construct(Block $block, Page $current_page) {
-            parent::__construct($current_page);
+        public function __construct(Block $block, Page $page) {
+            parent::__construct($page, null);
             $this->_block = $block;
-            $this->_current_page = $current_page;
         }
 
         public function render(): string {
@@ -24,7 +22,7 @@
         private function renderElements(): array {
             $elements_content = array();
             foreach ($this->_block->getElements() as $element) {
-                $elements_content[] = $element->getFrontendVisual($this->_current_page)->render();
+                $elements_content[] = $element->getFrontendVisual($this->getPage(), null)->render();
             }
             return $elements_content;
         }

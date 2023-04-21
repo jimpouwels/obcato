@@ -9,7 +9,7 @@
         private ?Article $_article;
 
         public function __construct(Page $page, ?Article $article) {
-            parent::__construct($page);
+            parent::__construct($page, $article);
             $this->_article = $article;
         }
 

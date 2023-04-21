@@ -79,8 +79,8 @@
             return new ImageElementEditorVisual($this);
         }
 
-        public function getFrontendVisual(Page $current_page): ImageElementFrontendVisual {
-            return new ImageElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): ImageElementFrontendVisual {
+            return new ImageElementFrontendVisual($page, $article, $this);
         }
 
         public function getRequestHandler(): HttpRequestHandler {

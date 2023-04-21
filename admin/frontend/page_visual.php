@@ -7,12 +7,10 @@
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class PageVisual extends FrontendVisual {
-        private ?Article $_article = null;
         private PageDao $_page_dao;
 
-        public function __construct(Page $current_page, ?Article $current_article) {
-            parent::__construct($current_page);
-            $this->_article = $current_article;
+        public function __construct(Page $page, ?Article $article) {
+            parent::__construct($page, $article);
             $this->_page_dao = PageDao::getInstance();
         }
 
@@ -21,9 +19,9 @@
             $this->getTemplateEngine()->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $rendered_article = null;
             $this->getTemplateEngine()->assign("page_title", $this->getPage()->getTitle());
-            if (!is_null($this->_article) && $this->_article->isPublished()) {
+            if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
                 $rendered_article = $this->renderArticle();
-                $this->getTemplateEngine()->assign("page_title", $this->_article->getTitle());
+                $this->getTemplateEngine()->assign("page_title", $this->getArticle()->getTitle());
             }
             $this->getTemplateEngine()->assign('article', $rendered_article);
             $this->getTemplateEngine()->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
@@ -69,12 +67,12 @@
 
         private function renderArticle(): array {
             $article_content = array();
-            $article_content["id"] = $this->_article->getId();
-            $article_content["title"] = $this->_article->getTitle();
-            $article_content["description"] = $this->_article->getDescription();
-            $article_content["publication_date"] = $this->_article->getPublicationDate();
-            $article_content["image"] = $this->getImageData($this->_article->getImage());
-            $article_content["elements"] = $this->renderElementHolderContent($this->_article);
+            $article_content["id"] = $this->getArticle()->getId();
+            $article_content["title"] = $this->getArticle()->getTitle();
+            $article_content["description"] = $this->getArticle()->getDescription();
+            $article_content["publication_date"] = $this->getArticle()->getPublicationDate();
+            $article_content["image"] = $this->getImageData($this->getArticle()->getImage());
+            $article_content["elements"] = $this->renderElementHolderContent($this->getArticle());
             return $article_content;
         }
 
@@ -101,11 +99,11 @@
             return $block_visual->render();
         }
 
-        private function renderElementHolderContent($element_holder) {
+        private function renderElementHolderContent(ElementHolder $element_holder) {
             $elements_content = array();
             foreach ($element_holder->getElements() as $element) {
                 if ($element->getTemplate()) {
-                    $elements_content[] = $element->getFrontendVisual($element_holder)->render();
+                    $elements_content[] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
                 }
             }
             return $elements_content;

@@ -101,7 +101,7 @@
         
         public abstract function getBackendVisual(): ElementVisual;
         
-        public abstract function getFrontendVisual(Page $current_page): FrontendVisual;
+        public abstract function getFrontendVisual(Page $page, ?Article $article): FrontendVisual;
         
         public abstract function getRequestHandler(): HttpRequestHandler;
         

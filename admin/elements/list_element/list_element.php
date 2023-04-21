@@ -44,8 +44,8 @@
             return new ListElementEditorVisual($this);
         }
 
-        public function getFrontendVisual(Page $current_page): FrontendVisual {
-            return new ListElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
+            return new ListElementFrontendVisual($page, $article, $this);
         }
         
         public function getRequestHandler(): HttpRequestHandler {

@@ -7,22 +7,20 @@
 
     class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
-        private ArticleOverviewElement $_article_overview_element;
 
-        public function __construct(Page $current_page, ArticleOverviewElement $article_overview_element) {
-            parent::__construct($current_page, $article_overview_element);
-            $this->_article_overview_element = $article_overview_element;
+        public function __construct(Page $page, ?Article $article, ArticleOverviewElement $article_overview_element) {
+            parent::__construct($page, $article, $article_overview_element);
         }
 
         public function renderElement(): string {
-            $element_holder = $this->_article_overview_element->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->toHtml($this->_article_overview_element->getTitle(), $element_holder));
+            $element_holder = $this->getElement()->getElementHolder();
+            $this->getTemplateEngine()->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
             $this->getTemplateEngine()->assign("articles", $this->getArticles());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_article_overview_element->getTemplate()->getFileName());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
         }
 
         private function getArticles(): array {
-            $articles = $this->_article_overview_element->getArticles();
+            $articles = $this->getElement()->getArticles();
             $articles_arr = array();
             foreach ($articles as $article) {
                 if (!$this->isPublished($article)) continue;
@@ -40,7 +38,7 @@
             return $articles_arr;
         }
 
-        private function getArticleImage(Article $article): ?Image {
+        private function getArticleImage(Article $article): ?array {
             $image = null;
             if (!is_null($article->getImage())) {
                 $image = array();

@@ -5,23 +5,20 @@
 
     class ListElementFrontendVisual extends ElementFrontendVisual {
 
-        private ListElement $_list_element;
-
-        public function __construct(Page $current_page, ListElement $list_element) {
-            parent::__construct($current_page, $list_element);
-            $this->_list_element = $list_element;
+        public function __construct(Page $page, ?Article $article, ListElement $list_element) {
+            parent::__construct($page, $article, $list_element);
         }
 
         public function renderElement(): string {
-            $element_holder = $this->_list_element->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->toHtml($this->_list_element->getTitle(), $element_holder));
+            $element_holder = $this->getElement()->getElementHolder();
+            $this->getTemplateEngine()->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
             $this->getTemplateEngine()->assign("items", $this->renderListItems($element_holder));
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_list_element->getTemplate()->getFileName());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
         }
 
         private function renderListItems(ElementHolder $element_holder): array {
             $list_items = array();
-            foreach ($this->_list_element->getListItems() as $list_item) {
+            foreach ($this->getElement()->getListItems() as $list_item) {
                 $list_items[] = $this->toHtml($list_item->getText(), $element_holder);
             }
             return $list_items;

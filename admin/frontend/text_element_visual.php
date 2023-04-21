@@ -5,18 +5,15 @@
 
     class TextElementFrontendVisual extends ElementFrontendVisual {
 
-        private TextElement $_text_element;
-    
-        public function __construct(Page $current_page, TextElement $text_element) {
-            parent::__construct($current_page, $text_element);
-            $this->_text_element = $text_element;
+        public function __construct(Page $page, ?Article $article, TextElement $text_element) {
+            parent::__construct($page, $article, $text_element);
         }
 
         public function renderElement(): string {
-            $element_holder = $this->_text_element->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->toHtml($this->_text_element->getTitle(), $element_holder));
-            $this->getTemplateEngine()->assign("text", $this->toHtml($this->_text_element->getText(), $element_holder));
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_text_element->getTemplate()->getFileName());
+            $element_holder = $this->getElement()->getElementHolder();
+            $this->getTemplateEngine()->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
+            $this->getTemplateEngine()->assign("text", $this->toHtml($this->getElement()->getText(), $element_holder));
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
         }
     }
     

@@ -85,19 +85,19 @@
             <query>INSERT INTO element_types VALUES (9 ,'TableOfContentsElement','/img/table_of_contents_element.png','Inhoudsopgave','table_of_contents_element.php',12,'table_of_contents_element',1)</query>
             <query>ALTER TABLE elements ADD COLUMN include_in_table_of_contents BOOL NOT NULL DEFAULT 0</query>
             <query>ALTER TABLE element_types DROP COLUMN name</query>
-            <query>UPDATE scopes SET identifier = 'text_element' WHERE id = 1</query>
-            <query>UPDATE scopes SET name = 'list_element' WHERE id = 2</query>
-            <query>UPDATE scopes SET name = 'image_element' WHERE id = 3</query>
-            <query>UPDATE scopes SET name = 'download_element' WHERE id = 4</query>
-            <query>UPDATE scopes SET name = 'element_holder_page' WHERE id = 5</query>
-            <query>UPDATE scopes SET name = 'element_holder_block' WHERE id = 6</query>
-            <query>UPDATE scopes SET name = 'article_overview_element' WHERE id = 7</query>
-            <query>UPDATE scopes SET name = 'youtube_element' WHERE id = 8</query>
-            <query>UPDATE scopes SET name = 'element_holder_article' WHERE id = 9</query>
-            <query>UPDATE scopes SET name = 'guestbook_element' WHERE id = 10</query>
-            <query>UPDATE scopes SET name = 'photo_album_element' WHERE id = 11</query>
-            <query>UPDATE scopes SET name = 'table_of_contents_element' WHERE id = 12</query>
             <query>ALTER TABLE scopes CHANGE COLUMN name identifier VARCHAR(255) NOT NULL</query>
+            <query>UPDATE scopes SET identifier = 'text_element' WHERE id = 1</query>
+            <query>UPDATE scopes SET identifier = 'list_element' WHERE id = 2</query>
+            <query>UPDATE scopes SET identifier = 'image_element' WHERE id = 3</query>
+            <query>UPDATE scopes SET identifier = 'download_element' WHERE id = 4</query>
+            <query>UPDATE scopes SET identifier = 'element_holder_page' WHERE id = 5</query>
+            <query>UPDATE scopes SET identifier = 'element_holder_block' WHERE id = 6</query>
+            <query>UPDATE scopes SET identifier = 'article_overview_element' WHERE id = 7</query>
+            <query>UPDATE scopes SET identifier = 'youtube_element' WHERE id = 8</query>
+            <query>UPDATE scopes SET identifier = 'element_holder_article' WHERE id = 9</query>
+            <query>UPDATE scopes SET identifier = 'guestbook_element' WHERE id = 10</query>
+            <query>UPDATE scopes SET identifier = 'photo_album_element' WHERE id = 11</query>
+            <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
         </queries>
     </version>
 </versions>

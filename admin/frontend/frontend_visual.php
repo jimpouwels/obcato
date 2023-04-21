@@ -18,12 +18,14 @@
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
         private Page $_page;
+        private ?Article $_article;
 
-        public function __construct(Page $page) {
+        public function __construct(Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_page = $page;
+            $this->_article = $article;
             $this->_template_engine = TemplateEngine::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
@@ -39,8 +41,20 @@
             return $this->getPageUrl($this->_page) . '?image=' . $image->getId();
         }
 
-        protected function getPage(): ElementHolder {
+        protected function getPage(): Page {
             return $this->_page;
+        }
+
+        protected function getArticle(): ?Article {
+            return $this->_article;
+        }
+
+        protected function getElementHolder(): ElementHolder {
+            if ($this->_article) {
+                return $this->_article;
+            } else {
+                return $this->_page;
+            }
         }
 
         protected function getTemplateEngine(): Smarty {

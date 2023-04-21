@@ -4,37 +4,35 @@
     require_once CMS_ROOT . "frontend/element_visual.php";
 
     class ImageElementFrontendVisual extends ElementFrontendVisual {
-        private ImageElement $_image_element;
 
-        public function __construct(Page $current_page, ImageElement $image_element) {
-            parent::__construct($current_page, $image_element);
-            $this->_image_element = $image_element;
+        public function __construct(Page $page, ?Article $article, ImageElement $image_element) {
+            parent::__construct($page, $article, $image_element);
         }
 
         public function renderElement(): string {
-            $element_holder = $this->_image_element->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->_image_element->getTitle());
-            $this->getTemplateEngine()->assign("alternative_text", $this->toHtml($this->_image_element->getAlternativeText(), $element_holder));
-            $this->getTemplateEngine()->assign("align", $this->_image_element->getAlign());
-            $this->getTemplateEngine()->assign("width", $this->_image_element->getWidth());
-            $this->getTemplateEngine()->assign("height", $this->_image_element->getHeight());
+            $element_holder = $this->getElement()->getElementHolder();
+            $this->getTemplateEngine()->assign("title", $this->getElement()->getTitle());
+            $this->getTemplateEngine()->assign("alternative_text", $this->toHtml($this->getElement()->getAlternativeText(), $element_holder));
+            $this->getTemplateEngine()->assign("align", $this->getElement()->getAlign());
+            $this->getTemplateEngine()->assign("width", $this->getElement()->getWidth());
+            $this->getTemplateEngine()->assign("height", $this->getElement()->getHeight());
             $this->getTemplateEngine()->assign("image_url", $this->createImageUrl());
             $this->getTemplateEngine()->assign("extension", $this->getExtension());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_image_element->getTemplate()->getFileName());
+            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
         }
 
         private function createImageUrl(): string {
             $image_url = "";
-            if (!is_null($this->_image_element->getImage())) {
-                $image_url = $this->getImageUrl($this->_image_element->getImage());
+            if (!is_null($this->getElement()->getImage())) {
+                $image_url = $this->getImageUrl($this->getElement()->getImage());
             }
             return $image_url;
         }
 
         private function getExtension(): string {
             $extension = "";
-            if (!is_null($this->_image_element->getImage())) {
-                $extension = $this->_image_element->getImage()->getExtension();
+            if (!is_null($this->getElement()->getImage())) {
+                $extension = $this->getElement()->getImage()->getExtension();
             }
             return $extension;
         }

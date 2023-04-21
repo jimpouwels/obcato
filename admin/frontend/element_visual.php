@@ -7,8 +7,8 @@
 
         private Element $_element;
 
-        public function __construct(Page $current_page, Element $element) {
-            parent::__construct($current_page);
+        public function __construct(Page $page, ?Article $article, Element $element) {
+            parent::__construct($page, $article);
             $this->_element = $element;
         }
 
@@ -19,6 +19,10 @@
             $this->getTemplateEngine()->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
             $this->getTemplateEngine()->assign("element_html", $this->renderElement());
             return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/element.tpl");
+        }
+
+        protected function getElement(): Element {
+            return $this->_element;
         }
 
     }

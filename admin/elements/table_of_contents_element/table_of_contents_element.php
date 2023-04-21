@@ -24,8 +24,8 @@
             return new TableOfContentsElementEditor($this);
         }
 
-        public function getFrontendVisual(Page $current_page): FrontendVisual {
-            return new TableOfContentsElementFrontendVisual($current_page, $this);
+        public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
+            return new TableOfContentsElementFrontendVisual($page, $article, $this);
         }
         
         public function getRequestHandler(): HttpRequestHandler {

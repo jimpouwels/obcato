@@ -20,7 +20,7 @@
             $this->_page->setNavigationTitle($this->getMandatoryFieldValue("navigation_title", "Navigatietitel is verplicht"));
             $this->_page->setDescription($this->getFieldValue("description"));
             $this->_page->setShowInNavigation($this->getCheckboxValue("show_in_navigation"));
-            $this->_page->setTemplateId($this->getFieldValueAsInt("page_template"));
+            $this->_page->setTemplateId($this->getNumber("page_template", "Vul een geldig getal in"));
             $this->_element_order = $this->getFieldValue("element_order");
             $this->_selected_blocks = $this->getFieldValues("select_blocks_" . $this->_page->getId());
             if ($this->hasErrors()) {
