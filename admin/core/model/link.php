@@ -12,7 +12,7 @@
         private string $_title;
         private ?string $_url = null;
         private string $_type;
-        private string $_code;
+        private ?string $_code = null;
         private ?int $_targetElementHolderId;
         private int $_parentElementHolderId;
         private string $_target;
@@ -78,11 +78,11 @@
             $this->_parentElementHolderId = $parent_element_holder_id;
         }
         
-        public function getCode(): string {
+        public function getCode(): ?string {
             return $this->_code;
         }
         
-        public function setCode(string $code): void {
+        public function setCode(?string $code): void {
             $this->_code = $code;
         }
 
