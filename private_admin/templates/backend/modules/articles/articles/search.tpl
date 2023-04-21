@@ -1,6 +1,5 @@
 <form id="article_search" action="{$backend_base_url_raw}" method="get">
 	<ul class="admin_form">
-		</li>
 		<li class="displaynone">
 			{$module_id_form_field}
 			{$module_tab_id_form_field}
