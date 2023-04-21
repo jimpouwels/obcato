@@ -13,6 +13,6 @@
 		{$search_button}
 	</div>
 	<div class="show_all_link">
-		<a href="{$backend_base_url_raw}" title="Toon alle artikelen">{$text_resources.articles_search_box_show_all}</a>
+		<a href="{$backend_base_url}" title="Toon alle artikelen">{$text_resources.articles_search_box_show_all}</a>
 	</div>
 </form>
