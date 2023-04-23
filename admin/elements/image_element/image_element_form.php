@@ -17,9 +17,9 @@
             $this->_image_element->setTitle($this->getFieldValue('element_' . $this->_image_element->getId() . '_title'));
             $this->_image_element->setAlternativeText($this->getFieldValue('element_' . $this->_image_element->getId() . '_alternative_text'));
             $this->_image_element->setAlign($this->getFieldValue('element_' . $this->_image_element->getId() . '_align'));
-            $this->_image_element->setImageId($this->getNumber('image_image_ref_' . $this->_image_element->getId(), "Vul een geldig getal in"));
-            $this->_image_element->setWidth($this->getNumber('element_' . $this->_image_element->getId() . '_width', $this->getTextResource("form_invalid_number_error"), "Vul een geldig getal in"));
-            $this->_image_element->setHeight($this->getNumber('element_' . $this->_image_element->getId() . '_height', $this->getTextResource("form_invalid_number_error"), "Vul een geldig getal in"));
+            $this->_image_element->setImageId($this->getNumber('image_image_ref_' . $this->_image_element->getId(), $this->getTextResource("form_invalid_number_error")));
+            $this->_image_element->setWidth($this->getNumber('element_' . $this->_image_element->getId() . '_width', $this->getTextResource("form_invalid_number_error")));
+            $this->_image_element->setHeight($this->getNumber('element_' . $this->_image_element->getId() . '_height', $this->getTextResource("form_invalid_number_error")));
             if ($this->hasErrors()) {
                 throw new FormException();
             }

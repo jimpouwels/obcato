@@ -12,8 +12,8 @@
                     {if count($list_items) > 0}
                         <table cellspacing="0" cellpadding="0" class="list_element_items">
                             <tr>
-                                <td><em>{$list_item_label_value}</em></td>
-                                <td><em>{$list_item_label_delete}</em></td>
+                                <td><em>{$text_resources.list_element_item_label_value}</em></td>
+                                <td><em>{$text_resources.list_element_item_label_delete}</em></td>
                             </tr>
                             {foreach from=$list_items item=list_item}
                                 <tr>
@@ -23,7 +23,7 @@
                             {/foreach}
                         </table>
                     {else}
-                        <em>{$message_no_list_items}</em>
+                        <em>{$text_resources.list_element_message_no_list_items}</em>
                     {/if}
             </fieldset>
         </td>

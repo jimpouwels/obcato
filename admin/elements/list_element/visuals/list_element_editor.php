@@ -29,9 +29,6 @@
             $this->getTemplateEngine()->assign("title_field", $title_field->render());
             $this->getTemplateEngine()->assign("id", $this->_list_element->getId());
 
-            $this->getTemplateEngine()->assign("message_no_list_items", $this->getTextResource("list_element_message_no_list_items"));
-            $this->getTemplateEngine()->assign("list_item_label_value", $this->getTextResource("list_element_item_label_value"));
-            $this->getTemplateEngine()->assign("list_item_label_delete", $this->getTextResource("list_element_item_label_delete"));
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         

@@ -32,7 +32,7 @@
             $search_results = array();
 
             $articles = $this->getSearchResults();
-            foreach($articles as $article) {
+            foreach ($articles as $article) {
                 $search_result = array();
                 $search_result["id"] = $article->getId();
                 $search_result["title"] = $article->getTitle();
@@ -74,7 +74,7 @@
         }
 
         private function renderNoResultsMessage(): string {
-            $message = new InformationMessage("Geen artikelen gevonden.");
+            $message = new InformationMessage($this->getTextResource("articles_list_message_no_articles_found"));
             return $message->render();
         }
 

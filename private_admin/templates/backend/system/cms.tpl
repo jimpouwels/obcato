@@ -31,7 +31,6 @@
 
 			{$notification_bar}
 
-
 			{if isset($actions_menu)}
 				{$actions_menu}
 			{/if}

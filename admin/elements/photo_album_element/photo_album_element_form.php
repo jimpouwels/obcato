@@ -18,7 +18,7 @@
         public function loadFields(): void {
             $element_id = $this->_photo_album_element->getId();
             $title = $this->getFieldValue('element_' . $element_id . '_title');
-            $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', 'Vul een geldig getal in');
+            $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', $this->getTextResource("form_invalid_number_error"));
             if ($this->hasErrors())
                 throw new FormException();
             else {

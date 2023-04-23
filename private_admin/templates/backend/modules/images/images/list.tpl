@@ -26,7 +26,7 @@
 		<colgroup width="10px"></colgroup>
 		<thead>
 			<tr>
-				<th>Thumbnail</th>
+				<th>{$text_resources.images_list_thumbnail_column}</th>
 				<th>Titel</th>
 				<th>Aangemaakt op</th>
 				<th>Aangemaakt door</th>

@@ -1,9 +1,13 @@
+# GENERAL
+images_module_title: Images
+
 # TABS
 images_tab_images: Images
 images_tab_labels: Labels
 images_tab_target_pages: Target pages
 
-images_module_title: Images
-
+# LIST
+images_list_panel_title: Found articles
+images_list_thumbnail_column: Thumbnail
 image_successfully_published: Image successfully published
 image_successfully_depublished: Image successfully depublished

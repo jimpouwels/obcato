@@ -34,9 +34,6 @@
             $this->getTemplateEngine()->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
             $this->getTemplateEngine()->assign("summary_text", $element->getSummaryText());
 
-            $this->getTemplateEngine()->assign("delete_button_label", $this->getTextResource("element_delete_button_label"));
-            $this->getTemplateEngine()->assign("minimize_button_label", $this->getTextResource("element_minimize_button_label"));
-            $this->getTemplateEngine()->assign("minimize_all_button_label", $this->getTextResource("element_minimize_button_label"));
             return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
     }

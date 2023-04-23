@@ -21,7 +21,7 @@
             $title = $this->getFieldValue('element_' . $element_id . '_title');
             $show_to = $this->getDate('element_' . $element_id . '_show_to', 'Vul een datum in (bijv. 31-12-2010)');
             $show_from = $this->getDate('element_' . $element_id . '_show_from', 'Vul een datum in (bijv. 31-12-2010)');
-            $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', 'Vul een geldig getal in');
+            $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results', $this->getTextResource("form_invalid_number_error"));
             $order_by = $this->getFieldValue('element_' . $element_id . '_order_by');
             $order_type = $this->getFieldValue('element_' . $element_id . '_order_type');
             if ($this->hasErrors())

@@ -55,6 +55,9 @@ form_invalid_number_error: Deze waarde is geen getal
 element_include_in_table_of_contents: Inhoudsopgave
 element_holder_content_title: Inhoud
 no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een nieuw element toe te voegen.
+element_button_label_delete: Verwijder
+element_button_label_minimize_all: Minimaliseer alle
+element_button_label_minimize: Minimaliseer
 
 # BLOCK SELECTOR
 selected_blocks_header: Geselecteerde blokken

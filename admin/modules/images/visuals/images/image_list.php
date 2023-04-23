@@ -11,7 +11,7 @@
         private ImageRequestHandler $_images_request_handler;
 
         public function __construct(?Image $current_image, ImageRequestHandler $images_request_handler) {
-            parent::__construct('Gevonden afbeeldingen', 'images_list');
+            parent::__construct($this->getTextResource("images_list_panel_title"), 'images_list');
             $this->_current_image = $current_image;
             $this->_images_request_handler = $images_request_handler;
             $this->_image_dao = ImageDao::getInstance();

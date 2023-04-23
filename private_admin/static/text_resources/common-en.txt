@@ -55,6 +55,9 @@ form_invalid_number_error: This value is not numeric
 element_include_in_table_of_contents: Table of contents
 element_holder_content_title: Content
 no_elements_found_message: No elements found. Go to "Insert" to add a new element.
+element_button_label_delete: Delete
+element_button_label_minimize_all: Minimize all
+element_button_label_minimize: Minimize
 
 # BLOCK SELECTOR
 selected_blocks_header: Selected blocks
