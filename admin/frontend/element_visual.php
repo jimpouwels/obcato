@@ -26,6 +26,7 @@
             
             $element_data = $this->getTemplateEngine()->createChildData();
             $this->loadElement($element_data);
+            
             $this->assign("element_html", $this->getTemplateEngine()->fetch($this->getElementTemplateFilename(), $element_data));
         }
 
