@@ -14,18 +14,21 @@
             $this->_page_dao = PageDao::getInstance();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("website_title", WEBSITE_TITLE);
-            $this->getTemplateEngine()->assign("page", $this->getPageContentAndMetaData($this->getPage()));
+        public function getTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getPage()->getTemplate()->getFileName();
+        }
+
+        public function load(): void {
+            $this->assign("website_title", WEBSITE_TITLE);
+            $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $rendered_article = null;
-            $this->getTemplateEngine()->assign("page_title", $this->getPage()->getTitle());
+            $this->assign("page_title", $this->getPage()->getTitle());
             if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
                 $rendered_article = $this->renderArticle();
-                $this->getTemplateEngine()->assign("page_title", $this->getArticle()->getTitle());
+                $this->assign("page_title", $this->getArticle()->getTitle());
             }
-            $this->getTemplateEngine()->assign('article', $rendered_article);
-            $this->getTemplateEngine()->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getPage()->getTemplate()->getFileName());
+            $this->assign('article', $rendered_article);
+            $this->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
         }
 
         private function getPageContentAndMetaData(Page $page): array {

@@ -10,10 +10,13 @@
             parent::__construct($page, $article, $table_of_contents_element);
         }
 
-        public function renderElement(): string {
-            $this->getTemplateEngine()->assign("title", $this->getElement()->getTitle());
-            $this->getTemplateEngine()->assign("items", $this->renderItems());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
+        public function getElementTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+        }
+
+        public function loadElement(Smarty_Internal_Data $data): void {
+            $data->assign("title", $this->getElement()->getTitle());
+            $data->assign("items", $this->renderItems());
         }
 
         public function renderItems(): array {

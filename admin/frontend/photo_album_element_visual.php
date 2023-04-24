@@ -10,11 +10,14 @@
             parent::__construct($page, $article, $photo_album_element);
         }
 
-        public function renderElement(): string {
+        public function getElementTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+        }
+
+        public function loadElement(Smarty_Internal_Data $data): void {
             $element_holder = $this->getElement()->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
-            $this->getTemplateEngine()->assign("images", $this->getImages());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
+            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
+            $data->assign("images", $this->getImages());
         }
 
         private function getImages(): array {

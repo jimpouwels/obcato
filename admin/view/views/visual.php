@@ -18,6 +18,7 @@
             $this->load();
             return $this->_template_engine->fetch($this->getTemplateFilename(), $this->_template_data);
         }
+        
         abstract function load(): void;
 
         abstract function getTemplateFilename(): string;

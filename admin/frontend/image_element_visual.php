@@ -9,16 +9,19 @@
             parent::__construct($page, $article, $image_element);
         }
 
-        public function renderElement(): string {
+        public function getElementTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+        }
+
+        public function loadElement(Smarty_Internal_Data $data): void {
             $element_holder = $this->getElement()->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->getElement()->getTitle());
-            $this->getTemplateEngine()->assign("alternative_text", $this->toHtml($this->getElement()->getAlternativeText(), $element_holder));
-            $this->getTemplateEngine()->assign("align", $this->getElement()->getAlign());
-            $this->getTemplateEngine()->assign("width", $this->getElement()->getWidth());
-            $this->getTemplateEngine()->assign("height", $this->getElement()->getHeight());
-            $this->getTemplateEngine()->assign("image_url", $this->createImageUrl());
-            $this->getTemplateEngine()->assign("extension", $this->getExtension());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
+            $data->assign("title", $this->getElement()->getTitle());
+            $data->assign("alternative_text", $this->toHtml($this->getElement()->getAlternativeText(), $element_holder));
+            $data->assign("align", $this->getElement()->getAlign());
+            $data->assign("width", $this->getElement()->getWidth());
+            $data->assign("height", $this->getElement()->getHeight());
+            $data->assign("image_url", $this->createImageUrl());
+            $data->assign("extension", $this->getExtension());
         }
 
         private function createImageUrl(): string {

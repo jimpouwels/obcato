@@ -12,13 +12,15 @@
 
     abstract class FrontendVisual {
 
-        private Smarty $_template_engine;
+        private TemplateEngine $_template_engine;
+        private Smarty_Internal_Data $_template_data;
         private LinkDao $_link_dao;
         private PageDao $_page_dao;
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
         private Page $_page;
         private ?Article $_article;
+        
 
         public function __construct(Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
@@ -27,10 +29,30 @@
             $this->_page = $page;
             $this->_article = $article;
             $this->_template_engine = TemplateEngine::getInstance();
+            $this->_template_data = $this->_template_engine->createChildData();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public abstract function render(): string;
+        public function render(): string {
+            $this->load();
+            return $this->_template_engine->fetch($this->getTemplateFilename(), $this->_template_data);
+        }
+        
+        abstract function load(): void;
+
+        abstract function getTemplateFilename(): string;
+
+        protected function getTemplateEngine(): TemplateEngine {
+            return $this->_template_engine;
+        }
+
+        protected function assign(string $key, mixed $value) {
+            $this->_template_data->assign($key, $value);
+        }
+
+        protected function assignGlobal(string $key, mixed $value) {
+            $this->_template_engine->assign($key, $value);
+        }
 
         protected function toHtml(string $value, ElementHolder $element_holder): string {
             $value = nl2br($value);
@@ -55,10 +77,6 @@
             } else {
                 return $this->_page;
             }
-        }
-
-        protected function getTemplateEngine(): Smarty {
-            return $this->_template_engine;
         }
 
         protected function getArticleUrl(Article $article): string {

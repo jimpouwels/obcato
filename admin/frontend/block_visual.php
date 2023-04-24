@@ -12,11 +12,14 @@
             $this->_block = $block;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('id', $this->_block->getId());
-            $this->getTemplateEngine()->assign('title', $this->_block->getTitle());
-            $this->getTemplateEngine()->assign('elements', $this->renderElements());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName());
+        public function getTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName();
+        }
+
+        public function load(): void {
+            $this->assign('id', $this->_block->getId());
+            $this->assign('title', $this->_block->getTitle());
+            $this->assign('elements', $this->renderElements());
         }
 
         private function renderElements(): array {

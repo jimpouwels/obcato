@@ -9,11 +9,14 @@
             parent::__construct($page, $article, $text_element);
         }
 
-        public function renderElement(): string {
+        public function getElementTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+        }
+
+        public function loadElement(Smarty_Internal_Data $data): void {
             $element_holder = $this->getElement()->getElementHolder();
-            $this->getTemplateEngine()->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
-            $this->getTemplateEngine()->assign("text", $this->toHtml($this->getElement()->getText(), $element_holder));
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName());
+            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
+            $data->assign("text", $this->toHtml($this->getElement()->getText(), $element_holder));
         }
     }
     

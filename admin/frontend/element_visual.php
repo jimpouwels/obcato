@@ -12,13 +12,21 @@
             $this->_element = $element;
         }
 
-        public abstract function renderElement(): string;
+        public function getTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/element.tpl";
+        }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
-            $this->getTemplateEngine()->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
-            $this->getTemplateEngine()->assign("element_html", $this->renderElement());
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/element.tpl");
+        abstract function getElementTemplateFilename(): string;
+
+        abstract function loadElement(Smarty_Internal_Data $data): void;
+
+        public function load(): void {
+            $this->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
+            $this->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
+            
+            $element_data = $this->getTemplateEngine()->createChildData();
+            $this->loadElement($element_data);
+            $this->assign("element_html", $this->getTemplateEngine()->fetch($this->getElementTemplateFilename(), $element_data));
         }
 
         protected function getElement(): Element {
