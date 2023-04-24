@@ -36,12 +36,12 @@
             $this->assign("error", $this->getErrorHtml($this->_field_name));
             $this->assign('label', $this->getLabelHtml());
             
-            $child_data = $this->getTemplateEngine()->createChildData();
-            $this->loadFormField($child_data);
-            $child_data->assign('classes',$this->getCssClassesHtml());
-            $child_data->assign("field_name", $this->_field_name);
-            $child_data->assign("field_value", $this->getFieldValue());
-            $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $child_data));
+            $field_template_data = $this->getTemplateEngine()->createChildData();
+            $this->loadFormField($field_template_data);
+            $field_template_data->assign('classes',$this->getCssClassesHtml());
+            $field_template_data->assign("field_name", $this->_field_name);
+            $field_template_data->assign("field_value", $this->getFieldValue());
+            $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $field_template_data));
         }
         
         public function getErrorHtml(string $field_name): string {

@@ -24,9 +24,10 @@
         abstract function loadPanelContent(Smarty_Internal_Data $data): void;
 
         public function load(): void {
-            $child_data = $this->getTemplateEngine()->createChildData();
-            $this->loadPanelContent($child_data);
-            $this->assign('content', $this->getTemplateEngine()->fetch($this->getPanelContentTemplate(), $child_data));
+            $panel_content_template_data = $this->getTemplateEngine()->createChildData();
+            $this->loadPanelContent($panel_content_template_data);
+            
+            $this->assign('content', $this->getTemplateEngine()->fetch($this->getPanelContentTemplate(), $panel_content_template_data));
             $this->assign('panel_title', $this->_title);
             $this->assign('class', $this->_class);
         }
