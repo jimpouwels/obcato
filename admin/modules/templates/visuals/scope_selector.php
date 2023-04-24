@@ -5,7 +5,6 @@
 
     class ScopeSelector extends Panel {
 
-        private static string $SCOPE_SELECTOR = "templates/scope_selector.tpl";
         private TemplateDao $_template_dao;
         private ScopeDao $_scope_dao;
 
@@ -15,13 +14,12 @@
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/templates/scope_selector.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("scopes", $this->getAllScopes());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$SCOPE_SELECTOR);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("scopes", $this->getAllScopes());
         }
 
         private function getAllScopes(): array {

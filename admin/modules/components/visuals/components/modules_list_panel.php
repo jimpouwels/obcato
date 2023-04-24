@@ -15,13 +15,12 @@
             $this->_module_dao = ModuleDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'modules/components/modules_list.tpl';
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign('modules', $this->getModulesData());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('modules', $this->getModulesData());
         }
 
         private function getModulesData() {

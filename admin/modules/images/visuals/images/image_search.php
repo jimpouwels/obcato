@@ -3,7 +3,6 @@
 
     class ImageSearch extends Panel {
 
-        private static string $TEMPLATE = "images/images/search.tpl";
 
         private ImageDao $_image_dao;
         private ImageRequestHandler $_images_request_handler;
@@ -14,17 +13,15 @@
             $this->_images_request_handler = $images_request_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/images/search.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("title_search_field", $this->getTitleSearchField()->render());
-            $this->getTemplateEngine()->assign("filename_search_field", $this->getFileNameSearchField()->render());
-            $this->getTemplateEngine()->assign("labels_search_field", $this->getLabelPullDown()->render());
-            $this->getTemplateEngine()->assign("search_button", $this->getSearchButton()->render());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("title_search_field", $this->getTitleSearchField()->render());
+            $data->assign("filename_search_field", $this->getFileNameSearchField()->render());
+            $data->assign("labels_search_field", $this->getLabelPullDown()->render());
+            $data->assign("search_button", $this->getSearchButton()->render());
         }
 
         private function getTitleSearchField(): TextField {

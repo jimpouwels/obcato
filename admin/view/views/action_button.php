@@ -3,7 +3,6 @@
 
     class ActionButton extends Visual {
 
-        private static string $TEMPLATE = "system/actions_menu_button.tpl";
         private string $_label;
         private string $_action_id;
         private string $_icon_class;
@@ -15,11 +14,14 @@
             $this->_icon_class = $icon_class;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("action_id", $this->_action_id);
-            $this->getTemplateEngine()->assign("icon_class", $this->_icon_class);
-            $this->getTemplateEngine()->assign("label", $this->_label);
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "system/actions_menu_button.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("action_id", $this->_action_id);
+            $this->assign("icon_class", $this->_icon_class);
+            $this->assign("label", $this->_label);
         }
 
     }

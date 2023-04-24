@@ -5,7 +5,6 @@
 
     class ComponentsDetailsPanel extends Panel {
 
-        private static $TEMPLATE = 'components/details.tpl';
         private $_component_request_handler;
 
         public function __construct($component_request_handler) {
@@ -13,14 +12,13 @@
             $this->_component_request_handler = $component_request_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'modules/components/details.tpl';
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign('current_element', $this->getCurrentElementData());
-            $this->getTemplateEngine()->assign('current_module', $this->getCurrentModuleData());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('current_element', $this->getCurrentElementData());
+            $data->assign('current_module', $this->getCurrentModuleData());
         }
 
         private function getCurrentModuleData() {

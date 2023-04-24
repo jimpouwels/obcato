@@ -9,7 +9,6 @@
 
     class DownloadModuleVisual extends ModuleVisual {
 
-        private static string $TEMPLATE = "modules/downloads/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
         private ?Download $_current_download;
         private DownloadRequestHandler $_download_request_handler;
@@ -21,14 +20,17 @@
             $this->_download_request_handler = new DownloadRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('search_box', $this->renderSearchBox());
+        public function getTemplateFilename(): string {
+            return "modules/downloads/root.tpl";
+        }
+
+        public function load(): void {
+            $this->assign('search_box', $this->renderSearchBox());
             if ($this->_current_download) {
-                $this->getTemplateEngine()->assign('editor', $this->renderEditor());
+                $this->assign('editor', $this->renderEditor());
             } else {
-                $this->getTemplateEngine()->assign("list", $this->renderList());
+                $this->assign("list", $this->renderList());
             }
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         public function getActionButtons(): array {

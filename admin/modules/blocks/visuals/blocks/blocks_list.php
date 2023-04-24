@@ -5,7 +5,6 @@
 
     class BlocksList extends Panel {
 
-        private static string $TEMPLATE = "blocks/blocks/list.tpl";
         private ?Block $_current_block = null;
         private BlockDao $_block_dao;
 
@@ -15,19 +14,18 @@
             $this->_block_dao = BlockDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/blocks/blocks/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("block_lists", $this->getBlockLists());
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("block_lists", $this->getBlockLists());
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
             $current_block_value = null;
             if (!is_null($this->_current_block)) {
                 $current_block_value = $this->toArray($this->_current_block);
             }
-            $this->getTemplateEngine()->assign("current_block", $current_block_value);
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $data->assign("current_block", $current_block_value);
         }
 
         private function renderNoResultsMessage(): string {

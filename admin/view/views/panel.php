@@ -5,7 +5,6 @@
 
     abstract class Panel extends Visual {
 
-        private static string $TEMPLATE = "system/panel.tpl";
         private string $_title;
         private string $_html_content;
         private string $_class;
@@ -16,12 +15,20 @@
             $this->_class = $class;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('content', $this->renderPanelContent());
-            $this->getTemplateEngine()->assign('panel_title', $this->_title);
-            $this->getTemplateEngine()->assign('class', $this->_class);
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "system/panel.tpl";
         }
 
-        abstract function renderPanelContent();
+        abstract function getPanelContentTemplate(): string;
+
+        abstract function loadPanelContent(Smarty_Internal_Data $data): void;
+
+        public function load(): void {
+            $child_data = $this->getTemplateEngine()->createChildData();
+            $this->loadPanelContent($child_data);
+            $this->assign('content', $this->getTemplateEngine()->fetch($this->getPanelContentTemplate(), $child_data));
+            $this->assign('panel_title', $this->_title);
+            $this->assign('class', $this->_class);
+        }
+
     }

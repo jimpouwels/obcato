@@ -18,15 +18,17 @@
             $this->_article_request_handler = $article_request_handler;
             $this->_current_article = $article_request_handler->getCurrentArticle();
         }
+        public function getTemplateFilename(): string {
+            return "modules/articles/articles/root.tpl";
+        }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("search", $this->renderArticlesSearchPanel());
-            if (!is_null($this->_current_article))
-                $this->getTemplateEngine()->assign("editor", $this->renderArticleEditor());
-            else
-                $this->getTemplateEngine()->assign("list", $this->renderArticlesList());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function load(): void {
+            $this->assign("search", $this->renderArticlesSearchPanel());
+            if (!is_null($this->_current_article)) {
+                $this->assign("editor", $this->renderArticleEditor());
+            } else {
+                $this->assign("list", $this->renderArticlesList());
+            }
         }
 
         private function renderArticlesSearchPanel(): string {

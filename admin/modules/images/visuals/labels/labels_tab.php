@@ -7,8 +7,7 @@
     require_once CMS_ROOT . "modules/images/visuals/labels/label_editor.php";
     
     class LabelsTab extends Visual {
-    
-        private static string $TEMPLATE = "images/labels/root.tpl";
+
         private ?ImageLabel $_current_label;
         private LabelRequestHandler $_label_request_handler;
         
@@ -17,13 +16,16 @@
             $this->_label_request_handler = $label_request_handler;
             $this->_current_label = $this->_label_request_handler->getCurrentLabel();
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/images/labels/root.tpl";
+        }
     
-        public function render(): string {
+        public function load(): void {
             if (!is_null($this->_current_label)) {
-                $this->getTemplateEngine()->assign("label_editor", $this->renderLabelEditor());
+                $this->assign("label_editor", $this->renderLabelEditor());
             }
-            $this->getTemplateEngine()->assign("labels_list", $this->renderLabelsList());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $this->assign("labels_list", $this->renderLabelsList());
         }
         
         private function renderLabelEditor(): string {

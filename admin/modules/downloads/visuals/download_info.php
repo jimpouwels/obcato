@@ -6,7 +6,6 @@
 
     class DownloadInfo extends Panel {
 
-        private static string $TEMPLATE = "downloads/download_info.tpl";
         private Download $_download;
 
         public function __construct(Download $download) {
@@ -14,13 +13,12 @@
             $this->_download = $download;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/downloads/download_info.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("file", $this->getFileData());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("file", $this->getFileData());
         }
 
         private function getFileData(): array {

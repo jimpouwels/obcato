@@ -6,7 +6,6 @@
 
     class ImageMetadataEditor extends Panel {
 
-        private static string $TEMPLATE = "images/images/metadata_editor.tpl";
 
         private Image $_current_image;
 
@@ -15,27 +14,26 @@
             $this->_current_image = $current_image;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/images/metadata_editor.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->assignImageMetaDataFields();
-            $this->getTemplateEngine()->assign("current_image_id", $this->_current_image->getId());
-            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $this->assignImageMetaDataFields($data);
+            $data->assign("current_image_id", $this->_current_image->getId());
+            $data->assign("action_form_id", ACTION_FORM_ID);
         }
 
 
-        private function assignImageMetaDataFields(): void {
+        private function assignImageMetaDataFields($data): void {
             $title_field = new TextField("image_title", "Titel", $this->_current_image->getTitle(), true, false, null);
             $published_field = new SingleCheckbox("image_published", "Gepubliceerd", $this->_current_image->isPublished(), false, null);
             $upload_field = new UploadField("image_file", "Afbeelding", false, null);
 
-            $this->getTemplateEngine()->assign("image_id", $this->_current_image->getId());
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            $this->getTemplateEngine()->assign("published_field", $published_field->render());
-            $this->getTemplateEngine()->assign("upload_field", $upload_field->render());
+            $data->assign("image_id", $this->_current_image->getId());
+            $data->assign("title_field", $title_field->render());
+            $data->assign("published_field", $published_field->render());
+            $data->assign("upload_field", $upload_field->render());
         }
 
     }

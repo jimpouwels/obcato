@@ -5,7 +5,6 @@
 
     class ElementsListPanel extends Panel {
 
-        private static $TEMPLATE = 'components/elements_list.tpl';
         private $_element_dao;
         private $_components_request_handler;
 
@@ -15,13 +14,13 @@
             $this->_element_dao = ElementDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'modules/components/elements_list.tpl';
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign('elements', $this->getElementsData());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('elements', $this->getElementsData());
         }
 
         private function getElementsData() {

@@ -10,7 +10,6 @@
 
     class PageModuleVisual extends ModuleVisual {
 
-        private static string $PAGE_MODULE_TEMPLATE = "modules/pages/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
         private ?Page $_current_page;
         private Module $_page_module;
@@ -24,12 +23,15 @@
             $this->_page_dao = PageDao::getInstance();
         }
 
-        public function render(): string {
+        public function getTemplateFilename(): string {
+            return "modules/pages/root.tpl";
+        }
+
+        public function load(): void {
             $page_tree = new PageTree($this->_page_dao->getRootPage(), $this->_current_page);
             $page_editor = new PageEditor($this->_current_page);
-            $this->getTemplateEngine()->assign("tree", $page_tree->render());
-            $this->getTemplateEngine()->assign("editor", $page_editor->render());
-            return $this->getTemplateEngine()->fetch(self::$PAGE_MODULE_TEMPLATE);
+            $this->assign("tree", $page_tree->render());
+            $this->assign("editor", $page_editor->render());
         }
 
         public function getActionButtons(): array {

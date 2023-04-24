@@ -3,17 +3,19 @@
     
     class WarningMessage extends Visual {
     
-        private static $TEMPLATE = "system/warning_message.tpl";
         private $_message;
     
         public function __construct(string $message) {
             parent::__construct();
             $this->_message = $message;
         }
+
+        public function getTemplateFilename(): string {
+            return "system/warning_message.tpl";
+        }
     
-        public function render(): string {
-            $this->getTemplateEngine()->assign("message", $this->_message);
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function load(): void {
+            $this->assign("message", $this->_message);
         }    
     }
 

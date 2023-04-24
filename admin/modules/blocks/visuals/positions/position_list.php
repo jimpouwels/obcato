@@ -5,8 +5,6 @@
 
     class PositionList extends Panel {
 
-        private static string $TEMPLATE = "blocks/positions/list.tpl";
-
         private BlockDao $_block_dao;
 
         public function __construct() {
@@ -14,16 +12,14 @@
             $this->_block_dao = BlockDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/blocks/positions/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("all_positions", $this->getAllPositions());
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("all_positions", $this->getAllPositions());
             $no_positions_message = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
-            $this->getTemplateEngine()->assign("no_positions_message", $no_positions_message->render());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $data->assign("no_positions_message", $no_positions_message->render());
         }
 
         private function getAllPositions(): array {

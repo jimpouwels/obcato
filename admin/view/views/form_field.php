@@ -2,11 +2,11 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'authentication/session.php';
+    require_once CMS_ROOT . 'view/views/form_error.php';
+    require_once CMS_ROOT . 'view/views/form_label.php';
 
     abstract class FormField extends Visual {
         
-        private static string $TEMPLATE = "system/form_field.tpl";
-
         private ?string $_css_class = null;
         private string $_field_name;
         private string $_label;
@@ -24,20 +24,31 @@
             $this->_value = $value;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('classes',$this->getCssClassesHtml());
-            $this->getTemplateEngine()->assign('label', $this->getLabelHtml());
-            $this->getTemplateEngine()->assign("field_name", $this->_field_name);
-            $this->getTemplateEngine()->assign("field_value", $this->getFieldValue());
-            $this->getTemplateEngine()->assign("error", $this->getErrorHtml($this->_field_name));
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "system/form_field.tpl";
+        }
+
+        abstract function getFormFieldTemplateFilename(): string;
+
+        abstract function loadFormField(Smarty_Internal_Data $data);
+
+        public function load(): void {
+            $this->assign("error", $this->getErrorHtml($this->_field_name));
+            $this->assign('label', $this->getLabelHtml());
+            
+            $child_data = $this->getTemplateEngine()->createChildData();
+            $this->loadFormField($child_data);
+            $child_data->assign('classes',$this->getCssClassesHtml());
+            $child_data->assign("field_name", $this->_field_name);
+            $child_data->assign("field_value", $this->getFieldValue());
+            $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $child_data));
         }
         
         public function getErrorHtml(string $field_name): string {
             $error_html = "";
             if (Session::hasError($field_name)) {
-                $this->getTemplateEngine()->assign("error", Session::popError($field_name));
-                $error_html = $this->getTemplateEngine()->fetch("system/form_error.tpl");
+                $error = new FormError(Session::popError($field_name));
+                return $error->render();
             }
             return $error_html;
         }
@@ -61,11 +72,8 @@
 
         protected function getInputLabelHtml(string $field_label, string $field_name, bool $mandatory): string {
             if ($field_label) {
-                $data = $this->getTemplateEngine()->createChildData();
-                $data->assign("label", $field_label);
-                $data->assign("name", $field_name);
-                $data->assign("mandatory", $mandatory);
-                return $this->getTemplateEngine()->fetch("system/form_label.tpl", $data);
+                $label = new FormLabel($field_name, $field_label, $mandatory);
+                return $label->render();
             }
             return "";
         }

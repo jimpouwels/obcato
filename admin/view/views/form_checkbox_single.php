@@ -5,16 +5,18 @@
     
     class SingleCheckbox extends FormField {
     
-        private static string $TEMPLATE = "system/form_checkbox_single.tpl";
     
         public function __construct(string $name, string $label, string $value, bool $mandatory, ?string $class_name) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
         }
     
-        public function render(): string {
-            return parent::render() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getFormFieldTemplateFilename(): string {
+            return "system/form_checkbox_single.tpl";
         }
-    
+
+        function loadFormField(Smarty_Internal_Data $data) {
+        }
+
     }
 
 ?>

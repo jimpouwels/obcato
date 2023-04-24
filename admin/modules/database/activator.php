@@ -10,7 +10,6 @@
 
     class DatabaseModuleVisual extends ModuleVisual {
 
-        private static string $DATABASE_MODULE_TEMPLATE = "modules/database/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "modules/database/head_includes.tpl";
         private static int $CONFIGURATION_TAB = 0;
         private static int $TABLES_TAB = 1;
@@ -24,8 +23,12 @@
             $this->_database_request_handler = new DatabaseRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
+        public function getTemplateFilename(): string {
+            return "modules/database/root.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("tab_menu", $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
                 $content = new Configuration();
             } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
@@ -33,8 +36,7 @@
             } else if ($this->getCurrentTabId() == self::$QUERY_TAB) {
                 $content = new QueriesTab($this->_database_request_handler);
             }
-            $this->getTemplateEngine()->assign("content", $content->render());
-            return $this->getTemplateEngine()->fetch(self::$DATABASE_MODULE_TEMPLATE);
+            $this->assign("content", $content->render());
         }
 
         public function getActionButtons(): array {

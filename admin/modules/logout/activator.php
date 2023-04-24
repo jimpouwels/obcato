@@ -14,9 +14,12 @@
             $this->_module = $module;
             $this->_logout_request_handler = new LogoutRequestHandler();
         }
-    
-        public function render(): string {
+
+        public function getTemplateFilename(): string {
             return "";
+        }
+    
+        public function load(): void {
         }
     
         public function getActionButtons(): array {

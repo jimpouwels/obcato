@@ -7,7 +7,6 @@
 
     class Tables extends Visual {
 
-        private static string $TABLES_TEMPLATE = "modules/database/tables.tpl";
         private DatabaseDao $_database_dao;
 
         public function __construct() {
@@ -15,9 +14,12 @@
             $this->_database_dao = DatabaseDao::getInstance();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('tables', $this->getTables());
-            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "modules/database/tables.tpl";
+        }
+
+        public function load(): void {
+            $this->assign('tables', $this->getTables());
         }
 
         private function getTables(): array {

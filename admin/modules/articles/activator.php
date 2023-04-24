@@ -13,7 +13,6 @@
 
     class ArticleModuleVisual extends ModuleVisual {
 
-        private static string $TEMPLATE = "articles/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
         private static int $ARTICLES_TAB = 0;
         private static int $TERMS_TAB = 1;
@@ -35,8 +34,12 @@
             $this->_target_pages_request_handler = new TargetPagesRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
+        public function getTemplateFilename(): string {
+            return "modules/articles/root.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $content = new ArticleTab($this->_article_request_handler);
@@ -46,10 +49,8 @@
                 $content = new TargetPagesList();
             }
             if (!is_null($content)) {
-                $this->getTemplateEngine()->assign("content", $content->render());
+                $this->assign("content", $content->render());
             }
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
 
         public function getRequestHandlers(): array {

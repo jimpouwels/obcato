@@ -10,7 +10,7 @@
         }
         
         public function getType(): string {
-            return Search::$IMAGES;
+            return Search::$IMAGES_POPUP_TYPE;
         }
     
     }

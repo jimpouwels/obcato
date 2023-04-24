@@ -3,8 +3,6 @@
 
     class ArticlesSearch extends Panel {
 
-        private static string $TEMPLATE = "articles/articles/search.tpl";
-
         private ArticleDao $_article_dao;
         private ArticleRequestHandler $_article_request_handler;
 
@@ -14,16 +12,14 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/articles/articles/search.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("search_query_field", $this->renderSearchQueryField());
-            $this->getTemplateEngine()->assign("term_query_field", $this->renderTermQueryField());
-            $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("search_query_field", $this->renderSearchQueryField());
+            $data->assign("term_query_field", $this->renderTermQueryField());
+            $data->assign("search_button", $this->renderSearchButton());
         }
 
         private function renderSearchQueryField(): string {

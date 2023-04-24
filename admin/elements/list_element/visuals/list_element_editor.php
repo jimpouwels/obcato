@@ -24,12 +24,13 @@
             $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->_list_element->getTitle(), false, true, null);
             $add_item_button = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
-            $this->getTemplateEngine()->assign("list_items", $this->getListItems());
-            $this->getTemplateEngine()->assign("add_item_button", $add_item_button->render());
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            $this->getTemplateEngine()->assign("id", $this->_list_element->getId());
+            $template_data = $this->getTemplateEngine()->createChildData();
+            $template_data->assign("list_items", $this->getListItems());
+            $template_data->assign("add_item_button", $add_item_button->render());
+            $template_data->assign("title_field", $title_field->render());
+            $template_data->assign("id", $this->_list_element->getId());
 
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $template_data);
         }
         
         private function getListItems(): array {

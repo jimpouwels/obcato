@@ -14,10 +14,10 @@
             $this->_settings_dao = SettingsDao::getInstance();
         }
     
-        public function handleGet() {
+        public function handleGet(): void {
         }
         
-        public function handlePost() {
+        public function handlePost(): void {
             $settings = $this->_settings_dao->getSettings();
             $settings_form = new SettingsForm($settings);
             try {

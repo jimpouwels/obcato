@@ -5,7 +5,6 @@
     
     class ActionsMenu extends Visual {
     
-        private static string $TEMPLATE = "system/actions_menu.tpl";
         private array $_action_buttons;
     
         public function __construct(array $action_buttons) {
@@ -13,9 +12,12 @@
             $this->_action_buttons = $action_buttons;
         }
     
-        public function render(): string {
-            $this->getTemplateEngine()->assign("buttons", $this->getActionButtonsHtml());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "system/actions_menu.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("buttons", $this->getActionButtonsHtml());
         }
         
         private function getActionButtonsHtml(): array {

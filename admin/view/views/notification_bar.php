@@ -5,17 +5,19 @@
     
     class NotificationBar extends Visual {
     
-        private static string $TEMPLATE = "system/notification_bar.tpl";
         
         public function __construct() {
             parent::__construct();
         }
+
+        public function getTemplateFilename(): string {
+            return "system/notification_bar.tpl";
+        }
         
-        public function render(): string {
-            $this->getTemplateEngine()->assign("message", Notifications::getMessage());
-            $this->getTemplateEngine()->assign("success", Notifications::getSuccess());
+        public function load(): void {
+            $this->assign("message", Notifications::getMessage());
+            $this->assign("success", Notifications::getSuccess());
             Notifications::clearMessage();
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
         
     }

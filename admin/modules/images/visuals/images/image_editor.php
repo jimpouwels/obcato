@@ -8,8 +8,6 @@
     require_once CMS_ROOT . 'view/views/image_label_selector.php';
 
     class ImageEditor extends Visual {
-
-        private static string $TEMPLATE = "images/images/editor.tpl";
         private Image $_current_image;
         private ImageDao $_image_dao;
 
@@ -19,27 +17,30 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function render(): string {
+        public function getTemplateFilename(): string {
+            return "modules/images/images/editor.tpl";
+        }
+        
+        public function load(): void {
             $this->assignMetadataEditor();
             $this->assignLabelSelector();
             $this->assignImageViewer();
-            $this->getTemplateEngine()->assign("current_image_id", $this->_current_image->getId());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $this->assign("current_image_id", $this->_current_image->getId());
         }
 
         private function assignMetadataEditor(): void {
             $metadata_editor = new ImageMetadataEditor($this->_current_image);
-            $this->getTemplateEngine()->assign('metadata_editor', $metadata_editor->render());
+            $this->assign('metadata_editor', $metadata_editor->render());
         }
 
         private function assignLabelSelector(): void {
             $image_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
             $label_select = new ImageLabelSelector($image_labels, $this->_current_image->getId());
-            $this->getTemplateEngine()->assign('label_selector', $label_select->render());
+            $this->assign('label_selector', $label_select->render());
         }
 
         private function assignImageViewer(): void {
             $image_viewer = new ImageViewer($this->_current_image);
-            $this->getTemplateEngine()->assign('image_viewer', $image_viewer->render());
+            $this->assign('image_viewer', $image_viewer->render());
         }
     }

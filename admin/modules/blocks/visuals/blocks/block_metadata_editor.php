@@ -8,8 +8,6 @@
 
     class BlockMetadataEditor extends Panel {
 
-        private static string $BLOCK_METADATA_TEMPLATE = "modules/blocks/blocks/metadata.tpl";
-
         private Block $_current_block;
         private BlockDao $_block_dao;
 
@@ -19,22 +17,21 @@
             $this->_block_dao = BlockDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/blocks/blocks/metadata.tpl";
         }
 
-        public function renderPanelContent(): string {
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
             $title_field = new TextField("title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->_current_block->getTitle(), true, false, null);
             $published_field = new SingleCheckbox("published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->_current_block->isPublished(), false, null);
             $template_picker_field = new TemplatePicker("block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->_current_block->getTemplate(), $this->_current_block->getScope());
 
-            $this->assignElementHolderFormIds();
-            $this->getTemplateEngine()->assign("current_block_id", $this->_current_block->getId());
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            $this->getTemplateEngine()->assign("published_field", $published_field->render());
-            $this->getTemplateEngine()->assign("template_picker_field", $template_picker_field->render());
-            $this->getTemplateEngine()->assign("positions_field", $this->renderPositionsField());
-            return $this->getTemplateEngine()->fetch(self::$BLOCK_METADATA_TEMPLATE);
+            $this->assignElementHolderFormIds($data);
+            $data->assign("current_block_id", $this->_current_block->getId());
+            $data->assign("title_field", $title_field->render());
+            $data->assign("published_field", $published_field->render());
+            $data->assign("template_picker_field", $template_picker_field->render());
+            $data->assign("positions_field", $this->renderPositionsField());
         }
 
         private function renderPositionsField(): string {
@@ -51,13 +48,13 @@
             return $positions_field->render();
         }
 
-        private function assignElementHolderFormIds(): void {
-            $this->getTemplateEngine()->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
-            $this->getTemplateEngine()->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
-            $this->getTemplateEngine()->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
-            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
-            $this->getTemplateEngine()->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-            $this->getTemplateEngine()->assign("element_order_id", ELEMENT_ORDER_ID);
+        private function assignElementHolderFormIds($data): void {
+            $data->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
+            $data->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
+            $data->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
+            $data->assign("action_form_id", ACTION_FORM_ID);
+            $data->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
+            $data->assign("element_order_id", ELEMENT_ORDER_ID);
         }
 
     }

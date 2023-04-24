@@ -1,10 +1,10 @@
 <?php
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "modules/pages/visuals/page_tree_item.php";
+
     class PageTree extends Panel {
 
-        private string $PAGES_TREE_TEMPLATE = "pages/tree.tpl";
-        private string $PAGES_TREE_ITEM_TEMPLATE = "pages/tree_item.tpl";
         private Page $_root_page;
         private Page $_selected_page;
 
@@ -14,31 +14,13 @@
             $this->_selected_page = $selected_page;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/pages/tree.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("items_html", $this->renderPageTree($this->_root_page));
-            return $this->getTemplateEngine()->fetch("modules/" . $this->PAGES_TREE_TEMPLATE);
-        }
-
-        private function renderPageTree($page): string {
-            $sub_pages = array();
-            foreach ($page->getSubPages() as $sub_page) {
-                $sub_pages[] = $this->renderPageTree($sub_page);
-            }
-
-            $this->getTemplateEngine()->assign("sub_pages", $sub_pages);
-            $this->getTemplateEngine()->assign("title", $page->getTitle());
-            $this->getTemplateEngine()->assign("show_in_navigation", $page->getShowInNavigation());
-            $this->getTemplateEngine()->assign("published", $page->isPublished());
-            $this->getTemplateEngine()->assign("page_id", $page->getId());
-
-            $active = $this->_selected_page->getId() == $page->getId();
-            $this->getTemplateEngine()->assign("active", $active);
-
-            return $this->getTemplateEngine()->fetch("modules/" . $this->PAGES_TREE_ITEM_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $root_tree_item = new PageTreeItem($this->_root_page, $this->_selected_page);
+            $data->assign("items_html", $root_tree_item->render());
         }
 
     }

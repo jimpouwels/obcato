@@ -9,9 +9,6 @@
 
     class PageEditor extends Visual {
 
-        private static string $PAGE_EDITOR_TEMPLATE = "pages/editor.tpl";
-        private static string $PAGE_METADATA_TEMPLATE = "pages/metadata.tpl";
-
         private Page $_current_page;
 
         public function __construct(Page $current_page) {
@@ -19,13 +16,17 @@
             $this->_current_page = $current_page;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("page_id", $this->_current_page->getId());
-            $this->getTemplateEngine()->assign("page_metadata", $this->renderPageMetaDataPanel());
-            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainerPanel());
-            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditorPanel());
-            $this->getTemplateEngine()->assign("block_selector", $this->renderBlockSelectorPanel());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$PAGE_EDITOR_TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "modules/pages/editor.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("page_id", $this->_current_page->getId());
+            $this->assign("page_metadata", $this->renderPageMetaDataPanel());
+            $this->assign("element_container", $this->renderElementContainerPanel());
+            $this->assign("link_editor", $this->renderLinkEditorPanel());
+            $this->assign("block_selector", $this->renderBlockSelectorPanel());
+            $this->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
         }
 
         private function renderPageMetaDataPanel(): string {

@@ -3,7 +3,6 @@
 
     class QueryFieldPanel extends Panel {
 
-        private static string $TABLES_TEMPLATE = "modules/database/query_field_panel.tpl";
         private DatabaseRequestHandler $_request_handler;
 
         public function __construct($request_handler) {
@@ -11,14 +10,13 @@
             $this->_request_handler = $request_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/database/query_field_panel.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("query_field", $this->renderQueryField());
-            $this->getTemplateEngine()->assign("execute_query_button", $this->renderExecuteButton());
-            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("query_field", $this->renderQueryField());
+            $data->assign("execute_query_button", $this->renderExecuteButton());
         }
 
         private function renderQueryField(): string {

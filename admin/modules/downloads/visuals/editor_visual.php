@@ -7,7 +7,6 @@
 
     class EditorVisual extends Visual {
 
-        private static string $TEMPLATE = "downloads/editor.tpl";
         private Download $_download;
 
         public function __construct(Download $download) {
@@ -15,11 +14,14 @@
             $this->_download = $download;
         }
 
-        public function render(): string {
+        public function getTemplateFilename(): string {
+            return "modules/downloads/editor.tpl";
+        }
+
+        public function load(): void {
             $metadata_editor = new DownloadMetadataEditor($this->_download);
             $download_info = new DownloadInfo($this->_download);
-            $this->getTemplateEngine()->assign('metadata_editor', $metadata_editor->render());
-            $this->getTemplateEngine()->assign('download_info', $download_info->render());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $this->assign('metadata_editor', $metadata_editor->render());
+            $this->assign('download_info', $download_info->render());
         }
     }

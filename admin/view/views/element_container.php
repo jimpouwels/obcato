@@ -5,7 +5,6 @@
 
     class ElementContainer extends Panel {
 
-        private static string $TEMPLATE = "system/element_container.tpl";
         private array $_elements;
 
         public function __construct(array $elements) {
@@ -13,17 +12,16 @@
             $this->_elements = $elements;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/element_container.tpl";
         }
 
-        public function renderPanelContent(): string {
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
             if (count($this->_elements) > 0) {
-                $this->getTemplateEngine()->assign("elements", $this->renderElements());
+                $data->assign("elements", $this->renderElements());
             } else {
-                $this->getTemplateEngine()->assign("message", $this->renderInformationMessage());
+                $data->assign("message", $this->renderInformationMessage());
             }
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function renderInformationMessage(): string {

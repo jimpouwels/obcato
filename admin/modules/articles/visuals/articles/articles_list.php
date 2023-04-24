@@ -16,16 +16,15 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/articles/articles/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
-            $this->getTemplateEngine()->assign("search_query", $this->_article_request_handler->getSearchQuery());
-            $this->getTemplateEngine()->assign("search_term", $this->getSearchTermName());
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("search_results", $this->renderSearchResults());
+            $data->assign("search_query", $this->_article_request_handler->getSearchQuery());
+            $data->assign("search_term", $this->getSearchTermName());
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
         }
 
         private function renderSearchResults(): array {

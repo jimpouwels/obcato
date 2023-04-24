@@ -6,7 +6,6 @@
 
     class TermSelector extends Panel {
 
-        private static string $TEMPLATE = "system/term_selector.tpl";
         private array $_selected_terms;
         private ArticleDao $_article_dao;
         private int $_context_id;
@@ -18,20 +17,18 @@
             $this->_context_id = $context_id;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/term_selector.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("terms_to_select", $this->getTermsToSelect());
-            $this->getTemplateEngine()->assign("selected_terms", $this->getSelectedTermsHtml());
-            $this->getTemplateEngine()->assign("context_id", $this->_context_id);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("terms_to_select", $this->getTermsToSelect());
+            $data->assign("selected_terms", $this->getSelectedTermsHtml());
+            $data->assign("context_id", $this->_context_id);
 
-            $this->getTemplateEngine()->assign("label_selected_terms", $this->getTextResource("term_selector_label_selected_terms"));
-            $this->getTemplateEngine()->assign("label_delete_selected_term", $this->getTextResource("term_selector_label_delete_selected_term"));
-            $this->getTemplateEngine()->assign("message_no_selected_terms", $this->getTextResource("term_selector_message_no_terms_selected"));
-
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $data->assign("label_selected_terms", $this->getTextResource("term_selector_label_selected_terms"));
+            $data->assign("label_delete_selected_term", $this->getTextResource("term_selector_label_delete_selected_term"));
+            $data->assign("message_no_selected_terms", $this->getTextResource("term_selector_message_no_terms_selected"));
         }
 
         private function getTermsToSelect(): array {

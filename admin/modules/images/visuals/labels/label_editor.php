@@ -6,7 +6,6 @@
 
     class LabelEditor extends Panel {
 
-        private static string $TEMPLATE = "images/labels/editor.tpl";
         private ImageLabel $_current_label;
 
         public function __construct(ImageLabel $current_label) {
@@ -14,14 +13,13 @@
             $this->_current_label = $current_label;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/labels/editor.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("id", $this->_current_label->getId());
-            $this->getTemplateEngine()->assign("label_name_field", $this->renderLabelNameField());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("id", $this->_current_label->getId());
+            $data->assign("label_name_field", $this->renderLabelNameField());
         }
 
         private function renderLabelNameField(): string {

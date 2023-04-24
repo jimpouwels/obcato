@@ -7,7 +7,6 @@
     
     class PositionTab extends Visual {
     
-        private static string $TEMPLATE = "blocks/positions/root.tpl";
         private static string $POSITION_QUERYSTRING_KEY = "position";
         private static string $NEW_POSITION_QUERYSTRING_KEY = "new_position";
     
@@ -17,14 +16,16 @@
             parent::__construct();
             $this->_current_position = $current_position;
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/blocks/positions/root.tpl";
+        }
     
-        public function render(): string {
+        public function load(): void {
             if ($this->isEditPositionMode()) {
-                $this->getTemplateEngine()->assign("position_editor", $this->renderPositionEditor());
+                $this->assign("position_editor", $this->renderPositionEditor());
             }
-            $this->getTemplateEngine()->assign("position_list", $this->renderPositionList());
-            
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $this->assign("position_list", $this->renderPositionList());
         }
         
         public static function isEditPositionMode(): bool {

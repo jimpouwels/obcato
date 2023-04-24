@@ -6,7 +6,6 @@
 
     class InstallationTabVisual extends Visual {
 
-        private static $TEMPLATE = 'installation/root.tpl';
         private $_install_request_handler;
 
         public function __construct($install_request_handler) {
@@ -14,10 +13,13 @@
             $this->_install_request_handler = $install_request_handler;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("component_install_form", $this->renderComponentInstallFormPanel());
-            $this->getTemplateEngine()->assign("component_install_log", $this->renderComponentInstallLogPanel());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return 'modules/components/installation/root.tpl';
+        }
+
+        public function load(): void {
+            $this->assign("component_install_form", $this->renderComponentInstallFormPanel());
+            $this->assign("component_install_log", $this->renderComponentInstallLogPanel());
         }
 
         private function renderComponentInstallFormPanel() {

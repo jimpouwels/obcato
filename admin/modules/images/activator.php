@@ -12,7 +12,6 @@
 
     class ImageModuleVisual extends ModuleVisual {
     
-        private static string $TEMPLATE = "images/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "images/head_includes.tpl";
         private static int $IMAGES_TAB = 0;
         private static int $LABELS_TAB = 1;
@@ -34,9 +33,13 @@
             $this->_import_request_handler = new ImportRequestHandler();
             $this->_current_tab_id = $this->getCurrentTabId();
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/images/root.tpl";
+        }
         
-        public function render(): string {
-            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
+        public function load(): void {
+            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
                 $content = new ImagesTab($this->_images_request_handler);
@@ -47,10 +50,8 @@
             }
             
             if (!is_null($content)) {
-                $this->getTemplateEngine()->assign("content", $content->render());
+                $this->assign("content", $content->render());
             }
-            
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
         public function getActionButtons(): array {

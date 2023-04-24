@@ -125,7 +125,7 @@
                 }
                 $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', alternative_text = '"
                            . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = "
-                           . $image_id . ", width = " . $element->getWidth() . ", height = " . $element->getHeight() . ""
+                           . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
                            . " WHERE element_id = " . $element->getId();
             } else {
                 $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, width, height, image_id, element_id) VALUES "

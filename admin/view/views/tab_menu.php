@@ -3,7 +3,6 @@
     
     class TabMenu extends Visual {
     
-        private static string $TEMPLATE = "system/tab_menu.tpl";
         private array $_tab_items;
         private int $_current_tab;
     
@@ -12,10 +11,13 @@
             $this->_tab_items = $tab_items;
             $this->_current_tab = $current_tab;
         }
+
+        public function getTemplateFilename(): string {
+            return "system/tab_menu.tpl";
+        }
     
-        public function render(): string {
-            $this->getTemplateEngine()->assign("tab_items", $this->_tab_items);
-            $this->getTemplateEngine()->assign("current_tab", $this->_current_tab);
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function load(): void {
+            $this->assign("tab_items", $this->_tab_items);
+            $this->assign("current_tab", $this->_current_tab);
         }
     }

@@ -6,8 +6,6 @@
 
     class TermsList extends Panel {
 
-        private static string $TEMPLATE = "articles/terms/list.tpl";
-
         private ArticleDao $_article_dao;
 
         public function __construct() {
@@ -15,16 +13,14 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/articles/terms/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("all_terms", $this->getAllTerms());
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("all_terms", $this->getAllTerms());
             $no_terms_message = new InformationMessage("Geen termen gevonden");
-            $this->getTemplateEngine()->assign("no_terms_message", $no_terms_message->render());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $data->assign("no_terms_message", $no_terms_message->render());
         }
 
         private function getAllTerms(): array {

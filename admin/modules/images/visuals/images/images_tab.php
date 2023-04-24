@@ -8,7 +8,6 @@
     
     class ImagesTab extends Visual {
     
-        private static string $TEMPLATE = "images/images/root.tpl";
         private $_current_image;
         private $_images_pre_handler;
     
@@ -17,15 +16,18 @@
             $this->_images_pre_handler = $images_pre_handler;
             $this->_current_image = $this->_images_pre_handler->getCurrentImage();
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/images/images/root.tpl";
+        }
     
-        public function render(): string {
-            $this->getTemplateEngine()->assign("search", $this->renderImageSearch());
+        public function load(): void {
+            $this->assign("search", $this->renderImageSearch());
             if (!is_null($this->_current_image)) {
-                $this->getTemplateEngine()->assign("editor", $this->renderImageEditor());
+                $this->assign("editor", $this->renderImageEditor());
             } else {
-                $this->getTemplateEngine()->assign("list", $this->renderImageList());
+                $this->assign("list", $this->renderImageList());
             }
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
         
         private function renderImageSearch(): string {

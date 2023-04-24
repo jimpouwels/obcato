@@ -6,7 +6,6 @@
 
     class ImageLabelSelector extends Panel {
 
-        private static string $TEMPLATE = "system/image_label_selector.tpl";
         private array $_selected_labels;
         private ImageDao $_image_dao;
         private int $_context_id;
@@ -18,21 +17,20 @@
             $this->_context_id = $context_id;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/image_label_selector.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->assignLabelSelector();
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $this->assignLabelSelector($data);
         }
 
-        private function assignLabelSelector(): void {
+        private function assignLabelSelector($data): void {
             $all_label_values = $this->labelsToArray($this->_image_dao->getAllLabels(), $this->_selected_labels);
             $image_label_values = $this->selectedLabelsToArray($this->_selected_labels);
-            $this->getTemplateEngine()->assign('context_id', $this->_context_id);
-            $this->getTemplateEngine()->assign("all_labels", $all_label_values);
-            $this->getTemplateEngine()->assign("image_labels", $image_label_values);
+            $data->assign('context_id', $this->_context_id);
+            $data->assign("all_labels", $all_label_values);
+            $data->assign("image_labels", $image_label_values);
         }
 
         private function labelsToArray(array $labels, array $image_labels): array {

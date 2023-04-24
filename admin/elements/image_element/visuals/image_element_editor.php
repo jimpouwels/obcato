@@ -26,15 +26,16 @@
             $width_field = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->_image_element->getHeight(), false, false, "size_field");
 
-            $this->getTemplateEngine()->assign("alignment_field", $this->renderAlignmentField());
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            $this->getTemplateEngine()->assign("alternative_text_field", $alternative_text_field->render());
-            $this->getTemplateEngine()->assign("width_field", $width_field->render());
-            $this->getTemplateEngine()->assign("height_field", $height_field->render());
-            $this->getTemplateEngine()->assign("image_picker", $image_picker->render());
-            $this->getTemplateEngine()->assign("image_id", $this->_image_element->getImageId());
-            $this->getTemplateEngine()->assign("selected_image_title", $this->getSelectedImageTitle());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $template_data = $this->getTemplateEngine()->createChildData();
+            $template_data->assign("alignment_field", $this->renderAlignmentField());
+            $template_data->assign("title_field", $title_field->render());
+            $template_data->assign("alternative_text_field", $alternative_text_field->render());
+            $template_data->assign("width_field", $width_field->render());
+            $template_data->assign("height_field", $height_field->render());
+            $template_data->assign("image_picker", $image_picker->render());
+            $template_data->assign("image_id", $this->_image_element->getImageId());
+            $template_data->assign("selected_image_title", $this->getSelectedImageTitle());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $template_data);
         }
 
         private function renderAlignmentField(): string {

@@ -5,15 +5,15 @@
     
     class UploadField extends FormField {
     
-        private static string $TEMPLATE = "system/form_upload_field.tpl";
-
         public function __construct(string $name, string $label, bool $mandatory, ?string $class_name) {
             parent::__construct($name, null, $label, $mandatory, false, $class_name);
         }
     
-        public function render(): string {
-            parent::render();
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getFormFieldTemplateFilename(): string {
+            return "system/form_upload_field.tpl";
+        }
+
+        function loadFormField(Smarty_Internal_Data $data) {
         }
     
     }

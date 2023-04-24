@@ -5,7 +5,6 @@
 
     class TemplateEditor extends Panel {
 
-        private static string $TEMPLATE_EDITOR_TEMPLATE = "templates/template_editor.tpl";
         private Template $_template;
         private ScopeDao $_scope_dao;
 
@@ -15,24 +14,23 @@
             $this->_scope_dao = ScopeDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/templates/template_editor.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("template_id", $this->_template->getId());
-            $this->assignEditFields();
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("template_id", $this->_template->getId());
+            $this->assignEditFields($data);
         }
 
-        private function assignEditFields(): void {
+        private function assignEditFields($data): void {
             $name_field = new TextField("name", "Naam", $this->_template->getName(), true, false, null);
-            $this->getTemplateEngine()->assign("name_field", $name_field->render());
+            $data->assign("name_field", $name_field->render());
             $filename_field = new TextField("file_name", "Bestandsnaam", $this->_template->getFileName(), false, false, null);
-            $this->getTemplateEngine()->assign("filename_field", $filename_field->render());
+            $data->assign("filename_field", $filename_field->render());
             $upload_field = new UploadField("template_file", "Template", false, "");
-            $this->getTemplateEngine()->assign("upload_field", $upload_field->render());
-            $this->getTemplateEngine()->assign("scopes_field", $this->renderScopesField());
+            $data->assign("upload_field", $upload_field->render());
+            $data->assign("scopes_field", $this->renderScopesField());
         }
 
         private function renderScopesField(): string {

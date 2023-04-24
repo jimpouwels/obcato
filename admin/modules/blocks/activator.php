@@ -11,7 +11,6 @@
 
     class BlockModuleVisual extends ModuleVisual {
     
-        private static string $TEMPLATE = "blocks/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
         private static int $BLOCKS_TAB = 0;
         private static int $POSITIONS_TAB = 1;
@@ -30,9 +29,13 @@
             $this->_position_request_handler = new PositionRequestHandler();
             $this->_block_dao = BlockDao::getInstance();
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/blocks/root.tpl";
+        }
     
-        public function render(): string {
-            $this->getTemplateEngine()->assign("tab_menu", $this->renderTabMenu());
+        public function load(): void {
+            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
                 $content = new BlockTab($this->_current_block);
@@ -40,9 +43,8 @@
                 $content = new PositionTab($this->_current_position);
             }
             if (!is_null($content)) {
-                $this->getTemplateEngine()->assign("content", $content->render());
+                $this->assign("content", $content->render());
             }
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
         }
     
         public function getActionButtons(): array {

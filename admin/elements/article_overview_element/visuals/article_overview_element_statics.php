@@ -6,14 +6,15 @@
 
     class ArticleOverviewElementStatics extends Visual {
     
-        private static string $TEMPLATE = "elements/article_overview_element/article_overview_element_statics.tpl";
-    
         public function __construct() {
             parent::__construct();
         }
+
+        public function getTemplateFilename(): string {
+            return "elements/article_overview_element/article_overview_element_statics.tpl";
+        }
         
-        public function render(): string {
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function load(): void {
         }
     
     }

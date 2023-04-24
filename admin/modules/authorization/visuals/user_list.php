@@ -15,13 +15,12 @@
             $this->_authorization_dao = AuthorizationDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/authorization/user_list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("users", $this->getAllUsers());
-            return $this->getTemplateEngine()->fetch(self::$USER_LIST_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $thdatais->assign("users", $this->getAllUsers());
         }
 
         public function getAllUsers(): array {

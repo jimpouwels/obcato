@@ -12,14 +12,13 @@
             $this->_current_term = $current_term;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/articles/terms/editor.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("id", $this->_current_term->getId());
-            $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("id", $this->_current_term->getId());
+            $data->assign("name_field", $this->renderNameField());
         }
 
         private function renderNameField(): string {

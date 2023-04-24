@@ -5,7 +5,6 @@
 
     class ImageViewer extends Panel {
 
-        private static string $TEMPLATE = "images/images/viewer.tpl";
 
         private Image $_current_image;
 
@@ -14,13 +13,12 @@
             $this->_current_image = $current_image;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/images/viewer.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("title", $this->_current_image->getTitle());
-            $this->getTemplateEngine()->assign("url", $this->_current_image->getUrl());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("title", $this->_current_image->getTitle());
+            $data->assign("url", $this->_current_image->getUrl());
         }
     }

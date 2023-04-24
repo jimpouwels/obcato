@@ -6,7 +6,6 @@
 
     class Configuration extends Panel {
 
-        private static string $CONFIGURATION_TEMPLATE = "modules/database/configuration.tpl";
         private MysqlConnector $_mysql_connector;
 
         public function __construct() {
@@ -14,15 +13,14 @@
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/database/configuration.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("hostname", $this->_mysql_connector->getHostName());
-            $this->getTemplateEngine()->assign("database_name", $this->_mysql_connector->getDatabaseName());
-            $this->getTemplateEngine()->assign("database_type", $this->_mysql_connector->getDatabaseType());
-            $this->getTemplateEngine()->assign("database_version", $this->_mysql_connector->getDatabaseVersion());
-            return $this->getTemplateEngine()->fetch(self::$CONFIGURATION_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("hostname", $this->_mysql_connector->getHostName());
+            $data->assign("database_name", $this->_mysql_connector->getDatabaseName());
+            $data->assign("database_type", $this->_mysql_connector->getDatabaseType());
+            $data->assign("database_version", $this->_mysql_connector->getDatabaseVersion());
         }
     }

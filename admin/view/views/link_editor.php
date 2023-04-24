@@ -6,7 +6,6 @@
 
     class LinkEditor extends Panel {
 
-        private static string $TEMPLATE = 'system/link_editor.tpl';
         private array $_links;
 
         public function __construct(array $links) {
@@ -14,17 +13,16 @@
             $this->_links = $links;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'system/link_editor.tpl';
         }
 
-        public function renderPanelContent(): string {
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
             if (count($this->_links) > 0) {
-                $this->getTemplateEngine()->assign('links', $this->getLinksData());
+                $data->assign('links', $this->getLinksData());
             } else {
-                $this->getTemplateEngine()->assign('message', $this->renderNoLinksFoundMessage());
+                $data->assign('message', $this->renderNoLinksFoundMessage());
             }
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
         }
 
         private function getLinksData(): array {

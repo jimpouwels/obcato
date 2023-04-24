@@ -9,7 +9,6 @@
     require_once CMS_ROOT . "view/views/notification_bar.php";
 
     class Cms extends Visual {
-        private static string $TEMPLATE = "system/cms.tpl";
         private ?ModuleVisual $_module_visual = null;
         private string $_website_title;
         private ModuleDao $_module_dao;
@@ -21,37 +20,38 @@
             $this->_website_title = $website_title;
         }
 
-        public function render(): string {
+        public function getTemplateFilename(): string {
+            return "system/cms.tpl";
+        }
 
+        public function load(): void {
             $navigation_menu = new NavigationMenu($this->_module_dao->getModuleGroups());
             $notification_bar = new NotificationBar();
             $current_user_indicator = new CurrentUserIndicator();
 
-            $this->getTemplateEngine()->assign("text_resources", Session::getTextResources());
+            $this->assignGlobal("text_resources", Session::getTextResources());
 
             if (!is_null($this->_module_visual)) {
-                $this->getTemplateEngine()->assign("page_title", $this->_module_visual->getTitle());
-                $this->getTemplateEngine()->assign("module_head_includes", $this->_module_visual->renderHeadIncludes());
+                $this->assignGlobal("page_title", $this->_module_visual->getTitle());
+                $this->assignGlobal("module_head_includes", $this->_module_visual->renderHeadIncludes());
             }
-            $this->getTemplateEngine()->assign("backend_base_url", $this->getBackendBaseUrl());
-            $this->getTemplateEngine()->assign("backend_base_url_raw", $this->getBackendBaseUrlRaw());
-            $this->getTemplateEngine()->assign("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
+            $this->assignGlobal("backend_base_url", $this->getBackendBaseUrl());
+            $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
+            $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 
             $module_id_text_field = new TextField("module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
-            $this->getTemplateEngine()->assign("module_id_form_field", $module_id_text_field->render());
+            $this->assignGlobal("module_id_form_field", $module_id_text_field->render());
             $module_tab_id_text_field = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
-            $this->getTemplateEngine()->assign("module_tab_id_form_field", $module_tab_id_text_field->render());
+            $this->assignGlobal("module_tab_id_form_field", $module_tab_id_text_field->render());
 
-            $this->getTemplateEngine()->assign("actions_menu", $this->getActionsMenu()->render());
-            $this->getTemplateEngine()->assign("website_title", $this->_website_title);
-            $this->getTemplateEngine()->assign("navigation_menu", $navigation_menu->render());
-            $this->getTemplateEngine()->assign("current_user_indicator", $current_user_indicator->render());
-            $this->getTemplateEngine()->assign("notification_bar", $notification_bar->render());
-            $this->getTemplateEngine()->assign("content_pane", $this->renderContentPane());
-            $this->getTemplateEngine()->assign("system_version", SYSTEM_VERSION);
-            $this->getTemplateEngine()->assign("db_version", DB_VERSION);
-
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $this->assignGlobal("actions_menu", $this->getActionsMenu()->render());
+            $this->assignGlobal("website_title", $this->_website_title);
+            $this->assignGlobal("navigation_menu", $navigation_menu->render());
+            $this->assignGlobal("current_user_indicator", $current_user_indicator->render());
+            $this->assignGlobal("notification_bar", $notification_bar->render());
+            $this->assignGlobal("content_pane", $this->renderContentPane());
+            $this->assignGlobal("system_version", SYSTEM_VERSION);
+            $this->assignGlobal("db_version", DB_VERSION);
         }
 
         private function getActionsMenu(): ActionsMenu {

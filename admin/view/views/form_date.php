@@ -5,14 +5,16 @@
     
     class DateField extends FormField {
     
-        private static $TEMPLATE = "system/form_date.tpl";
     
         public function __construct(string $name, string $label, ?string $value, bool $mandatory, ?string $class_name) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
         }
     
-        public function render(): string {
-            return parent::render() . $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function getFormFieldTemplateFilename(): string {
+            return "system/form_date.tpl";
+        }
+
+        function loadFormField(Smarty_Internal_Data $data) {
         }
     
     }

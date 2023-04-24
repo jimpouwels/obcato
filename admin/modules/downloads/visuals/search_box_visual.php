@@ -3,7 +3,6 @@
 
     class SearchBoxVisual extends Panel {
 
-        private static string $TEMPLATE = "downloads/search_box.tpl";
         private DownloadRequestHandler $_download_request_handler;
 
         public function __construct(DownloadRequestHandler $download_request_handler) {
@@ -11,14 +10,13 @@
             $this->_download_request_handler = $download_request_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/downloads/search_box.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign('search_query_field', $this->renderSearchQueryField());
-            $this->getTemplateEngine()->assign('search_button', $this->renderSearchButton());
-            return $this->getTemplateEngine()->fetch('modules/' . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('search_query_field', $this->renderSearchQueryField());
+            $data->assign('search_button', $this->renderSearchButton());
         }
 
         private function renderSearchQueryField(): string {

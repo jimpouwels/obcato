@@ -46,7 +46,7 @@
             return $this->getFieldValue($field_name) == "on" ? 1 : 0;
         }
         
-        public function getMandatoryEmailAddress(string $field_name, string $error_message, string $invalid_email_message): string {
+        public function getMandatoryEmailAddress(string $field_name, string $error_message, string $invalid_email_message): ?string {
             $email_address = $this->getEmailAddress($field_name, $invalid_email_message);
             if ($this->isEmpty($email_address)) {
                 $this->raiseError($field_name, $error_message);
@@ -63,7 +63,7 @@
             return $value;
         }
         
-        public function getMandatoryNumber(string $field_name, string $error_message, string $invalid_number_message): int {
+        public function getMandatoryNumber(string $field_name, string $error_message, string $invalid_number_message): ?int {
             $number = $this->getNumber($field_name, $invalid_number_message);
             if ($this->isEmpty($number)) {
                 $this->raiseError($field_name, $error_message);
@@ -79,7 +79,7 @@
             return !$this->isEmpty($number_as_string) ? intval($number_as_string) : null;
         }
         
-        public function getMandatoryDate(string $field_name, string $error_message, string $invalid_date_message) {
+        public function getMandatoryDate(string $field_name, string $error_message, string $invalid_date_message): ?string {
             $date = $this->getDate($field_name, $invalid_date_message);
             if ($this->isEmpty($date)) {
                 $this->raiseError($field_name, $error_message);
@@ -87,7 +87,7 @@
             return $date;
         }
         
-        public function getDate(string $field_name, string $error_message) {
+        public function getDate(string $field_name, string $error_message): ?string {
             $value = $this->getFieldValue($field_name);
             $valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
             if (!$valid_date && $value != '') {
@@ -138,8 +138,8 @@
             $this->_error_count++;
         }
         
-        protected function isEmpty(string $value): bool {
-            return empty($value) || $value == "";
+        protected function isEmpty(?string $value): bool {
+            return is_null($value) || empty($value) || $value == "";
         }
 
         protected function getError(string $field_name): string {

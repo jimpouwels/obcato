@@ -5,7 +5,6 @@
     
     class Button extends Visual {
         
-        private static string $TEMPLATE = "system/button.tpl";
         private ?string $_id = null;
         private string $_label;
         private ?string $_onclick = null;
@@ -16,13 +15,15 @@
             $this->_label = $label;
             $this->_onclick = $onclick;
         }
+
+        public function getTemplateFilename(): string {
+            return "system/button.tpl";
+        }
         
-        public function render(): string {
-            $this->getTemplateEngine()->assign("id", $this->_id);
-            $this->getTemplateEngine()->assign("label", $this->_label);
-            $this->getTemplateEngine()->assign("onclick", $this->_onclick);
-            
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function load(): void {
+            $this->assign("id", $this->_id);
+            $this->assign("label", $this->_label);
+            $this->assign("onclick", $this->_onclick);
         }
         
     }

@@ -6,7 +6,6 @@
 
     class ImportTab extends Panel {
 
-        private static string $TEMPLATE = "images/import/root.tpl";
         private ImageDao $_image_dao;
 
         public function __construct() {
@@ -14,15 +13,13 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/import/root.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("upload_field", $this->renderUploadField());
-            $this->getTemplateEngine()->assign("labels_pulldown", $this->renderLabelPullDown());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("upload_field", $this->renderUploadField());
+            $data->assign("labels_pulldown", $this->renderLabelPullDown());
         }
 
         private function renderUploadField(): string {

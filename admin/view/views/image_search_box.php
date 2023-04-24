@@ -10,36 +10,36 @@
 
         private static string $SEARCH_QUERY_KEY = "s_term";
         private static string $SEARCH_LABEL_KEY = "s_label";
-        private static string $TEMPLATE = "system/image_search.tpl";
         private string $_back_click_id;
         private string $_backfill_id;
         private string $_objects_to_search;
+        private string $_popup_type;
         private ImageDao $_image_dao;
 
-        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search) {
+        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search, string $popup_type) {
             parent::__construct('Zoeken', 'popup_search_fieldset');
             $this->_back_click_id = $back_click_id;
             $this->_backfill_id = $backfill_id;
             $this->_objects_to_search = $objects_to_search;
             $this->_image_dao = ImageDao::getInstance();
+            $this->_popup_type = $popup_type;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/image_search.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("object", $this->_objects_to_search);
-            $this->getTemplateEngine()->assign("backfill", $this->_backfill_id);
-            $this->getTemplateEngine()->assign("back_click_id", $this->_back_click_id);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("object", $this->_objects_to_search);
+            $data->assign("backfill", $this->_backfill_id);
+            $data->assign("back_click_id", $this->_back_click_id);
 
-            $this->getTemplateEngine()->assign("search_field", $this->renderSearchField());
-            $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
-            $this->getTemplateEngine()->assign("image_labels_field", $this->renderImageLabelsField());
-            $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
-
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $data->assign("search_field", $this->renderSearchField());
+            $data->assign("search_button", $this->renderSearchButton());
+            $data->assign("image_labels_field", $this->renderImageLabelsField());
+            $data->assign("search_results", $this->renderSearchResults());
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
+            $data->assign("popup_type", $this->_popup_type);
         }
 
         private function renderSearchField(): string {

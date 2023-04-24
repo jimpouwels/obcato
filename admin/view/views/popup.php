@@ -5,21 +5,23 @@
     
     class Popup extends Visual {
         
-        private static string $TEMPLATE = "system/popup.tpl";
         private string $_popup_type;
         
         public function __construct(string $popup_type) {
             parent::__construct();
             $this->_popup_type = $popup_type;
         }
+
+        public function getTemplateFilename(): string {
+            return "system/popup.tpl";
+        }
         
-        public function render(): string {
+        public function load(): void {
             $content = null;
             if ($this->_popup_type == "search") {
                 $content = new Search();
             }
-            $this->getTemplateEngine()->assign("content", $content->render());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $this->assign("content", $content->render());
         }
         
     }

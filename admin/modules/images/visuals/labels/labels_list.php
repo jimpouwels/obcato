@@ -8,7 +8,6 @@
 
     class LabelsList extends Panel {
 
-        private static string $TEMPLATE = "images/labels/list.tpl";
         private ImageDao $_image_dao;
 
         public function __construct() {
@@ -16,14 +15,13 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/labels/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("all_labels", $this->getAllLabels());
-            $this->getTemplateEngine()->assign("no_labels_message", $this->getNoLabelsMessage());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("all_labels", $this->getAllLabels());
+            $data->assign("no_labels_message", $this->getNoLabelsMessage());
         }
 
         private function getAllLabels(): array {

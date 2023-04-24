@@ -7,7 +7,6 @@
     
     class TermTab extends Visual {
     
-        private static string $TERM_MANAGER_TEMPLATE = "articles/terms/root.tpl";
         private static string $TERM_QUERYSTRING_KEY = "term";
         private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";
     
@@ -17,14 +16,16 @@
             parent::__construct();
             $this->_current_term = $current_term;
         }
+
+        public function getTemplateFilename(): string {
+            return "modules/articles/terms/root.tpl";
+        }
     
-        public function render(): string {
+        public function load(): void {
             if ($this->isEditTermMode()) {
-                $this->getTemplateEngine()->assign("term_editor", $this->renderTermEditor());
+                $this->assign("term_editor", $this->renderTermEditor());
             }
-            $this->getTemplateEngine()->assign("term_list", $this->renderTermsList());
-            
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TERM_MANAGER_TEMPLATE);
+            $this->assign("term_list", $this->renderTermsList());
         }
         
         public static function isEditTermMode(): bool {

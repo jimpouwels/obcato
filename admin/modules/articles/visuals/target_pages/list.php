@@ -6,8 +6,6 @@
 
     class TargetPagesList extends Panel {
 
-        private static string $TEMPLATE = "articles/target_pages/list.tpl";
-
         private ArticleDao $_article_dao;
 
         public function __construct() {
@@ -15,18 +13,16 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/articles/target_pages/list.tpl";
         }
-
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("target_pages", $this->getTargetPages());
-            $this->getTemplateEngine()->assign("default_target_page", $this->getDefaultTargetPage());
+        
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("target_pages", $this->getTargetPages());
+            $data->assign("default_target_page", $this->getDefaultTargetPage());
 
             $page_picker = new PagePicker("", null, "add_target_page_ref", "update_target_pages", "articles");
-            $this->getTemplateEngine()->assign("page_picker", $page_picker->render());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $data->assign("page_picker", $page_picker->render());
         }
 
         private function getDefaultTargetPage(): array {

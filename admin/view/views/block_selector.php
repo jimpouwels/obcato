@@ -5,7 +5,6 @@
 
     class BlockSelector extends Panel {
 
-        private static string $TEMPLATE = "system/block_selector.tpl";
         private array $_selected_blocks;
         private BlockDao $_block_dao;
         private int $_context_id;
@@ -17,15 +16,14 @@
             $this->_selected_blocks = $selected_blocks;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/block_selector.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("blocks_to_select", $this->getBlocksToSelect());
-            $this->getTemplateEngine()->assign("selected_blocks", $this->getSelectedBlocksHtml());
-            $this->getTemplateEngine()->assign("context_id", $this->_context_id);
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("blocks_to_select", $this->getBlocksToSelect());
+            $data->assign("selected_blocks", $this->getSelectedBlocksHtml());
+            $data->assign("context_id", $this->_context_id);
         }
 
         private function getBlocksToSelect(): array {

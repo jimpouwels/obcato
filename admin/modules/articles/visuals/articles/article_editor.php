@@ -10,9 +10,6 @@
 
     class ArticleEditor extends Visual {
 
-        private static string $ARTICLE_EDITOR_TEMPLATE = "articles/articles/editor.tpl";
-        private static string $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
-
         private Article $_current_article;
         private ArticleDao $_article_dao;
 
@@ -22,16 +19,18 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("article_id", $this->getBackendBaseUrl() . "&article=" . $this->_current_article->getId());
-            $this->getTemplateEngine()->assign("article_metadata", $this->renderArticleMetaDataPanel());
-            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainer());
-            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditor());
-            $this->getTemplateEngine()->assign("term_selector", $this->renderTermSelector());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$ARTICLE_EDITOR_TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "modules/articles/articles/editor.tpl";
         }
 
+        public function load(): void {
+            $this->assign("article_id", $this->_current_article->getId());
+            $this->assign("article_metadata", $this->renderArticleMetaDataPanel());
+            $this->assign("element_container", $this->renderElementContainer());
+            $this->assign("link_editor", $this->renderLinkEditor());
+            $this->assign("term_selector", $this->renderTermSelector());
+            $this->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
+        }
 
         private function renderArticleMetaDataPanel(): string {
             $metadata_panel = new ArticleMetadataEditor($this->_current_article);

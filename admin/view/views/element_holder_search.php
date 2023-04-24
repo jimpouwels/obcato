@@ -12,38 +12,38 @@
 
         private static string $OBJECT_TYPE_KEY = "s_element_holder";
         private static string $SEARCH_QUERY_KEY = "s_term";
-        private static string $TEMPLATE = "system/element_holder_search.tpl";
         private string $_objects_to_search;
         private string $_back_click_id;
         private string $_backfill_id;
         private ArticleDao $_article_dao;
         private PageDao $_page_dao;
+        private string $_popup_type;
 
-        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search) {
+        public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search, string $popup_type) {
             parent::__construct('Zoeken', 'popup_search_fieldset');
             $this->_objects_to_search = $objects_to_search;
             $this->_back_click_id = $back_click_id;
             $this->_backfill_id = $backfill_id;
             $this->_article_dao = ArticleDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
+            $this->_popup_type = $popup_type;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "system/element_holder_search.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("search_object", $this->_objects_to_search);
-            $this->getTemplateEngine()->assign("backfill", $this->_backfill_id);
-            $this->getTemplateEngine()->assign("back_click_id", $this->_back_click_id);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("search_object", $this->_objects_to_search);
+            $data->assign("backfill", $this->_backfill_id);
+            $data->assign("back_click_id", $this->_back_click_id);
 
-            $this->getTemplateEngine()->assign("search_field", $this->renderSearchField());
-            $this->getTemplateEngine()->assign("search_options", $this->renderSearchOptionsField());
-            $this->getTemplateEngine()->assign("search_button", $this->renderSearchButton());
-            $this->getTemplateEngine()->assign("search_results", $this->renderSearchResults());
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
-
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $data->assign("search_field", $this->renderSearchField());
+            $data->assign("search_options", $this->renderSearchOptionsField());
+            $data->assign("search_button", $this->renderSearchButton());
+            $data->assign("search_results", $this->renderSearchResults());
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
+            $data->assign("popup_type", $this->_popup_type);
         }
 
         private function renderSearchField(): string {

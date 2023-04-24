@@ -5,7 +5,6 @@
 
     class ImageList extends Panel {
 
-        private static string $TEMPLATE = "images/images/list.tpl";
         private ?Image $_current_image;
         private ImageDao $_image_dao;
         private ImageRequestHandler $_images_request_handler;
@@ -17,19 +16,17 @@
             $this->_image_dao = ImageDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/images/images/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("search_results", $this->getSearchResults());
-            $this->getTemplateEngine()->assign("action_form_id", ACTION_FORM_ID);
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
-            $this->getTemplateEngine()->assign("current_search_title", $this->_images_request_handler->getCurrentSearchTitleFromGetRequest());
-            $this->getTemplateEngine()->assign("current_search_filename", $this->_images_request_handler->getCurrentSearchFilenameFromGetRequest());
-            $this->getTemplateEngine()->assign("current_search_label", $this->getCurrentSearchLabel());
-
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("search_results", $this->getSearchResults());
+            $data->assign("action_form_id", ACTION_FORM_ID);
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
+            $data->assign("current_search_title", $this->_images_request_handler->getCurrentSearchTitleFromGetRequest());
+            $data->assign("current_search_filename", $this->_images_request_handler->getCurrentSearchFilenameFromGetRequest());
+            $data->assign("current_search_label", $this->getCurrentSearchLabel());
         }
 
         private function getCurrentSearchLabel() {

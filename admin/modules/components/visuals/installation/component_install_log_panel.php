@@ -3,7 +3,6 @@
 
     class ComponentInstallLogPanel extends Panel {
 
-        private static $TEMPLATE = 'installation/component_install_log.tpl';
         private $_install_request_handler;
 
         public function __construct($install_request_handler) {
@@ -11,12 +10,11 @@
             $this->_install_request_handler = $install_request_handler;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'modules/components/installation/component_install_log.tpl';
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign('log_messages', $this->_install_request_handler->getLogMessages());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('log_messages', $this->_install_request_handler->getLogMessages());
         }
     }

@@ -3,19 +3,16 @@
 
     class ComponentInstallFormPanel extends Panel {
 
-        private static $TEMPLATE = 'installation/component_install_form.tpl';
-
         public function __construct() {
             parent::__construct('Instaleer component', 'install-form-panel');
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return 'modules/components/installation/component_install_form.tpl';
         }
 
-        public function renderPanelContent() {
-            $this->getTemplateEngine()->assign('upload_field', $this->renderUploadField());
-            return $this->getTemplateEngine()->fetch('modules/components/' . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('upload_field', $this->renderUploadField());
         }
 
         private function renderUploadField() {

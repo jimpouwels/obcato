@@ -8,7 +8,6 @@
 
     class AuthorizationModuleVisual extends ModuleVisual {
     
-        private static string $AUTHORIZATION_MODULE_TEMPLATE = "modules/authorization/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "modules/authorization/head_includes.tpl";
         private ?User $_current_user;
         private AuthorizationRequestHandler $_authorization_request_handler;
@@ -18,12 +17,15 @@
             $this->_authorization_request_handler = new AuthorizationRequestHandler();
         }
     
-        public function render(): string {
+        public function getTemplateFilename(): string {
+            return  "modules/authorization/root.tpl";
+        }
+
+        public function load(): void {
             $user_list = new UserList($this->_current_user);
             $user_editor = new UserEditor($this->_current_user);
-            $this->getTemplateEngine()->assign("user_list", $user_list->render());
-            $this->getTemplateEngine()->assign("user_editor", $user_editor->render());
-            return $this->getTemplateEngine()->fetch(self::$AUTHORIZATION_MODULE_TEMPLATE);
+            $this->assign("user_list", $user_list->render());
+            $this->assign("user_editor", $user_editor->render());
         }
     
         public function getActionButtons(): array {

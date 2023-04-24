@@ -5,7 +5,6 @@
 
     class GlobalSettingsPanel extends Panel {
 
-        private static string $TEMPLATE = "modules/settings/global_settings_panel.tpl";
         private Settings $_settings;
 
         public function __construct(Settings $settings) {
@@ -13,25 +12,24 @@
             $this->_settings = $settings;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/settings/global_settings_panel.tpl";
         }
 
-        public function renderPanelContent(): string {
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
             $current_homepage = $this->_settings->getHomepage();
 
             $website_title = new TextField("website_title", "Website titel", $this->_settings->getWebsiteTitle(), true, false, null);
             $email_field = new TextField("email_address", "Email adres", $this->_settings->getEmailAddress(), false, false, null);
             $homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "apply_settings", "pick_homepage");
 
-            $this->getTemplateEngine()->assign("website_title", $website_title->render());
-            $this->getTemplateEngine()->assign("email_field", $email_field->render());
+            $data->assign("website_title", $website_title->render());
+            $data->assign("email_field", $email_field->render());
 
             if (!is_null($current_homepage)) {
-                $this->getTemplateEngine()->assign("current_homepage_id", $current_homepage->getId());
-                $this->getTemplateEngine()->assign("current_homepage_title", $current_homepage->getTitle());
+                $data->assign("current_homepage_id", $current_homepage->getId());
+                $data->assign("current_homepage_title", $current_homepage->getTitle());
             }
-            $this->getTemplateEngine()->assign("homepage_picker", $homepage_picker->render());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $data->assign("homepage_picker", $homepage_picker->render());
         }
     }

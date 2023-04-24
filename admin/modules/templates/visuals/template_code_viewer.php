@@ -5,7 +5,6 @@
 
     class TemplateCodeViewer extends Panel {
 
-        private static string $TEMPLATE_EDITOR_TEMPLATE = "templates/template_code_viewer.tpl";
 
         private Template $_template;
 
@@ -14,13 +13,12 @@
             $this->_template = $template;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/templates/template_code_viewer.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign('file_content', $this->getTemplateCode());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_EDITOR_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign('file_content', $this->getTemplateCode());
         }
 
         private function getTemplateCode(): ?string {

@@ -7,7 +7,6 @@
 
     class TemplateList extends Panel {
 
-        private static string $TEMPLATE_LIST_TEMPLATE = "templates/template_list.tpl";
 
         private TemplateDao $_template_dao;
         private Scope $_scope;
@@ -18,15 +17,14 @@
             $this->_template_dao = TemplateDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/templates/template_list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("scope", $this->_scope->getIdentifier());
-            $this->getTemplateEngine()->assign("templates", $this->getTemplatesForScope($this->_scope));
-            $this->getTemplateEngine()->assign("information_message", $this->renderInformationMessage());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE_LIST_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("scope", $this->_scope->getIdentifier());
+            $data->assign("templates", $this->getTemplatesForScope($this->_scope));
+            $data->assign("information_message", $this->renderInformationMessage());
         }
 
         private function getTemplatesForScope(Scope $scope): array {

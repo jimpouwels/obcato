@@ -15,10 +15,6 @@
             parent::__construct($name, $label, $current_template_id, $options, $mandatory, $class_name);
         }
     
-        public function render(): string {
-            return parent::render();
-        }
-        
         private function getOptions(Scope $scope): array {
             $template_dao = TemplateDao::getInstance();
             $options = array();

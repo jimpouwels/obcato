@@ -7,7 +7,6 @@
 
     class ListVisual extends Panel {
 
-        private static string $TEMPLATE = "downloads/list.tpl";
         private DownloadDao $_download_dao;
         private DownloadRequestHandler $_download_request_handler;
 
@@ -17,14 +16,13 @@
             $this->_download_dao = DownloadDao::getInstance();
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/downloads/list.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("search_results", $this->getDownloads());
-            $this->getTemplateEngine()->assign("no_results_message", $this->renderNoResultsMessage());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("search_results", $this->getDownloads());
+            $data->assign("no_results_message", $this->renderNoResultsMessage());
         }
 
         public function getDownloads(): array {

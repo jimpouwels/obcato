@@ -9,7 +9,6 @@
 
     class TemplateModuleVisual extends ModuleVisual {
 
-        private static string $TEMPLATE_MODULE_TEMPLATE = "modules/templates/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "templates/head_includes.tpl";
 
         private Module $_template_module;
@@ -23,17 +22,20 @@
             $this->_template_request_handler = new TemplateRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("current_template_id", $this->getCurrentTemplateId());
+        public function getTemplateFilename(): string {
+            return "modules/templates/root.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("current_template_id", $this->getCurrentTemplateId());
             if (!is_null($this->_current_template)) {
-                $this->getTemplateEngine()->assign("template_editor", $this->renderTemplateEditor());
-                $this->getTemplateEngine()->assign('template_code_viewer', $this->renderTemplateCodeViewer());
+                $this->assign("template_editor", $this->renderTemplateEditor());
+                $this->assign('template_code_viewer', $this->renderTemplateCodeViewer());
             }
-            $this->getTemplateEngine()->assign("scope_selector", $this->getScopeSelector());
+            $this->assign("scope_selector", $this->getScopeSelector());
             if (!is_null($this->_current_scope)) {
-                $this->getTemplateEngine()->assign("template_list", $this->renderTemplateList());
+                $this->assign("template_list", $this->renderTemplateList());
             }
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE_MODULE_TEMPLATE);
         }
 
         public function getActionButtons(): array {

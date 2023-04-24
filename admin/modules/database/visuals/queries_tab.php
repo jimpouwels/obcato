@@ -6,7 +6,6 @@
 
     class QueriesTab extends Visual {
 
-        private static string $TABLES_TEMPLATE = "modules/database/queries_tab.tpl";
         private DatabaseRequestHandler $_request_handler;
 
         public function __construct($request_handler) {
@@ -14,10 +13,13 @@
             $this->_request_handler = $request_handler;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('query_field_panel', $this->renderQueryFieldPanel());
-            $this->getTemplateEngine()->assign('query_result_panel', $this->renderQueryResultPanel());
-            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "modules/database/queries_tab.tpl";
+        }
+
+        public function load(): void {
+            $this->assign('query_field_panel', $this->renderQueryFieldPanel());
+            $this->assign('query_result_panel', $this->renderQueryResultPanel());
         }
 
         private function renderQueryFieldPanel(): string {

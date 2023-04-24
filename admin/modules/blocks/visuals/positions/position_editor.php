@@ -3,8 +3,6 @@
 
     class PositionEditor extends Panel {
 
-        private static string $TEMPLATE = "blocks/positions/editor.tpl";
-
         private BlockPosition $_current_position;
 
         public function __construct(BlockPosition $current_position) {
@@ -12,22 +10,21 @@
             $this->_current_position = $current_position;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/blocks/positions/editor.tpl";
         }
 
-        public function renderPanelContent(): string {
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
             $new_position = true;
             $position_id = null;
             if (!is_null($this->_current_position)) {
                 $new_position = false;
                 $position_id = $this->_current_position->getId();
             }
-            $this->getTemplateEngine()->assign("id", $position_id);
-            $this->getTemplateEngine()->assign("new_position", $new_position);
-            $this->getTemplateEngine()->assign("name_field", $this->renderNameField());
-            $this->getTemplateEngine()->assign("explanation_field", $this->renderExplanationField());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $data->assign("id", $position_id);
+            $data->assign("new_position", $new_position);
+            $data->assign("name_field", $this->renderNameField());
+            $data->assign("explanation_field", $this->renderExplanationField());
         }
 
         private function renderNameField(): string {

@@ -8,8 +8,6 @@
 
     class BlockEditor extends Visual {
 
-        private static string $BLOCK_EDITOR_TEMPLATE = "modules/blocks/blocks/editor.tpl";
-
         private Block $_current_block;
 
         public function __construct(Block $current_block) {
@@ -17,12 +15,16 @@
             $this->_current_block = $current_block;
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("block_metadata", $this->renderBlockMetaDataPanel());
-            $this->getTemplateEngine()->assign("element_container", $this->renderElementContainer());
-            $this->getTemplateEngine()->assign("link_editor", $this->renderLinkEditor());
+        public function getTemplateFilename(): string {
+            return "modules/blocks/blocks/editor.tpl";
+        }
 
-            return $this->getTemplateEngine()->fetch(self::$BLOCK_EDITOR_TEMPLATE);
+        public function load(): void {
+            $this->assign("current_block_id", $this->_current_block->getId());
+            $this->assign("block_metadata", $this->renderBlockMetaDataPanel());
+            $this->assign("element_container", $this->renderElementContainer());
+            $this->assign("link_editor", $this->renderLinkEditor());
+            $this->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
         }
 
         private function renderBlockMetaDataPanel(): string {

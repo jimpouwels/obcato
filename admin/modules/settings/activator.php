@@ -12,7 +12,6 @@
 
     class SettingsModuleVisual extends ModuleVisual {
 
-        private static string $TEMPLATE = "settings/root.tpl";
         private static string $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
         private Module $_settings_module;
         private Settings $_settings;
@@ -25,12 +24,15 @@
             $this->_settings_request_handler = new SettingsRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign("warning_message", $this->renderWarningMessage());
-            $this->getTemplateEngine()->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
-            $this->getTemplateEngine()->assign("directory_settings_panel", $this->renderDirectorySettingsPanel());
-            $this->getTemplateEngine()->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+        public function getTemplateFilename(): string {
+            return "modules/settings/root.tpl";
+        }
+
+        public function load(): void {
+            $this->assign("warning_message", $this->renderWarningMessage());
+            $this->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
+            $this->assign("directory_settings_panel", $this->renderDirectorySettingsPanel());
+            $this->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
         }
 
         public function getActionButtons(): array {

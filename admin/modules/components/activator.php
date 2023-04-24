@@ -10,7 +10,6 @@
 
     class ComponentsModuleVisual extends ModuleVisual {
 
-        private static $TEMPLATE = 'components/root.tpl';
         private static $HEAD_INCLUDES_TEMPLATE = 'components/head_includes.tpl';
         private static $COMPONENTS_TAB = 0;
         private static $INSTALLATION_TAB = 1;
@@ -25,15 +24,18 @@
             $this->_component_request_handler = new ComponentRequestHandler();
         }
 
-        public function render(): string {
-            $this->getTemplateEngine()->assign('tab_menu', $this->renderTabMenu());
+        public function getTemplateFilename(): string {
+            return 'components/root.tpl';
+        }
+
+        public function load(): void {
+            $this->assign('tab_menu', $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
                 $content = new ComponentsTabVisual($this->_component_request_handler);
             } else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB) {
                 $content = new InstallationTabVisual($this->_install_request_handler);
             }
-            $this->getTemplateEngine()->assign('content', $content->render());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$TEMPLATE);
+            $this->assign('content', $content->render());
         }
 
         public function renderHeadIncludes() {

@@ -6,7 +6,6 @@
 
     class TablePanel extends Panel {
 
-        private static string $TABLES_TEMPLATE = "modules/database/table.tpl";
         private array $_table;
 
         public function __construct(array $table) {
@@ -14,12 +13,11 @@
             $this->_table = $table;
         }
 
-        public function render(): string {
-            return parent::render();
+        public function getPanelContentTemplate(): string {
+            return "modules/database/table.tpl";
         }
 
-        public function renderPanelContent(): string {
-            $this->getTemplateEngine()->assign("table", $this->_table);
-            return $this->getTemplateEngine()->fetch(self::$TABLES_TEMPLATE);
+        public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $data->assign("table", $this->_table);
         }
     }
