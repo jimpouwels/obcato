@@ -34,7 +34,7 @@
                                         . "&amp;" . Search::$BACKFILL_KEY . "=" . $this->_backing_field_id . "', '" . $this->_label 
                                         . "', 'width=950,height=600,scrollbars=yes,toolbar=no,location=yes'); return false;");
 
-            $object_picker_template_data = $this->getTemplateEngine()->createData();
+            $object_picker_template_data = $this->getTemplateEngine()->createChildData();
             $object_picker_template_data->assign("picker_button", $picker_button->render());
             $object_picker_template_data->assign("backing_field_id", $this->_backing_field_id);
             $object_picker_template_data->assign("value", $this->_value);

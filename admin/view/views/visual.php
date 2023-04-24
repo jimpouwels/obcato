@@ -6,7 +6,7 @@
     
     abstract class Visual {
         
-        private Smarty $_template_engine;
+        private TemplateEngine $_template_engine;
 
         public function __construct() {
             $this->_template_engine = TemplateEngine::getInstance();
@@ -14,7 +14,7 @@
 
         abstract function render(): string;
 
-        protected function getTemplateEngine(): Smarty {
+        protected function getTemplateEngine(): TemplateEngine {
             return $this->_template_engine;
         }
 

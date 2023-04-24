@@ -5,20 +5,42 @@
 
     class TemplateEngine
     {
-        private static Smarty $_instance;
-        private static bool $_initialized = false;
+        private static ?TemplateEngine $_instance = null;
+        private Smarty $_smarty;
 
-        private function __construct() {
+        private function __construct(Smarty $smarty) {
+            $this->_smarty = $smarty;
         }
 
-        public static function getInstance(): Smarty {
-            if (!self::$_initialized) {
-                self::$_instance = new Smarty();
-                self::$_instance->template_dir = BACKEND_TEMPLATE_DIR;
-                self::$_instance->compile_dir = BACKEND_TEMPLATE_DIR . "/compiled_templates";
-                self::$_instance->cache_dir = BACKEND_TEMPLATE_DIR . "/cache";
-                self::$_initialized = true;
+        public static function getInstance(): TemplateEngine {
+            if (!self::$_instance) {
+                $smarty = new Smarty();
+                $smarty->template_dir = BACKEND_TEMPLATE_DIR;
+                $smarty->compile_dir = BACKEND_TEMPLATE_DIR . "/compiled_templates";
+                $smarty->cache_dir = BACKEND_TEMPLATE_DIR . "/cache";
+                self::$_instance = new TemplateEngine($smarty);
             }
             return self::$_instance;
+        }
+
+        public function assign(string $key, mixed $value) {
+            $this->_smarty->assign($key, $value);
+        }
+
+        public function fetch(string $template, ?Smarty_Internal_Data $data = null): string {
+            if ($data) {
+                $tpl = $this->_smarty->createTemplate($template, $data);
+                return $tpl->fetch();
+            } else {
+                return $this->_smarty->fetch($template);
+            }
+        }
+
+        public function createChildData(): Smarty_Internal_Data {
+            return $this->_smarty->createData($this->_smarty);
+        }
+
+        public function display(string $template): void {
+            $this->_smarty->display($template);
         }
     }

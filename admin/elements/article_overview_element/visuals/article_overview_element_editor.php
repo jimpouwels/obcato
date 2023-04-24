@@ -21,7 +21,7 @@
         }
         
         public function renderElementForm(): string {
-            $data = $this->getTemplateEngine()->createData();
+            $data = $this->getTemplateEngine()->createChildData();
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", $this->getTextResource("article_overview_element_editor_title"), $this->_element->getTitle(), false, true, null);
             $data->assign("title_field", $title_field->render());
             $show_from_field = new DateField("element_" . $this->_element->getId() . "_show_from", $this->getTextResource("article_overview_element_editor_publication_date_from"), $this->getDateValue($this->_element->getShowFrom()), false, "datepicker");
@@ -37,8 +37,7 @@
             $term_select_field = new TermSelector($this->_element->getTerms(), $this->_element->getId());
             $data->assign("term_select_field", $term_select_field->render());
             
-            $tpl = $this->getTemplateEngine()->createTemplate(self::$TEMPLATE, $data);
-            return $tpl->fetch();
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
         
         private function getDateValue(?string $date): ?string {            

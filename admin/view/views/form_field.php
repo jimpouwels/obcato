@@ -61,12 +61,11 @@
 
         protected function getInputLabelHtml(string $field_label, string $field_name, bool $mandatory): string {
             if ($field_label) {
-                $data = $this->getTemplateEngine()->createData();
+                $data = $this->getTemplateEngine()->createChildData();
                 $data->assign("label", $field_label);
                 $data->assign("name", $field_name);
                 $data->assign("mandatory", $mandatory);
-                $tpl = $this->getTemplateEngine()->createTemplate("system/form_label.tpl", $data);
-                return $tpl->fetch();
+                return $this->getTemplateEngine()->fetch("system/form_label.tpl", $data);
             }
             return "";
         }
