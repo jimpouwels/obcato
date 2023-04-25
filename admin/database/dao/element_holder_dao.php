@@ -45,10 +45,7 @@
         public function update(ElementHolder $element_holder): void {
             $published_value = ($element_holder->isPublished()) ? 1 : 0;
             $query = "UPDATE element_holders SET title = '" . $this->_mysql_connector->realEscapeString($element_holder->getTitle()) . "', published = " . $published_value . ",
-                      scope_id = " . $element_holder->getScopeId();
-            if ($element_holder->getTemplateId() != "" && !is_null($element_holder->getTemplateId())) {
-                $query .= ", template_id = " . $element_holder->getTemplateId();
-            }
+                      scope_id = " . $element_holder->getScopeId() . ", template_id = " . ($element_holder->getTemplateId() ? $element_holder->getTemplateId() : "NULL");
             $query .= " WHERE id = " . $element_holder->getId();
             $this->_mysql_connector->executeQuery($query);
         }
