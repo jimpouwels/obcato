@@ -44,10 +44,23 @@ function deleteElement(elementId, formFieldId) {
 // elements visibility
 $(document).ready(function() {
 	getAllElements().each(function() {
-		var elementId = getElementIdFromElementNode($(this));
+		var rootNode = $(this);
+		var elementId = getElementIdFromElementNode(rootNode);
 		if (!isVisible(elementId)) {
 			hideElement(elementId);
 		}
+		var elementHeader = findElementHeader(rootNode);
+		elementHeader.click(function(e) {
+			/* 
+				currentTarget == the node where the click listener is attached to ('.element_header')
+				target == the node that captured the event and bubbled it up the tree
+				if there was a child element that captured and bubbled the event, don't toggle (unless it's the left part of the header).
+			*/
+			if (e.currentTarget !== e.target && e.target.className !== 'element_header_left') {
+  				return;
+			}
+			toggleElement(elementId);
+		});
 	});
 });
 
@@ -101,6 +114,10 @@ function getAllElements() {
 
 function getElementIdFromElementNode(elementNode) {
 	return elementNode.find('.element_id_holder').text()
+}
+
+function findElementHeader(elementNode) {
+	return elementNode.find('.element_header');
 }
 
 // initializes sortable elements
