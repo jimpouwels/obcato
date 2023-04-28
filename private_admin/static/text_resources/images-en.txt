@@ -9,6 +9,10 @@ images_tab_import: Import
 # LIST
 images_list_panel_title: Found articles
 images_list_thumbnail_column: Thumbnail
+images_list_title_column: Title
+images_list_created_at_column: Created at
+images_list_created_by_column: Created by
+images_list_published_column: Published
 image_successfully_published: Image successfully published
 image_successfully_depublished: Image successfully depublished
 

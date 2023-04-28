@@ -9,6 +9,10 @@ images_tab_import: Importeren
 # LIST
 images_list_panel_title: Gevonden afbeeldingen
 images_list_thumbnail_column: Thumbnail
+images_list_title_column: Titel
+images_list_created_at_column: Gecreëerd op
+images_list_created_by_column: Gecreëerd door
+images_list_published_column: Gepubliceerd
 image_successfully_published: Afbeelding succesvol gepubliceerd
 image_successfully_depublished: Afbeelding succesvol gedepubliceerd
 

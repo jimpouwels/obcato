@@ -27,10 +27,10 @@
 		<thead>
 			<tr>
 				<th>{$text_resources.images_list_thumbnail_column}</th>
-				<th>Titel</th>
-				<th>Aangemaakt op</th>
-				<th>Aangemaakt door</th>
-				<th>Gepubliceerd</th>
+				<th>{$text_resources.images_list_title_column}</th>
+				<th>{$text_resources.images_list_created_at_column}</th>
+				<th>{$text_resources.images_list_created_by_column}</th>
+				<th>{$text_resources.images_list_published_column}</th>
 			</tr>
 		</thead>
 		<tbody>
