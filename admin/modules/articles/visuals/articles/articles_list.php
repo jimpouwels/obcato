@@ -37,7 +37,7 @@
                 $search_result["title"] = $article->getTitle();
 
                 $user = $article->getCreatedBy();
-                $search_result["created_by"] = $user ? null : $user->getUsername();
+                $search_result["created_by"] = $user == null ? "" : $user->getUsername();
                 $search_result["created_at"] = $article->getCreatedAt();
                 $search_result["published"] = $article->isPublished();
 
