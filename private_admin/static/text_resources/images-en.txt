@@ -4,10 +4,17 @@ images_module_title: Images
 # TABS
 images_tab_images: Images
 images_tab_labels: Labels
-images_tab_target_pages: Target pages
+images_tab_import: Import
 
 # LIST
 images_list_panel_title: Found articles
 images_list_thumbnail_column: Thumbnail
 image_successfully_published: Image successfully published
 image_successfully_depublished: Image successfully depublished
+
+# SEARCH
+images_search_show_all: Show all
+images_search_show_all_without_label: Show all without label
+images_search_title_field: Title
+images_search_filename_field: File name
+images_search_label_field: Label

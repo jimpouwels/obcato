@@ -110,7 +110,7 @@
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("images_tab_target_pages");
+            $tab_item["text"] = $this->getTextResource("images_tab_import");
             $tab_item["id"] = self::$IMPORT_TAB;
             $tab_items[] = $tab_item;
             

@@ -23,7 +23,7 @@
             if (isset($_SESSION['text_resources'][$name])) {
                 return $_SESSION['text_resources'][$name];
             }
-            return "";
+            return $name;
         }
 
         public static function areTextResourcesLoaded(): bool {

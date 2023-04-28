@@ -25,17 +25,17 @@
         }
 
         private function getTitleSearchField(): TextField {
-            return new TextField("s_title", "Titel", $this->_images_request_handler->getCurrentSearchTitleFromGetRequest(), false, false, null);
+            return new TextField("s_title", "images_search_title_field", $this->_images_request_handler->getCurrentSearchTitleFromGetRequest(), false, false, null);
         }
 
         private function getFileNameSearchField(): TextField {
-            return new TextField("s_filename", "Bestandsnaam", $this->_images_request_handler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
+            return new TextField("s_filename", "images_search_filename_field", $this->_images_request_handler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
         }
 
         private function getLabelPullDown(): Pulldown {
             $labels = $this->getLabels();
             $currently_selected_label = $this->_images_request_handler->getCurrentSearchLabelFromGetRequest();
-            return new PullDown("s_label", "Label", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, "");
+            return new PullDown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, "");
         }
 
         private function getSearchButton(): Button {

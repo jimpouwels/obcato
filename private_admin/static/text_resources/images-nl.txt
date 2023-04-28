@@ -4,10 +4,17 @@ images_module_title: Afbeeldingen
 # TABS
 images_tab_images: Afbeeldingen
 images_tab_labels: Labels
-images_tab_target_pages: Doelpagina's
+images_tab_import: Importeren
 
 # LIST
 images_list_panel_title: Gevonden afbeeldingen
 images_list_thumbnail_column: Thumbnail
 image_successfully_published: Afbeelding succesvol gepubliceerd
 image_successfully_depublished: Afbeelding succesvol gedepubliceerd
+
+# SEARCH
+images_search_show_all: Toon allen
+images_search_show_all_without_label: Toon allen zonder label
+images_search_title_field: Titel
+images_search_filename_field: Bestandsnaam
+images_search_label_field: Label
