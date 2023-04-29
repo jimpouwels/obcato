@@ -36,7 +36,6 @@
 
         private function renderPositionsField(): string {
             $positions_options = array();
-            array_push($positions_options, array("name" => $this->getTextResource("select_field_default_text"), "value" => null));
             foreach ($this->_block_dao->getBlockPositions() as $position) {
                 array_push($positions_options, array("name" => $position->getName(), "value" => $position->getId()));
             }
@@ -44,7 +43,7 @@
             if (!is_null($this->_current_block->getPosition())) {
                 $current_position = $this->_current_block->getPosition()->getId();
             }
-            $positions_field = new Pulldown("block_position", $this->getTextResource("blocks_edit_metadata_position_field_label"), $current_position, $positions_options, false, null);
+            $positions_field = new Pulldown("block_position", $this->getTextResource("blocks_edit_metadata_position_field_label"), $current_position, $positions_options, false, null, true);
             return $positions_field->render();
         }
 

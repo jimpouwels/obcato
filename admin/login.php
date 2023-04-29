@@ -66,7 +66,7 @@
                             $languages = array();
                             $languages[] = array('name' => 'Nederlands', 'value' => 'nl');
                             $languages[] = array('name' => 'English', 'value' => 'en');
-                            $language = new Pulldown('language', 'Taal', 'nl', $languages, '', false);
+                            $language = new Pulldown('language', 'Taal', 'nl', $languages, false, null);
                             echo $language->render();
                         ?>
 

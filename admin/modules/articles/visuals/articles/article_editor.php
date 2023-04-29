@@ -56,17 +56,6 @@
             return $term_selector->render();
         }
 
-        private function getTargetPageOptions(): array {
-            $target_page_options = array();
-            array_push($target_page_options, array("name" => "&gt; Selecteer", "value" => ""));
-
-            $all_target_pages = $this->_article_dao->getTargetPages();
-            foreach ($all_target_pages as $article_target_page) {
-                array_push($target_page_options, array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId()));
-            }
-            return $target_page_options;
-        }
-
     }
 
 ?>

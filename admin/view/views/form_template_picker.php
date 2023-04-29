@@ -12,13 +12,12 @@
             if (!is_null($current_template)) {
                 $current_template_id = $current_template->getId();
             }
-            parent::__construct($name, $label, $current_template_id, $options, $mandatory, $class_name);
+            parent::__construct($name, $label, $current_template_id, $options, $mandatory, $class_name, true);
         }
     
         private function getOptions(Scope $scope): array {
             $template_dao = TemplateDao::getInstance();
             $options = array();
-            array_push($options, array("name" => $this->getTextResource("select_field_default_text"), "value" => null));
             foreach ($template_dao->getTemplatesByScope($scope) as $template) {
                 array_push($options, array('name' => $template->getName(), 'value' => $template->getId()));
             }

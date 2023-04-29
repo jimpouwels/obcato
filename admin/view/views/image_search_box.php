@@ -50,15 +50,12 @@
 
         private function renderImageLabelsField(): string {
             $image_labels_values = array();
-
             $current_label_search = $this->getCurrentSearchLabel();
-            $image_labels_values[] = array("name" => "&gt; Selecteer", "value" => "");
-
             $image_labels = $this->_image_dao->getAllLabels();
             foreach ($image_labels as $image_label) {
                 $image_labels_values[] = array("name" => $image_label->getName(), "value" => $image_label->getId());
             }
-            $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null);
+            $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null, true);
             return $image_labels_field->render();
         }
 

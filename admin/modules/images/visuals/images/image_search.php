@@ -35,7 +35,7 @@
         private function getLabelPullDown(): Pulldown {
             $labels = $this->getLabels();
             $currently_selected_label = $this->_images_request_handler->getCurrentSearchLabelFromGetRequest();
-            return new PullDown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, "");
+            return new PullDown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, null, true);
         }
 
         private function getSearchButton(): Button {
@@ -44,7 +44,6 @@
 
         private function getLabels(): array {
             $labels_name_value_pair = array();
-            $labels_name_value_pair[] = array('name' => '&gt; Selecteer', 'value' => null);
             foreach ($this->_image_dao->getAllLabels() as $label) {
                 $labels_name_value_pair[] = array('name' => $label->getName(), 'value' => $label->getId());
             }

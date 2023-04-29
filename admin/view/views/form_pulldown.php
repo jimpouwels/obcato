@@ -6,9 +6,11 @@
     class Pulldown extends FormField {
     
         private array $_options;
+        private bool $_include_select_indication;
     
-        public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $class_name) {
+        public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $class_name, bool $include_select_indication = false) {
             parent::__construct($name, $value, $label, $mandatory, false, $class_name);
+            $this->_include_select_indication = $include_select_indication;
             $this->_options = $options;
         }
     
@@ -18,6 +20,7 @@
 
         function loadFormField(Smarty_Internal_Data $data) {
             $data->assign("options", $this->_options);
+            $data->assign("include_select_indication", $this->_include_select_indication);
         }
     
     }
