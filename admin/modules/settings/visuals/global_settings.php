@@ -19,9 +19,9 @@
         public function loadPanelContent(Smarty_Internal_Data $data): void {
             $current_homepage = $this->_settings->getHomepage();
 
-            $website_title = new TextField("website_title", "Website titel", $this->_settings->getWebsiteTitle(), true, false, null);
-            $email_field = new TextField("email_address", "Email adres", $this->_settings->getEmailAddress(), false, false, null);
-            $homepage_picker = new PagePicker("Homepage", $current_homepage->getId(), "homepage_page_id", "apply_settings", "pick_homepage");
+            $website_title = new TextField("website_title", "settings_form_website_title_field", $this->_settings->getWebsiteTitle(), true, false, null);
+            $email_field = new TextField("email_address", "settings_form_website_email_address_field", $this->_settings->getEmailAddress(), false, false, null);
+            $homepage_picker = new PagePicker("settings_form_website_homepage_field", $current_homepage->getId(), "homepage_page_id", "apply_settings", "pick_homepage");
 
             $data->assign("website_title", $website_title->render());
             $data->assign("email_field", $email_field->render());

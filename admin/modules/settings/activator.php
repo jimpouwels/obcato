@@ -71,7 +71,7 @@
         }
 
         private function renderWarningMessage(): string {
-            $warning_message = new WarningMessage("Let op! Het incorrect wijzigen van de onderstaande instellingen kan zorgen voor een niet (goed) meer werkende website!");
+            $warning_message = new WarningMessage("settings_warning_message");
             return $warning_message->render();
         }
 

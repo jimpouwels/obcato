@@ -3,6 +3,6 @@
 		<img src="/admin/static.php?file=/default/img/default_icons/warning.png" alt="notification" />
 	</div>
 	<div class="info-message">
-		<p><em>{$message}</em></p>
+		<p><em>{$text_resources[$message_resource_identifier]}</em></p>
 	</div>
 </div>

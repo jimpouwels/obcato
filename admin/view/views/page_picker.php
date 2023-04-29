@@ -5,8 +5,8 @@
     
     class PagePicker extends ObjectPicker {
         
-        public function __construct(string $label, ?string $value, string $backing_field_id, string $opener_submit_id, string $button_id) {
-            parent::__construct($label, $value, $backing_field_id, $opener_submit_id, $button_id);
+        public function __construct(string $label_resource_identifier, ?string $value, string $backing_field_id, string $opener_submit_id, string $button_id) {
+            parent::__construct($label_resource_identifier, $value, $backing_field_id, $opener_submit_id, $button_id);
         }
         
         public function getType(): string {

@@ -1,1 +1,19 @@
+# GENERAL
 settings_module_title: Settings
+settings_warning_message: Warning! Making faulty changes to the following settings could cause the website to behave incorrectly!
+
+# FORM
+settings_form_website_title_field: Website title
+settings_form_website_email_address_field: Email address
+settings_form_website_homepage_field: Homepage
+settings_form_frontend_hostname_field: Frontend hostname
+settings_form_backend_hostname_field: Backend hostname
+settings_form_backend_smtp_host_field: SMTP hostname
+settings_form_backend_cms_root_dir_field: CMS root directory
+settings_form_backend_public_root_dir_field: Public root directory
+settings_form_backend_static_dir_field: Static directory
+settings_form_backend_config_dir_field: Config directory
+settings_form_backend_upload_dir_field: Upload directory
+settings_form_backend_frontend_template_dir_field: Frontend template directory
+settings_form_backend_backend_template_dir_field: Backend template directory
+settings_form_backend_component_dir_field: Component directory

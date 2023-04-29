@@ -3,11 +3,11 @@
     
     class WarningMessage extends Visual {
     
-        private $_message;
+        private $_message_resource_identifier;
     
-        public function __construct(string $message) {
+        public function __construct(string $message_resource_identifier) {
             parent::__construct();
-            $this->_message = $message;
+            $this->_message_resource_identifier = $message_resource_identifier;
         }
 
         public function getTemplateFilename(): string {
@@ -15,7 +15,7 @@
         }
     
         public function load(): void {
-            $this->assign("message", $this->_message);
+            $this->assign("message_resource_identifier", $this->_message_resource_identifier);
         }    
     }
 
