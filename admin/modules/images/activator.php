@@ -100,17 +100,17 @@
             $tab_items = array();
             
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("images_tab_images");
+            $tab_item["text_resource_identifier"] = "images_tab_images";
             $tab_item["id"] = self::$IMAGES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("images_tab_labels");
+            $tab_item["text_resource_identifier"] = "images_tab_labels";
             $tab_item["id"] = self::$LABELS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("images_tab_import");
+            $tab_item["text_resource_identifier"] = "images_tab_import";
             $tab_item["id"] = self::$IMPORT_TAB;
             $tab_items[] = $tab_item;
             

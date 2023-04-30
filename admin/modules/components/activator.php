@@ -77,12 +77,12 @@
             $tab_items = array();
             
             $tab_item = array();
-            $tab_item["text"] = "Componenten";
+            $tab_item["text_resource_identifier"] = "Componenten";
             $tab_item["id"] = self::$COMPONENTS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = "Installeren";
+            $tab_item["text_resource_identifier"] = "Installeren";
             $tab_item["id"] = self::$INSTALLATION_TAB;
             $tab_items[] = $tab_item;
 

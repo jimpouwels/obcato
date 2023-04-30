@@ -4,13 +4,13 @@
     class Button extends Visual {
         
         private ?string $_id = null;
-        private string $_label;
+        private string $_label_resource_identifier;
         private ?string $_onclick = null;
         
-        public function __construct(?string $id, string $label, ?string $onclick) {
+        public function __construct(?string $id, string $label_resource_identifier, ?string $onclick) {
             parent::__construct();
             $this->_id = $id;
-            $this->_label = $label;
+            $this->_label_resource_identifier = $label_resource_identifier;
             $this->_onclick = $onclick;
         }
 
@@ -20,7 +20,7 @@
         
         public function load(): void {
             $this->assign("id", $this->_id);
-            $this->assign("label", $this->_label);
+            $this->assign("label_resource_identifier", $this->_label_resource_identifier);
             $this->assign("onclick", $this->_onclick);
         }
         

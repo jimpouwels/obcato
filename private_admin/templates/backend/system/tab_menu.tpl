@@ -7,7 +7,12 @@
 				{assign var='class' value='tab_item_active'}
 			{/if}
 			<li class="{$class}">
-				<a href="{$backend_base_url_without_tab}&module_tab_id={$tab_item.id}" title="{$tab_item.text}">{$tab_item.text}</a>
+				{if isset($text_resources[$tab_item.text_resource_identifier])}
+					{assign var="text" value=$text_resources[$tab_item.text_resource_identifier]}
+				{else}
+					{assign var="text" value=$tab_item.text_resource_identifier}
+				{/if}
+				<a href="{$backend_base_url_without_tab}&module_tab_id={$tab_item.id}" title="{$text}">{$text}</a>
 			</li>
 			{assign var='index' value=$index + 1}
 		{/foreach}

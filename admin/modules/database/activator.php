@@ -61,17 +61,17 @@
             $tab_items = array();
             
             $tab_item = array();
-            $tab_item["text"] = "Configuratie";
+            $tab_item["text_resource_identifier"] = "database_tab_menu_configuration";
             $tab_item["id"] = self::$CONFIGURATION_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = "Tabellen";
+            $tab_item["text_resource_identifier"] = "database_tab_menu_tabels";
             $tab_item["id"] = self::$TABLES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = "Query";
+            $tab_item["text_resource_identifier"] = "database_tab_menu_query";
             $tab_item["id"] = self::$QUERY_TAB;
             $tab_items[] = $tab_item;
 

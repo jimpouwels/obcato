@@ -4,9 +4,9 @@
     <colgroup width="33%"></colgroup>
 
     <tr>
-        <th>Kolomnaam</th>
-        <th>Type</th>
-        <th>Null toegestaan</th>
+        <th>{$text_resources.database_tables_column_column}</th>
+        <th>{$text_resources.database_tables_column_type}</th>
+        <th>{$text_resources.database_tables_column_nullable}</th>
     </tr>
 
     {foreach from=$table.columns item=column}

@@ -1,6 +1,12 @@
 <div class="panel {$class}">
 	<div class="panel-title">
-		<p>{$panel_title}</p>
+		<p>
+			{if isset($text_resources[$title_resource_identifier])}
+				{$text_resources[$title_resource_identifier]}
+			{else}
+				{$title_resource_identifier}
+			{/if}
+		</p>
 	</div>
 	{$content}
 </div>

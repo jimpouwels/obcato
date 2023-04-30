@@ -1,1 +1,19 @@
+# GENERAL
 database_module_title: Database
+database_tab_menu_configuration: Configuration
+database_tab_menu_tabels: Tables
+database_tab_menu_query: Query
+
+# CONFIGURATION
+database_config_panel_title: Database configuration
+
+# TABLES
+database_tables_column_column: Column name
+database_tables_column_type: Type
+database_tables_column_nullable: Nullable
+
+# QUERY
+database_query_editor_title: Query editor
+database_query_query_field_label: Query
+database_query_execute_button_label: Execute
+database_query_result_panel_title: Results

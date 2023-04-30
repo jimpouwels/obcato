@@ -6,7 +6,7 @@
         private DatabaseRequestHandler $_request_handler;
 
         public function __construct(DatabaseRequestHandler $request_handler) {
-            parent::__construct('Resultaten', 'query_result_panel');
+            parent::__construct('database_query_result_panel_title', 'query_result_panel');
             $this->_request_handler = $request_handler;
         }
 

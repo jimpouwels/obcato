@@ -116,17 +116,17 @@
             $tab_items = array();
             
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("articles_tab_articles");
+            $tab_item["text_resource_identifier"] = "articles_tab_articles";
             $tab_item["id"] = self::$ARTICLES_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("articles_tab_terms");
+            $tab_item["text_resource_identifier"] = "articles_tab_terms";
             $tab_item["id"] = self::$TERMS_TAB;
             $tab_items[] = $tab_item;
 
             $tab_item = array();
-            $tab_item["text"] = $this->getTextResource("articles_tab_target_pages");
+            $tab_item["text_resource_identifier"] = "articles_tab_target_pages";
             $tab_item["id"] = self::$TARGET_PAGES_TAB;
             $tab_items[] = $tab_item;
 

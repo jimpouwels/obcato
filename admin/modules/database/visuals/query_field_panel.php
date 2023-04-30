@@ -6,7 +6,7 @@
         private DatabaseRequestHandler $_request_handler;
 
         public function __construct($request_handler) {
-            parent::__construct('Query editor', 'queries_form_wrapper');
+            parent::__construct('database_query_editor_title', 'queries_form_wrapper');
             $this->_request_handler = $request_handler;
         }
 
@@ -20,12 +20,12 @@
         }
 
         private function renderQueryField(): string {
-            $query_field = new TextArea('query', "Query", $this->_request_handler->getQuery(), true, false, "");
+            $query_field = new TextArea('query', "database_query_query_field_label", $this->_request_handler->getQuery(), true, false, "");
             return $query_field->render();
         }
 
         private function renderExecuteButton(): string {
-            $execute_button = new Button("", "Query uitvoeren", "document.getElementById('query_execute_form').submit(); return false;");
+            $execute_button = new Button("", "database_query_execute_button_label", "document.getElementById('query_execute_form').submit(); return false;");
             return $execute_button->render();
         }
     }

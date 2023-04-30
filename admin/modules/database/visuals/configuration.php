@@ -9,7 +9,7 @@
         private MysqlConnector $_mysql_connector;
 
         public function __construct() {
-            parent::__construct('Database configuratie', 'configuration_panel');
+            parent::__construct('database_config_panel_title', 'configuration_panel');
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 

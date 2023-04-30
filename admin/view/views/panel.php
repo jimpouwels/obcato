@@ -5,13 +5,13 @@
 
     abstract class Panel extends Visual {
 
-        private string $_title;
+        private string $_title_resource_identifier;
         private string $_html_content;
         private string $_class;
 
-        public function __construct(string $title, string $class = "") {
+        public function __construct(string $title_resource_identifier, string $class = "") {
             parent::__construct();
-            $this->_title = $title;
+            $this->_title_resource_identifier = $title_resource_identifier;
             $this->_class = $class;
         }
 
@@ -28,7 +28,7 @@
             $this->loadPanelContent($panel_content_template_data);
             
             $this->assign('content', $this->getTemplateEngine()->fetch($this->getPanelContentTemplate(), $panel_content_template_data));
-            $this->assign('panel_title', $this->_title);
+            $this->assign('title_resource_identifier', $this->_title_resource_identifier);
             $this->assign('class', $this->_class);
         }
 
