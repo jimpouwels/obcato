@@ -21,7 +21,7 @@
                     <a href="#" onclick="toggleAllElements('{$id}'); return false;" title="{$text_resources.element_button_label_minimize_all}">
                         <img src="/admin/static.php?file=/default/img/default_icons/minimize_all.png" width="16px" height="16px" alt="{$text_resources.element_button_label_minimize_all}" title="{$text_resources.element_button_label_minimize_all}" />
                     </a>
-                    <a href="#" onclick="deleteElement('{$id}','{$delete_element_form_id}'); return false;" title="{$text_resources.element_button_label_delete}">
+                    <a href="#" onclick="deleteElement('{$id}','{$delete_element_form_id}', '{$text_resources.element_holder_delete_element_confirm_message}'); return false;" title="{$text_resources.element_button_label_delete}">
                         <img src="/admin/static.php?file=/default/img/default_icons/delete_small.png" alt="{$text_resources.element_button_label_delete}" title="{$text_resources.element_button_label_delete}" />
                     </a>
                 </div>

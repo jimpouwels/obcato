@@ -24,7 +24,7 @@ function submitSelectionBackToOpener(backRef, backValue, backClickId) {
 }
 
 // handles the 'delete element' click
-function deleteElement(elementId, formFieldId) {
+function deleteElement(elementId, formFieldId, confirmMessage) {
 	var $inputField = $('#' + formFieldId);
 	if ($inputField.length == 0) {
 		alert('Fout: Kan element niet verwijderen');
@@ -32,7 +32,7 @@ function deleteElement(elementId, formFieldId) {
 	} else {
 		$inputField.attr('value', elementId);
 	}
-	var confirmed = confirm("Weet u zeker dat u dit element wilt verwijderen?");
+	var confirmed = confirm(confirmMessage);
 	if (confirmed) {
 		$('#action').attr('value', 'update_element_holder');
 		$('#element_holder_form_id').submit();

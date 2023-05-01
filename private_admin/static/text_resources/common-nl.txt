@@ -59,6 +59,7 @@ no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een ni
 element_button_label_delete: Verwijder
 element_button_label_minimize_all: Minimaliseer alle
 element_button_label_minimize: Minimaliseer
+element_holder_delete_element_confirm_message: Weet u zeker dat u dit element wilt verwijderen?
 
 # BLOCK SELECTOR
 selected_blocks_header: Geselecteerde blokken

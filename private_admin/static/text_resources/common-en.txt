@@ -59,6 +59,7 @@ no_elements_found_message: No elements found. Go to "Insert" to add a new elemen
 element_button_label_delete: Delete
 element_button_label_minimize_all: Minimize all
 element_button_label_minimize: Minimize
+element_holder_delete_element_confirm_message: Are you sure you want to delete this element?
 
 # BLOCK SELECTOR
 selected_blocks_header: Selected blocks
