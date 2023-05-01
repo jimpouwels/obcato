@@ -9,7 +9,7 @@
                             {foreach from=$group.elements item=element}
                                 <li>
                                     <img src="{$element.icon_url}" alt="{$element.name}" />
-                                    <a href="#" onclick="addElement('{$element.id}'); return false;">{$element.name}</a>
+                                    <a href="#" onclick="addElement('{$element.id}', '{$text_resources.navigation_menu_add_element_error}'); return false;">{$element.name}</a>
                                 </li>
                             {/foreach}
                             <li class="last">

@@ -48,9 +48,9 @@
                 while (!feof($file)) {
                     $line = fgets($file);
                     if (!$this->isComment($line) && !$this->isEmptyLine($line)) {
-                        $parts = explode(':', $line);
+                        $parts = explode(':', $line, 2);
                         if (count($parts) > 1) {
-                            $resources[trim($parts[0])] = trim($parts[1]);
+                           $resources[trim($parts[0])] = trim($parts[1]);
                         }
                     }
                 }

@@ -9,6 +9,7 @@ menu_item_maintain: Beheer
 menu_item_design: Vormgeving
 menu_item_configure: Configuratie
 menu_item_insert: Invoegen
+navigation_menu_add_element_error: Fout: Kan element niet toevoegen. U kunt elementen plaatsen op pagina\'s, artikelen en blokken
 
 # ACTION BUTTONS
 action_button_save: Opslaan

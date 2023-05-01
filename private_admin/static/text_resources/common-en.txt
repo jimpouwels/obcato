@@ -9,6 +9,7 @@ menu_item_maintain: Maintain
 menu_item_design: Design
 menu_item_configure: Configure
 menu_item_insert: Insert
+navigation_menu_add_element_error: Error: Can\'t add element. You can only add elements to pages, articles and blocks.
 
 # ACTION BUTTONS
 action_button_save: Save

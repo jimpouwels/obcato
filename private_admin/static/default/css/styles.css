@@ -603,6 +603,10 @@ h1 {
     height: 100%;
 }
 
+.link-table {
+    margin-left: 10px;
+}
+
 .link-table, .link-table thead th {
     text-align: left;
 }

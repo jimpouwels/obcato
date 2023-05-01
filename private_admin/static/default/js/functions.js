@@ -1,8 +1,8 @@
 // handles the 'add element' click in the navigation menu
-function addElement(elementTypeId) {
+function addElement(elementTypeId, errorMessage) {
 	var $inputField = $('#add_element_type_id');
 	if ($inputField.length == 0) {
-		alert('Fout: Kan element niet toevoegen. U kunt elementen plaatsen op pagina\'s, artikelen en blokken.');
+		alert(errorMessage);
 		return false;
 	} else {
 		$inputField.attr('value', elementTypeId);
