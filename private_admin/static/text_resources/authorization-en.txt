@@ -1,1 +1,13 @@
+# GENERAL
 authorization_module_title: Authorization
+
+users_list_panel_title: Users
+
+# EDITOR
+users_editor_username_field_label: Username
+users_editor_firstname_field_label: First name
+users_editor_prefix_field_label: Prefix
+users_editor_lastname_field_label: Last name
+users_editor_email_address_field_label: Email address
+users_editor_new_pwd_field_label: New password
+users_editor_new_pwd_repeat_field_label: New password (repeat)

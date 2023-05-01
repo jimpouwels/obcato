@@ -1,1 +1,13 @@
+# GENERAL
 authorization_module_title: Authorisatie
+
+users_list_panel_title: Gebruikers
+
+# EDITOR
+users_editor_username_field_label: Gebruikersnaam
+users_editor_firstname_field_label: Voornaam
+users_editor_prefix_field_label: Tussenvoegsel
+users_editor_lastname_field_label: Achternaam
+users_editor_email_address_field_label: Email adres
+users_editor_new_pwd_field_label: Nieuw wachtwoord
+users_editor_new_pwd_repeat_field_label: Nieuw wachtwoord (herhaal)

@@ -10,7 +10,7 @@
         private ?User $_current_user = null;
 
         public function __construct(?User $current_user) {
-            parent::__construct('Gebruikers', 'user_tree_fieldset');
+            parent::__construct('users_list_panel_title', 'user_tree_fieldset');
             $this->_current_user = $current_user;
             $this->_authorization_dao = AuthorizationDao::getInstance();
         }
@@ -20,7 +20,7 @@
         }
 
         public function loadPanelContent(Smarty_Internal_Data $data): void {
-            $thdatais->assign("users", $this->getAllUsers());
+            $data->assign("users", $this->getAllUsers());
         }
 
         public function getAllUsers(): array {

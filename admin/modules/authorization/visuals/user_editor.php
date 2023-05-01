@@ -6,7 +6,7 @@
         private ?User $_current_user = null;
 
         public function __construct($current_user) {
-            parent::__construct('Algemeen', 'user_meta');
+            parent::__construct($current_user->getFullName(), 'user_meta');
             $this->_current_user = $current_user;
         }
 
@@ -28,37 +28,37 @@
         }
 
         private function renderUserNameField(): string {
-            $username_field = new TextField("user_username", "Gebruikersnaam", $this->_current_user->getUsername(), true, false, null);
+            $username_field = new TextField("user_username", "users_editor_username_field_label", $this->_current_user->getUsername(), true, false, null);
             return $username_field->render();
         }
 
         private function renderFirstNameField(): string {
-            $firstname_field = new TextField("user_firstname", "Voornaam", $this->_current_user->getFirstName(), true, false, "user_firstname_field");
+            $firstname_field = new TextField("user_firstname", "users_editor_firstname_field_label", $this->_current_user->getFirstName(), true, false, "user_firstname_field");
             return $firstname_field->render();
         }
 
         private function renderPrefixField(): string {
-            $prefix_field = new TextField("user_prefix", "Tussenvoegsel", $this->_current_user->getPrefix(), false, false, "user_prefix_field");
+            $prefix_field = new TextField("user_prefix", "users_editor_prefix_field_label", $this->_current_user->getPrefix(), false, false, "user_prefix_field");
             return $prefix_field->render();
         }
 
         private function renderLastNameField(): string {
-            $lastname_field = new TextField("user_lastname", "Achternaam", $this->_current_user->getLastName(), true, false, "user_lastname_field");
+            $lastname_field = new TextField("user_lastname", "users_editor_lastname_field_label", $this->_current_user->getLastName(), true, false, "user_lastname_field");
             return $lastname_field->render();
         }
 
         private function renderEmailField(): string {
-            $email_field = new TextField("user_email", "E-mail adres", $this->_current_user->getEmailAddress(), true, false, "user_email_field");
+            $email_field = new TextField("user_email", "users_editor_email_address_field_label", $this->_current_user->getEmailAddress(), true, false, "user_email_field");
             return $email_field->render();
         }
 
         private function renderFirstPasswordField(): string {
-            $first_password_field = new PasswordField("user_new_password_first", "Nieuw wachtwoord", "", false, "user_password_field");
+            $first_password_field = new PasswordField("user_new_password_first", "users_editor_new_pwd_field_label", "", false, "user_password_field");
             return $first_password_field->render();
         }
 
         private function renderSecondPasswordField(): string {
-            $second_password_field = new PasswordField("user_new_password_second", "Herhaal wachtwoord", "", false, "user_password_field");
+            $second_password_field = new PasswordField("user_new_password_second", "users_editor_new_pwd_repeat_field_label", "", false, "user_password_field");
             return $second_password_field->render();
         }
     }
