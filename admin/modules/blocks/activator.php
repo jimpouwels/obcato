@@ -92,19 +92,9 @@
         }
         
         private function renderTabMenu(): string {
-            $tab_items = array();
-            
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "blocks_tabmenu_blocks";
-            $tab_item["id"] = self::$BLOCKS_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "blocks_tabmenu_positions";
-            $tab_item["id"] = self::$POSITIONS_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+            $tab_menu = new TabMenu();
+            $tab_menu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB, true);
+            $tab_menu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
             return $tab_menu->render();
         }
     

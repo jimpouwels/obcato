@@ -74,19 +74,9 @@
         }
 
         private function renderTabMenu() {
-            $tab_items = array();
-            
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "Componenten";
-            $tab_item["id"] = self::$COMPONENTS_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "Installeren";
-            $tab_item["id"] = self::$INSTALLATION_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+            $tab_menu = new TabMenu();
+            $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB, true);
+            $tab_menu->addItem("Installeren", self::$INSTALLATION_TAB);
             return $tab_menu->render();
         }
     }

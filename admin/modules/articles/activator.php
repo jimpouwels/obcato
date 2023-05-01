@@ -113,24 +113,10 @@
         }
 
         private function renderTabMenu(): string {
-            $tab_items = array();
-            
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "articles_tab_articles";
-            $tab_item["id"] = self::$ARTICLES_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "articles_tab_terms";
-            $tab_item["id"] = self::$TERMS_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "articles_tab_target_pages";
-            $tab_item["id"] = self::$TARGET_PAGES_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+            $tab_menu = new TabMenu();
+            $tab_menu->addItem("articles_tab_articles", self::$ARTICLES_TAB, true);
+            $tab_menu->addItem("articles_tab_terms", self::$TERMS_TAB);
+            $tab_menu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
             return $tab_menu->render();
         }
 

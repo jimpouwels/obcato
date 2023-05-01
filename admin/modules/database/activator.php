@@ -58,24 +58,10 @@
         }
 
         private function renderTabMenu(): string {
-            $tab_items = array();
-            
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "database_tab_menu_configuration";
-            $tab_item["id"] = self::$CONFIGURATION_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "database_tab_menu_tabels";
-            $tab_item["id"] = self::$TABLES_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_item = array();
-            $tab_item["text_resource_identifier"] = "database_tab_menu_query";
-            $tab_item["id"] = self::$QUERY_TAB;
-            $tab_items[] = $tab_item;
-
-            $tab_menu = new TabMenu($tab_items, $this->getCurrentTabId());
+            $tab_menu = new TabMenu();
+            $tab_menu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB, true);
+            $tab_menu->addItem("database_tab_menu_tabels", self::$TABLES_TAB);
+            $tab_menu->addItem("database_tab_menu_query", self::$QUERY_TAB);
             return $tab_menu->render();
         }
 
