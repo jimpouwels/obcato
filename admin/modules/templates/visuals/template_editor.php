@@ -24,11 +24,11 @@
         }
 
         private function assignEditFields($data): void {
-            $name_field = new TextField("name", "Naam", $this->_template->getName(), true, false, null);
+            $name_field = new TextField("name", "template_editor_name_field", $this->_template->getName(), true, false, null);
             $data->assign("name_field", $name_field->render());
-            $filename_field = new TextField("file_name", "Bestandsnaam", $this->_template->getFileName(), false, false, null);
+            $filename_field = new TextField("file_name", "template_editor_filename_field", $this->_template->getFileName(), false, false, null);
             $data->assign("filename_field", $filename_field->render());
-            $upload_field = new UploadField("template_file", "Template", false, "");
+            $upload_field = new UploadField("template_file", "template_editor_upload_field", false, "");
             $data->assign("upload_field", $upload_field->render());
             $data->assign("scopes_field", $this->renderScopesField());
         }

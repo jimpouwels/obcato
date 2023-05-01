@@ -8,10 +8,10 @@
 			<colgroup width="100px"></colgroup>
 			<thead>
 				<tr>
-					<th>Naam</th>
-					<th>Bestandsnaam</th>
-					<th class="center">Templatebestand aanwezig</th>
-					<th class="center">Verwijderen</th>
+					<th>{$text_resources.template_list_name_column}</th>
+					<th>{$text_resources.template_list_filename_column}</th>
+					<th class="center">{$text_resources.template_list_file_present_column}</th>
+					<th class="center">{$text_resources.template_list_delete_column}</th>
 				</tr>
 			</thead>
 			<tbody>

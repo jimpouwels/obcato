@@ -9,7 +9,7 @@
         private ScopeDao $_scope_dao;
 
         public function __construct() {
-            parent::__construct('Componenten', 'scope_selector_fieldset');
+            parent::__construct('templates_scope_list_title', 'scope_selector_fieldset');
             $this->_template_dao = TemplateDao::getInstance();
             $this->_scope_dao = ScopeDao::getInstance();
         }

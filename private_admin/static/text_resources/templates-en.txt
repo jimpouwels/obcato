@@ -1,1 +1,14 @@
+# GENERAL
 templates_module_title: Templates
+templates_scope_list_title: Components
+
+# EDITOR
+template_editor_name_field: Name
+template_editor_filename_field: Filename
+template_editor_upload_field: Template file
+
+# LIST
+template_list_name_column: Name
+template_list_filename_column: Filename
+template_list_file_present_column: File found
+template_list_delete_column: Delete

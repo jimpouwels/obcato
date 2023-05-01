@@ -1,1 +1,14 @@
+# GENERAL
 templates_module_title: Templates
+templates_scope_list_title: Componenten
+
+# EDITOR
+template_editor_name_field: Naam
+template_editor_filename_field: Bestandsnaam
+template_editor_upload_field: Template bestand
+
+# LIST
+template_list_name_column: Naam
+template_list_filename_column: Bestandsnaam
+template_list_file_present_column: Bestand gevonden
+template_list_delete_column: Verwijderen
