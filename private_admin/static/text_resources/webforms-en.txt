@@ -3,3 +3,6 @@ webforms_module_title: Forms
 
 # TABS
 webforms_tab_forms: Forms
+
+# WEBFORMS TAB
+webforms_list_panel_title: Forms

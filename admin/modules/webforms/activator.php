@@ -2,7 +2,8 @@
     defined('_ACCESS') or die;
     
     require_once CMS_ROOT . "view/views/module_visual.php";
-    require_once CMS_ROOT . "modules/forms/webform_request_handler.php";
+    require_once CMS_ROOT . "modules/webforms/webform_request_handler.php";
+    require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_tab.php";
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "view/views/tab_menu.php";
 
@@ -13,6 +14,7 @@
         private WebFormDao $_webform_dao;
         private WebFormRequestHandler $_webform_request_handler;
         private Module $_webform_module;
+        private int $_current_tab_id = 0;
         
         public function __construct(Module $form_module) {
             parent::__construct($form_module);
@@ -26,6 +28,11 @@
         }
         
         public function load(): void {
+            $content = null;
+            if ($this->_current_tab_id == self::$FORMS_TAB) {
+                $content = new WebFormTab($this->_webform_request_handler);
+            }
+            $this->assign("content", $content->render());
         }
     
         public function getActionButtons(): array {

@@ -3,7 +3,7 @@
 
     require_once CMS_ROOT . "core/model/webform.php";
 
-    class FormList extends Panel {
+    class WebFormList extends Panel {
 
         private ?WebForm $_current_webform;
         private WebFormDao $_webform_dao;
@@ -21,6 +21,15 @@
         }
 
         public function loadPanelContent(Smarty_Internal_Data $data): void {
+            $webforms = $this->_webform_dao->getAllWebForms();
+            $webforms_data = array();
+            foreach ($webforms as $webform) {
+                $webform_data = array();
+                $webform_data["id"] = $webform->getId();
+                $webform_data["title"] = $webform->getTitle();
+                $webforms_data[] = $webform_data;
+            }
+            $data->assign("webforms", $webforms_data);
         }
 
     }

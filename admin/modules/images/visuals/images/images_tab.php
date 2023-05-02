@@ -8,8 +8,8 @@
     
     class ImagesTab extends Visual {
     
-        private $_current_image;
-        private $_images_pre_handler;
+        private ?Image $_current_image;
+        private ImageRequestHandler $_images_pre_handler;
     
         public function __construct($images_pre_handler) {
             parent::__construct();

@@ -29,4 +29,14 @@
             }
             return null;
         }
+
+        public function getAllWebForms(): array {
+            $webforms = array();
+            $query = "SELECT " . self::$myAllColumns . " FROM webforms i";
+            $result = $this->_mysql_connector->executeQuery($query);
+            while ($row = $result->fetch_assoc()) {
+                $webforms[] = WebForm::constructFromRecord($row);
+            }
+            return $webforms;
+        }
     }
