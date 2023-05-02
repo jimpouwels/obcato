@@ -70,6 +70,10 @@
             return $this->getTextResource($this->_template_module->getTitleTextResourceIdentifier());
         }
 
+        public function getTabMenu(): ?TabMenu {
+            return null;
+        }
+
         private function getScopeSelector(): string {
             $scope_selector = new ScopeSelector();
             return $scope_selector->render();

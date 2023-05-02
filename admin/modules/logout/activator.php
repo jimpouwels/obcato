@@ -38,6 +38,10 @@
         
         public function onRequestHandled(): void {
         }
+
+        public function getTabMenu(): ?TabMenu {
+            return null;
+        }
     
     }
     

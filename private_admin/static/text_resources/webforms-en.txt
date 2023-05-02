@@ -1,0 +1,5 @@
+# GENERAL
+webforms_module_title: Forms
+
+# TABS
+webforms_tab_forms: Forms

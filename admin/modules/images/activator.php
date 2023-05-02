@@ -39,7 +39,6 @@
         }
         
         public function load(): void {
-            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->_current_tab_id == self::$IMAGES_TAB) {
                 $content = new ImagesTab($this->_images_request_handler);
@@ -96,12 +95,12 @@
         public function onRequestHandled(): void {
         }
         
-        private function renderTabMenu(): string {
+        public function getTabMenu(): ?TabMenu {
             $tab_menu = new TabMenu();
             $tab_menu->addItem("images_tab_images", self::$IMAGES_TAB, true);
             $tab_menu->addItem("images_tab_labels", self::$LABELS_TAB, true);
             $tab_menu->addItem("images_tab_import", self::$IMPORT_TAB, true);
-            return $tab_menu->render();
+            return $tab_menu;
         }
     
     }

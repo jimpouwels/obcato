@@ -17,6 +17,8 @@
         abstract function getActionButtons(): array;
         
         abstract function renderHeadIncludes(): string;
+
+        abstract function getTabMenu(): ?TabMenu;
         
         abstract function getRequestHandlers(): array;
         

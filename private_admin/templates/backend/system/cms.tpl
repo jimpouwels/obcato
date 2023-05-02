@@ -44,6 +44,7 @@
 				</h1>
 			</div>
 			<div id="content-pane-wrapper">
+				{$tab_menu}
 				{$content_pane}
 			</div>
 		</div>

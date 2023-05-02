@@ -1,0 +1,5 @@
+# GENERAL
+webforms_module_title: Formulieren
+
+# TABS
+webforms_tab_forms: Formulieren

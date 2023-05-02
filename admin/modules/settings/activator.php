@@ -55,6 +55,10 @@
         public function onRequestHandled(): void {
         }
 
+        public function getTabMenu(): ?TabMenu {
+            return null;
+        }
+
         private function renderGlobalSettingsPanel(): string {
             $global_settings_panel = new GlobalSettingsPanel($this->_settings);
             return $global_settings_panel->render();

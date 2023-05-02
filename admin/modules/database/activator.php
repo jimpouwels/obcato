@@ -28,7 +28,6 @@
         }
 
         public function load(): void {
-            $this->assign("tab_menu", $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
                 $content = new Configuration();
             } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
@@ -57,12 +56,12 @@
         public function onRequestHandled(): void {
         }
 
-        private function renderTabMenu(): string {
+        public function getTabMenu(): ?TabMenu {
             $tab_menu = new TabMenu();
             $tab_menu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB, true);
             $tab_menu->addItem("database_tab_menu_tabels", self::$TABLES_TAB);
             $tab_menu->addItem("database_tab_menu_query", self::$QUERY_TAB);
-            return $tab_menu->render();
+            return $tab_menu;
         }
 
     }

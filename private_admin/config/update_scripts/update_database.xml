@@ -98,6 +98,7 @@
             <query>UPDATE scopes SET identifier = 'guestbook_element' WHERE id = 10</query>
             <query>UPDATE scopes SET identifier = 'photo_album_element' WHERE id = 11</query>
             <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
+            <query>INSERT INTO modules VALUES (13, 'webforms_module_title', '/img/webforms.png', 2, 0, 'webforms', 1, 1, 'WebFormsModuleVisual')</query>
         </queries>
     </version>
 </versions>

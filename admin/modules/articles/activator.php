@@ -39,7 +39,6 @@
         }
 
         public function load(): void {
-            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
                 $content = new ArticleTab($this->_article_request_handler);
@@ -112,12 +111,12 @@
             $this->_current_term = $this->_term_request_handler->getCurrentTerm();
         }
 
-        private function renderTabMenu(): string {
+        public function getTabMenu(): ?TabMenu {
             $tab_menu = new TabMenu();
             $tab_menu->addItem("articles_tab_articles", self::$ARTICLES_TAB, true);
             $tab_menu->addItem("articles_tab_terms", self::$TERMS_TAB);
             $tab_menu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
-            return $tab_menu->render();
+            return $tab_menu;
         }
 
     }

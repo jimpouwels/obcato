@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/information_message.php";
-
     class ImageList extends Panel {
 
         private ?Image $_current_image;

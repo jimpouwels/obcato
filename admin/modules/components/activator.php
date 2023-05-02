@@ -29,7 +29,6 @@
         }
 
         public function load(): void {
-            $this->assign('tab_menu', $this->renderTabMenu());
             if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
                 $content = new ComponentsTabVisual($this->_component_request_handler);
             } else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB) {
@@ -54,7 +53,7 @@
         public function onRequestHandled(): void {
         }
 
-        public function getActionButtons() {
+        public function getActionButtons(): array {
             $action_buttons = array();
             if ($this->getCurrentTabId() ==  self::$INSTALLATION_TAB)
                 $action_buttons[] = new ActionButtonSave('upload_component');
@@ -63,7 +62,7 @@
             return $action_buttons;
         }
 
-        private function isCurrentComponentUninstallable() {
+        private function isCurrentComponentUninstallable(): bool {
             $current_module = $this->_component_request_handler->getCurrentModule();
             if ($current_module && !$current_module->isSystemDefault())
                 return true;
@@ -73,10 +72,10 @@
             return false;
         }
 
-        private function renderTabMenu() {
+        private function getTabMenu(): ?TabMenu {
             $tab_menu = new TabMenu();
             $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB, true);
             $tab_menu->addItem("Installeren", self::$INSTALLATION_TAB);
-            return $tab_menu->render();
+            return $tab_menu;
         }
     }

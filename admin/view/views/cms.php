@@ -50,6 +50,7 @@
             $this->assignGlobal("current_user_indicator", $current_user_indicator->render());
             $this->assignGlobal("notification_bar", $notification_bar->render());
             $this->assignGlobal("content_pane", $this->renderContentPane());
+            $this->assignGlobal("tab_menu", $this->renderTabMenu());
             $this->assignGlobal("system_version", SYSTEM_VERSION);
             $this->assignGlobal("db_version", DB_VERSION);
         }
@@ -68,6 +69,15 @@
             } else {
                 return $this->getTemplateEngine()->fetch("system/home_wrapper.tpl");
             }
+        }
+
+        private function renderTabMenu(): string {
+            if (!is_null($this->_module_visual)) {
+                $tab_menu = $this->_module_visual->getTabMenu();
+                return $tab_menu ? $tab_menu->render() : "";
+
+            }
+            return "";
         }
 
     }

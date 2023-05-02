@@ -35,7 +35,6 @@
         }
     
         public function load(): void {
-            $this->assign("tab_menu", $this->renderTabMenu());
             $content = null;
             if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
                 $content = new BlockTab($this->_current_block);
@@ -91,11 +90,11 @@
             $this->_current_position = $this->_position_request_handler->getCurrentPosition();
         }
         
-        private function renderTabMenu(): string {
+        public function getTabMenu(): ?TabMenu {
             $tab_menu = new TabMenu();
             $tab_menu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB, true);
             $tab_menu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
-            return $tab_menu->render();
+            return $tab_menu;
         }
     
     }

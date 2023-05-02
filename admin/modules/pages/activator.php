@@ -73,6 +73,10 @@
             $this->_current_page = $this->_page_request_handler->getCurrentPage();
         }
 
+        public function getTabMenu(): ?TabMenu {
+            return null;
+        }
+
         private function currentPageIsHomepage() {
             return !is_null($this->_current_page) && $this->_current_page->getId() == 1;
         }

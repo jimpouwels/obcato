@@ -1,2 +1,1 @@
-{$tab_menu}
 {$content}

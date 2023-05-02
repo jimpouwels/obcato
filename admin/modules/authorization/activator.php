@@ -53,6 +53,10 @@
         public function onRequestHandled(): void {
             $this->_current_user = $this->_authorization_request_handler->getCurrentUser();
         }
+
+        public function getTabMenu(): ?TabMenu {
+            return null;
+        }
     
     }
     
