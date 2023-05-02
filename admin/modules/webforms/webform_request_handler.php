@@ -7,7 +7,7 @@
     
     class WebFormRequestHandler extends HttpRequestHandler {
 
-        private static string $FORM_QUERYSTRING_KEY = "webform";
+        private static string $FORM_QUERYSTRING_KEY = "webform_id";
 
         private static string $FORM_ID_POST_KEY = "webform_id";
         private WebFormDao $_webform_dao;
@@ -28,7 +28,7 @@
             }
         }
         
-        public function getCurrentWebForm(): ?Form {
+        public function getCurrentWebForm(): ?WebForm {
             return $this->_current_webform;
         }
         
@@ -41,7 +41,7 @@
             return $webform;
         }
         
-        private function getFormFromGetRequest(): ?Form {
+        private function getFormFromGetRequest(): ?WebForm {
             $current_form = null;
             if (isset($_GET[self::$FORM_QUERYSTRING_KEY]) && $_GET[self::$FORM_QUERYSTRING_KEY] != "") {
                 $current_form = $this->_webform_dao->getWebForm($_GET[self::$FORM_QUERYSTRING_KEY]);

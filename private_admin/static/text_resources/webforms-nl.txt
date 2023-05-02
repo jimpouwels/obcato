@@ -8,3 +8,4 @@ webforms_tab_forms: Formulieren
 webforms_list_panel_title: Formulieren
 webforms_new_webform_title: Nieuw formulier
 webforms_new_webform_create_message: Nieuw formulier aangemaakt
+webforms_editor_panel_title: Bewerk formulier
