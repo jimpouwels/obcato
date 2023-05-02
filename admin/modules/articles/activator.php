@@ -112,8 +112,8 @@
         }
 
         public function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("articles_tab_articles", self::$ARTICLES_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("articles_tab_articles", self::$ARTICLES_TAB);
             $tab_menu->addItem("articles_tab_terms", self::$TERMS_TAB);
             $tab_menu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
             return $tab_menu;

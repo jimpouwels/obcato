@@ -4,10 +4,11 @@
     class TabMenu extends Visual {
     
         private array $_tab_items = array();
-        private int $_current_tab = 0;
+        private int $_current_tab_id = 0;
     
-        public function __construct() {
+        public function __construct($current_tab_id) {
             parent::__construct();
+            $this->_current_tab_id = $current_tab_id;
         }
 
         public function getTemplateFilename(): string {
@@ -16,16 +17,13 @@
     
         public function load(): void {
             $this->assign("tab_items", $this->_tab_items);
-            $this->assign("current_tab", $this->_current_tab);
+            $this->assign("current_tab", $this->_current_tab_id);
         }
 
-        public function addItem(string $text_resource_identifier, int $id, bool $is_current = false): void {
+        public function addItem(string $text_resource_identifier, int $id): void {
             $tab_item = array();
             $tab_item["text_resource_identifier"] = $text_resource_identifier;
             $tab_item["id"] = $id;
-            if ($is_current) {
-                $this->_current_tab = $id;
-            }
             $this->_tab_items[] = $tab_item;
         }
     }

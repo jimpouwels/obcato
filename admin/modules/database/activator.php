@@ -57,8 +57,8 @@
         }
 
         public function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB);
             $tab_menu->addItem("database_tab_menu_tabels", self::$TABLES_TAB);
             $tab_menu->addItem("database_tab_menu_query", self::$QUERY_TAB);
             return $tab_menu;

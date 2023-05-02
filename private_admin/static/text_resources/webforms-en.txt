@@ -6,3 +6,5 @@ webforms_tab_forms: Forms
 
 # WEBFORMS TAB
 webforms_list_panel_title: Forms
+webforms_new_webform_title: New webform
+webforms_new_webform_create_message: New webform created

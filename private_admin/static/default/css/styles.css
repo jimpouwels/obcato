@@ -773,3 +773,13 @@ h1 {
 .displaynone {
     display: none;
 }
+
+/** LIST STYLES **/
+.content_left_column ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.content_left_column li {
+    line-height: 20px;
+}

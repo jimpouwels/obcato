@@ -91,8 +91,8 @@
         }
         
         public function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB);
             $tab_menu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
             return $tab_menu;
         }

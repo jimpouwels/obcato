@@ -39,4 +39,11 @@
             }
             return $webforms;
         }
+
+        public function persistWebForm($webform): void {
+            $query = "INSERT INTO webforms (title) "
+                     . "VALUES ('" . $webform->getTitle() . "')";
+            $this->_mysql_connector->executeQuery($query);
+            $webform->setId($this->_mysql_connector->getInsertId());
+        }
     }

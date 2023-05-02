@@ -9,7 +9,6 @@
 
     class WebFormsModuleVisual extends ModuleVisual {
     
-        private static string $HEAD_INCLUDES_TEMPLATE = "images/head_includes.tpl";
         private static int $FORMS_TAB = 0;
         private WebFormDao $_webform_dao;
         private WebFormRequestHandler $_webform_request_handler;
@@ -53,7 +52,7 @@
         
         public function renderHeadIncludes(): string {
             $this->getTemplateEngine()->assign("path", $this->_webform_module->getIdentifier());
-            return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+            return $this->getTemplateEngine()->fetch("modules/webforms/head_includes.tpl");
         }
         
         public function getRequestHandlers(): array {
@@ -66,8 +65,8 @@
         }
         
         public function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("webforms_tab_forms", self::$FORMS_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("webforms_tab_forms", self::$FORMS_TAB);
             return $tab_menu;
         }
     

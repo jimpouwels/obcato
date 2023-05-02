@@ -188,15 +188,19 @@
         }
 
         private function isToggleImagePublishedAction(): bool {
-            return isset($_POST["action"]) && $_POST["action"] == "toggle_image_published";
+            return $this->isAction("toggle_image_published");
         }
         
         private function isDeleteImageAction(): bool {
-            return isset($_POST['action']) && $_POST["action"] == "delete_image" && isset($_POST["image_id"]);
+            return $this->isAction("delete_image") && isset($_POST["image_id"]);
         }
         
         private function isUpdateImageAction(): bool {
-            return isset($_POST['action']) && $_POST["action"] == "update_image" && isset($_POST["image_id"]);
+            return $this->isAction("update_image") && isset($_POST["image_id"]);
+        }
+        
+        private function isAction(string $name): bool {
+            return isset($_POST['action']) && $_POST["action"] == $name && isset($_POST["image_id"]);
         }
         
         private function getQueryStringValueFromGetRequest($query_string_key): ?string {

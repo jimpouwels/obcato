@@ -23,15 +23,9 @@
         
         public function handlePost(): void {
             $this->_current_webform = $this->getFormFromPostRequest();
-            // if ($this->isUpdateImageAction()) {
-            //     $this->updateImage();
-            // } else if ($this->isDeleteImageAction()) {
-            //     $this->deleteImage();
-            // } else if ($this->isAddImageAction()) {
-            //     $this->addImage();
-            // } else if ($this->isToggleImagePublishedAction()) {
-            //     $this->toggleImagePublished();
-            // }
+            if ($this->isAddWebFormAction()) {
+                $this->addWebForm();
+            }
         }
         
         public function getCurrentWebForm(): ?Form {
@@ -61,6 +55,18 @@
                 $form_id = $_POST[self::$FORM_ID_POST_KEY];
             }
             return $form_id;
+        }
+
+        private function isAddWebFormAction(): bool {
+            return isset($_POST["add_webform_action"]) && $_POST["add_webform_action"] == "add_webform";
+        }
+
+        private function addWebForm(): void {
+            $webform = new WebForm();
+            $webform->setTitle($this->getTextResource("webforms_new_webform_title"));
+            $this->_webform_dao->persistWebForm($webform);
+            $this->sendSuccessMessage($this->getTextResource("webforms_new_webform_create_message"));
+            $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $webform->getId());
         }
         
     }

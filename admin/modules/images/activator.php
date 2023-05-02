@@ -96,10 +96,10 @@
         }
         
         public function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("images_tab_images", self::$IMAGES_TAB, true);
-            $tab_menu->addItem("images_tab_labels", self::$LABELS_TAB, true);
-            $tab_menu->addItem("images_tab_import", self::$IMPORT_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("images_tab_images", self::$IMAGES_TAB);
+            $tab_menu->addItem("images_tab_labels", self::$LABELS_TAB);
+            $tab_menu->addItem("images_tab_import", self::$IMPORT_TAB);
             return $tab_menu;
         }
     

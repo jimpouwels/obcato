@@ -73,8 +73,8 @@
         }
 
         private function getTabMenu(): ?TabMenu {
-            $tab_menu = new TabMenu();
-            $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB, true);
+            $tab_menu = new TabMenu($this->getCurrentTabId());
+            $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB);
             $tab_menu->addItem("Installeren", self::$INSTALLATION_TAB);
             return $tab_menu;
         }

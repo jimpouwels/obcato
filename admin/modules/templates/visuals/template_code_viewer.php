@@ -9,7 +9,7 @@
         private Template $_template;
 
         public function __construct(Template $template) {
-            parent::__construct('Markup', 'template_content_fieldset');
+            parent::__construct('Markup', 'template_content_panel');
             $this->_template = $template;
         }
 

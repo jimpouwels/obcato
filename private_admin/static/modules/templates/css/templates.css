@@ -28,36 +28,26 @@
     float: left;
 }
 
-.template_editor_fieldset {
+.template_editor_panel {
     float: left;
     margin-left: 50px;
 }
 
-.template_content_fieldset {
+.template_content_panel {
     margin-left: 50px;
     font-size: 1.2em;
     clear: both;
 }
 
-.template_content_fieldset .markup {
+.template_content_panel .markup {
     margin: 10px;
     color: gray;
 }
 
 /* TEMPLATE SELECTOR */
-.scope_selector_fieldset {
+.scope_selector_panel {
     float: left;
     width: 255px;
-}
-
-.scope_selector_fieldset ul {
-    padding: 0px;
-    margin-left: 10px;
-}
-
-.scope_selector_fieldset li {
-    list-style-type: none;
-    line-height: 20px;
 }
 
 /* TEMPLATE LIST */
