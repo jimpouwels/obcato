@@ -36,7 +36,19 @@
         }
     
         public function getActionButtons(): array {
-            return array();
+            $action_buttons = array();
+            if ($this->_current_tab_id == self::$FORMS_TAB) {
+                $save_button = null;
+                $delete_button = null;
+                if (!is_null($this->_webform_request_handler->getCurrentWebForm())) {
+                    $save_button = new ActionButtonSave('update_webform');
+                    $delete_button = new ActionButtonDelete('delete_webform');
+                }
+                $action_buttons[] = $save_button;
+                $action_buttons[] = new ActionButtonAdd('add_webform');
+                $action_buttons[] = $delete_button;                
+            }
+            return $action_buttons;
         }
         
         public function renderHeadIncludes(): string {
