@@ -36,8 +36,12 @@
             }
         }
 
-        public function createChildData(): Smarty_Internal_Data {
-            return $this->_smarty->createData($this->_smarty);
+        public function createChildData(?Smarty_Internal_Data $parent_data = null): Smarty_Internal_Data {
+            $parent_template = $this->_smarty;
+            if ($parent_data) {
+                $parent_template = $parent_data;
+            }
+            return $this->_smarty->createData($parent_template);
         }
 
         public function display(string $template): void {

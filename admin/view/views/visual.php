@@ -7,11 +7,16 @@
     abstract class Visual {
         
         private TemplateEngine $_template_engine;
-        private Smarty_Internal_Data $_template_data;
+        private Smarty_Internal_Data $_template_data;  
+        private ?Smarty_Internal_Data $_parent_template_data;
 
-        public function __construct() {
+        public function __construct(?Visual $parent = null) {
             $this->_template_engine = TemplateEngine::getInstance();
-            $this->_template_data = $this->_template_engine->createChildData();
+            $this->_parent_template_data = null;
+            if ($parent) {
+                $this->_parent_template_data = $parent->_template_data;
+            }
+            $this->_template_data = $this->_template_engine->createChildData($this->_parent_template_data);
         }
 
         public function render(): string {
@@ -25,6 +30,10 @@
 
         protected function getTemplateEngine(): TemplateEngine {
             return $this->_template_engine;
+        }
+
+        protected function getParentTemplateData(): ?Smarty_Internal_Data {
+            return $this->_parent_template_data;
         }
 
         protected function assign(string $key, mixed $value) {

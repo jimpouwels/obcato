@@ -23,6 +23,7 @@
         public function load(): void {
             $this->assign("list", $this->renderWebFormsList());
             if ($this->_current_webform) {
+                $this->assign("id", $this->_current_webform->getId());
                 $this->assign("metadata_editor", $this->renderMetadataEditor());
                 $this->assign("webform_editor", $this->renderWebFormEditor());
             }
@@ -34,7 +35,7 @@
         }
 
         private function renderMetadataEditor(): string {
-            $metadata_editor = new WebFormMetadataEditor($this->_current_webform);
+            $metadata_editor = new WebFormMetadataEditor($this->_current_webform, $this);
             return $metadata_editor->render();
         }
 

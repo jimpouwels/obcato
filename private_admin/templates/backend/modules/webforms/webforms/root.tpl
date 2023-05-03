@@ -3,8 +3,10 @@
 </div>
 {if isset($metadata_editor)}
 	<div class="content_right_column">
-		{$metadata_editor}
-		{$webform_editor}
+		<form action="{$backend_base_url}&image={$id}" method="post" id="webform-editor-form" enctype="multipart/form-data">
+			{$metadata_editor}
+			{$webform_editor}
+		</form>
 	</div>
 {/if}
 
