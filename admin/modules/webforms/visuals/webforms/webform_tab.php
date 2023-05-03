@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_list.php";
+    require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_metadata_editor.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_editor.php";
     
     class WebFormTab extends Visual {
@@ -22,7 +23,8 @@
         public function load(): void {
             $this->assign("list", $this->renderWebFormsList());
             if ($this->_current_webform) {
-                $this->assign("editor", $this->renderEditor());
+                $this->assign("metadata_editor", $this->renderMetadataEditor());
+                $this->assign("webform_editor", $this->renderWebFormEditor());
             }
         }
         
@@ -31,12 +33,15 @@
             return $webform_list->render();
         }
 
-        private function renderEditor() {
+        private function renderMetadataEditor(): string {
+            $metadata_editor = new WebFormMetadataEditor($this->_current_webform);
+            return $metadata_editor->render();
+        }
+
+        private function renderWebFormEditor(): string {
             $webform_editor = new WebFormEditor($this->_current_webform);
             return $webform_editor->render();
         }
-        
-    
     }
     
 ?>

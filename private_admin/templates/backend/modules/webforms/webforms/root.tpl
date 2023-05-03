@@ -1,9 +1,10 @@
 <div class="content_left_column">
 	{$list}
 </div>
-{if isset($editor)}
+{if isset($metadata_editor)}
 	<div class="content_right_column">
-		{$editor}
+		{$metadata_editor}
+		{$webform_editor}
 	</div>
 {/if}
 
