@@ -2,7 +2,7 @@
 
     defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "core/form/webform.php";
+    require_once CMS_ROOT . "core/form/form.php";
 
     class WebFormForm extends Form {
 
@@ -13,9 +13,11 @@
         }
 
         public function loadFields(): void {
-            $this->_webform->setTitle($this->getMandatoryFieldValue("webform_title", "Titel is verplicht"));
+            $title = $this->getMandatoryFieldValue("title", "webforms_editor_title_error_message");
             if ($this->hasErrors()) {
                 throw new FormException();
+            } else {
+                $this->_webform->setTitle($title);
             }
         }
 

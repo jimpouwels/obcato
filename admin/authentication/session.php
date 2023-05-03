@@ -30,11 +30,15 @@
             return isset($_SESSION['text_resources']);
         }
 
-        public static function addFieldError(string $field_name, string $error_message): void {
+        public static function addFieldError(string $field_name, string $error_message_resource_identifier): void {
             if (!isset($_SESSION['errors'])) {
                 $_SESSION['errors'] = array();
             }
             if (!self::hasError($field_name)) {
+                $error_message = self::getTextResource($error_message_resource_identifier);
+                if (!$error_message) {
+                    $error_message = $error_message_resource_identifier;
+                }
                 $_SESSION['errors'][$field_name . '_error'] = $error_message;
             }
         }

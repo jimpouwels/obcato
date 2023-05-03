@@ -3,7 +3,7 @@
     
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-    require_once CMS_ROOT . "modules/forms/form_form.php";
+    require_once CMS_ROOT . "modules/webforms/webform_form.php";
     
     class WebFormRequestHandler extends HttpRequestHandler {
 
@@ -25,6 +25,8 @@
             $this->_current_webform = $this->getFormFromPostRequest();
             if ($this->isAddWebFormAction()) {
                 $this->addWebForm();
+            } else if ($this->isAction("update_webform")) {
+                $this->updateWebForm($this->_current_webform);
             }
         }
         
@@ -61,12 +63,25 @@
             return isset($_POST["add_webform_action"]) && $_POST["add_webform_action"] == "add_webform";
         }
 
+        private function isAction($name): bool {
+            return isset($_POST["action"]) && $_POST["action"] == $name;
+        }
+
         private function addWebForm(): void {
             $webform = new WebForm();
             $webform->setTitle($this->getTextResource("webforms_new_webform_title"));
             $this->_webform_dao->persistWebForm($webform);
             $this->sendSuccessMessage($this->getTextResource("webforms_new_webform_create_message"));
             $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $webform->getId());
+        }
+
+        private function updateWebForm($webform): void {
+            $form = new WebFormForm($webform);
+            try {
+                $form->loadFields();
+            } catch (FormException $e) {
+                $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));
+            }
         }
         
     }
