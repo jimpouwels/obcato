@@ -100,6 +100,8 @@
             <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
             <query>INSERT INTO modules VALUES (13, 'webforms_module_title', '/img/webforms.png', 2, 0, 'webforms', 1, 1, 'WebFormsModuleVisual')</query>
             <query>CREATE TABLE webforms (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, PRIMARY KEY (id))</query>
-        </queries>
+            <query>CREATE TABLE webforms_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, label varchar(255) DEFAULT NULL, mandatory tinyint(1) DEFAULT 0, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id),CONSTRAINT webforms_fields_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</queries>
+            <query>ALTER TABLE webforms_fields ADD COLUMN type VARCHAR(45) NOT NULL</queries>
+            <query>ALTER TABLE webforms_fields ADD COLUMN name VARCHAR(255) NOT NULL</queries>
     </version>
 </versions>

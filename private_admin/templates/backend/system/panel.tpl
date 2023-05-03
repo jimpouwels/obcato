@@ -8,5 +8,7 @@
 			{/if}
 		</p>
 	</div>
-	{$content}
+	<div class="panel-content">
+		{$content}
+	</div>
 </div>

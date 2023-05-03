@@ -13,3 +13,8 @@ $(document).ready(function() {
 		$('#webform-editor-form').submit();
 	});
 });
+
+function addFormField(webform_id, type) {
+	$('#action').attr('value', 'add_textfield');
+	$('#webform-editor-form').submit();
+}

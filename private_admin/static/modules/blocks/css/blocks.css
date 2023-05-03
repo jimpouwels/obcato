@@ -4,10 +4,6 @@
     overflow-x: scroll;
 }
 
-.block_list .position_label {
-    margin-left: 10px;
-}
-
 .block_list a {
     text-decoration: none;
 }
@@ -17,11 +13,11 @@
 }
 
 .block_list ul {
-    padding-left: 25px;
+    padding-left: 15px;
 }
 
-.block_list ul li{
-    margin-left: 20px;
+.block_list ul li {
+    margin-left: 15px;
     list-style-type: none;
 }
 

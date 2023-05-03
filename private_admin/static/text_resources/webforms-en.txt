@@ -13,3 +13,4 @@ webforms_new_webform_create_message: New webform created
 webforms_metdata_editor_panel_title: Edit form
 webforms_webform_editor_panel_title: Form content
 webforms_editor_title_field: Title
+webforms_add_textfield_button_label: Textfield

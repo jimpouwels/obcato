@@ -23,9 +23,6 @@ body a:hover {
 /*
 =========== MAIN STYLES
 */
-html {
-}
-
 body {
     overflow-y: hidden;
     font-size: 68.8%;
@@ -125,12 +122,12 @@ body {
     border-bottom: 1px dotted lightgray;
 }
 
-.panel .admin_form {
-    padding-left: 0px;
+.panel-content {
+    margin: 15px;
 }
 
 .panel .admin_form {
-    padding-left: 15px;
+    padding-left: 0px;
 }
 
 .content_left_column {
@@ -421,7 +418,7 @@ h1 {
     cursor: move;
     border: 1px solid #d3d3d3;
     padding: 10px;
-    margin: 20px;
+    margin-bottom: 10px;
     box-shadow: 5px 5px 5px #888888;
     background-color: #ffffff;
 }
@@ -603,10 +600,6 @@ h1 {
     height: 100%;
 }
 
-.link-table {
-    margin-left: 10px;
-}
-
 .link-table, .link-table thead th {
     text-align: left;
 }
@@ -664,7 +657,6 @@ h1 {
 =========== GLOBAL LISTING STYLES
 */
 .listing {
-    margin: 10px 10px 10px 10px;
     text-align: left;
 }
 
@@ -749,7 +741,6 @@ h1 {
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin: 10px;
     height: 30px;
 }
 

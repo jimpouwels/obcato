@@ -1,0 +1,9 @@
+.webforms_editor_add_buttons {
+    overflow-y: auto;
+}
+
+.webforms_editor_form_fields {
+    clear: both;
+    margin-top: 15px;
+    overflow-y: auto;
+}

@@ -4,6 +4,7 @@
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/webforms/webform_form.php";
+    require_once CMS_ROOT . "core/model/webform_textfield.php";
     
     class WebFormRequestHandler extends HttpRequestHandler {
 
@@ -26,6 +27,9 @@
             if ($this->isAddWebFormAction()) {
                 $this->addWebForm();
             } else if ($this->isAction("update_webform")) {
+                $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_textfield")) {
+                $this->addTextField($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
             }
         }
@@ -72,7 +76,7 @@
             $webform->setTitle($this->getTextResource("webforms_new_webform_title"));
             $this->_webform_dao->persistWebForm($webform);
             $this->sendSuccessMessage($this->getTextResource("webforms_new_webform_create_message"));
-            $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $webform->getId());
+            $this->redirectTo($this->getBackendBaseUrl() . "&" . self::$FORM_QUERYSTRING_KEY . "=" . $webform->getId());
         }
 
         private function updateWebForm($webform): void {
@@ -84,6 +88,11 @@
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));
             }
+        }
+
+        private function addTextField($webform): void {
+            $text_field = new WebFormTextField($this->getTextResource("webforms_new_textfield_label"), "textfield", false);
+            $this->_webform_dao->persistWebFormField($webform, $text_field);
         }
         
     }

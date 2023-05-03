@@ -1,28 +1,25 @@
 /* PAGE TREE */
 .page_tree {
-    width: 300px;
     overflow-x: scroll;
-    border: 0px;
-    padding-left: 8px;
+    padding-left: 10px;
 }
 
-.page_tree_fieldset {
-    width: 315px;
-    float: left;
+.page_tree ul li {
+    list-style-type: none;
+    margin-top: 5px;
+}
+
+.page_tree_link {
+    text-decoration: none;
+}
+
+.page_tree_link:hover {
+    text-decoration: underline;
 }
 
 .page_blocks {
     margin-left: 350px;;
     height: 100%;
-}
-
-.page_tree ul {
-    padding-left: 25px;
-}
-
-.page_tree  ul  li{
-    list-style-type: none;
-    margin-top: 5px;
 }
 
 .published {
@@ -35,14 +32,6 @@
     font-style: italic;
 }
 
-.page_tree_link {
-    text-decoration: none;
-}
-
-.page_tree_link:hover {
-    text-decoration: underline;
-}
-
 .not_in_navigation {
     color: gray;
 }
@@ -52,8 +41,6 @@
 }
 
 .block-selector {
-    margin-left: 10px;
-    margin-top: 10px;
     float: left;
     width: 150px;
 }

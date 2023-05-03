@@ -36,6 +36,10 @@
     list-style-type: none;
 }
 
+.queries_form_wrapper .admin_field_text_area {
+    width: 100%;
+}
+
 .button {
     margin-top: 5px;
     float: right;
@@ -47,5 +51,4 @@
 
 .configuration_panel .db_property {
     font-weight: bold;
-    padding-left: 5px;
 }

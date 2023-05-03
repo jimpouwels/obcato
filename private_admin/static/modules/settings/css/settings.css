@@ -2,19 +2,12 @@
     list-style: none outside none;
 }
 
-.admin_form {
-    padding: 0px;
-    margin: 10px;
-}
-
 .admin_label {
     min-width: 175px;
     float: left;
-    padding-top: 12px;
 }
 
 .admin_field {
-    margin-top: 8px;
     width: 450px;
 }
 

@@ -12,7 +12,7 @@
         private Scope $_scope;
 
         public function __construct(Scope $scope) {
-            parent::__construct($this->getTextResource($scope->getIdentifier() . '_scope_label') . ' templates', 'template_list_fieldset');
+            parent::__construct($this->getTextResource($scope->getIdentifier() . '_scope_label') . ' templates', 'template_list_panel');
             $this->_scope = $scope;
             $this->_template_dao = TemplateDao::getInstance();
         }

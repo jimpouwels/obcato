@@ -13,3 +13,4 @@ webforms_new_webform_create_message: Nieuw formulier aangemaakt
 webforms_metdata_editor_panel_title: Bewerk formulier
 webforms_webform_editor_panel_title: Formulierinhoud
 webforms_editor_title_field: Titel
+webforms_add_textfield_button_label: Tekstveld

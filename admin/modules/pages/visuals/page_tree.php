@@ -9,7 +9,7 @@
         private Page $_selected_page;
 
         public function __construct(Page $root_page, Page $selected_page) {
-            parent::__construct($this->getTextResource('page_tree_title'), 'page_tree_fieldset');
+            parent::__construct($this->getTextResource('page_tree_title'), 'page_tree_panel');
             $this->_root_page = $root_page;
             $this->_selected_page = $selected_page;
         }

@@ -4,11 +4,6 @@
     clear: both;
 }
 
-.admin_form {
-    padding: 0px;
-    margin: 10px;
-}
-
 .admin_label {
     min-width: 135px;
     float: left;
@@ -40,7 +35,6 @@
 }
 
 .template_content_panel .markup {
-    margin: 10px;
     color: gray;
 }
 
@@ -51,11 +45,11 @@
 }
 
 /* TEMPLATE LIST */
-.template_list_fieldset {
-    float: left;
-    margin-left: 50px;
-}
 
 .template_listing .last .admin_label {
     display: none;
+}
+
+.scope_selector_panel ul {
+    padding-left: 0px;
 }
