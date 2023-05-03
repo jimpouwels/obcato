@@ -46,4 +46,13 @@
             $this->_mysql_connector->executeQuery($query);
             $webform->setId($this->_mysql_connector->getInsertId());
         }
+
+        public function updateWebForm($webform): void {
+            $query = "UPDATE webforms SET title = ? WHERE id = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $id = $webform->getId();
+            $title = $webform->getTitle();
+            $statement->bind_param("si", $title, $id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
     }

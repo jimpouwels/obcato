@@ -79,6 +79,8 @@
             $form = new WebFormForm($webform);
             try {
                 $form->loadFields();
+                $this->_webform_dao->updateWebForm($this->_current_webform);
+                $this->sendSuccessMessage($this->getTextResource("webforms_update_success_message"));
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));
             }

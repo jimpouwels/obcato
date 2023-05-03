@@ -13,11 +13,9 @@
         }
 
         public function loadFields(): void {
-            $title = $this->getMandatoryFieldValue("title", "webforms_editor_title_error_message");
+            $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
             if ($this->hasErrors()) {
                 throw new FormException();
-            } else {
-                $this->_webform->setTitle($title);
             }
         }
 
