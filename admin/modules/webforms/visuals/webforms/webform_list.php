@@ -27,6 +27,7 @@
                 $webform_data = array();
                 $webform_data["id"] = $webform->getId();
                 $webform_data["title"] = $webform->getTitle();
+                $webform_data["is_selected"] = $webform->getId() == $this->_current_webform->getId();
                 $webforms_data[] = $webform_data;
             }
             $data->assign("webforms", $webforms_data);
