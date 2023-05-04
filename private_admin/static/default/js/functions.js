@@ -52,11 +52,11 @@ $(document).ready(function() {
 		var elementHeader = findElementHeader(rootNode);
 		elementHeader.click(function(e) {
 			/* 
-				currentTarget == the node where the click listener is attached to ('.element_header')
+				currentTarget == the node where the click listener is attached to ('.collapsable_header')
 				target == the node that captured the event and bubbled it up the tree
 				if there was a child element that captured and bubbled the event, don't toggle (unless it's the left part of the header).
 			*/
-			if (e.currentTarget !== e.target && e.target.className !== 'element_header_left') {
+			if (e.currentTarget !== e.target && !e.target.className.includes('collapsable_header_left')) {
   				return;
 			}
 			toggleElement(elementId);
@@ -109,23 +109,23 @@ function isVisible(elementId) {
 }
 
 function getAllElements() {
-	return $('.element_root_wrapper');
+	return $('.collapsable_root_wrapper');
 }
 
 function getElementIdFromElementNode(elementNode) {
-	return elementNode.find('.element_id_holder').text()
+	return elementNode.find('.collapsable_id_holder').text()
 }
 
 function findElementHeader(elementNode) {
-	return elementNode.find('.element_header');
+	return elementNode.find('.collapsable_header');
 }
 
 // initializes sortable elements
 $(document).ready(function() {
 	$(function() {
-		$("#element_container").sortable({ opacity: 0.6, cursor: 'move', update: function() {
+		$(".sortable_items").sortable({ opacity: 0.6, cursor: 'move', update: function() {
 			var idString = '';
-			$('.element_id_holder').each(function() {
+			$('.collapsable_id_holder').each(function() {
 				if (idString != '') {
 					idString += ',';
 				}

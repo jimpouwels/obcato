@@ -27,6 +27,7 @@
             
             $this->assign('id', $this->_webform_field->getId());
             $this->assign('type', $this->_webform_field->getType());
+            $this->assign('index', 0);
             $label_field = new TextField("webform_field_{$this->_webform_field->getId()}_label", "webforms_editor_field_label_label", $this->_webform_field->getLabel(), true, false, null);
             $name_field = new TextField("webform_field_{$this->_webform_field->getId()}_name", "webforms_editor_field_name_label", $this->_webform_field->getName(), true, false, null);
             $this->assign("name_field", $name_field->render());

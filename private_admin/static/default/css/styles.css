@@ -414,7 +414,7 @@ h1 {
 ============ ELEMENT STYLES
 */
 
-.element_wrapper {
+.draggable_wrapper {
     cursor: move;
     border: 1px solid #d3d3d3;
     padding: 10px;
@@ -423,20 +423,20 @@ h1 {
     background-color: #ffffff;
 }
 
-.element_wrapper select {
+.draggable_wrapper select {
     margin-top: 8px;
 }
 
-.element_wrapper .button {
+.draggable_wrapper .button {
     margin-top: 5px;
 }
 
-.element_wrapper .panel {
+.draggable_wrapper .panel {
     width: 100%;
     margin-top: 25px;
 }
 
-.element_header {
+.draggable_header {
     overflow-y: auto;
     width: 100%;
     color: #000000;
@@ -445,60 +445,60 @@ h1 {
     text-align: left;
 }
 
-.element_header .element_header_right {
+.draggable_header .draggable_header_right {
     float: right;
     display: flex;
 }
 
-.element_header .element_header_left {
+.draggable_header .draggable_header_left {
     float: left;
 }
 
-.element_header .template_picker .admin_label {
+.draggable_header .template_picker .admin_label {
     display: none;
 }
 
-.element_header .include_in_table_of_contents {
+.draggable_header .include_in_table_of_contents {
     margin-top: 3px;
 }
 
-.element_header .include_in_table_of_contents .admin_field_checkbox {
+.draggable_header .include_in_table_of_contents .admin_field_checkbox {
     margin-top: 0px;
     margin-right: 10px;
 }
 
-.element_header .include_in_table_of_contents .admin_label {
+.draggable_header .include_in_table_of_contents .admin_label {
     margin-top: 0px;
     min-width: initial;
 }
 
-.element_header .admin_label {
+.draggable_header .admin_label {
     padding-top: 0px;
     font-size: 0.9em;
 }
 
-.element_header .template_picker {
+.draggable_header .template_picker {
     width: 300px;
 }
 
-.element_header select {
+.draggable_header select {
     margin-top: 2px;
     margin-bottom: 2px;
 }
 
-.element_header .element_action_buttons {
+.draggable_header .draggable_action_buttons {
     margin-left: 10px;
 }
 
-.element_header .element_action_buttons a:hover {
+.draggable_header .draggable_action_buttons a:hover {
     text-decoration: none;
 }
 
-.element_wrapper .element_editor_body {
+.draggable_wrapper .element_editor_body {
     width: 100%;
 }
 
-.element_wrapper .element_editor_body .admin_form {
+.draggable_wrapper .element_editor_body .admin_form {
     padding-left: 0px;
 }
 

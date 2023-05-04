@@ -1,11 +1,11 @@
-<div class="element_root_wrapper" id="element_index_{$index}">
-    <span class="element_id_holder displaynone">{$id}</span>
-    <div class="element_wrapper {$identifier}">
-        <div class="element_header">
-            <div class="element_header_left">
+<div class="collapsable_root_wrapper">
+    <span class="collapsable_id_holder displaynone">{$id}</span>
+    <div class="draggable_wrapper {$identifier}">
+        <div class="draggable_header collapsable_header">
+            <div class="collapsable_header_left draggable_header_left">
                 <img src="{$icon_url}" alt="{$type}" />&nbsp;{$type}
             </div>
-            <div class="element_header_right">
+            <div class="draggable_header_right">
                 {if $include_in_table_of_contents}
                     <div class="include_in_table_of_contents">
                         {$include_in_table_of_contents}
@@ -14,7 +14,7 @@
                 <div class="template_picker">
                     {$template_picker}
                 </div>
-                <div class="element_action_buttons">
+                <div class="draggable_action_buttons">
                     <a href="#" onclick="toggleElement('{$id}'); return false;" title="{$text_resources.element_button_label_minimize}">
                         <img src="/admin/static.php?file=/default/img/default_icons/minimize.png" width="16px" height="16px" alt="{$text_resources.element_button_label_minimize}" title="{$text_resources.element_button_label_minimize}" />
                     </a>
