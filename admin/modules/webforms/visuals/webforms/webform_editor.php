@@ -36,15 +36,16 @@
             $form_fields_data = array();
             $form_fields = $this->_webform_dao->getFormFieldsByWebForm($this->_current_webform->getId());
             foreach ($form_fields as $form_field) {
-                $field = null;
+                $form_field_data = null;
                 if ($form_field instanceof WebFormTextField) {
-                    $field = new WebFormTextFieldVisual($form_field);
+                    $form_field_data = new WebFormTextFieldVisual($form_field);
+                    $form_fields_data[] = $form_field_data->render();
                 } else if ($form_field instanceof WebFormTextArea) {
-                    $field = new WebFormTextAreaVisual($form_field);
+                    $form_field_data = new WebFormTextAreaVisual($form_field);
+                    $form_fields_data[] = $form_field_data->render();
                 } else if ($form_field instanceof WebFormDropDown) {
-                    $field = new WebFormDropDown($form_field);
+                    $form_field_data = new WebFormDropDown($form_field);
                 }
-                $form_fields_data[] = $field->render();
             }
             return $form_fields_data;
         }

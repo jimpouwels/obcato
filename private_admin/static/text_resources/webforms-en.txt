@@ -15,3 +15,7 @@ webforms_webform_editor_panel_title: Form content
 webforms_editor_title_field: Title
 webforms_add_textfield_button_label: Textfield
 webforms_add_textarea_button_label: Text area
+webforms_editor_field_name_label: Name
+webforms_editor_field_label_label: Label
+webforms_update_success_message: Webform updated
+webforms_update_error_message: Webform not updated

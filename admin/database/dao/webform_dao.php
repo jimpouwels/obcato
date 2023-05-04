@@ -57,6 +57,9 @@
             $title = $webform->getTitle();
             $statement->bind_param("si", $title, $id);
             $this->_mysql_connector->executeStatement($statement);
+            foreach ($webform->getFormFields() as $form_field) {
+                $this->updateFormField($form_field);
+            }
         }
 
         public function persistWebFormField(WebForm $webform, WebFormField $webform_field): void {
@@ -69,6 +72,16 @@
             $type = $webform_field->getType();
             $scope_id = $webform_field->getScopeId();
             $statement->bind_param("ssiisi", $label, $name, $mandatory, $webform_id, $type, $scope_id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
+        public function updateFormField(WebFormField $webform_field): void {
+            $query = "UPDATE webforms_fields SET `name` = ?, label = ? WHERE id = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $label = $webform_field->getLabel();
+            $name = $webform_field->getName();
+            $webform_field_id = $webform_field->getId();
+            $statement->bind_param("ssi", $name, $label, $webform_field_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 

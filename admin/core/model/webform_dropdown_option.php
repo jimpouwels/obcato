@@ -1,9 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/model/webform_field.php";
-
-    class WebFormDropDownOption extends WebFormField {
+    class WebFormDropDownOption extends Entity {
     
         private string $_text;
         private string $_name;

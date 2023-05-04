@@ -24,8 +24,8 @@
             return $this->_label;
         }
 
-        public function setName(string $label): void {
-            $this->_label = $label;
+        public function setName(string $name): void {
+            $this->_name = $name;
         }
 
         public function getName(): string {

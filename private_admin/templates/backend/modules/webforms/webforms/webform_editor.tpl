@@ -5,6 +5,6 @@
 
 <div class="webforms_editor_form_fields">
     {foreach from=$form_fields item=form_field}
-        {$form_field}<br />
+        {$form_field}
     {/foreach}
 </div>
