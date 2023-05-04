@@ -143,9 +143,7 @@
             $new_block->setTitle('Nieuw block');
             $new_block->setCreatedById(Authenticator::getCurrentUser()->getId());
             $new_block->setType(ELEMENT_HOLDER_BLOCK);
-            
-            $new_block->setScopeId(6);
-            $this->persistBlock($new_block);
+                        $this->persistBlock($new_block);
             return $new_block;
         }
 

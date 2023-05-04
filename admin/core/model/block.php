@@ -6,6 +6,11 @@
     class Block extends ElementHolder {
     
         private int $_position_id;
+        private static int $SCOPE = 5;
+
+        public function __construct() {
+            parent::__construct(self::$SCOPE);
+        }
         
         public function getPositionId(): int {
             return $this->_position_id;

@@ -14,7 +14,7 @@ $(document).ready(function() {
 	});
 });
 
-function addFormField(webform_id, type) {
-	$('#action').attr('value', 'add_textfield');
+function addFormField(type) {
+	$('#action').attr('value', 'add_' + type);
 	$('#webform-editor-form').submit();
 }

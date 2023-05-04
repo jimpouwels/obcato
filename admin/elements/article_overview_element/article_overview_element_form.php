@@ -11,7 +11,7 @@
         private array $_selected_terms;
         private array $_removed_terms;
 
-        public function __construct($article_overview_element) {
+        public function __construct(ArticleOverviewElement $article_overview_element) {
             parent::__construct($article_overview_element);
             $this->_article_overview_element = $article_overview_element;
         }

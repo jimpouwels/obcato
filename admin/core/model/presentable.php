@@ -7,6 +7,10 @@
         
         private ?int $_template_id = null;
         private int $_scope_id;
+
+        public function __construct(int $scope_id) {
+            $this->_scope_id = $scope_id;
+        }
         
         public function getTemplate(): ?Template {
             $dao = TemplateDao::getInstance();

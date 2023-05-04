@@ -16,8 +16,8 @@
         private array $_labels;
         private ?int $_number_of_results = null;
             
-        public function __construct() {
-            parent::__construct(new PhotoAlbumElementMetadataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new PhotoAlbumElementMetadataProvider($this));
             $this->_labels = array();
         }
         

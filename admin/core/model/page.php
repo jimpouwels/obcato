@@ -10,6 +10,7 @@
         const ElementHolderType = "ELEMENT_HOLDER_PAGE";
 
         private static string $TABLE_NAME = "pages";
+        private static int $SCOPE = 5;
         
         private PageDao $_page_dao;
         private string $_description;
@@ -20,8 +21,7 @@
         private bool $_is_homepage;
         
         public function __construct() {
-            parent::__construct();
-            $this->setScopeId(5);
+            parent::__construct(self::$SCOPE);
             $this->_page_dao = PageDao::getInstance();
         }
         

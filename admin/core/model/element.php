@@ -13,7 +13,8 @@
         private bool $_include_in_table_of_contents;
         private ElementMetadataProvider $_metadata_provider;
 
-        public function __construct(ElementMetadataProvider $metadata_provider) {
+        public function __construct(int $scope_id, ElementMetadataProvider $metadata_provider) {
+            parent::__construct($scope_id);
             $this->_metadata_provider = $metadata_provider;
         }
 
@@ -79,7 +80,7 @@
             $element_type = $record['classname'];
 
             // the constructor for each type will initialize specific metadata
-            $element = new $element_type;
+            $element = new $element_type($record["scope_id"]);
 
             $element->setId($record['id']);
             $element->setIndex($record['follow_up']);
@@ -87,7 +88,6 @@
             $element->setIncludeInTableOfContents($record['include_in_table_of_contents'] == 1 ? true : false);
             $element->setElementHolderId($record['element_holder_id']);
 
-            // initialize element specific metadata
             $element->initializeMetaData();
 
             return $element;

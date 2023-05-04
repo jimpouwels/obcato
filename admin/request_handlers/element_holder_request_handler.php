@@ -48,14 +48,16 @@
 
         private function addElement(): void {
             $element_type = $this->getElementTypeToAdd();
-            if (!is_null($element_type))
+            if (!is_null($element_type)) {
                 $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
+            }
         }
 
         private function deleteElement(): void {
             $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
-            if (!is_null($element_to_delete))
+            if (!is_null($element_to_delete)) {
                 $element_to_delete->delete();
+            }
         }
 
         private function getElementTypeToAdd(): ElementType {

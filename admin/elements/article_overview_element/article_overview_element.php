@@ -22,8 +22,8 @@
         private array $_terms;
         private ?int $_number_of_results = null;
             
-        public function __construct() {
-            parent::__construct(new ArticleOverviewElementMetadataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new ArticleOverviewElementMetadataProvider($this));
             $this->_terms = array();
         }
         

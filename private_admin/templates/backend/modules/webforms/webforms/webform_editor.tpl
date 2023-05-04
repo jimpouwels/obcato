@@ -1,5 +1,6 @@
 <div class="webforms_editor_add_buttons">
     {$button_add_textfield}
+    {$button_add_textarea}
 </div>
 
 <div class="webforms_editor_form_fields">

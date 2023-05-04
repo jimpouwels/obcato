@@ -1,15 +1,16 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/model/entity.php";
+    require_once CMS_ROOT . "core/model/presentable.php";
 
-    abstract class WebFormField extends Entity {
+    abstract class WebFormField extends Presentable {
     
         private string $_label;
         private string $_name;
         private bool $_mandatory = false;
 
-        public function __construct($label, $name, $mandatory) {
+        public function __construct(int $scope_id, string $label, string $name, bool $mandatory) {
+            parent::__construct($scope_id);
             $this->_label = $label;
             $this->_name = $name;
             $this->_mandatory = $mandatory;

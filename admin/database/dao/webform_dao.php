@@ -60,14 +60,15 @@
         }
 
         public function persistWebFormField(WebForm $webform, WebFormField $webform_field): void {
-            $query = "INSERT INTO webforms_fields (label, `name`, mandatory, webform_id, `type`) VALUE (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO webforms_fields (label, `name`, mandatory, webform_id, `type`, scope_id) VALUE (?, ?, ?, ?, ?, ?)";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $label = $webform_field->getLabel();
             $name = $webform_field->getName();
             $webform_id = $webform->getId();
             $mandatory = $webform_field->getMandatory() ? 1 : 0;
             $type = $webform_field->getType();
-            $statement->bind_param("ssiis", $label, $name, $mandatory, $webform_id, $type);
+            $scope_id = $webform_field->getScopeId();
+            $statement->bind_param("ssiisi", $label, $name, $mandatory, $webform_id, $type, $scope_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 

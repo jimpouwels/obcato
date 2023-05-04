@@ -16,7 +16,8 @@
         private int $_created_by_id;
         private string $_type;
         
-        public function __construct() {
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id);
             $this->_element_holder_dao = ElementHolderDao::getInstance();
         }
         
@@ -102,7 +103,7 @@
         }
         
         public static function constructFromRecord(array $record): ElementHolder {
-            $element_holder = new ElementHolder();
+            $element_holder = new ElementHolder($record["scope_id"]);
             $element_holder->setId($record['id']);
             $element_holder->setPublished($record['published'] == 1 ? true : false);
             $element_holder->setTitle($record['title']);

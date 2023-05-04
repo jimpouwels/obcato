@@ -12,8 +12,8 @@
 
     class TableOfContentsElement extends Element {
             
-        public function __construct() {
-            parent::__construct(new TableOfContentsElementMetadataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new TableOfContentsElementMetadataProvider($this));
         }
         
         public function getStatics(): Visual {

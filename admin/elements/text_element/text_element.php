@@ -14,8 +14,8 @@
             
         private ?string $_text = null;
             
-        public function __construct() {
-            parent::__construct(new TextElementMetadataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new TextElementMetadataProvider($this));
         }
         
         public function setText(?string $text): void {

@@ -15,12 +15,6 @@
     // AUTHENTICATE
     Authenticator::isAuthenticated();
 
-    // only Developer account may access this section
-    if ($_SESSION['username'] != "jim.pouwels@gmail.com") {
-        header('Location: /admin/login.php');
-        exit();
-    }
-
     $settings_dao = SettingsDao::getInstance();
     $website_settings = $settings_dao->getSettings();
 

@@ -14,3 +14,4 @@ webforms_metdata_editor_panel_title: Bewerk formulier
 webforms_webform_editor_panel_title: Formulierinhoud
 webforms_editor_title_field: Titel
 webforms_add_textfield_button_label: Tekstveld
+webforms_add_textarea_button_label: Tekst area

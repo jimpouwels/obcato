@@ -9,8 +9,9 @@
     include_once CMS_ROOT . "database/dao/image_dao.php";
     
     class Article extends ElementHolder {
-
+        
         const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
+        private static int $SCOPE = 9;
 
         private string $_description;
         private string $_image_id;
@@ -20,9 +21,8 @@
         private PageDao $_page_dao;
         
         public function __construct() {
-            parent::__construct();
+            parent::__construct(self::$SCOPE);
             $this->_page_dao = PageDao::getInstance();
-            $this->setScopeId(9);
             $this->setPublished(false);
         }
         

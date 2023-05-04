@@ -14,8 +14,8 @@
 
         private array $_list_items = array();
             
-        public function __construct() {
-            parent::__construct(new ListElementMetaDataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new ListElementMetaDataProvider($this));
         }
         
         public function getListItems(): array {

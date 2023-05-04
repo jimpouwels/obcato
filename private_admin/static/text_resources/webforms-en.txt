@@ -14,3 +14,4 @@ webforms_metdata_editor_panel_title: Edit form
 webforms_webform_editor_panel_title: Form content
 webforms_editor_title_field: Title
 webforms_add_textfield_button_label: Textfield
+webforms_add_textarea_button_label: Text area

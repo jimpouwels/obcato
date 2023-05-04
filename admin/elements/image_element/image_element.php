@@ -18,8 +18,8 @@
         private ?int $_width = null;
         private ?int $_image_id = null;
 
-        public function __construct() {
-            parent::__construct(new ImageElementMetadataProvider($this));
+        public function __construct(int $scope_id) {
+            parent::__construct($scope_id, new ImageElementMetadataProvider($this));
         }
 
         public function setAlternativeText(?string $alternative_text): void {

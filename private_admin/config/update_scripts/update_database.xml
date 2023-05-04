@@ -98,10 +98,21 @@
             <query>UPDATE scopes SET identifier = 'guestbook_element' WHERE id = 10</query>
             <query>UPDATE scopes SET identifier = 'photo_album_element' WHERE id = 11</query>
             <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
+            
             <query>INSERT INTO modules VALUES (13, 'webforms_module_title', '/img/webforms.png', 2, 0, 'webforms', 1, 1, 'WebFormsModuleVisual')</query>
             <query>CREATE TABLE webforms (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, PRIMARY KEY (id))</query>
-            <query>CREATE TABLE webforms_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, label varchar(255) DEFAULT NULL, mandatory tinyint(1) DEFAULT 0, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id),CONSTRAINT webforms_fields_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</queries>
-            <query>ALTER TABLE webforms_fields ADD COLUMN type VARCHAR(45) NOT NULL</queries>
-            <query>ALTER TABLE webforms_fields ADD COLUMN name VARCHAR(255) NOT NULL</queries>
+            <query>CREATE TABLE webforms_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, label varchar(255) DEFAULT NULL, mandatory tinyint(1) DEFAULT 0, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id),CONSTRAINT webforms_fields_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>ALTER TABLE webforms_fields ADD COLUMN type VARCHAR(45) NOT NULL</query>
+            <query>ALTER TABLE webforms_fields ADD COLUMN name VARCHAR(255) NOT NULL</query>
+            <query>ALTER TABLE webforms_fields ADD COLUMN scope_id int(10) NOT NULL</query>
+            <query>ALTER TABLE webforms_fields ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE webforms_fields ADD CONSTRAINT webforms_fields_to_templates FOREIGN KEY webforms_fields_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>INSERT INTO scopes (id, identifier) VALUES (13, 'webform_textfield')</query>
+            <query>INSERT INTO scopes (id, identifier) VALUES (14, 'webform_textarea')</query>
+            <query>INSERT INTO scopes (id, identifier) VALUES (15, 'webform_dropdown')</query>
+            <query>ALTER TABLE elements MODIFY COLUMN template_id int(10) UNSIGNED DEFAULT NULL<query>
+            <query>ALTER TABLE elements ADD CONSTRAINT elements_to_templates FOREIGN KEY elements_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE element_holders MODIFY COLUMN template_id int(10) UNSIGNED DEFAULT NULL<query>
+            <query>ALTER TABLE element_holders ADD CONSTRAINT element_holders_to_templates FOREIGN KEY element_holders_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
     </version>
 </versions>

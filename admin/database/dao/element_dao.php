@@ -7,7 +7,7 @@
 
     class ElementDao {
 
-        private static string $myAllColumns = "e.id, e.follow_up, e.template_id, e.include_in_table_of_contents, t.classname, t.identifier, 
+        private static string $myAllColumns = "e.id, e.follow_up, e.template_id, e.include_in_table_of_contents, t.classname, t.scope_id, t.identifier, 
                                         t.domain_object, e.element_holder_id";
         private static ?ElementDao $instance = null;
         private MysqlConnector $_mysql_connector;
@@ -152,9 +152,8 @@
         public function createElement(ElementType $element_type, int $element_holder_id): Element {
             include_once CMS_ROOT . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
             $element_classname = $element_type->getClassName();
-            $new_element = new $element_classname;
+            $new_element = new $element_classname($element_type->getScopeId());
             $new_element->setIndex($this->getNextElementIndex($element_holder_id));
-            $new_element->setScopeId($element_type->getScopeId());
             $this->persistElement($element_type, $new_element, $element_holder_id);
             return $new_element;
         }
@@ -171,8 +170,8 @@
         }
 
         private function persistElement(ElementType $element_type, Element $element, int $element_holder_id): void {
-            $query = "INSERT INTO elements(follow_up,type_id, element_holder_id, template_id) VALUES (" . $element->getIndex() . " 
-                      , " . $element_type->getId() . ", " . $element_holder_id . ", 0)";
+            $query = "INSERT INTO elements(follow_up,type_id, element_holder_id) VALUES (" . $element->getIndex() . " 
+                      , " . $element_type->getId() . ", " . $element_holder_id . ")";
             $this->_mysql_connector->executeQuery($query);
             $element->setId($this->_mysql_connector->getInsertId());
             $element->updateMetaData();

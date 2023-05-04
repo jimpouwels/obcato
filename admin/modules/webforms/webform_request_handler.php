@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/webforms/webform_form.php";
     require_once CMS_ROOT . "core/model/webform_textfield.php";
+    require_once CMS_ROOT . "core/model/webform_textarea.php";
     
     class WebFormRequestHandler extends HttpRequestHandler {
 
@@ -30,6 +31,9 @@
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("add_textfield")) {
                 $this->addTextField($this->_current_webform);
+                $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_textarea")) {
+                $this->addTextArea($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
             }
         }
@@ -79,7 +83,7 @@
             $this->redirectTo($this->getBackendBaseUrl() . "&" . self::$FORM_QUERYSTRING_KEY . "=" . $webform->getId());
         }
 
-        private function updateWebForm($webform): void {
+        private function updateWebForm(WebForm $webform): void {
             $form = new WebFormForm($webform);
             try {
                 $form->loadFields();
@@ -90,9 +94,14 @@
             }
         }
 
-        private function addTextField($webform): void {
+        private function addTextField(WebForm $webform): void {
             $text_field = new WebFormTextField($this->getTextResource("webforms_new_textfield_label"), "textfield", false);
             $this->_webform_dao->persistWebFormField($webform, $text_field);
+        }
+
+        private function addTextArea(WebForm $webform): void {
+            $text_area = new WebFormTextArea($this->getTextResource("webforms_new_textarea_label"), "textarea", false);
+            $this->_webform_dao->persistWebFormField($webform, $text_area);
         }
         
     }
