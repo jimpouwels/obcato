@@ -114,5 +114,7 @@
             <query>ALTER TABLE elements ADD CONSTRAINT elements_to_templates FOREIGN KEY elements_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>ALTER TABLE element_holders MODIFY COLUMN template_id int(10) UNSIGNED DEFAULT NULL<query>
             <query>ALTER TABLE element_holders ADD CONSTRAINT element_holders_to_templates FOREIGN KEY element_holders_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>INSERT INTO scopes (id, identifier) VALUES (16, 'form_element')</query>
+            <query>INSERT INTO element_types (id, classname, icon_url, domain_object, scope_id, identifier, system_default) VALUES (10, 'FormElement', '/img/form_element.png', 'form_element.php', 16, 'form_element', 1)</query>
     </version>
 </versions>
