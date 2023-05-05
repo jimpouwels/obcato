@@ -35,6 +35,9 @@
             } else if ($this->isAction("add_textarea")) {
                 $this->addTextArea($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_button")) {
+                $this->addButton($this->_current_webform);
+                $this->updateWebForm($this->_current_webform);
             }
         }
         
@@ -102,6 +105,11 @@
         private function addTextArea(WebForm $webform): void {
             $text_area = new WebFormTextArea($this->getTextResource("webforms_new_textarea_label"), "textarea", false);
             $this->_webform_dao->persistWebFormField($webform, $text_area);
+        }
+
+        private function addButton(WebForm $webform): void {
+            $button = new WebFormButton($this->getTextResource("webforms_new_button_label"), "button");
+            $this->_webform_dao->persistWebFormField($webform, $button);
         }
         
     }

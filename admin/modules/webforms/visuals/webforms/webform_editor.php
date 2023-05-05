@@ -32,6 +32,9 @@
             $add_textarea_button = new Button("", "webforms_add_textarea_button_label", "addFormField('textarea');");
             $data->assign("button_add_textarea", $add_textarea_button->render());
 
+            $add_button_button = new Button("", "webforms_add_button_button_label", "addFormField('button');");
+            $data->assign("button_add_button", $add_button_button->render());
+
             $data->assign("form_fields", $this->renderFormFields());            
         }
         
