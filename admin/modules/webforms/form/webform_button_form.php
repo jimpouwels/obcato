@@ -15,7 +15,7 @@
         }
 
         public static function supports(string $type): bool {
-            return $type == "textfield";
+            return $type == "button";
         }
 
     }
