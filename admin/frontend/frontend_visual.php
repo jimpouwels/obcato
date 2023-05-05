@@ -20,7 +20,6 @@
         private FriendlyUrlManager $_friendly_url_manager;
         private Page $_page;
         private ?Article $_article;
-        
 
         public function __construct(Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
