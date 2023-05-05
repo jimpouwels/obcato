@@ -35,6 +35,7 @@
             $field = new WebFormDropDown($row["label"], $row["name"], $row["mandatory"] == 1 ? true : false, $options);
             $field->setId($row["id"]);
             $field->setScopeId($row["scope_id"]);
+            $field->setTemplateId($row["template_id"]);
             return $field;
         }
     }

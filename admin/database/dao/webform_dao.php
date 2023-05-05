@@ -78,12 +78,13 @@
         }
 
         public function updateFormField(WebFormField $webform_field): void {
-            $query = "UPDATE webforms_fields SET `name` = ?, label = ? WHERE id = ?";
+            $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $label = $webform_field->getLabel();
             $name = $webform_field->getName();
+            $template_id = $webform_field->getTemplateId();
             $webform_field_id = $webform_field->getId();
-            $statement->bind_param("ssi", $name, $label, $webform_field_id);
+            $statement->bind_param("ssii", $name, $label, $template_id, $webform_field_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 

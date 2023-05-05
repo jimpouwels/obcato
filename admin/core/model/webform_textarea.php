@@ -20,6 +20,7 @@
             $field = new WebFormTextArea($row["label"], $row["name"], $row["mandatory"] == 1 ? true : false);
             $field->setId($row["id"]);
             $field->setScopeId($row["scope_id"]);
+            $field->setTemplateId($row["template_id"]);
             return $field;
         }
     }

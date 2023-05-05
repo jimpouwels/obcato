@@ -16,6 +16,14 @@
         public function loadFields(): void {
             $this->_webform_field->setLabel($this->getMandatoryFieldValue("webform_field_{$this->_webform_field->getId()}_label", "webforms_editor_title_error_message"));
             $this->_webform_field->setName($this->getMandatoryFieldValue("webform_field_{$this->_webform_field->getId()}_name", "webforms_editor_title_error_message"));
+            
+            $template_id_string_val = $this->getFieldValue("webform_field_{$this->_webform_field->getId()}_template");
+            $template_id = null;
+            if (!empty($template_id_string_val)) {
+                $template_id = intval($template_id_string_val);
+            }
+            $this->_webform_field->setTemplateId($template_id);
+
             $this->loadCustomFields($this->_webform_field);
             if ($this->hasErrors()) {
                 throw new FormException();

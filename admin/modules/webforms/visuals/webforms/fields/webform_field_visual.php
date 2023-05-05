@@ -25,6 +25,9 @@
             $form_field_content_template_data = $this->getTemplateEngine()->createChildData($this->getParentTemplateData());
             $this->loadFieldContent($form_field_content_template_data);
             
+            $template_picker = new TemplatePicker("webform_field_{$this->_webform_field->getId()}_template", "", false, "template_picker", $this->_webform_field->getTemplate(), $this->_webform_field->getScope());
+            $this->assign('template_picker', $template_picker->render());
+
             $this->assign('id', $this->_webform_field->getId());
             $this->assign('type', $this->_webform_field->getType());
             $this->assign('index', 0);
