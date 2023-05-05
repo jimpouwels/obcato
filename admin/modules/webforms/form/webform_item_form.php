@@ -32,7 +32,7 @@
 
         public abstract function loadItemFields(): void;
 
-        protected function getFormItem(): WebFormField {
+        protected function getWebFormItem(): WebFormField {
             return $this->_webform_item;
         }
     }

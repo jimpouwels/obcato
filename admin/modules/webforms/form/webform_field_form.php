@@ -13,7 +13,11 @@
         }
 
         public function loadItemFields(): void {
-           
+            $this->getWebFormItem()->setMandatory($this->getCheckboxValue("webform_field_{$this->getWebFormItem()->getId()}_mandatory"));
+            $this->loadFieldFields();
+            if ($this->hasErrors()) {
+                throw new FormException();
+            }
         }
 
         public abstract function loadFieldFields(): void;

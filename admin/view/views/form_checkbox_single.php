@@ -6,8 +6,8 @@
     class SingleCheckbox extends FormField {
     
     
-        public function __construct(string $name, string $label, string $value, bool $mandatory, ?string $class_name) {
-            parent::__construct($name, $value, $label, $mandatory, false, $class_name);
+        public function __construct(string $name, string $label_identifier, string $value, bool $mandatory, ?string $class_name) {
+            parent::__construct($name, $value, $label_identifier, $mandatory, false, $class_name);
         }
     
         public function getFormFieldTemplateFilename(): string {

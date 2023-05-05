@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "view/views/visual.php";
+    require_once CMS_ROOT . "view/views/form_checkbox_single.php";
     require_once CMS_ROOT . "core/model/webform_field.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_item_visual.php";
 
@@ -22,10 +23,10 @@
         public function loadItemContent(Smarty_Internal_Data $data): void {
             $form_field_content_template_data = $this->getTemplateEngine()->createChildData();
             $this->loadFieldContent($form_field_content_template_data);
+            $data->assign('field_editor', $this->getTemplateEngine()->fetch($this->getFormFieldTemplate(), $form_field_content_template_data));
             
-            // TODO mandatory checkbox
-
-            $this->assign('field_editor', $this->getTemplateEngine()->fetch($this->getFormFieldTemplate(), $form_field_content_template_data));
+            $mandatory_field = new SingleCheckbox("webform_field_{$this->getWebFormItem()->getId()}_mandatory", 'webforms_editor_field_mandatory_label', $this->getWebFormItem()->getMandatory(), false, null);
+            $data->assign('mandatory_field', $mandatory_field->render());
         }
 
     }

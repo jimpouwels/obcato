@@ -91,11 +91,10 @@
             $template_id = $webform_item->getTemplateId();
             $webform_field_id = $webform_item->getId();
 
-            $mandatory = false;
+            $mandatory = 0;
             if ($webform_item instanceof WebFormField) {
                 $mandatory = $webform_item->getMandatory() ? 1 : 0;
             }
-
             $statement->bind_param("ssiii", $name, $label, $template_id, $mandatory, $webform_field_id);
             $this->_mysql_connector->executeStatement($statement);
         }

@@ -14,7 +14,7 @@
         }
 
         public function getTemplateFilename(): string {
-            return "modules/webforms/webforms/fields/webform_formitem.tpl";
+            return "modules/webforms/webforms/fields/webform_item.tpl";
         }
 
         protected function getWebFormItem(): WebFormItem {
@@ -39,7 +39,7 @@
             $name_field = new TextField("webform_item_{$this->_webform_item->getId()}_name", "webforms_editor_field_name_label", $this->_webform_item->getName(), true, false, null);
             $this->assign("name_field", $name_field->render());
             $this->assign("label_field", $label_field->render());
-            $this->assign('item_editor', $this->getTemplateEngine()->fetch($this->getFormFieldTemplate(), $form_item_content_template_data));
+            $this->assign('item_editor', $this->getTemplateEngine()->fetch($this->getFormItemTemplate(), $form_item_content_template_data));
         }
 
     }

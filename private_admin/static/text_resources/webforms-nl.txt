@@ -17,5 +17,6 @@ webforms_add_textfield_button_label: Tekstveld
 webforms_add_textarea_button_label: Tekst area
 webforms_editor_field_name_label: Naam
 webforms_editor_field_label_label: Label
+webforms_editor_field_mandatory_label: Verplicht
 webforms_update_success_message: Webformulier opgeslagen
 webforms_update_error_message: Webformulier niet opgeslagen
