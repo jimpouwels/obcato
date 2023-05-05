@@ -1,6 +1,5 @@
 <?php
 namespace {
-use WebFormFieldFactory\FormFieldType;
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_textfield_visual.php";
@@ -33,7 +32,7 @@ use WebFormFieldFactory\FormFieldType;
             return new $backend_form_classname($webform_field);
         }
 
-        private function getFormFieldType(string $type_to_find): FormFieldType {
+        private function getFormFieldType(string $type_to_find): WebFormFieldFactory\FormFieldType {
             $found_type = null;
             foreach ($this->_types as $type) {
                 if ($type->getTypeName() == $type_to_find) {
