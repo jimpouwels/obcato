@@ -4,6 +4,8 @@
     require_once CMS_ROOT . "database/mysql_connector.php";
     require_once CMS_ROOT . "core/model/webform.php";
     require_once CMS_ROOT . "core/model/webform_field.php";
+    require_once CMS_ROOT . "core/model/webform_textfield.php";
+    require_once CMS_ROOT . "core/model/webform_textarea.php";
     
     class WebFormDao {
 

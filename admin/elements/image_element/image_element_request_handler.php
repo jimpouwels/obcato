@@ -27,7 +27,7 @@
                 $this->_image_element_form->loadFields();
                 $this->_element_dao->updateElement($this->_image_element);
             } catch (FormException $e) {
-                throw new ElementContainsErrorsException("Article overview element contains errors");
+                throw new ElementContainsErrorsException("Image element contains errors");
             }
         }
     }

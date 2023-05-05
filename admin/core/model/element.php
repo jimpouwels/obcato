@@ -8,7 +8,7 @@
     abstract class Element extends Presentable {
 
         private int $_index;
-        private string $_title = "";
+        private ?string $_title = null;
         private int $_element_holder_id;
         private bool $_include_in_table_of_contents;
         private ElementMetadataProvider $_metadata_provider;
@@ -26,11 +26,11 @@
             return $this->_index;
         }
 
-        public function setTitle(string $title): void {
+        public function setTitle(?string $title): void {
             $this->_title = $title;
         }
 
-        public function getTitle(): string {
+        public function getTitle(): ?string {
             return $this->_title;
         }
 

@@ -1,0 +1,7 @@
+# GENERAL
+form_element_label: Formulier
+form_element_scope_label: Formulier Element
+
+# EDITOR
+form_element_editor_title: Titel
+form_element_editor_webform: Formulier

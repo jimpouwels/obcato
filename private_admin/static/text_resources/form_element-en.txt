@@ -1,0 +1,7 @@
+# GENERAL
+form_element_label: Form
+form_element_scope_label: Form Element
+
+# EDITOR
+form_element_editor_title: Title
+form_element_editor_webform: Form
