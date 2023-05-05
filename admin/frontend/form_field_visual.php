@@ -1,32 +1,28 @@
 <?php
     defined('_ACCESS') or die;
 
-    abstract class FormFieldVisual extends FrontendVisual {
-        
-        private WebFormField $_webform_field;
+    require_once CMS_ROOT . 'frontend/form_item_visual.php';
 
+    abstract class FormFieldVisual extends FormItemVisual {
+        
         public function __construct(Page $page, ?Article $article, WebFormField $webform_field) {
-            parent::__construct($page, $article);
-            $this->_webform_field = $webform_field;
+            parent::__construct($page, $article, $webform_field);
         }
 
-        public function getTemplateFilename(): string {
+        public function getFormItemTemplateFilename(): string {
             return FRONTEND_TEMPLATE_DIR . '/form_field.tpl';
         }
 
-        protected function getFormField(): WebFormField {
-            return $this->_webform_field;
-        }
-
-        public function load(): void {
-            $this->assign('label', $this->_webform_field->getLabel());
-            $this->assign('name', $this->_webform_field->getName());
-            $this->assign('mandatory', $this->_webform_field->getMandatory());
+        public function loadFormItem(Smarty_Internal_Data $data): void {
+            $mandatory = false;
+            if ($this->getFormItem() instanceof WebFormField) {
+                $mandatory = $this->getFormItem()->getMandatory();
+            }
+            $data->assign('mandatory', $mandatory);
             
             $field_data = $this->getTemplateEngine()->createChildData();
             $this->loadFormField($field_data);
-            
-            $this->assign('form_field_html', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $field_data));
+            $data->assign('form_field_html', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $field_data));
         }
 
         abstract function loadFormField(Smarty_Internal_Data $data): void;

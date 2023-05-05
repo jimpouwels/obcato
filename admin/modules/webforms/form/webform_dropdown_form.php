@@ -7,7 +7,11 @@
 
     class WebFormDropDownForm extends WebFormFieldForm {
 
-        public function loadCustomFields(WebFormField $webform_field): void {
+        public function __construct(WebFormField $webform_field) {
+            parent::__construct($webform_field);
+        }
+
+        public function loadFieldFields(): void {
         }
 
         public static function supports(string $type): bool {

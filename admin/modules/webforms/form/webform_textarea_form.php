@@ -7,11 +7,11 @@
 
     class WebFormTextAreaForm extends WebFormFieldForm {
 
-        public function __construct(WebFormTextArea $webform_field) {
-            parent::__construct($webform_field);
+        public function __construct(WebFormTextArea $webform_item) {
+            parent::__construct($webform_item);
         }
 
-        public function loadCustomFields(WebFormField $webform_field): void {
+        public function loadFieldFields(): void {
         }
 
         public static function supports(string $type): bool {

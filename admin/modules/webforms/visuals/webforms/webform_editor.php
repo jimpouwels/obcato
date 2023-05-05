@@ -6,18 +6,18 @@
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_textfield_visual.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_textarea_visual.php";
-    require_once CMS_ROOT . "modules/webforms/webform_field_factory.php";
+    require_once CMS_ROOT . "modules/webforms/webform_item_factory.php";
 
     class WebFormEditor extends Panel {
 
         private WebForm $_current_webform;
         private WebFormDao $_webform_dao;
-        private WebFormFieldFactory $_webform_field_factory;
+        private WebFormItemFactory $_webform_item_factory;
 
         public function __construct(?WebForm $current_webform) {
             parent::__construct("webforms_webform_editor_panel_title");
             $this->_webform_dao = WebFormDao::getInstance();
-            $this->_webform_field_factory = WebFormFieldFactory::getInstance();
+            $this->_webform_item_factory = WebFormItemFactory::getInstance();
             $this->_current_webform = $current_webform;
         }
 
@@ -39,7 +39,7 @@
             $form_fields_data = array();
             $form_fields = $this->_webform_dao->getFormFieldsByWebForm($this->_current_webform->getId());
             foreach ($form_fields as $form_field) {
-                $form_field_data = $this->_webform_field_factory->getBackendVisualFor($form_field);
+                $form_field_data = $this->_webform_item_factory->getBackendVisualFor($form_field);
                 $form_fields_data[] = $form_field_data->render();
             }
             return $form_fields_data;

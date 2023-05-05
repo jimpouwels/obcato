@@ -3,36 +3,19 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "core/form/form.php";
-    require_once CMS_ROOT . "core/model/webform_field.php";
+    require_once CMS_ROOT . "core/model/webform_item.php";
+    require_once CMS_ROOT . 'modules/webforms/form/webform_item_form.php';
 
-    abstract class WebFormFieldForm extends Form {
+    abstract class WebFormFieldForm extends WebFormItemForm {
 
-        private WebFormField $_webform_field;
-
-        public function __construct(WebFormField $webform_field) {
-            $this->_webform_field = $webform_field;
+        public function __construct(WebFormField $webform_item) {
+            parent::__construct($webform_item);
         }
 
-        public function loadFields(): void {
-            $this->_webform_field->setLabel($this->getMandatoryFieldValue("webform_field_{$this->_webform_field->getId()}_label", "webforms_editor_title_error_message"));
-            $this->_webform_field->setName($this->getMandatoryFieldValue("webform_field_{$this->_webform_field->getId()}_name", "webforms_editor_title_error_message"));
-            
-            $template_id_string_val = $this->getFieldValue("webform_field_{$this->_webform_field->getId()}_template");
-            $template_id = null;
-            if (!empty($template_id_string_val)) {
-                $template_id = intval($template_id_string_val);
-            }
-            $this->_webform_field->setTemplateId($template_id);
-
-            $this->loadCustomFields($this->_webform_field);
-            if ($this->hasErrors()) {
-                throw new FormException();
-            }
+        public function loadItemFields(): void {
+           
         }
 
-        public abstract function loadCustomFields(WebFormField $webform_field): void;
+        public abstract function loadFieldFields(): void;
 
-        protected function getFormField(): WebFormField {
-            return $this->_webform_field;
-        }
     }

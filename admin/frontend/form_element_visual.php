@@ -2,15 +2,15 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'frontend/element_visual.php';
-    require_once CMS_ROOT . 'modules/webforms/webform_field_factory.php';
+    require_once CMS_ROOT . 'modules/webforms/webform_item_factory.php';
 
     class FormElementFrontendVisual extends ElementFrontendVisual {
 
-        private WebFormFieldFactory $_webform_field_factory;
+        private WebFormItemFactory $_webform_item_factory;
 
         public function __construct(Page $page, ?Article $article, FormElement $form_element) {
             parent::__construct($page, $article, $form_element);
-            $this->_webform_field_factory = WebFormFieldFactory::getInstance();
+            $this->_webform_item_factory = WebFormItemFactory::getInstance();
         }
 
         public function getElementTemplateFilename(): string {
@@ -36,7 +36,7 @@
         private function renderFields(WebForm $webform): array {
             $fields = array();
             foreach ($webform->getFormFields() as $form_field) {
-                $field = $this->_webform_field_factory->getFrontendVisualFor($form_field, $this->getPage(), $this->getArticle());
+                $field = $this->_webform_item_factory->getFrontendVisualFor($form_field, $this->getPage(), $this->getArticle());
                 $fields[] = $field->render();
             }
             return $fields;

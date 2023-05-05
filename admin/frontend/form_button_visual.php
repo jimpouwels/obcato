@@ -1,19 +1,20 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . 'frontend/form_field_visual.php';
+    require_once CMS_ROOT . 'frontend/form_item_visual.php';
 
-    class FormDropDownVisual extends FormFieldVisual {
+    class FormButtonVisual extends FormItemVisual {
         
+
         public function __construct(Page $page, ?Article $article, WebFormItem $webform_item) {
             parent::__construct($page, $article, $webform_item);
         }
 
-        public function getFormFieldTemplateFilename(): string {
+        public function getFormItemTemplateFilename(): string {
             return FRONTEND_TEMPLATE_DIR . "/" . $this->getFormItem()->getTemplate()->getFileName();
         }
 
-        public function loadFormField(Smarty_Internal_Data $data): void {
+        public function loadFormItem(Smarty_Internal_Data $data): void {
         }
 
     }

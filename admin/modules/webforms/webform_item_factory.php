@@ -2,48 +2,51 @@
 namespace {
     defined('_ACCESS') or die;
     
-    require_once CMS_ROOT . 'modules/webforms/visuals/webforms/fields/webform_field_visual.php';
+    require_once CMS_ROOT . 'modules/webforms/visuals/webforms/fields/webform_item_visual.php';
     require_once CMS_ROOT . 'core/model/webform_textfield.php';
     require_once CMS_ROOT . 'core/model/webform_textarea.php';
     require_once CMS_ROOT . 'core/model/webform_dropdown.php';
+    require_once CMS_ROOT . 'core/model/webform_button.php';
     require_once CMS_ROOT . 'frontend/form_textfield_visual.php';
     require_once CMS_ROOT . 'frontend/form_textarea_visual.php';
     require_once CMS_ROOT . 'frontend/form_dropdown_visual.php';
+    require_once CMS_ROOT . 'frontend/form_button_visual.php';
 
-    class WebFormFieldFactory {
+    class WebFormItemFactory {
 
         private array $_types = array();
-        private static ?WebFormFieldFactory $_instance = null;
+        private static ?WebFormItemFactory $_instance = null;
 
         private function __construct() {
             $this->addType(WebFormTextField::$TYPE, "WebFormTextFieldVisual", "WebFormTextFieldForm", "FormTextFieldVisual");
             $this->addType(WebFormTextArea::$TYPE, "WebFormTextAreaVisual", "WebFormTextAreaForm", "FormTextAreaVisual");
             $this->addType(WebFormDropDown::$TYPE, "WebFormDropDownVisual", "WebFormDropDownForm", "FormDropDownVisual");
+            $this->addType(WebFormButton::$TYPE, "WebFormButtonVisual", "WebFormButtonForm", "FormButtonVisual");
         }
 
-        public static function getInstance(): WebFormFieldFactory {
+        public static function getInstance(): WebFormItemFactory {
             if (!self::$_instance) {
-                self::$_instance = new WebFormFieldFactory();
+                self::$_instance = new WebFormItemFactory();
             }
             return self::$_instance;
         }
 
-        public function getBackendVisualFor(WebFormField $webform_field): WebFormFieldVisual {
-            $backend_visual_classname = $this->getFormFieldType($webform_field->getType())->getBackendVisualClassname();
-            return new $backend_visual_classname($webform_field);
+        public function getBackendVisualFor(WebFormItem $webform_item): WebFormItemVisual {
+            $backend_visual_classname = $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
+            return new $backend_visual_classname($webform_item);
         }
 
-        public function getBackendFormFor(WebFormField $webform_field): WebFormFieldForm {
-            $backend_form_classname = $this->getFormFieldType($webform_field->getType())->getBackendFormClassname();
-            return new $backend_form_classname($webform_field);
+        public function getBackendFormFor(WebFormItem $webform_item): WebFormItemForm {
+            $backend_form_classname = $this->getFormItemType($webform_item->getType())->getBackendFormClassname();
+            return new $backend_form_classname($webform_item);
         }
 
-        public function getFrontendVisualFor(WebFormField $webform_field, Page $page, ?Article $article): FormFieldVisual {
-            $frontend_form_classname = $this->getFormFieldType($webform_field->getType())->getFrontendVisualClassname();
-            return new $frontend_form_classname($page, $article, $webform_field);
+        public function getFrontendVisualFor(WebFormItem $webform_item, Page $page, ?Article $article): FormItemVisual {
+            $frontend_form_classname = $this->getFormItemType($webform_item->getType())->getFrontendVisualClassname();
+            return new $frontend_form_classname($page, $article, $webform_item);
         }
 
-        private function getFormFieldType(string $type_to_find): WebFormFieldFactory\FormFieldType {
+        private function getFormItemType(string $type_to_find): WebFormItemFactory\FormItemType {
             $found_type = null;
             foreach ($this->_types as $type) {
                 if ($type->getTypeName() == $type_to_find) {
@@ -54,12 +57,12 @@ namespace {
         }
 
         private function addType(string $type_name, string $backend_visual_classname, string $backend_form_classname, string $frontend_visual_classname): void {
-            $this->_types[] = new WebFormFieldFactory\FormFieldType($type_name, $backend_visual_classname, $backend_form_classname, $frontend_visual_classname);
+            $this->_types[] = new WebFormItemFactory\FormItemType($type_name, $backend_visual_classname, $backend_form_classname, $frontend_visual_classname);
         }
     }
 }   
-namespace WebFormFieldFactory {     
-    class FormFieldType {
+namespace WebFormItemFactory {     
+    class FormItemType {
         private string $_type_name;
         private string $_backend_visual_classname;
         private string $_backend_form_classname;

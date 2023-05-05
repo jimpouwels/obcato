@@ -17,7 +17,6 @@
         }
 
         public function loadFieldContent(Smarty_Internal_Data $data): void {
-            $data->assign("custom", "textfield");
         }
     }
 ?>

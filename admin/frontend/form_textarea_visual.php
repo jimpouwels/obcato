@@ -5,14 +5,12 @@
 
     class FormTextAreaVisual extends FormFieldVisual {
         
-        private WebFormField $_webform_field;
-
-        public function __construct(Page $page, ?Article $article, WebFormField $webform_field) {
-            parent::__construct($page, $article, $webform_field);
+        public function __construct(Page $page, ?Article $article, WebFormItem $webform_item) {
+            parent::__construct($page, $article, $webform_item);
         }
 
         public function getFormFieldTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->getFormField()->getTemplate()->getFileName();
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getFormItem()->getTemplate()->getFileName();
         }
 
         public function loadFormField(Smarty_Internal_Data $data): void {

@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "core/model/webform_field.php";
     require_once CMS_ROOT . "core/model/webform_textfield.php";
     require_once CMS_ROOT . "core/model/webform_textarea.php";
+    require_once CMS_ROOT . "core/model/webform_button.php";
     
     class WebFormDao {
 
@@ -64,27 +65,38 @@
             }
         }
 
-        public function persistWebFormField(WebForm $webform, WebFormField $webform_field): void {
+        public function persistWebFormField(WebForm $webform, WebFormItem $webform_item): void {
             $query = "INSERT INTO webforms_fields (label, `name`, mandatory, webform_id, `type`, scope_id) VALUE (?, ?, ?, ?, ?, ?)";
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $label = $webform_field->getLabel();
-            $name = $webform_field->getName();
+            $label = $webform_item->getLabel();
+            $name = $webform_item->getName();
             $webform_id = $webform->getId();
-            $mandatory = $webform_field->getMandatory() ? 1 : 0;
-            $type = $webform_field->getType();
-            $scope_id = $webform_field->getScopeId();
+
+            $mandatory = false;
+            if ($webform_item instanceof WebFormField) {
+                $mandatory = $webform_item->getMandatory() ? 1 : 0;
+            }
+
+            $type = $webform_item->getType();
+            $scope_id = $webform_item->getScopeId();
             $statement->bind_param("ssiisi", $label, $name, $mandatory, $webform_id, $type, $scope_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function updateFormField(WebFormField $webform_field): void {
-            $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ? WHERE id = ?";
+        public function updateFormField(WebFormItem $webform_item): void {
+            $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ?, mandatory = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $label = $webform_field->getLabel();
-            $name = $webform_field->getName();
-            $template_id = $webform_field->getTemplateId();
-            $webform_field_id = $webform_field->getId();
-            $statement->bind_param("ssii", $name, $label, $template_id, $webform_field_id);
+            $label = $webform_item->getLabel();
+            $name = $webform_item->getName();
+            $template_id = $webform_item->getTemplateId();
+            $webform_field_id = $webform_item->getId();
+
+            $mandatory = false;
+            if ($webform_item instanceof WebFormField) {
+                $mandatory = $webform_item->getMandatory() ? 1 : 0;
+            }
+
+            $statement->bind_param("ssiii", $name, $label, $template_id, $mandatory, $webform_field_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 
@@ -104,6 +116,9 @@
                         break;
                     case WebFormDropDown::$TYPE:
                         $form_fields[] = WebFormDropDown::constructFromRecord($row, array());
+                        break;
+                    case WebFormButton::$TYPE:
+                        $form_fields[] = WebFormButton::constructFromRecord($row);
                         break;
                 }
             }
