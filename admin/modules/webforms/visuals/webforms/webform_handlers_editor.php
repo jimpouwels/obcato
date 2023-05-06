@@ -4,6 +4,8 @@
     require_once CMS_ROOT . 'core/model/webform.php';
     require_once CMS_ROOT . 'view/views/panel.php';
     require_once CMS_ROOT . 'view/views/button.php';
+    require_once CMS_ROOT . 'view/views/form_textfield.php';
+    require_once CMS_ROOT . 'view/views/form_textarea.php';
     require_once CMS_ROOT . 'modules/webforms/handlers/email_form_handler.php';
     require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
     require_once CMS_ROOT . 'database/dao/webform_dao.php';
