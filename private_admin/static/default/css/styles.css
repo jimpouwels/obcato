@@ -494,11 +494,11 @@ h1 {
     text-decoration: none;
 }
 
-.draggable_wrapper .element_editor_body {
+.draggable_wrapper .draggable_body {
     width: 100%;
 }
 
-.draggable_wrapper .element_editor_body .admin_form {
+.draggable_wrapper .draggable_body .admin_form {
     padding-left: 0px;
 }
 

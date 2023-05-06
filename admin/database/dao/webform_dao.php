@@ -7,15 +7,19 @@
     require_once CMS_ROOT . "core/model/webform_textfield.php";
     require_once CMS_ROOT . "core/model/webform_textarea.php";
     require_once CMS_ROOT . "core/model/webform_button.php";
+    require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
+    require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
     
     class WebFormDao {
 
         private static string $myAllColumns = "i.id, i.title";
         private static ?WebFormDao $instance = null;
+        private WebFormHandlerManager $_webform_handler_manager;
         private MysqlConnector $_mysql_connector;
 
         private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
+            $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
         }
 
         public static function getInstance(): WebFormDao {
@@ -129,5 +133,39 @@
                 }
             }
             return $form_fields;
+        }
+
+        public function addHandler(WebForm $webform, FormHandler $handler) {
+            $query = 'INSERT INTO webforms_handlers (`type`, webform_id) VALUES (?, ?)';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $type = $handler->getType();
+            $webform_id = $webform->getId();
+            $statement->bind_param('si', $type, $webform_id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
+        public function getHandlersFor(WebForm $webform): array {
+            $handlers = array();
+            $query = 'SELECT * FROM webforms_handlers WHERE webform_id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $webform_id = $webform->getId();
+            $statement->bind_param('i', $webform_id);
+
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc()) {
+                $handlers[] = array(
+                    "id" => $row["id"],
+                    "handler" => $this->_webform_handler_manager->getHandler($row['type'])
+                );
+            }
+            return $handlers;
+        }
+
+        public function deleteFormHandler(WebForm $webform, int $webform_handler_id): void {
+            $query = 'DELETE FROM webforms_handlers WHERE webform_id = ? AND `id` = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $webform_id = $webform->getId();
+            $statement->bind_param('ii', $webform_id, $webform_handler_id);
+            $this->_mysql_connector->executeStatement($statement);
         }
     }

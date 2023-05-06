@@ -22,6 +22,8 @@ webforms_editor_field_mandatory_label: Verplicht
 webforms_update_success_message: Webformulier opgeslagen
 webforms_update_error_message: Webformulier niet opgeslagen
 webforms_delete_item_confirm_message: Weet u zeker dat u dit formulieronderdeel wilt verwijderen?
+webforms_delete_handler_confirm_message: Weet u zeker dat u deze formulierafhandeling wilt verwijderen?
+webforms_delete_handler_link_title: Verwijderen
 
 # HANDLERS
 webforms_email_form_handler_name_add_button: Verstuur email

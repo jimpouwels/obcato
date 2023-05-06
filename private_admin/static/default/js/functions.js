@@ -93,13 +93,13 @@ function showElements() {
 }
 
 function hideElement(elementId) {
-	$('#element_editor_body_' + elementId).hide();
+	$('#draggable_body_body_' + elementId).hide();
 	$('#element_summary_text_' + elementId).show();
 	localStorage.setItem("sa_element_visible_" + elementId, "false");
 }
 
 function showElement(elementId) {
-	$('#element_editor_body_' + elementId).show();
+	$('#draggable_body_body_' + elementId).show();
 	$('#element_summary_text_' + elementId).hide();
 	localStorage.setItem("sa_element_visible_" + elementId, "true");
 }

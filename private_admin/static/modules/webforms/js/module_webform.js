@@ -29,3 +29,19 @@ function deleteFormField(itemId, confirmMessage) {
 		return false;
 	}
 }
+
+function addFormHandler(type) {
+	$('#action').attr('value', 'add_handler_' + type);
+	$('#webform-editor-form').submit();
+}
+
+function deleteFormHandler(handlerId, confirmMessage) {
+	var confirmed = confirm(confirmMessage);
+	if (confirmed) {
+		$('#action').attr('value', 'delete_form_handler');
+		$('#webform_handler_to_delete').attr('value', handlerId);
+		$('#webform-editor-form').submit();
+	} else {
+		return false;
+	}
+}

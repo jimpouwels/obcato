@@ -6,9 +6,7 @@
 
     class EmailFormHandler extends Formhandler {
 
-        public function __construct(WebForm $webform) {
-            parent::__construct($webform);
-        }
+        public static string $TYPE = 'email_form_handler';
 
         public function getRequiredProperties(): array {
             return array(
@@ -22,7 +20,7 @@
         }
 
         public function getType(): string {
-            return 'email_form_handler';
+            return self::$TYPE;
         }
 
         public function handlePost(array $properties): void {

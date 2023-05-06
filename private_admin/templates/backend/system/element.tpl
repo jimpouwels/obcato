@@ -27,9 +27,9 @@
                 </div>
             </div>
         </div>
-        <div class="element_editor_body">
+        <div class="draggable_body_body">
             <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
-            <div id="element_editor_body_{$id}" class="admin_form">
+            <div id="draggable_body_{$id}" class="admin_form">
                 {$element_form}
             </div>
         </div>

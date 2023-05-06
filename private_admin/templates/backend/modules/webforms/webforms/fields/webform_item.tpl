@@ -14,8 +14,8 @@
             </div>
         </div>
     </div>
-    <div class="element_editor_body">
-        <div id="element_editor_body_{$id}" class="admin_form">
+    <div class="draggable_body">
+        <div id="draggable_body_{$id}" class="admin_form">
             <div class="form_field_editor_wrapper">
                 <ul class="admin_form">
                     <li>

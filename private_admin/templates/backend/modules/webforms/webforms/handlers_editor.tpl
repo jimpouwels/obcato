@@ -3,3 +3,31 @@
 		{$handlers_add_button}
 	{/foreach}
 </div>
+
+<div class="selected_webforms">
+	{foreach from=$selected_handlers item=handler}
+		<div class="draggable_wrapper">
+			<div class="draggable_header">
+				<div class="draggable_header_left">
+					{$handler.type}
+				</div>
+				<div class="draggable_header_right">
+					<div class="draggable_action_buttons">
+						 <a href="#" onclick="deleteFormHandler('{$handler.id}', '{$text_resources.webforms_delete_handler_confirm_message}'); return false;" title="{$text_resources.webforms_delete_handler_link_title}">
+							<img src="/admin/static.php?file=/default/img/default_icons/delete_small.png" alt="{$text_resources.webforms_delete_handler_link_title}" title="{$text_resources.webforms_delete_handler_link_title}" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="draggable_body">
+				<div id="draggable_body_{$handler}" class="admin_form">
+					<div class="form_field_editor_wrapper">
+						<ul class="admin_form">
+							<li>{$handler.type}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/foreach}
+</div>

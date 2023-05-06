@@ -4,19 +4,21 @@
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/webforms/form/webform_form.php";
+    require_once CMS_ROOT . "modules/webforms/handlers/email_form_handler.php";
     require_once CMS_ROOT . "core/model/webform_textfield.php";
     require_once CMS_ROOT . "core/model/webform_textarea.php";
     
     class WebFormRequestHandler extends HttpRequestHandler {
 
         private static string $FORM_QUERYSTRING_KEY = "webform_id";
-
         private static string $FORM_ID_POST_KEY = "webform_id";
+        private WebFormHandlerManager $_webform_handler_manager;
         private WebFormDao $_webform_dao;
         private ?WebForm $_current_webform = null;
     
         public function __construct() {
             $this->_webform_dao = WebFormDao::getInstance();
+            $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
         }
     
         public function handleGet(): void {
@@ -40,6 +42,12 @@
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("delete_form_item")) {
                 $this->deleteFormItem(intval($_POST['webform_item_to_delete']));
+                $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_handler_email_form_handler")) {
+                $this->addEmailHandler($this->_current_webform);
+                $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("delete_form_handler")) {
+                $this->deleteFormHandler($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
             }
         }
@@ -117,6 +125,15 @@
 
         private function deleteFormItem(int $form_item_id): void {
             $this->_webform_dao->deleteWebFormItem($form_item_id);
+        }
+
+        private function addEmailHandler(WebForm $webform): void {
+            $handler = $this->_webform_handler_manager->getHandler(EmailFormHandler::$TYPE);
+            $this->_webform_dao->addHandler($this->_current_webform, $handler);
+        }
+
+        private function deleteFormHandler(WebForm $webform): void {
+            $this->_webform_dao->deleteFormHandler($webform, intval($_POST['webform_handler_to_delete']));
         }
         
     }

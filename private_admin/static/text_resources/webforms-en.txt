@@ -22,6 +22,8 @@ webforms_editor_field_mandatory_label: Mandatory
 webforms_update_success_message: Webform updated
 webforms_update_error_message: Webform not updated
 webforms_delete_item_confirm_message: Are you sure you want to delete the form item?
+webforms_delete_handler_confirm_message: Are you sure you want to delete the form handler?
+webforms_delete_handler_link_title: Delete
 
 # HANDLERS
 webforms_email_form_handler_name_add_button: Send email
