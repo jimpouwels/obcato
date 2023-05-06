@@ -6,6 +6,7 @@
 		<form action="{$backend_base_url}&webform_id={$id}" method="post" id="webform-editor-form" enctype="multipart/form-data">
 			{$metadata_editor}
 			{$webform_editor}
+			{$handlers_editor}
 		</form>
 	</div>
 {/if}

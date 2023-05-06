@@ -4,6 +4,7 @@
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_list.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_metadata_editor.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_editor.php";
+    require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_handlers_editor.php";
     
     class WebFormTab extends Visual {
     
@@ -21,11 +22,12 @@
         }
     
         public function load(): void {
-            $this->assign("list", $this->renderWebFormsList());
+            $this->assign('list', $this->renderWebFormsList());
             if ($this->_current_webform) {
-                $this->assign("id", $this->_current_webform->getId());
-                $this->assign("metadata_editor", $this->renderMetadataEditor());
-                $this->assign("webform_editor", $this->renderWebFormEditor());
+                $this->assign('id', $this->_current_webform->getId());
+                $this->assign('metadata_editor', $this->renderMetadataEditor());
+                $this->assign('webform_editor', $this->renderWebFormEditor());
+                $this->assign('handlers_editor', $this->renderHandlersEditor());
             }
         }
         
@@ -42,6 +44,11 @@
         private function renderWebFormEditor(): string {
             $webform_editor = new WebFormEditor($this->_current_webform);
             return $webform_editor->render();
+        }
+
+        private function renderHandlersEditor(): string {
+            $handlers_editor = new HandlersEditor($this->_current_webform);
+            return $handlers_editor->render();
         }
     }
     

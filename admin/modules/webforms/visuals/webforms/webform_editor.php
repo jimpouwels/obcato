@@ -22,7 +22,7 @@
         }
 
         public function getPanelContentTemplate(): string {
-            return "modules/webforms/webforms/webform_editor.tpl";
+            return 'modules/webforms/webforms/webform_editor.tpl';
         }
 
         public function loadPanelContent(Smarty_Internal_Data $data): void {            
