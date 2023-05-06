@@ -18,3 +18,14 @@ function addFormField(type) {
 	$('#action').attr('value', 'add_' + type);
 	$('#webform-editor-form').submit();
 }
+
+function deleteFormField(itemId, confirmMessage) {
+	var confirmed = confirm(confirmMessage);
+	if (confirmed) {
+		$('#action').attr('value', 'delete_form_item');
+		$('#webform_item_to_delete').attr('value', itemId);
+		$('#webform-editor-form').submit();
+	} else {
+		return false;
+	}
+}

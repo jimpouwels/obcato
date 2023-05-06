@@ -13,7 +13,7 @@
 
         abstract function getRequiredProperties(): array;
 
-        abstract function handlePost(): void;
+        abstract function handlePost(array $properties): void;
 
         abstract function getNameResourceIdentifier(): string;
 

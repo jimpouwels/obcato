@@ -38,6 +38,9 @@
             } else if ($this->isAction("add_button")) {
                 $this->addButton($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("delete_form_item")) {
+                $this->deleteFormItem(intval($_POST['webform_item_to_delete']));
+                $this->updateWebForm($this->_current_webform);
             }
         }
         
@@ -110,6 +113,10 @@
         private function addButton(WebForm $webform): void {
             $button = new WebFormButton($this->getTextResource("webforms_new_button_label"), "button");
             $this->_webform_dao->persistWebFormField($webform, $button);
+        }
+
+        private function deleteFormItem(int $form_item_id): void {
+            $this->_webform_dao->deleteWebFormItem($form_item_id);
         }
         
     }

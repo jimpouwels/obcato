@@ -22,6 +22,7 @@
         }
     
         public function load(): void {
+            $this->assign("action_form_id", ACTION_FORM_ID);
             $this->assign('list', $this->renderWebFormsList());
             if ($this->_current_webform) {
                 $this->assign('id', $this->_current_webform->getId());

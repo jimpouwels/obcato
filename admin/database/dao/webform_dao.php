@@ -99,6 +99,13 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
+        public function deleteWebFormItem(int $item_id): void {
+            $query = 'DELETE FROM webforms_fields WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('i', $item_id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
         public function getFormFieldsByWebForm(int $webform_id): array {
             $form_fields = array();
             $query = "SELECT * FROM webforms_fields WHERE webform_id = ?";
