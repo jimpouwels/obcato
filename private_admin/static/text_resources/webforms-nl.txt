@@ -26,5 +26,6 @@ webforms_delete_handler_confirm_message: Weet u zeker dat u deze formulierafhand
 webforms_delete_handler_link_title: Verwijderen
 
 # HANDLERS
+webforms_email_form_handler_name: Verstuur email
 webforms_email_form_handler_name_add_button: Verstuur email
 webforms_handlers_editor_title: Formulier afhandelingen

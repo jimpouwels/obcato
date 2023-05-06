@@ -45,7 +45,8 @@
             foreach ($found_handlers as $found_handler) {
                 $handler = array();
                 $handler['id'] = $found_handler['id'];
-                $handler['type'] = $found_handler['handler']->getType();
+                $handler['type'] = $found_handler['type'];
+                $handler['name_resource_identifier'] = $this->_webform_handler_manager->getHandler($found_handler['type'])->getNameResourceIdentifier();
                 $handlers[] = $handler;
             }
             return $handlers;

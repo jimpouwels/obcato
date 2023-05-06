@@ -8,18 +8,15 @@
     require_once CMS_ROOT . "core/model/webform_textarea.php";
     require_once CMS_ROOT . "core/model/webform_button.php";
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
-    require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
     
     class WebFormDao {
 
         private static string $myAllColumns = "i.id, i.title";
         private static ?WebFormDao $instance = null;
-        private WebFormHandlerManager $_webform_handler_manager;
         private MysqlConnector $_mysql_connector;
 
         private function __construct() {
             $this->_mysql_connector = MysqlConnector::getInstance();
-            $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
         }
 
         public static function getInstance(): WebFormDao {
@@ -155,7 +152,7 @@
             while ($row = $result->fetch_assoc()) {
                 $handlers[] = array(
                     "id" => $row["id"],
-                    "handler" => $this->_webform_handler_manager->getHandler($row['type'])
+                    "type" => $row['type']
                 );
             }
             return $handlers;

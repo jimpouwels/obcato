@@ -26,5 +26,6 @@ webforms_delete_handler_confirm_message: Are you sure you want to delete the for
 webforms_delete_handler_link_title: Delete
 
 # HANDLERS
+webforms_email_form_handler_name: Send email
 webforms_email_form_handler_name_add_button: Send email
 webforms_handlers_editor_title: Form handlers

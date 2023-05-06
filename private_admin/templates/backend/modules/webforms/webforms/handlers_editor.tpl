@@ -9,7 +9,7 @@
 		<div class="draggable_wrapper">
 			<div class="draggable_header">
 				<div class="draggable_header_left">
-					{$handler.type}
+					{$text_resources[$handler.name_resource_identifier]}
 				</div>
 				<div class="draggable_header_right">
 					<div class="draggable_action_buttons">
