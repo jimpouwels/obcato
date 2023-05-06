@@ -45,12 +45,47 @@
             foreach ($found_handlers as $found_handler) {
                 $handler_data = array();
                 $handler = $this->_webform_handler_manager->getHandler($found_handler['type']);
-                $handler_data['id'] = $found_handler['id'];
+                $found_handler_id = $found_handler['id'];
+                $handler_data['id'] = $found_handler_id;
                 $handler_data['type'] = $handler->getType();
                 $handler_data['name_resource_identifier'] = $handler->getNameResourceIdentifier();
+                $handler_data['properties'] = $this->renderHandlerProperties($found_handler_id, $handler);
                 $handlers[] = $handler_data;
             }
             return $handlers;
+        }
+
+        private function renderHandlerProperties(int $found_handler_id, FormHandler $form_handler): array {
+            $handler_properties = array();
+
+            $existing_properties = $this->_webform_dao->getPropertiesFor($found_handler_id);
+            foreach ($form_handler->getRequiredProperties() as $property) {
+                $handler_property = array();
+                $existing_property = $this->findPropertyIn($existing_properties, $property);
+                if (!$existing_property) {
+                    $existing_property = $this->_webform_dao->storeProperty($found_handler_id, $property);
+                }
+                $property_field = null;
+                if ($property['type'] == 'textfield') {
+                    $property_field = new TextField('property_' . $existing_property['id'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                } else {
+                    $property_field = new TextArea('property_' . $existing_property['id'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                }
+                $handler_property['id'] = $existing_property['id'];
+                $handler_property['field'] = $property_field->render();
+                $handler_properties[] = $handler_property;
+            }
+
+            return $handler_properties;
+        }
+
+        private function findPropertyIn(array $properties, array $property_to_find): ?array {
+            foreach ($properties as $property) {
+                if ($property['name'] == $property_to_find['name']) {
+                    return $property;
+                }
+            }
+            return null;
         }
     }
 

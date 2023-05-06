@@ -10,8 +10,8 @@
 
         public function getRequiredProperties(): array {
             return array(
-                'email_address' => 'textfield',
-                'email_template' => 'textarea'
+                array('name' => 'email_address', 'type' => 'textfield'),
+                array('name' => 'template', 'type' => 'textarea')
             );
         }
 

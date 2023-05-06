@@ -118,7 +118,8 @@
             <query>INSERT INTO element_types (id, classname, icon_url, domain_object, scope_id, identifier, system_default) VALUES (10, 'FormElement', '/img/form_element.png', 'form_element.php', 16, 'form_element', 1)</query>
             <query>CREATE TABLE form_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, element_id int(10) unsigned NOT NULL, webform_id int(10) unsigned DEFAULT NULL, PRIMARY KEY (id), KEY form_element_metadata_to_element (element_id), CONSTRAINT form_element_metadata_to_element FOREIGN KEY (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT form_element_metadata_to_webform FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE SET NULL ON UPDATE CASCADE)</query>
             <query>INSERT INTO scopes (id, identifier) VALUES (17, 'webform_button')</query>
-
             <query>CREATE TABLE webforms_handlers (id int(10) unsigned NOT NULL AUTO_INCREMENT, `type` varchar(255) NOT NULL, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT webforms_handlers_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>CREATE TABLE webforms_handlers_properties (id int(10) unsigned NOT NULL AUTO_INCREMENT, handler_id int(10) unsigned NOT NULL, name text NOT NULL, value text DEFAULT NULL, PRIMARY KEY (id), CONSTRAINT handler_properties_to_handlers FOREIGN KEY (handler_id) REFERENCES webforms_handlers (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>ALTER TABLE webforms_handlers_properties ADD COLUMN type VARCHAR(255) NOT NULL</query>
     </version>
 </versions>

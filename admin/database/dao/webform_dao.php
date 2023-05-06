@@ -165,4 +165,33 @@
             $statement->bind_param('ii', $webform_id, $webform_handler_id);
             $this->_mysql_connector->executeStatement($statement);
         }
+
+        public function getPropertiesFor(int $handler_id): array {
+            $properties = array();
+            $query = 'SELECT * FROM webforms_handlers_properties WHERE handler_id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('i', $handler_id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc()) {
+                $properties[] = array(
+                    "id" => $row["id"],
+                    "name" => $row["name"],
+                    "value" => $row['value']
+                );
+            }
+            return $properties;
+        }
+
+        public function storeProperty(int $handler_id, array $property): array {
+            $property_name = $property['name'];
+            $property_type = $property['type'];
+            $query = "INSERT INTO webforms_handlers_properties (handler_id, `name`, `value`, `type`) VALUES ('{$handler_id}', '{$property_name}', '', '{$property_type}')";
+            $this->_mysql_connector->executeQuery($query);
+
+            return array(
+                'id' => $this->_mysql_connector->getInsertId(),
+                'name' => $property,
+                'value' => ''
+            );
+        }
     }

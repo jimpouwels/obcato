@@ -23,7 +23,9 @@
 				<div id="draggable_body_{$handler}" class="admin_form">
 					<div class="form_field_editor_wrapper">
 						<ul class="admin_form">
-							<li>{$handler.type}</li>
+							{foreach from=$handler.properties item=property}
+								<li>{$property.field}</li>
+							{/foreach}
 						</ul>
 					</div>
 				</div>
