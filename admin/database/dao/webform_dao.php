@@ -190,7 +190,7 @@
 
             return array(
                 'id' => $this->_mysql_connector->getInsertId(),
-                'name' => $property,
+                'name' => $property_name,
                 'value' => ''
             );
         }
