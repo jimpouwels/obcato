@@ -43,11 +43,12 @@
             $handlers = array();
             $found_handlers = $this->_webform_dao->getHandlersFor($this->_webform);
             foreach ($found_handlers as $found_handler) {
-                $handler = array();
-                $handler['id'] = $found_handler['id'];
-                $handler['type'] = $found_handler['type'];
-                $handler['name_resource_identifier'] = $this->_webform_handler_manager->getHandler($found_handler['type'])->getNameResourceIdentifier();
-                $handlers[] = $handler;
+                $handler_data = array();
+                $handler = $this->_webform_handler_manager->getHandler($found_handler['type']);
+                $handler_data['id'] = $found_handler['id'];
+                $handler_data['type'] = $handler->getType();
+                $handler_data['name_resource_identifier'] = $handler->getNameResourceIdentifier();
+                $handlers[] = $handler_data;
             }
             return $handlers;
         }
