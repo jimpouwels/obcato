@@ -9,7 +9,7 @@
     
         abstract function getElement(): Element;
         
-        abstract function renderElementForm(): string;
+        abstract function renderElementForm(Smarty_Internal_Data $data): string;
 
         public function getTemplateFilename(): string {
             return "system/element.tpl";
@@ -19,7 +19,8 @@
             $element = $this->getElement();
             $template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $element->getType()->getScope());
             
-            $this->assign("element_form", $this->renderElementForm());
+            $panel_content_template_data = $this->getTemplateEngine()->createChildData();
+            $this->assign("element_form", $this->renderElementForm($panel_content_template_data));
             $this->assign("index", $element->getIndex());
             $this->assign("id", $element->getId());
             $this->assign("icon_url", '/admin/static.php?file=/elements/' . $element->getType()->getIdentifier() . '/' . $element->getType()->getIconUrl());

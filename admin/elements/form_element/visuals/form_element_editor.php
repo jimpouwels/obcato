@@ -21,7 +21,7 @@
             return $this->_form_element;
         }
 
-        public function renderElementForm(): string {
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField($this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->_form_element->getTitle()), false, false, null);
             $current_selected_webform = $this->_form_element->getWebForm();
             $current_webform_id = null;
@@ -33,10 +33,9 @@
                 $webform_picker->addOption($webform->getTitle(), $webform->getId());
             }
 
-            $template_data = $this->getTemplateEngine()->createChildData();
-            $template_data->assign("title_field", $title_field->render());
-            $template_data->assign("webform_picker", $webform_picker->render());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $template_data);
+            $data->assign("title_field", $title_field->render());
+            $data->assign("webform_picker", $webform_picker->render());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
 
         private function createFieldId($property_name): string {

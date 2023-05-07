@@ -20,9 +20,8 @@
             }
             $data->assign('mandatory', $mandatory);
             
-            $field_data = $this->getTemplateEngine()->createChildData();
-            $this->loadFormField($field_data);
-            $data->assign('form_field_html', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $field_data));
+            $this->loadFormField($data);
+            $data->assign('form_field_html', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $data));
         }
 
         abstract function loadFormField(Smarty_Internal_Data $data): void;

@@ -20,10 +20,10 @@
             return $this->_element;
         }
         
-        public function renderElementForm(): string {
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", "Titel", $this->_element->getTitle(), false, true, null);
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            $data->assign("title_field", $title_field->render());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
         
     }

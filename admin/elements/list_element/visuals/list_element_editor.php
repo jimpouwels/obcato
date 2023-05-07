@@ -20,17 +20,16 @@
             return $this->_list_element;
         }
         
-        public function renderElementForm(): string {
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField('element_' . $this->_list_element->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->_list_element->getTitle(), false, true, null);
             $add_item_button = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->_list_element->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
-            $template_data = $this->getTemplateEngine()->createChildData();
-            $template_data->assign("list_items", $this->getListItems());
-            $template_data->assign("add_item_button", $add_item_button->render());
-            $template_data->assign("title_field", $title_field->render());
-            $template_data->assign("id", $this->_list_element->getId());
+            $data->assign("list_items", $this->getListItems());
+            $data->assign("add_item_button", $add_item_button->render());
+            $data->assign("title_field", $title_field->render());
+            $data->assign("id", $this->_list_element->getId());
 
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $template_data);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
         
         private function getListItems(): array {

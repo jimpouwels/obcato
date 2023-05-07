@@ -20,16 +20,16 @@
             return $this->_element;
         }
         
-        public function renderElementForm(): string {
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->_element->getTitle(), false, true, null);
             $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
             $label_select_field = new ImageLabelSelector($this->_element->getLabels(), $this->_element->getId());
 
-            $this->getTemplateEngine()->assign("title_field", $title_field->render());
-            $this->getTemplateEngine()->assign("max_results_field", $max_results_field->render());
-            $this->getTemplateEngine()->assign("label_select_field", $label_select_field->render());
+            $data->assign("title_field", $title_field->render());
+            $data->assign("max_results_field", $max_results_field->render());
+            $data->assign("label_select_field", $label_select_field->render());
             
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE);
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
         
     }

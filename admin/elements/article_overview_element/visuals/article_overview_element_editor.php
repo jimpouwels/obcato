@@ -20,8 +20,7 @@
             return $this->_element;
         }
         
-        public function renderElementForm(): string {
-            $data = $this->getTemplateEngine()->createChildData();
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField("element_" . $this->_element->getId() . "_title", $this->getTextResource("article_overview_element_editor_title"), $this->_element->getTitle(), false, true, null);
             $data->assign("title_field", $title_field->render());
             $show_from_field = new DateField("element_" . $this->_element->getId() . "_show_from", $this->getTextResource("article_overview_element_editor_publication_date_from"), $this->getDateValue($this->_element->getShowFrom()), false, "datepicker");

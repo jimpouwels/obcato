@@ -19,23 +19,22 @@
             return $this->_image_element;
         }
 
-        public function renderElementForm(): string {
+        public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->_image_element->getTitle()), false, false, null);
             $alternative_text_field = new TextField($this->createFieldId("alternative_text"), $this->getTextResource("image_element_editor_alternative_text"), $this->_image_element->getAlternativeText(), false, true, null);
             $image_picker = new ImagePicker($this->getTextResource("image_element_editor_image"), $this->_image_element->getImageId(), "image_image_ref_" . $this->_image_element->getId(), "update_element_holder", "");
             $width_field = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->_image_element->getHeight(), false, false, "size_field");
 
-            $template_data = $this->getTemplateEngine()->createChildData();
-            $template_data->assign("alignment_field", $this->renderAlignmentField());
-            $template_data->assign("title_field", $title_field->render());
-            $template_data->assign("alternative_text_field", $alternative_text_field->render());
-            $template_data->assign("width_field", $width_field->render());
-            $template_data->assign("height_field", $height_field->render());
-            $template_data->assign("image_picker", $image_picker->render());
-            $template_data->assign("image_id", $this->_image_element->getImageId());
-            $template_data->assign("selected_image_title", $this->getSelectedImageTitle());
-            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $template_data);
+            $data->assign("alignment_field", $this->renderAlignmentField());
+            $data->assign("title_field", $title_field->render());
+            $data->assign("alternative_text_field", $alternative_text_field->render());
+            $data->assign("width_field", $width_field->render());
+            $data->assign("height_field", $height_field->render());
+            $data->assign("image_picker", $image_picker->render());
+            $data->assign("image_id", $this->_image_element->getImageId());
+            $data->assign("selected_image_title", $this->getSelectedImageTitle());
+            return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
         }
 
         private function renderAlignmentField(): string {

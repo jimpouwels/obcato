@@ -78,6 +78,10 @@
             }
         }
 
+        protected function createChildData(bool $include_current_data): Smarty_Internal_Data {
+            return $this->_template_engine->createChildData($this->_template_data);
+        }
+
         protected function getArticleUrl(Article $article): string {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {

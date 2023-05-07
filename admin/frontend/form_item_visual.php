@@ -24,7 +24,7 @@
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());
             
-            $field_data = $this->getTemplateEngine()->createChildData();
+            $field_data = $this->createChildData(true);
             $this->loadFormItem($field_data);
             $this->assign('form_item_html', $this->getTemplateEngine()->fetch($this->getFormItemTemplateFilename(), $field_data));
         }
