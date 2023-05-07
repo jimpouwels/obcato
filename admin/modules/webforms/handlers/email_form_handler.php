@@ -3,10 +3,16 @@
   
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     require_once CMS_ROOT . 'core/model/webform.php';
+    require_once CMS_ROOT . 'database/dao/settings_dao.php';
 
     class EmailFormHandler extends Formhandler {
 
         public static string $TYPE = 'email_form_handler';
+        private SettingsDao $_settings_dao;
+
+        public function __construct() {
+            $this->_settings_dao = SettingsDao::getInstance();
+        }
 
         public function getRequiredProperties(): array {
             return array(
@@ -29,7 +35,11 @@
             foreach ($fields as $field) {
                 $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
             }
-            mail('jim.pouwels@gmail.com', 'JQTravel', $message, $headers);
+            $email_address = $this->_settings_dao->getSettings()->getEmailAddress();
+            if (!$email_address) {
+                $email_address = $this->findPropertyIn($properties, 'email_address')['value'];
+            }
+            mail($email_address, 'JQTravel', $message, $headers);
         }
 
         private function findPropertyIn(array $properties, string $property_to_find): ?array {
