@@ -1,14 +1,8 @@
 <?php
     defined('_ACCESS') or die;
   
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     require_once CMS_ROOT . 'core/model/webform.php';
-    require CMS_ROOT . 'lib/phpmailer/Exception.php';
-    require CMS_ROOT . 'lib/phpmailer/PHPMailer.php';
-    require CMS_ROOT . 'lib/phpmailer/SMTP.php';
 
     class EmailFormHandler extends Formhandler {
 
@@ -30,7 +24,21 @@
         }
 
         public function handlePost(array $properties, array $fields): void {
-            mail('jim.pouwels@gmail.com', 'JQTravel', 'Hoiiii');
+            $headers = 'From: info@jqtravel.nl';
+            $message = $this->findPropertyIn($properties, 'template')['value'];
+            foreach ($fields as $field) {
+                $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
+            }
+            mail('jim.pouwels@gmail.com', 'JQTravel', $message, $headers);
+        }
+
+        private function findPropertyIn(array $properties, string $property_to_find): ?array {
+            foreach ($properties as $property) {
+                if ($property['name'] == $property_to_find) {
+                    return $property;
+                }
+            }
+            return null;
         }
     }
 ?>
