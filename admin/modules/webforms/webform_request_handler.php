@@ -102,6 +102,9 @@
             try {
                 $form->loadFields();
                 $this->_webform_dao->updateWebForm($this->_current_webform);
+                foreach ($form->getHandlerProperties() as $property) {
+                    $this->_webform_dao->updateHandlerProperty($property);
+                }
                 $this->sendSuccessMessage($this->getTextResource("webforms_update_success_message"));
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));

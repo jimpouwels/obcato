@@ -69,9 +69,9 @@
                 }
                 $property_field = null;
                 if ($property['type'] == 'textfield') {
-                    $property_field = new TextField('handler_property_' . $existing_property['id'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                    $property_field = new TextField('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
                 } else {
-                    $property_field = new TextArea('handler_property_' . $existing_property['id'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                    $property_field = new TextArea('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
                 }
                 $handler_property['id'] = $existing_property['id'];
                 $handler_property['field'] = $property_field->render();

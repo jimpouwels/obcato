@@ -194,4 +194,11 @@
                 'value' => ''
             );
         }
+
+        public function updateHandlerProperty(array $property): void {
+            $query = 'UPDATE webforms_handlers_properties SET `value` = ? WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('si', $property['value'], $property['id']);
+            $this->_mysql_connector->executeStatement($statement);
+        }
     }
