@@ -78,8 +78,12 @@
             }
         }
 
-        protected function createChildData(bool $include_current_data): Smarty_Internal_Data {
-            return $this->_template_engine->createChildData($this->_template_data);
+        protected function createChildData(bool $include_current_data = false): Smarty_Internal_Data {
+            if ($include_current_data) {
+                return $this->_template_engine->createChildData($this->_template_data);
+            } else {
+                return $this->_template_engine->createChildData();
+            }
         }
 
         protected function getArticleUrl(Article $article): string {

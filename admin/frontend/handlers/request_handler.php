@@ -8,9 +8,11 @@
     require_once CMS_ROOT . "database/dao/settings_dao.php";
     require_once CMS_ROOT . "frontend/website_visual.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_request_handler.php';
 
     class RequestHandler {
 
+        private FormRequestHandler $_form_request_handler;
         private PageDao $_page_dao;
         private ArticleDao $_article_dao;
         private ImageDao $_image_dao;
@@ -23,6 +25,7 @@
             $this->_article_dao = ArticleDao::getInstance();
             $this->_image_dao = ImageDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
+            $this->_form_request_handler = FormRequestHandler::getInstance();
         }
 
         public function handleRequest(): void {
@@ -30,8 +33,12 @@
                 $this->loadImage();
             } else {
                 $page = $this->getPageFromRequest();
+                $article = $this->getArticleFromRequest();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $this->_form_request_handler->handlePost($page, $article);
+                }
                 if ($page) {
-                    $this->renderPage($page, $this->getArticleFromRequest());
+                    $this->renderPage($page, $article);
                 } else {
                     $this->renderHomepage();
                 }

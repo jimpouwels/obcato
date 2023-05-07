@@ -14,16 +14,20 @@
         }
 
         public function getElementTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+            return FRONTEND_TEMPLATE_DIR . '/sa_form.tpl';
         }
 
         public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign('title', $this->getElement()->getTitle());
+            $data->assign('webform_id', $this->getElement()->getWebForm()->getId());
+
+            $form_data = $this->createChildData();
+            $form_data->assign('title', $this->getElement()->getTitle());
             $webform_data = array();
             if ($this->getElement()->getWebForm()) {
                 $webform_data = $this->renderWebForm($this->getElement()->getWebForm());
             }
-            $data->assign('webform', $webform_data);
+            $form_data->assign('webform', $webform_data);
+            $data->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName(), $form_data));
         }
 
         private function renderWebForm(WebForm $webform): array {

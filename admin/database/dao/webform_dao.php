@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "core/model/webform_field.php";
     require_once CMS_ROOT . "core/model/webform_textfield.php";
     require_once CMS_ROOT . "core/model/webform_textarea.php";
+    require_once CMS_ROOT . "core/model/webform_dropdown.php";
     require_once CMS_ROOT . "core/model/webform_button.php";
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     

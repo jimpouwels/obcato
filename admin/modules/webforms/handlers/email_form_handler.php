@@ -1,8 +1,14 @@
 <?php
     defined('_ACCESS') or die;
   
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     require_once CMS_ROOT . 'core/model/webform.php';
+    require CMS_ROOT . 'lib/phpmailer/Exception.php';
+    require CMS_ROOT . 'lib/phpmailer/PHPMailer.php';
+    require CMS_ROOT . 'lib/phpmailer/SMTP.php';
 
     class EmailFormHandler extends Formhandler {
 
@@ -23,8 +29,8 @@
             return self::$TYPE;
         }
 
-        public function handlePost(array $properties): void {
-            // send email
+        public function handlePost(array $properties, array $fields): void {
+            mail('jim.pouwels@gmail.com', 'JQTravel', 'Hoiiii');
         }
     }
 ?>
