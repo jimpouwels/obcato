@@ -33,7 +33,7 @@
             if (isset($_POST['webform_id'])) {
                 $webform = $this->_webform_dao->getWebForm($_POST['webform_id']);
                 
-                if (!$this->validCaptcha()) {
+                if ($webform->getIncludeCaptcha() && !$this->validCaptcha()) {
                     FormStatus::raiseError('captcha', ErrorType::InvalidValue);
                 }
                 $fields = $this->getFields($webform);
@@ -42,7 +42,6 @@
                     return;
                 }
 
-                
                 $webform_handlers = $this->_webform_dao->getHandlersFor($webform);
                 foreach ($webform_handlers as $webform_handler) {
                     $properties = $this->_webform_dao->getPropertiesFor($webform_handler['id']);

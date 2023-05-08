@@ -16,7 +16,7 @@
         }
 
         function loadFormField(Smarty_Internal_Data $data) {
-            $data->assign('onchange_js', "onChange=({$this->_onchange_js})");
+            $data->assign('onchange_js', "onChange={$this->_onchange_js}");
         }
 
         public function setOnChangeJS(string $onchange_js): void {

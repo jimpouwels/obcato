@@ -107,7 +107,9 @@
                 foreach ($form->getHandlerProperties() as $property) {
                     $this->_webform_dao->updateHandlerProperty($property);
                 }
-                $this->_config_dao->updateCaptchaSecret($form->getCaptchaSecret());
+                if ($this->_current_webform->getIncludeCaptcha()) {
+                    $this->_config_dao->updateCaptchaSecret($form->getCaptchaSecret());
+                }
                 $this->sendSuccessMessage($this->getTextResource("webforms_update_success_message"));
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));

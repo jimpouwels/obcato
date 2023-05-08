@@ -14,7 +14,7 @@
         private WebFormItemFactory $_webform_item_factory;
         private WebForm $_webform;
         private array $_handler_properties = array();
-        private string $_captcha_secret;
+        private ?string $_captcha_secret = null;
         private WebFormDao $_webform_dao;
         private array $_form_field_forms = array();
 
@@ -54,7 +54,7 @@
             return $this->_handler_properties;
         }
 
-        public function getCaptchaSecret(): string {
+        public function getCaptchaSecret(): ?string {
             return $this->_captcha_secret;
         }
 
