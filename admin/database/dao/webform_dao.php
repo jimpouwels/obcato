@@ -12,7 +12,7 @@
     
     class WebFormDao {
 
-        private static string $myAllColumns = "i.id, i.title";
+        private static string $myAllColumns = "i.id, i.title, i.include_captcha";
         private static ?WebFormDao $instance = null;
         private MysqlConnector $_mysql_connector;
 
@@ -56,11 +56,12 @@
         }
 
         public function updateWebForm(WebForm $webform): void {
-            $query = "UPDATE webforms SET title = ? WHERE id = ?";
+            $query = "UPDATE webforms SET title = ?, include_captcha = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $id = $webform->getId();
             $title = $webform->getTitle();
-            $statement->bind_param("si", $title, $id);
+            $include_captcha = $webform->getIncludeCaptcha() ? 1 : 0;
+            $statement->bind_param("sii", $title, $include_captcha, $id);
             $this->_mysql_connector->executeStatement($statement);
             foreach ($webform->getFormFields() as $form_field) {
                 $this->updateFormField($form_field);

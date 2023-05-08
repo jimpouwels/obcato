@@ -13,6 +13,7 @@ webforms_new_webform_create_message: Nieuw formulier aangemaakt
 webforms_metdata_editor_panel_title: Bewerk formulier
 webforms_webform_editor_panel_title: Formulierinhoud
 webforms_editor_title_field: Titel
+webforms_editor_captcha_field: Captcha
 webforms_add_textfield_button_label: Tekstveld
 webforms_add_textarea_button_label: Tekst area
 webforms_add_button_button_label: Knop

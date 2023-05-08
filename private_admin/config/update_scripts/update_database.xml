@@ -98,7 +98,6 @@
             <query>UPDATE scopes SET identifier = 'guestbook_element' WHERE id = 10</query>
             <query>UPDATE scopes SET identifier = 'photo_album_element' WHERE id = 11</query>
             <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
-            
             <query>INSERT INTO modules VALUES (13, 'webforms_module_title', '/img/webforms.png', 2, 0, 'webforms', 1, 1, 'WebFormsModuleVisual')</query>
             <query>CREATE TABLE webforms (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, PRIMARY KEY (id))</query>
             <query>CREATE TABLE webforms_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, label varchar(255) DEFAULT NULL, mandatory tinyint(1) DEFAULT 0, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id),CONSTRAINT webforms_fields_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
@@ -121,5 +120,6 @@
             <query>CREATE TABLE webforms_handlers (id int(10) unsigned NOT NULL AUTO_INCREMENT, `type` varchar(255) NOT NULL, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT webforms_handlers_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
             <query>CREATE TABLE webforms_handlers_properties (id int(10) unsigned NOT NULL AUTO_INCREMENT, handler_id int(10) unsigned NOT NULL, name text NOT NULL, value text DEFAULT NULL, PRIMARY KEY (id), CONSTRAINT handler_properties_to_handlers FOREIGN KEY (handler_id) REFERENCES webforms_handlers (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
             <query>ALTER TABLE webforms_handlers_properties ADD COLUMN type VARCHAR(255) NOT NULL</query>
+            <query>ALTER TABLE webforms ADD COLUMN include_captcha int(10) unsigned NOT NULL</query>
     </version>
 </versions>

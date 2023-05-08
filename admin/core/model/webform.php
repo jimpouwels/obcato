@@ -7,6 +7,7 @@
     
         private string $_title;
         private array $_form_fields;
+        private bool $_include_captcha;
         
         public function setTitle(string $title): void {
             $this->_title = $title;
@@ -23,11 +24,20 @@
         public function setFormFields(array $form_fields): void {
             $this->_form_fields = $form_fields;
         }
+
+        public function setIncludeCaptcha(bool $include_captcha): void {
+            $this->_include_captcha = $include_captcha;
+        }
+
+        public function getIncludeCaptcha(): bool {
+            return $this->_include_captcha;
+        }
         
         public static function constructFromRecord(array $record, array $form_fields): WebForm {
             $form = new WebForm();
             $form->setId($record['id']);
             $form->setTitle($record['title']);
+            $form->setIncludeCaptcha($record['include_captcha'] == 1 ? true : false);
             $form->setFormFields($form_fields);
             return $form;
         }

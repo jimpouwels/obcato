@@ -26,6 +26,7 @@
 
         public function loadFields(): void {
             $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
+            $this->_webform->setIncludeCaptcha($this->getCheckboxValue('include_captcha'));
 
             foreach ($this->_webform->getFormFields() as $form_field) {
                 $form = $this->_webform_item_factory->getBackendFormFor($form_field);
