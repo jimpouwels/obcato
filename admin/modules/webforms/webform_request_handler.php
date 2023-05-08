@@ -15,9 +15,11 @@
         private WebFormHandlerManager $_webform_handler_manager;
         private WebFormDao $_webform_dao;
         private ?WebForm $_current_webform = null;
+        private ConfigDao $_config_dao;
     
         public function __construct() {
             $this->_webform_dao = WebFormDao::getInstance();
+            $this->_config_dao = ConfigDao::getInstance();
             $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
         }
     
@@ -105,6 +107,7 @@
                 foreach ($form->getHandlerProperties() as $property) {
                     $this->_webform_dao->updateHandlerProperty($property);
                 }
+                $this->_config_dao->updateCaptchaSecret($form->getCaptchaSecret());
                 $this->sendSuccessMessage($this->getTextResource("webforms_update_success_message"));
             } catch (FormException $e) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));

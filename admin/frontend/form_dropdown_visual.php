@@ -5,7 +5,7 @@
 
     class FormDropDownVisual extends FormFieldVisual {
         
-        public function __construct(Page $page, ?Article $article, WebFormItem $webform_item) {
+        public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
             parent::__construct($page, $article, $webform_item);
         }
 

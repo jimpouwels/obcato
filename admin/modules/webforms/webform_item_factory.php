@@ -47,9 +47,9 @@ namespace {
             return new $backend_form_classname($webform_item);
         }
 
-        public function getFrontendVisualFor(WebFormItem $webform_item, Page $page, ?Article $article): FormItemVisual {
+        public function getFrontendVisualFor(WebForm $webform, WebFormItem $webform_item, Page $page, ?Article $article): FormItemVisual {
             $frontend_form_classname = $this->getFormItemType($webform_item->getType())->getFrontendVisualClassname();
-            return new $frontend_form_classname($page, $article, $webform_item);
+            return new $frontend_form_classname($page, $article, $webform, $webform_item);
         }
 
         private function getFormItemType(string $type_to_find): WebFormItemFactory\FormItemType {

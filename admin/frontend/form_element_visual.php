@@ -19,7 +19,10 @@
 
         public function loadElement(Smarty_Internal_Data $data): void {
             $data->assign('webform_id', $this->getElement()->getWebForm()->getId());
-
+            if ($this->getElement()->getWebForm()->getIncludeCaptcha()) {
+                $captcha_key = $this->getElement()->getWebForm()->getCaptchaKey();
+                $data->assign('captcha_key', $captcha_key);
+            }
             $form_data = $this->createChildData();
             $form_data->assign('title', $this->getElement()->getTitle());
             $webform_data = array();
@@ -40,7 +43,7 @@
         private function renderFields(WebForm $webform): array {
             $fields = array();
             foreach ($webform->getFormFields() as $form_field) {
-                $field = $this->_webform_item_factory->getFrontendVisualFor($form_field, $this->getPage(), $this->getArticle());
+                $field = $this->_webform_item_factory->getFrontendVisualFor($webform, $form_field, $this->getPage(), $this->getArticle());
                 $fields[] = $field->render();
             }
             return $fields;

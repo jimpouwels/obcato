@@ -14,6 +14,7 @@
         private WebFormItemFactory $_webform_item_factory;
         private WebForm $_webform;
         private array $_handler_properties = array();
+        private string $_captcha_secret;
         private WebFormDao $_webform_dao;
         private array $_form_field_forms = array();
 
@@ -27,6 +28,11 @@
         public function loadFields(): void {
             $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
             $this->_webform->setIncludeCaptcha($this->getCheckboxValue('include_captcha'));
+
+            if ($this->_webform->getIncludeCaptcha()) {
+                $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
+                $this->_captcha_secret = $this->getMandatoryFieldValue('captcha_secret', 'webforms_editor_captcha_secret_error_message');
+            }
 
             foreach ($this->_webform->getFormFields() as $form_field) {
                 $form = $this->_webform_item_factory->getBackendFormFor($form_field);
@@ -46,6 +52,10 @@
 
         public function getHandlerProperties(): array {
             return $this->_handler_properties;
+        }
+
+        public function getCaptchaSecret(): string {
+            return $this->_captcha_secret;
         }
 
         private function loadHandlerProperties(): void {

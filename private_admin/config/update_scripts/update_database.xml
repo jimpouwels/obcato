@@ -121,5 +121,6 @@
             <query>CREATE TABLE webforms_handlers_properties (id int(10) unsigned NOT NULL AUTO_INCREMENT, handler_id int(10) unsigned NOT NULL, name text NOT NULL, value text DEFAULT NULL, PRIMARY KEY (id), CONSTRAINT handler_properties_to_handlers FOREIGN KEY (handler_id) REFERENCES webforms_handlers (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
             <query>ALTER TABLE webforms_handlers_properties ADD COLUMN type VARCHAR(255) NOT NULL</query>
             <query>ALTER TABLE webforms ADD COLUMN include_captcha int(10) unsigned NOT NULL</query>
+            <query>ALTER TABLE webforms ADD COLUMN captcha_key VARCHAR(255) DEFAULT NULL</query>
     </version>
 </versions>

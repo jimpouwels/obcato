@@ -14,6 +14,8 @@ webforms_metdata_editor_panel_title: Edit form
 webforms_webform_editor_panel_title: Form content
 webforms_editor_title_field: Title
 webforms_editor_captcha_field: Include captcha
+webforms_editor_captcha_key_field: Captcha key
+webforms_editor_captcha_secret_field: Captcha secret
 webforms_add_textfield_button_label: Textfield
 webforms_add_textarea_button_label: Text area
 webforms_add_button_button_label: Button

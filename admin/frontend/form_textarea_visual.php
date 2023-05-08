@@ -5,8 +5,8 @@
 
     class FormTextAreaVisual extends FormFieldVisual {
         
-        public function __construct(Page $page, ?Article $article, WebFormItem $webform_item) {
-            parent::__construct($page, $article, $webform_item);
+        public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
+            parent::__construct($page, $article, $webform, $webform_item);
         }
 
         public function getFormFieldTemplateFilename(): string {

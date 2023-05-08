@@ -2,14 +2,17 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'frontend/frontend_visual.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_errors.php';
 
     abstract class FormItemVisual extends FrontendVisual {
         
         private WebFormItem $_webform_item;
+        private WebForm $_webform;
 
-        public function __construct(Page $page, ?Article $article, WebFormItem $webform_item) {
+        public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
             parent::__construct($page, $article);
             $this->_webform_item = $webform_item;
+            $this->_webform = $webform;
         }
 
         public function getTemplateFilename(): string {
@@ -20,9 +23,14 @@
             return $this->_webform_item;
         }
 
+        protected function getWebForm(): WebForm {
+            return $this->_webform;
+        }
+
         public function load(): void {
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());
+            $this->assign('has_error', FormErrors::getError($this->getFormItem()->getName()) != null);
             
             $field_data = $this->createChildData(true);
             $this->loadFormItem($field_data);

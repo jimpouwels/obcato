@@ -45,3 +45,7 @@ function deleteFormHandler(handlerId, confirmMessage) {
 		return false;
 	}
 }
+
+function onCaptchaChanged(captchaKeyFieldClass) {
+	$('.' + captchaKeyFieldClass).toggleClass('displaynone');
+}
