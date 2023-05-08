@@ -3,6 +3,7 @@
 
     require_once CMS_ROOT . 'frontend/element_visual.php';
     require_once CMS_ROOT . 'modules/webforms/webform_item_factory.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_status.php';
 
     class FormElementFrontendVisual extends ElementFrontendVisual {
 
@@ -37,6 +38,7 @@
             $webform_data = array();
             $webform_data['title'] = $webform->getTitle();
             $webform_data['fields'] = $this->renderFields($webform);
+            $webform_data['is_submitted'] = FormStatus::getSubmittedForm() == $this->getElement()->getWebForm()->getId();
             return $webform_data;
         }
 

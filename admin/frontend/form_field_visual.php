@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'frontend/form_item_visual.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_status.php';
 
     abstract class FormFieldVisual extends FormItemVisual {
         
@@ -18,6 +19,7 @@
             if ($this->getFormItem() instanceof WebFormField) {
                 $mandatory = $this->getFormItem()->getMandatory();
             }
+            $data->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
             $data->assign('mandatory', $mandatory);
             
             $this->loadFormField($data);

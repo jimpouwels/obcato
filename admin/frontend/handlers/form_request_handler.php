@@ -6,7 +6,7 @@
     require_once CMS_ROOT . 'database/dao/webform_dao.php';
     require_once CMS_ROOT . 'database/dao/config_dao.php';
     require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
-    require_once CMS_ROOT . 'frontend/handlers/form_errors.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_status.php';
     require_once CMS_ROOT . 'frontend/handlers/error_type.php';
 
     class FormRequestHandler {
@@ -34,20 +34,23 @@
                 $webform = $this->_webform_dao->getWebForm($_POST['webform_id']);
                 
                 if (!$this->validCaptcha()) {
-                    FormErrors::raiseError('captcha', ErrorType::InvalidValue);
+                    FormStatus::raiseError('captcha', ErrorType::InvalidValue);
                 }
                 $fields = $this->getFields($webform);
 
-                if (FormErrors::hasErrors()) {
+                if (FormStatus::hasErrors()) {
                     return;
                 }
 
+                
                 $webform_handlers = $this->_webform_dao->getHandlersFor($webform);
                 foreach ($webform_handlers as $webform_handler) {
                     $properties = $this->_webform_dao->getPropertiesFor($webform_handler['id']);
                     $handler_instance = $this->_webform_handler_manager->getHandler($webform_handler['type']);
                     $handler_instance->handlePost($properties, $fields);
                 }
+                
+                FormStatus::setSubmittedForm($webform->getId());
             }
         }
 
@@ -59,7 +62,7 @@
                     continue;
                 }
                 if ($form_field->getMandatory() && empty($_POST[$form_field->getName()])) {
-                    FormErrors::raiseError($form_field->getName(), ErrorType::Mandatory);
+                    FormStatus::raiseError($form_field->getName(), ErrorType::Mandatory);
                 }
                 $filled_in_field = array();
                 $filled_in_field['name'] = $form_field->getName();

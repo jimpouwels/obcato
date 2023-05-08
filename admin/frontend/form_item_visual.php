@@ -2,7 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'frontend/frontend_visual.php';
-    require_once CMS_ROOT . 'frontend/handlers/form_errors.php';
+    require_once CMS_ROOT . 'frontend/handlers/form_status.php';
 
     abstract class FormItemVisual extends FrontendVisual {
         
@@ -30,7 +30,8 @@
         public function load(): void {
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());
-            $this->assign('has_error', FormErrors::getError($this->getFormItem()->getName()) != null);
+            $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
+            $this->assign('has_error', FormStatus::getError($this->getFormItem()->getName()) != null);
             
             $field_data = $this->createChildData(true);
             $this->loadFormItem($field_data);
