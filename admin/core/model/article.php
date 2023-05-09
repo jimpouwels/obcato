@@ -88,22 +88,19 @@
             return $article_dao->getTermsForArticle($this->getId());
         }
         
-        public static function constructFromRecord($record): Article {
+        public static function constructFromRecord($row): Article {
             $article = new Article();
-            $article->setId($record['id']);
-            $article->setTitle($record['title']);
-            $article->setPublished($record['published'] == 1 ? true : false);
-            $article->setDescription($record['description']);
-            $article->setScopeId($record['scope_id']);
-            $article->setImageId($record['image_id']);
-            $article->setCreatedAt($record['created_at']);
-            $article->setCreatedById($record['created_by']);
-            $article->setType($record['type']);
-            $article->setPublicationDate($record['publication_date']);
-            $article->setSortDate($record['sort_date']);
-            $article->setTargetPageId(intval($record['target_page']));
-            
+            $article->initFromDb($row);
             return $article;
+        }
+
+        protected function initFromDb(array $row): void {
+            $this->setDescription($row['description']);
+            $this->setImageId($row['image_id']);
+            $this->setPublicationDate($row['publication_date']);
+            $this->setSortDate($row['sort_date']);
+            $this->setTargetPageId(intval($row['target_page']));
+            parent::initFromDb($row);
         }
 
     }

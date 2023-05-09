@@ -11,7 +11,6 @@
         private ElementHolderDao $_element_holder_dao;
         private string $_title;
         private bool $_published;
-        private bool $_include_in_search_engine;
         private string $_created_at;
         private int $_created_by_id;
         private string $_type;
@@ -35,14 +34,6 @@
         
         public function setPublished(bool $published): void {
             $this->_published = $published;
-        }
-        
-        public function getIncludeInSearchEngine(): bool {
-            return $this->_include_in_search_engine;
-        }
-        
-        public function setIncludeInSearchEngine(bool $include_in_search_engine): void {
-            $this->_include_in_search_engine = $include_in_search_engine;
         }
         
         public function getElements(): array {
@@ -102,18 +93,21 @@
             $this->_element_holder_dao->delete($this);
         }
         
-        public static function constructFromRecord(array $record): ElementHolder {
-            $element_holder = new ElementHolder($record["scope_id"]);
-            $element_holder->setId($record['id']);
-            $element_holder->setPublished($record['published'] == 1 ? true : false);
-            $element_holder->setTitle($record['title']);
-            $element_holder->setTemplateId($record['template_id']);
-            $element_holder->setScopeId($record['scope_id']);
-            $element_holder->setCreatedAt($record['created_at']);
-            $element_holder->setCreatedById($record['created_by']);
-            $element_holder->setType($record['type']);
+        public static function constructFromRecord(array $row): ElementHolder {
+            $element_holder = new ElementHolder($row["scope_id"]);
+            $element_holder->initFromDb($row);
             
             return $element_holder;
+        }
+
+        protected function initFromDb(array $row): void {
+            $this->setTitle($row['title']);
+            $this->setPublished($row['published'] == 1 ? true : false);
+            $this->setCreatedAt($row['created_at']);
+            $this->setCreatedById($row['created_by']);
+            $this->setType($row['type']);
+
+            parent::initFromDb($row);
         }
     
     }

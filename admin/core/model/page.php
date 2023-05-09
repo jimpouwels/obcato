@@ -15,6 +15,7 @@
         private PageDao $_page_dao;
         private string $_description;
         private string $_navigation_title;
+        private bool $_include_in_search_engine;
         private ?int $_parent_id;
         private bool $_show_in_navigation;
         private int $_followup;
@@ -61,6 +62,14 @@
             if (!is_null($parent)) {
                 $this->_parent_id = $parent->getId();
             }
+        }
+        
+        public function getIncludeInSearchEngine(): bool {
+            return $this->_include_in_search_engine;
+        }
+        
+        public function setIncludeInSearchEngine(bool $include_in_search_engine): void {
+            $this->_include_in_search_engine = $include_in_search_engine;
         }
         
         public function getShowInNavigation(): bool {
@@ -137,24 +146,21 @@
             $this->_page_dao->moveDown($this);
         }
         
-        public static function constructFromRecord(array $record): Page {
+        public static function constructFromRecord(array $row): Page {
             $page = new Page();
-            $page->setId($record['id']);
-            $page->setParentId($record['parent_id']);
-            $page->setPublished($record['published'] == 1 ? true : false);
-            $page->setTitle($record['title']);
-            $page->setDescription($record['description']);
-            $page->setNavigationTitle($record['navigation_title']);
-            $page->setShowInNavigation($record['show_in_navigation'] == 1 ? true : false);
-            $page->setTemplateId($record['template_id']);
-            $page->setIncludeInSearchEngine($record['include_in_searchindex'] == 1 ? true : false);
-            $page->setScopeId($record['scope_id']);
-            $page->setCreatedAt($record['created_at']);
-            $page->setCreatedById($record['created_by']);
-            $page->setType($record['type']);
-            $page->setFollowUp($record['follow_up']);
-            $page->setIsHomepage($record['is_homepage'] == 1 ? true : false);
+            $page->initFromDb($row);
             return $page;
+        }
+
+        protected function initFromDb(array $row): void {
+            $this->setParentId($row['parent_id']);
+            $this->setDescription($row['description']);
+            $this->setNavigationTitle($row['navigation_title']);
+            $this->setShowInNavigation($row['show_in_navigation'] == 1 ? true : false);
+            $this->setIncludeInSearchEngine($row['include_in_searchindex'] == 1 ? true : false);
+            $this->setFollowUp($row['follow_up']);
+            $this->setIsHomepage($row['is_homepage'] == 1 ? true : false);
+            parent::initFromDb($row);
         }
     
     }

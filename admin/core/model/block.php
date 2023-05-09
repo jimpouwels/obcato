@@ -34,18 +34,16 @@
             return $position_name;
         }
         
-        public static function constructFromRecord(array $record): Block {
+        public static function constructFromRecord(array $row): Block {
             $block = new Block();
-            $block->setId($record['id']);
-            $block->setTitle($record['title']);
-            $block->setPublished($record['published'] == 1 ? true : false);
-            $block->setTemplateId($record['template_id']);
-            $block->setScopeId($record['scope_id']);
-            $block->setPositionId($record['position_id']);
-            $block->setCreatedAt($record['created_at']);
-            $block->setCreatedById($record['created_by']);
-            $block->setType($record['type']);
+            $block->initFromDb($row);
             return $block;
+        }
+
+        protected function initFromDb(array $row): void {
+            $this->setPublished($row['published'] == 1 ? true : false);
+            $this->setPositionId($row['position_id']);
+            parent::initFromDb($row);
         }
     
     }
