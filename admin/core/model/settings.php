@@ -159,23 +159,27 @@
             return $settings;
         }
 
-        public static function constructFromRecord(array $record): Settings {
+        public static function constructFromRecord(array $row): Settings {
             $settings = new Settings();
-            $settings->setWebsiteTitle($record['website_title']);
-            $settings->setFrontEndHostname($record['frontend_hostname']);
-            $settings->setBackEndHostname($record['backend_hostname']);
-            $settings->setEmailAddress($record['email_address']);
-            $settings->setSmtpHost($record['smtp_host']);
-            $settings->setCmsRootDir($record['cms_root_dir']);
-            $settings->setPublicRootDir($record['public_root_dir']);
-            $settings->setFrontendTemplateDir($record['frontend_template_dir']);
-            $settings->setStaticDir($record['static_files_dir']);
-            $settings->setConfigDir($record['config_dir']);
-            $settings->setUploadDir($record['upload_dir']);
-            $settings->setComponentDir($record['component_dir']);
-            $settings->setDatabaseVersion($record['database_version']);
-            $settings->setBackendTemplateDir($record['backend_template_dir']);
+            $settings->initFromDb($row);
             return $settings;
+        }
+
+        protected function initFromDb(array $row): void {
+            $this->setWebsiteTitle($row['website_title']);
+            $this->setFrontEndHostname($row['frontend_hostname']);
+            $this->setBackEndHostname($row['backend_hostname']);
+            $this->setEmailAddress($row['email_address']);
+            $this->setSmtpHost($row['smtp_host']);
+            $this->setCmsRootDir($row['cms_root_dir']);
+            $this->setPublicRootDir($row['public_root_dir']);
+            $this->setFrontendTemplateDir($row['frontend_template_dir']);
+            $this->setStaticDir($row['static_files_dir']);
+            $this->setConfigDir($row['config_dir']);
+            $this->setUploadDir($row['upload_dir']);
+            $this->setComponentDir($row['component_dir']);
+            $this->setDatabaseVersion($row['database_version']);
+            $this->setBackendTemplateDir($row['backend_template_dir']);
         }
     }
 

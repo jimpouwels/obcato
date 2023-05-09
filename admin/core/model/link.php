@@ -98,18 +98,21 @@
             return $this->_element_holder_dao->getElementHolder($element_holder_id);
         }
         
-        public static function constructFromRecord(array $record): Link {
+        public static function constructFromRecord(array $row): Link {
             $link = new Link();
-            $link->setId($record['id']);
-            $link->setTitle($record['title']);
-            $link->setTargetAddress($record['target_address']);
-            $link->setType($record['type']);
-            $link->setCode($record['code']);
-            $link->setTarget($record['target']);
-            $link->setParentElementHolderId($record['parent_element_holder']);
-            $link->setTargetElementHolderId($record['target_element_holder']);
-            
+            $link->initFromDb($row);
             return $link;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setTitle($row['title']);
+            $this->setTargetAddress($row['target_address']);
+            $this->setType($row['type']);
+            $this->setCode($row['code']);
+            $this->setTarget($row['target']);
+            $this->setParentElementHolderId($row['parent_element_holder']);
+            $this->setTargetElementHolderId($row['target_element_holder']);
+            parent::initFromDb($row);
         }
     }
     

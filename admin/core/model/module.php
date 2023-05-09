@@ -85,24 +85,22 @@
             return $module_group;
         }
         
-        public static function constructFromRecord(array $record): Module {
-            $module = null;
-        
-            $class = $record['class'];
-            $identifier = $record['identifier'];
-            if (!is_null($class) && $class != '') {
-                $module = new Module();
-                $module->setId($record['id']);
-                $module->setTitleTextResourceIdentifier($record['title_text_resource_identifier']);
-                $module->setIconUrl($record['icon_url']);
-                $module->setIdentifier($identifier);
-                $module->setPopUp($record['popup']);
-                $module->setEnabled($record['enabled']);
-                $module->setSystemDefault($record['system_default']);
-                $module->setModuleGroupId($record['module_group_id']);
-                $module->setClass($record['class']);
-            }
+        public static function constructFromRecord(array $row): Module {
+            $module = new Module();
+            $module->initFromDb($row);
             return $module;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setTitleTextResourceIdentifier($row['title_text_resource_identifier']);
+            $this->setIconUrl($row['icon_url']);
+            $this->setIdentifier($row['identifier']);
+            $this->setPopUp($row['popup']);
+            $this->setEnabled($row['enabled']);
+            $this->setSystemDefault($row['system_default']);
+            $this->setModuleGroupId($row['module_group_id']);
+            $this->setClass($row['class']);
+            parent::initFromDb($row);
         }
 
     }

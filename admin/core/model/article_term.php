@@ -16,11 +16,15 @@
             $this->_name = $name;
         }
         
-        public static function constructFromRecord(array $record): ArticleTerm {
+        public static function constructFromRecord(array $row): ArticleTerm {
             $term = new ArticleTerm();
-            $term->setId($record['id']);
-            $term->setName($record['name']);
+            $term->initFromDb($row);
             return $term;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setName($row['name']);
+            parent::initFromDb($row);
         }
 
     }

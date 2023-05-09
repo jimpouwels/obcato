@@ -34,13 +34,16 @@
             return $this->_block_dao->getBlocksByPosition($this);
         }
         
-        public static function constructFromRecord(array $record): BlockPosition {
+        public static function constructFromRecord(array $row): BlockPosition {
             $position = new BlockPosition();
-            $position->setId($record['id']);
-            $position->setName($record['name']);
-            $position->setExplanation($record['explanation']);
-            
+            $position->initFromDb($row);
             return $position;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setName($row['name']);
+            $this->setExplanation($row['explanation']);
+            parent::initFromDb($row);
         }
     
     }

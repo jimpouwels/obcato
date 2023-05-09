@@ -77,17 +77,20 @@
             return $parts[count($parts) - 1];
         }
         
-        public static function constructFromRecord(array $record): Image {
+        public static function constructFromRecord(array $row): Image {
             $image = new Image();
-            $image->setId($record['id']);
-            $image->setTitle($record['title']);
-            $image->setPublished($record['published']) == 1 ? true : false;
-            $image->setCreatedAt($record['created_at']);
-            $image->setCreatedById($record['created_by']);
-            $image->setFileName($record['file_name']);
-            $image->setThumbFileName($record['thumb_file_name']);
-            
+            $image->initFromDb($row);
             return $image;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setTitle($row['title']);
+            $this->setPublished($row['published']) == 1 ? true : false;
+            $this->setCreatedAt($row['created_at']);
+            $this->setCreatedById($row['created_by']);
+            $this->setFileName($row['file_name']);
+            $this->setThumbFileName($row['thumb_file_name']);
+            parent::initFromDb($row);
         }
     
     }

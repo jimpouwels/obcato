@@ -45,14 +45,17 @@
             return file_exists($template_dir . "/" . $this->getFileName()) && $this->getFileName() != "";
         }
         
-        public static function constructFromRecord(array $record): Template {
+        public static function constructFromRecord(array $row): Template {
             $template = new Template();
-            $template->setId($record['id']);
-            $template->setFileName($record['filename']);
-            $template->setName($record['name']);
-            $template->setScopeId($record['scope_id']);
-            
+            $template->initFromDb($row);
             return $template;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setFileName($row['filename']);
+            $this->setName($row['name']);
+            $this->setScopeId($row['scope_id']);
+            parent::initFromDb($row);
         }
     
     }

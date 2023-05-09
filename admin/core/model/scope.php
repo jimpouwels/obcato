@@ -15,12 +15,15 @@
             $this->_identifier = $identifier;
         }
         
-        public static function constructFromRecord(array $record): Scope {
+        public static function constructFromRecord(array $row): Scope {
             $scope = new Scope();
-            $scope->setId($record['id']);
-            $scope->setIdentifier($record['identifier']);
-            
+            $scope->initFromDb($row);            
             return $scope;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setIdentifier($row['identifier']);
+            parent::initFromDb($row);
         }
     
     }

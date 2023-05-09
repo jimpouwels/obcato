@@ -40,13 +40,16 @@
             return $modules;
         }
         
-        public static function constructFromRecord(array $record): ModuleGroup {
+        public static function constructFromRecord(array $row): ModuleGroup {
             $module_group = new ModuleGroup();
-            $module_group->setId($record['id']);
-            $module_group->setIdentifier($record['identifier']);
-            $module_group->setElementGroup($record['element_group']);
-            
+            $module_group->initFromDb($row);
             return $module_group;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setIdentifier($row['identifier']);
+            $this->setElementGroup($row['element_group']);
+            parent::initFromDb($row);
         }
     
     }

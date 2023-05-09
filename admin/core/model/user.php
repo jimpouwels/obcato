@@ -82,16 +82,20 @@
             return $this->getUsername() == $_SESSION["username"];
         }
         
-        public static function constructFromRecord(array $record): User {
+        public static function constructFromRecord(array $row): User {
             $user = new User();
-            $user->setId($record['id']);
-            $user->setUsername($record['username']);
-            $user->setEmailAddress($record['email_address']);
-            $user->setFirstName($record['first_name']);
-            $user->setLastName($record['last_name']);
-            $user->setPrefix($record['prefix']);
-            $user->setUuid($record['uuid']);
+            $user->initFromDb($row);
             return $user;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setUsername($row['username']);
+            $this->setEmailAddress($row['email_address']);
+            $this->setFirstName($row['first_name']);
+            $this->setLastName($row['last_name']);
+            $this->setPrefix($row['prefix']);
+            $this->setUuid($row['uuid']);
+            parent::initFromDb($row);
         }
     }
     

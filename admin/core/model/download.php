@@ -61,14 +61,18 @@
             return $parts[count($parts) - 1];
         }
 
-        public static function constructFromRecord(array $record): Download {
+        public static function constructFromRecord(array $row): Download {
             $download = new Download();
-            $download->setId($record['id']);
-            $download->setTitle($record['title']);
-            $download->setPublished($record['published']);
-            $download->setCreatedAt($record['created_at']);
-            $download->setCreatedById($record['created_by']);
-            $download->setFileName($record['file_name']);
+            $download->initFromDb($row);
             return $download;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setTitle($row['title']);
+            $this->setPublished($row['published']);
+            $this->setCreatedAt($row['created_at']);
+            $this->setCreatedById($row['created_by']);
+            $this->setFileName($row['file_name']);
+            parent::initFromDb($row);
         }
     }

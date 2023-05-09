@@ -35,6 +35,10 @@
             $field->initFromDb($row);
             return $field;
         }
+        
+        protected function initFromDb(array $row): void {
+            parent::initFromDb($row);
+        }
     }
     
 ?>

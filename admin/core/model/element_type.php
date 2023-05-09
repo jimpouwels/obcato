@@ -70,17 +70,20 @@
             $this->_system_default = $system_default;
         }
         
-        public static function constructFromRecord($record) {
+        public static function constructFromRecord($row) {
             $element_type = new ElementType();
-            $element_type->setId($record['id']);
-            $element_type->setClassName($record['classname']);
-            $element_type->setIconUrl($record['icon_url']);
-            $element_type->setIdentifier($record['identifier']);
-            $element_type->setDomainObject($record['domain_object']);
-            $element_type->setScopeId($record['scope_id']);
-            $element_type->setSystemDefault($record['system_default']);
-            
+            $element_type->initFromDb($row);
             return $element_type;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setClassName($row['classname']);
+            $this->setIconUrl($row['icon_url']);
+            $this->setIdentifier($row['identifier']);
+            $this->setDomainObject($row['domain_object']);
+            $this->setScopeId($row['scope_id']);
+            $this->setSystemDefault($row['system_default']);
+            parent::initFromDb($row);
         }
     
     }

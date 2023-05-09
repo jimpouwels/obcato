@@ -15,12 +15,15 @@
             return $this->_name;
         }
         
-        public static function constructFromRecord(array $record): ImageLabel {
+        public static function constructFromRecord(array $row): ImageLabel {
             $label = new ImageLabel();
-            $label->setId($record['id']);
-            $label->setName($record['name']);
-            
+            $label->initFromDb($row);
             return $label;
+        }
+        
+        protected function initFromDb(array $row): void {
+            $this->setName($row['name']);
+            parent::initFromDb($row);
         }
     
     }
