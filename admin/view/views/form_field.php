@@ -78,6 +78,10 @@
             return "";
         }
 
+        protected function getFieldName(): string {
+            return $this->_field_name;
+        }
+
         private function getFieldValue(): ?string {
             if (isset($_POST[$this->_field_name])) {
                 return StringUtility::escapeXml($_POST[$this->_field_name]);

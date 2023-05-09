@@ -42,7 +42,7 @@
                     return;
                 }
 
-                $webform_handlers = $this->_webform_dao->getHandlersFor($webform);
+                $webform_handlers = $this->_webform_dao->getWebFormHandlersFor($webform);
                 foreach ($webform_handlers as $webform_handler) {
                     $properties = $this->_webform_dao->getPropertiesFor($webform_handler['id']);
                     $handler_instance = $this->_webform_handler_manager->getHandler($webform_handler['type']);
@@ -54,7 +54,7 @@
         }
 
         private function getFields(WebForm $webform): array {
-            $form_fields = $this->_webform_dao->getFormFieldsByWebForm($webform->getId());
+            $form_fields = $this->_webform_dao->getWebFormItemsByWebForm($webform->getId());
             $filled_in_fields = array();
             foreach ($form_fields as $form_field) {
                 if (!$form_field instanceof WebFormField) {

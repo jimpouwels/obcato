@@ -33,6 +33,8 @@
                 $this->addWebForm();
             } else if ($this->isAction("update_webform")) {
                 $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("delete_webform")) {
+                $this->deleteWebForm($this->_current_webform);
             } else if ($this->isAction("add_textfield")) {
                 $this->addTextField($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
@@ -46,10 +48,10 @@
                 $this->deleteFormItem(intval($_POST['webform_item_to_delete']));
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("add_handler_email_form_handler")) {
-                $this->addEmailHandler($this->_current_webform);
+                $this->addWebFormHandler(EmailFormHandler::$TYPE);
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("add_handler_redirect_form_handler")) {
-                $this->addRedirectHandler($this->_current_webform);
+                $this->addWebFormHandler(RedirectFormHandler::$TYPE);
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("delete_form_handler")) {
                 $this->deleteFormHandler($this->_current_webform);
@@ -119,33 +121,33 @@
             }
         }
 
+        private function deleteWebForm(WebForm $webform): void {
+            $this->_webform_dao->deleteWebForm($webform);
+            $this->redirectTo($this->getBackendBaseUrl());
+        }
+
         private function addTextField(WebForm $webform): void {
             $text_field = new WebFormTextField($this->getTextResource("webforms_new_textfield_label"), "textfield", false);
-            $this->_webform_dao->persistWebFormField($webform, $text_field);
+            $this->_webform_dao->persistWebFormItem($webform, $text_field);
         }
 
         private function addTextArea(WebForm $webform): void {
             $text_area = new WebFormTextArea($this->getTextResource("webforms_new_textarea_label"), "textarea", false);
-            $this->_webform_dao->persistWebFormField($webform, $text_area);
+            $this->_webform_dao->persistWebFormItem($webform, $text_area);
         }
 
         private function addButton(WebForm $webform): void {
             $button = new WebFormButton($this->getTextResource("webforms_new_button_label"), "button");
-            $this->_webform_dao->persistWebFormField($webform, $button);
+            $this->_webform_dao->persistWebFormItem($webform, $button);
         }
 
         private function deleteFormItem(int $form_item_id): void {
             $this->_webform_dao->deleteWebFormItem($form_item_id);
         }
 
-        private function addEmailHandler(WebForm $webform): void {
-            $handler = $this->_webform_handler_manager->getHandler(EmailFormHandler::$TYPE);
-            $this->_webform_dao->addHandler($this->_current_webform, $handler);
-        }
-
-        private function addRedirectHandler(WebForm $webform): void {
-            $handler = $this->_webform_handler_manager->getHandler(RedirectFormHandler::$TYPE);
-            $this->_webform_dao->addHandler($this->_current_webform, $handler);
+        private function addWebFormHandler(string $type): void {
+            $handler = $this->_webform_handler_manager->getHandler($type);
+            $this->_webform_dao->addWebFormHandler($this->_current_webform, $handler);
         }
 
         private function deleteFormHandler(WebForm $webform): void {

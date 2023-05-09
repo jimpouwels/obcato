@@ -21,7 +21,7 @@
             $data->assign("target_pages", $this->getTargetPages());
             $data->assign("default_target_page", $this->getDefaultTargetPage());
 
-            $page_picker = new PagePicker("add_target_page_ref", "", null, "update_target_pages", "articles");
+            $page_picker = new PagePicker("add_target_page_ref", "", null, "update_target_pages");
             $data->assign("page_picker", $page_picker->render());
         }
 

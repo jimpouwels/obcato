@@ -31,7 +31,7 @@
             $query = "SELECT " . self::$myAllColumns . " FROM webforms i WHERE id = " . $webform_id;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
-                return WebForm::constructFromRecord($row, $this->getFormFieldsByWebForm($webform_id));
+                return WebForm::constructFromRecord($row, $this->getWebFormItemsByWebForm($webform_id));
             }
             return null;
         }
@@ -41,16 +41,17 @@
             $query = "SELECT " . self::$myAllColumns . " FROM webforms i";
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
-                $webforms[] = WebForm::constructFromRecord($row, $this->getFormFieldsByWebForm($row["id"]));
+                $webforms[] = WebForm::constructFromRecord($row, $this->getWebFormItemsByWebForm($row["id"]));
             }
             return $webforms;
         }
 
         public function persistWebForm(WebForm $webform): void {
-            $query = "INSERT INTO webforms (title) VALUES (?)";
+            $query = "INSERT INTO webforms (title, include_captcha) VALUES (?, ?)";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $title = $webform->getTitle();
-            $statement->bind_param("s", $title);
+            $include_captcha = 0;
+            $statement->bind_param('si', $title, $include_captcha);
             $this->_mysql_connector->executeStatement($statement);
             $webform->setId($this->_mysql_connector->getInsertId());
         }
@@ -65,11 +66,19 @@
             $statement->bind_param("sisi", $title, $include_captcha, $captcha_key, $id);
             $this->_mysql_connector->executeStatement($statement);
             foreach ($webform->getFormFields() as $form_field) {
-                $this->updateFormField($form_field);
+                $this->updateWebFormItem($form_field);
             }
         }
 
-        public function persistWebFormField(WebForm $webform, WebFormItem $webform_item): void {
+        public function deleteWebForm(WebForm $webform): void {
+            $query = 'DELETE FROM webforms WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $id = $webform->getId();
+            $statement->bind_param('i', $id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
+        public function persistWebFormItem(WebForm $webform, WebFormItem $webform_item): void {
             $query = "INSERT INTO webforms_fields (label, `name`, mandatory, webform_id, `type`, scope_id) VALUE (?, ?, ?, ?, ?, ?)";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $label = $webform_item->getLabel();
@@ -87,7 +96,7 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function updateFormField(WebFormItem $webform_item): void {
+        public function updateWebFormItem(WebFormItem $webform_item): void {
             $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ?, mandatory = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $label = $webform_item->getLabel();
@@ -110,7 +119,7 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function getFormFieldsByWebForm(int $webform_id): array {
+        public function getWebFormItemsByWebForm(int $webform_id): array {
             $form_fields = array();
             $query = "SELECT * FROM webforms_fields WHERE webform_id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
@@ -135,7 +144,7 @@
             return $form_fields;
         }
 
-        public function addHandler(WebForm $webform, FormHandler $handler) {
+        public function addWebFormHandler(WebForm $webform, FormHandler $handler) {
             $query = 'INSERT INTO webforms_handlers (`type`, webform_id) VALUES (?, ?)';
             $statement = $this->_mysql_connector->prepareStatement($query);
             $type = $handler->getType();
@@ -144,7 +153,7 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function getHandlersFor(WebForm $webform): array {
+        public function getWebFormHandlersFor(WebForm $webform): array {
             $handlers = array();
             $query = 'SELECT * FROM webforms_handlers WHERE webform_id = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);

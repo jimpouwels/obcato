@@ -1,16 +1,25 @@
 // initialize event handlers
 $(document).ready(function() {
-	// add webform button
+	// add webform action button
 	$('#add_webform').click(function() {
 		$('#add_webform_action').attr('value', 'add_webform');
 		$('#add_form_hidden').submit();
 		return false;
 	});
 
-	// update webform button
+	// update webform action button
 	$('#update_webform').click(function() {
 		$('#action').attr('value', 'update_webform');
 		$('#webform-editor-form').submit();
+	});
+
+	// delete webform action button
+	$('#delete_webform').click(function() {
+		var confirmed = confirm('Are you sure?');
+		if (confirmed) {
+			$('#action').attr('value', 'delete_webform');
+			$('#webform-editor-form').submit();
+		}
 	});
 });
 

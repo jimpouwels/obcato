@@ -28,7 +28,7 @@
                     $this->assign('selected_page', $page->getTitle());
                 }
             }
-            $page_picker = new PagePicker("handler_property_{$id}_{$name}_field", 'webforms_redirect_handler_page_picker', $this->_property['value'], 'update_webform', 'pages');
+            $page_picker = new PagePicker("handler_property_{$id}_{$name}_field", 'webforms_redirect_handler_page_picker', $this->_property['value'], 'update_webform');
             $this->assign('page_picker', $page_picker->render());
         }
 

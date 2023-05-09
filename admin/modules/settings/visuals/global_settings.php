@@ -21,7 +21,7 @@
 
             $website_title = new TextField("website_title", "settings_form_website_title_field", $this->_settings->getWebsiteTitle(), true, false, null);
             $email_field = new TextField("email_address", "settings_form_website_email_address_field", $this->_settings->getEmailAddress(), false, false, null);
-            $homepage_picker = new PagePicker("homepage_page_id", "settings_form_website_homepage_field", $current_homepage->getId(), "apply_settings", "pick_homepage");
+            $homepage_picker = new PagePicker("homepage_page_id", "settings_form_website_homepage_field", $current_homepage->getId(), "apply_settings");
 
             $data->assign("website_title", $website_title->render());
             $data->assign("email_field", $email_field->render());

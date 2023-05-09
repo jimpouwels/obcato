@@ -22,7 +22,7 @@
         public function renderElementForm(Smarty_Internal_Data $data): string {
             $title_field = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->_image_element->getTitle()), false, false, null);
             $alternative_text_field = new TextField($this->createFieldId("alternative_text"), $this->getTextResource("image_element_editor_alternative_text"), $this->_image_element->getAlternativeText(), false, true, null);
-            $image_picker = new ImagePicker("image_image_ref_" . $this->_image_element->getId(), $this->getTextResource("image_element_editor_image"), $this->_image_element->getImageId(), "update_element_holder", "");
+            $image_picker = new ImagePicker("image_image_ref_" . $this->_image_element->getId(), $this->getTextResource("image_element_editor_image"), $this->_image_element->getImageId(), "update_element_holder");
             $width_field = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->_image_element->getWidth(), false, false, "size_field");
             $height_field = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->_image_element->getHeight(), false, false, "size_field");
 

@@ -59,7 +59,7 @@
         }
 
         private function loadHandlerProperties(): void {
-            foreach ($this->_webform_dao->getHandlersFor($this->_webform) as $handler) {
+            foreach ($this->_webform_dao->getWebFormHandlersFor($this->_webform) as $handler) {
                 foreach ($this->_webform_dao->getPropertiesFor($handler['id']) as $property) {
                     $this->_handler_properties[] = $property;
                 }
