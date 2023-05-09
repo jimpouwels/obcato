@@ -415,6 +415,7 @@ h1 {
 */
 
 .draggable_wrapper {
+    overflow: auto;
     cursor: move;
     border: 1px solid #d3d3d3;
     padding: 10px;
