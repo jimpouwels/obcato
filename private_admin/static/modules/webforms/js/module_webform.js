@@ -12,11 +12,6 @@ $(document).ready(function() {
 		$('#action').attr('value', 'update_webform');
 		$('#webform-editor-form').submit();
 	});
-
-	$('#submit_webform_editor_form').click(function() {
-		$('#action').attr('value', 'update_webform');
-		$('#webform-editor-form').submit();
-	});
 });
 
 function addFormField(type) {

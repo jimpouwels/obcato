@@ -22,14 +22,13 @@
         public function load(): void {
             $id = $this->_property['id'];
             $name = $this->_property['name'];
-            $backing_field_name = "handler_property_{$id}_{$name}_field";
-            $page_picker = new PagePicker('webforms_redirect_handler_page_picker', $this->_property['value'], $backing_field_name, 'submit_webform_editor_form', 'pages');
             if ($this->_property['value']) {
                 $page = $this->_page_dao->getPage(intval($this->_property['value']));
                 if ($page) {
-                  $this->assign('selected_page', $page->getTitle());
+                    $this->assign('selected_page', $page->getTitle());
                 }
             }
+            $page_picker = new PagePicker("handler_property_{$id}_{$name}_field", 'webforms_redirect_handler_page_picker', $this->_property['value'], 'update_webform', 'pages');
             $this->assign('page_picker', $page_picker->render());
         }
 

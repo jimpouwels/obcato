@@ -32,7 +32,7 @@
             $publication_date_field = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->_current_article->getPublicationDate()), true, null);
             $sort_date_field = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->_current_article->getSortDate()), true, null);
             $target_pages_field = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->_current_article->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
-            $image_picker_field = new ImagePicker($this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "article_image_ref_" . $this->_current_article->getId(), "update_element_holder", null);
+            $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder", null);
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
 
             $data->assign("current_article_id", $this->_current_article->getId());

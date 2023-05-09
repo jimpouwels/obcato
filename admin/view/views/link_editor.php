@@ -74,7 +74,7 @@
         }
 
         private function renderLinkTargetPicker(Link $link): string {
-            $element_holder_picker = new ObjectPicker('', $link->getTargetElementHolderId(), 'link_element_holder_ref_' . $link->getId(), 'update_element_holder');
+            $element_holder_picker = new ObjectPicker('link_element_holder_ref_' . $link->getId(), '', $link->getTargetElementHolderId(), 'update_element_holder');
             return $element_holder_picker->render();
         }
 
