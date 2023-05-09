@@ -48,6 +48,9 @@
             } else if ($this->isAction("add_handler_email_form_handler")) {
                 $this->addEmailHandler($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_handler_redirect_form_handler")) {
+                $this->addRedirectHandler($this->_current_webform);
+                $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("delete_form_handler")) {
                 $this->deleteFormHandler($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
@@ -137,6 +140,11 @@
 
         private function addEmailHandler(WebForm $webform): void {
             $handler = $this->_webform_handler_manager->getHandler(EmailFormHandler::$TYPE);
+            $this->_webform_dao->addHandler($this->_current_webform, $handler);
+        }
+
+        private function addRedirectHandler(WebForm $webform): void {
+            $handler = $this->_webform_handler_manager->getHandler(RedirectFormHandler::$TYPE);
             $this->_webform_dao->addHandler($this->_current_webform, $handler);
         }
 

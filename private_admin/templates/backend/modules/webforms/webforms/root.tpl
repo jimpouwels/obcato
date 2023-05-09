@@ -11,6 +11,7 @@
 			{$metadata_editor}
 			{$webform_editor}
 			{$handlers_editor}
+			<a href="#" id="submit_webform_editor_form" class="displaynone"></a>
 		</form>
 	</div>
 {/if}

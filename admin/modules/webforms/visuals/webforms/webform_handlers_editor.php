@@ -68,10 +68,15 @@
                     $existing_property = $this->_webform_dao->storeProperty($found_handler_id, $property);
                 }
                 $property_field = null;
-                if ($property['type'] == 'textfield') {
-                    $property_field = new TextField('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                if (isset($property['editor'])) {
+                    $property_field = $property['editor'];
+                    $property_field->setCurrentValue($existing_property);
                 } else {
-                    $property_field = new TextArea('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                    if ($property['type'] == 'textfield') {
+                        $property_field = new TextField('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                    } else {
+                        $property_field = new TextArea('handler_property_' . $existing_property['id'] . '_' . $existing_property['name'] . '_field', $existing_property['name'], $existing_property['value'], true, false, null);
+                    }
                 }
                 $handler_property['id'] = $existing_property['id'];
                 $handler_property['field'] = $property_field->render();

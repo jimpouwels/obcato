@@ -9,12 +9,12 @@
         
         private ?string $_css_class = null;
         private string $_field_name;
-        private string $_label_resource_identifier;
+        private ?string $_label_resource_identifier;
         private bool $_mandatory;
         private bool $_linkable;
         private ?string $_value = null;
 
-        protected function __construct(string $field_name, ?string $value, string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
+        protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
             parent::__construct();
             $this->_field_name = $field_name;
             $this->_css_class = $css_class;

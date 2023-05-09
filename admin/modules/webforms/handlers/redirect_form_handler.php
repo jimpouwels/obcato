@@ -4,25 +4,29 @@
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     require_once CMS_ROOT . 'core/model/webform.php';
     require_once CMS_ROOT . 'database/dao/settings_dao.php';
+    require_once CMS_ROOT . 'database/dao/page_dao.php';
 
-    class EmailFormHandler extends Formhandler {
+    class RedirectFormHandler extends Formhandler {
 
-        public static string $TYPE = 'email_form_handler';
+        public static string $TYPE = 'redirect_form_handler';
         private SettingsDao $_settings_dao;
+        private PageDao $_page_dao;
 
         public function __construct() {
+            parent::__construct();
             $this->_settings_dao = SettingsDao::getInstance();
+            $this->_page_dao = PageDao::getInstance();
         }
 
         public function getRequiredProperties(): array {
+            require_once CMS_ROOT . 'modules/webforms/visuals/redirect_form_handler_editor.php';
             return array(
-                array('name' => 'email_address', 'type' => 'textfield', 'editor' => null),
-                array('name' => 'template', 'type' => 'textarea', 'editor' => null)
+                array('name' => 'page_id', 'type' => 'textfield', 'editor' => new RedirectFormHandlerEditor()),
             );
         }
 
         public function getNameResourceIdentifier(): string {
-            return 'webforms_email_form_handler_name';
+            return 'webforms_redirect_form_handler_name';
         }
 
         public function getType(): string {
@@ -30,16 +34,13 @@
         }
 
         public function handlePost(array $properties, array $fields): void {
-            $headers = 'From: info@jqtravel.nl';
-            $message = $this->findPropertyIn($properties, 'template')['value'];
-            foreach ($fields as $field) {
-                $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
+            $page_id = $this->findPropertyIn($properties, 'page_id')['value'];
+            if ($page_id) {
+                $page = $this->_page_dao->getPage($page_id);
+                if ($page) {
+                    $this->redirectTo($this->getPageUrl($page));
+                }
             }
-            $email_address = $this->_settings_dao->getSettings()->getEmailAddress();
-            if (!$email_address) {
-                $email_address = $this->findPropertyIn($properties, 'email_address')['value'];
-            }
-            mail($email_address, 'JQTravel', $message, $headers);
         }
 
         private function findPropertyIn(array $properties, string $property_to_find): ?array {
