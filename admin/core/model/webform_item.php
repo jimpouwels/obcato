@@ -5,13 +5,11 @@
 
     abstract class WebFormItem extends Presentable {
     
-        private string $_label;
-        private string $_name;
+        private string $_label = "";
+        private string $_name = "";
 
-        public function __construct(int $scope_id, string $label, string $name) {
+        public function __construct(int $scope_id) {
             parent::__construct($scope_id);
-            $this->_label = $label;
-            $this->_name = $name;
         }
         
         public function setLabel(string $label): void {
@@ -31,6 +29,12 @@
         }
 
         public abstract function getType(): string;
+
+        protected function initFromDb(array $row): void {
+            $this->setName($row['name']);
+            $this->setLabel($row['label']);
+            parent::initFromDb($row);
+        }
 
     }
     

@@ -8,8 +8,8 @@
         public static string $TYPE = "button";
         private static int $SCOPE = 17;
         
-        public function __construct(string $label, string $name) {
-            parent::__construct(self::$SCOPE, $label, $name);
+        public function __construct() {
+            parent::__construct(self::$SCOPE);
         }
         
         public function getType(): string {
@@ -17,10 +17,8 @@
         }
 
         public static function constructFromRecord(array $row): WebFormButton {
-            $field = new WebFormButton($row["label"], $row["name"]);
-            $field->setId($row["id"]);
-            $field->setScopeId($row["scope_id"]);
-            $field->setTemplateId($row["template_id"]);
+            $field = new WebFormButton();
+            $field->initFromDb($row);
             return $field;
         }
     }

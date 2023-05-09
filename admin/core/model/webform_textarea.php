@@ -8,8 +8,8 @@
         public static string $TYPE = "textarea";
         private static int $SCOPE = 14;
         
-        public function __construct(string $label, string $name, bool $mandatory) {
-            parent::__construct(self::$SCOPE, $label, $name, $mandatory);
+        public function __construct() {
+            parent::__construct(self::$SCOPE);
         }
 
         public function getType(): string {
@@ -17,10 +17,8 @@
         }
 
         public static function constructFromRecord(array $row): WebFormTextArea {
-            $field = new WebFormTextArea($row["label"], $row["name"], $row["mandatory"] == 1 ? true : false);
-            $field->setId($row["id"]);
-            $field->setScopeId($row["scope_id"]);
-            $field->setTemplateId($row["template_id"]);
+            $field = new WebFormTextArea();
+            $field->initFromDb($row);
             return $field;
         }
     }

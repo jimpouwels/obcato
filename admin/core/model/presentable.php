@@ -47,6 +47,12 @@
         public function setScopeId(int $scope_id): void {
             $this->_scope_id = $scope_id;
         }
+
+        protected function initFromDb(array $row): void {
+            $this->setTemplateId($row['template_id']);
+            $this->setScopeId($row['scope_id']);
+            parent::initFromDb($row);
+        }
     }
     
 ?>

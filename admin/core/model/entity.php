@@ -12,6 +12,10 @@
         public function setId(?int $id): void {
             $this->_id = $id;
         }
+
+        protected function initFromDb(array $row): void {
+            $this->setId($row['id']);
+        }
     
     }
     
