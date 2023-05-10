@@ -9,7 +9,6 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        private array $_required_properties = array();
 
         abstract function getRequiredProperties(): array;
 
