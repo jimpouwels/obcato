@@ -36,7 +36,7 @@
             $this->assign("error", $this->getErrorHtml($this->_field_name));
             $this->assign('label', $this->getLabelHtml());
             
-            $field_template_data = $this->getTemplateEngine()->createChildData();
+            $field_template_data = $this->createChildData();
             $this->loadFormField($field_template_data);
             $field_template_data->assign('classes',$this->getCssClassesHtml());
             $field_template_data->assign("field_name", $this->_field_name);

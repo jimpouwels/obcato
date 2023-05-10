@@ -32,6 +32,14 @@
             return $this->_template_engine;
         }
 
+        protected function createChildData(bool $include_current_data = false): Smarty_Internal_Data {
+            if ($include_current_data) {
+                return $this->_template_engine->createChildData($this->_template_data);
+            } else {
+                return $this->_template_engine->createChildData();
+            }
+        }
+
         protected function getParentTemplateData(): ?Smarty_Internal_Data {
             return $this->_parent_template_data;
         }

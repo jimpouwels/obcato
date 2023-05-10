@@ -14,7 +14,7 @@
         private static int $SCOPE = 9;
 
         private string $_description;
-        private string $_image_id;
+        private ?int $_image_id = null;
         private string $_publication_date;
         private string $_sort_date;
         private ?int $_target_page_id;
@@ -34,15 +34,15 @@
             $this->_description = $description;
         }
         
-        public function getImageId(): string {
+        public function getImageId(): ?int {
             return $this->_image_id;
         }
         
-        public function setImageId(string $image_id): void {
+        public function setImageId(?int $image_id): void {
             $this->_image_id = $image_id;
         }
         
-        public function getImage(): Image {
+        public function getImage(): ?Image {
             $image = null;
             if ($this->_image_id != '' && !is_null($this->_image_id)) {
                 $image_dao = ImageDao::getInstance();
