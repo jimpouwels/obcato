@@ -29,26 +29,17 @@
             return self::$TYPE;
         }
 
-        public function handlePost(array $properties, array $fields): void {
+        public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
             $headers = 'From: info@jqtravel.nl';
-            $message = $this->findPropertyIn($properties, 'template')['value'];
+            $message = $webform_handler_instance->getProperty('template')->getValue();
             foreach ($fields as $field) {
                 $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
             }
             $email_address = $this->_settings_dao->getSettings()->getEmailAddress();
             if (!$email_address) {
-                $email_address = $this->findPropertyIn($properties, 'email_address')['value'];
+                $email_address = $webform_handler_instance->getProperty('email_address')->getValue();
             }
             mail($email_address, 'JQTravel', $message, $headers);
-        }
-
-        private function findPropertyIn(array $properties, string $property_to_find): ?array {
-            foreach ($properties as $property) {
-                if ($property['name'] == $property_to_find) {
-                    return $property;
-                }
-            }
-            return null;
         }
     }
 ?>

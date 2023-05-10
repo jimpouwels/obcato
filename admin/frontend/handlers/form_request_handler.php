@@ -42,11 +42,10 @@
                     return;
                 }
 
-                $webform_handlers = $this->_webform_dao->getWebFormHandlersFor($webform);
-                foreach ($webform_handlers as $webform_handler) {
-                    $properties = $this->_webform_dao->getPropertiesFor($webform_handler['id']);
-                    $handler_instance = $this->_webform_handler_manager->getHandler($webform_handler['type']);
-                    $handler_instance->handlePost($properties, $fields);
+                $handler_instances = $this->_webform_dao->getWebFormHandlersFor($webform);
+                foreach ($handler_instances as $webform_handler_instance) {
+                    $webform_handler = $this->_webform_handler_manager->getHandler($webform_handler_instance->getType());
+                    $webform_handler->handlePost($webform_handler_instance, $fields);
                 }
                 
                 FormStatus::setSubmittedForm($webform->getId());

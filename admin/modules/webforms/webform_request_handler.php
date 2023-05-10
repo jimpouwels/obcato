@@ -127,17 +127,17 @@
         }
 
         private function addTextField(WebForm $webform): void {
-            $text_field = new WebFormTextField($this->getTextResource("webforms_new_textfield_label"), "textfield", false);
+            $text_field = new WebFormTextField();
             $this->_webform_dao->persistWebFormItem($webform, $text_field);
         }
 
         private function addTextArea(WebForm $webform): void {
-            $text_area = new WebFormTextArea($this->getTextResource("webforms_new_textarea_label"), "textarea", false);
+            $text_area = new WebFormTextArea();
             $this->_webform_dao->persistWebFormItem($webform, $text_area);
         }
 
         private function addButton(WebForm $webform): void {
-            $button = new WebFormButton($this->getTextResource("webforms_new_button_label"), "button");
+            $button = new WebFormButton();
             $this->_webform_dao->persistWebFormItem($webform, $button);
         }
 
@@ -151,7 +151,7 @@
         }
 
         private function deleteFormHandler(WebForm $webform): void {
-            $this->_webform_dao->deleteFormHandler($webform, intval($_POST['webform_handler_to_delete']));
+            $this->_webform_dao->deleteWebFormHandler($webform, intval($_POST['webform_handler_to_delete']));
         }
         
     }

@@ -33,23 +33,14 @@
             return self::$TYPE;
         }
 
-        public function handlePost(array $properties, array $fields): void {
-            $page_id = $this->findPropertyIn($properties, 'page_id')['value'];
+        public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
+            $page_id = $webform_handler_instance->getProperty('page_id')->getValue();
             if ($page_id) {
                 $page = $this->_page_dao->getPage($page_id);
                 if ($page) {
                     $this->redirectTo($this->getPageUrl($page));
                 }
             }
-        }
-
-        private function findPropertyIn(array $properties, string $property_to_find): ?array {
-            foreach ($properties as $property) {
-                if ($property['name'] == $property_to_find) {
-                    return $property;
-                }
-            }
-            return null;
         }
     }
 ?>

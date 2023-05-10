@@ -42,7 +42,7 @@
             }
 
             foreach ($this->_handler_properties as &$property) {
-                $property['value'] = $this->getMandatoryFieldValue('handler_property_' . $property['id'] . '_' . $property['name'] . '_field', 'webforms_editor_handler_property_mandatory_error_message');
+                $property->setValue($this->getMandatoryFieldValue('handler_property_' . $property->getId() . '_' . $property->getName() . '_field', 'webforms_editor_handler_property_mandatory_error_message'));
             }
 
             if ($this->hasErrors()) {
@@ -59,10 +59,8 @@
         }
 
         private function loadHandlerProperties(): void {
-            foreach ($this->_webform_dao->getWebFormHandlersFor($this->_webform) as $handler) {
-                foreach ($this->_webform_dao->getPropertiesFor($handler['id']) as $property) {
-                    $this->_handler_properties[] = $property;
-                }
+            foreach ($this->_webform_dao->getWebFormHandlersFor($this->_webform) as $handler_instance) {
+                $this->_handler_properties = array_merge($this->_handler_properties, $handler_instance->getProperties());
             }
         }
     }

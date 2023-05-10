@@ -8,6 +8,8 @@
     require_once CMS_ROOT . "core/model/webform_textarea.php";
     require_once CMS_ROOT . "core/model/webform_dropdown.php";
     require_once CMS_ROOT . "core/model/webform_button.php";
+    require_once CMS_ROOT . "core/model/webform_handler_instance.php";
+    require_once CMS_ROOT . "core/model/webform_handler_property.php";
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     
     class WebFormDao {
@@ -134,7 +136,7 @@
                         $form_fields[] = WebFormTextArea::constructFromRecord($row);
                         break;
                     case WebFormDropDown::$TYPE:
-                        $form_fields[] = WebFormDropDown::constructFromRecord($row, array());
+                        $form_fields[] = WebFormDropDown::constructFromRecord($row);
                         break;
                     case WebFormButton::$TYPE:
                         $form_fields[] = WebFormButton::constructFromRecord($row);
@@ -154,23 +156,21 @@
         }
 
         public function getWebFormHandlersFor(WebForm $webform): array {
-            $handlers = array();
             $query = 'SELECT * FROM webforms_handlers WHERE webform_id = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);
             $webform_id = $webform->getId();
             $statement->bind_param('i', $webform_id);
-
+            
             $result = $this->_mysql_connector->executeStatement($statement);
+            
+            $handlers = array();
             while ($row = $result->fetch_assoc()) {
-                $handlers[] = array(
-                    "id" => $row["id"],
-                    "type" => $row['type']
-                );
+                $handlers[] = WebFormHandlerInstance::constructFromRecord($row, $this->getPropertiesFor($row['id']));
             }
             return $handlers;
         }
 
-        public function deleteFormHandler(WebForm $webform, int $webform_handler_id): void {
+        public function deleteWebFormHandler(WebForm $webform, int $webform_handler_id): void {
             $query = 'DELETE FROM webforms_handlers WHERE webform_id = ? AND `id` = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);
             $webform_id = $webform->getId();
@@ -178,39 +178,33 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        public function getPropertiesFor(int $handler_id): array {
-            $properties = array();
+        public function storeProperty(int $handler_id, WebFormHandlerProperty $property): void {
+            $name = $property->getName();
+            $type = $property->getType();
+            $query = "INSERT INTO webforms_handlers_properties (handler_id, `name`, `value`, `type`) VALUES ('{$handler_id}', '{$name}', '', '{$type}')";
+            $this->_mysql_connector->executeQuery($query);
+        }
+
+        public function updateHandlerProperty(WebFormHandlerProperty $property): void {
+            $query = 'UPDATE webforms_handlers_properties SET `value` = ? WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+
+            $id = $property->getId();
+            $value = $property->getValue();
+            $statement->bind_param('si', $value, $id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
+        private function getPropertiesFor(int $handler_id): array {
             $query = 'SELECT * FROM webforms_handlers_properties WHERE handler_id = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param('i', $handler_id);
             $result = $this->_mysql_connector->executeStatement($statement);
+
+            $properties = array();
             while ($row = $result->fetch_assoc()) {
-                $properties[] = array(
-                    "id" => $row["id"],
-                    "name" => $row["name"],
-                    "value" => $row['value']
-                );
+                $properties[] = WebFormHandlerProperty::constructFromRecord($row);
             }
             return $properties;
-        }
-
-        public function storeProperty(int $handler_id, array $property): array {
-            $property_name = $property['name'];
-            $property_type = $property['type'];
-            $query = "INSERT INTO webforms_handlers_properties (handler_id, `name`, `value`, `type`) VALUES ('{$handler_id}', '{$property_name}', '', '{$property_type}')";
-            $this->_mysql_connector->executeQuery($query);
-
-            return array(
-                'id' => $this->_mysql_connector->getInsertId(),
-                'name' => $property_name,
-                'value' => ''
-            );
-        }
-
-        public function updateHandlerProperty(array $property): void {
-            $query = 'UPDATE webforms_handlers_properties SET `value` = ? WHERE id = ?';
-            $statement = $this->_mysql_connector->prepareStatement($query);
-            $statement->bind_param('si', $property['value'], $property['id']);
-            $this->_mysql_connector->executeStatement($statement);
         }
     }

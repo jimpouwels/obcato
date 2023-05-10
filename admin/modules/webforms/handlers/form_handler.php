@@ -13,7 +13,7 @@
 
         abstract function getRequiredProperties(): array;
 
-        abstract function handlePost(array $properties, array $fields): void;
+        abstract function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void;
 
         abstract function getNameResourceIdentifier(): string;
 
