@@ -22,14 +22,13 @@
 
         public function load(): void {
             $id = $this->_property->getId();
-            $name = $this->_property->getName();
             if ($this->_property->getValue()) {
                 $page = $this->_page_dao->getPage(intval($this->_property->getValue()));
                 if ($page) {
                     $this->assign('selected_page', $page->getTitle());
                 }
             }
-            $page_picker = new PagePicker("handler_property_{$id}_{$name}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
+            $page_picker = new PagePicker("handler_property_{$id}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
             $this->assign('page_picker', $page_picker->render());
         }
 

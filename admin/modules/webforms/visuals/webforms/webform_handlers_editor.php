@@ -74,9 +74,9 @@
                     $property_field->setCurrentValue($existing_property);
                 } else {
                     if ($property['type'] == 'textfield') {
-                        $property_field = new TextField('handler_property_' . $existing_property->getId() . '_' . $existing_property->getName() . '_field', $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                        $property_field = new TextField("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
                     } else {
-                        $property_field = new TextArea('handler_property_' . $existing_property->getId() . '_' . $existing_property->getName() . '_field', $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                        $property_field = new TextArea("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
                     }
                 }
                 $handler_property['id'] = $existing_property->getId();

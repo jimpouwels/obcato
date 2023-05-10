@@ -42,7 +42,7 @@
             }
 
             foreach ($this->_handler_properties as $property) {
-                $property->setValue($this->getMandatoryFieldValue('handler_property_' . $property->getId() . '_' . $property->getName() . '_field', 'webforms_editor_handler_property_mandatory_error_message'));
+                $property->setValue($this->getMandatoryFieldValue("handler_property_{$property->getId()}_field", 'webforms_editor_handler_property_mandatory_error_message'));
             }
 
             if ($this->hasErrors()) {
