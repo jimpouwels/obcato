@@ -7,6 +7,9 @@
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
     require_once CMS_ROOT . "frontend/website_visual.php";
+    require_once CMS_ROOT . 'utilities/url_helper.php';
+    require_once CMS_ROOT . 'view/views/visual.php';
+    require_once CMS_ROOT . 'view/template_engine.php';
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
     require_once CMS_ROOT . 'frontend/handlers/form_request_handler.php';
 
