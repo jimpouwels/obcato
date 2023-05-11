@@ -4,7 +4,6 @@
     require_once CMS_ROOT . "view/views/search.php";
     require_once CMS_ROOT . "view/views/information_message.php";
     require_once CMS_ROOT . "database/dao/image_dao.php";
-    require_once CMS_ROOT . 'view/views/panel.php';
 
     class ImageSearchBox extends Panel {
 

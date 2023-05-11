@@ -1,7 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/template_engine.php";
     require_once CMS_ROOT . "database/mysql_connector.php";
 
     class Configuration extends Panel {

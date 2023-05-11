@@ -1,7 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
     require_once CMS_ROOT . 'modules/downloads/visuals/metadata_editor.php';
     require_once CMS_ROOT . 'modules/downloads/visuals/download_info.php';
 

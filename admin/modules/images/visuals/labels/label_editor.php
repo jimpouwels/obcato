@@ -1,9 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
-    require_once CMS_ROOT . "view/views/form_textfield.php";
-
     class LabelEditor extends Panel {
 
         private ImageLabel $_current_label;

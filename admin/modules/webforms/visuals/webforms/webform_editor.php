@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/panel.php";
-    require_once CMS_ROOT . "view/views/button.php";
     require_once CMS_ROOT . "database/dao/webform_dao.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_textfield_visual.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_textarea_visual.php";

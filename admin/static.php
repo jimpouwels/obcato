@@ -6,7 +6,6 @@
     require_once CMS_ROOT . "authentication/authenticator.php";
     require_once CMS_ROOT . "database_config.php";
     require_once CMS_ROOT . "constants.php";
-    require_once CMS_ROOT . "backend.php";
     require_once CMS_ROOT . "request_handlers/statics_request_handler.php";
 
     Authenticator::isAuthenticated();

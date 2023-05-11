@@ -1,8 +1,8 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . 'view/views/visual.php';
     require_once CMS_ROOT . 'view/template_engine.php';
+    require_once CMS_ROOT . 'view/views/visual.php';
     require_once CMS_ROOT . 'view/views/panel.php';
     require_once CMS_ROOT . 'view/views/action_button.php';
     require_once CMS_ROOT . 'view/views/action_button_save.php';
@@ -12,6 +12,7 @@
     require_once CMS_ROOT . 'view/views/action_button_down.php';
     require_once CMS_ROOT . 'view/views/button.php';
     require_once CMS_ROOT . 'view/views/form_checkbox_single.php';
+    require_once CMS_ROOT . "view/views/information_message.php";
     require_once CMS_ROOT . 'view/views/form_date.php';
     require_once CMS_ROOT . 'view/views/form_field.php';
     require_once CMS_ROOT . 'view/views/form_password_field.php';

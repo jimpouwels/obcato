@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
     
-    require_once CMS_ROOT . "view/views/visual.php";
-    
     class ActionsMenu extends Visual {
     
         private array $_action_buttons;

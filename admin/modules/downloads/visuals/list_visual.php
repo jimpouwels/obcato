@@ -1,7 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
     require_once CMS_ROOT . "database/dao/download_dao.php";
     require_once CMS_ROOT . "view/views/information_message.php";
 

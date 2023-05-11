@@ -1,7 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
     require_once CMS_ROOT . "modules/webforms/visuals/webforms/fields/webform_item_visual.php";
     require_once CMS_ROOT . "core/model/webform_button.php";
 

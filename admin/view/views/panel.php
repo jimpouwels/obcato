@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
-
     abstract class Panel extends Visual {
 
         private string $_title_resource_identifier;

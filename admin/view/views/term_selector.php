@@ -2,7 +2,6 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "database/dao/block_dao.php";
-    require_once CMS_ROOT . 'view/views/panel.php';
 
     class TermSelector extends Panel {
 

@@ -6,7 +6,6 @@
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "core/model/page.php";
-    require_once CMS_ROOT . 'view/views/panel.php';
 
     class ElementHolderSearch extends Panel {
 

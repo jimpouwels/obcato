@@ -1,9 +1,6 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "view/views/visual.php";
-    require_once CMS_ROOT . "view/views/information_message.php";
-
     class DownloadInfo extends Panel {
 
         private Download $_download;

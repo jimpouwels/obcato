@@ -1,8 +1,6 @@
 <?php
     defined('_ACCESS') or die;
     
-    require_once CMS_ROOT . "view/views/visual.php";
-    
     class InformationMessage extends Visual {
     
         private string $_message;

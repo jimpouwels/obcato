@@ -2,7 +2,6 @@
     defined("_ACCESS") or die;
     
     require_once CMS_ROOT . "frontend/frontend_visual.php";
-    require_once CMS_ROOT . "view/template_engine.php";
     require_once CMS_ROOT . "frontend/block_visual.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
 
