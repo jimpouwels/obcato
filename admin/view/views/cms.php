@@ -53,6 +53,11 @@
             $this->assignGlobal("tab_menu", $this->renderTabMenu());
             $this->assignGlobal("system_version", SYSTEM_VERSION);
             $this->assignGlobal("db_version", DB_VERSION);
+
+            if (Logs::hasLogs()) {
+                $system_logs = new WarningMessage(Logs::asString());
+                $this->assign('system_logs', $system_logs->render());
+            }
         }
 
         private function getActionsMenu(): ActionsMenu {

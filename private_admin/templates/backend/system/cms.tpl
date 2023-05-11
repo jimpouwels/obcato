@@ -36,6 +36,9 @@
 			{/if}
 		</div>
 		<div id="content-wrapper">
+			{if isset($system_logs)}
+				{$system_logs}
+			{/if}
 			<div class="module_title_wrapper">
 				<h1>
 					{if isset($page_title)}

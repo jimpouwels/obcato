@@ -3,6 +3,14 @@
 		<img src="/admin/static.php?file=/default/img/default_icons/warning.png" alt="notification" />
 	</div>
 	<div class="info-message">
-		<p><em>{$text_resources[$message_resource_identifier]}</em></p>
+		<p>
+			<em>
+				{if isset($text_resources[$message_resource_identifier])}
+					{$text_resources[$message_resource_identifier]}
+				{else}
+					{$message_resource_identifier}
+				{/if}
+			</em>
+		</p>
 	</div>
 </div>
