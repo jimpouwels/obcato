@@ -57,8 +57,8 @@
             return mysqli_affected_rows($this->conn);
         }
 
-        public function getInsertId(): string {
-            return $this->conn->insert_id;
+        public function getInsertId(): int {
+            return mysqli_insert_id($this->conn);
         }
 
         public function getDatabaseName(): string {

@@ -8,8 +8,10 @@
         private static array $ERRORS = array();
         private static ?int $SUBMITTED_FORM = null;
 
-        public static function raiseError(string $key, ErrorType $errorType): void {
-            self::$ERRORS[$key] = $errorType;
+        public static function raiseError(string $key, ErrorType $error_type): void {
+            dumpVar($key);
+            dumpVar($error_type);
+            self::$ERRORS[$key] = $error_type;
         }
 
         public static function getError(string $key): ?ErrorType {

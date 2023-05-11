@@ -26,12 +26,9 @@
         }
 
         public function getProperty(string $property_to_find): ?WebFormHandlerProperty {
-            foreach ($this->_properties as $property) {
-                if ($property->getName() == $property_to_find) {
-                    return $property;
-                }
-            }
-            return null;
+            return Arrays::firstMatch($this->_properties, function($p) use ($property_to_find) {
+                return $property_to_find == $p->getName();
+            });
         }
 
         public static function constructFromRecord(array $row, array $properties): WebFormHandlerInstance {

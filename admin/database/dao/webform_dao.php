@@ -183,6 +183,7 @@
             $type = $property->getType();
             $query = "INSERT INTO webforms_handlers_properties (handler_id, `name`, `value`, `type`) VALUES ('{$handler_id}', '{$name}', '', '{$type}')";
             $this->_mysql_connector->executeQuery($query);
+            $property->setId($this->_mysql_connector->getInsertId());
         }
 
         public function updateHandlerProperty(WebFormHandlerProperty $property): void {

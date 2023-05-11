@@ -46,6 +46,7 @@
             }
 
             if ($this->hasErrors()) {
+                dumpVar($_SESSION);
                 throw new FormException();
             }
         }

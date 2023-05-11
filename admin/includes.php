@@ -28,6 +28,6 @@
     require_once CMS_ROOT . 'utilities/password_utility.php';
     require_once CMS_ROOT . 'utilities/string_utility.php';
     require_once CMS_ROOT . 'utilities/url_helper.php';
-
     require_once CMS_ROOT . 'utilities/logger.php';
+    require_once CMS_ROOT . 'utilities/arrays.php';
 ?>
