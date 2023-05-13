@@ -11,3 +11,7 @@
 .webforms_list .selected {
     font-weight: bold;
 }
+
+.form_field_editor_wrapper textarea {
+    width: 100%;
+}
