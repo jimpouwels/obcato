@@ -7,6 +7,7 @@
     
         private string $_label = "";
         private string $_name = "";
+        private int $_order_nr = 0;
 
         public function __construct(int $scope_id) {
             parent::__construct($scope_id);
@@ -28,11 +29,20 @@
             return $this->_name;
         }
 
+        public function setOrderNr(int $order_nr): void {
+            $this->_order_nr = $order_nr;
+        }
+
+        public function getOrderNr(): int {
+            return $this->_order_nr;
+        }
+
         public abstract function getType(): string;
 
         protected function initFromDb(array $row): void {
             $this->setName($row['name']);
             $this->setLabel($row['label']);
+            $this->setOrderNr($row['order_nr']);
             parent::initFromDb($row);
         }
 

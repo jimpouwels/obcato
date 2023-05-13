@@ -122,5 +122,6 @@
             <query>ALTER TABLE webforms_handlers_properties ADD COLUMN type VARCHAR(255) NOT NULL</query>
             <query>ALTER TABLE webforms ADD COLUMN include_captcha int(10) unsigned NOT NULL</query>
             <query>ALTER TABLE webforms ADD COLUMN captcha_key VARCHAR(255) DEFAULT NULL</query>
+            <query>ALTER TABLE webforms_fields ADD COLUMN order_nr int(10) DEFAULT 9999</query>
     </version>
 </versions>

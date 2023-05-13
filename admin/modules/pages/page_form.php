@@ -21,7 +21,7 @@
             $this->_page->setDescription($this->getFieldValue("description"));
             $this->_page->setShowInNavigation($this->getCheckboxValue("show_in_navigation"));
             $this->_page->setTemplateId($this->getNumber("page_template", $this->getTextResource("form_invalid_number_error")));
-            $this->_element_order = $this->getFieldValue("element_order");
+            $this->_element_order = $this->getFieldValue("draggable_order");
             $this->_selected_blocks = $this->getFieldValues("select_blocks_" . $this->_page->getId());
             if ($this->hasErrors()) {
                 throw new FormException();

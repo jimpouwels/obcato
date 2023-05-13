@@ -41,12 +41,17 @@
             }
             $this->loadHandlerProperties();
 
+            
             if ($this->_webform->getIncludeCaptcha()) {
                 $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
                 $this->_captcha_secret = $this->getMandatoryFieldValue('captcha_secret', 'webforms_editor_captcha_secret_error_message');
             }
+            
+            $item_order = $this->getFieldValue('draggable_order');
+            $item_order = explode(',', $item_order);
 
             foreach ($this->_webform->getFormFields() as $form_field) {
+                $form_field->setOrderNr(array_search($form_field->getId(), $item_order));
                 $form = $this->_webform_item_factory->getBackendFormFor($form_field);
                 if ($form->supports($form_field->getType())) {
                     $form->loadFields();
@@ -58,7 +63,6 @@
             }
 
             if ($this->hasErrors()) {
-                dumpVar($_SESSION['errors']);
                 throw new FormException();
             }
         }

@@ -1,5 +1,5 @@
 <div class="collapsable_root_wrapper">
-    <span class="collapsable_id_holder displaynone">{$id}</span>
+    <span class="collapsable_id_holder draggable_id_holder displaynone">{$id}</span>
     <div class="draggable_wrapper {$identifier}">
         <div class="draggable_header collapsable_header">
             <div class="collapsable_header_left draggable_header_left">

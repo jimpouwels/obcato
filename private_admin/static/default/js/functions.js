@@ -123,15 +123,15 @@ function findElementHeader(elementNode) {
 // initializes sortable elements
 $(document).ready(function() {
 	$(function() {
-		$(".sortable_items").sortable({ opacity: 0.6, cursor: 'move', update: function() {
+		$(".draggable_items").sortable({ opacity: 0.6, cursor: 'move', update: function() {
 			var idString = '';
-			$('.collapsable_id_holder').each(function() {
+			$('.draggable_id_holder').each(function() {
 				if (idString != '') {
 					idString += ',';
 				}
 				idString = idString + $(this).text();
 			});
-			var $order_field = $('#element_order');
+			var $order_field = $('#draggable_order');
 			if ($order_field.length > 0) {
 				$order_field.attr("value", idString);
 			}

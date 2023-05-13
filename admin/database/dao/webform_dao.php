@@ -99,10 +99,11 @@
         }
 
         public function updateWebFormItem(WebFormItem $webform_item): void {
-            $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ?, mandatory = ? WHERE id = ?";
+            $query = "UPDATE webforms_fields SET `name` = ?, label = ?, template_id = ?, mandatory = ?, order_nr = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $label = $webform_item->getLabel();
             $name = $webform_item->getName();
+            $order_nr = $webform_item->getOrderNr();
             $template_id = $webform_item->getTemplateId();
             $webform_field_id = $webform_item->getId();
 
@@ -110,7 +111,7 @@
             if ($webform_item instanceof WebFormField) {
                 $mandatory = $webform_item->getMandatory() ? 1 : 0;
             }
-            $statement->bind_param("ssiii", $name, $label, $template_id, $mandatory, $webform_field_id);
+            $statement->bind_param("ssiiii", $name, $label, $template_id, $mandatory, $order_nr, $webform_field_id);
             $this->_mysql_connector->executeStatement($statement);
         }
 
@@ -121,9 +122,29 @@
             $this->_mysql_connector->executeStatement($statement);
         }
 
+        public function getWebFormItem(int $id): ?WebFormItem {
+            $query = 'SELECT * FROM webforms_fields WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('i', $id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc()) {
+                switch ($row["type"]) {
+                    case WebFormTextField::$TYPE:
+                        return WebFormTextField::constructFromRecord($row);
+                    case WebFormTextArea::$TYPE:
+                        return WebFormTextArea::constructFromRecord($row);
+                    case WebFormDropDown::$TYPE:
+                        return WebFormDropDown::constructFromRecord($row);
+                    case WebFormButton::$TYPE:
+                        return WebFormButton::constructFromRecord($row);
+                }
+            }
+            return null;
+        }
+
         public function getWebFormItemsByWebForm(int $webform_id): array {
             $form_fields = array();
-            $query = "SELECT * FROM webforms_fields WHERE webform_id = ?";
+            $query = "SELECT * FROM webforms_fields WHERE webform_id = ? ORDER BY order_nr ASC";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $statement->bind_param("i", $webform_id);
             $result = $this->_mysql_connector->executeStatement($statement);

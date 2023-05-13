@@ -8,6 +8,7 @@
 			<input type="hidden" id="webform_handler_to_delete" name="webform_handler_to_delete" value="" />
 			<input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 			<input type="hidden" id="webform_id" name="webform_id" value="{$id}" />
+			<input type="hidden" id="draggable_order" name="draggable_order" value="" />
 			{$metadata_editor}
 			{$webform_editor}
 			{$handlers_editor}

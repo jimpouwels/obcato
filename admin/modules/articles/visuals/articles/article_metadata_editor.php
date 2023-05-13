@@ -69,7 +69,6 @@
             $data->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
             $data->assign("action_form_id", ACTION_FORM_ID);
             $data->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-            $data->assign("element_order_id", ELEMENT_ORDER_ID);
         }
 
     }

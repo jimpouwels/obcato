@@ -9,8 +9,6 @@
         private static ?int $SUBMITTED_FORM = null;
 
         public static function raiseError(string $key, ErrorType $error_type): void {
-            dumpVar($key);
-            dumpVar($error_type);
             self::$ERRORS[$key] = $error_type;
         }
 

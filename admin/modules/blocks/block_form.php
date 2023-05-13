@@ -17,7 +17,7 @@
             $this->_block->setPublished($this->getCheckboxValue("published"));
             $this->_block->setPositionId($this->getFieldValue("block_position"));
             $this->_block->setTemplateId($this->getFieldValue("block_template"));
-            $this->_element_order = $this->getFieldValue("element_order");
+            $this->_element_order = $this->getFieldValue("draggable_order");
             if ($this->hasErrors()) {
                 throw new FormException();
             }

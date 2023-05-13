@@ -1,5 +1,5 @@
 {if isset($elements)}
-	<div id="element_container" class="sortable_items">
+	<div id="element_container" class="draggable_items">
 		{foreach from=$elements item=element}
 			{$element}
 		{/foreach}

@@ -1,4 +1,5 @@
 <div class="draggable_wrapper">
+    <span class="draggable_id_holder displaynone">{$id}</span>
     <div class="draggable_header">
         <div class="draggable_header_left">
             {$type}

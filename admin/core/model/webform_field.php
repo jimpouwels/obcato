@@ -5,7 +5,7 @@
 
     abstract class WebFormField extends WebFormItem {
     
-        private bool $_mandatory;
+        private bool $_mandatory = false;
         
         public function setMandatory(bool $mandatory): void {
             $this->_mandatory = $mandatory;
