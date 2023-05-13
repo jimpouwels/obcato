@@ -11,7 +11,6 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-
         abstract function getRequiredProperties(): array;
 
         abstract function getNameResourceIdentifier(): string;
