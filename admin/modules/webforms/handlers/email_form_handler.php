@@ -30,16 +30,12 @@
             return self::$TYPE;
         }
 
-        public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
-            $message = $webform_handler_instance->getProperty('template')->getValue();
-            $subject = $webform_handler_instance->getProperty('subject')->getValue();
-            foreach ($fields as $field) {
-                $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
-                $subject = str_replace('${'.$field['name'].'}', $field['value'], $subject);
-            }
+        public function handle(array $fields): void {
+            $message = $this->getFilledInPropertyValue('template');
+            $subject = $this->getFilledInPropertyValue('subject');
             $target_email_address = $this->_settings_dao->getSettings()->getEmailAddress();
             if (!$target_email_address) {
-                $target_email_address = $webform_handler_instance->getProperty('target_email_address')->getValue();
+                $target_email_address = $this->getProperty('target_email_address');
             }
             $headers = array(
                 'From' => $target_email_address
