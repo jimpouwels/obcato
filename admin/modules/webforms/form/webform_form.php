@@ -48,10 +48,14 @@
             }
             
             $item_order = $this->getFieldValue('draggable_order');
-            $item_order = explode(',', $item_order);
-
+            $item_order_arr = array();
+            if ($item_order) {
+                $item_order_arr = explode(',', $item_order);
+            }
             foreach ($this->_webform->getFormFields() as $form_field) {
-                $form_field->setOrderNr(array_search($form_field->getId(), $item_order));
+                if (count($item_order_arr) > 0) {
+                    $form_field->setOrderNr(array_search($form_field->getId(), $item_order_arr));
+                }
                 $form = $this->_webform_item_factory->getBackendFormFor($form_field);
                 if ($form->supports($form_field->getType())) {
                     $form->loadFields();
