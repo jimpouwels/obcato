@@ -30,16 +30,18 @@
         }
 
         public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
-            $headers = 'From: info@jqtravel.nl';
             $message = $webform_handler_instance->getProperty('template')->getValue();
             foreach ($fields as $field) {
                 $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
             }
-            $email_address = $this->_settings_dao->getSettings()->getEmailAddress();
-            if (!$email_address) {
-                $email_address = $webform_handler_instance->getProperty('email_address')->getValue();
+            $target_email_address = $this->_settings_dao->getSettings()->getEmailAddress();
+            if (!$target_email_address) {
+                $target_email_address = $webform_handler_instance->getProperty('email_address')->getValue();
             }
-            mail($email_address, 'JQTravel', $message, $headers);
+            $headers = array(
+                'From' => $target_email_address
+            );
+            mail($target_email_address, 'JQTravel', $message, $headers);
         }
     }
 ?>

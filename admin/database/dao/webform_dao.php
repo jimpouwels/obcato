@@ -186,6 +186,14 @@
             $property->setId($this->_mysql_connector->getInsertId());
         }
 
+        public function deleteProperty(WebFormHandlerProperty $webform_handler_property): void {
+            $query = 'DELETE FROM webforms_handlers_properties WHERE id = ?';
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $id = $webform_handler_property->getId();
+            $statement->bind_param('i', $id);
+            $this->_mysql_connector->executeStatement($statement);
+        }
+
         public function updateHandlerProperty(WebFormHandlerProperty $property): void {
             $query = 'UPDATE webforms_handlers_properties SET `value` = ? WHERE id = ?';
             $statement = $this->_mysql_connector->prepareStatement($query);

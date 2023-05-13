@@ -19,6 +19,7 @@
         }
         
         public function start(): void {
+            Session::clearErrors();
             $this->loadTextResources();
             $this->_backend_request_handler->handle();
             $this->loadCurrentModule();

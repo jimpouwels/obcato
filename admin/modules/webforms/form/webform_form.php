@@ -12,6 +12,7 @@
     class WebFormForm extends Form {
 
         private WebFormItemFactory $_webform_item_factory;
+        private WebFormHandlerManager $_webform_handler_manager;
         private WebForm $_webform;
         private array $_handler_properties = array();
         private ?string $_captcha_secret = null;
@@ -22,12 +23,23 @@
             $this->_webform = $webform;
             $this->_webform_item_factory = WebFormItemFactory::getInstance();
             $this->_webform_dao = WebFormDao::getInstance();
+            $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
             $this->loadHandlerProperties();
         }
 
         public function loadFields(): void {
             $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
             $this->_webform->setIncludeCaptcha($this->getCheckboxValue('include_captcha'));
+
+            // delete properties that are no longer supposed to be there
+            $all_handlers_instances = $this->_webform_dao->getWebFormHandlersFor($this->_webform);
+            foreach ($all_handlers_instances as $handler_instance) {
+                foreach ($handler_instance->getProperties() as $property) {
+                    if (!Arrays::firstMatch($this->_webform_handler_manager->getHandler($handler_instance->getType())->getRequiredProperties(), function ($required_property) use($property) { return $property->getName() == $required_property['name']; })) {
+                        $this->_webform_dao->deleteProperty($property);
+                    }
+                }
+            }
 
             if ($this->_webform->getIncludeCaptcha()) {
                 $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
@@ -46,7 +58,7 @@
             }
 
             if ($this->hasErrors()) {
-                dumpVar($_SESSION);
+                dumpVar($_SESSION['errors']);
                 throw new FormException();
             }
         }

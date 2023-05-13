@@ -59,4 +59,8 @@
         public static function hasError(string $field_name): bool {
             return isset($_SESSION['errors'][$field_name . '_error']);
         }
+
+        public static function clearErrors(): void {
+            $_SESSION['errors'] = array();
+        }
     }
