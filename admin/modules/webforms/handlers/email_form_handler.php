@@ -16,7 +16,8 @@
 
         public function getRequiredProperties(): array {
             return array(
-                array('name' => 'email_address', 'type' => 'textfield', 'editor' => null),
+                array('name' => 'target_email_address', 'type' => 'textfield', 'editor' => null),
+                array('name' => 'subject', 'type' => 'textfield', 'editor' => null),
                 array('name' => 'template', 'type' => 'textarea', 'editor' => null)
             );
         }
@@ -31,17 +32,19 @@
 
         public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
             $message = $webform_handler_instance->getProperty('template')->getValue();
+            $subject = $webform_handler_instance->getProperty('subject')->getValue();
             foreach ($fields as $field) {
                 $message = str_replace('${'.$field['name'].'}', $field['value'], $message);
+                $subject = str_replace('${'.$field['name'].'}', $field['value'], $subject);
             }
             $target_email_address = $this->_settings_dao->getSettings()->getEmailAddress();
             if (!$target_email_address) {
-                $target_email_address = $webform_handler_instance->getProperty('email_address')->getValue();
+                $target_email_address = $webform_handler_instance->getProperty('target_email_address')->getValue();
             }
             $headers = array(
                 'From' => $target_email_address
             );
-            mail($target_email_address, 'JQTravel', $message, $headers);
+            mail($target_email_address, $subject, $message, $headers);
         }
     }
 ?>

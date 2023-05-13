@@ -24,7 +24,6 @@
             $this->_webform_item_factory = WebFormItemFactory::getInstance();
             $this->_webform_dao = WebFormDao::getInstance();
             $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
-            $this->loadHandlerProperties();
         }
 
         public function loadFields(): void {
@@ -40,6 +39,7 @@
                     }
                 }
             }
+            $this->loadHandlerProperties();
 
             if ($this->_webform->getIncludeCaptcha()) {
                 $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
