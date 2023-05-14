@@ -57,19 +57,19 @@
 
             foreach ($form_handler->getRequiredProperties() as $property) {
                 $handler_property = array();
-                $existing_property = $webform_handler_instance->getProperty($property['name']);
+                $existing_property = $webform_handler_instance->getProperty($property->getName());
                 if (!$existing_property) {
                     $existing_property = new WebFormHandlerProperty();
-                    $existing_property->setName($property['name']);
-                    $existing_property->setType($property['type']);
+                    $existing_property->setName($property->getName());
+                    $existing_property->setType($property->getType());
                     $this->_webform_dao->storeProperty($webform_handler_instance->getId(), $existing_property);
                 }
                 $property_field = null;
-                if (isset($property['editor'])) {
-                    $property_field = $property['editor'];
+                if ($property->getEditor()) {
+                    $property_field = $property->getEditor();
                     $property_field->setCurrentValue($existing_property);
                 } else {
-                    if ($property['type'] == 'textfield') {
+                    if ($property->getType() == 'textfield') {
                         $property_field = new TextField("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
                     } else {
                         $property_field = new TextArea("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);

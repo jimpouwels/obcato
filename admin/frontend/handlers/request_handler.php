@@ -10,6 +10,7 @@
     require_once CMS_ROOT . 'utilities/url_helper.php';
     require_once CMS_ROOT . 'utilities/arrays.php';
     require_once CMS_ROOT . 'view/views/visual.php';
+    require_once CMS_ROOT . 'view/views/panel.php';
     require_once CMS_ROOT . 'view/template_engine.php';
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
     require_once CMS_ROOT . 'frontend/handlers/form_request_handler.php';

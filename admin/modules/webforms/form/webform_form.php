@@ -34,7 +34,7 @@
             $all_handlers_instances = $this->_webform_dao->getWebFormHandlersFor($this->_webform);
             foreach ($all_handlers_instances as $handler_instance) {
                 foreach ($handler_instance->getProperties() as $property) {
-                    if (!Arrays::firstMatch($this->_webform_handler_manager->getHandler($handler_instance->getType())->getRequiredProperties(), function ($required_property) use($property) { return $property->getName() == $required_property['name']; })) {
+                    if (!Arrays::firstMatch($this->_webform_handler_manager->getHandler($handler_instance->getType())->getRequiredProperties(), function ($required_property) use($property) { return $property->getName() == $required_property->getName(); })) {
                         $this->_webform_dao->deleteProperty($property);
                     }
                 }

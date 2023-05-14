@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
   
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
+    require_once CMS_ROOT . 'modules/webforms/handlers/handler_property.php';
     require_once CMS_ROOT . 'core/model/webform.php';
     require_once CMS_ROOT . 'database/dao/settings_dao.php';
 
@@ -16,9 +17,9 @@
 
         public function getRequiredProperties(): array {
             return array(
-                array('name' => 'target_email_address', 'type' => 'textfield', 'editor' => null),
-                array('name' => 'subject', 'type' => 'textfield', 'editor' => null),
-                array('name' => 'template', 'type' => 'textarea', 'editor' => null)
+                new HandlerProperty('target_email_address', 'textfield'),
+                new HandlerProperty('subject', 'textfield'),
+                new HandlerProperty('template', 'textarea')
             );
         }
 

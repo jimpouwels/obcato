@@ -21,7 +21,7 @@
         public function getRequiredProperties(): array {
             require_once CMS_ROOT . 'modules/webforms/visuals/redirect_form_handler_editor.php';
             return array(
-                array('name' => 'page_id', 'type' => 'textfield', 'editor' => new RedirectFormHandlerEditor()),
+                new HandlerProperty('page_id', 'textfield', new RedirectFormHandlerEditor()),
             );
         }
 
