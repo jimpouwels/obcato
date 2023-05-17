@@ -28,9 +28,8 @@
 
         private function getBlocksToSelect(): array {
             $blocks_to_select = array();
-
             foreach ($this->_block_dao->getAllBlocks() as $block) {
-                if (!in_array($block, $this->_selected_blocks)) {
+                if (!Arrays::firstMatch($this->_selected_blocks, function (Block $b) use ($block) { return $b->getId() == $block->getId(); })) {
                     $block_to_select["id"] = $block->getId();
                     $block_to_select["title"] = $block->getTitle();
                     $blocks_to_select[] = $block_to_select;

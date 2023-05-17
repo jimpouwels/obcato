@@ -93,13 +93,13 @@ function showElements() {
 }
 
 function hideElement(elementId) {
-	$('#draggable_body_' + elementId).hide();
+	$('#collapsable_body_' + elementId).hide();
 	$('#element_summary_text_' + elementId).show();
 	localStorage.setItem("sa_element_visible_" + elementId, "false");
 }
 
 function showElement(elementId) {
-	$('#draggable_body_' + elementId).show();
+	$('#collapsable_body_' + elementId).show();
 	$('#element_summary_text_' + elementId).hide();
 	localStorage.setItem("sa_element_visible_" + elementId, "true");
 }
@@ -135,6 +135,7 @@ $(document).ready(function() {
 			if ($order_field.length > 0) {
 				$order_field.attr("value", idString);
 			}
+			$(this). scrollIntoView();
 		}
 		});
 	});

@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="draggable_body">
-				<div id="draggable_body_{$handler.id}" class="admin_form">
+				<div id="collapsable_body_{$handler.id}" class="admin_form">
 					<div class="form_field_editor_wrapper">
 						<ul class="admin_form">
 							{foreach from=$handler.properties item=property}

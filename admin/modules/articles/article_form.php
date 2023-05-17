@@ -1,11 +1,11 @@
 <?php
     defined("_ACCESS") or die;
     
-    require_once CMS_ROOT . "core/form/form.php";
+    require_once CMS_ROOT . "core/form/element_holder_form.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
-    class ArticleForm extends Form {
+    class ArticleForm extends ElementHolderForm {
     
         private Article $_article;
         private string $_element_order;
@@ -14,11 +14,13 @@
         private ArticleDao $_article_dao;
 
         public function __construct(Article $article) {
+            parent::__construct($article);
             $this->_article = $article;
             $this->_article_dao = ArticleDao::getInstance();
         }
 
         public function loadFields(): void {
+            parent::loadFields();
             $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
             $this->_article->setDescription($this->getFieldValue("article_description"));
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
@@ -27,7 +29,6 @@
             $publication_date = $this->loadPublicationDate();
             $sort_date = $this->loadSortDate();
             $this->deleteLeadImageIfNeeded();
-            $this->_element_order = $this->getFieldValue("draggable_order");        
             $this->_selected_terms = $this->getSelectValue("select_terms_" . $this->_article->getId());
             if ($this->hasErrors()) {
                 throw new FormException();
@@ -35,10 +36,6 @@
                 $this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
                 $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
             }
-        }
-        
-        public function getElementOrder(): string {
-            return $this->_element_order;
         }
         
         public function getSelectedTerms(): array {

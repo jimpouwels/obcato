@@ -3,6 +3,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "frontend/element_visual.php";
+    require_once CMS_ROOT . 'database/dao/element_dao.php';
 
     class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 
@@ -21,7 +22,7 @@
 
         public function renderItems(): array {
             $items = array();
-            foreach ($this->getElementHolder()->getElements() as $element) {
+            foreach (ElementDao::getInstance()->getElements($this->getElementHolder()) as $element) {
                 if ($element->includeInTableOfContents()) {
                     $item = array();
                     $item["title"] = $element->getTitle();

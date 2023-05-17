@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "view/views/term_selector.php";
     require_once CMS_ROOT . "view/views/image_picker.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . 'modules/articles/visuals/articles/article_metadata_editor.php';
 
     class ArticleEditor extends Visual {
@@ -42,7 +43,7 @@
         }
 
         private function renderElementContainer(): string {
-            $element_container = new ElementContainer($this->_current_article->getElements());
+            $element_container = new ElementContainer(ElementDao::getInstance()->getElements($this->_current_article));
             return $element_container->render();
         }
 

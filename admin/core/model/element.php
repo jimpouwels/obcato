@@ -10,6 +10,7 @@
         private int $_index;
         private ?string $_title = null;
         private int $_element_holder_id;
+        private int $_order_nr;
         private bool $_include_in_table_of_contents;
         private ElementMetadataProvider $_metadata_provider;
 
@@ -18,20 +19,20 @@
             $this->_metadata_provider = $metadata_provider;
         }
 
-        public function setIndex(int $index): void {
-            $this->_index = $index;
-        }
-
-        public function getIndex(): int {
-            return $this->_index;
-        }
-
         public function setTitle(?string $title): void {
             $this->_title = $title;
         }
 
         public function getTitle(): ?string {
             return $this->_title;
+        }
+
+        public function setOrderNr(int $order_nr): void {
+            $this->_order_nr = $order_nr;
+        }
+
+        public function getOrderNr(): int {
+            return $this->_order_nr;
         }
 
         public function getType(): ElementType {
@@ -55,6 +56,7 @@
             $this->_element_holder_id = $element_holder_id;
         }
 
+        // TODO: This can cause recursion
         public function getElementHolder(): ElementHolder {
             $element_holder_dao = ElementHolderDao::getInstance();
             return $element_holder_dao->getElementHolder($this->_element_holder_id);
@@ -83,7 +85,7 @@
             $element = new $element_type($record["scope_id"]);
 
             $element->setId($record['id']);
-            $element->setIndex($record['follow_up']);
+            $element->setOrderNr($record['follow_up']);
             $element->setTemplateId($record['template_id']);
             $element->setIncludeInTableOfContents($record['include_in_table_of_contents'] == 1 ? true : false);
             $element->setElementHolderId($record['element_holder_id']);

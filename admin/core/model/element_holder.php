@@ -2,22 +2,21 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "core/model/presentable.php";
-    require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/authorization_dao.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
 
     class ElementHolder extends Presentable {
         
-        private ElementHolderDao $_element_holder_dao;
         private string $_title;
         private bool $_published;
         private string $_created_at;
         private int $_created_by_id;
+        private array $_elements = array();
         private string $_type;
         
         public function __construct(int $scope_id) {
             parent::__construct($scope_id);
-            $this->_element_holder_dao = ElementHolderDao::getInstance();
         }
         
         public function isPublished(): bool {
@@ -35,12 +34,7 @@
         public function setPublished(bool $published): void {
             $this->_published = $published;
         }
-        
-        public function getElements(): array {
-            $dao = ElementDao::getInstance();
-            return $dao->getElements($this);
-        }
-        
+
         public function getCreatedAt(): string {
             return $this->_created_at;
         }
@@ -73,7 +67,7 @@
         
         public function getElementStatics(): array {
             $element_statics = array();
-            foreach ($this->getElements() as $element) {
+            foreach (ElementDao::getInstance()->getElements($this) as $element) {
                 $key = $element->getType()->getIdentifier();
                 if (!array_key_exists($key, $element_statics)) {
                     $statics = $element->getStatics();
@@ -83,14 +77,6 @@
                 }
             }
             return $element_statics;
-        }
-        
-        public function update(): void {
-            $this->_element_holder_dao->update($this);
-        }
-        
-        public function delete(): void {
-            $this->_element_holder_dao->delete($this);
         }
         
         public static function constructFromRecord(array $row): ElementHolder {
@@ -106,7 +92,6 @@
             $this->setCreatedAt($row['created_at']);
             $this->setCreatedById($row['created_by']);
             $this->setType($row['type']);
-
             parent::initFromDb($row);
         }
     

@@ -58,7 +58,6 @@
             $page_form = new PageForm($this->_current_page);
             try {
                 $page_form->loadFields();
-                $this->_element_dao->updateElementOrder($page_form->getElementOrder());
                 $this->addSelectedBlocks($page_form->getSelectedBlocks());
                 $this->deleteSelectedBlocksFromPage();
                 $this->_page_dao->updatePage($this->_current_page);

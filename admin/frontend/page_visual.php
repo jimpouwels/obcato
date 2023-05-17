@@ -4,6 +4,7 @@
     require_once CMS_ROOT . "frontend/frontend_visual.php";
     require_once CMS_ROOT . "frontend/block_visual.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
+    require_once CMS_ROOT . "database/dao/element_dao.php";
 
     class PageVisual extends FrontendVisual {
         private PageDao $_page_dao;
@@ -103,7 +104,7 @@
 
         private function renderElementHolderContent(ElementHolder $element_holder) {
             $elements_content = array();
-            foreach ($element_holder->getElements() as $element) {
+            foreach (ElementDao::getInstance()->getElements($element_holder) as $element) {
                 if ($element->getTemplate()) {
                     $elements_content[] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
                 }

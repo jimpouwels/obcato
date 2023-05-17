@@ -65,7 +65,6 @@
             $article_form = new ArticleForm($this->_current_article);
             try {
                 $article_form->loadFields();
-                $this->_element_dao->updateElementOrder($article_form->getElementOrder());
                 $this->_article_dao->updateArticle($this->_current_article);
                 $this->updateElementHolder($this->_current_article);
                 $this->updateSelectedTerms($article_form->getSelectedTerms());

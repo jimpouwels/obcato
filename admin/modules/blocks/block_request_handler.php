@@ -44,7 +44,6 @@
             $block_form = new BlockForm($this->_current_block);
             try {
                 $block_form->loadFields();
-                $this->_element_dao->updateElementOrder($block_form->getElementOrder());
                 $this->_block_dao->updateBlock($this->_current_block);
                 $this->updateElementHolder($this->_current_block);
                 $this->sendSuccessMessage("Blok succesvol opgeslagen");

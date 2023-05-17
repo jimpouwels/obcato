@@ -19,7 +19,7 @@
             
             $panel_content_template_data = $this->getTemplateEngine()->createChildData();
             $this->assign("element_form", $this->renderElementForm($panel_content_template_data));
-            $this->assign("index", $element->getIndex());
+            $this->assign("index", $element->getOrderNr());
             $this->assign("id", $element->getId());
             $this->assign("icon_url", '/admin/static.php?file=/elements/' . $element->getType()->getIdentifier() . '/' . $element->getType()->getIconUrl());
             $this->assign("type", $this->getTextResource($element->getType()->getIdentifier() . '_label'));

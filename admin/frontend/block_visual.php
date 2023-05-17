@@ -2,6 +2,7 @@
     defined ('_ACCESS') or die;
 
     require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . 'database/dao/element_dao.php';
 
     class BlockVisual extends FrontendVisual {
 
@@ -24,7 +25,7 @@
 
         private function renderElements(): array {
             $elements_content = array();
-            foreach ($this->_block->getElements() as $element) {
+            foreach (ElementDao::getInstance()->getElements($this->_block) as $element) {
                 $elements_content[] = $element->getFrontendVisual($this->getPage(), null)->render();
             }
             return $elements_content;

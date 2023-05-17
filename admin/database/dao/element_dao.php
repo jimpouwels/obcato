@@ -45,7 +45,7 @@
         }
 
         public function updateElement(Element $element): void {
-            $set = 'follow_up = ' . $element->getIndex();
+            $set = 'follow_up = ' . $element->getOrderNr();
             if (!is_null($element->getTemplateId()) && $element->getTemplateId() != '') {
                 $set .= ', template_id = ' . $element->getTemplateId();
             } else {
@@ -153,24 +153,13 @@
             include_once CMS_ROOT . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
             $element_classname = $element_type->getClassName();
             $new_element = new $element_classname($element_type->getScopeId());
-            $new_element->setIndex($this->getNextElementIndex($element_holder_id));
+            $new_element->setOrderNr($this->getNextElementIndex($element_holder_id));
             $this->persistElement($element_type, $new_element, $element_holder_id);
             return $new_element;
         }
 
-        public function updateElementOrder(string $element_order): void {
-            $element_ids = explode(',', $element_order);
-            if (count($element_ids) > 0 && $element_ids[0] != '') {
-                for ($counter = 0; $counter < count($element_ids); $counter += 1) {
-                    $element = $this->getElement($element_ids[$counter]);
-                    $element->setIndex($counter);
-                    $this->updateElement($element);
-                }
-            }
-        }
-
         private function persistElement(ElementType $element_type, Element $element, int $element_holder_id): void {
-            $query = "INSERT INTO elements(follow_up,type_id, element_holder_id) VALUES (" . $element->getIndex() . " 
+            $query = "INSERT INTO elements(follow_up,type_id, element_holder_id) VALUES (" . $element->getOrderNr() . " 
                       , " . $element_type->getId() . ", " . $element_holder_id . ")";
             $this->_mysql_connector->executeQuery($query);
             $element->setId($this->_mysql_connector->getInsertId());
