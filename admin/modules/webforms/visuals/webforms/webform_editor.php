@@ -38,8 +38,7 @@
         
         private function renderFormFields(): array {
             $form_fields_data = array();
-            $form_fields = $this->_webform_dao->getWebFormItemsByWebForm($this->_current_webform->getId());
-            foreach ($form_fields as $form_field) {
+            foreach ($this->_current_webform->getFormFields() as $form_field) {
                 $form_field_data = $this->_webform_item_factory->getBackendVisualFor($form_field);
                 $form_fields_data[] = $form_field_data->render();
             }

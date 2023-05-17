@@ -19,6 +19,7 @@
         }
 
         public function getFormFields(): array {
+            usort($this->_form_fields, function(WebFormItem $f1, WebFormItem $f2) { return $f1->getOrderNr() - $f2->getOrderNr(); });
             return $this->_form_fields;
         }
 
