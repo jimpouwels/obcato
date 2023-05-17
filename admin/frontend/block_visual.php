@@ -25,7 +25,7 @@
 
         private function renderElements(): array {
             $elements_content = array();
-            foreach (ElementDao::getInstance()->getElements($this->_block) as $element) {
+            foreach ($this->_block->getElements() as $element) {
                 $elements_content[] = $element->getFrontendVisual($this->getPage(), null)->render();
             }
             return $elements_content;

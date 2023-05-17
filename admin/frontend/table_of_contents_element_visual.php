@@ -22,7 +22,7 @@
 
         public function renderItems(): array {
             $items = array();
-            foreach (ElementDao::getInstance()->getElements($this->getElementHolder()) as $element) {
+            foreach ($this->getElementHolder()->getElements() as $element) {
                 if ($element->includeInTableOfContents()) {
                     $item = array();
                     $item["title"] = $element->getTitle();

@@ -37,7 +37,7 @@
 
         protected function updateElementHolder(ElementHolder $element_holder): void {
             $this->updateLinks($element_holder);
-            foreach (ElementDao::getInstance()->getElements($element_holder) as $element) {
+            foreach ($element_holder->getElements() as $element) {
                 try {
                     $element->getRequestHandler()->handle();
                 } catch (ElementContainsErrorsException $e) {

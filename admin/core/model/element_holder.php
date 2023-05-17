@@ -4,7 +4,6 @@
     require_once CMS_ROOT . "core/model/presentable.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/authorization_dao.php";
-    require_once CMS_ROOT . "database/dao/element_dao.php";
 
     class ElementHolder extends Presentable {
         
@@ -35,6 +34,15 @@
             $this->_published = $published;
         }
 
+        public function setElements(array $elements): void {
+            $this->_elements = $elements;
+        }
+        
+        public function getElements(): array {
+            usort($this->_elements, function(Element $e1, Element $e2) { return $e1->getOrderNr() - $e2->getOrderNr(); });
+            return $this->_elements;
+        }
+        
         public function getCreatedAt(): string {
             return $this->_created_at;
         }
@@ -67,7 +75,7 @@
         
         public function getElementStatics(): array {
             $element_statics = array();
-            foreach (ElementDao::getInstance()->getElements($this) as $element) {
+            foreach ($this->getElements() as $element) {
                 $key = $element->getType()->getIdentifier();
                 if (!array_key_exists($key, $element_statics)) {
                     $statics = $element->getStatics();
@@ -87,12 +95,14 @@
         }
 
         protected function initFromDb(array $row): void {
+            require_once CMS_ROOT . 'database/dao/element_dao.php';
             $this->setTitle($row['title']);
             $this->setPublished($row['published'] == 1 ? true : false);
             $this->setCreatedAt($row['created_at']);
             $this->setCreatedById($row['created_by']);
             $this->setType($row['type']);
             parent::initFromDb($row);
+            $this->setElements(ElementDao::getInstance()->getElements($this));
         }
     
     }

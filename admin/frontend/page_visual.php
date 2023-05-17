@@ -104,7 +104,7 @@
 
         private function renderElementHolderContent(ElementHolder $element_holder) {
             $elements_content = array();
-            foreach (ElementDao::getInstance()->getElements($element_holder) as $element) {
+            foreach ($element_holder->getElements() as $element) {
                 if ($element->getTemplate()) {
                     $elements_content[] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
                 }

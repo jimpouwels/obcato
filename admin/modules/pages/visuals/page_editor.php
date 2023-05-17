@@ -6,7 +6,6 @@
     require_once CMS_ROOT . "view/views/link_editor.php";
     require_once CMS_ROOT . "view/views/block_selector.php";
     require_once CMS_ROOT . 'modules/pages/visuals/page_metadata_editor.php';
-    require_once CMS_ROOT . 'database/dao/element_dao.php';
 
     class PageEditor extends Visual {
 
@@ -36,7 +35,7 @@
         }
 
         private function renderElementContainerPanel(): string {
-            $element_container = new ElementContainer(ElementDao::getInstance()->getElements($this->_current_page));
+            $element_container = new ElementContainer($this->_current_page->getElements());
             return $element_container->render();
         }
 

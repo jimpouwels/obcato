@@ -5,7 +5,6 @@
     require_once CMS_ROOT . "view/views/element_container.php";
     require_once CMS_ROOT . "view/views/link_editor.php";
     require_once CMS_ROOT . 'modules/blocks/visuals/blocks/block_metadata_editor.php';
-    require_once CMS_ROOT . 'database/dao/element_dao.php';
 
     class BlockEditor extends Visual {
 
@@ -34,7 +33,7 @@
         }
 
         private function renderElementContainer(): string {
-            $element_container = new ElementContainer(ElementDao::getInstance()->getElements($this->_current_block));
+            $element_container = new ElementContainer($this->_current_block->getElements());
             return $element_container->render();
         }
 

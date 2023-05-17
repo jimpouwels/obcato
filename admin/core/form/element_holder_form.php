@@ -7,11 +7,9 @@
     abstract class ElementHolderForm extends Form {
 
         private ElementHolder $_element_holder;
-        private ElementDao $_element_dao;
 
         public function __construct(ElementHolder $element_holder) {
             $this->_element_holder = $element_holder;
-            $this->_element_dao = ElementDao::getInstance();
         }
 
         public function loadFields(): void {
@@ -20,15 +18,13 @@
             if ($item_order) {
                 $item_order_arr = explode(',', $item_order);
             }
-            $elements = ElementDao::getInstance()->getElements($this->_element_holder);
-            foreach ($elements as $element) {
+            foreach ($this->_element_holder->getElements() as $element) {
                 if (count($item_order_arr) > 0) {
                     $element->setOrderNr(array_search($element->getId(), $item_order_arr));
                 }
-                if ($this->hasErrors()) {
-                    throw new FormException('ElementHolder form contains errors');
-                }
-                $this->_element_dao->updateElement($element);
+            }
+            if ($this->hasErrors()) {
+                throw new FormException('ElementHolder form contains errors');
             }
         }
 
