@@ -11,9 +11,6 @@
 
     class ArticleDao {
 
-        private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page";
-
         private static ?ArticleDao $instance = null;
         private PageDao $_page_dao;
         private ElementHolderDao $_element_holder_dao;
@@ -33,7 +30,7 @@
         }
 
         public function getArticle($id): ?Article {
-            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
+            $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM
                                                                     element_holders e, articles a WHERE e.id = ?
                                                                     AND e.id = a.element_holder_id");
             $statement->bind_param("i", $id);
@@ -44,8 +41,8 @@
             return null;
         }
 
-        public function getArticleByElementHolderId($element_holder_id): ?Article {
-            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
+        public function getArticleByElementHolderId(int $element_holder_id): ?Article {
+            $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM
                                                                     element_holders e, articles a WHERE a.element_holder_id = ?
                                                                     AND e.id = a.element_holder_id");
             $statement->bind_param("i", $element_holder_id);
@@ -57,7 +54,7 @@
         }
 
         public function getAllArticles(): array {
-            $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
+            $query = "SELECT * FROM element_holders e, articles a WHERE e.id = a.element_holder_id
                       order by created_at DESC";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
@@ -67,18 +64,17 @@
             return $articles;
         }
 
-        public function searchArticles($keyword, $term_id): array {
-            $from = " FROM element_holders e, articles a";
-            $where = " WHERE
-                      e.id = a.element_holder_id";
-            if (!is_null($keyword) && $keyword != "")
-                $where = $where . " AND e.title LIKE '" . $keyword . "%'";
+        public function searchArticles(?string $keyword, ?int $term_id): array {
+            $from = "FROM element_holders e, articles a";
+            $where = "WHERE e.id = a.element_holder_id";
+            if ($keyword)
+                $where .= " AND e.title LIKE '{$keyword}%'";
             if (!is_null($term_id)) {
-                $from = $from . ", articles_terms ats";
-                $where = $where . " AND ats.term_id = " . $term_id . " AND ats.article_id = e.id";
+                $from .= ", articles_terms ats";
+                $where .= " AND ats.term_id = {$term_id} AND ats.article_id = e.id";
             }
 
-            $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
+            $query = "SELECT DISTINCT * {$from} {$where} ORDER BY created_at";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
             while ($row = $result->fetch_assoc()) {
@@ -87,45 +83,44 @@
             return $articles;
         }
 
-        public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results): array {
+        public function searchPublishedArticles(string $from_date, string $to_date, string $order_by, string $order_type, ?array $terms, int $max_results): array {
             $from = " FROM element_holders e, articles a";
-            $where = " WHERE
-                      e.id = a.element_holder_id";
+            $where = " WHERE e.id = a.element_holder_id";
             $order = '';
             $limit = '';
 
             $where = $where . " AND publication_date <= now()";
-            if (!is_null($to_date) && $to_date != '') {
-                $where = $where . " AND publication_date <= '" . DateUtility::stringMySqlDate($to_date) . "'";
+            if ($to_date) {
+                $where .= " AND publication_date <= '" . DateUtility::stringMySqlDate($to_date) . "'";
             }
-            if (!is_null($from_date) && $from_date != '') {
-                $where = $where . " AND publication_date > '" . DateUtility::stringMySqlDate($from_date) . "'";
+            if ($from_date) {
+                $where .= " AND publication_date > '" . DateUtility::stringMySqlDate($from_date) . "'";
             }
             if (!is_null($terms) && count($terms) > 0) {
-                $from = $from . ", articles_terms at";
+                $from .= ", articles_terms at";
                 foreach ($terms as $term) {
-                    $where = $where . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
+                    $where .= " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = {$term->getId()})";
                 }
             }
             if (!is_null($max_results) && $max_results != '') {
-                $limit = " LIMIT " . $max_results;
+                $limit = " LIMIT {$max_results}";
             }
 
-            if (!is_null($order_by) && $order_by != '') {
+            if ($order_by) {
                 switch ($order_by) {
                     case "Alphabet":
                         $order = 'e.title';
                         break;
                     case "PublicationDate":
-                        $order = 'a.publication_date ' . $order_type;
+                        $order = "a.publication_date {$order_type}";
                         break;
                     case "SortDate":
-                        $order = 'a.sort_date ' . $order_type;
+                        $order = "a.sort_date {$order_type}";
                         break;
                 }
             }
 
-            $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
+            $query = "SELECT DISTINCT * {$from} {$where} ORDER BY {$order} $limit";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
             while ($row = $result->fetch_assoc()) {
