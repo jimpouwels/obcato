@@ -105,20 +105,27 @@
 
         public function updateMetaData(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
-            
+            $statement = null;
             if ($this->metaDataPersisted($element)) {
-                $query = "UPDATE photo_album_elements_metadata SET title = '" . $element->getTitle() . "', ";
+                $query = "UPDATE photo_album_elements_metadata SET title = ?, ";
                 if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
                     $query = $query . "number_of_results = NULL ";
                 } else {
                     $query = $query . "number_of_results = " . $element->getNumberOfResults() . "";
                 }
                 $query = $query . " WHERE element_id = " . $element->getId();
+                $statement = $mysql_database->prepareStatement($query);
+                $title = $element->getTitle();
+                $statement->bind_param('s', $title);
             } else {
                 $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
-                          ('" . $element->getTitle() . "', " . $element->getId() . ", NULL)";
+                        (?, ?, NULL)";
+                $statement = $mysql_database->prepareStatement($statement);
+                $title = $element->getTitle();
+                $id = $element->getId();
+                $statement->bind_param('si', $title, $id);
             }
-            $mysql_database->executeQuery($query);
+            $mysql_database->executeStatement($statement);
             $this->addLabels();
         }
 
