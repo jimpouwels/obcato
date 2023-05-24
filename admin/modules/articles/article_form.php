@@ -24,7 +24,7 @@
             $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
             $this->_article->setDescription($this->getFieldValue("article_description"));
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
-            $this->_article->setImageId($this->getFieldValue("article_image_ref_" . $this->_article->getId()));
+            $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId(), $this->getTextResource("form_invalid_number_error")));
             $this->_article->setTargetPageId($this->getNumber("article_target_page", $this->getTextResource("form_invalid_number_error")));
             $publication_date = $this->loadPublicationDate();
             $sort_date = $this->loadSortDate();

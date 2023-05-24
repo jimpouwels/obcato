@@ -13,7 +13,7 @@
         const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
         private static int $SCOPE = 9;
 
-        private string $_description;
+        private ?string $_description;
         private ?int $_image_id = null;
         private string $_publication_date;
         private string $_sort_date;
@@ -26,11 +26,11 @@
             $this->setPublished(false);
         }
         
-        public function getDescription(): string {
+        public function getDescription(): ?string {
             return $this->_description;
         }
         
-        public function setDescription(string $description): void {
+        public function setDescription(?string $description): void {
             $this->_description = $description;
         }
         
