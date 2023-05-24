@@ -1,3 +1,9 @@
 # GENERAL
 iframe_element_label: IFrame
 iframe_element_scope_label: IFrame Element
+
+# EDITOR
+iframe_element_editor_title: Titel
+iframe_element_editor_url: URL
+iframe_element_editor_height: Hoogte
+iframe_element_editor_width: Breedte

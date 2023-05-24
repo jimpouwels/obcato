@@ -17,7 +17,7 @@
             $element_holder = $this->getElement()->getElementHolder();
             $data->assign("title", $this->getElement()->getTitle());
             $data->assign("url", $this->toHtml($this->getElement()->getUrl(), $element_holder));
-            $data->assign("align", $this->getElement()->getAlign());
+            $data->assign("height", $this->getElement()->getHeight());
             $data->assign("width", $this->getElement()->getWidth());
         }
 
