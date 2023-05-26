@@ -24,10 +24,29 @@
             }
         }
 
+        public function upsert(Element $element): void {
+            if (!$this->isPersisted($element)) {
+                $this->insert($element);
+            } else {
+                $this->update($element);
+            }
+        }
+
         abstract function constructMetadata(array $record, Element $element);
-
-        abstract function updateMetaData(Element $element): void;
-
+        abstract function insert(Element $element): void;
+        abstract function update(Element $element): void;
         abstract function getTableName(): string;
+        
+        private function isPersisted(Element $element): bool {
+            $mysql_database = MysqlConnector::getInstance();
+            $statement = $this->_mysql_connector->prepareStatement("SELECT t.id, e.id FROM {$this->getTableName()} t, elements e WHERE t.element_id = ? AND e.id = ?");
+            $element_id = $element->getId();
+            $statement->bind_param("ii", $element_id, $element_id);
+            $result = $mysql_database->executeStatement($statement);
+            while ($result->fetch_assoc()) {
+                return true;
+            }
+            return false;
+        }
     }
 ?>

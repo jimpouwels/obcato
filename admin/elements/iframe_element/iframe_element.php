@@ -81,27 +81,19 @@
             $element->setHeight($row['height']);
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance();
-            if ($this->isPersisted($element)) {
-                $query = "UPDATE iframe_elements_metadata SET `url` = '" . $element->getUrl() . "', title = '" . $element->getTitle() . "', width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . 
-                           " WHERE element_id = " . $element->getId();
-            } else {
-                $query = "INSERT INTO iframe_elements_metadata (title, `url`, width, height, element_id) VALUES "
-                          . "('" . $element->getTitle() . "', '" . $element->getUrl() . "', 0 , 0, " . $element->getId() . ")";
-            }
+            $query = "UPDATE iframe_elements_metadata SET `url` = '" . $element->getUrl() . "', title = '" . $element->getTitle() . "', width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . 
+                        " WHERE element_id = " . $element->getId();
+            
             $mysql_database->executeQuery($query);
         }
 
-        private function isPersisted(Element $element): bool {
+        public function insert(Element $element): void {
             $mysql_database = MysqlConnector::getInstance();
-            $query = "SELECT t.id, e.id FROM iframe_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
-                      AND e.id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                return true;
-            }
-            return false;
+            $query = "INSERT INTO iframe_elements_metadata (title, `url`, width, height, element_id) VALUES "
+                        . "('" . $element->getTitle() . "', '" . $element->getUrl() . "', 0 , 0, " . $element->getId() . ")";
+            $mysql_database->executeQuery($query);
         }
 
     }

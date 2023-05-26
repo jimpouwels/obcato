@@ -103,28 +103,33 @@
             $element->setLabels($this->getLabels());
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
             $statement = null;
-            if ($this->metaDataPersisted($element)) {
-                $query = "UPDATE photo_album_elements_metadata SET title = ?, ";
-                if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
-                    $query = $query . "number_of_results = NULL ";
-                } else {
-                    $query = $query . "number_of_results = " . $element->getNumberOfResults() . "";
-                }
-                $query = $query . " WHERE element_id = " . $element->getId();
-                $statement = $mysql_database->prepareStatement($query);
-                $title = $element->getTitle();
-                $statement->bind_param('s', $title);
+            $query = "UPDATE photo_album_elements_metadata SET title = ?, ";
+            if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
+                $query = $query . "number_of_results = NULL ";
             } else {
-                $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
-                        (?, ?, NULL)";
-                $statement = $mysql_database->prepareStatement($query);
-                $title = $element->getTitle();
-                $id = $element->getId();
-                $statement->bind_param('si', $title, $id);
+                $query = $query . "number_of_results = " . $element->getNumberOfResults() . "";
             }
+            $query = $query . " WHERE element_id = " . $element->getId();
+            $statement = $mysql_database->prepareStatement($query);
+            $title = $element->getTitle();
+            $statement->bind_param('s', $title);
+            
+            $mysql_database->executeStatement($statement);
+            $this->addLabels();
+        }
+
+        public function insert(Element $element): void {
+            $mysql_database = MysqlConnector::getInstance(); 
+            $statement = null;
+            $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
+                    (?, ?, NULL)";
+            $statement = $mysql_database->prepareStatement($query);
+            $title = $element->getTitle();
+            $id = $element->getId();
+            $statement->bind_param('si', $title, $id);
             $mysql_database->executeStatement($statement);
             $this->addLabels();
         }
@@ -165,18 +170,7 @@
             $label_id = $label->getId();
             $statement->bind_param('ii', $element_id, $label_id);
             $mysql_database->executeStatement($statement);
-        }
-
-        private function metaDataPersisted(Element $element): bool {
-            $query = "SELECT t.id, e.id FROM photo_album_elements_metadata t, elements e WHERE t.element_id = " 
-                    . $element->getId() . " AND e.id = " . $element->getId();
-            $mysql_database = MysqlConnector::getInstance(); 
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc())
-                return true;
-            return false;
-        }
-        
+        }        
     }
     
 ?>

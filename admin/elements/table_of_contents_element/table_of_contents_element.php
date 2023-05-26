@@ -55,25 +55,16 @@
             $element->setTitle($row['title']);
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
-            
-            if ($this->metaDataPersisted($element)) {
-                $query = "UPDATE table_of_contents_elements_metadata SET title = '" . $element->getTitle() . "'";
-            } else {
-                $query = "INSERT INTO table_of_contents_elements_metadata (title, element_id) VALUES ('" . $element->getTitle() . "', " . $element->getId() . ")";
-            }
+            $query = "UPDATE table_of_contents_elements_metadata SET title = '" . $element->getTitle() . "'";
             $mysql_database->executeQuery($query);
         }
 
-        private function metaDataPersisted(Element $element): bool {
-            $query = "SELECT t.id, e.id FROM table_of_contents_elements_metadata t, elements e WHERE t.element_id = " 
-                    . $element->getId() . " AND e.id = " . $element->getId();
+        public function insert(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc())
-                return true;
-            return false;
+            $query = "INSERT INTO table_of_contents_elements_metadata (title, element_id) VALUES ('" . $element->getTitle() . "', " . $element->getId() . ")";
+            $mysql_database->executeQuery($query);
         }
         
     }

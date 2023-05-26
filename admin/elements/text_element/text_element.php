@@ -65,30 +65,18 @@
             $element->setText($row['text']);
         }
 
-        public function updateMetaData(Element $element): void {
-            // check if the metadata exists first
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
-            
-            if ($this->persisted($element)) {
-                $query = "UPDATE text_elements_metadata SET title = '" . $mysql_database->realEscapeString($element->getTitle()) . "', text = '"
-                          . $mysql_database->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
-            } else {
-                $query = "INSERT INTO text_elements_metadata (title, text, element_id) VALUES 
-                          ('" . $element->getTitle() . "', '" . $element->getText() . "', " . $element->getId() . ")"; 
-            }
+            $query = "UPDATE text_elements_metadata SET title = '" . $mysql_database->realEscapeString($element->getTitle()) . "', text = '"
+                        . $mysql_database->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
             $mysql_database->executeQuery($query);        
         }
-        
-        // checks if the metadata is already persisted
-        private function persisted(Element $element): bool {
+
+        public function insert(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
-            $query = "SELECT t.id, e.id FROM text_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
-                      AND e.id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                return true;
-            }
-            return false;
+            $query = "INSERT INTO text_elements_metadata (title, text, element_id) VALUES 
+                        ('" . $element->getTitle() . "', '" . $element->getText() . "', " . $element->getId() . ")"; 
+            $mysql_database->executeQuery($query);        
         }
         
     }

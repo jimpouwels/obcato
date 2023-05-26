@@ -74,34 +74,30 @@
             }
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $statement = null;
             $element_id = $element->getId();
-            if ($this->isPersisted($element)) {
-                $webform_id = null;
-                if ($element->getWebForm()) {
-                    $webform_id = $element->getWebForm()->getId();
-                }
-                $statement = $this->_mysql_connector->prepareStatement("UPDATE form_elements_metadata SET webform_id = ?, title = ? WHERE element_id = ?");
-                $title = $element->getTitle();
-                $statement->bind_param("isi", $webform_id, $title, $element_id);
-            } else {
-                $statement = $this->_mysql_connector->prepareStatement("INSERT INTO form_elements_metadata (webform_id, element_id) VALUES (?, ?)");
-                $statement->bind_param("ii", $webform_id, $element_id);
+            $webform_id = null;
+            if ($element->getWebForm()) {
+                $webform_id = $element->getWebForm()->getId();
             }
+            $statement = $this->_mysql_connector->prepareStatement("UPDATE form_elements_metadata SET webform_id = ?, title = ? WHERE element_id = ?");
+            $title = $element->getTitle();
+            $statement->bind_param("isi", $webform_id, $title, $element_id);
+            
             $this->_mysql_connector->executeStatement($statement);
         }
 
-        private function isPersisted(Element $element): bool {
-            $mysql_database = MysqlConnector::getInstance();
-            $statement = $this->_mysql_connector->prepareStatement("SELECT t.id, e.id FROM form_elements_metadata t, elements e WHERE t.element_id = ? AND e.id = ?");
+        public function insert(Element $element): void {
+            $statement = null;
             $element_id = $element->getId();
-            $statement->bind_param("ii", $element_id, $element_id);
-            $result = $mysql_database->executeStatement($statement);
-            while ($result->fetch_assoc()) {
-                return true;
+            $webform_id = null;
+            if ($element->getWebForm()) {
+                $webform_id = $element->getWebForm()->getId();
             }
-            return false;
+            $statement = $this->_mysql_connector->prepareStatement("INSERT INTO form_elements_metadata (webform_id, element_id) VALUES (?, ?)");
+            $statement->bind_param("ii", $webform_id, $element_id);
+            $this->_mysql_connector->executeStatement($statement);
         }
 
     }

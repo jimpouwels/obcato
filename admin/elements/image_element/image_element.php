@@ -116,34 +116,25 @@
             $element->setHeight($row['height']);
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance();
-            if ($this->isPersisted($element)) {
-                $image_id = "NULL";
-                if ($element->getImageId() != '' && !is_null($element->getImageId())) {
-                    $image_id = $element->getImageId();
-                }
-                $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', alternative_text = '"
-                           . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = "
-                           . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
-                           . " WHERE element_id = " . $element->getId();
-            } else {
-                $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, width, height, image_id, element_id) VALUES "
-                          . "('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "', 0 , 0"
-                          . ", NULL, " . $element->getId() . ")";
+            $image_id = "NULL";
+            if ($element->getImageId() != '' && !is_null($element->getImageId())) {
+                $image_id = $element->getImageId();
             }
+            $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', alternative_text = '"
+                        . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = "
+                        . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
+                        . " WHERE element_id = " . $element->getId();
             $mysql_database->executeQuery($query);
         }
 
-        private function isPersisted(Element $element): bool {
+        public function insert(Element $element): void {
             $mysql_database = MysqlConnector::getInstance();
-            $query = "SELECT t.id, e.id FROM image_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
-                      AND e.id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                return true;
-            }
-            return false;
+            $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, width, height, image_id, element_id) VALUES "
+                        . "('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "', 0 , 0"
+                        . ", NULL, " . $element->getId() . ")";
+            $mysql_database->executeQuery($query);
         }
 
     }

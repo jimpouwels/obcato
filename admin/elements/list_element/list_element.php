@@ -53,7 +53,7 @@
         }
 
         public function getSummaryText(): string {
-            return $this->getTitle();            
+            return $this->getTitle() || '';            
         }
     }
     
@@ -61,9 +61,11 @@
         
         // Holds the list of columns that are to be collected
         private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id";
+        private MysqlConnector $_mysql_database;
 
         public function __construct(Element $element) {
             parent::__construct($element);
+            $this->_mysql_database = MysqlConnector::getInstance();
         }
         
         public function getTableName(): string {
@@ -77,63 +79,52 @@
         
         public function deleteListItem(Element $element, ListItem $list_item): void {
             // first delete it from the database
-            $mysql_database = MysqlConnector::getInstance(); 
             
             $query = "DELETE FROM list_element_items WHERE id = " . $list_item->getId();
-            $mysql_database->executeQuery($query);
+            $this->_mysql_database->executeQuery($query);
         }
         
-        public function updateMetaData(Element $element): void {
-            // check if the metadata exists first
-            $mysql_database = MysqlConnector::getInstance(); 
-            
-            
+        public function update(Element $element): void {
             // first handle default metadata
-            if ($this->metaDataPersisted($element)) {
-                $query = "UPDATE list_elements_metadata SET title = '" . $element->getTitle() . "' WHERE element_id = " . $element->getId();    
-            } else {
-                $query = "INSERT INTO list_elements_metadata (title, element_id) VALUES 
-                          ('" . $element->getTitle() . "', " . $element->getId() . ")"; 
-            }
-            $mysql_database->executeQuery($query);    
+            $query = "UPDATE list_elements_metadata SET title = '" . $element->getTitle() . "' WHERE element_id = " . $element->getId();    
+            $this->_mysql_database->executeQuery($query);    
             
+            $this->storeItems($element->getListItems());
+        }
+        
+        public function insert(Element $element): void {
+            // first handle default metadata
+            $query = "INSERT INTO list_elements_metadata (title, element_id) VALUES 
+                        ('" . $element->getTitle() . "', " . $element->getId() . ")"; 
+            dumpVar($query);
+            $this->_mysql_database->executeQuery($query);    
+        }
+
+        private function storeItems(array $items): void {
             // now handle the list items
-            if (!is_null($element->getListItems())) {
+            if (!is_null($items)) {
                 $query = "";
-                foreach ($element->getListItems() as $list_item) {
+                foreach ($items as $list_item) {
                     if (!is_null($list_item->getId())) {
-                        $query = "UPDATE list_element_items SET text = '" . $list_item->getText() . "', indent = " . $list_item->getIndent() . "
-                                  WHERE id = " . $list_item->getId();
+                        $query = "UPDATE list_element_items SET `text` = '" . $list_item->getText() . "', indent = " . $list_item->getIndent() . "
+                                WHERE id = " . $list_item->getId();
                     } else {
-                        $query = "INSERT INTO list_element_items (text, indent, element_id) VALUES
-                            ('" . $list_item->getText() . "', " . $list_item->getIndent() . ", " . $element->getId() . ")";
+                        $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES
+                            ('', " . $list_item->getIndent() . ", " . $this->getElement()->getId() . ")";
                     }
-                    $mysql_database->executeQuery($query);
+                    $this->_mysql_database->executeQuery($query);
                 }
             }
         }
         
-        // checks if the metadata is already persisted
-        private function metaDataPersisted(Element $element): bool {
-            $query = "SELECT t.id, e.id FROM list_elements_metadata t, elements e WHERE t.element_id = " . $element->getId() . "
-                      AND e.id = " . $element->getId();
-            $mysql_database = MysqlConnector::getInstance(); 
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                return true;
-            }
-            return false;
-        }
-        
         // returns all list items
         private function getListItems(Element $element): array {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
             $query = "SELECT " . self::$myAllColumns . " FROM list_element_items i, elements e WHERE i.element_id = " . $element->getId() .
                       " AND e.id = " . $element->getId();
-            $result = $mysql_database->executeQuery($query);
+            $result = $this->_mysql_database->executeQuery($query);
             $list_items = array();
             $list_item = NULL;
+            dumpVar($query);
             while ($row = $result->fetch_assoc()) {
                 $list_item = new ListItem();
                 $list_item->setId($row['id']);

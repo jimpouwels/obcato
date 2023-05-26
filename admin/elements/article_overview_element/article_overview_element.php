@@ -164,31 +164,35 @@
             $element->setTerms($this->getTerms());
         }
 
-        public function updateMetaData(Element $element): void {
+        public function update(Element $element): void {
             $mysql_database = MysqlConnector::getInstance(); 
             
-            if ($this->metaDataPersisted($element)) {
-                $query = "UPDATE article_overview_elements_metadata SET title = '" . $element->getTitle() . "', ";
-                if (is_null($element->getShowFrom()) || $element->getShowFrom() == '') {
-                    $query = $query . "show_from = NULL, ";
-                } else {
-                    $query = $query . "show_from = '" . $element->getShowFrom() . "',";
-                } if (is_null($element->getShowTo()) || $element->getShowTo() == '') {
-                    $query = $query . "show_to = NULL, ";
-                } else {
-                    $query = $query . "show_to = '" . $element->getShowTo() . "',";
-                }
-                if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
-                    $query = $query . "number_of_results = NULL, ";
-                } else {
-                    $query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";
-                }
-                $query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() .
-                         "' WHERE element_id = " . $element->getId();
+            $query = "UPDATE article_overview_elements_metadata SET title = '" . $element->getTitle() . "', ";
+            if (is_null($element->getShowFrom()) || $element->getShowFrom() == '') {
+                $query = $query . "show_from = NULL, ";
             } else {
-                $query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, order_type, element_id, number_of_results) VALUES
-                          ('" . $element->getTitle() . "', NULL, NULL, 'PublicationDate', 'asc', " . $element->getId() . ", NULL)";
+                $query = $query . "show_from = '" . $element->getShowFrom() . "',";
+            } if (is_null($element->getShowTo()) || $element->getShowTo() == '') {
+                $query = $query . "show_to = NULL, ";
+            } else {
+                $query = $query . "show_to = '" . $element->getShowTo() . "',";
             }
+            if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
+                $query = $query . "number_of_results = NULL, ";
+            } else {
+                $query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";
+            }
+            $query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() .
+                        "' WHERE element_id = " . $element->getId();
+            
+            $mysql_database->executeQuery($query);
+            $this->addTerms();
+        }
+
+        public function insert(Element $element): void {
+            $mysql_database = MysqlConnector::getInstance(); 
+            $query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, order_type, element_id, number_of_results) VALUES
+                        ('" . $element->getTitle() . "', NULL, NULL, 'PublicationDate', 'asc', " . $element->getId() . ", NULL)";
             $mysql_database->executeQuery($query);
             $this->addTerms();
         }
@@ -202,17 +206,6 @@
                 array_push($terms, $this->_article_dao->getTerm($row['term_id']));
             }
             return $terms;
-        }
-
-        private function metaDataPersisted(Element $element): bool {
-            $query = "SELECT t.id, e.id FROM article_overview_elements_metadata t, elements e WHERE t.element_id = " 
-                    . $element->getId() . " AND e.id = " . $element->getId();
-            $mysql_database = MysqlConnector::getInstance(); 
-            $result = $mysql_database->executeQuery($query);
-            while ($row = $result->fetch_assoc()) {
-                return true;
-            }
-            return false;
         }
 
         private function addTerms(): void {

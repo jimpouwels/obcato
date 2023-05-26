@@ -72,7 +72,7 @@
         }
 
         public function updateMetaData(): void {
-            $this->_metadata_provider->updateMetaData($this);
+            $this->_metadata_provider->upsert($this);
         }
 
         public static function constructFromRecord(array $record): Element {
