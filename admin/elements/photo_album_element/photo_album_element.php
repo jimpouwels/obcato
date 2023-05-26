@@ -70,7 +70,7 @@
         }
         
         public function getSummaryText(): string {
-            $summary_text = $this->getTitle();
+            $summary_text = $this->getTitle() || '';
             if ($this->getLabels()) {
                 $summary_text .= " (Labels:";
                 foreach ($this->getLabels() as $label) {
@@ -120,7 +120,7 @@
             } else {
                 $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
                         (?, ?, NULL)";
-                $statement = $mysql_database->prepareStatement($statement);
+                $statement = $mysql_database->prepareStatement($query);
                 $title = $element->getTitle();
                 $id = $element->getId();
                 $statement->bind_param('si', $title, $id);

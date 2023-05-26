@@ -225,3 +225,37 @@ $(document).ready(function() {
 		$submenu.hide();
 	});
 });
+
+// element holder scrollbehaviour 
+function storeScrollPosition(elementHolderId, scrollPosition) {
+	localStorage.setItem("sa_element_holder_scroll_position", JSON.stringify({ elementHolderId: elementHolderId, pos: scrollPosition}));
+}
+
+function getScrollPosition(elementHolderId) {
+	var scrollPos = JSON.parse(localStorage.getItem("sa_element_holder_scroll_position"));
+	if (!scrollPos) {
+		return 0;
+	}
+	console.log(scrollPos.elementHolderId);
+	if (scrollPos.elementHolderId == elementHolderId) {
+		return scrollPos.pos;
+	} else {
+		storeScrollPosition(elementHolderId, 0);
+		return 0;
+	}
+}
+
+$(document).ready(function() {
+	var elementHolderId = $('#element_holder_id').attr('value');
+	if (elementHolderId) {
+		var scrollPos = getScrollPosition(elementHolderId);
+		$('#content-wrapper').scrollTop(scrollPos);
+	}
+		
+	$('#content-wrapper').on('scroll', function() {
+		clearTimeout($.data(this, 'scrollTimer'));
+		$.data(this, 'scrollTimer', setTimeout(function() {
+			storeScrollPosition(elementHolderId, $('#content-wrapper').scrollTop());
+		}, 100));
+	});
+});
