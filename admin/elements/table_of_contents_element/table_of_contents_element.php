@@ -40,11 +40,13 @@
     
     class TableOfContentsElementMetadataProvider extends ElementMetadataProvider {
 
+        private MysqlConnector $_mysql_connector;
         private $_element;
 
         public function __construct(TableOfContentsElement $element) {
             parent::__construct($element);
             $this->_element = $element;
+            $this->_mysql_connector = MysqlConnector::getInstance(); 
         }
 
         public function getTableName(): string {
@@ -56,15 +58,13 @@
         }
 
         public function update(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "UPDATE table_of_contents_elements_metadata SET title = '" . $element->getTitle() . "'";
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "INSERT INTO table_of_contents_elements_metadata (title, element_id) VALUES ('" . $element->getTitle() . "', " . $element->getId() . ")";
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
         
     }

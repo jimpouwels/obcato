@@ -52,8 +52,11 @@
     
     class TextElementMetadataProvider extends ElementMetadataProvider {
         
+        private MysqlConnector $_mysql_connector;
+
         public function __construct(TextElement $text_element) {
             parent::__construct($text_element);
+            $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
         public function getTableName(): string {
@@ -66,17 +69,15 @@
         }
 
         public function update(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
-            $query = "UPDATE text_elements_metadata SET title = '" . $mysql_database->realEscapeString($element->getTitle()) . "', text = '"
-                        . $mysql_database->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
-            $mysql_database->executeQuery($query);        
+            $query = "UPDATE text_elements_metadata SET title = '" . $this->_mysql_connector->realEscapeString($element->getTitle()) . "', text = '"
+                        . $this->_mysql_connector->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
+            $this->_mysql_connector->executeQuery($query);        
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "INSERT INTO text_elements_metadata (title, text, element_id) VALUES 
                         ('" . $element->getTitle() . "', '" . $element->getText() . "', " . $element->getId() . ")"; 
-            $mysql_database->executeQuery($query);        
+            $this->_mysql_connector->executeQuery($query);        
         }
         
     }

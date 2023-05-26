@@ -84,6 +84,7 @@
     
     class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider {
 
+        private MysqlConnector $_mysql_connector;
         private ImageDao $_image_dao;
         private Element $_element;
 
@@ -91,6 +92,7 @@
             parent::__construct($element);
             $this->_element = $element;
             $this->_image_dao = ImageDao::getInstance();
+            $this->_mysql_connector = MysqlConnector::getInstance(); 
         }
 
         public function getTableName(): string {
@@ -122,22 +124,20 @@
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
             $statement = null;
             $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
                     (?, ?, NULL)";
-            $statement = $mysql_database->prepareStatement($query);
+            $statement = $this->_mysql_connector->prepareStatement($query);
             $title = $element->getTitle();
             $id = $element->getId();
             $statement->bind_param('si', $title, $id);
-            $mysql_database->executeStatement($statement);
+            $this->_mysql_connector->executeStatement($statement);
             $this->addLabels();
         }
 
         private function getLabels(): array {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "SELECT * FROM photo_album_element_labels WHERE element_id = " . $this->_element->getId();
-            $result = $mysql_database->executeQuery($query);
+            $result = $this->_mysql_connector->executeQuery($query);
             $labels = array();
             while ($row = $result->fetch_assoc()) {
                 array_push($labels, $this->_image_dao->getLabel($row['label_id']));
@@ -153,23 +153,21 @@
             }
             foreach ($this->_element->getLabels() as $label) {
                 if (!in_array($label, $existing_labels)) {
-                    $mysql_database = MysqlConnector::getInstance();
-                    $statement = $mysql_database->prepareStatement("INSERT INTO photo_album_element_labels (element_id, label_id) VALUES (?, ?)");
+                    $statement = $this->_mysql_connector->prepareStatement("INSERT INTO photo_album_element_labels (element_id, label_id) VALUES (?, ?)");
                     $label_id = $label->getId();
                     $element_id = $this->_element->getId();
                     $statement->bind_param('ii', $element_id, $label_id);
-                    $mysql_database->executeStatement($statement);
+                    $this->_mysql_connector->executeStatement($statement);
                 }
             }
         }
 
         private function removeLabel(ImageLabel $label): void {
-            $mysql_database = MysqlConnector::getInstance();
-            $statement = $mysql_database->prepareStatement("DELETE FROM photo_album_element_labels WHERE element_id = ? AND label_id = ?");
+            $statement = $this->_mysql_connector->prepareStatement("DELETE FROM photo_album_element_labels WHERE element_id = ? AND label_id = ?");
             $element_id = $this->_element->getId();
             $label_id = $label->getId();
             $statement->bind_param('ii', $element_id, $label_id);
-            $mysql_database->executeStatement($statement);
+            $this->_mysql_connector->executeStatement($statement);
         }        
     }
     

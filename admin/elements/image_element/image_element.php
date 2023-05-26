@@ -99,8 +99,11 @@
 
     class ImageElementMetadataProvider extends ElementMetadataProvider {
         
+        private MysqlConnector $_mysql_connector;
+
         public function __construct(Element $element) {
             parent::__construct($element);
+            $this->_mysql_connector = MysqlConnector::getInstance();
         }
         
         public function getTableName(): string {
@@ -117,7 +120,6 @@
         }
 
         public function update(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance();
             $image_id = "NULL";
             if ($element->getImageId() != '' && !is_null($element->getImageId())) {
                 $image_id = $element->getImageId();
@@ -126,15 +128,14 @@
                         . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = "
                         . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
                         . " WHERE element_id = " . $element->getId();
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance();
             $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, width, height, image_id, element_id) VALUES "
                         . "('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "', 0 , 0"
                         . ", NULL, " . $element->getId() . ")";
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
 
     }

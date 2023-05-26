@@ -143,11 +143,13 @@
 
         private ArticleDao $_article_dao;
         private Element $_element;
+        private MysqlConnector $_mysql_connector;
 
         public function __construct($element) {
             parent::__construct($element);
             $this->_element = $element;
             $this->_article_dao = ArticleDao::getInstance();
+            $this->_mysql_connector = MysqlConnector::getInstance();
         }
         
         public function getTableName(): string {
@@ -164,9 +166,7 @@
             $element->setTerms($this->getTerms());
         }
 
-        public function update(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
-            
+        public function update(Element $element): void {            
             $query = "UPDATE article_overview_elements_metadata SET title = '" . $element->getTitle() . "', ";
             if (is_null($element->getShowFrom()) || $element->getShowFrom() == '') {
                 $query = $query . "show_from = NULL, ";
@@ -185,22 +185,20 @@
             $query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() .
                         "' WHERE element_id = " . $element->getId();
             
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
             $this->addTerms();
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, order_type, element_id, number_of_results) VALUES
                         ('" . $element->getTitle() . "', NULL, NULL, 'PublicationDate', 'asc', " . $element->getId() . ", NULL)";
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
             $this->addTerms();
         }
 
         private function getTerms(): array {
-            $mysql_database = MysqlConnector::getInstance(); 
             $query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
-            $result = $mysql_database->executeQuery($query);
+            $result = $this->_mysql_connector->executeQuery($query);
             $terms = array();
             while ($row = $result->fetch_assoc()) {
                 array_push($terms, $this->_article_dao->getTerm($row['term_id']));
@@ -217,23 +215,21 @@
             }
             foreach ($this->_element->getTerms() as $term) {
                 if (!in_array($term, $existing_terms)) {
-                    $mysql_database = MysqlConnector::getInstance();
-                    $statement = $mysql_database->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
+                    $statement = $this->_mysql_connector->prepareStatement("INSERT INTO articles_element_terms (element_id, term_id) VALUES (?, ?)");
                     $term_id = $term->getId();
                     $element_id = $this->_element->getId();
                     $statement->bind_param('ii', $element_id, $term_id);
-                    $mysql_database->executeStatement($statement);
+                    $this->_mysql_connector->executeStatement($statement);
                 }
             }
         }
 
         private function removeTerm(ArticleTerm $term): void {
-            $mysql_database = MysqlConnector::getInstance();
-            $statement = $mysql_database->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ? AND term_id = ?");
+            $statement = $this->_mysql_connector->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ? AND term_id = ?");
             $elementId = $this->_element->getId();
             $termId = $term->getId();
             $statement->bind_param('ii', $elementId, $termId);
-            $mysql_database->executeStatement($statement);
+            $this->_mysql_connector->executeStatement($statement);
         }
         
     }

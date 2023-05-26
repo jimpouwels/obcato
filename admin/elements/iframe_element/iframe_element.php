@@ -66,8 +66,11 @@
 
     class IFrameElementMetadataProvider extends ElementMetadataProvider {
         
+        private MysqlConnector $_mysql_connector;
+
         public function __construct(Element $element) {
             parent::__construct($element);
+            $this->_mysql_connector = MysqlConnector::getInstance();
         }
         
         public function getTableName(): string {
@@ -82,18 +85,16 @@
         }
 
         public function update(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance();
             $query = "UPDATE iframe_elements_metadata SET `url` = '" . $element->getUrl() . "', title = '" . $element->getTitle() . "', width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . 
                         " WHERE element_id = " . $element->getId();
             
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
 
         public function insert(Element $element): void {
-            $mysql_database = MysqlConnector::getInstance();
             $query = "INSERT INTO iframe_elements_metadata (title, `url`, width, height, element_id) VALUES "
                         . "('" . $element->getTitle() . "', '" . $element->getUrl() . "', 0 , 0, " . $element->getId() . ")";
-            $mysql_database->executeQuery($query);
+            $this->_mysql_connector->executeQuery($query);
         }
 
     }
