@@ -195,7 +195,7 @@
         public function getChildArticleComments(int $comment_id): array {
             $query = "SELECT * FROM article_comments WHERE parent = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
-            $statement->bind_param('i', $article_id);
+            $statement->bind_param('i', $comment_id);
             $result = $this->_mysql_connector->executeStatement($statement);
             $comments = array();
             while ($row = $result->fetch_assoc()) {

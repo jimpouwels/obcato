@@ -137,12 +137,15 @@
             $comments_data = array();
             foreach ($this->_article_dao->getArticleComments($article->getId()) as $comment) {
                 $comment_data = array();
+                $comment_data['id'] = htmlspecialchars($comment->getId());
                 $comment_data['name'] = htmlspecialchars($comment->getName());
                 $comment_data['message'] = htmlspecialchars($comment->getMessage());
                 $comment_data['created_at'] = $comment->getCreatedAt();
                 $child_comments = array();
                 foreach ($this->_article_dao->getChildArticleComments($comment->getId()) as $child) {
                     $child_comment_data = array();
+                    $child_comment_data['id'] = htmlspecialchars($child->getId());               
+                    $child_comment_data['created_at'] = $child->getCreatedAt();
                     $child_comment_data['name'] = htmlspecialchars($child->getName());
                     $child_comment_data['message'] = htmlspecialchars($comment->getMessage());
                     $child_comments[] = $child_comment_data;
