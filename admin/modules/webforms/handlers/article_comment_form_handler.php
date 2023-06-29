@@ -19,7 +19,8 @@
             return array(
                 new HandlerProperty('name', 'textfield'),
                 new HandlerProperty('email', 'textfield'),
-                new HandlerProperty('message', 'textarea')
+                new HandlerProperty('message', 'textarea'),
+                new HandlerProperty('parent', 'textfield')
             );
         }
 
@@ -35,7 +36,10 @@
             $name = $this->getFilledInPropertyValue('name');
             $email = $this->getFilledInPropertyValue('email');
             $message = $this->getFilledInPropertyValue('message');
-            $parent = $_POST["article_comment_parent"];
+            $parent = $this->getFilledInPropertyValue('parent');
+            if (is_null($parent) || $parent == "") {
+                $parent = null;
+            }
             $article_id = $article->getId();
             
             $query = "INSERT INTO article_comments (`name`, `message`, email_address, created_at, article_id, parent) VALUES (?, ?, ?, now(), ?, ?)";

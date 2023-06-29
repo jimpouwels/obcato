@@ -45,7 +45,7 @@
                 $handler_instances = $this->_webform_dao->getWebFormHandlersFor($webform);
                 foreach ($handler_instances as $webform_handler_instance) {
                     $webform_handler = $this->_webform_handler_manager->getHandler($webform_handler_instance->getType());
-                    $webform_handler->handlePost($webform_handler_instance, $fields);
+                    $webform_handler->handlePost($webform_handler_instance, $fields, $page, $article);
                 }
                 
                 FormStatus::setSubmittedForm($webform->getId());

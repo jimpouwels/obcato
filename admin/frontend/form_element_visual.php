@@ -7,7 +7,7 @@
 
     class FormElementFrontendVisual extends ElementFrontendVisual {
 
-        private WebFormItemFactory $_webform_item_factory;
+    private WebFormItemFactory $_webform_item_factory;
 
         public function __construct(Page $page, ?Article $article, FormElement $form_element) {
             parent::__construct($page, $article, $form_element);
