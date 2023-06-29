@@ -57,6 +57,8 @@
                 $this->deleteFormHandler($this->_current_webform);
                 $this->updateWebForm($this->_current_webform);
             }
+            
+            $this->_current_webform = $this->getFormFromPostRequest();
         }
         
         public function getCurrentWebForm(): ?WebForm {
@@ -142,6 +144,7 @@
         }
 
         private function deleteFormItem(int $form_item_id): void {
+            $this->_current_webform->deleteWebFormItem($form_item_id);
             $this->_webform_dao->deleteWebFormItem($form_item_id);
         }
 

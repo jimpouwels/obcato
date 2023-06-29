@@ -23,6 +23,12 @@
             return $this->_form_fields;
         }
 
+        public function deleteWebFormItem(int $form_item_id): void {
+            $this->_form_fields = array_filter($this->_form_fields, function($item) use($form_item_id) {
+                return $item->getId() !== $form_item_id;
+            }); 
+        }
+
         public function setFormFields(array $form_fields): void {
             $this->_form_fields = $form_fields;
         }
