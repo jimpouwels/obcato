@@ -6,6 +6,7 @@
     require_once CMS_ROOT . "database/dao/element_dao.php";
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "core/model/article.php";
+    require_once CMS_ROOT . "core/model/article_comment.php";
     require_once CMS_ROOT . "core/model/article_term.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
@@ -177,6 +178,30 @@
             $query = "INSERT INTO articles (description, image_id, element_holder_id, sort_date, publication_date, target_page) VALUES
                       (NULL, NULL, " . $article->getId() . ", now(), now(), NULL)";
             $this->_mysql_connector->executeQuery($query);
+        }
+
+        public function getArticleComments(int $article_id): array {
+            $query = "SELECT * FROM article_comments WHERE article_id = ? AND parent IS NULL";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('i', $article_id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            $comments = array();
+            while ($row = $result->fetch_assoc()) {
+                $comments[] = ArticleComment::constructFromRecord($row);
+            }
+            return $comments;
+        }
+
+        public function getChildArticleComments(int $comment_id): array {
+            $query = "SELECT * FROM article_comments WHERE parent = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('i', $article_id);
+            $result = $this->_mysql_connector->executeStatement($statement);
+            $comments = array();
+            while ($row = $result->fetch_assoc()) {
+                $comments[] = ArticleComment::constructFromRecord($row);
+            }
+            return $comments;
         }
 
         public function getAllTerms(): array {
