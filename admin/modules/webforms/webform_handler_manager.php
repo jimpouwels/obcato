@@ -4,6 +4,7 @@
     require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
     require_once CMS_ROOT . 'modules/webforms/handlers/email_form_handler.php';
     require_once CMS_ROOT . 'modules/webforms/handlers/redirect_form_handler.php';
+    require_once CMS_ROOT . 'modules/webforms/handlers/article_comment_form_handler.php';
     
     class WebFormHandlerManager {
 
@@ -13,6 +14,7 @@
         private function __construct() {
             $this->_all_handlers[] = new EmailFormHandler();
             $this->_all_handlers[] = new RedirectFormHandler();
+            $this->_all_handlers[] = new ArticleCommentFormHandler();
         }
 
         public static function getInstance() {

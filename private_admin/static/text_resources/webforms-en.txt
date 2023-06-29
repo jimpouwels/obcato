@@ -33,6 +33,8 @@ webforms_email_form_handler_name: Send email
 webforms_email_form_handler_name_add_button: Send email
 webforms_redirect_form_handler_name: Redirect
 webforms_redirect_form_handler_name_add_button: Redirect
+webforms_article_comment_form_handler_name: Save as article comment
+webforms_article_comment_form_handler_name_add_button: Save as article comment
 webforms_redirect_handler_page_picker: Select page
 webforms_handlers_editor_title: Form handlers
 webforms_editor_handler_property_mandatory_error_message: This field is mandatory

@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
     require_once CMS_ROOT . "modules/webforms/form/webform_form.php";
     require_once CMS_ROOT . "modules/webforms/handlers/email_form_handler.php";
+    require_once CMS_ROOT . "modules/webforms/handlers/article_comment_form_handler.php";
     require_once CMS_ROOT . "core/model/webform_textfield.php";
     require_once CMS_ROOT . "core/model/webform_textarea.php";
     
@@ -52,6 +53,9 @@
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("add_handler_redirect_form_handler")) {
                 $this->addWebFormHandler(RedirectFormHandler::$TYPE);
+                $this->updateWebForm($this->_current_webform);
+            } else if ($this->isAction("add_handler_article_comment_form_handler")) {
+                $this->addWebFormHandler(ArticleCommentFormHandler::$TYPE);
                 $this->updateWebForm($this->_current_webform);
             } else if ($this->isAction("delete_form_handler")) {
                 $this->deleteFormHandler($this->_current_webform);

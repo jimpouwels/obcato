@@ -43,12 +43,12 @@
             return $this->_webform_handler_instance->getProperty($property_name)->getValue();
         }
 
-        public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields): void {
+        public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields, Page $page, ?Article $article): void {
             $this->_fields = $fields;
             $this->_webform_handler_instance = $webform_handler_instance;
-            $this->handle($fields);
+            $this->handle($fields, $page, $article);
         }
 
-        abstract function handle(array $fields): void;
+        abstract function handle(array $fields, Page $page, ?Article $article): void;
     }
 ?>

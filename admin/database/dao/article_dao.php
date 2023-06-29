@@ -11,7 +11,7 @@
 
     class ArticleDao {
         private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page";
+                      e.created_at, e.created_by, e.type, a.description, a.image_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
         private static ?ArticleDao $instance = null;
         private PageDao $_page_dao;
@@ -146,6 +146,11 @@
                 $query = $query . ", target_page = " . $article->getTargetPageId();
             } else {
                 $query = $query . ", target_page = NULL";
+            }
+            if (!is_null($article->getCommentWebFormId()) && $article->getCommentWebFormId() != '') {
+                $query = $query . ", comment_webform_id = " . $article->getCommentWebFormId();
+            } else {
+                $query = $query . ", comment_webform_id = NULL";
             }
             $query = $query . " WHERE element_holder_id = " . $article->getId();
             $this->_mysql_connector->executeQuery($query);

@@ -126,5 +126,10 @@
             <query>CREATE TABLE iframe_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL, element_id int(10) unsigned NOT NULL, url VARCHAR(255) DEFAULT NULL, width int(10) DEFAULT NULL, height int(10) DEFAULT NULL, PRIMARY KEY (id), KEY iframe_element_metadata_to_element (element_id), CONSTRAINT iframe_element_metadata_to_element FOREIGN KEY (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
             <query>INSERT INTO scopes (id, identifier) VALUES (18, 'iframe_element')</query>
             <query>INSERT INTO element_types (id, classname, icon_url, domain_object, scope_id, identifier, system_default) VALUES (11, 'IFrameElement', '/img/iframe_element.png', 'iframe_element.php', 18, 'iframe_element', 1)</query>
+            
+            <query>CREATE TABLE article_comments (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, message TEXT NOT NULL, email_address TEXT NOT NULL, article_id int(10) unsigned NOT NULL, parent int(10) unsigned DEFAULT NULL, PRIMARY KEY (id), KEY comment_to_article (article_id), CONSTRAINT comment_to_article FOREIGN KEY (article_id) REFERENCES articles (element_holder_id) ON DELETE CASCADE ON UPDATE RESTRICT, KEY comment_to_comment (parent), CONSTRAINT comment_to_comment FOREIGN KEY (parent) REFERENCES article_comments (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>ALTER TABLE article_comments ADD COLUMN created_at datetime NOT NULL</query>
+            <query>ALTER TABLE articles ADD COLUMN comment_webform_id int(10) UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE articles ADD CONSTRAINT article_to_webform FOREIGN KEY article_to_webform (comment_webform_id) REFERENCES webforms (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
     </version>
 </versions>

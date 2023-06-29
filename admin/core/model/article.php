@@ -17,7 +17,8 @@
         private ?int $_image_id = null;
         private string $_publication_date;
         private string $_sort_date;
-        private ?int $_target_page_id;
+        private ?int $_target_page_id = null;
+        private ?int $_comment_webform_id = null;
         private PageDao $_page_dao;
         
         public function __construct() {
@@ -82,6 +83,15 @@
             }
             return $target_page;
         }
+
+        public function setCommentWebFormId(int $comment_webform_id): void {
+            $this->_comment_webform_id = $comment_webform_id;
+        }
+        
+        public function getCommentWebFormId(): ?int {
+            return $this->_comment_webform_id;
+        }
+
         
         public function getTerms(): array {
             $article_dao = ArticleDao::getInstance();
@@ -100,6 +110,7 @@
             $this->setPublicationDate($row['publication_date']);
             $this->setSortDate($row['sort_date']);
             $this->setTargetPageId(intval($row['target_page']));
+            $this->setCommentWebFormId(intval($row['comment_webform_id']));
             parent::initFromDb($row);
         }
 

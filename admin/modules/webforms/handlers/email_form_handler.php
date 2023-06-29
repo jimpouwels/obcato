@@ -31,7 +31,7 @@
             return self::$TYPE;
         }
 
-        public function handle(array $fields): void {
+        public function handle(array $fields, Page $page, ?Article $article): void {
             $message = $this->getFilledInPropertyValue('template');
             $subject = $this->getFilledInPropertyValue('subject');
             $target_email_address = $this->_settings_dao->getSettings()->getEmailAddress();

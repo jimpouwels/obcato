@@ -33,7 +33,7 @@
             return self::$TYPE;
         }
 
-        public function handle(array $fields): void {
+        public function handle(array $fields, Page $page, ?Article $article): void {
             $page_id = $this->getProperty('page_id');
             if ($page_id) {
                 $page = $this->_page_dao->getPage($page_id);

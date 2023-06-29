@@ -3,6 +3,7 @@
 
     require_once CMS_ROOT . "view/views/image_picker.php";
     require_once CMS_ROOT . 'database/dao/article_dao.php';
+    require_once CMS_ROOT . 'database/dao/webform_dao.php';
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
     class ArticleMetadataEditor extends Panel {
@@ -11,12 +12,14 @@
 
         private Article $_current_article;
         private ArticleDao $_article_dao;
+        private WebFormDao $_webform_dao;
         private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct(Article $current_article) {
             parent::__construct('Algemeen', 'article_metadata_editor');
             $this->_current_article = $current_article;
             $this->_article_dao = ArticleDao::getInstance();
+            $this->_webform_dao = WebFormDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
@@ -32,6 +35,7 @@
             $publication_date_field = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->_current_article->getPublicationDate()), true, null);
             $sort_date_field = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->_current_article->getSortDate()), true, null);
             $target_pages_field = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->_current_article->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
+            $comment_forms_field = new PullDown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
             $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
 
@@ -43,6 +47,7 @@
             $data->assign("publication_date_field", $publication_date_field->render());
             $data->assign("sort_date_field", $sort_date_field->render());
             $data->assign("target_pages_field", $target_pages_field->render());
+            $data->assign("comment_forms_field", $comment_forms_field->render());
             $data->assign("image_picker_field", $image_picker_field->render());
             $data->assign("lead_image_id", $this->_current_article->getImageId());
             $data->assign("delete_lead_image_button", $image_delete_button->render());
@@ -61,6 +66,16 @@
                 array_push($target_page_options, array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId()));
             }
             return $target_page_options;
+        }
+
+        private function getWebFormsOptions(): array {
+            $webforms_options = array();
+
+            $all_webforms = $this->_webform_dao->getAllWebForms();
+            foreach ($all_webforms as $webform) {
+                array_push($webforms_options, array("name" => $webform->getTitle(), "value" => $webform->getId()));
+            }
+            return $webforms_options;
         }
 
         private function assignElementHolderFormIds(Smarty_Internal_Data $data): void {
