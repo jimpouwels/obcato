@@ -29,6 +29,7 @@
 
         public function loadPanelContent(Smarty_Internal_Data $data): void {
             $title_field = new TextField("article_title", $this->getTextResource('article_editor_title_label'), $this->_current_article->getTitle(), true, false, null);
+            $template_picker_field = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->_current_article->getTemplate(), $this->_current_article->getScope());
             $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_article), '');
             $description_field = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->_current_article->getDescription(), false, true, null);
             $published_field = new SingleCheckbox("article_published", $this->getTextResource('article_editor_published_label'), $this->_current_article->isPublished(), false, "");
@@ -38,9 +39,10 @@
             $comment_forms_field = new PullDown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
             $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
-
+            
             $data->assign("current_article_id", $this->_current_article->getId());
             $data->assign("title_field", $title_field->render());
+            $data->assign('template_field', $template_picker_field->render());
             $data->assign('url_field', $url_field->render());
             $data->assign("description_field", $description_field->render());
             $data->assign("published_field", $published_field->render());

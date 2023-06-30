@@ -130,9 +130,10 @@
             <query>ALTER TABLE article_comments ADD COLUMN created_at datetime NOT NULL</query>
             <query>ALTER TABLE articles ADD COLUMN comment_webform_id int(10) UNSIGNED DEFAULT NULL</query>
             <query>ALTER TABLE articles ADD CONSTRAINT article_to_webform FOREIGN KEY article_to_webform (comment_webform_id) REFERENCES webforms (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
-            
             <query>ALTER TABLE webforms ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
             <query>ALTER TABLE webforms ADD CONSTRAINT webforms_templates FOREIGN KEY webforms_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>INSERT INTO scopes (id, identifier) VALUES (19, 'webform')</query>
+            <query>ALTER TABLE articles ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE articles ADD CONSTRAINT articles_templates FOREIGN KEY articles_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
     </version>
 </versions>
