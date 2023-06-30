@@ -12,10 +12,6 @@
             parent::__construct($page, $article, $article_overview_element);
         }
 
-        public function getElementTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
-        }
-
         public function loadElement(Smarty_Internal_Data $data): void {
             $element_holder = $this->getElement()->getElementHolder();
             $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));

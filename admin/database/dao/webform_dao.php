@@ -14,7 +14,7 @@
     
     class WebFormDao {
 
-        private static string $myAllColumns = "i.id, i.title, i.include_captcha, i.captcha_key";
+        private static string $myAllColumns = "i.id, i.title, i.template_id, i.include_captcha, i.captcha_key, s.id as scope_id";
         private static ?WebFormDao $instance = null;
         private MysqlConnector $_mysql_connector;
 
@@ -30,7 +30,7 @@
         }
 
         public function getWebForm(int $webform_id): ?WebForm {
-            $query = "SELECT " . self::$myAllColumns . " FROM webforms i WHERE id = " . $webform_id;
+            $query = "SELECT " . self::$myAllColumns . " FROM webforms i, scopes s WHERE i.id = ${webform_id} AND s.id = " . WebForm::$SCOPE;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return WebForm::constructFromRecord($row, $this->getWebFormItemsByWebForm($webform_id));
@@ -40,7 +40,7 @@
 
         public function getAllWebForms(): array {
             $webforms = array();
-            $query = "SELECT " . self::$myAllColumns . " FROM webforms i";
+            $query = "SELECT " . self::$myAllColumns . " FROM webforms i, scopes s WHERE s.id = " . WebForm::$SCOPE;
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 $webforms[] = WebForm::constructFromRecord($row, $this->getWebFormItemsByWebForm($row["id"]));
@@ -59,13 +59,14 @@
         }
 
         public function updateWebForm(WebForm $webform): void {
-            $query = "UPDATE webforms SET title = ?, include_captcha = ?, captcha_key = ? WHERE id = ?";
+            $query = "UPDATE webforms SET title = ?, template_id = ?, include_captcha = ?, captcha_key = ? WHERE id = ?";
             $statement = $this->_mysql_connector->prepareStatement($query);
             $id = $webform->getId();
             $title = $webform->getTitle();
+            $template_id = $webform->getTemplateId();
             $include_captcha = $webform->getIncludeCaptcha() ? 1 : 0;
             $captcha_key = $webform->getCaptchaKey();
-            $statement->bind_param("sisi", $title, $include_captcha, $captcha_key, $id);
+            $statement->bind_param("siisi", $title, $template_id, $include_captcha, $captcha_key, $id);
             $this->_mysql_connector->executeStatement($statement);
             foreach ($webform->getFormFields() as $form_field) {
                 $this->updateWebFormItem($form_field);

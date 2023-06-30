@@ -3,6 +3,7 @@
     
     require_once CMS_ROOT . "frontend/frontend_visual.php";
     require_once CMS_ROOT . "frontend/block_visual.php";
+    require_once CMS_ROOT . "frontend/form_visual.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/webform_dao.php";
@@ -147,7 +148,7 @@
                     $child_comment_data['id'] = htmlspecialchars($child->getId());               
                     $child_comment_data['created_at'] = $child->getCreatedAt();
                     $child_comment_data['name'] = htmlspecialchars($child->getName());
-                    $child_comment_data['message'] = htmlspecialchars($comment->getMessage());
+                    $child_comment_data['message'] = htmlspecialchars($child->getMessage());
                     $child_comments[] = $child_comment_data;
                 }
                 $comment_data['children'] = $child_comments;
@@ -158,27 +159,10 @@
 
         private function renderArticleCommentWebForm($article): string {
             if (!is_null($article->getCommentWebFormId())) {
-                $form_data = $this->createChildData();
                 $comment_webform = $this->_webform_dao->getWebForm($article->getCommentWebFormId());
-
-                if ($comment_webform) {
-                    if ($comment_webform->getIncludeCaptcha()) {
-                        $captcha_key = $comment_webform->getCaptchaKey();
-                        $form_data->assign('captcha_key', $captcha_key);
-                    }
-                    $form_data->assign('webform_id', $comment_webform->getId());
-                    $form_data->assign('title', $comment_webform->getTitle());
-
-                    $fields_data = "";
-                    foreach ($this->_webform_dao->getWebFormItemsByWebForm($article->getCommentWebFormId()) as $form_field) {
-                        $field = $this->_webform_item_factory->getFrontendVisualFor($comment_webform, $form_field, $this->getPage(), $this->getArticle());
-                        $fields_data .= $field->render();
-                    }
-                    $form_data->assign('form_html', $fields_data);
-                } else {
-                    return "";
-                }
+                $form_visual = new FormFrontendVisual($this->getPage(), $article, $comment_webform);
+                return $form_visual->render();
             }
-            return $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/sa_form.tpl", $form_data);
+            return "";
         }
     }

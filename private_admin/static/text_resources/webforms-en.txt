@@ -13,6 +13,7 @@ webforms_new_webform_create_message: New webform created
 webforms_metdata_editor_panel_title: Edit form
 webforms_webform_editor_panel_title: Form content
 webforms_editor_title_field: Title
+webforms_editor_template_field: Template
 webforms_editor_captcha_field: Include captcha
 webforms_editor_captcha_key_field: Captcha key
 webforms_editor_captcha_secret_field: Captcha secret

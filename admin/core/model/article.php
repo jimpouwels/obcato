@@ -84,7 +84,7 @@
             return $target_page;
         }
 
-        public function setCommentWebFormId(int $comment_webform_id): void {
+        public function setCommentWebFormId(?int $comment_webform_id): void {
             $this->_comment_webform_id = $comment_webform_id;
         }
         
@@ -92,7 +92,6 @@
             return $this->_comment_webform_id;
         }
 
-        
         public function getTerms(): array {
             $article_dao = ArticleDao::getInstance();
             return $article_dao->getTermsForArticle($this->getId());

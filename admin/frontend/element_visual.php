@@ -16,7 +16,9 @@
             return FRONTEND_TEMPLATE_DIR . "/element.tpl";
         }
 
-        abstract function getElementTemplateFilename(): string;
+        public function getElementTemplateFilename(): string {
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+        }
 
         abstract function loadElement(Smarty_Internal_Data $data): void;
 

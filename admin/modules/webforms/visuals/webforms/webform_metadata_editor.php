@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . 'database/dao/config_dao.php';
+    require_once CMS_ROOT . "view/views/form_template_picker.php";
 
     class WebFormMetadataEditor extends Panel {
 
@@ -22,6 +23,9 @@
             $title_text_field = new TextField("title", "webforms_editor_title_field", $this->_current_webform->getTitle(), true, false, null);
             $data->assign("title_field", $title_text_field->render());
             
+            $template_picker_field = new TemplatePicker("template", $this->getTextResource("webforms_editor_template_field"), false, "", $this->_current_webform->getTemplate(), $this->_current_webform->getScope());
+            $data->assign('template_picker', $template_picker_field->render());
+
             $captcha_key_field_class = "captcha_key_field_{$this->_current_webform->getId()}";
             $data->assign('captcha_key_field_class', $captcha_key_field_class);
             $data->assign('include_captcha', $this->_current_webform->getIncludeCaptcha());

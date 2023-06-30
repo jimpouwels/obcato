@@ -28,6 +28,7 @@
 
         public function loadFields(): void {
             $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
+            $this->_webform->setTemplateId($this->getFieldValue("template"));
             $this->_webform->setIncludeCaptcha($this->getCheckboxValue('include_captcha'));
 
             // delete properties that are no longer supposed to be there

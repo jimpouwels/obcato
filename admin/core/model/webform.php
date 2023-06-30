@@ -1,15 +1,20 @@
 <?php
     defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/model/entity.php";
+    require_once CMS_ROOT . "core/model/presentable.php";
 
-    class WebForm extends Entity {
+    class WebForm extends Presentable {
     
         private string $_title;
         private array $_form_fields;
         private bool $_include_captcha;
         private ?string $_captcha_key;
-        
+        public static int $SCOPE = 19;
+
+        public function __construct() {
+            parent::__construct(self::$SCOPE);
+        }
+
         public function setTitle(string $title): void {
             $this->_title = $title;
         }
@@ -51,12 +56,16 @@
         
         public static function constructFromRecord(array $record, array $form_fields): WebForm {
             $form = new WebForm();
-            $form->setId($record['id']);
-            $form->setTitle($record['title']);
-            $form->setIncludeCaptcha($record['include_captcha'] == 1 ? true : false);
-            $form->setCaptchaKey($record['captcha_key']);
             $form->setFormFields($form_fields);
+            $form->initFromDb($record);
             return $form;
+        }
+
+        protected function initFromDb(array $record): void {
+            $this->setTitle($record['title']);
+            $this->setIncludeCaptcha($record['include_captcha'] == 1 ? true : false);
+            $this->setCaptchaKey($record['captcha_key']);
+            parent::initFromDb($record);
         }
     
     }
