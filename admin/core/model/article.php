@@ -109,7 +109,7 @@
             $this->setPublicationDate($row['publication_date']);
             $this->setSortDate($row['sort_date']);
             $this->setTargetPageId(intval($row['target_page']));
-            $this->setCommentWebFormId(intval($row['comment_webform_id']));
+            $this->setCommentWebFormId($row['comment_webform_id']);
             parent::initFromDb($row);
         }
 

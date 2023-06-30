@@ -76,7 +76,6 @@
             } catch (ElementHolderContainsErrorsException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
-            $this->redirectTo($this->getBackendBaseUrl() . '&article=' . $this->_current_article->getId());
         }
 
         private function addArticle(): void {
