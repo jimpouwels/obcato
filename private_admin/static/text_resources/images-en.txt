@@ -22,3 +22,6 @@ images_search_show_all_without_label: Show all without label
 images_search_title_field: Title
 images_search_filename_field: File name
 images_search_label_field: Label
+
+# EDITOR
+image_editor_alt_text_label: Alternative text

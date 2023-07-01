@@ -8,7 +8,7 @@
     
     class ImageDao {
 
-        private static string $myAllColumns = "i.id, i.title, i.published, i.created_at, i.created_by, i.file_name, i.thumb_file_name";
+        private static string $myAllColumns = "i.id, i.title, i.alt_text, i.published, i.created_at, i.created_by, i.file_name, i.thumb_file_name";
         private static ?ImageDao $instance = null;
         private MysqlConnector $_mysql_connector;
 
@@ -34,7 +34,7 @@
 
         public function updateImage(Image $image): void {
             $query = "UPDATE images SET title = '" . $image->getTitle() . "', 
-                      published = " . ($image->isPublished() ? 1 : 0) . ", file_name = '" . $image->getFileName() . "'
+                      alt_text = '" . $image->getAltText() . "', published = " . ($image->isPublished() ? 1 : 0) . ", file_name = '" . $image->getFileName() . "'
                       , thumb_file_name = '" . $image->getThumbFileName() . "' WHERE id = " . $image->getId();
             $this->_mysql_connector->executeQuery($query);
         }

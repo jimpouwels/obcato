@@ -12,7 +12,6 @@
 
     class ImageElement extends Element {
 
-        private ?string $_alternative_text = null;
         private ?string $_align = null;
         private ?int $_height = null;
         private ?int $_width = null;
@@ -20,14 +19,6 @@
 
         public function __construct(int $scope_id) {
             parent::__construct($scope_id, new ImageElementMetadataProvider($this));
-        }
-
-        public function setAlternativeText(?string $alternative_text): void {
-            $this->_alternative_text = $alternative_text;
-        }
-
-        public function getAlternativeText(): ?string {
-            return $this->_alternative_text;
         }
 
         public function setAlign(?string $align): void {
@@ -112,7 +103,6 @@
 
         public function constructMetaData(array $row, $element): void {
             $element->setTitle($row['title']);
-            $element->setAlternativeText($row['alternative_text']);
             $element->setAlign($row['align']);
             $element->setImageId($row['image_id']);
             $element->setWidth($row['width']);
@@ -124,16 +114,15 @@
             if ($element->getImageId() != '' && !is_null($element->getImageId())) {
                 $image_id = $element->getImageId();
             }
-            $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', alternative_text = '"
-                        . $element->getAlternativeText() . "', align = '" . $element->getAlign() . "', image_id = "
+            $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', align = '" . $element->getAlign() . "', image_id = "
                         . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
                         . " WHERE element_id = " . $element->getId();
             $this->_mysql_connector->executeQuery($query);
         }
 
         public function insert(Element $element): void {
-            $query = "INSERT INTO image_elements_metadata (title, alternative_text, align, width, height, image_id, element_id) VALUES "
-                        . "('" . $element->getTitle() . "', '" . $element->getAlternativeText() . "', '" . $element->getAlign() . "', 0 , 0"
+            $query = "INSERT INTO image_elements_metadata (title, align, width, height, image_id, element_id) VALUES "
+                        . "('" . $element->getTitle() . "', '" . $element->getAlign() . "', 0 , 0"
                         . ", NULL, " . $element->getId() . ")";
             $this->_mysql_connector->executeQuery($query);
         }

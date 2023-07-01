@@ -3,6 +3,7 @@
 
 <ul class="admin_form">
     <li>{$title_field}</li>
+    <li>{$alt_text_field}</li>
     <li>{$published_field}</li>
     <li>{$upload_field}</li>
 </ul>

@@ -22,3 +22,6 @@ images_search_show_all_without_label: Toon allen zonder label
 images_search_title_field: Titel
 images_search_filename_field: Bestandsnaam
 images_search_label_field: Label
+
+# EDITOR
+image_editor_alt_text_label: Alternatieve tekst

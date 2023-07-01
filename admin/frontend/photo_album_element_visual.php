@@ -24,6 +24,7 @@
                 $image_item = array();
                 $image_item["id"] = $image->getId();
                 $image_item["title"] = $image->getTitle();
+                $image_item["alt_text"] = $image->getAltText();
                 $image_item["url"] = $this->getImageUrl($image);
                 $images_arr[] = $image_item;
             }

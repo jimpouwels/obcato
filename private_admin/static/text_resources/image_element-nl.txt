@@ -4,7 +4,6 @@ image_element_scope_label: Afbeelding Element
 
 # EDITOR
 image_element_editor_title: Titel
-image_element_editor_alternative_text: Alternatieve titel
 image_element_editor_image: Afbeelding
 image_element_editor_width: Breedte
 image_element_editor_height: Hoogte

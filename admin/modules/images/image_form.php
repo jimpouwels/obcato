@@ -15,6 +15,7 @@
 
         public function loadFields(): void {
             $this->_image->setTitle($this->getMandatoryFieldValue("image_title", "Titel is verplicht"));
+            $this->_image->setAltText($this->getFieldValue("image_alt_text"));
             $this->_image->setPublished($this->getCheckboxValue("image_published"));
             $this->_selected_labels = $this->getSelectValue("select_labels_" . $this->_image->getId());
             if ($this->hasErrors()) {

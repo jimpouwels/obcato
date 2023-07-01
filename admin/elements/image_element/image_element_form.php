@@ -15,7 +15,6 @@
         public function loadFields(): void {
             parent::loadFields();
             $this->_image_element->setTitle($this->getFieldValue('element_' . $this->_image_element->getId() . '_title'));
-            $this->_image_element->setAlternativeText($this->getFieldValue('element_' . $this->_image_element->getId() . '_alternative_text'));
             $this->_image_element->setAlign($this->getFieldValue('element_' . $this->_image_element->getId() . '_align'));
             $this->_image_element->setImageId($this->getNumber('image_image_ref_' . $this->_image_element->getId(), $this->getTextResource("form_invalid_number_error")));
             $this->_image_element->setWidth($this->getNumber('element_' . $this->_image_element->getId() . '_width', $this->getTextResource("form_invalid_number_error")));

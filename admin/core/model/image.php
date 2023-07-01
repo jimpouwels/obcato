@@ -7,6 +7,7 @@
     class Image extends Entity {
     
         private string $_title;
+        private ?string $_alt_text = null;
         private ?string $_file_name;
         private ?string $_thumbnail_file_name;
         private bool $_published;
@@ -19,6 +20,14 @@
         
         public function getTitle(): string {
             return $this->_title;
+        }
+
+        public function setAltText(?string $alt_text): void {
+            $this->_alt_text = $alt_text;
+        }
+
+        public function getAltText(): ?string {
+            return $this->_alt_text;
         }
         
         public function setFileName(?string $filename): void {
@@ -85,6 +94,7 @@
         
         protected function initFromDb(array $row): void {
             $this->setTitle($row['title']);
+            $this->setAltText($row['alt_text']);
             $this->setPublished($row['published']) == 1 ? true : false;
             $this->setCreatedAt($row['created_at']);
             $this->setCreatedById($row['created_by']);

@@ -1,5 +1,4 @@
 <div>{$title_field}</div>
-<div>{$alternative_text_field}</div>
 <div>{$alignment_field}</div>
 <div>{$width_field}</div>
 <div>{$height_field}</div>

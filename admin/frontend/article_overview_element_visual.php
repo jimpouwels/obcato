@@ -42,6 +42,7 @@
             if (!is_null($article->getImage())) {
                 $image = array();
                 $image["title"] = $article->getImage()->getTitle();
+                $image["alt_text"] = $article->getImage()->getAltText();
                 $image["url"] = $this->getImageUrl($article->getImage());
             }
             return $image;
