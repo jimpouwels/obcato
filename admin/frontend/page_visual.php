@@ -30,6 +30,7 @@
                 $rendered_article = $article_visual->render();
                 $this->assign("page_title", $this->getArticle()->getTitle());
             }
+            $this->assign("canonical_url", $this->getCanonicalUrl());
             $this->assign('article', $rendered_article);
             $this->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
         }

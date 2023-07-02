@@ -51,7 +51,10 @@
             $this->_template_engine->assign($key, $value);
         }
 
-        protected function toHtml(string $value, ElementHolder $element_holder): string {
+        protected function toHtml(?string $value, ElementHolder $element_holder): string {
+            if (!$value) {
+                return "";
+            }
             $value = nl2br($value);
             return $this->createLinksInString($value, $element_holder);
         }
@@ -106,6 +109,22 @@
             return $url;
         }
 
+        protected function getCanonicalUrl(): string {
+            $absolute_url = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
+            $absolute_url .= '://';
+            if (str_contains($_SERVER['HTTP_HOST'], 'www.')) {
+                $absolute_url .= $_SERVER['HTTP_HOST'];
+            } else {
+                $absolute_url .= 'www.' . $_SERVER['HTTP_HOST'];
+            }
+            if ($this->getArticle()) {
+                $absolute_url .= $this->getArticleUrl($this->getArticle());
+            } else {
+                $absolute_url .= $this->getPageUrl($this->getPage());
+            }
+            return $absolute_url;
+        }
+
         protected function toAnchorValue(string $value): string {
             $anchor_value = strtolower($value);
             $anchor_value = str_replace("-", " ", $anchor_value);
@@ -141,7 +160,6 @@
         }
 
         private function createUrlFromLink(Link $link): string {
-            $url = null;
             $target_element_holder = $link->getTargetElementHolder();
             switch ($target_element_holder->getType()) {
                 case Page::ElementHolderType:
