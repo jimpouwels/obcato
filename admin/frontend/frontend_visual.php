@@ -112,11 +112,7 @@
         protected function getCanonicalUrl(): string {
             $absolute_url = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
             $absolute_url .= '://';
-            if (str_contains($_SERVER['HTTP_HOST'], 'www.')) {
-                $absolute_url .= $_SERVER['HTTP_HOST'];
-            } else {
-                $absolute_url .= 'www.' . $_SERVER['HTTP_HOST'];
-            }
+            $absolute_url .= str_replace('www.', '', $_SERVER['HTTP_HOST']);
             if ($this->getArticle()) {
                 $absolute_url .= $this->getArticleUrl($this->getArticle());
             } else {
