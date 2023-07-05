@@ -96,16 +96,22 @@
 
         private function storeItems(array $items): void {
             if (!is_null($items)) {
-                $query = "";
                 foreach ($items as $list_item) {
+                    $statement = null;
+                    $id = $list_item->getId();
+                    $indent = $list_item->getIndent();
+                    $text = $list_item->getText();
+                    $element_id = $this->getElement()->getId();
                     if (!is_null($list_item->getId())) {
-                        $query = "UPDATE list_element_items SET `text` = '" . $list_item->getText() . "', indent = " . $list_item->getIndent() . "
-                                WHERE id = " . $list_item->getId();
+                        $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
+                        $statement = $this->_mysql_connector->prepareStatement($query);
+                        $statement->bind_param('sii', $text, $indent, $id);
                     } else {
-                        $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES
-                            ('', " . $list_item->getIndent() . ", " . $this->getElement()->getId() . ")";
+                        $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
+                        $statement = $this->_mysql_connector->prepareStatement($query);
+                        $statement->bind_param('ii', $indent, $element_id);
                     }
-                    $this->_mysql_connector->executeQuery($query);
+                    $this->_mysql_connector->executeStatement($statement);
                 }
             }
         }
