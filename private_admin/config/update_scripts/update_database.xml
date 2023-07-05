@@ -137,5 +137,7 @@
             <query>ALTER TABLE articles ADD CONSTRAINT articles_templates FOREIGN KEY articles_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>ALTER TABLE images ADD COLUMN alt_text TEXT DEFAULT NULL</query>
             <query>ALTER TABLE image_elements_metadata DROP COLUMN alternative_text</query>
+            <query>DELETE FROM scopes WHERE id = 10</query>
+            <query>DELETE FROM scopes WHERE id = 8</query>
     </version>
 </versions>

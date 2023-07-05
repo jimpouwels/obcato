@@ -1,6 +1,13 @@
 # GENERAL
 webforms_module_title: Forms
 
+# SCOPES
+webform_textfield_scope_label: Webform - Textfield
+webform_textarea_scope_label: Webform - Textarea
+webform_dropdown_scope_label: Webform - Dropdown
+webform_button_scope_label: Webform - Button
+webform_scope_label: Webform
+
 # TABS
 webforms_tab_forms: Forms
 

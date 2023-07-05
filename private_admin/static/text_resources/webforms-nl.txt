@@ -1,6 +1,13 @@
 # GENERAL
 webforms_module_title: Formulieren
 
+# SCOPES
+webform_textfield_scope_label: Webformlier - Tekstveld
+webform_textarea_scope_label: Webformulier - Tekstarea
+webform_dropdown_scope_label: Webformulier - Dropdown
+webform_button_scope_label: Webformulier - Knop
+webform_scope_label: Webformulier
+
 # TABS
 webforms_tab_forms: Formulieren
 
