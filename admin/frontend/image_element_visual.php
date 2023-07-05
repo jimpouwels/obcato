@@ -12,7 +12,7 @@
         public function loadElement(Smarty_Internal_Data $data): void {
             $element_holder = $this->getElement()->getElementHolder();
             $data->assign("title", $this->getElement()->getTitle());
-            $data->assign("alternative_text", $this->toHtml($this->getElement()->getImage()->getAltText(), $element_holder));
+            $data->assign("alt_text", $this->toHtml($this->getElement()->getImage()->getAltText(), $element_holder));
             $data->assign("align", $this->getElement()->getAlign());
             $data->assign("width", $this->getElement()->getWidth());
             $data->assign("height", $this->getElement()->getHeight());
