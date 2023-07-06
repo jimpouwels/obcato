@@ -10,9 +10,8 @@
         }
 
         public function loadElement(Smarty_Internal_Data $data): void {
-            $element_holder = $this->getElement()->getElementHolder();
             $data->assign("title", $this->getElement()->getTitle());
-            $data->assign("url", $this->toHtml($this->getElement()->getUrl(), $element_holder));
+            $data->assign("url", $this->toHtml($this->getElement()->getUrl(), $this->getElementHolder()));
             $data->assign("height", $this->getElement()->getHeight());
             $data->assign("width", $this->getElement()->getWidth());
         }

@@ -11,8 +11,7 @@
         }
 
         public function loadElement(Smarty_Internal_Data $data): void {
-            $element_holder = $this->getElement()->getElementHolder();
-            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
+            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
             $data->assign("images", $this->getImages());
         }
 

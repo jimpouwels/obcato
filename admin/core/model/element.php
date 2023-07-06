@@ -56,12 +56,6 @@
             $this->_element_holder_id = $element_holder_id;
         }
 
-        // TODO: This can cause recursion
-        public function getElementHolder(): ElementHolder {
-            $element_holder_dao = ElementHolderDao::getInstance();
-            return $element_holder_dao->getElementHolder($this->_element_holder_id);
-        }
-
         public function delete(): void {
             $element_dao = ElementDao::getInstance();
             $element_dao->deleteElement($this);

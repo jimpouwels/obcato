@@ -10,9 +10,8 @@
         }
 
         public function loadElement(Smarty_Internal_Data $data): void {
-            $element_holder = $this->getElement()->getElementHolder();
-            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $element_holder));
-            $data->assign("items", $this->renderListItems($element_holder));
+            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
+            $data->assign("items", $this->renderListItems($this->getElementHolder()));
         }
 
         private function renderListItems(ElementHolder $element_holder): array {
