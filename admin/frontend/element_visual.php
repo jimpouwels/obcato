@@ -25,6 +25,7 @@
         public function load(): void {
             $this->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
             $this->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
+            $this->assign("type", $this->_element->getType()->getIdentifier());
             
             $element_data = $this->getTemplateEngine()->createChildData();
             $this->loadElement($element_data);

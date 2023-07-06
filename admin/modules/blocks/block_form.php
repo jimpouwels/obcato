@@ -18,7 +18,7 @@
             $this->_block->setTitle($this->getMandatoryFieldValue("title", "Titel is verplicht"));
             $this->_block->setPublished($this->getCheckboxValue("published"));
             $this->_block->setPositionId($this->getFieldValue("block_position"));
-            $this->_block->setTemplateId($this->getFieldValue("block_template"));
+            $this->_block->setTemplateId($this->getNumber("block_template", "not a number"));
             if ($this->hasErrors()) {
                 throw new FormException();
             }

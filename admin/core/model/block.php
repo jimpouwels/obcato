@@ -5,22 +5,22 @@
 
     class Block extends ElementHolder {
     
-        private int $_position_id;
-        private static int $SCOPE = 5;
+        private ?int $_position_id = null;
+        private static int $SCOPE = 6;
 
         public function __construct() {
             parent::__construct(self::$SCOPE);
         }
         
-        public function getPositionId(): int {
+        public function getPositionId(): ?int {
             return $this->_position_id;
         }
         
-        public function setPositionId(int $position_id): void {
+        public function setPositionId(?int $position_id): void {
             $this->_position_id = $position_id;
         }
         
-        public function getPosition(): BlockPosition {
+        public function getPosition(): ?BlockPosition {
             $dao = BlockDao::getInstance();
             return $dao->getBlockPosition($this->_position_id);
         }
