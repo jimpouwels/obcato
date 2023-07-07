@@ -29,6 +29,7 @@
             $this->assign("website_title", WEBSITE_TITLE);
             $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $this->assign("page_title", $this->getPage()->getTitle());
+            $this->assign("crumb_path", $this->renderCrumbPath());
             if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
                 $article_data = $this->renderArticle();
                 $this->assign("article", $article_data);
@@ -173,6 +174,21 @@
                 }
             }
             return $elements_content;
+        }
+
+        private function renderCrumbPath(): array {
+            $crumb_path_items = array();
+            $parents = $this->getPage()->getParents();
+            for ($i = 0; $i < count($parents); $i++) {
+                if ($this->getPage() == $parents[$i] && !$this->getArticle()) {
+                    continue;
+                }
+                $item_data = array();
+                $item_data['url'] = $this->getPageUrl($parents[$i]);
+                $item_data['title'] = $parents[$i]->getTitle();
+                $crumb_path_items[] = $item_data;
+            }
+            return $crumb_path_items;
         }
 
     }
