@@ -12,7 +12,7 @@
 
     class ArticleDao {
         private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.image_id, a.template_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
+                      e.created_at, e.created_by, e.type, a.description, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
         private static ?ArticleDao $instance = null;
         private PageDao $_page_dao;
@@ -147,6 +147,11 @@
                 $query = $query . ", target_page = " . $article->getTargetPageId();
             } else {
                 $query = $query . ", target_page = NULL";
+            }
+            if (!is_null($article->getParentArticleId())) {
+                $query = $query . ", parent_article_id = " . $article->getParentArticleId();
+            } else {
+                $query = $query . ", parent_article_id = NULL";
             }
             if (!is_null($article->getTemplateId()) && $article->getTemplateId() != '') {
                 $query = $query . ", template_id = " . $article->getTemplateId();

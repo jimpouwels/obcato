@@ -5,7 +5,6 @@
 
     class FormButtonVisual extends FormItemVisual {
         
-
         public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
             parent::__construct($page, $article, $webform, $webform_item);
         }

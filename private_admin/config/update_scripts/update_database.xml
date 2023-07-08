@@ -139,5 +139,7 @@
             <query>ALTER TABLE image_elements_metadata DROP COLUMN alternative_text</query>
             <query>DELETE FROM scopes WHERE id = 10</query>
             <query>DELETE FROM scopes WHERE id = 8</query>
+            <query>ALTER TABLE articles ADD COLUMN parent_article_id int(10) UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE articles ADD CONSTRAINT article_to_element_holders FOREIGN KEY article_to_element_holders (parent_article_id) REFERENCES element_holders(id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
     </version>
 </versions>

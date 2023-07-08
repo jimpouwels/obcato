@@ -178,14 +178,27 @@
 
         private function renderCrumbPath(): array {
             $crumb_path_items = array();
-            $parents = $this->getPage()->getParents();
+            $parents = null;
+            $parent_article = null;
+            if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
+                $parent_article = $this->_article_dao->getArticle($this->getArticle()->getParentArticleId());
+                $parents = $parent_article->getTargetPage()->getParents();
+            } else {
+                $parents = $this->getPage()->getParents();
+            }
             for ($i = 0; $i < count($parents); $i++) {
-                if ($this->getPage() == $parents[$i] && !$this->getArticle()) {
+                if ($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) {
                     continue;
                 }
                 $item_data = array();
                 $item_data['url'] = $this->getPageUrl($parents[$i]);
                 $item_data['title'] = $parents[$i]->getTitle();
+                $crumb_path_items[] = $item_data;
+            }
+            if ($parent_article) {
+                $item_data = array();
+                $item_data['url'] = $this->getArticleUrl($parent_article);
+                $item_data['title'] = $parent_article->getTitle();
                 $crumb_path_items[] = $item_data;
             }
             return $crumb_path_items;

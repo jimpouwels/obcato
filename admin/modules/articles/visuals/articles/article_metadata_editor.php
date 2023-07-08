@@ -2,6 +2,7 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "view/views/image_picker.php";
+    require_once CMS_ROOT . "view/views/article_picker.php";
     require_once CMS_ROOT . 'database/dao/article_dao.php';
     require_once CMS_ROOT . 'database/dao/webform_dao.php';
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
@@ -37,9 +38,17 @@
             $sort_date_field = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->_current_article->getSortDate()), true, null);
             $target_pages_field = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->_current_article->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
             $comment_forms_field = new PullDown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
+            $parent_article_picker_field = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->_current_article->getParentArticleId(), "update_element_holder");
+            $parent_article_delete_button = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
             $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
             
+            $parent_article = null;
+            if (!is_null($this->_current_article->getParentArticleId())) {
+                $parent_article = $this->_article_dao->getArticle($this->_current_article->getParentArticleId());
+                $data->assign('parent_article', $this->renderParentArticle($parent_article));
+            }
+
             $data->assign("current_article_id", $this->_current_article->getId());
             $data->assign("title_field", $title_field->render());
             $data->assign('template_field', $template_picker_field->render());
@@ -49,11 +58,20 @@
             $data->assign("publication_date_field", $publication_date_field->render());
             $data->assign("sort_date_field", $sort_date_field->render());
             $data->assign("target_pages_field", $target_pages_field->render());
+            $data->assign("parent_article_field", $parent_article_picker_field->render());
+            $data->assign("delete_parent_article_button", $parent_article_delete_button->render());
             $data->assign("comment_forms_field", $comment_forms_field->render());
             $data->assign("image_picker_field", $image_picker_field->render());
             $data->assign("lead_image_id", $this->_current_article->getImageId());
             $data->assign("delete_lead_image_button", $image_delete_button->render());
             $this->assignElementHolderFormIds($data);
+        }
+
+        private function renderParentArticle(Article $parent_article): array {
+            $article_data = array();
+            $article_data['id'] = $parent_article->getId();
+            $article_data['title'] = $parent_article->getTitle();
+            return $article_data;
         }
 
         private function getDateValue(string $date): string {

@@ -27,10 +27,12 @@
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
             $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId(), $this->getTextResource("form_invalid_number_error")));
             $this->_article->setTargetPageId($this->getNumber("article_target_page", $this->getTextResource("form_invalid_number_error")));
+            $this->_article->setParentArticleId($this->getNumber("parent_article_id", $this->getTextResource("form_invalid_number_error")));
             $this->_article->setCommentWebFormId($this->getNumber("article_comment_webform", $this->getTextResource("form_invalid_number_error")));
             $publication_date = $this->loadPublicationDate();
             $sort_date = $this->loadSortDate();
             $this->deleteLeadImageIfNeeded();
+            $this->deleteParentArticleIfNeeded();
             $this->_selected_terms = $this->getSelectValue("select_terms_" . $this->_article->getId());
             if ($this->hasErrors()) {
                 throw new FormException();
@@ -62,6 +64,12 @@
         private function deleteLeadImageIfNeeded(): void {
             if ($this->getFieldValue("delete_lead_image_field") == "true") {
                 $this->_article->setImageId(null);
+            }
+        }
+        
+        private function deleteParentArticleIfNeeded(): void {
+            if ($this->getFieldValue("delete_parent_article_field") == "true") {
+                $this->_article->setParentArticleId(null);
             }
         }
         

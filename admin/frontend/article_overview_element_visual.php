@@ -7,7 +7,6 @@
 
     class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
-
         public function __construct(Page $page, ?Article $article, ArticleOverviewElement $article_overview_element) {
             parent::__construct($page, $article, $article_overview_element);
         }

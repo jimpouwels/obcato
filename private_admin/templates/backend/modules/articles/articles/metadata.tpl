@@ -4,6 +4,7 @@
 <input type="hidden" id="draggable_order" name="draggable_order" value="" />
 <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 <input type="hidden" id="delete_lead_image_field" name="delete_lead_image_field" value="" />
+<input type="hidden" id="delete_parent_article_field" name="delete_parent_article_field" value="" />
 
 <ul class="admin_form">
 	<li>{$title_field}</li>
@@ -13,6 +14,16 @@
 	<li>{$publication_date_field}</li>
     <li>{$sort_date_field}</li>
 	<li>{$target_pages_field}</li>
+	<li>
+		<div>
+			{$parent_article_field}
+		</div>
+        {if isset($parent_article)}
+            <div>
+                <i>{$parent_article.title}</i> {$delete_parent_article_button}
+            </div>
+        {/if}
+	</li>
 	<li>{$comment_forms_field}</li>
 	<li>{$template_field}</li>
 	<li>

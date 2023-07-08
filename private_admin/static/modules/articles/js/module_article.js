@@ -62,6 +62,16 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('#delete_parent_article').click(function() {
+		var confirmed = confirm("Weet u zeker dat u deze verwijzing wilt verwijderen?");
+		if (confirmed) {
+			$('#action').attr('value', 'update_element_holder');
+			$('#delete_parent_article_field').attr('value', 'true');
+			$('#element_holder_form_id').submit();
+		}
+		return false;
+	});
+
 	$('#update_target_pages').click(function() {
 		$('#update_target_page_form').submit();
 	});

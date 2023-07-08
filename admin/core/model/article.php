@@ -18,6 +18,7 @@
         private string $_publication_date;
         private string $_sort_date;
         private ?int $_target_page_id = null;
+        private ?int $_parent_article_id = null;
         private ?int $_comment_webform_id = null;
         private PageDao $_page_dao;
         
@@ -75,6 +76,14 @@
         public function setTargetPageId(?int $target_page_id): void {
             $this->_target_page_id = $target_page_id;
         }
+
+        public function getParentArticleId(): ?int {
+            return $this->_parent_article_id;
+        }
+
+        public function setParentArticleId(?int $parent_article_id): void {
+            $this->_parent_article_id = $parent_article_id;
+        }
         
         public function getTargetPage(): ?Page {
             $target_page = null;
@@ -108,7 +117,8 @@
             $this->setImageId($row['image_id']);
             $this->setPublicationDate($row['publication_date']);
             $this->setSortDate($row['sort_date']);
-            $this->setTargetPageId(intval($row['target_page']));
+            $this->setTargetPageId(!is_null($row['target_page']) ? intval($row['target_page']) : null);
+            $this->setParentArticleId(!is_null($row['parent_article_id']) ? intval($row['parent_article_id']) : null);
             $this->setCommentWebFormId($row['comment_webform_id']);
             parent::initFromDb($row);
         }
