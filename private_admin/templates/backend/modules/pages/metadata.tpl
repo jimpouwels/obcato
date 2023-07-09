@@ -3,12 +3,12 @@
 <input type="hidden" id="{$delete_element_form_id}" name="{$delete_element_form_id}" value="" />
 <input type="hidden" id="draggable_order" name="draggable_order" value="" />
 <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
-<ul class="admin_form">
-	<li>{$page_title_field}</li>
-	<li>{$navigation_title_field}</li>
-	<li>{$url_field}</li>
-	<li>{$description_field}</li>
-	<li>{$published_field}</li>
-	<li>{$show_in_navigation_field}</li>
-	<li>{$template_picker_field}</li>
-</ul>
+<div class="admin_form_v2">
+	{$page_title_field}
+	{$navigation_title_field}
+	{$url_field}
+	{$description_field}
+	{$published_field}
+	{$show_in_navigation_field}
+	{$template_picker_field}
+</div>

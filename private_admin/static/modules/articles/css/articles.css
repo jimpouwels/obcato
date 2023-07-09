@@ -15,10 +15,6 @@
     float: right;
 }
 
-.button {
-    margin: 10px;
-}
-
 .article_list {
     margin-left: 350px;
 }
@@ -55,11 +51,6 @@
     text-align: center;
 }
 
-.button {
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
 .term_editor_panel {
     margin: auto;
     width: 800px;
@@ -78,4 +69,29 @@
 .target_pages_fieldset {
     width: 800px;
     margin: auto;
+}
+
+.selected_parent_article {
+    width: 100px;
+    float: left;
+    overflow: auto;
+}
+
+.selected_parent_article_delete_button {
+    float: left;
+    overflow: auto;
+}
+
+.selected_parent_article p {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.selected_parent_article_delete_button a {
+    margin: 0px;
+}
+
+.article-child-articles {
+    padding-top: 10px;
+    padding-left: 150px;
 }

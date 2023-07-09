@@ -1,8 +1,8 @@
-<div>{$title_field}</div>
-<div>{$alignment_field}</div>
-<div>{$width_field}</div>
-<div>{$height_field}</div>
-<div>
+<div class="admin_form_v2">
+    {$title_field}
+    {$alignment_field}
+    {$width_field}
+    {$height_field}
     {$image_picker}
     {if !is_null($image_id) && $image_id != ""}
         <br />

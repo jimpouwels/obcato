@@ -1,9 +1,9 @@
 <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 <input type="hidden" id="image_id" name="image_id" value="{$current_image_id}" />
 
-<ul class="admin_form">
-    <li>{$title_field}</li>
-    <li>{$alt_text_field}</li>
-    <li>{$published_field}</li>
-    <li>{$upload_field}</li>
-</ul>
+<div class="admin_form_v2">
+    {$title_field}
+    {$alt_text_field}
+    {$published_field}
+    {$upload_field}
+</div>

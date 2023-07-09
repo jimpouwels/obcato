@@ -1,16 +1,18 @@
-<ul class="admin_form">
-    <li>{$website_title}</li>
-    <li>{$email_field}</li>
-    <li>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <td>
-                    {$homepage_picker}
-                </td>
-                {if !is_null($current_homepage_id)}
-                    <td><em><a class="link" href="{$backend_base_url}&module_id=3&amp;page={$current_homepage_id}">{$current_homepage_title}</a></em></td>
-                {/if}
-            </tr>
-        </table>
-    </li>
+<div class="admin_form_v2">
+    {$website_title}
+    {$email_field}
+    {$homepage_picker}
+
+    <div class="admin_form_field_v2">
+        {if !is_null($current_homepage_id)}
+            <div class="admin_label_wrapper">
+				<label class="admin_label">{$text_resources.settings_form_selected_homepage}</label>
+			</div>
+			<div class="admin_field_wrapper">
+				<div class="selected_parent_article">
+					<p><i><a class="link" href="{$backend_base_url}&module_id=3&amp;page={$current_homepage_id}">{$current_homepage_title}</a></i></p>
+				</div>
+			</div>
+		{/if}
+	</div>
 </ul>

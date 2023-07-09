@@ -1,5 +1,5 @@
-<ul>
-    <li>{$title_field}</li>
-    <li>{$max_results_field}</li>
-    <li>{$label_select_field}</li>
-</ul>
+<div class="admin_form_v2">
+    {$title_field}
+    {$max_results_field}
+    {$label_select_field}
+</div>

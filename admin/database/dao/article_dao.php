@@ -67,6 +67,17 @@
             return $articles;
         }
 
+        public function getAllChildArticles(int $parent_article_id): array {
+            $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
+                      AND parent_article_id = " . $parent_article_id . " order by created_at DESC";
+            $result = $this->_mysql_connector->executeQuery($query);
+            $articles = array();
+            while ($row = $result->fetch_assoc()) {
+                $articles[] = Article::constructFromRecord($row);
+            }
+            return $articles;
+        }
+
         public function searchArticles($keyword, $term_id): array {
             $from = " FROM element_holders e, articles a";
             $where = " WHERE

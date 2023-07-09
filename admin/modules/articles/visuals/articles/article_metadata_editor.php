@@ -49,6 +49,8 @@
                 $data->assign('parent_article', $this->renderParentArticle($parent_article));
             }
 
+            $data->assign("child_articles", $this->renderChildArticles());
+
             $data->assign("current_article_id", $this->_current_article->getId());
             $data->assign("title_field", $title_field->render());
             $data->assign('template_field', $template_picker_field->render());
@@ -67,10 +69,24 @@
             $this->assignElementHolderFormIds($data);
         }
 
+        private function renderChildArticles(): array {
+            $child_articles_data = array();
+            $child_articles = $this->_article_dao->getAllChildArticles($this->_current_article->getId());
+            foreach ($child_articles as $child_article) {
+                $child_article_data = array();
+                $child_article_data['id'] = $child_article->getId();
+                $child_article_data['title'] = $child_article->getTitle();
+                $child_article_data['url'] = "{$this->getBackendBaseUrl()}&article={$child_article->getId()}";
+                $child_articles_data[] = $child_article_data;
+            }
+            return $child_articles_data;
+        }
+
         private function renderParentArticle(Article $parent_article): array {
             $article_data = array();
             $article_data['id'] = $parent_article->getId();
             $article_data['title'] = $parent_article->getTitle();
+            $article_data['url'] = "{$this->getBackendBaseUrl()}&article={$parent_article->getId()}";
             return $article_data;
         }
 

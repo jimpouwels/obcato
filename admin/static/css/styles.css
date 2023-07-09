@@ -46,26 +46,6 @@
     background-position: 0 bottom;
 }
 
-.admin_label {
-    min-width: 135px;
-    float: left;
-    padding-top: 12px;
-}
-
-.admin_field {
-    margin-top: 8px;
-    width: 300px;
-}
-
-.admin_form ul {
-    padding: 0px;
-}
-
-.admin_form li {
-    list-style: none outside none;
-    clear: both;
-}
-
 .mandatory_star {
     color: red;
 }

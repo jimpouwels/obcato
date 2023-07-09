@@ -1,5 +1,5 @@
-<ul class="admin_form">
-    <li>{$frontend_hostname}</li>
-    <li>{$backend_hostname}</li>
-    <li>{$smtp_host}</li>
-</ul>
+<div class="admin_form_v2">
+    {$frontend_hostname}
+    {$backend_hostname}
+    {$smtp_host}
+</div>

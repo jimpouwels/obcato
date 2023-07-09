@@ -134,8 +134,12 @@ body {
     margin: 15px;
 }
 
-.panel .admin_form {
-    padding-left: 0px;
+.panel-content .admin_label_wrapper {
+    width: 18%;
+}
+
+.panel-content .admin_field_wrapper {
+    width: 70%;
 }
 
 .content_left_column {
@@ -432,12 +436,17 @@ h1 {
     background-color: #ffffff;
 }
 
-.draggable_wrapper select {
-    margin-top: 8px;
+.draggable_wrapper .template_picker .admin_field_wrapper select {
+    width: 100%;
 }
 
-.draggable_wrapper .button {
-    margin-top: 5px;
+.draggable_wrapper .template_picker .admin_field_wrapper {
+    width: 100%;
+}
+
+.template_picker .admin_form_field_v2 {
+    width: 300px;
+    float: right;
 }
 
 .draggable_wrapper .panel {
@@ -467,8 +476,16 @@ h1 {
     display: none;
 }
 
-.draggable_header .include_in_table_of_contents {
-    margin-top: 3px;
+.draggable_header .include_in_table_of_contents .admin_form_field_v2 {
+    width: 150px;
+}
+
+.draggable_header .include_in_table_of_contents .admin_label_wrapper {
+    width: 100px;
+}
+
+.draggable_header .include_in_table_of_contents .admin_field_wrapper {
+    width: 30px;
 }
 
 .draggable_header .include_in_table_of_contents .admin_field_checkbox {
@@ -511,11 +528,36 @@ h1 {
     padding-left: 0px;
 }
 
+.draggable_body .admin_label_wrapper {
+    width: 18%;
+}
+
+.draggable_body .admin_field_wrapper {
+    width: 70%;
+}
+
 .element_summary_text {
     margin-bottom: 0px;
     margin-top: 5px;
     display: none;
     font-style: italic;
+}
+
+.admin_form_field_v2 {
+    overflow: auto;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.admin_form_field_v2 > .admin_label_wrapper {
+    overflow: auto;
+    float: left;
+}
+
+.admin_form_field_v2 > .admin_field_wrapper {
+    overflow: auto;
+    float: left;
 }
 
 .admin_form_list select {
@@ -524,17 +566,11 @@ h1 {
 
 .admin_field_text {
     margin: 0px;
-    padding-top: 11px;
     width: 300px;
 }
 
 .admin_field_text_area {
-    margin-top: 10px;
     height: 150px;
-}
-
-.admin_field_checkbox {
-    margin-top: 11px;
 }
 
 .delete_column .admin_field_checkbox {

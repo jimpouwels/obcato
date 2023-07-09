@@ -28,11 +28,14 @@ article_editor_description_label: Beschrijving
 article_editor_published_label: Gepubliceerd
 article_editor_publication_date_label: Publicatiedatum
 article_editor_sort_date_label: Sorteerdatum
-article_editor_parent_article_label: Subartikel van
+article_editor_parent_article_label: Selecteer hoofdartikel
 article_editor_target_page_label: Doelpagina
 article_editor_comment_webform_label: Reactieformulier
 article_editor_image_label: Afbeelding
 article_editor_delete_image_button_label: Afbeelding verwijderen
+article_editor_delete_parent_article_label: Verwijzing verwijderen
+article_editor_child_articles_label: Subartikelen
+article_editor_select_parent_article_label: Hoofdartikel
 
 # TERMS EDITOR
 articles_terms_editor_title: Term bewerken

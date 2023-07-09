@@ -18,15 +18,11 @@
     <div class="draggable_body">
         <div id="collapsable_body_{$id}" class="admin_form">
             <div class="form_field_editor_wrapper">
-                <ul class="admin_form">
-                    <li>
-                        {$name_field}
-                    </li>
-                    <li>
-                        {$label_field}
-                    </li>
+                <div class="admin_form_v2">
+                    {$name_field}
+                    {$label_field}
                     {$item_editor}
-                </ul>
+                </div>
             </div>
         </div>
     </div>

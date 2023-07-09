@@ -6,5 +6,4 @@ list_element_message_no_list_items: There are no items yet
 # EDITOR
 list_element_editor_title: Title
 list_element_editor_add_item: Add list item
-list_element_item_label_value: Value
 list_element_item_label_delete: Delete

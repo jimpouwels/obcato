@@ -1,5 +1,3 @@
-<table>
-    <tr>
-        <td>{$title_field}</td>
-    </tr>
-</table>
+<div class="admin_form_v2">
+    {$title_field}
+</div>

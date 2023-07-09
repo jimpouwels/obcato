@@ -1,4 +1,2 @@
-<li>
-    {$mandatory_field}
-</li>
+{$mandatory_field}
 {$field_editor}

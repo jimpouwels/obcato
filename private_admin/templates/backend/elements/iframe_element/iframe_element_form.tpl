@@ -1,4 +1,6 @@
-<div>{$title_field}</div>
-<div>{$url_field}</div>
-<div>{$width_field}</div>
-<div>{$height_field}</div>
+<div class="admin_form_v2">
+    {$title_field}
+    {$url_field}
+    {$width_field}
+    {$height_field}
+</div>

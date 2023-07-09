@@ -17,3 +17,4 @@ settings_form_backend_upload_dir_field: Upload directory
 settings_form_backend_frontend_template_dir_field: Frontend template directory
 settings_form_backend_backend_template_dir_field: Backend template directory
 settings_form_backend_component_dir_field: Component directory
+settings_form_selected_homepage: Selected homepage

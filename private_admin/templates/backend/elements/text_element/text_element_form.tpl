@@ -1,8 +1,4 @@
-<ul>
-    <li>
-        {$title_field}
-    </li>
-    <li>
-        {$text_field}
-    </li>
-</ul>
+<div class="admin_form_v2">
+    {$title_field}
+    {$text_field}
+</div>
