@@ -664,15 +664,39 @@ h1 {
 }
 
 .link-table .link-title .admin_field  {
-    width: 250px;
+    width: 160px;
 }
 
 .link-table .link-target .admin_field  {
-    width: 250px;
+    width: 160px;
 }
 
-.link-table .link-code .admin_field  {
-    width: 35px;
+.link-table .admin_field_wrapper {
+    width: 230px;
+}
+
+.link-table .admin_form_field_v2 {
+    margin-bottom: 0px;
+}
+
+.link-table .link-code input {
+    width: 75px;
+}
+
+.link-table .link-code .admin_field_wrapper {
+    width: 110px;
+}
+
+.link-table .link-target .admin_field_wrapper {
+    width: 170px;
+}
+
+.link-table .link-delete .admin_field_wrapper {
+    width: 80px;
+}
+
+.link-table .link-button .admin_field_wrapper {
+    width: 100px;
 }
 
 .link-table .link-delete {

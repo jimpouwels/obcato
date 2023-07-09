@@ -5,10 +5,10 @@
 		<input type="hidden" name="back_click_id" value="{$back_click_id}" />
 		<input type="hidden" name="popup" value="{$popup_type}" />
 
-		<ul class="admin_form">
-			<li>{$search_field}</li>
-			<li>{$search_options}</li>
-		</ul>
+		<div class="admin_form_v2">
+			{$search_field}
+			{$search_options}
+		</div>
 
 		{$search_button}
 	</div>
