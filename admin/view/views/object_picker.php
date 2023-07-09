@@ -33,6 +33,10 @@
             $data->assign("picker_button", $picker_button->render());
             $data->assign("value", $this->_value);
         }
+
+        public function getFieldType(): string {
+            return 'objectpicker';
+        }
     
     }
 

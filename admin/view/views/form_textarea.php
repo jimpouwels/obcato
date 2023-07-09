@@ -14,7 +14,11 @@
             return "system/form_textarea.tpl";
         }
 
-        function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data) {
+        }
+
+        public function getFieldType(): string {
+            return 'textarea';
         }
     
     }

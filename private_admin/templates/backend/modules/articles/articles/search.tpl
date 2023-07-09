@@ -1,13 +1,13 @@
 <form id="article_search" action="{$backend_base_url_raw}" method="get">
-	<ul class="admin_form">
-		<li class="displaynone">
+	<div class="admin_form_v2">
+		<div class="displaynone">
 			{$module_id_form_field}
 			{$module_tab_id_form_field}
 			<input type="hidden" name="action" value="search" />
-		</li>
-		<li>{$search_query_field}</li>
-		<li>{$term_query_field}</li>
-	</ul>
+		</div>
+		{$search_query_field}
+		{$term_query_field}
+	</div>
 	<div class="button_container">
 		{$search_button}
 	</div>

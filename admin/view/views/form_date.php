@@ -14,7 +14,11 @@
             return "system/form_date.tpl";
         }
 
-        function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data) {
+        }
+
+        public function getFieldType(): string {
+            return 'date';
         }
     
     }

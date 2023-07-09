@@ -26,6 +26,10 @@
         public function addOption(string $name, string $value): void {
             $this->_options[] = array('name' => $name, 'value' => $value);
         }
+
+        public function getFieldType(): string {
+            return 'pulldown';
+        }
     
     }
 

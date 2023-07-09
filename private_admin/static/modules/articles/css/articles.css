@@ -3,12 +3,14 @@
     float: left;
 }
 
-.article_search .admin_field {
+.article_search .admin_field_wrapper {
+    clear: both;
     width: 250px;
 }
 
-.article_search .admin_label {
-    width: 100%;
+.article_search .admin_field_wrapper input,select {
+    width: 95%;
+    margin-top: 8px;
 }
 
 .button_container {

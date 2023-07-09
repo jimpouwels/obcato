@@ -536,6 +536,12 @@ h1 {
     width: 70%;
 }
 
+.draggable_body .admin_field_wrapper-textarea {
+    clear: both;
+    width: 100%;
+    margin-top: 8px;
+}
+
 .element_summary_text {
     margin-bottom: 0px;
     margin-top: 5px;

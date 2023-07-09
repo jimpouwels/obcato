@@ -29,12 +29,14 @@
         }
 
         abstract function getFormFieldTemplateFilename(): string;
+        abstract function getFieldType(): string;
 
         abstract function loadFormField(Smarty_Internal_Data $data);
 
         public function load(): void {
             $this->assign("error", $this->getErrorHtml($this->_field_name));
             $this->assign('label', $this->getLabelHtml());
+            $this->assign('type', $this->getFieldType());
             
             $field_template_data = $this->createChildData();
             $this->loadFormField($field_template_data);

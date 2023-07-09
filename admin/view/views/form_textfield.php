@@ -16,8 +16,12 @@
             return "system/form_textfield.tpl";
         }
 
-        function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data) {
             $data->assign("is_visible", $this->_is_visible);
+        }
+
+        public function getFieldType(): string {
+            return 'textfield';
         }
 
     }

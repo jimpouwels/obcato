@@ -9,7 +9,7 @@
             {$label}
         {/if}
     </div>
-    <div class="admin_field_wrapper">
+    <div class="admin_field_wrapper admin_field_wrapper-{$type}">
         {$form_field}
     </div>
 </div>

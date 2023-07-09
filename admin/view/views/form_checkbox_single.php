@@ -15,12 +15,16 @@
             return "system/form_checkbox_single.tpl";
         }
 
-        function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data) {
             $data->assign('onchange_js', "onChange={$this->_onchange_js}");
         }
 
         public function setOnChangeJS(string $onchange_js): void {
             $this->_onchange_js = $onchange_js;
+        }
+
+        public function getFieldType(): string {
+            return 'checkbox';
         }
 
     }

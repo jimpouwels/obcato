@@ -36,6 +36,7 @@ article_editor_delete_image_button_label: Afbeelding verwijderen
 article_editor_delete_parent_article_label: Verwijzing verwijderen
 article_editor_child_articles_label: Subartikelen
 article_editor_select_parent_article_label: Hoofdartikel
+article_editor_selected_image_label: Geselecteerde afbeelding
 
 # TERMS EDITOR
 articles_terms_editor_title: Term bewerken
