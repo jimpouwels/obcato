@@ -9,8 +9,8 @@
 <div class="admin_form_v2">
 	{$title_field}</li>
 	{$url_field}</li>
-	{$keywords_field}</li>
 	{$description_field}</li>
+	{$keywords_field}</li>
 	{$published_field}</li>
 	{$publication_date_field}</li>
     {$sort_date_field}</li>
