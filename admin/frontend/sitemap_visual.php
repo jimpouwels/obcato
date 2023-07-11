@@ -28,6 +28,9 @@
         private function renderPageUrls(): array {
             $page_urls = array();
             foreach ($this->_page_dao->getAllPages() as $page) {
+                if (!$page->getIncludeInSearchEngine()) {
+                    continue;
+                }
                 $page_url = array();
                 $page_url['url'] = $this->getPageUrl($page, true);
                 $page_url['last_modified'] = date_format($page->getLastModified(), 'Y-m-d');

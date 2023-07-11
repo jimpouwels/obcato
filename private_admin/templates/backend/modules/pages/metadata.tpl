@@ -11,5 +11,6 @@
 	{$description_field}
 	{$published_field}
 	{$show_in_navigation_field}
+	{$include_in_search_engine_field}
 	{$template_picker_field}
 </div>

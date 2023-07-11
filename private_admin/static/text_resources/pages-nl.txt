@@ -17,6 +17,7 @@ pages_edit_metadata_keywords_field_label: Keywords
 pages_edit_metadata_description_field_label: Beschrijving
 pages_edit_metadata_ispublished_field_label: Gepubliceerd
 pages_edit_metadata_showinnavigation_field_label: Tonen in navigatie
+pages_edit_metadata_include_in_search_engine_field_label: Opnemen in zoekindex
 pages_edit_metadata_template_field_label: Template
 pages_edit_metadata_friendly_url_label: URL
 

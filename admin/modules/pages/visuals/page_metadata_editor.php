@@ -25,6 +25,7 @@
             $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_page), '');
             $description_field = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->_current_page->getDescription(), false, true, null);
             $published_field = new SingleCheckbox("published", $this->getTextResource('pages_edit_metadata_ispublished_field_label'), $this->_current_page->isPublished(), false, "");
+            $include_in_search_engine_field = new SingleCheckbox("include_in_search_engine", $this->getTextResource('pages_edit_metadata_include_in_search_engine_field_label'), $this->_current_page->getIncludeInSearchEngine(), false, "");
             $show_in_navigation_field = new SingleCheckbox("show_in_navigation", $this->getTextResource('pages_edit_metadata_showinnavigation_field_label'), $this->_current_page->getShowInNavigation(), false, "");
             $template_picker_field = new TemplatePicker("page_template", $this->getTextResource('pages_edit_metadata_template_field_label'), false, "", $this->_current_page->getTemplate(), $this->_current_page->getScope());
 
@@ -35,6 +36,7 @@
             $data->assign('url_field', $url_field->render());
             $data->assign("description_field", $description_field->render());
             $data->assign("published_field", $published_field->render());
+            $data->assign("include_in_search_engine_field", $include_in_search_engine_field->render());
             $data->assign("show_in_navigation_field", $show_in_navigation_field->render());
             $data->assign("template_picker_field", $template_picker_field->render());
             $this->assignElementHolderFormIds($data);
