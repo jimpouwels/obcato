@@ -8,7 +8,12 @@
     width: 250px;
 }
 
-.article_search .admin_field_wrapper input,select {
+.article_search .admin_field_wrapper input {
+    width: 95%;
+    margin-top: 8px;
+}
+
+.article_search .admin_field_wrapper select {
     width: 95%;
     margin-top: 8px;
 }
@@ -27,7 +32,11 @@
 }
 
 .article_metadata_editor textarea {
-    width: 500px;
+    width: 95%;
+}
+
+.article_metadata_editor .keywords_field {
+    width: 95%;
 }
 
 .show_all_link {

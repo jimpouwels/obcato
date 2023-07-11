@@ -13,10 +13,11 @@
         private static int $SCOPE = 5;
         
         private PageDao $_page_dao;
-        private string $_description;
+        private ?string $_description = null;
         private string $_navigation_title;
         private bool $_include_in_search_engine;
         private ?int $_parent_id;
+        private ?string $_keywords = null;
         private bool $_show_in_navigation;
         private int $_followup;
         private bool $_is_homepage;
@@ -26,12 +27,20 @@
             $this->_page_dao = PageDao::getInstance();
         }
         
-        public function getDescription(): string {
+        public function getDescription(): ?string {
             return $this->_description;
         }
         
-        public function setDescription(string $description): void {
+        public function setDescription(?string $description): void {
             $this->_description = $description;
+        }
+
+        public function getKeywords(): ?string {
+            return $this->_keywords;
+        }
+
+        public function setKeywords(?string $keywords): void {
+            $this->_keywords = $keywords;
         }
         
         public function getNavigationTitle(): string {
@@ -155,6 +164,7 @@
         protected function initFromDb(array $row): void {
             $this->setParentId($row['parent_id']);
             $this->setDescription($row['description']);
+            $this->setKeywords($row['keywords']);
             $this->setNavigationTitle($row['navigation_title']);
             $this->setShowInNavigation($row['show_in_navigation'] == 1 ? true : false);
             $this->setIncludeInSearchEngine($row['include_in_searchindex'] == 1 ? true : false);

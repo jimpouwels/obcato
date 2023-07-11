@@ -15,6 +15,7 @@
 
         private ?string $_description;
         private ?int $_image_id = null;
+        private ?string $_keywords = null;
         private string $_publication_date;
         private string $_sort_date;
         private ?int $_target_page_id = null;
@@ -34,6 +35,14 @@
         
         public function setDescription(?string $description): void {
             $this->_description = $description;
+        }
+
+        public function getKeywords(): ?string {
+            return $this->_keywords;
+        }
+
+        public function setKeywords(?string $keywords): void {
+            $this->_keywords = $keywords;
         }
         
         public function getImageId(): ?int {
@@ -115,6 +124,7 @@
         protected function initFromDb(array $row): void {
             $this->setDescription($row['description']);
             $this->setImageId($row['image_id']);
+            $this->setKeywords($row['keywords']);
             $this->setPublicationDate($row['publication_date']);
             $this->setSortDate($row['sort_date']);
             $this->setTargetPageId(!is_null($row['target_page']) ? intval($row['target_page']) : null);

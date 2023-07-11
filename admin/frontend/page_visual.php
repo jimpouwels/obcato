@@ -28,12 +28,14 @@
         public function load(): void {
             $this->assign("website_title", WEBSITE_TITLE);
             $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
-            $this->assign("page_title", $this->getPage()->getTitle());
+            $this->assign("title", $this->getPage()->getTitle());
             $this->assign("crumb_path", $this->renderCrumbPath());
+            $this->assign("keywords", $this->getPage()->getKeywords());
             if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
                 $article_data = $this->renderArticle();
                 $this->assign("article", $article_data);
-                $this->assign("page_title", $this->getArticle()->getTitle());
+                $this->assign("title", $this->getArticle()->getTitle());
+                $this->assign("keywords", $this->getArticle()->getKeywords());
             } else {
                 $this->assign("article", null);
             }
@@ -69,6 +71,7 @@
         private function addPageMetaData(Page $page, array &$page_data, bool $render_childen = true): void {
             $page_data["is_current_page"] = $this->getPage()->getId() == $page->getId();
             $page_data["title"] = $page->getTitle();
+            $page_data["keywords"] = $page->getKeywords();
             $page_data["url"] = $this->getPageUrl($page);
             $page_data["is_homepage"] = $page->isHomepage();
             $page_data["navigation_title"] = $page->getNavigationTitle();

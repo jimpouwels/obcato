@@ -6,6 +6,7 @@
 <div class="admin_form_v2">
 	{$page_title_field}
 	{$navigation_title_field}
+	{$keywords_field}
 	{$url_field}
 	{$description_field}
 	{$published_field}

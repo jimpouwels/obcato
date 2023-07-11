@@ -14,7 +14,7 @@
     class PageDao {
 
         private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, p.navigation_title, p.description, p.parent_id, p.show_in_navigation,
+                      e.created_at, e.created_by, e.type, p.navigation_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
                       p.include_in_searchindex, p.follow_up, p.is_homepage";
         private static ?PageDao $instance = null;
         private MysqlConnector $_mysql_connector;
@@ -89,11 +89,19 @@
         }
 
         public function updatePage(Page $page): void {
-            $query = "UPDATE pages SET navigation_title = '" . $this->_mysql_connector->realEscapeString($page->getNavigationTitle()) . "', show_in_navigation = " . ($page->getShowInNavigation() ? 1 : 0) . ",
-                    include_in_searchindex = " . ($page->getIncludeInSearchEngine() ? 1 : 0) . ", follow_up = " . $page->getFollowUp() . ", description = '" .
-                      $page->getDescription() . "'";
-            $query .= " WHERE element_holder_id = " . $page->getId();
-            $this->_mysql_connector->executeQuery($query);
+            $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_in_searchindex = ?, follow_up = ?, `description` = ? WHERE element_holder_id = ?";
+
+            $navigation_title = $page->getNavigationTitle();
+            $keywords = $page->getKeywords();
+            $show_in_navigation = $page->getShowInNavigation() ? 1 : 0;
+            $include_in_search_engine = $page->getIncludeInSearchEngine() ? 1 : 0;
+            $follow_Up = $page->getFollowUp();
+            $description = $page->getDescription();
+            $element_holder_id = $page->getId();
+            
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('ssiiisi', $navigation_title, $keywords, $show_in_navigation, $include_in_search_engine, $follow_Up, $description, $element_holder_id);
+            $this->_mysql_connector->executeStatement($statement);
             $this->_element_holder_dao->update($page);
         }
 

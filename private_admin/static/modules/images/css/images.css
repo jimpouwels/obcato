@@ -13,6 +13,23 @@
     width: 293px;
 }
 
+.image_search .admin_field_wrapper {
+    width: 220px;
+    margin-top: 8px;
+}
+
+.image_search .admin_field_wrapper input {
+    width: 210px;
+}
+
+.image_search .admin_field_wrapper select {
+    width: 210px;
+}
+
+.image_search .admin_label_wrapper {
+    width: 120px;
+}
+
 .button_container {
     margin-top: 10px;
     padding-left: 15px;

@@ -67,5 +67,9 @@
 }
 
 .page_metadata_editor textarea {
-    width: 500px;
+    width: 95%;
+}
+
+.page_metadata_editor .keywords_field {
+    width: 95%;
 }

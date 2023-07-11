@@ -13,6 +13,7 @@ block_selection_title: Blokken
 # METADATA LABELS
 pages_edit_metadata_title_field_label: Titel
 pages_edit_metadata_navigation_title_field_label: Navigatietitel
+pages_edit_metadata_keywords_field_label: Keywords
 pages_edit_metadata_description_field_label: Beschrijving
 pages_edit_metadata_ispublished_field_label: Gepubliceerd
 pages_edit_metadata_showinnavigation_field_label: Tonen in navigatie

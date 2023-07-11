@@ -23,6 +23,7 @@
             parent::loadFields();
             $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
             $this->_article->setTemplateId($this->getNumber('template', "No number"));
+            $this->_article->setKeywords($this->getFieldValue('keywords'));
             $this->_article->setDescription($this->getFieldValue("article_description"));
             $this->_article->setPublished($this->getCheckboxValue("article_published"));
             $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId(), $this->getTextResource("form_invalid_number_error")));

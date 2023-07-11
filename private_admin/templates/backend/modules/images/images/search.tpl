@@ -1,15 +1,15 @@
 <div class="image_search_wrapper">
 	<form id="image_search" class="image_search_form" action="{$backend_base_url}" method="get">
-		<ul class="admin_form">
-			<li class="displaynone">
+		<div class="admin_form_v2">
+			<div class="displaynone">
 				{$module_id_form_field}
 				{$module_tab_id_form_field}
 				<input type="hidden" name="action" value="search" />
-			</li>
-			<li>{$title_search_field}</li>
-			<li>{$filename_search_field}</li>
-			<li>{$labels_search_field}</li>
-		</ul>
+			</div>
+			{$title_search_field}
+			{$filename_search_field}
+			{$labels_search_field}
+		</div>
 		<div class="button_container">
 			{$search_button}
 		</div>

@@ -21,6 +21,7 @@
         public function loadPanelContent(Smarty_Internal_Data $data): void {
             $title_field = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->_current_page->getTitle(), true, false, null);
             $navigation_title_field = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->_current_page->getNavigationTitle(), true, false, null);
+            $keywords_field = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->_current_page->getKeywords(), false, false, "keywords_field");
             $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_page), '');
             $description_field = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->_current_page->getDescription(), false, true, null);
             $published_field = new SingleCheckbox("published", $this->getTextResource('pages_edit_metadata_ispublished_field_label'), $this->_current_page->isPublished(), false, "");
@@ -29,6 +30,7 @@
 
             $data->assign("current_page_id", $this->_current_page->getId());
             $data->assign("page_title_field", $title_field->render());
+            $data->assign("keywords_field", $keywords_field->render());
             $data->assign("navigation_title_field", $navigation_title_field->render());
             $data->assign('url_field', $url_field->render());
             $data->assign("description_field", $description_field->render());

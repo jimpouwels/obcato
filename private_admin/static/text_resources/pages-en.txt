@@ -13,6 +13,7 @@ block_selection_title: Blocks
 # METADATA LABELS
 pages_edit_metadata_title_field_label: Title
 pages_edit_metadata_navigation_title_field_label: Navigation title
+pages_edit_metadata_keywords_field_label: Keywords
 pages_edit_metadata_description_field_label: Description
 pages_edit_metadata_ispublished_field_label: Published
 pages_edit_metadata_showinnavigation_field_label: Show in navigation
