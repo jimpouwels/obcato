@@ -16,10 +16,10 @@
         private PageDao $_page_dao;
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
-        private Page $_page;
-        private ?Article $_article;
+        private ?Page $_page = null;
+        private ?Article $_article = null;
 
-        public function __construct(Page $page, ?Article $article) {
+        public function __construct(?Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
@@ -87,38 +87,48 @@
             }
         }
 
-        protected function getArticleUrl(Article $article): string {
+        protected function getArticleUrl(Article $article, bool $full = false): string {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {
                 $target_page = $this->_page;
             }
-            $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
-            if ($url == null) {
-                $url = UrlHelper::addQueryStringParameter($this->getPageUrl($target_page), 'articleid', $article->getId());
+            $url = $full ? $this->getBaseUrl() : "";
+            $url .= $this->getPageUrl($target_page);
+            $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
+            if (!$friendly_url) {
+                $url .= UrlHelper::addQueryStringParameter($url, 'articleid', $article->getId());
             } else {
-                $url = $this->getPageUrl($target_page) . $url;
+                $url .= $friendly_url;
             }
             return $url;
         }
 
-        protected function getPageUrl(Page $page): string {
-            $url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
-            if ($url == null) {
-                $url = '/index.php?id=' . $page->getId();
+        protected function getPageUrl(Page $page, bool $full = false): string {
+            $url = $full ? $this->getBaseUrl() : "";
+            $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
+            if (!$friendly_url) {
+                $url .= '/index.php?id=' . $page->getId();
+            } else {
+                $url .= $friendly_url;
             }
             return $url;
         }
 
         protected function getCanonicalUrl(): string {
-            $absolute_url = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
-            $absolute_url .= '://';
-            $absolute_url .= str_replace('www.', '', $_SERVER['HTTP_HOST']);
+            $absolute_url = $this->getBaseUrl();
             if ($this->getArticle()) {
                 $absolute_url .= $this->getArticleUrl($this->getArticle());
             } else {
                 $absolute_url .= $this->getPageUrl($this->getPage());
             }
             return $absolute_url;
+        }
+
+        protected function getBaseUrl(): string {
+            $base_url = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
+            $base_url .= '://';
+            $base_url .= str_replace('www.', '', $_SERVER['HTTP_HOST']);
+            return $base_url;
         }
 
         protected function toAnchorValue(string $value): string {

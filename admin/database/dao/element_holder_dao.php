@@ -9,7 +9,7 @@
     class ElementHolderDao {
 
         private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type";
+                      e.created_at, e.created_by, e.type, e.last_modified";
 
         private static ?ElementHolderDao $instance = null;
         private MysqlConnector $_mysql_connector;
@@ -45,7 +45,7 @@
         public function update(ElementHolder $element_holder): void {
             $published_value = ($element_holder->isPublished()) ? 1 : 0;
             $query = "UPDATE element_holders SET title = '" . $this->_mysql_connector->realEscapeString($element_holder->getTitle()) . "', published = " . $published_value . ",
-                      scope_id = " . $element_holder->getScopeId() . ", template_id = " . ($element_holder->getTemplateId() ? $element_holder->getTemplateId() : "NULL");
+                      scope_id = " . $element_holder->getScopeId() . ", template_id = " . ($element_holder->getTemplateId() ? $element_holder->getTemplateId() : "NULL") . ", last_modified = NOW()";
             $query .= " WHERE id = " . $element_holder->getId();
             $this->_mysql_connector->executeQuery($query);
         }

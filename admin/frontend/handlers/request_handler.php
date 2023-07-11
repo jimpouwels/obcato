@@ -7,6 +7,7 @@
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "database/dao/settings_dao.php";
     require_once CMS_ROOT . "frontend/website_visual.php";
+    require_once CMS_ROOT . 'frontend/sitemap_visual.php';
     require_once CMS_ROOT . 'utilities/url_helper.php';
     require_once CMS_ROOT . 'utilities/arrays.php';
     require_once CMS_ROOT . 'view/views/visual.php';
@@ -34,7 +35,11 @@
         }
 
         public function handleRequest(): void {
-            if ($this->isImageRequest()) {
+            if ($this->isSitemapRequest()) {
+                $sitemap = new SitemapVisual();
+                header('Content-Type: application/xml');
+                echo $sitemap->render();
+            } else if ($this->isImageRequest()) {
                 $this->loadImage();
             } else {
                 $page = $this->getPageFromRequest();
@@ -100,6 +105,10 @@
 
         private function isImageRequest(): bool {
             return isset($_GET["image"]);
+        }
+
+        private function isSitemapRequest(): bool {
+            return isset($_GET['sitemap']) && $_GET['sitemap'];
         }
 
     }

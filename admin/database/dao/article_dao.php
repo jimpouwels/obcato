@@ -11,7 +11,7 @@
     require_once CMS_ROOT . "utilities/date_utility.php";
 
     class ArticleDao {
-        private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
+        private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,
                       e.created_at, e.created_by, e.type, a.description, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
         private static ?ArticleDao $instance = null;

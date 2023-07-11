@@ -13,7 +13,7 @@
 
     class PageDao {
 
-        private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
+        private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, p.navigation_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
                       p.include_in_searchindex, p.follow_up, p.is_homepage";
         private static ?PageDao $instance = null;
@@ -30,6 +30,17 @@
                 self::$instance = new PageDao();
             }
             return self::$instance;
+        }
+
+        public function getAllPages(): array {
+            $pages = array();
+            $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
+                                                                     element_holders e WHERE e.id = p.element_holder_id");
+            $result = $this->_mysql_connector->executeStatement($statement);
+            while ($row = $result->fetch_assoc()) {
+                $pages[] = Page::constructFromRecord($row);
+            }
+            return $pages;
         }
 
         public function getPage(int $id): ?Page {

@@ -61,7 +61,7 @@
             return null;
         }
 
-        public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): string {
+        public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
             return $this->_friendly_url_dao->getUrlFromElementHolder($element_holder);
         }
 
@@ -123,6 +123,8 @@
             $handle = fopen($htaccess_file_path, 'w');
             fclose($handle);
             file_put_contents($htaccess_file_path, "RewriteEngine on\n" .
+                                                   "RewriteCond %{REQUEST_URI} !^/index.php\n" .
+                                                   "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
                                                    "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
                                                    "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
                                                    "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .

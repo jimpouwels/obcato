@@ -11,6 +11,7 @@
         private bool $_published;
         private string $_created_at;
         private int $_created_by_id;
+        private DateTime $_last_modified;
         private array $_elements = array();
         private string $_type;
         
@@ -59,6 +60,14 @@
         public function setCreatedById(int $created_by_id): void {
             $this->_created_by_id = $created_by_id;
         }
+
+        public function getLastModified(): DateTime {
+            return $this->_last_modified;
+        }
+
+        public function setLastModified(DateTime $last_modified): void {
+            $this->_last_modified = $last_modified;
+        }
         
         public function getType(): string {
             return $this->_type;
@@ -100,6 +109,7 @@
             $this->setPublished($row['published'] == 1 ? true : false);
             $this->setCreatedAt($row['created_at']);
             $this->setCreatedById($row['created_by']);
+            $this->setLastModified(new DateTime($row['last_modified']));
             $this->setType($row['type']);
             parent::initFromDb($row);
             $this->setElements(ElementDao::getInstance()->getElements($this));
