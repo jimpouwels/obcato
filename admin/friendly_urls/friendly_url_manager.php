@@ -30,7 +30,7 @@
         }
 
         public function insertOrUpdateFriendlyUrlForPage(Page $page): void {
-            $url = '/' . $this->createUrlForPage($page);
+            $url = $this->createUrlForPage($page);
             $this->insertOrUpateFriendlyUrl($url, $page);
         }
 
@@ -88,10 +88,10 @@
         }
 
         private function createUrlForPage(Page $page): string {
-            $url = $this->replaceSpecialCharacters($page->getNavigationTitle());
+            $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
             $parent_page = $page->getParent();
             if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
-                $url = $this->createUrlForPage($page->getParent()) . "/" . $url;
+                $url = $this->createUrlForPage($page->getParent()) . $url;
             }
             return $url;
         }
