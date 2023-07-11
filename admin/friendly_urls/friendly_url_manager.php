@@ -35,7 +35,7 @@
         }
 
         public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
-            $url = '/' . $this->createUrlForArticle($article);
+            $url = $this->createUrlForArticle($article);
             $this->insertOrUpateFriendlyUrl($url, $article);
         }
 
@@ -97,7 +97,7 @@
         }
 
         private function createUrlForArticle(Article $article): string {
-            $base = $article->getParentArticleId() ? ($this->createUrlForArticle($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '';
+            $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '/';
             return $base . $this->replaceSpecialCharacters($article->getTitle());
         }
 

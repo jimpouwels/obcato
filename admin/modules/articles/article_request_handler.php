@@ -70,6 +70,9 @@
                 $this->updateSelectedTerms($article_form->getSelectedTerms());
                 $this->deleteSelectedTerms($article_form);
                 $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($this->_current_article);
+                foreach ($this->_article_dao->getAllChildArticles($this->_current_article->getId()) as $child_article) {
+                    $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($child_article);
+                }
                 $this->sendSuccessMessage("Artikel succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
