@@ -44,21 +44,34 @@
             $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
             if (is_null($page)) {
-                $page_part_of_url = UrlHelper::removeLastPartFromUrl($url);
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
-                $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+                $url_parts = UrlHelper::splitIntoParts($url);
+                for ($i = 0; $i < count($url_parts); $i++) {
+                    $sub_array = array_slice($url_parts, 1, (count($url_parts) - $i - 1));
+                    $page_part_of_url = '/' . implode('/', $sub_array);
+                    $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
+                    $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+                    if ($page) {
+                        break;
+                    }
+                }
             }
             return $page;
         }
 
         public function getArticleFromUrl(string $url): ?Article {
             $url_parts = UrlHelper::splitIntoParts($url);
-            if (count($url_parts) > 1) {
-                $last_url_part = $url_parts[count($url_parts) - 1];
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl('/' . $last_url_part);
-                return $this->_article_dao->getArticleByElementHolderId($element_holder_id);
+            $article = null;
+
+            for ($i = 0; $i < count($url_parts); $i++) {
+                $sub_array = array_slice($url_parts, $i + 1, count($url_parts));
+                $article_part_of_url = '/' . implode('/', $sub_array);
+                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($article_part_of_url);
+                $article = $this->_article_dao->getArticleByElementHolderId($element_holder_id);
+                if ($article) {
+                    break;
+                }
             }
-            return null;
+            return $article;
         }
 
         public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
@@ -84,7 +97,8 @@
         }
 
         private function createUrlForArticle(Article $article): string {
-            return $this->replaceSpecialCharacters($article->getTitle());
+            $base = $article->getParentArticleId() ? ($this->createUrlForArticle($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '';
+            return $base . $this->replaceSpecialCharacters($article->getTitle());
         }
 
         private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {

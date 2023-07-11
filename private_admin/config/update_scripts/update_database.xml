@@ -143,7 +143,6 @@
             <query>ALTER TABLE articles ADD CONSTRAINT article_to_element_holders FOREIGN KEY article_to_element_holders (parent_article_id) REFERENCES element_holders(id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>ALTER TABLE pages ADD COLUMN keywords TEXT DEFAULT NULL</query>
             <query>ALTER TABLE articles ADD COLUMN keywords TEXT DEFAULT NULL</query>
-            
             <query>ALTER TABLE element_holders ADD COLUMN last_modified DATETIME DEFAULT now()</query>
     </version>
 </versions>
