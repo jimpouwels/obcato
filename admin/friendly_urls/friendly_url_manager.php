@@ -115,6 +115,9 @@
 
         private function replaceSpecialCharacters(string $value): string {
             $value = strtolower($value);
+            $value = str_replace(' - ', ' ', $value);
+            $value = str_replace(' (', ' ', $value);
+            $value = str_replace(')', '', $value);
             $value = str_replace('\'', '', $value);
             $value = str_replace('&', '', $value);
             $value = str_replace('  ', ' ', $value);
