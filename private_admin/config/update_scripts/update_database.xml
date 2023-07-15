@@ -144,5 +144,9 @@
             <query>ALTER TABLE pages ADD COLUMN keywords TEXT DEFAULT NULL</query>
             <query>ALTER TABLE articles ADD COLUMN keywords TEXT DEFAULT NULL</query>
             <query>ALTER TABLE element_holders ADD COLUMN last_modified DATETIME DEFAULT now()</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN alignv2 VARCHAR(45) NULL</query>
+            <query>UPDATE image_elements_metadata SET alignv2 = align</query>
+            <query>ALTER TABLE image_elements_metadata DROP COLUMN align</query>
+            <query>ALTER TABLE image_elements_metadata CHANGE COLUMN alignv2 align VARCHAR(45) NULL</query>
     </version>
 </versions>

@@ -69,15 +69,23 @@
         }
 
         public function update(Element $element): void {
-            $query = "UPDATE text_elements_metadata SET title = '" . $this->_mysql_connector->realEscapeString($element->getTitle()) . "', text = '"
-                        . $this->_mysql_connector->realEscapeString($element->getText()) . "' WHERE element_id = " . $element->getId();
-            $this->_mysql_connector->executeQuery($query);        
+            $title = $element->getTitle();
+            $text = $element->getText();
+            $element_id = $element->getId();
+            $query = "UPDATE text_elements_metadata SET title = ?, text = ? WHERE element_id = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('ssi', $title, $text, $element_id);
+            $this->_mysql_connector->executeStatement($statement);  
         }
 
         public function insert(Element $element): void {
-            $query = "INSERT INTO text_elements_metadata (title, text, element_id) VALUES 
-                        ('" . $element->getTitle() . "', '" . $element->getText() . "', " . $element->getId() . ")"; 
-            $this->_mysql_connector->executeQuery($query);        
+            $title = $element->getTitle();
+            $text = $element->getText();
+            $element_id = $element->getId();
+            $query = "INSERT INTO text_elements_metadata (title, `text`, element_id) VALUES (?, ?, ?)"; 
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('ssi', $title, $text, $element_id);
+            $this->_mysql_connector->executeStatement($statement);         
         }
         
     }

@@ -79,7 +79,7 @@
         }
 
         public function getSummaryText(): string {
-            $summary_text = $this->getTitle();
+            $summary_text = $this->getTitle() ? $this->getTitle() : '';
             $image = $this->getImage();
             if ($image) {
                 $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFileName() . ')';
@@ -110,21 +110,25 @@
         }
 
         public function update(Element $element): void {
-            $image_id = "NULL";
-            if ($element->getImageId() != '' && !is_null($element->getImageId())) {
-                $image_id = $element->getImageId();
-            }
-            $query = "UPDATE image_elements_metadata SET title = '" . $element->getTitle() . "', align = '" . $element->getAlign() . "', image_id = "
-                        . $image_id . ", width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") . ""
-                        . " WHERE element_id = " . $element->getId();
-            $this->_mysql_connector->executeQuery($query);
+            $image_id = $element->getImageId();
+            $title = $element->getTitle();
+            $align = $element->getAlign();
+            $width = $element->getWidth();
+            $height = $element->getHeight();
+            $element_id = $element->getId();
+            $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ? WHERE element_id = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('ssiiii', $title, $align, $image_id, $width, $height, $element_id);
+            $this->_mysql_connector->executeStatement($statement);
         }
 
         public function insert(Element $element): void {
-            $query = "INSERT INTO image_elements_metadata (title, align, width, height, image_id, element_id) VALUES "
-                        . "('" . $element->getTitle() . "', '" . $element->getAlign() . "', 0 , 0"
-                        . ", NULL, " . $element->getId() . ")";
-            $this->_mysql_connector->executeQuery($query);
+            $title = $element->getTitle();
+            $element_id = $element->getId();
+            $query = "INSERT INTO image_elements_metadata (title, align, width, height, image_id, element_id) VALUES (?, NULL, 0 , 0, NULL, ?)";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('si', $title, $element_id);
+            $this->_mysql_connector->executeStatement($statement);
         }
 
     }
