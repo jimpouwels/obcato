@@ -33,10 +33,16 @@
         }
 
         public function updateImage(Image $image): void {
-            $query = "UPDATE images SET title = '" . $image->getTitle() . "', 
-                      alt_text = '" . $image->getAltText() . "', published = " . ($image->isPublished() ? 1 : 0) . ", file_name = '" . $image->getFileName() . "'
-                      , thumb_file_name = '" . $image->getThumbFileName() . "' WHERE id = " . $image->getId();
-            $this->_mysql_connector->executeQuery($query);
+            $title = $image->getTitle();
+            $alt_text = $image->getAltText();
+            $published = $image->isPublished() ? 1 : 0;
+            $filename = $image->getFileName();
+            $id = $image->getId();
+            $thumb_filename = $image->getThumbFileName();
+            $query = "UPDATE images SET title = ?, alt_text = ?, published = ?, file_name = ?, thumb_file_name = ? WHERE id = ?";
+            $statement = $this->_mysql_connector->prepareStatement($query);
+            $statement->bind_param('ssissi', $title, $alt_text, $published, $filename, $thumb_filename, $id);
+            $this->_mysql_connector->executeStatement($statement);
         }
 
         public function getAllImages(): array {

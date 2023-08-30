@@ -115,6 +115,7 @@
             $article_data["title"] = $this->getArticle()->getTitle();
             $article_data["description"] = $this->getArticle()->getDescription();
             $article_data["publication_date"] = $this->getArticle()->getPublicationDate();
+            $article_data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
             $article_data["image"] = $this->getImageData($this->getArticle()->getImage());
             $article_data["elements"] = $this->renderElementHolderContent($this->getArticle());
             $article_data["comments"] = $this->renderArticleComments($this->getArticle());
@@ -195,7 +196,7 @@
                 }
                 $item_data = array();
                 $item_data['url'] = $this->getPageUrl($parents[$i]);
-                $item_data['title'] = $parents[$i]->getTitle();
+                $item_data['title'] = $parents[$i]->getNavigationTitle();
                 $crumb_path_items[] = $item_data;
             }
             if ($parent_article) {
