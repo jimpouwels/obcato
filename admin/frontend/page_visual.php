@@ -173,9 +173,12 @@
         private function renderElementHolderContent(ElementHolder $element_holder) {
             $elements_content = array();
             foreach ($element_holder->getElements() as $element) {
+                $element_data = array();
+                $element_data["type"] = $element->getType()->getIdentifier();
                 if ($element->getTemplate()) {
-                    $elements_content[] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+                    $element_data["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
                 }
+                $elements_content[] = $element_data;
             }
             return $elements_content;
         }
