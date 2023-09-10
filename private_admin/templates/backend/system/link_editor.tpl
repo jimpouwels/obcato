@@ -24,7 +24,7 @@
 			{foreach from=$links item=link}
 				<tr>
 					<td class="link-addlink">
-						<a href="#" onclick="putLink('{$link.code}'); return false;" title="{$text_resources.place_link}">
+						<a href="#" onclick="putLink('{$link.id}'); return false;" title="{$text_resources.place_link}">
 							<img src="/admin/static.php?file=/default/img/default_icons/place_link.png" alt="{$text_resources.place_link}" />
 						</a>
 					</td>

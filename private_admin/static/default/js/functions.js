@@ -182,7 +182,7 @@ $(document).ready(function() {
 });
 
 // handles put link
-function putLink(linkCode) {
+function putLink(linkId) {
 	var errorMessage = "Fout: U heeft geen tekst geselecteerd, of het is niet toegestaan aan het huidige veld een link toe te voegen.";
 	if (lastFocussedField == undefined) {
 		alert(errorMessage);
@@ -193,8 +193,7 @@ function putLink(linkCode) {
 		var value = lastFocussedField.value;
 		var selectedText = value.substring(start, end);
 		if (selectedText != undefined && selectedText.length > 0) {
-			newText = "[LINK C=\"" + linkCode + "\"]" + selectedText + "[/LINK]";
-			var result = value.replace(selectedText, newText);
+			newText = "[LINK C=\"" + ($('#link_' + linkId + '_code').val()) + "\"]" + selectedText + "[/LINK]";
 			lastFocussedField.value = lastFocussedField.value.substring(0,start) + newText + lastFocussedField.value.substring(end,len);
 		} else {
 			alert(errorMessage);

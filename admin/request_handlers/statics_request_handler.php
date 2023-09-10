@@ -16,7 +16,7 @@
             if (!empty($relative_path)) {
                 $absolute_path = $this->getAbsolutePathFor($relative_path);
                 $this->setResponseContentType($absolute_path);
-                readfile($absolute_path);
+                readfile(explode('?', $absolute_path)[0]);
             }
         }
 
