@@ -93,7 +93,9 @@
                 $target_page = $this->_page;
             }
             $url = $full ? $this->getBaseUrl() : "";
-            $url .= $this->getPageUrl($target_page);
+            if ($target_page) {
+                $url .= $this->getPageUrl($target_page);
+            }
             $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($article);
             if (!$friendly_url) {
                 $url .= UrlHelper::addQueryStringParameter($url, 'articleid', $article->getId());

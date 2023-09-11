@@ -28,10 +28,13 @@
             $element_holder = $this->getElementHolderFromPostRequest();
             if ($this->isAddElementAction()) {
                 $this->addElement();
+                $this->updateElementHolder($element_holder);
             } else if ($this->isDeleteElementAction()) {
-                $this->deleteElement();
+                $this->deleteElementFrom($element_holder);
+                $this->updateElementHolder($element_holder);
             } else if ($this->isAddLinkAction()) {
                 $this->addLink($element_holder);
+                $this->updateElementHolder($element_holder);
             }
         }
 
@@ -53,10 +56,11 @@
             }
         }
 
-        private function deleteElement(): void {
+        private function deleteElementFrom(ElementHolder $element_holder): void {
             $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
             if (!is_null($element_to_delete)) {
                 $element_to_delete->delete();
+                $element_holder->deleteElement($element_to_delete);
             }
         }
 

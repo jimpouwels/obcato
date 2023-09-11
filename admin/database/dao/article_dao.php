@@ -58,7 +58,7 @@
 
         public function getAllArticles(): array {
             $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
-                      order by created_at DESC";
+                      order by title ASC";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
             while ($row = $result->fetch_assoc()) {
@@ -89,7 +89,7 @@
                 $where = $where . " AND ats.term_id = " . $term_id . " AND ats.article_id = e.id";
             }
 
-            $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY created_at";
+            $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY title";
             $result = $this->_mysql_connector->executeQuery($query);
             $articles = array();
             while ($row = $result->fetch_assoc()) {
@@ -231,7 +231,7 @@
         }
 
         public function getAllTerms(): array {
-            $query = "SELECT * FROM article_terms";
+            $query = "SELECT * FROM article_terms ORDER by name ASC";
             $terms = array();
             $result = $this->_mysql_connector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {

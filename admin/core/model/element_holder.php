@@ -43,6 +43,12 @@
             usort($this->_elements, function(Element $e1, Element $e2) { return $e1->getOrderNr() - $e2->getOrderNr(); });
             return $this->_elements;
         }
+
+        public function deleteElement(Element $element_to_delete): void {
+            $this->_elements = array_filter($this->_elements, function($element) use($element_to_delete) {
+                return $element->getId() !== $element_to_delete->getId();
+            }); 
+        }
         
         public function getCreatedAt(): string {
             return $this->_created_at;

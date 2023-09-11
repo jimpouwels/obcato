@@ -36,6 +36,8 @@
                 $this->deleteArticle();
             } else if ($this->isAddArticleAction()) {
                 $this->addArticle();
+            } else {
+                $this->updateArticle();
             }
         }
 
