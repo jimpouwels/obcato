@@ -32,8 +32,11 @@
             array_push($this->_list_items, $list_item);
         }
         
-        public function deleteListItem(ListItem $list_item): void {
-            $this->getMetaDataProvider()->deleteListItem($this, $list_item);
+        public function deleteListItem(ListItem $list_item_to_delete): void {
+            $this->_list_items = array_filter($this->_list_items, function($list_item) use($list_item_to_delete) {
+                return $list_item->getId() !== $list_item_to_delete->getId();
+            }); 
+            $this->getMetaDataProvider()->deleteListItem($this, $list_item_to_delete);
         }
         
         public function getStatics(): Visual {

@@ -29,8 +29,7 @@
             return $list_items_to_delete;
         }
 
-        private function loadListItemsFields(): void
-        {
+        private function loadListItemsFields(): void {
             foreach ($this->_list_element->getListItems() as $list_item) {
                 $list_item->setText($this->getFieldValue("listitem_" . $list_item->getId() . "_text"));
             }

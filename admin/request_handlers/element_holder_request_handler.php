@@ -34,7 +34,9 @@
             } else if ($this->isAddLinkAction()) {
                 $this->addLink($element_holder);
             }
-            $this->updateElementHolder($element_holder);
+            if ($element_holder) {
+                $this->updateElementHolder($element_holder);
+            }
         }
 
         protected function updateElementHolder(ElementHolder $element_holder): void {

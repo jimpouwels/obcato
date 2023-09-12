@@ -32,8 +32,7 @@
             $this->_element_dao->updateElement($this->_list_element);
         }
 
-        private function isAddListItemAction(): bool
-        {
+        private function isAddListItemAction(): bool {
             return !is_null($this->_list_element) && isset($_POST['element' . $this->_list_element->getId() . '_add_item']) &&
                 $_POST['element' . $this->_list_element->getId() . '_add_item'] != '';
         }
