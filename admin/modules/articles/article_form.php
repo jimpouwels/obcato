@@ -1,11 +1,11 @@
 <?php
     defined("_ACCESS") or die;
     
-    require_once CMS_ROOT . "core/form/element_holder_form.php";
+    require_once CMS_ROOT . "core/form/form.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . "utilities/date_utility.php";
 
-    class ArticleForm extends ElementHolderForm {
+    class ArticleForm extends Form {
     
         private Article $_article;
         private string $_element_order;
@@ -14,13 +14,11 @@
         private ArticleDao $_article_dao;
 
         public function __construct(Article $article) {
-            parent::__construct($article);
             $this->_article = $article;
             $this->_article_dao = ArticleDao::getInstance();
         }
 
         public function loadFields(): void {
-            parent::loadFields();
             $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
             $this->_article->setTemplateId($this->getNumber('template', "No number"));
             $this->_article->setKeywords($this->getFieldValue('keywords'));

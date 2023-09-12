@@ -2,21 +2,19 @@
 
     defined("_ACCESS") or die;
     
-    require_once CMS_ROOT . "core/form/element_holder_form.php";
+    require_once CMS_ROOT . "core/form/form.php";
     
-    class PageForm extends ElementHolderForm {
+    class PageForm extends Form {
     
         private Page $_page;
         private string $_element_order;
         private array $_selected_blocks;
     
         public function __construct(Page $page) {
-            parent::__construct($page);
             $this->_page = $page;
         }
     
         public function loadFields(): void {
-            parent::loadFields();
             $this->_page->setTitle($this->getMandatoryFieldValue("page_title", "Titel is verplicht"));
             $this->_page->setPublished($this->getCheckboxValue("published"));
             $this->_page->setIncludeInSearchEngine($this->getCheckboxValue("include_in_search_engine"));

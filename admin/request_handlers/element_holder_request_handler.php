@@ -1,6 +1,7 @@
 <?php
     defined('_ACCESS') or die;
 
+    require_once CMS_ROOT . "core/form/element_holder_form.php";
     require_once CMS_ROOT . "database/dao/element_holder_dao.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/element_dao.php";
@@ -37,6 +38,8 @@
         }
 
         protected function updateElementHolder(ElementHolder $element_holder): void {
+            $form = new ElementHolderForm($element_holder);
+            $form->loadFields();
             $this->updateLinks($element_holder);
             foreach ($element_holder->getElements() as $element) {
                 try {

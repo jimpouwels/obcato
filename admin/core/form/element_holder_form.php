@@ -4,7 +4,7 @@
     require_once CMS_ROOT . "core/form/form.php";
     require_once CMS_ROOT . 'database/dao/element_dao.php';
     
-    abstract class ElementHolderForm extends Form {
+    class ElementHolderForm extends Form {
 
         private ElementHolder $_element_holder;
 
