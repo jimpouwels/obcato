@@ -28,14 +28,12 @@
             $element_holder = $this->getElementHolderFromPostRequest();
             if ($this->isAddElementAction()) {
                 $this->addElement();
-                $this->updateElementHolder($element_holder);
             } else if ($this->isDeleteElementAction()) {
                 $this->deleteElementFrom($element_holder);
-                $this->updateElementHolder($element_holder);
             } else if ($this->isAddLinkAction()) {
                 $this->addLink($element_holder);
-                $this->updateElementHolder($element_holder);
             }
+            $this->updateElementHolder($element_holder);
         }
 
         protected function updateElementHolder(ElementHolder $element_holder): void {
@@ -75,12 +73,12 @@
         }
 
         private function updateLinks(ElementHolder $element_holder): void {
-            $links = $this->_link_dao->getLinksForElementHolder($element_holder->getId());
+            $links = $element_holder->getLinks();
             foreach ($links as $link) {
                 $link_form = new LinkForm($link);
-                if ($link_form->isSelectedForDeletion())
+                if ($link_form->isSelectedForDeletion()) {
                     $this->_link_dao->deleteLink($link);
-                else {
+                } else {
                     $this->updateLink($link, $link_form);
                 }
             }

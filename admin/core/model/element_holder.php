@@ -13,6 +13,7 @@
         private int $_created_by_id;
         private DateTime $_last_modified;
         private array $_elements = array();
+        private array $_links = array();
         private string $_type;
         
         public function __construct(int $scope_id) {
@@ -84,8 +85,11 @@
         }
         
         public function getLinks(): array {
-            $link_dao = LinkDao::getInstance();
-            return $link_dao->getLinksForElementHolder($this->getId());
+            return $this->_links;
+        }
+
+        public function setLinks(array $links): void {
+            $this->_links = $links;
         }
         
         public function getElementStatics(): array {
@@ -119,6 +123,7 @@
             $this->setType($row['type']);
             parent::initFromDb($row);
             $this->setElements(ElementDao::getInstance()->getElements($this));
+            $this->setLinks(LinkDao::getInstance()->getLinksForElementHolder($this->getId()));
         }
     
     }

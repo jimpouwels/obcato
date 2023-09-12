@@ -68,7 +68,6 @@
             try {
                 $article_form->loadFields();
                 $this->_article_dao->updateArticle($this->_current_article);
-                $this->updateElementHolder($this->_current_article);
                 $this->updateSelectedTerms($article_form->getSelectedTerms());
                 $this->deleteSelectedTerms($article_form);
                 $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($this->_current_article);
