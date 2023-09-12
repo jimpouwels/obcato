@@ -30,14 +30,12 @@
         public function handlePost(): void {
             parent::handlePost();
             $this->_current_article = $this->getArticleFromPostRequest();
-            if ($this->isUpdateArticleAction()) {
+            if ($this->isAddArticleAction()) {
+                $this->addArticle();
+            } else if ($this->isUpdateArticleAction()) {
                 $this->updateArticle();
             } else if ($this->isDeleteArticleAction()) {
                 $this->deleteArticle();
-            } else if ($this->isAddArticleAction()) {
-                $this->addArticle();
-            } else {
-                $this->updateArticle();
             }
         }
 

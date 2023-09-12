@@ -18,9 +18,13 @@
             if ($item_order) {
                 $item_order_arr = explode(',', $item_order);
             }
-            foreach ($this->_element_holder->getElements() as $element) {
-                if (count($item_order_arr) > 0) {
-                    $element->setOrderNr(array_search($element->getId(), $item_order_arr));
+            $order_nr = 0;
+            foreach ($item_order_arr as $item) {
+                foreach ($this->_element_holder->getElements() as $element) {
+                    if ($element->getId() == $item) {
+                        $element->setOrderNr($order_nr++);
+                        break;
+                    }
                 }
             }
             if ($this->hasErrors()) {

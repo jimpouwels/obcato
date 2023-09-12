@@ -28,7 +28,7 @@
         public function handlePost(): void {
             $element_holder = $this->getElementHolderFromPostRequest();
             if ($this->isAddElementAction()) {
-                $this->addElement();
+                $this->addElement($element_holder);
             } else if ($this->isDeleteElementAction()) {
                 $this->deleteElementFrom($element_holder);
             } else if ($this->isAddLinkAction()) {
@@ -50,10 +50,11 @@
             }
         }
 
-        private function addElement(): void {
+        private function addElement(ElementHolder $element_holder): void {
             $element_type = $this->getElementTypeToAdd();
             if (!is_null($element_type)) {
-                $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
+                $created_element = $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
+                $element_holder->addElement($created_element);
             }
         }
 

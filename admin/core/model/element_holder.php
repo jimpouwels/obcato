@@ -39,6 +39,10 @@
         public function setElements(array $elements): void {
             $this->_elements = $elements;
         }
+
+        public function addElement(Element $element): void {
+            $this->_elements[] = $element;
+        }
         
         public function getElements(): array {
             usort($this->_elements, function(Element $e1, Element $e2) { return $e1->getOrderNr() - $e2->getOrderNr(); });
