@@ -43,7 +43,7 @@
         <script type="text/javascript" src="/admin/static/js/jquery-1.6.1.min.js"></script>
         <script type="text/javascript" src="/admin/static/js/login_functions.js"></script>
 
-        <title>Site Administrator</title>
+        <title>Obcato</title>
         <meta name="robots" content="noindex" />
     </head>
     <body>
@@ -51,7 +51,7 @@
             <form id="form-login" method="post" action="/admin/login.php">
                 <fieldset class="loginform">
                     <div class="header">
-                        <p>Site Administrator</p>
+                        <p>Obcato</p>
                     </div>
                     <div class="fields">
                         <?php if (isset($_GET['org_url']) && $_GET['org_url'] != ''): ?>

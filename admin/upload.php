@@ -10,7 +10,7 @@
     require_once CMS_ROOT . "constants.php";
     require_once CMS_ROOT . "backend.php";
     
-    $backend = new Backend("site_administrator");
+    $backend = new Backend("obcato");
     
     include_once CMS_ROOT . "database/dao/image_dao.php";
     

@@ -11,7 +11,8 @@
 
         public function loadElement(Smarty_Internal_Data $data): void {
             $data->assign("title", $this->getElement()->getTitle());
-            $data->assign("alt_text", $this->toHtml($this->getElement()->getImage()->getAltText(), $this->getElementHolder()));
+            $data->assign("img_title", $this->getElement()->getImage()->getTitle());
+            $data->assign("img_alt_text", $this->getElement()->getImage()->getAltText());
             $data->assign("align", $this->getElement()->getAlign());
             $data->assign("width", $this->getElement()->getWidth());
             $data->assign("height", $this->getElement()->getHeight());

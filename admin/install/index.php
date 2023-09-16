@@ -95,7 +95,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl_NL" lang="nl_NL">
     <head>
-        <title>Site Administrator - Installation</title>
+        <title>Obcato - Installation</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
@@ -110,7 +110,7 @@
                 <?php if ($_GET["step"] == "1"): ?>
                 <div class="panel-title">Configureer database</div>
                 <div class="content">
-                    <p>Site Administrator vereist opslag van data in een MySQL database met InnoDB als storage engine.
+                    <p>Obcato vereist opslag van data in een MySQL database met InnoDB als storage engine.
                        Vul de volgende gegevens van uw database in om het systeem correct te laten werken.</p>
                     <input type="hidden" id="step" name="step" value="1" />
                     <ul class="admin_form">

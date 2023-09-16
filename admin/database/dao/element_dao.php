@@ -25,7 +25,7 @@
 
         public function getElements(ElementHolder $element_holder): array {
             $elements_info_query = "SELECT " . self::$myAllColumns . " FROM elements e, element_types t WHERE element_holder_id 
-                                    = " . $element_holder->getId() . " AND t.id = e.type_id ORDER BY e.follow_up ASC";
+                                    = " . $element_holder->getId() . " AND t.id = e.type_id ORDER BY e.follow_up ASC, e.id";
             $result = $this->_mysql_connector->executeQuery($elements_info_query);
             $elements = array();
             while ($row = $result->fetch_assoc()) {

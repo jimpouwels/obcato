@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1    Database: site_administrator
+-- Host: 127.0.0.1    Database: obcato
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.29-MariaDB
 

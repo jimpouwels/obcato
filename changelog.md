@@ -2,7 +2,7 @@
 ***
 > Current version: 1.0.0.4
 
-> [GitHub](https://github.com/jimpouwels/site_administrator)
+> [GitHub](https://github.com/jimpouwels/obcato)
 
 #### 1.0.0.4
 ***
