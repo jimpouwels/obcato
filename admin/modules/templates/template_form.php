@@ -32,6 +32,11 @@
             if ($this->hasErrors() || $this->fileNameExists()) {
                 throw new FormException();
             }
+            foreach ($this->_template->getTemplateVars() as $template_var) {
+                $template_var_id = $template_var->getId();
+                $template_var->setValue($this->getFieldValue("template_var_{$template_var_id}_field"));
+                $this->_template_dao->updateTemplateVar($template_var);
+            }
         }
         
         public function isFileUploaded(): bool {

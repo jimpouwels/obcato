@@ -5,7 +5,6 @@
 
     class TemplateCodeViewer extends Panel {
 
-
         private Template $_template;
 
         public function __construct(Template $template) {
@@ -22,11 +21,7 @@
         }
 
         private function getTemplateCode(): ?string {
-            $file_path = FRONTEND_TEMPLATE_DIR . '/' . $this->_template->getFilename();
-            if (is_file($file_path) && file_exists($file_path)) {
-                return htmlspecialchars(file_get_contents($file_path));
-            }
-            return null;
+            return htmlspecialchars($this->_template->getCode());
         }
 
     }

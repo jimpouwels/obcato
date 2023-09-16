@@ -335,6 +335,12 @@ body {
     margin-left: 6px;
 }
 
+.icon_reload {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/reload.png");
+    width: 36px;
+    margin-left: 6px;
+}
+
 .icon_delete {
     background-image: url("/admin/static.php?file=/default/img/default_icons/delete.png");
     width: 37px;

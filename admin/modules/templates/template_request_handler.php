@@ -39,6 +39,8 @@
                 $this->addTemplate();
             } else if ($this->isDeleteAction()) {
                 $this->deleteTemplates();
+            } else if ($this->isReloadAction()) {
+                $this->reloadTemplate();
             }
         }
         
@@ -81,6 +83,32 @@
             } catch (FormException $e) {
                 $this->sendErrorMessage("Template niet opgeslagen, verwerk de fouten");
             }
+        }
+
+        private function reloadTemplate(): void {
+            $code = $this->_current_template->getCode();
+            $matches = null;
+            preg_match('/\$var\.(.*?)}/', $code, $matches);
+
+            $existing_vars = $this->_current_template->getTemplateVars();
+
+            for ($i = 1; $i < count($matches); $i++) {
+                $var_name = $matches[$i];
+                if (!Arrays::firstMatch($existing_vars, function($existing_var) use ($var_name) {
+                    return $existing_var->getName() == $var_name;
+                })) {
+                    $this->_template_dao->storeTemplateVar($this->_current_template, $splitted[0], $splitted[1]);
+                }
+            }
+
+            foreach ($existing_vars as $existing_var) {
+                if (!Arrays::firstMatch($matches, function($match) use ($existing_var) {
+                    return $existing_var->getName() == $match;
+                })) {
+                    $this->_template_dao->deleteTemplateVar($existing_var);
+                }
+            }
+            $this->sendSuccessMessage($this->getTextResource('message_template_successfully_reloaded'));
         }
         
         private function renameTemplateFile(string $old_file_name): void {
@@ -135,6 +163,10 @@
         
         private function isDeleteAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "delete_templates";
+        }
+
+        private function isReloadAction(): bool {
+            return isset($_POST["action"]) && $_POST["action"] == "reload_template";
         }
 
     }

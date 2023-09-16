@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "modules/templates/template_request_handler.php";
     require_once CMS_ROOT . "modules/templates/visuals/template_list.php";
     require_once CMS_ROOT . "modules/templates/visuals/template_editor.php";
+    require_once CMS_ROOT . "modules/templates/visuals/template_var_editor.php";
     require_once CMS_ROOT . "modules/templates/visuals/template_code_viewer.php";
 
     class TemplateModuleVisual extends ModuleVisual {
@@ -30,6 +31,7 @@
             $this->assign("current_template_id", $this->getCurrentTemplateId());
             if (!is_null($this->_current_template)) {
                 $this->assign("template_editor", $this->renderTemplateEditor());
+                $this->assign("template_var_editor", $this->renderTemplateVarEditor());
                 $this->assign('template_code_viewer', $this->renderTemplateCodeViewer());
             }
             $this->assign("scope_selector", $this->getScopeSelector());
@@ -42,6 +44,7 @@
             $action_buttons = array();
             if (!is_null($this->_current_template)) {
                 $action_buttons[] = new ActionButtonSave('update_template');
+                $action_buttons[] = new ActionButtonReload('reload_template');
             }
             $action_buttons[] = new ActionButtonAdd('add_template');
             if (!is_null($this->_current_scope)) {
@@ -87,6 +90,11 @@
         private function renderTemplateCodeViewer(): string {
             $template_code_viewer = new TemplateCodeViewer($this->_current_template);
             return $template_code_viewer->render();
+        }
+
+        private function renderTemplateVarEditor(): string {
+            $template_var_editor = new TemplateVarEditor($this->_current_template);
+            return $template_var_editor->render();
         }
 
         private function renderTemplateList(): string {
