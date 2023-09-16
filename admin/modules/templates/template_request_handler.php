@@ -88,24 +88,26 @@
         private function reloadTemplate(): void {
             $code = $this->_current_template->getCode();
             $matches = null;
-            preg_match('/\$var\.(.*?)}/', $code, $matches);
+            preg_match_all('/\$var\.(.*?)}/', $code, $matches);
 
             $existing_vars = $this->_current_template->getTemplateVars();
 
-            for ($i = 1; $i < count($matches); $i++) {
-                $var_name = $matches[$i];
+            for ($i = 0; $i < count($matches[1]); $i++) {
+                $var_name = $matches[1][$i];
                 if (!Arrays::firstMatch($existing_vars, function($existing_var) use ($var_name) {
                     return $existing_var->getName() == $var_name;
                 })) {
-                    $this->_template_dao->storeTemplateVar($this->_current_template, $splitted[0], $splitted[1]);
+                    $template_var = $this->_template_dao->storeTemplateVar($this->_current_template, $var_name);
+                    $this->_current_template->addTemplateVar($template_var);
                 }
             }
 
             foreach ($existing_vars as $existing_var) {
-                if (!Arrays::firstMatch($matches, function($match) use ($existing_var) {
+                if (!Arrays::firstMatch($matches[1], function($match) use ($existing_var) {
                     return $existing_var->getName() == $match;
                 })) {
                     $this->_template_dao->deleteTemplateVar($existing_var);
+                    $this->_current_template->deleteTemplateVar($existing_var);
                 }
             }
             $this->sendSuccessMessage($this->getTextResource('message_template_successfully_reloaded'));

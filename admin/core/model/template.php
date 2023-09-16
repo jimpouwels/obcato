@@ -54,6 +54,16 @@
         public function setTemplateVars(array $template_vars): void {
             $this->_template_vars = $template_vars;
         }
+
+        public function addTemplateVar(TemplateVar $template_var): void {
+            $this->_template_vars[] = $template_var;
+        }
+
+        public function deleteTemplateVar(TemplateVar $template_var_to_delete): void {
+            $this->_template_vars = array_filter($this->_template_vars, function($template_var) use($template_var_to_delete) {
+                return $template_var->getId() !== $template_var_to_delete->getId();
+            }); 
+        }
         
         public function getCode(): string {
             $code = "";

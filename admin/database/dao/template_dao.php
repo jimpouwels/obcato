@@ -117,11 +117,15 @@
             return $template_vars;
         }
 
-        public function storeTemplateVar(Template $template, string $name, string $default_value): void {
-            $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_vars (`name`, default_value, template_id) VALUES (?, ?, ?)");
+        public function storeTemplateVar(Template $template, string $name): TemplateVar {
+            $new_template_var = new TemplateVar();
+            $new_template_var->setName($name);
+            $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_vars (`name`, template_id) VALUES (?, ?)");
             $template_id = $template->getId();
-            $statement->bind_param("ssi", $name, $default_value, $template_id);
+            $statement->bind_param("si", $name, $template_id);
             $this->_mysql_connector->executeStatement($statement);
+            $new_template_var->setId($this->_mysql_connector->getInsertId());
+            return $new_template_var;
         }
 
         public function updateTemplateVar(TemplateVar $template_var): void {
