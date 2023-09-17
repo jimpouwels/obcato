@@ -23,3 +23,6 @@ template_file_editor_filename_field: Bestandsnaam
 template_file_editor_variables: Variabelen
 template_var_editor_panel_title: Bewerkt template variabelen
 templates_no_migration_required: Geen nieuwe variabelen gevonden, migratie niet nodig
+
+# MESSAGES
+message_template_file_successfully_reloaded: Template bestand herladen

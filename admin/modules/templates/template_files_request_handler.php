@@ -60,7 +60,7 @@
 
         private function reloadTemplateFiles(): void {
             $this->_parsed_var_defs = $this->parseVarDefs();
-            $this->sendSuccessMessage($this->getTextResource('message_template_successfully_reloaded'));
+            $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_reloaded'));
         }
 
         private function parseVarDefs(): array {
