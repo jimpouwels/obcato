@@ -125,7 +125,7 @@
             return $template_vars;
         }
 
-        public function storeTemplateVar(Template $template, string $name, string $value = ""): TemplateVar {
+        public function storeTemplateVar(Template $template, string $name, ?string $value = ""): TemplateVar {
             $new_template_var = new TemplateVar();
             $new_template_var->setName($name);
             $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_vars (`name`, `value`, template_id) VALUES (?, ?, ?)");
@@ -178,6 +178,13 @@
             $statement->bind_param("s", $name);
             $this->_mysql_connector->executeStatement($statement);
             $template_file->setId($this->_mysql_connector->getInsertId());
+        }
+
+        public function deleteTemplateFile(TemplateFile $template_file): void {
+            $statement = $this->_mysql_connector->prepareStatement("DELETE FROM template_files WHERE id = ?");
+            $id = $template_file->getId();
+            $statement->bind_param("i", $id);
+            $this->_mysql_connector->executeStatement($statement);
         }
 
         public function updateTemplateFile(TemplateFile $template_file): void {

@@ -33,7 +33,9 @@
             } else if ($this->isUpdateAction()) {
                 $this->updateTemplateFile();
             } else if ($this->isReloadAction()) {
-                $this->reloadTemplateFiles();
+                $this->reloadTemplateFile();
+            } else if ($this->isDeleteAction()) {
+                $this->deleteTemplateFile();
             }
         }
         
@@ -58,9 +60,15 @@
             $this->_template_dao->updateTemplateFile($this->_current_template_file);
         }
 
-        private function reloadTemplateFiles(): void {
+        private function reloadTemplateFile(): void {
             $this->_parsed_var_defs = $this->parseVarDefs();
             $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_reloaded'));
+        }
+
+        private function deleteTemplateFile(): void {
+            $this->_template_dao->deleteTemplateFile($this->_current_template_file);
+            $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_deleted'));
+            $this->redirectTo($this->getBackendBaseUrl());
         }
 
         private function parseVarDefs(): array {
@@ -106,11 +114,11 @@
         }
         
         private function isDeleteAction(): bool {
-            return isset($_POST["action"]) && $_POST["action"] == "delete_template_files";
+            return isset($_POST["action"]) && $_POST["action"] == "delete_template_file";
         }
 
         private function isReloadAction(): bool {
-            return isset($_POST["action"]) && $_POST["action"] == "reload_template_files";
+            return isset($_POST["action"]) && $_POST["action"] == "reload_template_file";
         }
 
     }

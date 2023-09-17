@@ -48,7 +48,14 @@ $(document).ready(function() {
 	});
 	
 	$('#reload_template_file').click(function() {
-		submitTemplateForm('reload_template_files', 'template_file_form');
+		submitTemplateForm('reload_template_file', 'template_file_form');
+	});
+	
+	$('#delete_template_file').click(function() {
+		var confirmed = confirm('Weet u zeker dat u de geselecteerde template bestand wilt verwijderen?');
+		if (confirmed) {
+			submitTemplateForm('delete_template_file', 'template_file_form');
+		}
 	});
 	
 });

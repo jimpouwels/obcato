@@ -54,6 +54,7 @@
                 $action_buttons[] = new ActionButtonSave('update_template_file');
                 $action_buttons[] = new ActionButtonAdd('add_template_file');
                 $action_buttons[] = new ActionButtonReload('reload_template_file');
+                $action_buttons[] = new ActionButtonDelete('delete_template_file');
             }
             return $action_buttons;
         }
