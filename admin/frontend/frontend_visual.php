@@ -5,6 +5,7 @@
     require_once CMS_ROOT . "core/model/page.php";
     require_once CMS_ROOT . "database/dao/link_dao.php";
     require_once CMS_ROOT . "database/dao/page_dao.php";
+    require_once CMS_ROOT . "database/dao/template_dao.php";
     require_once CMS_ROOT . "database/dao/article_dao.php";
     require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
 
@@ -16,12 +17,14 @@
         private PageDao $_page_dao;
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
+        private TemplateDao $_template_dao;
         private ?Page $_page = null;
         private ?Article $_article = null;
 
         public function __construct(?Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
+            $this->_template_dao = TemplateDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_page = $page;
             $this->_article = $article;

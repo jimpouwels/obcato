@@ -149,5 +149,10 @@
             <query>ALTER TABLE image_elements_metadata DROP COLUMN align</query>
             <query>ALTER TABLE image_elements_metadata CHANGE COLUMN alignv2 align VARCHAR(45) NULL</query>
             <query>CREATE TABLE template_vars (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, value TEXT DEFAULT NULL, template_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY template_vars_to_templates (template_id), CONSTRAINT template_vars_to_templates FOREIGN KEY (template_id) REFERENCES templates (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>CREATE TABLE template_files (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, filename varchar(255) DEFAULT NULL, PRIMARY KEY (id))</query>
+            <query>CREATE TABLE template_var_defs (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, default_value TEXT DEFAULT NULL, template_file_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY template_var_defs_to_template_files (template_file_id), CONSTRAINT template_var_defs_to_template_files FOREIGN KEY (template_file_id) REFERENCES template_files (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>ALTER TABLE templates ADD COLUMN template_file_id int(10) UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE templates ADD CONSTRAINT templates_to_template_files FOREIGN KEY templates_to_template_files (template_file_id) REFERENCES template_files(id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE templates DROP COLUMN filename</query>
     </version>
 </versions>

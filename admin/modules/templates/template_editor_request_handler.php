@@ -5,9 +5,9 @@
     require_once CMS_ROOT . "database/dao/template_dao.php";
     require_once CMS_ROOT . "database/dao/scope_dao.php";
     require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-    require_once CMS_ROOT . "modules/templates/template_form.php";
+    require_once CMS_ROOT . "modules/templates/template_editor_form.php";
     
-    class TemplateRequestHandler extends HttpRequestHandler {
+    class TemplateEditorRequestHandler extends HttpRequestHandler {
     
         private static string $TEMPLATE_ID_GET = "template";
         private static string $SCOPE_IDENTIFIER_GET = "scope";
@@ -39,8 +39,6 @@
                 $this->addTemplate();
             } else if ($this->isDeleteAction()) {
                 $this->deleteTemplates();
-            } else if ($this->isReloadAction()) {
-                $this->reloadTemplate();
             }
         }
         
@@ -67,70 +65,16 @@
         }
         
         private function updateTemplate(): void {
-            $template_form = new TemplateForm($this->_current_template);
-            $old_file_path = FRONTEND_TEMPLATE_DIR . "\\" . $this->_current_template->getFileName();
-            $old_file_name = $this->_current_template->getFileName();
+            $template_form = new TemplateEditorForm($this->_current_template);
             try {
                 $template_form->loadFields();
-                if ($template_form->isFileUploaded()) {
-                    $this->removeOldFile($old_file_path);
-                    $this->copyUploadToTemplateDir($template_form->getPathToUploadedFile());
-                } else if ($this->isTemplateRenamed($old_file_name) && file_exists($old_file_path) ) {
-                    $this->renameTemplateFile($old_file_name);
-                }
                 $this->_template_dao->updateTemplate($this->_current_template);
                 $this->sendSuccessMessage("Template succesvol opgeslagen");
             } catch (FormException $e) {
                 $this->sendErrorMessage("Template niet opgeslagen, verwerk de fouten");
             }
         }
-
-        private function reloadTemplate(): void {
-            $code = $this->_current_template->getCode();
-            $matches = null;
-            preg_match_all('/\$var\.(.*?)}/', $code, $matches);
-
-            $existing_vars = $this->_current_template->getTemplateVars();
-
-            for ($i = 0; $i < count($matches[1]); $i++) {
-                $var_name = $matches[1][$i];
-                if (!Arrays::firstMatch($existing_vars, function($existing_var) use ($var_name) {
-                    return $existing_var->getName() == $var_name;
-                })) {
-                    $template_var = $this->_template_dao->storeTemplateVar($this->_current_template, $var_name);
-                    $this->_current_template->addTemplateVar($template_var);
-                }
-            }
-
-            foreach ($existing_vars as $existing_var) {
-                if (!Arrays::firstMatch($matches[1], function($match) use ($existing_var) {
-                    return $existing_var->getName() == $match;
-                })) {
-                    $this->_template_dao->deleteTemplateVar($existing_var);
-                    $this->_current_template->deleteTemplateVar($existing_var);
-                }
-            }
-            $this->sendSuccessMessage($this->getTextResource('message_template_successfully_reloaded'));
-        }
         
-        private function renameTemplateFile(string $old_file_name): void {
-            rename(FRONTEND_TEMPLATE_DIR . "/" . $old_file_name, FRONTEND_TEMPLATE_DIR . "/" . $this->_current_template->getFileName());
-        }
-        
-        private function isTemplateRenamed(string $old_file_name): bool {
-            return ($old_file_name != "" && $old_file_name != $this->_current_template->getFileName());
-        }
-        
-        private function removeOldFile(string $old_file_path): void {
-            if (file_exists($old_file_path)) {
-                unlink($old_file_path);
-            }
-        }
-        
-        private function copyUploadToTemplateDir(string $path_to_uploaded_file): void {
-            move_uploaded_file($path_to_uploaded_file, FRONTEND_TEMPLATE_DIR . "/" . $this->_current_template->getFileName());
-        }
-
         private function getTemplateFromPostRequest(): ?Template {
             $template = null;
             if (isset($_POST[self::$TEMPLATE_ID_POST])) {
@@ -165,10 +109,6 @@
         
         private function isDeleteAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "delete_templates";
-        }
-
-        private function isReloadAction(): bool {
-            return isset($_POST["action"]) && $_POST["action"] == "reload_template";
         }
 
     }

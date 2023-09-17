@@ -9,6 +9,7 @@ template_editor_upload_field: Template file
 
 # LIST
 template_list_name_column: Name
-template_list_filename_column: Filename
-template_list_file_present_column: File found
 template_list_delete_column: Delete
+
+# TEMPLATE FILES
+templates_no_migration_required: No new variables found, no migration needed

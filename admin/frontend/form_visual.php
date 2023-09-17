@@ -10,11 +10,13 @@
     private WebFormItemFactory $_webform_item_factory;
 
         private WebForm $_webform;
+        private TemplateDao $_template_dao;
 
         public function __construct(Page $page, ?Article $article, WebForm $webform) {
             parent::__construct($page, $article);
             $this->_webform = $webform;
             $this->_webform_item_factory = WebFormItemFactory::getInstance();
+            $this->_template_dao = TemplateDao::getInstance();
         }
 
         public function getTemplateFilename(): string {
@@ -35,7 +37,7 @@
                 $webform_data = $this->renderWebForm($this->_webform);
             }
             $webform_child_data->assign('webform', $webform_data);
-            $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_webform->getTemplate()->getFileName(), $webform_child_data));
+            $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_webform->getTemplate()->getTemplateFileId())->getFileName(), $webform_child_data));
         }
 
         private function renderWebForm(WebForm $webform): array {

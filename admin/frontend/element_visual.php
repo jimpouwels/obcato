@@ -2,14 +2,17 @@
     defined('_ACCESS') or die;
 
     require_once CMS_ROOT . "frontend/frontend_visual.php";
+    require_once CMS_ROOT . "database/dao/template_dao.php";
 
     abstract class ElementFrontendVisual extends FrontendVisual {
 
         private Element $_element;
+        private TemplateDao $_template_dao;
 
         public function __construct(Page $page, ?Article $article, Element $element) {
             parent::__construct($page, $article);
             $this->_element = $element;
+            $this->_template_dao = TemplateDao::getInstance();
         }
 
         public function getTemplateFilename(): string {
@@ -17,7 +20,7 @@
         }
 
         public function getElementTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->getElement()->getTemplate()->getFileName();
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getElement()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
         abstract function loadElement(Smarty_Internal_Data $data): void;

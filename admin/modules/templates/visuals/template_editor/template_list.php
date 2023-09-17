@@ -3,10 +3,9 @@
 
     require_once CMS_ROOT . "database/dao/template_dao.php";
     require_once CMS_ROOT . "view/views/information_message.php";
-    require_once CMS_ROOT . "modules/templates/visuals/scope_selector.php";
+    require_once CMS_ROOT . "modules/templates/visuals/template_editor/scope_selector.php";
 
     class TemplateList extends Panel {
-
 
         private TemplateDao $_template_dao;
         private Scope $_scope;
@@ -33,8 +32,6 @@
                 $template_data = array();
                 $template_data["id"] = $template->getId();
                 $template_data["name"] = $template->getName();
-                $template_data["filename"] = $template->getFileName();
-                $template_data["exists"] = $template->exists();
                 $template_data["delete_checkbox"] = $this->renderDeleteCheckBox($template);
                 $templates_data[] = $template_data;
             }

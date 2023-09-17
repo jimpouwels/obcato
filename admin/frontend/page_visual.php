@@ -10,6 +10,7 @@
     class PageVisual extends FrontendVisual {
         private PageDao $_page_dao;
         private ArticleDao $_article_dao;
+        private TemplateDao $_template_dao;
         private WebFormDao $_webform_dao;
         private WebFormItemFactory $_webform_item_factory;
 
@@ -18,11 +19,12 @@
             $this->_page_dao = PageDao::getInstance();
             $this->_webform_dao = WebFormDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
+            $this->_template_dao = TemplateDao::getInstance();
             $this->_webform_item_factory = WebFormItemFactory::getInstance();
         }
 
         public function getTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->getPage()->getTemplate()->getFileName();
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getPage()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
         public function load(): void {
@@ -124,7 +126,7 @@
             foreach ($article_data as $key => $value) {
                 $article_template_data->assign($key, $value);
             }
-            $article_data["to_string"] = $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->getArticle()->getTemplate()->getFileName(), $article_template_data);
+            $article_data["to_string"] = $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getArticle()->getTemplate()->getTemplateFileId())->getFileName(), $article_template_data);
             return $article_data;
         }
 

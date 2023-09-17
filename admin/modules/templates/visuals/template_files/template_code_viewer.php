@@ -3,13 +3,13 @@
 
     require_once CMS_ROOT . "database/dao/scope_dao.php";
 
-    class TemplateCodeViewer extends Panel {
+    class TemplateFileCodeViewer extends Panel {
 
-        private Template $_template;
+        private TemplateFile $_template_file;
 
-        public function __construct(Template $template) {
+        public function __construct(TemplateFile $template_file) {
             parent::__construct('Markup', 'template_content_panel');
-            $this->_template = $template;
+            $this->_template_file = $template_file;
         }
 
         public function getPanelContentTemplate(): string {
@@ -21,7 +21,7 @@
         }
 
         private function getTemplateCode(): ?string {
-            return htmlspecialchars($this->_template->getCode());
+            return htmlspecialchars($this->_template_file->getCode());
         }
 
     }

@@ -3,18 +3,21 @@
 
     require_once CMS_ROOT . "frontend/frontend_visual.php";
     require_once CMS_ROOT . 'database/dao/element_dao.php';
+    require_once CMS_ROOT . 'database/dao/template_dao.php';
 
     class BlockVisual extends FrontendVisual {
 
         private Block $_block;
+        private TemplateDao $_template_dao;
 
         public function __construct(Block $block, Page $page) {
             parent::__construct($page, null);
             $this->_block = $block;
+            $this->_template_dao = TemplateDao::getInstance();
         }
 
         public function getTemplateFilename(): string {
-            return FRONTEND_TEMPLATE_DIR . "/" . $this->_block->getTemplate()->getFileName();
+            return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_block->getTemplate()->getTemplateFileId())->getFileName();
         }
 
         public function load(): void {

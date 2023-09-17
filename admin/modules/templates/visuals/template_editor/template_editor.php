@@ -7,11 +7,13 @@
 
         private Template $_template;
         private ScopeDao $_scope_dao;
+        private TemplateDao $_template_dao;
 
         public function __construct(Template $template) {
             parent::__construct('Template bewerken', 'template_editor_panel');
             $this->_template = $template;
             $this->_scope_dao = ScopeDao::getInstance();
+            $this->_template_dao = TemplateDao::getInstance();
         }
 
         public function getPanelContentTemplate(): string {
@@ -26,11 +28,21 @@
         private function assignEditFields($data): void {
             $name_field = new TextField("name", "template_editor_name_field", $this->_template->getName(), true, false, null);
             $data->assign("name_field", $name_field->render());
-            $filename_field = new TextField("file_name", "template_editor_filename_field", $this->_template->getFileName(), false, false, null);
-            $data->assign("filename_field", $filename_field->render());
-            $upload_field = new UploadField("template_file", "template_editor_upload_field", false, "");
-            $data->assign("upload_field", $upload_field->render());
             $data->assign("scopes_field", $this->renderScopesField());
+
+            $template_file_select = new Pulldown("template_editor_template_file", $this->getTextResource('template_editor_template_file_field'), $this->_template->getTemplateFileId(), $this->getTemplateFilesData(), false, null, true);
+            $data->assign("template_files_selector", $template_file_select->render());
+        }
+
+        private function getTemplateFilesData(): array {
+            $template_files_data = array();
+            foreach ($this->_template_dao->getTemplateFiles() as $template_file) {
+                $template_file_data = array();
+                $template_file_data['name'] = $template_file->getName();
+                $template_file_data['value'] = $template_file->getId();
+                $template_files_data[] = $template_file_data;
+            }
+            return $template_files_data;
         }
 
         private function renderScopesField(): string {

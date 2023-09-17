@@ -6,7 +6,6 @@
 
     class WebFormTextFieldVisual extends WebFormFieldVisual {
 
-
         public function __construct(WebFormTextField $form_field) {
             parent::__construct($form_field);
         }

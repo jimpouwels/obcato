@@ -7,11 +7,11 @@
 
     class Template extends Entity {
     
-        private ?string $_file_name = null;
         private string $_scope;
         private string $_name;
         private int $_scope_id;
         private array $_template_vars = array();
+        private ?int $_template_file_id = null;
         
         public function setName(string $name): void {
             $this->_name = $name;
@@ -21,12 +21,12 @@
             return $this->_name;
         }
         
-        public function setFileName(?string $file_name): void {
-            $this->_file_name = $file_name;
+        public function getTemplateFileId(): ?int {
+            return $this->_template_file_id;
         }
-        
-        public function getFileName(): ?string {
-            return $this->_file_name;
+
+        public function setTemplateFileId(?int $template_file_id): void {
+            $this->_template_file_id = $template_file_id;
         }
         
         public function getScope(): Scope {
@@ -81,9 +81,9 @@
         }
 
         protected function initFromDb(array $row): void {
-            $this->setFileName($row['filename']);
             $this->setName($row['name']);
             $this->setScopeId($row['scope_id']);
+            $this->setTemplateFileId($row['template_file_id']);
             parent::initFromDb($row);
             $this->setTemplateVars(TemplateDao::getInstance()->getTemplateVars($this));
         }
