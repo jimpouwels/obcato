@@ -4,12 +4,21 @@ templates_scope_list_title: Components
 
 # EDITOR
 template_editor_name_field: Name
-template_editor_filename_field: Filename
-template_editor_upload_field: Template file
+template_editor_template_file_field: Template file
+
+# TAB
+templates_tab_menu_templates: Templates
+templates_tab_menu_template_files: Template Files
 
 # LIST
 template_list_name_column: Name
 template_list_delete_column: Delete
 
 # TEMPLATE FILES
+template_files_list_title: Template files
+template_file_editor_panel_title: Edit template file
+template_var_migration_panel_title: Migrate template variables
+template_file_editor_name_field: Name
+template_file_editor_filename_field: Filename
+template_file_editor_variables: Variables
 templates_no_migration_required: No new variables found, no migration needed

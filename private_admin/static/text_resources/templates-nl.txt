@@ -4,11 +4,21 @@ templates_scope_list_title: Componenten
 
 # EDITOR
 template_editor_name_field: Naam
-template_editor_upload_field: Template bestand
+template_editor_template_file_field: Template bestand
+
+# TAB
+templates_tab_menu_templates: Templates
+templates_tab_menu_template_files: Template bestanden
 
 # LIST
 template_list_name_column: Naam
 template_list_delete_column: Verwijderen
 
 # TEMPLATE FILES
+template_files_list_title: Template bestanden
+template_file_editor_panel_title: Template bestand bewerken
+template_var_migration_panel_title: Migreren van template variabelen
+template_file_editor_name_field: Naam
+template_file_editor_filename_field: Bestandsnaam
+template_file_editor_variables: Variabelen
 templates_no_migration_required: Geen nieuwe variabelen gevonden, migratie niet nodig
