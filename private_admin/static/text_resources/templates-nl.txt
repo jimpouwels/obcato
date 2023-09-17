@@ -21,4 +21,5 @@ template_var_migration_panel_title: Migreren van template variabelen
 template_file_editor_name_field: Naam
 template_file_editor_filename_field: Bestandsnaam
 template_file_editor_variables: Variabelen
+template_var_editor_panel_title: Bewerkt template variabelen
 templates_no_migration_required: Geen nieuwe variabelen gevonden, migratie niet nodig
