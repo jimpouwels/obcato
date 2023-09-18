@@ -25,8 +25,14 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getArticle()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function loadVisual(Smarty_Internal_Data $template_data, array $data): void {
+        public function loadVisual(Smarty_Internal_Data $template_data, ?array &$data): void {
+            $data["id"] = $this->getArticle()->getId();
+            $data["title"] = $this->getArticle()->getTitle();
+            $data["description"] = $this->getArticle()->getDescription();
+            $data["publication_date"] = $this->getArticle()->getPublicationDate();
+            $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
             $data["image"] = $this->getImageData($this->getArticle()->getImage());
+            $data["elements"] = $this->renderElementHolderContent($this->getArticle());
             $data["comments"] = $this->renderArticleComments($this->getArticle());
             $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
             foreach ($data as $key => $value) {
@@ -46,6 +52,19 @@
                 $image_data["url"] = $this->getImageUrl($image);
             }
             return $image_data;
+        }
+
+        private function renderElementHolderContent(ElementHolder $element_holder) {
+            $elements_content = array();
+            foreach ($element_holder->getElements() as $element) {
+                $element_data = array();
+                $element_data["type"] = $element->getType()->getIdentifier();
+                if ($element->getTemplate()) {
+                    $element_data["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+                }
+                $elements_content[] = $element_data;
+            }
+            return $elements_content;
         }
 
         private function renderArticleComments(Article $article): array {

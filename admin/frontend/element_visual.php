@@ -25,7 +25,7 @@
 
         abstract function loadElement(Smarty_Internal_Data $data): void;
 
-        public function loadVisual(Smarty_Internal_Data $template_data, array $data): void {
+        public function loadVisual(Smarty_Internal_Data $template_data, ?array &$data): void {
             $this->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
             $this->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
             $this->assign("type", $this->_element->getType()->getIdentifier());
