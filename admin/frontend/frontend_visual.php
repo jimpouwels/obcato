@@ -33,12 +33,12 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function render(array &$parent_data = null): string {
+        public function render(array $parent_data = null): string {
             $this->load($parent_data);
             return $this->_template_engine->fetch($this->getTemplateFilename(), $this->_template_data);
         }
 
-        public function load(?array &$parent_data): void {
+        public function load(?array $parent_data): void {
             $presentable = $this->getPresentable();
             $template_vars = array();
 
@@ -53,14 +53,14 @@
                 }
             }
             $child_data->assign("var", $template_vars);
-            $this->loadVisual($child_data, $parent_data);
+            $this->loadVisual($child_data, $parent_data ? $parent_data : array());
         }
 
         public function getTemplateData(): Smarty_Internal_Data {
             return $this->_template_data;
         }
         
-        abstract function loadVisual(Smarty_Internal_Data $data, ?array &$parent_data): void;
+        abstract function loadVisual(Smarty_Internal_Data $template_data, array $data): void;
 
         abstract function getPresentable(): ?Presentable;
 

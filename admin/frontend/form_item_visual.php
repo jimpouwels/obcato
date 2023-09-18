@@ -27,7 +27,7 @@
             return $this->_webform;
         }
 
-        public function loadVisual(Smarty_Internal_Data $data, ?array &$parent_data): void {
+        public function loadVisual(Smarty_Internal_Data $template_data, array $data): void {
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());
             $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));

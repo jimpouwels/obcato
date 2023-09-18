@@ -25,18 +25,12 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getArticle()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function loadVisual(Smarty_Internal_Data $data, ?array &$parent_data): void {
-            $parent_data["id"] = $this->getArticle()->getId();
-            $parent_data["title"] = $this->getArticle()->getTitle();
-            $parent_data["description"] = $this->getArticle()->getDescription();
-            $parent_data["publication_date"] = $this->getArticle()->getPublicationDate();
-            $parent_data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
-            $parent_data["image"] = $this->getImageData($this->getArticle()->getImage());
-            $parent_data["elements"] = $this->renderElementHolderContent($this->getArticle());
-            $parent_data["comments"] = $this->renderArticleComments($this->getArticle());
-            $parent_data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
-            foreach ($parent_data as $key => $value) {
-                $data->assign($key, $value);
+        public function loadVisual(Smarty_Internal_Data $template_data, array $data): void {
+            $data["image"] = $this->getImageData($this->getArticle()->getImage());
+            $data["comments"] = $this->renderArticleComments($this->getArticle());
+            $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
+            foreach ($data as $key => $value) {
+                $template_data->assign($key, $value);
             }
         }
         
@@ -52,19 +46,6 @@
                 $image_data["url"] = $this->getImageUrl($image);
             }
             return $image_data;
-        }
-
-        private function renderElementHolderContent(ElementHolder $element_holder) {
-            $elements_content = array();
-            foreach ($element_holder->getElements() as $element) {
-                $element_data = array();
-                $element_data["type"] = $element->getType()->getIdentifier();
-                if ($element->getTemplate()) {
-                    $element_data["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
-                }
-                $elements_content[] = $element_data;
-            }
-            return $elements_content;
         }
 
         private function renderArticleComments(Article $article): array {
