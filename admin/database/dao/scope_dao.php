@@ -21,7 +21,7 @@
         }
 
         public function getScopes(): array {
-            $query = "SELECT * FROM scopes";
+            $query = "SELECT * FROM scopes ORDER BY identifier ASC";
             $result = $this->_mysql_connector->executeQuery($query);
             $scope = null;
             $scopes = array();
