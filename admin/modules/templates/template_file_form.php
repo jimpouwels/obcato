@@ -46,21 +46,23 @@
                 }
             }
 
-            // update all templates (migration)
-            foreach ($this->_template_dao->getTemplatesForTemplateFile($this->_template_file) as $template) {
-                foreach ($template->getTemplateVars() as $template_var) {
-                    if (!Arrays::firstMatch($this->_parsed_var_defs, function($parsed_var_def) use ($template_var) {
-                        return $template_var->getName() == $parsed_var_def;
-                    })) {
-                        $this->_template_dao->deleteTemplateVar($template_var);
-                        $template->deleteTemplateVar($template_var);
+            if (isset($_GET['reloaded'])) {
+                // update all templates (migration)
+                foreach ($this->_template_dao->getTemplatesForTemplateFile($this->_template_file) as $template) {
+                    foreach ($template->getTemplateVars() as $template_var) {
+                        if (!Arrays::firstMatch($this->_parsed_var_defs, function($parsed_var_def) use ($template_var) {
+                            return $template_var->getName() == $parsed_var_def;
+                        })) {
+                            $this->_template_dao->deleteTemplateVar($template_var);
+                            $template->deleteTemplateVar($template_var);
+                        }
                     }
-                }
-                foreach ($this->_parsed_var_defs as $parsed_var_def) {
-                    if (!Arrays::firstMatch($template->getTemplateVars(), function($template_var) use ($parsed_var_def) {
-                        return $template_var->getName() == $parsed_var_def;
-                    })) {
-                        $template_var = $this->_template_dao->storeTemplateVar($template, $parsed_var_def, $this->getFieldValue("new_var|{$parsed_var_def}"));
+                    foreach ($this->_parsed_var_defs as $parsed_var_def) {
+                        if (!Arrays::firstMatch($template->getTemplateVars(), function($template_var) use ($parsed_var_def) {
+                            return $template_var->getName() == $parsed_var_def;
+                        })) {
+                            $template_var = $this->_template_dao->storeTemplateVar($template, $parsed_var_def, $this->getFieldValue("new_var|{$parsed_var_def}"));
+                        }
                     }
                 }
             }

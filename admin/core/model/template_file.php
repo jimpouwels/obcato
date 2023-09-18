@@ -38,6 +38,12 @@
             return $this->_template_var_defs;
         }
 
+        public function getTemplateVarDef(string $var_name): TemplateVarDef {
+            return Arrays::firstMatch($this->_template_var_defs, function($template_var_def) use ($var_name) {
+                return $var_name == $template_var_def->getName();
+            });
+        }
+
         public function setTemplateVarDefs(array $template_var_defs): void {
             $this->_template_var_defs = $template_var_defs;
         }

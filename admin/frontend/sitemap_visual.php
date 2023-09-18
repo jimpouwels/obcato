@@ -20,9 +20,13 @@
             return FRONTEND_TEMPLATE_DIR . "/sitemap.tpl";
         }
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign('pages', $this->renderPageUrls());
             $this->assign('articles', $this->renderArticleUrls());
+        }
+
+        public function getPresentable(): Presentable {
+            return null;
         }
 
         private function renderPageUrls(): array {

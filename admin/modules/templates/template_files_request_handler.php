@@ -58,11 +58,13 @@
             $template_file_form = new TemplateFileForm($this->_current_template_file, $this->parseVarDefs());
             $template_file_form->loadFields();
             $this->_template_dao->updateTemplateFile($this->_current_template_file);
+            $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_saved'));
         }
 
         private function reloadTemplateFile(): void {
             $this->_parsed_var_defs = $this->parseVarDefs();
             $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_reloaded'));
+            $this->redirectTo($this->getBackendBaseUrl() . "&template_file=" . $this->_current_template_file->getId() . "&reloaded=true");
         }
 
         private function deleteTemplateFile(): void {

@@ -27,7 +27,7 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getPage()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign("website_title", WEBSITE_TITLE);
             $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $this->assign("title", $this->getPage()->getTitle());
@@ -43,6 +43,10 @@
             }
             $this->assign("canonical_url", $this->getCanonicalUrl()); 
             $this->assign("root_page", $this->getPageMetaData($this->_page_dao->getRootPage()));
+        }
+
+        public function getPresentable(): ?Presentable {
+            return $this->getPage();
         }
 
         private function getPageContentAndMetaData(Page $page): array {

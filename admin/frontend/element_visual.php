@@ -25,21 +25,18 @@
 
         abstract function loadElement(Smarty_Internal_Data $data): void;
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
             $this->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
             $this->assign("type", $this->_element->getType()->getIdentifier());
 
-            $template_vars = array();
-            foreach ($this->_element->getTemplate()->getTemplateVars() as $template_var) {
-                $template_vars[$template_var->getName()] = $template_var->getValue();
-            }
-            
-            $element_data = $this->getTemplateEngine()->createChildData();
-            $element_data->assign("var", $template_vars);
+            $element_data = $this->getTemplateEngine()->createChildData($data);
             $this->loadElement($element_data);
-            
             $this->assign("element_html", $this->getTemplateEngine()->fetch($this->getElementTemplateFilename(), $element_data));
+        }
+
+        public function getPresentable(): ?Presentable {
+            return $this->_element;
         }
 
         protected function getElement(): Element {

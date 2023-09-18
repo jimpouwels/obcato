@@ -20,10 +20,14 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_block->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign('id', $this->_block->getId());
             $this->assign('title', $this->_block->getTitle());
             $this->assign('elements', $this->renderElements());
+        }
+        
+        public function getPresentable(): ?Presentable {
+            return $this->_block;
         }
 
         private function renderElements(): array {

@@ -37,8 +37,26 @@
             $this->load();
             return $this->_template_engine->fetch($this->getTemplateFilename(), $this->_template_data);
         }
+
+        public function load(): void {
+            $presentable = $this->getPresentable();
+            $template_vars = array();
+            if ($presentable) {
+                foreach ($presentable->getTemplate()->getTemplateVars() as $template_var) {
+                    $var_value = $template_var->getValue();
+                    if (empty($var_value)) {
+                        $var_value = $this->_template_dao->getTemplateFile($presentable->getTemplate()->getTemplateFileId())->getTemplateVarDef($template_var->getName())->getDefaultValue();
+                    }
+                    $template_vars[$template_var->getName()] = $var_value;
+                }
+            }
+            $this->assign("var", $template_vars);
+            $this->loadVisual($this->createChildData(true));
+        }
         
-        abstract function load(): void;
+        abstract function loadVisual(Smarty_Internal_Data $data): void;
+
+        abstract function getPresentable(): ?Presentable;
 
         abstract function getTemplateFilename(): string;
 

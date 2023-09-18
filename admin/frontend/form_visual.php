@@ -23,7 +23,7 @@
             return FRONTEND_TEMPLATE_DIR . '/sa_form.tpl';
         }
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign('webform_id', $this->_webform->getId());
             if ($this->_webform->getIncludeCaptcha()) {
                 $captcha_key = $this->_webform->getCaptchaKey();
@@ -38,6 +38,10 @@
             }
             $webform_child_data->assign('webform', $webform_data);
             $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_webform->getTemplate()->getTemplateFileId())->getFileName(), $webform_child_data));
+        }
+
+        public function getPresentable(): ?Presentable {
+            return $this->_webform;
         }
 
         private function renderWebForm(WebForm $webform): array {

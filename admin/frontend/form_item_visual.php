@@ -27,7 +27,7 @@
             return $this->_webform;
         }
 
-        public function load(): void {
+        public function loadVisual(Smarty_Internal_Data $data): void {
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());
             $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
@@ -36,6 +36,10 @@
             $field_data = $this->createChildData(true);
             $this->loadFormItem($field_data);
             $this->assign('form_item_html', $this->getTemplateEngine()->fetch($this->getFormItemTemplateFilename(), $field_data));
+        }
+
+        public function getPresentable(): ?Presentable {
+            return $this->_webform_item;
         }
 
         abstract function loadFormItem(Smarty_Internal_Data $data): void;
