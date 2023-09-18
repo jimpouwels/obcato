@@ -32,8 +32,8 @@
                 $this->addTemplateFile();
             } else if ($this->isUpdateAction()) {
                 $this->updateTemplateFile();
-            } else if ($this->isReloadAction()) {
-                $this->reloadTemplateFile();
+            } else if ($this->isMigrateAction()) {
+                $this->migrateTemplateFile();
             } else if ($this->isDeleteAction()) {
                 $this->deleteTemplateFile();
             }
@@ -42,7 +42,7 @@
         public function getCurrentTemplateFile(): ?TemplateFile {
             return $this->_current_template_file;
         }
-
+        
         public function getParsedVarDefs(): array {
             return $this->_parsed_var_defs;
         }
@@ -53,37 +53,24 @@
             $this->_template_dao->storeTemplateFile($template_file);
             $this->redirectTo($this->getBackendBaseUrl() . "&template_file=" . $template_file->getId());
         }
-
+        
         private function updateTemplateFile(): void {
-            $template_file_form = new TemplateFileForm($this->_current_template_file, $this->parseVarDefs());
+            $template_file_form = new TemplateFileForm($this->_current_template_file);
             $template_file_form->loadFields();
             $this->_template_dao->updateTemplateFile($this->_current_template_file);
             $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_saved'));
         }
-
-        private function reloadTemplateFile(): void {
-            $this->_parsed_var_defs = $this->parseVarDefs();
-            $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_reloaded'));
-            $this->redirectTo($this->getBackendBaseUrl() . "&template_file=" . $this->_current_template_file->getId() . "&reloaded=true");
+        
+        private function migrateTemplateFile(): void {
+            $template_file_form = new TemplateFileForm($this->_current_template_file);
+            $template_file_form->loadFields();
+            $this->_parsed_var_defs = $template_file_form->getParsedVarDefs();
         }
-
+        
         private function deleteTemplateFile(): void {
             $this->_template_dao->deleteTemplateFile($this->_current_template_file);
             $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_deleted'));
             $this->redirectTo($this->getBackendBaseUrl());
-        }
-
-        private function parseVarDefs(): array {
-            $parsed_var_defs = array();
-            $code = $this->_current_template_file->getCode();
-            $matches = null;
-            preg_match_all('/\$var\.(.*?)}/', $code, $matches);
-
-            for ($i = 0; $i < count($matches[1]); $i++) {
-                $var_def_name = $matches[1][$i];
-                $parsed_var_defs[] = $var_def_name;
-            }
-            return $parsed_var_defs;
         }
         
         private function getTemplateFileFromPostRequest(): ?TemplateFile {
@@ -119,8 +106,8 @@
             return isset($_POST["action"]) && $_POST["action"] == "delete_template_file";
         }
 
-        private function isReloadAction(): bool {
-            return isset($_POST["action"]) && $_POST["action"] == "reload_template_file";
+        private function isMigrateAction(): bool {
+            return isset($_POST["action"]) && $_POST["action"] == "migrate_template_file";
         }
 
     }

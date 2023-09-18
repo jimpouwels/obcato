@@ -9,18 +9,23 @@
     
         private TemplateFile $_template_file;
         private TemplateDao $_template_dao;
-        private array $_parsed_var_defs;
+        private array $_parsed_var_defs = array();
 
-        public function __construct(TemplateFile $template_file, array $parsed_var_defs) {
+        public function __construct(TemplateFile $template_file) {
             $this->_template_file = $template_file;
             $this->_template_dao = TemplateDao::getInstance();
-            $this->_parsed_var_defs = $parsed_var_defs;
+        }
+
+        public function getParsedVarDefs(): array {
+            return $this->_parsed_var_defs;
         }
     
         public function loadFields(): void {
             $id = $this->_template_file->getId();
             $this->_template_file->setName($this->getMandatoryFieldValue("template_file_{$id}_name_field", $this->getTextResource("error_field_is_mandatory")));
             $this->_template_file->setFileName($this->getFieldValue("template_file_{$id}_filename_field"));
+
+            $this->_parsed_var_defs = $this->parseVarDefs();
 
             foreach ($this->_template_file->getTemplateVarDefs() as $var_def) {
                 $var_def_id = $var_def->getId();
@@ -46,8 +51,8 @@
                 }
             }
 
-            if (isset($_GET['reloaded'])) {
-                // update all templates (migration)
+            // update all templates (migration)
+            if (isset($_POST['is_migrating'])) {
                 foreach ($this->_template_dao->getTemplatesForTemplateFile($this->_template_file) as $template) {
                     foreach ($template->getTemplateVars() as $template_var) {
                         if (!Arrays::firstMatch($this->_parsed_var_defs, function($parsed_var_def) use ($template_var) {
@@ -67,6 +72,19 @@
                 }
             }
 
+        }
+        
+        private function parseVarDefs(): array {
+            $parsed_var_defs = array();
+            $code = $this->_template_file->getCode();
+            $matches = null;
+            preg_match_all('/\$var\.(.*?)}/', $code, $matches);
+
+            for ($i = 0; $i < count($matches[1]); $i++) {
+                $var_def_name = $matches[1][$i];
+                $parsed_var_defs[] = $var_def_name;
+            }
+            return $parsed_var_defs;
         }
         
     }

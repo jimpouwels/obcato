@@ -78,7 +78,7 @@
         private function getTemplateFromPostRequest(): ?Template {
             $template = null;
             if (isset($_POST[self::$TEMPLATE_ID_POST])) {
-                $template = $this->_template_dao->getTemplate($_POST[self::$TEMPLATE_ID_POST]);
+                $template = $this->_template_dao->getTemplate(intval($_POST[self::$TEMPLATE_ID_POST]));
             }
             return $template;
         }

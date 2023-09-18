@@ -13,7 +13,7 @@ navigation_menu_add_element_error: Error: Can\'t add element. You can only add e
 
 # ACTION BUTTONS
 action_button_save: Save
-action_button_reload: Reload
+action_button_migrate: Migrate
 action_button_delete: Delete
 action_button_add: Add
 action_button_up: Up

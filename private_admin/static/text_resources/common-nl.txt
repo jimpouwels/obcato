@@ -13,7 +13,7 @@ navigation_menu_add_element_error: Fout: Kan element niet toevoegen. U kunt elem
 
 # ACTION BUTTONS
 action_button_save: Opslaan
-action_button_reload: Herladen
+action_button_migrate: Migreren
 action_button_delete: Verwijderen
 action_button_add: Toevoegen
 action_button_up: Omhoog

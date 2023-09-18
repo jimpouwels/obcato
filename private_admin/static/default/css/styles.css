@@ -335,8 +335,8 @@ body {
     margin-left: 6px;
 }
 
-.icon_reload {
-    background-image: url("/admin/static.php?file=/default/img/default_icons/reload.png");
+.icon_migrate {
+    background-image: url("/admin/static.php?file=/default/img/default_icons/migrate.png");
     width: 36px;
     margin-left: 6px;
 }

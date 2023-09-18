@@ -47,8 +47,8 @@ $(document).ready(function() {
 		submitTemplateForm('update_template_file', 'template_file_form');
 	});
 	
-	$('#reload_template_file').click(function() {
-		submitTemplateForm('reload_template_file', 'template_file_form');
+	$('#migrate_template_file').click(function() {
+		submitTemplateForm('migrate_template_file', 'template_file_form');
 	});
 	
 	$('#delete_template_file').click(function() {

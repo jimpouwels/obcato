@@ -6,7 +6,7 @@
     require_once CMS_ROOT . 'view/views/panel.php';
     require_once CMS_ROOT . 'view/views/action_button.php';
     require_once CMS_ROOT . 'view/views/action_button_save.php';
-    require_once CMS_ROOT . 'view/views/action_button_reload.php';
+    require_once CMS_ROOT . 'view/views/action_button_migrate.php';
     require_once CMS_ROOT . 'view/views/action_button_delete.php';
     require_once CMS_ROOT . 'view/views/action_button_add.php';
     require_once CMS_ROOT . 'view/views/action_button_up.php';

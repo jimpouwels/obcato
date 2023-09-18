@@ -25,5 +25,4 @@ template_var_editor_panel_title: Edit template variables
 templates_no_migration_required: No new variables found, no migration needed
 
 # MESSAGES
-message_template_file_successfully_reloaded: Template file reloaded
 message_template_file_successfully_deleted: Template file deleted
