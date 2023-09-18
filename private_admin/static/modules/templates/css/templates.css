@@ -4,11 +4,6 @@
     clear: both;
 }
 
-.template_editor_panel {
-    float: left;
-    margin-left: 50px;
-}
-
 /* TEMPLATE SELECTOR */
 .scope_selector_panel {
     float: left;
