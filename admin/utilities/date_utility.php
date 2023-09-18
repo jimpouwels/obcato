@@ -17,7 +17,7 @@
             return $new_date_value;
         }
 
-        public static function stringMySqlDate(string $date_string): ?string {
+        public static function stringMySqlDate(?string $date_string): ?string {
             if (!is_null($date_string) && $date_string != '') {
                 $splitted = explode('-', $date_string);
                 return $splitted[2] . '-' . $splitted[1] . '-' . $splitted[0];

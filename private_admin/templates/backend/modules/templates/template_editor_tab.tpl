@@ -6,10 +6,8 @@
 	</div>
 	<div class="content_right_column">
 		{if isset($template_editor)}
-			<div class="template_editor_wrapper">
-				{$template_editor}
-				{$template_var_editor}
-			</div>
+			{$template_editor}
+			{$template_var_editor}
 		{elseif isset($template_list)}
 			{$template_list}
 		{/if}

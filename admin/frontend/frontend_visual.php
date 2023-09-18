@@ -33,14 +33,16 @@
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
-        public function render(): string {
-            $this->load();
+        public function render(array &$parent_data = null): string {
+            $this->load($parent_data);
             return $this->_template_engine->fetch($this->getTemplateFilename(), $this->_template_data);
         }
 
-        public function load(): void {
+        public function load(?array &$parent_data): void {
             $presentable = $this->getPresentable();
             $template_vars = array();
+
+            $child_data = $this->getTemplateData();
             if ($presentable) {
                 foreach ($presentable->getTemplate()->getTemplateVars() as $template_var) {
                     $var_value = $template_var->getValue();
@@ -50,11 +52,15 @@
                     $template_vars[$template_var->getName()] = $var_value;
                 }
             }
-            $this->assign("var", $template_vars);
-            $this->loadVisual($this->createChildData(true));
+            $child_data->assign("var", $template_vars);
+            $this->loadVisual($child_data, $parent_data);
+        }
+
+        public function getTemplateData(): Smarty_Internal_Data {
+            return $this->_template_data;
         }
         
-        abstract function loadVisual(Smarty_Internal_Data $data): void;
+        abstract function loadVisual(Smarty_Internal_Data $data, ?array &$parent_data): void;
 
         abstract function getPresentable(): ?Presentable;
 
@@ -106,6 +112,10 @@
             } else {
                 return $this->_template_engine->createChildData();
             }
+        }
+
+        protected function createChildDataAndInclude(Smarty_Internal_Data $data): Smarty_Internal_Data {
+            return $this->_template_engine->createChildData($data);
         }
 
         protected function getArticleUrl(Article $article, bool $full = false): string {
