@@ -23,7 +23,7 @@
             return FRONTEND_TEMPLATE_DIR . '/sa_form.tpl';
         }
 
-        public function loadVisual( ?array &$data): void {
+        public function loadVisual(?array &$data): void {
             $this->assign('webform_id', $this->_webform->getId());
             if ($this->_webform->getIncludeCaptcha()) {
                 $captcha_key = $this->_webform->getCaptchaKey();
