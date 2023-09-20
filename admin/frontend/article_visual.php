@@ -25,7 +25,7 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getArticle()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function loadVisual(Smarty_Internal_Data $template_data, ?array &$data): void {
+        public function loadVisual(?array &$data): void {
             $data["id"] = $this->getArticle()->getId();
             $data["title"] = $this->getArticle()->getTitle();
             $data["description"] = $this->getArticle()->getDescription();
@@ -36,7 +36,7 @@
             $data["comments"] = $this->renderArticleComments($this->getArticle());
             $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
             foreach ($data as $key => $value) {
-                $template_data->assign($key, $value);
+                $this->assign($key, $value);
             }
         }
         

@@ -53,14 +53,14 @@
                 }
             }
             $child_data->assign("var", $template_vars);
-            $this->loadVisual($child_data, $parent_data);
+            $this->loadVisual($parent_data);
         }
 
         public function getTemplateData(): Smarty_Internal_Data {
             return $this->_template_data;
         }
         
-        abstract function loadVisual(Smarty_Internal_Data $template_data, ?array &$data): void;
+        abstract function loadVisual( ?array &$data): void;
 
         abstract function getPresentable(): ?Presentable;
 

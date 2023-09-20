@@ -24,7 +24,7 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getPage()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function loadVisual(Smarty_Internal_Data $template_data, ?array &$data): void {
+        public function loadVisual( ?array &$data): void {
             $this->assign("website_title", WEBSITE_TITLE);
             $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
             $this->assign("title", $this->getPage()->getTitle());
