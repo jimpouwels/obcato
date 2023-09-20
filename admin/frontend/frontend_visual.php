@@ -42,7 +42,6 @@
             $presentable = $this->getPresentable();
             $template_vars = array();
 
-            $child_data = $this->getTemplateData();
             if ($presentable) {
                 foreach ($presentable->getTemplate()->getTemplateVars() as $template_var) {
                     $var_value = $template_var->getValue();
@@ -52,7 +51,7 @@
                     $template_vars[$template_var->getName()] = $var_value;
                 }
             }
-            $child_data->assign("var", $template_vars);
+            $this->assign("var", $template_vars);
             $this->loadVisual($parent_data);
         }
 
@@ -60,7 +59,7 @@
             return $this->_template_data;
         }
         
-        abstract function loadVisual( ?array &$data): void;
+        abstract function loadVisual(?array &$data): void;
 
         abstract function getPresentable(): ?Presentable;
 
@@ -72,6 +71,10 @@
 
         protected function assign(string $key, mixed $value) {
             $this->_template_data->assign($key, $value);
+        }
+
+        protected function fetch(string $template_filename): string {
+            return $this->_template_engine->fetch($template_filename, $this->_template_data);
         }
 
         protected function assignGlobal(string $key, mixed $value) {

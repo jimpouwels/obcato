@@ -10,9 +10,9 @@
             parent::__construct($page, $article, $photo_album_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-            $data->assign("images", $this->getImages());
+        public function loadElement(): void {
+            $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
+            $this->assign("images", $this->getImages());
         }
 
         private function getImages(): array {

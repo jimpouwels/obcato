@@ -23,16 +23,15 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getElement()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        abstract function loadElement(Smarty_Internal_Data $data): void;
+        abstract function loadElement(): void;
 
         public function loadVisual( ?array &$data): void {
             $this->assign("toc_reference", $this->toAnchorValue($this->_element->getTitle()));
             $this->assign("include_in_table_of_contents", $this->_element->includeInTableOfContents());
             $this->assign("type", $this->_element->getType()->getIdentifier());
 
-            $element_data = $this->createChildData(true);
-            $this->loadElement($element_data);
-            $this->assign("element_html", $this->getTemplateEngine()->fetch($this->getElementTemplateFilename(), $element_data));
+            $this->loadElement();
+            $this->assign("element_html", $this->fetch($this->getElementTemplateFilename()));
         }
 
         public function getPresentable(): ?Presentable {

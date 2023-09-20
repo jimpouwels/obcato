@@ -11,9 +11,9 @@
             parent::__construct($page, $article, $article_overview_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-            $data->assign("articles", $this->getArticles());
+        public function loadElement(): void {
+            $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
+            $this->assign("articles", $this->getArticles());
         }
 
         private function getArticles(): array {

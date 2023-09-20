@@ -11,9 +11,9 @@
             parent::__construct($page, $article, $form_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
+        public function loadElement(): void {
             $form_visual = new FormFrontendVisual($this->getPage(), $this->getArticle(), $this->getElement()->getWebForm());
-            $data->assign('webform', $form_visual->render());
+            $this->assign('webform', $form_visual->render());
         }
 
     }

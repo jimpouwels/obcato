@@ -9,15 +9,15 @@
             parent::__construct($page, $article, $image_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign("title", $this->getElement()->getTitle());
-            $data->assign("img_title", $this->getElement()->getImage()->getTitle());
-            $data->assign("img_alt_text", $this->getElement()->getImage()->getAltText());
-            $data->assign("align", $this->getElement()->getAlign());
-            $data->assign("width", $this->getElement()->getWidth());
-            $data->assign("height", $this->getElement()->getHeight());
-            $data->assign("image_url", $this->createImageUrl());
-            $data->assign("extension", $this->getExtension());
+        public function loadElement(): void {
+            $this->assign("title", $this->getElement()->getTitle());
+            $this->assign("img_title", $this->getElement()->getImage()->getTitle());
+            $this->assign("img_alt_text", $this->getElement()->getImage()->getAltText());
+            $this->assign("align", $this->getElement()->getAlign());
+            $this->assign("width", $this->getElement()->getWidth());
+            $this->assign("height", $this->getElement()->getHeight());
+            $this->assign("image_url", $this->createImageUrl());
+            $this->assign("extension", $this->getExtension());
         }
 
         private function createImageUrl(): string {

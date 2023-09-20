@@ -9,11 +9,11 @@
             parent::__construct($page, $article, $iframe_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign("title", $this->getElement()->getTitle());
-            $data->assign("url", $this->toHtml($this->getElement()->getUrl(), $this->getElementHolder()));
-            $data->assign("height", $this->getElement()->getHeight());
-            $data->assign("width", $this->getElement()->getWidth());
+        public function loadElement(): void {
+            $this->assign("title", $this->getElement()->getTitle());
+            $this->assign("url", $this->toHtml($this->getElement()->getUrl(), $this->getElementHolder()));
+            $this->assign("height", $this->getElement()->getHeight());
+            $this->assign("width", $this->getElement()->getWidth());
         }
 
     }

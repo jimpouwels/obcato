@@ -16,7 +16,7 @@
             return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->getFormItem()->getTemplate()->getTemplateFileId())->getFileName();
         }
 
-        public function loadFormField(Smarty_Internal_Data $data): void {
+        public function loadFormField(): void {
         }
 
     }

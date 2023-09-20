@@ -14,19 +14,19 @@
             return FRONTEND_TEMPLATE_DIR . '/form_field.tpl';
         }
 
-        public function loadFormItem(Smarty_Internal_Data $data): void {
+        public function loadFormItem(): void {
             $mandatory = false;
             if ($this->getFormItem() instanceof WebFormField) {
                 $mandatory = $this->getFormItem()->getMandatory();
             }
-            $data->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
-            $data->assign('mandatory', $mandatory);
+            $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
+            $this->assign('mandatory', $mandatory);
             
-            $this->loadFormField($data);
-            $data->assign('form_field_html', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $data));
+            $this->loadFormField();
+            $this->assign('form_field_html', $this->fetch($this->getFormFieldTemplateFilename()));
         }
 
-        abstract function loadFormField(Smarty_Internal_Data $data): void;
+        abstract function loadFormField(): void;
         abstract function getFormFieldTemplateFilename(): string;
     }
 ?>

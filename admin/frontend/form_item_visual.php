@@ -33,16 +33,15 @@
             $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
             $this->assign('has_error', FormStatus::getError($this->getFormItem()->getName()) != null);
             
-            $field_data = $this->createChildData(true);
-            $this->loadFormItem($field_data);
-            $this->assign('form_item_html', $this->getTemplateEngine()->fetch($this->getFormItemTemplateFilename(), $field_data));
+            $this->loadFormItem();
+            $this->assign('form_item_html', $this->fetch($this->getFormItemTemplateFilename()));
         }
 
         public function getPresentable(): ?Presentable {
             return $this->_webform_item;
         }
 
-        abstract function loadFormItem(Smarty_Internal_Data $data): void;
+        abstract function loadFormItem(): void;
         abstract function getFormItemTemplateFilename(): string;
     }
 ?>

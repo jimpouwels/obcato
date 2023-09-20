@@ -9,9 +9,9 @@
             parent::__construct($page, $article, $text_element);
         }
 
-        public function loadElement(Smarty_Internal_Data $data): void {
-            $data->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-            $data->assign("text", $this->toHtml($this->getElement()->getText(), $this->getElementHolder()));
+        public function loadElement(): void {
+            $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
+            $this->assign("text", $this->toHtml($this->getElement()->getText(), $this->getElementHolder()));
         }
     }
     
