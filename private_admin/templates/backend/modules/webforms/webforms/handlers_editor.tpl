@@ -22,11 +22,11 @@
 			<div class="draggable_body">
 				<div id="collapsable_body_{$handler.id}" class="admin_form">
 					<div class="form_field_editor_wrapper">
-						<ul class="admin_form">
+						<div class="admin_form_v2">
 							{foreach from=$handler.properties item=property}
-								<li>{$property.field}</li>
+								{$property.field}
 							{/foreach}
-						</ul>
+						</div>
 					</div>
 				</div>
 			</div>
