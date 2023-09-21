@@ -33,8 +33,12 @@
             $this->_template->setTemplateFileId($new_template_file_id);
 
             foreach ($this->_template_dao->getTemplateFile($this->_template->getTemplateFileId())->getTemplateVarDefs() as $var_def) {
-                $template_var = $this->_template_dao->storeTemplateVar($this->_template, $var_def->getName());
-                $this->_template->addTemplateVar($template_var);
+                if (!Arrays::firstMatch($this->_template->getTemplateVars(), function($tv) use ($var_def) {
+                    return $var_def->getName() == $tv->getName();
+                })) {
+                    $template_var = $this->_template_dao->storeTemplateVar($this->_template, $var_def->getName());
+                    $this->_template->addTemplateVar($template_var);
+                }
             }
 
             $this->_uploaded_file_name = $this->getUploadedFileName("template_file");

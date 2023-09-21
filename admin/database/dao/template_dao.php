@@ -125,7 +125,7 @@
             return $template_vars;
         }
 
-        public function storeTemplateVar(Template $template, string $name, string $value = ""): TemplateVar {
+        public function storeTemplateVar(Template $template, string $name, ?string $value = ""): TemplateVar {
             $new_template_var = new TemplateVar();
             $new_template_var->setName($name);
             $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_vars (`name`, `value`, template_id) VALUES (?, ?, ?)");
