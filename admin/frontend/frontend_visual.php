@@ -140,6 +140,9 @@
         }
 
         protected function getPageUrl(Page $page, bool $full = false): string {
+            if ($page->isHomepage()) {
+                return "";
+            }
             $url = $full ? $this->getBaseUrl() : "";
             $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
             if (!$friendly_url) {
@@ -161,8 +164,7 @@
         }
 
         protected function getBaseUrl(): string {
-            $base_url = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
-            $base_url .= '://';
+            $base_url = 'https://';
             $base_url .= str_replace('www.', '', $_SERVER['HTTP_HOST']);
             return $base_url;
         }

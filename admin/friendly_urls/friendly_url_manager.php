@@ -139,7 +139,10 @@
             if (file_exists($htaccess_file_path)) return;
             $handle = fopen($htaccess_file_path, 'w');
             fclose($handle);
-            file_put_contents($htaccess_file_path, "RewriteEngine on\n" .
+            file_put_contents($htaccess_file_path, "RewriteEngine on\n\n" .
+                                                   "RewriteCond %{HTTP_HOST} !=localhost\n" .  
+                                                   "RewriteCond %{HTTPS} !=on\n" .
+                                                   "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
                                                    "RewriteCond %{REQUEST_URI} !^/index.php\n" .
                                                    "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
                                                    "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
