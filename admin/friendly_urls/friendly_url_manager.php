@@ -5,6 +5,7 @@
     require_once CMS_ROOT . 'database/dao/settings_dao.php';
     require_once CMS_ROOT . 'database/dao/page_dao.php';
     require_once CMS_ROOT . 'database/dao/article_dao.php';
+    require_once CMS_ROOT . 'friendly_urls/url_match.php';
 
     class FriendlyUrlManager {
 
@@ -39,10 +40,12 @@
             $this->insertOrUpateFriendlyUrl($url, $article);
         }
 
-        public function getPageFromUrl(string $url): ?Page {
+        public function getPageFromUrl(string $url): UrlMatch {
             $url = UrlHelper::removeQueryStringFrom($url);
             $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+            
+            $matched_url = $url;
             if (is_null($page)) {
                 $url_parts = UrlHelper::splitIntoParts($url);
                 for ($i = 0; $i < count($url_parts); $i++) {
@@ -51,27 +54,30 @@
                     $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
                     $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
                     if ($page) {
+                        $matched_url = $page_part_of_url;
                         break;
                     }
                 }
             }
-            return $page;
+            return new UrlMatch($page, $matched_url);
         }
 
-        public function getArticleFromUrl(string $url): ?Article {
+        public function getArticleFromUrl(string $url): UrlMatch {
             $url_parts = UrlHelper::splitIntoParts($url);
             $article = null;
 
+            $matched_url = $url;
             for ($i = 0; $i < count($url_parts); $i++) {
                 $sub_array = array_slice($url_parts, $i + 1, count($url_parts));
                 $article_part_of_url = '/' . implode('/', $sub_array);
                 $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($article_part_of_url);
                 $article = $this->_article_dao->getArticleByElementHolderId($element_holder_id);
                 if ($article) {
+                    $matched_url = $article_part_of_url;
                     break;
                 }
             }
-            return $article;
+            return new UrlMatch($article, $matched_url);
         }
 
         public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {

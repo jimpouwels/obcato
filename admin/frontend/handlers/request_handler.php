@@ -42,15 +42,17 @@
             } else if ($this->isImageRequest()) {
                 $this->loadImage();
             } else {
-                $page = $this->getPageFromRequest();
-                $article = $this->getArticleFromRequest();
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $this->_form_request_handler->handlePost($page, $article);
-                }
-                if ($page) {
-                    $this->renderPage($page, $article);
-                } else if ($_SERVER['REQUEST_URI'] == "/") {
+                $url_match_page = $this->getPageFromRequest();
+                $url_match_article = $this->getArticleFromRequest();
+                if ($_SERVER['REQUEST_URI'] == "/") {
                     $this->renderHomepage();
+                } else if (strlen($url_match_page->getUrl()) < strlen($_SERVER['REQUEST_URI']) && !$url_match_article->getElementHolder()) {
+                    $this->render404Page();
+                } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $this->_form_request_handler->handlePost($url_match_page->getElementHolder(), $url_match_article->getElementHolder());
+                }
+                if ($url_match_page->getElementHolder()) {
+                    $this->renderPage($url_match_page->getElementHolder(), $url_match_article->getElementHolder());
                 } else {
                     $this->render404Page();
                 }
@@ -90,21 +92,21 @@
             }
         }
 
-        private function getPageFromRequest(): ?Page {
-            $page = $this->_friendly_url_manager->getPageFromUrl($_SERVER['REQUEST_URI']);
-            if ($page == null && isset($_GET['id'])) {
-                return $this->_page_dao->getPage($_GET['id']);
+        private function getPageFromRequest(): UrlMatch {
+            $url_match = $this->_friendly_url_manager->getPageFromUrl($_SERVER['REQUEST_URI']);
+            if (!$url_match->getElementHolder() && isset($_GET['id'])) {
+                return new UrlMatch($this->_page_dao->getPage($_GET['id']), "");
             } else {
-                return $page;
+                return $url_match;
             }
         }
 
-        private function getArticleFromRequest(): ?Article {
-            $article = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
-            if ($article == null && isset($_GET['articleid'])) {
-                return $this->_article_dao->getArticle($_GET['articleid']);
+        private function getArticleFromRequest(): UrlMatch {
+            $url_match = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
+            if (!$url_match->getElementHolder() && isset($_GET['articleid'])) {
+                return new UrlMatch($this->_article_dao->getArticle($_GET['articleid']), "");
             } else {
-                return $article;
+                return $url_match;
             }
         }
 
