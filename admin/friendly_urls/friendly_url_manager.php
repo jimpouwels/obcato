@@ -40,7 +40,26 @@
             $this->insertOrUpateFriendlyUrl($url, $article);
         }
 
-        public function getPageFromUrl(string $url): UrlMatch {
+        public function matchUrl(string $url): ?UrlMatch {
+            if (str_ends_with($url, '/')) {
+                $url = rtrim($url, "/");
+            }
+            $url_match = new UrlMatch();
+            $this->getPageFromUrl($url, $url_match);
+
+            if (!$url_match->getPage()) {
+                return null;
+            }
+            if (strlen($url_match->getPageUrl()) < strlen($url)) {
+                $this->getArticleFromUrl($url, $url_match);
+                if (!$url_match->getArticle()) {
+                    return null;
+                }
+            }
+            return $url_match;
+        }
+
+        private function getPageFromUrl(string $url, UrlMatch $url_match): void {
             $url = UrlHelper::removeQueryStringFrom($url);
             $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
             $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
@@ -59,10 +78,10 @@
                     }
                 }
             }
-            return new UrlMatch($page, $matched_url);
+            $url_match->setPage($page, $matched_url);
         }
 
-        public function getArticleFromUrl(string $url): UrlMatch {
+        private function getArticleFromUrl(string $url, UrlMatch $url_match): void {
             $url_parts = UrlHelper::splitIntoParts($url);
             $article = null;
 
@@ -77,7 +96,7 @@
                     break;
                 }
             }
-            return new UrlMatch($article, $matched_url);
+            $url_match->setArticle($article, $matched_url);
         }
 
         public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {

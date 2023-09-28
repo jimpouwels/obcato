@@ -42,19 +42,19 @@
             } else if ($this->isImageRequest()) {
                 $this->loadImage();
             } else {
-                $url_match_page = $this->getPageFromRequest();
-                $url_match_article = $this->getArticleFromRequest();
-                if ($_SERVER['REQUEST_URI'] == "/") {
+                $url = $_SERVER['REQUEST_URI'];
+                $url_match = $this->_friendly_url_manager->matchUrl($url);
+                if ($url == "/") {
                     $this->renderHomepage();
-                } else if (strlen($url_match_page->getUrl()) < strlen($_SERVER['REQUEST_URI']) && !$url_match_article->getElementHolder()) {
-                    $this->render404Page();
-                } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $this->_form_request_handler->handlePost($url_match_page->getElementHolder(), $url_match_article->getElementHolder());
-                }
-                if ($url_match_page->getElementHolder()) {
-                    $this->renderPage($url_match_page->getElementHolder(), $url_match_article->getElementHolder());
                 } else {
-                    $this->render404Page();
+                    if (!$url_match) {
+                        $this->render404Page();
+                    } else {
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $this->_form_request_handler->handlePost($url_match->getPage(), $url_match->getArticle());
+                        }
+                        $this->renderPage($url_match->getPage(), $url_match->getArticle());
+                    }
                 }
             }
         }
@@ -89,24 +89,6 @@
                     header("Content-Type: image/" . $image->getExtension());
                 }
                 readfile(UPLOAD_DIR . "/" . $image->getFileName());
-            }
-        }
-
-        private function getPageFromRequest(): UrlMatch {
-            $url_match = $this->_friendly_url_manager->getPageFromUrl($_SERVER['REQUEST_URI']);
-            if (!$url_match->getElementHolder() && isset($_GET['id'])) {
-                return new UrlMatch($this->_page_dao->getPage($_GET['id']), "");
-            } else {
-                return $url_match;
-            }
-        }
-
-        private function getArticleFromRequest(): UrlMatch {
-            $url_match = $this->_friendly_url_manager->getArticleFromUrl($_SERVER['REQUEST_URI']);
-            if (!$url_match->getElementHolder() && isset($_GET['articleid'])) {
-                return new UrlMatch($this->_article_dao->getArticle($_GET['articleid']), "");
-            } else {
-                return $url_match;
             }
         }
 
