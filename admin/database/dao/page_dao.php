@@ -43,9 +43,12 @@
             return $pages;
         }
 
-        public function getPage(int $id): ?Page {
+        public function getPage(?int $id): ?Page {
+            if (!$id) {
+                return null;
+            }
             $statement = $this->_mysql_connector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p,
-                                                                    element_holders e WHERE e.id = ? AND e.id = p.element_holder_id");
+            element_holders e WHERE e.id = ? AND e.id = p.element_holder_id");
             $statement->bind_param("i", $id);
             $result = $this->_mysql_connector->executeStatement($statement);
             while ($row = $result->fetch_assoc()) {

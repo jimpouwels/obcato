@@ -3,14 +3,17 @@
     defined("_ACCESS") or die;
 
     require_once CMS_ROOT . "core/form/form.php";
+    require_once CMS_ROOT . "database/dao/page_dao.php";
 
     class SettingsForm extends Form {
 
         private Settings $_settings;
+        private PageDao $_page_dao;
         private int $_homepage_id;
 
         public function __construct(Settings $settings) {
             $this->_settings = $settings;
+            $this->_page_dao = PageDao::getInstance();
         }
 
         public function loadFields(): void {
@@ -27,6 +30,11 @@
             $this->_settings->setUploadDir($this->preserveBackSlashes($this->getMandatoryFieldValue("upload_dir", "Upload directory is verplicht")));
             $this->_settings->setComponentDir($this->preserveBackSlashes($this->getMandatoryFieldValue("component_dir", "Component directory is verplicht")));
             $this->_settings->setBackendTemplateDir($this->preserveBackSlashes($this->getMandatoryFieldValue("backend_template_dir", "Template Engine directory is verplicht")));
+
+            $selected_404_page_id = $this->getFieldValue("404_page_id");
+            if ($selected_404_page_id) {
+                $this->_settings->set404Page($this->_page_dao->getPage(intval($selected_404_page_id)));
+            }
             $this->_homepage_id = intval($this->getMandatoryFieldValue("homepage_page_id", "De website heeft een homepage nodig"));
 
             if ($this->hasErrors()) {

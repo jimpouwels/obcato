@@ -50,7 +50,7 @@
                 if ($page) {
                     $this->renderPage($page, $article);
                 } else {
-                    $this->renderHomepage();
+                    $this->render404Page();
                 }
             }
         }
@@ -58,6 +58,13 @@
         private function renderHomepage(): void {
             $homePage = $this->_settings_dao->getSettings()->getHomepage();
             $this->renderPage($homePage, null);
+        }
+
+        private function render404Page(): void {
+            $page_404 = $this->_settings_dao->getSettings()->get404Page();
+            http_response_code(404);
+            $this->renderPage($page_404, null);
+            exit();
         }
 
         private function renderPage(Page $page, ?Article $article): void {

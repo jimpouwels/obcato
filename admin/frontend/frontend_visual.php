@@ -139,11 +139,11 @@
             return $url;
         }
 
-        protected function getPageUrl(Page $page, bool $full = false): string {
+        protected function getPageUrl(Page $page, bool $absolute = false): string {
+            $url = $absolute ? $this->getBaseUrl() : "";
             if ($page->isHomepage()) {
-                return "";
+                return $url;
             }
-            $url = $full ? $this->getBaseUrl() : "";
             $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
             if (!$friendly_url) {
                 $url .= '/index.php?id=' . $page->getId();

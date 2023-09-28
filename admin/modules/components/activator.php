@@ -37,7 +37,7 @@
             $this->assign('content', $content->render());
         }
 
-        public function renderHeadIncludes() {
+        public function renderHeadIncludes(): string {
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 

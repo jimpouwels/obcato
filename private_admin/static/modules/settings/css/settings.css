@@ -7,7 +7,19 @@
     float: left;
 }
 
-.admin_field {
+.admin_form_field_v2 {
+    width: 100%;
+}
+
+.panel-content .admin_label_wrapper {
+    width: 30%;
+}
+
+.panel-content .admin_field_wrapper {
+    width: 70%;
+}
+
+.panel-content .admin_field_wrapper input {
     width: 450px;
 }
 

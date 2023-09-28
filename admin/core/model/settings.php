@@ -21,6 +21,7 @@
         private string $_component_dir;
         private string $_backend_template_dir;
         private string $_database_version;
+        private ?Page $_404_page = null;
 
         public function setWebsiteTitle(string $website_title): void {
             $this->_website_title = $website_title;
@@ -149,6 +150,21 @@
             return $homepage;
         }
 
+        public function get404PageId(): ?int {
+            if ($this->_404_page) {
+                return $this->_404_page->getId();
+            }
+            return null;
+        }
+
+        public function get404Page(): ?Page {
+            return $this->_404_page;
+        }
+
+        public function set404Page(?Page $page_404): void {
+            $this->_404_page = $page_404;
+        }
+
         public static function find(): Settings {
             $mysql_database = MysqlConnector::getInstance();
             $result = $mysql_database->executeQuery("SELECT * FROM settings");
@@ -180,6 +196,7 @@
             $this->setComponentDir($row['component_dir']);
             $this->setDatabaseVersion($row['database_version']);
             $this->setBackendTemplateDir($row['backend_template_dir']);
+            $this->set404Page(PageDao::getInstance()->getPage($row['404_page_id']));
         }
     }
 
