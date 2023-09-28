@@ -140,8 +140,9 @@
         }
 
         protected function getPageUrl(Page $page, bool $absolute = false): string {
+            $url = $absolute ? $this->getBaseUrl() : "";
             if ($page->isHomepage()) {
-                return $absolute ? $this->getBaseUrl() : "/";
+                return "${url}" . ($absolute ? "" : "/");
             }
             $url = $absolute ? $this->getBaseUrl() : "";
             $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
