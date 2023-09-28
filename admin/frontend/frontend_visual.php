@@ -121,12 +121,12 @@
             return $this->_template_engine->createChildData($data);
         }
 
-        protected function getArticleUrl(Article $article, bool $full = false): string {
+        protected function getArticleUrl(Article $article, bool $absolute = false): string {
             $target_page = $article->getTargetPage();
             if (is_null($target_page)) {
                 $target_page = $this->_page;
             }
-            $url = $full ? $this->getBaseUrl() : "";
+            $url = $absolute ? $this->getBaseUrl() : "";
             if ($target_page) {
                 $url .= $this->getPageUrl($target_page);
             }
@@ -140,10 +140,10 @@
         }
 
         protected function getPageUrl(Page $page, bool $absolute = false): string {
-            $url = $absolute ? $this->getBaseUrl() : "";
             if ($page->isHomepage()) {
-                return $url;
+                return $absolute ? $this->getBaseUrl() : "/";
             }
+            $url = $absolute ? $this->getBaseUrl() : "";
             $friendly_url = $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
             if (!$friendly_url) {
                 $url .= '/index.php?id=' . $page->getId();
@@ -154,13 +154,11 @@
         }
 
         protected function getCanonicalUrl(): string {
-            $absolute_url = $this->getBaseUrl();
             if ($this->getArticle()) {
-                $absolute_url .= $this->getArticleUrl($this->getArticle());
+                return $this->getArticleUrl($this->getArticle(), true);
             } else {
-                $absolute_url .= $this->getPageUrl($this->getPage());
+                return $this->getPageUrl($this->getPage(), true);
             }
-            return $absolute_url;
         }
 
         protected function getBaseUrl(): string {

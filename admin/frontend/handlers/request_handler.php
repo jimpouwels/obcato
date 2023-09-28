@@ -49,6 +49,8 @@
                 }
                 if ($page) {
                     $this->renderPage($page, $article);
+                } else if ($_SERVER['REQUEST_URI'] == "/") {
+                    $this->renderHomepage();
                 } else {
                     $this->render404Page();
                 }
