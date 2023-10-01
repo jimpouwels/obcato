@@ -7,7 +7,7 @@
     
     class BlockTab extends Visual {
     
-        private ?Block $_current_block = null;
+        private ?Block $_current_block;
     
         public function __construct(?Block $current_block) {
             parent::__construct();

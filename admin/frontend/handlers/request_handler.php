@@ -19,16 +19,12 @@
     class RequestHandler {
 
         private FormRequestHandler $_form_request_handler;
-        private PageDao $_page_dao;
-        private ArticleDao $_article_dao;
         private ImageDao $_image_dao;
         private SettingsDao $_settings_dao;
         private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             $this->_settings_dao = SettingsDao::getInstance();
-            $this->_page_dao = PageDao::getInstance();
-            $this->_article_dao = ArticleDao::getInstance();
             $this->_image_dao = ImageDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
             $this->_form_request_handler = FormRequestHandler::getInstance();

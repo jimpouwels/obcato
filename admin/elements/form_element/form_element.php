@@ -67,15 +67,14 @@
             return "form_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            if (isset($row["webform_id"])) {
-                $element->setWebForm($this->_webform_dao->getWebForm($row['webform_id']));
+        public function constructMetaData(array $record, Element $element): void {
+            $element->setTitle($record['title']);
+            if (isset($record["webform_id"])) {
+                $element->setWebForm($this->_webform_dao->getWebForm($record['webform_id']));
             }
         }
 
         public function update(Element $element): void {
-            $statement = null;
             $element_id = $element->getId();
             $webform_id = null;
             if ($element->getWebForm()) {
@@ -89,7 +88,6 @@
         }
 
         public function insert(Element $element): void {
-            $statement = null;
             $element_id = $element->getId();
             $webform_id = null;
             if ($element->getWebForm()) {

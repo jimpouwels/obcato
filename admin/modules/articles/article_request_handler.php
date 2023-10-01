@@ -12,14 +12,12 @@
         private static string $ARTICLE_ID_POST = "element_holder_id";
         private static string $ARTICLE_ID_GET = "article";
         private ?Article $_current_article = null;
-        private ElementDao $_element_dao;
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             parent::__construct();
             $this->_article_dao = ArticleDao::getInstance();
-            $this->_element_dao = ElementDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 
@@ -73,9 +71,9 @@
                     $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($child_article);
                 }
                 $this->sendSuccessMessage("Artikel succesvol opgeslagen");
-            } catch (FormException $e) {
-                $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             } catch (ElementHolderContainsErrorsException $e) {
+                $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
+            } catch (FormException $e) {
                 $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
             }
         }

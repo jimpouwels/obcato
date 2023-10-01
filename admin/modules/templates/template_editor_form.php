@@ -9,10 +9,7 @@
     
         private Template $_template;
         private TemplateDao $_template_dao;
-        private ?string $_path_to_uploaded_file = null;
-        private bool $_is_file_uploaded;
-        private ?string $_uploaded_file_name = null;
-    
+
         public function __construct(Template $template) {
             $this->_template = $template;
             $this->_template_dao = TemplateDao::getInstance();
@@ -41,9 +38,6 @@
                 }
             }
 
-            $this->_uploaded_file_name = $this->getUploadedFileName("template_file");
-            $this->_path_to_uploaded_file = $this->getUploadFilePath("template_file");
-            $this->_is_file_uploaded = $this->getUploadedFileName("template_file") != "";
             if ($this->hasErrors()) {
                 throw new FormException();
             }
@@ -52,10 +46,6 @@
                 $template_var->setValue($this->getFieldValue("template_var_{$template_var_id}_field"));
                 $this->_template_dao->updateTemplateVar($template_var);
             }
-        }
-        
-        public function isFileUploaded(): bool {
-            return $this->_is_file_uploaded;
         }
         
     }

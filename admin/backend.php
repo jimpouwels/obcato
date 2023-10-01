@@ -8,13 +8,11 @@
 
     class Backend {
     
-        private string $_identifier;
         private BackendRequestHandler $_backend_request_handler;
         private ?Module $_current_module = null;
         private ?ModuleVisual $_module_visual = null;
     
-        public function __construct($identifier) {
-            $this->_identifier = $identifier;
+        public function __construct() {
             $this->_backend_request_handler = new BackendRequestHandler();
         }
         

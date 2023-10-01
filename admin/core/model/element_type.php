@@ -54,23 +54,23 @@
             return $dao->getScope($this->_scope_id);
         }
         
-        public function getScopeId() {
+        public function getScopeId(): int {
             return $this->_scope_id;
         }
         
-        public function setScopeId($scope_id) {
+        public function setScopeId($scope_id): void {
             $this->_scope_id = $scope_id;
         }
         
-        public function getSystemDefault() {
+        public function getSystemDefault(): bool {
             return $this->_system_default;
         }
         
-        public function setSystemDefault($system_default) {
+        public function setSystemDefault($system_default): void {
             $this->_system_default = $system_default;
         }
         
-        public static function constructFromRecord($row) {
+        public static function constructFromRecord($row): ElementType {
             $element_type = new ElementType();
             $element_type->initFromDb($row);
             return $element_type;

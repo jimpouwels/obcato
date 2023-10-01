@@ -77,11 +77,11 @@
             return "iframe_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            $element->setUrl($row['url']);
-            $element->setWidth($row['width']);
-            $element->setHeight($row['height']);
+        public function constructMetaData(array $record, $element): void {
+            $element->setTitle($record['title']);
+            $element->setUrl($record['url']);
+            $element->setWidth($record['width']);
+            $element->setHeight($record['height']);
         }
 
         public function update(Element $element): void {

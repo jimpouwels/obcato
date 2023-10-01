@@ -10,7 +10,6 @@
     class TemplateFilesTab extends Visual {
 
         private ?TemplateFile $_current_template_file;
-        private array $_new_var_defs;
         private TemplateFilesRequestHandler $_request_handler;
 
         public function __construct(TemplateFilesRequestHandler $request_handler) {

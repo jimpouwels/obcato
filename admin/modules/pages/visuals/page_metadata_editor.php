@@ -42,7 +42,7 @@
             $this->assignElementHolderFormIds($data);
         }
 
-        private function assignElementHolderFormIds($data) {
+        private function assignElementHolderFormIds($data): void {
             $data->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
             $data->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
             $data->assign("action_form_id", ACTION_FORM_ID);

@@ -17,7 +17,6 @@
         private array $_handler_properties = array();
         private ?string $_captcha_secret = null;
         private WebFormDao $_webform_dao;
-        private array $_form_field_forms = array();
 
         public function __construct(WebForm $webform) {
             $this->_webform = $webform;
@@ -42,7 +41,6 @@
             }
             $this->loadHandlerProperties();
 
-            
             if ($this->_webform->getIncludeCaptcha()) {
                 $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
                 $this->_captcha_secret = $this->getMandatoryFieldValue('captcha_secret', 'webforms_editor_captcha_secret_error_message');

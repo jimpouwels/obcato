@@ -5,7 +5,6 @@
 
     class UserList extends Panel {
 
-        private static string $USER_LIST_TEMPLATE = "modules/authorization/user_list.tpl";
         private AuthorizationDao $_authorization_dao;
         private ?User $_current_user = null;
 

@@ -9,8 +9,8 @@
     
         private string $_target_page_to_add;
         private string $_new_default_target_page;
-        private $_target_pages_to_delete;
-        private $_article_dao;
+        private array $_target_pages_to_delete;
+        private ArticleDao $_article_dao;
     
         public function __construct() {
             $this->_article_dao = ArticleDao::getInstance();

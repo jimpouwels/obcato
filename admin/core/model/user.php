@@ -74,8 +74,7 @@
             if (!is_null($this->getPrefix()) && $this->getPrefix() != '') {
                 $full_name = $full_name . ' ' . $this->getPrefix();
             }
-            $full_name = $full_name . ' ' . $this->getLastName();
-            return $full_name;
+            return $full_name . ' ' . $this->getLastName();
         }
         
         public function isLoggedInUser(): bool {

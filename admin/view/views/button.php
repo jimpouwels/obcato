@@ -3,9 +3,9 @@
     
     class Button extends Visual {
         
-        private ?string $_id = null;
+        private ?string $_id;
         private string $_label_resource_identifier;
-        private ?string $_onclick = null;
+        private ?string $_onclick;
         
         public function __construct(?string $id, string $label_resource_identifier, ?string $onclick) {
             parent::__construct();

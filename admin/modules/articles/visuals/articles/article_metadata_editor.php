@@ -9,8 +9,6 @@
 
     class ArticleMetadataEditor extends Panel {
 
-        private static $ARTICLE_METADATA_TEMPLATE = "articles/articles/metadata.tpl";
-
         private Article $_current_article;
         private ArticleDao $_article_dao;
         private WebFormDao $_webform_dao;
@@ -44,7 +42,6 @@
             $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");
             $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
             
-            $parent_article = null;
             if (!is_null($this->_current_article->getParentArticleId())) {
                 $parent_article = $this->_article_dao->getArticle($this->_current_article->getParentArticleId());
                 $data->assign('parent_article', $this->renderParentArticle($parent_article));
@@ -101,7 +98,7 @@
 
             $all_target_pages = $this->_article_dao->getTargetPages();
             foreach ($all_target_pages as $article_target_page) {
-                array_push($target_page_options, array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId()));
+                $target_page_options[] = array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId());
             }
             return $target_page_options;
         }
@@ -111,7 +108,7 @@
 
             $all_webforms = $this->_webform_dao->getAllWebForms();
             foreach ($all_webforms as $webform) {
-                array_push($webforms_options, array("name" => $webform->getTitle(), "value" => $webform->getId()));
+                $webforms_options[] = array("name" => $webform->getTitle(), "value" => $webform->getId());
             }
             return $webforms_options;
         }

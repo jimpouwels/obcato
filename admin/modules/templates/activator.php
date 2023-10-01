@@ -14,7 +14,6 @@
         private static string $HEAD_INCLUDES_TEMPLATE = "templates/head_includes.tpl";
 
         private ?Template $_current_template;
-        private ?TemplateFile $_current_template_file;
         private ?Scope $_current_scope;
         private Module $_template_module;
         private TemplateEditorRequestHandler $_template_editor_request_handler;
@@ -34,7 +33,7 @@
         public function load(): void {
             if ($this->getCurrentTabId() == self::$TEMPLATES_TAB) {
                 $content = new TemplateEditorTab($this->_current_template, $this->_current_scope);
-            } else if ($this->getCurrentTabId() == self::$TEMPLATE_FILES_TAB) {
+            } else {
                 $content = new TemplateFilesTab($this->_template_files_request_handler);
             } 
             $this->assign("content", $content->render());

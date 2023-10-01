@@ -15,7 +15,7 @@
         private ElementHolderDao $_element_holder_dao;
         private MysqlConnector $_mysql_connector;
 
-        public static $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id, 
+        public static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id, 
                       e.created_at, e.created_by, e.type, b.position_id";
 
         private static ?BlockDao $instance = null;

@@ -6,12 +6,10 @@
 
     class LogoutModuleVisual extends ModuleVisual {
     
-        private Module $_module;
         private LogoutRequestHandler $_logout_request_handler;
     
         public function __construct($module) {
             parent::__construct($module);
-            $this->_module = $module;
             $this->_logout_request_handler = new LogoutRequestHandler();
         }
 

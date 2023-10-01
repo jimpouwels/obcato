@@ -122,16 +122,6 @@
             return $article_data;
         }
 
-        private function getImageData($image): ?array {
-            $image_data = null;
-            if (!is_null($image)) {
-                $image_data = array();
-                $image_data["title"] = $image->getTitle();
-                $image_data["url"] = $this->getImageUrl($image);
-            }
-            return $image_data;
-        }
-
         private function renderElementHolderContent(ElementHolder $element_holder) {
             $elements_content = array();
             foreach ($element_holder->getElements() as $element) {
@@ -147,7 +137,6 @@
 
         private function renderCrumbPath(): array {
             $crumb_path_items = array();
-            $parents = null;
             $parent_article = null;
             if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
                 $parent_article = $this->_article_dao->getArticle($this->getArticle()->getParentArticleId());

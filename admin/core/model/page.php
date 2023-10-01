@@ -8,10 +8,7 @@
     class Page extends ElementHolder {
 
         const ElementHolderType = "ELEMENT_HOLDER_PAGE";
-
-        private static string $TABLE_NAME = "pages";
         private static int $SCOPE = 5;
-        
         private PageDao $_page_dao;
         private ?string $_description = null;
         private string $_navigation_title;
@@ -68,9 +65,7 @@
         }
         
         public function setParent(Page $parent): void {
-            if (!is_null($parent)) {
-                $this->_parent_id = $parent->getId();
-            }
+            $this->_parent_id = $parent->getId();
         }
         
         public function getIncludeInSearchEngine(): bool {
@@ -166,10 +161,10 @@
             $this->setDescription($row['description']);
             $this->setKeywords($row['keywords']);
             $this->setNavigationTitle($row['navigation_title']);
-            $this->setShowInNavigation($row['show_in_navigation'] == 1 ? true : false);
-            $this->setIncludeInSearchEngine($row['include_in_searchindex'] == 1 ? true : false);
+            $this->setShowInNavigation($row['show_in_navigation'] == 1);
+            $this->setIncludeInSearchEngine($row['include_in_searchindex'] == 1);
             $this->setFollowUp($row['follow_up']);
-            $this->setIsHomepage($row['is_homepage'] == 1 ? true : false);
+            $this->setIsHomepage($row['is_homepage'] == 1);
             parent::initFromDb($row);
         }
     

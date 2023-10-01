@@ -3,9 +3,6 @@
     
     class Notifications {
         
-        private function __construct() {
-        }
-        
         public static function setSuccessMessage(string $message): void {
             if (!self::getMessage()) {
                 $_SESSION['success'] = true;
@@ -21,7 +18,7 @@
         }
         
         public static function getMessage(): ?string {
-            if (isset($_SESSION['cms_notification']) && !is_null($_SESSION['cms_notification'])) {
+            if (isset($_SESSION['cms_notification'])) {
                 return $_SESSION['cms_notification'];
             }
             return null;
@@ -29,17 +26,17 @@
         
         public static function getSuccess(): ?string {
             $success = null;
-            if (isset($_SESSION['success']) && !is_null($_SESSION['success'])) {
+            if (isset($_SESSION['success'])) {
                 $success = $_SESSION['success'];
             }
             return $success;
         }
         
         public static function clearMessage(): void {
-            if (isset($_SESSION['cms_notification']) && !is_null($_SESSION['cms_notification'])) {
+            if (isset($_SESSION['cms_notification'])) {
                 unset($_SESSION['cms_notification']);
             }
-            if (isset($_SESSION['success']) && !is_null($_SESSION['success'])) {
+            if (isset($_SESSION['success'])) {
                 unset($_SESSION['success']);
             }
         }

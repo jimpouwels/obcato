@@ -31,10 +31,7 @@
             $result = $mysql_database->executeQuery($query);
             $modules = array();
             while ($row = $result->fetch_assoc()) {
-                $module = Module::constructFromRecord($row);
-                if (!is_null($module)) {
-                    array_push($modules, $module);
-                }
+                $modules[] = Module::constructFromRecord($row);
             }
             
             return $modules;

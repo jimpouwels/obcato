@@ -16,7 +16,7 @@
             return "system/form_textfield.tpl";
         }
 
-        public function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data): void {
             $data->assign("is_visible", $this->_is_visible);
         }
 

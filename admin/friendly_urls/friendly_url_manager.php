@@ -151,13 +151,6 @@
             return $value;
         }
 
-        private function replaceChars(string $value, string $new_char, array ...$old_chars): string {
-            foreach ($old_chars as $old_char) {
-                $value = str_replace($old_char, $new_char, $value);
-            }
-            return $value;
-        }
-
         private function writeHtaccessFileIfNotExists(): void {
             $public_root_dir = $this->_settings_dao->getSettings()->getPublicRootDir();
             $htaccess_file_path = $public_root_dir . '/.htaccess';

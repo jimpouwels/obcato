@@ -5,7 +5,6 @@
 
     class ReadonlyTextField extends FormField {
 
-
         public function __construct(string $name, string $label, ?string $value, ?string $class_name) {
             parent::__construct($name, $value, $label, false, false, $class_name);
         }

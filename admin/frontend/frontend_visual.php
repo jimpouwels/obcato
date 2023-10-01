@@ -18,8 +18,8 @@
         private ArticleDao $_article_dao;
         private FriendlyUrlManager $_friendly_url_manager;
         private TemplateDao $_template_dao;
-        private ?Page $_page = null;
-        private ?Article $_article = null;
+        private ?Page $_page;
+        private ?Article $_article;
 
         public function __construct(?Page $page, ?Article $article) {
             $this->_link_dao = LinkDao::getInstance();
@@ -55,10 +55,6 @@
             $this->loadVisual($parent_data);
         }
 
-        public function getTemplateData(): Smarty_Internal_Data {
-            return $this->_template_data;
-        }
-        
         abstract function loadVisual(?array &$data): void;
 
         abstract function getPresentable(): ?Presentable;
@@ -69,16 +65,16 @@
             return $this->_template_engine;
         }
 
-        protected function assign(string $key, mixed $value) {
+        protected function assign(string $key, mixed $value): void {
             $this->_template_data->assign($key, $value);
+        }
+
+        protected function assignGlobal(string $key, mixed $value): void {
+            $this->_template_engine->assign($key, $value);
         }
 
         protected function fetch(string $template_filename): string {
             return $this->_template_engine->fetch($template_filename, $this->_template_data);
-        }
-
-        protected function assignGlobal(string $key, mixed $value) {
-            $this->_template_engine->assign($key, $value);
         }
 
         protected function toHtml(?string $value, ElementHolder $element_holder): string {
@@ -115,10 +111,6 @@
             } else {
                 return $this->_template_engine->createChildData();
             }
-        }
-
-        protected function createChildDataAndInclude(Smarty_Internal_Data $data): Smarty_Internal_Data {
-            return $this->_template_engine->createChildData($data);
         }
 
         protected function getArticleUrl(Article $article, bool $absolute = false): string {
@@ -195,8 +187,7 @@
         private function replaceLinkCodeTags(string $value, Link $link, string $url): string {
             $link_class = $link->getTargetElementHolderId() ? "internal" : "external";
             $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $link->getTarget(), $url, $link_class), $value);
-            $value = str_replace("[/LINK]", "</a>", $value);
-            return $value;
+            return str_replace("[/LINK]", "</a>", $value);
         }
 
         private function containsLink(string $value, Link $link): bool {

@@ -23,7 +23,7 @@
             return self::$_instance;
         }
 
-        public function assign(string $key, mixed $value) {
+        public function assign(string $key, mixed $value): void {
             $this->_smarty->assign($key, $value);
         }
 

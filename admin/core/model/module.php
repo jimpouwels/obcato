@@ -81,8 +81,7 @@
         
         public function getModuleGroup(): ModuleGroup {
             $module_dao = ModuleDao::getInstance();
-            $module_group = $module_dao->getModuleGroup($this->_module_group_id);
-            return $module_group;
+            return $module_dao->getModuleGroup($this->_module_group_id);
         }
         
         public static function constructFromRecord(array $row): Module {

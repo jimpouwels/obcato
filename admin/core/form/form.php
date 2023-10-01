@@ -6,11 +6,9 @@
     
     abstract class Form {
 
-        private int $_error_count = 0;
-
         public abstract function loadFields(): void;
         
-        public function getMandatoryFieldValue(string $field_name, string $error_message_resource_identifier) {
+        public function getMandatoryFieldValue(string $field_name, string $error_message_resource_identifier): string {
             $value = $this->getFieldValue($field_name);
             if ($this->isEmpty($value)) {
                 $this->raiseError($field_name, $error_message_resource_identifier);    
@@ -129,25 +127,20 @@
             }
         }
         
-        protected function hasErrors() {
-            return $this->_error_count > 0;
+        protected function hasErrors(): bool {
+            return Session::getErrorCount() > 0;
         }
         
-        protected function raiseError(string $error_field, string $error_message_resource_identifier) {
+        protected function raiseError(string $error_field, string $error_message_resource_identifier): void {
             Session::addFieldError($error_field, $error_message_resource_identifier);
-            $this->_error_count++;
         }
         
         protected function isEmpty(?string $value): bool {
-            return is_null($value) || empty($value) || $value == "";
+            return empty($value) || $value == "";
         }
 
         protected function getError(string $field_name): string {
             return Session::getError($field_name);
-        }
-
-        private function hasError(string $field_name): bool {
-            return Session::hasError($field_name);
         }
 
         protected function getTextResource(string $identifier): string {

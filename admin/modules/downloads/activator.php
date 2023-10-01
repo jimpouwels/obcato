@@ -12,7 +12,6 @@
         private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
         private ?Download $_current_download;
         private DownloadRequestHandler $_download_request_handler;
-        private Module $_module;
 
         public function __construct(Module $module) {
             parent::__construct($module);
@@ -47,7 +46,7 @@
             return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
         }
 
-        public function getRequestHandlers() {
+        public function getRequestHandlers(): array {
             $request_handlers = array();
             $request_handlers[] = $this->_download_request_handler;
             return $request_handlers;
@@ -57,17 +56,17 @@
             $this->_current_download = $this->_download_request_handler->getCurrentDownload();
         }
 
-        private function renderSearchBox() {
+        private function renderSearchBox(): string {
             $search_box = new SearchBoxVisual($this->_download_request_handler);
             return $search_box->render();
         }
 
-        private function renderList() {
+        private function renderList(): string {
             $list = new ListVisual($this->_download_request_handler);
             return $list->render();
         }
 
-        private function renderEditor() {
+        private function renderEditor(): string {
             $editor = new EditorVisual($this->_current_download);
             return $editor->render();
         }

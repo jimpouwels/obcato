@@ -7,7 +7,6 @@
 
     abstract class Element extends Presentable {
 
-        private int $_index;
         private ?string $_title = null;
         private int $_element_holder_id;
         private int $_order_nr;

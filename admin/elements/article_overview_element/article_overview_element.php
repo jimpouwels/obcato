@@ -156,28 +156,28 @@
             return "article_overview_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            $element->setShowFrom($row['show_from']);
-            $element->setShowTo($row['show_to']);
-            $element->setOrderBy($row['order_by']);
-            $element->setOrderType($row['order_type']);
-            $element->setNumberOfResults($row['number_of_results']);
+        public function constructMetaData(array $record, $element): void {
+            $element->setTitle($record['title']);
+            $element->setShowFrom($record['show_from']);
+            $element->setShowTo($record['show_to']);
+            $element->setOrderBy($record['order_by']);
+            $element->setOrderType($record['order_type']);
+            $element->setNumberOfResults($record['number_of_results']);
             $element->setTerms($this->getTerms());
         }
 
         public function update(Element $element): void {            
             $query = "UPDATE article_overview_elements_metadata SET title = '" . $element->getTitle() . "', ";
-            if (is_null($element->getShowFrom()) || $element->getShowFrom() == '') {
+            if ($element->getShowFrom() == '') {
                 $query = $query . "show_from = NULL, ";
             } else {
                 $query = $query . "show_from = '" . $element->getShowFrom() . "',";
-            } if (is_null($element->getShowTo()) || $element->getShowTo() == '') {
+            } if ($element->getShowTo() == '') {
                 $query = $query . "show_to = NULL, ";
             } else {
                 $query = $query . "show_to = '" . $element->getShowTo() . "',";
             }
-            if (is_null($element->getNumberOfResults()) || $element->getNumberOfResults() == '') {
+            if ($element->getNumberOfResults() == '') {
                 $query = $query . "number_of_results = NULL, ";
             } else {
                 $query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";

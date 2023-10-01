@@ -43,13 +43,17 @@
             }
         }
 
+        public static function getErrorCount(): int {
+            return count($_SESSION['errors']);
+        }
+
         public static function popError(string $field_name): string {
             $error = self::getError($field_name);
             unset($_SESSION['errors'][$field_name . '_error']);
             return $error;
         }
 
-        public static function getError(string $field_name): string {
+        public static function getError(string $field_name): ?string {
             if (isset($_SESSION['errors'][$field_name . '_error'])) {
                 return $_SESSION['errors'][$field_name . '_error'];
             }

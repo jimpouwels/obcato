@@ -23,7 +23,6 @@
         public function getScopes(): array {
             $query = "SELECT * FROM scopes ORDER BY identifier ASC";
             $result = $this->_mysql_connector->executeQuery($query);
-            $scope = null;
             $scopes = array();
             while ($row = $result->fetch_assoc()) {
                 $scopes[] = Scope::constructFromRecord($row);
@@ -32,7 +31,7 @@
         }
 
         public function getScope(int $id): ?Scope {
-            if (!is_null($id) && $id != "") {
+            if ($id != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE id = ?");
                 $statement->bind_param("i", $id);
                 $result = $this->_mysql_connector->executeStatement($statement);
@@ -44,7 +43,7 @@
         }
 
         public function getScopeByIdentifier(string $identifier): ?Scope {
-            if (!is_null($identifier) && $identifier != "") {
+            if ($identifier != "") {
                 $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM scopes WHERE identifier = ?");
                 $statement->bind_param("s", $identifier);
                 $result = $this->_mysql_connector->executeStatement($statement);

@@ -7,7 +7,7 @@
 
     abstract class FormField extends Visual {
         
-        private ?string $_css_class = null;
+        private ?string $_css_class;
         private string $_field_name;
         private ?string $_label_resource_identifier;
         private bool $_mandatory;
@@ -61,8 +61,7 @@
             if ($this->_linkable) {
                 $css_class_html .= 'linkable ';
             }
-            $css_class_html = trim($css_class_html);
-            return $css_class_html;
+            return trim($css_class_html);
         }
 
         public function errorClass(string $field_name): string {

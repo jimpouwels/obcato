@@ -54,7 +54,7 @@
             }
         }
         
-        private function deletePositions() {
+        private function deletePositions(): void {
             $positions = $this->_block_dao->getBlockPositions();
             foreach ($positions as $position) {
                 if (isset($_POST["position_" . $position->getId() . "_delete"]))
@@ -63,29 +63,33 @@
             $this->sendSuccessMessage($this->getTextResource("blocks_position_successfully_deleted"));
         }
         
-        private function getPositionFromGetRequest() {
-            if (isset($_GET[self::$POSITION_ID_GET]))
+        private function getPositionFromGetRequest(): ?BlockPosition {
+            if (isset($_GET[self::$POSITION_ID_GET])) {
                 return $this->getPositionFromDatabase($_GET[self::$POSITION_ID_GET]);
+            }
+            return null;
         }
         
-        private function getPositionFromPostRequest() {
-            if (isset($_POST[self::$POSITION_ID_POST]))
+        private function getPositionFromPostRequest(): ?BlockPosition {
+            if (isset($_POST[self::$POSITION_ID_POST])) {
                 return $this->getPositionFromDatabase($_POST[self::$POSITION_ID_POST]);
+            }
+            return null;
         }
         
-        private function getPositionFromDatabase($position_id) {
-                return $this->_block_dao->getBlockPosition($position_id);
+        private function getPositionFromDatabase($position_id): BlockPosition {
+            return $this->_block_dao->getBlockPosition($position_id);
         }
         
-        private function isAddPositionAction() {
+        private function isAddPositionAction(): bool {
             return isset($_POST["add_position_action"]);
         }
         
-        private function isUpdatePositionAction() {
+        private function isUpdatePositionAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "update_position";
         }
         
-        private function isDeletePositionsAction() {
+        private function isDeletePositionsAction(): bool {
             return isset($_POST["position_delete_action"]);
         }
     }

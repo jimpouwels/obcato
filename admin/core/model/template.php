@@ -7,7 +7,6 @@
 
     class Template extends Entity {
     
-        private string $_scope;
         private string $_name;
         private int $_scope_id;
         private array $_template_vars = array();
@@ -42,11 +41,6 @@
             $this->_scope_id = $scope_id;
         }
         
-        public function exists(): bool {
-            $template_dir = Settings::find()->getFrontendTemplateDir();
-            return file_exists($template_dir . "/" . $this->getFileName()) && $this->getFileName() != "";
-        }
-
         public function getTemplateVars(): array {
             return $this->_template_vars;
         }
@@ -63,15 +57,6 @@
             $this->_template_vars = array_filter($this->_template_vars, function($template_var) use($template_var_to_delete) {
                 return $template_var->getId() !== $template_var_to_delete->getId();
             }); 
-        }
-        
-        public function getCode(): string {
-            $code = "";
-            $file_path = FRONTEND_TEMPLATE_DIR . '/' . $this->getFilename();
-            if (is_file($file_path) && file_exists($file_path)) {
-                $code = file_get_contents($file_path);
-            }
-            return $code;
         }
         
         public static function constructFromRecord(array $row): Template {

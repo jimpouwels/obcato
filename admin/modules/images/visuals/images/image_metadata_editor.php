@@ -6,7 +6,6 @@
 
     class ImageMetadataEditor extends Panel {
 
-
         private Image $_current_image;
 
         public function __construct(Image $current_image) {

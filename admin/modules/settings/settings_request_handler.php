@@ -8,7 +8,7 @@
 
     class SettingsRequestHandler extends HttpRequestHandler {
     
-        private $_settings_dao;
+        private SettingsDao $_settings_dao;
         
         public function __construct() {
             $this->_settings_dao = SettingsDao::getInstance();

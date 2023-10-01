@@ -6,8 +6,8 @@
     class FormTextAreaVisual extends FormFieldVisual {
         private TemplateDao $_template_dao;
 
-        public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
-            parent::__construct($page, $article, $webform, $webform_item);
+        public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webform_field) {
+            parent::__construct($page, $article, $webform, $webform_field);
             $this->_template_dao = TemplateDao::getInstance();
         }
 

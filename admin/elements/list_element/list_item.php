@@ -7,7 +7,7 @@
 
     class ListItem extends Entity {
             
-        private ?string  $_text = null;
+        private ?string $_text = null;
         private int $_indent = 0;
         private int $_elementId;
         

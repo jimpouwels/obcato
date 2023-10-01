@@ -41,20 +41,18 @@
     class TableOfContentsElementMetadataProvider extends ElementMetadataProvider {
 
         private MysqlConnector $_mysql_connector;
-        private $_element;
 
         public function __construct(TableOfContentsElement $element) {
             parent::__construct($element);
-            $this->_element = $element;
-            $this->_mysql_connector = MysqlConnector::getInstance(); 
+            $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
         public function getTableName(): string {
             return "table_of_contents_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
+        public function constructMetaData(array $record, Element $element): void {
+            $element->setTitle($record['title']);
         }
 
         public function update(Element $element): void {

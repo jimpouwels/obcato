@@ -77,7 +77,7 @@
             return null;
         }
 
-        private function currentPageIsHomepage() {
+        private function currentPageIsHomepage(): bool {
             return !is_null($this->_current_page) && $this->_current_page->getId() == 1;
         }
 

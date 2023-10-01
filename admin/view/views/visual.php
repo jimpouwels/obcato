@@ -39,15 +39,11 @@
             }
         }
 
-        protected function getParentTemplateData(): ?Smarty_Internal_Data {
-            return $this->_parent_template_data;
-        }
-
-        protected function assign(string $key, mixed $value) {
+        protected function assign(string $key, mixed $value): void {
             $this->_template_data->assign($key, $value);
         }
 
-        protected function assignGlobal(string $key, mixed $value) {
+        protected function assignGlobal(string $key, mixed $value): void {
             $this->_template_engine->assign($key, $value);
         }
 

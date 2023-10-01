@@ -6,7 +6,6 @@
 
     class WebFormButtonVisual extends WebFormItemVisual {
 
-
         public function __construct(WebFormItem $webform_item) {
             parent::__construct($webform_item);
         }

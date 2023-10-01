@@ -7,7 +7,6 @@
     class PageForm extends Form {
     
         private Page $_page;
-        private string $_element_order;
         private array $_selected_blocks;
     
         public function __construct(Page $page) {

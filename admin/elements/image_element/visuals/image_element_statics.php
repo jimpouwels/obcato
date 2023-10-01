@@ -2,8 +2,7 @@
     defined('_ACCESS') or die;
     
     class ImageElementStatics extends Visual {
-    
-    
+
         public function __construct() {
             parent::__construct();
         }

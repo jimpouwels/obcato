@@ -79,7 +79,7 @@
         }
 
         public function getSummaryText(): string {
-            $summary_text = $this->getTitle() ? $this->getTitle() : '';
+            $summary_text = $this->getTitle() ?: '';
             $image = $this->getImage();
             if ($image) {
                 $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFileName() . ')';
@@ -101,12 +101,12 @@
             return "image_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            $element->setAlign($row['align']);
-            $element->setImageId($row['image_id']);
-            $element->setWidth($row['width']);
-            $element->setHeight($row['height']);
+        public function constructMetaData(array $record, Element $element): void {
+            $element->setTitle($record['title']);
+            $element->setAlign($record['align']);
+            $element->setImageId($record['image_id']);
+            $element->setWidth($record['width']);
+            $element->setHeight($record['height']);
         }
 
         public function update(Element $element): void {

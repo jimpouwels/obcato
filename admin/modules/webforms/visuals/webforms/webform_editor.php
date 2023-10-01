@@ -9,12 +9,10 @@
     class WebFormEditor extends Panel {
 
         private WebForm $_current_webform;
-        private WebFormDao $_webform_dao;
         private WebFormItemFactory $_webform_item_factory;
 
         public function __construct(?WebForm $current_webform) {
             parent::__construct("webforms_webform_editor_panel_title");
-            $this->_webform_dao = WebFormDao::getInstance();
             $this->_webform_item_factory = WebFormItemFactory::getInstance();
             $this->_current_webform = $current_webform;
         }

@@ -99,9 +99,9 @@
             return "photo_album_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            $element->setNumberOfResults($row['number_of_results']);
+        public function constructMetaData(array $record, $element): void {
+            $element->setTitle($record['title']);
+            $element->setNumberOfResults($record['number_of_results']);
             $element->setLabels($this->getLabels());
         }
 

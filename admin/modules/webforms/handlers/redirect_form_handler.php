@@ -9,12 +9,10 @@
     class RedirectFormHandler extends Formhandler {
 
         public static string $TYPE = 'redirect_form_handler';
-        private SettingsDao $_settings_dao;
         private PageDao $_page_dao;
 
         public function __construct() {
             parent::__construct();
-            $this->_settings_dao = SettingsDao::getInstance();
             $this->_page_dao = PageDao::getInstance();
         }
 

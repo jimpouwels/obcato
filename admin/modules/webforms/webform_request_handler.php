@@ -122,7 +122,7 @@
                     $this->_config_dao->updateCaptchaSecret($form->getCaptchaSecret());
                 }
                 $this->sendSuccessMessage($this->getTextResource("webforms_update_success_message"));
-            } catch (FormException $e) {
+            } catch (FormException) {
                 $this->sendErrorMessage($this->getTextResource("webforms_update_error_message"));
             }
         }

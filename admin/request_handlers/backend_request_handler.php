@@ -32,9 +32,7 @@
                 $this->_current_module = $this->_module_dao->getModule($module_id);
                 BlackBoard::$MODULE_ID = $module_id;
                 $module_tab_id = intval($this->getParam('module_tab_id'));
-                if (!is_null($module_tab_id)) {
-                    BlackBoard::$MODULE_TAB_ID = $module_tab_id;
-                }
+                BlackBoard::$MODULE_TAB_ID = $module_tab_id;
             }
         }
 

@@ -87,13 +87,13 @@
             return $target_title;
         }
 
-        private function renderNoLinksFoundMessage() {
+        private function renderNoLinksFoundMessage(): string {
             $message = $this->getTextResource('link_editor_no_links_found_message');
             $message = new InformationMessage($message);
             return $message->render();
         }
 
-        private function getTargetOptions() {
+        private function getTargetOptions(): array {
             $options = array();
             $options[] = array('name' => $this->getTextResource('link_editor_target_same_page'), 'value' => '_self');
             $options[] = array('name' => $this->getTextResource('link_editor_target_new_tab'), 'value' => '_blank');

@@ -15,14 +15,8 @@
         }
 
         public function loadPanelContent(Smarty_Internal_Data $data): void {
-            $new_position = true;
-            $position_id = null;
-            if (!is_null($this->_current_position)) {
-                $new_position = false;
-                $position_id = $this->_current_position->getId();
-            }
+            $position_id = $this->_current_position->getId();
             $data->assign("id", $position_id);
-            $data->assign("new_position", $new_position);
             $data->assign("name_field", $this->renderNameField());
             $data->assign("explanation_field", $this->renderExplanationField());
         }

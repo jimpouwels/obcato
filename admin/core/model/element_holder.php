@@ -120,7 +120,7 @@
         protected function initFromDb(array $row): void {
             require_once CMS_ROOT . 'database/dao/element_dao.php';
             $this->setTitle($row['title']);
-            $this->setPublished($row['published'] == 1 ? true : false);
+            $this->setPublished($row['published'] == 1);
             $this->setCreatedAt($row['created_at']);
             $this->setCreatedById($row['created_by']);
             $this->setLastModified(new DateTime($row['last_modified']));

@@ -37,7 +37,7 @@
         private function renderPositionsField(): string {
             $positions_options = array();
             foreach ($this->_block_dao->getBlockPositions() as $position) {
-                array_push($positions_options, array("name" => $position->getName(), "value" => $position->getId()));
+                $positions_options[] = array("name" => $position->getName(), "value" => $position->getId());
             }
             $current_position = null;
             if (!is_null($this->_current_block->getPosition())) {

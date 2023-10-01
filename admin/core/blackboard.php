@@ -20,7 +20,7 @@
         }
         
         public static function getBackendBaseUrlRaw(): string {
-            return sprintf("/admin/index.php");
+            return "/admin/index.php";
         }
     }
 

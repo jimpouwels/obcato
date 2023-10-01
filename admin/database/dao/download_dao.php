@@ -37,7 +37,7 @@
             $title = $download->getTitle();
             $filename = $download->getFileName();
             $user_id = $user->getId();
-            $statement->bind_param('ssii', $title, $filename, $published = 0, $user_id);
+            $statement->bind_param('ssii', $title, $filename, 0, $user_id);
             $this->_mysql_connector->executeStatement($statement);
             $download->setId($this->_mysql_connector->getInsertId());
         }

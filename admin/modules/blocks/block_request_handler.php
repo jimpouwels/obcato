@@ -11,13 +11,11 @@
         private static string $BLOCK_ID_POST = "element_holder_id";
         private static string $BLOCK_ID_GET = "block";
         private BlockDao $_block_dao;
-        private ElementDao $_element_dao;
         private ?Block $_current_block;
 
         public function __construct() {
             parent::__construct();
             $this->_block_dao = BlockDao::getInstance();
-            $this->_element_dao = ElementDao::getInstance();
         }
 
         public function handleGet(): void {
@@ -80,19 +78,19 @@
             return null;
         }
 
-        private function getBlockFromDatabase($block_id) {
+        private function getBlockFromDatabase($block_id): Block {
             return $this->_block_dao->getBlock($block_id);
         }
 
-        private function isUpdateBlockAction() {
+        private function isUpdateBlockAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "update_element_holder";
         }
 
-        private function isDeleteBlockAction() {
+        private function isDeleteBlockAction(): bool {
             return isset($_POST["action"]) && $_POST["action"] == "delete_block";
         }
 
-        private function isAddBlockAction() {
+        private function isAddBlockAction(): bool {
             return isset($_POST['add_block_action']);
         }
     }

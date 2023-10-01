@@ -63,9 +63,9 @@
             return "text_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
-            $element->setText($row['text']);
+        public function constructMetaData(array $record, $element): void {
+            $element->setTitle($record['title']);
+            $element->setText($record['text']);
         }
 
         public function update(Element $element): void {

@@ -19,14 +19,12 @@
         private Page $_current_page;
         private PageDao $_page_dao;
         private BlockDao $_block_dao;
-        private ElementDao $_element_dao;
         private FriendlyUrlManager $_friendly_url_manager;
 
         public function __construct() {
             parent::__construct();
             $this->_page_dao = PageDao::getInstance();
             $this->_block_dao = BlockDao::getInstance();
-            $this->_element_dao = ElementDao::getInstance();
             $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         }
 

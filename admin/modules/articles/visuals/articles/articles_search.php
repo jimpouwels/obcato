@@ -31,7 +31,7 @@
         private function renderTermQueryField(): string {
             $term_options = array();
             foreach ($this->_article_dao->getAllTerms() as $term) {
-                array_push($term_options, array('name' => $term->getName(), 'value' => $term->getId()));
+                $term_options[] = array('name' => $term->getName(), 'value' => $term->getId());
             }
             $term = $this->_article_request_handler->getSearchTerm();
             $term_query_field = new Pulldown("s_term", $this->getTextResource('articles_search_box_term'), $term, $term_options, false, "", true);

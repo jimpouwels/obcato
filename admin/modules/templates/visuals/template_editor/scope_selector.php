@@ -5,12 +5,10 @@
 
     class ScopeSelector extends Panel {
 
-        private TemplateDao $_template_dao;
         private ScopeDao $_scope_dao;
 
         public function __construct() {
             parent::__construct('templates_scope_list_title', 'scope_selector_panel');
-            $this->_template_dao = TemplateDao::getInstance();
             $this->_scope_dao = ScopeDao::getInstance();
         }
 

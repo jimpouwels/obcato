@@ -12,6 +12,7 @@
         private MysqlConnector $_mysql_connector;
 
         public function __construct() {
+            parent::__construct();
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
@@ -37,7 +38,7 @@
             $email = $this->getFilledInPropertyValue('email');
             $message = $this->getFilledInPropertyValue('message');
             $parent = $this->getFilledInPropertyValue('parent');
-            if (is_null($parent) || $parent == "") {
+            if ($parent) {
                 $parent = null;
             }
             $article_id = $article->getId();

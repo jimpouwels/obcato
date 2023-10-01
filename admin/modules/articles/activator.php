@@ -17,7 +17,6 @@
         private static int $ARTICLES_TAB = 0;
         private static int $TERMS_TAB = 1;
         private static int $TARGET_PAGES_TAB = 2;
-        private ArticleDao $_article_dao;
         private ?ArticleTerm $_current_term;
         private ?Article $_current_article;
         private Module $_article_module;
@@ -28,7 +27,6 @@
         public function __construct(Module $article_module) {
             parent::__construct($article_module);
             $this->_article_module = $article_module;
-            $this->_article_dao = ArticleDao::getInstance();
             $this->_article_request_handler = new ArticleRequestHandler();
             $this->_term_request_handler = new TermRequestHandler();
             $this->_target_pages_request_handler = new TargetPagesRequestHandler();

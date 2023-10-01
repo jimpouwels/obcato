@@ -324,6 +324,8 @@
         public function addTargetPage($target_page_id): void {
             $duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $target_page_id;
             $result = $this->_mysql_connector->executeQuery($duplicate_check_query);
+
+            $count = 0;
             while ($row = $result->fetch_assoc()) {
                 $count = $row['number_of'];
                 break;

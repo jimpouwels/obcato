@@ -15,14 +15,11 @@
             $this->_article_dao = ArticleDao::getInstance();
         }
         
-        public function setTerm(ArticleTerm $term): void {
-            $this->_term = $term;
-        }
-    
         public function loadFields(): void {
             $this->_term->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
-            if ($this->hasErrors() || $this->termExists())
+            if ($this->hasErrors() || $this->termExists()) {
                 throw new FormException();
+            }
         }
         
         private function termExists(): bool {

@@ -18,7 +18,6 @@
             return FRONTEND_TEMPLATE_DIR . "/website.tpl";
         }
 
-
         public function loadVisual(?array &$data): void {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
             $is_mobile_user_agent = false;

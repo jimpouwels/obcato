@@ -5,7 +5,7 @@
 
     class BlocksList extends Panel {
 
-        private ?Block $_current_block = null;
+        private ?Block $_current_block;
         private BlockDao $_block_dao;
 
         public function __construct(?Block $current_block) {

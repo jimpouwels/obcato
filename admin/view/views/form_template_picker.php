@@ -19,7 +19,7 @@
             $template_dao = TemplateDao::getInstance();
             $options = array();
             foreach ($template_dao->getTemplatesByScope($scope) as $template) {
-                array_push($options, array('name' => $template->getName(), 'value' => $template->getId()));
+                $options[] = array('name' => $template->getName(), 'value' => $template->getId());
             }
             return $options;
         }

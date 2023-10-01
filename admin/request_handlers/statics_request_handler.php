@@ -6,8 +6,6 @@
     
     class StaticsRequestHandler extends HttpRequestHandler {
 
-        private Settings $_settings;
-        
         public function __construct() {
         }
 

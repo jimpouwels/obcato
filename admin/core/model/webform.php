@@ -61,11 +61,11 @@
             return $form;
         }
 
-        protected function initFromDb(array $record): void {
-            $this->setTitle($record['title']);
-            $this->setIncludeCaptcha($record['include_captcha'] == 1 ? true : false);
-            $this->setCaptchaKey($record['captcha_key']);
-            parent::initFromDb($record);
+        protected function initFromDb(array $row): void {
+            $this->setTitle($row['title']);
+            $this->setIncludeCaptcha($row['include_captcha'] == 1);
+            $this->setCaptchaKey($row['captcha_key']);
+            parent::initFromDb($row);
         }
     
     }

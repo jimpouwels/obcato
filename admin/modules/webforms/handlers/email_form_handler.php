@@ -12,6 +12,7 @@
         private SettingsDao $_settings_dao;
 
         public function __construct() {
+            parent::__construct();
             $this->_settings_dao = SettingsDao::getInstance();
         }
 

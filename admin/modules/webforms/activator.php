@@ -10,7 +10,6 @@
     class WebFormsModuleVisual extends ModuleVisual {
     
         private static int $FORMS_TAB = 0;
-        private WebFormDao $_webform_dao;
         private WebFormRequestHandler $_webform_request_handler;
         private Module $_webform_module;
         private int $_current_tab_id = 0;
@@ -18,7 +17,6 @@
         public function __construct(Module $form_module) {
             parent::__construct($form_module);
             $this->_webform_module = $form_module;
-            $this->_webform_dao = WebFormDao::getInstance();
             $this->_webform_request_handler = new WebFormRequestHandler();
         }
 

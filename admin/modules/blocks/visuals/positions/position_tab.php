@@ -8,9 +8,8 @@
     class PositionTab extends Visual {
     
         private static string $POSITION_QUERYSTRING_KEY = "position";
-        private static string $NEW_POSITION_QUERYSTRING_KEY = "new_position";
-    
-        private ?BlockPosition $_current_position = null;
+
+        private ?BlockPosition $_current_position;
     
         public function __construct(?BlockPosition $current_position) {
             parent::__construct();

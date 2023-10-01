@@ -3,8 +3,6 @@
 
     class TermEditor extends Panel {
 
-        private static string $TEMPLATE = "articles/terms/editor.tpl";
-
         private ArticleTerm $_current_term;
 
         public function __construct(ArticleTerm $current_term) {

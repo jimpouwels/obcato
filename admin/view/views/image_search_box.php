@@ -60,9 +60,8 @@
 
         private function renderSearchResults(): array {
             $search_results_value = array();
-            $search_results = null;
             $search_results = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, $this->getCurrentSearchLabel());
-            if (!is_null($search_results) && count($search_results) > 0) {
+            if (count($search_results) > 0) {
                 foreach ($search_results as $search_result) {
                     $search_result_value = array();
                     $search_result_value["id"] = $search_result->getId();

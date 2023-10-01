@@ -12,7 +12,6 @@
         
         const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
         private static int $SCOPE = 9;
-
         private ?string $_description;
         private ?int $_image_id = null;
         private ?string $_keywords = null;
@@ -74,7 +73,7 @@
             return $this->_sort_date;
         }
 
-        public function setSortDate(string $sort_date) {
+        public function setSortDate(string $sort_date): void {
             $this->_sort_date = $sort_date;
         }
         

@@ -6,12 +6,10 @@
     class TemplateVarEditor extends Panel {
 
         private Template $_template;
-        private TemplateDao $_template_dao;
 
         public function __construct(Template $template) {
             parent::__construct($this->getTextResource('template_var_editor_panel_title'), 'template_editor_panel');
             $this->_template = $template;
-            $this->_template_dao = TemplateDao::getInstance();
         }
 
         public function getPanelContentTemplate(): string { 

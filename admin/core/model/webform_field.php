@@ -16,7 +16,7 @@
         }
 
         protected function initFromDb(array $row): void {
-            $this->setMandatory($row["mandatory"] == 1 ? true : false);
+            $this->setMandatory($row["mandatory"] == 1);
             parent::initFromDb($row);
         }
 

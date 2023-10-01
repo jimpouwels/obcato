@@ -11,14 +11,12 @@
         private TemplateDao $_template_dao;
         private WebFormDao $_webform_dao;
         private ArticleDao $_article_dao;
-        private WebFormItemFactory $_webform_item_factory;
 
         public function __construct(Page $page, Article $article) {
             parent::__construct($page, $article);
             $this->_webform_dao = WebFormDao::getInstance();
             $this->_article_dao = ArticleDao::getInstance();
             $this->_template_dao = TemplateDao::getInstance();
-            $this->_webform_item_factory = WebFormItemFactory::getInstance();
         }
 
         public function getTemplateFilename(): string {
@@ -54,7 +52,7 @@
             return $image_data;
         }
 
-        private function renderElementHolderContent(ElementHolder $element_holder) {
+        private function renderElementHolderContent(ElementHolder $element_holder): array {
             $elements_content = array();
             foreach ($element_holder->getElements() as $element) {
                 $element_data = array();

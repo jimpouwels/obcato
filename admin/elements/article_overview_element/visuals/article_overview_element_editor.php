@@ -45,16 +45,16 @@
         
         private function getOrderOptions(): array {
             $order_options = array();
-            array_push($order_options, array('name' => $this->getTextResource("article_overview_element_editor_sort_publication_date"), 'value' => 'PublicationDate'));
-            array_push($order_options, array('name' => $this->getTextResource("article_overview_element_editor_sort_sort_date"), 'value' => 'SortDate'));
-            array_push($order_options, array('name' => $this->getTextResource("article_overview_element_editor_sort_alphabet"), 'value' => 'Alphabet'));
+            $order_options[] = array('name' => $this->getTextResource("article_overview_element_editor_sort_publication_date"), 'value' => 'PublicationDate');
+            $order_options[] = array('name' => $this->getTextResource("article_overview_element_editor_sort_sort_date"), 'value' => 'SortDate');
+            $order_options[] = array('name' => $this->getTextResource("article_overview_element_editor_sort_alphabet"), 'value' => 'Alphabet');
             return $order_options;
         }
 
         private function getOrderTypeOptions(): array {
             $order_options = array();
-            array_push($order_options, array('name' => $this->getTextResource("article_overview_element_editor_order_ascending"), 'value' => 'asc'));
-            array_push($order_options, array('name' => $this->getTextResource("article_overview_element_editor_order_descending"), 'value' => 'desc'));
+            $order_options[] = array('name' => $this->getTextResource("article_overview_element_editor_order_ascending"), 'value' => 'asc');
+            $order_options[] = array('name' => $this->getTextResource("article_overview_element_editor_order_descending"), 'value' => 'desc');
             return $order_options;
         }
     

@@ -14,10 +14,8 @@
         private static string $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
         private static int $BLOCKS_TAB = 0;
         private static int $POSITIONS_TAB = 1;
-        
         private ?Block $_current_block = null;
         private ?BlockPosition $_current_position = null;
-        private BlockDao $_block_dao;
         private Module $_block_module;
         private BlockRequestHandler $_block_request_handler;
         private PositionRequestHandler $_position_request_handler;
@@ -27,7 +25,6 @@
             $this->_block_module = $block_module;
             $this->_block_request_handler = new BlockRequestHandler();
             $this->_position_request_handler = new PositionRequestHandler();
-            $this->_block_dao = BlockDao::getInstance();
         }
 
         public function getTemplateFilename(): string {

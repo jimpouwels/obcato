@@ -25,14 +25,11 @@
             $this->_webform_item->setTemplateId($template_id);
 
             $this->loadItemFields();
-            if ($this->hasErrors()) {
-                throw new FormException();
-            }
         }
 
         public abstract function loadItemFields(): void;
 
-        protected function getWebFormItem(): WebFormField {
+        protected function getWebFormItem(): WebFormItem {
             return $this->_webform_item;
         }
     }

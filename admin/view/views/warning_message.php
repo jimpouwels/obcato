@@ -3,7 +3,7 @@
     
     class WarningMessage extends Visual {
     
-        private $_message_resource_identifier;
+        private string $_message_resource_identifier;
     
         public function __construct(string $message_resource_identifier) {
             parent::__construct();

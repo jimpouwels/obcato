@@ -6,7 +6,7 @@
 
         private string $_name;
         private string $_type;
-        private ?Visual $_editor = null;
+        private ?Visual $_editor;
 
         public function setName(string $name): void {
             $this->_name = $name;

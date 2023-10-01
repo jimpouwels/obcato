@@ -8,7 +8,6 @@
         
         const INTERNAL = "INTERNAL";
         const EXTERNAL = "EXTERNAL";
-    
         private string $_title;
         private ?string $_url = null;
         private string $_type;
@@ -54,12 +53,11 @@
             return $element_holder;
         }
         
-        public function getParentElementHolder(): ElementHolder {
-            $element_holder = NULL;
-            if (!is_null($this->_parentElementHolderId) && $this->_parentElementHolderId != '') {
-                $element_holder = $this->getElementHolder($this->_parentElementHolderId);
+        public function getParentElementHolder(): ?ElementHolder {
+            if ($this->_parentElementHolderId) {
+                return $this->getElementHolder($this->_parentElementHolderId);
             }
-            return $element_holder;
+            return null;
         }
         
         public function getTargetElementHolderId(): ?int {

@@ -47,7 +47,7 @@
                     return $template_file_var_def->getName() == $parsed_var_def;
                 })) {
                     $this->_template_dao->deleteTemplateVarDef($template_file_var_def);
-                    $this->_template_file->deleteTemplateVarDef($template_var_def);
+                    $this->_template_file->deleteTemplateVarDef($template_file_var_def);
                 }
             }
 
@@ -66,7 +66,7 @@
                         if (!Arrays::firstMatch($template->getTemplateVars(), function($template_var) use ($parsed_var_def) {
                             return $template_var->getName() == $parsed_var_def;
                         })) {
-                            $template_var = $this->_template_dao->storeTemplateVar($template, $parsed_var_def, $this->getFieldValue("new_var|{$parsed_var_def}"));
+                            $this->_template_dao->storeTemplateVar($template, $parsed_var_def, $this->getFieldValue("new_var|{$parsed_var_def}"));
                         }
                     }
                 }

@@ -34,9 +34,9 @@
 
         private function getLabelsValuePair(): array {
             $labels_name_value_pair = array();
-            array_push($labels_name_value_pair, array("name" => "&gt; Selecteer", "value" => null));
+            $labels_name_value_pair[] = array("name" => "&gt; Selecteer", "value" => null);
             foreach ($this->_image_dao->getAllLabels() as $label) {
-                array_push($labels_name_value_pair, array("name" => $label->getName(), "value" => $label->getId()));
+                $labels_name_value_pair[] = array("name" => $label->getName(), "value" => $label->getId());
             }
             return $labels_name_value_pair;
         }

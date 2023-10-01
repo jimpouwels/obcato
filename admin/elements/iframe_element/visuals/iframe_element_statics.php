@@ -3,7 +3,6 @@
     
     class IFrameElementStatics extends Visual {
     
-    
         public function __construct() {
             parent::__construct();
         }

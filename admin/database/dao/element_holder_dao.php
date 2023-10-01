@@ -18,7 +18,7 @@
             $this->_mysql_connector = MysqlConnector::getInstance();
         }
 
-        public static function getInstance() {
+        public static function getInstance(): ElementHolderDao {
             if (!self::$instance) {
                 self::$instance = new ElementHolderDao();
             }

@@ -32,10 +32,7 @@
             $this->assign('title', $this->_webform->getTitle());
 
             $webform_child_data = $this->createChildData();
-            $webform_data = array();
-            if ($this->_webform) {
-                $webform_data = $this->renderWebForm($this->_webform);
-            }
+            $webform_data = $this->renderWebForm($this->_webform);
             $webform_child_data->assign('webform', $webform_data);
             $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_webform->getTemplate()->getTemplateFileId())->getFileName(), $webform_child_data));
         }

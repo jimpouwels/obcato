@@ -29,7 +29,7 @@
             $modules = array();
             while ($row = $result->fetch_assoc()) {
                 $module = Module::constructFromRecord($row);
-                array_push($modules, $module);
+                $modules[] = $module;
             }
             return $modules;
         }

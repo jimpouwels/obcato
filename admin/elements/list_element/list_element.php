@@ -29,7 +29,7 @@
         public function addListItem(): void {
             $list_item = new ListItem();
             $list_item->setIndent(0);
-            array_push($this->_list_items, $list_item);
+            $this->_list_items[] = $list_item;
         }
         
         public function deleteListItem(ListItem $list_item_to_delete): void {
@@ -74,8 +74,8 @@
             return "list_elements_metadata";
         }
 
-        public function constructMetaData(array $row, $element): void {
-            $element->setTitle($row['title']);
+        public function constructMetaData(array $record, $element): void {
+            $element->setTitle($record['title']);
             $element->setListItems($this->getListItems($element));
         }
         
@@ -98,24 +98,22 @@
         }
 
         private function storeItems(array $items): void {
-            if (!is_null($items)) {
-                foreach ($items as $list_item) {
-                    $statement = null;
-                    $id = $list_item->getId();
-                    $indent = $list_item->getIndent();
-                    $text = $list_item->getText();
-                    $element_id = $this->getElement()->getId();
-                    if (!is_null($list_item->getId())) {
-                        $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
-                        $statement = $this->_mysql_connector->prepareStatement($query);
-                        $statement->bind_param('sii', $text, $indent, $id);
-                    } else {
-                        $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
-                        $statement = $this->_mysql_connector->prepareStatement($query);
-                        $statement->bind_param('ii', $indent, $element_id);
-                    }
-                    $this->_mysql_connector->executeStatement($statement);
+            foreach ($items as $list_item) {
+                $statement = null;
+                $id = $list_item->getId();
+                $indent = $list_item->getIndent();
+                $text = $list_item->getText();
+                $element_id = $this->getElement()->getId();
+                if (!is_null($list_item->getId())) {
+                    $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
+                    $statement = $this->_mysql_connector->prepareStatement($query);
+                    $statement->bind_param('sii', $text, $indent, $id);
+                } else {
+                    $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
+                    $statement = $this->_mysql_connector->prepareStatement($query);
+                    $statement->bind_param('ii', $indent, $element_id);
                 }
+                $this->_mysql_connector->executeStatement($statement);
             }
         }
         
@@ -124,7 +122,6 @@
                       " AND e.id = " . $element->getId();
             $result = $this->_mysql_connector->executeQuery($query);
             $list_items = array();
-            $list_item = NULL;
             while ($row = $result->fetch_assoc()) {
                 $list_item = new ListItem();
                 $list_item->setId($row['id']);
@@ -132,7 +129,7 @@
                 $list_item->setIndent($row['indent']);
                 $list_item->setElementId($row['element_id']);
                 
-                array_push($list_items, $list_item);
+                $list_items[] = $list_item;
             }
             
             return $list_items;

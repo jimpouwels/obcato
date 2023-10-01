@@ -20,7 +20,7 @@
         require_once CMS_ROOT . "backend.php";
         require_once CMS_ROOT . "authentication/authenticator.php";
         checkAuthentication();
-        $backend = new Backend("obcato");
+        $backend = new Backend();
         $backend->start();
     }
         

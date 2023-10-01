@@ -5,8 +5,6 @@
 
     class ArticlesList extends Panel {
 
-        private static string $TEMPLATE = "articles/articles/list.tpl";
-
         private ArticleDao $_article_dao;
         private ArticleRequestHandler $_article_request_handler;
 
@@ -56,12 +54,12 @@
 
         private function getSearchTermId(): ?string {
             $search_term = $this->getSearchTerm();
-            return $search_term ? $search_term->getId() : null;
+            return $search_term?->getId();
         }
 
         private function getSearchTermName(): ?string {
             $search_term = $this->getSearchTerm();
-            return $search_term ? $search_term->getName() : null;
+            return $search_term?->getName();
         }
 
         private function getSearchTerm(): ?ArticleTerm {

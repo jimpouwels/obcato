@@ -18,7 +18,7 @@
             return "system/form_pulldown.tpl";
         }
 
-        public function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data): void {
             $data->assign("options", $this->_options);
             $data->assign("include_select_indication", $this->_include_select_indication);
         }

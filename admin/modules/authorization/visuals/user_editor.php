@@ -3,7 +3,7 @@
 
     class UserEditor extends Panel {
 
-        private ?User $_current_user = null;
+        private ?User $_current_user;
 
         public function __construct($current_user) {
             parent::__construct($current_user->getFullName(), 'user_meta');

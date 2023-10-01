@@ -4,7 +4,6 @@
     abstract class Panel extends Visual {
 
         private string $_title_resource_identifier;
-        private string $_html_content;
         private string $_class;
 
         public function __construct(string $title_resource_identifier, string $class = "", ?Visual $parent = null) {

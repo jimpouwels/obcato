@@ -9,7 +9,7 @@
     require_once CMS_ROOT . "view/views/notification_bar.php";
 
     class Cms extends Visual {
-        private ?ModuleVisual $_module_visual = null;
+        private ?ModuleVisual $_module_visual;
         private string $_website_title;
         private ModuleDao $_module_dao;
 

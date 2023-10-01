@@ -13,7 +13,7 @@
             return "system/form_upload_field.tpl";
         }
 
-        public function loadFormField(Smarty_Internal_Data $data) {
+        public function loadFormField(Smarty_Internal_Data $data): void {
         }
 
         public function getFieldType(): string {

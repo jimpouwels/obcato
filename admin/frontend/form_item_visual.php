@@ -23,10 +23,6 @@
             return $this->_webform_item;
         }
 
-        protected function getWebForm(): WebForm {
-            return $this->_webform;
-        }
-
         public function loadVisual(?array &$data): void {
             $this->assign('label', $this->getFormItem()->getLabel());
             $this->assign('name', $this->getFormItem()->getName());

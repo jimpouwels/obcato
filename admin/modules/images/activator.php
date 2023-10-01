@@ -17,7 +17,6 @@
         private static int $LABELS_TAB = 1;
         private static int $IMPORT_TAB = 2;
 
-        private ImageDao $_image_dao;
         private ImageRequestHandler $_images_request_handler;
         private LabelRequestHandler $_label_request_handler;
         private ImportRequestHandler $_import_request_handler;
@@ -27,7 +26,6 @@
         public function __construct(Module $image_module) {
             parent::__construct($image_module);
             $this->_image_module = $image_module;
-            $this->_image_dao = ImageDao::getInstance();
             $this->_images_request_handler = new ImageRequestHandler();
             $this->_label_request_handler = new LabelRequestHandler();
             $this->_import_request_handler = new ImportRequestHandler();

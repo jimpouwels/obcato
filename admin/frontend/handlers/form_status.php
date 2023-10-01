@@ -13,8 +13,8 @@
         }
 
         public static function getError(string $key): ?ErrorType {
-            if (isset(SELF::$ERRORS[$key])) {
-                return SELF::$ERRORS[$key];
+            if (isset(self::$ERRORS[$key])) {
+                return self::$ERRORS[$key];
             }
             return null;
         }

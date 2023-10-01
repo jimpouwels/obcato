@@ -6,8 +6,7 @@
     class BlockForm extends Form {
     
         private Block $_block;
-        private string $_element_order;
-    
+
         public function __construct(Block $block) {
             $this->_block = $block;
         }

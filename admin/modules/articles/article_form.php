@@ -10,7 +10,6 @@
         private Article $_article;
         private string $_element_order;
         private array $_selected_terms;
-        private int $_target_page_id;
         private ArticleDao $_article_dao;
 
         public function __construct(Article $article) {
@@ -45,10 +44,6 @@
             return $this->_selected_terms;
         }
         
-        public function getTargetPageId(): int {
-            return $this->_target_page_id;
-        }
-
         public function getTermsToDelete(): array {
             $terms_to_delete = array();
             $article_terms = $this->_article_dao->getTermsForArticle($this->_article->getId());

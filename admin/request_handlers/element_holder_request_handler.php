@@ -41,23 +41,21 @@
 
         protected function updateElementHolder(ElementHolder $element_holder): void {
             $form = new ElementHolderForm($element_holder);
-            $form->loadFields();
-            $this->updateLinks($element_holder);
-            foreach ($element_holder->getElements() as $element) {
-                try {
+            try {
+                $form->loadFields();
+                $this->updateLinks($element_holder);
+                foreach ($element_holder->getElements() as $element) {
                     $element->getRequestHandler()->handle();
-                } catch (ElementContainsErrorsException $e) {
-                    throw new ElementHolderContainsErrorsException($e->getMessage());
                 }
+            } catch (ElementContainsErrorsException|FormException $e) {
+                throw new ElementHolderContainsErrorsException($e->getMessage());
             }
         }
 
         private function addElement(ElementHolder $element_holder): void {
             $element_type = $this->getElementTypeToAdd();
-            if (!is_null($element_type)) {
-                $created_element = $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
-                $element_holder->addElement($created_element);
-            }
+            $created_element = $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
+            $element_holder->addElement($created_element);
         }
 
         private function deleteElementFrom(ElementHolder $element_holder): void {

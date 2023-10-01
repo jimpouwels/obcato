@@ -11,12 +11,10 @@
     class ArticleEditor extends Visual {
 
         private Article $_current_article;
-        private ArticleDao $_article_dao;
 
         public function __construct($current_article) {
             parent::__construct();
             $this->_current_article = $current_article;
-            $this->_article_dao = ArticleDao::getInstance();
         }
 
         public function getTemplateFilename(): string {
@@ -35,10 +33,6 @@
         private function renderArticleMetaDataPanel(): string {
             $metadata_panel = new ArticleMetadataEditor($this->_current_article);
             return $metadata_panel->render();
-        }
-
-        private function getDateValue(string $date): string {
-            return DateUtility::mysqlDateToString($date, '-');
         }
 
         private function renderElementContainer(): string {
