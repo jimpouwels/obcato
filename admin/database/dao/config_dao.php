@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 class ConfigDao {
 
@@ -9,7 +9,7 @@ class ConfigDao {
     private SettingsDao $_settings_dao;
 
     private function __construct() {
-        $this->_settings_dao = SettingsDao::getInstance();
+        $this->_settings_dao = SettingsDaoMysql::getInstance();
     }
 
     public static function getInstance(): ConfigDao {

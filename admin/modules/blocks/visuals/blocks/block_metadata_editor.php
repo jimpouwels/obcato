@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/view/views/element_container.php";
 require_once CMS_ROOT . "/view/views/form_template_picker.php";
 require_once CMS_ROOT . "/view/views/link_editor.php";
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockMetadataEditor extends Panel {
 
@@ -14,7 +14,7 @@ class BlockMetadataEditor extends Panel {
     public function __construct(Block $current_block) {
         parent::__construct('Algemeen', 'block_meta');
         $this->_current_block = $current_block;
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

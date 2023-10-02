@@ -2,9 +2,9 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/authentication/authenticator.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/modules/pages/page_form.php";
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/element_dao.php";
 require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
 require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
@@ -23,8 +23,8 @@ class PageRequestHandler extends ElementHolderRequestHandler {
 
     public function __construct() {
         parent::__construct();
-        $this->_page_dao = PageDao::getInstance();
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
         $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
     }
 
@@ -70,11 +70,11 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function addSelectedBlocks(array $selected_blocks): void {
-        if (is_null($selected_blocks) || count($selected_blocks) == 0) return;
-        $current_page_blocks = $this->_current_page->getBlocks();
+        if (count($selected_blocks) == 0) return;
+        $current_page_blocks = $this->_block_dao->getBlocksByPage($this->_current_page);
         foreach ($selected_blocks as $selected_block_id) {
             if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
-                $this->_current_page->addBlock($this->_block_dao->getBlock($selected_block_id));
+                $this->_block_dao->addBlockToPage($selected_block_id, $this->_current_page);
             }
         }
     }
@@ -89,10 +89,10 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function deleteSelectedBlocksFromPage(): void {
-        $current_page_blocks = $this->_current_page->getBlocks();
+        $current_page_blocks = $this->_block_dao->getBlocksByPage($this->_current_page);
         foreach ($current_page_blocks as $current_page_block) {
             if ($this->isBlockSelectedForDeletion($current_page_block)) {
-                $this->_current_page->deleteBlock($current_page_block);
+                $this->_block_dao->deleteBlockFromPage($current_page_block->getId(), $this->_current_page);
             }
         }
     }
@@ -103,8 +103,8 @@ class PageRequestHandler extends ElementHolderRequestHandler {
 
     private function deletePage(): void {
         $this->_page_dao->deletePage($this->_current_page);
-        $parent = $this->_current_page->getParent();
-        $current_level_pages = $parent->getSubPages();
+        $parent = $this->_page_dao->getParent($this->_current_page);
+        $current_level_pages = $this->_page_dao->getSubPages($parent);
         $this->updateFollowUp($current_level_pages);
         $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
@@ -123,7 +123,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         $this->_page_dao->persist($new_page);
 
         $parent = $this->_page_dao->getPage($this->_current_page->getId());
-        $current_level_pages = $parent->getSubPages();
+        $current_level_pages = $this->_page_dao->getSubPages($parent);
         $this->updateFollowUp($current_level_pages);
 
         $this->sendSuccessMessage($this->getTextResource('page_added_message'));
@@ -131,11 +131,11 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function moveUp(): void {
-        $this->_current_page->moveUp();
+        $this->_page_dao->moveUp($this->_current_page);
     }
 
     private function moveDown(): void {
-        $this->_current_page->moveDown();
+        $this->_page_dao->moveDown($this->_current_page);
     }
 
     private function updateFollowUp(array $pages): void {

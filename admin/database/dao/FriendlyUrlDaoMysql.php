@@ -1,18 +1,20 @@
 <?php
 defined('_ACCESS') or die;
 
-class FriendlyUrlDao {
+require_once CMS_ROOT . '/database/dao/FriendlyUrlDao.php';
 
-    private static ?FriendlyUrlDao $instance = null;
+class FriendlyUrlDaoMysql implements FriendlyUrlDao {
+
+    private static ?FriendlyUrlDaoMysql $instance = null;
     private MysqlConnector $_mysql_connector;
 
     private function __construct() {
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 
-    public static function getInstance(): FriendlyUrlDao {
+    public static function getInstance(): FriendlyUrlDaoMysql {
         if (!self::$instance) {
-            self::$instance = new FriendlyUrlDao();
+            self::$instance = new FriendlyUrlDaoMysql();
         }
         return self::$instance;
     }

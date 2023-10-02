@@ -3,8 +3,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
 require_once CMS_ROOT . '/core/model/webform.php';
-require_once CMS_ROOT . '/database/dao/settings_dao.php';
-require_once CMS_ROOT . '/database/dao/page_dao.php';
+require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 
 class RedirectFormHandler extends Formhandler {
 
@@ -13,7 +13,7 @@ class RedirectFormHandler extends Formhandler {
 
     public function __construct() {
         parent::__construct();
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
     }
 
     public function getRequiredProperties(): array {

@@ -4,7 +4,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/modules/articles/term_form.php";
 
 class TermRequestHandler extends HttpRequestHandler {
@@ -13,7 +13,7 @@ class TermRequestHandler extends HttpRequestHandler {
     private ArticleDao $_article_dao;
 
     public function __construct() {
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

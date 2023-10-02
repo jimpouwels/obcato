@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/element_dao.php";
 require_once CMS_ROOT . "/modules/articles/article_form.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
@@ -17,7 +17,7 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
 
     public function __construct() {
         parent::__construct();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
     }
 

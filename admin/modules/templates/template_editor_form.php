@@ -6,7 +6,6 @@ require_once CMS_ROOT . "/core/form/form.php";
 require_once CMS_ROOT . "/database/dao/template_dao.php";
 
 class TemplateEditorForm extends Form {
-
     private Template $_template;
     private TemplateDao $_template_dao;
 
@@ -27,14 +26,16 @@ class TemplateEditorForm extends Form {
             $this->_template->setTemplateVars([]);
         }
 
-        $this->_template->setTemplateFileId($new_template_file_id);
+        if ($new_template_file_id) {
+            $this->_template->setTemplateFileId(intval($new_template_file_id));
 
-        foreach ($this->_template_dao->getTemplateFile($this->_template->getTemplateFileId())->getTemplateVarDefs() as $var_def) {
-            if (!Arrays::firstMatch($this->_template->getTemplateVars(), function ($tv) use ($var_def) {
-                return $var_def->getName() == $tv->getName();
-            })) {
-                $template_var = $this->_template_dao->storeTemplateVar($this->_template, $var_def->getName());
-                $this->_template->addTemplateVar($template_var);
+            foreach ($this->_template_dao->getTemplateFile($this->_template->getTemplateFileId())->getTemplateVarDefs() as $var_def) {
+                if (!Arrays::firstMatch($this->_template->getTemplateVars(), function ($tv) use ($var_def) {
+                    return $var_def->getName() == $tv->getName();
+                })) {
+                    $template_var = $this->_template_dao->storeTemplateVar($this->_template, $var_def->getName());
+                    $this->_template->addTemplateVar($template_var);
+                }
             }
         }
 

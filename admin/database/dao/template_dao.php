@@ -1,6 +1,4 @@
 <?php
-
-
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
@@ -77,19 +75,14 @@ class TemplateDao {
         $new_template->setId($this->_mysql_connector->getInsertId());
     }
 
-    public function getTemplateByFileName($file_name) {
-        $query = "SELECT * FROM templates WHERE filename = '" . $file_name . "'";
-        $result = $this->_mysql_connector->executeQuery($query);
-        while ($row = $result->fetch_assoc()) {
-            return Template::constructFromRecord($row);
-        }
-    }
-
     public function updateTemplate(Template $template): void {
-        $query = "UPDATE templates SET `name` = '" . $template->getName() . "' 
-                      , template_file_id = " . $template->getTemplateFileId() . ", scope_id = 
-                      '" . $template->getScopeId() . "' WHERE id = " . $template->getId();
-        $this->_mysql_connector->executeQuery($query);
+        $statement = $this->_mysql_connector->prepareStatement("UPDATE templates SET `name` = ?, template_file_id = ?, scope_id = ? WHERE id = ?");
+        $template_id = $template->getId();
+        $name = $template->getName();
+        $template_file_id = $template->getTemplateFileId();
+        $scope_id = $template->getScopeId();
+        $statement->bind_param("siii", $name, $template_file_id, $scope_id, $template_id);
+        $this->_mysql_connector->executeStatement($statement);
     }
 
     public function deleteTemplate(Template $template): void {
@@ -235,5 +228,3 @@ class TemplateDao {
         $this->_mysql_connector->executeStatement($statement);
     }
 }
-
-?>

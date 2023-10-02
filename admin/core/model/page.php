@@ -2,14 +2,11 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/element_holder.php";
-require_once CMS_ROOT . "/database/dao/block_dao.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
 
 class Page extends ElementHolder {
 
     const ElementHolderType = "ELEMENT_HOLDER_PAGE";
     private static int $SCOPE = 5;
-    private PageDao $_page_dao;
     private ?string $_description = null;
     private string $_navigation_title;
     private bool $_include_in_search_engine;
@@ -21,7 +18,6 @@ class Page extends ElementHolder {
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
-        $this->_page_dao = PageDao::getInstance();
     }
 
     public static function constructFromRecord(array $row): Page {
@@ -70,7 +66,7 @@ class Page extends ElementHolder {
         $this->_navigation_title = $navigation_title;
     }
 
-    public function getParentId(): int {
+    public function getParentId(): ?int {
         return $this->_parent_id;
     }
 
@@ -108,64 +104,6 @@ class Page extends ElementHolder {
 
     public function isHomepage(): bool {
         return $this->_is_homepage;
-    }
-
-    public function isLast(): bool {
-        return $this->_page_dao->isLast($this);
-    }
-
-    public function isFirst(): bool {
-        return $this->_page_dao->isFirst($this);
-    }
-
-    public function getParents(): array {
-        $parents = array();
-        array_unshift($parents, $this);
-        $parent = $this->getParent();
-        if (!is_null($parent)) {
-            $parents = array_merge($parent->getParents(), $parents);
-        }
-        return $parents;
-    }
-
-    public function getParent(): ?Page {
-        $parent = null;
-        if (!is_null($this->_parent_id)) {
-            $parent = $this->_page_dao->getPage($this->_parent_id);
-        }
-        return $parent;
-    }
-
-    public function getSubPages(): array {
-        return $this->_page_dao->getSubPages($this);
-    }
-
-    public function getBlocks(): array {
-        $block_dao = BlockDao::getInstance();
-        return $block_dao->getBlocksByPage($this);
-    }
-
-    public function getBlocksByPosition($position): array {
-        $block_dao = BlockDao::getInstance();
-        return $block_dao->getBlocksByPageAndPosition($this, $position);
-    }
-
-    public function addBlock(Block $block): void {
-        $block_dao = BlockDao::getInstance();
-        $block_dao->addBlockToPage($block->getId(), $this);
-    }
-
-    public function deleteBlock(Block $block): void {
-        $block_dao = BlockDao::getInstance();
-        $block_dao->deleteBlockFromPage($block->getId(), $this);
-    }
-
-    public function moveUp(): void {
-        $this->_page_dao->moveUp($this);
-    }
-
-    public function moveDown(): void {
-        $this->_page_dao->moveDown($this);
     }
 
 }

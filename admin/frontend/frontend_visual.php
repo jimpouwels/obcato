@@ -4,9 +4,9 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/article.php";
 require_once CMS_ROOT . "/core/model/page.php";
 require_once CMS_ROOT . "/database/dao/link_dao.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/template_dao.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 abstract class FrontendVisual {
@@ -23,9 +23,9 @@ abstract class FrontendVisual {
 
     public function __construct(?Page $page, ?Article $article) {
         $this->_link_dao = LinkDao::getInstance();
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
         $this->_template_dao = TemplateDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_page = $page;
         $this->_article = $article;
         $this->_template_engine = TemplateEngine::getInstance();

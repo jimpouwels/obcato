@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
 require_once CMS_ROOT . "/install/install_folders_form.php";
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 if (file_exists("database_config.php")) {
     require_once CMS_ROOT . "/database_config.php";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mysql_connector->executeSql(file_get_contents("./install/install_script.sql"));
         header("Location: /admin/index.php?mode=install&step=3");
     } else if (getStepFromPostRequest() == "3") {
-        $settings_dao = SettingsDao::getInstance();
+        $settings_dao = SettingsDaoMysql::getInstance();
         $settings = new Settings();
         $form = new InstallFoldersForm($settings);
         try {

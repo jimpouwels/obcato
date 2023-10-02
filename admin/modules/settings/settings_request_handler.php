@@ -2,7 +2,7 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/settings/settings_form.php";
 
@@ -11,7 +11,7 @@ class SettingsRequestHandler extends HttpRequestHandler {
     private SettingsDao $_settings_dao;
 
     public function __construct() {
-        $this->_settings_dao = SettingsDao::getInstance();
+        $this->_settings_dao = SettingsDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

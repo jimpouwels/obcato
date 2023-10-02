@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/frontend_visual.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 
 class SitemapVisual extends FrontendVisual {
 
@@ -12,8 +12,8 @@ class SitemapVisual extends FrontendVisual {
 
     public function __construct() {
         parent::__construct(null, null);
-        $this->_page_dao = PageDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

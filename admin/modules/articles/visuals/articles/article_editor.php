@@ -5,7 +5,7 @@ require_once CMS_ROOT . "/view/views/element_container.php";
 require_once CMS_ROOT . "/view/views/link_editor.php";
 require_once CMS_ROOT . "/view/views/term_selector.php";
 require_once CMS_ROOT . "/view/views/image_picker.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . '/modules/articles/visuals/articles/article_metadata_editor.php';
 
 class ArticleEditor extends Visual {

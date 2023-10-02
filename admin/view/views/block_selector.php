@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockSelector extends Panel {
 
@@ -11,7 +11,7 @@ class BlockSelector extends Panel {
 
     public function __construct(array $selected_blocks, int $context_id) {
         parent::__construct($this->getTextResource('block_selection_title'), 'page_blocks');
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
         $this->_context_id = $context_id;
         $this->_selected_blocks = $selected_blocks;
     }

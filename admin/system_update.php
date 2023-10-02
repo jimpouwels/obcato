@@ -10,12 +10,12 @@ require_once CMS_ROOT . "/database_config.php";
 require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
 require_once CMS_ROOT . "/backend.php";
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 // AUTHENTICATE
 Authenticator::isAuthenticated();
 
-$settings_dao = SettingsDao::getInstance();
+$settings_dao = SettingsDaoMysql::getInstance();
 $website_settings = $settings_dao->getSettings();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

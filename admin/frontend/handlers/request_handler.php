@@ -2,10 +2,10 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/model/settings.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/image_dao.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/frontend/website_visual.php";
 require_once CMS_ROOT . '/frontend/sitemap_visual.php';
 require_once CMS_ROOT . '/utilities/url_helper.php';
@@ -24,7 +24,7 @@ class RequestHandler {
     private FriendlyUrlManager $_friendly_url_manager;
 
     public function __construct() {
-        $this->_settings_dao = SettingsDao::getInstance();
+        $this->_settings_dao = SettingsDaoMysql::getInstance();
         $this->_image_dao = ImageDao::getInstance();
         $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
         $this->_form_request_handler = FormRequestHandler::getInstance();

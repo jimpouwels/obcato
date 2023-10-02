@@ -5,14 +5,17 @@ require_once CMS_ROOT . "/view/views/form_template_picker.php";
 require_once CMS_ROOT . "/view/views/element_container.php";
 require_once CMS_ROOT . "/view/views/link_editor.php";
 require_once CMS_ROOT . "/view/views/block_selector.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . '/modules/pages/visuals/page_metadata_editor.php';
 
 class PageEditor extends Visual {
 
     private Page $_current_page;
+    private BlockDao $_block_dao;
 
     public function __construct(Page $current_page) {
         parent::__construct();
+        $this->_block_dao = BlockDaoMysql::getInstance();
         $this->_current_page = $current_page;
     }
 
@@ -45,7 +48,7 @@ class PageEditor extends Visual {
     }
 
     private function renderBlockSelectorPanel(): string {
-        $block_selector = new BlockSelector($this->_current_page->getBlocks(), $this->_current_page->getId());
+        $block_selector = new BlockSelector($this->_block_dao->getBlocksByPage($this->_current_page), $this->_current_page->getId());
         return $block_selector->render();
     }
 

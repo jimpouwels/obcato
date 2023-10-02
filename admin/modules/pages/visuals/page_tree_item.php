@@ -4,11 +4,13 @@ defined('_ACCESS') or die;
 class PageTreeItem extends Visual {
 
     private Page $_page;
+    private PageDao $_page_dao;
     private Page $_selected_page;
 
     public function __construct(Page $page, Page $selected_page) {
         parent::__construct();
         $this->_page = $page;
+        $this->_page_dao = PageDaoMysql::getInstance();
         $this->_selected_page = $selected_page;
     }
 
@@ -18,7 +20,7 @@ class PageTreeItem extends Visual {
 
     public function load(): void {
         $sub_pages = array();
-        foreach ($this->_page->getSubPages() as $sub_page) {
+        foreach ($this->_page_dao->getSubPages($this->_page) as $sub_page) {
             $tree_item = new PageTreeItem($sub_page, $this->_selected_page);
             $sub_pages[] = $tree_item->render();
         }

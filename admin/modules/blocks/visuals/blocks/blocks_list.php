@@ -11,7 +11,7 @@ class BlocksList extends Panel {
     public function __construct(?Block $current_block) {
         parent::__construct('Blokken', 'block_list');
         $this->_current_block = $current_block;
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

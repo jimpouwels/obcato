@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/settings.php";
 require_once CMS_ROOT . "/view/views/module_visual.php";
 require_once CMS_ROOT . "/view/views/warning_message.php";
-require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/modules/settings/settings_request_handler.php";
 require_once CMS_ROOT . "/modules/settings/visuals/global_settings.php";
 require_once CMS_ROOT . "/modules/settings/visuals/domain_settings.php";
@@ -20,7 +20,7 @@ class SettingsModuleVisual extends ModuleVisual {
     public function __construct(Module $settings_module) {
         parent::__construct($settings_module);
         $this->_settings_module = $settings_module;
-        $this->_settings = SettingsDao::getInstance()->getSettings();
+        $this->_settings = SettingsDaoMysql::getInstance()->getSettings();
         $this->_settings_request_handler = new SettingsRequestHandler();
     }
 

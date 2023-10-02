@@ -11,3 +11,4 @@ nbproject
 .idea/vcs.xml
 .idea/codeStyles/codeStyleConfig.xml
 vendor
+.phpunit.result.cache

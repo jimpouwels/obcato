@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 
 class Settings extends Entity {
     private string $_website_title;
@@ -53,7 +53,7 @@ class Settings extends Entity {
         $this->setComponentDir($row['component_dir']);
         $this->setDatabaseVersion($row['database_version']);
         $this->setBackendTemplateDir($row['backend_template_dir']);
-        $this->set404Page(PageDao::getInstance()->getPage($row['404_page_id']));
+        $this->set404Page(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
     }
 
     public function getWebsiteTitle(): string {
@@ -177,7 +177,7 @@ class Settings extends Entity {
             $homepage_id = $row['element_holder_id'];
         }
         if (!is_null($homepage_id)) {
-            $homepage = PageDao::getInstance()->getPage($homepage_id);
+            $homepage = PageDaoMysql::getInstance()->getPage($homepage_id);
         }
 
         return $homepage;

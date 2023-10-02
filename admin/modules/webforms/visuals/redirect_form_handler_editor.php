@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/view/views/page_picker.php';
-require_once CMS_ROOT . '/database/dao/page_dao.php';
+require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 require_once CMS_ROOT . '/core/model/webform_handler_property.php';
 
 class RedirectFormHandlerEditor extends Visual {
@@ -12,7 +12,7 @@ class RedirectFormHandlerEditor extends Visual {
 
     public function __construct() {
         parent::__construct();
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

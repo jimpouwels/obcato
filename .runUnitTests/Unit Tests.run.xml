@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Unit Tests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-    <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test" options="--testdox --colors" />
+    <TestRunner bootstrap_file="$PROJECT_DIR$/test/bootstrap.php" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test" options="--testdox --colors" use_alternative_bootstrap_file="true" />
     <method v="2" />
   </configuration>
 </component>

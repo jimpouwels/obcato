@@ -11,7 +11,7 @@ class PositionForm extends Form {
 
     public function __construct(BlockPosition $position) {
         $this->_position = $position;
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public function loadFields(): void {

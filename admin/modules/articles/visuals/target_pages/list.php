@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/page_picker.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 
 class TargetPagesList extends Panel {
 
@@ -10,7 +10,7 @@ class TargetPagesList extends Panel {
 
     public function __construct() {
         parent::__construct('Beschikbare doelpagina\'s', 'target_pages_fieldset');
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

@@ -5,18 +5,22 @@ require_once CMS_ROOT . "/frontend/frontend_visual.php";
 require_once CMS_ROOT . "/frontend/block_visual.php";
 require_once CMS_ROOT . "/frontend/article_visual.php";
 require_once CMS_ROOT . "/frontend/form_visual.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class PageVisual extends FrontendVisual {
     private PageDao $_page_dao;
+    private BlockDao $_block_dao;
+
     private ArticleDao $_article_dao;
     private TemplateDao $_template_dao;
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
-        $this->_page_dao = PageDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_template_dao = TemplateDao::getInstance();
     }
 
@@ -62,7 +66,7 @@ class PageVisual extends FrontendVisual {
 
     private function renderChildren(Page $page): array {
         $children = array();
-        foreach ($page->getSubPages() as $subPage) {
+        foreach ($this->_page_dao->getSubPages($page) as $subPage) {
             if (!$subPage->isPublished()) continue;
             $child = array();
             $this->addPageMetaData($subPage, $child, false);
@@ -92,7 +96,7 @@ class PageVisual extends FrontendVisual {
     private function renderBlocks(): array {
         $blocks = array();
         $blocks['no_position'] = array();
-        foreach ($this->getPage()->getBlocks() as $block) {
+        foreach ($this->_block_dao->getBlocksByPage($this->getPage()) as $block) {
             if (!$block->isPublished()) continue;
             $position = $block->getPosition();
             if (!is_null($position)) {
@@ -108,7 +112,7 @@ class PageVisual extends FrontendVisual {
         return $blocks;
     }
 
-    private function renderBlock($block) {
+    private function renderBlock($block): string {
         $block_visual = new BlockVisual($block, $this->getPage());
         return $block_visual->render();
     }
@@ -140,9 +144,9 @@ class PageVisual extends FrontendVisual {
         $parent_article = null;
         if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
             $parent_article = $this->_article_dao->getArticle($this->getArticle()->getParentArticleId());
-            $parents = $parent_article->getTargetPage()->getParents();
+            $parents = $this->_page_dao->getParents($parent_article->getTargetPage());
         } else {
-            $parents = $this->getPage()->getParents();
+            $parents = $this->_page_dao->getParents($this->getPage());
         }
         for ($i = 0; $i < count($parents); $i++) {
             if ($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) {

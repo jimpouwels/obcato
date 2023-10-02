@@ -3,8 +3,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/element_holder.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/image_dao.php";
 
 class Article extends ElementHolder {
@@ -23,7 +23,7 @@ class Article extends ElementHolder {
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
         $this->setPublished(false);
     }
 
@@ -127,7 +127,7 @@ class Article extends ElementHolder {
     }
 
     public function getTerms(): array {
-        $article_dao = ArticleDao::getInstance();
+        $article_dao = ArticleDaoMysql::getInstance();
         return $article_dao->getTermsForArticle($this->getId());
     }
 

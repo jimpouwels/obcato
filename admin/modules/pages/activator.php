@@ -6,7 +6,7 @@ require_once CMS_ROOT . "/view/views/module_visual.php";
 require_once CMS_ROOT . "/modules/pages/visuals/page_tree.php";
 require_once CMS_ROOT . "/modules/pages/visuals/page_editor.php";
 require_once CMS_ROOT . "/modules/pages/page_request_handler.php";
-require_once CMS_ROOT . '/database/dao/page_dao.php';
+require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 
 class PageModuleVisual extends ModuleVisual {
 
@@ -20,7 +20,7 @@ class PageModuleVisual extends ModuleVisual {
         parent::__construct($page_module);
         $this->_page_module = $page_module;
         $this->_page_request_handler = new PageRequestHandler();
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -42,10 +42,10 @@ class PageModuleVisual extends ModuleVisual {
         }
         $buttons[] = new ActionButtonAdd('add_element_holder');
         if ($this->_current_page->getId() != 1) {
-            if (!$this->_current_page->isFirst()) {
+            if (!$this->_page_dao->isFirst($this->_current_page)) {
                 $buttons[] = new ActionButtonUp('moveup_element_holder');
             }
-            if (!$this->_current_page->isLast()) {
+            if (!$this->_page_dao->isLast($this->_current_page)) {
                 $buttons[] = new ActionButtonDown('movedown_element_holder');
             }
         }

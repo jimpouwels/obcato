@@ -3,7 +3,7 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/form/form.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 
 class SettingsForm extends Form {
 
@@ -13,7 +13,7 @@ class SettingsForm extends Form {
 
     public function __construct(Settings $settings) {
         $this->_settings = $settings;
-        $this->_page_dao = PageDao::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
     }
 
     public function loadFields(): void {

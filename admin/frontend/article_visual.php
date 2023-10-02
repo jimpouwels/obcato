@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/frontend_visual.php";
 require_once CMS_ROOT . '/database/dao/element_dao.php';
-require_once CMS_ROOT . '/database/dao/article_dao.php';
+require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/template_dao.php';
 
 class ArticleVisual extends FrontendVisual {
@@ -15,7 +15,7 @@ class ArticleVisual extends FrontendVisual {
     public function __construct(Page $page, Article $article) {
         parent::__construct($page, $article);
         $this->_webform_dao = WebFormDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_template_dao = TemplateDao::getInstance();
     }
 

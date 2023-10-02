@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockPosition extends Entity {
 
@@ -11,7 +11,7 @@ class BlockPosition extends Entity {
     private BlockDao $_block_dao;
 
     public function __construct() {
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public static function constructFromRecord(array $row): BlockPosition {

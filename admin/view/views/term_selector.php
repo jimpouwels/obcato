@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/view/views/panel.php";
 
 class TermSelector extends Panel {
@@ -13,7 +13,7 @@ class TermSelector extends Panel {
     public function __construct(array $selected_terms, int $context_id) {
         parent::__construct($this->getTextResource("term_selector_title"), 'term_selector');
         $this->_selected_terms = $selected_terms;
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_context_id = $context_id;
     }
 

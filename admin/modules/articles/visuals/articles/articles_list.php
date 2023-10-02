@@ -11,7 +11,7 @@ class ArticlesList extends Panel {
     public function __construct(ArticleRequestHandler $article_request_handler) {
         parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
         $this->_article_request_handler = $article_request_handler;
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

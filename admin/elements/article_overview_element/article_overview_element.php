@@ -5,7 +5,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/element.php";
 require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/utilities/date_utility.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
@@ -94,7 +94,7 @@ class ArticleOverviewElement extends Element {
     }
 
     public function getArticles(): array {
-        $article_dao = ArticleDao::getInstance();
+        $article_dao = ArticleDaoMysql::getInstance();
         $show_to = null;
         if ($this->_show_until_today != 1 && $this->_show_to) {
             $show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
@@ -148,7 +148,7 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider {
     public function __construct($element) {
         parent::__construct($element);
         $this->_element = $element;
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 

@@ -1,11 +1,12 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/database/dao/friendly_url_dao.php';
-require_once CMS_ROOT . '/database/dao/settings_dao.php';
-require_once CMS_ROOT . '/database/dao/page_dao.php';
-require_once CMS_ROOT . '/database/dao/article_dao.php';
+require_once CMS_ROOT . '/database/dao/FriendlyUrlDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
 require_once CMS_ROOT . '/friendly_urls/url_match.php';
+require_once CMS_ROOT . '/utilities/url_helper.php';
 
 class FriendlyUrlManager {
 
@@ -15,19 +16,54 @@ class FriendlyUrlManager {
     private PageDao $_page_dao;
     private ArticleDao $_article_dao;
 
-    public function __construct() {
-        $this->_friendly_url_dao = FriendlyUrlDao::getInstance();
-        $this->_settings_dao = SettingsDao::getInstance();
-        $this->_page_dao = PageDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+    public function __construct(FriendlyUrlDao $friendlyUrlDao,
+                                SettingsDao    $settingsDao,
+                                PageDao        $pageDao,
+                                ArticleDao     $articleDao) {
+        $this->_friendly_url_dao = $friendlyUrlDao;
+        $this->_settings_dao = $settingsDao;
+        $this->_page_dao = $pageDao;
+        $this->_article_dao = $articleDao;
         $this->writeHtaccessFileIfNotExists();
     }
 
     public static function getInstance(): FriendlyUrlManager {
         if (!self::$instance) {
-            self::$instance = new FriendlyUrlManager();
+            self::$instance = new FriendlyUrlManager(FriendlyUrlDaoMysql::getInstance(),
+                SettingsDaoMysql::getInstance(),
+                PageDaoMysql::getInstance(),
+                ArticleDaoMysql::getInstance());
         }
         return self::$instance;
+    }
+
+    public static function getTestInstance(FriendlyUrlDao $friendlyUrlDao,
+                                           SettingsDao    $settingsDao,
+                                           PageDao        $pageDao,
+                                           ArticleDao     $articleDao): FriendlyUrlManager {
+        if (!self::$instance) {
+            self::$instance = new FriendlyUrlManager($friendlyUrlDao, $settingsDao, $pageDao, $articleDao);
+        }
+        return self::$instance;
+    }
+
+    private function writeHtaccessFileIfNotExists(): void {
+        $public_root_dir = $this->_settings_dao->getSettings()->getPublicRootDir();
+        $htaccess_file_path = $public_root_dir . '/.htaccess';
+        if (file_exists($htaccess_file_path)) return;
+        $handle = fopen($htaccess_file_path, 'w');
+        fclose($handle);
+        file_put_contents($htaccess_file_path, "RewriteEngine on\n\n" .
+            "RewriteCond %{HTTP_HOST} !=localhost\n" .
+            "RewriteCond %{HTTPS} !=on\n" .
+            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
+            "RewriteCond %{REQUEST_URI} !^/index.php\n" .
+            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
+            "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/admin(.*)\n" .
+            "RewriteRule ^.*$ index.php [NC,L]");
     }
 
     public function insertOrUpdateFriendlyUrlForPage(Page $page): void {
@@ -35,9 +71,61 @@ class FriendlyUrlManager {
         $this->insertOrUpateFriendlyUrl($url, $page);
     }
 
+    private function createUrlForPage(Page $page): string {
+        $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
+        $parent_page = $this->_page_dao->getParent($page);
+        if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
+            $url = $this->createUrlForPage($this->_page_dao->getParent($page)) . $url;
+        }
+        return $url;
+    }
+
+    private function replaceSpecialCharacters(string $value): string {
+        $value = strtolower($value);
+        $value = str_replace(' - ', ' ', $value);
+        $value = str_replace(' (', ' ', $value);
+        $value = str_replace(')', '', $value);
+        $value = str_replace('\'', '', $value);
+        $value = str_replace('&', '', $value);
+        $value = str_replace('  ', ' ', $value);
+        $value = str_replace(' ', '-', $value);
+        $value = urlencode($value);
+        return $value;
+    }
+
+    private function insertOrUpateFriendlyUrl(string $url, ElementHolder $element_holder): void {
+        $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
+        if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
+            $this->_friendly_url_dao->insertFriendlyUrl($url, $element_holder);
+        } else {
+            $this->_friendly_url_dao->updateFriendlyUrl($url, $element_holder);
+        }
+    }
+
+    private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {
+        $new_url = $url;
+        $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
+        $number = 1;
+        while ($existing_element_holder_id != null && $existing_element_holder_id != $element_holder->getId()) {
+            $new_url = $url . $number;
+            $number++;
+            $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($new_url);
+        }
+        return $new_url;
+    }
+
+    public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
+        return $this->_friendly_url_dao->getUrlFromElementHolder($element_holder);
+    }
+
     public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
         $url = $this->createUrlForArticle($article);
         $this->insertOrUpateFriendlyUrl($url, $article);
+    }
+
+    private function createUrlForArticle(Article $article): string {
+        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '/';
+        return $base . $this->replaceSpecialCharacters($article->getTitle());
     }
 
     public function matchUrl(string $url): ?UrlMatch {
@@ -97,76 +185,5 @@ class FriendlyUrlManager {
             }
         }
         $url_match->setArticle($article, $matched_url);
-    }
-
-    public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
-        return $this->_friendly_url_dao->getUrlFromElementHolder($element_holder);
-    }
-
-    private function insertOrUpateFriendlyUrl(string $url, ElementHolder $element_holder): void {
-        $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
-        if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
-            $this->_friendly_url_dao->insertFriendlyUrl($url, $element_holder);
-        } else {
-            $this->_friendly_url_dao->updateFriendlyUrl($url, $element_holder);
-        }
-    }
-
-    private function createUrlForPage(Page $page): string {
-        $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
-        $parent_page = $page->getParent();
-        if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
-            $url = $this->createUrlForPage($page->getParent()) . $url;
-        }
-        return $url;
-    }
-
-    private function createUrlForArticle(Article $article): string {
-        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '/';
-        return $base . $this->replaceSpecialCharacters($article->getTitle());
-    }
-
-    private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {
-        $new_url = $url;
-        $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
-        $number = 1;
-        while ($existing_element_holder_id != null && $existing_element_holder_id != $element_holder->getId()) {
-            $new_url = $url . $number;
-            $number++;
-            $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($new_url);
-        }
-        return $new_url;
-    }
-
-    private function replaceSpecialCharacters(string $value): string {
-        $value = strtolower($value);
-        $value = str_replace(' - ', ' ', $value);
-        $value = str_replace(' (', ' ', $value);
-        $value = str_replace(')', '', $value);
-        $value = str_replace('\'', '', $value);
-        $value = str_replace('&', '', $value);
-        $value = str_replace('  ', ' ', $value);
-        $value = str_replace(' ', '-', $value);
-        $value = urlencode($value);
-        return $value;
-    }
-
-    private function writeHtaccessFileIfNotExists(): void {
-        $public_root_dir = $this->_settings_dao->getSettings()->getPublicRootDir();
-        $htaccess_file_path = $public_root_dir . '/.htaccess';
-        if (file_exists($htaccess_file_path)) return;
-        $handle = fopen($htaccess_file_path, 'w');
-        fclose($handle);
-        file_put_contents($htaccess_file_path, "RewriteEngine on\n\n" .
-            "RewriteCond %{HTTP_HOST} !=localhost\n" .
-            "RewriteCond %{HTTPS} !=on\n" .
-            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !^/index.php\n" .
-            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/admin(.*)\n" .
-            "RewriteRule ^.*$ index.php [NC,L]");
     }
 }

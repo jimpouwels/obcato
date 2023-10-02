@@ -42,7 +42,7 @@ class Block extends ElementHolder {
     }
 
     public function getPosition(): ?BlockPosition {
-        $dao = BlockDao::getInstance();
+        $dao = BlockDaoMysql::getInstance();
         return $dao->getBlockPosition($this->_position_id);
     }
 

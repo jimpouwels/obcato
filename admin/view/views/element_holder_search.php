@@ -3,8 +3,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/search.php";
 require_once CMS_ROOT . "/view/views/information_message.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
-require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/core/model/page.php";
 
 class ElementHolderSearch extends Panel {
@@ -23,8 +23,8 @@ class ElementHolderSearch extends Panel {
         $this->_objects_to_search = $objects_to_search;
         $this->_back_click_id = $back_click_id;
         $this->_backfill_id = $backfill_id;
-        $this->_article_dao = ArticleDao::getInstance();
-        $this->_page_dao = PageDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
+        $this->_page_dao = PageDaoMysql::getInstance();
         $this->_popup_type = $popup_type;
     }
 

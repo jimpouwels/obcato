@@ -9,7 +9,7 @@ class PositionList extends Panel {
 
     public function __construct() {
         parent::__construct('Posities');
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

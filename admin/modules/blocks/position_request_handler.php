@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/modules/blocks/position_form.php";
 
 class PositionRequestHandler extends HttpRequestHandler {
@@ -13,7 +13,7 @@ class PositionRequestHandler extends HttpRequestHandler {
     private ?BlockPosition $_current_position;
 
     public function __construct() {
-        $this->_block_dao = BlockDao::getInstance();
+        $this->_block_dao = BlockDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

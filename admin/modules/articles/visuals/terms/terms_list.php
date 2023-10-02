@@ -10,7 +10,7 @@ class TermsList extends Panel {
 
     public function __construct() {
         parent::__construct('Termen', 'term_list_panel');
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

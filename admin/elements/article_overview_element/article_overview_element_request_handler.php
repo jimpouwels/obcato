@@ -5,7 +5,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_form.php";
 require_once CMS_ROOT . "/database/dao/element_dao.php";
-require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
@@ -18,7 +18,7 @@ class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
     public function __construct(ArticleOverviewElement $article_overview_element) {
         $this->_article_overview_element = $article_overview_element;
         $this->_element_dao = ElementDao::getInstance();
-        $this->_article_dao = ArticleDao::getInstance();
+        $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_article_overview_element_form = new ArticleOverviewElementForm($article_overview_element);
     }
 
