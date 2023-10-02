@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class MetadataEditor extends Panel {
 

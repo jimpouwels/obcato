@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "frontend/frontend_visual.php";
-require_once CMS_ROOT . 'database/dao/element_dao.php';
-require_once CMS_ROOT . 'database/dao/template_dao.php';
+require_once CMS_ROOT . "/frontend/frontend_visual.php";
+require_once CMS_ROOT . '/database/dao/element_dao.php';
+require_once CMS_ROOT . '/database/dao/template_dao.php';
 
 class BlockVisual extends FrontendVisual {
 

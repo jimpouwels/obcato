@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "frontend/element_visual.php";
+require_once CMS_ROOT . "/frontend/element_visual.php";
 
 class TextElementFrontendVisual extends ElementFrontendVisual {
 

@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/images/visuals/labels/labels_list.php";
-require_once CMS_ROOT . "modules/images/visuals/labels/label_editor.php";
+require_once CMS_ROOT . "/modules/images/visuals/labels/labels_list.php";
+require_once CMS_ROOT . "/modules/images/visuals/labels/label_editor.php";
 
 class LabelsTab extends Visual {
 

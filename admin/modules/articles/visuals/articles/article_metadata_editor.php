@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/image_picker.php";
-require_once CMS_ROOT . "view/views/article_picker.php";
-require_once CMS_ROOT . 'database/dao/article_dao.php';
-require_once CMS_ROOT . 'database/dao/webform_dao.php';
-require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+require_once CMS_ROOT . "/view/views/image_picker.php";
+require_once CMS_ROOT . "/view/views/article_picker.php";
+require_once CMS_ROOT . '/database/dao/article_dao.php';
+require_once CMS_ROOT . '/database/dao/webform_dao.php';
+require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class ArticleMetadataEditor extends Panel {
 

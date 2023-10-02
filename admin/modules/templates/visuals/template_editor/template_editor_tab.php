@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/templates/visuals/template_editor/template_list.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_editor/template_editor.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_editor/template_var_editor.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_editor/template_list.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_editor/template_editor.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_editor/template_var_editor.php";
 
 class TemplateEditorTab extends Visual {
 

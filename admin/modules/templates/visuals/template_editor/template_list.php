@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/dao/template_dao.php";
-require_once CMS_ROOT . "view/views/information_message.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_editor/scope_selector.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/view/views/information_message.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_editor/scope_selector.php";
 
 class TemplateList extends Panel {
 

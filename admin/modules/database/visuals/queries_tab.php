@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'modules/database/visuals/query_field_panel.php';
-require_once CMS_ROOT . 'modules/database/visuals/query_result_panel.php';
+require_once CMS_ROOT . '/modules/database/visuals/query_field_panel.php';
+require_once CMS_ROOT . '/modules/database/visuals/query_result_panel.php';
 
 class QueriesTab extends Visual {
 

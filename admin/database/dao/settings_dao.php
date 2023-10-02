@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-include_once CMS_ROOT . "database/mysql_connector.php";
-include_once CMS_ROOT . "core/model/settings.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/core/model/settings.php";
 
 class SettingsDao {
 

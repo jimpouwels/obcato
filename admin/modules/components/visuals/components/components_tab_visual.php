@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'modules/components/visuals/components/modules_list_panel.php';
-require_once CMS_ROOT . 'modules/components/visuals/components/elements_list_panel.php';
-require_once CMS_ROOT . 'modules/components/visuals/components/component_details_panel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/modules_list_panel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/elements_list_panel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/component_details_panel.php';
 
 class ComponentsTabVisual extends Visual {
 

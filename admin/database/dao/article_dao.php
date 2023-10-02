@@ -1,14 +1,14 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "database/dao/element_holder_dao.php";
-require_once CMS_ROOT . "core/model/article.php";
-require_once CMS_ROOT . "core/model/article_comment.php";
-require_once CMS_ROOT . "core/model/article_term.php";
-require_once CMS_ROOT . "utilities/date_utility.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/core/model/article.php";
+require_once CMS_ROOT . "/core/model/article_comment.php";
+require_once CMS_ROOT . "/core/model/article_term.php";
+require_once CMS_ROOT . "/utilities/date_utility.php";
 
 class ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,

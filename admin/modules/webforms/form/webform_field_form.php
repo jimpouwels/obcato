@@ -2,9 +2,9 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/form/form.php";
-require_once CMS_ROOT . "core/model/webform_item.php";
-require_once CMS_ROOT . 'modules/webforms/form/webform_item_form.php';
+require_once CMS_ROOT . "/core/form/form.php";
+require_once CMS_ROOT . "/core/model/webform_item.php";
+require_once CMS_ROOT . '/modules/webforms/form/webform_item_form.php';
 
 abstract class WebFormFieldForm extends WebFormItemForm {
 

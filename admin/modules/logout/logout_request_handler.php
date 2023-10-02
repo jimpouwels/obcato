@@ -1,7 +1,7 @@
 <?php
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 
 class LogoutRequestHandler extends HttpRequestHandler {
 

@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/search.php";
+require_once CMS_ROOT . "/view/views/search.php";
 
 class Popup extends Visual {
 

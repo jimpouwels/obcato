@@ -3,11 +3,11 @@
 
 defined('_ACCESS') or die;
 
-include_once CMS_ROOT . "database/mysql_connector.php";
-include_once CMS_ROOT . "core/model/template.php";
-include_once CMS_ROOT . "core/model/template_var.php";
-include_once CMS_ROOT . "core/model/template_var_def.php";
-include_once CMS_ROOT . "core/model/template_file.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/core/model/template.php";
+require_once CMS_ROOT . "/core/model/template_var.php";
+require_once CMS_ROOT . "/core/model/template_var_def.php";
+require_once CMS_ROOT . "/core/model/template_file.php";
 
 class TemplateDao {
 
@@ -70,19 +70,19 @@ class TemplateDao {
         return $new_template;
     }
 
+    public function persistTemplate(Template $new_template): void {
+        $query = "INSERT INTO templates (scope_id, `name`) VALUES (" . (is_null($new_template->getScopeId()) ? 'NULL' : $new_template->getScopeId()) . ", '" .
+            $new_template->getName() . "')";
+        $this->_mysql_connector->executeQuery($query);
+        $new_template->setId($this->_mysql_connector->getInsertId());
+    }
+
     public function getTemplateByFileName($file_name) {
         $query = "SELECT * FROM templates WHERE filename = '" . $file_name . "'";
         $result = $this->_mysql_connector->executeQuery($query);
         while ($row = $result->fetch_assoc()) {
             return Template::constructFromRecord($row);
         }
-    }
-
-    public function persistTemplate(Template $new_template): void {
-        $query = "INSERT INTO templates (scope_id, `name`) VALUES (" . (is_null($new_template->getScopeId()) ? 'NULL' : $new_template->getScopeId()) . ", '" .
-            $new_template->getName() . "')";
-        $this->_mysql_connector->executeQuery($query);
-        $new_template->setId($this->_mysql_connector->getInsertId());
     }
 
     public function updateTemplate(Template $template): void {

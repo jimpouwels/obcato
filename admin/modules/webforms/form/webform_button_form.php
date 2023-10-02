@@ -2,8 +2,8 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/model/webform_textfield.php";
-require_once CMS_ROOT . "modules/webforms/form/webform_item_form.php";
+require_once CMS_ROOT . "/core/model/webform_textfield.php";
+require_once CMS_ROOT . "/modules/webforms/form/webform_item_form.php";
 
 class WebFormButtonForm extends WebFormItemForm {
 

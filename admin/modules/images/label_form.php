@@ -2,8 +2,8 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/form/form.php";
-require_once CMS_ROOT . "database/dao/image_dao.php";
+require_once CMS_ROOT . "/core/form/form.php";
+require_once CMS_ROOT . "/database/dao/image_dao.php";
 
 class LabelForm extends Form {
 

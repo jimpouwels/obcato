@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'authentication/session.php';
-require_once CMS_ROOT . 'view/views/form_error.php';
-require_once CMS_ROOT . 'view/views/form_label.php';
+require_once CMS_ROOT . '/authentication/session.php';
+require_once CMS_ROOT . '/view/views/form_error.php';
+require_once CMS_ROOT . '/view/views/form_label.php';
 
 abstract class FormField extends Visual {
 

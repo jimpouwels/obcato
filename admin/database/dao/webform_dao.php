@@ -1,16 +1,16 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "core/model/webform.php";
-require_once CMS_ROOT . "core/model/webform_field.php";
-require_once CMS_ROOT . "core/model/webform_textfield.php";
-require_once CMS_ROOT . "core/model/webform_textarea.php";
-require_once CMS_ROOT . "core/model/webform_dropdown.php";
-require_once CMS_ROOT . "core/model/webform_button.php";
-require_once CMS_ROOT . "core/model/webform_handler_instance.php";
-require_once CMS_ROOT . "core/model/webform_handler_property.php";
-require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/core/model/webform.php";
+require_once CMS_ROOT . "/core/model/webform_field.php";
+require_once CMS_ROOT . "/core/model/webform_textfield.php";
+require_once CMS_ROOT . "/core/model/webform_textarea.php";
+require_once CMS_ROOT . "/core/model/webform_dropdown.php";
+require_once CMS_ROOT . "/core/model/webform_button.php";
+require_once CMS_ROOT . "/core/model/webform_handler_instance.php";
+require_once CMS_ROOT . "/core/model/webform_handler_property.php";
+require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
 
 class WebFormDao {
 

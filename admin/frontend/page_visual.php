@@ -1,12 +1,12 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "frontend/frontend_visual.php";
-require_once CMS_ROOT . "frontend/block_visual.php";
-require_once CMS_ROOT . "frontend/article_visual.php";
-require_once CMS_ROOT . "frontend/form_visual.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
+require_once CMS_ROOT . "/frontend/frontend_visual.php";
+require_once CMS_ROOT . "/frontend/block_visual.php";
+require_once CMS_ROOT . "/frontend/article_visual.php";
+require_once CMS_ROOT . "/frontend/form_visual.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
 
 class PageVisual extends FrontendVisual {
     private PageDao $_page_dao;

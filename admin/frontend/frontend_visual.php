@@ -1,13 +1,13 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/article.php";
-require_once CMS_ROOT . "core/model/page.php";
-require_once CMS_ROOT . "database/dao/link_dao.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
-require_once CMS_ROOT . "database/dao/template_dao.php";
-require_once CMS_ROOT . "database/dao/article_dao.php";
-require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+require_once CMS_ROOT . "/core/model/article.php";
+require_once CMS_ROOT . "/core/model/page.php";
+require_once CMS_ROOT . "/database/dao/link_dao.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 abstract class FrontendVisual {
 

@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/form_template_picker.php";
-require_once CMS_ROOT . "view/views/element_container.php";
-require_once CMS_ROOT . "view/views/link_editor.php";
-require_once CMS_ROOT . "view/views/block_selector.php";
-require_once CMS_ROOT . 'modules/pages/visuals/page_metadata_editor.php';
+require_once CMS_ROOT . "/view/views/form_template_picker.php";
+require_once CMS_ROOT . "/view/views/element_container.php";
+require_once CMS_ROOT . "/view/views/link_editor.php";
+require_once CMS_ROOT . "/view/views/block_selector.php";
+require_once CMS_ROOT . '/modules/pages/visuals/page_metadata_editor.php';
 
 class PageEditor extends Visual {
 

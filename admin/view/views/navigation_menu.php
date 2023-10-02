@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/dao/module_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/module_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
 
 class NavigationMenu extends Visual {
 

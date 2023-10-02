@@ -1,14 +1,14 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/form/element_holder_form.php";
-require_once CMS_ROOT . "database/dao/element_holder_dao.php";
-require_once CMS_ROOT . "database/dao/link_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "core/form/link_form.php";
-require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
-require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
+require_once CMS_ROOT . "/core/form/element_holder_form.php";
+require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/link_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/core/form/link_form.php";
+require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
+require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 

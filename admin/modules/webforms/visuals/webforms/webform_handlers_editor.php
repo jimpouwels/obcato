@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'core/model/webform.php';
-require_once CMS_ROOT . 'modules/webforms/handlers/email_form_handler.php';
-require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
-require_once CMS_ROOT . 'database/dao/webform_dao.php';
+require_once CMS_ROOT . '/core/model/webform.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/email_form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/webform_handler_manager.php';
+require_once CMS_ROOT . '/database/dao/webform_dao.php';
 
 class HandlersEditor extends Panel {
 

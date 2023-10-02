@@ -1,18 +1,18 @@
 <?php
 
 define("_ACCESS", "GRANTED");
-define("CMS_ROOT", '');
+define("CMS_ROOT", dirname(__FILE__));
 
-require_once CMS_ROOT . "view/views/visual.php";
-require_once CMS_ROOT . "view/views/panel.php";
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database_config.php";
-require_once CMS_ROOT . "constants.php";
-require_once CMS_ROOT . "backend.php";
+require_once CMS_ROOT . "/view/views/visual.php";
+require_once CMS_ROOT . "/view/views/panel.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database_config.php";
+require_once CMS_ROOT . "/constants.php";
+require_once CMS_ROOT . "/backend.php";
 
 $backend = new Backend();
 
-include_once CMS_ROOT . "database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/image_dao.php";
 
 if (isset($_GET['image']) && $_GET['image'] != '') {
     $image_dao = ImageDao::getInstance();

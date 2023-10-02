@@ -1,13 +1,13 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/element.php";
-require_once CMS_ROOT . "core/model/element_metadata_provider.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "elements/iframe_element/visuals/iframe_element_statics.php";
-require_once CMS_ROOT . "elements/iframe_element/visuals/iframe_element_editor.php";
-require_once CMS_ROOT . "elements/iframe_element/iframe_element_request_handler.php";
-require_once CMS_ROOT . "frontend/iframe_element_visual.php";
+require_once CMS_ROOT . "/core/model/element.php";
+require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/elements/iframe_element/visuals/iframe_element_statics.php";
+require_once CMS_ROOT . "/elements/iframe_element/visuals/iframe_element_editor.php";
+require_once CMS_ROOT . "/elements/iframe_element/iframe_element_request_handler.php";
+require_once CMS_ROOT . "/frontend/iframe_element_visual.php";
 
 class IFrameElement extends Element {
 

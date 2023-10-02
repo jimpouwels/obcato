@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/form_pulldown.php";
-require_once CMS_ROOT . "database/dao/template_dao.php";
+require_once CMS_ROOT . "/view/views/form_pulldown.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
 
 class TemplatePicker extends Pulldown {
 

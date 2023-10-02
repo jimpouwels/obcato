@@ -3,10 +3,10 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "database/dao/download_dao.php";
-require_once CMS_ROOT . "modules/downloads/download_form.php";
-require_once CMS_ROOT . "core/model/download.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/database/dao/download_dao.php";
+require_once CMS_ROOT . "/modules/downloads/download_form.php";
+require_once CMS_ROOT . "/core/model/download.php";
 
 class DownloadRequestHandler extends HttpRequestHandler {
 

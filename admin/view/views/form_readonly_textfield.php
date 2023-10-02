@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/form_readonly_textfield.php";
+require_once CMS_ROOT . "/view/views/form_readonly_textfield.php";
 
 class ReadonlyTextField extends FormField {
 

@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/entity.php";
+require_once CMS_ROOT . "/core/model/entity.php";
 
 class ArticleComment extends Entity {
 

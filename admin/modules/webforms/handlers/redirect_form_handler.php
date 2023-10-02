@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
-require_once CMS_ROOT . 'core/model/webform.php';
-require_once CMS_ROOT . 'database/dao/settings_dao.php';
-require_once CMS_ROOT . 'database/dao/page_dao.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
+require_once CMS_ROOT . '/core/model/webform.php';
+require_once CMS_ROOT . '/database/dao/settings_dao.php';
+require_once CMS_ROOT . '/database/dao/page_dao.php';
 
 class RedirectFormHandler extends Formhandler {
 
@@ -17,7 +17,7 @@ class RedirectFormHandler extends Formhandler {
     }
 
     public function getRequiredProperties(): array {
-        require_once CMS_ROOT . 'modules/webforms/visuals/redirect_form_handler_editor.php';
+        require_once CMS_ROOT . '/modules/webforms/visuals/redirect_form_handler_editor.php';
         return array(
             new HandlerProperty('page_id', 'textfield', new RedirectFormHandlerEditor()),
         );

@@ -1,13 +1,13 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . 'core/model/page.php';
-require_once CMS_ROOT . 'core/model/article.php';
-require_once CMS_ROOT . 'database/dao/webform_dao.php';
-require_once CMS_ROOT . 'database/dao/config_dao.php';
-require_once CMS_ROOT . 'modules/webforms/webform_handler_manager.php';
-require_once CMS_ROOT . 'frontend/handlers/form_status.php';
-require_once CMS_ROOT . 'frontend/handlers/error_type.php';
+require_once CMS_ROOT . '/core/model/page.php';
+require_once CMS_ROOT . '/core/model/article.php';
+require_once CMS_ROOT . '/database/dao/webform_dao.php';
+require_once CMS_ROOT . '/database/dao/config_dao.php';
+require_once CMS_ROOT . '/modules/webforms/webform_handler_manager.php';
+require_once CMS_ROOT . '/frontend/handlers/form_status.php';
+require_once CMS_ROOT . '/frontend/handlers/error_type.php';
 
 class FormRequestHandler {
 

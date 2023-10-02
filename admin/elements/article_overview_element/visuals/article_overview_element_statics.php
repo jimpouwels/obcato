@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/visual.php";
+require_once CMS_ROOT . "/view/views/visual.php";
 
 class ArticleOverviewElementStatics extends Visual {
 

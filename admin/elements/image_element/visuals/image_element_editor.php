@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/element_visual.php";
-require_once CMS_ROOT . "view/views/form_textfield.php";
-require_once CMS_ROOT . "view/views/image_picker.php";
+require_once CMS_ROOT . "/view/views/element_visual.php";
+require_once CMS_ROOT . "/view/views/form_textfield.php";
+require_once CMS_ROOT . "/view/views/image_picker.php";
 
 class ImageElementEditorVisual extends ElementVisual {
 

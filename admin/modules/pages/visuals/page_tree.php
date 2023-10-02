@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/pages/visuals/page_tree_item.php";
+require_once CMS_ROOT . "/modules/pages/visuals/page_tree_item.php";
 
 class PageTree extends Panel {
 

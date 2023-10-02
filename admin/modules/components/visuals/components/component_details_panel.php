@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'database/dao/module_dao.php';
+require_once CMS_ROOT . '/database/dao/module_dao.php';
 
 class ComponentsDetailsPanel extends Panel {
 

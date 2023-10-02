@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'database/dao/config_dao.php';
-require_once CMS_ROOT . "view/views/form_template_picker.php";
+require_once CMS_ROOT . '/database/dao/config_dao.php';
+require_once CMS_ROOT . "/view/views/form_template_picker.php";
 
 class WebFormMetadataEditor extends Panel {
 

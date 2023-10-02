@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "core/model/scope.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/core/model/scope.php";
 
 class ScopeDao {
 

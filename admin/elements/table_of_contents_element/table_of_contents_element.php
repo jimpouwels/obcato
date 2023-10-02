@@ -2,13 +2,13 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/element.php";
-require_once CMS_ROOT . "core/model/element_metadata_provider.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "elements/table_of_contents_element/visuals/table_of_contents_element_statics.php";
-require_once CMS_ROOT . "elements/table_of_contents_element/visuals/table_of_contents_element_editor.php";
-require_once CMS_ROOT . "elements/table_of_contents_element/table_of_contents_element_request_handler.php";
-require_once CMS_ROOT . "frontend/table_of_contents_element_visual.php";
+require_once CMS_ROOT . "/core/model/element.php";
+require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_statics.php";
+require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_editor.php";
+require_once CMS_ROOT . "/elements/table_of_contents_element/table_of_contents_element_request_handler.php";
+require_once CMS_ROOT . "/frontend/table_of_contents_element_visual.php";
 
 class TableOfContentsElement extends Element {
 

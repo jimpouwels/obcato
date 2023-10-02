@@ -2,14 +2,14 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/element.php";
-require_once CMS_ROOT . "core/model/element_metadata_provider.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "database/dao/image_dao.php";
-require_once CMS_ROOT . "elements/photo_album_element/visuals/photo_album_element_statics.php";
-require_once CMS_ROOT . "elements/photo_album_element/visuals/photo_album_element_editor.php";
-require_once CMS_ROOT . "elements/photo_album_element/photo_album_element_request_handler.php";
-require_once CMS_ROOT . "frontend/photo_album_element_visual.php";
+require_once CMS_ROOT . "/core/model/element.php";
+require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_statics.php";
+require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_editor.php";
+require_once CMS_ROOT . "/elements/photo_album_element/photo_album_element_request_handler.php";
+require_once CMS_ROOT . "/frontend/photo_album_element_visual.php";
 
 class PhotoAlbumElement extends Element {
 

@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "authentication/session.php";
-require_once CMS_ROOT . "utilities/string_utility.php";
-require_once CMS_ROOT . "database/dao/module_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
+require_once CMS_ROOT . "/authentication/session.php";
+require_once CMS_ROOT . "/utilities/string_utility.php";
+require_once CMS_ROOT . "/database/dao/module_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
 
 class TextResourceLoader {
 

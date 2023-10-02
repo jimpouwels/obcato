@@ -2,10 +2,10 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/dao/template_dao.php";
-require_once CMS_ROOT . "database/dao/scope_dao.php";
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "modules/templates/template_editor_form.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/scope_dao.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/modules/templates/template_editor_form.php";
 
 class TemplateEditorRequestHandler extends HttpRequestHandler {
 

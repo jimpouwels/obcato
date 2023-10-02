@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/presentable.php";
-require_once CMS_ROOT . "database/dao/link_dao.php";
-require_once CMS_ROOT . "database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/core/model/presentable.php";
+require_once CMS_ROOT . "/database/dao/link_dao.php";
+require_once CMS_ROOT . "/database/dao/authorization_dao.php";
 
 class ElementHolder extends Presentable {
 
@@ -28,7 +28,7 @@ class ElementHolder extends Presentable {
     }
 
     protected function initFromDb(array $row): void {
-        require_once CMS_ROOT . 'database/dao/element_dao.php';
+        require_once CMS_ROOT . '/database/dao/element_dao.php';
         $this->setTitle($row['title']);
         $this->setPublished($row['published'] == 1);
         $this->setCreatedAt($row['created_at']);

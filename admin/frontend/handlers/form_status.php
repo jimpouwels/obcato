@@ -1,7 +1,7 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . 'frontend/handlers/error_type.php';
+require_once CMS_ROOT . '/frontend/handlers/error_type.php';
 
 class FormStatus {
 

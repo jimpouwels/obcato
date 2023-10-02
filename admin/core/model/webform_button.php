@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/webform_field.php";
+require_once CMS_ROOT . "/core/model/webform_field.php";
 
 class WebFormButton extends WebFormItem {
 

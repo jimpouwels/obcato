@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'frontend/form_item_visual.php';
-require_once CMS_ROOT . 'frontend/handlers/form_status.php';
+require_once CMS_ROOT . '/frontend/form_item_visual.php';
+require_once CMS_ROOT . '/frontend/handlers/form_status.php';
 
 abstract class FormFieldVisual extends FormItemVisual {
 

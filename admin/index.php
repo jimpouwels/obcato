@@ -2,7 +2,7 @@
 
 // DIRECT ACCESS GRANTED
 define("_ACCESS", "GRANTED");
-define("CMS_ROOT", '');
+define("CMS_ROOT", dirname(__FILE__));
 
 if (!file_exists("database_config.php") || isInstallMode()) {
     if (!isset($_GET["mode"])) {
@@ -14,11 +14,11 @@ if (!file_exists("database_config.php") || isInstallMode()) {
 }
 
 function runBackend(): void {
-    require_once CMS_ROOT . "database_config.php";
-    require_once CMS_ROOT . "includes.php";
-    require_once CMS_ROOT . "constants.php";
-    require_once CMS_ROOT . "backend.php";
-    require_once CMS_ROOT . "authentication/authenticator.php";
+    require_once CMS_ROOT . "/database_config.php";
+    require_once CMS_ROOT . "/includes.php";
+    require_once CMS_ROOT . "/constants.php";
+    require_once CMS_ROOT . "/backend.php";
+    require_once CMS_ROOT . "/authentication/authenticator.php";
     checkAuthentication();
     $backend = new Backend();
     $backend->start();

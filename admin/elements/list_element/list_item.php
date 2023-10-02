@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-include_once CMS_ROOT . "core/model/entity.php";
-include_once CMS_ROOT . "database/dao/element_dao.php";
+require_once CMS_ROOT . "/core/model/entity.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
 
 class ListItem extends Entity {
 
@@ -11,20 +11,20 @@ class ListItem extends Entity {
     private int $_indent = 0;
     private int $_elementId;
 
-    public function setText(?string $text): void {
-        $this->_text = $text;
-    }
-
     public function getText(): ?string {
         return $this->_text;
     }
 
-    public function setIndent(int $indent): void {
-        $this->_indent = $indent;
+    public function setText(?string $text): void {
+        $this->_text = $text;
     }
 
     public function getIndent(): int {
         return $this->_indent;
+    }
+
+    public function setIndent(int $indent): void {
+        $this->_indent = $indent;
     }
 
     public function getElementId(): int {

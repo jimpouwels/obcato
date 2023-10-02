@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/smarty/Smarty.class.php";
+require_once CMS_ROOT . "/view/smarty/Smarty.class.php";
 
 class TemplateEngine {
     private static ?TemplateEngine $_instance = null;

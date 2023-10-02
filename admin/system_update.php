@@ -2,15 +2,15 @@
 
 // DIRECT ACCESS GRANTED
 define("_ACCESS", "GRANTED");
-define("CMS_ROOT", '');
+define("CMS_ROOT", dirname(__FILE__));
 
 // INCLUDE SYSTEM CONSTANTS
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database_config.php";
-require_once CMS_ROOT . "constants.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "backend.php";
-require_once CMS_ROOT . "database/dao/settings_dao.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database_config.php";
+require_once CMS_ROOT . "/constants.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/backend.php";
+require_once CMS_ROOT . "/database/dao/settings_dao.php";
 
 // AUTHENTICATE
 Authenticator::isAuthenticated();

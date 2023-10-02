@@ -2,8 +2,8 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/form/form.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
+require_once CMS_ROOT . "/core/form/form.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
 
 class SettingsForm extends Form {
 

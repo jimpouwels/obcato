@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'database/dao/module_dao.php';
-require_once CMS_ROOT . 'database/dao/element_dao.php';
-require_once CMS_ROOT . 'modules/components/installer/logger.php';
+require_once CMS_ROOT . '/database/dao/module_dao.php';
+require_once CMS_ROOT . '/database/dao/element_dao.php';
+require_once CMS_ROOT . '/modules/components/installer/logger.php';
 
 class ComponentRequestHandler extends HttpRequestHandler {
 
@@ -55,7 +55,7 @@ class ComponentRequestHandler extends HttpRequestHandler {
 
     private function uninstallModule(): void {
         $module = $this->getModuleFromPostRequest();
-        include_once CMS_ROOT . '/modules/' . $module->getIdentifier() . '/installer.php';
+        require_once CMS_ROOT . '/modules/' . $module->getIdentifier() . '/installer.php';
         $installer = new CustomModuleInstaller(new Logger());
         $installer->uninstall();
         $this->sendSuccessMessage('Component succesvol verwijderd');
@@ -71,7 +71,7 @@ class ComponentRequestHandler extends HttpRequestHandler {
 
     private function uninstallElement(): void {
         $element = $this->getElementFromPostRequest();
-        include_once CMS_ROOT . '/elements/' . $element->getIdentifier() . '/installer.php';
+        require_once CMS_ROOT . '/elements/' . $element->getIdentifier() . '/installer.php';
         $installer = new CustomElementInstaller(new Logger());
         $installer->uninstall();
         $this->sendSuccessMessage('Component succesvol verwijderd');

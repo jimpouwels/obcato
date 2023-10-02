@@ -1,14 +1,14 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
-require_once CMS_ROOT . "modules/pages/page_form.php";
-require_once CMS_ROOT . "database/dao/block_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "request_handlers/element_holder_request_handler.php";
-require_once CMS_ROOT . "request_handlers/exceptions/element_holder_contains_errors_exception.php";
-require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/modules/pages/page_form.php";
+require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
+require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class PageRequestHandler extends ElementHolderRequestHandler {
 

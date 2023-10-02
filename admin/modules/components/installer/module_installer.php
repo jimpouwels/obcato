@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'utilities/file_utility.php';
-require_once CMS_ROOT . 'database/dao/module_dao.php';
-require_once CMS_ROOT . 'core/model/module.php';
-require_once CMS_ROOT . 'modules/components/installer/installer.php';
+require_once CMS_ROOT . '/utilities/file_utility.php';
+require_once CMS_ROOT . '/database/dao/module_dao.php';
+require_once CMS_ROOT . '/core/model/module.php';
+require_once CMS_ROOT . '/modules/components/installer/installer.php';
 
 abstract class ModuleInstaller extends Installer {
 

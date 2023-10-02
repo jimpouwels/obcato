@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/blocks/visuals/blocks/blocks_list.php";
-require_once CMS_ROOT . "modules/blocks/visuals/blocks/block_editor.php";
+require_once CMS_ROOT . "/modules/blocks/visuals/blocks/blocks_list.php";
+require_once CMS_ROOT . "/modules/blocks/visuals/blocks/block_editor.php";
 
 class BlockTab extends Visual {
 

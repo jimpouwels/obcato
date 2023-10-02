@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/element_holder.php";
-require_once CMS_ROOT . "database/dao/block_dao.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
+require_once CMS_ROOT . "/core/model/element_holder.php";
+require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
 
 class Page extends ElementHolder {
 

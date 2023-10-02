@@ -1,12 +1,12 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/module_visual.php";
-require_once CMS_ROOT . "view/views/tab_menu.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_editor/template_editor_tab.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_files/template_files_tab.php";
-require_once CMS_ROOT . "modules/templates/template_editor_request_handler.php";
-require_once CMS_ROOT . "modules/templates/template_files_request_handler.php";
+require_once CMS_ROOT . "/view/views/module_visual.php";
+require_once CMS_ROOT . "/view/views/tab_menu.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_editor/template_editor_tab.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_files/template_files_tab.php";
+require_once CMS_ROOT . "/modules/templates/template_editor_request_handler.php";
+require_once CMS_ROOT . "/modules/templates/template_files_request_handler.php";
 
 class TemplateModuleVisual extends ModuleVisual {
     private static int $TEMPLATES_TAB = 0;

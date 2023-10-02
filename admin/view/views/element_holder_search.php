@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/search.php";
-require_once CMS_ROOT . "view/views/information_message.php";
-require_once CMS_ROOT . "database/dao/article_dao.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
-require_once CMS_ROOT . "core/model/page.php";
+require_once CMS_ROOT . "/view/views/search.php";
+require_once CMS_ROOT . "/view/views/information_message.php";
+require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/core/model/page.php";
 
 class ElementHolderSearch extends Panel {
 

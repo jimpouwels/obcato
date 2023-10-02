@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/presentable.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/core/model/presentable.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
 
 abstract class Element extends Presentable {
 
@@ -19,7 +19,7 @@ abstract class Element extends Presentable {
     }
 
     public static function constructFromRecord(array $record): Element {
-        include_once CMS_ROOT . 'elements/' . $record['identifier'] . '/' . $record['domain_object'];
+        require_once CMS_ROOT . '/elements/' . $record['identifier'] . '/' . $record['domain_object'];
 
         // first get the element type
         $element_type = $record['classname'];

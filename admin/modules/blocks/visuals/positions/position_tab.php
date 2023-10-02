@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/blocks/visuals/positions/position_editor.php";
-require_once CMS_ROOT . "modules/blocks/visuals/positions/position_list.php";
+require_once CMS_ROOT . "/modules/blocks/visuals/positions/position_editor.php";
+require_once CMS_ROOT . "/modules/blocks/visuals/positions/position_list.php";
 
 class PositionTab extends Visual {
 

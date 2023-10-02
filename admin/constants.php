@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/settings.php";
+require_once CMS_ROOT . "/core/model/settings.php";
 
 $website_settings = Settings::find();
 

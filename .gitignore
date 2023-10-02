@@ -1,6 +1,13 @@
 templates/backend/compiled_templates
 upload
 nbproject
-.idea
 .bat
 .VSCodeCounter
+
+.idea/modules.xml
+**/**.iml
+.idea/php-test-framework.xml
+.idea/php.xml
+.idea/vcs.xml
+.idea/codeStyles/codeStyleConfig.xml
+vendor

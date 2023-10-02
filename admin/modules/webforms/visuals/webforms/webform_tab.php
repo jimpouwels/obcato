@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_list.php";
-require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_metadata_editor.php";
-require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_editor.php";
-require_once CMS_ROOT . "modules/webforms/visuals/webforms/webform_handlers_editor.php";
+require_once CMS_ROOT . "/modules/webforms/visuals/webforms/webform_list.php";
+require_once CMS_ROOT . "/modules/webforms/visuals/webforms/webform_metadata_editor.php";
+require_once CMS_ROOT . "/modules/webforms/visuals/webforms/webform_editor.php";
+require_once CMS_ROOT . "/modules/webforms/visuals/webforms/webform_handlers_editor.php";
 
 class WebFormTab extends Visual {
 

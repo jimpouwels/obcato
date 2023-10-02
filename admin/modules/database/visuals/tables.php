@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "database/dao/database_dao.php";
-require_once CMS_ROOT . 'modules/database/visuals/table.php';
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/database_dao.php";
+require_once CMS_ROOT . '/modules/database/visuals/table.php';
 
 class Tables extends Visual {
 

@@ -1,12 +1,12 @@
 <?php
 
 define("_ACCESS", "GRANTED");
-define("CMS_ROOT", '');
+define("CMS_ROOT", dirname(__FILE__));
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database_config.php";
-require_once CMS_ROOT . "constants.php";
-require_once CMS_ROOT . "request_handlers/statics_request_handler.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database_config.php";
+require_once CMS_ROOT . "/constants.php";
+require_once CMS_ROOT . "/request_handlers/statics_request_handler.php";
 
 Authenticator::isAuthenticated();
 

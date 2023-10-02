@@ -2,12 +2,12 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/form/form.php";
-require_once CMS_ROOT . "modules/webforms/form/webform_textfield_form.php";
-require_once CMS_ROOT . "modules/webforms/form/webform_textarea_form.php";
-require_once CMS_ROOT . "modules/webforms/form/webform_dropdown_form.php";
-require_once CMS_ROOT . "modules/webforms/webform_item_factory.php";
-require_once CMS_ROOT . 'database/dao/webform_dao.php';
+require_once CMS_ROOT . "/core/form/form.php";
+require_once CMS_ROOT . "/modules/webforms/form/webform_textfield_form.php";
+require_once CMS_ROOT . "/modules/webforms/form/webform_textarea_form.php";
+require_once CMS_ROOT . "/modules/webforms/form/webform_dropdown_form.php";
+require_once CMS_ROOT . "/modules/webforms/webform_item_factory.php";
+require_once CMS_ROOT . '/database/dao/webform_dao.php';
 
 class WebFormForm extends Form {
 

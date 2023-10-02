@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "modules/database/query_form.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/modules/database/query_form.php";
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

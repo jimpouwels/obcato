@@ -2,8 +2,8 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "request_handlers/element_form.php";
-require_once CMS_ROOT . "utilities/date_utility.php";
+require_once CMS_ROOT . "/request_handlers/element_form.php";
+require_once CMS_ROOT . "/utilities/date_utility.php";
 
 class ArticleOverviewElementForm extends ElementForm {
 

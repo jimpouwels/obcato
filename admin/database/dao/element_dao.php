@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "core/model/element_type.php";
-require_once CMS_ROOT . "core/model/element.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/core/model/element_type.php";
+require_once CMS_ROOT . "/core/model/element.php";
 
 class ElementDao {
 
@@ -150,7 +150,7 @@ class ElementDao {
     }
 
     public function createElement(ElementType $element_type, int $element_holder_id): Element {
-        include_once CMS_ROOT . "elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
+        require_once CMS_ROOT . "/elements/" . $element_type->getIdentifier() . "/" . $element_type->getDomainObject();
         $element_classname = $element_type->getClassName();
         $new_element = new $element_classname($element_type->getScopeId());
         $new_element->setOrderNr(999);

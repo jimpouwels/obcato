@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'core/notifications.php';
+require_once CMS_ROOT . '/core/notifications.php';
 
 abstract class HttpRequestHandler {
 

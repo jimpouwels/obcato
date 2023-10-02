@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/dao/image_dao.php";
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "utilities/file_utility.php";
-require_once CMS_ROOT . "modules/images/image_form.php";
-require_once CMS_ROOT . "modules/images/image_list_form.php";
+require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/utilities/file_utility.php";
+require_once CMS_ROOT . "/modules/images/image_form.php";
+require_once CMS_ROOT . "/modules/images/image_list_form.php";
 
 class ImageRequestHandler extends HttpRequestHandler {
 

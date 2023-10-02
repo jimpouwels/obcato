@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/element_visual.php";
-require_once CMS_ROOT . "view/views/form_textfield.php";
-require_once CMS_ROOT . "view/views/form_date.php";
-require_once CMS_ROOT . "view/views/image_label_selector.php";
+require_once CMS_ROOT . "/view/views/element_visual.php";
+require_once CMS_ROOT . "/view/views/form_textfield.php";
+require_once CMS_ROOT . "/view/views/form_date.php";
+require_once CMS_ROOT . "/view/views/image_label_selector.php";
 
 class PhotoAlbumElementEditor extends ElementVisual {
 

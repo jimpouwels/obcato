@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'frontend/form_field_visual.php';
+require_once CMS_ROOT . '/frontend/form_field_visual.php';
 
 class FormTextAreaVisual extends FormFieldVisual {
     private TemplateDao $_template_dao;

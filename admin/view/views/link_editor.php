@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'view/views/information_message.php';
-require_once CMS_ROOT . 'view/views/object_picker.php';
+require_once CMS_ROOT . '/view/views/information_message.php';
+require_once CMS_ROOT . '/view/views/object_picker.php';
 
 class LinkEditor extends Panel {
 

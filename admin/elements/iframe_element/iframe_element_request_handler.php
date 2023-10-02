@@ -2,10 +2,10 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "elements/iframe_element/iframe_element_form.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/elements/iframe_element/iframe_element_form.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class IFrameElementRequestHandler extends HttpRequestHandler {
 

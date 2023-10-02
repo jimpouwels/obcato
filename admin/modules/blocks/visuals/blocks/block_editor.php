@@ -2,9 +2,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "view/views/element_container.php";
-require_once CMS_ROOT . "view/views/link_editor.php";
-require_once CMS_ROOT . 'modules/blocks/visuals/blocks/block_metadata_editor.php';
+require_once CMS_ROOT . "/view/views/element_container.php";
+require_once CMS_ROOT . "/view/views/link_editor.php";
+require_once CMS_ROOT . '/modules/blocks/visuals/blocks/block_metadata_editor.php';
 
 class BlockEditor extends Visual {
 

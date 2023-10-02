@@ -2,7 +2,7 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/form/form.php";
+require_once CMS_ROOT . "/core/form/form.php";
 
 class PositionForm extends Form {
 

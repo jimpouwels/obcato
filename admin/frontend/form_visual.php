@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'frontend/element_visual.php';
-require_once CMS_ROOT . 'modules/webforms/webform_item_factory.php';
-require_once CMS_ROOT . 'frontend/handlers/form_status.php';
+require_once CMS_ROOT . '/frontend/element_visual.php';
+require_once CMS_ROOT . '/modules/webforms/webform_item_factory.php';
+require_once CMS_ROOT . '/frontend/handlers/form_status.php';
 
 class FormFrontendVisual extends FrontendVisual {
 

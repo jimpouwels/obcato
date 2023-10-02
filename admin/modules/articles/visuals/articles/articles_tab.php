@@ -2,9 +2,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/articles/visuals/articles/article_editor.php";
-require_once CMS_ROOT . "modules/articles/visuals/articles/articles_list.php";
-require_once CMS_ROOT . "modules/articles/visuals/articles/articles_search.php";
+require_once CMS_ROOT . "/modules/articles/visuals/articles/article_editor.php";
+require_once CMS_ROOT . "/modules/articles/visuals/articles/articles_list.php";
+require_once CMS_ROOT . "/modules/articles/visuals/articles/articles_search.php";
 
 class ArticleTab extends Visual {
 

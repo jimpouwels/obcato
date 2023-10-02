@@ -3,13 +3,13 @@
 
 defined('_ACCESS') or die;
 
-include_once CMS_ROOT . "database/mysql_connector.php";
-include_once CMS_ROOT . "database/dao/element_dao.php";
-include_once CMS_ROOT . "database/dao/element_holder_dao.php";
-include_once CMS_ROOT . "database/dao/block_dao.php";
-include_once CMS_ROOT . "database/dao/template_dao.php";
-include_once CMS_ROOT . "core/model/page.php";
-include_once CMS_ROOT . "database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/core/model/page.php";
+require_once CMS_ROOT . "/database/dao/authorization_dao.php";
 
 class PageDao {
 

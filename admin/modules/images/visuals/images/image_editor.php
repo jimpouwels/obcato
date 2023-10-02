@@ -2,10 +2,10 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "database/dao/image_dao.php";
-require_once CMS_ROOT . 'modules/images/visuals/images/image_metadata_editor.php';
-require_once CMS_ROOT . 'modules/images/visuals/images/image_viewer.php';
-require_once CMS_ROOT . 'view/views/image_label_selector.php';
+require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . '/modules/images/visuals/images/image_metadata_editor.php';
+require_once CMS_ROOT . '/modules/images/visuals/images/image_viewer.php';
+require_once CMS_ROOT . '/view/views/image_label_selector.php';
 
 class ImageEditor extends Visual {
     private Image $_current_image;

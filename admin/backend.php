@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/backend_request_handler.php";
-require_once CMS_ROOT . "view/views/cms.php";
-require_once CMS_ROOT . "view/views/popup.php";
-require_once CMS_ROOT . "text_resource_loader.php";
+require_once CMS_ROOT . "/request_handlers/backend_request_handler.php";
+require_once CMS_ROOT . "/view/views/cms.php";
+require_once CMS_ROOT . "/view/views/popup.php";
+require_once CMS_ROOT . "/text_resource_loader.php";
 
 class Backend {
 
@@ -29,7 +29,7 @@ class Backend {
         $current_module = $this->_backend_request_handler->getCurrentModule();
         if (!is_null($current_module)) {
             $this->_current_module = $current_module;
-            require_once CMS_ROOT . "modules/" . $this->_current_module->getIdentifier() . "/activator.php";
+            require_once CMS_ROOT . "/modules/" . $this->_current_module->getIdentifier() . "/activator.php";
             $class = $this->_current_module->getClass();
             $this->_module_visual = new $class($this->_current_module);
         }

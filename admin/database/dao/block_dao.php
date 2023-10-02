@@ -1,14 +1,14 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "database/mysql_connector.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "database/dao/element_holder_dao.php";
-require_once CMS_ROOT . "database/dao/template_dao.php";
-require_once CMS_ROOT . "core/model/block.php";
-require_once CMS_ROOT . "core/model/block_position.php";
-require_once CMS_ROOT . "database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/core/model/block.php";
+require_once CMS_ROOT . "/core/model/block_position.php";
+require_once CMS_ROOT . "/database/dao/authorization_dao.php";
 
 class BlockDao {
 

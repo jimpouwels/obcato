@@ -1,9 +1,9 @@
 <?php
 
-require_once CMS_ROOT . "modules/templates/visuals/template_files/template_files_list.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_files/template_file_editor.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_files/template_code_viewer.php";
-require_once CMS_ROOT . "modules/templates/visuals/template_files/template_var_migration.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_files/template_files_list.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_files/template_file_editor.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_files/template_code_viewer.php";
+require_once CMS_ROOT . "/modules/templates/visuals/template_files/template_var_migration.php";
 
 defined('_ACCESS') or die;
 

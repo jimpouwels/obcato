@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/element_holder_request_handler.php";
-require_once CMS_ROOT . "database/dao/block_dao.php";
-require_once CMS_ROOT . "database/dao/element_dao.php";
-require_once CMS_ROOT . "modules/blocks/block_form.php";
+require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
+require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/modules/blocks/block_form.php";
 
 class BlockRequestHandler extends ElementHolderRequestHandler {
 

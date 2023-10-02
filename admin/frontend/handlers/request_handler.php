@@ -1,20 +1,20 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "core/model/settings.php";
-require_once CMS_ROOT . "database/dao/page_dao.php";
-require_once CMS_ROOT . "database/dao/image_dao.php";
-require_once CMS_ROOT . "database/dao/article_dao.php";
-require_once CMS_ROOT . "database/dao/settings_dao.php";
-require_once CMS_ROOT . "frontend/website_visual.php";
-require_once CMS_ROOT . 'frontend/sitemap_visual.php';
-require_once CMS_ROOT . 'utilities/url_helper.php';
-require_once CMS_ROOT . 'utilities/arrays.php';
-require_once CMS_ROOT . 'view/views/visual.php';
-require_once CMS_ROOT . 'view/views/panel.php';
-require_once CMS_ROOT . 'view/template_engine.php';
-require_once CMS_ROOT . 'friendly_urls/friendly_url_manager.php';
-require_once CMS_ROOT . 'frontend/handlers/form_request_handler.php';
+require_once CMS_ROOT . "/core/model/settings.php";
+require_once CMS_ROOT . "/database/dao/page_dao.php";
+require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/database/dao/settings_dao.php";
+require_once CMS_ROOT . "/frontend/website_visual.php";
+require_once CMS_ROOT . '/frontend/sitemap_visual.php';
+require_once CMS_ROOT . '/utilities/url_helper.php';
+require_once CMS_ROOT . '/utilities/arrays.php';
+require_once CMS_ROOT . '/view/views/visual.php';
+require_once CMS_ROOT . '/view/views/panel.php';
+require_once CMS_ROOT . '/view/template_engine.php';
+require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
+require_once CMS_ROOT . '/frontend/handlers/form_request_handler.php';
 
 class RequestHandler {
 
@@ -55,21 +55,12 @@ class RequestHandler {
         }
     }
 
-    private function renderHomepage(): void {
-        $homePage = $this->_settings_dao->getSettings()->getHomepage();
-        $this->renderPage($homePage, null);
+    private function isSitemapRequest(): bool {
+        return isset($_GET['sitemap']) && $_GET['sitemap'];
     }
 
-    private function render404Page(): void {
-        $page_404 = $this->_settings_dao->getSettings()->get404Page();
-        http_response_code(404);
-        $this->renderPage($page_404, null);
-        exit();
-    }
-
-    private function renderPage(Page $page, ?Article $article): void {
-        $website = new WebsiteVisual($page, $article);
-        echo $website->render();
+    private function isImageRequest(): bool {
+        return isset($_GET["image"]);
     }
 
     private function loadImage(): void {
@@ -92,12 +83,21 @@ class RequestHandler {
         return $this->_image_dao->getImage($_GET["image"]);
     }
 
-    private function isImageRequest(): bool {
-        return isset($_GET["image"]);
+    private function renderHomepage(): void {
+        $homePage = $this->_settings_dao->getSettings()->getHomepage();
+        $this->renderPage($homePage, null);
     }
 
-    private function isSitemapRequest(): bool {
-        return isset($_GET['sitemap']) && $_GET['sitemap'];
+    private function renderPage(Page $page, ?Article $article): void {
+        $website = new WebsiteVisual($page, $article);
+        echo $website->render();
+    }
+
+    private function render404Page(): void {
+        $page_404 = $this->_settings_dao->getSettings()->get404Page();
+        http_response_code(404);
+        $this->renderPage($page_404, null);
+        exit();
     }
 
 }

@@ -3,9 +3,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "database/dao/article_dao.php";
-require_once CMS_ROOT . "modules/articles/term_form.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/database/dao/article_dao.php";
+require_once CMS_ROOT . "/modules/articles/term_form.php";
 
 class TermRequestHandler extends HttpRequestHandler {
 

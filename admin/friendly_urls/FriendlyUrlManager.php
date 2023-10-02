@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'database/dao/friendly_url_dao.php';
-require_once CMS_ROOT . 'database/dao/settings_dao.php';
-require_once CMS_ROOT . 'database/dao/page_dao.php';
-require_once CMS_ROOT . 'database/dao/article_dao.php';
-require_once CMS_ROOT . 'friendly_urls/url_match.php';
+require_once CMS_ROOT . '/database/dao/friendly_url_dao.php';
+require_once CMS_ROOT . '/database/dao/settings_dao.php';
+require_once CMS_ROOT . '/database/dao/page_dao.php';
+require_once CMS_ROOT . '/database/dao/article_dao.php';
+require_once CMS_ROOT . '/friendly_urls/url_match.php';
 
 class FriendlyUrlManager {
 

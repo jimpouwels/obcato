@@ -1,16 +1,16 @@
 <?php
 define("_ACCESS", "GRANTED");
-define("CMS_ROOT", '');
+define("CMS_ROOT", dirname(__FILE__));
 
 if (!file_exists("database_config.php"))
     header("Location: /admin/index.php");
 
-require_once CMS_ROOT . "authentication/authenticator.php";
-require_once CMS_ROOT . "authentication/session.php";
-require_once CMS_ROOT . "database_config.php";
-require_once CMS_ROOT . "constants.php";
-require_once CMS_ROOT . "includes.php";
-require_once CMS_ROOT . "utilities/string_utility.php";
+require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/authentication/session.php";
+require_once CMS_ROOT . "/database_config.php";
+require_once CMS_ROOT . "/constants.php";
+require_once CMS_ROOT . "/includes.php";
+require_once CMS_ROOT . "/utilities/string_utility.php";
 
 $errors = array();
 

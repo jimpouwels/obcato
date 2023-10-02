@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "core/model/entity.php";
-require_once CMS_ROOT . "database/dao/article_dao.php";
+require_once CMS_ROOT . "/core/model/entity.php";
+require_once CMS_ROOT . "/database/dao/article_dao.php";
 
 class ArticleTerm extends Entity {
 

@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
-require_once CMS_ROOT . 'modules/webforms/handlers/email_form_handler.php';
-require_once CMS_ROOT . 'modules/webforms/handlers/redirect_form_handler.php';
-require_once CMS_ROOT . 'modules/webforms/handlers/article_comment_form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/email_form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/redirect_form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/article_comment_form_handler.php';
 
 class WebFormHandlerManager {
 

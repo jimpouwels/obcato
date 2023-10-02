@@ -1,10 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . 'modules/webforms/handlers/form_handler.php';
-require_once CMS_ROOT . 'modules/webforms/handlers/handler_property.php';
-require_once CMS_ROOT . 'core/model/webform.php';
-require_once CMS_ROOT . 'database/dao/settings_dao.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/handler_property.php';
+require_once CMS_ROOT . '/core/model/webform.php';
+require_once CMS_ROOT . '/database/dao/settings_dao.php';
 
 class ArticleCommentFormHandler extends Formhandler {
 

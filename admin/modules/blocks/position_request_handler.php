@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "database/dao/block_dao.php";
-require_once CMS_ROOT . "modules/blocks/position_form.php";
+require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/database/dao/block_dao.php";
+require_once CMS_ROOT . "/modules/blocks/position_form.php";
 
 class PositionRequestHandler extends HttpRequestHandler {
 

@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "modules/articles/visuals/terms/terms_list.php";
-require_once CMS_ROOT . "modules/articles/visuals/terms/term_editor.php";
+require_once CMS_ROOT . "/modules/articles/visuals/terms/terms_list.php";
+require_once CMS_ROOT . "/modules/articles/visuals/terms/term_editor.php";
 
 class TermTab extends Visual {
 
