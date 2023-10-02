@@ -1,22 +1,22 @@
 <?php
 
-    defined("_ACCESS") or die;
+defined("_ACCESS") or die;
 
-    require_once CMS_ROOT . "core/form/form.php";
-    require_once CMS_ROOT . "core/model/webform_item.php";
-    require_once CMS_ROOT . 'modules/webforms/form/webform_item_form.php';
+require_once CMS_ROOT . "core/form/form.php";
+require_once CMS_ROOT . "core/model/webform_item.php";
+require_once CMS_ROOT . 'modules/webforms/form/webform_item_form.php';
 
-    abstract class WebFormFieldForm extends WebFormItemForm {
+abstract class WebFormFieldForm extends WebFormItemForm {
 
-        public function __construct(WebFormField $webform_item) {
-            parent::__construct($webform_item);
-        }
-
-        public function loadItemFields(): void {
-            $this->getWebFormItem()->setMandatory($this->getCheckboxValue("webform_field_{$this->getWebFormItem()->getId()}_mandatory"));
-            $this->loadFieldFields();
-        }
-
-        public abstract function loadFieldFields(): void;
-
+    public function __construct(WebFormField $webform_item) {
+        parent::__construct($webform_item);
     }
+
+    public function loadItemFields(): void {
+        $this->getWebFormItem()->setMandatory($this->getCheckboxValue("webform_field_{$this->getWebFormItem()->getId()}_mandatory"));
+        $this->loadFieldFields();
+    }
+
+    public abstract function loadFieldFields(): void;
+
+}

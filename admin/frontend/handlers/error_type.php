@@ -1,8 +1,7 @@
 <?php
-    defined("_ACCESS") or die;
+defined("_ACCESS") or die;
 
-    enum ErrorType
-{
+enum ErrorType {
     case InvalidValue;
     case Mandatory;
 }

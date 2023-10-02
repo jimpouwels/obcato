@@ -1,15 +1,15 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    class Logger {
+class Logger {
 
-        private $_log_messages = array();
+    private $_log_messages = array();
 
-        public function log($message) {
-            $this->_log_messages[] = date('H:m:s') . ': ' . $message;
-        }
-
-        public function getLogMessages() {
-            return $this->_log_messages;
-        }
+    public function log($message) {
+        $this->_log_messages[] = date('H:m:s') . ': ' . $message;
     }
+
+    public function getLogMessages() {
+        return $this->_log_messages;
+    }
+}

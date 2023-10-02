@@ -1,20 +1,20 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/form/form.php";
+require_once CMS_ROOT . "core/form/form.php";
 
-    class QueryForm extends Form {
+class QueryForm extends Form {
 
-        private ?string $_query = null;
+    private ?string $_query = null;
 
-        public function loadFields(): void {
-            $this->_query = $this->getMandatoryFieldValue('query', 'U heeft geen query ingevoerd');
-            if ($this->hasErrors()) {
-                throw new FormException();
-            }
-        }
-
-        public function getQuery(): ?string {
-            return $this->_query;
+    public function loadFields(): void {
+        $this->_query = $this->getMandatoryFieldValue('query', 'U heeft geen query ingevoerd');
+        if ($this->hasErrors()) {
+            throw new FormException();
         }
     }
+
+    public function getQuery(): ?string {
+        return $this->_query;
+    }
+}

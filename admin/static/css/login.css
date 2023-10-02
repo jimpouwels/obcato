@@ -4,20 +4,20 @@
     left: 50%;
     margin-left: -250px;
     margin-top: -150px;
-    display:block;
+    display: block;
     overflow: auto;
     width: 500px;
-    border: 1px solid gray;
-    font-family: verdana;
+    border: 1px solid rgb(128, 128, 128);
+    font-family: Verdana;
     font-size: 0.8em;
     background-color: #fbf9ee;
     box-shadow: 5px 5px 5px #888888;
 }
 
 .loginform {
-    border: 0px;
-    padding: 0px;
-    margin: 0px;
+    border: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .admin_label {

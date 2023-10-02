@@ -1,16 +1,13 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-    
-    class RestRequestHandler extends HttpRequestHandler {
-    
-        public function handleGet(): void {
-        }
+require_once CMS_ROOT . "request_handlers/http_request_handler.php";
 
-        public function handlePost(): void {
-            
-        }
-    }
+class RestRequestHandler extends HttpRequestHandler {
+
+    public function handleGet(): void {}
+
+    public function handlePost(): void {}
+}
 
 ?>

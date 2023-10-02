@@ -1,25 +1,23 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "core/model/webform_item.php";
+require_once CMS_ROOT . "core/model/webform_item.php";
 
-    abstract class WebFormField extends WebFormItem {
-    
-        private bool $_mandatory = false;
-        
-        public function setMandatory(bool $mandatory): void {
-            $this->_mandatory = $mandatory;
-        }
+abstract class WebFormField extends WebFormItem {
 
-        public function getMandatory(): bool {
-            return $this->_mandatory;
-        }
+    private bool $_mandatory = false;
 
-        protected function initFromDb(array $row): void {
-            $this->setMandatory($row["mandatory"] == 1);
-            parent::initFromDb($row);
-        }
-
+    public function getMandatory(): bool {
+        return $this->_mandatory;
     }
-    
-?>
+
+    public function setMandatory(bool $mandatory): void {
+        $this->_mandatory = $mandatory;
+    }
+
+    protected function initFromDb(array $row): void {
+        $this->setMandatory($row["mandatory"] == 1);
+        parent::initFromDb($row);
+    }
+
+}

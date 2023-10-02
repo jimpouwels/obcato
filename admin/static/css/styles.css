@@ -1,6 +1,6 @@
-@font-face{
-    font-family:GeosansLight;
-    src:url(/admin/static/fonts/GeosansLight.ttf);
+@font-face {
+    font-family: GeosansLight;
+    src: url(/admin/static/fonts/GeosansLight.ttf);
 }
 
 /*
@@ -12,7 +12,7 @@
 }
 
 .field_error_message {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 10px;
     font-size: 0.9em;
     color: red;

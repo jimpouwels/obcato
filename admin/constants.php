@@ -1,38 +1,38 @@
 <?php
-    defined('_ACCESS') or die;
-    
-    require_once CMS_ROOT . "core/model/settings.php";
-   
-    $website_settings = Settings::find();
+defined('_ACCESS') or die;
 
-    // EDITOR FORM CONSTANTS
-    define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
-    define("EDIT_ELEMENT_HOLDER_ID", 'element_holder_id');
-    define("ACTION_FORM_ID", 'action');
-    define("DELETE_ELEMENT_FORM_ID", 'delete_element');
-    define('ELEMENT_HOLDER_FORM_ID', 'element_holder_form_id');
-    define('ELEMENT_ORDER_ID', 'element_order');
+require_once CMS_ROOT . "core/model/settings.php";
 
-    // ELEMENT HOLDER TYPES
-    define("ELEMENT_HOLDER_PAGE", 'ELEMENT_HOLDER_PAGE');
-    define("ELEMENT_HOLDER_ARTICLE", 'ELEMENT_HOLDER_ARTICLE');
-    define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
+$website_settings = Settings::find();
 
-    // DEFINE SYSTEM VFERSION
-    define("SYSTEM_VERSION", "1.0.0.5");
-    define("DB_VERSION", $website_settings->getDatabaseVersion());
+// EDITOR FORM CONSTANTS
+define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
+define("EDIT_ELEMENT_HOLDER_ID", 'element_holder_id');
+define("ACTION_FORM_ID", 'action');
+define("DELETE_ELEMENT_FORM_ID", 'delete_element');
+define('ELEMENT_HOLDER_FORM_ID', 'element_holder_form_id');
+define('ELEMENT_ORDER_ID', 'element_order');
 
-    // DEFINE TIME OUT
-    define("SESSION_TIMEOUT", 1800);
+// ELEMENT HOLDER TYPES
+define("ELEMENT_HOLDER_PAGE", 'ELEMENT_HOLDER_PAGE');
+define("ELEMENT_HOLDER_ARTICLE", 'ELEMENT_HOLDER_ARTICLE');
+define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
 
-    // DIRECTORIES
-    define("COMPONENT_DIR", $website_settings->getComponentDir());
-    define("COMPONENT_TEMP_DIR", $website_settings->getComponentDir() . "/temp");
-    define("UPLOAD_DIR", $website_settings->getUploadDir());
-    define("FRONTEND_TEMPLATE_DIR", $website_settings->getFrontendTemplateDir());
-    define("BACKEND_TEMPLATE_DIR", $website_settings->getBackendTemplateDir());
-    define("STATIC_DIR", $website_settings->getStaticDir());
+// DEFINE SYSTEM VFERSION
+define("SYSTEM_VERSION", "1.0.0.5");
+define("DB_VERSION", $website_settings->getDatabaseVersion());
 
-    // OTHER
-    define("WEBSITE_TITLE", $website_settings->getWebsiteTitle());
+// DEFINE TIME OUT
+define("SESSION_TIMEOUT", 1800);
+
+// DIRECTORIES
+define("COMPONENT_DIR", $website_settings->getComponentDir());
+define("COMPONENT_TEMP_DIR", $website_settings->getComponentDir() . "/temp");
+define("UPLOAD_DIR", $website_settings->getUploadDir());
+define("FRONTEND_TEMPLATE_DIR", $website_settings->getFrontendTemplateDir());
+define("BACKEND_TEMPLATE_DIR", $website_settings->getBackendTemplateDir());
+define("STATIC_DIR", $website_settings->getStaticDir());
+
+// OTHER
+define("WEBSITE_TITLE", $website_settings->getWebsiteTitle());
 ?>

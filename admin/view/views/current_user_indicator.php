@@ -1,20 +1,20 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "authentication/authenticator.php";
-    
-    class CurrentUserIndicator extends Visual {
-    
+require_once CMS_ROOT . "authentication/authenticator.php";
 
-        public function __construct() {
-            parent::__construct();
-        }
+class CurrentUserIndicator extends Visual {
 
-        public function getTemplateFilename(): string {
-            return "system/current_user_indicator.tpl";
-        }
 
-        public function load(): void {
-            $this->assign('username', Authenticator::getCurrentUser()->getFullName());
-        }
+    public function __construct() {
+        parent::__construct();
     }
+
+    public function getTemplateFilename(): string {
+        return "system/current_user_indicator.tpl";
+    }
+
+    public function load(): void {
+        $this->assign('username', Authenticator::getCurrentUser()->getFullName());
+    }
+}

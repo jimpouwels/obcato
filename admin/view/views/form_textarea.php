@@ -1,23 +1,22 @@
 <?php
-    defined('_ACCESS') or die;
-    
-    require_once CMS_ROOT . "view/views/form_field.php";
-    
-    class TextArea extends FormField {
+defined('_ACCESS') or die;
 
-        public function __construct(string $name, string $label, ?string $value, bool $mandatory, bool $linkable, ?string $class_name) {
-            parent::__construct($name, $value, $label, $mandatory, $linkable, $class_name);
-        }
-    
-        public function getFormFieldTemplateFilename(): string {
-            return "system/form_textarea.tpl";
-        }
+require_once CMS_ROOT . "view/views/form_field.php";
 
-        public function loadFormField(Smarty_Internal_Data $data) {
-        }
+class TextArea extends FormField {
 
-        public function getFieldType(): string {
-            return 'textarea';
-        }
-    
+    public function __construct(string $name, string $label, ?string $value, bool $mandatory, bool $linkable, ?string $class_name) {
+        parent::__construct($name, $value, $label, $mandatory, $linkable, $class_name);
     }
+
+    public function getFormFieldTemplateFilename(): string {
+        return "system/form_textarea.tpl";
+    }
+
+    public function loadFormField(Smarty_Internal_Data $data) {}
+
+    public function getFieldType(): string {
+        return 'textarea';
+    }
+
+}

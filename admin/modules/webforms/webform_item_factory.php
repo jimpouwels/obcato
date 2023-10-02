@@ -1,7 +1,8 @@
 <?php
+
 namespace {
     defined('_ACCESS') or die;
-    
+
     require_once CMS_ROOT . 'view/views/visual.php';
     require_once CMS_ROOT . 'modules/webforms/visuals/webforms/fields/webform_item_visual.php';
     require_once CMS_ROOT . 'modules/webforms/visuals/webforms/fields/webform_button_visual.php';
@@ -67,8 +68,9 @@ namespace {
             $this->_types[] = new WebFormItemFactory\FormItemType($type_name, $backend_visual_classname, $backend_form_classname, $frontend_visual_classname);
         }
     }
-}   
-namespace WebFormItemFactory {     
+}
+
+namespace WebFormItemFactory {
     class FormItemType {
         private string $_type_name;
         private string $_backend_visual_classname;

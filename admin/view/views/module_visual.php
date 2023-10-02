@@ -1,28 +1,27 @@
 <?php
-    defined('_ACCESS') or die;
-    
-    abstract class ModuleVisual extends Visual {
+defined('_ACCESS') or die;
 
-        private Module $_module;
+abstract class ModuleVisual extends Visual {
 
-        protected function __construct(Module $module) {
-            parent::__construct();
-            $this->_module = $module;
-        }
+    private Module $_module;
 
-        public function getTitle(): string {
-            return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
-        }
-        
-        abstract function getActionButtons(): array;
-        
-        abstract function renderHeadIncludes(): string;
-
-        abstract function getTabMenu(): ?TabMenu;
-        
-        abstract function getRequestHandlers(): array;
-        
-        public function onRequestHandled(): void {
-        }
-    
+    protected function __construct(Module $module) {
+        parent::__construct();
+        $this->_module = $module;
     }
+
+    public function getTitle(): string {
+        return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
+    }
+
+    abstract function getActionButtons(): array;
+
+    abstract function renderHeadIncludes(): string;
+
+    abstract function getTabMenu(): ?TabMenu;
+
+    abstract function getRequestHandlers(): array;
+
+    public function onRequestHandled(): void {}
+
+}

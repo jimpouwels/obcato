@@ -1,22 +1,20 @@
 <?php
-    defined('_ACCESS') or die;
+defined('_ACCESS') or die;
 
-    abstract class Entity {
-    
-        private ?int $_id = null;
-        
-        public function getId(): ?int {
-            return $this->_id;
-        }
-        
-        public function setId(?int $id): void {
-            $this->_id = $id;
-        }
+abstract class Entity {
 
-        protected function initFromDb(array $row): void {
-            $this->setId($row['id']);
-        }
-    
+    private ?int $_id = null;
+
+    public function getId(): ?int {
+        return $this->_id;
     }
-    
-?>
+
+    public function setId(?int $id): void {
+        $this->_id = $id;
+    }
+
+    protected function initFromDb(array $row): void {
+        $this->setId($row['id']);
+    }
+
+}

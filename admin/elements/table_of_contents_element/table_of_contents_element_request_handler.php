@@ -1,34 +1,34 @@
 <?php
-    
-    defined('_ACCESS') or die;
 
-    require_once CMS_ROOT . "request_handlers/http_request_handler.php";
-    require_once CMS_ROOT . "elements/table_of_contents_element/table_of_contents_element_form.php";
-    require_once CMS_ROOT . "database/dao/element_dao.php";
-    require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
+defined('_ACCESS') or die;
 
-    class TableOfContentsElementRequestHandler extends HttpRequestHandler {
+require_once CMS_ROOT . "request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "elements/table_of_contents_element/table_of_contents_element_form.php";
+require_once CMS_ROOT . "database/dao/element_dao.php";
+require_once CMS_ROOT . "elements/element_contains_errors_exception.php";
 
-        private TableOfContentsElement $_table_of_contents_element;
-        private ElementDao $_element_dao;
-        private TableOfContentsElementForm $_table_of_contents_element_form;
+class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 
-        public function __construct(TableOfContentsElement $table_of_contents_element) {
-            $this->_table_of_contents_element = $table_of_contents_element;
-            $this->_element_dao = ElementDao::getInstance();
-            $this->_table_of_contents_element_form = new TableOfContentsElementForm($this->_table_of_contents_element);
-        }
+    private TableOfContentsElement $_table_of_contents_element;
+    private ElementDao $_element_dao;
+    private TableOfContentsElementForm $_table_of_contents_element_form;
 
-        public function handleGet(): void {
-        }
+    public function __construct(TableOfContentsElement $table_of_contents_element) {
+        $this->_table_of_contents_element = $table_of_contents_element;
+        $this->_element_dao = ElementDao::getInstance();
+        $this->_table_of_contents_element_form = new TableOfContentsElementForm($this->_table_of_contents_element);
+    }
 
-        public function handlePost(): void {
-            try {
-                $this->_table_of_contents_element_form->loadFields();
-                $this->_element_dao->updateElement($this->_table_of_contents_element);
-            } catch (FormException $e) {
-                throw new ElementContainsErrorsException("Table of contents element contains errors");
-            }
+    public function handleGet(): void {}
+
+    public function handlePost(): void {
+        try {
+            $this->_table_of_contents_element_form->loadFields();
+            $this->_element_dao->updateElement($this->_table_of_contents_element);
+        } catch (FormException $e) {
+            throw new ElementContainsErrorsException("Table of contents element contains errors");
         }
     }
+}
+
 ?>
