@@ -4,12 +4,16 @@ require_once(CMS_ROOT . '/database/dao/ArticleDao.php');
 
 class ArticleDaoMock implements ArticleDao {
 
+    private array $articles = array();
+
     public function getArticle($id): ?Article {
         // TODO: Implement getArticle() method.
     }
 
     public function getArticleByElementHolderId($element_holder_id): ?Article {
-        // TODO: Implement getArticleByElementHolderId() method.
+        return Arrays::firstMatch($this->articles, function ($article) use ($element_holder_id) {
+            return $article->getId() == $element_holder_id;
+        });
     }
 
     public function getAllArticles(): array {
@@ -102,5 +106,9 @@ class ArticleDaoMock implements ArticleDao {
 
     public function setDefaultArticleTargetPage($target_page_id): void {
         // TODO: Implement setDefaultArticleTargetPage() method.
+    }
+
+    public function addArticle(Article $article): void {
+        $this->articles[] = $article;
     }
 }

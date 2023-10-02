@@ -93,7 +93,7 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
 
     private function updateSelectedTerms(array $selected_terms): void {
         if (count($selected_terms) == 0) return;
-        $existing_terms = $this->_current_article->getTerms();
+        $existing_terms = $this->_article_dao->getTermsForArticle($this->_current_article);
         foreach ($selected_terms as $selected_term_id) {
             if (!$this->termAlreadyExists($selected_term_id, $existing_terms)) {
                 $this->_article_dao->addTermToArticle($selected_term_id, $this->_current_article);

@@ -144,7 +144,7 @@ class PageVisual extends FrontendVisual {
         $parent_article = null;
         if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
             $parent_article = $this->_article_dao->getArticle($this->getArticle()->getParentArticleId());
-            $parents = $this->_page_dao->getParents($parent_article->getTargetPage());
+            $parents = $this->_page_dao->getParents($this->_page_dao->getPage($parent_article->getTargetPageId()));
         } else {
             $parents = $this->_page_dao->getParents($this->getPage());
         }

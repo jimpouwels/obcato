@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 interface ImageDao {
-    public function getImage(int $image_id): ?Image;
+    public function getImage(?int $imageId): ?Image;
 
     public function updateImage(Image $image): void;
 

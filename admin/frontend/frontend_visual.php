@@ -114,8 +114,8 @@ abstract class FrontendVisual {
     }
 
     protected function getArticleUrl(Article $article, bool $absolute = false): string {
-        $target_page = $article->getTargetPage();
-        if (is_null($target_page)) {
+        $target_page = $this->_page_dao->getPage($article->getTargetPageId());
+        if (!$target_page) {
             $target_page = $this->_page;
         }
         $url = $absolute ? $this->getBaseUrl() : "";

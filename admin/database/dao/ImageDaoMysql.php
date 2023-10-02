@@ -24,8 +24,11 @@ class ImageDaoMysql implements ImageDao {
         return self::$instance;
     }
 
-    public function getImage(int $image_id): ?Image {
-        $query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $image_id;
+    public function getImage(?int $imageId): ?Image {
+        if (!$imageId) {
+            return null;
+        }
+        $query = "SELECT " . self::$myAllColumns . " FROM images i WHERE id = " . $imageId;
         $result = $this->_mysql_connector->executeQuery($query);
         while ($row = $result->fetch_assoc()) {
             return Image::constructFromRecord($row);

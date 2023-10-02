@@ -4,7 +4,7 @@ require_once(CMS_ROOT . '/database/dao/FriendlyUrlDao.php');
 
 class FriendlyUrlDaoMock implements FriendlyUrlDao {
 
-    private array $_data = array();
+    private array $elementHolders = array();
 
     public function insertFriendlyUrl(string $url, ElementHolder $element_holder): void {
         // TODO: Implement insertFriendlyUrl() method.
@@ -19,15 +19,16 @@ class FriendlyUrlDaoMock implements FriendlyUrlDao {
     }
 
     public function getElementHolderIdFromUrl(string $url): ?int {
-        foreach ($this->_data as $data) {
+        foreach ($this->elementHolders as $data) {
             if ($data["url"] == $url) {
-                return $data["page"]->getId();
+                return $data["element_holder"]->getId();
             }
         }
         return null;
     }
 
-    public function addPage(Page $page, string $url): void {
-        $this->_data[] = array("page" => $page, "url" => $url);
+    public function addElementHolder(ElementHolder $elementHolder, string $url): void {
+        $this->elementHolders[] = array("element_holder" => $elementHolder, "url" => $url);
     }
+
 }

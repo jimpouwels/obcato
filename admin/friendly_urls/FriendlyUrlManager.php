@@ -58,7 +58,7 @@ class FriendlyUrlManager {
 
     public function insertOrUpdateFriendlyUrlForPage(Page $page): void {
         $url = $this->createUrlForPage($page);
-        $this->insertOrUpateFriendlyUrl($url, $page);
+        $this->insertOrUpdateFriendlyUrl($url, $page);
     }
 
     private function createUrlForPage(Page $page): string {
@@ -83,7 +83,7 @@ class FriendlyUrlManager {
         return $value;
     }
 
-    private function insertOrUpateFriendlyUrl(string $url, ElementHolder $element_holder): void {
+    private function insertOrUpdateFriendlyUrl(string $url, ElementHolder $element_holder): void {
         $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
         if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
             $this->friendlyUrlDao->insertFriendlyUrl($url, $element_holder);
@@ -110,7 +110,7 @@ class FriendlyUrlManager {
 
     public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
         $url = $this->createUrlForArticle($article);
-        $this->insertOrUpateFriendlyUrl($url, $article);
+        $this->insertOrUpdateFriendlyUrl($url, $article);
     }
 
     private function createUrlForArticle(Article $article): string {
@@ -175,21 +175,5 @@ class FriendlyUrlManager {
             }
         }
         $url_match->setArticle($article, $matched_url);
-    }
-
-    private function setFriendlyUrlDao(FriendlyUrlDao $friendlyUrlDao): void {
-        $this->friendlyUrlDao = $friendlyUrlDao;
-    }
-
-    private function setPageDao(PageDao $pageDao): void {
-        $this->pageDao = $pageDao;
-    }
-
-    private function setArticleDao(ArticleDao $articleDao): void {
-        $this->articleDao = $articleDao;
-    }
-
-    private function setSettingsDao(SettingsDao $settingsDao): void {
-        $this->settingsDao = $settingsDao;
     }
 }

@@ -11,10 +11,12 @@ require_once CMS_ROOT . '/modules/articles/visuals/articles/article_metadata_edi
 class ArticleEditor extends Visual {
 
     private Article $_current_article;
+    private ArticleDao $articleDao;
 
     public function __construct($current_article) {
         parent::__construct();
         $this->_current_article = $current_article;
+        $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -46,7 +48,7 @@ class ArticleEditor extends Visual {
     }
 
     private function renderTermSelector(): string {
-        $term_selector = new TermSelector($this->_current_article->getTerms(), $this->_current_article->getId());
+        $term_selector = new TermSelector($this->articleDao->getTermsForArticle($this->_current_article->getId()), $this->_current_article->getId());
         return $term_selector->render();
     }
 

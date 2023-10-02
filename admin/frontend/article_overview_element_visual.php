@@ -7,8 +7,11 @@ require_once CMS_ROOT . "/utilities/date_utility.php";
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
+    private ImageDao $imageDao;
+
     public function __construct(Page $page, ?Article $article, ArticleOverviewElement $article_overview_element) {
         parent::__construct($page, $article, $article_overview_element);
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function loadElement(): void {
@@ -36,14 +39,14 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function getArticleImage(Article $article): ?array {
-        $image = null;
-        if (!is_null($article->getImage())) {
-            $image = array();
-            $image["title"] = $article->getImage()->getTitle();
-            $image["alt_text"] = $article->getImage()->getAltText();
-            $image["url"] = $this->getImageUrl($article->getImage());
+        $image = $this->imageDao->getImage($article->getImageId());
+        if ($image) {
+            $imageData = array();
+            $imageData["title"] = $image->getTitle();
+            $imageData["alt_text"] = $image->getAltText();
+            $imageData["url"] = $this->getImageUrl($image);
         }
-        return $image;
+        return $imageData;
     }
 
     private function isPublished(Article $article): bool {

@@ -3,9 +3,6 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/ElementHolder.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class Article extends ElementHolder {
 
@@ -19,11 +16,9 @@ class Article extends ElementHolder {
     private ?int $_target_page_id = null;
     private ?int $_parent_article_id = null;
     private ?int $_comment_webform_id = null;
-    private PageDao $_page_dao;
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
-        $this->_page_dao = PageDaoMysql::getInstance();
         $this->setPublished(false);
     }
 
@@ -69,15 +64,6 @@ class Article extends ElementHolder {
         $this->_image_id = $image_id;
     }
 
-    public function getImage(): ?Image {
-        $image = null;
-        if ($this->_image_id != '' && !is_null($this->_image_id)) {
-            $image_dao = ImageDaoMysql::getInstance();
-            $image = $image_dao->getImage($this->_image_id);
-        }
-        return $image;
-    }
-
     public function getPublicationDate(): string {
         return $this->_publication_date;
     }
@@ -110,25 +96,12 @@ class Article extends ElementHolder {
         $this->_parent_article_id = $parent_article_id;
     }
 
-    public function getTargetPage(): ?Page {
-        $target_page = null;
-        if (!is_null($this->_target_page_id) && $this->_target_page_id != '') {
-            $target_page = $this->_page_dao->getPage($this->_target_page_id);
-        }
-        return $target_page;
-    }
-
     public function getCommentWebFormId(): ?int {
         return $this->_comment_webform_id;
     }
 
     public function setCommentWebFormId(?int $comment_webform_id): void {
         $this->_comment_webform_id = $comment_webform_id;
-    }
-
-    public function getTerms(): array {
-        $article_dao = ArticleDaoMysql::getInstance();
-        return $article_dao->getTermsForArticle($this->getId());
     }
 
 }
