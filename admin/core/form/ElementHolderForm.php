@@ -7,23 +7,23 @@ require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 
 class ElementHolderForm extends Form {
 
-    private ElementHolder $_element_holder;
+    private ElementHolder $elementHolder;
 
-    public function __construct(ElementHolder $element_holder) {
-        $this->_element_holder = $element_holder;
+    public function __construct(ElementHolder $elementHolder) {
+        $this->elementHolder = $elementHolder;
     }
 
     public function loadFields(): void {
-        $item_order = $this->getFieldValue('draggable_order');
-        $item_order_arr = array();
-        if ($item_order) {
-            $item_order_arr = explode(',', $item_order);
+        $itemOrder = $this->getFieldValue('draggable_order');
+        $itemOrderArr = array();
+        if ($itemOrder) {
+            $itemOrderArr = explode(',', $itemOrder);
         }
-        $order_nr = 0;
-        foreach ($item_order_arr as $item) {
-            foreach ($this->_element_holder->getElements() as $element) {
+        $orderNr = 0;
+        foreach ($itemOrderArr as $item) {
+            foreach ($this->elementHolder->getElements() as $element) {
                 if ($element->getId() == $item) {
-                    $element->setOrderNr($order_nr++);
+                    $element->setOrderNr($orderNr++);
                     break;
                 }
             }

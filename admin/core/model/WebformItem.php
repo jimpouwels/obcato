@@ -9,8 +9,8 @@ abstract class WebFormItem extends Presentable {
     private string $_name = "";
     private int $_order_nr = 0;
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id);
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId);
     }
 
     public function getLabel(): string {

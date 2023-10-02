@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/authentication/session.php';
+require_once CMS_ROOT . '/authentication/Session.php';
 require_once CMS_ROOT . '/view/views/visual.php';
 
 class FormError extends Visual {

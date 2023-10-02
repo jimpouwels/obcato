@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/modules/pages/page_form.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";

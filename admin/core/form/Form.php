@@ -1,25 +1,25 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/authentication/session.php";
+require_once CMS_ROOT . "/authentication/Session.php";
 require_once CMS_ROOT . "/utilities/string_utility.php";
 
 abstract class Form {
 
     public abstract function loadFields(): void;
 
-    public function getMandatoryFieldValue(string $field_name, string $error_message_resource_identifier): string {
-        $value = $this->getFieldValue($field_name);
+    public function getMandatoryFieldValue(string $fieldName, string $errorMessageResourceIdentifier): string {
+        $value = $this->getFieldValue($fieldName);
         if ($this->isEmpty($value)) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
         }
         return $value;
     }
 
-    public function getFieldValue(string $field_name): ?string {
+    public function getFieldValue(string $fieldName): ?string {
         $value = null;
-        if (isset($_POST[$field_name])) {
-            $value = $_POST[$field_name];
+        if (isset($_POST[$fieldName])) {
+            $value = $_POST[$fieldName];
         }
         return $value;
     }
@@ -28,51 +28,51 @@ abstract class Form {
         return empty($value) || $value == "";
     }
 
-    protected function raiseError(string $error_field, string $error_message_resource_identifier): void {
-        Session::addFieldError($error_field, $error_message_resource_identifier);
+    protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
+        Session::addFieldError($errorField, $errorMessageResourceIdentifier);
     }
 
-    public function getFieldValues(string $field_name): array {
+    public function getFieldValues(string $fieldName): array {
         $value = array();
-        if (isset($_POST[$field_name])) {
-            $value = $_POST[$field_name];
+        if (isset($_POST[$fieldName])) {
+            $value = $_POST[$fieldName];
         }
         return $value;
     }
 
-    public function getSelectValue(string $field_name): array {
+    public function getSelectValue(string $fieldName): array {
         $value = [];
-        if (isset($_POST[$field_name])) {
-            $value = $_POST[$field_name];
+        if (isset($_POST[$fieldName])) {
+            $value = $_POST[$fieldName];
         }
         return $value;
     }
 
-    public function getCheckboxValue(string $field_name): int {
-        return $this->getFieldValue($field_name) == "on" ? 1 : 0;
+    public function getCheckboxValue(string $fieldName): int {
+        return $this->getFieldValue($fieldName) == "on" ? 1 : 0;
     }
 
-    public function getMandatoryEmailAddress(string $field_name, string $error_message_resource_identifier, string $invalid_email_message): ?string {
-        $email_address = $this->getEmailAddress($field_name, $invalid_email_message);
-        if ($this->isEmpty($email_address)) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+    public function getMandatoryEmailAddress(string $fieldName, string $errorMessageResourceIdentifier, string $invalidEmailMessage): ?string {
+        $emailAddress = $this->getEmailAddress($fieldName, $invalidEmailMessage);
+        if ($this->isEmpty($emailAddress)) {
+            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
         }
-        return $email_address;
+        return $emailAddress;
     }
 
-    public function getEmailAddress(string $field_name, string $error_message_resource_identifier): ?string {
-        $value = $this->getFieldValue($field_name);
-        $valid_email = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
-        if (!$this->isEmpty($value) && !$valid_email) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+    public function getEmailAddress(string $fieldName, string $errorMessageResourceIdentifier): ?string {
+        $value = $this->getFieldValue($fieldName);
+        $invalidEmail = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
+        if (!$this->isEmpty($value) && !$invalidEmail) {
+            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
         }
         return $value;
     }
 
-    public function getMandatoryNumber(string $field_name, string $error_message_resource_identifier, string $invalid_number_message): ?int {
-        $number = $this->getNumber($field_name, $invalid_number_message);
+    public function getMandatoryNumber(string $fieldName, string $errorMessageResourceIdentifier, string $invalidNumberMessage): ?int {
+        $number = $this->getNumber($fieldName, $invalidNumberMessage);
         if ($this->isEmpty($number)) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
         }
         return $number;
     }

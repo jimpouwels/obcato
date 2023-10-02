@@ -5,7 +5,7 @@ define("CMS_ROOT", dirname(__FILE__));
 
 require_once CMS_ROOT . "/view/views/visual.php";
 require_once CMS_ROOT . "/view/views/panel.php";
-require_once CMS_ROOT . "/authentication/authenticator.php";
+require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database_config.php";
 require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/backend.php";

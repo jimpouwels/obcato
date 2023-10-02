@@ -5,16 +5,56 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class ArticleComment extends Entity {
 
-    private string $_name;
-    private string $_email_address;
-    private string $_message;
-    private ?int $_parent_id = null;
-    private string $_created_at;
+    private string $name;
+    private string $emailAddress;
+    private string $message;
+    private ?int $parentId = null;
+    private string $createdAt;
 
     public static function constructFromRecord(array $row): ArticleComment {
-        $article_comment = new ArticleComment();
-        $article_comment->initFromDb($row);
-        return $article_comment;
+        $articleComment = new ArticleComment();
+        $articleComment->initFromDb($row);
+        return $articleComment;
+    }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
+
+    public function getEmailAddress(): string {
+        return $this->emailAddress;
+    }
+
+    public function setEmailAddress(string $emailAddress): void {
+        $this->emailAddress = $emailAddress;
+    }
+
+    public function getMessage(): string {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): void {
+        $this->message = $message;
+    }
+
+    public function getParentId(): ?int {
+        return $this->parentId;
+    }
+
+    public function setParentId(?int $parentId): void {
+        $this->parentId = $parentId;
+    }
+
+    public function getCreatedAt(): string {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(string $createdAt): void {
+        $this->createdAt = $createdAt;
     }
 
     protected function initFromDb(array $row): void {
@@ -24,46 +64,6 @@ class ArticleComment extends Entity {
         $this->setParentId($row['parent']);
         $this->setCreatedAt($row['created_at']);
         parent::initFromDb($row);
-    }
-
-    public function getName(): string {
-        return $this->_name;
-    }
-
-    public function setName(string $name): void {
-        $this->_name = $name;
-    }
-
-    public function getEmailAddress(): string {
-        return $this->_email_address;
-    }
-
-    public function setEmailAddress(string $email_address): void {
-        $this->_email_address = $email_address;
-    }
-
-    public function getMessage(): string {
-        return $this->_message;
-    }
-
-    public function setMessage(string $message): void {
-        $this->_message = $message;
-    }
-
-    public function getParentId(): ?int {
-        return $this->_parent_id;
-    }
-
-    public function setParentId(?int $parent_id): void {
-        $this->_parent_id = $parent_id;
-    }
-
-    public function getCreatedAt(): string {
-        return $this->_created_at;
-    }
-
-    public function setCreatedAt(string $created_at): void {
-        $this->_created_at = $created_at;
     }
 
 }

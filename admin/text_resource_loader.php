@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/authentication/session.php";
+require_once CMS_ROOT . "/authentication/Session.php";
 require_once CMS_ROOT . "/utilities/string_utility.php";
 require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";

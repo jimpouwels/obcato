@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/User.php";
 require_once CMS_ROOT . "/utilities/string_utility.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDao.php";
 
 class AuthorizationDaoMysql implements AuthorizationDao {

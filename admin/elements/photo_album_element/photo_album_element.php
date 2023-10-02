@@ -4,20 +4,20 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_statics.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_editor.php";
 require_once CMS_ROOT . "/elements/photo_album_element/photo_album_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/photo_album_element_visual.php";
+require_once CMS_ROOT . "/frontend/PhotoAlbumElementVisual.php";
 
 class PhotoAlbumElement extends Element {
 
     private array $_labels;
     private ?int $_number_of_results = null;
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new PhotoAlbumElementMetadataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new PhotoAlbumElementMetadataProvider($this));
         $this->_labels = array();
     }
 

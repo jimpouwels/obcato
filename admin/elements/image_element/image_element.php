@@ -3,12 +3,12 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_editor.php";
 require_once CMS_ROOT . "/elements/image_element/image_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/image_element_visual.php";
+require_once CMS_ROOT . "/frontend/ImageElementVisual.php";
 
 class ImageElement extends Element {
 
@@ -17,8 +17,8 @@ class ImageElement extends Element {
     private ?int $_width = null;
     private ?int $_image_id = null;
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new ImageElementMetadataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new ImageElementMetadataProvider($this));
     }
 
     public function setAlign(?string $align): void {

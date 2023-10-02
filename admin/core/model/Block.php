@@ -6,7 +6,7 @@ require_once CMS_ROOT . "/core/model/ElementHolder.php";
 class Block extends ElementHolder {
 
     private static int $SCOPE = 6;
-    private ?int $_position_id = null;
+    private ?int $positionId = null;
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
@@ -19,17 +19,17 @@ class Block extends ElementHolder {
     }
 
     protected function initFromDb(array $row): void {
-        $this->setPublished($row['published'] == 1 ? true : false);
+        $this->setPublished($row['published'] == 1);
         $this->setPositionId($row['position_id']);
         parent::initFromDb($row);
     }
 
     public function getPositionId(): ?int {
-        return $this->_position_id;
+        return $this->positionId;
     }
 
     public function setPositionId(?int $position_id): void {
-        $this->_position_id = $position_id;
+        $this->positionId = $position_id;
     }
 
     public function getPositionName(): string {
@@ -43,7 +43,7 @@ class Block extends ElementHolder {
 
     public function getPosition(): ?BlockPosition {
         $dao = BlockDaoMysql::getInstance();
-        return $dao->getBlockPosition($this->_position_id);
+        return $dao->getBlockPosition($this->positionId);
     }
 
 }

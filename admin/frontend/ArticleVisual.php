@@ -1,11 +1,12 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/frontend/frontend_visual.php";
+require_once CMS_ROOT . "/frontend/FrontendVisual.php";
 require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/TemplateDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ImageDaoMysql.php';
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class ArticleVisual extends FrontendVisual {
 
@@ -13,6 +14,7 @@ class ArticleVisual extends FrontendVisual {
     private WebFormDao $webformDao;
     private ArticleDao $articleDao;
     private ImageDao $imageDao;
+    private ElementDao $elementDao;
 
     public function __construct(Page $page, Article $article) {
         parent::__construct($page, $article);
@@ -20,6 +22,7 @@ class ArticleVisual extends FrontendVisual {
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -46,56 +49,57 @@ class ArticleVisual extends FrontendVisual {
     }
 
     private function getImageData($image): ?array {
-        $image_data = null;
+        $imageData = null;
         if (!is_null($image)) {
-            $image_data = array();
-            $image_data["title"] = $image->getTitle();
-            $image_data["url"] = $this->getImageUrl($image);
+            $imageData = array();
+            $imageData["title"] = $image->getTitle();
+            $imageData["url"] = $this->getImageUrl($image);
         }
-        return $image_data;
+        return $imageData;
     }
 
     private function renderElementHolderContent(ElementHolder $element_holder): array {
-        $elements_content = array();
+        $elementsContents = array();
         foreach ($element_holder->getElements() as $element) {
-            $element_data = array();
-            $element_data["type"] = $element->getType()->getIdentifier();
+            $elementData = array();
+            $elementType = $this->elementDao->getElementTypeForElement($element->getId());
+            $elementData["type"] = $elementType->getIdentifier();
             if ($element->getTemplate()) {
-                $element_data["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
             }
-            $elements_content[] = $element_data;
+            $elementsContents[] = $elementData;
         }
-        return $elements_content;
+        return $elementsContents;
     }
 
     private function renderArticleComments(Article $article): array {
-        $comments_data = array();
+        $commentsData = array();
         foreach ($this->articleDao->getArticleComments($article->getId()) as $comment) {
-            $comment_data = array();
-            $comment_data['id'] = htmlspecialchars($comment->getId());
-            $comment_data['name'] = htmlspecialchars($comment->getName());
-            $comment_data['message'] = htmlspecialchars($comment->getMessage());
-            $comment_data['created_at'] = $comment->getCreatedAt();
-            $child_comments = array();
+            $commentData = array();
+            $commentData['id'] = htmlspecialchars($comment->getId());
+            $commentData['name'] = htmlspecialchars($comment->getName());
+            $commentData['message'] = htmlspecialchars($comment->getMessage());
+            $commentData['created_at'] = $comment->getCreatedAt();
+            $childComments = array();
             foreach ($this->articleDao->getChildArticleComments($comment->getId()) as $child) {
-                $child_comment_data = array();
-                $child_comment_data['id'] = htmlspecialchars($child->getId());
-                $child_comment_data['created_at'] = $child->getCreatedAt();
-                $child_comment_data['name'] = htmlspecialchars($child->getName());
-                $child_comment_data['message'] = htmlspecialchars($child->getMessage());
-                $child_comments[] = $child_comment_data;
+                $childCommentData = array();
+                $childCommentData['id'] = htmlspecialchars($child->getId());
+                $childCommentData['created_at'] = $child->getCreatedAt();
+                $childCommentData['name'] = htmlspecialchars($child->getName());
+                $childCommentData['message'] = htmlspecialchars($child->getMessage());
+                $childComments[] = $childCommentData;
             }
-            $comment_data['children'] = $child_comments;
-            $comments_data[] = $comment_data;
+            $commentData['children'] = $childComments;
+            $commentsData[] = $commentData;
         }
-        return $comments_data;
+        return $commentsData;
     }
 
     private function renderArticleCommentWebForm($article): string {
         if (!is_null($article->getCommentWebFormId())) {
-            $comment_webform = $this->webformDao->getWebForm($article->getCommentWebFormId());
-            $form_visual = new FormFrontendVisual($this->getPage(), $article, $comment_webform);
-            return $form_visual->render();
+            $commentWebform = $this->webformDao->getWebForm($article->getCommentWebFormId());
+            $formVisual = new FormFrontendVisual($this->getPage(), $article, $commentWebform);
+            return $formVisual->render();
         }
         return "";
     }

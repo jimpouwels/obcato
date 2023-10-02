@@ -4,13 +4,13 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/utilities/date_utility.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
 require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/article_overview_element_visual.php";
+require_once CMS_ROOT . "/frontend/ArticleOverviewElementVisual.php";
 
 class ArticleOverviewElement extends Element {
 
@@ -22,8 +22,8 @@ class ArticleOverviewElement extends Element {
     private array $_terms;
     private ?int $_number_of_results = null;
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new ArticleOverviewElementMetadataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new ArticleOverviewElementMetadataProvider($this));
         $this->_terms = array();
     }
 

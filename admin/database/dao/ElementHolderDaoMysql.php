@@ -3,7 +3,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ElementHolderDao.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/core/model/ElementHolder.php";
 
 class ElementHolderDaoMysql implements ElementHolderDao {
@@ -13,9 +14,11 @@ class ElementHolderDaoMysql implements ElementHolderDao {
 
     private static ?ElementHolderDaoMysql $instance = null;
     private MysqlConnector $_mysql_connector;
+    private AuthorizationDao $authorizationDao;
 
     private function __construct() {
         $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }
 
     public static function getInstance(): ElementHolderDaoMysql {
@@ -36,7 +39,7 @@ class ElementHolderDaoMysql implements ElementHolderDao {
 
     public function persist(ElementHolder $element_holder): void {
         $query = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type) VALUES
-                      (NULL, '" . $element_holder->getTitle() . "', 0," . $element_holder->getScopeId() . ", now(), " . $element_holder->getCreatedBy()->getId() . "
+                      (NULL, '" . $element_holder->getTitle() . "', 0," . $element_holder->getScopeId() . ", now(), " . $this->authorizationDao->getUserById($element_holder->getCreatedById()) . "
                       , '" . $element_holder->getType() . "')";
         $this->_mysql_connector->executeQuery($query);
         $element_holder->setId($this->_mysql_connector->getInsertId());

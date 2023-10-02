@@ -4,16 +4,16 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_statics.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_editor.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/table_of_contents_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/table_of_contents_element_visual.php";
+require_once CMS_ROOT . "/frontend/TableOfContentsElementVisual.php";
 
 class TableOfContentsElement extends Element {
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new TableOfContentsElementMetadataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new TableOfContentsElementMetadataProvider($this));
     }
 
     public function getStatics(): Visual {

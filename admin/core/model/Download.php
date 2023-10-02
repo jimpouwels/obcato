@@ -10,11 +10,6 @@ class Download extends Entity {
     private string $_file_name;
     private bool $_published;
     private string $_created_at;
-    private int $_created_by_id;
-
-    public function __construct() {
-        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
-    }
 
     public static function constructFromRecord(array $row): Download {
         $download = new Download();
@@ -57,10 +52,6 @@ class Download extends Entity {
 
     public function setCreatedAt(string $created_at): void {
         $this->_created_at = $created_at;
-    }
-
-    public function getCreatedBy(): User {
-        return $this->_authorization_dao->getUserById($this->_created_by_id);
     }
 
     public function getExtension(): string {

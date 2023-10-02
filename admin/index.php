@@ -18,7 +18,7 @@ function runBackend(): void {
     require_once CMS_ROOT . "/includes.php";
     require_once CMS_ROOT . "/constants.php";
     require_once CMS_ROOT . "/backend.php";
-    require_once CMS_ROOT . "/authentication/authenticator.php";
+    require_once CMS_ROOT . "/authentication/Authenticator.php";
     checkAuthentication();
     $backend = new Backend();
     $backend->start();

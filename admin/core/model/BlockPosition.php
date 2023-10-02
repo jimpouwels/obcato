@@ -6,13 +6,8 @@ require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockPosition extends Entity {
 
-    private string $_name = "";
-    private string $_explanation = "";
-    private BlockDao $_block_dao;
-
-    public function __construct() {
-        $this->_block_dao = BlockDaoMysql::getInstance();
-    }
+    private string $name = "";
+    private string $explanation = "";
 
     public static function constructFromRecord(array $row): BlockPosition {
         $position = new BlockPosition();
@@ -20,30 +15,26 @@ class BlockPosition extends Entity {
         return $position;
     }
 
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function setName($name): void {
+        $this->name = $name;
+    }
+
+    public function getExplanation(): string {
+        return $this->explanation;
+    }
+
+    public function setExplanation(string $explanation): void {
+        $this->explanation = $explanation;
+    }
+
     protected function initFromDb(array $row): void {
         $this->setName($row['name']);
         $this->setExplanation($row['explanation']);
         parent::initFromDb($row);
-    }
-
-    public function getName(): string {
-        return $this->_name;
-    }
-
-    public function setName($name): void {
-        $this->_name = $name;
-    }
-
-    public function getExplanation(): string {
-        return $this->_explanation;
-    }
-
-    public function setExplanation(string $explanation): void {
-        $this->_explanation = $explanation;
-    }
-
-    public function getBlocks(): array {
-        return $this->_block_dao->getBlocksByPosition($this);
     }
 
 }

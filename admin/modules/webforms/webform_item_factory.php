@@ -15,10 +15,10 @@ namespace {
     require_once CMS_ROOT . '/core/model/WebformTextArea.php';
     require_once CMS_ROOT . '/core/model/WebformDropdown.php';
     require_once CMS_ROOT . '/core/model/WebformButton.php';
-    require_once CMS_ROOT . '/frontend/form_textfield_visual.php';
-    require_once CMS_ROOT . '/frontend/form_textarea_visual.php';
-    require_once CMS_ROOT . '/frontend/form_dropdown_visual.php';
-    require_once CMS_ROOT . '/frontend/form_button_visual.php';
+    require_once CMS_ROOT . '/frontend/FormTextfieldVisual.php';
+    require_once CMS_ROOT . '/frontend/FormTextAreaVisual.php';
+    require_once CMS_ROOT . '/frontend/FormDropdownVisual.php';
+    require_once CMS_ROOT . '/frontend/FormButtonVisual.php';
 
     class WebFormItemFactory {
 

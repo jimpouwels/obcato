@@ -5,8 +5,8 @@ define("CMS_ROOT", dirname(__FILE__));
 if (!file_exists("database_config.php"))
     header("Location: /admin/index.php");
 
-require_once CMS_ROOT . "/authentication/authenticator.php";
-require_once CMS_ROOT . "/authentication/session.php";
+require_once CMS_ROOT . "/authentication/Authenticator.php";
+require_once CMS_ROOT . "/authentication/Session.php";
 require_once CMS_ROOT . "/database_config.php";
 require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/includes.php";

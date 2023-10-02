@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/BlockDao.php";
-require_once CMS_ROOT . "/authentication/authenticator.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/authentication/Authenticator.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 require_once CMS_ROOT . "/core/model/Block.php";

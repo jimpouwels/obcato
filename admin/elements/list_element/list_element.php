@@ -3,19 +3,19 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/elements/list_element/list_item.php";
 require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
 require_once CMS_ROOT . "/elements/list_element/visuals/list_element_editor.php";
-require_once CMS_ROOT . "/frontend/list_element_visual.php";
+require_once CMS_ROOT . "/frontend/ListElementVisual.php";
 require_once CMS_ROOT . "/elements/list_element/list_element_request_handler.php";
 
 class ListElement extends Element {
 
     private array $_list_items = array();
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new ListElementMetaDataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new ListElementMetaDataProvider($this));
     }
 
     public function getListItems(): array {

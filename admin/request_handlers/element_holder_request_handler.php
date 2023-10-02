@@ -61,7 +61,7 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     private function deleteElementFrom(ElementHolder $element_holder): void {
         $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
         if (!is_null($element_to_delete)) {
-            $element_to_delete->delete();
+            $this->_element_dao->deleteElement($element_to_delete);
             $element_holder->deleteElement($element_to_delete);
         }
     }

@@ -6,7 +6,7 @@ require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 
 class ArticleTerm extends Entity {
 
-    private string $_name = "";
+    private string $name = "";
 
     public static function constructFromRecord(array $row): ArticleTerm {
         $term = new ArticleTerm();
@@ -20,11 +20,11 @@ class ArticleTerm extends Entity {
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName(string $name): void {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
 }

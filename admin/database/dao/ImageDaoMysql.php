@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ImageDao.php";
-require_once CMS_ROOT . "/authentication/authenticator.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/authentication/Authenticator.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/core/model/ImageLabel.php";
 require_once CMS_ROOT . "/core/model/Image.php";
 

@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/mysql_connector.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/install/install_folders_form.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 

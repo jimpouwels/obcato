@@ -2,35 +2,33 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Presentable.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 
 abstract class Element extends Presentable {
 
-    private ?string $_title = null;
-    private int $_element_holder_id;
-    private int $_order_nr;
-    private bool $_include_in_table_of_contents;
-    private ElementMetadataProvider $_metadata_provider;
+    private ?string $title = null;
+    private int $elementHolderId;
+    private int $orderNr;
+    private bool $includeInTableOfContents;
+    private ElementMetadataProvider $metadataProvider;
 
-    public function __construct(int $scope_id, ElementMetadataProvider $metadata_provider) {
-        parent::__construct($scope_id);
-        $this->_metadata_provider = $metadata_provider;
+    public function __construct(int $scopeId, ElementMetadataProvider $metadataProvider) {
+        parent::__construct($scopeId);
+        $this->metadataProvider = $metadataProvider;
     }
 
     public static function constructFromRecord(array $record): Element {
         require_once CMS_ROOT . '/elements/' . $record['identifier'] . '/' . $record['domain_object'];
 
         // first get the element type
-        $element_type = $record['classname'];
+        $elementType = $record['classname'];
 
         // the constructor for each type will initialize specific metadata
-        $element = new $element_type($record["scope_id"]);
+        $element = new $elementType($record["scope_id"]);
 
         $element->setId($record['id']);
         $element->setOrderNr($record['follow_up']);
         $element->setTemplateId($record['template_id']);
-        $element->setIncludeInTableOfContents($record['include_in_table_of_contents'] == 1 ? true : false);
+        $element->setIncludeInTableOfContents($record['include_in_table_of_contents'] == 1);
         $element->setElementHolderId($record['element_holder_id']);
 
         $element->initializeMetaData();
@@ -38,54 +36,44 @@ abstract class Element extends Presentable {
         return $element;
     }
 
-    public function setIncludeInTableOfContents(bool $_include_in_table_of_contents): void {
-        $this->_include_in_table_of_contents = $_include_in_table_of_contents;
+    public function setIncludeInTableOfContents(bool $includeInTableOfContents): void {
+        $this->includeInTableOfContents = $includeInTableOfContents;
     }
 
     public function initializeMetaData(): void {
-        $this->_metadata_provider->loadMetaData();
+        $this->metadataProvider->loadMetaData();
     }
 
     public function getTitle(): ?string {
-        return $this->_title;
+        return $this->title;
     }
 
     public function setTitle(?string $title): void {
-        $this->_title = $title;
+        $this->title = $title;
     }
 
     public function getOrderNr(): int {
-        return $this->_order_nr;
+        return $this->orderNr;
     }
 
     public function setOrderNr(int $order_nr): void {
-        $this->_order_nr = $order_nr;
-    }
-
-    public function getType(): ElementType {
-        $element_dao = ElementDaoMysql::getInstance();
-        return $element_dao->getElementTypeForElement($this->getId());
+        $this->orderNr = $order_nr;
     }
 
     public function includeInTableOfContents(): bool {
-        return $this->_include_in_table_of_contents;
+        return $this->includeInTableOfContents;
     }
 
     public function getElementHolderId(): int {
-        return $this->_element_holder_id;
+        return $this->elementHolderId;
     }
 
     public function setElementHolderId(int $element_holder_id): void {
-        $this->_element_holder_id = $element_holder_id;
-    }
-
-    public function delete(): void {
-        $element_dao = ElementDaoMysql::getInstance();
-        $element_dao->deleteElement($this);
+        $this->elementHolderId = $element_holder_id;
     }
 
     public function updateMetaData(): void {
-        $this->_metadata_provider->upsert($this);
+        $this->metadataProvider->upsert($this);
     }
 
     public abstract function getStatics(): Visual;
@@ -99,6 +87,6 @@ abstract class Element extends Presentable {
     public abstract function getSummaryText(): string;
 
     protected function getMetaDataProvider(): ElementMetadataProvider {
-        return $this->_metadata_provider;
+        return $this->metadataProvider;
     }
 }

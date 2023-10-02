@@ -8,14 +8,14 @@ class Article extends ElementHolder {
 
     const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
     private static int $SCOPE = 9;
-    private ?string $_description;
-    private ?int $_image_id = null;
-    private ?string $_keywords = null;
-    private string $_publication_date;
-    private string $_sort_date;
-    private ?int $_target_page_id = null;
-    private ?int $_parent_article_id = null;
-    private ?int $_comment_webform_id = null;
+    private ?string $description;
+    private ?int $imageId = null;
+    private ?string $keywords = null;
+    private string $publicationDate;
+    private string $sortDate;
+    private ?int $targetPageId = null;
+    private ?int $parentArticleId = null;
+    private ?int $commentWebformId = null;
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
@@ -41,67 +41,67 @@ class Article extends ElementHolder {
     }
 
     public function getDescription(): ?string {
-        return $this->_description;
+        return $this->description;
     }
 
     public function setDescription(?string $description): void {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     public function getKeywords(): ?string {
-        return $this->_keywords;
+        return $this->keywords;
     }
 
     public function setKeywords(?string $keywords): void {
-        $this->_keywords = $keywords;
+        $this->keywords = $keywords;
     }
 
     public function getImageId(): ?int {
-        return $this->_image_id;
+        return $this->imageId;
     }
 
     public function setImageId(?int $image_id): void {
-        $this->_image_id = $image_id;
+        $this->imageId = $image_id;
     }
 
     public function getPublicationDate(): string {
-        return $this->_publication_date;
+        return $this->publicationDate;
     }
 
     public function setPublicationDate(string $publication_date): void {
-        $this->_publication_date = $publication_date;
+        $this->publicationDate = $publication_date;
     }
 
     public function getSortDate(): string {
-        return $this->_sort_date;
+        return $this->sortDate;
     }
 
     public function setSortDate(string $sort_date): void {
-        $this->_sort_date = $sort_date;
+        $this->sortDate = $sort_date;
     }
 
     public function getTargetPageId(): ?int {
-        return $this->_target_page_id;
+        return $this->targetPageId;
     }
 
     public function setTargetPageId(?int $target_page_id): void {
-        $this->_target_page_id = $target_page_id;
+        $this->targetPageId = $target_page_id;
     }
 
     public function getParentArticleId(): ?int {
-        return $this->_parent_article_id;
+        return $this->parentArticleId;
     }
 
     public function setParentArticleId(?int $parent_article_id): void {
-        $this->_parent_article_id = $parent_article_id;
+        $this->parentArticleId = $parent_article_id;
     }
 
     public function getCommentWebFormId(): ?int {
-        return $this->_comment_webform_id;
+        return $this->commentWebformId;
     }
 
     public function setCommentWebFormId(?int $comment_webform_id): void {
-        $this->_comment_webform_id = $comment_webform_id;
+        $this->commentWebformId = $comment_webform_id;
     }
 
 }

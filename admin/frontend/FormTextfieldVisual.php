@@ -1,9 +1,10 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/frontend/form_field_visual.php';
+require_once CMS_ROOT . '/frontend/FormFieldVisual.php';
 
-class FormTextAreaVisual extends FormFieldVisual {
+class FormTextFieldVisual extends FormFieldVisual {
+
     private TemplateDao $_template_dao;
 
     public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webform_field) {

@@ -53,7 +53,7 @@ class BlocksList extends Panel {
     private function getBlocks(?BlockPosition $position): array {
         $blocks = array();
         if (!is_null($position)) {
-            foreach ($position->getBlocks() as $block) {
+            foreach ($this->_block_dao->getBlocksByPosition($position) as $block) {
                 $blocks[] = $this->toArray($block);
             }
         } else {

@@ -7,15 +7,15 @@ require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/elements/text_element/visuals/text_element_editor.php";
 require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
 require_once CMS_ROOT . "/elements/text_element/text_element_request_handler.php";
-require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/frontend/text_element_visual.php";
+require_once CMS_ROOT . "/database/MysqlConnector.php";
+require_once CMS_ROOT . "/frontend/TextElementVisual.php";
 
 class TextElement extends Element {
 
     private ?string $_text = null;
 
-    public function __construct(int $scope_id) {
-        parent::__construct($scope_id, new TextElementMetadataProvider($this));
+    public function __construct(int $scopeId) {
+        parent::__construct($scopeId, new TextElementMetadataProvider($this));
     }
 
     public function setText(?string $text): void {
