@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/element.php";
-require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
+require_once CMS_ROOT . "/core/model/Element.php";
+require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/elements/text_element/visuals/text_element_editor.php";
 require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
 require_once CMS_ROOT . "/elements/text_element/text_element_request_handler.php";

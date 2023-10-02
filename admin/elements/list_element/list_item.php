@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/entity.php";
+require_once CMS_ROOT . "/core/model/Entity.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class ListItem extends Entity {

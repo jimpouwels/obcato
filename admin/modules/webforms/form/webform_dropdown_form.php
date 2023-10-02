@@ -2,7 +2,7 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/core/model/webform_dropdown.php";
+require_once CMS_ROOT . "/core/model/WebformDropdown.php";
 require_once CMS_ROOT . "/modules/webforms/form/webform_field_form.php";
 
 class WebFormDropDownForm extends WebFormFieldForm {

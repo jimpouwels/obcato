@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
-require_once CMS_ROOT . '/core/model/webform.php';
+require_once CMS_ROOT . '/core/model/Webform.php';
 require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 

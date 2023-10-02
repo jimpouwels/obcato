@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/utilities/file_utility.php';
 require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
-require_once CMS_ROOT . '/core/model/module.php';
+require_once CMS_ROOT . '/core/model/Module.php';
 require_once CMS_ROOT . '/modules/components/installer/installer.php';
 
 abstract class ModuleInstaller extends Installer {

@@ -9,7 +9,7 @@ require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
-require_once CMS_ROOT . "/core/model/page.php";
+require_once CMS_ROOT . "/core/model/Page.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class PageDaoMysql implements PageDao {

@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/core/model/webform.php';
+require_once CMS_ROOT . '/core/model/Webform.php';
 require_once CMS_ROOT . '/modules/webforms/handlers/email_form_handler.php';
 require_once CMS_ROOT . '/modules/webforms/webform_handler_manager.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';

@@ -6,8 +6,8 @@ require_once CMS_ROOT . "/authentication/authenticator.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
-require_once CMS_ROOT . "/core/model/block.php";
-require_once CMS_ROOT . "/core/model/block_position.php";
+require_once CMS_ROOT . "/core/model/Block.php";
+require_once CMS_ROOT . "/core/model/BlockPosition.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class BlockDaoMysql implements BlockDao {

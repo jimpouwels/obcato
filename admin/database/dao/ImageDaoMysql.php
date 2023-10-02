@@ -4,8 +4,8 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/database/dao/ImageDao.php";
 require_once CMS_ROOT . "/authentication/authenticator.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/image_label.php";
-require_once CMS_ROOT . "/core/model/image.php";
+require_once CMS_ROOT . "/core/model/ImageLabel.php";
+require_once CMS_ROOT . "/core/model/Image.php";
 
 class ImageDaoMysql implements ImageDao {
 

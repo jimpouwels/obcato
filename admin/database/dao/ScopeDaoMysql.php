@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/scope.php";
+require_once CMS_ROOT . "/core/model/Scope.php";
 require_once CMS_ROOT . "/database/dao/ScopeDao.php";
 
 class ScopeDaoMysql implements ScopeDao {

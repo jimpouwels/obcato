@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/webform_field_visual.php";
-require_once CMS_ROOT . "/core/model/webform_textfield.php";
+require_once CMS_ROOT . "/core/model/WebformTextField.php";
 
 class WebFormTextAreaVisual extends WebFormFieldVisual {
 

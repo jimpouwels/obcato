@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/LinkDao.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/link.php";
+require_once CMS_ROOT . "/core/model/Link.php";
 
 class LinkDaoMysql implements LinkDao {
 

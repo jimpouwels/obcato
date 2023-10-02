@@ -1,7 +1,8 @@
 <?php
+
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/core/form/form.php";
+require_once CMS_ROOT . "/core/form/Form.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/utilities/date_utility.php";
 

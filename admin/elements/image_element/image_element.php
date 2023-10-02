@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/element.php";
-require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
+require_once CMS_ROOT . "/core/model/Element.php";
+require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";

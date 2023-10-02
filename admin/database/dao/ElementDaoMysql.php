@@ -3,8 +3,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ElementDao.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/element_type.php";
-require_once CMS_ROOT . "/core/model/element.php";
+require_once CMS_ROOT . "/core/model/ElementType.php";
+require_once CMS_ROOT . "/core/model/Element.php";
 
 class ElementDaoMysql implements ElementDao {
 

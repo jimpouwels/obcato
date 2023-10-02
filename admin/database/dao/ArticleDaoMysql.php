@@ -6,9 +6,9 @@ require_once CMS_ROOT . "/authentication/authenticator.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
-require_once CMS_ROOT . "/core/model/article.php";
-require_once CMS_ROOT . "/core/model/article_comment.php";
-require_once CMS_ROOT . "/core/model/article_term.php";
+require_once CMS_ROOT . "/core/model/Article.php";
+require_once CMS_ROOT . "/core/model/ArticleComment.php";
+require_once CMS_ROOT . "/core/model/ArticleTerm.php";
 require_once CMS_ROOT . "/utilities/date_utility.php";
 
 class ArticleDaoMysql implements ArticleDao {

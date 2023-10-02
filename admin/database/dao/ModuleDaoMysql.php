@@ -3,8 +3,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/module_group.php";
-require_once CMS_ROOT . "/core/model/module.php";
+require_once CMS_ROOT . "/core/model/ModuleGroup.php";
+require_once CMS_ROOT . "/core/model/Module.php";
 require_once CMS_ROOT . "/database/dao/ModuleDao.php";
 
 class ModuleDaoMysql implements ModuleDao {

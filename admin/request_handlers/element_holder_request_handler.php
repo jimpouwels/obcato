@@ -1,12 +1,13 @@
 <?php
+
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/form/element_holder_form.php";
+require_once CMS_ROOT . "/core/form/ElementHolderForm.php";
 require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "/core/form/link_form.php";
+require_once CMS_ROOT . "/core/form/LinkForm.php";
 require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 

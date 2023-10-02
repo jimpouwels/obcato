@@ -1,4 +1,5 @@
 <?php
+
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
@@ -6,8 +7,8 @@ require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/webforms/form/webform_form.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/email_form_handler.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/article_comment_form_handler.php";
-require_once CMS_ROOT . "/core/model/webform_textfield.php";
-require_once CMS_ROOT . "/core/model/webform_textarea.php";
+require_once CMS_ROOT . "/core/model/WebformTextField.php";
+require_once CMS_ROOT . "/core/model/WebformTextArea.php";
 
 class WebFormRequestHandler extends HttpRequestHandler {
 

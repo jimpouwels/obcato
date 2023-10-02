@@ -11,10 +11,10 @@ namespace {
     require_once CMS_ROOT . '/modules/webforms/form/webform_button_form.php';
     require_once CMS_ROOT . '/modules/webforms/form/webform_textfield_form.php';
     require_once CMS_ROOT . '/modules/webforms/form/webform_textarea_form.php';
-    require_once CMS_ROOT . '/core/model/webform_textfield.php';
-    require_once CMS_ROOT . '/core/model/webform_textarea.php';
-    require_once CMS_ROOT . '/core/model/webform_dropdown.php';
-    require_once CMS_ROOT . '/core/model/webform_button.php';
+    require_once CMS_ROOT . '/core/model/WebformTextField.php';
+    require_once CMS_ROOT . '/core/model/WebformTextArea.php';
+    require_once CMS_ROOT . '/core/model/WebformDropdown.php';
+    require_once CMS_ROOT . '/core/model/WebformButton.php';
     require_once CMS_ROOT . '/frontend/form_textfield_visual.php';
     require_once CMS_ROOT . '/frontend/form_textarea_visual.php';
     require_once CMS_ROOT . '/frontend/form_dropdown_visual.php';

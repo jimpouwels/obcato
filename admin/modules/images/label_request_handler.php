@@ -1,8 +1,9 @@
 <?php
+
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/core/model/image_label.php";
+require_once CMS_ROOT . "/core/model/ImageLabel.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/images/label_form.php";
 

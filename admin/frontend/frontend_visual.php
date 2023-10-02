@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/article.php";
-require_once CMS_ROOT . "/core/model/page.php";
+require_once CMS_ROOT . "/core/model/Article.php";
+require_once CMS_ROOT . "/core/model/Page.php";
 require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";

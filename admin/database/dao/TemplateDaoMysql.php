@@ -2,10 +2,10 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/template.php";
-require_once CMS_ROOT . "/core/model/template_var.php";
-require_once CMS_ROOT . "/core/model/template_var_def.php";
-require_once CMS_ROOT . "/core/model/template_file.php";
+require_once CMS_ROOT . "/core/model/Template.php";
+require_once CMS_ROOT . "/core/model/TemplateVar.php";
+require_once CMS_ROOT . "/core/model/TemplateVarDef.php";
+require_once CMS_ROOT . "/core/model/TemplateFile.php";
 require_once CMS_ROOT . "/database/dao/TemplateDao.php";
 
 class TemplateDaoMysql implements TemplateDao {

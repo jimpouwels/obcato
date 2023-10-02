@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ElementHolderDao.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/core/model/element_holder.php";
+require_once CMS_ROOT . "/core/model/ElementHolder.php";
 
 class ElementHolderDaoMysql implements ElementHolderDao {
 
