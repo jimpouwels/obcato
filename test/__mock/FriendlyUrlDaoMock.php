@@ -28,7 +28,6 @@ class FriendlyUrlDaoMock implements FriendlyUrlDao {
     }
 
     public function addPage(Page $page, string $url): void {
-        $this->_data[] = array("page" => $page,
-            "url" => $url);
+        $this->_data[] = array("page" => $page, "url" => $url);
     }
 }

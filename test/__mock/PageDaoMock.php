@@ -5,7 +5,7 @@ require_once CMS_ROOT . '/utilities/arrays.php';
 
 class PageDaoMock implements PageDao {
 
-    private array $_pages = array();
+    private array $pages = array();
 
     public function getAllPages(): array {
         // TODO: Implement getAllPages() method.
@@ -16,7 +16,7 @@ class PageDaoMock implements PageDao {
     }
 
     public function getPageByElementHolderId(?int $element_holder_id): ?Page {
-        return Arrays::firstMatch($this->_pages, function ($page) use ($element_holder_id) {
+        return Arrays::firstMatch($this->pages, function ($page) use ($element_holder_id) {
             return $page->getId() == $element_holder_id;
         });
     }
@@ -70,6 +70,6 @@ class PageDaoMock implements PageDao {
     }
 
     public function addPage(Page $page): void {
-        $this->_pages[] = $page;
+        $this->pages[] = $page;
     }
 }

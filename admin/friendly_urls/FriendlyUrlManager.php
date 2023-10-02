@@ -11,19 +11,19 @@ require_once CMS_ROOT . '/utilities/url_helper.php';
 class FriendlyUrlManager {
 
     private static ?FriendlyUrlManager $instance = null;
-    private FriendlyUrlDao $_friendly_url_dao;
-    private SettingsDao $_settings_dao;
-    private PageDao $_page_dao;
-    private ArticleDao $_article_dao;
+    private FriendlyUrlDao $friendlyUrlDao;
+    private SettingsDao $settingsDao;
+    private PageDao $pageDao;
+    private ArticleDao $articleDao;
 
     public function __construct(FriendlyUrlDao $friendlyUrlDao,
                                 SettingsDao    $settingsDao,
                                 PageDao        $pageDao,
                                 ArticleDao     $articleDao) {
-        $this->_friendly_url_dao = $friendlyUrlDao;
-        $this->_settings_dao = $settingsDao;
-        $this->_page_dao = $pageDao;
-        $this->_article_dao = $articleDao;
+        $this->friendlyUrlDao = $friendlyUrlDao;
+        $this->settingsDao = $settingsDao;
+        $this->pageDao = $pageDao;
+        $this->articleDao = $articleDao;
         $this->writeHtaccessFileIfNotExists();
     }
 
@@ -37,18 +37,8 @@ class FriendlyUrlManager {
         return self::$instance;
     }
 
-    public static function getTestInstance(FriendlyUrlDao $friendlyUrlDao,
-                                           SettingsDao    $settingsDao,
-                                           PageDao        $pageDao,
-                                           ArticleDao     $articleDao): FriendlyUrlManager {
-        if (!self::$instance) {
-            self::$instance = new FriendlyUrlManager($friendlyUrlDao, $settingsDao, $pageDao, $articleDao);
-        }
-        return self::$instance;
-    }
-
     private function writeHtaccessFileIfNotExists(): void {
-        $public_root_dir = $this->_settings_dao->getSettings()->getPublicRootDir();
+        $public_root_dir = $this->settingsDao->getSettings()->getPublicRootDir();
         $htaccess_file_path = $public_root_dir . '/.htaccess';
         if (file_exists($htaccess_file_path)) return;
         $handle = fopen($htaccess_file_path, 'w');
@@ -73,9 +63,9 @@ class FriendlyUrlManager {
 
     private function createUrlForPage(Page $page): string {
         $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
-        $parent_page = $this->_page_dao->getParent($page);
-        if ($parent_page != null && $parent_page->getId() != $this->_page_dao->getRootPage()->getId()) {
-            $url = $this->createUrlForPage($this->_page_dao->getParent($page)) . $url;
+        $parent_page = $this->pageDao->getParent($page);
+        if ($parent_page != null && $parent_page->getId() != $this->pageDao->getRootPage()->getId()) {
+            $url = $this->createUrlForPage($this->pageDao->getParent($page)) . $url;
         }
         return $url;
     }
@@ -96,26 +86,26 @@ class FriendlyUrlManager {
     private function insertOrUpateFriendlyUrl(string $url, ElementHolder $element_holder): void {
         $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
         if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
-            $this->_friendly_url_dao->insertFriendlyUrl($url, $element_holder);
+            $this->friendlyUrlDao->insertFriendlyUrl($url, $element_holder);
         } else {
-            $this->_friendly_url_dao->updateFriendlyUrl($url, $element_holder);
+            $this->friendlyUrlDao->updateFriendlyUrl($url, $element_holder);
         }
     }
 
     private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {
         $new_url = $url;
-        $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
+        $existing_element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
         $number = 1;
         while ($existing_element_holder_id != null && $existing_element_holder_id != $element_holder->getId()) {
             $new_url = $url . $number;
             $number++;
-            $existing_element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($new_url);
+            $existing_element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($new_url);
         }
         return $new_url;
     }
 
     public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
-        return $this->_friendly_url_dao->getUrlFromElementHolder($element_holder);
+        return $this->friendlyUrlDao->getUrlFromElementHolder($element_holder);
     }
 
     public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
@@ -124,7 +114,7 @@ class FriendlyUrlManager {
     }
 
     private function createUrlForArticle(Article $article): string {
-        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->_article_dao->getArticle($article->getParentArticleId())) . '/') : '/';
+        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->articleDao->getArticle($article->getParentArticleId())) . '/') : '/';
         return $base . $this->replaceSpecialCharacters($article->getTitle());
     }
 
@@ -149,8 +139,8 @@ class FriendlyUrlManager {
 
     private function getPageFromUrl(string $url, UrlMatch $url_match): void {
         $url = UrlHelper::removeQueryStringFrom($url);
-        $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($url);
-        $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+        $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
+        $page = $this->pageDao->getPageByElementHolderId($element_holder_id);
 
         $matched_url = $url;
         if (is_null($page)) {
@@ -158,8 +148,8 @@ class FriendlyUrlManager {
             for ($i = 0; $i < count($url_parts); $i++) {
                 $sub_array = array_slice($url_parts, 1, (count($url_parts) - $i - 1));
                 $page_part_of_url = '/' . implode('/', $sub_array);
-                $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($page_part_of_url);
-                $page = $this->_page_dao->getPageByElementHolderId($element_holder_id);
+                $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($page_part_of_url);
+                $page = $this->pageDao->getPageByElementHolderId($element_holder_id);
                 if ($page) {
                     $matched_url = $page_part_of_url;
                     break;
@@ -177,13 +167,29 @@ class FriendlyUrlManager {
         for ($i = 0; $i < count($url_parts); $i++) {
             $sub_array = array_slice($url_parts, $i + 1, count($url_parts));
             $article_part_of_url = '/' . implode('/', $sub_array);
-            $element_holder_id = $this->_friendly_url_dao->getElementHolderIdFromUrl($article_part_of_url);
-            $article = $this->_article_dao->getArticleByElementHolderId($element_holder_id);
+            $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($article_part_of_url);
+            $article = $this->articleDao->getArticleByElementHolderId($element_holder_id);
             if ($article) {
                 $matched_url = $article_part_of_url;
                 break;
             }
         }
         $url_match->setArticle($article, $matched_url);
+    }
+
+    private function setFriendlyUrlDao(FriendlyUrlDao $friendlyUrlDao): void {
+        $this->friendlyUrlDao = $friendlyUrlDao;
+    }
+
+    private function setPageDao(PageDao $pageDao): void {
+        $this->pageDao = $pageDao;
+    }
+
+    private function setArticleDao(ArticleDao $articleDao): void {
+        $this->articleDao = $articleDao;
+    }
+
+    private function setSettingsDao(SettingsDao $settingsDao): void {
+        $this->settingsDao = $settingsDao;
     }
 }
