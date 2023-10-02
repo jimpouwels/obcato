@@ -5,12 +5,12 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/database/dao/PageDao.php';
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
-require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 require_once CMS_ROOT . "/core/model/page.php";
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class PageDaoMysql implements PageDao {
 
@@ -23,7 +23,7 @@ class PageDaoMysql implements PageDao {
 
     private function __construct() {
         $this->_mysql_connector = MysqlConnector::getInstance();
-        $this->_element_holder_dao = ElementHolderDao::getInstance();
+        $this->_element_holder_dao = ElementHolderDaoMysql::getInstance();
     }
 
     public static function getInstance(): PageDaoMysql {

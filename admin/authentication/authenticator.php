@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/utilities/string_utility.php";
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class Authenticator {
 
@@ -10,7 +10,7 @@ class Authenticator {
         if (!isset($_SESSION)) {
             session_start();
         }
-        $authorization_dao = AuthorizationDao::getInstance();
+        $authorization_dao = AuthorizationDaoMysql::getInstance();
         if (isset($_SESSION['last_activity'])
             && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)
             && isset($_SESSION['username'])) {
@@ -26,7 +26,7 @@ class Authenticator {
     public static function logIn(string $username, string $password): void {
         if (self::authenticate($username, $password)) {
             session_start();
-            $authorization_dao = AuthorizationDao::getInstance();
+            $authorization_dao = AuthorizationDaoMysql::getInstance();
             $user = $authorization_dao->getUser($username);
             $_SESSION['username'] = $username;
             $_SESSION['uuid'] = $user->getUuid();
@@ -52,7 +52,7 @@ class Authenticator {
     }
 
     public static function getCurrentUser(): User {
-        $authorization_dao = AuthorizationDao::getInstance();
+        $authorization_dao = AuthorizationDaoMysql::getInstance();
         return $authorization_dao->getUser($_SESSION["username"]);
     }
 

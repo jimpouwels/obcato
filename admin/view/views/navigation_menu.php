@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/module_dao.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class NavigationMenu extends Visual {
 
@@ -12,7 +12,7 @@ class NavigationMenu extends Visual {
     public function __construct(array $module_groups) {
         parent::__construct();
         $this->_module_groups = $module_groups;
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

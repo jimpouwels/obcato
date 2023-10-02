@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/module_dao.php";
+require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 
 class Module extends Entity {
 
@@ -98,7 +98,7 @@ class Module extends Entity {
     }
 
     public function getModuleGroup(): ModuleGroup {
-        $module_dao = ModuleDao::getInstance();
+        $module_dao = ModuleDaoMysql::getInstance();
         return $module_dao->getModuleGroup($this->_module_group_id);
     }
 

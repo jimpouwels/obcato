@@ -7,7 +7,7 @@ require_once CMS_ROOT . "/modules/webforms/form/webform_textfield_form.php";
 require_once CMS_ROOT . "/modules/webforms/form/webform_textarea_form.php";
 require_once CMS_ROOT . "/modules/webforms/form/webform_dropdown_form.php";
 require_once CMS_ROOT . "/modules/webforms/webform_item_factory.php";
-require_once CMS_ROOT . '/database/dao/webform_dao.php';
+require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 
 class WebFormForm extends Form {
 
@@ -21,7 +21,7 @@ class WebFormForm extends Form {
     public function __construct(WebForm $webform) {
         $this->_webform = $webform;
         $this->_webform_item_factory = WebFormItemFactory::getInstance();
-        $this->_webform_dao = WebFormDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
         $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
     }
 

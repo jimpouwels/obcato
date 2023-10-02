@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/view/views/image_picker.php";
 require_once CMS_ROOT . "/view/views/article_picker.php";
 require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/webform_dao.php';
+require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class ArticleMetadataEditor extends Panel {
@@ -18,7 +18,7 @@ class ArticleMetadataEditor extends Panel {
         parent::__construct('Algemeen', 'article_metadata_editor');
         $this->_current_article = $current_article;
         $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_webform_dao = WebFormDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
         $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
     }
 

@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/scope_dao.php";
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class Template extends Entity {
 
@@ -23,7 +23,7 @@ class Template extends Entity {
         $this->setScopeId($row['scope_id']);
         $this->setTemplateFileId($row['template_file_id']);
         parent::initFromDb($row);
-        $this->setTemplateVars(TemplateDao::getInstance()->getTemplateVars($this));
+        $this->setTemplateVars(TemplateDaoMysql::getInstance()->getTemplateVars($this));
     }
 
     public function getTemplateVars(): array {
@@ -51,7 +51,7 @@ class Template extends Entity {
     }
 
     public function getScope(): Scope {
-        $dao = ScopeDao::getInstance();
+        $dao = ScopeDaoMysql::getInstance();
         return $dao->getScope($this->_scope_id);
     }
 

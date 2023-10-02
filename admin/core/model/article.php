@@ -5,7 +5,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/element_holder.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class Article extends ElementHolder {
 
@@ -72,7 +72,7 @@ class Article extends ElementHolder {
     public function getImage(): ?Image {
         $image = null;
         if ($this->_image_id != '' && !is_null($this->_image_id)) {
-            $image_dao = ImageDao::getInstance();
+            $image_dao = ImageDaoMysql::getInstance();
             $image = $image_dao->getImage($this->_image_id);
         }
         return $image;

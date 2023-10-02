@@ -3,7 +3,7 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/form/form.php";
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class TemplateEditorForm extends Form {
     private Template $_template;
@@ -11,7 +11,7 @@ class TemplateEditorForm extends Form {
 
     public function __construct(Template $template) {
         $this->_template = $template;
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function loadFields(): void {

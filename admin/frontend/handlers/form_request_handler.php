@@ -3,8 +3,8 @@ defined("_ACCESS") or die;
 
 require_once CMS_ROOT . '/core/model/page.php';
 require_once CMS_ROOT . '/core/model/article.php';
-require_once CMS_ROOT . '/database/dao/webform_dao.php';
-require_once CMS_ROOT . '/database/dao/config_dao.php';
+require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
 require_once CMS_ROOT . '/modules/webforms/webform_handler_manager.php';
 require_once CMS_ROOT . '/frontend/handlers/form_status.php';
 require_once CMS_ROOT . '/frontend/handlers/error_type.php';
@@ -17,8 +17,8 @@ class FormRequestHandler {
     private ConfigDao $_config_dao;
 
     public function __construct() {
-        $this->_webform_dao = WebFormDao::getInstance();
-        $this->_config_dao = ConfigDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_config_dao = ConfigDaoMysql::getInstance();
         $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
     }
 

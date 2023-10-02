@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class LabelsList extends Panel {
 
@@ -9,7 +9,7 @@ class LabelsList extends Panel {
 
     public function __construct() {
         parent::__construct('Labels');
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

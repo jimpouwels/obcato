@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/template_dao.php";
-require_once CMS_ROOT . "/database/dao/scope_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/templates/template_editor_form.php";
 
@@ -19,8 +19,8 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     private ?Scope $_current_scope = null;
 
     public function __construct() {
-        $this->_template_dao = TemplateDao::getInstance();
-        $this->_scope_dao = ScopeDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
+        $this->_scope_dao = ScopeDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

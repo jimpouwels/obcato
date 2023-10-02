@@ -6,7 +6,7 @@ require_once CMS_ROOT . "/frontend/block_visual.php";
 require_once CMS_ROOT . "/frontend/article_visual.php";
 require_once CMS_ROOT . "/frontend/form_visual.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class PageVisual extends FrontendVisual {
@@ -21,7 +21,7 @@ class PageVisual extends FrontendVisual {
         $this->_page_dao = PageDaoMysql::getInstance();
         $this->_block_dao = BlockDaoMysql::getInstance();
         $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

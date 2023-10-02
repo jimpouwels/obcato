@@ -4,7 +4,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "/database/dao/download_dao.php";
+require_once CMS_ROOT . "/database/dao/DownloadDaoMysql.php";
 require_once CMS_ROOT . "/modules/downloads/download_form.php";
 require_once CMS_ROOT . "/core/model/download.php";
 
@@ -14,7 +14,7 @@ class DownloadRequestHandler extends HttpRequestHandler {
     private ?Download $_current_download;
 
     public function __construct() {
-        $this->_download_dao = DownloadDao::getInstance();
+        $this->_download_dao = DownloadDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

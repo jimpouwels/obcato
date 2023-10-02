@@ -14,7 +14,7 @@ class FormElementEditorVisual extends ElementVisual {
     public function __construct(FormElement $form_element) {
         parent::__construct();
         $this->_form_element = $form_element;
-        $this->_webform_dao = WebFormDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
     }
 
     public function getElement(): Element {

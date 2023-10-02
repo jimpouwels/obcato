@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/modules/blocks/block_form.php";
 
 class BlockRequestHandler extends ElementHolderRequestHandler {

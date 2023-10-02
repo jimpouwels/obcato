@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 
 class Link extends Entity {
 
@@ -18,7 +18,7 @@ class Link extends Entity {
     private ElementHolderDao $_element_holder_dao;
 
     public function __construct() {
-        $this->_element_holder_dao = ElementHolderDao::getInstance();
+        $this->_element_holder_dao = ElementHolderDaoMysql::getInstance();
     }
 
     public static function constructFromRecord(array $row): Link {

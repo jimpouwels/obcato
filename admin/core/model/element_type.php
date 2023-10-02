@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/presentable.php";
-require_once CMS_ROOT . "/database/dao/scope_dao.php";
+require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 
 class ElementType extends Entity {
 
@@ -66,7 +66,7 @@ class ElementType extends Entity {
     }
 
     public function getScope(): Scope {
-        $dao = ScopeDao::getInstance();
+        $dao = ScopeDaoMysql::getInstance();
         return $dao->getScope($this->_scope_id);
     }
 

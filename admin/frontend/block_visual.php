@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/frontend_visual.php";
-require_once CMS_ROOT . '/database/dao/element_dao.php';
-require_once CMS_ROOT . '/database/dao/template_dao.php';
+require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/TemplateDaoMysql.php';
 
 class BlockVisual extends FrontendVisual {
 
@@ -13,7 +13,7 @@ class BlockVisual extends FrontendVisual {
     public function __construct(Block $block, Page $page) {
         parent::__construct($page, null);
         $this->_block = $block;
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

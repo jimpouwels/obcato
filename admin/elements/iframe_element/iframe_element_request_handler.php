@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/iframe_element/iframe_element_form.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class IFrameElementRequestHandler extends HttpRequestHandler {
@@ -16,7 +16,7 @@ class IFrameElementRequestHandler extends HttpRequestHandler {
     public function __construct(IFrameElement $iframe_element) {
         $this->_iframe_element = $iframe_element;
         $this->_iframe_element_form = new IFrameElementForm($this->_iframe_element);
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

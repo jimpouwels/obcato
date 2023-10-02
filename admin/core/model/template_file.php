@@ -19,7 +19,7 @@ class TemplateFIle extends Entity {
         $this->setFileName($row['filename']);
         $this->setName($row['name']);
         parent::initFromDb($row);
-        $this->setTemplateVarDefs(TemplateDao::getInstance()->getTemplateVarDefs($this));
+        $this->setTemplateVarDefs(TemplateDaoMysql::getInstance()->getTemplateVarDefs($this));
     }
 
     public function getTemplateVarDefs(): array {

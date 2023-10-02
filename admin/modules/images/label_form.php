@@ -3,7 +3,7 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/form/form.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class LabelForm extends Form {
 
@@ -12,7 +12,7 @@ class LabelForm extends Form {
 
     public function __construct(ImageLabel $label) {
         $this->_label = $label;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function loadFields(): void {

@@ -4,8 +4,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/photo_album_element/photo_album_element_form.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class PhotoAlbumElementRequestHandler extends HttpRequestHandler {
@@ -17,8 +17,8 @@ class PhotoAlbumElementRequestHandler extends HttpRequestHandler {
 
     public function __construct(PhotoAlbumElement $photo_album_element) {
         $this->_photo_album_element = $photo_album_element;
-        $this->_element_dao = ElementDao::getInstance();
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_photo_album_element_form = new PhotoAlbumElementForm($photo_album_element);
     }
 

@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/database_dao.php";
+require_once CMS_ROOT . "/database/dao/DatabaseDaoMysql.php";
 require_once CMS_ROOT . '/modules/database/visuals/table.php';
 
 class Tables extends Visual {
@@ -11,7 +11,7 @@ class Tables extends Visual {
 
     public function __construct() {
         parent::__construct();
-        $this->_database_dao = DatabaseDao::getInstance();
+        $this->_database_dao = DatabaseDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

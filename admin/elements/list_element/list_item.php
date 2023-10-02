@@ -3,7 +3,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class ListItem extends Entity {
 
@@ -36,7 +36,7 @@ class ListItem extends Entity {
     }
 
     public function getElement(): Element {
-        $element_dao = ElementDao::getInstance();
+        $element_dao = ElementDaoMysql::getInstance();
         return $element_dao->getElement($this->_elementId);
     }
 

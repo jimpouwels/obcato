@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/presentable.php";
-require_once CMS_ROOT . "/database/dao/link_dao.php";
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class ElementHolder extends Presentable {
 
@@ -28,7 +28,7 @@ class ElementHolder extends Presentable {
     }
 
     protected function initFromDb(array $row): void {
-        require_once CMS_ROOT . '/database/dao/element_dao.php';
+        require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
         $this->setTitle($row['title']);
         $this->setPublished($row['published'] == 1);
         $this->setCreatedAt($row['created_at']);
@@ -36,8 +36,8 @@ class ElementHolder extends Presentable {
         $this->setLastModified(new DateTime($row['last_modified']));
         $this->setType($row['type']);
         parent::initFromDb($row);
-        $this->setElements(ElementDao::getInstance()->getElements($this));
-        $this->setLinks(LinkDao::getInstance()->getLinksForElementHolder($this->getId()));
+        $this->setElements(ElementDaoMysql::getInstance()->getElements($this));
+        $this->setLinks(LinkDaoMysql::getInstance()->getLinksForElementHolder($this->getId()));
     }
 
     public function setCreatedById(int $created_by_id): void {
@@ -79,7 +79,7 @@ class ElementHolder extends Presentable {
     }
 
     public function getCreatedBy(): User {
-        $authorization_dao = AuthorizationDao::getInstance();
+        $authorization_dao = AuthorizationDaoMysql::getInstance();
         return $authorization_dao->getUserById($this->_created_by_id);
     }
 

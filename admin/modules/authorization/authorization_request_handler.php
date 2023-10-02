@@ -3,7 +3,7 @@ defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/authorization/authorization_form.php";
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 require_once CMS_ROOT . "/utilities/password_utility.php";
 
 class AuthorizationRequestHandler extends HttpRequestHandler {
@@ -12,7 +12,7 @@ class AuthorizationRequestHandler extends HttpRequestHandler {
     private User $_current_user;
 
     public function __construct() {
-        $this->_authorization_dao = AuthorizationDao::getInstance();
+        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

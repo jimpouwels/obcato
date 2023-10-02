@@ -7,7 +7,7 @@ class TemplateVarMigration extends Panel {
 
     public function __construct(TemplateFilesRequestHandler $request_handler) {
         parent::__construct('template_var_migration_panel_title', 'template_var_migration_panel');
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
         $this->_request_handler = $request_handler;
     }
 

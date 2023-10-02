@@ -13,7 +13,7 @@ abstract class Presentable extends Entity {
     }
 
     public function getTemplate(): ?Template {
-        $dao = TemplateDao::getInstance();
+        $dao = TemplateDaoMysql::getInstance();
         if ($this->_template_id) {
             return $dao->getTemplate($this->_template_id);
         } else {
@@ -36,7 +36,7 @@ abstract class Presentable extends Entity {
     }
 
     public function getScope(): Scope {
-        $dao = ScopeDao::getInstance();
+        $dao = ScopeDaoMysql::getInstance();
         return $dao->getScope($this->_scope_id);
     }
 

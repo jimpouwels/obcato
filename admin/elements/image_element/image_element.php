@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/element.php";
 require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_editor.php";
 require_once CMS_ROOT . "/elements/image_element/image_element_request_handler.php";
@@ -56,7 +56,7 @@ class ImageElement extends Element {
     public function getImage(): ?Image {
         $image = null;
         if ($this->_image_id != null) {
-            $image_dao = ImageDao::getInstance();
+            $image_dao = ImageDaoMysql::getInstance();
             $image = $image_dao->getImage($this->_image_id);
         }
         return $image;

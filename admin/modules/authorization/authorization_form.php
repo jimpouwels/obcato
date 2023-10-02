@@ -8,7 +8,7 @@ class AuthorizationForm extends Form {
     private User $_user;
     private AuthorizationDao $_authorization_dao;
 
-    public function __construct(User $user, AuthorizationDao $authorization_dao) {
+    public function __construct(User $user, AuthorizationDaoMysql $authorization_dao) {
         $this->_user = $user;
         $this->_authorization_dao = $authorization_dao;
     }

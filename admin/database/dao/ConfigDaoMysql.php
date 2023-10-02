@@ -1,20 +1,21 @@
 <?php
 defined('_ACCESS') or die;
 
+require_once CMS_ROOT . "/database/dao/ConfigDao.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
-class ConfigDao {
+class ConfigDaoMysql implements ConfigDao {
 
-    private static ?ConfigDao $instance = null;
+    private static ?ConfigDaoMysql $instance = null;
     private SettingsDao $_settings_dao;
 
     private function __construct() {
         $this->_settings_dao = SettingsDaoMysql::getInstance();
     }
 
-    public static function getInstance(): ConfigDao {
+    public static function getInstance(): ConfigDaoMysql {
         if (!self::$instance) {
-            self::$instance = new ConfigDao();
+            self::$instance = new ConfigDaoMysql();
         }
         return self::$instance;
     }

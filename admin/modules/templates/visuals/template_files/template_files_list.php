@@ -6,7 +6,7 @@ class TemplateFilesList extends Panel {
 
     public function __construct() {
         parent::__construct('template_files_list_title', 'template_files_list_panel');
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

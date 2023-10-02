@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/database/dao/module_dao.php';
-require_once CMS_ROOT . '/database/dao/element_dao.php';
+require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 require_once CMS_ROOT . '/modules/components/installer/logger.php';
 
 class ComponentRequestHandler extends HttpRequestHandler {
@@ -13,8 +13,8 @@ class ComponentRequestHandler extends HttpRequestHandler {
     private $_current_element;
 
     public function __construct() {
-        $this->_module_dao = ModuleDao::getInstance();
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_module_dao = ModuleDaoMysql::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

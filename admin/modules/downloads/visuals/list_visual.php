@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/download_dao.php";
+require_once CMS_ROOT . "/database/dao/DownloadDaoMysql.php";
 require_once CMS_ROOT . "/view/views/information_message.php";
 
 class ListVisual extends Panel {
@@ -12,7 +12,7 @@ class ListVisual extends Panel {
     public function __construct(DownloadRequestHandler $download_request_handler) {
         parent::__construct('Gevonden downloads', 'download_list');
         $this->_download_request_handler = $download_request_handler;
-        $this->_download_dao = DownloadDao::getInstance();
+        $this->_download_dao = DownloadDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

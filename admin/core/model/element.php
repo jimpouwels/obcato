@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/presentable.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
-require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 
 abstract class Element extends Presentable {
 
@@ -63,7 +63,7 @@ abstract class Element extends Presentable {
     }
 
     public function getType(): ElementType {
-        $element_dao = ElementDao::getInstance();
+        $element_dao = ElementDaoMysql::getInstance();
         return $element_dao->getElementTypeForElement($this->getId());
     }
 
@@ -80,7 +80,7 @@ abstract class Element extends Presentable {
     }
 
     public function delete(): void {
-        $element_dao = ElementDao::getInstance();
+        $element_dao = ElementDaoMysql::getInstance();
         $element_dao->deleteElement($this);
     }
 

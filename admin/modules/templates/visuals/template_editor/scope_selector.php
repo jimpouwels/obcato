@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/scope_dao.php";
+require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 
 class ScopeSelector extends Panel {
 
@@ -9,7 +9,7 @@ class ScopeSelector extends Panel {
 
     public function __construct() {
         parent::__construct('templates_scope_list_title', 'scope_selector_panel');
-        $this->_scope_dao = ScopeDao::getInstance();
+        $this->_scope_dao = ScopeDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

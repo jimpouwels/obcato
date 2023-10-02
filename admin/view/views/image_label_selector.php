@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class ImageLabelSelector extends Panel {
 
@@ -12,7 +12,7 @@ class ImageLabelSelector extends Panel {
     public function __construct(array $selected_labels, int $context_id) {
         parent::__construct('Labels', 'image_label_selector');
         $this->_selected_labels = $selected_labels;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_context_id = $context_id;
     }
 

@@ -3,8 +3,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/authentication/session.php";
 require_once CMS_ROOT . "/utilities/string_utility.php";
-require_once CMS_ROOT . "/database/dao/module_dao.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class TextResourceLoader {
 
@@ -14,8 +14,8 @@ class TextResourceLoader {
 
     public function __construct(string $language) {
         $this->_language = $language;
-        $this->_module_dao = ModuleDao::getInstance();
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_module_dao = ModuleDaoMysql::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function loadTextResources(): array {

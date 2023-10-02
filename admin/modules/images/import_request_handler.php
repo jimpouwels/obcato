@@ -1,14 +1,14 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class ImportRequestHandler extends HttpRequestHandler {
     private static string $ZIP_FILE_ID = "import_zip_file";
     private ImageDao $_image_dao;
 
     public function __construct() {
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

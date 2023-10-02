@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/templates/template_file_form.php";
 require_once CMS_ROOT . "/core/model/template_file.php";
@@ -17,7 +17,7 @@ class TemplateFilesRequestHandler extends HttpRequestHandler {
     private array $_parsed_var_defs = array();
 
     public function __construct() {
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

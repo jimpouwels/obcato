@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 require_once CMS_ROOT . "/view/views/information_message.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_editor/scope_selector.php";
 
@@ -13,7 +13,7 @@ class TemplateList extends Panel {
     public function __construct(Scope $scope) {
         parent::__construct($this->getTextResource($scope->getIdentifier() . '_scope_label') . ' templates', 'template_list_panel');
         $this->_scope = $scope;
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

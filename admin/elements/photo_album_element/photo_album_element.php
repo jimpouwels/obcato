@@ -5,7 +5,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/element.php";
 require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_statics.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_editor.php";
 require_once CMS_ROOT . "/elements/photo_album_element/photo_album_element_request_handler.php";
@@ -48,7 +48,7 @@ class PhotoAlbumElement extends Element {
     }
 
     public function getImages(): array {
-        $image_dao = ImageDao::getInstance();
+        $image_dao = ImageDaoMysql::getInstance();
         $images = $image_dao->searchImagesByLabels($this->_labels);
         return $images;
     }
@@ -91,7 +91,7 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider {
     public function __construct(Element $element) {
         parent::__construct($element);
         $this->_element = $element;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 

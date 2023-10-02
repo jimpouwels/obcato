@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/database/dao/module_dao.php';
+require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
 
 class ModulesListPanel extends Panel {
 
@@ -12,7 +12,7 @@ class ModulesListPanel extends Panel {
     public function __construct($components_request_handler) {
         parent::__construct('Modules', 'component-list-fieldset');
         $this->_components_request_handler = $components_request_handler;
-        $this->_module_dao = ModuleDao::getInstance();
+        $this->_module_dao = ModuleDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

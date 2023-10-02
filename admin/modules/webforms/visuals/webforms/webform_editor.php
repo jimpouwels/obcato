@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/webform_dao.php";
+require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/webform_textfield_visual.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/webform_textarea_visual.php";
 require_once CMS_ROOT . "/modules/webforms/webform_item_factory.php";

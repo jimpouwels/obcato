@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/authentication/session.php";
-require_once CMS_ROOT . "/database/dao/module_dao.php";
+require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 require_once CMS_ROOT . "/view/views/navigation_menu.php";
 require_once CMS_ROOT . "/view/views/current_user_indicator.php";
 require_once CMS_ROOT . "/view/views/actions_menu.php";
@@ -15,7 +15,7 @@ class Cms extends Visual {
 
     public function __construct(?ModuleVisual $module_visual, string $website_title) {
         parent::__construct();
-        $this->_module_dao = ModuleDao::getInstance();
+        $this->_module_dao = ModuleDaoMysql::getInstance();
         $this->_module_visual = $module_visual;
         $this->_website_title = $website_title;
     }

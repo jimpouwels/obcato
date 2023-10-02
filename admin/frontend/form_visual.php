@@ -16,7 +16,7 @@ class FormFrontendVisual extends FrontendVisual {
         parent::__construct($page, $article);
         $this->_webform = $webform;
         $this->_webform_item_factory = WebFormItemFactory::getInstance();
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

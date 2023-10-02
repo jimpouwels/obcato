@@ -11,7 +11,7 @@ class BackendRequestHandler extends HttpRequestHandler {
     private ?Module $_current_module = null;
 
     public function __construct() {
-        $this->_module_dao = ModuleDao::getInstance();
+        $this->_module_dao = ModuleDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

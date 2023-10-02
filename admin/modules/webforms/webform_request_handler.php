@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/webform_dao.php";
+require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/webforms/form/webform_form.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/email_form_handler.php";
@@ -19,8 +19,8 @@ class WebFormRequestHandler extends HttpRequestHandler {
     private ConfigDao $_config_dao;
 
     public function __construct() {
-        $this->_webform_dao = WebFormDao::getInstance();
-        $this->_config_dao = ConfigDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_config_dao = ConfigDaoMysql::getInstance();
         $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
     }
 

@@ -5,7 +5,7 @@ require_once CMS_ROOT . "/core/model/element.php";
 require_once CMS_ROOT . "/core/model/element_metadata_provider.php";
 require_once CMS_ROOT . "/core/model/webform.php";
 require_once CMS_ROOT . "/database/mysql_connector.php";
-require_once CMS_ROOT . "/database/dao/webform_dao.php";
+require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/elements/form_element/visuals/form_element_statics.php";
 require_once CMS_ROOT . "/elements/form_element/visuals/form_element_editor.php";
 require_once CMS_ROOT . "/elements/form_element/form_element_request_handler.php";
@@ -59,7 +59,7 @@ class FormElementMetadataProvider extends ElementMetadataProvider {
 
     public function __construct(Element $element) {
         parent::__construct($element);
-        $this->_webform_dao = WebFormDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 

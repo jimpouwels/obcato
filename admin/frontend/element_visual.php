@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/frontend_visual.php";
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 abstract class ElementFrontendVisual extends FrontendVisual {
 
@@ -12,7 +12,7 @@ abstract class ElementFrontendVisual extends FrontendVisual {
     public function __construct(Page $page, ?Article $article, Element $element) {
         parent::__construct($page, $article);
         $this->_element = $element;
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

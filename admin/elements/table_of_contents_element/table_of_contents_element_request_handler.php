@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/table_of_contents_element_form.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class TableOfContentsElementRequestHandler extends HttpRequestHandler {
@@ -15,7 +15,7 @@ class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 
     public function __construct(TableOfContentsElement $table_of_contents_element) {
         $this->_table_of_contents_element = $table_of_contents_element;
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
         $this->_table_of_contents_element_form = new TableOfContentsElementForm($this->_table_of_contents_element);
     }
 

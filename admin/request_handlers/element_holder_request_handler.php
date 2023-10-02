@@ -2,9 +2,9 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/form/element_holder_form.php";
-require_once CMS_ROOT . "/database/dao/element_holder_dao.php";
-require_once CMS_ROOT . "/database/dao/link_dao.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/core/form/link_form.php";
 require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
@@ -17,9 +17,9 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     private ElementHolderDao $_element_holder_dao;
 
     public function __construct() {
-        $this->_element_dao = ElementDao::getInstance();
-        $this->_link_dao = LinkDao::getInstance();
-        $this->_element_holder_dao = ElementHolderDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->_link_dao = LinkDaoMysql::getInstance();
+        $this->_element_holder_dao = ElementHolderDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

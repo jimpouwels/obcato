@@ -2,8 +2,8 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/utilities/file_utility.php';
-require_once CMS_ROOT . '/database/dao/element_dao.php';
-require_once CMS_ROOT . '/database/dao/scope_dao.php';
+require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
+require_once CMS_ROOT . '/database/dao/ScopeDaoMysql.php';
 require_once CMS_ROOT . '/core/model/element_type.php';
 require_once CMS_ROOT . '/core/model/scope.php';
 require_once CMS_ROOT . '/modules/components/installer/installer.php';
@@ -18,8 +18,8 @@ abstract class ElementInstaller extends Installer {
     public function __construct($logger) {
         parent::__construct($logger);
         $this->_logger = $logger;
-        $this->_element_dao = ElementDao::getInstance();
-        $this->_scope_dao = ScopeDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->_scope_dao = ScopeDaoMysql::getInstance();
     }
 
     abstract function getName(): string;

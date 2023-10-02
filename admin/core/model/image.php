@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/entity.php";
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class Image extends Entity {
 
@@ -86,7 +86,7 @@ class Image extends Entity {
     }
 
     public function getCreatedBy(): User {
-        $authorization_dao = AuthorizationDao::getInstance();
+        $authorization_dao = AuthorizationDaoMysql::getInstance();
         return $authorization_dao->getUserById($this->_created_by_id);
     }
 

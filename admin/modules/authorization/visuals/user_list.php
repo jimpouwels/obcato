@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class UserList extends Panel {
 
@@ -11,7 +11,7 @@ class UserList extends Panel {
     public function __construct(?User $current_user) {
         parent::__construct('users_list_panel_title', 'user_tree_fieldset');
         $this->_current_user = $current_user;
-        $this->_authorization_dao = AuthorizationDao::getInstance();
+        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

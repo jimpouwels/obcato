@@ -9,7 +9,7 @@ class ImageSearch extends Panel {
 
     public function __construct($images_request_handler) {
         parent::__construct('Zoeken', 'image_search');
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_images_request_handler = $images_request_handler;
     }
 

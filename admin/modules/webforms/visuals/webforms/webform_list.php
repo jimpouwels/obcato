@@ -11,7 +11,7 @@ class WebFormList extends Panel {
     public function __construct(?WebForm $current_webform, WebFormRequestHandler $webform_request_handler) {
         parent::__construct("webforms_list_panel_title", 'webforms_list');
         $this->_current_webform = $current_webform;
-        $this->_webform_dao = WebFormDao::getInstance();
+        $this->_webform_dao = WebFormDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

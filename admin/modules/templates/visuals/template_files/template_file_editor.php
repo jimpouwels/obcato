@@ -7,7 +7,7 @@ class TemplateFileEditor extends Panel {
 
     public function __construct(TemplateFile $current_template_file) {
         parent::__construct('template_file_editor_panel_title', 'template_file_editor_panel');
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
         $this->_current_template_file = $current_template_file;
     }
 

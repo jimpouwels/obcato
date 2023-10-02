@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/scope_dao.php";
+require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 
 class TemplateEditor extends Panel {
 
@@ -12,8 +12,8 @@ class TemplateEditor extends Panel {
     public function __construct(Template $template) {
         parent::__construct('Template bewerken', 'template_editor_panel');
         $this->_template = $template;
-        $this->_scope_dao = ScopeDao::getInstance();
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_scope_dao = ScopeDaoMysql::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

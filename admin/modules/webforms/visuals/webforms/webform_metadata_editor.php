@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/database/dao/config_dao.php';
+require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
 require_once CMS_ROOT . "/view/views/form_template_picker.php";
 
 class WebFormMetadataEditor extends Panel {
@@ -12,7 +12,7 @@ class WebFormMetadataEditor extends Panel {
     public function __construct(WebForm $current_webform, ?Visual $parent = null) {
         parent::__construct('webforms_metdata_editor_panel_title', '', $parent);
         $this->_current_webform = $current_webform;
-        $this->_config_dao = ConfigDao::getInstance();
+        $this->_config_dao = ConfigDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

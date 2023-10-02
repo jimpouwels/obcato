@@ -9,7 +9,7 @@ class FormDropDownVisual extends FormFieldVisual {
 
     public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webform_field) {
         parent::__construct($page, $article, $webform, $webform_field);
-        $this->_template_dao = TemplateDao::getInstance();
+        $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
     public function getFormFieldTemplateFilename(): string {

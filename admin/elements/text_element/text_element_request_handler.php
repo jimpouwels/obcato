@@ -3,7 +3,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/elements/text_element/text_element_form.php";
 
 class TextElementRequestHandler extends HttpRequestHandler {
@@ -14,7 +14,7 @@ class TextElementRequestHandler extends HttpRequestHandler {
 
     public function __construct(TextElement $text_element) {
         $this->_text_element = $text_element;
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
         $this->_text_element_form = new TextElementForm($this->_text_element);
     }
 

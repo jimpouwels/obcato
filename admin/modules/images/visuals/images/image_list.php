@@ -9,7 +9,7 @@ class ImageList extends Panel {
     public function __construct(?Image $current_image, ImageRequestHandler $images_request_handler) {
         parent::__construct($this->getTextResource("images_list_panel_title"), 'images_list');
         $this->_images_request_handler = $images_request_handler;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

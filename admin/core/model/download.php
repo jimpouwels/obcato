@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/authorization_dao.php";
+require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class Download extends Entity {
 
@@ -13,7 +13,7 @@ class Download extends Entity {
     private int $_created_by_id;
 
     public function __construct() {
-        $this->_authorization_dao = AuthorizationDao::getInstance();
+        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
     }
 
     public static function constructFromRecord(array $row): Download {

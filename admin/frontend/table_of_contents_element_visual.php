@@ -3,7 +3,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/element_visual.php";
-require_once CMS_ROOT . '/database/dao/element_dao.php';
+require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 
 class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 

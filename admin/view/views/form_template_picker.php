@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/form_pulldown.php";
-require_once CMS_ROOT . "/database/dao/template_dao.php";
+require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class TemplatePicker extends Pulldown {
 
@@ -16,7 +16,7 @@ class TemplatePicker extends Pulldown {
     }
 
     private function getOptions(Scope $scope): array {
-        $template_dao = TemplateDao::getInstance();
+        $template_dao = TemplateDaoMysql::getInstance();
         $options = array();
         foreach ($template_dao->getTemplatesByScope($scope) as $template) {
             $options[] = array('name' => $template->getName(), 'value' => $template->getId());

@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/search.php";
 require_once CMS_ROOT . "/view/views/information_message.php";
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class ImageSearchBox extends Panel {
 
@@ -20,7 +20,7 @@ class ImageSearchBox extends Panel {
         $this->_back_click_id = $back_click_id;
         $this->_backfill_id = $backfill_id;
         $this->_objects_to_search = $objects_to_search;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_popup_type = $popup_type;
     }
 

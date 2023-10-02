@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/list_element/list_element_form.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
 class ListElementRequestHandler extends HttpRequestHandler {
 
@@ -15,7 +15,7 @@ class ListElementRequestHandler extends HttpRequestHandler {
     public function __construct($list_element) {
         $this->_list_element = $list_element;
         $this->_list_element_form = new ListElementForm($this->_list_element);
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

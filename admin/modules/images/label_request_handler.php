@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/core/model/image_label.php";
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/modules/images/label_form.php";
@@ -14,7 +14,7 @@ class LabelRequestHandler extends HttpRequestHandler {
     private ?ImageLabel $_current_label;
 
     public function __construct() {
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function handleGet(): void {

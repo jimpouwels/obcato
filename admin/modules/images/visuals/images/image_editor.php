@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . '/modules/images/visuals/images/image_metadata_editor.php';
 require_once CMS_ROOT . '/modules/images/visuals/images/image_viewer.php';
 require_once CMS_ROOT . '/view/views/image_label_selector.php';
@@ -14,7 +14,7 @@ class ImageEditor extends Visual {
     public function __construct(Image $current_image) {
         parent::__construct();
         $this->_current_image = $current_image;
-        $this->_image_dao = ImageDao::getInstance();
+        $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {

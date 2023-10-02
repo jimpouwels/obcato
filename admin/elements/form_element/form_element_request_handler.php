@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
 require_once CMS_ROOT . "/elements/form_element/form_element_form.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";
 
 class FormElementRequestHandler extends HttpRequestHandler {
@@ -16,7 +16,7 @@ class FormElementRequestHandler extends HttpRequestHandler {
     public function __construct(FormElement $form_element) {
         $this->_form_element = $form_element;
         $this->_form_element_form = new FormElementForm($this->_form_element);
-        $this->_element_dao = ElementDao::getInstance();
+        $this->_element_dao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}

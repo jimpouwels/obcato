@@ -12,10 +12,10 @@ require_once CMS_ROOT . "/backend.php";
 
 $backend = new Backend();
 
-require_once CMS_ROOT . "/database/dao/image_dao.php";
+require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 if (isset($_GET['image']) && $_GET['image'] != '') {
-    $image_dao = ImageDao::getInstance();
+    $image_dao = ImageDaoMysql::getInstance();
     $image = $image_dao->getImage($_GET['image']);
 
     if (!$image->isPublished())

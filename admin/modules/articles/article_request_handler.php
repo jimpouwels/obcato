@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/element_dao.php";
+require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/modules/articles/article_form.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
