@@ -20,13 +20,13 @@ class InstallFoldersForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_root_dir = $this->getMandatoryFieldValue("root_dir", "Dit veld is verplicht");
-        $this->_frontend_templates_dir = $this->getMandatoryFieldValue("frontend_template_dir", "Dit veld is verplicht");
-        $this->_backend_templates_dir = $this->getMandatoryFieldValue("backend_template_dir", "Dit veld is verplicht");
-        $this->_backend_static_files_dir = $this->getMandatoryFieldValue("backend_static_files_dir", "Dit veld is verplicht");
-        $this->_config_dir = $this->getMandatoryFieldValue("config_dir", "Dit veld is verplicht");
-        $this->_upload_dir = $this->getMandatoryFieldValue("upload_dir", "Dit veld is verplicht");
-        $this->_component_dir = $this->getMandatoryFieldValue("component_dir", "Dit veld is verplicht");
+        $this->_root_dir = $this->getMandatoryFieldValue("root_dir");
+        $this->_frontend_templates_dir = $this->getMandatoryFieldValue("frontend_template_dir");
+        $this->_backend_templates_dir = $this->getMandatoryFieldValue("backend_template_dir");
+        $this->_backend_static_files_dir = $this->getMandatoryFieldValue("backend_static_files_dir");
+        $this->_config_dir = $this->getMandatoryFieldValue("config_dir");
+        $this->_upload_dir = $this->getMandatoryFieldValue("upload_dir");
+        $this->_component_dir = $this->getMandatoryFieldValue("component_dir");
         if ($this->hasErrors()) {
             throw new FormException();
         } else {

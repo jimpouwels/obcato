@@ -9,7 +9,7 @@ class QueryForm extends Form {
     private ?string $_query = null;
 
     public function loadFields(): void {
-        $this->_query = $this->getMandatoryFieldValue('query', 'U heeft geen query ingevoerd');
+        $this->_query = $this->getMandatoryFieldValue('query');
         if ($this->hasErrors()) {
             throw new FormException();
         }

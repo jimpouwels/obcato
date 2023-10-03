@@ -11,21 +11,21 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
 
     private static string $BLOCK_ID_POST = "element_holder_id";
     private static string $BLOCK_ID_GET = "block";
-    private BlockDao $_block_dao;
-    private ?Block $_current_block;
+    private BlockDao $blockDao;
+    private ?Block $currentBlock;
 
     public function __construct() {
         parent::__construct();
-        $this->_block_dao = BlockDaoMysql::getInstance();
+        $this->blockDao = BlockDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_block = $this->getBlockFromGetRequest();
+        $this->currentBlock = $this->getBlockFromGetRequest();
     }
 
     public function handlePost(): void {
         parent::handlePost();
-        $this->_current_block = $this->getBlockFromPostRequest();
+        $this->currentBlock = $this->getBlockFromPostRequest();
         if ($this->isUpdateBlockAction()) {
             $this->updateBlock();
         } else if ($this->isDeleteBlockAction()) {
@@ -36,33 +36,31 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function getCurrentBlock(): ?Block {
-        return $this->_current_block;
+        return $this->currentBlock;
     }
 
     private function updateBlock(): void {
-        $block_form = new BlockForm($this->_current_block);
         try {
-            $block_form->loadFields();
-            $this->_block_dao->updateBlock($this->_current_block);
-            $this->updateElementHolder($this->_current_block);
-            $this->sendSuccessMessage("Blok succesvol opgeslagen");
-        } catch (FormException $e) {
-            $this->sendErrorMessage("Blok niet opgeslagen, verwerk de fouten");
-        } catch (ElementHolderContainsErrorsException $e) {
-            $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
+            $blockForm = new BlockForm($this->currentBlock);
+            $blockForm->loadFields();
+            $this->blockDao->updateBlock($this->currentBlock);
+            $this->updateElementHolder($this->currentBlock);
+            $this->sendSuccessMessage($this->getTextResource("blocks_notification_successfully_updated"));
+        } catch (FormException|ElementHolderContainsErrorsException) {
+            $this->sendErrorMessage($this->getTextResource("blocks_notification_not_updated_error"));
         }
     }
 
     private function deleteBlock(): void {
-        $this->_block_dao->deleteBlock($this->_current_block);
-        $this->sendSuccessMessage("Blok succesvol verwijderd");
+        $this->blockDao->deleteBlock($this->currentBlock);
+        $this->sendSuccessMessage($this->getTextResource("blocks_notification_successfully_deleted"));
         $this->redirectTo($this->getBackendBaseUrl());
     }
 
     private function addBlock(): void {
-        $new_block = $this->_block_dao->createBlock();
-        $this->sendSuccessMessage("Blok succesvol aangemaakt");
-        $this->redirectTo($this->getBackendBaseUrl() . "&block=" . $new_block->getId());
+        $newBlock = $this->blockDao->createBlock();
+        $this->sendSuccessMessage($this->getTextResource("blocks_notification_successfully_created"));
+        $this->redirectTo($this->getBackendBaseUrl() . "&block=" . $newBlock->getId());
     }
 
     private function getBlockFromGetRequest(): ?Block {
@@ -80,7 +78,7 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function getBlockFromDatabase($block_id): Block {
-        return $this->_block_dao->getBlock($block_id);
+        return $this->blockDao->getBlock($block_id);
     }
 
     private function isUpdateBlockAction(): bool {

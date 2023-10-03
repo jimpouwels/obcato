@@ -14,8 +14,8 @@ abstract class WebFormItemForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_webform_item->setLabel($this->getMandatoryFieldValue("webform_item_{$this->_webform_item->getId()}_label", "webforms_editor_title_error_message"));
-        $this->_webform_item->setName($this->getMandatoryFieldValue("webform_item_{$this->_webform_item->getId()}_name", "webforms_editor_title_error_message"));
+        $this->_webform_item->setLabel($this->getMandatoryFieldValue("webform_item_{$this->_webform_item->getId()}_label"));
+        $this->_webform_item->setName($this->getMandatoryFieldValue("webform_item_{$this->_webform_item->getId()}_name"));
 
         $template_id_string_val = $this->getFieldValue("webform_item_{$this->_webform_item->getId()}_template");
         $template_id = null;

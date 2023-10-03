@@ -16,7 +16,7 @@ class LabelForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_label->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
+        $this->_label->setName($this->getMandatoryFieldValue("name"));
         if ($this->hasErrors() || $this->labelExists())
             throw new FormException();
     }

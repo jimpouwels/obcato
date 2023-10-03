@@ -26,7 +26,7 @@ class WebFormForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_webform->setTitle($this->getMandatoryFieldValue("title", "webforms_editor_title_error_message"));
+        $this->_webform->setTitle($this->getMandatoryFieldValue("title"));
         $this->_webform->setTemplateId($this->getFieldValue("template"));
         $this->_webform->setIncludeCaptcha($this->getCheckboxValue('include_captcha'));
 
@@ -44,8 +44,8 @@ class WebFormForm extends Form {
         $this->loadHandlerProperties();
 
         if ($this->_webform->getIncludeCaptcha()) {
-            $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key', 'webforms_editor_captcha_key_error_message'));
-            $this->_captcha_secret = $this->getMandatoryFieldValue('captcha_secret', 'webforms_editor_captcha_secret_error_message');
+            $this->_webform->setCaptchaKey($this->getMandatoryFieldValue('captcha_key'));
+            $this->_captcha_secret = $this->getMandatoryFieldValue('captcha_secret');
         }
 
         $item_order = $this->getFieldValue('draggable_order');
@@ -64,7 +64,7 @@ class WebFormForm extends Form {
         }
 
         foreach ($this->_handler_properties as $property) {
-            $property->setValue($this->getMandatoryFieldValue("handler_property_{$property->getId()}_field", 'webforms_editor_handler_property_mandatory_error_message'));
+            $property->setValue($this->getMandatoryFieldValue("handler_property_{$property->getId()}_field"));
         }
 
         if ($this->hasErrors()) {

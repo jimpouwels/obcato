@@ -15,7 +15,7 @@ class PositionForm extends Form {
     }
 
     public function loadFields(): void {
-        $positionName = str_replace(" ", "_", $this->getMandatoryFieldValue("name", "Naam is verplicht"));
+        $positionName = str_replace(" ", "_", $this->getMandatoryFieldValue("name"));
         $this->_position->setName($positionName);
         $this->_position->setExplanation($this->getFieldValue("explanation"));
         if ($this->hasErrors() || $this->positionAlreadyExists()) {

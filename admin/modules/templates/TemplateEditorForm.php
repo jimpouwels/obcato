@@ -15,8 +15,8 @@ class TemplateEditorForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_template->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
-        $this->_template->setScopeId($this->getMandatoryFieldValue("scope", "Scope is verplicht"));
+        $this->_template->setName($this->getMandatoryFieldValue("name"));
+        $this->_template->setScopeId($this->getMandatoryFieldValue("scope"));
 
         $new_template_file_id = $this->getFieldValue("template_editor_template_file");
         if ($new_template_file_id != $this->_template->getTemplateFileId()) {

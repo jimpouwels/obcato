@@ -15,14 +15,14 @@ class AuthorizationForm extends Form {
     }
 
     public function loadFields(): void {
-        $username = $this->getMandatoryFieldValue("user_username", 'Gebruikersnaam is verplicht');
+        $username = $this->getMandatoryFieldValue("user_username");
         if ($this->userExists($username)) {
             $this->raiseError('user_username', 'Er bestaat al een gebruiker met deze gebruikersnaam');
         }
-        $first_name = $this->getMandatoryFieldValue('user_firstname', 'Voornaam is verplicht');
-        $last_name = $this->getMandatoryFieldValue('user_lastname', 'Voornaam is verplicht');
+        $first_name = $this->getMandatoryFieldValue('user_firstname');
+        $last_name = $this->getMandatoryFieldValue('user_lastname');
         $prefix = $this->getFieldValue('user_prefix');
-        $email = $this->getMandatoryEmailAddress('user_email', 'Email adres is verplicht', 'Vul een geldig email adres in');
+        $email = $this->getMandatoryEmailAddress('user_email');
         $password = $this->getPassword('user_new_password_first', 'user_new_password_second');
 
         if (!$this->hasErrors()) {

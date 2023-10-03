@@ -8,10 +8,10 @@ abstract class Form {
 
     public abstract function loadFields(): void;
 
-    public function getMandatoryFieldValue(string $fieldName, string $errorMessageResourceIdentifier): string {
+    public function getMandatoryFieldValue(string $fieldName): string {
         $value = $this->getFieldValue($fieldName);
         if ($this->isEmpty($value)) {
-            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
+            $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $value;
     }
@@ -52,88 +52,88 @@ abstract class Form {
         return $this->getFieldValue($fieldName) == "on" ? 1 : 0;
     }
 
-    public function getMandatoryEmailAddress(string $fieldName, string $errorMessageResourceIdentifier, string $invalidEmailMessage): ?string {
-        $emailAddress = $this->getEmailAddress($fieldName, $invalidEmailMessage);
+    public function getMandatoryEmailAddress(string $fieldName): ?string {
+        $emailAddress = $this->getEmailAddress($fieldName);
         if ($this->isEmpty($emailAddress)) {
-            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
+            $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $emailAddress;
     }
 
-    public function getEmailAddress(string $fieldName, string $errorMessageResourceIdentifier): ?string {
+    public function getEmailAddress(string $fieldName): ?string {
         $value = $this->getFieldValue($fieldName);
         $invalidEmail = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
         if (!$this->isEmpty($value) && !$invalidEmail) {
-            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
+            $this->raiseError($fieldName, "form_error_invalid_email");
         }
         return $value;
     }
 
-    public function getMandatoryNumber(string $fieldName, string $errorMessageResourceIdentifier, string $invalidNumberMessage): ?int {
-        $number = $this->getNumber($fieldName, $invalidNumberMessage);
+    public function getMandatoryNumber(string $fieldName): ?int {
+        $number = $this->getNumber($fieldName);
         if ($this->isEmpty($number)) {
-            $this->raiseError($fieldName, $errorMessageResourceIdentifier);
+            $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $number;
     }
 
-    public function getNumber(string $field_name, string $error_message_resource_identifier): ?int {
-        $number_as_string = $this->getFieldValue($field_name);
-        if (!$this->isEmpty($number_as_string) && !is_numeric($number_as_string)) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+    public function getNumber(string $fieldName): ?int {
+        $numberAsString = $this->getFieldValue($fieldName);
+        if (!$this->isEmpty($numberAsString) && !is_numeric($numberAsString)) {
+            $this->raiseError($fieldName, "form_error_invalid_number");
         }
-        return !$this->isEmpty($number_as_string) ? intval($number_as_string) : null;
+        return !$this->isEmpty($numberAsString) ? intval($numberAsString) : null;
     }
 
-    public function getMandatoryDate(string $field_name, string $error_message_resource_identifier, string $invalid_date_message): ?string {
-        $date = $this->getDate($field_name, $invalid_date_message);
+    public function getMandatoryDate(string $fieldName): ?string {
+        $date = $this->getDate($fieldName);
         if ($this->isEmpty($date)) {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+            $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $date;
     }
 
-    public function getDate(string $field_name, string $error_message_resource_identifier): ?string {
-        $value = $this->getFieldValue($field_name);
-        $valid_date = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-        if (!$valid_date && $value != '') {
-            $this->raiseError($field_name, $error_message_resource_identifier);
+    public function getDate(string $fieldName): ?string {
+        $value = $this->getFieldValue($fieldName);
+        $invalidDate = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
+        if (!$invalidDate && $value != '') {
+            $this->raiseError($fieldName, "form_error_invalid_date");
         }
         return $value;
     }
 
-    public function getPassword(string $password1, string $password2) {
-        $value1 = $this->getFieldValue($password1);
-        $value2 = $this->getFieldValue($password2);
+    public function getPassword(string $passwordField1, string $passwordField2): ?string {
+        $value1 = $this->getFieldValue($passwordField1);
+        $value2 = $this->getFieldValue($passwordField2);
         if ((!$value1 && $value2)) {
-            $this->raiseError($password1, "Vul beide wachtwoordvelden in");
+            $this->raiseError($passwordField1, "form_error_not_both_passwords_filled_in");
         } else if ($value1 && !$value2) {
-            $this->raiseError($password2, "Herhaal het wachtwoord");
+            $this->raiseError($passwordField2, "form_error_not_both_passwords_filled_in");
         } else if ($value1 != $value2) {
-            $this->raiseError($password2, "De wachtwoorden zijn niet gelijk");
+            $this->raiseError($passwordField2, "form_error_passwords_mismatch");
         }
         return $value1;
     }
 
-    public function getMandatoryUploadFilePath(string $field_name, string $error_message_resource_identifier): ?string {
-        $file_path = $this->getUploadFilePath($field_name);
+    public function getMandatoryUploadFilePath(string $fieldName): ?string {
+        $file_path = $this->getUploadFilePath($fieldName);
         if ($file_path) {
             return $file_path;
         }
-        $this->raiseError($field_name, $error_message_resource_identifier);
+        $this->raiseError($fieldName, "form_error_mandatory");
         return null;
     }
 
-    public function getUploadFilePath(string $field_name): ?string {
-        if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
-            return $_FILES[$field_name]["tmp_name"];
+    public function getUploadFilePath(string $fieldName): ?string {
+        if (isset($_FILES[$fieldName]) && is_uploaded_file($_FILES[$fieldName]["tmp_name"])) {
+            return $_FILES[$fieldName]["tmp_name"];
         }
         return null;
     }
 
-    public function getUploadedFileName(string $field_name): ?string {
-        if (isset($_FILES[$field_name]) && is_uploaded_file($_FILES[$field_name]["tmp_name"])) {
-            return $_FILES[$field_name]["name"];
+    public function getUploadedFileName(string $fieldName): ?string {
+        if (isset($_FILES[$fieldName]) && is_uploaded_file($_FILES[$fieldName]["tmp_name"])) {
+            return $_FILES[$fieldName]["name"];
         }
         return null;
     }
@@ -142,8 +142,8 @@ abstract class Form {
         return Session::getErrorCount() > 0;
     }
 
-    protected function getError(string $field_name): string {
-        return Session::getError($field_name);
+    protected function getError(string $fieldName): string {
+        return Session::getError($fieldName);
     }
 
     protected function getTextResource(string $identifier): string {

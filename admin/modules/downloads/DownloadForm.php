@@ -13,7 +13,7 @@ class DownloadForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_download->setTitle($this->getMandatoryFieldValue("download_title", "Titel is verplicht"));
+        $this->_download->setTitle($this->getMandatoryFieldValue("download_title"));
         $this->_download->setPublished($this->getCheckboxValue("download_published"));
         if ($this->hasErrors())
             throw new FormException();

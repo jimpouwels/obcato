@@ -10,11 +10,11 @@ class Authenticator {
         if (!isset($_SESSION)) {
             session_start();
         }
-        $authorization_dao = AuthorizationDaoMysql::getInstance();
+        $authorizationDao = AuthorizationDaoMysql::getInstance();
         if (isset($_SESSION['last_activity'])
             && (time() - $_SESSION['last_activity'] < SESSION_TIMEOUT)
             && isset($_SESSION['username'])) {
-            $user = $authorization_dao->getUser($_SESSION['username']);
+            $user = $authorizationDao->getUser($_SESSION['username']);
             if ($user->getUuid() == $_SESSION['uuid']) {
                 $_SESSION['last_activity'] = time();
                 return true;
@@ -26,8 +26,8 @@ class Authenticator {
     public static function logIn(string $username, string $password): void {
         if (self::authenticate($username, $password)) {
             session_start();
-            $authorization_dao = AuthorizationDaoMysql::getInstance();
-            $user = $authorization_dao->getUser($username);
+            $authorizationDao = AuthorizationDaoMysql::getInstance();
+            $user = $authorizationDao->getUser($username);
             $_SESSION['username'] = $username;
             $_SESSION['uuid'] = $user->getUuid();
             $_SESSION['last_activity'] = time();
@@ -35,12 +35,11 @@ class Authenticator {
     }
 
     private static function authenticate(string $username, string $password): bool {
-        $mysql_database = MysqlConnector::getInstance();
+        $mysqlConnector = MysqlConnector::getInstance();
         $password = StringUtility::hashStringValue($password);
-        $auth_query = "SELECT * FROM auth_users WHERE username = ? AND password = ?";
-        $statement = $mysql_database->prepareStatement($auth_query);
+        $statement = $mysqlConnector->prepareStatement("SELECT * FROM auth_users WHERE username = ? AND password = ?");
         $statement->bind_param("ss", $username, $password);
-        $result = $mysql_database->executeStatement($statement);
+        $result = $mysqlConnector->executeStatement($statement);
         return $result->num_rows > 0;
     }
 
@@ -52,8 +51,8 @@ class Authenticator {
     }
 
     public static function getCurrentUser(): User {
-        $authorization_dao = AuthorizationDaoMysql::getInstance();
-        return $authorization_dao->getUser($_SESSION["username"]);
+        $authorizationDao = AuthorizationDaoMysql::getInstance();
+        return $authorizationDao->getUser($_SESSION["username"]);
     }
 
 }

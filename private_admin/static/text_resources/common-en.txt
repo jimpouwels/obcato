@@ -51,7 +51,12 @@ select_field_default_text: &gt; Select
 friendly_url_label: URL
 
 # FORM FIELD ERROR MESSAGES
-form_invalid_number_error: This value is not numeric
+form_error_invalid_number: This value is not numeric
+form_error_not_both_passwords_filled_in: Both passwords need to be filled in
+form_error_mandatory: This field is mandatory
+form_error_passwords_mismatch: Passwords need to match
+form_error_invalid_date: Invalid date
+form_error_invalid_email: Invalid email address
 
 # ELEMENT HOLDER
 element_include_in_table_of_contents: Table of contents

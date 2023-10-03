@@ -3,13 +3,13 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/form/Form.php";
+require_once CMS_ROOT . "/core/form/FormException.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleForm extends Form {
 
     private Article $_article;
-    private string $_element_order;
     private array $_selected_terms;
     private ArticleDao $_article_dao;
 
@@ -19,15 +19,15 @@ class ArticleForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_article->setTitle($this->getMandatoryFieldValue("article_title", "Titel is verplicht"));
-        $this->_article->setTemplateId($this->getNumber('template', "No number"));
+        $this->_article->setTitle($this->getMandatoryFieldValue("article_title"));
+        $this->_article->setTemplateId($this->getNumber('template'));
         $this->_article->setKeywords($this->getFieldValue('keywords'));
         $this->_article->setDescription($this->getFieldValue("article_description"));
         $this->_article->setPublished($this->getCheckboxValue("article_published"));
-        $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId(), $this->getTextResource("form_invalid_number_error")));
-        $this->_article->setTargetPageId($this->getNumber("article_target_page", $this->getTextResource("form_invalid_number_error")));
-        $this->_article->setParentArticleId($this->getNumber("parent_article_id", $this->getTextResource("form_invalid_number_error")));
-        $this->_article->setCommentWebFormId($this->getNumber("article_comment_webform", $this->getTextResource("form_invalid_number_error")));
+        $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId()));
+        $this->_article->setTargetPageId($this->getNumber("article_target_page"));
+        $this->_article->setParentArticleId($this->getNumber("parent_article_id"));
+        $this->_article->setCommentWebFormId($this->getNumber("article_comment_webform"));
         $publication_date = $this->loadPublicationDate();
         $sort_date = $this->loadSortDate();
         $this->deleteLeadImageIfNeeded();
@@ -69,11 +69,11 @@ class ArticleForm extends Form {
     }
 
     private function loadPublicationDate(): string {
-        return $this->getMandatoryDate("publication_date", "Datum is verplicht", "Vul een datum in (bijv. 31-12-2010)");
+        return $this->getMandatoryDate("publication_date");
     }
 
     private function loadSortDate(): string {
-        return $this->getMandatoryDate("sort_date", "Datum is verplicht", "Vul een geldige datum in (bijv. 31-12-2010)");
+        return $this->getMandatoryDate("sort_date");
     }
 
 }

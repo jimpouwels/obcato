@@ -16,7 +16,7 @@ class TermForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_term->setName($this->getMandatoryFieldValue("name", "Naam is verplicht"));
+        $this->_term->setName($this->getMandatoryFieldValue("name"));
         if ($this->hasErrors() || $this->termExists()) {
             throw new FormException();
         }

@@ -22,7 +22,7 @@ class TemplateFileForm extends Form {
 
     public function loadFields(): void {
         $id = $this->_template_file->getId();
-        $this->_template_file->setName($this->getMandatoryFieldValue("template_file_{$id}_name_field", $this->getTextResource("error_field_is_mandatory")));
+        $this->_template_file->setName($this->getMandatoryFieldValue("template_file_{$id}_name_field"));
         $this->_template_file->setFileName($this->getFieldValue("template_file_{$id}_filename_field"));
 
         $this->_parsed_var_defs = $this->parseVarDefs();

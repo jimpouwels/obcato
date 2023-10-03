@@ -9,7 +9,7 @@ class ImageListForm extends Form {
     private int $_image_id;
 
     public function loadFields(): void {
-        $this->_image_id = intval($this->getMandatoryFieldValue("image_id", ""));
+        $this->_image_id = intval($this->getMandatoryFieldValue("image_id"));
         if ($this->hasErrors()) {
             throw new FormException();
         }

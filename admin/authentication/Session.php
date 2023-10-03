@@ -11,8 +11,8 @@ class Session {
         $_SESSION['language'] = $language;
     }
 
-    public static function setTextResources(array $text_resources): void {
-        $_SESSION['text_resources'] = $text_resources;
+    public static function setTextResources(array $textResources): void {
+        $_SESSION['text_resources'] = $textResources;
     }
 
     public static function getTextResources(): array {
@@ -23,21 +23,21 @@ class Session {
         return isset($_SESSION['text_resources']);
     }
 
-    public static function addFieldError(string $field_name, string $error_message_resource_identifier): void {
+    public static function addFieldError(string $fieldName, string $errorMessageResourceIdentifier): void {
         if (!isset($_SESSION['errors'])) {
             $_SESSION['errors'] = array();
         }
-        if (!self::hasError($field_name)) {
-            $error_message = self::getTextResource($error_message_resource_identifier);
-            if (!$error_message) {
-                $error_message = $error_message_resource_identifier;
+        if (!self::hasError($fieldName)) {
+            $errorMessage = self::getTextResource($errorMessageResourceIdentifier);
+            if (!$errorMessage) {
+                $errorMessage = $errorMessageResourceIdentifier;
             }
-            $_SESSION['errors'][$field_name . '_error'] = $error_message;
+            $_SESSION['errors'][$fieldName . '_error'] = $errorMessage;
         }
     }
 
-    public static function hasError(string $field_name): bool {
-        return isset($_SESSION['errors'][$field_name . '_error']);
+    public static function hasError(string $fieldName): bool {
+        return isset($_SESSION['errors'][$fieldName . '_error']);
     }
 
     public static function getTextResource(string $name): string {
@@ -51,15 +51,15 @@ class Session {
         return count($_SESSION['errors']);
     }
 
-    public static function popError(string $field_name): string {
-        $error = self::getError($field_name);
-        unset($_SESSION['errors'][$field_name . '_error']);
+    public static function popError(string $fieldName): string {
+        $error = self::getError($fieldName);
+        unset($_SESSION['errors'][$fieldName . '_error']);
         return $error;
     }
 
-    public static function getError(string $field_name): ?string {
-        if (isset($_SESSION['errors'][$field_name . '_error'])) {
-            return $_SESSION['errors'][$field_name . '_error'];
+    public static function getError(string $fieldName): ?string {
+        if (isset($_SESSION['errors'][$fieldName . '_error'])) {
+            return $_SESSION['errors'][$fieldName . '_error'];
         }
         return null;
     }

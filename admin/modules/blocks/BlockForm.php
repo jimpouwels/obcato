@@ -13,10 +13,10 @@ class BlockForm extends Form {
     }
 
     public function loadFields(): void {
-        $this->_block->setTitle($this->getMandatoryFieldValue("title", "Titel is verplicht"));
+        $this->_block->setTitle($this->getMandatoryFieldValue("title"));
         $this->_block->setPublished($this->getCheckboxValue("published"));
         $this->_block->setPositionId($this->getFieldValue("block_position"));
-        $this->_block->setTemplateId($this->getNumber("block_template", "not a number"));
+        $this->_block->setTemplateId($this->getNumber("block_template"));
         if ($this->hasErrors()) {
             throw new FormException();
         }

@@ -51,7 +51,12 @@ select_field_default_text: &gt; Selecteer
 friendly_url_label: URL
 
 # FORM FIELD ERROR MESSAGES
-form_invalid_number_error: Deze waarde is geen getal
+form_error_invalid_number: Deze waarde is geen getal
+form_error_not_both_passwords_filled_in: Herhaal het wachtwoord
+form_error_mandatory: Dit veld is verplicht
+form_error_passwords_mismatch: Wachtwoorden zijn niet gelijk
+form_error_invalid_date: Ongeldige datum
+form_error_invalid_email: Ongeldig email adres
 
 # ELEMENT HOLDER
 element_include_in_table_of_contents: Inhoudsopgave

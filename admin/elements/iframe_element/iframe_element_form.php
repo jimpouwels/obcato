@@ -17,8 +17,8 @@ class IFrameElementForm extends ElementForm {
         parent::loadFields();
         $this->_iframe_element->setTitle($this->getFieldValue('element_' . $this->_iframe_element->getId() . '_title'));
         $this->_iframe_element->setUrl($this->getFieldValue('element_' . $this->_iframe_element->getId() . '_url'));
-        $this->_iframe_element->setWidth($this->getNumber('element_' . $this->_iframe_element->getId() . '_width', $this->getTextResource("form_invalid_number_error")));
-        $this->_iframe_element->setHeight($this->getNumber('element_' . $this->_iframe_element->getId() . '_height', $this->getTextResource("form_invalid_number_error")));
+        $this->_iframe_element->setWidth($this->getNumber('element_' . $this->_iframe_element->getId() . '_width'));
+        $this->_iframe_element->setHeight($this->getNumber('element_' . $this->_iframe_element->getId() . '_height'));
         if ($this->hasErrors()) {
             throw new FormException();
         }
