@@ -9,7 +9,7 @@ require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
 require_once CMS_ROOT . "/core/model/Article.php";
 require_once CMS_ROOT . "/core/model/ArticleComment.php";
 require_once CMS_ROOT . "/core/model/ArticleTerm.php";
-require_once CMS_ROOT . "/utilities/date_utility.php";
+require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,

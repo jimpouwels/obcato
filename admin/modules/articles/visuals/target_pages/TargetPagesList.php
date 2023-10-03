@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/page_picker.php";
+require_once CMS_ROOT . "/view/views/PagePicker.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 
 class TargetPagesList extends Panel {

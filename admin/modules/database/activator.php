@@ -1,12 +1,12 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/module_visual.php";
+require_once CMS_ROOT . "/view/views/ModuleVisual.php";
 require_once CMS_ROOT . "/modules/database/DatabaseRequestHandler.php";
 require_once CMS_ROOT . "/modules/database/visuals/Configuration.php";
 require_once CMS_ROOT . "/modules/database/visuals/Tables.php";
 require_once CMS_ROOT . "/modules/database/visuals/QueriesTab.php";
-require_once CMS_ROOT . "/view/views/tab_menu.php";
+require_once CMS_ROOT . "/view/views/TabMenu.php";
 
 class DatabaseModuleVisual extends ModuleVisual {
 

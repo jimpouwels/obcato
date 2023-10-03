@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/elements/form_element/form_element_form.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/elements/element_contains_errors_exception.php";

@@ -7,8 +7,8 @@ require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/modules/pages/PageForm.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/element_holder_request_handler.php";
-require_once CMS_ROOT . "/request_handlers/exceptions/element_holder_contains_errors_exception.php";
+require_once CMS_ROOT . "/request_handlers/ElementHolderRequestHandler.php";
+require_once CMS_ROOT . "/request_handlers/exceptions/ElementHolderContainsErrorsException.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class PageRequestHandler extends ElementHolderRequestHandler {

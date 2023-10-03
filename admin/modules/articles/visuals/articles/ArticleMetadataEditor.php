@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/image_picker.php";
-require_once CMS_ROOT . "/view/views/article_picker.php";
+require_once CMS_ROOT . "/view/views/ImagePicker.php";
+require_once CMS_ROOT . "/view/views/ArticlePicker.php";
 require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
@@ -36,7 +36,7 @@ class ArticleMetadataEditor extends Panel {
         $publication_date_field = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->_current_article->getPublicationDate()), true, null);
         $sort_date_field = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->_current_article->getSortDate()), true, null);
         $target_pages_field = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->_current_article->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
-        $comment_forms_field = new PullDown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
+        $comment_forms_field = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
         $parent_article_picker_field = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->_current_article->getParentArticleId(), "update_element_holder");
         $parent_article_delete_button = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
         $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");

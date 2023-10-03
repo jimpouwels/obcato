@@ -8,11 +8,11 @@ require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/frontend/WebsiteVisual.php";
 require_once CMS_ROOT . '/frontend/SitemapVisual.php';
-require_once CMS_ROOT . '/utilities/url_helper.php';
-require_once CMS_ROOT . '/utilities/arrays.php';
-require_once CMS_ROOT . '/view/views/visual.php';
-require_once CMS_ROOT . '/view/views/panel.php';
-require_once CMS_ROOT . '/view/template_engine.php';
+require_once CMS_ROOT . '/utilities/UrlHelper.php';
+require_once CMS_ROOT . '/utilities/Arrays.php';
+require_once CMS_ROOT . '/view/views/Visual.php';
+require_once CMS_ROOT . '/view/views/Panel.php';
+require_once CMS_ROOT . '/view/TemplateEngine.php';
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 require_once CMS_ROOT . '/frontend/handlers/FormRequestHandler.php';
 

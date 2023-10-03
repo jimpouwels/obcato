@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/modules/templates/TemplateEditorForm.php";
 
 class TemplateEditorRequestHandler extends HttpRequestHandler {

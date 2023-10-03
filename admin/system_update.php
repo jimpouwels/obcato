@@ -9,7 +9,7 @@ require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database_config.php";
 require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/backend.php";
+require_once CMS_ROOT . "/Backend.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 // AUTHENTICATE

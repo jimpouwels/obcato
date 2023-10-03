@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/core/model/ImageLabel.php";
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/modules/images/LabelForm.php";
 
 class LabelRequestHandler extends HttpRequestHandler {

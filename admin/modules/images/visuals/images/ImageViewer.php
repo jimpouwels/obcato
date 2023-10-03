@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/information_message.php";
+require_once CMS_ROOT . "/view/views/InformationMessage.php";
 
 class ImageViewer extends Panel {
 

@@ -2,8 +2,8 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/element_container.php";
-require_once CMS_ROOT . "/view/views/link_editor.php";
+require_once CMS_ROOT . "/view/views/ElementContainer.php";
+require_once CMS_ROOT . "/view/views/LinkEditor.php";
 require_once CMS_ROOT . '/modules/blocks/visuals/blocks/BlockMetadataEditor.php';
 
 class BlockEditor extends Visual {

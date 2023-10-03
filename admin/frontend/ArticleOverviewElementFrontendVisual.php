@@ -3,7 +3,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
-require_once CMS_ROOT . "/utilities/date_utility.php";
+require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 

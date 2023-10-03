@@ -6,7 +6,7 @@ require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/utilities/date_utility.php";
+require_once CMS_ROOT . "/utilities/DateUtility.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
 require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_request_handler.php";

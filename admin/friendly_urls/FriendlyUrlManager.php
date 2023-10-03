@@ -6,7 +6,7 @@ require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
 require_once CMS_ROOT . '/friendly_urls/url_match.php';
-require_once CMS_ROOT . '/utilities/url_helper.php';
+require_once CMS_ROOT . '/utilities/UrlHelper.php';
 
 class FriendlyUrlManager {
 

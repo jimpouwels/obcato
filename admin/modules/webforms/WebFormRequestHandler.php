@@ -3,7 +3,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/modules/webforms/form/WebFormForm.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/EmailFormHandler.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/ArticleCommentFormHandler.php";

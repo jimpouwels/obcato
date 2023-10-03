@@ -2,9 +2,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/request_handlers/http_request_handler.php';
+require_once CMS_ROOT . '/request_handlers/HttpRequestHandler.php';
 require_once CMS_ROOT . '/modules/components/InstallComponentForm.php';
-require_once CMS_ROOT . '/utilities/file_utility.php';
+require_once CMS_ROOT . '/utilities/FileUtility.php';
 require_once CMS_ROOT . '/modules/components/installer/installation_exception.php';
 require_once CMS_ROOT . '/modules/components/installer/module_installer.php';
 require_once CMS_ROOT . '/modules/components/installer/element_installer.php';

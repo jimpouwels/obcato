@@ -2,7 +2,7 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/modules/blocks/PositionForm.php";
 

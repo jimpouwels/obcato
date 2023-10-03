@@ -1,9 +1,9 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/element_container.php";
-require_once CMS_ROOT . "/view/views/form_template_picker.php";
-require_once CMS_ROOT . "/view/views/link_editor.php";
+require_once CMS_ROOT . "/view/views/ElementContainer.php";
+require_once CMS_ROOT . "/view/views/TemplatePicker.php";
+require_once CMS_ROOT . "/view/views/LinkEditor.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockMetadataEditor extends Panel {

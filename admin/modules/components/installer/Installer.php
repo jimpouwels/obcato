@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/database/MysqlConnector.php';
 require_once CMS_ROOT . '/modules/components/installer/Installer.php';
-require_once CMS_ROOT . '/utilities/file_utility.php';
+require_once CMS_ROOT . '/utilities/FileUtility.php';
 
 abstract class Installer {
 

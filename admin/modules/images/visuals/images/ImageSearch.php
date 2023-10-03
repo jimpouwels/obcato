@@ -34,7 +34,7 @@ class ImageSearch extends Panel {
     private function getLabelPullDown(): Pulldown {
         $labels = $this->getLabels();
         $currently_selected_label = $this->_images_request_handler->getCurrentSearchLabelFromGetRequest();
-        return new PullDown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, null, true);
+        return new Pulldown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, null, true);
     }
 
     private function getSearchButton(): Button {

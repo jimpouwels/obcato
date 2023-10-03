@@ -1,7 +1,7 @@
 <?php
 
 require_once CMS_ROOT . '/database/dao/PageDao.php';
-require_once CMS_ROOT . '/utilities/arrays.php';
+require_once CMS_ROOT . '/utilities/Arrays.php';
 
 class PageDaoMock implements PageDao {
 

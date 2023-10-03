@@ -5,7 +5,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . '/modules/images/visuals/images/ImageMetadataEditor.php';
 require_once CMS_ROOT . '/modules/images/visuals/images/ImageViewer.php';
-require_once CMS_ROOT . '/view/views/image_label_selector.php';
+require_once CMS_ROOT . '/view/views/ImageLabelSelector.php';
 
 class ImageEditor extends Visual {
     private Image $_current_image;

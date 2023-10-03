@@ -1,11 +1,11 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/module_visual.php";
+require_once CMS_ROOT . "/view/views/ModuleVisual.php";
 require_once CMS_ROOT . "/modules/webforms/WebFormRequestHandler.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformTab.php";
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
-require_once CMS_ROOT . "/view/views/tab_menu.php";
+require_once CMS_ROOT . "/view/views/TabMenu.php";
 
 class WebFormsModuleVisual extends ModuleVisual {
 

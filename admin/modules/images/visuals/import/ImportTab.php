@@ -28,7 +28,7 @@ class ImportTab extends Panel {
 
     private function renderLabelPullDown(): string {
         $labels_name_value_pair = $this->getLabelsValuePair();
-        $pulldown = new PullDown("import_label", "Label", null, $labels_name_value_pair, 200, false);
+        $pulldown = new Pulldown("import_label", "Label", null, $labels_name_value_pair, 200, false);
         return $pulldown->render();
     }
 

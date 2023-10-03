@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/module_visual.php";
-require_once CMS_ROOT . "/view/views/tab_menu.php";
+require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateEditorTab.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFilesTab.php";
 require_once CMS_ROOT . "/modules/templates/TemplateEditorRequestHandler.php";

@@ -10,7 +10,7 @@ require_once CMS_ROOT . "/authentication/Session.php";
 require_once CMS_ROOT . "/database_config.php";
 require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/includes.php";
-require_once CMS_ROOT . "/utilities/string_utility.php";
+require_once CMS_ROOT . "/utilities/StringUtility.php";
 
 $errors = array();
 

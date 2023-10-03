@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/utilities/string_utility.php";
+require_once CMS_ROOT . "/utilities/StringUtility.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class Authenticator {

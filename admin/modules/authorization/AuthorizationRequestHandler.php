@@ -2,10 +2,10 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/request_handlers/http_request_handler.php";
+require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/modules/authorization/AuthorizationForm.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
-require_once CMS_ROOT . "/utilities/password_utility.php";
+require_once CMS_ROOT . "/utilities/PasswordUtility.php";
 
 class AuthorizationRequestHandler extends HttpRequestHandler {
 

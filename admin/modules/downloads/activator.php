@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/module_visual.php";
+require_once CMS_ROOT . "/view/views/ModuleVisual.php";
 require_once CMS_ROOT . "/modules/downloads/visuals/ListVisual.php";
 require_once CMS_ROOT . "/modules/downloads/visuals/EditorVisual.php";
 require_once CMS_ROOT . "/modules/downloads/visuals/SearchBoxVisual.php";

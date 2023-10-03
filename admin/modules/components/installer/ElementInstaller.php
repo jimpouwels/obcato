@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . '/utilities/file_utility.php';
+require_once CMS_ROOT . '/utilities/FileUtility.php';
 require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ScopeDaoMysql.php';
 require_once CMS_ROOT . '/core/model/ElementType.php';

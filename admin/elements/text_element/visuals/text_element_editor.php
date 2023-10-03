@@ -3,9 +3,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/view/views/element_visual.php";
-require_once CMS_ROOT . "/view/views/form_textfield.php";
-require_once CMS_ROOT . "/view/views/form_textarea.php";
+require_once CMS_ROOT . "/view/views/ElementVisual.php";
+require_once CMS_ROOT . "/view/views/TextField.php";
+require_once CMS_ROOT . "/view/views/TextArea.php";
 
 class TextElementEditorVisual extends ElementVisual {
 
