@@ -17,7 +17,7 @@ class RedirectFormHandler extends Formhandler {
     }
 
     public function getRequiredProperties(): array {
-        require_once CMS_ROOT . '/modules/webforms/visuals/redirect_form_handler_editor.php';
+        require_once CMS_ROOT . '/modules/webforms/visuals/RedirectFormHandlerEditor.php';
         return array(
             new HandlerProperty('page_id', 'textfield', new RedirectFormHandlerEditor()),
         );
