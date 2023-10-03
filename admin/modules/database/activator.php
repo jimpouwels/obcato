@@ -2,10 +2,10 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/module_visual.php";
-require_once CMS_ROOT . "/modules/database/database_request_handler.php";
-require_once CMS_ROOT . "/modules/database/visuals/configuration.php";
-require_once CMS_ROOT . "/modules/database/visuals/tables.php";
-require_once CMS_ROOT . "/modules/database/visuals/queries_tab.php";
+require_once CMS_ROOT . "/modules/database/DatabaseRequestHandler.php";
+require_once CMS_ROOT . "/modules/database/visuals/Configuration.php";
+require_once CMS_ROOT . "/modules/database/visuals/Tables.php";
+require_once CMS_ROOT . "/modules/database/visuals/QueriesTab.php";
 require_once CMS_ROOT . "/view/views/tab_menu.php";
 
 class DatabaseModuleVisual extends ModuleVisual {

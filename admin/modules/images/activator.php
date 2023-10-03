@@ -2,13 +2,13 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/module_visual.php";
-require_once CMS_ROOT . "/modules/images/visuals/import/import_tab.php";
+require_once CMS_ROOT . "/modules/images/visuals/import/ImportTab.php";
 require_once CMS_ROOT . "/modules/images/visuals/images/images_tab.php";
-require_once CMS_ROOT . "/modules/images/visuals/labels/labels_tab.php";
+require_once CMS_ROOT . "/modules/images/visuals/labels/LabelsTab.php";
 require_once CMS_ROOT . "/view/views/tab_menu.php";
-require_once CMS_ROOT . "/modules/images/image_request_handler.php";
-require_once CMS_ROOT . "/modules/images/label_request_handler.php";
-require_once CMS_ROOT . "/modules/images/import_request_handler.php";
+require_once CMS_ROOT . "/modules/images/ImageRequestHandler.php";
+require_once CMS_ROOT . "/modules/images/LabelRequestHandler.php";
+require_once CMS_ROOT . "/modules/images/ImportRequestHandler.php";
 
 class ImageModuleVisual extends ModuleVisual {
 

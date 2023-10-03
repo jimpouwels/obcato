@@ -8,7 +8,7 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_statics.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/table_of_contents_element_editor.php";
 require_once CMS_ROOT . "/elements/table_of_contents_element/table_of_contents_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/TableOfContentsElementVisual.php";
+require_once CMS_ROOT . "/frontend/TableOfContentsElementFrontendVisual.php";
 
 class TableOfContentsElement extends Element {
 

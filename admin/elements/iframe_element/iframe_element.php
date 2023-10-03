@@ -7,7 +7,7 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/elements/iframe_element/visuals/iframe_element_statics.php";
 require_once CMS_ROOT . "/elements/iframe_element/visuals/iframe_element_editor.php";
 require_once CMS_ROOT . "/elements/iframe_element/iframe_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/IFrameElementVisual.php";
+require_once CMS_ROOT . "/frontend/IFrameElementFrontendVisual.php";
 
 class IFrameElement extends Element {
 

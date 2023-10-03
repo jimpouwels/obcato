@@ -7,7 +7,7 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/elements/list_element/list_item.php";
 require_once CMS_ROOT . "/elements/list_element/visuals/list_element_statics.php";
 require_once CMS_ROOT . "/elements/list_element/visuals/list_element_editor.php";
-require_once CMS_ROOT . "/frontend/ListElementVisual.php";
+require_once CMS_ROOT . "/frontend/ListElementFrontendVisual.php";
 require_once CMS_ROOT . "/elements/list_element/list_element_request_handler.php";
 
 class ListElement extends Element {

@@ -8,7 +8,7 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_statics.php";
 require_once CMS_ROOT . "/elements/image_element/visuals/image_element_editor.php";
 require_once CMS_ROOT . "/elements/image_element/image_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/ImageElementVisual.php";
+require_once CMS_ROOT . "/frontend/ImageElementFrontendVisual.php";
 
 class ImageElement extends Element {
 

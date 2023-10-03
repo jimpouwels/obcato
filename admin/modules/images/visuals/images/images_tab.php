@@ -2,9 +2,9 @@
 
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/modules/images/visuals/images/image_search.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/image_list.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/image_editor.php";
+require_once CMS_ROOT . "/modules/images/visuals/images/ImageSearch.php";
+require_once CMS_ROOT . "/modules/images/visuals/images/ImageList.php";
+require_once CMS_ROOT . "/modules/images/visuals/images/ImageEditor.php";
 
 class ImagesTab extends Visual {
 

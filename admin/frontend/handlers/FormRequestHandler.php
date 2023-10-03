@@ -5,7 +5,7 @@ require_once CMS_ROOT . '/core/model/Page.php';
 require_once CMS_ROOT . '/core/model/Article.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
-require_once CMS_ROOT . '/modules/webforms/webform_handler_manager.php';
+require_once CMS_ROOT . '/modules/webforms/WebFormHandlerManager.php';
 require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 require_once CMS_ROOT . '/frontend/handlers/ErrorType.php';
 

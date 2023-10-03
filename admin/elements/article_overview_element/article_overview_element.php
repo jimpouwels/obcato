@@ -10,7 +10,7 @@ require_once CMS_ROOT . "/utilities/date_utility.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_statics.php";
 require_once CMS_ROOT . "/elements/article_overview_element/visuals/article_overview_element_editor.php";
 require_once CMS_ROOT . "/elements/article_overview_element/article_overview_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/ArticleOverviewElementVisual.php";
+require_once CMS_ROOT . "/frontend/ArticleOverviewElementFrontendVisual.php";
 
 class ArticleOverviewElement extends Element {
 

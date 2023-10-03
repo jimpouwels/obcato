@@ -3,8 +3,8 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/module_visual.php";
 require_once CMS_ROOT . "/modules/authorization/authorization_request_handler.php";
-require_once CMS_ROOT . "/modules/authorization/visuals/user_list.php";
-require_once CMS_ROOT . "/modules/authorization/visuals/user_editor.php";
+require_once CMS_ROOT . "/modules/authorization/visuals/UserList.php";
+require_once CMS_ROOT . "/modules/authorization/visuals/UserEditor.php";
 
 class AuthorizationModuleVisual extends ModuleVisual {
 

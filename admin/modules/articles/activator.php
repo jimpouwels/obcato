@@ -4,12 +4,12 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/view/views/tab_menu.php";
 require_once CMS_ROOT . "/view/views/module_visual.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/modules/articles/visuals/articles/articles_tab.php";
-require_once CMS_ROOT . "/modules/articles/visuals/terms/terms_tab.php";
-require_once CMS_ROOT . "/modules/articles/visuals/target_pages/list.php";
-require_once CMS_ROOT . "/modules/articles/article_request_handler.php";
-require_once CMS_ROOT . "/modules/articles/term_request_handler.php";
-require_once CMS_ROOT . "/modules/articles/target_pages_request_handler.php";
+require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticleTab.php";
+require_once CMS_ROOT . "/modules/articles/visuals/terms/TermTab.php";
+require_once CMS_ROOT . "/modules/articles/visuals/target_pages/TargetPagesList.php";
+require_once CMS_ROOT . "/modules/articles/ArticleRequestHandler.php";
+require_once CMS_ROOT . "/modules/articles/TermRequestHandler.php";
+require_once CMS_ROOT . "/modules/articles/TargetPagesRequestHandler.php";
 
 class ArticleModuleVisual extends ModuleVisual {
 

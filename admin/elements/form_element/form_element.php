@@ -9,7 +9,7 @@ require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/elements/form_element/visuals/form_element_statics.php";
 require_once CMS_ROOT . "/elements/form_element/visuals/form_element_editor.php";
 require_once CMS_ROOT . "/elements/form_element/form_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/FormElementVisual.php";
+require_once CMS_ROOT . "/frontend/FormElementFrontendVisual.php";
 
 class FormElement extends Element {
 

@@ -2,10 +2,10 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/module_visual.php";
-require_once CMS_ROOT . "/modules/downloads/visuals/list_visual.php";
-require_once CMS_ROOT . "/modules/downloads/visuals/editor_visual.php";
-require_once CMS_ROOT . "/modules/downloads/visuals/search_box_visual.php";
-require_once CMS_ROOT . "/modules/downloads/download_request_handler.php";
+require_once CMS_ROOT . "/modules/downloads/visuals/ListVisual.php";
+require_once CMS_ROOT . "/modules/downloads/visuals/EditorVisual.php";
+require_once CMS_ROOT . "/modules/downloads/visuals/SearchBoxVisual.php";
+require_once CMS_ROOT . "/modules/downloads/DownloadRequestHandler.php";
 
 class DownloadModuleVisual extends ModuleVisual {
 

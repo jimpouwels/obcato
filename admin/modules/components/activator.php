@@ -5,8 +5,8 @@ require_once CMS_ROOT . '/view/views/module_visual.php';
 require_once CMS_ROOT . '/view/views/tab_menu.php';
 require_once CMS_ROOT . '/modules/components/visuals/installation/installation_tab_visual.php';
 require_once CMS_ROOT . '/modules/components/visuals/components/components_tab_visual.php';
-require_once CMS_ROOT . '/modules/components/install_request_handler.php';
-require_once CMS_ROOT . '/modules/components/component_request_handler.php';
+require_once CMS_ROOT . '/modules/components/InstallRequestHandler.php';
+require_once CMS_ROOT . '/modules/components/ComponentRequestHandler.php';
 
 class ComponentsModuleVisual extends ModuleVisual {
 

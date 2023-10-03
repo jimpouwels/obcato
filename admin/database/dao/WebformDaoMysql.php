@@ -11,7 +11,7 @@ require_once CMS_ROOT . "/core/model/WebformDropdown.php";
 require_once CMS_ROOT . "/core/model/WebformButton.php";
 require_once CMS_ROOT . "/core/model/WebformHandlerInstance.php";
 require_once CMS_ROOT . "/core/model/WebformHandlerProperty.php";
-require_once CMS_ROOT . '/modules/webforms/handlers/form_handler.php';
+require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
 
 class WebFormDaoMysql implements WebFormDao {
 

@@ -4,7 +4,7 @@ defined("_ACCESS") or die;
 require_once CMS_ROOT . "/frontend/FrontendVisual.php";
 require_once CMS_ROOT . "/frontend/BlockVisual.php";
 require_once CMS_ROOT . "/frontend/ArticleVisual.php";
-require_once CMS_ROOT . "/frontend/FormVisual.php";
+require_once CMS_ROOT . "/frontend/FormFrontendVisual.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";

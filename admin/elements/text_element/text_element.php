@@ -8,7 +8,7 @@ require_once CMS_ROOT . "/elements/text_element/visuals/text_element_editor.php"
 require_once CMS_ROOT . "/elements/text_element/visuals/text_element_statics.php";
 require_once CMS_ROOT . "/elements/text_element/text_element_request_handler.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/frontend/TextElementVisual.php";
+require_once CMS_ROOT . "/frontend/TextElementFrontendVisual.php";
 
 class TextElement extends Element {
 

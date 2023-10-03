@@ -9,7 +9,7 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_statics.php";
 require_once CMS_ROOT . "/elements/photo_album_element/visuals/photo_album_element_editor.php";
 require_once CMS_ROOT . "/elements/photo_album_element/photo_album_element_request_handler.php";
-require_once CMS_ROOT . "/frontend/PhotoAlbumElementVisual.php";
+require_once CMS_ROOT . "/frontend/PhotoAlbumElementFrontendVisual.php";
 
 class PhotoAlbumElement extends Element {
 
