@@ -6,12 +6,12 @@ require_once CMS_ROOT . "/request_handlers/ElementForm.php";
 
 class FormElementForm extends ElementForm {
 
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
     private FormElement $_form_element;
 
     public function __construct(FormElement $form_element) {
         parent::__construct($form_element);
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
         $this->_form_element = $form_element;
     }
 

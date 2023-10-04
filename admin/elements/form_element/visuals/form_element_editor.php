@@ -9,12 +9,12 @@ class FormElementEditorVisual extends ElementVisual {
 
     private static string $TEMPLATE = "elements/form_element/form_element_form.tpl";
     private FormElement $_form_element;
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
 
     public function __construct(FormElement $form_element) {
         parent::__construct();
         $this->_form_element = $form_element;
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
     }
 
     public function getElement(): Element {

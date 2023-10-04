@@ -23,7 +23,7 @@ define("SYSTEM_VERSION", "1.0.0.5");
 define("DB_VERSION", $website_settings->getDatabaseVersion());
 
 // DEFINE TIME OUT
-define("SESSION_TIMEOUT", 1800);
+define("SESSION_TIMEOUT", 3600);
 
 // DIRECTORIES
 define("COMPONENT_DIR", $website_settings->getComponentDir());

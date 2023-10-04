@@ -5,7 +5,7 @@ defined("_ACCESS") or die;
 require_once CMS_ROOT . "/core/form/Form.php";
 require_once CMS_ROOT . "/core/model/WebformItem.php";
 
-abstract class WebFormItemForm extends Form {
+abstract class WebformItemForm extends Form {
 
     private WebFormItem $_webform_item;
 

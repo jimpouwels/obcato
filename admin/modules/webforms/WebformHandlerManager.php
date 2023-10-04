@@ -6,10 +6,10 @@ require_once CMS_ROOT . '/modules/webforms/handlers/EmailFormHandler.php';
 require_once CMS_ROOT . '/modules/webforms/handlers/RedirectFormHandler.php';
 require_once CMS_ROOT . '/modules/webforms/handlers/ArticleCommentFormHandler.php';
 
-class WebFormHandlerManager {
+class WebformHandlerManager {
 
     private array $_all_handlers = array();
-    private static ?WebFormHandlerManager $_instance = null;
+    private static ?WebformHandlerManager $_instance = null;
 
     private function __construct() {
         $this->_all_handlers[] = new EmailFormHandler();
@@ -19,7 +19,7 @@ class WebFormHandlerManager {
 
     public static function getInstance() {
         if (!self::$_instance) {
-            self::$_instance = new WebFormHandlerManager();
+            self::$_instance = new WebformHandlerManager();
         }
         return self::$_instance;
     }

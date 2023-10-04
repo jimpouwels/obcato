@@ -5,21 +5,21 @@ require_once CMS_ROOT . '/core/model/Page.php';
 require_once CMS_ROOT . '/core/model/Article.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
-require_once CMS_ROOT . '/modules/webforms/WebFormHandlerManager.php';
+require_once CMS_ROOT . '/modules/webforms/WebformHandlerManager.php';
 require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 require_once CMS_ROOT . '/frontend/handlers/ErrorType.php';
 
 class FormRequestHandler {
 
     private static ?FormRequestHandler $_instance = null;
-    private WebFormHandlerManager $_webform_handler_manager;
-    private WebFormDao $_webform_dao;
+    private WebformHandlerManager $_webform_handler_manager;
+    private WebformDao $_webform_dao;
     private ConfigDao $_config_dao;
 
     public function __construct() {
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
         $this->_config_dao = ConfigDaoMysql::getInstance();
-        $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
+        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
     }
 
     public static function getInstance(): FormRequestHandler {

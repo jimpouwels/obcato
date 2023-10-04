@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
 require_once CMS_ROOT . "/view/views/TemplatePicker.php";
 
-class WebFormMetadataEditor extends Panel {
+class WebformMetadataEditor extends Panel {
 
     private WebForm $_current_webform;
     private ConfigDao $_config_dao;

@@ -11,14 +11,14 @@ class ArticleMetadataEditor extends Panel {
 
     private Article $_current_article;
     private ArticleDao $_article_dao;
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
     private FriendlyUrlManager $_friendly_url_manager;
 
     public function __construct(Article $current_article) {
         parent::__construct('Algemeen', 'article_metadata_editor');
         $this->_current_article = $current_article;
         $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
         $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
     }
 

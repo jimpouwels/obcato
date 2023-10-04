@@ -12,7 +12,7 @@ interface ArticleDao {
 
     public function searchArticles($keyword, $term_id): array;
 
-    public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results): array;
+    public function searchPublishedArticles($fromDate, $toDate, $orderBy, $orderType, $terms, $maxResults): array;
 
     public function updateArticle(Article $article): void;
 
@@ -38,11 +38,11 @@ interface ArticleDao {
 
     public function getTermsForArticle($article_id): array;
 
-    public function addTermToArticle($term_id, $article): void;
+    public function addTermToArticle($termId, $article): void;
 
-    public function deleteTermFromArticle($term_id, $article): void;
+    public function deleteTermFromArticle($termId, $article): void;
 
-    public function addTargetPage($target_page_id): void;
+    public function addTargetPage($targetPageId): void;
 
     public function getTargetPages(): array;
 

@@ -2,12 +2,12 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/frontend/ElementFrontendVisual.php';
-require_once CMS_ROOT . '/modules/webforms/WebFormItemFactory.php';
+require_once CMS_ROOT . '/modules/webforms/WebformItemFactory.php';
 require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 
 class FormFrontendVisual extends FrontendVisual {
 
-    private WebFormItemFactory $_webform_item_factory;
+    private WebformItemFactory $_webform_item_factory;
 
     private WebForm $_webform;
     private TemplateDao $_template_dao;
@@ -15,7 +15,7 @@ class FormFrontendVisual extends FrontendVisual {
     public function __construct(Page $page, ?Article $article, WebForm $webform) {
         parent::__construct($page, $article);
         $this->_webform = $webform;
-        $this->_webform_item_factory = WebFormItemFactory::getInstance();
+        $this->_webform_item_factory = WebformItemFactory::getInstance();
         $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 

@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-interface WebFormDao {
+interface WebformDao {
     public function getWebForm(int $webform_id): ?WebForm;
 
     public function getAllWebForms(): array;

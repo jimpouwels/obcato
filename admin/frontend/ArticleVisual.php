@@ -11,14 +11,14 @@ require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 class ArticleVisual extends FrontendVisual {
 
     private TemplateDao $templateDao;
-    private WebFormDao $webformDao;
+    private WebformDao $webformDao;
     private ArticleDao $articleDao;
     private ImageDao $imageDao;
     private ElementDao $elementDao;
 
     public function __construct(Page $page, Article $article) {
         parent::__construct($page, $article);
-        $this->webformDao = WebFormDaoMysql::getInstance();
+        $this->webformDao = WebformDaoMysql::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();

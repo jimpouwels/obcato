@@ -4,7 +4,7 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/core/model/WebformField.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformItemVisual.php";
 
-abstract class WebFormFieldVisual extends WebFormItemVisual {
+abstract class WebformFieldVisual extends WebformItemVisual {
 
     public function __construct(WebFormItem $webform_item) {
         parent::__construct($webform_item);

@@ -6,11 +6,11 @@ namespace {
     require_once CMS_ROOT . '/view/views/Visual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformItemVisual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformButtonVisual.php';
-    require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextfieldVisual.php';
-    require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextareaVisual.php';
-    require_once CMS_ROOT . '/modules/webforms/form/WebFormButtonForm.php';
-    require_once CMS_ROOT . '/modules/webforms/form/WebFormTextFieldForm.php';
-    require_once CMS_ROOT . '/modules/webforms/form/WebFormTextAreaForm.php';
+    require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextFieldVisual.php';
+    require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextAreaVisual.php';
+    require_once CMS_ROOT . '/modules/webforms/form/WebformButtonForm.php';
+    require_once CMS_ROOT . '/modules/webforms/form/WebformTextFieldForm.php';
+    require_once CMS_ROOT . '/modules/webforms/form/WebformTextAreaForm.php';
     require_once CMS_ROOT . '/core/model/WebformTextField.php';
     require_once CMS_ROOT . '/core/model/WebformTextArea.php';
     require_once CMS_ROOT . '/core/model/WebformDropdown.php';
@@ -20,31 +20,31 @@ namespace {
     require_once CMS_ROOT . '/frontend/FormDropdownVisual.php';
     require_once CMS_ROOT . '/frontend/FormButtonVisual.php';
 
-    class WebFormItemFactory {
+    class WebformItemFactory {
 
         private array $_types = array();
-        private static ?WebFormItemFactory $_instance = null;
+        private static ?WebformItemFactory $_instance = null;
 
         private function __construct() {
-            $this->addType(WebFormTextField::$TYPE, "WebFormTextFieldVisual", "WebFormTextFieldForm", "FormTextFieldVisual");
+            $this->addType(WebformTextField::$TYPE, "WebFormTextFieldVisual", "WebFormTextFieldForm", "FormTextFieldVisual");
             $this->addType(WebFormTextArea::$TYPE, "WebFormTextAreaVisual", "WebFormTextAreaForm", "FormTextAreaVisual");
             $this->addType(WebFormDropDown::$TYPE, "WebFormDropDownVisual", "WebFormDropDownForm", "FormDropDownVisual");
             $this->addType(WebFormButton::$TYPE, "WebFormButtonVisual", "WebFormButtonForm", "FormButtonVisual");
         }
 
-        public static function getInstance(): WebFormItemFactory {
+        public static function getInstance(): WebformItemFactory {
             if (!self::$_instance) {
-                self::$_instance = new WebFormItemFactory();
+                self::$_instance = new WebformItemFactory();
             }
             return self::$_instance;
         }
 
-        public function getBackendVisualFor(WebFormItem $webform_item): WebFormItemVisual {
+        public function getBackendVisualFor(WebFormItem $webform_item): WebformItemVisual {
             $backend_visual_classname = $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
             return new $backend_visual_classname($webform_item);
         }
 
-        public function getBackendFormFor(WebFormItem $webform_item): WebFormItemForm {
+        public function getBackendFormFor(WebFormItem $webform_item): WebformItemForm {
             $backend_form_classname = $this->getFormItemType($webform_item->getType())->getBackendFormClassname();
             return new $backend_form_classname($webform_item);
         }

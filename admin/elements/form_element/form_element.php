@@ -54,12 +54,12 @@ class FormElement extends Element {
 
 class FormElementMetadataProvider extends ElementMetadataProvider {
 
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
     private MysqlConnector $_mysql_connector;
 
     public function __construct(Element $element) {
         parent::__construct($element);
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 

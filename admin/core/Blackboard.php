@@ -9,9 +9,9 @@ class BlackBoard {
     private function __construct() {}
 
     public static function getBackendBaseUrl(): string {
-        $base_url = sprintf("/admin/index.php?module_id=%s", BlackBoard::$MODULE_ID);
-        $base_url .= sprintf("&module_tab_id=%s", BlackBoard::$MODULE_TAB_ID);
-        return $base_url;
+        $baseUrl = sprintf("/admin/index.php?module_id=%s", BlackBoard::$MODULE_ID);
+        $baseUrl .= sprintf("&module_tab_id=%s", BlackBoard::$MODULE_TAB_ID);
+        return $baseUrl;
     }
 
     public static function getBackendBaseUrlWithoutTab(): string {

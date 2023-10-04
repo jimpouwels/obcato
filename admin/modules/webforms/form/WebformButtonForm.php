@@ -3,9 +3,9 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/model/WebformTextField.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormItemForm.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformItemForm.php";
 
-class WebFormButtonForm extends WebFormItemForm {
+class WebformButtonForm extends WebformItemForm {
 
     public function __construct(WebFormButton $webform_item) {
         parent::__construct($webform_item);

@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/database/dao/WebFormDao.php";
+require_once CMS_ROOT . "/database/dao/WebformDao.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/core/model/Webform.php";
 require_once CMS_ROOT . "/core/model/WebformField.php";
@@ -13,19 +13,19 @@ require_once CMS_ROOT . "/core/model/WebformHandlerInstance.php";
 require_once CMS_ROOT . "/core/model/WebformHandlerProperty.php";
 require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
 
-class WebFormDaoMysql implements WebFormDao {
+class WebformDaoMysql implements WebformDao {
 
     private static string $myAllColumns = "i.id, i.title, i.template_id, i.include_captcha, i.captcha_key, s.id as scope_id";
-    private static ?WebFormDaoMysql $instance = null;
+    private static ?WebformDaoMysql $instance = null;
     private MysqlConnector $_mysql_connector;
 
     private function __construct() {
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 
-    public static function getInstance(): WebFormDaoMysql {
+    public static function getInstance(): WebformDaoMysql {
         if (!self::$instance) {
-            self::$instance = new WebFormDaoMysql();
+            self::$instance = new WebformDaoMysql();
         }
         return self::$instance;
     }
@@ -131,8 +131,8 @@ class WebFormDaoMysql implements WebFormDao {
         $result = $this->_mysql_connector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {
             switch ($row["type"]) {
-                case WebFormTextField::$TYPE:
-                    return WebFormTextField::constructFromRecord($row);
+                case WebformTextField::$TYPE:
+                    return WebformTextField::constructFromRecord($row);
                 case WebFormTextArea::$TYPE:
                     return WebFormTextArea::constructFromRecord($row);
                 case WebFormDropDown::$TYPE:
@@ -152,8 +152,8 @@ class WebFormDaoMysql implements WebFormDao {
         $result = $this->_mysql_connector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {
             switch ($row["type"]) {
-                case WebFormTextField::$TYPE:
-                    $form_fields[] = WebFormTextField::constructFromRecord($row);
+                case WebformTextField::$TYPE:
+                    $form_fields[] = WebformTextField::constructFromRecord($row);
                     break;
                 case WebFormTextArea::$TYPE:
                     $form_fields[] = WebFormTextArea::constructFromRecord($row);

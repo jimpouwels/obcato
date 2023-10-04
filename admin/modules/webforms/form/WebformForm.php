@@ -3,26 +3,26 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormTextFieldForm.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormTextAreaForm.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormDropDownForm.php";
-require_once CMS_ROOT . "/modules/webforms/WebFormItemFactory.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformTextFieldForm.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformTextAreaForm.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformDropDownForm.php";
+require_once CMS_ROOT . "/modules/webforms/WebformItemFactory.php";
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 
-class WebFormForm extends Form {
+class WebformForm extends Form {
 
-    private WebFormItemFactory $_webform_item_factory;
-    private WebFormHandlerManager $_webform_handler_manager;
+    private WebformItemFactory $_webform_item_factory;
+    private WebformHandlerManager $_webform_handler_manager;
     private WebForm $_webform;
     private array $_handler_properties = array();
     private ?string $_captcha_secret = null;
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
 
     public function __construct(WebForm $webform) {
         $this->_webform = $webform;
-        $this->_webform_item_factory = WebFormItemFactory::getInstance();
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
-        $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
+        $this->_webform_item_factory = WebformItemFactory::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
+        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
     }
 
     public function loadFields(): void {

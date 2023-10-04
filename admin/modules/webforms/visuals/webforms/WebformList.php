@@ -3,15 +3,15 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/Webform.php";
 
-class WebFormList extends Panel {
+class WebformList extends Panel {
 
     private ?WebForm $_current_webform;
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
 
-    public function __construct(?WebForm $current_webform, WebFormRequestHandler $webform_request_handler) {
+    public function __construct(?WebForm $current_webform, WebformRequestHandler $webform_request_handler) {
         parent::__construct("webforms_list_panel_title", 'webforms_list');
         $this->_current_webform = $current_webform;
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {

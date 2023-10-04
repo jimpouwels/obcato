@@ -4,25 +4,25 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormForm.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformForm.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/EmailFormHandler.php";
 require_once CMS_ROOT . "/modules/webforms/handlers/ArticleCommentFormHandler.php";
 require_once CMS_ROOT . "/core/model/WebformTextField.php";
 require_once CMS_ROOT . "/core/model/WebformTextArea.php";
 
-class WebFormRequestHandler extends HttpRequestHandler {
+class WebformRequestHandler extends HttpRequestHandler {
 
     private static string $FORM_QUERYSTRING_KEY = "webform_id";
     private static string $FORM_ID_POST_KEY = "webform_id";
-    private WebFormHandlerManager $_webform_handler_manager;
-    private WebFormDao $_webform_dao;
+    private WebformHandlerManager $_webform_handler_manager;
+    private WebformDao $_webform_dao;
     private ?WebForm $_current_webform = null;
     private ConfigDao $_config_dao;
 
     public function __construct() {
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
         $this->_config_dao = ConfigDaoMysql::getInstance();
-        $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
+        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
     }
 
     public function handleGet(): void {
@@ -112,7 +112,7 @@ class WebFormRequestHandler extends HttpRequestHandler {
     }
 
     private function updateWebForm(WebForm $webform): void {
-        $form = new WebFormForm($webform);
+        $form = new WebformForm($webform);
         try {
             $form->loadFields();
             $this->_webform_dao->updateWebForm($this->_current_webform);
@@ -134,7 +134,7 @@ class WebFormRequestHandler extends HttpRequestHandler {
     }
 
     private function addTextField(WebForm $webform): void {
-        $text_field = new WebFormTextField();
+        $text_field = new WebformTextField();
         $this->_webform_dao->persistWebFormItem($webform, $text_field);
     }
 

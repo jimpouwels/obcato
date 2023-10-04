@@ -99,7 +99,7 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results): array {
+    public function searchPublishedArticles($fromDate, $toDate, $orderBy, $orderType, $terms, $maxResults): array {
         $from = " FROM element_holders e, articles a";
         $where = " WHERE
                       e.id = a.element_holder_id";
@@ -107,11 +107,11 @@ class ArticleDaoMysql implements ArticleDao {
         $limit = '';
 
         $where = $where . " AND publication_date <= now()";
-        if (!is_null($to_date) && $to_date != '') {
-            $where = $where . " AND publication_date <= '" . DateUtility::stringMySqlDate($to_date) . "'";
+        if (!is_null($toDate) && $toDate != '') {
+            $where = $where . " AND publication_date <= '" . DateUtility::stringMySqlDate($toDate) . "'";
         }
-        if (!is_null($from_date) && $from_date != '') {
-            $where = $where . " AND publication_date > '" . DateUtility::stringMySqlDate($from_date) . "'";
+        if (!is_null($fromDate) && $fromDate != '') {
+            $where = $where . " AND publication_date > '" . DateUtility::stringMySqlDate($fromDate) . "'";
         }
         if (!is_null($terms) && count($terms) > 0) {
             $from = $from . ", articles_terms at";
@@ -119,20 +119,20 @@ class ArticleDaoMysql implements ArticleDao {
                 $where = $where . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
             }
         }
-        if (!is_null($max_results) && $max_results != '') {
-            $limit = " LIMIT " . $max_results;
+        if (!is_null($maxResults) && $maxResults != '') {
+            $limit = " LIMIT " . $maxResults;
         }
 
-        if (!is_null($order_by) && $order_by != '') {
-            switch ($order_by) {
+        if (!is_null($orderBy) && $orderBy != '') {
+            switch ($orderBy) {
                 case "Alphabet":
                     $order = 'e.title';
                     break;
                 case "PublicationDate":
-                    $order = 'a.publication_date ' . $order_type;
+                    $order = 'a.publication_date ' . $orderType;
                     break;
                 case "SortDate":
-                    $order = 'a.sort_date ' . $order_type;
+                    $order = 'a.sort_date ' . $orderType;
                     break;
             }
         }
@@ -190,14 +190,14 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function createArticle(): Article {
-        $new_article = new Article();
-        $new_article->setPublished(false);
-        $new_article->setTitle('Nieuw artikel');
-        $new_article->setCreatedById(Authenticator::getCurrentUser()->getId());
-        $new_article->setType(ELEMENT_HOLDER_ARTICLE);
+        $newArticle = new Article();
+        $newArticle->setPublished(false);
+        $newArticle->setTitle('Nieuw artikel');
+        $newArticle->setCreatedById(Authenticator::getCurrentUser()->getId());
+        $newArticle->setType(ELEMENT_HOLDER_ARTICLE);
 
-        $this->persistArticle($new_article);
-        return $new_article;
+        $this->persistArticle($newArticle);
+        return $newArticle;
     }
 
     private function persistArticle($article): void {
@@ -251,15 +251,15 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function createTerm($term_name): ArticleTerm {
-        $new_term = new ArticleTerm();
-        $new_term->setName($term_name);
+        $newTerm = new ArticleTerm();
+        $newTerm->setName($term_name);
         $postfix = 1;
-        while (!is_null($this->getTermByName($new_term->getName()))) {
-            $new_term->setName($term_name . " " . $postfix);
+        while (!is_null($this->getTermByName($newTerm->getName()))) {
+            $newTerm->setName($term_name . " " . $postfix);
             $postfix++;
         }
-        $this->persistTerm($new_term);
-        return $new_term;
+        $this->persistTerm($newTerm);
+        return $newTerm;
     }
 
     public function getTermByName($name): ?ArticleTerm {
@@ -301,19 +301,19 @@ class ArticleDaoMysql implements ArticleDao {
         return $terms;
     }
 
-    public function addTermToArticle($term_id, $article): void {
-        $query = "INSERT INTO articles_terms (article_id, term_id) VALUES (" . $article->getId() . ", " . $term_id . ")";
+    public function addTermToArticle($termId, $article): void {
+        $query = "INSERT INTO articles_terms (article_id, term_id) VALUES (" . $article->getId() . ", " . $termId . ")";
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function deleteTermFromArticle($term_id, $article): void {
+    public function deleteTermFromArticle($termId, $article): void {
         $query = "DELETE FROM articles_terms WHERE article_id = " . $article->getId() . "
-                      AND term_id = " . $term_id;
+                      AND term_id = " . $termId;
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function addTargetPage($target_page_id): void {
-        $duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $target_page_id;
+    public function addTargetPage($targetPageId): void {
+        $duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $targetPageId;
         $result = $this->mysqlConnector->executeQuery($duplicate_check_query);
 
         $count = 0;
@@ -323,7 +323,7 @@ class ArticleDaoMysql implements ArticleDao {
         }
 
         if ($count == 0) {
-            $query = "INSERT INTO article_target_pages (element_holder_id, is_default) VALUES (" . $target_page_id . ", 0)";
+            $query = "INSERT INTO article_target_pages (element_holder_id, is_default) VALUES (" . $targetPageId . ", 0)";
             $this->mysqlConnector->executeQuery($query);
 
             // check if only one target page is present

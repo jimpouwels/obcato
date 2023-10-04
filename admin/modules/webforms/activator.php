@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/ModuleVisual.php";
-require_once CMS_ROOT . "/modules/webforms/WebFormRequestHandler.php";
+require_once CMS_ROOT . "/modules/webforms/WebformRequestHandler.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformTab.php";
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/view/views/TabMenu.php";
@@ -10,14 +10,14 @@ require_once CMS_ROOT . "/view/views/TabMenu.php";
 class WebFormsModuleVisual extends ModuleVisual {
 
     private static int $FORMS_TAB = 0;
-    private WebFormRequestHandler $_webform_request_handler;
+    private WebformRequestHandler $_webform_request_handler;
     private Module $_webform_module;
     private int $_current_tab_id = 0;
 
     public function __construct(Module $form_module) {
         parent::__construct($form_module);
         $this->_webform_module = $form_module;
-        $this->_webform_request_handler = new WebFormRequestHandler();
+        $this->_webform_request_handler = new WebformRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -27,7 +27,7 @@ class WebFormsModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->_current_tab_id == self::$FORMS_TAB) {
-            $content = new WebFormTab($this->_webform_request_handler);
+            $content = new WebformTab($this->_webform_request_handler);
         }
         $this->assign("content", $content->render());
     }

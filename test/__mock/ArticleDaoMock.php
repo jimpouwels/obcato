@@ -28,7 +28,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement searchArticles() method.
     }
 
-    public function searchPublishedArticles($from_date, $to_date, $order_by, $order_type, $terms, $max_results): array {
+    public function searchPublishedArticles($fromDate, $toDate, $orderBy, $orderType, $terms, $maxResults): array {
         // TODO: Implement searchPublishedArticles() method.
     }
 
@@ -80,15 +80,15 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getTermsForArticle() method.
     }
 
-    public function addTermToArticle($term_id, $article): void {
+    public function addTermToArticle($termId, $article): void {
         // TODO: Implement addTermToArticle() method.
     }
 
-    public function deleteTermFromArticle($term_id, $article): void {
+    public function deleteTermFromArticle($termId, $article): void {
         // TODO: Implement deleteTermFromArticle() method.
     }
 
-    public function addTargetPage($target_page_id): void {
+    public function addTargetPage($targetPageId): void {
         // TODO: Implement addTargetPage() method.
     }
 

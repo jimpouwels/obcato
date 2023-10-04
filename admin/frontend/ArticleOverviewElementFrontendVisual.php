@@ -40,8 +40,8 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
     private function getArticleImage(Article $article): ?array {
         $image = $this->imageDao->getImage($article->getImageId());
+        $imageData = array();
         if ($image) {
-            $imageData = array();
             $imageData["title"] = $image->getTitle();
             $imageData["alt_text"] = $image->getAltText();
             $imageData["url"] = $this->getImageUrl($image);

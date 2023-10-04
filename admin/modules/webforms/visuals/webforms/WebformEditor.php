@@ -4,16 +4,16 @@ defined('_ACCESS') or die;
 require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformTextfieldVisual.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformTextareaVisual.php";
-require_once CMS_ROOT . "/modules/webforms/WebFormItemFactory.php";
+require_once CMS_ROOT . "/modules/webforms/WebformItemFactory.php";
 
-class WebFormEditor extends Panel {
+class WebformEditor extends Panel {
 
     private WebForm $_current_webform;
-    private WebFormItemFactory $_webform_item_factory;
+    private WebformItemFactory $_webform_item_factory;
 
     public function __construct(?WebForm $current_webform) {
         parent::__construct("webforms_webform_editor_panel_title");
-        $this->_webform_item_factory = WebFormItemFactory::getInstance();
+        $this->_webform_item_factory = WebformItemFactory::getInstance();
         $this->_current_webform = $current_webform;
     }
 

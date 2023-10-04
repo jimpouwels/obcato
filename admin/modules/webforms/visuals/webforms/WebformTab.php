@@ -6,10 +6,10 @@ require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformMetadataEdito
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformEditor.php";
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/HandlersEditor.php";
 
-class WebFormTab extends Visual {
+class WebformTab extends Visual {
 
     private ?WebForm $_current_webform;
-    private WebFormRequestHandler $_webform_request_handler;
+    private WebformRequestHandler $_webform_request_handler;
 
     public function __construct($webform_request_handler) {
         parent::__construct();
@@ -33,17 +33,17 @@ class WebFormTab extends Visual {
     }
 
     private function renderWebFormsList(): string {
-        $webform_list = new WebFormList($this->_current_webform, $this->_webform_request_handler);
+        $webform_list = new WebformList($this->_current_webform, $this->_webform_request_handler);
         return $webform_list->render();
     }
 
     private function renderMetadataEditor(): string {
-        $metadata_editor = new WebFormMetadataEditor($this->_current_webform, $this);
+        $metadata_editor = new WebformMetadataEditor($this->_current_webform, $this);
         return $metadata_editor->render();
     }
 
     private function renderWebFormEditor(): string {
-        $webform_editor = new WebFormEditor($this->_current_webform);
+        $webform_editor = new WebformEditor($this->_current_webform);
         return $webform_editor->render();
     }
 

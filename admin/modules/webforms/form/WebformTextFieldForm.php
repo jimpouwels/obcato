@@ -3,11 +3,11 @@
 defined("_ACCESS") or die;
 
 require_once CMS_ROOT . "/core/model/WebformTextField.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebFormFieldForm.php";
+require_once CMS_ROOT . "/modules/webforms/form/WebformFieldForm.php";
 
-class WebFormTextFieldForm extends WebFormFieldForm {
+class WebformTextFieldForm extends WebformFieldForm {
 
-    public function __construct(WebFormTextField $webform_item) {
+    public function __construct(WebformTextField $webform_item) {
         parent::__construct($webform_item);
     }
 

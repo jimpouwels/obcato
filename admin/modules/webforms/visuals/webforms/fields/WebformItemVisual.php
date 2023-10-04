@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/core/model/WebformField.php";
 
-abstract class WebFormItemVisual extends Visual {
+abstract class WebformItemVisual extends Visual {
 
     private WebFormItem $_webform_item;
 

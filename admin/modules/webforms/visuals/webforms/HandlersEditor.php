@@ -3,20 +3,20 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/core/model/Webform.php';
 require_once CMS_ROOT . '/modules/webforms/handlers/EmailFormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/WebFormHandlerManager.php';
+require_once CMS_ROOT . '/modules/webforms/WebformHandlerManager.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 
 class HandlersEditor extends Panel {
 
-    private WebFormHandlerManager $_webform_handler_manager;
+    private WebformHandlerManager $_webform_handler_manager;
     private WebForm $_webform;
-    private WebFormDao $_webform_dao;
+    private WebformDao $_webform_dao;
 
     public function __construct(WebForm $webform) {
         parent::__construct('webforms_handlers_editor_title');
         $this->_webform = $webform;
-        $this->_webform_handler_manager = WebFormHandlerManager::getInstance();
-        $this->_webform_dao = WebFormDaoMysql::getInstance();
+        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
+        $this->_webform_dao = WebformDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
