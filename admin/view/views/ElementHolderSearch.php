@@ -5,7 +5,7 @@ require_once CMS_ROOT . "/view/views/Search.php";
 require_once CMS_ROOT . "/view/views/InformationMessage.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
-require_once CMS_ROOT . "/core/model/Page.php";
+require_once CMS_ROOT . "/modules/pages/model/Page.php";
 
 class ElementHolderSearch extends Panel {
 

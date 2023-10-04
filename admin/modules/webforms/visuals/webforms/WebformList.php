@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/Webform.php";
+require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
 
 class WebformList extends Panel {
 

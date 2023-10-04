@@ -3,14 +3,14 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/database/dao/WebformDao.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/core/model/Webform.php";
-require_once CMS_ROOT . "/core/model/WebformField.php";
-require_once CMS_ROOT . "/core/model/WebformTextField.php";
-require_once CMS_ROOT . "/core/model/WebformTextArea.php";
-require_once CMS_ROOT . "/core/model/WebformDropdown.php";
-require_once CMS_ROOT . "/core/model/WebformButton.php";
-require_once CMS_ROOT . "/core/model/WebformHandlerInstance.php";
-require_once CMS_ROOT . "/core/model/WebformHandlerProperty.php";
+require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformTextField.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformTextArea.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformDropdown.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformButton.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformHandlerInstance.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformHandlerProperty.php";
 require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
 
 class WebformDaoMysql implements WebformDao {

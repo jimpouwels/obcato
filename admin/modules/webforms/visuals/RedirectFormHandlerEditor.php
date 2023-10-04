@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/view/views/PagePicker.php';
 require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
-require_once CMS_ROOT . '/core/model/WebformHandlerProperty.php';
+require_once CMS_ROOT . '/modules/webforms/model/WebformHandlerProperty.php';
 
 class RedirectFormHandlerEditor extends Visual {
 

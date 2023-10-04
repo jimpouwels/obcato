@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/WebformItem.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformItem.php";
 
 abstract class WebFormField extends WebFormItem {
 

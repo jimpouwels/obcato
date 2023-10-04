@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformItemVisual.php";
-require_once CMS_ROOT . "/core/model/WebformButton.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformButton.php";
 
 class WebformButtonVisual extends WebformItemVisual {
 

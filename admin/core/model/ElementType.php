@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/Presentable.php";
+require_once CMS_ROOT . "/modules/templates/model/Presentable.php";
 require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 
 class ElementType extends Entity {

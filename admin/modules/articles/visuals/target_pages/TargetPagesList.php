@@ -25,7 +25,7 @@ class TargetPagesList extends Panel {
         $data->assign("page_picker", $page_picker->render());
     }
 
-    private function getDefaultTargetPage(): array {
+    private function getDefaultTargetPage(): ?array {
         $target_page = $this->_article_dao->getDefaultTargetPage();
         $target_page_value = null;
         if (!is_null($target_page)) {

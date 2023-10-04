@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/WebformField.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
 
 class WebFormTextArea extends WebFormField {
 

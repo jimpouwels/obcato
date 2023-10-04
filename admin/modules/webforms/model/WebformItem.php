@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/Presentable.php";
+require_once CMS_ROOT . "/modules/templates/model/Presentable.php";
 
 abstract class WebFormItem extends Presentable {
 

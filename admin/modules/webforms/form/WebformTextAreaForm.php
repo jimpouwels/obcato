@@ -2,7 +2,7 @@
 
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . "/core/model/WebformTextArea.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformTextArea.php";
 require_once CMS_ROOT . "/modules/webforms/form/WebformFieldForm.php";
 
 class WebformTextAreaForm extends WebformFieldForm {

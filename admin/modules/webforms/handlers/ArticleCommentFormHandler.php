@@ -3,7 +3,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
 require_once CMS_ROOT . '/modules/webforms/handlers/HandlerProperty.php';
-require_once CMS_ROOT . '/core/model/Webform.php';
+require_once CMS_ROOT . '/modules/webforms/model/Webform.php';
 require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
 
 class ArticleCommentFormHandler extends Formhandler {

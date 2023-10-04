@@ -1,8 +1,8 @@
 <?php
 defined("_ACCESS") or die;
 
-require_once CMS_ROOT . '/core/model/Page.php';
-require_once CMS_ROOT . '/core/model/Article.php';
+require_once CMS_ROOT . '/modules/pages/model/Page.php';
+require_once CMS_ROOT . '/modules/articles/model/Article.php';
 require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
 require_once CMS_ROOT . '/modules/webforms/WebformHandlerManager.php';

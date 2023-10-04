@@ -1,8 +1,8 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/WebformDropdownOption.php";
-require_once CMS_ROOT . "/core/model/WebformField.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformDropdownOption.php";
+require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
 
 class WebFormDropDown extends WebFormField {
 

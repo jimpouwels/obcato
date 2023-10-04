@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/User.php";
+require_once CMS_ROOT . "/modules/authorization/model/User.php";
 require_once CMS_ROOT . "/utilities/StringUtility.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/AuthorizationDao.php";

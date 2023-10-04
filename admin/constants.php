@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once CMS_ROOT . "/core/model/Settings.php";
+require_once CMS_ROOT . "/modules/settings/model/Settings.php";
 
 $website_settings = Settings::find();
 
@@ -18,7 +18,7 @@ define("ELEMENT_HOLDER_PAGE", 'ELEMENT_HOLDER_PAGE');
 define("ELEMENT_HOLDER_ARTICLE", 'ELEMENT_HOLDER_ARTICLE');
 define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
 
-// DEFINE SYSTEM VFERSION
+// DEFINE SYSTEM VERSION
 define("SYSTEM_VERSION", "1.0.0.5");
 define("DB_VERSION", $website_settings->getDatabaseVersion());
 

@@ -2,7 +2,7 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/view/views/ModuleVisual.php";
-require_once CMS_ROOT . "/modules/authorization/authorization_request_handler.php";
+require_once CMS_ROOT . "/modules/authorization/AuthorizationRequestHandler.php";
 require_once CMS_ROOT . "/modules/authorization/visuals/UserList.php";
 require_once CMS_ROOT . "/modules/authorization/visuals/UserEditor.php";
 
