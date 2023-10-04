@@ -3,7 +3,6 @@
 defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
 require_once CMS_ROOT . "/modules/pages/PageForm.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
@@ -19,14 +18,12 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     private static int $FALLBACK_PAGE_ID = 1;
 
     private Page $currentPage;
-    private PageDao $pageDao;
     private BlockDao $blockDao;
     private PageService $pageService;
     private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct() {
         parent::__construct();
-        $this->pageDao = PageDaoMysql::getInstance();
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->pageService = PageInteractor::getInstance();
@@ -62,7 +59,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
             $pageForm->loadFields();
             $this->pageService->addSelectedBlocks($this->currentPage, $pageForm->getSelectedBlocks());
             $this->deleteSelectedBlocksFromPage();
-            $this->pageDao->updatePage($this->currentPage);
+            $this->pageService->updatePage($this->currentPage);
             $this->updateElementHolder($this->currentPage);
             $this->friendlyUrlManager->insertOrUpdateFriendlyUrlForPage($this->currentPage);
             $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
@@ -85,64 +82,34 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function deletePage(): void {
-        $subPages = $this->pageDao->getSubPages($this->currentPage);
-        foreach ($subPages as $subPage) {
-            $this->pageDao->deletePage($subPage);
-        }
-
-        $this->pageDao->deletePage($this->currentPage);
-
-        $parent = $this->pageDao->getParent($this->currentPage);
-        $currentLevelPages = $this->pageDao->getSubPages($parent);
-        $this->updateFollowUp($currentLevelPages);
+        $this->pageService->deletePage($this->currentPage);
         $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
     }
 
     private function addSubPage(): void {
-        $newPage = new Page();
-        $newPage->setParentId($this->currentPage->getId());
-        $newPage->setShowInNavigation(true);
-        $newPage->setDescription($this->getTextResource('new_page_default_title'));
-        $newPage->setNavigationTitle($this->getTextResource('new_page_default_navigation_title'));
-        $newPage->setTitle($this->getTextResource('new_page_default_title'));
-        $user = Authenticator::getCurrentUser();
-        $newPage->setCreatedById($user->getId());
-        $newPage->setType(ELEMENT_HOLDER_PAGE);
-        $this->pageDao->persist($newPage);
-
-        $parent = $this->pageDao->getPage($this->currentPage->getId());
-        $current_level_pages = $this->pageDao->getSubPages($parent);
-        $this->updateFollowUp($current_level_pages);
-
+        $newPage = $this->pageService->addSubPageTo($this->currentPage);
         $this->sendSuccessMessage($this->getTextResource('page_added_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $newPage->getId());
     }
 
     private function moveUp(): void {
-        $this->pageDao->moveUp($this->currentPage);
+        $this->pageService->moveUp($this->currentPage);
     }
 
     private function moveDown(): void {
-        $this->pageDao->moveDown($this->currentPage);
-    }
-
-    private function updateFollowUp(array $pages): void {
-        for ($i = 0; $i < count($pages); $i++) {
-            $pages[$i]->setFollowUp($i);
-            $this->pageDao->updatePage($pages[$i]);
-        }
+        $this->pageService->moveDown($this->currentPage);
     }
 
     private function getPageFromPostRequest(): Page {
-        return $this->pageDao->getPage($_POST[self::$PAGE_ID_POST]);
+        return $this->pageService->getPageById($_POST[self::$PAGE_ID_POST]);
     }
 
     private function getPageFromGetRequest(): Page {
         if (isset($_GET[self::$PAGE_ID_GET])) {
-            return $this->pageDao->getPage($_GET[self::$PAGE_ID_GET]);
+            return $this->pageService->getPageById($_GET[self::$PAGE_ID_GET]);
         } else {
-            return $this->pageDao->getPage(self::$FALLBACK_PAGE_ID);
+            return $this->pageService->getPageById(self::$FALLBACK_PAGE_ID);
         }
     }
 

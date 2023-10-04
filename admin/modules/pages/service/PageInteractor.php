@@ -16,6 +16,14 @@ class PageInteractor implements PageService {
         $this->blockDao = BlockDaoMysql::getInstance();
     }
 
+    public function getPageById(int $id): ?Page {
+        return $this->pageDao->getPage($id);
+    }
+
+    public function updatePage(Page $page): void {
+        $this->pageDao->updatePage($page);
+    }
+
     public static function getInstance(): PageInteractor {
         if (!self::$instance) {
             self::$instance = new PageInteractor();
@@ -23,22 +31,68 @@ class PageInteractor implements PageService {
         return self::$instance;
     }
 
-    function addSelectedBlocks(Page $page, array $selected_blocks): void {
-        if (count($selected_blocks) == 0) return;
-        $current_page_blocks = $this->blockDao->getBlocksByPage($page);
-        foreach ($selected_blocks as $selected_block_id) {
-            if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
-                $this->blockDao->addBlockToPage($selected_block_id, $page);
+    public function addSubPageTo(Page $page): Page {
+        $newPage = new Page();
+        $newPage->setParentId($page->getId());
+        $newPage->setShowInNavigation(true);
+        $newPage->setDescription(Session::getTextResource('new_page_default_title'));
+        $newPage->setNavigationTitle(Session::getTextResource('new_page_default_navigation_title'));
+        $newPage->setTitle(Session::getTextResource('new_page_default_title'));
+        $user = Authenticator::getCurrentUser();
+        $newPage->setCreatedById($user->getId());
+        $newPage->setType(ELEMENT_HOLDER_PAGE);
+        $this->pageDao->persist($newPage);
+
+        $parent = $this->pageDao->getPage($page->getId());
+        $currentLevelPages = $this->pageDao->getSubPages($parent);
+        $this->updateFollowUp($currentLevelPages);
+        return $newPage;
+    }
+
+    public function addSelectedBlocks(Page $page, array $selectedBlocks): void {
+        if (count($selectedBlocks) == 0) return;
+        $blocksForPage = $this->blockDao->getBlocksByPage($page);
+        foreach ($selectedBlocks as $selectedBlock) {
+            if (!Arrays::firstMatch($blocksForPage, function ($blockForPage) use ($selectedBlock) {
+                return $blockForPage->getName() == $selectedBlock;
+            })) {
+                $this->blockDao->addBlockToPage($selectedBlock, $page);
             }
         }
     }
 
-    private function blockAlreadyExists(int $selected_block_id, array $current_page_blocks): bool {
-        foreach ($current_page_blocks as $current_page_block) {
-            if ($current_page_block->getId() == $selected_block_id) {
-                return true;
-            }
+    public function getSubPages(Page $page): array {
+        return $this->pageDao->getSubPages($page);
+    }
+
+    public function deletePage(Page $page): void {
+        $this->deleteSubPagesOf($page);
+        $this->pageDao->deletePage($page);
+
+        $parent = $this->pageDao->getParent($page);
+        $currentLevelPages = $this->pageDao->getSubPages($parent);
+        $this->updateFollowUp($currentLevelPages);
+    }
+
+    public function moveUp(Page $page): void {
+        $this->pageDao->moveUp($page);
+    }
+
+    public function moveDown(Page $page): void {
+        $this->pageDao->moveDown($page);
+    }
+
+    private function updateFollowUp(array $pages): void {
+        for ($i = 0; $i < count($pages); $i++) {
+            $pages[$i]->setFollowUp($i);
+            $this->pageDao->updatePage($pages[$i]);
         }
-        return false;
+    }
+
+    private function deleteSubPagesOf(Page $page): void {
+        foreach ($this->pageDao->getSubPages($page) as $subPage) {
+            $this->pageDao->deletePage($subPage);
+        }
+
     }
 }
