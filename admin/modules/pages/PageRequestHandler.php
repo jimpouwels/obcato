@@ -4,6 +4,7 @@ defined('_ACCESS') or die;
 
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
+require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
 require_once CMS_ROOT . "/modules/pages/PageForm.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
@@ -17,25 +18,27 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     private static string $PAGE_ID_GET = "page";
     private static int $FALLBACK_PAGE_ID = 1;
 
-    private Page $_current_page;
-    private PageDao $_page_dao;
-    private BlockDao $_block_dao;
-    private FriendlyUrlManager $_friendly_url_manager;
+    private Page $currentPage;
+    private PageDao $pageDao;
+    private BlockDao $blockDao;
+    private PageService $pageService;
+    private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct() {
         parent::__construct();
-        $this->_page_dao = PageDaoMysql::getInstance();
-        $this->_block_dao = BlockDaoMysql::getInstance();
-        $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
+        $this->pageDao = PageDaoMysql::getInstance();
+        $this->blockDao = BlockDaoMysql::getInstance();
+        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
+        $this->pageService = PageInteractor::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_page = $this->getPageFromGetRequest();
+        $this->currentPage = $this->getPageFromGetRequest();
     }
 
     public function handlePost(): void {
         parent::handlePost();
-        $this->_current_page = $this->getPageFromPostRequest();
+        $this->currentPage = $this->getPageFromPostRequest();
         if ($this->isUpdatePageAction()) {
             $this->updatePage();
         } else if ($this->isDeletePageAction()) {
@@ -50,111 +53,90 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function getCurrentPage(): ?Page {
-        return $this->_current_page;
+        return $this->currentPage;
     }
 
     private function updatePage(): void {
-        $page_form = new PageForm($this->_current_page);
+        $pageForm = new PageForm($this->currentPage);
         try {
-            $page_form->loadFields();
-            $this->addSelectedBlocks($page_form->getSelectedBlocks());
+            $pageForm->loadFields();
+            $this->pageService->addSelectedBlocks($this->currentPage, $pageForm->getSelectedBlocks());
             $this->deleteSelectedBlocksFromPage();
-            $this->_page_dao->updatePage($this->_current_page);
-            $this->updateElementHolder($this->_current_page);
-            $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForPage($this->_current_page);
+            $this->pageDao->updatePage($this->currentPage);
+            $this->updateElementHolder($this->currentPage);
+            $this->friendlyUrlManager->insertOrUpdateFriendlyUrlForPage($this->currentPage);
             $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
-        } catch (ElementHolderContainsErrorsException $e) {
-            $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
-        } catch (FormException $e) {
+        } catch (ElementHolderContainsErrorsException|FormException) {
             $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
         }
-    }
-
-    private function addSelectedBlocks(array $selected_blocks): void {
-        if (count($selected_blocks) == 0) return;
-        $current_page_blocks = $this->_block_dao->getBlocksByPage($this->_current_page);
-        foreach ($selected_blocks as $selected_block_id) {
-            if (!$this->blockAlreadyExists($selected_block_id, $current_page_blocks)) {
-                $this->_block_dao->addBlockToPage($selected_block_id, $this->_current_page);
-            }
-        }
-    }
-
-    private function blockAlreadyExists(int $selected_block_id, array $current_page_blocks): bool {
-        foreach ($current_page_blocks as $current_page_block) {
-            if ($current_page_block->getId() == $selected_block_id) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private function deleteSelectedBlocksFromPage(): void {
-        $current_page_blocks = $this->_block_dao->getBlocksByPage($this->_current_page);
-        foreach ($current_page_blocks as $current_page_block) {
-            if ($this->isBlockSelectedForDeletion($current_page_block)) {
-                $this->_block_dao->deleteBlockFromPage($current_page_block->getId(), $this->_current_page);
+        $currentPageBlocks = $this->blockDao->getBlocksByPage($this->currentPage);
+        foreach ($currentPageBlocks as $currentPageBlock) {
+            if ($this->isBlockSelectedForDeletion($currentPageBlock)) {
+                $this->blockDao->deleteBlockFromPage($currentPageBlock->getId(), $this->currentPage);
             }
         }
     }
 
-    private function isBlockSelectedForDeletion(Block $current_page_block): bool {
-        return isset($_POST["block_" . $this->_current_page->getId() . "_" . $current_page_block->getId() . "_delete"]);
+    private function isBlockSelectedForDeletion(Block $currentPageBlock): bool {
+        return isset($_POST["block_" . $this->currentPage->getId() . "_" . $currentPageBlock->getId() . "_delete"]);
     }
 
     private function deletePage(): void {
-        $this->_page_dao->deletePage($this->_current_page);
-        $parent = $this->_page_dao->getParent($this->_current_page);
-        $current_level_pages = $this->_page_dao->getSubPages($parent);
+        $this->pageDao->deletePage($this->currentPage);
+        $parent = $this->pageDao->getParent($this->currentPage);
+        $current_level_pages = $this->pageDao->getSubPages($parent);
         $this->updateFollowUp($current_level_pages);
         $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
     }
 
     private function addSubPage(): void {
-        $new_page = new Page();
-        $new_page->setParentId($this->_current_page->getId());
-        $new_page->setShowInNavigation(true);
-        $new_page->setDescription($this->getTextResource('new_page_default_title'));
-        $new_page->setNavigationTitle($this->getTextResource('new_page_default_navigation_title'));
-        $new_page->setTitle($this->getTextResource('new_page_default_title'));
+        $newPage = new Page();
+        $newPage->setParentId($this->currentPage->getId());
+        $newPage->setShowInNavigation(true);
+        $newPage->setDescription($this->getTextResource('new_page_default_title'));
+        $newPage->setNavigationTitle($this->getTextResource('new_page_default_navigation_title'));
+        $newPage->setTitle($this->getTextResource('new_page_default_title'));
         $user = Authenticator::getCurrentUser();
-        $new_page->setCreatedById($user->getId());
-        $new_page->setType(ELEMENT_HOLDER_PAGE);
-        $this->_page_dao->persist($new_page);
+        $newPage->setCreatedById($user->getId());
+        $newPage->setType(ELEMENT_HOLDER_PAGE);
+        $this->pageDao->persist($newPage);
 
-        $parent = $this->_page_dao->getPage($this->_current_page->getId());
-        $current_level_pages = $this->_page_dao->getSubPages($parent);
+        $parent = $this->pageDao->getPage($this->currentPage->getId());
+        $current_level_pages = $this->pageDao->getSubPages($parent);
         $this->updateFollowUp($current_level_pages);
 
         $this->sendSuccessMessage($this->getTextResource('page_added_message'));
-        $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $new_page->getId());
+        $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $newPage->getId());
     }
 
     private function moveUp(): void {
-        $this->_page_dao->moveUp($this->_current_page);
+        $this->pageDao->moveUp($this->currentPage);
     }
 
     private function moveDown(): void {
-        $this->_page_dao->moveDown($this->_current_page);
+        $this->pageDao->moveDown($this->currentPage);
     }
 
     private function updateFollowUp(array $pages): void {
         for ($i = 0; $i < count($pages); $i++) {
             $pages[$i]->setFollowUp($i);
-            $this->_page_dao->updatePage($pages[$i]);
+            $this->pageDao->updatePage($pages[$i]);
         }
     }
 
     private function getPageFromPostRequest(): Page {
-        return $this->_page_dao->getPage($_POST[self::$PAGE_ID_POST]);
+        return $this->pageDao->getPage($_POST[self::$PAGE_ID_POST]);
     }
 
     private function getPageFromGetRequest(): Page {
         if (isset($_GET[self::$PAGE_ID_GET])) {
-            return $this->_page_dao->getPage($_GET[self::$PAGE_ID_GET]);
+            return $this->pageDao->getPage($_GET[self::$PAGE_ID_GET]);
         } else {
-            return $this->_page_dao->getPage(self::$FALLBACK_PAGE_ID);
+            return $this->pageDao->getPage(self::$FALLBACK_PAGE_ID);
         }
     }
 
