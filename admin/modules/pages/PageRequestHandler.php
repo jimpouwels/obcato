@@ -43,9 +43,9 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         } else if ($this->isAddSubPageAction()) {
             $this->addSubPage();
         } else if ($this->isMoveUpAction()) {
-            $this->moveUp();
+            $this->pageService->moveUp($this->currentPage);
         } else if ($this->isMoveDownAction()) {
-            $this->moveDown();
+            $this->pageService->moveDown($this->currentPage);
         }
     }
 
@@ -91,14 +91,6 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         $newPage = $this->pageService->addSubPageTo($this->currentPage);
         $this->sendSuccessMessage($this->getTextResource('page_added_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=" . $newPage->getId());
-    }
-
-    private function moveUp(): void {
-        $this->pageService->moveUp($this->currentPage);
-    }
-
-    private function moveDown(): void {
-        $this->pageService->moveDown($this->currentPage);
     }
 
     private function getPageFromPostRequest(): Page {
