@@ -37,12 +37,12 @@ class ElementHolderDaoMysql implements ElementHolderDao {
         return null;
     }
 
-    public function persist(ElementHolder $element_holder): void {
+    public function persist(ElementHolder $elementHolder): void {
         $query = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type) VALUES
-                      (NULL, '" . $element_holder->getTitle() . "', 0," . $element_holder->getScopeId() . ", now(), " . $this->authorizationDao->getUserById($element_holder->getCreatedById()) . "
-                      , '" . $element_holder->getType() . "')";
+                      (NULL, '" . $elementHolder->getTitle() . "', 0," . $elementHolder->getScopeId() . ", now(), " . $this->authorizationDao->getUserById($elementHolder->getCreatedById())->getId() . "
+                      , '" . $elementHolder->getType() . "')";
         $this->_mysql_connector->executeQuery($query);
-        $element_holder->setId($this->_mysql_connector->getInsertId());
+        $elementHolder->setId($this->_mysql_connector->getInsertId());
     }
 
     public function update(ElementHolder $element_holder): void {

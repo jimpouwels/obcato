@@ -85,10 +85,16 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function deletePage(): void {
+        $subPages = $this->pageDao->getSubPages($this->currentPage);
+        foreach ($subPages as $subPage) {
+            $this->pageDao->deletePage($subPage);
+        }
+
         $this->pageDao->deletePage($this->currentPage);
+
         $parent = $this->pageDao->getParent($this->currentPage);
-        $current_level_pages = $this->pageDao->getSubPages($parent);
-        $this->updateFollowUp($current_level_pages);
+        $currentLevelPages = $this->pageDao->getSubPages($parent);
+        $this->updateFollowUp($currentLevelPages);
         $this->sendSuccessMessage($this->getTextResource('page_deleted_message'));
         $this->redirectTo($this->getBackendBaseUrl() . "&page=1");
     }
