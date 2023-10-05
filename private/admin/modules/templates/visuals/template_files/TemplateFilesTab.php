@@ -4,8 +4,6 @@ require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFileE
 require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFileCodeViewer.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateVarMigration.php";
 
-defined('_ACCESS') or die;
-
 class TemplateFilesTab extends Visual {
 
     private ?TemplateFile $_current_template_file;
