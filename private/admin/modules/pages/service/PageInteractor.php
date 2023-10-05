@@ -4,6 +4,7 @@ require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 require_once CMS_ROOT . '/database/dao/BlockDaoMysql.php';
 
 class PageInteractor implements PageService {
+
     private static ?PageInteractor $instance = null;
 
     private PageDao $pageDao;
@@ -14,19 +15,19 @@ class PageInteractor implements PageService {
         $this->blockDao = BlockDaoMysql::getInstance();
     }
 
+    public static function getInstance(): PageInteractor {
+        if (!self::$instance) {
+            self::$instance = new PageInteractor();
+        }
+        return self::$instance;
+    }
+
     public function getPageById(int $id): ?Page {
         return $this->pageDao->getPage($id);
     }
 
     public function updatePage(Page $page): void {
         $this->pageDao->updatePage($page);
-    }
-
-    public static function getInstance(): PageInteractor {
-        if (!self::$instance) {
-            self::$instance = new PageInteractor();
-        }
-        return self::$instance;
     }
 
     public function addSubPageTo(Page $page): Page {

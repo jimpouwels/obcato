@@ -1,8 +1,8 @@
 <?php
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
+require_once CMS_ROOT . "/modules/blocks/service/BlockInteractor.php";
 require_once CMS_ROOT . "/modules/pages/PageForm.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/request_handlers/ElementHolderRequestHandler.php";
 require_once CMS_ROOT . "/request_handlers/exceptions/ElementHolderContainsErrorsException.php";
@@ -15,15 +15,15 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     private static int $FALLBACK_PAGE_ID = 1;
 
     private Page $currentPage;
-    private BlockDao $blockDao;
     private PageService $pageService;
+    private BlockService $blockService;
     private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct() {
         parent::__construct();
-        $this->blockDao = BlockDaoMysql::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->pageService = PageInteractor::getInstance();
+        $this->blockService = BlockInteractor::getInstance();
     }
 
     public function handleGet(): void {
@@ -66,10 +66,10 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function deleteSelectedBlocksFromPage(): void {
-        $currentPageBlocks = $this->blockDao->getBlocksByPage($this->currentPage);
+        $currentPageBlocks = $this->blockService->getBlocksByPage($this->currentPage);
         foreach ($currentPageBlocks as $currentPageBlock) {
             if ($this->isBlockSelectedForDeletion($currentPageBlock)) {
-                $this->blockDao->deleteBlockFromPage($currentPageBlock->getId(), $this->currentPage);
+                $this->blockService->deleteBlockFromPage($currentPageBlock->getId(), $this->currentPage);
             }
         }
     }
