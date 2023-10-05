@@ -1,7 +1,7 @@
 <?php
 define("_ACCESS", "GRANTED");
 
-require_once "../discovery.php";
+require_once "../bootstrap.php";
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
     header("Location: /admin/index.php");

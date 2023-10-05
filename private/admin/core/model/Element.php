@@ -30,7 +30,6 @@ abstract class Element extends Presentable {
         $element->setElementHolderId($record['element_holder_id']);
 
         $element->initializeMetaData();
-
         return $element;
     }
 

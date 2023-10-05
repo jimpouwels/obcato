@@ -1,8 +1,6 @@
 <?php
 
 namespace {
-    defined('_ACCESS') or die;
-
     require_once CMS_ROOT . '/view/views/Visual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformButtonVisual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextfieldVisual.php';

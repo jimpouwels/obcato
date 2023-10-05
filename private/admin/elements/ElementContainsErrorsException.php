@@ -1,5 +1,4 @@
 <?php
-defined('_ACCESS') or die;
 
 class ElementContainsErrorsException extends Exception {
 

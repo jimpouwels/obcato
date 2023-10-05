@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once "../../discovery.php";
+require_once "../../bootstrap.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 function createDatabaseConfig($url, $port, $username, $password, $name) {
     $db_config_file = fopen(PRIVATE_DIR . "/database_config.php", "w") or die("No write access to create database configuration");
     fwrite($db_config_file, "<?php\n");
-    fwrite($db_config_file, "defined('_ACCESS') or die;\n");
     fwrite($db_config_file, "define(\"HOST\", \"" . $url . "\");\n");
     fwrite($db_config_file, "define(\"PORT\", \"" . $port . "\");\n");
     fwrite($db_config_file, "define(\"USERNAME\", \"" . $username . "\");\n");
