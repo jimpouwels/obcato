@@ -1,0 +1,54 @@
+# TABS
+articles_tab_articles: Articles
+articles_tab_terms: Terms
+articles_tab_target_pages: Target pages
+
+# SEARCH RESULTS
+articles_module_title: Articles
+articles_search_results_title: Found articles
+articles_search_results_title_column: Title
+articles_search_creation_date_column: Created at
+articles_search_author_column: Created by
+articles_search_results_published_column: Published
+
+# SEARCH BOX
+articles_search_box_title: Search
+articles_search_box_query: Query
+articles_search_box_term: Term
+articles_search_box_show_all: Show all
+articles_search_box_search_button: Search
+
+# LIST
+articles_list_message_no_articles_found: No articles found
+
+# EDITOR
+article_editor_title_label: Title
+article_editor_template_field: Template
+article_editor_description_label: Description
+article_editor_published_label: Published
+article_editor_publication_date_label: Publication date
+article_editor_sort_date_label: Sort date
+article_editor_keyword_field: Keywords
+article_editor_target_page_label: Target page
+article_editor_parent_article_label: Select main article
+article_editor_comment_webform_label: Comment form
+article_editor_image_label: Image
+article_editor_delete_image_button_label: Delete image
+article_editor_delete_parent_article_label: Delete reference
+article_editor_child_articles_label: Sub articles
+article_editor_select_parent_article_label: Main article
+article_editor_selected_image_label: Selected image
+
+# TERMS EDITOR
+articles_terms_editor_title: Edit term
+articles_terms_editor_name_field: Name
+articles_terms_default_term_name: New term
+articles_terms_term_create_success_message: New term successfully created
+articles_terms_term_save_success_message: Term successfully saved
+articles_terms_term_delete_success_message: Term(s) successfully deleted
+articles_terms_term_save_error_message: Term not saved, resolve the errors
+articles_edit_metadata_friendly_url_label: URL
+
+# TERMS LIST
+articles_terms_list_name: Name
+articles_terms_list_delete: Delete

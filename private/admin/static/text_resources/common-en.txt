@@ -1,0 +1,79 @@
+welcome_message_prefix: Welcome to the admin page of
+
+# CURRENT USER
+current_user_indicator_logout_text: Logout
+current_user_indicator_welcome_text: Welcome
+
+# NAVIGATION MENU
+menu_item_maintain: Maintain
+menu_item_design: Design
+menu_item_configure: Configure
+menu_item_insert: Insert
+navigation_menu_add_element_error: Error: Can\'t add element. You can only add elements to pages, articles and blocks.
+
+# ACTION BUTTONS
+action_button_save: Save
+action_button_migrate: Migrate
+action_button_delete: Delete
+action_button_add: Add
+action_button_up: Up
+action_button_down: Down
+
+# LINK EDITOR
+link_editor_target_same_page: Same page
+link_editor_target_new_tab: New tab
+link_editor_target_popup: Popup
+link_editor_link_browser_target: Open in
+link_editor_no_links_found_message: No links found. Go to &quot;Insert&quot; &gt; &quot;Link&quot; to add a new link.
+link_editor_new_link_title: New link
+place_link: Place link
+link_title: Title
+link_target: Target
+link_code: Code
+link_open_in: Open in
+link_delete: Delete
+link_editor_title: Links
+
+# TERM SELECTOR
+term_selector_title: Terms
+term_selector_label_selected_terms: Selected terms
+term_selector_label_delete_selected_term: Delete
+term_selector_message_no_terms_selected: No terms selected
+
+# LINK ERROR MESSAGES
+link_not_saved_error: A link could not be saved, resolve the error(s)
+link_code_field_missing: Link code is mandatory
+link_code_field_invalid: Fill in a valid number
+
+# FORM FIELDS
+object_picker_button_title: Select
+select_field_default_text: &gt; Select
+friendly_url_label: URL
+
+# FORM FIELD ERROR MESSAGES
+form_error_invalid_number: This value is not numeric
+form_error_not_both_passwords_filled_in: Both passwords need to be filled in
+form_error_mandatory: This field is mandatory
+form_error_passwords_mismatch: Passwords need to match
+form_error_invalid_date: Invalid date
+form_error_invalid_email: Invalid email address
+
+# ELEMENT HOLDER
+element_include_in_table_of_contents: Table of contents
+element_holder_content_title: Content
+no_elements_found_message: No elements found. Go to "Insert" to add a new element.
+element_button_label_delete: Delete
+element_button_label_minimize_all: Minimize all
+element_button_label_minimize: Minimize
+element_holder_delete_element_confirm_message: Are you sure you want to delete this element?
+
+# BLOCK SELECTOR
+selected_blocks_header: Selected blocks
+selected_blocks_position: Position
+selected_blocks_delete: Delete
+no_selected_blocks_found_message: No blocks selected
+
+# SCOPE LABELS
+element_holder_article_scope_label: Article
+element_holder_page_scope_label: Page
+element_holder_block_scope_label: Block

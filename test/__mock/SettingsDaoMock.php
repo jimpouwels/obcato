@@ -13,9 +13,7 @@ class SettingsDaoMock implements SettingsDao {
     }
 
     public function getSettings(): ?Settings {
-        $settings = new Settings();
-        $settings->setPublicRootDir(__DIR__);
-        return $settings;
+        return null;
     }
 
     public function setHomepage(int $homepage_id): void {

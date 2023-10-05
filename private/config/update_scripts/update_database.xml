@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<versions>
+    <version>
+        <number>1.0.0</number>
+    </version>
+    <version>
+        <number>1.0.0.1</number>
+        <queries>
+            <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN order_type VARCHAR(45) NOT NULL AFTER
+                number_of_results
+            </query>
+            <query>UPDATE article_overview_elements_metadata SET order_type = 'asc'</query>
+        </queries>
+    </version>
+    <version>
+        <number>1.0.0.2</number>
+        <queries>
+            <query>INSERT INTO modules (title, icon_url, module_group_id, popup, identifier, enabled, system_default,
+                class) VALUES ('Componenten', '/components/img/components.png', 3, 0, 'components', 1, 1,
+                'ComponentsModuleVisual')
+            </query>
+            <query>UPDATE modules SET icon_url = '/img/logout.png' WHERE identifier = 'logout'</query>
+            <query>UPDATE modules SET icon_url = '/img/settings.png' WHERE identifier = 'settings'</query>
+            <query>UPDATE modules SET icon_url = '/img/page.png' WHERE identifier = 'pages'</query>
+            <query>UPDATE modules SET icon_url = '/img/database.png' WHERE identifier = 'database'</query>
+            <query>UPDATE modules SET icon_url = '/img/articles.png' WHERE identifier = 'articles'</query>
+            <query>UPDATE modules SET icon_url = '/img/blocks.png' WHERE identifier = 'blocks'</query>
+            <query>UPDATE modules SET icon_url = '/img/images.png' WHERE identifier = 'images'</query>
+            <query>UPDATE modules SET icon_url = '/img/templates.png' WHERE identifier = 'templates'</query>
+            <query>UPDATE modules SET icon_url = '/img/downloads.png' WHERE identifier = 'downloads'</query>
+            <query>UPDATE modules SET icon_url = '/img/authorization.png' WHERE identifier = 'authorization'</query>
+            <query>UPDATE modules SET icon_url = '/img/components.png' WHERE identifier = 'components'</query>
+            <query>DELETE FROM modules WHERE identifier = 'messages'</query>
+            <query>UPDATE element_types SET icon_url = '/img/text_element.png' WHERE identifier = 'text_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/list_element.png' WHERE identifier = 'list_element'</query>
+            <query>UPDATE element_types SET icon_url = '/img/image_element.png' WHERE identifier = 'image_element'
+            </query>
+            <query>UPDATE element_types SET icon_url = '/img/download_element.png' WHERE identifier =
+                'download_element'
+            </query>
+            <query>UPDATE element_types SET icon_url = '/img/article_overview_element.png' WHERE identifier =
+                'article_overview_element'
+            </query>
+            <query>ALTER TABLE element_types DROP edit_presentation</query>
+            <query>ALTER TABLE element_types DROP destroy_script</query>
+            <query>ALTER TABLE element_types MODIFY COLUMN scope_id INTEGER UNSIGNED NOT NULL</query>
+            <query>ALTER TABLE element_types ADD CONSTRAINT element_types_scopes FOREIGN KEY element_types_scopes
+                (scope_id) REFERENCES scopes (id) ON DELETE CASCADE ON UPDATE RESTRICT
+            </query>
+            <query>ALTER TABLE links ADD COLUMN target VARCHAR(45) DEFAULT NULL</query>
+            <query>ALTER TABLE modules MODIFY COLUMN module_group_id INTEGER UNSIGNED DEFAULT NULL</query>
+            <query>DELETE FROM module_groups WHERE title = 'Bestand'</query>
+            <query>UPDATE modules SET title = 'pages_module_title' WHERE identifier = 'pages'</query>
+            <query>UPDATE modules SET title = 'articles_module_title' WHERE identifier = 'articles'</query>
+            <query>UPDATE modules SET title = 'blocks_module_title' WHERE identifier = 'blocks'</query>
+            <query>UPDATE modules SET title = 'templates_module_title' WHERE identifier = 'templates'</query>
+            <query>UPDATE modules SET title = 'downloads_module_title' WHERE identifier = 'downloads'</query>
+            <query>UPDATE modules SET title = 'images_module_title' WHERE identifier = 'images'</query>
+            <query>UPDATE modules SET title = 'components_module_title' WHERE identifier = 'components'</query>
+            <query>UPDATE modules SET title = 'settings_module_title' WHERE identifier = 'settings'</query>
+            <query>UPDATE modules SET title = 'authorization_module_title' WHERE identifier = 'authorization'</query>
+            <query>UPDATE modules SET title = 'database_module_title' WHERE identifier = 'database'</query>
+            <query>UPDATE modules SET title = 'logout_module_title' WHERE identifier = 'logout'</query>
+            <query>ALTER TABLE modules CHANGE COLUMN title title_text_resource_identifier VARCHAR(255) NOT NULL</query>
+            <query>ALTER TABLE module_groups CHANGE COLUMN title identifier VARCHAR(255) NOT NULL</query>
+            <query>UPDATE module_groups SET identifier = 'maintain' where identifier = 'Beheer'</query>
+            <query>UPDATE module_groups SET identifier = 'configure' where identifier = 'Configuratie'</query>
+            <query>UPDATE module_groups SET identifier = 'design' where identifier = 'Vormgeving'</query>
+            <query>UPDATE module_groups SET identifier = 'insert' where identifier = 'Invoegen'</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN width int DEFAULT NULL</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN height int DEFAULT NULL</query>
+            <query>ALTER TABLE settings CHANGE COLUMN root_dir cms_root_dir TEXT NOT NULL</query>
+            <query>ALTER TABLE settings ADD COLUMN public_root_dir TEXT NOT NULL</query>
+            <query>CREATE TABLE friendly_urls (id INT NOT NULL AUTO_INCREMENT, url TEXT NOT NULL, element_holder_id INT
+                unsigned NOT NULL, PRIMARY KEY (id), KEY friendly_url_to_element_holder (element_holder_id), CONSTRAINT
+                friendly_url_to_element_holder FOREIGN KEY (element_holder_id) REFERENCES element_holders (id) ON DELETE
+                CASCADE ON UPDATE CASCADE)
+            </query>
+            <query>ALTER TABLE settings ADD COLUMN 404_page_id int(10) unsigned DEFAULT NULL</query>
+            <query>ALTER TABLE settings ADD CONSTRAINT settings_404_pages FOREIGN KEY settings_404_pages (404_page_id)
+                REFERENCES element_holders (id) ON DELETE CASCADE ON UPDATE RESTRICT
+            </query>
+        </queries>
+    </version>
+    <version>
+        <number>1.0.0.3</number>
+        <queries>
+        </queries>
+    </version>
+    <version>
+        <number>1.0.0.4</number>
+        <queries>
+        </queries>
+    </version>
+    <version>
+        <number>1.0.0.5</number>
+        <queries>
+        <query>CREATE TABLE photo_album_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title
+            varchar(255) DEFAULT NULL, element_id int(10) unsigned NOT NULL, number_of_results int(10) unsigned DEFAULT
+            NULL, PRIMARY KEY (id), KEY metadata_to_element (element_id), CONSTRAINT metadata_to_element FOREIGN KEY
+            (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE)
+        </query>
+        <query>CREATE TABLE photo_album_element_labels (id int(10) unsigned NOT NULL AUTO_INCREMENT, element_id int(10)
+            unsigned NOT NULL, label_id int(10) unsigned NOT NULL, PRIMARY KEY (id) USING BTREE, KEY labels_key
+            (label_id), KEY elements_id_key (element_id), CONSTRAINT element_id_to_element2 FOREIGN KEY (element_id)
+            REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT label_id_to_image_label2 FOREIGN
+            KEY (label_id) REFERENCES image_labels (id) ON DELETE CASCADE ON UPDATE CASCADE)
+        </query>
+        <query>INSERT INTO scopes (id, name) VALUES (11, 'Fotoalbum')</query>
+        <query>INSERT INTO element_types VALUES (8
+            ,'PhotoAlbumElement','/img/photo_album_element.png','Fotoalbum','photo_album_element.php',11,'photo_album_element',1)
+        </query>
+        <query>ALTER TABLE elements MODIFY template_id int(10)</query>
+        <query>CREATE TABLE table_of_contents_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title
+            varchar(255) DEFAULT NULL, element_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY
+            toc_metadata_to_element (element_id), CONSTRAINT toc_metadata_to_element FOREIGN KEY (element_id) REFERENCES
+            elements (id) ON DELETE CASCADE ON UPDATE CASCADE)
+        </query>
+        <query>INSERT INTO scopes (id, name) VALUES (12, 'Inhoudsopgave')</query>
+        <query>INSERT INTO element_types VALUES (9
+            ,'TableOfContentsElement','/img/table_of_contents_element.png','Inhoudsopgave','table_of_contents_element.php',12,'table_of_contents_element',1)
+        </query>
+        <query>ALTER TABLE elements ADD COLUMN include_in_table_of_contents BOOL NOT NULL DEFAULT 0</query>
+        <query>ALTER TABLE element_types DROP COLUMN name</query>
+        <query>ALTER TABLE scopes CHANGE COLUMN name identifier VARCHAR(255) NOT NULL</query>
+        <query>UPDATE scopes SET identifier = 'text_element' WHERE id = 1</query>
+        <query>UPDATE scopes SET identifier = 'list_element' WHERE id = 2</query>
+        <query>UPDATE scopes SET identifier = 'image_element' WHERE id = 3</query>
+        <query>UPDATE scopes SET identifier = 'download_element' WHERE id = 4</query>
+        <query>UPDATE scopes SET identifier = 'element_holder_page' WHERE id = 5</query>
+        <query>UPDATE scopes SET identifier = 'element_holder_block' WHERE id = 6</query>
+        <query>UPDATE scopes SET identifier = 'article_overview_element' WHERE id = 7</query>
+        <query>UPDATE scopes SET identifier = 'youtube_element' WHERE id = 8</query>
+        <query>UPDATE scopes SET identifier = 'element_holder_article' WHERE id = 9</query>
+        <query>UPDATE scopes SET identifier = 'guestbook_element' WHERE id = 10</query>
+        <query>UPDATE scopes SET identifier = 'photo_album_element' WHERE id = 11</query>
+        <query>UPDATE scopes SET identifier = 'table_of_contents_element' WHERE id = 12</query>
+        <query>INSERT INTO modules VALUES (13, 'webforms_module_title', '/img/webforms.png', 2, 0, 'webforms', 1, 1,
+            'WebFormsModuleVisual')
+        </query>
+        <query>CREATE TABLE webforms (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255) DEFAULT NULL,
+            PRIMARY KEY (id))
+        </query>
+        <query>CREATE TABLE webforms_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, label varchar(255) DEFAULT
+            NULL, mandatory tinyint(1) DEFAULT 0, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id),CONSTRAINT
+            webforms_fields_to_webforms FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE
+            RESTRICT)
+        </query>
+        <query>ALTER TABLE webforms_fields ADD COLUMN type VARCHAR(45) NOT NULL</query>
+        <query>ALTER TABLE webforms_fields ADD COLUMN name VARCHAR(255) NOT NULL</query>
+        <query>ALTER TABLE webforms_fields ADD COLUMN scope_id int(10) NOT NULL</query>
+        <query>ALTER TABLE webforms_fields ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE webforms_fields ADD CONSTRAINT webforms_fields_to_templates FOREIGN KEY
+            webforms_fields_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (13, 'webform_textfield')</query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (14, 'webform_textarea')</query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (15, 'webform_dropdown')</query>
+        <query>ALTER TABLE elements MODIFY COLUMN template_id int(10) UNSIGNED DEFAULT NULL
+        <query>
+        <query>ALTER TABLE elements ADD CONSTRAINT elements_to_templates FOREIGN KEY elements_to_templates (template_id)
+            REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>ALTER TABLE element_holders MODIFY COLUMN template_id int(10) UNSIGNED DEFAULT NULL
+        <query>
+        <query>ALTER TABLE element_holders ADD CONSTRAINT element_holders_to_templates FOREIGN KEY
+            element_holders_to_templates (template_id) REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (16, 'form_element')</query>
+        <query>INSERT INTO element_types (id, classname, icon_url, domain_object, scope_id, identifier, system_default)
+            VALUES (10, 'FormElement', '/img/form_element.png', 'form_element.php', 16, 'form_element', 1)
+        </query>
+        <query>CREATE TABLE form_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255)
+            DEFAULT NULL, element_id int(10) unsigned NOT NULL, webform_id int(10) unsigned DEFAULT NULL, PRIMARY KEY
+            (id), KEY form_element_metadata_to_element (element_id), CONSTRAINT form_element_metadata_to_element FOREIGN
+            KEY (element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT
+            form_element_metadata_to_webform FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE SET NULL ON
+            UPDATE CASCADE)
+        </query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (17, 'webform_button')</query>
+        <query>CREATE TABLE webforms_handlers (id int(10) unsigned NOT NULL AUTO_INCREMENT, `type` varchar(255) NOT
+            NULL, webform_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT webforms_handlers_to_webforms
+            FOREIGN KEY (webform_id) REFERENCES webforms (id) ON DELETE CASCADE ON UPDATE RESTRICT)
+        </query>
+        <query>CREATE TABLE webforms_handlers_properties (id int(10) unsigned NOT NULL AUTO_INCREMENT, handler_id
+            int(10) unsigned NOT NULL, name text NOT NULL, value text DEFAULT NULL, PRIMARY KEY (id), CONSTRAINT
+            handler_properties_to_handlers FOREIGN KEY (handler_id) REFERENCES webforms_handlers (id) ON DELETE CASCADE
+            ON UPDATE RESTRICT)
+        </query>
+        <query>ALTER TABLE webforms_handlers_properties ADD COLUMN type VARCHAR(255) NOT NULL</query>
+        <query>ALTER TABLE webforms ADD COLUMN include_captcha int(10) unsigned NOT NULL</query>
+        <query>ALTER TABLE webforms ADD COLUMN captcha_key VARCHAR(255) DEFAULT NULL</query>
+        <query>ALTER TABLE webforms_fields ADD COLUMN order_nr int(10) DEFAULT 9999</query>
+        <query>CREATE TABLE iframe_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title varchar(255)
+            DEFAULT NULL, element_id int(10) unsigned NOT NULL, url VARCHAR(255) DEFAULT NULL, width int(10) DEFAULT
+            NULL, height int(10) DEFAULT NULL, PRIMARY KEY (id), KEY iframe_element_metadata_to_element (element_id),
+            CONSTRAINT iframe_element_metadata_to_element FOREIGN KEY (element_id) REFERENCES elements (id) ON DELETE
+            CASCADE ON UPDATE CASCADE)
+        </query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (18, 'iframe_element')</query>
+        <query>INSERT INTO element_types (id, classname, icon_url, domain_object, scope_id, identifier, system_default)
+            VALUES (11, 'IFrameElement', '/img/iframe_element.png', 'iframe_element.php', 18, 'iframe_element', 1)
+        </query>
+        <query>CREATE TABLE article_comments (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL,
+            message TEXT NOT NULL, email_address TEXT NOT NULL, article_id int(10) unsigned NOT NULL, parent int(10)
+            unsigned DEFAULT NULL, PRIMARY KEY (id), KEY comment_to_article (article_id), CONSTRAINT comment_to_article
+            FOREIGN KEY (article_id) REFERENCES articles (element_holder_id) ON DELETE CASCADE ON UPDATE RESTRICT, KEY
+            comment_to_comment (parent), CONSTRAINT comment_to_comment FOREIGN KEY (parent) REFERENCES article_comments
+            (id) ON DELETE CASCADE ON UPDATE RESTRICT)
+        </query>
+        <query>ALTER TABLE article_comments ADD COLUMN created_at datetime NOT NULL</query>
+        <query>ALTER TABLE articles ADD COLUMN comment_webform_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE articles ADD CONSTRAINT article_to_webform FOREIGN KEY article_to_webform
+            (comment_webform_id) REFERENCES webforms (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>ALTER TABLE webforms ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE webforms ADD CONSTRAINT webforms_templates FOREIGN KEY webforms_templates (template_id)
+            REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>INSERT INTO scopes (id, identifier) VALUES (19, 'webform')</query>
+        <query>ALTER TABLE articles ADD COLUMN template_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE articles ADD CONSTRAINT articles_templates FOREIGN KEY articles_templates (template_id)
+            REFERENCES templates (id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>ALTER TABLE images ADD COLUMN alt_text TEXT DEFAULT NULL</query>
+        <query>ALTER TABLE image_elements_metadata DROP COLUMN alternative_text</query>
+        <query>DELETE FROM scopes WHERE id = 10</query>
+        <query>DELETE FROM scopes WHERE id = 8</query>
+        <query>ALTER TABLE articles ADD COLUMN parent_article_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE articles ADD CONSTRAINT article_to_element_holders FOREIGN KEY article_to_element_holders
+            (parent_article_id) REFERENCES element_holders(id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>ALTER TABLE pages ADD COLUMN keywords TEXT DEFAULT NULL</query>
+        <query>ALTER TABLE articles ADD COLUMN keywords TEXT DEFAULT NULL</query>
+        <query>ALTER TABLE element_holders ADD COLUMN last_modified DATETIME DEFAULT now()</query>
+        <query>ALTER TABLE image_elements_metadata ADD COLUMN alignv2 VARCHAR(45) NULL</query>
+        <query>UPDATE image_elements_metadata SET alignv2 = align</query>
+        <query>ALTER TABLE image_elements_metadata DROP COLUMN align</query>
+        <query>ALTER TABLE image_elements_metadata CHANGE COLUMN alignv2 align VARCHAR(45) NULL</query>
+        <query>CREATE TABLE template_vars (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL,
+            value TEXT DEFAULT NULL, template_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY
+            template_vars_to_templates (template_id), CONSTRAINT template_vars_to_templates FOREIGN KEY (template_id)
+            REFERENCES templates (id) ON DELETE CASCADE ON UPDATE RESTRICT)
+        </query>
+        <query>CREATE TABLE template_files (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL,
+            filename varchar(255) DEFAULT NULL, PRIMARY KEY (id))
+        </query>
+        <query>CREATE TABLE template_var_defs (id int(10) unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL,
+            default_value TEXT DEFAULT NULL, template_file_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY
+            template_var_defs_to_template_files (template_file_id), CONSTRAINT template_var_defs_to_template_files
+            FOREIGN KEY (template_file_id) REFERENCES template_files (id) ON DELETE CASCADE ON UPDATE RESTRICT)
+        </query>
+        <query>ALTER TABLE templates ADD COLUMN template_file_id int(10) UNSIGNED DEFAULT NULL</query>
+        <query>ALTER TABLE templates ADD CONSTRAINT templates_to_template_files FOREIGN KEY templates_to_template_files
+            (template_file_id) REFERENCES template_files(id) ON DELETE SET NULL ON UPDATE RESTRICT
+        </query>
+        <query>ALTER TABLE templates DROP COLUMN filename</query>
+        <query>UPDATE element_types SET domain_object = 'TextElement.php' WHERE id = 1</query>
+        <query>UPDATE element_types SET domain_object = 'ListElement.php' WHERE id = 2</query>
+        <query>UPDATE element_types SET domain_object = 'ImageElement.php' WHERE id = 3</query>
+        <query>UPDATE element_types SET domain_object = 'DownloadElement.php' WHERE id = 4</query>
+        <query>UPDATE element_types SET domain_object = 'ArticleOverviewElement.php' WHERE id = 5</query>
+        <query>UPDATE element_types SET domain_object = 'PhotoAlbumElement.php' WHERE id = 8</query>
+        <query>UPDATE element_types SET domain_object = 'TableOfContentsElement.php' WHERE id = 9</query>
+        <query>UPDATE element_types SET domain_object = 'FormElement.php' WHERE id = 10</query>
+        <query>UPDATE element_types SET domain_object = 'IFrameElement.php' WHERE id = 11</query>
+
+        <query>ALTER TABLE settings DROP COLUMN frontend_template_dir, DROP COLUMN static_files_dir, DROP COLUMN upload_dir, DROP COLUMN cms_root_dir,
+            DROP COLUMN backend_template_dir, DROP COLUMN public_root_dir, DROP COLUMN config_dir, DROP COLUMN
+            component_dir</query>
+    </version>
+</versions>

@@ -1,0 +1,26 @@
+# MESSAGES
+page_not_saved_error_message: Page could not be saved, please resolve the errors
+page_saved_message: Page saved succesfully
+page_deleted_message: Page deleted succesfully
+page_added_message: Page added succesfully
+
+# TITLES
+page_tree_title: Page tree
+edit_metadata_title: Edit metadata
+pages_module_title: Pages
+block_selection_title: Blocks
+
+# METADATA LABELS
+pages_edit_metadata_title_field_label: Title
+pages_edit_metadata_navigation_title_field_label: Navigation title
+pages_edit_metadata_keywords_field_label: Keywords
+pages_edit_metadata_description_field_label: Description
+pages_edit_metadata_ispublished_field_label: Published
+pages_edit_metadata_include_in_search_engine_field_label: Include in search engine
+pages_edit_metadata_showinnavigation_field_label: Show in navigation
+pages_edit_metadata_template_field_label: Template
+pages_edit_metadata_friendly_url_label: URL
+
+# NEW PAGE DEFAULT DATA
+new_page_default_title: New page
+new_page_default_navigation_title: New page

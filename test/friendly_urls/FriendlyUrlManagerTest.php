@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__ . "/../setup.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 require_once MOCK_DIR . '/FriendlyUrlDaoMock.php';
-require_once MOCK_DIR . '/SettingsDaoMock.php';
 require_once MOCK_DIR . '/PageDaoMock.php';
 require_once MOCK_DIR . '/ArticleDaoMock.php';
 
@@ -20,7 +19,7 @@ class FriendlyUrlManagerTest extends TestCase {
         $this->friendlyUrlDao = new FriendlyUrlDaoMock();
         $this->pageDao = new PageDaoMock();
         $this->articleDao = new ArticleDaoMock();
-        $this->friendlyUrlManager = new FriendlyUrlManager($this->friendlyUrlDao, new SettingsDaoMock(), $this->pageDao, $this->articleDao);
+        $this->friendlyUrlManager = new FriendlyUrlManager($this->friendlyUrlDao, $this->pageDao, $this->articleDao);
     }
 
     protected function tearDown(): void {

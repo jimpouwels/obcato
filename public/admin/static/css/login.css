@@ -1,0 +1,69 @@
+#login-form-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -150px;
+    display: block;
+    overflow: auto;
+    width: 500px;
+    border: 1px solid rgb(128, 128, 128);
+    font-family: Verdana;
+    font-size: 0.8em;
+    background-color: #fbf9ee;
+    box-shadow: 5px 5px 5px #888888;
+}
+
+.loginform {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.admin_label {
+    min-width: 135px;
+    padding-top: 12px;
+    display: block;
+}
+
+.admin_field {
+    margin-top: 8px;
+    width: 200px;
+}
+
+.fields {
+    width: 200px;
+    margin: 20px auto auto;
+}
+
+.header {
+    width: 100%;
+    background-color: #1f8dd6;
+    font-family: GeosansLight;
+    color: #ffffff;
+}
+
+.header p {
+    margin: 0px;
+    padding: 8px;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.header img {
+    margin-top: 3px;
+}
+
+.button-holder {
+    width: 80px;
+    float: right;
+    margin-top: 20px;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    margin: 60px auto auto;
+    clear: both;
+    width: 450px;
+}
