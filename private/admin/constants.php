@@ -4,33 +4,33 @@ require_once CMS_ROOT . "/modules/settings/model/Settings.php";
 $website_settings = Settings::find();
 
 // EDITOR FORM CONSTANTS
-define("ADD_ELEMENT_FORM_ID", 'add_element_type_id');
-define("EDIT_ELEMENT_HOLDER_ID", 'element_holder_id');
-define("ACTION_FORM_ID", 'action');
-define("DELETE_ELEMENT_FORM_ID", 'delete_element');
-define('ELEMENT_HOLDER_FORM_ID', 'element_holder_form_id');
-define('ELEMENT_ORDER_ID', 'element_order');
+const ADD_ELEMENT_FORM_ID = 'add_element_type_id';
+const EDIT_ELEMENT_HOLDER_ID = 'element_holder_id';
+const ACTION_FORM_ID = 'action';
+const DELETE_ELEMENT_FORM_ID = 'delete_element';
+const ELEMENT_HOLDER_FORM_ID = 'element_holder_form_id';
+const ELEMENT_ORDER_ID = 'element_order';
 
 // ELEMENT HOLDER TYPES
-define("ELEMENT_HOLDER_PAGE", 'ELEMENT_HOLDER_PAGE');
-define("ELEMENT_HOLDER_ARTICLE", 'ELEMENT_HOLDER_ARTICLE');
-define("ELEMENT_HOLDER_BLOCK", 'ELEMENT_HOLDER_BLOCK');
+const ELEMENT_HOLDER_PAGE = 'ELEMENT_HOLDER_PAGE';
+const ELEMENT_HOLDER_ARTICLE = 'ELEMENT_HOLDER_ARTICLE';
+const ELEMENT_HOLDER_BLOCK = 'ELEMENT_HOLDER_BLOCK';
 
 // DEFINE SYSTEM VERSION
-define("SYSTEM_VERSION", "1.0.0.5");
+const SYSTEM_VERSION = "1.0.0.5";
 define("DB_VERSION", $website_settings->getDatabaseVersion());
 
 // DEFINE TIME OUT
-define("SESSION_TIMEOUT", 3600);
+const SESSION_TIMEOUT = 3600;
 
 // DIRECTORIES
-define("COMPONENT_DIR", PRIVATE_DIR . '/components');
-define("COMPONENT_TEMP_DIR", COMPONENT_DIR . '/temp');
-define("UPLOAD_DIR", PRIVATE_DIR . '/upload');
-define("FRONTEND_TEMPLATE_DIR", PRIVATE_DIR . '/templates');
-define("BACKEND_TEMPLATE_DIR", CMS_ROOT . '/templates');
-define("STATIC_DIR", CMS_ROOT . '/static');
-define("CONFIG_DIR", PRIVATE_DIR . '/config');
+const COMPONENT_DIR = PRIVATE_DIR . '/components';
+const COMPONENT_TEMP_DIR = COMPONENT_DIR . '/temp';
+const UPLOAD_DIR = PRIVATE_DIR . '/upload';
+const FRONTEND_TEMPLATE_DIR = PRIVATE_DIR . '/templates';
+const BACKEND_TEMPLATE_DIR = CMS_ROOT . '/templates';
+const STATIC_DIR = CMS_ROOT . '/static';
+const CONFIG_DIR = PRIVATE_DIR . '/config';
 
 // OTHER
 define("WEBSITE_TITLE", $website_settings->getWebsiteTitle());
