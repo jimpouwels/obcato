@@ -57,5 +57,3 @@ class ArticleOverviewElementEditor extends ElementVisual {
     }
 
 }
-
-?>
