@@ -1,8 +1,5 @@
 <?php
-
-// DIRECT ACCESS GRANTED
-define("_ACCESS", "GRANTED");
-define("CMS_ROOT", dirname(__FILE__));
+require_once "discovery.php";
 
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";

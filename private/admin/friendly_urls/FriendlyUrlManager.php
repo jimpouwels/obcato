@@ -31,8 +31,7 @@ class FriendlyUrlManager {
     }
 
     private function writeHtaccessFileIfNotExists(): void {
-        $public_root_dir = PUBLIC_DIR;
-        $htaccess_file_path = $public_root_dir . '/.htaccess';
+        $htaccess_file_path = PUBLIC_DIR . '/.htaccess';
         if (file_exists($htaccess_file_path)) return;
         $handle = fopen($htaccess_file_path, 'w');
         fclose($handle);
