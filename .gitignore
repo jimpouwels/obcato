@@ -4,8 +4,7 @@ nbproject
 .bat
 .VSCodeCounter
 
-.idea/modules.xml
+.idea
 **/**.iml
-.idea/*
 vendor
 .phpunit.result.cache
