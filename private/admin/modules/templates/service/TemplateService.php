@@ -2,5 +2,9 @@
 
 interface TemplateService {
 
-    public function getTemplateVarDefByTemplateVar(TemplateVar $templateVar): TemplateVarDef;
+    public function getTemplateVarDefByTemplateVar(Template $template, TemplateVar $templateVar): TemplateVarDef;
+
+    public function getTemplateVarDefsByTemplate(Template $template): array;
+
+    public function getTemplateFileForTemplate(Template $template): TemplateFile;
 }

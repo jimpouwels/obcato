@@ -19,9 +19,17 @@ class TemplateInteractor implements TemplateService {
         return self::$instance;
     }
 
-    public function getTemplateVarDefByTemplateVar(TemplateVar $templateVar): TemplateVarDef {
-        return $this->templateDao->getTemplateFile(
-            $this->templateDao->getTemplate($templateVar->getTemplateId())->getTemplateFileId())
-            ->getTemplateVarDef($templateVar->getName());
+    public function getTemplateVarDefByTemplateVar(Template $template, TemplateVar $templateVar): TemplateVarDef {
+        return Arrays::firstMatch($this->getTemplateVarDefsByTemplate($template), function ($templateVarDef) use ($templateVar) {
+            return $templateVar->getName() == $templateVarDef->getName();
+        });
+    }
+
+    public function getTemplateVarDefsByTemplate(Template $template): array {
+        return $this->templateDao->getTemplateVarDefs($this->getTemplateFileForTemplate($template));
+    }
+
+    public function getTemplateFileForTemplate(Template $template): TemplateFile {
+        return $this->templateDao->getTemplateFile($template->getTemplateFileId());
     }
 }

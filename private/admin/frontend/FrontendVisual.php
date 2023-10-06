@@ -41,11 +41,9 @@ abstract class FrontendVisual {
         $templateVars = array();
 
         if ($presentable) {
+            $templateVarDefs = $this->templateService->getTemplateVarDefsByTemplate($presentable->getTemplate());
             foreach ($presentable->getTemplate()->getTemplateVars() as $templateVar) {
-                $varValue = $templateVar->getValue();
-                if (empty($varValue)) {
-                    $varValue = $this->templateService->getTemplateVarDefByTemplateVar($templateVar)->getDefaultValue();
-                }
+                $varValue = $templateVar->getValue() ?: $this->getDefaultValueFor($templateVar, $templateVarDefs);
                 if (is_numeric($varValue)) {
                     $varValue = intval($varValue);
                 }
@@ -183,6 +181,12 @@ abstract class FrontendVisual {
             }
         }
         return $value;
+    }
+
+    private function getDefaultValueFor(mixed $templateVar, array $templateVarDefs) {
+        return Arrays::firstMatch($templateVarDefs, function ($item) use ($templateVar) {
+            return $templateVar->getName() == $item->getName();
+        })->getDefaultValue();
     }
 
     private function replaceLinkCodeTags(string $value, Link $link, string $url): string {
