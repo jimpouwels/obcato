@@ -2,9 +2,7 @@
 
 define("_ACCESS", "GRANTED");
 
-require_once "../bootstrap.php";
-require_once CMS_ROOT . "/constants.php";
-
+require_once "../discovery.php";
 
 require_once CMS_ROOT . "/view/views/Visual.php";
 require_once CMS_ROOT . "/view/views/Panel.php";

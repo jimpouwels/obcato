@@ -1,8 +1,7 @@
 <?php
 define("_ACCESS", "GRANTED");
 
-require_once "../bootstrap.php";
-renderBackend();
+require_once "../discovery.php";
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
     header("Location: /admin/index.php");
@@ -10,8 +9,6 @@ if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
 
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/authentication/Session.php";
-require_once PRIVATE_DIR . "/database_config.php";
-require_once CMS_ROOT . "/constants.php";
 require_once CMS_ROOT . "/includes.php";
 require_once CMS_ROOT . "/utilities/StringUtility.php";
 

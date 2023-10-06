@@ -3,8 +3,7 @@
 // DIRECT ACCESS GRANTED
 define("_ACCESS", "GRANTED");
 
-require_once "../bootstrap.php";
-renderBackend();
+require_once "../discovery.php";
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {
     if (!isset($_GET["mode"])) {

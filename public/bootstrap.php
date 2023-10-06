@@ -6,7 +6,3 @@ function renderFrontend(): void {
     $request_handler = new RequestHandler();
     $request_handler->handleRequest();
 }
-
-function renderBackend(): void {
-    require_once "discovery.php";
-}
