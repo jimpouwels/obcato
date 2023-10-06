@@ -63,13 +63,13 @@ class BlockDaoMysql implements BlockDao {
         return $blocks;
     }
 
-    public function getBlocksByPageAndPosition(Page $page, string $position_name): array {
+    public function getBlocksByPageAndPosition(Page $page, string $positionName): array {
         $query = "SELECT " . self::$myAllColumns .
             " FROM element_holders e, blocks b, blocks_pages bp, block_positions bps" .
             " WHERE e.id = b.element_holder_id" .
             " AND bp.block_id = e.id" .
             " AND bp.page_id = " . $page->getId() .
-            " AND bps.name = '" . $position_name . "'" .
+            " AND bps.name = '" . $positionName . "'" .
             " AND b.position_id = bps.id";
         $result = $this->mysqlConnector->executeQuery($query);
         $blocks = array();
@@ -101,9 +101,9 @@ class BlockDaoMysql implements BlockDao {
         return $positions;
     }
 
-    public function getBlockPosition($position_id): ?BlockPosition {
-        if (!is_null($position_id) && $position_id != '') {
-            $query = "SELECT * FROM block_positions WHERE id = " . $position_id;
+    public function getBlockPosition($positionId): ?BlockPosition {
+        if (!is_null($positionId) && $positionId != '') {
+            $query = "SELECT * FROM block_positions WHERE id = " . $positionId;
             $result = $this->mysqlConnector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return BlockPosition::constructFromRecord($row);
@@ -123,13 +123,13 @@ class BlockDaoMysql implements BlockDao {
     }
 
     public function createBlock(): Block {
-        $new_block = new Block();
-        $new_block->setPublished(false);
-        $new_block->setTitle('Nieuw block');
-        $new_block->setCreatedById(Authenticator::getCurrentUser()->getId());
-        $new_block->setType(ELEMENT_HOLDER_BLOCK);
-        $this->persistBlock($new_block);
-        return $new_block;
+        $newBlock = new Block();
+        $newBlock->setPublished(false);
+        $newBlock->setTitle('Nieuw block');
+        $newBlock->setCreatedById(Authenticator::getCurrentUser()->getId());
+        $newBlock->setType(ELEMENT_HOLDER_BLOCK);
+        $this->persistBlock($newBlock);
+        return $newBlock;
     }
 
     private function persistBlock($block): void {
@@ -140,10 +140,11 @@ class BlockDaoMysql implements BlockDao {
 
     public function updateBlock($block): void {
         $query = "UPDATE blocks SET";
-        if ($block->getPositionId() != '' && !is_null($block->getPositionId()))
+        if ($block->getPositionId() != '' && !is_null($block->getPositionId())) {
             $query = $query . " position_id = " . $block->getPositionId();
-        else
+        } else {
             $query = $query . " position_id = NULL";
+        }
         $query .= " WHERE element_holder_id = " . $block->getId();
         $this->mysqlConnector->executeQuery($query);
         $this->elementHolderDao->update($block);
@@ -154,19 +155,19 @@ class BlockDaoMysql implements BlockDao {
     }
 
     public function createBlockPosition(): BlockPosition {
-        $new_position = new BlockPosition();
+        $newPosition = new BlockPosition();
         $postfix = 1;
-        while (!is_null($this->getBlockPositionByName($new_position->getName()))) {
-            $new_position->setName("nieuwe_positie_" . $postfix);
+        while (!is_null($this->getBlockPositionByName($newPosition->getName()))) {
+            $newPosition->setName("nieuwe_positie_" . $postfix);
             $postfix++;
         }
-        $this->persistBlockPosition($new_position);
-        return $new_position;
+        $this->persistBlockPosition($newPosition);
+        return $newPosition;
     }
 
-    public function getBlockPositionByName($position_name): ?BlockPosition {
-        if (!is_null($position_name) && $position_name != '') {
-            $query = "SELECT * FROM block_positions WHERE name = '" . $position_name . "'";
+    public function getBlockPositionByName($positionName): ?BlockPosition {
+        if (!is_null($positionName) && $positionName != '') {
+            $query = "SELECT * FROM block_positions WHERE name = '" . $positionName . "'";
             $result = $this->mysqlConnector->executeQuery($query);
             while ($row = $result->fetch_assoc()) {
                 return BlockPosition::constructFromRecord($row);
@@ -192,14 +193,14 @@ class BlockDaoMysql implements BlockDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function addBlockToPage($block_id, $page): void {
-        $query = "INSERT INTO blocks_pages (page_id, block_id) VALUES (" . $page->getId() . ", " . $block_id . ")";
+    public function addBlockToPage($blockId, $page): void {
+        $query = "INSERT INTO blocks_pages (page_id, block_id) VALUES (" . $page->getId() . ", " . $blockId . ")";
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function deleteBlockFromPage($block_id, $page): void {
+    public function deleteBlockFromPage($blockId, $page): void {
         $query = "DELETE FROM blocks_pages WHERE page_id = " . $page->getId() . "
-                      AND block_id = " . $block_id;
+                      AND block_id = " . $blockId;
         $this->mysqlConnector->executeQuery($query);
     }
 }

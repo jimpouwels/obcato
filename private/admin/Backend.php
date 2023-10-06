@@ -3,33 +3,36 @@ require_once CMS_ROOT . "/request_handlers/BackendRequestHandler.php";
 require_once CMS_ROOT . "/view/views/Cms.php";
 require_once CMS_ROOT . "/view/views/Popup.php";
 require_once CMS_ROOT . "/text_resource_loader.php";
+require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 class Backend {
 
-    private BackendRequestHandler $_backend_request_handler;
-    private ?Module $_current_module = null;
-    private ?ModuleVisual $_module_visual = null;
+    private BackendRequestHandler $backendRequestHandler;
+    private SettingsDao $settingsDao;
+    private ?ModuleVisual $moduleVisual = null;
 
     public function __construct() {
-        $this->_backend_request_handler = new BackendRequestHandler();
+        $this->backendRequestHandler = new BackendRequestHandler();
+        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function start(): void {
         Session::clearErrors();
         $this->loadTextResources();
-        $this->_backend_request_handler->handle();
+        $this->backendRequestHandler->handle();
         $this->loadCurrentModule();
         $this->runModuleRequestHandler();
         $this->renderCms();
     }
 
     private function loadCurrentModule(): void {
-        $current_module = $this->_backend_request_handler->getCurrentModule();
+        $current_module = $this->backendRequestHandler->getCurrentModule();
         if (!is_null($current_module)) {
-            $this->_current_module = $current_module;
-            require_once CMS_ROOT . "/modules/" . $this->_current_module->getIdentifier() . "/activator.php";
-            $class = $this->_current_module->getClass();
-            $this->_module_visual = new $class($this->_current_module);
+            $currentModule = null;
+            $currentModule = $current_module;
+            require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
+            $class = $currentModule->getClass();
+            $this->moduleVisual = new $class($currentModule);
         }
     }
 
@@ -42,7 +45,7 @@ class Backend {
     }
 
     private function renderCmsView(): void {
-        $cms = new Cms($this->_module_visual, WEBSITE_TITLE);
+        $cms = new Cms($this->moduleVisual);
         echo $cms->render();
     }
 
@@ -52,11 +55,11 @@ class Backend {
     }
 
     private function runModuleRequestHandler(): void {
-        if (!is_null($this->_module_visual)) {
-            foreach ($this->_module_visual->getRequestHandlers() as $request_handler) {
+        if (!is_null($this->moduleVisual)) {
+            foreach ($this->moduleVisual->getRequestHandlers() as $request_handler) {
                 $request_handler->handle();
             }
-            $this->_module_visual->onRequestHandled();
+            $this->moduleVisual->onRequestHandled();
         }
     }
 

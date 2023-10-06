@@ -57,18 +57,19 @@ class AuthorizationDaoMysql implements AuthorizationDao {
                                   email_address = '" . $user->getEmailAddress() . "',
                                   prefix = '" . $user->getPrefix() . "',
                                   uuid = '" . $user->getUuid() . "'";
-        if (!is_null($user->getPassword()) && $user->getPassword() != '')
+        if (!is_null($user->getPassword()) && $user->getPassword() != '') {
             $query = $query . ", password = '" . StringUtility::hashStringValue($user->getPassword()) . "'";
+        }
         $query = $query . " WHERE id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $user_id = $user->getId();
-        $statement->bind_param("i", $user_id);
+        $userId = $user->getId();
+        $statement->bind_param("i", $userId);
         $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function deleteUser(int $user_id): void {
+    public function deleteUser(int $userId): void {
         $statement = $this->mysqlConnector->prepareStatement("DELETE FROM auth_users WHERE id = ?");
-        $statement->bind_param("i", $user_id);
+        $statement->bind_param("i", $userId);
         $this->mysqlConnector->executeStatement($statement);
     }
 

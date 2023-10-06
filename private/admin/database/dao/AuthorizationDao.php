@@ -9,7 +9,7 @@ interface AuthorizationDao {
 
     public function updateUser(User $user): void;
 
-    public function deleteUser(int $user_id): void;
+    public function deleteUser(int $userId): void;
 
     public function createUser(): User;
 }

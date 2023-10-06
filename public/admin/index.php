@@ -4,6 +4,7 @@
 define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";
+renderBackend();
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {
     if (!isset($_GET["mode"])) {
@@ -15,9 +16,7 @@ if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {
 }
 
 function runBackend(): void {
-    require_once PRIVATE_DIR . "/database_config.php";
     require_once CMS_ROOT . "/includes.php";
-    require_once CMS_ROOT . "/constants.php";
     require_once CMS_ROOT . "/Backend.php";
     require_once CMS_ROOT . "/authentication/Authenticator.php";
     checkAuthentication();

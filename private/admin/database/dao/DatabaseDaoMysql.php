@@ -5,10 +5,10 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 class DatabaseDaoMysql implements DatabaseDao {
 
     private static ?DatabaseDaoMysql $instance = null;
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     private function __construct() {
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public static function getInstance(): DatabaseDaoMysql {
@@ -20,21 +20,19 @@ class DatabaseDaoMysql implements DatabaseDao {
 
     public function getTables(): array {
         $query = "SHOW TABLES";
-        $result = $this->_mysql_connector->executeQuery($query);
+        $result = $this->mysqlConnector->executeQuery($query);
 
-        $mysql_database = MysqlConnector::getInstance();
-        $database_name = $mysql_database->getDatabaseName();
         $tables = array();
 
         while ($row = $result->fetch_assoc()) {
-            $tables[] = $row['Tables_in_' . $database_name];
+            $tables[] = $row['Tables_in_' . $this->mysqlConnector->getDatabaseName()];
         }
         return $tables;
     }
 
-    public function getColumns(string $table_name): array {
-        $query = 'SHOW columns FROM ' . $table_name;
-        $result = $this->_mysql_connector->executeQuery($query);
+    public function getColumns(string $tableName): array {
+        $query = 'SHOW columns FROM ' . $tableName;
+        $result = $this->mysqlConnector->executeQuery($query);
 
         $columns = array();
         while ($row = $result->fetch_assoc()) {

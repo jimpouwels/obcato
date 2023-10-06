@@ -1,7 +1,4 @@
 <?php
-require_once CMS_ROOT . "/modules/settings/model/Settings.php";
-
-$website_settings = Settings::find();
 
 // EDITOR FORM CONSTANTS
 const ADD_ELEMENT_FORM_ID = 'add_element_type_id';
@@ -18,7 +15,6 @@ const ELEMENT_HOLDER_BLOCK = 'ELEMENT_HOLDER_BLOCK';
 
 // DEFINE SYSTEM VERSION
 const SYSTEM_VERSION = "1.0.0.5";
-define("DB_VERSION", $website_settings->getDatabaseVersion());
 
 // DEFINE TIME OUT
 const SESSION_TIMEOUT = 3600;
@@ -31,6 +27,3 @@ const FRONTEND_TEMPLATE_DIR = PRIVATE_DIR . '/templates';
 const BACKEND_TEMPLATE_DIR = CMS_ROOT . '/templates';
 const STATIC_DIR = CMS_ROOT . '/static';
 const CONFIG_DIR = PRIVATE_DIR . '/config';
-
-// OTHER
-define("WEBSITE_TITLE", $website_settings->getWebsiteTitle());

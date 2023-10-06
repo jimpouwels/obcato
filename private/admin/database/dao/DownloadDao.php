@@ -9,7 +9,7 @@ interface DownloadDao {
 
     public function getAllDownloads(): array;
 
-    public function searchDownloads(string $search_query): array;
+    public function searchDownloads(string $searchQuery): array;
 
     public function deleteDownload(int $id): void;
 }

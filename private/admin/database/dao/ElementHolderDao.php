@@ -5,7 +5,7 @@ interface ElementHolderDao {
 
     public function persist(ElementHolder $elementHolder): void;
 
-    public function update(ElementHolder $element_holder): void;
+    public function update(ElementHolder $elementHolder): void;
 
-    public function delete(ElementHolder $element_holder): void;
+    public function delete(ElementHolder $elementHolder): void;
 }

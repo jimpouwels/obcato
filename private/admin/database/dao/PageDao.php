@@ -5,7 +5,7 @@ interface PageDao {
 
     public function getPage(?int $id): ?Page;
 
-    public function getPageByElementHolderId(?int $element_holder_id): ?Page;
+    public function getPageByElementHolderId(?int $elementHolderId): ?Page;
 
     public function getParent(Page $page): ?Page;
 

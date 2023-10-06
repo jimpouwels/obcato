@@ -6,15 +6,15 @@ class FriendlyUrlDaoMock implements FriendlyUrlDao {
 
     private array $elementHolders = array();
 
-    public function insertFriendlyUrl(string $url, ElementHolder $element_holder): void {
+    public function insertFriendlyUrl(string $url, ElementHolder $elementHolder): void {
         // TODO: Implement insertFriendlyUrl() method.
     }
 
-    public function updateFriendlyUrl(string $url, ElementHolder $element_holder): void {
+    public function updateFriendlyUrl(string $url, ElementHolder $elementHolder): void {
         // TODO: Implement updateFriendlyUrl() method.
     }
 
-    public function getUrlFromElementHolder(ElementHolder $element_holder): ?string {
+    public function getUrlFromElementHolder(ElementHolder $elementHolder): ?string {
         // TODO: Implement getUrlFromElementHolder() method.
     }
 

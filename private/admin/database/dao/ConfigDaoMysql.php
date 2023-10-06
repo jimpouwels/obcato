@@ -1,15 +1,9 @@
 <?php
 require_once CMS_ROOT . "/database/dao/ConfigDao.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 class ConfigDaoMysql implements ConfigDao {
 
     private static ?ConfigDaoMysql $instance = null;
-    private SettingsDao $_settings_dao;
-
-    private function __construct() {
-        $this->_settings_dao = SettingsDaoMysql::getInstance();
-    }
 
     public static function getInstance(): ConfigDaoMysql {
         if (!self::$instance) {
@@ -18,22 +12,22 @@ class ConfigDaoMysql implements ConfigDao {
         return self::$instance;
     }
 
-    public function updateCaptchaSecret(string $captcha_secret): void {
-        $file_path = CONFIG_DIR . "/captcha_secret.txt";
-        $file_path_new = CONFIG_DIR . "/captcha_secret_new.txt";
-        $new_file = fopen($file_path_new, "w");
-        fwrite($new_file, $captcha_secret);
+    public function updateCaptchaSecret(string $captchaSecret): void {
+        $filePath = CONFIG_DIR . "/captcha_secret.txt";
+        $filePathNew = CONFIG_DIR . "/captcha_secret_new.txt";
+        $newFile = fopen($filePathNew, "w");
+        fwrite($newFile, $captchaSecret);
 
-        if (file_exists($file_path)) {
-            unlink($file_path);
+        if (file_exists($filePath)) {
+            unlink($filePath);
         }
-        rename($file_path_new, $file_path);
+        rename($filePathNew, $filePath);
     }
 
     public function getCaptchaSecret(): ?string {
-        $file_path = CONFIG_DIR . "/captcha_secret.txt";
-        if (file_exists($file_path)) {
-            return file_get_contents($file_path);
+        $filePath = CONFIG_DIR . "/captcha_secret.txt";
+        if (file_exists($filePath)) {
+            return file_get_contents($filePath);
         }
         return null;
     }

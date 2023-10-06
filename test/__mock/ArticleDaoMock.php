@@ -10,9 +10,9 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getArticle() method.
     }
 
-    public function getArticleByElementHolderId($element_holder_id): ?Article {
-        return Arrays::firstMatch($this->articles, function ($article) use ($element_holder_id) {
-            return $article->getId() == $element_holder_id;
+    public function getArticleByElementHolderId($elementHolderId): ?Article {
+        return Arrays::firstMatch($this->articles, function ($article) use ($elementHolderId) {
+            return $article->getId() == $elementHolderId;
         });
     }
 
@@ -20,11 +20,11 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getAllArticles() method.
     }
 
-    public function getAllChildArticles(int $parent_article_id): array {
+    public function getAllChildArticles(int $parentArticleId): array {
         // TODO: Implement getAllChildArticles() method.
     }
 
-    public function searchArticles($keyword, $term_id): array {
+    public function searchArticles($keyword, $termId): array {
         // TODO: Implement searchArticles() method.
     }
 
@@ -44,11 +44,11 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement createArticle() method.
     }
 
-    public function getArticleComments(int $article_id): array {
+    public function getArticleComments(int $articleId): array {
         // TODO: Implement getArticleComments() method.
     }
 
-    public function getChildArticleComments(int $comment_id): array {
+    public function getChildArticleComments(int $commentId): array {
         // TODO: Implement getChildArticleComments() method.
     }
 
@@ -60,7 +60,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getTerm() method.
     }
 
-    public function createTerm($term_name): ArticleTerm {
+    public function createTerm($termName): ArticleTerm {
         // TODO: Implement createTerm() method.
     }
 
@@ -76,7 +76,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement deleteTerm() method.
     }
 
-    public function getTermsForArticle($article_id): array {
+    public function getTermsForArticle($articleId): array {
         // TODO: Implement getTermsForArticle() method.
     }
 
@@ -96,7 +96,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getTargetPages() method.
     }
 
-    public function deleteTargetPage($target_page_id): void {
+    public function deleteTargetPage($targetPageId): void {
         // TODO: Implement deleteTargetPage() method.
     }
 
@@ -104,7 +104,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getDefaultTargetPage() method.
     }
 
-    public function setDefaultArticleTargetPage($target_page_id): void {
+    public function setDefaultArticleTargetPage($targetPageId): void {
         // TODO: Implement setDefaultArticleTargetPage() method.
     }
 

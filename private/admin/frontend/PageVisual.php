@@ -14,6 +14,7 @@ class PageVisual extends FrontendVisual {
     private ArticleDao $articleDao;
     private TemplateDao $templateDao;
     private ElementDao $elementDao;
+    private SettingsDao $settingsDao;
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
@@ -22,6 +23,7 @@ class PageVisual extends FrontendVisual {
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->elementDao = ElementDaoMysql::getInstance();
+        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -29,7 +31,7 @@ class PageVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign("website_title", WEBSITE_TITLE);
+        $this->assign("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
         $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
         $this->assign("title", $this->getPage()->getTitle());
         $this->assign("crumb_path", $this->renderCrumbPath());

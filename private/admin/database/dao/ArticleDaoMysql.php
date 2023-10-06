@@ -44,11 +44,11 @@ class ArticleDaoMysql implements ArticleDao {
         return null;
     }
 
-    public function getArticleByElementHolderId($element_holder_id): ?Article {
+    public function getArticleByElementHolderId($elementHolderId): ?Article {
         $statement = $this->mysqlConnector->prepareStatement("SELECT " . self::$myAllColumns . " FROM
                                                                     element_holders e, articles a WHERE a.element_holder_id = ?
                                                                     AND e.id = a.element_holder_id");
-        $statement->bind_param("i", $element_holder_id);
+        $statement->bind_param("i", $elementHolderId);
         $result = $this->mysqlConnector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {
             return Article::constructFromRecord($row);
@@ -67,9 +67,9 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function getAllChildArticles(int $parent_article_id): array {
+    public function getAllChildArticles(int $parentArticleId): array {
         $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
-                      AND parent_article_id = " . $parent_article_id . " order by created_at DESC";
+                      AND parent_article_id = " . $parentArticleId . " order by created_at DESC";
         $result = $this->mysqlConnector->executeQuery($query);
         $articles = array();
         while ($row = $result->fetch_assoc()) {
@@ -78,15 +78,15 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchArticles($keyword, $term_id): array {
+    public function searchArticles($keyword, $termId): array {
         $from = " FROM element_holders e, articles a";
         $where = " WHERE
                       e.id = a.element_holder_id";
         if (!is_null($keyword) && $keyword != "")
             $where = $where . " AND e.title LIKE '" . $keyword . "%'";
-        if (!is_null($term_id)) {
+        if (!is_null($termId)) {
             $from = $from . ", articles_terms ats";
-            $where = $where . " AND ats.term_id = " . $term_id . " AND ats.article_id = e.id";
+            $where = $where . " AND ats.term_id = " . $termId . " AND ats.article_id = e.id";
         }
 
         $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY title";
@@ -206,10 +206,10 @@ class ArticleDaoMysql implements ArticleDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function getArticleComments(int $article_id): array {
+    public function getArticleComments(int $articleId): array {
         $query = "SELECT * FROM article_comments WHERE article_id = ? AND parent IS NULL";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('i', $article_id);
+        $statement->bind_param('i', $articleId);
         $result = $this->mysqlConnector->executeStatement($statement);
         $comments = array();
         while ($row = $result->fetch_assoc()) {
@@ -218,10 +218,10 @@ class ArticleDaoMysql implements ArticleDao {
         return $comments;
     }
 
-    public function getChildArticleComments(int $comment_id): array {
+    public function getChildArticleComments(int $commentId): array {
         $query = "SELECT * FROM article_comments WHERE parent = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('i', $comment_id);
+        $statement->bind_param('i', $commentId);
         $result = $this->mysqlConnector->executeStatement($statement);
         $comments = array();
         while ($row = $result->fetch_assoc()) {
@@ -249,12 +249,12 @@ class ArticleDaoMysql implements ArticleDao {
         return null;
     }
 
-    public function createTerm($term_name): ArticleTerm {
+    public function createTerm($termName): ArticleTerm {
         $newTerm = new ArticleTerm();
-        $newTerm->setName($term_name);
+        $newTerm->setName($termName);
         $postfix = 1;
         while (!is_null($this->getTermByName($newTerm->getName()))) {
-            $newTerm->setName($term_name . " " . $postfix);
+            $newTerm->setName($termName . " " . $postfix);
             $postfix++;
         }
         $this->persistTerm($newTerm);
@@ -287,9 +287,9 @@ class ArticleDaoMysql implements ArticleDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function getTermsForArticle($article_id): array {
+    public function getTermsForArticle($articleId): array {
         $query = "SELECT at.id, at.name FROM article_terms at, articles_terms ats,
-                      element_holders e WHERE ats.article_id = " . $article_id . " AND ats.article_id =
+                      element_holders e WHERE ats.article_id = " . $articleId . " AND ats.article_id =
                       e.id AND at.id = ats.term_id";
 
         $result = $this->mysqlConnector->executeQuery($query);
@@ -312,9 +312,9 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function addTargetPage($targetPageId): void {
-        $duplicate_check_query = "SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = " . $targetPageId;
-        $result = $this->mysqlConnector->executeQuery($duplicate_check_query);
-
+        $statement = $this->mysqlConnector->prepareStatement("SELECT count(*) AS number_of FROM article_target_pages WHERE element_holder_id = ?");
+        $statement->bind_param("i", $targetPageId);
+        $result = $this->mysqlConnector->executeStatement($statement);
         $count = 0;
         while ($row = $result->fetch_assoc()) {
             $count = $row['number_of'];
@@ -322,8 +322,9 @@ class ArticleDaoMysql implements ArticleDao {
         }
 
         if ($count == 0) {
-            $query = "INSERT INTO article_target_pages (element_holder_id, is_default) VALUES (" . $targetPageId . ", 0)";
-            $this->mysqlConnector->executeQuery($query);
+            $statement = $this->mysqlConnector->prepareStatement("INSERT INTO article_target_pages (element_holder_id, is_default) VALUES (?, 0)");
+            $statement->bind_param("i", $targetPageId);
+            $this->mysqlConnector->executeStatement($statement);
 
             // check if only one target page is present
             $this->updateDefaultArticleTargetPage();
@@ -332,7 +333,7 @@ class ArticleDaoMysql implements ArticleDao {
 
     private function updateDefaultArticleTargetPage(): void {
         $target_pages = $this->getTargetPages();
-        if (!is_null($target_pages) && count($target_pages) == 1) {
+        if (count($target_pages) == 1) {
             $query = "UPDATE article_target_pages SET is_default = 1";
             $this->mysqlConnector->executeQuery($query);
         }
@@ -348,8 +349,8 @@ class ArticleDaoMysql implements ArticleDao {
         return $pages;
     }
 
-    public function deleteTargetPage($target_page_id): void {
-        $query = "DELETE FROM article_target_pages where element_holder_id = " . $target_page_id;
+    public function deleteTargetPage($targetPageId): void {
+        $query = "DELETE FROM article_target_pages where element_holder_id = " . $targetPageId;
         $this->mysqlConnector->executeQuery($query);
 
         // check if only one target page is present
@@ -365,9 +366,9 @@ class ArticleDaoMysql implements ArticleDao {
         return null;
     }
 
-    public function setDefaultArticleTargetPage($target_page_id): void {
+    public function setDefaultArticleTargetPage($targetPageId): void {
         $query1 = "UPDATE article_target_pages SET is_default = 0 WHERE is_default = 1";
-        $query2 = "UPDATE article_target_pages SET is_default = 1 WHERE element_holder_id = " . $target_page_id;
+        $query2 = "UPDATE article_target_pages SET is_default = 1 WHERE element_holder_id = " . $targetPageId;
         $this->mysqlConnector->executeQuery($query1);
         $this->mysqlConnector->executeQuery($query2);
     }

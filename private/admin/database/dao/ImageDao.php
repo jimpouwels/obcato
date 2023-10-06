@@ -11,7 +11,7 @@ interface ImageDao {
 
     public function searchImagesByLabels(array $labels): array;
 
-    public function searchImages(?string $keyword, ?string $filename, ?int $label_id): array;
+    public function searchImages(?string $keyword, ?string $filename, ?int $labelId): array;
 
     public function createImage(): Image;
 
@@ -31,9 +31,9 @@ interface ImageDao {
 
     public function deleteLabel(ImageLabel $label): void;
 
-    public function addLabelToImage(int $label_id, Image $image): void;
+    public function addLabelToImage(int $labelId, Image $image): void;
 
-    public function deleteLabelForImage(int $label_id, Image $image): void;
+    public function deleteLabelForImage(int $labelId, Image $image): void;
 
-    public function getLabelsForImage(int $image_id): array;
+    public function getLabelsForImage(int $labelId): array;
 }

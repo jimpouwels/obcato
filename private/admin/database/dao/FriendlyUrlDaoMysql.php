@@ -17,28 +17,28 @@ class FriendlyUrlDaoMysql implements FriendlyUrlDao {
         return self::$instance;
     }
 
-    public function insertFriendlyUrl(string $url, ElementHolder $element_holder): void {
+    public function insertFriendlyUrl(string $url, ElementHolder $elementHolder): void {
         $query = "INSERT INTO friendly_urls (url, element_holder_id) VALUES (?, ?)";
         $statement = $this->_mysql_connector->prepareStatement($query);
 
-        $element_holder_id = $element_holder->getId();
+        $element_holder_id = $elementHolder->getId();
         $statement->bind_param("si", $url, $element_holder_id);
         $this->_mysql_connector->executeStatement($statement);
     }
 
-    public function updateFriendlyUrl(string $url, ElementHolder $element_holder): void {
+    public function updateFriendlyUrl(string $url, ElementHolder $elementHolder): void {
         $query = "UPDATE friendly_urls SET url = ? WHERE element_holder_id = ?";
         $statement = $this->_mysql_connector->prepareStatement($query);
 
-        $element_holder_id = $element_holder->getId();
+        $element_holder_id = $elementHolder->getId();
         $statement->bind_param("si", $url, $element_holder_id);
         $this->_mysql_connector->executeStatement($statement);
     }
 
-    public function getUrlFromElementHolder(ElementHolder $element_holder): ?string {
+    public function getUrlFromElementHolder(ElementHolder $elementHolder): ?string {
         $query = "SELECT url FROM friendly_urls WHERE element_holder_id = ?";
         $statement = $this->_mysql_connector->prepareStatement($query);
-        $element_holder_id = $element_holder->getId();
+        $element_holder_id = $elementHolder->getId();
         $statement->bind_param("i", $element_holder_id);
         $result = $this->_mysql_connector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {

@@ -4,8 +4,8 @@ class MysqlConnector {
 
     private static ?MysqlConnector $instance = null;
     private mysqli $conn;
-    private string $_host;
-    private string $_database_name;
+    private string $host;
+    private string $databaseName;
 
     public static function getInstance(): MysqlConnector {
         if (is_null(self::$instance)) {
@@ -15,9 +15,9 @@ class MysqlConnector {
     }
 
     private function __construct() {
-        $this->_host = HOST;
-        $this->_database_name = DATABASE_NAME;
-        $this->conn = new mysqli($this->_host, USERNAME, PASSWORD, $this->_database_name) or die("Error connecting to MySQL database");
+        $this->host = HOST;
+        $this->databaseName = DATABASE_NAME;
+        $this->conn = new mysqli($this->host, USERNAME, PASSWORD, $this->databaseName) or die("Error connecting to MySQL database");
     }
 
     public function getConnection(): mysqli {
@@ -60,11 +60,11 @@ class MysqlConnector {
     }
 
     public function getDatabaseName(): string {
-        return $this->_database_name;
+        return $this->databaseName;
     }
 
     public function getHostName(): string {
-        return $this->_host;
+        return $this->host;
     }
 
     public function getDatabaseType(): string {
