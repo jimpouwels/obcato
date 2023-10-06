@@ -81,7 +81,7 @@ class TemplateFileForm extends Form {
             $var_def_name = $matches[1][$i];
             $parsed_var_defs[] = $var_def_name;
         }
-        return $parsed_var_defs;
+        return array_unique($parsed_var_defs);
     }
 
 }
