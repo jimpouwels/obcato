@@ -6,9 +6,6 @@ nbproject
 
 .idea/modules.xml
 **/**.iml
-.idea/php-test-framework.xml
-.idea/php.xml
-.idea/vcs.xml
-.idea/codeStyles/codeStyleConfig.xml
+.idea/*
 vendor
 .phpunit.result.cache
