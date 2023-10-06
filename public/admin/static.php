@@ -2,7 +2,7 @@
 
 define("_ACCESS", "GRANTED");
 
-require_once "../discovery.php";
+require_once "../bootstrap.php";
 
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/request_handlers/StaticsRequestHandler.php";
