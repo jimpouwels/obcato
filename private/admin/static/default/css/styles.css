@@ -1,6 +1,6 @@
-@font-face{
-    font-family:GeosansLight;
-    src:url(/admin/static/fonts/GeosansLight.ttf);
+@font-face {
+    font-family: GeosansLight;
+    src: url(/admin/static/fonts/GeosansLight.ttf);
 }
 
 /*
@@ -26,7 +26,7 @@ body a:hover {
 body {
     overflow-y: hidden;
     font-size: 68.8%;
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0px;
     margin: 0px;
     height: 100%;
@@ -46,7 +46,7 @@ body {
 #top {
     overflow: auto;
     width: 100%;
-    background: -moz-linear-gradient(center top , #3c3a3d, #1a171b) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -moz-linear-gradient(center top, #3c3a3d, #1a171b) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: -webkit-linear-gradient(top, #3c3a3d, #1a171b);
     background: -moz-linear-gradient(top, #3c3a3d, #1a171b);
     background: -ms-linear-gradient(top, #3c3a3d, #1a171b);
@@ -168,7 +168,7 @@ body {
 #navigation_wrapper {
     width: 100%;
     overflow: auto;
-    background: -moz-linear-gradient(center top , #545454, #1a171b) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -moz-linear-gradient(center top, #545454, #1a171b) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: -webkit-linear-gradient(top, #545454, #1a171b);
     background: -moz-linear-gradient(top, #545454, #1a171b);
     background: -ms-linear-gradient(top, #545454, #1a171b);
@@ -207,7 +207,7 @@ body {
 #menu .parent {
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Trebuchet MS',Arial,Verdana;
+    font-family: 'Trebuchet MS', Arial, Verdana;
 }
 
 #menu .parent {
@@ -249,7 +249,7 @@ body {
     border-right: 0;
     background: #fff;
     height: 25px;
-    font-family: "Trebuchet MS",Arial,Verdana;
+    font-family: "Trebuchet MS", Arial, Verdana;
     font-weight: bold;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eeeeee));
     background: -webkit-linear-gradient(top, #fff, #eeeeee);
@@ -365,7 +365,7 @@ body {
     margin-left: 7px;
 }
 
-.icon_movedown{
+.icon_movedown {
     background: url("/admin/static.php?file=/default/img/default_icons/down.png");
     width: 36px;
     margin-left: 14px;
@@ -465,7 +465,7 @@ h1 {
     width: 100%;
     color: #000000;
     font-size: 1.3em;
-    font-family: "Trebuchet MS",Arial,Verdana;
+    font-family: "Trebuchet MS", Arial, Verdana;
     text-align: left;
 }
 
@@ -581,6 +581,11 @@ h1 {
     width: 300px;
 }
 
+.admin_field_postfix {
+    font-style: italic;
+    margin-left: 10px;
+}
+
 .admin_field_text_area {
     height: 150px;
 }
@@ -669,11 +674,11 @@ h1 {
     margin: 0px;
 }
 
-.link-table .link-title .admin_field  {
+.link-table .link-title .admin_field {
     width: 160px;
 }
 
-.link-table .link-target .admin_field  {
+.link-table .link-target .admin_field {
     width: 160px;
 }
 
@@ -837,7 +842,7 @@ h1 {
 
 .information-block .info-message p, .information-block .warning-message p {
     margin-left: 5px;
-    margin-top:8px;
+    margin-top: 8px;
     margin-bottom: 1px;
     color: gray;
 }

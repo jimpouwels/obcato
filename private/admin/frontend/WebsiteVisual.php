@@ -5,11 +5,11 @@ require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 
 class WebsiteVisual extends FrontendVisual {
 
-    private ?Article $_article;
+    private ?Article $article;
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
-        $this->_article = $article;
+        $this->article = $article;
     }
 
     public function getTemplateFilename(): string {
@@ -25,7 +25,7 @@ class WebsiteVisual extends FrontendVisual {
         $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_mobile_device", $is_mobile_user_agent);
         if ($this->getPage()->isPublished()) {
-            $page_visual = new PageVisual($this->getPage(), $this->_article);
+            $page_visual = new PageVisual($this->getPage(), $this->article);
             $this->assign("html", $page_visual->render());
         }
     }

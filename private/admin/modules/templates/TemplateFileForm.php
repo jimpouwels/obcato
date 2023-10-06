@@ -75,7 +75,7 @@ class TemplateFileForm extends Form {
         $parsed_var_defs = array();
         $code = $this->_template_file->getCode();
         $matches = null;
-        preg_match_all('/\$var\.(.*?)[\ }]/', $code, $matches);
+        preg_match_all('/\$var\.(.*?)[\ })|]/', $code, $matches);
 
         for ($i = 0; $i < count($matches[1]); $i++) {
             $var_def_name = $matches[1][$i];

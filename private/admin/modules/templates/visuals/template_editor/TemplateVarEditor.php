@@ -1,13 +1,15 @@
 <?php
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+require_once CMS_ROOT . "/modules/templates/service/TemplateInteractor.php";
 
 class TemplateVarEditor extends Panel {
 
-    private Template $_template;
+    private Template $template;
+    private TemplateService $templateService;
 
     public function __construct(Template $template) {
         parent::__construct($this->getTextResource('template_var_editor_panel_title'), 'template_editor_panel');
-        $this->_template = $template;
+        $this->template = $template;
+        $this->templateService = TemplateInteractor::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -15,13 +17,19 @@ class TemplateVarEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $var_fields = array();
-        foreach ($this->_template->getTemplateVars() as $template_var) {
-            $template_var_id = $template_var->getId();
-            $var_field = new TextField("template_var_{$template_var_id}_field", $template_var->getName(), $template_var->getValue(), false, false, null);
-            $var_fields[] = $var_field->render();
+        $varFields = array();
+        foreach ($this->template->getTemplateVars() as $templateVar) {
+            $templateVarId = $templateVar->getId();
+
+            $postfix = "";
+            if (!$templateVar->getValue()) {
+                $defaultValue = $this->templateService->getTemplateVarDefByTemplateVar($templateVar)->getDefaultValue();
+                $postfix = "Default: $defaultValue";
+            }
+            $var_field = new TextField("template_var_{$templateVarId}_field", $templateVar->getName(), $templateVar->getValue(), false, false, null, true, $postfix);
+            $varFields[] = $var_field->render();
         }
-        $data->assign("var_fields", $var_fields);
+        $data->assign("var_fields", $varFields);
 
     }
 }

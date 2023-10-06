@@ -6,8 +6,8 @@ class Pulldown extends FormField {
     private array $_options;
     private bool $_include_select_indication;
 
-    public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $class_name, bool $include_select_indication = false) {
-        parent::__construct($name, $value, $label, $mandatory, false, $class_name);
+    public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $className, bool $include_select_indication = false) {
+        parent::__construct($name, $value, $label, $mandatory, false, $className);
         $this->_include_select_indication = $include_select_indication;
         $this->_options = $options;
     }

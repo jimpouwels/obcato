@@ -2,4 +2,6 @@
 {if !$is_visible}
     {assign var='visible_attr' value='hidden'}
 {/if}
-<input type="{$visible_attr}" value="{$field_value}" id="{$field_name}" name="{$field_name}" class="admin_field {$classes}">
+<input type="{$visible_attr}" value="{$field_value}" id="{$field_name}" name="{$field_name}"
+       class="admin_field {$classes}">
+<span class="admin_field_postfix">{$postfix}</span>

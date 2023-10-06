@@ -6,8 +6,8 @@ class ObjectPicker extends FormField {
     private ?string $_value = null;
     private string $_opener_click_id;
 
-    public function __construct(string $field_name, string $label_resource_identifier, ?string $value, string $opener_click_id) {
-        parent::__construct($field_name, $value, $label_resource_identifier, false, false, null);
+    public function __construct(string $field_name, string $labelResourceIdentifier, ?string $value, string $opener_click_id) {
+        parent::__construct($field_name, $value, $labelResourceIdentifier, false, false, null);
         $this->_value = $value;
         $this->_opener_click_id = $opener_click_id;
     }

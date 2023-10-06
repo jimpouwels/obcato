@@ -3,11 +3,13 @@ require_once CMS_ROOT . "/view/views/FormField.php";
 
 class TextField extends FormField {
 
-    private bool $_is_visible;
+    private bool $isVisible;
+    private string $postfix;
 
-    public function __construct(string $name, ?string $label_resource_identifier, ?string $value, bool $mandatory, bool $linkable, ?string $class_name, bool $is_visible = true) {
-        parent::__construct($name, $value, $label_resource_identifier, $mandatory, $linkable, $class_name);
-        $this->_is_visible = $is_visible;
+    public function __construct(string $name, ?string $labelResourceIdentifier, ?string $value, bool $mandatory, bool $linkable, ?string $className, bool $isVisible = true, string $postfix = "") {
+        parent::__construct($name, $value, $labelResourceIdentifier, $mandatory, $linkable, $className);
+        $this->isVisible = $isVisible;
+        $this->postfix = $postfix;
     }
 
     public function getFormFieldTemplateFilename(): string {
@@ -15,7 +17,8 @@ class TextField extends FormField {
     }
 
     public function loadFormField(Smarty_Internal_Data $data): void {
-        $data->assign("is_visible", $this->_is_visible);
+        $data->assign("postfix", $this->postfix);
+        $data->assign("is_visible", $this->isVisible);
     }
 
     public function getFieldType(): string {
