@@ -16,16 +16,16 @@ require_once CMS_ROOT . '/frontend/handlers/FormRequestHandler.php';
 
 class RequestHandler {
 
-    private FormRequestHandler $_form_request_handler;
-    private ImageDao $_image_dao;
-    private SettingsDao $_settings_dao;
-    private FriendlyUrlManager $_friendly_url_manager;
+    private FormRequestHandler $formRequestHandler;
+    private ImageDao $imageDao;
+    private SettingsDao $settingsDao;
+    private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct() {
-        $this->_settings_dao = SettingsDaoMysql::getInstance();
-        $this->_image_dao = ImageDaoMysql::getInstance();
-        $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
-        $this->_form_request_handler = FormRequestHandler::getInstance();
+        $this->settingsDao = SettingsDaoMysql::getInstance();
+        $this->imageDao = ImageDaoMysql::getInstance();
+        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
+        $this->formRequestHandler = FormRequestHandler::getInstance();
     }
 
     public function handleRequest(): void {
@@ -37,17 +37,17 @@ class RequestHandler {
             $this->loadImage();
         } else {
             $url = $_SERVER['REQUEST_URI'];
-            $url_match = $this->_friendly_url_manager->matchUrl($url);
+            $urlMatch = $this->friendlyUrlManager->matchUrl($url);
             if ($url == "/") {
                 $this->renderHomepage();
             } else {
-                if (!$url_match) {
+                if (!$urlMatch) {
                     $this->render404Page();
                 } else {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $this->_form_request_handler->handlePost($url_match->getPage(), $url_match->getArticle());
+                        $this->formRequestHandler->handlePost($urlMatch->getPage(), $urlMatch->getArticle());
                     }
-                    $this->renderPage($url_match->getPage(), $url_match->getArticle());
+                    $this->renderPage($urlMatch->getPage(), $urlMatch->getArticle());
                 }
             }
         }
@@ -78,11 +78,11 @@ class RequestHandler {
     }
 
     private function getImageFromRequest(): Image {
-        return $this->_image_dao->getImage($_GET["image"]);
+        return $this->imageDao->getImage($_GET["image"]);
     }
 
     private function renderHomepage(): void {
-        $homePage = $this->_settings_dao->getSettings()->getHomepage();
+        $homePage = $this->settingsDao->getSettings()->getHomepage();
         $this->renderPage($homePage, null);
     }
 
@@ -92,9 +92,9 @@ class RequestHandler {
     }
 
     private function render404Page(): void {
-        $page_404 = $this->_settings_dao->getSettings()->get404Page();
+        $page404 = $this->settingsDao->getSettings()->get404Page();
         http_response_code(404);
-        $this->renderPage($page_404, null);
+        $this->renderPage($page404, null);
         exit();
     }
 
