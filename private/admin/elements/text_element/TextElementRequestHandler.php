@@ -5,21 +5,21 @@ require_once CMS_ROOT . "/elements/text_element/TextElementForm.php";
 
 class TextElementRequestHandler extends HttpRequestHandler {
 
-    private TextElement $_text_element;
-    private ElementDao $_element_dao;
-    private TextElementForm $_text_element_form;
+    private TextElement $textElement;
+    private ElementDao $elementDao;
+    private TextElementForm $textElementForm;
 
-    public function __construct(TextElement $text_element) {
-        $this->_text_element = $text_element;
-        $this->_element_dao = ElementDaoMysql::getInstance();
-        $this->_text_element_form = new TextElementForm($this->_text_element);
+    public function __construct(TextElement $textElement) {
+        $this->textElement = $textElement;
+        $this->elementDao = ElementDaoMysql::getInstance();
+        $this->textElementForm = new TextElementForm($this->textElement);
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
-        $this->_text_element_form->loadFields();
-        $this->_element_dao->updateElement($this->_text_element);
+        $this->textElementForm->loadFields();
+        $this->elementDao->updateElement($this->textElement);
     }
 }
 

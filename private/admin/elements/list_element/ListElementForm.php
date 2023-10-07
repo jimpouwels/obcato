@@ -3,32 +3,32 @@ require_once CMS_ROOT . "/request_handlers/ElementForm.php";
 
 class ListElementForm extends ElementForm {
 
-    private ListElement $_list_element;
+    private ListElement $listElement;
 
-    public function __construct($list_element) {
-        parent::__construct($list_element);
-        $this->_list_element = $list_element;
+    public function __construct($listElement) {
+        parent::__construct($listElement);
+        $this->listElement = $listElement;
     }
 
     public function loadFields(): void {
         parent::loadFields();
-        $this->_list_element->setTitle($this->getFieldValue('element_' . $this->_list_element->getId() . '_title'));
+        $this->listElement->setTitle($this->getFieldValue('element_' . $this->listElement->getId() . '_title'));
         $this->loadListItemsFields();
     }
 
     public function getListItemsToDelete(): array {
-        $list_items_to_delete = array();
-        foreach ($this->_list_element->getListItems() as $list_item) {
-            if (!is_null($this->getFieldValue("listitem_" . $list_item->getId() . "_delete"))) {
-                $list_items_to_delete[] = $list_item;
+        $listItemsToDelete = array();
+        foreach ($this->listElement->getListItems() as $listItem) {
+            if (!is_null($this->getFieldValue("listitem_" . $listItem->getId() . "_delete"))) {
+                $listItemsToDelete[] = $listItem;
             }
         }
-        return $list_items_to_delete;
+        return $listItemsToDelete;
     }
 
     private function loadListItemsFields(): void {
-        foreach ($this->_list_element->getListItems() as $list_item) {
-            $list_item->setText($this->getFieldValue("listitem_" . $list_item->getId() . "_text"));
+        foreach ($this->listElement->getListItems() as $listItem) {
+            $listItem->setText($this->getFieldValue("listitem_" . $listItem->getId() . "_text"));
         }
     }
 

@@ -7,23 +7,23 @@ class TextElementEditor extends ElementVisual {
 
     private static string $TEMPLATE = "elements/text_element/text_element_form.tpl";
 
-    private TextElement $_text_element;
+    private TextElement $textElement;
 
-    public function __construct(TextElement $text_element) {
+    public function __construct(TextElement $textElement) {
         parent::__construct();
-        $this->_text_element = $text_element;
+        $this->textElement = $textElement;
     }
 
     public function getElement(): Element {
-        return $this->_text_element;
+        return $this->textElement;
     }
 
     public function renderElementForm(Smarty_Internal_Data $data): string {
-        $title_field = new TextField('element_' . $this->_text_element->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->_text_element->getTitle(), false, true, null);
-        $text_field = new TextArea('element_' . $this->_text_element->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->_text_element->getText(), false, true, null);
+        $titleField = new TextField('element_' . $this->textElement->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->textElement->getTitle(), false, true, null);
+        $textField = new TextArea('element_' . $this->textElement->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->textElement->getText(), false, true, null);
 
-        $data->assign("title_field", $title_field->render());
-        $data->assign("text_field", $text_field->render());
+        $data->assign("title_field", $titleField->render());
+        $data->assign("text_field", $textField->render());
         return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 

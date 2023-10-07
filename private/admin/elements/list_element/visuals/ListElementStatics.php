@@ -13,5 +13,3 @@ class ListElementStatics extends Visual {
     public function load(): void {}
 
 }
-
-?>

@@ -9,27 +9,27 @@ require_once CMS_ROOT . '/frontend/handlers/ErrorType.php';
 
 class FormRequestHandler {
 
-    private static ?FormRequestHandler $_instance = null;
-    private WebformHandlerManager $_webform_handler_manager;
-    private WebformDao $_webform_dao;
-    private ConfigDao $_config_dao;
+    private static ?FormRequestHandler $instance = null;
+    private WebformHandlerManager $webformHandlerManager;
+    private WebformDao $webformDao;
+    private ConfigDao $configDao;
 
     public function __construct() {
-        $this->_webform_dao = WebformDaoMysql::getInstance();
-        $this->_config_dao = ConfigDaoMysql::getInstance();
-        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
+        $this->webformDao = WebformDaoMysql::getInstance();
+        $this->configDao = ConfigDaoMysql::getInstance();
+        $this->webformHandlerManager = WebformHandlerManager::getInstance();
     }
 
     public static function getInstance(): FormRequestHandler {
-        if (!self::$_instance) {
-            self::$_instance = new FormRequestHandler();
+        if (!self::$instance) {
+            self::$instance = new FormRequestHandler();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     public function handlePost(Page $page, ?Article $article): void {
         if (isset($_POST['webform_id'])) {
-            $webform = $this->_webform_dao->getWebForm($_POST['webform_id']);
+            $webform = $this->webformDao->getWebForm($_POST['webform_id']);
 
             if ($webform->getIncludeCaptcha() && !$this->validCaptcha()) {
                 FormStatus::raiseError('captcha', ErrorType::InvalidValue);
@@ -40,10 +40,10 @@ class FormRequestHandler {
                 return;
             }
 
-            $handler_instances = $this->_webform_dao->getWebFormHandlersFor($webform);
-            foreach ($handler_instances as $webform_handler_instance) {
-                $webform_handler = $this->_webform_handler_manager->getHandler($webform_handler_instance->getType());
-                $webform_handler->handlePost($webform_handler_instance, $fields, $page, $article);
+            $handlerInstances = $this->webformDao->getWebFormHandlersFor($webform);
+            foreach ($handlerInstances as $webform_handler_instance) {
+                $webformHandler = $this->webformHandlerManager->getHandler($webform_handler_instance->getType());
+                $webformHandler->handlePost($webform_handler_instance, $fields, $page, $article);
             }
 
             FormStatus::setSubmittedForm($webform->getId());
@@ -51,34 +51,32 @@ class FormRequestHandler {
     }
 
     private function getFields(WebForm $webform): array {
-        $form_fields = $this->_webform_dao->getWebFormItemsByWebForm($webform->getId());
-        $filled_in_fields = array();
-        foreach ($form_fields as $form_field) {
-            if (!$form_field instanceof WebFormField) {
+        $formFields = $this->webformDao->getWebFormItemsByWebForm($webform->getId());
+        $filledInFields = array();
+        foreach ($formFields as $formField) {
+            if (!$formField instanceof WebFormField) {
                 continue;
             }
-            if ($form_field->getMandatory() && empty($_POST[$form_field->getName()])) {
-                FormStatus::raiseError($form_field->getName(), ErrorType::Mandatory);
+            if ($formField->getMandatory() && empty($_POST[$formField->getName()])) {
+                FormStatus::raiseError($formField->getName(), ErrorType::Mandatory);
             }
-            $filled_in_field = array();
-            $filled_in_field['name'] = $form_field->getName();
-            $filled_in_field['value'] = $_POST[$form_field->getName()];
-            $filled_in_fields[] = $filled_in_field;
+            $filledInField = array();
+            $filledInField['name'] = $formField->getName();
+            $filledInField['value'] = $_POST[$formField->getName()];
+            $filledInFields[] = $filledInField;
         }
-        return $filled_in_fields;
+        return $filledInFields;
     }
 
     private function validCaptcha(): bool {
-        $captcha_token = $_POST["captcha_token"];
-        $secret_key = $this->_config_dao->getCaptchaSecret();
+        $captchaToken = $_POST["captcha_token"];
+        $secretKey = $this->configDao->getCaptchaSecret();
         $ip = $_SERVER['REMOTE_ADDR'];
-        $url = "https://www.google.com/recaptcha/api/siteverify?secret={$secret_key}&response={$captcha_token}&remoteip={$ip}";
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captchaToken}&remoteip={$ip}";
 
         $response = file_get_contents($url);
-        $json_response = json_decode($response);
+        $jsonResponse = json_decode($response);
 
-        return $json_response->success;
+        return $jsonResponse->success;
     }
 }
-
-?>

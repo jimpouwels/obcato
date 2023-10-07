@@ -6,23 +6,23 @@ require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
 
 class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 
-    private TableOfContentsElement $_table_of_contents_element;
-    private ElementDao $_element_dao;
-    private TableOfContentsElementForm $_table_of_contents_element_form;
+    private TableOfContentsElement $tableOfContentsElement;
+    private ElementDao $elementDao;
+    private TableOfContentsElementForm $tableOfContentsElementForm;
 
-    public function __construct(TableOfContentsElement $table_of_contents_element) {
-        $this->_table_of_contents_element = $table_of_contents_element;
-        $this->_element_dao = ElementDaoMysql::getInstance();
-        $this->_table_of_contents_element_form = new TableOfContentsElementForm($this->_table_of_contents_element);
+    public function __construct(TableOfContentsElement $tableOfContentsElement) {
+        $this->tableOfContentsElement = $tableOfContentsElement;
+        $this->elementDao = ElementDaoMysql::getInstance();
+        $this->tableOfContentsElementForm = new TableOfContentsElementForm($this->tableOfContentsElement);
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
         try {
-            $this->_table_of_contents_element_form->loadFields();
-            $this->_element_dao->updateElement($this->_table_of_contents_element);
-        } catch (FormException $e) {
+            $this->tableOfContentsElementForm->loadFields();
+            $this->elementDao->updateElement($this->tableOfContentsElement);
+        } catch (FormException) {
             throw new ElementContainsErrorsException("Table of contents element contains errors");
         }
     }

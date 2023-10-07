@@ -10,31 +10,31 @@ require_once CMS_ROOT . "/elements/list_element/ListElementRequestHandler.php";
 
 class ListElement extends Element {
 
-    private array $_list_items = array();
+    private array $listItems = array();
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ListElementMetaDataProvider($this));
     }
 
     public function getListItems(): array {
-        return $this->_list_items;
+        return $this->listItems;
     }
 
-    public function setListItems(array $list_items): void {
-        $this->_list_items = $list_items;
+    public function setListItems(array $listItems): void {
+        $this->listItems = $listItems;
     }
 
     public function addListItem(): void {
-        $list_item = new ListItem();
-        $list_item->setIndent(0);
-        $this->_list_items[] = $list_item;
+        $listItem = new ListItem();
+        $listItem->setIdent(0);
+        $this->listItems[] = $listItem;
     }
 
-    public function deleteListItem(ListItem $list_item_to_delete): void {
-        $this->_list_items = array_filter($this->_list_items, function ($list_item) use ($list_item_to_delete) {
-            return $list_item->getId() !== $list_item_to_delete->getId();
+    public function deleteListItem(ListItem $listItemToDelete): void {
+        $this->listItems = array_filter($this->listItems, function ($listItem) use ($listItemToDelete) {
+            return $listItem->getId() !== $listItemToDelete->getId();
         });
-        $this->getMetaDataProvider()->deleteListItem($this, $list_item_to_delete);
+        $this->getMetaDataProvider()->deleteListItem();
     }
 
     public function getStatics(): Visual {
@@ -61,11 +61,11 @@ class ListElement extends Element {
 class ListElementMetaDataProvider extends ElementMetadataProvider {
 
     private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id";
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element) {
         parent::__construct($element);
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public function getTableName(): string {
@@ -77,14 +77,14 @@ class ListElementMetaDataProvider extends ElementMetadataProvider {
         $element->setListItems($this->getListItems($element));
     }
 
-    public function deleteListItem(Element $element, ListItem $list_item): void {
+    public function deleteListItem(ListItem $list_item): void {
         $query = "DELETE FROM list_element_items WHERE id = " . $list_item->getId();
-        $this->_mysql_connector->executeQuery($query);
+        $this->mysqlConnector->executeQuery($query);
     }
 
     public function update(Element $element): void {
         $query = "UPDATE list_elements_metadata SET title = '" . $element->getTitle() . "' WHERE element_id = " . $element->getId();
-        $this->_mysql_connector->executeQuery($query);
+        $this->mysqlConnector->executeQuery($query);
 
         $this->storeItems($element->getListItems());
     }
@@ -92,47 +92,45 @@ class ListElementMetaDataProvider extends ElementMetadataProvider {
     public function insert(Element $element): void {
         $query = "INSERT INTO list_elements_metadata (title, element_id) VALUES 
                         ('" . $element->getTitle() . "', " . $element->getId() . ")";
-        $this->_mysql_connector->executeQuery($query);
+        $this->mysqlConnector->executeQuery($query);
     }
 
     private function storeItems(array $items): void {
-        foreach ($items as $list_item) {
+        foreach ($items as $listItem) {
             $statement = null;
-            $id = $list_item->getId();
-            $indent = $list_item->getIndent();
-            $text = $list_item->getText();
-            $element_id = $this->getElement()->getId();
-            if (!is_null($list_item->getId())) {
+            $id = $listItem->getId();
+            $indent = $listItem->getIndent();
+            $text = $listItem->getText();
+            $elementId = $this->getElement()->getId();
+            if (!is_null($listItem->getId())) {
                 $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
-                $statement = $this->_mysql_connector->prepareStatement($query);
+                $statement = $this->mysqlConnector->prepareStatement($query);
                 $statement->bind_param('sii', $text, $indent, $id);
             } else {
                 $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
-                $statement = $this->_mysql_connector->prepareStatement($query);
-                $statement->bind_param('ii', $indent, $element_id);
+                $statement = $this->mysqlConnector->prepareStatement($query);
+                $statement->bind_param('ii', $indent, $elementId);
             }
-            $this->_mysql_connector->executeStatement($statement);
+            $this->mysqlConnector->executeStatement($statement);
         }
     }
 
     private function getListItems(Element $element): array {
         $query = "SELECT " . self::$myAllColumns . " FROM list_element_items i, elements e WHERE i.element_id = " . $element->getId() .
             " AND e.id = " . $element->getId();
-        $result = $this->_mysql_connector->executeQuery($query);
-        $list_items = array();
+        $result = $this->mysqlConnector->executeQuery($query);
+        $listItems = array();
         while ($row = $result->fetch_assoc()) {
-            $list_item = new ListItem();
-            $list_item->setId($row['id']);
-            $list_item->setText($row['text']);
-            $list_item->setIndent($row['indent']);
-            $list_item->setElementId($row['element_id']);
+            $listItem = new ListItem();
+            $listItem->setId($row['id']);
+            $listItem->setText($row['text']);
+            $listItem->setIdent($row['indent']);
+            $listItem->setElementId($row['element_id']);
 
-            $list_items[] = $list_item;
+            $listItems[] = $listItem;
         }
 
-        return $list_items;
+        return $listItems;
     }
 
 }
-
-?>

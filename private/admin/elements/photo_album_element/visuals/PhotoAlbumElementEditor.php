@@ -7,25 +7,25 @@ require_once CMS_ROOT . "/view/views/ImageLabelSelector.php";
 class PhotoAlbumElementEditor extends ElementVisual {
 
     private static string $TEMPLATE = "elements/photo_album_element/photo_album_element_form.tpl";
-    private PhotoAlbumElement $_element;
+    private PhotoAlbumElement $element;
 
-    public function __construct($_element) {
+    public function __construct($element) {
         parent::__construct();
-        $this->_element = $_element;
+        $this->element = $element;
     }
 
     public function getElement(): Element {
-        return $this->_element;
+        return $this->element;
     }
 
     public function renderElementForm(Smarty_Internal_Data $data): string {
-        $title_field = new TextField("element_" . $this->_element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->_element->getTitle(), false, true, null);
-        $max_results_field = new TextField("element_" . $this->_element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->_element->getNumberOfResults(), false, true, "number_of_results_field");
-        $label_select_field = new ImageLabelSelector($this->_element->getLabels(), $this->_element->getId());
+        $titleField = new TextField("element_" . $this->element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->element->getTitle(), false, true, null);
+        $maxResultsField = new TextField("element_" . $this->element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->element->getNumberOfResults(), false, true, "number_of_results_field");
+        $labelSelectField = new ImageLabelSelector($this->element->getLabels(), $this->element->getId());
 
-        $data->assign("title_field", $title_field->render());
-        $data->assign("max_results_field", $max_results_field->render());
-        $data->assign("label_select_field", $label_select_field->render());
+        $data->assign("title_field", $titleField->render());
+        $data->assign("max_results_field", $maxResultsField->render());
+        $data->assign("label_select_field", $labelSelectField->render());
 
         return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }

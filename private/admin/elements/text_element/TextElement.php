@@ -9,18 +9,18 @@ require_once CMS_ROOT . "/frontend/TextElementFrontendVisual.php";
 
 class TextElement extends Element {
 
-    private ?string $_text = null;
+    private ?string $text = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new TextElementMetadataProvider($this));
     }
 
     public function setText(?string $text): void {
-        $this->_text = $text;
+        $this->text = $text;
     }
 
     public function getText(): ?string {
-        return $this->_text;
+        return $this->text;
     }
 
     public function getStatics(): Visual {
@@ -40,20 +40,20 @@ class TextElement extends Element {
     }
 
     public function getSummaryText(): string {
-        $summary_text = $this->getTitle();
-        $summary_text .= ' (\'' . substr($this->getText(), 0, 50) . '...\')';
-        return $summary_text;
+        $summaryText = $this->getTitle();
+        $summaryText .= ' (\'' . substr($this->getText(), 0, 50) . '...\')';
+        return $summaryText;
     }
 
 }
 
 class TextElementMetadataProvider extends ElementMetadataProvider {
 
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
-    public function __construct(TextElement $text_element) {
-        parent::__construct($text_element);
-        $this->_mysql_connector = MysqlConnector::getInstance();
+    public function __construct(TextElement $textElement) {
+        parent::__construct($textElement);
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public function getTableName(): string {
@@ -68,21 +68,21 @@ class TextElementMetadataProvider extends ElementMetadataProvider {
     public function update(Element $element): void {
         $title = $element->getTitle();
         $text = $element->getText();
-        $element_id = $element->getId();
+        $elementId = $element->getId();
         $query = "UPDATE text_elements_metadata SET title = ?, text = ? WHERE element_id = ?";
-        $statement = $this->_mysql_connector->prepareStatement($query);
-        $statement->bind_param('ssi', $title, $text, $element_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param('ssi', $title, $text, $elementId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function insert(Element $element): void {
         $title = $element->getTitle();
         $text = $element->getText();
-        $element_id = $element->getId();
+        $elementId = $element->getId();
         $query = "INSERT INTO text_elements_metadata (title, `text`, element_id) VALUES (?, ?, ?)";
-        $statement = $this->_mysql_connector->prepareStatement($query);
-        $statement->bind_param('ssi', $title, $text, $element_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param('ssi', $title, $text, $elementId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
 }

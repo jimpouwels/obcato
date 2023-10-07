@@ -22,7 +22,7 @@ class ImageElementRequestHandler extends HttpRequestHandler {
         try {
             $this->imageElementForm->loadFields();
             $this->elementDao->updateElement($this->imageElement);
-        } catch (FormException $e) {
+        } catch (FormException) {
             throw new ElementContainsErrorsException("Image element contains errors");
         }
     }

@@ -29,8 +29,8 @@ class FormStatus {
         return self::$SUBMITTED_FORM;
     }
 
-    public static function setSubmittedForm(int $webform_id): void {
-        self::$SUBMITTED_FORM = $webform_id;
+    public static function setSubmittedForm(int $webformId): void {
+        self::$SUBMITTED_FORM = $webformId;
     }
 
     public static function getFieldValue(string $name): ?string {

@@ -2,35 +2,35 @@
 
 class UrlMatch {
 
-    private ?Page $_page = null;
-    private ?string $_page_url = null;
-    private ?Article $_article = null;
-    private ?string $_article_url = null;
+    private ?Page $page = null;
+    private ?string $pageUrl = null;
+    private ?Article $article = null;
+    private ?string $articleUrl = null;
 
     public function getPage(): ?Page {
-        return $this->_page;
+        return $this->page;
     }
 
     public function setPage(?Page $page, ?string $url): void {
-        $this->_page = $page;
-        $this->_page_url = $url;
+        $this->page = $page;
+        $this->pageUrl = $url;
     }
 
     public function getArticle(): ?Article {
-        return $this->_article;
+        return $this->article;
     }
 
     public function setArticle(?Article $article, ?string $url): void {
-        $this->_article = $article;
-        $this->_article_url = $url;
+        $this->article = $article;
+        $this->articleUrl = $url;
     }
 
     public function getPageUrl(): string {
-        return $this->_page_url;
+        return $this->pageUrl;
     }
 
     public function getArticleUrl(): string {
-        return $this->_article_url;
+        return $this->articleUrl;
     }
 
 }

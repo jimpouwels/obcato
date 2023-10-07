@@ -3,19 +3,19 @@ require_once CMS_ROOT . "/request_handlers/ElementForm.php";
 
 class IFrameElementForm extends ElementForm {
 
-    private IFrameElement $_iframe_element;
+    private IFrameElement $iframeElement;
 
-    public function __construct(IFrameElement $iframe_element) {
-        parent::__construct($iframe_element);
-        $this->_iframe_element = $iframe_element;
+    public function __construct(IFrameElement $iframeElement) {
+        parent::__construct($iframeElement);
+        $this->iframeElement = $iframeElement;
     }
 
     public function loadFields(): void {
         parent::loadFields();
-        $this->_iframe_element->setTitle($this->getFieldValue('element_' . $this->_iframe_element->getId() . '_title'));
-        $this->_iframe_element->setUrl($this->getFieldValue('element_' . $this->_iframe_element->getId() . '_url'));
-        $this->_iframe_element->setWidth($this->getNumber('element_' . $this->_iframe_element->getId() . '_width'));
-        $this->_iframe_element->setHeight($this->getNumber('element_' . $this->_iframe_element->getId() . '_height'));
+        $this->iframeElement->setTitle($this->getFieldValue('element_' . $this->iframeElement->getId() . '_title'));
+        $this->iframeElement->setUrl($this->getFieldValue('element_' . $this->iframeElement->getId() . '_url'));
+        $this->iframeElement->setWidth($this->getNumber('element_' . $this->iframeElement->getId() . '_width'));
+        $this->iframeElement->setHeight($this->getNumber('element_' . $this->iframeElement->getId() . '_height'));
         if ($this->hasErrors()) {
             throw new FormException();
         }

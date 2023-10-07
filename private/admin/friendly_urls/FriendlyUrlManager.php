@@ -31,11 +31,11 @@ class FriendlyUrlManager {
     }
 
     private function writeHtaccessFileIfNotExists(): void {
-        $htaccess_file_path = PUBLIC_DIR . '/.htaccess';
-        if (file_exists($htaccess_file_path)) return;
-        $handle = fopen($htaccess_file_path, 'w');
+        $htaccessFilePath = PUBLIC_DIR . '/.htaccess';
+        if (file_exists($htaccessFilePath)) return;
+        $handle = fopen($htaccessFilePath, 'w');
         fclose($handle);
-        file_put_contents($htaccess_file_path, "RewriteEngine on\n\n" .
+        file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
             "RewriteCond %{HTTP_HOST} !=localhost\n" .
             "RewriteCond %{HTTPS} !=on\n" .
             "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
@@ -55,8 +55,8 @@ class FriendlyUrlManager {
 
     private function createUrlForPage(Page $page): string {
         $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
-        $parent_page = $this->pageDao->getParent($page);
-        if ($parent_page != null && $parent_page->getId() != $this->pageDao->getRootPage()->getId()) {
+        $parentPage = $this->pageDao->getParent($page);
+        if ($parentPage != null && $parentPage->getId() != $this->pageDao->getRootPage()->getId()) {
             $url = $this->createUrlForPage($this->pageDao->getParent($page)) . $url;
         }
         return $url;
@@ -71,33 +71,32 @@ class FriendlyUrlManager {
         $value = str_replace('&', '', $value);
         $value = str_replace('  ', ' ', $value);
         $value = str_replace(' ', '-', $value);
-        $value = urlencode($value);
-        return $value;
+        return urlencode($value);
     }
 
-    private function insertOrUpdateFriendlyUrl(string $url, ElementHolder $element_holder): void {
-        $url = $this->appendNumberIfFriendlyUrlExists($url, $element_holder);
-        if (!$this->getFriendlyUrlForElementHolder($element_holder)) {
-            $this->friendlyUrlDao->insertFriendlyUrl($url, $element_holder);
+    private function insertOrUpdateFriendlyUrl(string $url, ElementHolder $elementHolder): void {
+        $url = $this->appendNumberIfFriendlyUrlExists($url, $elementHolder);
+        if (!$this->getFriendlyUrlForElementHolder($elementHolder)) {
+            $this->friendlyUrlDao->insertFriendlyUrl($url, $elementHolder);
         } else {
-            $this->friendlyUrlDao->updateFriendlyUrl($url, $element_holder);
+            $this->friendlyUrlDao->updateFriendlyUrl($url, $elementHolder);
         }
     }
 
-    private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $element_holder): string {
-        $new_url = $url;
-        $existing_element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
+    private function appendNumberIfFriendlyUrlExists(string $url, ElementHolder $elementHolder): string {
+        $newUrl = $url;
+        $existingElementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
         $number = 1;
-        while ($existing_element_holder_id != null && $existing_element_holder_id != $element_holder->getId()) {
-            $new_url = $url . $number;
+        while ($existingElementHolderId != null && $existingElementHolderId != $elementHolder->getId()) {
+            $newUrl = $url . $number;
             $number++;
-            $existing_element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($new_url);
+            $existingElementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($newUrl);
         }
-        return $new_url;
+        return $newUrl;
     }
 
-    public function getFriendlyUrlForElementHolder(ElementHolder $element_holder): ?string {
-        return $this->friendlyUrlDao->getUrlFromElementHolder($element_holder);
+    public function getFriendlyUrlForElementHolder(ElementHolder $elementHolder): ?string {
+        return $this->friendlyUrlDao->getUrlFromElementHolder($elementHolder);
     }
 
     public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
@@ -114,58 +113,58 @@ class FriendlyUrlManager {
         if (str_ends_with($url, '/')) {
             $url = rtrim($url, "/");
         }
-        $url_match = new UrlMatch();
-        $this->getPageFromUrl($url, $url_match);
+        $urlMatch = new UrlMatch();
+        $this->getPageFromUrl($url, $urlMatch);
 
-        if (!$url_match->getPage()) {
+        if (!$urlMatch->getPage()) {
             return null;
         }
-        if (strlen($url_match->getPageUrl()) < strlen($url)) {
-            $this->getArticleFromUrl($url, $url_match);
-            if (!$url_match->getArticle()) {
+        if (strlen($urlMatch->getPageUrl()) < strlen($url)) {
+            $this->getArticleFromUrl($url, $urlMatch);
+            if (!$urlMatch->getArticle()) {
                 return null;
             }
         }
-        return $url_match;
+        return $urlMatch;
     }
 
-    private function getPageFromUrl(string $url, UrlMatch $url_match): void {
+    private function getPageFromUrl(string $url, UrlMatch $urlMatch): void {
         $url = UrlHelper::removeQueryStringFrom($url);
-        $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
-        $page = $this->pageDao->getPageByElementHolderId($element_holder_id);
+        $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($url);
+        $page = $this->pageDao->getPageByElementHolderId($elementHolderId);
 
-        $matched_url = $url;
+        $matchedUrl = $url;
         if (is_null($page)) {
-            $url_parts = UrlHelper::splitIntoParts($url);
-            for ($i = 0; $i < count($url_parts); $i++) {
-                $sub_array = array_slice($url_parts, 1, (count($url_parts) - $i - 1));
-                $page_part_of_url = '/' . implode('/', $sub_array);
-                $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($page_part_of_url);
-                $page = $this->pageDao->getPageByElementHolderId($element_holder_id);
+            $urlParts = UrlHelper::splitIntoParts($url);
+            for ($i = 0; $i < count($urlParts); $i++) {
+                $subArray = array_slice($urlParts, 1, (count($urlParts) - $i - 1));
+                $pagePartOfUrl = '/' . implode('/', $subArray);
+                $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($pagePartOfUrl);
+                $page = $this->pageDao->getPageByElementHolderId($elementHolderId);
                 if ($page) {
-                    $matched_url = $page_part_of_url;
+                    $matchedUrl = $pagePartOfUrl;
                     break;
                 }
             }
         }
-        $url_match->setPage($page, $matched_url);
+        $urlMatch->setPage($page, $matchedUrl);
     }
 
-    private function getArticleFromUrl(string $url, UrlMatch $url_match): void {
-        $url_parts = UrlHelper::splitIntoParts($url);
+    private function getArticleFromUrl(string $url, UrlMatch $urlMatch): void {
+        $urlParts = UrlHelper::splitIntoParts($url);
         $article = null;
 
-        $matched_url = $url;
-        for ($i = 0; $i < count($url_parts); $i++) {
-            $sub_array = array_slice($url_parts, $i + 1, count($url_parts));
-            $article_part_of_url = '/' . implode('/', $sub_array);
-            $element_holder_id = $this->friendlyUrlDao->getElementHolderIdFromUrl($article_part_of_url);
-            $article = $this->articleDao->getArticleByElementHolderId($element_holder_id);
+        $matchedUrl = $url;
+        for ($i = 0; $i < count($urlParts); $i++) {
+            $subArray = array_slice($urlParts, $i + 1, count($urlParts));
+            $articlePartOfUrl = '/' . implode('/', $subArray);
+            $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($articlePartOfUrl);
+            $article = $this->articleDao->getArticleByElementHolderId($elementHolderId);
             if ($article) {
-                $matched_url = $article_part_of_url;
+                $matchedUrl = $articlePartOfUrl;
                 break;
             }
         }
-        $url_match->setArticle($article, $matched_url);
+        $urlMatch->setArticle($article, $matchedUrl);
     }
 }

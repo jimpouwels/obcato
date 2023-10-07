@@ -9,36 +9,36 @@ require_once CMS_ROOT . "/frontend/IFrameElementFrontendVisual.php";
 
 class IFrameElement extends Element {
 
-    private ?string $_url = null;
-    private ?int $_width = null;
-    private ?int $_height = null;
+    private ?string $url = null;
+    private ?int $width = null;
+    private ?int $height = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new IFrameElementMetadataProvider($this));
     }
 
     public function setUrl(?string $url): void {
-        $this->_url = $url;
+        $this->url = $url;
     }
 
     public function getUrl(): ?string {
-        return $this->_url;
+        return $this->url;
     }
 
     public function getWidth(): ?int {
-        return $this->_width;
+        return $this->width;
     }
 
     public function setWidth(?int $width): void {
-        $this->_width = $width;
+        $this->width = $width;
     }
 
     public function getHeight(): ?int {
-        return $this->_height;
+        return $this->height;
     }
 
     public function setHeight(?int $height): void {
-        $this->_height = $height;
+        $this->height = $height;
     }
 
     public function getStatics(): Visual {
@@ -64,11 +64,11 @@ class IFrameElement extends Element {
 
 class IFrameElementMetadataProvider extends ElementMetadataProvider {
 
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element) {
         parent::__construct($element);
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public function getTableName(): string {
@@ -86,13 +86,13 @@ class IFrameElementMetadataProvider extends ElementMetadataProvider {
         $query = "UPDATE iframe_elements_metadata SET `url` = '" . $element->getUrl() . "', title = '" . $element->getTitle() . "', width = " . ($element->getWidth() ? $element->getWidth() : "NULL") . ", height = " . ($element->getHeight() ? $element->getHeight() : "NULL") .
             " WHERE element_id = " . $element->getId();
 
-        $this->_mysql_connector->executeQuery($query);
+        $this->mysqlConnector->executeQuery($query);
     }
 
     public function insert(Element $element): void {
         $query = "INSERT INTO iframe_elements_metadata (title, `url`, width, height, element_id) VALUES "
             . "('" . $element->getTitle() . "', '" . $element->getUrl() . "', 0 , 0, " . $element->getId() . ")";
-        $this->_mysql_connector->executeQuery($query);
+        $this->mysqlConnector->executeQuery($query);
     }
 
 }

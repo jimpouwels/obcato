@@ -7,44 +7,44 @@ require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
 
 class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
 
-    private ArticleOverviewElement $_article_overview_element;
-    private ElementDao $_element_dao;
-    private ArticleDao $_article_dao;
-    private ArticleOverviewElementForm $_article_overview_element_form;
+    private ArticleOverviewElement $articleOverviewElement;
+    private ElementDao $elementDao;
+    private ArticleDao $articleDao;
+    private ArticleOverviewElementForm $articleOverviewElementForm;
 
     public function __construct(ArticleOverviewElement $article_overview_element) {
-        $this->_article_overview_element = $article_overview_element;
-        $this->_element_dao = ElementDaoMysql::getInstance();
-        $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_article_overview_element_form = new ArticleOverviewElementForm($article_overview_element);
+        $this->articleOverviewElement = $article_overview_element;
+        $this->elementDao = ElementDaoMysql::getInstance();
+        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->articleOverviewElementForm = new ArticleOverviewElementForm($article_overview_element);
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
         try {
-            $this->_article_overview_element_form->loadFields();
+            $this->articleOverviewElementForm->loadFields();
             $this->removeSelectedTerms();
             $this->addSelectedTerms();
-            $this->_element_dao->updateElement($this->_article_overview_element);
+            $this->elementDao->updateElement($this->articleOverviewElement);
         } catch (FormException $e) {
             throw new ElementContainsErrorsException("Article overview element contains errors");
         }
     }
 
     private function addSelectedTerms(): void {
-        $selected_terms = $this->_article_overview_element_form->getSelectedTerms();
-        if ($selected_terms) {
-            foreach ($selected_terms as $selected_term_id) {
-                $term = $this->_article_dao->getTerm($selected_term_id);
-                $this->_article_overview_element->addTerm($term);
+        $selectedTerms = $this->articleOverviewElementForm->getSelectedTerms();
+        if ($selectedTerms) {
+            foreach ($selectedTerms as $selected_term_id) {
+                $term = $this->articleDao->getTerm($selected_term_id);
+                $this->articleOverviewElement->addTerm($term);
             }
         }
     }
 
     private function removeSelectedTerms(): void {
-        foreach ($this->_article_overview_element_form->getTermsToRemove() as $term) {
-            $this->_article_overview_element->removeTerm($term);
+        foreach ($this->articleOverviewElementForm->getTermsToRemove() as $term) {
+            $this->articleOverviewElement->removeTerm($term);
         }
     }
 }

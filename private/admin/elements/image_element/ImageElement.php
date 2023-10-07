@@ -10,52 +10,52 @@ require_once CMS_ROOT . "/frontend/ImageElementFrontendVisual.php";
 
 class ImageElement extends Element {
 
-    private ?string $_align = null;
-    private ?int $_height = null;
-    private ?int $_width = null;
-    private ?int $_image_id = null;
+    private ?string $align = null;
+    private ?int $height = null;
+    private ?int $width = null;
+    private ?int $imageId = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ImageElementMetadataProvider($this));
     }
 
     public function setAlign(?string $align): void {
-        $this->_align = $align;
+        $this->align = $align;
     }
 
     public function getAlign(): ?string {
-        return $this->_align;
+        return $this->align;
     }
 
     public function getWidth(): ?int {
-        return $this->_width;
+        return $this->width;
     }
 
     public function setWidth(?int $width): void {
-        $this->_width = $width;
+        $this->width = $width;
     }
 
     public function getHeight(): ?int {
-        return $this->_height;
+        return $this->height;
     }
 
     public function setHeight(?int $height): void {
-        $this->_height = $height;
+        $this->height = $height;
     }
 
     public function setImageId(?int $image_id): void {
-        $this->_image_id = $image_id;
+        $this->imageId = $image_id;
     }
 
     public function getImageId(): ?int {
-        return $this->_image_id;
+        return $this->imageId;
     }
 
     public function getImage(): ?Image {
         $image = null;
-        if ($this->_image_id != null) {
+        if ($this->imageId != null) {
             $image_dao = ImageDaoMysql::getInstance();
-            $image = $image_dao->getImage($this->_image_id);
+            $image = $image_dao->getImage($this->imageId);
         }
         return $image;
     }

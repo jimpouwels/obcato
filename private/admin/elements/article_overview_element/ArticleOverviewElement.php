@@ -11,98 +11,98 @@ require_once CMS_ROOT . "/frontend/ArticleOverviewElementFrontendVisual.php";
 
 class ArticleOverviewElement extends Element {
 
-    private ?string $_show_from = null;
-    private ?string $_show_to = null;
-    private bool $_show_until_today = false;
-    private ?string $_order_by = null;
-    private ?string $_order_type = null;
-    private array $_terms;
-    private ?int $_number_of_results = null;
+    private ?string $showFrom = null;
+    private ?string $showTo = null;
+    private bool $showUntilToday = false;
+    private ?string $orderBy = null;
+    private ?string $orderType = null;
+    private array $terms;
+    private ?int $numberOfResults = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ArticleOverviewElementMetadataProvider($this));
-        $this->_terms = array();
+        $this->terms = array();
     }
 
     public function setShowFrom(?string $show_from): void {
-        $this->_show_from = $show_from;
+        $this->showFrom = $show_from;
     }
 
     public function getShowFrom(): ?string {
-        return $this->_show_from;
+        return $this->showFrom;
     }
 
     public function setShowTo(?string $show_to): void {
-        $this->_show_to = $show_to;
+        $this->showTo = $show_to;
     }
 
     public function getShowTo(): ?string {
-        return $this->_show_to;
+        return $this->showTo;
     }
 
     public function setShowUntilToday(bool $show_until_today): void {
-        $this->_show_until_today = $show_until_today;
+        $this->showUntilToday = $show_until_today;
     }
 
     public function getShowUntilToday(): bool {
-        return $this->_show_until_today;
+        return $this->showUntilToday;
     }
 
     public function setNumberOfResults(?int $number_of_results): void {
-        $this->_number_of_results = $number_of_results;
+        $this->numberOfResults = $number_of_results;
     }
 
     public function getNumberOfResults(): ?int {
-        return $this->_number_of_results;
+        return $this->numberOfResults;
     }
 
     public function setOrderBy(?string $order_by): void {
-        $this->_order_by = $order_by;
+        $this->orderBy = $order_by;
     }
 
     public function getOrderBy(): ?string {
-        return $this->_order_by;
+        return $this->orderBy;
     }
 
     public function setOrderType(?string $order_type): void {
-        $this->_order_type = $order_type;
+        $this->orderType = $order_type;
     }
 
     public function getOrderType(): ?string {
-        return $this->_order_type;
+        return $this->orderType;
     }
 
     public function addTerm(ArticleTerm $term): void {
-        $this->_terms[] = $term;
+        $this->terms[] = $term;
     }
 
     public function removeTerm(ArticleTerm $term): void {
-        if (($key = array_search($term, $this->_terms, true)) !== false) {
-            unset($this->_terms[$key]);
+        if (($key = array_search($term, $this->terms, true)) !== false) {
+            unset($this->terms[$key]);
         }
     }
 
     public function setTerms(array $terms): void {
-        $this->_terms = $terms;
+        $this->terms = $terms;
     }
 
     public function getTerms(): array {
-        return $this->_terms;
+        return $this->terms;
     }
 
     public function getArticles(): array {
         $article_dao = ArticleDaoMysql::getInstance();
         $show_to = null;
-        if ($this->_show_until_today != 1 && $this->_show_to) {
-            $show_to = DateUtility::mysqlDateToString($this->_show_to, '-');
+        if ($this->showUntilToday != 1 && $this->showTo) {
+            $show_to = DateUtility::mysqlDateToString($this->showTo, '-');
         }
         $show_from = null;
-        if ($this->_show_from) {
-            $show_from = DateUtility::mysqlDateToString($this->_show_from, '-');
+        if ($this->showFrom) {
+            $show_from = DateUtility::mysqlDateToString($this->showFrom, '-');
         }
         $articles = $article_dao->searchPublishedArticles($show_from,
-            $show_to, $this->_order_by, $this->getOrderType(), $this->_terms,
-            $this->_number_of_results);
+            $show_to, $this->orderBy, $this->getOrderType(), $this->terms,
+            $this->numberOfResults);
         return $articles;
     }
 

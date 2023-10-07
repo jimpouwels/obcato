@@ -11,18 +11,18 @@ require_once CMS_ROOT . "/frontend/FormElementFrontendVisual.php";
 
 class FormElement extends Element {
 
-    private ?WebForm $_webform = null;
+    private ?WebForm $webform = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new FormElementMetadataProvider($this));
     }
 
     public function setWebForm(?WebForm $webform): void {
-        $this->_webform = $webform;
+        $this->webform = $webform;
     }
 
     public function getWebForm(): ?WebForm {
-        return $this->_webform;
+        return $this->webform;
     }
 
     public function getStatics(): Visual {
@@ -42,23 +42,23 @@ class FormElement extends Element {
     }
 
     public function getSummaryText(): string {
-        $summary_text = "";
-        if ($this->_webform) {
-            $summary_text = $this->_webform->getTitle();
+        $summaryText = "";
+        if ($this->webform) {
+            $summaryText = $this->webform->getTitle();
         }
-        return $summary_text;
+        return $summaryText;
     }
 }
 
 class FormElementMetadataProvider extends ElementMetadataProvider {
 
-    private WebformDao $_webform_dao;
-    private MysqlConnector $_mysql_connector;
+    private WebformDao $webformDao;
+    private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element) {
         parent::__construct($element);
-        $this->_webform_dao = WebformDaoMysql::getInstance();
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->webformDao = WebformDaoMysql::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public function getTableName(): string {
@@ -68,32 +68,32 @@ class FormElementMetadataProvider extends ElementMetadataProvider {
     public function constructMetaData(array $record, Element $element): void {
         $element->setTitle($record['title']);
         if (isset($record["webform_id"])) {
-            $element->setWebForm($this->_webform_dao->getWebForm($record['webform_id']));
+            $element->setWebForm($this->webformDao->getWebForm($record['webform_id']));
         }
     }
 
     public function update(Element $element): void {
-        $element_id = $element->getId();
-        $webform_id = null;
+        $elementId = $element->getId();
+        $webformId = null;
         if ($element->getWebForm()) {
-            $webform_id = $element->getWebForm()->getId();
+            $webformId = $element->getWebForm()->getId();
         }
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE form_elements_metadata SET webform_id = ?, title = ? WHERE element_id = ?");
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE form_elements_metadata SET webform_id = ?, title = ? WHERE element_id = ?");
         $title = $element->getTitle();
-        $statement->bind_param("isi", $webform_id, $title, $element_id);
+        $statement->bind_param("isi", $webformId, $title, $elementId);
 
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function insert(Element $element): void {
-        $element_id = $element->getId();
-        $webform_id = null;
+        $elementId = $element->getId();
+        $webformId = null;
         if ($element->getWebForm()) {
-            $webform_id = $element->getWebForm()->getId();
+            $webformId = $element->getWebForm()->getId();
         }
-        $statement = $this->_mysql_connector->prepareStatement("INSERT INTO form_elements_metadata (webform_id, element_id) VALUES (?, ?)");
-        $statement->bind_param("ii", $webform_id, $element_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO form_elements_metadata (webform_id, element_id) VALUES (?, ?)");
+        $statement->bind_param("ii", $webformId, $elementId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
 }

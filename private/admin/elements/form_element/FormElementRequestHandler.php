@@ -6,22 +6,22 @@ require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
 
 class FormElementRequestHandler extends HttpRequestHandler {
 
-    private FormElement $_form_element;
-    private FormElementForm $_form_element_form;
-    private ElementDao $_element_dao;
+    private FormElement $formElement;
+    private FormElementForm $formElementForm;
+    private ElementDao $elementDao;
 
-    public function __construct(FormElement $form_element) {
-        $this->_form_element = $form_element;
-        $this->_form_element_form = new FormElementForm($this->_form_element);
-        $this->_element_dao = ElementDaoMysql::getInstance();
+    public function __construct(FormElement $formElement) {
+        $this->formElement = $formElement;
+        $this->formElementForm = new FormElementForm($this->formElement);
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
         try {
-            $this->_form_element_form->loadFields();
-            $this->_element_dao->updateElement($this->_form_element);
+            $this->formElementForm->loadFields();
+            $this->elementDao->updateElement($this->formElement);
         } catch (FormException $e) {
             throw new ElementContainsErrorsException("Article overview element contains errors");
         }

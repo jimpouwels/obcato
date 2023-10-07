@@ -5,9 +5,9 @@ class ImageElementForm extends ElementForm {
 
     private ImageElement $imageElement;
 
-    public function __construct(ImageElement $image_element) {
-        parent::__construct($image_element);
-        $this->imageElement = $image_element;
+    public function __construct(ImageElement $imageElement) {
+        parent::__construct($imageElement);
+        $this->imageElement = $imageElement;
     }
 
     public function loadFields(): void {

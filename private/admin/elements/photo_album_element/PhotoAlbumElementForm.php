@@ -3,48 +3,48 @@ require_once CMS_ROOT . "/request_handlers/ElementForm.php";
 
 class PhotoAlbumElementForm extends ElementForm {
 
-    private PhotoAlbumElement $_photo_album_element;
-    private array $_selected_labels;
-    private array $_removed_labels;
+    private PhotoAlbumElement $photoAlbumElement;
+    private array $selectedLabels;
+    private array $removedLabels;
 
-    public function __construct(PhotoAlbumElement $photo_album_element) {
-        parent::__construct($photo_album_element);
-        $this->_photo_album_element = $photo_album_element;
+    public function __construct(PhotoAlbumElement $photoAlbumElement) {
+        parent::__construct($photoAlbumElement);
+        $this->photoAlbumElement = $photoAlbumElement;
     }
 
     public function loadFields(): void {
-        $element_id = $this->_photo_album_element->getId();
-        $title = $this->getFieldValue('element_' . $element_id . '_title');
-        $number_of_results = $this->getNumber('element_' . $element_id . '_number_of_results');
+        $elementId = $this->photoAlbumElement->getId();
+        $title = $this->getFieldValue('element_' . $elementId . '_title');
+        $numberOfResults = $this->getNumber('element_' . $elementId . '_number_of_results');
         if ($this->hasErrors())
             throw new FormException();
         else {
             parent::loadFields();
-            $this->_photo_album_element->setTitle($title);
-            $this->_photo_album_element->setNumberOfResults($number_of_results);
+            $this->photoAlbumElement->setTitle($title);
+            $this->photoAlbumElement->setNumberOfResults($numberOfResults);
         }
 
-        $this->_selected_labels = $this->getFieldValues('select_labels_' . $this->_photo_album_element->getId());
-        $this->_removed_labels = $this->getLabelsToDeleteFromPostRequest();
+        $this->selectedLabels = $this->getFieldValues('select_labels_' . $this->photoAlbumElement->getId());
+        $this->removedLabels = $this->getLabelsToDeleteFromPostRequest();
     }
 
     public function getSelectedLabels(): array {
-        return $this->_selected_labels;
+        return $this->selectedLabels;
     }
 
     public function getLabelsToRemove(): array {
-        return $this->_removed_labels;
+        return $this->removedLabels;
     }
 
     private function getLabelsToDeleteFromPostRequest(): array {
-        $labels_to_remove = array();
-        $element_labels = $this->_photo_album_element->getLabels();
-        foreach ($element_labels as $element_label) {
-            if (isset($_POST['label_' . $this->_photo_album_element->getId() . '_' . $element_label->getId() . '_delete'])) {
-                $labels_to_remove[] = $element_label;
+        $labelsToRemove = array();
+        $elementLabels = $this->photoAlbumElement->getLabels();
+        foreach ($elementLabels as $elementLabel) {
+            if (isset($_POST['label_' . $this->photoAlbumElement->getId() . '_' . $elementLabel->getId() . '_delete'])) {
+                $labelsToRemove[] = $elementLabel;
             }
         }
-        return $labels_to_remove;
+        return $labelsToRemove;
     }
 
 }
