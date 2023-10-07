@@ -172,11 +172,7 @@ abstract class FrontendVisual {
         $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
         foreach ($links as $link) {
             if ($this->containsLink($value, $link)) {
-                if (!is_null($link->getTargetElementHolderId())) {
-                    $url = $this->createUrlFromLink($link);
-                } else {
-                    $url = $link->getTargetAddress();
-                }
+                $url = $this->createUrlFromLink($link);
                 $value = $this->replaceLinkCodeTags($value, $link, $url);
             }
         }
@@ -198,6 +194,9 @@ abstract class FrontendVisual {
     }
 
     private function createUrlFromLink(Link $link): string {
+        if (!$link->getTargetElementHolderId()) {
+            return $link->getTargetAddress();
+        }
         $targetElementHolder = $link->getTargetElementHolder();
         switch ($targetElementHolder->getType()) {
             case Page::ElementHolderType:

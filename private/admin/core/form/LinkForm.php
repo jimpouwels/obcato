@@ -1,5 +1,6 @@
 <?php
 require_once CMS_ROOT . "/core/form/Form.php";
+require_once CMS_ROOT . "/core/form/FormException.php";
 require_once CMS_ROOT . "/core/model/Link.php";
 
 class LinkForm extends Form {

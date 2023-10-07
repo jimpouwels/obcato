@@ -21,14 +21,19 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
-        parent::handlePost();
-        $this->currentBlock = $this->getBlockFromPostRequest();
-        if ($this->isUpdateBlockAction()) {
-            $this->updateBlock();
-        } else if ($this->isDeleteBlockAction()) {
-            $this->deleteBlock();
-        } else if ($this->isAddBlockAction()) {
-            $this->addBlock();
+        try {
+            $this->currentBlock = $this->getBlockFromPostRequest();
+            parent::handlePost();
+            $this->currentBlock = $this->getBlockFromPostRequest();
+            if ($this->isUpdateBlockAction()) {
+                $this->updateBlock();
+            } else if ($this->isDeleteBlockAction()) {
+                $this->deleteBlock();
+            } else if ($this->isAddBlockAction()) {
+                $this->addBlock();
+            }
+        } catch (ElementHolderContainsErrorsException) {
+            $this->sendErrorMessage($this->getTextResource("blocks_notification_not_updated_error"));
         }
     }
 

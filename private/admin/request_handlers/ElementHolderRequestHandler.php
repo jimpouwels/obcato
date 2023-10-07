@@ -57,7 +57,7 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
     private function deleteElementFrom(ElementHolder $element_holder): void {
         $element_to_delete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
-        if (!is_null($element_to_delete)) {
+        if ($element_to_delete) {
             $this->_element_dao->deleteElement($element_to_delete);
             $element_holder->deleteElement($element_to_delete);
         }
@@ -86,12 +86,8 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     }
 
     private function updateLink(Link $link, LinkForm $link_form): void {
-        try {
-            $link_form->loadFields();
-            $this->_link_dao->updateLink($link);
-        } catch (FormException $e) {
-            $this->sendErrorMessage($this->getTextResource('link_not_saved_error'));
-        }
+        $link_form->loadFields();
+        $this->_link_dao->updateLink($link);
     }
 
     private function getElementHolderFromPostRequest(): ?ElementHolder {

@@ -6,17 +6,17 @@ class Link extends Entity {
 
     const INTERNAL = "INTERNAL";
     const EXTERNAL = "EXTERNAL";
-    private string $_title;
-    private ?string $_url = null;
-    private string $_type;
-    private ?string $_code = null;
-    private ?int $_targetElementHolderId;
-    private int $_parentElementHolderId;
-    private string $_target;
-    private ElementHolderDao $_element_holder_dao;
+    private string $title;
+    private ?string $url = null;
+    private string $type;
+    private ?string $code = null;
+    private ?int $targetElementHolderId;
+    private int $parentElementHolderId;
+    private string $target;
+    private ElementHolderDao $elementHolderDao;
 
     public function __construct() {
-        $this->_element_holder_dao = ElementHolderDaoMysql::getInstance();
+        $this->elementHolderDao = ElementHolderDaoMysql::getInstance();
     }
 
     public static function constructFromRecord(array $row): Link {
@@ -37,77 +37,77 @@ class Link extends Entity {
     }
 
     public function setTargetAddress(?string $url): void {
-        $this->_url = $url;
+        $this->url = $url;
     }
 
     public function getTitle(): string {
-        return $this->_title;
+        return $this->title;
     }
 
     public function setTitle(string $title): void {
-        $this->_title = $title;
+        $this->title = $title;
     }
 
     public function getTargetAddress(): ?string {
-        return $this->_url;
+        return $this->url;
     }
 
     public function getType(): string {
-        return $this->_type;
+        return $this->type;
     }
 
     public function setType(string $type): void {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     public function getTargetElementHolder(): ?ElementHolder {
         $element_holder = null;
-        if (!is_null($this->_targetElementHolderId) && $this->_targetElementHolderId != '') {
-            $element_holder = $this->getElementHolder($this->_targetElementHolderId);
+        if (!is_null($this->targetElementHolderId) && $this->targetElementHolderId != '') {
+            $element_holder = $this->getElementHolder($this->targetElementHolderId);
         }
         return $element_holder;
     }
 
-    private function getElementHolder(int $element_holder_id): ElementHolder {
-        return $this->_element_holder_dao->getElementHolder($element_holder_id);
+    private function getElementHolder(int $elementHolderId): ElementHolder {
+        return $this->elementHolderDao->getElementHolder($elementHolderId);
     }
 
     public function getParentElementHolder(): ?ElementHolder {
-        if ($this->_parentElementHolderId) {
-            return $this->getElementHolder($this->_parentElementHolderId);
+        if ($this->parentElementHolderId) {
+            return $this->getElementHolder($this->parentElementHolderId);
         }
         return null;
     }
 
     public function getTargetElementHolderId(): ?int {
-        return $this->_targetElementHolderId;
+        return $this->targetElementHolderId;
     }
 
-    public function setTargetElementHolderId(?int $target_element_holder_id): void {
-        $this->_targetElementHolderId = $target_element_holder_id;
+    public function setTargetElementHolderId(?int $targetElementHolderId): void {
+        $this->targetElementHolderId = $targetElementHolderId;
     }
 
     public function getParentElementHolderId(): int {
-        return $this->_parentElementHolderId;
+        return $this->parentElementHolderId;
     }
 
-    public function setParentElementHolderId(int $parent_element_holder_id): void {
-        $this->_parentElementHolderId = $parent_element_holder_id;
+    public function setParentElementHolderId(int $parentElementHolderId): void {
+        $this->parentElementHolderId = $parentElementHolderId;
     }
 
     public function getCode(): ?string {
-        return $this->_code;
+        return $this->code;
     }
 
     public function setCode(?string $code): void {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     public function getTarget(): string {
-        return $this->_target;
+        return $this->target;
     }
 
     public function setTarget(string $target): void {
-        $this->_target = $target;
+        $this->target = $target;
     }
 }

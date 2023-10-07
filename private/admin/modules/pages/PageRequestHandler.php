@@ -31,18 +31,23 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
-        parent::handlePost();
-        $this->currentPage = $this->getPageFromPostRequest();
-        if ($this->isUpdatePageAction()) {
-            $this->updatePage();
-        } else if ($this->isDeletePageAction()) {
-            $this->deletePage();
-        } else if ($this->isAddSubPageAction()) {
-            $this->addSubPage();
-        } else if ($this->isMoveUpAction()) {
-            $this->pageService->moveUp($this->currentPage);
-        } else if ($this->isMoveDownAction()) {
-            $this->pageService->moveDown($this->currentPage);
+        try {
+            $this->currentPage = $this->getPageFromPostRequest();
+            parent::handlePost();
+            $this->currentPage = $this->getPageFromPostRequest();
+            if ($this->isUpdatePageAction()) {
+                $this->updatePage();
+            } else if ($this->isDeletePageAction()) {
+                $this->deletePage();
+            } else if ($this->isAddSubPageAction()) {
+                $this->addSubPage();
+            } else if ($this->isMoveUpAction()) {
+                $this->pageService->moveUp($this->currentPage);
+            } else if ($this->isMoveDownAction()) {
+                $this->pageService->moveDown($this->currentPage);
+            }
+        } catch (ElementHolderContainsErrorsException) {
+            $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
         }
     }
 
@@ -60,7 +65,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
             $this->updateElementHolder($this->currentPage);
             $this->friendlyUrlManager->insertOrUpdateFriendlyUrlForPage($this->currentPage);
             $this->sendSuccessMessage($this->getTextResource('page_saved_message'));
-        } catch (ElementHolderContainsErrorsException|FormException) {
+        } catch (FormException) {
             $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
         }
     }

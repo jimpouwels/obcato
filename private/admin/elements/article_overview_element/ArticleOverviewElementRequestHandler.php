@@ -27,7 +27,7 @@ class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
             $this->removeSelectedTerms();
             $this->addSelectedTerms();
             $this->elementDao->updateElement($this->articleOverviewElement);
-        } catch (FormException $e) {
+        } catch (FormException) {
             throw new ElementContainsErrorsException("Article overview element contains errors");
         }
     }

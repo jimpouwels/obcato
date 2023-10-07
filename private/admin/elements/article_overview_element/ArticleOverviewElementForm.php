@@ -22,9 +22,9 @@ class ArticleOverviewElementForm extends ElementForm {
         $numberOfResults = $this->getNumber('element_' . $elementId . '_number_of_results');
         $orderBy = $this->getFieldValue('element_' . $elementId . '_order_by');
         $orderType = $this->getFieldValue('element_' . $elementId . '_order_type');
-        if ($this->hasErrors())
+        if ($this->hasErrors()) {
             throw new FormException();
-        else {
+        } else {
             parent::loadFields();
             $this->articleOverviewElement->setTitle($title);
             $this->articleOverviewElement->setShowTo(DateUtility::stringMySqlDate($showTo));

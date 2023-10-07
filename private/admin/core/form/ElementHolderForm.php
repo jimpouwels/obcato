@@ -25,9 +25,6 @@ class ElementHolderForm extends Form {
                 }
             }
         }
-        if ($this->hasErrors()) {
-            throw new FormException('ElementHolder form contains errors');
-        }
     }
 
 }
