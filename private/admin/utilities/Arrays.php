@@ -3,12 +3,8 @@
 class Arrays {
 
     static function firstMatch(array $array, Closure $lambda): object|array|string|null {
-        foreach ($array as $val) {
-            if ($lambda($val)) {
-                return $val;
-            }
-        }
-        return null;
+        $result = array_filter($array, $lambda);
+        return $result[0] ?? null;
     }
 
 }

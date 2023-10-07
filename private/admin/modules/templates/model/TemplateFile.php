@@ -46,9 +46,7 @@ class TemplateFIle extends Entity {
     }
 
     public function getTemplateVarDef(string $var_name): TemplateVarDef {
-        return Arrays::firstMatch($this->_template_var_defs, function ($template_var_def) use ($var_name) {
-            return $var_name == $template_var_def->getName();
-        });
+        return array_filter($this->_template_var_defs, fn($template_var_def) => $var_name == $template_var_def->getName())[0];
     }
 
     public function getName(): string {
@@ -64,9 +62,7 @@ class TemplateFIle extends Entity {
     }
 
     public function deleteTemplateVarDef(TemplateVarDef $template_var_def_to_delete): void {
-        $this->_template_var_defs = array_filter($this->_template_var_defs, function ($template_var_def) use ($template_var_def_to_delete) {
-            return $template_var_def->getId() !== $template_var_def_to_delete->getId();
-        });
+        $this->_template_var_defs = array_filter($this->_template_var_defs, fn($template_var_def) => $template_var_def->getId() !== $template_var_def_to_delete->getId());
     }
 
 }

@@ -29,8 +29,8 @@ class TemplateFilesRequestHandler extends HttpRequestHandler {
             $this->addTemplateFile();
         } else if ($this->isUpdateAction()) {
             $this->updateTemplateFile();
-        } else if ($this->isMigrateAction()) {
-            $this->migrateTemplateFile();
+        } else if ($this->isReloadAction()) {
+            $this->reloadTemplateFile();
         } else if ($this->isDeleteAction()) {
             $this->deleteTemplateFile();
         }
@@ -58,8 +58,9 @@ class TemplateFilesRequestHandler extends HttpRequestHandler {
         $this->sendSuccessMessage($this->getTextResource('message_template_file_successfully_saved'));
     }
 
-    private function migrateTemplateFile(): void {
+    private function reloadTemplateFile(): void {
         $template_file_form = new TemplateFileForm($this->_current_template_file);
+        $template_file_form->setReloading();
         $template_file_form->loadFields();
         $this->_parsed_var_defs = $template_file_form->getParsedVarDefs();
     }
@@ -103,8 +104,8 @@ class TemplateFilesRequestHandler extends HttpRequestHandler {
         return isset($_POST["action"]) && $_POST["action"] == "delete_template_file";
     }
 
-    private function isMigrateAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "migrate_template_file";
+    private function isReloadAction(): bool {
+        return isset($_POST["action"]) && $_POST["action"] == "reload_template_file";
     }
 
 }

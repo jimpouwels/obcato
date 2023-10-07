@@ -50,7 +50,7 @@ class TemplateModuleVisual extends ModuleVisual {
         } else if ($this->getCurrentTabId() == self::$TEMPLATE_FILES_TAB) {
             $action_buttons[] = new ActionButtonSave('update_template_file');
             $action_buttons[] = new ActionButtonAdd('add_template_file');
-            $action_buttons[] = new ActionButtonMigrate('migrate_template_file');
+            $action_buttons[] = new ActionButtonReload('reload_template_file');
             $action_buttons[] = new ActionButtonDelete('delete_template_file');
         }
         return $action_buttons;

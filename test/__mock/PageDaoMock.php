@@ -16,9 +16,7 @@ class PageDaoMock implements PageDao {
     }
 
     public function getPageByElementHolderId(?int $elementHolderId): ?Page {
-        return Arrays::firstMatch($this->pages, function ($page) use ($elementHolderId) {
-            return $page->getId() == $elementHolderId;
-        });
+        return Arrays::firstMatch($this->pages, fn($page) => $page->getId() == $elementHolderId);
     }
 
     public function getRootPage(): ?Page {

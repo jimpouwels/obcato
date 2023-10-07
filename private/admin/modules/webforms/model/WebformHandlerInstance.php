@@ -23,9 +23,7 @@ class WebFormHandlerInstance extends Entity {
     }
 
     public function getProperty(string $property_to_find): ?WebFormHandlerProperty {
-        return Arrays::firstMatch($this->_properties, function ($p) use ($property_to_find) {
-            return $property_to_find == $p->getName();
-        });
+        return Arrays::firstMatch($this->_properties, fn($p) => $property_to_find == $p->getName());
     }
 
     public static function constructFromRecord(array $row, array $properties): WebFormHandlerInstance {

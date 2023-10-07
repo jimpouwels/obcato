@@ -4,7 +4,7 @@ require_once CMS_ROOT . '/view/views/Visual.php';
 require_once CMS_ROOT . '/view/views/Panel.php';
 require_once CMS_ROOT . '/view/views/ActionButton.php';
 require_once CMS_ROOT . '/view/views/ActionButtonSave.php';
-require_once CMS_ROOT . '/view/views/ActionButtonMigrate.php';
+require_once CMS_ROOT . '/view/views/ActionButtonReload.php';
 require_once CMS_ROOT . '/view/views/ActionButtonDelete.php';
 require_once CMS_ROOT . '/view/views/ActionButtonAdd.php';
 require_once CMS_ROOT . '/view/views/ActionButtonUp.php';

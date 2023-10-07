@@ -52,9 +52,7 @@ class PageInteractor implements PageService {
         if (count($selectedBlocks) == 0) return;
         $blocksForPage = $this->blockDao->getBlocksByPage($page);
         foreach ($selectedBlocks as $selectedBlock) {
-            if (!Arrays::firstMatch($blocksForPage, function ($blockForPage) use ($selectedBlock) {
-                return $blockForPage->getName() == $selectedBlock;
-            })) {
+            if (!array_filter($blocksForPage, fn($blockForPage) => $blockForPage->getName() == $selectedBlock)) {
                 $this->blockDao->addBlockToPage($selectedBlock, $page);
             }
         }

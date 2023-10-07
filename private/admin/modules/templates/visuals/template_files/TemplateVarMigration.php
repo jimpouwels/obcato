@@ -28,9 +28,7 @@ class TemplateVarMigration extends Panel {
                 $existing_template_var['value'] = $template_var->getValue();
 
                 $existing_template_var['deleted'] = false;
-                if (!Arrays::firstMatch($this->_request_handler->getParsedVarDefs(), function ($parsed_var) use ($template_var) {
-                    return $template_var->getName() == $parsed_var;
-                })) {
+                if (!Arrays::firstMatch($this->_request_handler->getParsedVarDefs(), fn($parsed_var) => $template_var->getName() == $parsed_var)) {
                     $existing_template_var['deleted'] = true;
                 }
 
@@ -40,10 +38,9 @@ class TemplateVarMigration extends Panel {
 
             $new_vars_fields = array();
             foreach ($this->_request_handler->getParsedVarDefs() as $parsed_var) {
-                if (!Arrays::firstMatch($template->getTemplateVars(), function ($template_var) use ($parsed_var) {
-                    return $template_var->getName() == $parsed_var;
-                })) {
-                    $new_var_textfield = new TextField("new_var|{$parsed_var}", $parsed_var, "", false, false, null);
+                if (!Arrays::firstMatch($template->getTemplateVars(), fn($template_var) => $template_var->getName() == $parsed_var)) {
+                    $templateId = $template->getId();
+                    $new_var_textfield = new TextField("new_var_$templateId|{$parsed_var}", $parsed_var, "", false, false, null);
                     $new_vars_fields[] = $new_var_textfield->render();
                 }
             }
