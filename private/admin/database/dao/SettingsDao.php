@@ -7,5 +7,5 @@ interface SettingsDao {
 
     public function getSettings(): ?Settings;
 
-    public function setHomepage(int $homepage_id): void;
+    public function setHomepage(int $homepageId): void;
 }

@@ -16,7 +16,7 @@ class SettingsDaoMock implements SettingsDao {
         return null;
     }
 
-    public function setHomepage(int $homepage_id): void {
+    public function setHomepage(int $homepageId): void {
         // TODO: Implement setHomepage() method.
     }
 }

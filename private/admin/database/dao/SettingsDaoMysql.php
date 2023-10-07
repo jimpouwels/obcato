@@ -6,10 +6,10 @@ require_once CMS_ROOT . "/modules/settings/model/Settings.php";
 class SettingsDaoMysql implements SettingsDao {
 
     private static ?SettingsDaoMysql $instance = null;
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     private function __construct() {
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public static function getInstance(): SettingsDaoMysql {
@@ -20,54 +20,55 @@ class SettingsDaoMysql implements SettingsDao {
     }
 
     public function update(Settings $settings): void {
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE settings SET website_title = ?, 
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE settings SET website_title = ?, 
                                                                                         backend_hostname = ?,
                                                                                         frontend_hostname = ?,
                                                                                         smtp_host = ?,
                                                                                         email_address = ?,
                                                                                         database_version = ?,
                                                                                         404_page_id = ?");
-        $website_title = $settings->getWebsiteTitle();
-        $backend_hostname = $settings->getBackEndHostname();
-        $frontend_hostname = $settings->getFrontEndHostname();
-        $smtp_host = $settings->getSmtpHost();
-        $email_address = $settings->getEmailAddress();
-        $database_version = $settings->getDatabaseVersion();
-        $page_404_id = $settings->get404PageId();
-        $statement->bind_param("ssssssi", $website_title,
-            $backend_hostname,
-            $frontend_hostname,
-            $smtp_host,
-            $email_address,
-            $database_version,
-            $page_404_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $websiteTitle = $settings->getWebsiteTitle();
+        $backendHostname = $settings->getBackEndHostname();
+        $frontendHostname = $settings->getFrontEndHostname();
+        $smtpHost = $settings->getSmtpHost();
+        $emailAddress = $settings->getEmailAddress();
+        $databaseVersion = $settings->getDatabaseVersion();
+        $page404Id = $settings->get404PageId();
+        $statement->bind_param("ssssssi", $websiteTitle,
+            $backendHostname,
+            $frontendHostname,
+            $smtpHost,
+            $emailAddress,
+            $databaseVersion,
+            $page404Id);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function insert(Settings $settings): void {
-        $query = "INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host 
-                    , email_address, database_version) VALUES (
-                    'Default','" . $settings->getBackendHostname() . "', '" . $settings->getFrontendHostname() . "','" .
-            $settings->getSmtpHost() . "', '" . $settings->getEmailAddress() . "','" . SYSTEM_VERSION . "')";
-        $this->_mysql_connector->executeQuery($query);
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host 
+                    , email_address, database_version) VALUES ('Default', ?, ?, ?, ?, '" . SYSTEM_VERSION . "')");
+        $backendHostname = $settings->getBackEndHostname();
+        $frontendHostname = $settings->getFrontEndHostname();
+        $smtpHost = $settings->getSmtpHost();
+        $emailAddress = $settings->getEmailAddress();
+        $statement->bind_param("ssss", $backendHostname, $frontendHostname, $smtpHost, $emailAddress);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function getSettings(): ?Settings {
-        $result = $this->_mysql_connector->executeQuery("SELECT * FROM settings");
+        $result = $this->mysqlConnector->executeQuery("SELECT * FROM settings");
         while ($row = $result->fetch_assoc()) {
             return Settings::constructFromRecord($row);
         }
         return null;
     }
 
-    public function setHomepage(int $homepage_id): void {
+    public function setHomepage(int $homepageId): void {
         $query1 = "UPDATE pages SET is_homepage = 0";
-        $query2 = "UPDATE pages SET is_homepage = 1 WHERE element_holder_id = $homepage_id";
+        $query2 = "UPDATE pages SET is_homepage = 1 WHERE element_holder_id = $homepageId";
 
-        $this->_mysql_connector->executeQuery($query1);
-        $this->_mysql_connector->executeQuery($query2);
+        $this->mysqlConnector->executeQuery($query1);
+        $this->mysqlConnector->executeQuery($query2);
     }
 
 }
-
-?>

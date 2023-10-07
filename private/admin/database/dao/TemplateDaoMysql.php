@@ -9,10 +9,10 @@ require_once CMS_ROOT . "/database/dao/TemplateDao.php";
 class TemplateDaoMysql implements TemplateDao {
 
     private static ?TemplateDaoMysql $instance = null;
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     private function __construct() {
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public static function getInstance(): TemplateDaoMysql {
@@ -23,24 +23,22 @@ class TemplateDaoMysql implements TemplateDao {
     }
 
     public function getTemplate(int $id): ?Template {
-        if (!is_null($id)) {
-            $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM templates WHERE id = ?");
-            $statement->bind_param("i", $id);
-            $result = $this->_mysql_connector->executeStatement($statement);
-            while ($row = $result->fetch_assoc()) {
-                return Template::constructFromRecord($row);
-            }
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM templates WHERE id = ?");
+        $statement->bind_param("i", $id);
+        $result = $this->mysqlConnector->executeStatement($statement);
+        while ($row = $result->fetch_assoc()) {
+            return Template::constructFromRecord($row);
         }
         return null;
     }
 
     public function getTemplatesByScope(Scope $scope): array {
         $templates = array();
-        if (!is_null($scope) && $scope != "") {
-            $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM templates WHERE scope_id = ?");
-            $scope_id = $scope->getId();
-            $statement->bind_param("i", $scope_id);
-            $result = $this->_mysql_connector->executeStatement($statement);
+        if ($scope != "") {
+            $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM templates WHERE scope_id = ?");
+            $scopeId = $scope->getId();
+            $statement->bind_param("i", $scopeId);
+            $result = $this->mysqlConnector->executeStatement($statement);
             while ($row = $result->fetch_assoc()) {
                 $templates[] = Template::constructFromRecord($row);
             }
@@ -51,7 +49,7 @@ class TemplateDaoMysql implements TemplateDao {
 
     public function getTemplates(): array {
         $query = "SELECT * FROM templates";
-        $result = $this->_mysql_connector->executeQuery($query);
+        $result = $this->mysqlConnector->executeQuery($query);
         $templates = array();
         while ($row = $result->fetch_assoc()) {
             $templates[] = Template::constructFromRecord($row);
@@ -60,42 +58,44 @@ class TemplateDaoMysql implements TemplateDao {
     }
 
     public function createTemplate(): Template {
-        $new_template = new Template();
-        $new_template->setScopeId(1);
-        $new_template->setName("Nieuw template");
-        $this->persistTemplate($new_template);
-        return $new_template;
+        $newTemplate = new Template();
+        $newTemplate->setScopeId(1);
+        $newTemplate->setName("Nieuw template");
+        $this->persistTemplate($newTemplate);
+        return $newTemplate;
     }
 
-    public function persistTemplate(Template $new_template): void {
-        $query = "INSERT INTO templates (scope_id, `name`) VALUES (" . (is_null($new_template->getScopeId()) ? 'NULL' : $new_template->getScopeId()) . ", '" .
-            $new_template->getName() . "')";
-        $this->_mysql_connector->executeQuery($query);
-        $new_template->setId($this->_mysql_connector->getInsertId());
+    public function persistTemplate(Template $newTemplate): void {
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO templates (scope_id, `name`) VALUES (?, ?)");
+        $scopeId = $newTemplate->getScopeId();
+        $name = $newTemplate->getName();
+        $statement->bind_param("is", $scopeId, $name);
+        $this->mysqlConnector->executeStatement($statement);
+        $newTemplate->setId($this->mysqlConnector->getInsertId());
     }
 
     public function updateTemplate(Template $template): void {
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE templates SET `name` = ?, template_file_id = ?, scope_id = ? WHERE id = ?");
-        $template_id = $template->getId();
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE templates SET `name` = ?, template_file_id = ?, scope_id = ? WHERE id = ?");
+        $templateId = $template->getId();
         $name = $template->getName();
-        $template_file_id = $template->getTemplateFileId();
-        $scope_id = $template->getScopeId();
-        $statement->bind_param("siii", $name, $template_file_id, $scope_id, $template_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $templateFileId = $template->getTemplateFileId();
+        $scopeId = $template->getScopeId();
+        $statement->bind_param("siii", $name, $templateFileId, $scopeId, $templateId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function deleteTemplate(Template $template): void {
-        $statement = $this->_mysql_connector->prepareStatement("DELETE FROM templates WHERE id = ?");
-        $template_id = $template->getId();
-        $statement->bind_param("i", $template_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement("DELETE FROM templates WHERE id = ?");
+        $templateId = $template->getId();
+        $statement->bind_param("i", $templateId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function getTemplatesForTemplateFile(TemplateFile $template_file): array {
-        $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM templates WHERE template_file_id = ?");
-        $template_file_id = $template_file->getId();
-        $statement->bind_param('i', $template_file_id);
-        $result = $this->_mysql_connector->executeStatement($statement);
+    public function getTemplatesForTemplateFile(TemplateFile $templateFile): array {
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM templates WHERE template_file_id = ?");
+        $templateFileId = $templateFile->getId();
+        $statement->bind_param('i', $templateFileId);
+        $result = $this->mysqlConnector->executeStatement($statement);
 
         $templates = array();
         while ($row = $result->fetch_assoc()) {
@@ -105,125 +105,125 @@ class TemplateDaoMysql implements TemplateDao {
     }
 
     public function getTemplateVars(Template $template): array {
-        $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM template_vars WHERE template_id = ?");
-        $template_id = $template->getId();
-        $statement->bind_param("i", $template_id);
-        $result = $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM template_vars WHERE template_id = ?");
+        $templateId = $template->getId();
+        $statement->bind_param("i", $templateId);
+        $result = $this->mysqlConnector->executeStatement($statement);
 
-        $template_vars = array();
+        $templateVars = array();
         while ($row = $result->fetch_assoc()) {
-            $template_vars[] = TemplateVar::constructFromRecord($row);
+            $templateVars[] = TemplateVar::constructFromRecord($row);
         }
-        return $template_vars;
+        return $templateVars;
     }
 
     public function storeTemplateVar(Template $template, string $name, ?string $value = ""): TemplateVar {
-        $new_template_var = new TemplateVar();
-        $new_template_var->setName($name);
-        $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_vars (`name`, `value`, template_id) VALUES (?, ?, ?)");
-        $template_id = $template->getId();
-        $statement->bind_param("ssi", $name, $value, $template_id);
-        $this->_mysql_connector->executeStatement($statement);
-        $new_template_var->setId($this->_mysql_connector->getInsertId());
-        return $new_template_var;
+        $newTemplateVar = new TemplateVar();
+        $newTemplateVar->setName($name);
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO template_vars (`name`, `value`, template_id) VALUES (?, ?, ?)");
+        $templateId = $template->getId();
+        $statement->bind_param("ssi", $name, $value, $templateId);
+        $this->mysqlConnector->executeStatement($statement);
+        $newTemplateVar->setId($this->mysqlConnector->getInsertId());
+        return $newTemplateVar;
     }
 
-    public function updateTemplateVar(TemplateVar $template_var): void {
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE template_vars SET `value` = ? WHERE id = ?");
-        $value = $template_var->getValue();
-        $id = $template_var->getId();
+    public function updateTemplateVar(TemplateVar $templateVar): void {
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE template_vars SET `value` = ? WHERE id = ?");
+        $value = $templateVar->getValue();
+        $id = $templateVar->getId();
         $statement->bind_param("si", $value, $id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function deleteTemplateVar(TemplateVar $template_var): void {
-        $statement = $this->_mysql_connector->prepareStatement("DELETE FROM template_vars WHERE id = ?");
-        $id = $template_var->getId();
+    public function deleteTemplateVar(TemplateVar $templateVar): void {
+        $statement = $this->mysqlConnector->prepareStatement("DELETE FROM template_vars WHERE id = ?");
+        $id = $templateVar->getId();
         $statement->bind_param("i", $id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function getTemplateFiles(): array {
-        $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM template_files");
-        $result = $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM template_files");
+        $result = $this->mysqlConnector->executeStatement($statement);
 
-        $template_files = array();
+        $templateFiles = array();
         while ($row = $result->fetch_assoc()) {
-            $template_files[] = TemplateFile::constructFromRecord($row);
+            $templateFiles[] = TemplateFile::constructFromRecord($row);
         }
-        return $template_files;
+        return $templateFiles;
     }
 
     public function getTemplateFile(int $id): ?TemplateFile {
-        $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM template_files WHERE id = ?");
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM template_files WHERE id = ?");
         $statement->bind_param("i", $id);
-        $result = $this->_mysql_connector->executeStatement($statement);
+        $result = $this->mysqlConnector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {
             return TemplateFile::constructFromRecord($row);
         }
         return null;
     }
 
-    public function storeTemplateFile(TemplateFile $template_file): void {
-        $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_files (`name`) VALUES (?)");
-        $name = $template_file->getName();
+    public function storeTemplateFile(TemplateFile $templateFile): void {
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO template_files (`name`) VALUES (?)");
+        $name = $templateFile->getName();
         $statement->bind_param("s", $name);
-        $this->_mysql_connector->executeStatement($statement);
-        $template_file->setId($this->_mysql_connector->getInsertId());
+        $this->mysqlConnector->executeStatement($statement);
+        $templateFile->setId($this->mysqlConnector->getInsertId());
     }
 
-    public function deleteTemplateFile(TemplateFile $template_file): void {
-        $statement = $this->_mysql_connector->prepareStatement("DELETE FROM template_files WHERE id = ?");
-        $id = $template_file->getId();
+    public function deleteTemplateFile(TemplateFile $templateFile): void {
+        $statement = $this->mysqlConnector->prepareStatement("DELETE FROM template_files WHERE id = ?");
+        $id = $templateFile->getId();
         $statement->bind_param("i", $id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function updateTemplateFile(TemplateFile $template_file): void {
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE template_files SET `name` = ?, `filename` = ? WHERE id = ?");
-        $id = $template_file->getId();
-        $name = $template_file->getName();
-        $filename = $template_file->getFileName();
+    public function updateTemplateFile(TemplateFile $templateFile): void {
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE template_files SET `name` = ?, `filename` = ? WHERE id = ?");
+        $id = $templateFile->getId();
+        $name = $templateFile->getName();
+        $filename = $templateFile->getFileName();
         $statement->bind_param("ssi", $name, $filename, $id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function getTemplateVarDefs(TemplateFile $template_file): array {
-        $statement = $this->_mysql_connector->prepareStatement("SELECT * FROM template_var_defs WHERE template_file_id = ?");
-        $template_file_id = $template_file->getId();
-        $statement->bind_param("i", $template_file_id);
-        $result = $this->_mysql_connector->executeStatement($statement);
+        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM template_var_defs WHERE template_file_id = ?");
+        $templateFileId = $template_file->getId();
+        $statement->bind_param("i", $templateFileId);
+        $result = $this->mysqlConnector->executeStatement($statement);
 
-        $template_var_defs = array();
+        $templateVarDefs = array();
         while ($row = $result->fetch_assoc()) {
-            $template_var_defs[] = TemplateVarDef::constructFromRecord($row);
+            $templateVarDefs[] = TemplateVarDef::constructFromRecord($row);
         }
-        return $template_var_defs;
+        return $templateVarDefs;
     }
 
-    public function storeTemplateVarDef(TemplateFile $template_file, string $var_def_name): TemplateVarDef {
-        $var_def = new TemplateVarDef();
-        $var_def->setName($var_def_name);
-        $statement = $this->_mysql_connector->prepareStatement("INSERT INTO template_var_defs (`name`, template_file_id) VALUES (?, ?)");
-        $template_file_id = $template_file->getId();
-        $statement->bind_param("si", $var_def_name, $template_file_id);
-        $this->_mysql_connector->executeStatement($statement);
-        $var_def->setId($this->_mysql_connector->getInsertId());
-        return $var_def;
+    public function storeTemplateVarDef(TemplateFile $templateFile, string $varDefName): TemplateVarDef {
+        $varDef = new TemplateVarDef();
+        $varDef->setName($varDefName);
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO template_var_defs (`name`, template_file_id) VALUES (?, ?)");
+        $templateFileId = $templateFile->getId();
+        $statement->bind_param("si", $varDefName, $templateFileId);
+        $this->mysqlConnector->executeStatement($statement);
+        $varDef->setId($this->mysqlConnector->getInsertId());
+        return $varDef;
     }
 
-    public function updateTemplateVarDef(TemplateVarDef $template_var_def): void {
-        $statement = $this->_mysql_connector->prepareStatement("UPDATE template_var_defs SET default_value = ? WHERE id = ?");
-        $id = $template_var_def->getId();
-        $default_value = $template_var_def->getDefaultValue();
-        $statement->bind_param("si", $default_value, $id);
-        $this->_mysql_connector->executeStatement($statement);
+    public function updateTemplateVarDef(TemplateVarDef $templateVarDef): void {
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE template_var_defs SET default_value = ? WHERE id = ?");
+        $id = $templateVarDef->getId();
+        $defaultValue = $templateVarDef->getDefaultValue();
+        $statement->bind_param("si", $defaultValue, $id);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function deleteTemplateVarDef(TemplateVarDef $template_var_def): void {
-        $statement = $this->_mysql_connector->prepareStatement("DELETE FROM template_var_defs WHERE id = ?");
+        $statement = $this->mysqlConnector->prepareStatement("DELETE FROM template_var_defs WHERE id = ?");
         $id = $template_var_def->getId();
         $statement->bind_param('i', $id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 }

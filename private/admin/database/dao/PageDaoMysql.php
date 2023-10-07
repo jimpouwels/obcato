@@ -93,10 +93,14 @@ class PageDaoMysql implements PageDao {
 
     public function persist(Page $page): void {
         $this->elementHolderDao->persist($page);
-        $query = "INSERT INTO pages (navigation_title, parent_id, show_in_navigation, include_in_searchindex, element_holder_id,
-                     follow_up, is_homepage, description) VALUES ('" . $page->getNavigationTitle() . "', " . $page->getParentId() . ","
-            . $page->getShowInNavigation() . ", 1, " . $page->getId() . ", 1, 0, '')";
-        $this->mysqlConnector->executeQuery($query);
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO pages (navigation_title, parent_id, show_in_navigation, include_in_searchindex, element_holder_id,
+                     follow_up, is_homepage, description) VALUES (?, ?, ?, 1, ?, 1, 0, '')");
+        $navigationTitle = $page->getNavigationTitle();
+        $parentId = $page->getParentId();
+        $showInNavigation = $page->getShowInNavigation() ? 1 : 0;
+        $id = $page->getId();
+        $statement->bind_param("siii", $navigationTitle, $parentId, $showInNavigation, $id);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function updatePage(Page $page): void {
