@@ -128,17 +128,17 @@ class PageVisual extends FrontendVisual {
         return $article_data;
     }
 
-    private function renderElementHolderContent(ElementHolder $element_holder): array {
-        $elements_content = array();
-        foreach ($element_holder->getElements() as $element) {
-            $element_data = array();
-            $element_data["type"] = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
+    private function renderElementHolderContent(ElementHolder $elementHolder): array {
+        $elementsContent = array();
+        foreach ($elementHolder->getElements() as $element) {
+            $elementData = array();
+            $elementData["type"] = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
             if ($element->getTemplate()) {
-                $element_data["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
             }
-            $elements_content[] = $element_data;
+            $elementsContent[] = $elementData;
         }
-        return $elements_content;
+        return $elementsContent;
     }
 
     private function renderCrumbPath(): array {

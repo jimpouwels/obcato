@@ -6,8 +6,8 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
     private ImageDao $imageDao;
 
-    public function __construct(Page $page, ?Article $article, ArticleOverviewElement $article_overview_element) {
-        parent::__construct($page, $article, $article_overview_element);
+    public function __construct(Page $page, ?Article $article, ArticleOverviewElement $articleOverviewElement) {
+        parent::__construct($page, $article, $articleOverviewElement);
         $this->imageDao = ImageDaoMysql::getInstance();
     }
 
@@ -18,21 +18,21 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
     private function getArticles(): array {
         $articles = $this->getElement()->getArticles();
-        $articles_arr = array();
+        $articlesData = array();
         foreach ($articles as $article) {
             if (!$this->isPublished($article)) continue;
-            $article_item = array();
-            $article_item["id"] = $article->getId();
-            $article_item["title"] = $article->getTitle();
-            $article_item["url"] = $this->getArticleUrl($article);
-            $article_item["description"] = $this->toHtml($article->getDescription(), $article);
-            $article_item["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
-            $article_item["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
-            $article_item["sort_date"] = DateUtility::mysqlDateToString($article->getSortDate(), '-');
-            $article_item["image"] = $this->getArticleImage($article);
-            $articles_arr[] = $article_item;
+            $articleData = array();
+            $articleData["id"] = $article->getId();
+            $articleData["title"] = $article->getTitle();
+            $articleData["url"] = $this->getArticleUrl($article);
+            $articleData["description"] = $this->toHtml($article->getDescription(), $article);
+            $articleData["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
+            $articleData["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
+            $articleData["sort_date"] = DateUtility::mysqlDateToString($article->getSortDate(), '-');
+            $articleData["image"] = $this->getArticleImage($article);
+            $articlesData[] = $articleData;
         }
-        return $articles_arr;
+        return $articlesData;
     }
 
     private function getArticleImage(Article $article): ?array {

@@ -168,8 +168,8 @@ abstract class FrontendVisual {
         return urlencode($anchorValue);
     }
 
-    private function createLinksInString(string $value, ElementHolder $element_holder): string {
-        $links = $this->linkDao->getLinksForElementHolder($element_holder->getId());
+    private function createLinksInString(string $value, ElementHolder $elementHolder): string {
+        $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
         foreach ($links as $link) {
             if ($this->containsLink($value, $link)) {
                 if (!is_null($link->getTargetElementHolderId())) {
@@ -183,10 +183,8 @@ abstract class FrontendVisual {
         return $value;
     }
 
-    private function getDefaultValueFor(mixed $templateVar, array $templateVarDefs) {
-        return Arrays::firstMatch($templateVarDefs, function ($item) use ($templateVar) {
-            return $templateVar->getName() == $item->getName();
-        })->getDefaultValue();
+    private function getDefaultValueFor(TemplateVar $templateVar, array $templateVarDefs): string {
+        return Arrays::firstMatch($templateVarDefs, fn($item) => $templateVar->getName() == $item->getName())->getDefaultValue();
     }
 
     private function replaceLinkCodeTags(string $value, Link $link, string $url): string {

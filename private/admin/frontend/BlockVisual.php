@@ -5,34 +5,34 @@ require_once CMS_ROOT . '/database/dao/TemplateDaoMysql.php';
 
 class BlockVisual extends FrontendVisual {
 
-    private Block $_block;
-    private TemplateDao $_template_dao;
+    private Block $block;
+    private TemplateDao $templateDao;
 
     public function __construct(Block $block, Page $page) {
         parent::__construct($page, null);
-        $this->_block = $block;
-        $this->_template_dao = TemplateDaoMysql::getInstance();
+        $this->block = $block;
+        $this->templateDao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_block->getTemplate()->getTemplateFileId())->getFileName();
+        return FRONTEND_TEMPLATE_DIR . "/" . $this->templateDao->getTemplateFile($this->block->getTemplate()->getTemplateFileId())->getFileName();
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign('id', $this->_block->getId());
-        $this->assign('title', $this->_block->getTitle());
+        $this->assign('id', $this->block->getId());
+        $this->assign('title', $this->block->getTitle());
         $this->assign('elements', $this->renderElements());
     }
 
     public function getPresentable(): ?Presentable {
-        return $this->_block;
+        return $this->block;
     }
 
     private function renderElements(): array {
-        $elements_content = array();
-        foreach ($this->_block->getElements() as $element) {
-            $elements_content[] = $element->getFrontendVisual($this->getPage(), null)->render();
+        $elementsContent = array();
+        foreach ($this->block->getElements() as $element) {
+            $elementsContent[] = $element->getFrontendVisual($this->getPage(), null)->render();
         }
-        return $elements_content;
+        return $elementsContent;
     }
 }

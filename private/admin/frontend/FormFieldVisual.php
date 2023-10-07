@@ -4,8 +4,8 @@ require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 
 abstract class FormFieldVisual extends FormItemVisual {
 
-    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webform_field) {
-        parent::__construct($page, $article, $webform, $webform_field);
+    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webformField) {
+        parent::__construct($page, $article, $webform, $webformField);
     }
 
     public function getFormItemTemplateFilename(): string {
@@ -28,5 +28,3 @@ abstract class FormFieldVisual extends FormItemVisual {
 
     abstract function getFormFieldTemplateFilename(): string;
 }
-
-?>

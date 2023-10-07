@@ -3,8 +3,8 @@ require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
 
 class IFrameElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, IFrameElement $iframe_element) {
-        parent::__construct($page, $article, $iframe_element);
+    public function __construct(Page $page, ?Article $article, IFrameElement $iframeElement) {
+        parent::__construct($page, $article, $iframeElement);
     }
 
     public function loadElement(): void {

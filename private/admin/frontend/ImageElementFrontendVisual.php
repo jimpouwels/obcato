@@ -3,8 +3,8 @@ require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
 
 class ImageElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, ImageElement $image_element) {
-        parent::__construct($page, $article, $image_element);
+    public function __construct(Page $page, ?Article $article, ImageElement $imageElement) {
+        parent::__construct($page, $article, $imageElement);
     }
 
     public function loadElement(): void {
@@ -19,18 +19,12 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function createImageUrl(): string {
-        $image_url = "";
-        if (!is_null($this->getElement()->getImage())) {
-            $image_url = $this->getImageUrl($this->getElement()->getImage());
-        }
-        return $image_url;
+        $image = $this->getElement()->getImage();
+        return $image ? $this->getImageUrl($image) : "";
     }
 
     private function getExtension(): string {
-        $extension = "";
-        if (!is_null($this->getElement()->getImage())) {
-            $extension = $this->getElement()->getImage()->getExtension();
-        }
-        return $extension;
+        $image = $this->getElement()->getImage();
+        return $image ? $image->getExtension() : "";
     }
 }

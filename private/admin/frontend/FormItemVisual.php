@@ -4,11 +4,11 @@ require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 
 abstract class FormItemVisual extends FrontendVisual {
 
-    private WebFormItem $_webform_item;
+    private WebFormItem $webformIte;
 
-    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webform_item) {
+    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webformItem) {
         parent::__construct($page, $article);
-        $this->_webform_item = $webform_item;
+        $this->webformIte = $webformItem;
     }
 
     public function getTemplateFilename(): string {
@@ -26,7 +26,7 @@ abstract class FormItemVisual extends FrontendVisual {
     }
 
     protected function getFormItem(): WebFormItem {
-        return $this->_webform_item;
+        return $this->webformIte;
     }
 
     abstract function loadFormItem(): void;
@@ -34,8 +34,6 @@ abstract class FormItemVisual extends FrontendVisual {
     abstract function getFormItemTemplateFilename(): string;
 
     public function getPresentable(): ?Presentable {
-        return $this->_webform_item;
+        return $this->webformIte;
     }
 }
-
-?>

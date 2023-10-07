@@ -4,8 +4,8 @@ require_once CMS_ROOT . '/frontend/FormFieldVisual.php';
 class FormTextAreaVisual extends FormFieldVisual {
     private TemplateDao $_template_dao;
 
-    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webform_field) {
-        parent::__construct($page, $article, $webform, $webform_field);
+    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormField $webformField) {
+        parent::__construct($page, $article, $webform, $webformField);
         $this->_template_dao = TemplateDaoMysql::getInstance();
     }
 
@@ -16,5 +16,3 @@ class FormTextAreaVisual extends FormFieldVisual {
     public function loadFormField(): void {}
 
 }
-
-?>

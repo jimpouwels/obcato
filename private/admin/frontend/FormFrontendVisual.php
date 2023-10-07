@@ -5,16 +5,16 @@ require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
 
 class FormFrontendVisual extends FrontendVisual {
 
-    private WebformItemFactory $_webform_item_factory;
+    private WebformItemFactory $webformItemFactory;
 
-    private WebForm $_webform;
-    private TemplateDao $_template_dao;
+    private WebForm $webform;
+    private TemplateDao $templateDao;
 
     public function __construct(Page $page, ?Article $article, WebForm $webform) {
         parent::__construct($page, $article);
-        $this->_webform = $webform;
-        $this->_webform_item_factory = WebformItemFactory::getInstance();
-        $this->_template_dao = TemplateDaoMysql::getInstance();
+        $this->webform = $webform;
+        $this->webformItemFactory = WebformItemFactory::getInstance();
+        $this->templateDao = TemplateDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -22,35 +22,35 @@ class FormFrontendVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign('webform_id', $this->_webform->getId());
-        if ($this->_webform->getIncludeCaptcha()) {
-            $captcha_key = $this->_webform->getCaptchaKey();
+        $this->assign('webform_id', $this->webform->getId());
+        if ($this->webform->getIncludeCaptcha()) {
+            $captcha_key = $this->webform->getCaptchaKey();
             $this->assign('captcha_key', $captcha_key);
         }
-        $this->assign('title', $this->_webform->getTitle());
+        $this->assign('title', $this->webform->getTitle());
 
-        $webform_child_data = $this->createChildData();
-        $webform_data = $this->renderWebForm($this->_webform);
-        $webform_child_data->assign('webform', $webform_data);
-        $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->_template_dao->getTemplateFile($this->_webform->getTemplate()->getTemplateFileId())->getFileName(), $webform_child_data));
+        $webformChildData = $this->createChildData();
+        $webformData = $this->renderWebForm($this->webform);
+        $webformChildData->assign('webform', $webformData);
+        $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->templateDao->getTemplateFile($this->webform->getTemplate()->getTemplateFileId())->getFileName(), $webformChildData));
     }
 
     public function getPresentable(): ?Presentable {
-        return $this->_webform;
+        return $this->webform;
     }
 
     private function renderWebForm(WebForm $webform): array {
-        $webform_data = array();
-        $webform_data['title'] = $webform->getTitle();
-        $webform_data['fields'] = $this->renderFields($webform);
-        $webform_data['is_submitted'] = FormStatus::getSubmittedForm() == $this->_webform->getId();
-        return $webform_data;
+        $webformData = array();
+        $webformData['title'] = $webform->getTitle();
+        $webformData['fields'] = $this->renderFields($webform);
+        $webformData['is_submitted'] = FormStatus::getSubmittedForm() == $this->webform->getId();
+        return $webformData;
     }
 
     private function renderFields(WebForm $webform): array {
         $fields = array();
-        foreach ($webform->getFormFields() as $form_field) {
-            $field = $this->_webform_item_factory->getFrontendVisualFor($webform, $form_field, $this->getPage(), $this->getArticle());
+        foreach ($webform->getFormFields() as $formField) {
+            $field = $this->webformItemFactory->getFrontendVisualFor($webform, $formField, $this->getPage(), $this->getArticle());
             $fields[] = $field->render();
         }
         return $fields;
