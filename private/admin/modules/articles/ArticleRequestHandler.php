@@ -9,7 +9,7 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
 
     private static string $ARTICLE_ID_POST = "element_holder_id";
     private static string $ARTICLE_ID_GET = "article";
-    private ?Article $_current_article = null;
+    private ?Article $currentArticle = null;
     private ArticleDao $_article_dao;
     private FriendlyUrlManager $_friendly_url_manager;
 
@@ -20,14 +20,12 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handleGet(): void {
-        $this->_current_article = $this->getArticleFromGetRequest();
+        $this->currentArticle = $this->getArticleFromGetRequest();
     }
 
     public function handlePost(): void {
         try {
-            $this->_current_article = $this->getArticleFromPostRequest();
             parent::handlePost();
-            $this->_current_article = $this->getArticleFromPostRequest();
             if ($this->isAddArticleAction()) {
                 $this->addArticle();
             } else if ($this->isUpdateArticleAction()) {
@@ -36,12 +34,18 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
                 $this->deleteArticle();
             }
         } catch (ElementHolderContainsErrorsException) {
-            $this->sendErrorMessage("Artikel niet opgeslagen, verwerk de fouten");
+            $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
         }
     }
 
+    public function loadElementHolderFromPostRequest(): ElementHolder {
+        $this->currentArticle = $this->getArticleFromPostRequest();
+        return $this->currentArticle;
+    }
+
+
     public function getCurrentArticle(): ?Article {
-        return $this->_current_article;
+        return $this->currentArticle;
     }
 
     public function getSearchQuery(): string {
@@ -63,14 +67,14 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function updateArticle(): void {
-        $article_form = new ArticleForm($this->_current_article);
+        $article_form = new ArticleForm($this->currentArticle);
         try {
             $article_form->loadFields();
-            $this->_article_dao->updateArticle($this->_current_article);
+            $this->_article_dao->updateArticle($this->currentArticle);
             $this->updateSelectedTerms($article_form->getSelectedTerms());
             $this->deleteSelectedTerms($article_form);
-            $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($this->_current_article);
-            foreach ($this->_article_dao->getAllChildArticles($this->_current_article->getId()) as $child_article) {
+            $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($this->currentArticle);
+            foreach ($this->_article_dao->getAllChildArticles($this->currentArticle->getId()) as $child_article) {
                 $this->_friendly_url_manager->insertOrUpdateFriendlyUrlForArticle($child_article);
             }
             $this->sendSuccessMessage("Artikel succesvol opgeslagen");
@@ -88,24 +92,24 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function deleteArticle(): void {
-        $this->_article_dao->deleteArticle($this->_current_article);
+        $this->_article_dao->deleteArticle($this->currentArticle);
         $this->sendSuccessMessage("Artikel succesvol verwijderd");
         $this->redirectTo($this->getBackendBaseUrl());
     }
 
     private function updateSelectedTerms(array $selected_terms): void {
         if (count($selected_terms) == 0) return;
-        $existing_terms = $this->_article_dao->getTermsForArticle($this->_current_article);
+        $existing_terms = $this->_article_dao->getTermsForArticle($this->currentArticle);
         foreach ($selected_terms as $selected_term_id) {
             if (!$this->termAlreadyExists($selected_term_id, $existing_terms)) {
-                $this->_article_dao->addTermToArticle($selected_term_id, $this->_current_article);
+                $this->_article_dao->addTermToArticle($selected_term_id, $this->currentArticle);
             }
         }
     }
 
     private function deleteSelectedTerms(ArticleForm $article_form): void {
         foreach ($article_form->getTermsToDelete() as $term_to_delete) {
-            $this->_article_dao->deleteTermFromArticle($term_to_delete->getId(), $this->_current_article);
+            $this->_article_dao->deleteTermFromArticle($term_to_delete->getId(), $this->currentArticle);
         }
     }
 

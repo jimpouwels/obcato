@@ -50,9 +50,7 @@ class ElementHolder extends Presentable {
     }
 
     public function deleteElement(Element $element_to_delete): void {
-        $this->elements = array_filter($this->elements, function ($element) use ($element_to_delete) {
-            return $element->getId() !== $element_to_delete->getId();
-        });
+        $this->elements = array_filter($this->elements, fn($element) => $element->getId() != $element_to_delete->getId());
     }
 
     public function getCreatedAt(): string {
@@ -81,6 +79,14 @@ class ElementHolder extends Presentable {
 
     public function setLinks(array $links): void {
         $this->links = $links;
+    }
+
+    public function addLink(Link $link): void {
+        $this->links[] = $link;
+    }
+
+    public function deleteLink(Link $linkToDelete): void {
+        $this->links = array_filter($this->links, fn($link) => $linkToDelete->getId() != $link->getId());
     }
 
     public function getElementStatics(): array {

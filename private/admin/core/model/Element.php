@@ -6,7 +6,7 @@ abstract class Element extends Presentable {
     private ?string $title = null;
     private int $elementHolderId;
     private int $orderNr;
-    private bool $includeInTableOfContents;
+    private bool $includeInTableOfContents = false;
     private ElementMetadataProvider $metadataProvider;
 
     public function __construct(int $scopeId, ElementMetadataProvider $metadataProvider) {

@@ -20,9 +20,6 @@ class LinkForm extends Form {
         if ($this->getFieldValue('delete_link_target') == $this->link->getId()) {
             $this->link->setTargetElementHolderId(null);
         }
-        if ($this->hasErrors()) {
-            throw new FormException('Link form contains errors');
-        }
     }
 
     public function isSelectedForDeletion(): bool {

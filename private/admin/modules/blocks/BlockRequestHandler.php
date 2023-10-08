@@ -22,9 +22,7 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
 
     public function handlePost(): void {
         try {
-            $this->currentBlock = $this->getBlockFromPostRequest();
             parent::handlePost();
-            $this->currentBlock = $this->getBlockFromPostRequest();
             if ($this->isUpdateBlockAction()) {
                 $this->updateBlock();
             } else if ($this->isDeleteBlockAction()) {
@@ -35,6 +33,11 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
         } catch (ElementHolderContainsErrorsException) {
             $this->sendErrorMessage($this->getTextResource("blocks_notification_not_updated_error"));
         }
+    }
+
+    public function loadElementHolderFromPostRequest(): ElementHolder {
+        $this->currentBlock = $this->getBlockFromPostRequest();
+        return $this->currentBlock;
     }
 
     public function getCurrentBlock(): ?Block {

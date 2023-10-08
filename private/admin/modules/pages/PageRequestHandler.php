@@ -32,9 +32,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
 
     public function handlePost(): void {
         try {
-            $this->currentPage = $this->getPageFromPostRequest();
             parent::handlePost();
-            $this->currentPage = $this->getPageFromPostRequest();
             if ($this->isUpdatePageAction()) {
                 $this->updatePage();
             } else if ($this->isDeletePageAction()) {
@@ -51,13 +49,18 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
+    public function loadElementHolderFromPostRequest(): ElementHolder {
+        $this->currentPage = $this->getPageFromPostRequest();
+        return $this->currentPage;
+    }
+
     public function getCurrentPage(): ?Page {
         return $this->currentPage;
     }
 
     private function updatePage(): void {
-        $pageForm = new PageForm($this->currentPage);
         try {
+            $pageForm = new PageForm($this->currentPage);
             $pageForm->loadFields();
             $this->pageService->addSelectedBlocks($this->currentPage, $pageForm->getSelectedBlocks());
             $this->deleteSelectedBlocksFromPage();

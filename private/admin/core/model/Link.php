@@ -6,13 +6,13 @@ class Link extends Entity {
 
     const INTERNAL = "INTERNAL";
     const EXTERNAL = "EXTERNAL";
-    private string $title;
+    private ?string $title = null;
     private ?string $url = null;
     private string $type;
     private ?string $code = null;
-    private ?int $targetElementHolderId;
+    private ?int $targetElementHolderId = null;
     private int $parentElementHolderId;
-    private string $target;
+    private ?string $target = null;
     private ElementHolderDao $elementHolderDao;
 
     public function __construct() {
@@ -40,11 +40,11 @@ class Link extends Entity {
         $this->url = $url;
     }
 
-    public function getTitle(): string {
+    public function getTitle(): ?string {
         return $this->title;
     }
 
-    public function setTitle(string $title): void {
+    public function setTitle(?string $title): void {
         $this->title = $title;
     }
 
@@ -103,11 +103,11 @@ class Link extends Entity {
         $this->code = $code;
     }
 
-    public function getTarget(): string {
+    public function getTarget(): ?string {
         return $this->target;
     }
 
-    public function setTarget(string $target): void {
+    public function setTarget(?string $target): void {
         $this->target = $target;
     }
 }
