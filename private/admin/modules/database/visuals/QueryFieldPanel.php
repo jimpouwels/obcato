@@ -4,9 +4,9 @@ class QueryFieldPanel extends Panel {
 
     private DatabaseRequestHandler $_request_handler;
 
-    public function __construct($request_handler) {
+    public function __construct($requestHandler) {
         parent::__construct('database_query_editor_title', 'queries_form_wrapper');
-        $this->_request_handler = $request_handler;
+        $this->_request_handler = $requestHandler;
     }
 
     public function getPanelContentTemplate(): string {

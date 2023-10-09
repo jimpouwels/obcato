@@ -4,9 +4,9 @@ class QueryResultPanel extends Panel {
 
     private DatabaseRequestHandler $_request_handler;
 
-    public function __construct(DatabaseRequestHandler $request_handler) {
+    public function __construct(DatabaseRequestHandler $requestHandler) {
         parent::__construct('database_query_result_panel_title', 'query_result_panel');
-        $this->_request_handler = $request_handler;
+        $this->_request_handler = $requestHandler;
     }
 
     public function getPanelContentTemplate(): string {

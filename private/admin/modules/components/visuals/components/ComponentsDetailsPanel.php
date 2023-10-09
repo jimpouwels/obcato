@@ -5,9 +5,9 @@ class ComponentsDetailsPanel extends Panel {
 
     private $_component_request_handler;
 
-    public function __construct($component_request_handler) {
+    public function __construct($component_requestHandler) {
         parent::__construct('Component details');
-        $this->_component_request_handler = $component_request_handler;
+        $this->_component_request_handler = $component_requestHandler;
     }
 
     public function getPanelContentTemplate(): string {

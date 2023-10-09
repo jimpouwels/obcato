@@ -8,12 +8,12 @@ require_once CMS_ROOT . '/modules/articles/visuals/articles/ArticleMetadataEdito
 
 class ArticleEditor extends Visual {
 
-    private Article $_current_article;
+    private Article $currentArticle;
     private ArticleDao $articleDao;
 
-    public function __construct($current_article) {
+    public function __construct($currentArticle) {
         parent::__construct();
-        $this->_current_article = $current_article;
+        $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
@@ -22,7 +22,7 @@ class ArticleEditor extends Visual {
     }
 
     public function load(): void {
-        $this->assign("article_id", $this->_current_article->getId());
+        $this->assign("article_id", $this->currentArticle->getId());
         $this->assign("article_metadata", $this->renderArticleMetaDataPanel());
         $this->assign("element_container", $this->renderElementContainer());
         $this->assign("link_editor", $this->renderLinkEditor());
@@ -31,23 +31,19 @@ class ArticleEditor extends Visual {
     }
 
     private function renderArticleMetaDataPanel(): string {
-        $metadata_panel = new ArticleMetadataEditor($this->_current_article);
-        return $metadata_panel->render();
+        return (new ArticleMetadataEditor($this->currentArticle))->render();
     }
 
     private function renderElementContainer(): string {
-        $element_container = new ElementContainer($this->_current_article->getElements());
-        return $element_container->render();
+        return (new ElementContainer($this->currentArticle->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        $link_editor = new LinkEditor($this->_current_article->getLinks());
-        return $link_editor->render();
+        return (new LinkEditor($this->currentArticle->getLinks()))->render();
     }
 
     private function renderTermSelector(): string {
-        $term_selector = new TermSelector($this->articleDao->getTermsForArticle($this->_current_article->getId()), $this->_current_article->getId());
-        return $term_selector->render();
+        return (new TermSelector($this->articleDao->getTermsForArticle($this->currentArticle->getId()), $this->currentArticle->getId()))->render();
     }
 
 }

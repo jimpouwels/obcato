@@ -7,17 +7,17 @@ require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class ArticleMetadataEditor extends Panel {
 
-    private Article $_current_article;
-    private ArticleDao $_article_dao;
-    private WebformDao $_webform_dao;
-    private FriendlyUrlManager $_friendly_url_manager;
+    private Article $currentArticle;
+    private ArticleDao $articleDao;
+    private WebformDao $webformDao;
+    private FriendlyUrlManager $friendlyUrlManager;
 
-    public function __construct(Article $current_article) {
+    public function __construct(Article $currentArticle) {
         parent::__construct('Algemeen', 'article_metadata_editor');
-        $this->_current_article = $current_article;
-        $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_webform_dao = WebformDaoMysql::getInstance();
-        $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
+        $this->currentArticle = $currentArticle;
+        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->webformDao = WebformDaoMysql::getInstance();
+        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -25,66 +25,65 @@ class ArticleMetadataEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $title_field = new TextField("article_title", $this->getTextResource('article_editor_title_label'), $this->_current_article->getTitle(), true, false, null);
-        $template_picker_field = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->_current_article->getTemplate(), $this->_current_article->getScope());
-        $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_article), '');
-        $keywords_field = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->_current_article->getKeywords(), false, false, "keywords_field");
-        $description_field = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->_current_article->getDescription(), false, true, null);
-        $published_field = new SingleCheckbox("article_published", $this->getTextResource('article_editor_published_label'), $this->_current_article->isPublished(), false, "");
-        $publication_date_field = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->_current_article->getPublicationDate()), true, null);
-        $sort_date_field = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->_current_article->getSortDate()), true, null);
-        $target_pages_field = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->_current_article->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
-        $comment_forms_field = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->_current_article->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
-        $parent_article_picker_field = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->_current_article->getParentArticleId(), "update_element_holder");
-        $parent_article_delete_button = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
-        $image_picker_field = new ImagePicker("article_image_ref_" . $this->_current_article->getId(), $this->getTextResource('article_editor_image_label'), $this->_current_article->getImageId(), "update_element_holder");
-        $image_delete_button = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
+        $titleField = new TextField("article_title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
+        $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
+        $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle), '');
+        $keywordsField = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->currentArticle->getKeywords(), false, false, "keywords_field");
+        $descriptionField = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->currentArticle->getDescription(), false, true, null);
+        $publishedField = new SingleCheckbox("article_published", $this->getTextResource('article_editor_published_label'), $this->currentArticle->isPublished(), false, "");
+        $publicationDateField = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->currentArticle->getPublicationDate()), true, null);
+        $sortDateField = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->currentArticle->getSortDate()), true, null);
+        $targetPagesField = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->currentArticle->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
+        $commentFormsField = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->currentArticle->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
+        $parentArticlePicker = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->currentArticle->getParentArticleId(), "update_element_holder");
+        $parentArticleDeleteButton = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
+        $imagePickerField = new ImagePicker("article_image_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_image_label'), $this->currentArticle->getImageId(), "update_element_holder");
+        $imageDeleteButton = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
 
-        if (!is_null($this->_current_article->getParentArticleId())) {
-            $parent_article = $this->_article_dao->getArticle($this->_current_article->getParentArticleId());
-            $data->assign('parent_article', $this->renderParentArticle($parent_article));
+        if ($this->currentArticle->getParentArticleId()) {
+            $parentArticle = $this->articleDao->getArticle($this->currentArticle->getParentArticleId());
+            $data->assign('parent_article', $this->renderParentArticle($parentArticle));
         }
 
         $data->assign("child_articles", $this->renderChildArticles());
-
-        $data->assign("current_article_id", $this->_current_article->getId());
-        $data->assign("title_field", $title_field->render());
-        $data->assign('template_field', $template_picker_field->render());
-        $data->assign('keywords_field', $keywords_field->render());
-        $data->assign('url_field', $url_field->render());
-        $data->assign("description_field", $description_field->render());
-        $data->assign("published_field", $published_field->render());
-        $data->assign("publication_date_field", $publication_date_field->render());
-        $data->assign("sort_date_field", $sort_date_field->render());
-        $data->assign("target_pages_field", $target_pages_field->render());
-        $data->assign("parent_article_field", $parent_article_picker_field->render());
-        $data->assign("delete_parent_article_button", $parent_article_delete_button->render());
-        $data->assign("comment_forms_field", $comment_forms_field->render());
-        $data->assign("image_picker_field", $image_picker_field->render());
-        $data->assign("lead_image_id", $this->_current_article->getImageId());
-        $data->assign("delete_lead_image_button", $image_delete_button->render());
+        $data->assign("current_article_id", $this->currentArticle->getId());
+        $data->assign("title_field", $titleField->render());
+        $data->assign('template_field', $templatePickerField->render());
+        $data->assign('keywords_field', $keywordsField->render());
+        $data->assign('url_field', $urlField->render());
+        $data->assign("description_field", $descriptionField->render());
+        $data->assign("published_field", $publishedField->render());
+        $data->assign("publication_date_field", $publicationDateField->render());
+        $data->assign("sort_date_field", $sortDateField->render());
+        $data->assign("target_pages_field", $targetPagesField->render());
+        $data->assign("parent_article_field", $parentArticlePicker->render());
+        $data->assign("delete_parent_article_button", $parentArticleDeleteButton->render());
+        $data->assign("comment_forms_field", $commentFormsField->render());
+        $data->assign("image_picker_field", $imagePickerField->render());
+        $data->assign("lead_image_id", $this->currentArticle->getImageId());
+        $data->assign("delete_lead_image_button", $imageDeleteButton->render());
         $this->assignElementHolderFormIds($data);
     }
 
     private function renderChildArticles(): array {
-        $child_articles_data = array();
-        $child_articles = $this->_article_dao->getAllChildArticles($this->_current_article->getId());
-        foreach ($child_articles as $child_article) {
-            $child_article_data = array();
-            $child_article_data['id'] = $child_article->getId();
-            $child_article_data['title'] = $child_article->getTitle();
-            $child_article_data['url'] = "{$this->getBackendBaseUrl()}&article={$child_article->getId()}";
-            $child_articles_data[] = $child_article_data;
+        $childArticlesData = array();
+        $childArticles = $this->articleDao->getAllChildArticles($this->currentArticle->getId());
+        foreach ($childArticles as $childArticle) {
+            $childArticleData = array();
+            $childArticleData['id'] = $childArticle->getId();
+            $childArticleData['title'] = $childArticle->getTitle();
+            $childArticleData['url'] = "{$this->getBackendBaseUrl()}&article={$childArticle->getId()}";
+            $childArticlesData[] = $childArticleData;
         }
-        return $child_articles_data;
+        return $childArticlesData;
     }
 
-    private function renderParentArticle(Article $parent_article): array {
-        $article_data = array();
-        $article_data['id'] = $parent_article->getId();
-        $article_data['title'] = $parent_article->getTitle();
-        $article_data['url'] = "{$this->getBackendBaseUrl()}&article={$parent_article->getId()}";
-        return $article_data;
+    private function renderParentArticle(Article $parentArticle): array {
+        $articleData = array();
+        $articleData['id'] = $parentArticle->getId();
+        $articleData['title'] = $parentArticle->getTitle();
+        $articleData['url'] = "{$this->getBackendBaseUrl()}&article={$parentArticle->getId()}";
+        return $articleData;
     }
 
     private function getDateValue(string $date): string {
@@ -92,23 +91,23 @@ class ArticleMetadataEditor extends Panel {
     }
 
     private function getTargetPageOptions(): array {
-        $target_page_options = array();
+        $targetPageOption = array();
 
-        $all_target_pages = $this->_article_dao->getTargetPages();
-        foreach ($all_target_pages as $article_target_page) {
-            $target_page_options[] = array("name" => $article_target_page->getTitle(), "value" => $article_target_page->getId());
+        $allTargetPages = $this->articleDao->getTargetPages();
+        foreach ($allTargetPages as $articleTargetPage) {
+            $targetPageOption[] = array("name" => $articleTargetPage->getTitle(), "value" => $articleTargetPage->getId());
         }
-        return $target_page_options;
+        return $targetPageOption;
     }
 
     private function getWebFormsOptions(): array {
-        $webforms_options = array();
+        $webformOptions = array();
 
-        $all_webforms = $this->_webform_dao->getAllWebForms();
-        foreach ($all_webforms as $webform) {
-            $webforms_options[] = array("name" => $webform->getTitle(), "value" => $webform->getId());
+        $allWebforms = $this->webformDao->getAllWebForms();
+        foreach ($allWebforms as $webform) {
+            $webformOptions[] = array("name" => $webform->getTitle(), "value" => $webform->getId());
         }
-        return $webforms_options;
+        return $webformOptions;
     }
 
     private function assignElementHolderFormIds(Smarty_Internal_Data $data): void {
@@ -120,5 +119,3 @@ class ArticleMetadataEditor extends Panel {
     }
 
 }
-
-?>

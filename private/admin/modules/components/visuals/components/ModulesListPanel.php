@@ -7,9 +7,9 @@ class ModulesListPanel extends Panel {
     private $_module_dao;
     private $_components_request_handler;
 
-    public function __construct($components_request_handler) {
+    public function __construct($components_requestHandler) {
         parent::__construct('Modules', 'component-list-fieldset');
-        $this->_components_request_handler = $components_request_handler;
+        $this->_components_request_handler = $components_requestHandler;
         $this->_module_dao = ModuleDaoMysql::getInstance();
     }
 

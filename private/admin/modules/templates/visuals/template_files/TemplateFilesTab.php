@@ -9,10 +9,10 @@ class TemplateFilesTab extends Visual {
     private ?TemplateFile $_current_template_file;
     private TemplateFilesRequestHandler $_request_handler;
 
-    public function __construct(TemplateFilesRequestHandler $request_handler) {
+    public function __construct(TemplateFilesRequestHandler $requestHandler) {
         parent::__construct();
-        $this->_current_template_file = $request_handler->getCurrentTemplateFile();
-        $this->_request_handler = $request_handler;
+        $this->_current_template_file = $requestHandler->getCurrentTemplateFile();
+        $this->_request_handler = $requestHandler;
     }
 
     public function getTemplateFilename(): string {

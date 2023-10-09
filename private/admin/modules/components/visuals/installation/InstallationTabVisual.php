@@ -6,9 +6,9 @@ class InstallationTabVisual extends Visual {
 
     private $_install_request_handler;
 
-    public function __construct($install_request_handler) {
+    public function __construct($install_requestHandler) {
         parent::__construct();
-        $this->_install_request_handler = $install_request_handler;
+        $this->_install_request_handler = $install_requestHandler;
     }
 
     public function getTemplateFilename(): string {

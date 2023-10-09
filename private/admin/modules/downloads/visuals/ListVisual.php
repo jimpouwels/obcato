@@ -7,9 +7,9 @@ class ListVisual extends Panel {
     private DownloadDao $_download_dao;
     private DownloadRequestHandler $_download_request_handler;
 
-    public function __construct(DownloadRequestHandler $download_request_handler) {
+    public function __construct(DownloadRequestHandler $download_requestHandler) {
         parent::__construct('Gevonden downloads', 'download_list');
-        $this->_download_request_handler = $download_request_handler;
+        $this->_download_request_handler = $download_requestHandler;
         $this->_download_dao = DownloadDaoMysql::getInstance();
     }
 

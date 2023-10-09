@@ -6,9 +6,9 @@ class QueriesTab extends Visual {
 
     private DatabaseRequestHandler $_request_handler;
 
-    public function __construct($request_handler) {
+    public function __construct($requestHandler) {
         parent::__construct();
-        $this->_request_handler = $request_handler;
+        $this->_request_handler = $requestHandler;
     }
 
     public function getTemplateFilename(): string {

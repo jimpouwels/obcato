@@ -5,13 +5,13 @@ require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticlesSearch.php";
 
 class ArticleTab extends Visual {
 
-    private ?Article $_current_article;
-    private ArticleRequestHandler $_article_request_handler;
+    private ?Article $currentArticle;
+    private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(ArticleRequestHandler $article_request_handler) {
+    public function __construct(ArticleRequestHandler $articleRequestHandler) {
         parent::__construct();
-        $this->_article_request_handler = $article_request_handler;
-        $this->_current_article = $article_request_handler->getCurrentArticle();
+        $this->articleRequestHandler = $articleRequestHandler;
+        $this->currentArticle = $articleRequestHandler->getCurrentArticle();
     }
 
     public function getTemplateFilename(): string {
@@ -20,7 +20,7 @@ class ArticleTab extends Visual {
 
     public function load(): void {
         $this->assign("search", $this->renderArticlesSearchPanel());
-        if (!is_null($this->_current_article)) {
+        if (!is_null($this->currentArticle)) {
             $this->assign("editor", $this->renderArticleEditor());
         } else {
             $this->assign("list", $this->renderArticlesList());
@@ -28,18 +28,15 @@ class ArticleTab extends Visual {
     }
 
     private function renderArticlesSearchPanel(): string {
-        $articles_search_field = new ArticlesSearch($this->_article_request_handler);
-        return $articles_search_field->render();
+        return (new ArticlesSearch($this->articleRequestHandler))->render();
     }
 
     private function renderArticlesList(): string {
-        $articles_list = new ArticlesList($this->_article_request_handler);
-        return $articles_list->render();
+        return (new ArticlesList($this->articleRequestHandler))->render();
     }
 
     private function renderArticleEditor(): string {
-        $article_editor = new ArticleEditor($this->_current_article);
-        return $article_editor->render();
+        return (new ArticleEditor($this->currentArticle))->render();
     }
 
 }

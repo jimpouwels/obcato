@@ -6,9 +6,9 @@ class ElementsListPanel extends Panel {
     private $_element_dao;
     private $_components_request_handler;
 
-    public function __construct($components_request_handler) {
+    public function __construct($components_requestHandler) {
         parent::__construct('Elementen', 'component-list-fieldset');
-        $this->_components_request_handler = $components_request_handler;
+        $this->_components_request_handler = $components_requestHandler;
         $this->_element_dao = ElementDaoMysql::getInstance();
     }
 

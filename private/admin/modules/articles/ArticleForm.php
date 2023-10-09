@@ -6,62 +6,62 @@ require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleForm extends Form {
 
-    private Article $_article;
-    private array $_selected_terms;
-    private ArticleDao $_article_dao;
+    private Article $article;
+    private array $selectedTerm;
+    private ArticleDao $articleDao;
 
     public function __construct(Article $article) {
-        $this->_article = $article;
-        $this->_article_dao = ArticleDaoMysql::getInstance();
+        $this->article = $article;
+        $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
     public function loadFields(): void {
-        $this->_article->setTitle($this->getMandatoryFieldValue("article_title"));
-        $this->_article->setTemplateId($this->getNumber('template'));
-        $this->_article->setKeywords($this->getFieldValue('keywords'));
-        $this->_article->setDescription($this->getFieldValue("article_description"));
-        $this->_article->setPublished($this->getCheckboxValue("article_published"));
-        $this->_article->setImageId($this->getNumber("article_image_ref_" . $this->_article->getId()));
-        $this->_article->setTargetPageId($this->getNumber("article_target_page"));
-        $this->_article->setParentArticleId($this->getNumber("parent_article_id"));
-        $this->_article->setCommentWebFormId($this->getNumber("article_comment_webform"));
-        $publication_date = $this->loadPublicationDate();
-        $sort_date = $this->loadSortDate();
+        $this->article->setTitle($this->getMandatoryFieldValue("article_title"));
+        $this->article->setTemplateId($this->getNumber('template'));
+        $this->article->setKeywords($this->getFieldValue('keywords'));
+        $this->article->setDescription($this->getFieldValue("article_description"));
+        $this->article->setPublished($this->getCheckboxValue("article_published"));
+        $this->article->setImageId($this->getNumber("article_image_ref_" . $this->article->getId()));
+        $this->article->setTargetPageId($this->getNumber("article_target_page"));
+        $this->article->setParentArticleId($this->getNumber("parent_article_id"));
+        $this->article->setCommentWebFormId($this->getNumber("article_comment_webform"));
+        $publicationDate = $this->loadPublicationDate();
+        $sortDate = $this->loadSortDate();
         $this->deleteLeadImageIfNeeded();
         $this->deleteParentArticleIfNeeded();
-        $this->_selected_terms = $this->getSelectValue("select_terms_" . $this->_article->getId());
+        $this->selectedTerm = $this->getSelectValue("select_terms_" . $this->article->getId());
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
-            $this->_article->setPublicationDate(DateUtility::stringMySqlDate($publication_date));
-            $this->_article->setSortDate(DateUtility::stringMySqlDate($sort_date));
+            $this->article->setPublicationDate(DateUtility::stringMySqlDate($publicationDate));
+            $this->article->setSortDate(DateUtility::stringMySqlDate($sortDate));
         }
     }
 
-    public function getSelectedTerms(): array {
-        return $this->_selected_terms;
+    public function getSelectedTerm(): array {
+        return $this->selectedTerm;
     }
 
     public function getTermsToDelete(): array {
-        $terms_to_delete = array();
-        $article_terms = $this->_article_dao->getTermsForArticle($this->_article->getId());
-        foreach ($article_terms as $article_term) {
-            if (!is_null($this->getFieldValue("term_" . $this->_article->getId() . "_" . $article_term->getId() . "_delete"))) {
-                $terms_to_delete[] = $article_term;
+        $termsToDelete = array();
+        $articleTerms = $this->articleDao->getTermsForArticle($this->article->getId());
+        foreach ($articleTerms as $articleTerm) {
+            if (!is_null($this->getFieldValue("term_" . $this->article->getId() . "_" . $articleTerm->getId() . "_delete"))) {
+                $termsToDelete[] = $articleTerm;
             }
         }
-        return $terms_to_delete;
+        return $termsToDelete;
     }
 
     private function deleteLeadImageIfNeeded(): void {
         if ($this->getFieldValue("delete_lead_image_field") == "true") {
-            $this->_article->setImageId(null);
+            $this->article->setImageId(null);
         }
     }
 
     private function deleteParentArticleIfNeeded(): void {
         if ($this->getFieldValue("delete_parent_article_field") == "true") {
-            $this->_article->setParentArticleId(null);
+            $this->article->setParentArticleId(null);
         }
     }
 
@@ -74,4 +74,3 @@ class ArticleForm extends Form {
     }
 
 }
-    

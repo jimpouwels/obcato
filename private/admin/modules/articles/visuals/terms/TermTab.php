@@ -7,11 +7,11 @@ class TermTab extends Visual {
     private static string $TERM_QUERYSTRING_KEY = "term";
     private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";
 
-    private ?ArticleTerm $_current_term;
+    private ?ArticleTerm $currentTerm;
 
-    public function __construct(?ArticleTerm $current_term) {
+    public function __construct(?ArticleTerm $currentTerm) {
         parent::__construct();
-        $this->_current_term = $current_term;
+        $this->currentTerm = $currentTerm;
     }
 
     public function getTemplateFilename(): string {
@@ -31,13 +31,11 @@ class TermTab extends Visual {
     }
 
     private function renderTermEditor(): string {
-        $term_editor = new TermEditor($this->_current_term);
-        return $term_editor->render();
+        return (new TermEditor($this->currentTerm))->render();
     }
 
     private function renderTermsList(): string {
-        $term_list = new TermsList();
-        return $term_list->render();
+        return (new TermsList())->render();
     }
 }
 

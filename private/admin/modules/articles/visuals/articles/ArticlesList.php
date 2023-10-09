@@ -8,9 +8,9 @@ class ArticlesList extends Panel {
     private AuthorizationDao $authorizationDao;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(ArticleRequestHandler $article_request_handler) {
+    public function __construct(ArticleRequestHandler $articleRequestHandler) {
         parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
-        $this->articleRequestHandler = $article_request_handler;
+        $this->articleRequestHandler = $articleRequestHandler;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }
@@ -27,22 +27,22 @@ class ArticlesList extends Panel {
     }
 
     private function renderSearchResults(): array {
-        $search_results = array();
+        $searchResults = array();
 
         $articles = $this->getSearchResults();
         foreach ($articles as $article) {
-            $search_result = array();
-            $search_result["id"] = $article->getId();
-            $search_result["title"] = $article->getTitle();
+            $searchResult = array();
+            $searchResult["id"] = $article->getId();
+            $searchResult["title"] = $article->getTitle();
 
             $user = $this->authorizationDao->getUserById($article->getCreatedById());
-            $search_result["created_by"] = $user == null ? "" : $user->getUsername();
-            $search_result["created_at"] = $article->getCreatedAt();
-            $search_result["published"] = $article->isPublished();
+            $searchResult["created_by"] = $user == null ? "" : $user->getUsername();
+            $searchResult["created_at"] = $article->getCreatedAt();
+            $searchResult["published"] = $article->isPublished();
 
-            $search_results[] = $search_result;
+            $searchResults[] = $searchResult;
         }
-        return $search_results;
+        return $searchResults;
     }
 
     private function getSearchResults(): array {
@@ -54,8 +54,8 @@ class ArticlesList extends Panel {
     }
 
     private function getSearchTermId(): ?string {
-        $search_term = $this->getSearchTerm();
-        return $search_term?->getId();
+        $searchTerm = $this->getSearchTerm();
+        return $searchTerm?->getId();
     }
 
     private function getSearchTermName(): ?string {

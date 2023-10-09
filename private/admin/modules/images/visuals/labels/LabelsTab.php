@@ -7,9 +7,9 @@ class LabelsTab extends Visual {
     private ?ImageLabel $_current_label;
     private LabelRequestHandler $_label_request_handler;
 
-    public function __construct(LabelRequestHandler $label_request_handler) {
+    public function __construct(LabelRequestHandler $label_requestHandler) {
         parent::__construct();
-        $this->_label_request_handler = $label_request_handler;
+        $this->_label_request_handler = $label_requestHandler;
         $this->_current_label = $this->_label_request_handler->getCurrentLabel();
     }
 

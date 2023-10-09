@@ -4,9 +4,9 @@ class SearchBoxVisual extends Panel {
 
     private DownloadRequestHandler $_download_request_handler;
 
-    public function __construct(DownloadRequestHandler $download_request_handler) {
+    public function __construct(DownloadRequestHandler $download_requestHandler) {
         parent::__construct('Zoeken', 'download_search');
-        $this->_download_request_handler = $download_request_handler;
+        $this->_download_request_handler = $download_requestHandler;
     }
 
     public function getPanelContentTemplate(): string {

@@ -9,9 +9,9 @@ class WebformTab extends Visual {
     private ?WebForm $_current_webform;
     private WebformRequestHandler $_webform_request_handler;
 
-    public function __construct($webform_request_handler) {
+    public function __construct($webform_requestHandler) {
         parent::__construct();
-        $this->_webform_request_handler = $webform_request_handler;
+        $this->_webform_request_handler = $webform_requestHandler;
         $this->_current_webform = $this->_webform_request_handler->getCurrentWebForm();
     }
 
