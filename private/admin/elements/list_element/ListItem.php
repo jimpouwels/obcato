@@ -16,11 +16,11 @@ class ListItem extends Entity {
         $this->text = $text;
     }
 
-    public function getIdent(): int {
+    public function getIndent(): int {
         return $this->ident;
     }
 
-    public function setIdent(int $indent): void {
+    public function setIndent(int $indent): void {
         $this->ident = $indent;
     }
 

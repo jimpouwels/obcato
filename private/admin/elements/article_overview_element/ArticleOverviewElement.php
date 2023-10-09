@@ -123,7 +123,7 @@ class ArticleOverviewElement extends Element {
     }
 
     public function getSummaryText(): string {
-        $summary_text = $this->getTitle();
+        $summary_text = $this->getTitle() ?? "";
         if ($this->getTerms()) {
             $summary_text .= " (Termen:";
             foreach ($this->getTerms() as $term) {

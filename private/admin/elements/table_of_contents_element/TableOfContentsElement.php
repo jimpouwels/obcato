@@ -30,7 +30,7 @@ class TableOfContentsElement extends Element {
     }
 
     public function getSummaryText(): string {
-        return $this->getTitle();
+        return $this->getTitle() ?? "";
     }
 
 }

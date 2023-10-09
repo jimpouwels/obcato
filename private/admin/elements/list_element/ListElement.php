@@ -26,7 +26,7 @@ class ListElement extends Element {
 
     public function addListItem(): void {
         $listItem = new ListItem();
-        $listItem->setIdent(0);
+        $listItem->setIndent(0);
         $this->listItems[] = $listItem;
     }
 
@@ -124,7 +124,7 @@ class ListElementMetaDataProvider extends ElementMetadataProvider {
             $listItem = new ListItem();
             $listItem->setId($row['id']);
             $listItem->setText($row['text']);
-            $listItem->setIdent($row['indent']);
+            $listItem->setIndent($row['indent']);
             $listItem->setElementId($row['element_id']);
 
             $listItems[] = $listItem;

@@ -35,7 +35,7 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ElementHolder {
+    public function loadElementHolderFromPostRequest(): ?ElementHolder {
         $this->currentBlock = $this->getBlockFromPostRequest();
         return $this->currentBlock;
     }

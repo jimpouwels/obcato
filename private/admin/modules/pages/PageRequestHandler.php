@@ -49,7 +49,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ElementHolder {
+    public function loadElementHolderFromPostRequest(): ?ElementHolder {
         $this->currentPage = $this->getPageFromPostRequest();
         return $this->currentPage;
     }

@@ -38,7 +38,7 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ElementHolder {
+    public function loadElementHolderFromPostRequest(): ?ElementHolder {
         $this->currentArticle = $this->getArticleFromPostRequest();
         return $this->currentArticle;
     }
@@ -67,8 +67,8 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function updateArticle(): void {
-        $article_form = new ArticleForm($this->currentArticle);
         try {
+            $article_form = new ArticleForm($this->currentArticle);
             $article_form->loadFields();
             $this->_article_dao->updateArticle($this->currentArticle);
             $this->updateSelectedTerms($article_form->getSelectedTerms());
@@ -99,7 +99,7 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
 
     private function updateSelectedTerms(array $selected_terms): void {
         if (count($selected_terms) == 0) return;
-        $existing_terms = $this->_article_dao->getTermsForArticle($this->currentArticle);
+        $existing_terms = $this->_article_dao->getTermsForArticle($this->currentArticle->getId());
         foreach ($selected_terms as $selected_term_id) {
             if (!$this->termAlreadyExists($selected_term_id, $existing_terms)) {
                 $this->_article_dao->addTermToArticle($selected_term_id, $this->currentArticle);

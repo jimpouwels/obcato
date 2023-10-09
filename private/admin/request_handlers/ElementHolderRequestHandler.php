@@ -21,20 +21,21 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     public function handleGet(): void {}
 
     public function handlePost(): void {
-        $element_holder = $this->loadElementHolderFromPostRequest();
+        $elementHolder = $this->loadElementHolderFromPostRequest();
+        if (!$elementHolder) {
+            return;
+        }
         if ($this->isAddElementAction()) {
-            $this->addElement($element_holder);
+            $this->addElement($elementHolder);
         } else if ($this->isDeleteElementAction()) {
-            $this->deleteElementFrom($element_holder);
+            $this->deleteElementFrom($elementHolder);
         } else if ($this->isAddLinkAction()) {
-            $this->addLink($element_holder);
+            $this->addLink($elementHolder);
         }
-        if ($element_holder) {
-            $this->updateElementHolder($element_holder);
-        }
+        $this->updateElementHolder($elementHolder);
     }
 
-    protected abstract function loadElementHolderFromPostRequest(): ElementHolder;
+    protected abstract function loadElementHolderFromPostRequest(): ?ElementHolder;
 
     protected function updateElementHolder(ElementHolder $element_holder): void {
         $form = new ElementHolderForm($element_holder);
