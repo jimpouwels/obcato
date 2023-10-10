@@ -6,19 +6,19 @@ require_once CMS_ROOT . "/utilities/PasswordUtility.php";
 
 class AuthorizationRequestHandler extends HttpRequestHandler {
 
-    private AuthorizationDao $_authorization_dao;
-    private User $_current_user;
+    private AuthorizationDao $authorizationDao;
+    private User $currentUser;
 
     public function __construct() {
-        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
+        $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_user = $this->getCurrentUserFromGetRequest();
+        $this->currentUser = $this->getCurrentUserFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_user = $this->getCurrentUserFromPostRequest();
+        $this->currentUser = $this->getCurrentUserFromPostRequest();
         if ($this->isUpdateUserAction()) {
             $this->updateUser();
         }
@@ -31,34 +31,34 @@ class AuthorizationRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentUser(): ?User {
-        return $this->_current_user;
+        return $this->currentUser;
     }
 
     private function addUser(): void {
-        $new_user = $this->_authorization_dao->createUser();
+        $newUser = $this->authorizationDao->createUser();
         $password = PasswordUtility::generatePassword();
-        $new_user->setUuid(uniqid());
-        $new_user->setPassword($password);
-        $this->_authorization_dao->updateUser($new_user);
-        $this->sendSuccessMessage("Gebruiker aangemaakt, met wachtwoord: " . $password);
-        $this->redirectTo($this->getBackendBaseUrl() . "&user=" . $new_user->getId());
+        $newUser->setUuid(uniqid());
+        $newUser->setPassword($password);
+        $this->authorizationDao->updateUser($newUser);
+        $this->sendSuccessMessage($this->getTextResource("authorization_user_created_with_password_message") . ": " . $password);
+        $this->redirectTo($this->getBackendBaseUrl() . "&user=" . $newUser->getId());
         exit();
     }
 
     private function deleteUser(): void {
-        $this->_authorization_dao->deleteUser($this->_current_user->getId());
-        $this->sendSuccessMessage("Gebruiker succesvol verwijderd");
+        $this->authorizationDao->deleteUser($this->currentUser->getId());
+        $this->sendSuccessMessage($this->getTextResource("authorization_user_created_message"));
         $this->redirectTo($this->getBackendBaseUrl());
     }
 
     private function updateUser(): void {
-        $authorization_form = new AuthorizationForm($this->_current_user, $this->_authorization_dao);
+        $authorizationForm = new AuthorizationForm($this->currentUser, $this->authorizationDao);
         try {
-            $authorization_form->loadFields();
-            $this->_authorization_dao->updateUser($this->_current_user);
-            $this->sendSuccessMessage("Gebruiker succesvol opgeslagen");
-        } catch (FormException $e) {
-            $this->sendErrorMessage("Gebruiker niet opgeslagen, verwerk de fouten");
+            $authorizationForm->loadFields();
+            $this->authorizationDao->updateUser($this->currentUser);
+            $this->sendSuccessMessage($this->getTextResource("authorization_user_saved_message"));
+        } catch (FormException) {
+            $this->sendErrorMessage($this->getTextResource("authorization_error_message"));
         }
     }
 
@@ -66,7 +66,7 @@ class AuthorizationRequestHandler extends HttpRequestHandler {
         if (isset($_GET["user"])) {
             return $this->getUserFromDatabase($_GET["user"]);
         } else {
-            return $this->_authorization_dao->getUser($_SESSION["username"]);
+            return $this->authorizationDao->getUser($_SESSION["username"]);
         }
     }
 
@@ -75,7 +75,7 @@ class AuthorizationRequestHandler extends HttpRequestHandler {
     }
 
     private function getUserFromDatabase($user_id): User {
-        return $this->_authorization_dao->getUserById($user_id);
+        return $this->authorizationDao->getUserById($user_id);
     }
 
     private function isUpdateUserAction(): bool {
@@ -91,5 +91,3 @@ class AuthorizationRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

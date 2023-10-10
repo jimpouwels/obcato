@@ -7,12 +7,12 @@ require_once CMS_ROOT . "/modules/authorization/visuals/UserEditor.php";
 class AuthorizationModuleVisual extends ModuleVisual {
 
     private static string $HEAD_INCLUDES_TEMPLATE = "modules/authorization/head_includes.tpl";
-    private ?User $_current_user;
-    private AuthorizationRequestHandler $_authorization_request_handler;
+    private ?User $currentUser;
+    private AuthorizationRequestHandler $authorizationRequestHandler;
 
-    public function __construct(Module $authorization_module) {
-        parent::__construct($authorization_module);
-        $this->_authorization_request_handler = new AuthorizationRequestHandler();
+    public function __construct(Module $module) {
+        parent::__construct($module);
+        $this->authorizationRequestHandler = new AuthorizationRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -20,22 +20,22 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
     public function load(): void {
-        $user_list = new UserList($this->_current_user);
-        $user_editor = new UserEditor($this->_current_user);
-        $this->assign("user_list", $user_list->render());
-        $this->assign("user_editor", $user_editor->render());
+        $userList = new UserList($this->currentUser);
+        $userEditor = new UserEditor($this->currentUser);
+        $this->assign("user_list", $userList->render());
+        $this->assign("user_editor", $userEditor->render());
     }
 
     public function getActionButtons(): array {
-        $action_buttons = array();
-        if (!is_null($this->_current_user)) {
-            $action_buttons[] = new ActionButtonSave('update_user');
-            if (!$this->_current_user->isLoggedInUser()) {
-                $action_buttons[] = new ActionButtonDelete('delete_user');
+        $actionButtons = array();
+        if (!is_null($this->currentUser)) {
+            $actionButtons[] = new ActionButtonSave('update_user');
+            if (!$this->currentUser->isLoggedInUser()) {
+                $actionButtons[] = new ActionButtonDelete('delete_user');
             }
         }
-        $action_buttons[] = new ActionButtonAdd('add_user');
-        return $action_buttons;
+        $actionButtons[] = new ActionButtonAdd('add_user');
+        return $actionButtons;
     }
 
     public function renderHeadIncludes(): string {
@@ -43,13 +43,13 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_authorization_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->authorizationRequestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {
-        $this->_current_user = $this->_authorization_request_handler->getCurrentUser();
+        $this->currentUser = $this->authorizationRequestHandler->getCurrentUser();
     }
 
     public function getTabMenu(): ?TabMenu {
@@ -57,5 +57,3 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
 }
-
-?>

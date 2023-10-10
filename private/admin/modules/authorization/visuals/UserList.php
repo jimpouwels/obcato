@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class UserList extends Panel {
 
-    private AuthorizationDao $_authorization_dao;
-    private ?User $_current_user = null;
+    private AuthorizationDao $authorizationDao;
+    private ?User $currentUser;
 
-    public function __construct(?User $current_user) {
+    public function __construct(?User $currentUser) {
         parent::__construct('users_list_panel_title', 'user_tree_fieldset');
-        $this->_current_user = $current_user;
-        $this->_authorization_dao = AuthorizationDaoMysql::getInstance();
+        $this->currentUser = $currentUser;
+        $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -22,11 +22,11 @@ class UserList extends Panel {
 
     public function getAllUsers(): array {
         $users = array();
-        foreach ($this->_authorization_dao->getAllUsers() as $user) {
+        foreach ($this->authorizationDao->getAllUsers() as $user) {
             $user_values = array();
             $user_values["id"] = $user->getId();
             $user_values["fullname"] = $user->getFullName();
-            $user_values["is_current"] = $user->getId() == $this->_current_user->getId();
+            $user_values["is_current"] = $user->getId() == $this->currentUser->getId();
             $users[] = $user_values;
         }
         return $users;

@@ -2,11 +2,11 @@
 
 class UserEditor extends Panel {
 
-    private ?User $_current_user;
+    private ?User $currentUser;
 
-    public function __construct($current_user) {
-        parent::__construct($current_user->getFullName(), 'user_meta');
-        $this->_current_user = $current_user;
+    public function __construct($currentUser) {
+        parent::__construct($currentUser->getFullName(), 'user_meta');
+        $this->currentUser = $currentUser;
     }
 
     public function getPanelContentTemplate(): string {
@@ -14,50 +14,50 @@ class UserEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign("user_id", $this->_current_user->getId());
+        $data->assign("user_id", $this->currentUser->getId());
         $data->assign("username_field", $this->renderUserNameField());
         $data->assign("firstname_field", $this->renderFirstNameField());
         $data->assign("prefix_field", $this->renderPrefixField());
         $data->assign("lastname_field", $this->renderLastNameField());
         $data->assign("email_field", $this->renderEmailField());
-        if ($this->_current_user->isLoggedInUser()) {
+        if ($this->currentUser->isLoggedInUser()) {
             $data->assign("new_password_first", $this->renderFirstPasswordField());
             $data->assign("new_password_second", $this->renderSecondPasswordField());
         }
     }
 
     private function renderUserNameField(): string {
-        $username_field = new TextField("user_username", "users_editor_username_field_label", $this->_current_user->getUsername(), true, false, null);
-        return $username_field->render();
+        $usernameField = new TextField("user_username", "users_editor_username_field_label", $this->currentUser->getUsername(), true, false, null);
+        return $usernameField->render();
     }
 
     private function renderFirstNameField(): string {
-        $firstname_field = new TextField("user_firstname", "users_editor_firstname_field_label", $this->_current_user->getFirstName(), true, false, "user_firstname_field");
-        return $firstname_field->render();
+        $firstnameField = new TextField("user_firstname", "users_editor_firstname_field_label", $this->currentUser->getFirstName(), true, false, "user_firstname_field");
+        return $firstnameField->render();
     }
 
     private function renderPrefixField(): string {
-        $prefix_field = new TextField("user_prefix", "users_editor_prefix_field_label", $this->_current_user->getPrefix(), false, false, "user_prefix_field");
-        return $prefix_field->render();
+        $prefixField = new TextField("user_prefix", "users_editor_prefix_field_label", $this->currentUser->getPrefix(), false, false, "user_prefix_field");
+        return $prefixField->render();
     }
 
     private function renderLastNameField(): string {
-        $lastname_field = new TextField("user_lastname", "users_editor_lastname_field_label", $this->_current_user->getLastName(), true, false, "user_lastname_field");
-        return $lastname_field->render();
+        $lastnameField = new TextField("user_lastname", "users_editor_lastname_field_label", $this->currentUser->getLastName(), true, false, "user_lastname_field");
+        return $lastnameField->render();
     }
 
     private function renderEmailField(): string {
-        $email_field = new TextField("user_email", "users_editor_email_address_field_label", $this->_current_user->getEmailAddress(), true, false, "user_email_field");
-        return $email_field->render();
+        $emailField = new TextField("user_email", "users_editor_email_address_field_label", $this->currentUser->getEmailAddress(), true, false, "user_email_field");
+        return $emailField->render();
     }
 
     private function renderFirstPasswordField(): string {
-        $first_password_field = new PasswordField("user_new_password_first", "users_editor_new_pwd_field_label", "", false, "user_password_field");
-        return $first_password_field->render();
+        $firstPasswordField = new PasswordField("user_new_password_first", "users_editor_new_pwd_field_label", "", false, "user_password_field");
+        return $firstPasswordField->render();
     }
 
     private function renderSecondPasswordField(): string {
-        $second_password_field = new PasswordField("user_new_password_second", "users_editor_new_pwd_repeat_field_label", "", false, "user_password_field");
-        return $second_password_field->render();
+        $secondPasswordField = new PasswordField("user_new_password_second", "users_editor_new_pwd_repeat_field_label", "", false, "user_password_field");
+        return $secondPasswordField->render();
     }
 }
