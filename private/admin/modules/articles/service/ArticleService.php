@@ -17,4 +17,10 @@ interface ArticleService {
     public function deleteTermFromArticle(int $termId, Article $article): void;
 
     public function getArticle(int $id): Article;
+
+    public function deleteTargetPage(Page $page): void;
+
+    public function setDefaultArticleTargetPage(int $pageId): void;
+
+    public function addTargetPage(int $pageId): void;
 }

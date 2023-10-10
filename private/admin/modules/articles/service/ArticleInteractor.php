@@ -56,4 +56,16 @@ class ArticleInteractor implements ArticleService {
     public function getArticle(int $id): Article {
         return $this->articleDao->getArticle($id);
     }
+
+    public function deleteTargetPage(Page $page): void {
+        $this->articleDao->deleteTargetPage($page->getId());
+    }
+
+    public function setDefaultArticleTargetPage(int $pageId): void {
+        $this->articleDao->setDefaultArticleTargetPage($pageId);
+    }
+
+    public function addTargetPage(int $pageId): void {
+        $this->articleDao->addTargetPage($pageId);
+    }
 }

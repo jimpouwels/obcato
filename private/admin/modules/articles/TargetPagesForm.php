@@ -36,7 +36,7 @@ class TargetPagesForm extends Form {
         foreach ($targetPages as $targetPage) {
             $fieldToCheck = "target_page_" . $targetPage->getId() . "_delete";
             if (isset($_POST[$fieldToCheck]) && $_POST[$fieldToCheck] != "") {
-                $this->targetPagesToDelete[] = $targetPage->getId();
+                $this->targetPagesToDelete[] = $targetPage;
             }
         }
     }

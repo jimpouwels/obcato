@@ -1,16 +1,15 @@
 <?php
 require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/modules/articles/TargetPagesForm.php";
 
 class TargetPagesRequestHandler extends HttpRequestHandler {
 
     private TargetPagesForm $targetPagesForm;
-    private ArticleDao $articleDao;
+    private ArticleService $articleService;
 
     public function __construct() {
         $this->targetPagesForm = new TargetPagesForm();
-        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->articleService = ArticleInteractor::getInstance();
     }
 
     public function handleGet(): void {}
@@ -30,21 +29,21 @@ class TargetPagesRequestHandler extends HttpRequestHandler {
 
     private function deleteTargetPages(): void {
         foreach ($this->targetPagesForm->getTargetPagesToDelete() as $targetPageToDelete) {
-            $this->articleDao->deleteTargetPage($targetPageToDelete);
+            $this->articleService->deleteTargetPage($targetPageToDelete);
         }
     }
 
     private function changeDefaultTargetPage(): void {
         $newDefaultTargetPage = $this->targetPagesForm->getNewDefaultTargetPage();
         if ($newDefaultTargetPage) {
-            $this->articleDao->setDefaultArticleTargetPage($newDefaultTargetPage);
+            $this->articleService->setDefaultArticleTargetPage($newDefaultTargetPage);
         }
     }
 
     private function updateOptions(): void {
         $targetPageToAdd = $this->targetPagesForm->getTargetPageToAdd();
         if ($targetPageToAdd != "") {
-            $this->articleDao->addTargetPage($targetPageToAdd);
+            $this->articleService->addTargetPage($targetPageToAdd);
         }
     }
 
