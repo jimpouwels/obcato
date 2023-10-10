@@ -5,18 +5,18 @@ require_once CMS_ROOT . "/modules/articles/TargetPagesForm.php";
 
 class TargetPagesRequestHandler extends HttpRequestHandler {
 
-    private TargetPagesForm $_target_pages_form;
-    private ArticleDao $_article_dao;
+    private TargetPagesForm $targetPagesForm;
+    private ArticleDao $articleDao;
 
     public function __construct() {
-        $this->_target_pages_form = new TargetPagesForm();
-        $this->_article_dao = ArticleDaoMysql::getInstance();
+        $this->targetPagesForm = new TargetPagesForm();
+        $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
-        $this->_target_pages_form->loadFields();
+        $this->targetPagesForm->loadFields();
         if ($this->isUpdateOptionsAction()) {
             $this->updateOptions();
         }
@@ -29,22 +29,22 @@ class TargetPagesRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteTargetPages(): void {
-        foreach ($this->_target_pages_form->getTargetPagesToDelete() as $target_page_to_delete) {
-            $this->_article_dao->deleteTargetPage($target_page_to_delete);
+        foreach ($this->targetPagesForm->getTargetPagesToDelete() as $targetPageToDelete) {
+            $this->articleDao->deleteTargetPage($targetPageToDelete);
         }
     }
 
     private function changeDefaultTargetPage(): void {
-        $new_default_target_page = $this->_target_pages_form->getNewDefaultTargetPage();
-        if ($new_default_target_page != "") {
-            $this->_article_dao->setDefaultArticleTargetPage($new_default_target_page);
+        $newDefaultTargetPage = $this->targetPagesForm->getNewDefaultTargetPage();
+        if ($newDefaultTargetPage) {
+            $this->articleDao->setDefaultArticleTargetPage($newDefaultTargetPage);
         }
     }
 
     private function updateOptions(): void {
-        $target_page_to_add = $this->_target_pages_form->getTargetPageToAdd();
-        if ($target_page_to_add != "") {
-            $this->_article_dao->addTargetPage($target_page_to_add);
+        $targetPageToAdd = $this->targetPagesForm->getTargetPageToAdd();
+        if ($targetPageToAdd != "") {
+            $this->articleDao->addTargetPage($targetPageToAdd);
         }
     }
 
@@ -60,5 +60,3 @@ class TargetPagesRequestHandler extends HttpRequestHandler {
         return isset($_POST["action"]) && $_POST["action"] == "delete_target_pages";
     }
 }
-
-?>

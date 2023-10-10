@@ -4,39 +4,39 @@ require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 
 class TargetPagesForm extends Form {
 
-    private string $_target_page_to_add;
-    private string $_new_default_target_page;
-    private array $_target_pages_to_delete;
-    private ArticleDao $_article_dao;
+    private string $targetPageToAdd;
+    private string $newDefaultTargetPage;
+    private array $targetPagesToDelete;
+    private ArticleDao $articleDao;
 
     public function __construct() {
-        $this->_article_dao = ArticleDaoMysql::getInstance();
+        $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
     public function loadFields(): void {
-        $this->_target_page_to_add = $this->getFieldValue("add_target_page_ref");
-        $this->_new_default_target_page = $this->getFieldValue("new_default_target_page");
+        $this->targetPageToAdd = $this->getFieldValue("add_target_page_ref");
+        $this->newDefaultTargetPage = $this->getFieldValue("new_default_target_page");
         $this->loadTargetPagesToDelete();
     }
 
     public function getTargetPageToAdd(): string {
-        return $this->_target_page_to_add;
+        return $this->targetPageToAdd;
     }
 
     public function getNewDefaultTargetPage(): string {
-        return $this->_new_default_target_page;
+        return $this->newDefaultTargetPage;
     }
 
     public function getTargetPagesToDelete(): array {
-        return $this->_target_pages_to_delete;
+        return $this->targetPagesToDelete;
     }
 
     private function loadTargetPagesToDelete(): void {
-        $target_pages = $this->_article_dao->getTargetPages();
-        foreach ($target_pages as $target_page) {
-            $field_to_check = "target_page_" . $target_page->getId() . "_delete";
-            if (isset($_POST[$field_to_check]) && $_POST[$field_to_check] != "") {
-                $this->_target_pages_to_delete[] = $target_page->getId();
+        $targetPages = $this->articleDao->getTargetPages();
+        foreach ($targetPages as $targetPage) {
+            $fieldToCheck = "target_page_" . $targetPage->getId() . "_delete";
+            if (isset($_POST[$fieldToCheck]) && $_POST[$fieldToCheck] != "") {
+                $this->targetPagesToDelete[] = $targetPage->getId();
             }
         }
     }

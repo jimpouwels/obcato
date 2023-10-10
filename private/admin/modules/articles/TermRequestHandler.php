@@ -5,19 +5,19 @@ require_once CMS_ROOT . "/modules/articles/TermForm.php";
 
 class TermRequestHandler extends HttpRequestHandler {
 
-    private ?ArticleTerm $_current_term = null;
-    private ArticleDao $_article_dao;
+    private ?ArticleTerm $currentTerm = null;
+    private ArticleDao $articleDao;
 
     public function __construct() {
-        $this->_article_dao = ArticleDaoMysql::getInstance();
+        $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_term = $this->getTermFromGetRequest();
+        $this->currentTerm = $this->getTermFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_term = $this->getTermFromPostRequest();
+        $this->currentTerm = $this->getTermFromPostRequest();
         if ($this->isAddTermAction()) {
             $this->addTerm();
         } else if ($this->isUpdateTermAction()) {
@@ -28,20 +28,20 @@ class TermRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentTerm(): ?ArticleTerm {
-        return $this->_current_term;
+        return $this->currentTerm;
     }
 
     private function addTerm(): void {
-        $new_term = $this->_article_dao->createTerm($this->getTextResource("articles_terms_default_term_name"));
+        $newTerm = $this->articleDao->createTerm($this->getTextResource("articles_terms_default_term_name"));
         $this->sendSuccessMessage($this->getTextResource("articles_terms_term_create_success_message"));
-        $this->redirectTo($this->getBackendBaseUrl() . "&term=" . $new_term->getId());
+        $this->redirectTo($this->getBackendBaseUrl() . "&term=" . $newTerm->getId());
     }
 
     private function updateTerm(): void {
-        $term_form = new TermForm($this->_current_term);
+        $termForm = new TermForm($this->currentTerm);
         try {
-            $term_form->loadFields();
-            $this->_article_dao->updateTerm($this->_current_term);
+            $termForm->loadFields();
+            $this->articleDao->updateTerm($this->currentTerm);
             $this->sendSuccessMessage($this->getTextResource("articles_terms_term_save_success_message"));
         } catch (FormException $e) {
             $this->sendErrorMessage($this->getTextResource("articles_terms_term_save_error_message"));
@@ -49,10 +49,10 @@ class TermRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteTerms(): void {
-        $terms = $this->_article_dao->getAllTerms();
+        $terms = $this->articleDao->getAllTerms();
         foreach ($terms as $term) {
             if (isset($_POST["term_" . $term->getId() . "_delete"])) {
-                $this->_article_dao->deleteTerm($term);
+                $this->articleDao->deleteTerm($term);
             }
         }
         $this->sendSuccessMessage($this->getTextResource("articles_terms_term_delete_success_message"));
@@ -72,8 +72,8 @@ class TermRequestHandler extends HttpRequestHandler {
         return null;
     }
 
-    private function getTerm(int $term_id): ArticleTerm {
-        return $this->_article_dao->getTerm($term_id);
+    private function getTerm(int $termId): ArticleTerm {
+        return $this->articleDao->getTerm($termId);
     }
 
     private function isUpdateTermAction(): bool {
@@ -88,5 +88,3 @@ class TermRequestHandler extends HttpRequestHandler {
         return isset($_POST["term_delete_action"]) && $_POST["term_delete_action"] == "delete_terms";
     }
 }
-
-?>

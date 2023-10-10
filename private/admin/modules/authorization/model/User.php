@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class User extends Entity {
 
-    private string $_username;
-    private string $_email_address;
-    private string $_first_name;
-    private string $_prefix;
-    private string $_last_name;
-    private string $_password;
-    private string $_uuid;
+    private string $username;
+    private string $emailAddress;
+    private string $firstName;
+    private string $prefix;
+    private string $lastName;
+    private string $password;
+    private string $uuid;
 
     public static function constructFromRecord(array $row): User {
         $user = new User();
@@ -28,59 +28,59 @@ class User extends Entity {
     }
 
     public function getPassword(): string {
-        return $this->_password;
+        return $this->password;
     }
 
     public function setPassword(string $password): void {
-        $this->_password = $password;
+        $this->password = $password;
     }
 
     public function getEmailAddress(): string {
-        return $this->_email_address;
+        return $this->emailAddress;
     }
 
-    public function setEmailAddress(string $email_address): void {
-        $this->_email_address = $email_address;
+    public function setEmailAddress(string $emailAddress): void {
+        $this->emailAddress = $emailAddress;
     }
 
     public function getUuid(): string {
-        return $this->_uuid;
+        return $this->uuid;
     }
 
     public function setUuid(string $uuid): void {
-        $this->_uuid = $uuid;
+        $this->uuid = $uuid;
     }
 
     public function getFullName(): string {
-        $full_name = $this->getFirstName();
-        if (!is_null($this->getPrefix()) && $this->getPrefix() != '') {
-            $full_name = $full_name . ' ' . $this->getPrefix();
+        $fullname = $this->getFirstName();
+        if ($this->getPrefix()) {
+            $fullname = $fullname . ' ' . $this->getPrefix();
         }
-        return $full_name . ' ' . $this->getLastName();
+        return $fullname . ' ' . $this->getLastName();
     }
 
     public function getFirstName(): string {
-        return $this->_first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): void {
-        $this->_first_name = $first_name;
+    public function setFirstName(string $firstName): void {
+        $this->firstName = $firstName;
     }
 
     public function getPrefix(): string {
-        return $this->_prefix;
+        return $this->prefix;
     }
 
     public function setPrefix(string $prefix): void {
-        $this->_prefix = $prefix;
+        $this->prefix = $prefix;
     }
 
     public function getLastName(): string {
-        return $this->_last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): void {
-        $this->_last_name = $last_name;
+    public function setLastName(string $lastName): void {
+        $this->lastName = $lastName;
     }
 
     public function isLoggedInUser(): bool {
@@ -88,10 +88,10 @@ class User extends Entity {
     }
 
     public function getUsername(): string {
-        return $this->_username;
+        return $this->username;
     }
 
     public function setUsername(string $username): void {
-        $this->_username = $username;
+        $this->username = $username;
     }
 }
