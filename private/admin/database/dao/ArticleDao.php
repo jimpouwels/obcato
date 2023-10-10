@@ -17,7 +17,7 @@ interface ArticleDao {
 
     public function deleteArticle($article): void;
 
-    public function createArticle(): Article;
+    public function createArticle(Article $article): void;
 
     public function getArticleComments(int $articleId): array;
 
@@ -35,7 +35,7 @@ interface ArticleDao {
 
     public function deleteTerm($term): void;
 
-    public function getTermsForArticle($articleId): array;
+    public function getTermsForArticle(int $articleId): array;
 
     public function addTermToArticle($termId, $article): void;
 

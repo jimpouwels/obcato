@@ -5,16 +5,16 @@
 
 .article_search .admin_field_wrapper {
     clear: both;
-    width: 250px;
+    width: 270px;
 }
 
 .article_search .admin_field_wrapper input {
-    width: 95%;
+    width: 93%;
     margin-top: 8px;
 }
 
 .article_search .admin_field_wrapper select {
-    width: 95%;
+    width: 93%;
     margin-top: 8px;
 }
 
@@ -46,7 +46,7 @@
     margin-left: 10px;
 }
 
-.show_all_link  a {
+.show_all_link a {
     color: gray;
 }
 

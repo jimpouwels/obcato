@@ -188,18 +188,7 @@ class ArticleDaoMysql implements ArticleDao {
         $this->elementHolderDao->delete($article);
     }
 
-    public function createArticle(): Article {
-        $newArticle = new Article();
-        $newArticle->setPublished(false);
-        $newArticle->setTitle('Nieuw artikel');
-        $newArticle->setCreatedById(Authenticator::getCurrentUser()->getId());
-        $newArticle->setType(ELEMENT_HOLDER_ARTICLE);
-
-        $this->persistArticle($newArticle);
-        return $newArticle;
-    }
-
-    private function persistArticle($article): void {
+    public function createArticle(Article $article): void {
         $this->elementHolderDao->persist($article);
         $query = "INSERT INTO articles (description, image_id, element_holder_id, sort_date, publication_date, target_page) VALUES
                       (NULL, NULL, " . $article->getId() . ", now(), now(), NULL)";
@@ -287,7 +276,7 @@ class ArticleDaoMysql implements ArticleDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function getTermsForArticle($articleId): array {
+    public function getTermsForArticle(int $articleId): array {
         $query = "SELECT at.id, at.name FROM article_terms at, articles_terms ats,
                       element_holders e WHERE ats.article_id = " . $articleId . " AND ats.article_id =
                       e.id AND at.id = ats.term_id";

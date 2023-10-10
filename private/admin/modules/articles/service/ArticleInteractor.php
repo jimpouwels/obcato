@@ -1,0 +1,59 @@
+<?php
+
+require_once CMS_ROOT . "/modules/articles/service/ArticleService.php";
+require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+
+class ArticleInteractor implements ArticleService {
+
+    private static ?ArticleInteractor $instance = null;
+    private ArticleDao $articleDao;
+
+    private function __construct() {
+        $this->articleDao = ArticleDaoMysql::getInstance();
+    }
+
+    public static function getInstance(): ArticleInteractor {
+        if (!self::$instance) {
+            self::$instance = new ArticleInteractor();
+        }
+        return self::$instance;
+    }
+
+    public function updateArticle(Article $article): void {
+        $this->articleDao->updateArticle($article);
+    }
+
+    public function getAllChildArticlesFor(Article $article): array {
+        return $this->articleDao->getAllChildArticles($article->getId());
+    }
+
+    public function createArticle(): Article {
+        $newArticle = new Article();
+        $newArticle->setPublished(false);
+        $newArticle->setTitle('Nieuw artikel');
+        $newArticle->setCreatedById(Authenticator::getCurrentUser()->getId());
+        $newArticle->setType(ELEMENT_HOLDER_ARTICLE);
+        $this->articleDao->createArticle($newArticle);
+        return $newArticle;
+    }
+
+    public function deleteArticle(Article $article): void {
+        $this->articleDao->deleteArticle($article);
+    }
+
+    public function getTermsForArticle(Article $article): array {
+        return $this->articleDao->getTermsForArticle($article->getId());
+    }
+
+    public function addTermToArticle(int $termId, Article $article): void {
+        $this->articleDao->addTermToArticle($termId, $article);
+    }
+
+    public function deleteTermFromArticle(int $termId, Article $article): void {
+        $this->articleDao->deleteTermFromArticle($termId, $article);
+    }
+
+    public function getArticle(int $id): Article {
+        return $this->articleDao->getArticle($id);
+    }
+}

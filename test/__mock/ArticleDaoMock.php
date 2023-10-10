@@ -40,7 +40,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement deleteArticle() method.
     }
 
-    public function createArticle(): Article {
+    public function createArticle(Article $article): void {
         // TODO: Implement createArticle() method.
     }
 
@@ -76,7 +76,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement deleteTerm() method.
     }
 
-    public function getTermsForArticle($articleId): array {
+    public function getTermsForArticle(int $articleId): array {
         // TODO: Implement getTermsForArticle() method.
     }
 
