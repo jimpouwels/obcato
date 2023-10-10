@@ -46,7 +46,7 @@ class ArticleForm extends Form {
         $termsToDelete = array();
         $articleTerms = $this->articleDao->getTermsForArticle($this->article->getId());
         foreach ($articleTerms as $articleTerm) {
-            if (!is_null($this->getFieldValue("term_" . $this->article->getId() . "_" . $articleTerm->getId() . "_delete"))) {
+            if ($this->getFieldValue("term_" . $this->article->getId() . "_" . $articleTerm->getId() . "_delete")) {
                 $termsToDelete[] = $articleTerm;
             }
         }
