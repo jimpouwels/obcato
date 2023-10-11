@@ -33,6 +33,10 @@ class Image extends Entity {
         $this->createdById = $createdById;
     }
 
+    public function getCreatedById(): int {
+        return $this->createdById;
+    }
+
     public function setThumbFileName(?string $thumbnailFilename): void {
         $this->thumbnailFilename = $thumbnailFilename;
     }

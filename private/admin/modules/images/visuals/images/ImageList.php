@@ -1,13 +1,17 @@
 <?php
 
+require_once CMS_ROOT . "/modules/authorization/service/AuthorizationInteractor.php";
+
 class ImageList extends Panel {
 
     private ImageDao $imageDao;
     private ImageRequestHandler $requestHandler;
+    private AuthorizationService $authorizationService;
 
     public function __construct(ImageRequestHandler $requestHandler) {
         parent::__construct($this->getTextResource("images_list_panel_title"), 'images_list');
         $this->requestHandler = $requestHandler;
+        $this->authorizationService = AuthorizationInteractor::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
     }
 
@@ -59,10 +63,8 @@ class ImageList extends Panel {
             $imageValue["published"] = $image->isPublished();
             $imageValue["created_at"] = $image->getCreatedAt();
             $imageValue["thumb"] = $image->getThumbUrl();
-            $createdBy = $image->getCreatedBy();
-            if (!is_null($createdBy)) {
-                $imageValue["created_by"] = $createdBy->getUsername();
-            }
+            $createdBy = $this->authorizationService->getUser($image->getCreatedById());
+            $imageValue["created_by"] = $createdBy->getUsername();
             $imageValues[] = $imageValue;
         }
         return $imageValues;
