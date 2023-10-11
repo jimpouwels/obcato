@@ -136,7 +136,7 @@ class ImageDaoMysql implements ImageDao {
     private function persistImage($image): void {
         $query = "INSERT INTO images (title, published, created_at, created_by, file_name, thumb_file_name)
                       VALUES ('" . $image->getTitle() . "', " . ($image->isPublished() ? 1 : 0) . ", now(), " .
-            $image->getCreatedBy()->getId() . ", NULL, NULL)";
+            $image->getCreatedById() . ", NULL, NULL)";
         $this->mysqlConnector->executeQuery($query);
         $image->setId($this->mysqlConnector->getInsertId());
     }
