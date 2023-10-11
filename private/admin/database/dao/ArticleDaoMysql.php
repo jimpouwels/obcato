@@ -78,13 +78,13 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchArticles($keyword, $termId): array {
+    public function searchArticles(string $keyword, int $termId): array {
         $from = " FROM element_holders e, articles a";
         $where = " WHERE
                       e.id = a.element_holder_id";
-        if (!is_null($keyword) && $keyword != "")
+        if ($keyword)
             $where = $where . " AND e.title LIKE '" . $keyword . "%'";
-        if (!is_null($termId)) {
+        if ($termId) {
             $from = $from . ", articles_terms ats";
             $where = $where . " AND ats.term_id = " . $termId . " AND ats.article_id = e.id";
         }
@@ -98,45 +98,43 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchPublishedArticles($fromDate, $toDate, $orderBy, $orderType, $terms, $maxResults): array {
-        $from = " FROM element_holders e, articles a";
-        $where = " WHERE
-                      e.id = a.element_holder_id";
-        $order = '';
-        $limit = '';
-
-        $where = $where . " AND publication_date <= now()";
-        if (!is_null($toDate) && $toDate != '') {
-            $where = $where . " AND publication_date <= '" . DateUtility::stringMySqlDate($toDate) . "'";
+    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array {
+        $queryWhere = " WHERE e.id = a.element_holder_id";
+        $queryWhere = $queryWhere . " AND publication_date <= now()";
+        if ($toDate) {
+            $queryWhere = $queryWhere . " AND publication_date <= '" . DateUtility::stringMySqlDate($toDate) . "'";
         }
-        if (!is_null($fromDate) && $fromDate != '') {
-            $where = $where . " AND publication_date > '" . DateUtility::stringMySqlDate($fromDate) . "'";
+        if ($fromDate) {
+            $queryWhere = $queryWhere . " AND publication_date > '" . DateUtility::stringMySqlDate($fromDate) . "'";
         }
-        if (!is_null($terms) && count($terms) > 0) {
-            $from = $from . ", articles_terms at";
+        $queryFrom = " FROM element_holders e, articles a";
+        if ($terms && count($terms) > 0) {
+            $queryFrom = $queryFrom . ", articles_terms at";
             foreach ($terms as $term) {
-                $where = $where . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
+                $queryWhere = $queryWhere . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
             }
         }
-        if (!is_null($maxResults) && $maxResults != '') {
-            $limit = " LIMIT " . $maxResults;
+        $limitQueryPart = '';
+        if ($maxResults) {
+            $limitQueryPart = " LIMIT " . $maxResults;
         }
 
-        if (!is_null($orderBy) && $orderBy != '') {
+        $orderQueryPart = '';
+        if ($orderBy) {
             switch ($orderBy) {
                 case "Alphabet":
-                    $order = 'e.title';
+                    $orderQueryPart = 'e.title';
                     break;
                 case "PublicationDate":
-                    $order = 'a.publication_date ' . $orderType;
+                    $orderQueryPart = 'a.publication_date ' . $orderType;
                     break;
                 case "SortDate":
-                    $order = 'a.sort_date ' . $orderType;
+                    $orderQueryPart = 'a.sort_date ' . $orderType;
                     break;
             }
         }
 
-        $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY " . $order . $limit;
+        $query = "SELECT DISTINCT " . self::$myAllColumns . $queryFrom . $queryWhere . " ORDER BY " . $orderQueryPart . $limitQueryPart;
         $result = $this->mysqlConnector->executeQuery($query);
         $articles = array();
         while ($row = $result->fetch_assoc()) {

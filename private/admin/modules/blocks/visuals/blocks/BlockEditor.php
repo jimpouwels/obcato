@@ -5,11 +5,11 @@ require_once CMS_ROOT . '/modules/blocks/visuals/blocks/BlockMetadataEditor.php'
 
 class BlockEditor extends Visual {
 
-    private Block $_current_block;
+    private Block $currentBlock;
 
-    public function __construct(Block $current_block) {
+    public function __construct(Block $currentBlock) {
         parent::__construct();
-        $this->_current_block = $current_block;
+        $this->currentBlock = $currentBlock;
     }
 
     public function getTemplateFilename(): string {
@@ -17,7 +17,7 @@ class BlockEditor extends Visual {
     }
 
     public function load(): void {
-        $this->assign("current_block_id", $this->_current_block->getId());
+        $this->assign("current_block_id", $this->currentBlock->getId());
         $this->assign("block_metadata", $this->renderBlockMetaDataPanel());
         $this->assign("element_container", $this->renderElementContainer());
         $this->assign("link_editor", $this->renderLinkEditor());
@@ -25,17 +25,14 @@ class BlockEditor extends Visual {
     }
 
     private function renderBlockMetaDataPanel(): string {
-        $metadata_editor = new BlockMetadataEditor($this->_current_block);
-        return $metadata_editor->render();
+        return (new BlockMetadataEditor($this->currentBlock))->render();
     }
 
     private function renderElementContainer(): string {
-        $element_container = new ElementContainer($this->_current_block->getElements());
-        return $element_container->render();
+        return (new ElementContainer($this->currentBlock->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        $link_editor = new LinkEditor($this->_current_block->getLinks());
-        return $link_editor->render();
+        return (new LinkEditor($this->currentBlock->getLinks()))->render();
     }
 }

@@ -24,11 +24,11 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getAllChildArticles() method.
     }
 
-    public function searchArticles($keyword, $termId): array {
+    public function searchArticles(string $keyword, int $termId): array {
         // TODO: Implement searchArticles() method.
     }
 
-    public function searchPublishedArticles($fromDate, $toDate, $orderBy, $orderType, $terms, $maxResults): array {
+    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array {
         // TODO: Implement searchPublishedArticles() method.
     }
 

@@ -8,7 +8,7 @@ abstract class Form {
 
     public function getMandatoryFieldValue(string $fieldName): string {
         $value = $this->getFieldValue($fieldName);
-        if ($this->isEmpty($value)) {
+        if (!$value) {
             $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $value;
@@ -20,10 +20,6 @@ abstract class Form {
             $value = $_POST[$fieldName];
         }
         return $value;
-    }
-
-    protected function isEmpty(?string $value): bool {
-        return empty($value) || $value == "";
     }
 
     protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
@@ -52,7 +48,7 @@ abstract class Form {
 
     public function getMandatoryEmailAddress(string $fieldName): ?string {
         $emailAddress = $this->getEmailAddress($fieldName);
-        if ($this->isEmpty($emailAddress)) {
+        if (!$emailAddress) {
             $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $emailAddress;
@@ -61,7 +57,7 @@ abstract class Form {
     public function getEmailAddress(string $fieldName): ?string {
         $value = $this->getFieldValue($fieldName);
         $invalidEmail = preg_match("/^[A-Z0-9._%-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z]{2,6}$/i", $value);
-        if (!$this->isEmpty($value) && !$invalidEmail) {
+        if ($value && !$invalidEmail) {
             $this->raiseError($fieldName, "form_error_invalid_email");
         }
         return $value;
@@ -69,7 +65,7 @@ abstract class Form {
 
     public function getMandatoryNumber(string $fieldName): ?int {
         $number = $this->getNumber($fieldName);
-        if ($this->isEmpty($number)) {
+        if (!$number) {
             $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $number;
@@ -77,15 +73,16 @@ abstract class Form {
 
     public function getNumber(string $fieldName): ?int {
         $numberAsString = $this->getFieldValue($fieldName);
-        if (!$this->isEmpty($numberAsString) && !is_numeric($numberAsString)) {
+        if ($numberAsString && !is_numeric($numberAsString)) {
             $this->raiseError($fieldName, "form_error_invalid_number");
+            return null;
         }
-        return !$this->isEmpty($numberAsString) ? intval($numberAsString) : null;
+        return intval($numberAsString);
     }
 
     public function getMandatoryDate(string $fieldName): ?string {
         $date = $this->getDate($fieldName);
-        if ($this->isEmpty($date)) {
+        if (!$date) {
             $this->raiseError($fieldName, "form_error_mandatory");
         }
         return $date;
@@ -94,7 +91,7 @@ abstract class Form {
     public function getDate(string $fieldName): ?string {
         $value = $this->getFieldValue($fieldName);
         $invalidDate = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-        if (!$invalidDate && $value != '') {
+        if (!$invalidDate && !$value) {
             $this->raiseError($fieldName, "form_error_invalid_date");
         }
         return $value;

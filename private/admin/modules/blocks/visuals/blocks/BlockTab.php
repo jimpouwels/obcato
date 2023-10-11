@@ -4,11 +4,11 @@ require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlockEditor.php";
 
 class BlockTab extends Visual {
 
-    private ?Block $_current_block;
+    private ?Block $currentBlock;
 
-    public function __construct(?Block $current_block) {
+    public function __construct(?Block $currentBlock) {
         parent::__construct();
-        $this->_current_block = $current_block;
+        $this->currentBlock = $currentBlock;
     }
 
     public function getTemplateFilename(): string {
@@ -17,19 +17,17 @@ class BlockTab extends Visual {
 
     public function load(): void {
         $this->assign("blocks_list", $this->renderBlocksList());
-        if (!is_null($this->_current_block)) {
+        if ($this->currentBlock) {
             $this->assign("editor", $this->renderBlockEditor());
         }
     }
 
     private function renderBlocksList(): string {
-        $blocks_list = new BlocksList($this->_current_block);
-        return $blocks_list->render();
+        return (new BlocksList($this->currentBlock))->render();
     }
 
     private function renderBlockEditor(): string {
-        $block_editor = new BlockEditor($this->_current_block);
-        return $block_editor->render();
+        return (new BlockEditor($this->currentBlock))->render();
     }
 
 }

@@ -26,17 +26,12 @@ class Block extends ElementHolder {
         return $this->positionId;
     }
 
-    public function setPositionId(?int $position_id): void {
-        $this->positionId = $position_id;
+    public function setPositionId(?int $positionId): void {
+        $this->positionId = $positionId;
     }
 
     public function getPositionName(): string {
-        $position_name = "";
-        $position = $this->getPosition();
-        if (!is_null($position)) {
-            $position_name = $position->getName();
-        }
-        return $position_name;
+        return $this->getPosition()?->getName() ?? "";
     }
 
     public function getPosition(): ?BlockPosition {
