@@ -24,7 +24,7 @@ if (isset($_GET['image']) && $_GET['image'] != '') {
     if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {
         $file_name = $image->getThumbFileName();
     } else {
-        $file_name = $image->getFileName();
+        $file_name = $image->getFilename();
     }
 
     $path = UPLOAD_DIR . "/" . $file_name;

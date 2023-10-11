@@ -4,11 +4,11 @@ require_once CMS_ROOT . '/modules/database/visuals/QueryResultPanel.php';
 
 class QueriesTab extends Visual {
 
-    private DatabaseRequestHandler $_request_handler;
+    private DatabaseRequestHandler $requestHandler;
 
     public function __construct($requestHandler) {
         parent::__construct();
-        $this->_request_handler = $requestHandler;
+        $this->requestHandler = $requestHandler;
     }
 
     public function getTemplateFilename(): string {
@@ -21,12 +21,10 @@ class QueriesTab extends Visual {
     }
 
     private function renderQueryFieldPanel(): string {
-        $query_field_panel = new QueryFieldPanel($this->_request_handler);
-        return $query_field_panel->render();
+        return (new QueryFieldPanel($this->requestHandler))->render();
     }
 
     private function renderQueryResultPanel(): string {
-        $query_result_panel = new QueryResultPanel($this->_request_handler);
-        return $query_result_panel->render();
+        return (new QueryResultPanel($this->requestHandler))->render();
     }
 }

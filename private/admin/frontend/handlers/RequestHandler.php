@@ -73,7 +73,7 @@ class RequestHandler {
             } else {
                 header("Content-Type: image/" . $image->getExtension());
             }
-            readfile(UPLOAD_DIR . "/" . $image->getFileName());
+            readfile(UPLOAD_DIR . "/" . $image->getFilename());
         }
     }
 

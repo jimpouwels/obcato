@@ -166,7 +166,7 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function moveImageToUploadDirectory(string $new_file_name): void {
         rename($_FILES["image_file"]["tmp_name"], UPLOAD_DIR . "/" . $new_file_name);
-        $this->_current_image->setFileName($new_file_name);
+        $this->_current_image->setFilename($new_file_name);
     }
 
     private function deletePreviousImage(): void {

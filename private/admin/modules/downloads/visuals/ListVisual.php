@@ -4,13 +4,13 @@ require_once CMS_ROOT . "/view/views/InformationMessage.php";
 
 class ListVisual extends Panel {
 
-    private DownloadDao $_download_dao;
-    private DownloadRequestHandler $_download_request_handler;
+    private DownloadDao $downloadDao;
+    private DownloadRequestHandler $downloadRequestHandler;
 
     public function __construct(DownloadRequestHandler $download_requestHandler) {
         parent::__construct('Gevonden downloads', 'download_list');
-        $this->_download_request_handler = $download_requestHandler;
-        $this->_download_dao = DownloadDaoMysql::getInstance();
+        $this->downloadRequestHandler = $download_requestHandler;
+        $this->downloadDao = DownloadDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -23,36 +23,35 @@ class ListVisual extends Panel {
     }
 
     public function getDownloads(): array {
-        if ($this->_download_request_handler->isSearchAction()) {
+        if ($this->downloadRequestHandler->isSearchAction()) {
             return $this->getSearchResults();
         } else {
-            return $this->getDownloadData($this->_download_dao->getAllDownloads());
+            return $this->getDownloadData($this->downloadDao->getAllDownloads());
         }
     }
 
     private function getSearchResults(): array {
-        $search_query = $this->_download_request_handler->getSearchQuery();
-        return $this->getDownloadData($this->_download_dao->searchDownloads($search_query));
+        $searchQuery = $this->downloadRequestHandler->getSearchQuery();
+        return $this->getDownloadData($this->downloadDao->searchDownloads($searchQuery));
     }
 
     private function getDownloadData(array $downloads): array {
-        $downloads_values = array();
+        $downloadsValues = array();
         foreach ($downloads as $download) {
-            $download_value = array();
-            $download_value["id"] = $download->getId();
-            $download_value["title"] = $download->getTitle();
-            $download_value["published"] = $download->isPublished();
-            $download_value["created_at"] = $download->getCreatedAt();
-            $created_by = $download->getCreatedBy();
-            if (!is_null($created_by))
-                $download_value["created_by"] = $created_by->getUsername();
-            $downloads_values[] = $download_value;
+            $downloadValue = array();
+            $downloadValue["id"] = $download->getId();
+            $downloadValue["title"] = $download->getTitle();
+            $downloadValue["published"] = $download->isPublished();
+            $downloadValue["created_at"] = $download->getCreatedAt();
+            $createdBy = $download->getCreatedBy();
+            if (!is_null($createdBy))
+                $downloadValue["created_by"] = $createdBy->getUsername();
+            $downloadsValues[] = $downloadValue;
         }
-        return $downloads_values;
+        return $downloadsValues;
     }
 
     private function renderNoResultsMessage(): string {
-        $message = new InformationMessage("Geen downloads gevonden");
-        return $message->render();
+        return (new InformationMessage("Geen downloads gevonden"))->render();
     }
 }

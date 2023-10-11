@@ -6,26 +6,26 @@ require_once CMS_ROOT . "/core/model/Download.php";
 
 class DownloadRequestHandler extends HttpRequestHandler {
 
-    private DownloadDao $_download_dao;
-    private ?Download $_current_download;
+    private DownloadDao $downloadDao;
+    private ?Download $currentDownload;
 
     public function __construct() {
-        $this->_download_dao = DownloadDaoMysql::getInstance();
+        $this->downloadDao = DownloadDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_download = $this->getDownloadFromGetRequest();
+        $this->currentDownload = $this->getDownloadFromGetRequest();
     }
 
     private function getDownloadFromGetRequest(): ?Download {
         if (isset($_GET['download']) && $_GET['download'] != '') {
-            return $this->_download_dao->getDownload($_GET['download']);
+            return $this->downloadDao->getDownload($_GET['download']);
         }
         return null;
     }
 
     public function handlePost(): void {
-        $this->_current_download = $this->getDownloadFromPostRequest();
+        $this->currentDownload = $this->getDownloadFromPostRequest();
         if ($this->isAddDownloadAction()) {
             $this->addDownload();
         } else if ($this->isDeleteDownloadAction()) {
@@ -37,75 +37,76 @@ class DownloadRequestHandler extends HttpRequestHandler {
 
     private function getDownloadFromPostRequest() {
         if (isset($_POST['download_id']) && $_POST['download_id'] != '')
-            return $this->_download_dao->getDownload($_POST['download_id']);
+            return $this->downloadDao->getDownload($_POST['download_id']);
     }
 
-    private function isAddDownloadAction() {
+    private function isAddDownloadAction(): bool {
         return isset($_POST["add_download_action"]) && $_POST["add_download_action"] != "";
     }
 
     private function addDownload(): void {
         $download = new Download();
         $download->setTitle("Nieuwe download");
-        $this->_download_dao->persistDownload($download);
+        $this->downloadDao->persistDownload($download);
         $this->sendSuccessMessage("Download succesvol toegevoegd");
         $this->redirectTo($this->getBackendBaseUrl() . "&download=" . $download->getId());
     }
 
-    private function isDeleteDownloadAction() {
+    private function isDeleteDownloadAction(): bool {
         return isset($_POST['action']) && $_POST['action'] == 'delete_download';
     }
 
-    private function deleteDownload() {
-        $this->deleteDownloadFile($this->_current_download->getFileName());
-        $this->_download_dao->deleteDownload($this->_current_download->getId());
+    private function deleteDownload(): void {
+        $this->deleteDownloadFile($this->currentDownload->getFilename());
+        $this->downloadDao->deleteDownload($this->currentDownload->getId());
         $this->sendSuccessMessage('Download succesvol verwijderd');
         $this->redirectTo($this->getBackendBaseUrl());
     }
 
-    private function deleteDownloadFile($file_name) {
-        if (!$file_name) return;
-        $file_path = UPLOAD_DIR . '/' . $file_name;
-        if (file_exists($file_path))
-            unlink($file_path);
+    private function deleteDownloadFile(string $filename): void {
+        if (!$filename) return;
+        $filepath = UPLOAD_DIR . '/' . $filename;
+        if (file_exists($filepath)) {
+            unlink($filepath);
+        }
     }
 
-    private function isUpdateDownloadAction() {
+    private function isUpdateDownloadAction(): bool {
         return isset($_POST['action']) && $_POST['action'] == 'update_download';
     }
 
-    private function updateDownload() {
-        $download_form = new DownloadForm($this->_current_download);
+    private function updateDownload(): void {
         try {
-            $download_form->loadFields();
-            $this->saveUploadedFile($download_form);
-            $this->_download_dao->updateDownload($this->_current_download);
+            $downloadForm = new DownloadForm($this->currentDownload);
+            $downloadForm->loadFields();
+            $this->saveUploadedFile($downloadForm);
+            $this->downloadDao->updateDownload($this->currentDownload);
             $this->sendSuccessMessage("Download succesvol opgeslagen");
-        } catch (FormException $e) {
+        } catch (FormException) {
             $this->sendErrorMessage("Download niet opgeslagen, verwerk de fouten");
         }
     }
 
-    private function saveUploadedFile($download_form) {
-        if ($download_form->getUploadPath()) {
-            $new_file_name = $this->getNewDownloadFilename($download_form->getUploadFileName());
-            $this->deleteDownloadFile($this->_current_download->getFileName());
-            $this->moveDownloadToUploadDirectory($download_form->getUploadPath(), $new_file_name);
+    private function saveUploadedFile(DownloadForm $downloadForm): void {
+        if ($downloadForm->getUploadPath()) {
+            $newFilename = $this->getNewDownloadFilename($downloadForm->getUploadFileName());
+            $this->deleteDownloadFile($this->currentDownload->getFilename());
+            $this->moveDownloadToUploadDirectory($downloadForm->getUploadPath(), $newFilename);
         }
     }
 
-    private function getNewDownloadFilename($download_file_name): string {
-        $current_download_id = $this->_current_download->getId();
-        return "UPLDWNL-00$current_download_id" . "_$download_file_name";
+    private function getNewDownloadFilename(string $downloadFilename): string {
+        $currentDownloadId = $this->currentDownload->getId();
+        return "UPLDWNL-00$currentDownloadId" . "_$downloadFilename";
     }
 
-    private function moveDownloadToUploadDirectory($from_dir, $new_file_name): void {
-        rename($from_dir, UPLOAD_DIR . '/' . $new_file_name);
-        $this->_current_download->setFileName($new_file_name);
+    private function moveDownloadToUploadDirectory(string $fromDir, string $newFilename): void {
+        rename($fromDir, UPLOAD_DIR . '/' . $newFilename);
+        $this->currentDownload->setFilename($newFilename);
     }
 
     public function getCurrentDownload(): ?Download {
-        return $this->_current_download;
+        return $this->currentDownload;
     }
 
     public function isSearchAction(): bool {

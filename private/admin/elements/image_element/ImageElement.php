@@ -80,7 +80,7 @@ class ImageElement extends Element {
         $summary_text = $this->getTitle() ?: '';
         $image = $this->getImage();
         if ($image) {
-            $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFileName() . ')';
+            $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFilename() . ')';
         }
         return $summary_text;
     }

@@ -5,11 +5,11 @@ require_once CMS_ROOT . '/modules/database/visuals/TablePanel.php';
 
 class Tables extends Visual {
 
-    private DatabaseDao $_database_dao;
+    private DatabaseDao $databaseDao;
 
     public function __construct() {
         parent::__construct();
-        $this->_database_dao = DatabaseDaoMysql::getInstance();
+        $this->databaseDao = DatabaseDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -21,27 +21,26 @@ class Tables extends Visual {
     }
 
     private function getTables(): array {
-        $tables = $this->_database_dao->getTables();
-        $table_panels = array();
+        $tables = $this->databaseDao->getTables();
+        $tablePanels = array();
         foreach ($tables as $table) {
-            $table_value = array();
-            $table_value["name"] = $table;
-            $table_value["columns"] = $this->getColumns($table);
-            $table_panel = new TablePanel($table_value);
-            $table_panels[] = $table_panel->render();
+            $tableValue = array();
+            $tableValue["name"] = $table;
+            $tableValue["columns"] = $this->getColumns($table);
+            $tablePanels[] = (new TablePanel($tableValue))->render();
         }
-        return $table_panels;
+        return $tablePanels;
     }
 
     private function getColumns(string $table): array {
-        $columns_array = array();
-        foreach ($this->_database_dao->getColumns($table) as $column) {
-            $column_value = array();
-            $column_value["name"] = $column["name"];
-            $column_value["type"] = $column["type"];
-            $column_value["allowed_null"] = $column["allowed_null"] == "YES" ? "Ja" : "Nee";
-            $columns_array[] = $column_value;
+        $columnsArray = array();
+        foreach ($this->databaseDao->getColumns($table) as $column) {
+            $columnValue = array();
+            $columnValue["name"] = $column["name"];
+            $columnValue["type"] = $column["type"];
+            $columnValue["allowed_null"] = $column["allowed_null"] == "YES" ? "Ja" : "Nee";
+            $columnsArray[] = $columnValue;
         }
-        return $columns_array;
+        return $columnsArray;
     }
 }

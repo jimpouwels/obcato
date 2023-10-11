@@ -4,11 +4,11 @@ require_once CMS_ROOT . "/database/dao/DatabaseDaoMysql.php";
 
 class TablePanel extends Panel {
 
-    private array $_table;
+    private array $table;
 
     public function __construct(array $table) {
         parent::__construct($table['name'], 'table_details_panel');
-        $this->_table = $table;
+        $this->table = $table;
     }
 
     public function getPanelContentTemplate(): string {
@@ -16,6 +16,6 @@ class TablePanel extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign("table", $this->_table);
+        $data->assign("table", $this->table);
     }
 }

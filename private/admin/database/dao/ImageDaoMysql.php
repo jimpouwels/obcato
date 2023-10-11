@@ -38,7 +38,7 @@ class ImageDaoMysql implements ImageDao {
         $title = $image->getTitle();
         $altText = $image->getAltText();
         $published = $image->isPublished() ? 1 : 0;
-        $filename = $image->getFileName();
+        $filename = $image->getFilename();
         $id = $image->getId();
         $thumbFilename = $image->getThumbFileName();
         $query = "UPDATE images SET title = ?, alt_text = ?, published = ?, file_name = ?, thumb_file_name = ? WHERE id = ?";

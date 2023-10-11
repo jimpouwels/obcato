@@ -2,11 +2,11 @@
 
 class DownloadInfo extends Panel {
 
-    private Download $_download;
+    private Download $download;
 
     public function __construct(Download $download) {
         parent::__construct('Bestandsinformatie');
-        $this->_download = $download;
+        $this->download = $download;
     }
 
     public function getPanelContentTemplate(): string {
@@ -18,14 +18,14 @@ class DownloadInfo extends Panel {
     }
 
     private function getFileData(): array {
-        $file_path = UPLOAD_DIR . '/' . $this->_download->getFileName();
-        $file_exists = file_exists($file_path);
-        $file_data = array();
-        $file_data['name'] = $this->_download->getFileName();
-        if ($file_exists) {
-            $file_data['size'] = filesize($file_path) / 1000;
+        $filePath = UPLOAD_DIR . '/' . $this->download->getFilename();
+        $fileExists = file_exists($filePath);
+        $fileData = array();
+        $fileData['name'] = $this->download->getFilename();
+        if ($fileExists) {
+            $fileData['size'] = filesize($filePath) / 1000;
         }
-        $file_data['exists'] = $file_exists;
-        return $file_data;
+        $fileData['exists'] = $fileExists;
+        return $fileData;
     }
 }

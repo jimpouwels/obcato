@@ -4,13 +4,13 @@ require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 
 class Image extends Entity {
 
-    private string $_title;
-    private ?string $_alt_text = null;
-    private ?string $_file_name;
-    private ?string $_thumbnail_file_name;
-    private bool $_published;
-    private string $_created_at;
-    private int $_created_by_id;
+    private string $title;
+    private ?string $altText = null;
+    private ?string $filename;
+    private ?string $thumbnailFilename;
+    private bool $published;
+    private string $createdAt;
+    private int $createdById;
 
     public static function constructFromRecord(array $row): Image {
         $image = new Image();
@@ -24,33 +24,33 @@ class Image extends Entity {
         $this->setPublished($row['published'] == 1);
         $this->setCreatedAt($row['created_at']);
         $this->setCreatedById($row['created_by']);
-        $this->setFileName($row['file_name']);
+        $this->setFilename($row['file_name']);
         $this->setThumbFileName($row['thumb_file_name']);
         parent::initFromDb($row);
     }
 
-    public function setCreatedById(int $created_by_id): void {
-        $this->_created_by_id = $created_by_id;
+    public function setCreatedById(int $createdById): void {
+        $this->createdById = $createdById;
     }
 
-    public function setThumbFileName(?string $thumb_filename): void {
-        $this->_thumbnail_file_name = $thumb_filename;
+    public function setThumbFileName(?string $thumbnailFilename): void {
+        $this->thumbnailFilename = $thumbnailFilename;
     }
 
     public function getTitle(): string {
-        return $this->_title;
+        return $this->title;
     }
 
     public function setTitle(string $title): void {
-        $this->_title = $title;
+        $this->title = $title;
     }
 
     public function getAltText(): ?string {
-        return $this->_alt_text;
+        return $this->altText;
     }
 
-    public function setAltText(?string $alt_text): void {
-        $this->_alt_text = $alt_text;
+    public function setAltText(?string $altText): void {
+        $this->altText = $altText;
     }
 
     public function getThumbUrl(): string {
@@ -64,41 +64,36 @@ class Image extends Entity {
     }
 
     public function getThumbFileName(): ?string {
-        return $this->_thumbnail_file_name;
+        return $this->thumbnailFilename;
     }
 
     public function isPublished(): bool {
-        return $this->_published;
+        return $this->published;
     }
 
     public function setPublished(bool $published): void {
-        $this->_published = $published;
+        $this->published = $published;
     }
 
     public function getCreatedAt(): string {
-        return $this->_created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(string $created_at): void {
-        $this->_created_at = $created_at;
-    }
-
-    public function getCreatedBy(): User {
-        $authorization_dao = AuthorizationDaoMysql::getInstance();
-        return $authorization_dao->getUserById($this->_created_by_id);
+    public function setCreatedAt(string $createdAt): void {
+        $this->createdAt = $createdAt;
     }
 
     public function getExtension(): string {
-        $parts = explode(".", $this->getFileName());
+        $parts = explode(".", $this->getFilename());
         return $parts[count($parts) - 1];
     }
 
-    public function getFileName(): ?string {
-        return $this->_file_name;
+    public function getFilename(): ?string {
+        return $this->filename;
     }
 
-    public function setFileName(?string $filename): void {
-        $this->_file_name = $filename;
+    public function setFilename(?string $filename): void {
+        $this->filename = $filename;
     }
 
 }

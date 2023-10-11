@@ -7,19 +7,19 @@ class PositionRequestHandler extends HttpRequestHandler {
 
     private static string $POSITION_ID_POST = "position_id";
     private static string $POSITION_ID_GET = "position";
-    private BlockDao $_block_dao;
-    private ?BlockPosition $_current_position;
+    private BlockDao $blockDao;
+    private ?BlockPosition $currentPosition;
 
     public function __construct() {
-        $this->_block_dao = BlockDaoMysql::getInstance();
+        $this->blockDao = BlockDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_position = $this->getPositionFromGetRequest();
+        $this->currentPosition = $this->getPositionFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_position = $this->getPositionFromPostRequest();
+        $this->currentPosition = $this->getPositionFromPostRequest();
         if ($this->isAddPositionAction()) {
             $this->addPosition();
         } else if ($this->isUpdatePositionAction()) {
@@ -30,22 +30,22 @@ class PositionRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentPosition(): ?BlockPosition {
-        return $this->_current_position;
+        return $this->currentPosition;
     }
 
     private function addPosition(): void {
-        $new_position = $this->_block_dao->createBlockPosition();
-        $new_position->setName($this->getTextResource("blocks_default_position_title"));
-        $this->_block_dao->updateBlockPosition($new_position);
+        $newPosition = $this->blockDao->createBlockPosition();
+        $newPosition->setName($this->getTextResource("blocks_default_position_title"));
+        $this->blockDao->updateBlockPosition($newPosition);
         $this->sendSuccessMessage($this->getTextResource("blocks_position_successfully_created"));
-        $this->redirectTo($this->getBackendBaseUrl() . "&position=" . $new_position->getId());
+        $this->redirectTo($this->getBackendBaseUrl() . "&position=" . $newPosition->getId());
     }
 
     private function updatePosition(): void {
-        $position_form = new PositionForm($this->_current_position);
+        $positionForm = new PositionForm($this->currentPosition);
         try {
-            $position_form->loadFields();
-            $this->_block_dao->updateBlockPosition($this->_current_position);
+            $positionForm->loadFields();
+            $this->blockDao->updateBlockPosition($this->currentPosition);
             $this->sendSuccessMessage($this->getTextResource("blocks_position_successfully_updated"));
         } catch (FormException $e) {
             $this->sendErrorMessage($this->getTextResource("blocks_position_could_not_be_updated_error"));
@@ -53,10 +53,10 @@ class PositionRequestHandler extends HttpRequestHandler {
     }
 
     private function deletePositions(): void {
-        $positions = $this->_block_dao->getBlockPositions();
+        $positions = $this->blockDao->getBlockPositions();
         foreach ($positions as $position) {
             if (isset($_POST["position_" . $position->getId() . "_delete"]))
-                $this->_block_dao->deleteBlockPosition($position);
+                $this->blockDao->deleteBlockPosition($position);
         }
         $this->sendSuccessMessage($this->getTextResource("blocks_position_successfully_deleted"));
     }
@@ -76,7 +76,7 @@ class PositionRequestHandler extends HttpRequestHandler {
     }
 
     private function getPositionFromDatabase($position_id): BlockPosition {
-        return $this->_block_dao->getBlockPosition($position_id);
+        return $this->blockDao->getBlockPosition($position_id);
     }
 
     private function isAddPositionAction(): bool {
@@ -91,5 +91,3 @@ class PositionRequestHandler extends HttpRequestHandler {
         return isset($_POST["position_delete_action"]);
     }
 }
-
-?>

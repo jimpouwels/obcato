@@ -2,11 +2,11 @@
 
 class QueryFieldPanel extends Panel {
 
-    private DatabaseRequestHandler $_request_handler;
+    private DatabaseRequestHandler $requestHandler;
 
     public function __construct($requestHandler) {
         parent::__construct('database_query_editor_title', 'queries_form_wrapper');
-        $this->_request_handler = $requestHandler;
+        $this->requestHandler = $requestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -19,12 +19,12 @@ class QueryFieldPanel extends Panel {
     }
 
     private function renderQueryField(): string {
-        $query_field = new TextArea('query', "database_query_query_field_label", $this->_request_handler->getQuery(), true, false, "");
-        return $query_field->render();
+        $queryField = new TextArea('query', "database_query_query_field_label", $this->requestHandler->getQuery(), true, false, "");
+        return $queryField->render();
     }
 
     private function renderExecuteButton(): string {
-        $execute_button = new Button("", "database_query_execute_button_label", "document.getElementById('query_execute_form').submit(); return false;");
-        return $execute_button->render();
+        $executeButton = new Button("", "database_query_execute_button_label", "document.getElementById('query_execute_form').submit(); return false;");
+        return $executeButton->render();
     }
 }

@@ -6,11 +6,11 @@ class PositionTab extends Visual {
 
     private static string $POSITION_QUERYSTRING_KEY = "position";
 
-    private ?BlockPosition $_current_position;
+    private ?BlockPosition $currentPosition;
 
-    public function __construct(?BlockPosition $current_position) {
+    public function __construct(?BlockPosition $currentPosition) {
         parent::__construct();
-        $this->_current_position = $current_position;
+        $this->currentPosition = $currentPosition;
     }
 
     public function getTemplateFilename(): string {
@@ -29,13 +29,11 @@ class PositionTab extends Visual {
     }
 
     private function renderPositionEditor(): string {
-        $position_editor = new PositionEditor($this->_current_position);
-        return $position_editor->render();
+        return (new PositionEditor($this->currentPosition))->render();
     }
 
     private function renderPositionList(): string {
-        $position_list = new PositionList();
-        return $position_list->render();
+        return (new PositionList())->render();
     }
 
 }

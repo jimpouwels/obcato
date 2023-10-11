@@ -6,9 +6,9 @@ class BlocksList extends Panel {
     private ?Block $currentBlock;
     private BlockDao $blockDao;
 
-    public function __construct(?Block $currentBlock) {
+    public function __construct(?Block $current) {
         parent::__construct('Blokken', 'block_list');
-        $this->currentBlock = $currentBlock;
+        $this->currentBlock = $current;
         $this->blockDao = BlockDaoMysql::getInstance();
     }
 

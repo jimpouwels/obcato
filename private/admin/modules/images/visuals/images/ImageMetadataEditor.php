@@ -3,11 +3,11 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class ImageMetadataEditor extends Panel {
 
-    private Image $_current_image;
+    private Image $currentImage;
 
-    public function __construct(Image $current_image) {
+    public function __construct(Image $currentImage) {
         parent::__construct('Algemeen', 'image_meta');
-        $this->_current_image = $current_image;
+        $this->currentImage = $currentImage;
     }
 
     public function getPanelContentTemplate(): string {
@@ -16,24 +16,22 @@ class ImageMetadataEditor extends Panel {
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $this->assignImageMetaDataFields($data);
-        $data->assign("current_image_id", $this->_current_image->getId());
+        $data->assign("current_image_id", $this->currentImage->getId());
         $data->assign("action_form_id", ACTION_FORM_ID);
     }
 
 
     private function assignImageMetaDataFields($data): void {
-        $title_field = new TextField("image_title", "Titel", $this->_current_image->getTitle(), true, false, null);
-        $alt_text_field = new TextField("image_alt_text", $this->getTextResource('image_editor_alt_text_label'), $this->_current_image->getAltText(), false, false, null);
-        $published_field = new SingleCheckbox("image_published", "Gepubliceerd", $this->_current_image->isPublished(), false, null);
-        $upload_field = new UploadField("image_file", "Afbeelding", false, null);
+        $titleField = new TextField("image_title", "Titel", $this->currentImage->getTitle(), true, false, null);
+        $altTextField = new TextField("image_alt_text", $this->getTextResource('image_editor_alt_text_label'), $this->currentImage->getAltText(), false, false, null);
+        $publishedField = new SingleCheckbox("image_published", "Gepubliceerd", $this->currentImage->isPublished(), false, null);
+        $uploadField = new UploadField("image_file", "Afbeelding", false, null);
 
-        $data->assign("image_id", $this->_current_image->getId());
-        $data->assign("title_field", $title_field->render());
-        $data->assign("alt_text_field", $alt_text_field->render());
-        $data->assign("published_field", $published_field->render());
-        $data->assign("upload_field", $upload_field->render());
+        $data->assign("image_id", $this->currentImage->getId());
+        $data->assign("title_field", $titleField->render());
+        $data->assign("alt_text_field", $altTextField->render());
+        $data->assign("published_field", $publishedField->render());
+        $data->assign("upload_field", $uploadField->render());
     }
 
 }
-
-?>

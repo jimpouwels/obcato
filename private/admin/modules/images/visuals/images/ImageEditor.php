@@ -5,13 +5,13 @@ require_once CMS_ROOT . '/modules/images/visuals/images/ImageViewer.php';
 require_once CMS_ROOT . '/view/views/ImageLabelSelector.php';
 
 class ImageEditor extends Visual {
-    private Image $_current_image;
-    private ImageDao $_image_dao;
+    private Image $currentImage;
+    private ImageDao $imageDao;
 
-    public function __construct(Image $current_image) {
+    public function __construct(Image $currentImage) {
         parent::__construct();
-        $this->_current_image = $current_image;
-        $this->_image_dao = ImageDaoMysql::getInstance();
+        $this->currentImage = $currentImage;
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -22,22 +22,22 @@ class ImageEditor extends Visual {
         $this->assignMetadataEditor();
         $this->assignLabelSelector();
         $this->assignImageViewer();
-        $this->assign("current_image_id", $this->_current_image->getId());
+        $this->assign("current_image_id", $this->currentImage->getId());
     }
 
     private function assignMetadataEditor(): void {
-        $metadata_editor = new ImageMetadataEditor($this->_current_image);
-        $this->assign('metadata_editor', $metadata_editor->render());
+        $metadataEditor = new ImageMetadataEditor($this->currentImage);
+        $this->assign('metadata_editor', $metadataEditor->render());
     }
 
     private function assignLabelSelector(): void {
-        $image_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
-        $label_select = new ImageLabelSelector($image_labels, $this->_current_image->getId());
-        $this->assign('label_selector', $label_select->render());
+        $imageLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
+        $labelSelect = new ImageLabelSelector($imageLabels, $this->currentImage->getId());
+        $this->assign('label_selector', $labelSelect->render());
     }
 
     private function assignImageViewer(): void {
-        $image_viewer = new ImageViewer($this->_current_image);
-        $this->assign('image_viewer', $image_viewer->render());
+        $imageViewer = new ImageViewer($this->currentImage);
+        $this->assign('image_viewer', $imageViewer->render());
     }
 }

@@ -34,7 +34,7 @@ class DownloadDaoMysql implements DownloadDao {
         $statement = $this->mysqlConnector->prepareStatement('INSERT INTO downloads
                     (title, file_name, published, created_at, created_by) VALUES (?, ?, ?, now(), ?)');
         $title = $download->getTitle();
-        $filename = $download->getFileName();
+        $filename = $download->getFilename();
         $userId = $user->getId();
         $statement->bind_param('ssii', $title, $filename, 0, $userId);
         $this->mysqlConnector->executeStatement($statement);
@@ -44,7 +44,7 @@ class DownloadDaoMysql implements DownloadDao {
     public function updateDownload(Download $download): void {
         $statement = $this->mysqlConnector->prepareStatement('UPDATE downloads SET title = ?, published = ?, file_name = ?');
         $title = $download->getTitle();
-        $filename = $download->getFileName();
+        $filename = $download->getFilename();
         $published = $download->isPublished();
         $statement->bind_param('sis', $title, $published, $filename);
         $this->mysqlConnector->executeStatement($statement);

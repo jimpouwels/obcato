@@ -5,13 +5,13 @@ require_once CMS_ROOT . "/modules/images/visuals/images/ImageEditor.php";
 
 class ImagesTab extends Visual {
 
-    private ?Image $_current_image;
-    private ImageRequestHandler $_images_pre_handler;
+    private ?Image $currentImage;
+    private ImageRequestHandler $requestHandler;
 
-    public function __construct($images_pre_handler) {
+    public function __construct(ImageRequestHandler $requestHandler) {
         parent::__construct();
-        $this->_images_pre_handler = $images_pre_handler;
-        $this->_current_image = $this->_images_pre_handler->getCurrentImage();
+        $this->requestHandler = $requestHandler;
+        $this->currentImage = $this->requestHandler->getCurrentImage();
     }
 
     public function getTemplateFilename(): string {
@@ -20,7 +20,7 @@ class ImagesTab extends Visual {
 
     public function load(): void {
         $this->assign("search", $this->renderImageSearch());
-        if (!is_null($this->_current_image)) {
+        if ($this->currentImage) {
             $this->assign("editor", $this->renderImageEditor());
         } else {
             $this->assign("list", $this->renderImageList());
@@ -28,18 +28,15 @@ class ImagesTab extends Visual {
     }
 
     private function renderImageSearch(): string {
-        $image_search = new ImageSearch($this->_images_pre_handler);
-        return $image_search->render();
+        return (new ImageSearch($this->requestHandler))->render();
     }
 
     private function renderImageList(): string {
-        $images_list = new ImageList($this->_current_image, $this->_images_pre_handler);
-        return $images_list->render();
+        return (new ImageList($this->requestHandler))->render();
     }
 
     private function renderImageEditor(): string {
-        $image_editor = new ImageEditor($this->_current_image);
-        return $image_editor->render();
+        return (new ImageEditor($this->currentImage))->render();
     }
 
 }

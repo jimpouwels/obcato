@@ -2,11 +2,11 @@
 
 class QueryResultPanel extends Panel {
 
-    private DatabaseRequestHandler $_request_handler;
+    private DatabaseRequestHandler $requestHandler;
 
     public function __construct(DatabaseRequestHandler $requestHandler) {
         parent::__construct('database_query_result_panel_title', 'query_result_panel');
-        $this->_request_handler = $requestHandler;
+        $this->requestHandler = $requestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -14,8 +14,8 @@ class QueryResultPanel extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign("fields", $this->_request_handler->getFields());
-        $data->assign("values", $this->_request_handler->getValues());
-        $data->assign("affected_rows", $this->_request_handler->getAffectedRows());
+        $data->assign("fields", $this->requestHandler->getFields());
+        $data->assign("values", $this->requestHandler->getValues());
+        $data->assign("affected_rows", $this->requestHandler->getAffectedRows());
     }
 }

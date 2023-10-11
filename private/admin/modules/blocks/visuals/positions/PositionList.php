@@ -3,11 +3,11 @@ require_once CMS_ROOT . "/view/views/InformationMessage.php";
 
 class PositionList extends Panel {
 
-    private BlockDao $_block_dao;
+    private BlockDao $blockDao;
 
     public function __construct() {
         parent::__construct('Posities');
-        $this->_block_dao = BlockDaoMysql::getInstance();
+        $this->blockDao = BlockDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -16,24 +16,24 @@ class PositionList extends Panel {
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign("all_positions", $this->getAllPositions());
-        $no_positions_message = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
-        $data->assign("no_positions_message", $no_positions_message->render());
+        $noPositionsMessage = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
+        $data->assign("no_positions_message", $noPositionsMessage->render());
     }
 
     private function getAllPositions(): array {
-        $all_positions_values = array();
-        $all_positions = $this->_block_dao->getBlockPositions();
+        $allPositionsValues = array();
+        $allPositions = $this->blockDao->getBlockPositions();
 
-        foreach ($all_positions as $position) {
-            $position_value = array();
-            $position_value["id"] = $position->getId();
-            $position_value["name"] = $position->getName();
-            $position_value["explanation"] = $position->getExplanation();
-            $delete_field = new SingleCheckbox("position_" . $position->getId() . "_delete", "", false, false, "");
-            $position_value["delete_field"] = $delete_field->render();
+        foreach ($allPositions as $position) {
+            $positionValue = array();
+            $positionValue["id"] = $position->getId();
+            $positionValue["name"] = $position->getName();
+            $positionValue["explanation"] = $position->getExplanation();
+            $deleteField = new SingleCheckbox("position_" . $position->getId() . "_delete", "", false, false, "");
+            $positionValue["delete_field"] = $deleteField->render();
 
-            $all_positions_values[] = $position_value;
+            $allPositionsValues[] = $positionValue;
         }
-        return $all_positions_values;
+        return $allPositionsValues;
     }
 }

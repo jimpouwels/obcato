@@ -3,7 +3,7 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class ImageLabel extends Entity {
 
-    private string $_name;
+    private string $name;
 
     public static function constructFromRecord(array $row): ImageLabel {
         $label = new ImageLabel();
@@ -17,11 +17,11 @@ class ImageLabel extends Entity {
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName(string $name): void {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
 }

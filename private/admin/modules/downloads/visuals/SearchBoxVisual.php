@@ -2,11 +2,11 @@
 
 class SearchBoxVisual extends Panel {
 
-    private DownloadRequestHandler $_download_request_handler;
+    private DownloadRequestHandler $downloadRequestHandler;
 
     public function __construct(DownloadRequestHandler $download_requestHandler) {
         parent::__construct('Zoeken', 'download_search');
-        $this->_download_request_handler = $download_requestHandler;
+        $this->downloadRequestHandler = $download_requestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -19,13 +19,13 @@ class SearchBoxVisual extends Panel {
     }
 
     private function renderSearchQueryField(): string {
-        $default_search_value = $this->_download_request_handler->getSearchQuery();
-        $search_query_field = new TextField('search_query', 'Zoekterm', $default_search_value, false, false, null);
-        return $search_query_field->render();
+        $defaultSearchValue = $this->downloadRequestHandler->getSearchQuery();
+        $searchQueryField = new TextField('search_query', 'Zoekterm', $defaultSearchValue, false, false, null);
+        return $searchQueryField->render();
     }
 
     private function renderSearchButton(): string {
-        $search_button = new Button('', 'Zoeken', 'document.getElementById(\'download_search\').submit(); return false;');
-        return $search_button->render();
+        $searchButton = new Button('', 'Zoeken', 'document.getElementById(\'download_search\').submit(); return false;');
+        return $searchButton->render();
     }
 }

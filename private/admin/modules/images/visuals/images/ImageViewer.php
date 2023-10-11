@@ -3,11 +3,11 @@ require_once CMS_ROOT . "/view/views/InformationMessage.php";
 
 class ImageViewer extends Panel {
 
-    private Image $_current_image;
+    private Image $currentImage;
 
-    public function __construct(Image $current_image) {
+    public function __construct(Image $currentImage) {
         parent::__construct('Afbeelding', 'image_editor');
-        $this->_current_image = $current_image;
+        $this->currentImage = $currentImage;
     }
 
     public function getPanelContentTemplate(): string {
@@ -15,7 +15,7 @@ class ImageViewer extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign("title", $this->_current_image->getTitle());
-        $data->assign("url", $this->_current_image->getUrl());
+        $data->assign("title", $this->currentImage->getTitle());
+        $data->assign("url", $this->currentImage->getUrl());
     }
 }

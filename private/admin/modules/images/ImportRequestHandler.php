@@ -33,7 +33,7 @@ class ImportRequestHandler extends HttpRequestHandler {
                     $new_file = fopen(UPLOAD_DIR . "/" . $new_file_name, "w");
                     fwrite($new_file, $file_contents);
                     fclose($new_file);
-                    $new_image->setFileName($new_file_name);
+                    $new_image->setFilename($new_file_name);
                     $thumb_file_name = "THUMB-" . $new_file_name;
                     FileUtility::saveThumb($new_file_name, UPLOAD_DIR, $thumb_file_name, 50, 50);
                     $new_image->setThumbFileName($thumb_file_name);

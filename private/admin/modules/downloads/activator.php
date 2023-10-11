@@ -8,13 +8,14 @@ require_once CMS_ROOT . "/modules/downloads/DownloadRequestHandler.php";
 class DownloadModuleVisual extends ModuleVisual {
 
     private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
-    private ?Download $_current_download;
-    private DownloadRequestHandler $_download_request_handler;
+    private ?Download $currentDownload;
+    private DownloadRequestHandler $requestHandler;
+    private Module $module;
 
     public function __construct(Module $module) {
         parent::__construct($module);
-        $this->_module = $module;
-        $this->_download_request_handler = new DownloadRequestHandler();
+        $this->module = $module;
+        $this->requestHandler = new DownloadRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -23,7 +24,7 @@ class DownloadModuleVisual extends ModuleVisual {
 
     public function load(): void {
         $this->assign('search_box', $this->renderSearchBox());
-        if ($this->_current_download) {
+        if ($this->currentDownload) {
             $this->assign('editor', $this->renderEditor());
         } else {
             $this->assign("list", $this->renderList());
@@ -31,28 +32,25 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     private function renderSearchBox(): string {
-        $search_box = new SearchBoxVisual($this->_download_request_handler);
-        return $search_box->render();
+        return (new SearchBoxVisual($this->requestHandler))->render();
     }
 
     private function renderEditor(): string {
-        $editor = new EditorVisual($this->_current_download);
-        return $editor->render();
+        return (new EditorVisual($this->currentDownload))->render();
     }
 
     private function renderList(): string {
-        $list = new ListVisual($this->_download_request_handler);
-        return $list->render();
+        return (new ListVisual($this->requestHandler))->render();
     }
 
     public function getActionButtons(): array {
-        $action_buttons = array();
-        if ($this->_current_download) {
-            $action_buttons[] = new ActionButtonSave('update_download');
-            $action_buttons[] = new ActionButtonDelete('delete_download');
+        $actionButtons = array();
+        if ($this->currentDownload) {
+            $actionButtons[] = new ActionButtonSave('update_download');
+            $actionButtons[] = new ActionButtonDelete('delete_download');
         }
-        $action_buttons[] = new ActionButtonAdd('add_download');
-        return $action_buttons;
+        $actionButtons[] = new ActionButtonAdd('add_download');
+        return $actionButtons;
     }
 
     public function renderHeadIncludes(): string {
@@ -60,18 +58,14 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_download_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->requestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {
-        $this->_current_download = $this->_download_request_handler->getCurrentDownload();
+        $this->currentDownload = $this->requestHandler->getCurrentDownload();
     }
 
-    function getTabMenu(): ?TabMenu {
-        // TODO: Implement getTabMenu() method.
-    }
+    function getTabMenu(): ?TabMenu {}
 }
-
-?>

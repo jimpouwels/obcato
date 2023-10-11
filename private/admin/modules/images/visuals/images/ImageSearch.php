@@ -2,13 +2,13 @@
 
 class ImageSearch extends Panel {
 
-    private ImageDao $_image_dao;
-    private ImageRequestHandler $_images_request_handler;
+    private ImageDao $imageDao;
+    private ImageRequestHandler $requestHandler;
 
-    public function __construct($images_requestHandler) {
+    public function __construct(ImageRequestHandler $requestHandler) {
         parent::__construct('Zoeken', 'image_search');
-        $this->_image_dao = ImageDaoMysql::getInstance();
-        $this->_images_request_handler = $images_requestHandler;
+        $this->imageDao = ImageDaoMysql::getInstance();
+        $this->requestHandler = $requestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -23,17 +23,17 @@ class ImageSearch extends Panel {
     }
 
     private function getTitleSearchField(): TextField {
-        return new TextField("s_title", "images_search_title_field", $this->_images_request_handler->getCurrentSearchTitleFromGetRequest(), false, false, null);
+        return new TextField("s_title", "images_search_title_field", $this->requestHandler->getCurrentSearchTitleFromGetRequest(), false, false, null);
     }
 
     private function getFileNameSearchField(): TextField {
-        return new TextField("s_filename", "images_search_filename_field", $this->_images_request_handler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
+        return new TextField("s_filename", "images_search_filename_field", $this->requestHandler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
     }
 
     private function getLabelPullDown(): Pulldown {
         $labels = $this->getLabels();
-        $currently_selected_label = $this->_images_request_handler->getCurrentSearchLabelFromGetRequest();
-        return new Pulldown("s_label", "images_search_label_field", (is_null($currently_selected_label) ? null : $currently_selected_label), $labels, false, null, true);
+        $currentlySelectedLabel = $this->requestHandler->getCurrentSearchLabelFromGetRequest();
+        return new Pulldown("s_label", "images_search_label_field", (is_null($currentlySelectedLabel) ? null : $currentlySelectedLabel), $labels, false, null, true);
     }
 
     private function getSearchButton(): Button {
@@ -41,11 +41,11 @@ class ImageSearch extends Panel {
     }
 
     private function getLabels(): array {
-        $labels_name_value_pair = array();
-        foreach ($this->_image_dao->getAllLabels() as $label) {
-            $labels_name_value_pair[] = array('name' => $label->getName(), 'value' => $label->getId());
+        $labelsNameValuePair = array();
+        foreach ($this->imageDao->getAllLabels() as $label) {
+            $labelsNameValuePair[] = array('name' => $label->getName(), 'value' => $label->getId());
         }
-        return $labels_name_value_pair;
+        return $labelsNameValuePair;
     }
 
 }

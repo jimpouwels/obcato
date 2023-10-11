@@ -4,11 +4,11 @@ require_once CMS_ROOT . '/modules/downloads/visuals/DownloadInfo.php';
 
 class EditorVisual extends Visual {
 
-    private Download $_download;
+    private Download $download;
 
     public function __construct(Download $download) {
         parent::__construct();
-        $this->_download = $download;
+        $this->download = $download;
     }
 
     public function getTemplateFilename(): string {
@@ -16,9 +16,9 @@ class EditorVisual extends Visual {
     }
 
     public function load(): void {
-        $metadata_editor = new DownloadMetadataEditor($this->_download);
-        $download_info = new DownloadInfo($this->_download);
-        $this->assign('metadata_editor', $metadata_editor->render());
-        $this->assign('download_info', $download_info->render());
+        $metadataEditor = new DownloadMetadataEditor($this->download);
+        $downloadInfo = new DownloadInfo($this->download);
+        $this->assign('metadata_editor', $metadataEditor->render());
+        $this->assign('download_info', $downloadInfo->render());
     }
 }

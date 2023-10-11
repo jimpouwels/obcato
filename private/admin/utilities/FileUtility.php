@@ -7,8 +7,8 @@ class FileUtility {
 
     public static function deleteImage(Image $image, string $upload_dir): void {
         // first delete the old file
-        if (!is_null($image->getFileName()) && $image->getFileName() != '') {
-            $old_file_name = $upload_dir . "/" . $image->getFileName();
+        if (!is_null($image->getFilename()) && $image->getFilename() != '') {
+            $old_file_name = $upload_dir . "/" . $image->getFilename();
             if (file_exists($old_file_name)) {
                 unlink($old_file_name);
             }

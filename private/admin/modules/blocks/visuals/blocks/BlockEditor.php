@@ -7,9 +7,9 @@ class BlockEditor extends Visual {
 
     private Block $currentBlock;
 
-    public function __construct(Block $currentBlock) {
+    public function __construct(Block $current) {
         parent::__construct();
-        $this->currentBlock = $currentBlock;
+        $this->currentBlock = $current;
     }
 
     public function getTemplateFilename(): string {
