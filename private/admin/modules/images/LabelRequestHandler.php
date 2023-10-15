@@ -8,19 +8,19 @@ class LabelRequestHandler extends HttpRequestHandler {
 
     private static string $LABEL_QUERYSTRING_KEY = "label";
 
-    private ImageDao $_image_dao;
-    private ?ImageLabel $_current_label;
+    private ImageDao $imageDao;
+    private ?ImageLabel $currentLabel;
 
     public function __construct() {
-        $this->_image_dao = ImageDaoMysql::getInstance();
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_label = $this->getCurrentLabelFromGetRequest();
+        $this->currentLabel = $this->getCurrentLabelFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_label = $this->getCurrentLabelFromPostRequest();
+        $this->currentLabel = $this->getCurrentLabelFromPostRequest();
         if ($this->isUpdateLabelAction()) {
             $this->updateLabel();
         } else if ($this->isAddLabelAction()) {
@@ -31,37 +31,37 @@ class LabelRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentLabel(): ?ImageLabel {
-        return $this->_current_label;
+        return $this->currentLabel;
     }
 
     private function getCurrentLabelFromGetRequest(): ?ImageLabel {
-        $current_label = null;
+        $currentLabel = null;
         if (isset($_GET[self::$LABEL_QUERYSTRING_KEY])) {
-            $label_id = $_GET[self::$LABEL_QUERYSTRING_KEY];
-            $current_label = $this->_image_dao->getLabel($label_id);
+            $labelId = $_GET[self::$LABEL_QUERYSTRING_KEY];
+            $currentLabel = $this->imageDao->getLabel($labelId);
         }
-        return $current_label;
+        return $currentLabel;
     }
 
     private function getCurrentLabelFromPostRequest(): ?ImageLabel {
-        $current_label = null;
+        $currentLabel = null;
         if (isset($_POST["label_id"]) && $_POST["label_id"] != "") {
-            $current_label = $this->_image_dao->getLabel($_POST["label_id"]);
+            $currentLabel = $this->imageDao->getLabel($_POST["label_id"]);
         }
-        return $current_label;
+        return $currentLabel;
     }
 
     private function addLabel(): void {
-        $label = $this->_image_dao->createLabel();
+        $label = $this->imageDao->createLabel();
         $label->setName("Nieuw label");
         $this->redirectTo($this->getBackendBaseUrl() . "&label=" . $label->getId());
     }
 
     private function updateLabel(): void {
-        $label_form = new LabelForm($this->_current_label);
         try {
-            $label_form->loadFields();
-            $this->_image_dao->updateLabel($this->_current_label);
+            $labelForm = new LabelForm($this->currentLabel);
+            $labelForm->loadFields();
+            $this->imageDao->updateLabel($this->currentLabel);
             $this->sendSuccessMessage("Label succesvol opgeslagen");
         } catch (FormException $e) {
             $this->sendErrorMessage("Label niet opgeslagen, verwerk de fouten");
@@ -69,10 +69,10 @@ class LabelRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteLabels(): void {
-        $labels = $this->_image_dao->getAllLabels();
+        $labels = $this->imageDao->getAllLabels();
         foreach ($labels as $label) {
             if (isset($_POST["label_" . $label->getId() . "_delete"])) {
-                $this->_image_dao->deleteLabel($label);
+                $this->imageDao->deleteLabel($label);
             }
         }
         $this->sendSuccessMessage("Label(s) succesvol verwijderd");
@@ -91,5 +91,3 @@ class LabelRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

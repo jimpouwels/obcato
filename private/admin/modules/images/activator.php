@@ -15,19 +15,17 @@ class ImageModuleVisual extends ModuleVisual {
     private static int $LABELS_TAB = 1;
     private static int $IMPORT_TAB = 2;
 
-    private ImageRequestHandler $_images_request_handler;
-    private LabelRequestHandler $_label_request_handler;
-    private ImportRequestHandler $_import_request_handler;
-    private Module $_image_module;
-    private int $_current_tab_id;
+    private ImageRequestHandler $imageRequestHandler;
+    private LabelRequestHandler $labelRequestHandler;
+    private ImportRequestHandler $importRequestHandler;
+    private int $currentTabId;
 
-    public function __construct(Module $image_module) {
-        parent::__construct($image_module);
-        $this->_image_module = $image_module;
-        $this->_images_request_handler = new ImageRequestHandler();
-        $this->_label_request_handler = new LabelRequestHandler();
-        $this->_import_request_handler = new ImportRequestHandler();
-        $this->_current_tab_id = $this->getCurrentTabId();
+    public function __construct(Module $module) {
+        parent::__construct($module);
+        $this->imageRequestHandler = new ImageRequestHandler();
+        $this->labelRequestHandler = new LabelRequestHandler();
+        $this->importRequestHandler = new ImportRequestHandler();
+        $this->currentTabId = $this->getCurrentTabId();
     }
 
     public function getTemplateFilename(): string {
@@ -36,11 +34,11 @@ class ImageModuleVisual extends ModuleVisual {
 
     public function load(): void {
         $content = null;
-        if ($this->_current_tab_id == self::$IMAGES_TAB) {
-            $content = new ImagesTab($this->_images_request_handler);
-        } else if ($this->_current_tab_id == self::$LABELS_TAB) {
-            $content = new LabelsTab($this->_label_request_handler);
-        } else if ($this->_current_tab_id == self::$IMPORT_TAB) {
+        if ($this->currentTabId == self::$IMAGES_TAB) {
+            $content = new ImagesTab($this->imageRequestHandler);
+        } else if ($this->currentTabId == self::$LABELS_TAB) {
+            $content = new LabelsTab($this->labelRequestHandler);
+        } else if ($this->currentTabId == self::$IMPORT_TAB) {
             $content = new ImportTab();
         }
 
@@ -50,52 +48,52 @@ class ImageModuleVisual extends ModuleVisual {
     }
 
     public function getActionButtons(): array {
-        $action_buttons = array();
-        if ($this->_current_tab_id == self::$IMAGES_TAB) {
-            $save_button = null;
-            $delete_button = null;
-            if (!is_null($this->_images_request_handler->getCurrentImage())) {
-                $save_button = new ActionButtonSave('update_image');
-                $delete_button = new ActionButtonDelete('delete_image');
+        $actionButtons = array();
+        if ($this->currentTabId == self::$IMAGES_TAB) {
+            $saveButton = null;
+            $deleteButton = null;
+            if (!is_null($this->imageRequestHandler->getCurrentImage())) {
+                $saveButton = new ActionButtonSave('update_image');
+                $deleteButton = new ActionButtonDelete('delete_image');
             }
-            $action_buttons[] = $save_button;
-            $action_buttons[] = new ActionButtonAdd('add_image');
-            $action_buttons[] = $delete_button;
+            $actionButtons[] = $saveButton;
+            $actionButtons[] = new ActionButtonAdd('add_image');
+            $actionButtons[] = $deleteButton;
         }
-        if ($this->_current_tab_id == self::$LABELS_TAB) {
-            if (!is_null($this->_label_request_handler->getCurrentLabel())) {
-                $action_buttons[] = new ActionButtonSave('update_label');
+        if ($this->currentTabId == self::$LABELS_TAB) {
+            if (!is_null($this->labelRequestHandler->getCurrentLabel())) {
+                $actionButtons[] = new ActionButtonSave('update_label');
             }
-            $action_buttons[] = new ActionButtonAdd('add_label');
-            $action_buttons[] = new ActionButtonDelete('delete_labels');
+            $actionButtons[] = new ActionButtonAdd('add_label');
+            $actionButtons[] = new ActionButtonDelete('delete_labels');
         }
-        if ($this->_current_tab_id == self::$IMPORT_TAB) {
-            $action_buttons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");
+        if ($this->currentTabId == self::$IMPORT_TAB) {
+            $actionButtons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");
         }
-        return $action_buttons;
+        return $actionButtons;
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->_image_module->getIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
         return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_images_request_handler;
-        $request_handlers[] = $this->_label_request_handler;
-        $request_handlers[] = $this->_import_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->imageRequestHandler;
+        $requestHandlers[] = $this->labelRequestHandler;
+        $requestHandlers[] = $this->importRequestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {}
 
     public function getTabMenu(): ?TabMenu {
-        $tab_menu = new TabMenu($this->getCurrentTabId());
-        $tab_menu->addItem("images_tab_images", self::$IMAGES_TAB);
-        $tab_menu->addItem("images_tab_labels", self::$LABELS_TAB);
-        $tab_menu->addItem("images_tab_import", self::$IMPORT_TAB);
-        return $tab_menu;
+        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu->addItem("images_tab_images", self::$IMAGES_TAB);
+        $tabMenu->addItem("images_tab_labels", self::$LABELS_TAB);
+        $tabMenu->addItem("images_tab_import", self::$IMPORT_TAB);
+        return $tabMenu;
     }
 
 }

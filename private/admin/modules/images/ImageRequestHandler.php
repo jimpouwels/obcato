@@ -12,19 +12,19 @@ class ImageRequestHandler extends HttpRequestHandler {
     private static string $FILENAME_SEARCH_QUERYSTRING_KEY = "s_filename";
     private static string $LABEL_SEARCH_QUERYSTRING_KEY = "s_label";
 
-    private ImageDao $_image_dao;
-    private ?Image $_current_image = null;
+    private ImageDao $imageDao;
+    private ?Image $currentImage = null;
 
     public function __construct() {
-        $this->_image_dao = ImageDaoMysql::getInstance();
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_image = $this->getImageFromGetRequest();
+        $this->currentImage = $this->getImageFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_image = $this->getImageFromPostRequest();
+        $this->currentImage = $this->imageDao->getImage($this->getImageIdFromPostRequest());
         if ($this->isUpdateImageAction()) {
             $this->updateImage();
         } else if ($this->isDeleteImageAction()) {
@@ -37,7 +37,7 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentImage(): ?Image {
-        return $this->_current_image;
+        return $this->currentImage;
     }
 
     public function getCurrentSearchTitleFromGetRequest(): ?string {
@@ -53,13 +53,13 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function updateImage(): void {
-        $image_form = new ImageForm($this->_current_image);
         try {
-            $image_form->loadFields();
-            $this->addNewlySelectedLabelsToImage($image_form->getSelectedLabels());
+            $imageForm = new ImageForm($this->currentImage);
+            $imageForm->loadFields();
+            $this->addNewlySelectedLabelsToImage($imageForm->getSelectedLabels());
             $this->deleteSelectedLabelsFromImage();
             $this->saveUploadedImage();
-            $this->_image_dao->updateImage($this->_current_image);
+            $this->imageDao->updateImage($this->currentImage);
             $this->sendSuccessMessage("Afbeelding succesvol opgeslagen");
         } catch (FormException $e) {
             $this->sendErrorMessage("Afbeelding niet opgeslagen, verwerk de fouten");
@@ -67,17 +67,17 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function toggleImagePublished(): void {
-        $image_list_form = new ImageListForm();
         try {
-            $image_list_form->loadFields();
-            $image_to_toggle = $this->_image_dao->getImage($image_list_form->getImageId());
-            $image_to_toggle->setPublished(!$image_to_toggle->isPublished());
-            $this->_image_dao->updateImage(($image_to_toggle));
-            $success_message_text_resource = "image_successfully_depublished";
-            if ($image_to_toggle->isPublished()) {
-                $success_message_text_resource = "image_successfully_published";
+            $imageListForm = new ImageListForm();
+            $imageListForm->loadFields();
+            $imageToToggle = $this->imageDao->getImage($imageListForm->getImageId());
+            $imageToToggle->setPublished(!$imageToToggle->isPublished());
+            $this->imageDao->updateImage(($imageToToggle));
+            $successMessageTextResourceId = "image_successfully_depublished";
+            if ($imageToToggle->isPublished()) {
+                $successMessageTextResourceId = "image_successfully_published";
             }
-            $this->sendSuccessMessage(Session::getTextResource($success_message_text_resource));
+            $this->sendSuccessMessage(Session::getTextResource($successMessageTextResourceId));
             $this->redirectTo($this->getBackendBaseUrl());
         } catch (FormException $e) {
             $this->sendErrorMessage("Afbeelding niet worden ge(de)publiseerd");
@@ -85,49 +85,40 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteImage(): void {
-        $this->_image_dao->deleteImage($this->_current_image);
+        $this->imageDao->deleteImage($this->currentImage);
         $this->sendSuccessMessage("Afbeelding succesvol verwijderd");
         $this->redirectTo($this->getBackendBaseUrl());
     }
 
     private function addImage(): void {
-        $new_image = $this->_image_dao->createImage();
+        $newImage = $this->imageDao->createImage();
         $this->sendSuccessMessage("Afbeelding succesvol aangemaakt");
-        $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $new_image->getId());
-    }
-
-    private function getImageFromPostRequest(): ?Image {
-        $image = null;
-        $image_id = $this->getImageIdFromPostRequest();
-        if (!is_null($image_id)) {
-            $image = $this->_image_dao->getImage($image_id);
-        }
-        return $image;
+        $this->redirectTo($this->getBackendBaseUrl() . "&image=" . $newImage->getId());
     }
 
     private function getImageFromGetRequest(): ?Image {
-        $current_image = null;
+        $currentImage = null;
         if (isset($_GET[self::$IMAGE_QUERYSTRING_KEY]) && $_GET[self::$IMAGE_QUERYSTRING_KEY] != "") {
-            $current_image = $this->_image_dao->getImage($_GET[self::$IMAGE_QUERYSTRING_KEY]);
+            $currentImage = $this->imageDao->getImage($_GET[self::$IMAGE_QUERYSTRING_KEY]);
         }
-        return $current_image;
+        return $currentImage;
     }
 
-    private function addNewlySelectedLabelsToImage(array $selected_labels): void {
-        if (count($selected_labels) == 0) {
+    private function addNewlySelectedLabelsToImage(array $selectedLabels): void {
+        if (count($selectedLabels) == 0) {
             return;
         }
-        $existing_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
-        foreach ($selected_labels as $selected_label_id) {
-            if (!$this->isLabelAlreadyAdded($selected_label_id, $existing_labels)) {
-                $this->_image_dao->addLabelToImage($selected_label_id, $this->_current_image);
+        $existingLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
+        foreach ($selectedLabels as $selected_label_id) {
+            if (!$this->isLabelAlreadyAdded($selected_label_id, $existingLabels)) {
+                $this->imageDao->addLabelToImage($selected_label_id, $this->currentImage);
             }
         }
     }
 
-    private function isLabelAlreadyAdded(int $selected_label_id, array $existing_labels): bool {
-        foreach ($existing_labels as $existing_label) {
-            if ($selected_label_id == $existing_label->getId()) {
+    private function isLabelAlreadyAdded(int $selectedLabelId, array $existingLabels): bool {
+        foreach ($existingLabels as $existingLabel) {
+            if ($selectedLabelId == $existingLabel->getId()) {
                 return true;
             }
         }
@@ -135,50 +126,50 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteSelectedLabelsFromImage(): void {
-        $image_labels = $this->_image_dao->getLabelsForImage($this->_current_image->getId());
-        foreach ($image_labels as $image_label) {
-            if (isset($_POST["label_" . $this->_current_image->getId() . "_" . $image_label->getId() . "_delete"])) {
-                $this->_image_dao->deleteLabelForImage($image_label->getId(), $this->_current_image);
+        $imageLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
+        foreach ($imageLabels as $imageLabel) {
+            if (isset($_POST["label_" . $this->currentImage->getId() . "_" . $imageLabel->getId() . "_delete"])) {
+                $this->imageDao->deleteLabelForImage($imageLabel->getId(), $this->currentImage);
             }
         }
     }
 
     private function saveUploadedImage(): void {
-        $new_file_name = $this->getNewImageFilename();
+        $newFilename = $this->getNewImageFilename();
         if (is_uploaded_file($_FILES["image_file"]["tmp_name"])) {
             $this->deletePreviousImage();
-            $this->moveImageToUploadDirectory($new_file_name);
-            $this->saveThumbnailForUploadedImage($new_file_name);
+            $this->moveImageToUploadDirectory($newFilename);
+            $this->saveThumbnailForUploadedImage($newFilename);
         }
     }
 
     private function getNewImageFilename(): string {
-        $current_image_id = $this->_current_image->getId();
-        $uploaded_image_filename = $_FILES["image_file"]["name"];
-        return "UPLIMG-00$current_image_id" . "_$uploaded_image_filename";
+        $currentImageId = $this->currentImage->getId();
+        $uploadedImageFilename = $_FILES["image_file"]["name"];
+        return "UPLIMG-00$currentImageId" . "_$uploadedImageFilename";
     }
 
-    private function saveThumbnailForUploadedImage(string $new_file_name): void {
-        $thumb_file_name = "THUMB-" . $new_file_name;
-        FileUtility::saveThumb($new_file_name, UPLOAD_DIR, $thumb_file_name, 50, 50);
-        $this->_current_image->setThumbFileName($thumb_file_name);
+    private function saveThumbnailForUploadedImage(string $newFilename): void {
+        $thumbFilename = "THUMB-" . $newFilename;
+        FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 50, 50);
+        $this->currentImage->setThumbFileName($thumbFilename);
     }
 
-    private function moveImageToUploadDirectory(string $new_file_name): void {
-        rename($_FILES["image_file"]["tmp_name"], UPLOAD_DIR . "/" . $new_file_name);
-        $this->_current_image->setFilename($new_file_name);
+    private function moveImageToUploadDirectory(string $newFilename): void {
+        rename($_FILES["image_file"]["tmp_name"], UPLOAD_DIR . "/" . $newFilename);
+        $this->currentImage->setFilename($newFilename);
     }
 
     private function deletePreviousImage(): void {
-        FileUtility::deleteImage($this->_current_image, UPLOAD_DIR);
+        FileUtility::deleteImage($this->currentImage, UPLOAD_DIR);
     }
 
     private function getImageIdFromPostRequest(): ?int {
-        $image_id = null;
+        $imageId = null;
         if (isset($_POST["image_id"]) && $_POST["image_id"]) {
-            $image_id = $_POST["image_id"];
+            $imageId = $_POST["image_id"];
         }
-        return $image_id;
+        return $imageId;
     }
 
     private function isAddImageAction(): bool {
@@ -201,10 +192,10 @@ class ImageRequestHandler extends HttpRequestHandler {
         return isset($_POST['action']) && $_POST["action"] == $name && isset($_POST["image_id"]);
     }
 
-    private function getQueryStringValueFromGetRequest($query_string_key): ?string {
+    private function getQueryStringValueFromGetRequest($queryStringKey): ?string {
         $value = null;
-        if (isset($_GET[$query_string_key]) && $_GET[$query_string_key] != '') {
-            $value = $_GET[$query_string_key];
+        if (isset($_GET[$queryStringKey]) && $_GET[$queryStringKey] != '') {
+            $value = $_GET[$queryStringKey];
         }
         return $value;
     }

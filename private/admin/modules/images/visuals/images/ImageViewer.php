@@ -5,9 +5,9 @@ class ImageViewer extends Panel {
 
     private Image $currentImage;
 
-    public function __construct(Image $currentImage) {
+    public function __construct(Image $current) {
         parent::__construct('Afbeelding', 'image_editor');
-        $this->currentImage = $currentImage;
+        $this->currentImage = $current;
     }
 
     public function getPanelContentTemplate(): string {

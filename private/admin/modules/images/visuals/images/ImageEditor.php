@@ -8,9 +8,9 @@ class ImageEditor extends Visual {
     private Image $currentImage;
     private ImageDao $imageDao;
 
-    public function __construct(Image $currentImage) {
+    public function __construct(Image $current) {
         parent::__construct();
-        $this->currentImage = $currentImage;
+        $this->currentImage = $current;
         $this->imageDao = ImageDaoMysql::getInstance();
     }
 

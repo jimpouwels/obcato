@@ -11,13 +11,13 @@ class ComponentsModuleVisual extends ModuleVisual {
     private static $HEAD_INCLUDES_TEMPLATE = 'components/head_includes.tpl';
     private static $COMPONENTS_TAB = 0;
     private static $INSTALLATION_TAB = 1;
-    private $_module;
+    private $module;
     private $_install_request_handler;
     private $_component_request_handler;
 
     public function __construct($components_module) {
         parent::__construct($components_module);
-        $this->_module = $components_module;
+        $this->module = $components_module;
         $this->_install_request_handler = new InstallRequestHandler();
         $this->_component_request_handler = new ComponentRequestHandler();
     }

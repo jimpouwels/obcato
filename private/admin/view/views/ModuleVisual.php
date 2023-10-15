@@ -2,15 +2,15 @@
 
 abstract class ModuleVisual extends Visual {
 
-    private Module $_module;
+    private Module $module;
 
     protected function __construct(Module $module) {
         parent::__construct();
-        $this->_module = $module;
+        $this->module = $module;
     }
 
     public function getTitle(): string {
-        return $this->getTextResource($this->_module->getTitleTextResourceIdentifier());
+        return $this->getTextResource($this->module->getTitleTextResourceIdentifier());
     }
 
     abstract function getActionButtons(): array;
@@ -22,5 +22,9 @@ abstract class ModuleVisual extends Visual {
     abstract function getRequestHandlers(): array;
 
     public function onRequestHandled(): void {}
+
+    public function getModuleIdentifier(): string {
+        return $this->module->getIdentifier();
+    }
 
 }

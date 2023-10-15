@@ -3,55 +3,52 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class ImportRequestHandler extends HttpRequestHandler {
     private static string $ZIP_FILE_ID = "import_zip_file";
-    private ImageDao $_image_dao;
+    private ImageDao $imageDao;
 
     public function __construct() {
-        $this->_image_dao = ImageDaoMysql::getInstance();
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
         if (isset($_FILES[self::$ZIP_FILE_ID]) && is_uploaded_file($_FILES[self::$ZIP_FILE_ID]["tmp_name"])) {
-            $number_imported = 0;
+            $importCount = 0;
             $zip = new ZipArchive();
             $zip->open($_FILES["import_zip_file"]["tmp_name"]);
             for ($i = 0; $i < $zip->numFiles; $i++) {
-                $file_entry_name = $zip->getNameIndex($i);
-                if (str_starts_with($file_entry_name, '__MACOSX/')) {
+                $fileEntryName = $zip->getNameIndex($i);
+                if (str_starts_with($fileEntryName, '__MACOSX/')) {
                     continue;
                 }
-                $splits = explode(".", $file_entry_name);
+                $splits = explode(".", $fileEntryName);
                 $extension = $splits[count($splits) - 1];
                 $extension = strtolower($extension);
                 if ($extension == "jpeg" || $extension == "jpg" || $extension == "gif" || $extension == "png") {
-                    $new_image = $this->_image_dao->createImage();
-                    $new_image->setTitle($file_entry_name);
-                    $new_image->setPublished(1);
-                    $new_file_name = "UPLIMG-00" . $new_image->getId() . "00" . $file_entry_name;
-                    $file_contents = $zip->getFromIndex($i);
-                    $new_file = fopen(UPLOAD_DIR . "/" . $new_file_name, "w");
-                    fwrite($new_file, $file_contents);
-                    fclose($new_file);
-                    $new_image->setFilename($new_file_name);
-                    $thumb_file_name = "THUMB-" . $new_file_name;
-                    FileUtility::saveThumb($new_file_name, UPLOAD_DIR, $thumb_file_name, 50, 50);
-                    $new_image->setThumbFileName($thumb_file_name);
+                    $newImage = $this->imageDao->createImage();
+                    $newImage->setTitle($fileEntryName);
+                    $newImage->setPublished(1);
+                    $newFilename = "UPLIMG-00" . $newImage->getId() . "00" . $fileEntryName;
+                    $newFile = fopen(UPLOAD_DIR . "/" . $newFilename, "w");
+                    fwrite($newFile, $zip->getFromIndex($i));
+                    fclose($newFile);
+                    $newImage->setFilename($newFilename);
+                    $thumbFilename = "THUMB-" . $newFilename;
+                    FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 50, 50);
+                    $newImage->setThumbFileName($thumbFilename);
                     if (isset($_POST["import_label"]) && $_POST["import_label"] != "") {
-                        $this->_image_dao->addLabelToImage($_POST["import_label"], $new_image);
+                        $this->imageDao->addLabelToImage($_POST["import_label"], $newImage);
                     }
-                    $this->_image_dao->updateImage($new_image);
-                    $number_imported += 1;
+                    $this->imageDao->updateImage($newImage);
+                    $importCount += 1;
                 }
             }
             $zip->close();
-            if ($number_imported == 0) {
+            if ($importCount == 0) {
                 $this->sendErrorMessage("Geen afbeeldingen gevonden in ZIP bestand");
             } else {
-                $this->sendSuccessMessage($number_imported . " afbeeldingen geimporteerd");
+                $this->sendSuccessMessage($importCount . " afbeeldingen geimporteerd");
             }
         }
     }
 }
-
-?>

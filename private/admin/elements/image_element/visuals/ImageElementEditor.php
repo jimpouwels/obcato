@@ -8,9 +8,9 @@ class ImageElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
     private ImageElement $imageElement;
 
-    public function __construct(ImageElement $image_element) {
+    public function __construct(ImageElement $_element) {
         parent::__construct();
-        $this->imageElement = $image_element;
+        $this->imageElement = $_element;
     }
 
     public function getElement(): Element {

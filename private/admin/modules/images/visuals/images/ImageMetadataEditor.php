@@ -5,9 +5,9 @@ class ImageMetadataEditor extends Panel {
 
     private Image $currentImage;
 
-    public function __construct(Image $currentImage) {
+    public function __construct(Image $current) {
         parent::__construct('Algemeen', 'image_meta');
-        $this->currentImage = $currentImage;
+        $this->currentImage = $current;
     }
 
     public function getPanelContentTemplate(): string {

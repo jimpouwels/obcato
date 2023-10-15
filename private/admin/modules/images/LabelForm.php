@@ -4,23 +4,23 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 
 class LabelForm extends Form {
 
-    private ImageLabel $_label;
-    private ImageDao $_image_dao;
+    private ImageLabel $label;
+    private ImageDao $imageDao;
 
     public function __construct(ImageLabel $label) {
-        $this->_label = $label;
-        $this->_image_dao = ImageDaoMysql::getInstance();
+        $this->label = $label;
+        $this->imageDao = ImageDaoMysql::getInstance();
     }
 
     public function loadFields(): void {
-        $this->_label->setName($this->getMandatoryFieldValue("name"));
+        $this->label->setName($this->getMandatoryFieldValue("name"));
         if ($this->hasErrors() || $this->labelExists())
             throw new FormException();
     }
 
     private function labelExists(): bool {
-        $existing_label = $this->_image_dao->getLabelByName($this->_label->getName());
-        if (!is_null($existing_label) && $existing_label->getId() != $this->_label->getId()) {
+        $existingLabel = $this->imageDao->getLabelByName($this->label->getName());
+        if ($existingLabel && $existingLabel->getId() != $this->label->getId()) {
             $this->raiseError("name", "Er bestaat al een label met deze naam");
             return true;
         }
