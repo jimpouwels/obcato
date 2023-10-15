@@ -90,8 +90,8 @@ abstract class Form {
 
     public function getDate(string $fieldName): ?string {
         $value = $this->getFieldValue($fieldName);
-        $invalidDate = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
-        if (!$invalidDate && !$value) {
+        $validDate = preg_match("/^[0-3]?[0-9]\-[01]?[0-9]\-[12][90][0-9][0-9]$/", $value);
+        if ($value && !$validDate) {
             $this->raiseError($fieldName, "form_error_invalid_date");
         }
         return $value;
