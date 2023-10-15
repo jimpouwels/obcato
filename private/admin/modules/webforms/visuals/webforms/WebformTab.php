@@ -36,7 +36,7 @@ class WebformTab extends Visual {
     }
 
     private function renderMetadataEditor(): string {
-        $metadata_editor = new WebformMetadataEditor($this->_current_webform, $this);
+        $metadata_editor = new WebformMetadataEditor($this->_current_webform);
         return $metadata_editor->render();
     }
 

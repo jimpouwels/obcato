@@ -7,8 +7,8 @@ class WebformMetadataEditor extends Panel {
     private WebForm $_current_webform;
     private ConfigDao $_config_dao;
 
-    public function __construct(WebForm $current_webform, ?Visual $parent = null) {
-        parent::__construct('webforms_metdata_editor_panel_title', '', $parent);
+    public function __construct(WebForm $current_webform) {
+        parent::__construct('webforms_metdata_editor_panel_title', '');
         $this->_current_webform = $current_webform;
         $this->_config_dao = ConfigDaoMysql::getInstance();
     }
@@ -44,5 +44,3 @@ class WebformMetadataEditor extends Panel {
     }
 
 }
-
-?>

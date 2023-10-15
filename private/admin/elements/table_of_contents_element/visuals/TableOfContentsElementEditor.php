@@ -14,16 +14,17 @@ class TableOfContentsElementEditor extends ElementVisual {
         $this->element = $element;
     }
 
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
     public function getElement(): Element {
         return $this->element;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField("element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
 }
-
-?>

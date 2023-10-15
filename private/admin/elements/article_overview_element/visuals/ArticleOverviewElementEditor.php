@@ -18,7 +18,11 @@ class ArticleOverviewElementEditor extends ElementVisual {
         return $this->element;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField("element_" . $this->element->getId() . "_title", $this->getTextResource("article_overview_element_editor_title"), $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
         $showFromField = new DateField("element_" . $this->element->getId() . "_show_from", $this->getTextResource("article_overview_element_editor_publication_date_from"), $this->getDateValue($this->element->getShowFrom()), false, "datepicker");
@@ -33,8 +37,6 @@ class ArticleOverviewElementEditor extends ElementVisual {
         $data->assign("order_type_field", $orderTypeField->render());
         $termSelectField = new TermSelector($this->element->getTerms(), $this->element->getId());
         $data->assign("term_select_field", $termSelectField->render());
-
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
     private function getDateValue(?string $date): ?string {

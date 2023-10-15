@@ -17,7 +17,11 @@ class ImageElementEditor extends ElementVisual {
         return $this->imageElement;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
         $imagePicker = new ImagePicker("image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
         $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
@@ -30,7 +34,6 @@ class ImageElementEditor extends ElementVisual {
         $data->assign("image_picker", $imagePicker->render());
         $data->assign("image_id", $this->imageElement->getImageId());
         $data->assign("selected_image_title", $this->getSelectedImageTitle());
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
     private function renderAlignmentField(): string {

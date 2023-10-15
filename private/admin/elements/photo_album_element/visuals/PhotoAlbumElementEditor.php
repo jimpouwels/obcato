@@ -18,7 +18,11 @@ class PhotoAlbumElementEditor extends ElementVisual {
         return $this->element;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField("element_" . $this->element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->element->getTitle(), false, true, null);
         $maxResultsField = new TextField("element_" . $this->element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->element->getNumberOfResults(), false, true, "number_of_results_field");
         $labelSelectField = new ImageLabelSelector($this->element->getLabels(), $this->element->getId());
@@ -26,10 +30,6 @@ class PhotoAlbumElementEditor extends ElementVisual {
         $data->assign("title_field", $titleField->render());
         $data->assign("max_results_field", $maxResultsField->render());
         $data->assign("label_select_field", $labelSelectField->render());
-
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
 }
-
-?>

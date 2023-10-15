@@ -17,7 +17,11 @@ class ListElementEditor extends ElementVisual {
         return $this->listElement;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField('element_' . $this->listElement->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->listElement->getTitle(), false, true, null);
         $addItemButton = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
@@ -25,8 +29,6 @@ class ListElementEditor extends ElementVisual {
         $data->assign("add_item_button", $addItemButton->render());
         $data->assign("title_field", $titleField->render());
         $data->assign("id", $this->listElement->getId());
-
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
     private function getListItems(): array {

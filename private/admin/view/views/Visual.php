@@ -5,15 +5,10 @@ abstract class Visual {
 
     private TemplateEngine $_template_engine;
     private Smarty_Internal_Data $_template_data;
-    private ?Smarty_Internal_Data $_parent_template_data;
 
     public function __construct(?Visual $parent = null) {
         $this->_template_engine = TemplateEngine::getInstance();
-        $this->_parent_template_data = null;
-        if ($parent) {
-            $this->_parent_template_data = $parent->_template_data;
-        }
-        $this->_template_data = $this->_template_engine->createChildData($this->_parent_template_data);
+        $this->_template_data = $this->_template_engine->createChildData();
     }
 
     public function render(): string {
@@ -29,20 +24,20 @@ abstract class Visual {
         return $this->_template_engine;
     }
 
-    protected function createChildData(bool $include_current_data = false): Smarty_Internal_Data {
-        if ($include_current_data) {
-            return $this->_template_engine->createChildData($this->_template_data);
-        } else {
-            return $this->_template_engine->createChildData();
-        }
-    }
-
     protected function assign(string $key, mixed $value): void {
         $this->_template_data->assign($key, $value);
     }
 
     protected function assignGlobal(string $key, mixed $value): void {
         $this->_template_engine->assign($key, $value);
+    }
+
+    protected function createChildData(): Smarty_Internal_Data {
+        return $this->_template_engine->createChildData();
+    }
+
+    protected function fetch(string $template, Smarty_Internal_Data $data): string {
+        return $this->_template_engine->fetch($template, $data);
     }
 
     protected function getTextResource(string $identifier): string {

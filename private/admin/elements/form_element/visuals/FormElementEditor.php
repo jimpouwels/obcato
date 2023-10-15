@@ -19,13 +19,14 @@ class FormElementEditor extends ElementVisual {
         return $this->formElement;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
         $currentSelectedWebform = $this->formElement->getWebForm();
-        $currentWebformId = null;
-        if ($currentSelectedWebform) {
-            $currentWebformId = $currentSelectedWebform->getId();
-        }
+        $currentWebformId = $currentSelectedWebform?->getId();
         $webformPicker = new Pulldown($this->createFieldId("selected_webform"), $this->getTextResource("form_element_editor_webform"), $currentWebformId, array(), false, null, true);
         foreach ($this->webformDao->getAllWebForms() as $webform) {
             $webformPicker->addOption($webform->getTitle(), $webform->getId());
@@ -33,7 +34,6 @@ class FormElementEditor extends ElementVisual {
 
         $data->assign("title_field", $titleField->render());
         $data->assign("webform_picker", $webformPicker->render());
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
     private function createFieldId($propertyName): string {

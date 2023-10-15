@@ -27,7 +27,7 @@ abstract class FrontendVisual {
         $this->page = $page;
         $this->article = $article;
         $this->templateEngine = TemplateEngine::getInstance();
-        $this->templateData = $this->templateEngine->createChildData();
+        $this->templateData = $this->createChildData();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
     }
 
@@ -62,6 +62,10 @@ abstract class FrontendVisual {
 
     protected function getTemplateEngine(): TemplateEngine {
         return $this->templateEngine;
+    }
+
+    protected function createChildData(): Smarty_Internal_Data {
+        return $this->templateEngine->createChildData();
     }
 
     protected function assign(string $key, mixed $value): void {
@@ -101,14 +105,6 @@ abstract class FrontendVisual {
             return $this->article;
         } else {
             return $this->page;
-        }
-    }
-
-    protected function createChildData(bool $includeCurrentData = false): Smarty_Internal_Data {
-        if ($includeCurrentData) {
-            return $this->templateEngine->createChildData($this->templateData);
-        } else {
-            return $this->templateEngine->createChildData();
         }
     }
 

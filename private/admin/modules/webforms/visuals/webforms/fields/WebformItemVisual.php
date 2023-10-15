@@ -23,7 +23,7 @@ abstract class WebformItemVisual extends Visual {
     abstract function loadItemContent(Smarty_Internal_Data $data): void;
 
     public function load(): void {
-        $form_item_content_template_data = $this->getTemplateEngine()->createChildData();
+        $form_item_content_template_data = $this->createChildData();
         $this->loadItemContent($form_item_content_template_data);
 
         $template_picker = new TemplatePicker("webform_item_{$this->_webform_item->getId()}_template", "", false, "template_picker", $this->_webform_item->getTemplate(), $this->_webform_item->getScope());

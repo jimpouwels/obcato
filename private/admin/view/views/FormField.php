@@ -10,7 +10,7 @@ abstract class FormField extends Visual {
     private ?string $_label_resource_identifier;
     private bool $_mandatory;
     private bool $_linkable;
-    private ?string $_value = null;
+    private ?string $_value;
 
     protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
         parent::__construct();
@@ -37,12 +37,12 @@ abstract class FormField extends Visual {
         $this->assign('label', $this->getLabelHtml());
         $this->assign('type', $this->getFieldType());
 
-        $field_template_data = $this->createChildData();
-        $this->loadFormField($field_template_data);
-        $field_template_data->assign('classes', $this->getCssClassesHtml());
-        $field_template_data->assign("field_name", $this->_field_name);
-        $field_template_data->assign("field_value", $this->getFieldValue());
-        $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $field_template_data));
+        $fieldTemplateData = $this->createChildData();
+        $this->loadFormField($fieldTemplateData);
+        $fieldTemplateData->assign('classes', $this->getCssClassesHtml());
+        $fieldTemplateData->assign("field_name", $this->_field_name);
+        $fieldTemplateData->assign("field_value", $this->getFieldValue());
+        $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $fieldTemplateData));
     }
 
     public function getErrorHtml(string $field_name): string {

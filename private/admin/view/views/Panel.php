@@ -5,8 +5,8 @@ abstract class Panel extends Visual {
     private string $_title_resource_identifier;
     private string $_class;
 
-    public function __construct(string $title_resource_identifier, string $class = "", ?Visual $parent = null) {
-        parent::__construct($parent);
+    public function __construct(string $title_resource_identifier, string $class = "") {
+        parent::__construct();
         $this->_title_resource_identifier = $title_resource_identifier;
         $this->_class = $class;
     }
@@ -20,10 +20,10 @@ abstract class Panel extends Visual {
     abstract function loadPanelContent(Smarty_Internal_Data $data): void;
 
     public function load(): void {
-        $panel_content_template_data = $this->getTemplateEngine()->createChildData();
-        $this->loadPanelContent($panel_content_template_data);
+        $panelContentTemplateData = $this->createChildData();
+        $this->loadPanelContent($panelContentTemplateData);
 
-        $this->assign('content', $this->getTemplateEngine()->fetch($this->getPanelContentTemplate(), $panel_content_template_data));
+        $this->assign('content', $this->fetch($this->getPanelContentTemplate(), $panelContentTemplateData));
         $this->assign('title_resource_identifier', $this->_title_resource_identifier);
         $this->assign('class', $this->_class);
     }

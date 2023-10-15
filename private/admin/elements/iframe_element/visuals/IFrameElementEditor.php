@@ -17,7 +17,11 @@ class IFrameElementEditor extends ElementVisual {
         return $this->iframeElement;
     }
 
-    public function renderElementForm(Smarty_Internal_Data $data): string {
+    public function getElementFormTemplateFilename(): string {
+        return self::$TEMPLATE;
+    }
+
+    public function loadElementForm(Smarty_Internal_Data $data): void {
         $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("iframe_element_editor_title"), htmlentities($this->iframeElement->getTitle()), false, false, null);
         $urlField = new TextField($this->createFieldId("url"), $this->getTextResource("iframe_element_editor_url"), $this->iframeElement->getUrl(), false, true, null);
         $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("iframe_element_editor_width"), $this->iframeElement->getWidth(), false, false, "size_field");
@@ -27,7 +31,6 @@ class IFrameElementEditor extends ElementVisual {
         $data->assign("url_field", $urlField->render());
         $data->assign("width_field", $widthField->render());
         $data->assign("height_field", $heightField->render());
-        return $this->getTemplateEngine()->fetch(self::$TEMPLATE, $data);
     }
 
     private function createFieldId($propertyName): string {

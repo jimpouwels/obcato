@@ -8,10 +8,12 @@ abstract class ElementVisual extends Visual {
 
     abstract function getElement(): Element;
 
-    abstract function renderElementForm(Smarty_Internal_Data $data): string;
+    abstract function loadElementForm(Smarty_Internal_Data $data): void;
 
-    public function __construct(?Visual $parent = null) {
-        parent::__construct($parent);
+    abstract function getElementFormTemplateFilename(): string;
+
+    public function __construct() {
+        parent::__construct();
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 
@@ -23,22 +25,23 @@ abstract class ElementVisual extends Visual {
         $element = $this->getElement();
         $elementType = $this->elementDao->getElementTypeForElement($element->getId());
 
-        $template_picker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $elementType->getScope());
+        $templatePicker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $elementType->getScope());
 
-        $panel_content_template_data = $this->getTemplateEngine()->createChildData();
-        $this->assign("element_form", $this->renderElementForm($panel_content_template_data));
+        $panelContentTemplateData = $this->createChildData();
+        $this->loadElementForm($panelContentTemplateData);
+        $this->assign("element_form", $this->fetch($this->getElementFormTemplateFilename(), $panelContentTemplateData));
         $this->assign("index", $element->getOrderNr());
         $this->assign("id", $element->getId());
         $this->assign("icon_url", '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . '/' . $elementType->getIconUrl());
         $this->assign("type", $this->getTextResource($elementType->getIdentifier() . '_label'));
-        $this->assign("template_picker", $template_picker->render());
+        $this->assign("template_picker", $templatePicker->render());
 
-        $table_of_contents_html = "";
+        $tableOfContentsHtml = "";
         if ($elementType->getIdentifier() != 'table_of_contents_element') {
-            $include_in_table_of_contents_field = new SingleCheckbox("element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
-            $table_of_contents_html = $include_in_table_of_contents_field->render();
+            $includeInTocField = new SingleCheckbox("element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
+            $tableOfContentsHtml = $includeInTocField->render();
         }
-        $this->assign("include_in_table_of_contents", $table_of_contents_html);
+        $this->assign("include_in_table_of_contents", $tableOfContentsHtml);
         $this->assign("identifier", $elementType->getIdentifier());
         $this->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
         $this->assign("summary_text", $element->getSummaryText());

@@ -29,7 +29,7 @@ class Cms extends Visual {
 
         $this->assignGlobal("text_resources", Session::getTextResources());
 
-        if (!is_null($this->moduleVisual)) {
+        if ($this->moduleVisual) {
             $this->assignGlobal("page_title", $this->moduleVisual->getTitle());
             $this->assignGlobal("module_head_includes", $this->moduleVisual->renderHeadIncludes());
         }
@@ -60,7 +60,7 @@ class Cms extends Visual {
 
     private function getActionsMenu(): ActionsMenu {
         $action_buttons = array();
-        if (!is_null($this->moduleVisual)) {
+        if ($this->moduleVisual) {
             $action_buttons = $this->moduleVisual->getActionButtons();
         }
         return new ActionsMenu($action_buttons);
