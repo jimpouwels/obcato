@@ -24,8 +24,8 @@ class FormFrontendVisual extends FrontendVisual {
     public function loadVisual(?array &$data): void {
         $this->assign('webform_id', $this->webform->getId());
         if ($this->webform->getIncludeCaptcha()) {
-            $captcha_key = $this->webform->getCaptchaKey();
-            $this->assign('captcha_key', $captcha_key);
+            $captchaKey = $this->webform->getCaptchaKey();
+            $this->assign('captcha_key', $captchaKey);
         }
         $this->assign('title', $this->webform->getTitle());
 

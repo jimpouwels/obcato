@@ -1,6 +1,8 @@
 <?php
 
 interface PageDao {
+    public function getHomepage(): ?Page;
+
     public function getAllPages(): array;
 
     public function getPage(?int $id): ?Page;

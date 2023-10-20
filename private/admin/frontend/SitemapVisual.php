@@ -28,28 +28,28 @@ class SitemapVisual extends FrontendVisual {
     }
 
     private function renderPageUrls(): array {
-        $page_urls = array();
+        $pageUrls = array();
         foreach ($this->pageDao->getAllPages() as $page) {
             if (!$page->getIncludeInSearchEngine()) {
                 continue;
             }
-            $page_url = array();
-            $page_url['url'] = $this->getPageUrl($page, true);
-            $page_url['last_modified'] = date_format($page->getLastModified(), 'Y-m-d');
-            $page_urls[] = $page_url;
+            $pageUrl = array();
+            $pageUrl['url'] = $this->getPageUrl($page, true);
+            $pageUrl['last_modified'] = date_format($page->getLastModified(), 'Y-m-d');
+            $pageUrls[] = $pageUrl;
         }
-        return $page_urls;
+        return $pageUrls;
     }
 
     private function renderArticleUrls(): array {
-        $article_urls = array();
+        $articleUrls = array();
         foreach ($this->articleDao->getAllArticles() as $article) {
-            $article_url = array();
-            $article_url['url'] = $this->getArticleUrl($article, true);
-            $article_url['last_modified'] = date_format($article->getLastModified(), 'Y-m-d');
-            $article_urls[] = $article_url;
+            $articleUrl = array();
+            $articleUrl['url'] = $this->getArticleUrl($article, true);
+            $articleUrl['last_modified'] = date_format($article->getLastModified(), 'Y-m-d');
+            $articleUrls[] = $articleUrl;
         }
-        return $article_urls;
+        return $articleUrls;
     }
 
 }

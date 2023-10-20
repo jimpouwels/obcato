@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 // update settings object
-$website_settings = Settings::find();
+$website_settings = $settings_dao->getSettings();
 
 ?>
 

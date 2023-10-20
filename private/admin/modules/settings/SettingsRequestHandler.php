@@ -5,26 +5,24 @@ require_once CMS_ROOT . "/modules/settings/SettingsForm.php";
 
 class SettingsRequestHandler extends HttpRequestHandler {
 
-    private SettingsDao $_settings_dao;
+    private SettingsDao $settingsDao;
 
     public function __construct() {
-        $this->_settings_dao = SettingsDaoMysql::getInstance();
+        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
-        $settings = $this->_settings_dao->getSettings();
-        $settings_form = new SettingsForm($settings);
         try {
-            $settings_form->loadFields();
-            $this->_settings_dao->update($settings);
-            $this->_settings_dao->setHomepage($settings_form->getHomepageId());
+            $settings = $this->settingsDao->getSettings();
+            $settingsForm = new SettingsForm($settings);
+            $settingsForm->loadFields();
+            $this->settingsDao->update($settings);
+            $this->settingsDao->setHomepage($settingsForm->getHomepageId());
             $this->sendSuccessMessage("Instellingen succesvol opgeslagen");
-        } catch (FormException $e) {
+        } catch (FormException) {
             $this->sendErrorMessage("Instellingen niet opgeslagen, verwerk de fouten");
         }
     }
 }
-
-?>

@@ -22,6 +22,10 @@ class PageInteractor implements PageService {
         return self::$instance;
     }
 
+    public function getHomepage(): Page {
+        return $this->pageDao->getHomepage();
+    }
+
     public function getPageById(int $id): ?Page {
         return $this->pageDao->getPage($id);
     }

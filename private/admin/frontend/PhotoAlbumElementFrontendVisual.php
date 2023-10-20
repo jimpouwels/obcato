@@ -3,8 +3,8 @@ require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
 
 class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, PhotoAlbumElement $photo_album_element) {
-        parent::__construct($page, $article, $photo_album_element);
+    public function __construct(Page $page, ?Article $article, PhotoAlbumElement $photoAlbumElement) {
+        parent::__construct($page, $article, $photoAlbumElement);
     }
 
     public function loadElement(): void {
@@ -17,15 +17,13 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
         $images_arr = array();
         foreach ($images as $image) {
             if (!$image->isPublished()) continue;
-            $image_item = array();
-            $image_item["id"] = $image->getId();
-            $image_item["title"] = $image->getTitle();
-            $image_item["alt_text"] = $image->getAltText();
-            $image_item["url"] = $this->getImageUrl($image);
-            $images_arr[] = $image_item;
+            $imageItem = array();
+            $imageItem["id"] = $image->getId();
+            $imageItem["title"] = $image->getTitle();
+            $imageItem["alt_text"] = $image->getAltText();
+            $imageItem["url"] = $this->getImageUrl($image);
+            $images_arr[] = $imageItem;
         }
         return $images_arr;
     }
 }
-
-?>

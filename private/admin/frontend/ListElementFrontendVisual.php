@@ -3,8 +3,8 @@ require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
 
 class ListElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, ListElement $list_element) {
-        parent::__construct($page, $article, $list_element);
+    public function __construct(Page $page, ?Article $article, ListElement $listElement) {
+        parent::__construct($page, $article, $listElement);
     }
 
     public function loadElement(): void {
@@ -13,10 +13,10 @@ class ListElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function renderListItems(ElementHolder $element_holder): array {
-        $list_items = array();
-        foreach ($this->getElement()->getListItems() as $list_item) {
-            $list_items[] = $this->toHtml($list_item->getText(), $element_holder);
+        $listItems = array();
+        foreach ($this->getElement()->getListItems() as $listItem) {
+            $listItems[] = $this->toHtml($listItem->getText(), $element_holder);
         }
-        return $list_items;
+        return $listItems;
     }
 }

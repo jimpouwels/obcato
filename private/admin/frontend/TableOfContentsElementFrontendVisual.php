@@ -4,8 +4,8 @@ require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 
 class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, TableOfContentsElement $table_of_contents_element) {
-        parent::__construct($page, $article, $table_of_contents_element);
+    public function __construct(Page $page, ?Article $article, TableOfContentsElement $element) {
+        parent::__construct($page, $article, $element);
     }
 
     public function loadElement(): void {
@@ -27,5 +27,3 @@ class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
     }
 
 }
-
-?>

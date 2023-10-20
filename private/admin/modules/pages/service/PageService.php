@@ -1,6 +1,8 @@
 <?php
 
 interface PageService {
+    public function getHomepage(): Page;
+
     public function getPageById(int $id): ?Page;
 
     public function updatePage(Page $page): void;

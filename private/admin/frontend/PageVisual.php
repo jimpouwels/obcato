@@ -37,8 +37,8 @@ class PageVisual extends FrontendVisual {
         $this->assign("crumb_path", $this->renderCrumbPath());
         $this->assign("keywords", $this->getPage()->getKeywords());
         if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
-            $article_data = $this->renderArticle();
-            $this->assign("article", $article_data);
+            $articleData = $this->renderArticle();
+            $this->assign("article", $articleData);
             $this->assign("title", $this->getArticle()->getTitle());
             $this->assign("keywords", $this->getArticle()->getKeywords());
         } else {
@@ -53,17 +53,17 @@ class PageVisual extends FrontendVisual {
     }
 
     private function getPageContentAndMetaData(Page $page): array {
-        $page_data = array();
-        $page_data["elements"] = $this->renderElementHolderContent($page);
-        $page_data["blocks"] = $this->renderBlocks();
-        $this->addPageMetaData($page, $page_data);
-        return $page_data;
+        $pageData = array();
+        $pageData["elements"] = $this->renderElementHolderContent($page);
+        $pageData["blocks"] = $this->renderBlocks();
+        $this->addPageMetaData($page, $pageData);
+        return $pageData;
     }
 
     private function getPageMetaData(Page $page): array {
-        $page_data = array();
-        $this->addPageMetaData($page, $page_data);
-        return $page_data;
+        $pageData = array();
+        $this->addPageMetaData($page, $pageData);
+        return $pageData;
     }
 
     private function renderChildren(Page $page): array {
@@ -77,21 +77,21 @@ class PageVisual extends FrontendVisual {
         return $children;
     }
 
-    private function addPageMetaData(Page $page, array &$page_data, bool $render_childen = true): void {
-        $page_data["is_current_page"] = $this->getPage()->getId() == $page->getId();
-        $page_data["title"] = $page->getTitle();
-        $page_data["keywords"] = $page->getKeywords();
-        $page_data["url"] = $this->getPageUrl($page);
-        $page_data["is_homepage"] = $page->isHomepage();
-        $page_data["navigation_title"] = $page->getNavigationTitle();
+    private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren = true): void {
+        $pageData["is_current_page"] = $this->getPage()->getId() == $page->getId();
+        $pageData["title"] = $page->getTitle();
+        $pageData["keywords"] = $page->getKeywords();
+        $pageData["url"] = $this->getPageUrl($page);
+        $pageData["is_homepage"] = $page->isHomepage();
+        $pageData["navigation_title"] = $page->getNavigationTitle();
         $page_description = $page->getDescription();
         if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
             $page_description = $this->getArticle()->getDescription();
         }
-        $page_data["description"] = $this->toHtml($page_description, $page);
-        $page_data["show_in_navigation"] = $page->getShowInNavigation();
-        if ($render_childen) {
-            $page_data["children"] = $this->renderChildren($page);
+        $pageData["description"] = $this->toHtml($page_description, $page);
+        $pageData["show_in_navigation"] = $page->getShowInNavigation();
+        if ($renderChildren) {
+            $pageData["children"] = $this->renderChildren($page);
         }
     }
 
@@ -115,17 +115,15 @@ class PageVisual extends FrontendVisual {
     }
 
     private function renderBlock($block): string {
-        $block_visual = new BlockVisual($block, $this->getPage());
-        return $block_visual->render();
+        return (new BlockVisual($block, $this->getPage()))->render();
     }
 
     private function renderArticle(): array {
-        $article_data = array();
-
-        $article_visual = new ArticleVisual($this->getPage(), $this->getArticle());
-        $article_html = $article_visual->render($article_data);
-        $article_data["to_string"] = $article_html;
-        return $article_data;
+        $articleData = array();
+        $articleVisual = new ArticleVisual($this->getPage(), $this->getArticle());
+        $articleHtml = $articleVisual->render($articleData);
+        $articleData["to_string"] = $articleHtml;
+        return $articleData;
     }
 
     private function renderElementHolderContent(ElementHolder $elementHolder): array {
@@ -142,11 +140,11 @@ class PageVisual extends FrontendVisual {
     }
 
     private function renderCrumbPath(): array {
-        $crumb_path_items = array();
-        $parent_article = null;
+        $crumbPathItems = array();
+        $parentArticle = null;
         if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
-            $parent_article = $this->articleDao->getArticle($this->getArticle()->getParentArticleId());
-            $parents = $this->pageDao->getParents($this->pageDao->getPage($parent_article->getTargetPageId()));
+            $parentArticle = $this->articleDao->getArticle($this->getArticle()->getParentArticleId());
+            $parents = $this->pageDao->getParents($this->pageDao->getPage($parentArticle->getTargetPageId()));
         } else {
             $parents = $this->pageDao->getParents($this->getPage());
         }
@@ -154,18 +152,18 @@ class PageVisual extends FrontendVisual {
             if ($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) {
                 continue;
             }
-            $item_data = array();
-            $item_data['url'] = $this->getPageUrl($parents[$i]);
-            $item_data['title'] = $parents[$i]->getNavigationTitle();
-            $crumb_path_items[] = $item_data;
+            $itemData = array();
+            $itemData['url'] = $this->getPageUrl($parents[$i]);
+            $itemData['title'] = $parents[$i]->getNavigationTitle();
+            $crumbPathItems[] = $itemData;
         }
-        if ($parent_article) {
-            $item_data = array();
-            $item_data['url'] = $this->getArticleUrl($parent_article);
-            $item_data['title'] = $parent_article->getTitle();
-            $crumb_path_items[] = $item_data;
+        if ($parentArticle) {
+            $itemData = array();
+            $itemData['url'] = $this->getArticleUrl($parentArticle);
+            $itemData['title'] = $parentArticle->getTitle();
+            $crumbPathItems[] = $itemData;
         }
-        return $crumb_path_items;
+        return $crumbPathItems;
     }
 
 }

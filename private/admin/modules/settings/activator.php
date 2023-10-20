@@ -10,15 +10,15 @@ require_once CMS_ROOT . "/modules/settings/visuals/DomainSettingsPanel.php";
 class SettingsModuleVisual extends ModuleVisual {
 
     private static string $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
-    private Module $_settings_module;
-    private Settings $_settings;
-    private SettingsRequestHandler $_settings_request_handler;
+    private Module $settingsModule;
+    private Settings $settings;
+    private SettingsRequestHandler $settingsRequestHandler;
 
-    public function __construct(Module $settings_module) {
-        parent::__construct($settings_module);
-        $this->_settings_module = $settings_module;
-        $this->_settings = SettingsDaoMysql::getInstance()->getSettings();
-        $this->_settings_request_handler = new SettingsRequestHandler();
+    public function __construct(Module $settingsModule) {
+        parent::__construct($settingsModule);
+        $this->settingsModule = $settingsModule;
+        $this->settings = SettingsDaoMysql::getInstance()->getSettings();
+        $this->settingsRequestHandler = new SettingsRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -32,20 +32,20 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
     public function getActionButtons(): array {
-        $action_buttons = array();
-        $action_buttons[] = new ActionButtonSave('apply_settings');
-        return $action_buttons;
+        $actionButtons = array();
+        $actionButtons[] = new ActionButtonSave('apply_settings');
+        return $actionButtons;
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->_settings_module->getIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->settingsModule->getIdentifier());
         return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_settings_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->settingsRequestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {}
@@ -55,18 +55,15 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
     private function renderGlobalSettingsPanel(): string {
-        $global_settings_panel = new GlobalSettingsPanel($this->_settings);
-        return $global_settings_panel->render();
+        return (new GlobalSettingsPanel($this->settings))->render();
     }
 
     private function renderDomainSettingsPanel(): string {
-        $domain_settings_panel = new DomainSettingsPanel($this->_settings);
-        return $domain_settings_panel->render();
+        return (new DomainSettingsPanel($this->settings))->render();
     }
 
     private function renderWarningMessage(): string {
-        $warning_message = new WarningMessage("settings_warning_message");
-        return $warning_message->render();
+        return (new WarningMessage("settings_warning_message"))->render();
     }
 
 }

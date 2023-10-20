@@ -70,4 +70,8 @@ class PageDaoMock implements PageDao {
     public function addPage(Page $page): void {
         $this->pages[] = $page;
     }
+
+    public function getHomepage(): ?Page {
+        // TODO: Implement getHomepage() method.
+    }
 }

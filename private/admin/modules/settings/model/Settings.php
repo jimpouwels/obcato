@@ -4,22 +4,72 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 
 class Settings extends Entity {
-    private string $_website_title;
-    private string $_frontend_hostname;
-    private string $_backend_hostname;
-    private string $_email_address;
-    private string $_smtp_host;
-    private string $_database_version;
-    private ?Page $_404_page = null;
+    private string $websiteTitle;
+    private string $frontendHostname;
+    private string $backendHostname;
+    private string $emailAddress;
+    private string $smtpHost;
+    private string $databaseVersion;
+    private ?Page $page404 = null;
 
-    public static function find(): Settings {
-        $mysql_database = MysqlConnector::getInstance();
-        $result = $mysql_database->executeQuery("SELECT * FROM settings");
-        $settings = null;
-        while ($row = $result->fetch_assoc()) {
-            $settings = self::constructFromRecord($row);
-        }
-        return $settings;
+    public function getWebsiteTitle(): string {
+        return $this->websiteTitle;
+    }
+
+    public function setWebsiteTitle(string $website_title): void {
+        $this->websiteTitle = $website_title;
+    }
+
+    public function getFrontEndHostname(): string {
+        return $this->frontendHostname;
+    }
+
+    public function setFrontEndHostname(string $frontend_hostname): void {
+        $this->frontendHostname = $frontend_hostname;
+    }
+
+    public function getBackEndHostname(): string {
+        return $this->backendHostname;
+    }
+
+    public function setBackEndHostname(string $backend_hostname): void {
+        $this->backendHostname = $backend_hostname;
+    }
+
+    public function getEmailAddress(): string {
+        return $this->emailAddress;
+    }
+
+    public function setEmailAddress(string $email_address): void {
+        $this->emailAddress = $email_address;
+    }
+
+    public function getSmtpHost(): string {
+        return $this->smtpHost;
+    }
+
+    public function setSmtpHost(string $smtp_host): void {
+        $this->smtpHost = $smtp_host;
+    }
+
+    public function getDatabaseVersion(): string {
+        return $this->databaseVersion;
+    }
+
+    public function setDatabaseVersion(string $databaseVersion): void {
+        $this->databaseVersion = $databaseVersion;
+    }
+
+    public function get404PageId(): ?int {
+        return $this->page404?->getId();
+    }
+
+    public function getPage404(): ?Page {
+        return $this->page404;
+    }
+
+    public function setPage404(?Page $page404): void {
+        $this->page404 = $page404;
     }
 
     public static function constructFromRecord(array $row): Settings {
@@ -35,84 +85,6 @@ class Settings extends Entity {
         $this->setEmailAddress($row['email_address']);
         $this->setSmtpHost($row['smtp_host']);
         $this->setDatabaseVersion($row['database_version']);
-        $this->set404Page(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
-    }
-
-    public function getWebsiteTitle(): string {
-        return $this->_website_title;
-    }
-
-    public function setWebsiteTitle(string $website_title): void {
-        $this->_website_title = $website_title;
-    }
-
-    public function getFrontEndHostname(): string {
-        return $this->_frontend_hostname;
-    }
-
-    public function setFrontEndHostname(string $frontend_hostname): void {
-        $this->_frontend_hostname = $frontend_hostname;
-    }
-
-    public function getBackEndHostname(): string {
-        return $this->_backend_hostname;
-    }
-
-    public function setBackEndHostname(string $backend_hostname): void {
-        $this->_backend_hostname = $backend_hostname;
-    }
-
-    public function getEmailAddress(): string {
-        return $this->_email_address;
-    }
-
-    public function setEmailAddress(string $email_address): void {
-        $this->_email_address = $email_address;
-    }
-
-    public function getSmtpHost(): string {
-        return $this->_smtp_host;
-    }
-
-    public function setSmtpHost(string $smtp_host): void {
-        $this->_smtp_host = $smtp_host;
-    }
-
-    public function getDatabaseVersion(): string {
-        return $this->_database_version;
-    }
-
-    public function setDatabaseVersion(string $database_version): void {
-        $this->_database_version = $database_version;
-    }
-
-    public function getHomepage(): Page {
-        $mysql_database = MysqlConnector::getInstance();
-        $result = $mysql_database->executeQuery("SELECT element_holder_id FROM pages WHERE is_homepage = 1");
-        $homepage = null;
-        $homepage_id = null;
-        while ($row = $result->fetch_assoc()) {
-            $homepage_id = $row['element_holder_id'];
-        }
-        if (!is_null($homepage_id)) {
-            $homepage = PageDaoMysql::getInstance()->getPage($homepage_id);
-        }
-
-        return $homepage;
-    }
-
-    public function get404PageId(): ?int {
-        if ($this->_404_page) {
-            return $this->_404_page->getId();
-        }
-        return null;
-    }
-
-    public function get404Page(): ?Page {
-        return $this->_404_page;
-    }
-
-    public function set404Page(?Page $page_404): void {
-        $this->_404_page = $page_404;
+        $this->setPage404(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
     }
 }

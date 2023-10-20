@@ -1,6 +1,5 @@
 <?php
 require_once CMS_ROOT . "/modules/settings/model/Settings.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
@@ -13,6 +12,7 @@ require_once CMS_ROOT . '/view/views/Panel.php';
 require_once CMS_ROOT . '/view/TemplateEngine.php';
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 require_once CMS_ROOT . '/frontend/handlers/FormRequestHandler.php';
+require_once CMS_ROOT . '/modules/pages/service/PageInteractor.php';
 
 class RequestHandler {
 
@@ -20,12 +20,14 @@ class RequestHandler {
     private ImageDao $imageDao;
     private SettingsDao $settingsDao;
     private FriendlyUrlManager $friendlyUrlManager;
+    private PageService $pageService;
 
     public function __construct() {
         $this->settingsDao = SettingsDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->formRequestHandler = FormRequestHandler::getInstance();
+        $this->pageService = PageInteractor::getInstance();
     }
 
     public function handleRequest(): void {
@@ -82,7 +84,7 @@ class RequestHandler {
     }
 
     private function renderHomepage(): void {
-        $homePage = $this->settingsDao->getSettings()->getHomepage();
+        $homePage = $this->pageService->getHomepage();
         $this->renderPage($homePage, null);
     }
 
@@ -92,7 +94,7 @@ class RequestHandler {
     }
 
     private function render404Page(): void {
-        $page404 = $this->settingsDao->getSettings()->get404Page();
+        $page404 = $this->settingsDao->getSettings()->getPage404();
         http_response_code(404);
         $this->renderPage($page404, null);
         exit();
