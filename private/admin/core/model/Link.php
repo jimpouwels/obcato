@@ -61,11 +61,11 @@ class Link extends Entity {
     }
 
     public function getTargetElementHolder(): ?ElementHolder {
-        $element_holder = null;
-        if (!is_null($this->targetElementHolderId) && $this->targetElementHolderId != '') {
-            $element_holder = $this->getElementHolder($this->targetElementHolderId);
+        $elementHolder = null;
+        if ($this->targetElementHolderId) {
+            $elementHolder = $this->getElementHolder($this->targetElementHolderId);
         }
-        return $element_holder;
+        return $elementHolder;
     }
 
     private function getElementHolder(int $elementHolderId): ElementHolder {

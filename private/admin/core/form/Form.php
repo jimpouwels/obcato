@@ -77,7 +77,7 @@ abstract class Form {
             $this->raiseError($fieldName, "form_error_invalid_number");
             return null;
         }
-        return intval($numberAsString);
+        return $numberAsString ? intval($numberAsString) : null;
     }
 
     public function getMandatoryDate(string $fieldName): ?string {
