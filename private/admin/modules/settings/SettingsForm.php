@@ -20,9 +20,9 @@ class SettingsForm extends Form {
         $this->settings->setSmtpHost($this->getFieldValue("smtp_host"));
         $this->settings->setEmailAddress($this->getEmailAddress("email_address"));
 
-        $selected_404_page_id = $this->getFieldValue("404_page_id");
-        if ($selected_404_page_id) {
-            $this->settings->setPage404($this->pageService->getPageById(intval($selected_404_page_id)));
+        $selected404PageId = $this->getFieldValue("404_page_id");
+        if ($selected404PageId) {
+            $this->settings->setPage404($this->pageService->getPageById(intval($selected404PageId)));
         }
         $this->homepageId = intval($this->getMandatoryFieldValue("homepage_page_id"));
 
@@ -33,10 +33,6 @@ class SettingsForm extends Form {
 
     public function getHomepageId(): int {
         return $this->homepageId;
-    }
-
-    private function preserveBackSlashes(string $value): string {
-        return str_replace("\\", "\\\\", $value);
     }
 
 }

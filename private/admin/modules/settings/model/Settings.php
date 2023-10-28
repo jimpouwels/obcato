@@ -16,40 +16,40 @@ class Settings extends Entity {
         return $this->websiteTitle;
     }
 
-    public function setWebsiteTitle(string $website_title): void {
-        $this->websiteTitle = $website_title;
+    public function setWebsiteTitle(string $websiteTitle): void {
+        $this->websiteTitle = $websiteTitle;
     }
 
     public function getFrontEndHostname(): string {
         return $this->frontendHostname;
     }
 
-    public function setFrontEndHostname(string $frontend_hostname): void {
-        $this->frontendHostname = $frontend_hostname;
+    public function setFrontEndHostname(string $frontendHostname): void {
+        $this->frontendHostname = $frontendHostname;
     }
 
     public function getBackEndHostname(): string {
         return $this->backendHostname;
     }
 
-    public function setBackEndHostname(string $backend_hostname): void {
-        $this->backendHostname = $backend_hostname;
+    public function setBackEndHostname(string $backendHostname): void {
+        $this->backendHostname = $backendHostname;
     }
 
     public function getEmailAddress(): string {
         return $this->emailAddress;
     }
 
-    public function setEmailAddress(string $email_address): void {
-        $this->emailAddress = $email_address;
+    public function setEmailAddress(string $emailAddress): void {
+        $this->emailAddress = $emailAddress;
     }
 
     public function getSmtpHost(): string {
         return $this->smtpHost;
     }
 
-    public function setSmtpHost(string $smtp_host): void {
-        $this->smtpHost = $smtp_host;
+    public function setSmtpHost(string $smtpHost): void {
+        $this->smtpHost = $smtpHost;
     }
 
     public function getDatabaseVersion(): string {

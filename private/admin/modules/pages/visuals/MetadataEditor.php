@@ -3,13 +3,13 @@ require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
 class MetadataEditor extends Panel {
 
-    private Page $_current_page;
-    private FriendlyUrlManager $_friendly_url_manager;
+    private Page $currentPage;
+    private FriendlyUrlManager $friendUrlManager;
 
-    public function __construct(Page $current_page) {
+    public function __construct(Page $currentPage) {
         parent::__construct($this->getTextResource('edit_metadata_title'), "page_metadata_editor");
-        $this->_current_page = $current_page;
-        $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
+        $this->currentPage = $currentPage;
+        $this->friendUrlManager = FriendlyUrlManager::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -17,26 +17,26 @@ class MetadataEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $title_field = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->_current_page->getTitle(), true, false, null);
-        $navigation_title_field = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->_current_page->getNavigationTitle(), true, false, null);
-        $keywords_field = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->_current_page->getKeywords(), false, false, "keywords_field");
-        $url_field = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->_friendly_url_manager->getFriendlyUrlForElementHolder($this->_current_page), '');
-        $description_field = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->_current_page->getDescription(), false, true, null);
-        $published_field = new SingleCheckbox("published", $this->getTextResource('pages_edit_metadata_ispublished_field_label'), $this->_current_page->isPublished(), false, "");
-        $include_in_search_engine_field = new SingleCheckbox("include_in_search_engine", $this->getTextResource('pages_edit_metadata_include_in_search_engine_field_label'), $this->_current_page->getIncludeInSearchEngine(), false, "");
-        $show_in_navigation_field = new SingleCheckbox("show_in_navigation", $this->getTextResource('pages_edit_metadata_showinnavigation_field_label'), $this->_current_page->getShowInNavigation(), false, "");
-        $template_picker_field = new TemplatePicker("page_template", $this->getTextResource('pages_edit_metadata_template_field_label'), false, "", $this->_current_page->getTemplate(), $this->_current_page->getScope());
+        $titleField = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->currentPage->getTitle(), true, false, null);
+        $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
+        $keywordsField = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->currentPage->getKeywords(), false, false, "keywords_field");
+        $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->friendUrlManager->getFriendlyUrlForElementHolder($this->currentPage), '');
+        $descriptionField = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->currentPage->getDescription(), false, true, null);
+        $publishedField = new SingleCheckbox("published", $this->getTextResource('pages_edit_metadata_ispublished_field_label'), $this->currentPage->isPublished(), false, "");
+        $includeInSearchEngineField = new SingleCheckbox("include_in_search_engine", $this->getTextResource('pages_edit_metadata_include_in_search_engine_field_label'), $this->currentPage->getIncludeInSearchEngine(), false, "");
+        $showInNavigationField = new SingleCheckbox("show_in_navigation", $this->getTextResource('pages_edit_metadata_showinnavigation_field_label'), $this->currentPage->getShowInNavigation(), false, "");
+        $templatePickerField = new TemplatePicker("page_template", $this->getTextResource('pages_edit_metadata_template_field_label'), false, "", $this->currentPage->getTemplate(), $this->currentPage->getScope());
 
-        $data->assign("current_page_id", $this->_current_page->getId());
-        $data->assign("page_title_field", $title_field->render());
-        $data->assign("keywords_field", $keywords_field->render());
-        $data->assign("navigation_title_field", $navigation_title_field->render());
-        $data->assign('url_field', $url_field->render());
-        $data->assign("description_field", $description_field->render());
-        $data->assign("published_field", $published_field->render());
-        $data->assign("include_in_search_engine_field", $include_in_search_engine_field->render());
-        $data->assign("show_in_navigation_field", $show_in_navigation_field->render());
-        $data->assign("template_picker_field", $template_picker_field->render());
+        $data->assign("current_page_id", $this->currentPage->getId());
+        $data->assign("page_title_field", $titleField->render());
+        $data->assign("keywords_field", $keywordsField->render());
+        $data->assign("navigation_title_field", $navigationTitleField->render());
+        $data->assign('url_field', $urlField->render());
+        $data->assign("description_field", $descriptionField->render());
+        $data->assign("published_field", $publishedField->render());
+        $data->assign("include_in_search_engine_field", $includeInSearchEngineField->render());
+        $data->assign("show_in_navigation_field", $showInNavigationField->render());
+        $data->assign("template_picker_field", $templatePickerField->render());
         $this->assignElementHolderFormIds($data);
     }
 

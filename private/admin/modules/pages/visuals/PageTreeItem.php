@@ -2,15 +2,15 @@
 
 class PageTreeItem extends Visual {
 
-    private Page $_page;
-    private PageDao $_page_dao;
-    private Page $_selected_page;
+    private Page $page;
+    private PageDao $pageDao;
+    private Page $selectedPage;
 
-    public function __construct(Page $page, Page $selected_page) {
+    public function __construct(Page $page, Page $selectedPage) {
         parent::__construct();
-        $this->_page = $page;
-        $this->_page_dao = PageDaoMysql::getInstance();
-        $this->_selected_page = $selected_page;
+        $this->page = $page;
+        $this->pageDao = PageDaoMysql::getInstance();
+        $this->selectedPage = $selectedPage;
     }
 
     public function getTemplateFilename(): string {
@@ -18,21 +18,19 @@ class PageTreeItem extends Visual {
     }
 
     public function load(): void {
-        $sub_pages = array();
-        foreach ($this->_page_dao->getSubPages($this->_page) as $sub_page) {
-            $tree_item = new PageTreeItem($sub_page, $this->_selected_page);
-            $sub_pages[] = $tree_item->render();
+        $subPages = array();
+        foreach ($this->pageDao->getSubPages($this->page) as $subPage) {
+            $treeItem = new PageTreeItem($subPage, $this->selectedPage);
+            $subPages[] = $treeItem->render();
         }
 
-        $this->assign("sub_pages", $sub_pages);
-        $this->assign("title", $this->_page->getTitle());
-        $this->assign("show_in_navigation", $this->_page->getShowInNavigation());
-        $this->assign("published", $this->_page->isPublished());
-        $this->assign("page_id", $this->_page->getId());
-        $active = $this->_selected_page->getId() == $this->_page->getId();
+        $this->assign("sub_pages", $subPages);
+        $this->assign("title", $this->page->getTitle());
+        $this->assign("show_in_navigation", $this->page->getShowInNavigation());
+        $this->assign("published", $this->page->isPublished());
+        $this->assign("page_id", $this->page->getId());
+        $active = $this->selectedPage->getId() == $this->page->getId();
         $this->assign("active", $active);
     }
 
 }
-
-?>

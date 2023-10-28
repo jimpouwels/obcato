@@ -67,5 +67,3 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
 }
-
-?>

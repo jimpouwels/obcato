@@ -8,13 +8,13 @@ require_once CMS_ROOT . '/modules/pages/visuals/MetadataEditor.php';
 
 class PageEditor extends Visual {
 
-    private Page $_current_page;
-    private BlockDao $_block_dao;
+    private Page $currentPage;
+    private BlockDao $blockDao;
 
-    public function __construct(Page $current_page) {
+    public function __construct(Page $currentPage) {
         parent::__construct();
-        $this->_block_dao = BlockDaoMysql::getInstance();
-        $this->_current_page = $current_page;
+        $this->blockDao = BlockDaoMysql::getInstance();
+        $this->currentPage = $currentPage;
     }
 
     public function getTemplateFilename(): string {
@@ -22,7 +22,7 @@ class PageEditor extends Visual {
     }
 
     public function load(): void {
-        $this->assign("page_id", $this->_current_page->getId());
+        $this->assign("page_id", $this->currentPage->getId());
         $this->assign("page_metadata", $this->renderPageMetaDataPanel());
         $this->assign("element_container", $this->renderElementContainerPanel());
         $this->assign("link_editor", $this->renderLinkEditorPanel());
@@ -31,23 +31,19 @@ class PageEditor extends Visual {
     }
 
     private function renderPageMetaDataPanel(): string {
-        $metadata_editor = new MetadataEditor($this->_current_page);
-        return $metadata_editor->render();
+        return (new MetadataEditor($this->currentPage))->render();
     }
 
     private function renderElementContainerPanel(): string {
-        $element_container = new ElementContainer($this->_current_page->getElements());
-        return $element_container->render();
+        return (new ElementContainer($this->currentPage->getElements()))->render();
     }
 
     private function renderLinkEditorPanel(): string {
-        $link_editor = new LinkEditor($this->_current_page->getLinks());
-        return $link_editor->render();
+        return (new LinkEditor($this->currentPage->getLinks()))->render();
     }
 
     private function renderBlockSelectorPanel(): string {
-        $block_selector = new BlockSelector($this->_block_dao->getBlocksByPage($this->_current_page), $this->_current_page->getId());
-        return $block_selector->render();
+        return (new BlockSelector($this->blockDao->getBlocksByPage($this->currentPage), $this->currentPage->getId()))->render();
     }
 
 }

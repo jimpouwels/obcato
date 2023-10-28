@@ -5,14 +5,14 @@ class Page extends ElementHolder {
 
     const ElementHolderType = "ELEMENT_HOLDER_PAGE";
     private static int $SCOPE = 5;
-    private ?string $_description = null;
-    private string $_navigation_title;
-    private bool $_include_in_search_engine;
-    private ?int $_parent_id;
-    private ?string $_keywords = null;
-    private bool $_show_in_navigation;
-    private int $_followup;
-    private bool $_is_homepage;
+    private ?string $description = null;
+    private string $navigationTitle;
+    private bool $includeInSearchEngine;
+    private ?int $parentId;
+    private ?string $keywords = null;
+    private bool $showInNavigation;
+    private int $followUp;
+    private bool $isHomepage;
 
     public function __construct() {
         parent::__construct(self::$SCOPE);
@@ -36,72 +36,72 @@ class Page extends ElementHolder {
         parent::initFromDb($row);
     }
 
-    public function setIsHomepage(bool $is_homepage): void {
-        $this->_is_homepage = $is_homepage;
+    public function setIsHomepage(bool $isHomepage): void {
+        $this->isHomepage = $isHomepage;
     }
 
     public function getDescription(): ?string {
-        return $this->_description;
+        return $this->description;
     }
 
     public function setDescription(?string $description): void {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     public function getKeywords(): ?string {
-        return $this->_keywords;
+        return $this->keywords;
     }
 
     public function setKeywords(?string $keywords): void {
-        $this->_keywords = $keywords;
+        $this->keywords = $keywords;
     }
 
     public function getNavigationTitle(): string {
-        return $this->_navigation_title;
+        return $this->navigationTitle;
     }
 
-    public function setNavigationTitle(string $navigation_title): void {
-        $this->_navigation_title = $navigation_title;
+    public function setNavigationTitle(string $navigationTitle): void {
+        $this->navigationTitle = $navigationTitle;
     }
 
     public function getParentId(): ?int {
-        return $this->_parent_id;
+        return $this->parentId;
     }
 
-    public function setParentId(?int $parent_id): void {
-        $this->_parent_id = $parent_id;
+    public function setParentId(?int $parentId): void {
+        $this->parentId = $parentId;
     }
 
     public function setParent(Page $parent): void {
-        $this->_parent_id = $parent->getId();
+        $this->parentId = $parent->getId();
     }
 
     public function getIncludeInSearchEngine(): bool {
-        return $this->_include_in_search_engine;
+        return $this->includeInSearchEngine;
     }
 
-    public function setIncludeInSearchEngine(bool $include_in_search_engine): void {
-        $this->_include_in_search_engine = $include_in_search_engine;
+    public function setIncludeInSearchEngine(bool $includeInSearchEngine): void {
+        $this->includeInSearchEngine = $includeInSearchEngine;
     }
 
     public function getShowInNavigation(): bool {
-        return $this->_show_in_navigation;
+        return $this->showInNavigation;
     }
 
-    public function setShowInNavigation(bool $show_in_navigation): void {
-        $this->_show_in_navigation = $show_in_navigation;
+    public function setShowInNavigation(bool $showInNavigation): void {
+        $this->showInNavigation = $showInNavigation;
     }
 
-    public function getFollowup(): int {
-        return $this->_followup;
+    public function getFollowUp(): int {
+        return $this->followUp;
     }
 
-    public function setFollowUp(int $follow_up): void {
-        $this->_followup = $follow_up;
+    public function setFollowUp(int $followUp): void {
+        $this->followUp = $followUp;
     }
 
     public function isHomepage(): bool {
-        return $this->_is_homepage;
+        return $this->isHomepage;
     }
 
 }

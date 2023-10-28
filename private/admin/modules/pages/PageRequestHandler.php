@@ -131,5 +131,3 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
 }
-
-?>

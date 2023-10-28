@@ -4,11 +4,11 @@ require_once CMS_ROOT . "/modules/logout/LogoutRequestHandler.php";
 
 class LogoutModuleVisual extends ModuleVisual {
 
-    private LogoutRequestHandler $_logout_request_handler;
+    private LogoutRequestHandler $logoutRequestHandler;
 
     public function __construct($module) {
         parent::__construct($module);
-        $this->_logout_request_handler = new LogoutRequestHandler();
+        $this->logoutRequestHandler = new LogoutRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -26,9 +26,9 @@ class LogoutModuleVisual extends ModuleVisual {
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_logout_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->logoutRequestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {}
@@ -38,5 +38,3 @@ class LogoutModuleVisual extends ModuleVisual {
     }
 
 }
-
-?>

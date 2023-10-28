@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/modules/pages/visuals/PageTreeItem.php";
 
 class PageTree extends Panel {
 
-    private Page $_root_page;
-    private Page $_selected_page;
+    private Page $rootPage;
+    private Page $selectedPage;
 
-    public function __construct(Page $root_page, Page $selected_page) {
+    public function __construct(Page $rootPage, Page $selectedPage) {
         parent::__construct($this->getTextResource('page_tree_title'), 'page_tree_panel');
-        $this->_root_page = $root_page;
-        $this->_selected_page = $selected_page;
+        $this->rootPage = $rootPage;
+        $this->selectedPage = $selectedPage;
     }
 
     public function getPanelContentTemplate(): string {
@@ -17,10 +17,8 @@ class PageTree extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $root_tree_item = new PageTreeItem($this->_root_page, $this->_selected_page);
-        $data->assign("items_html", $root_tree_item->render());
+        $rootTreeItem = new PageTreeItem($this->rootPage, $this->selectedPage);
+        $data->assign("items_html", $rootTreeItem->render());
     }
 
 }
-
-?>

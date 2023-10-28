@@ -11,5 +11,3 @@ class LogoutRequestHandler extends HttpRequestHandler {
     public function handlePost(): void {}
 
 }
-
-?>
