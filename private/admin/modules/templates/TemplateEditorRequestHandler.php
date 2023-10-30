@@ -10,26 +10,26 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     private static string $SCOPE_IDENTIFIER_GET = "scope";
     private static string $TEMPLATE_ID_POST = "template_id";
 
-    private TemplateDao $_template_dao;
-    private ScopeDao $_scope_dao;
-    private ?Template $_current_template = null;
-    private ?Scope $_current_scope = null;
+    private TemplateDao $templateDao;
+    private ScopeDao $scopeDao;
+    private ?Template $currentTemplate = null;
+    private ?Scope $currentScope = null;
 
     public function __construct() {
-        $this->_template_dao = TemplateDaoMysql::getInstance();
-        $this->_scope_dao = ScopeDaoMysql::getInstance();
+        $this->templateDao = TemplateDaoMysql::getInstance();
+        $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
         if ($this->isCurrentTemplateShown()) {
-            $this->_current_template = $this->getTemplateFromGetRequest();
+            $this->currentTemplate = $this->getTemplateFromGetRequest();
         }
-        $this->_current_scope = $this->getScopeFromGetRequest();
+        $this->currentScope = $this->getScopeFromGetRequest();
     }
 
     public function handlePost(): void {
-        $this->_current_template = $this->getTemplateFromPostRequest();
-        $this->_current_scope = $this->getScopeFromGetRequest();
+        $this->currentTemplate = $this->getTemplateFromPostRequest();
+        $this->currentScope = $this->getScopeFromGetRequest();
         if ($this->isUpdateAction()) {
             $this->updateTemplate();
         } else if ($this->isAddTemplateAction()) {
@@ -40,32 +40,32 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentTemplate(): ?Template {
-        return $this->_current_template;
+        return $this->currentTemplate;
     }
 
     public function getCurrentScope(): ?Scope {
-        return $this->_current_scope;
+        return $this->currentScope;
     }
 
     private function addTemplate(): void {
-        $new_template = $this->_template_dao->createTemplate();
+        $new_template = $this->templateDao->createTemplate();
         $this->sendSuccessMessage("Template succesvol aangemaakt");
         $this->redirectTo($this->getBackendBaseUrl() . "&template=" . $new_template->getId());
     }
 
     private function deleteTemplates(): void {
-        foreach ($this->_template_dao->getTemplates() as $template) {
+        foreach ($this->templateDao->getTemplates() as $template) {
             if (isset($_POST["template_" . $template->getId() . "_delete"]))
-                $this->_template_dao->deleteTemplate($template);
+                $this->templateDao->deleteTemplate($template);
         }
         $this->sendSuccessMessage("Template(s) succesvol verwijderd");
     }
 
     private function updateTemplate(): void {
-        $template_form = new TemplateEditorForm($this->_current_template);
+        $template_form = new TemplateEditorForm($this->currentTemplate);
         try {
             $template_form->loadFields();
-            $this->_template_dao->updateTemplate($this->_current_template);
+            $this->templateDao->updateTemplate($this->currentTemplate);
             $this->sendSuccessMessage("Template succesvol opgeslagen");
         } catch (FormException $e) {
             $this->sendErrorMessage("Template niet opgeslagen, verwerk de fouten");
@@ -75,19 +75,19 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     private function getTemplateFromPostRequest(): ?Template {
         $template = null;
         if (isset($_POST[self::$TEMPLATE_ID_POST])) {
-            $template = $this->_template_dao->getTemplate(intval($_POST[self::$TEMPLATE_ID_POST]));
+            $template = $this->templateDao->getTemplate(intval($_POST[self::$TEMPLATE_ID_POST]));
         }
         return $template;
     }
 
     private function getTemplateFromGetRequest(): Template {
-        return $this->_template_dao->getTemplate($_GET[self::$TEMPLATE_ID_GET]);
+        return $this->templateDao->getTemplate($_GET[self::$TEMPLATE_ID_GET]);
     }
 
     private function getScopeFromGetRequest(): ?Scope {
         if (isset($_GET[self::$SCOPE_IDENTIFIER_GET])) {
-            $scope_identifier = $_GET[self::$SCOPE_IDENTIFIER_GET];
-            return $this->_scope_dao->getScopeByIdentifier($scope_identifier);
+            $scopeIdentifier = $_GET[self::$SCOPE_IDENTIFIER_GET];
+            return $this->scopeDao->getScopeByIdentifier($scopeIdentifier);
         }
         return null;
     }
@@ -109,5 +109,3 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

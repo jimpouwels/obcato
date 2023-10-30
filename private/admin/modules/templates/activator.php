@@ -11,17 +11,17 @@ class TemplateModuleVisual extends ModuleVisual {
     private static int $TEMPLATE_FILES_TAB = 1;
     private static string $HEAD_INCLUDES_TEMPLATE = "templates/head_includes.tpl";
 
-    private ?Template $_current_template;
-    private ?Scope $_current_scope;
-    private Module $_template_module;
-    private TemplateEditorRequestHandler $_template_editor_request_handler;
-    private TemplateFilesRequestHandler $_template_files_request_handler;
+    private ?Template $currentTemplate;
+    private ?Scope $currentScope;
+    private Module $module;
+    private TemplateEditorRequestHandler $templateEditorRequestHandler;
+    private TemplateFilesRequestHandler $templateFilesRequestHandler;
 
-    public function __construct(Module $template_module) {
-        parent::__construct($template_module);
-        $this->_template_module = $template_module;
-        $this->_template_editor_request_handler = new TemplateEditorRequestHandler();
-        $this->_template_files_request_handler = new TemplateFilesRequestHandler();
+    public function __construct(Module $module) {
+        parent::__construct($module);
+        $this->module = $module;
+        $this->templateEditorRequestHandler = new TemplateEditorRequestHandler();
+        $this->templateFilesRequestHandler = new TemplateFilesRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -30,89 +30,61 @@ class TemplateModuleVisual extends ModuleVisual {
 
     public function load(): void {
         if ($this->getCurrentTabId() == self::$TEMPLATES_TAB) {
-            $content = new TemplateEditorTab($this->_current_template, $this->_current_scope);
+            $content = new TemplateEditorTab($this->currentTemplate, $this->currentScope);
         } else {
-            $content = new TemplateFilesTab($this->_template_files_request_handler);
+            $content = new TemplateFilesTab($this->templateFilesRequestHandler);
         }
         $this->assign("content", $content->render());
     }
 
     public function getActionButtons(): array {
-        $action_buttons = array();
+        $actionButtons = array();
         if ($this->getCurrentTabId() == self::$TEMPLATES_TAB) {
-            if (!is_null($this->_current_template)) {
-                $action_buttons[] = new ActionButtonSave('update_template');
+            if ($this->currentTemplate) {
+                $actionButtons[] = new ActionButtonSave('update_template');
             }
-            $action_buttons[] = new ActionButtonAdd('add_template');
-            if (!is_null($this->_current_scope)) {
-                $action_buttons[] = new ActionButtonDelete('delete_template');
+            $actionButtons[] = new ActionButtonAdd('add_template');
+            if ($this->currentScope) {
+                $actionButtons[] = new ActionButtonDelete('delete_template');
             }
         } else if ($this->getCurrentTabId() == self::$TEMPLATE_FILES_TAB) {
-            $action_buttons[] = new ActionButtonSave('update_template_file');
-            $action_buttons[] = new ActionButtonAdd('add_template_file');
-            $action_buttons[] = new ActionButtonReload('reload_template_file');
-            $action_buttons[] = new ActionButtonDelete('delete_template_file');
+            if ($this->templateFilesRequestHandler->getCurrentTemplateFile()) {
+                $actionButtons[] = new ActionButtonSave('update_template_file');
+            }
+            $actionButtons[] = new ActionButtonAdd('add_template_file');
+            if ($this->templateFilesRequestHandler->getCurrentTemplateFile()) {
+                $actionButtons[] = new ActionButtonReload('reload_template_file');
+                $actionButtons[] = new ActionButtonDelete('delete_template_file');
+            }
         }
-        return $action_buttons;
+        return $actionButtons;
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->_template_module->getIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
         return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {
-        $request_handlers = array();
-        $request_handlers[] = $this->_template_editor_request_handler;
-        $request_handlers[] = $this->_template_files_request_handler;
-        return $request_handlers;
+        $requestHandlers = array();
+        $requestHandlers[] = $this->templateEditorRequestHandler;
+        $requestHandlers[] = $this->templateFilesRequestHandler;
+        return $requestHandlers;
     }
 
     public function onRequestHandled(): void {
-        $this->_current_template = $this->_template_editor_request_handler->getCurrentTemplate();
-        $this->_current_scope = $this->_template_editor_request_handler->getCurrentScope();
-        $this->_current_template_file = $this->_template_files_request_handler->getCurrentTemplateFile();
+        $this->currentTemplate = $this->templateEditorRequestHandler->getCurrentTemplate();
+        $this->currentScope = $this->templateEditorRequestHandler->getCurrentScope();
     }
 
     public function getTitle(): string {
-        return $this->getTextResource($this->_template_module->getTitleTextResourceIdentifier());
+        return $this->getTextResource($this->module->getTitleTextResourceIdentifier());
     }
 
     public function getTabMenu(): ?TabMenu {
-        $tab_menu = new TabMenu($this->getCurrentTabId());
-        $tab_menu->addItem("templates_tab_menu_templates", self::$TEMPLATES_TAB);
-        $tab_menu->addItem("templates_tab_menu_template_files", self::$TEMPLATE_FILES_TAB);
-        return $tab_menu;
+        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu->addItem("templates_tab_menu_templates", self::$TEMPLATES_TAB);
+        $tabMenu->addItem("templates_tab_menu_template_files", self::$TEMPLATE_FILES_TAB);
+        return $tabMenu;
     }
-
-    private function getScopeSelector(): string {
-        $scope_selector = new ScopeSelector();
-        return $scope_selector->render();
-    }
-
-    private function renderTemplateEditor(): string {
-        $template_editor = new TemplateEditor($this->_current_template);
-        return $template_editor->render();
-    }
-
-    private function renderTemplateVarEditor(): string {
-        $template_var_editor = new TemplateVarEditor($this->_current_template);
-        return $template_var_editor->render();
-    }
-
-    private function renderTemplateList(): string {
-        $template_list = new TemplateList($this->_current_scope);
-        return $template_list->render();
-    }
-
-    private function getCurrentTemplateId(): ?int {
-        $current_template_id = null;
-        if (!is_null($this->_current_template)) {
-            $current_template_id = $this->_current_template->getId();
-        }
-        return $current_template_id;
-    }
-
 }
-
-?>

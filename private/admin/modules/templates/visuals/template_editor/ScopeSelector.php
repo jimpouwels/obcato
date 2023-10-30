@@ -3,11 +3,11 @@ require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
 
 class ScopeSelector extends Panel {
 
-    private ScopeDao $_scope_dao;
+    private ScopeDao $scopeDao;
 
     public function __construct() {
         parent::__construct('templates_scope_list_title', 'scope_selector_panel');
-        $this->_scope_dao = ScopeDaoMysql::getInstance();
+        $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -20,11 +20,11 @@ class ScopeSelector extends Panel {
 
     private function getAllScopes(): array {
         $scopes = array();
-        foreach ($this->_scope_dao->getScopes() as $scope) {
-            $scope_array = array();
-            $scope_array["label"] = $this->getTextResource($scope->getIdentifier() . "_scope_label");
-            $scope_array["identifier"] = $scope->getIdentifier();
-            $scopes[] = $scope_array;
+        foreach ($this->scopeDao->getScopes() as $scope) {
+            $scopeArray = array();
+            $scopeArray["label"] = $this->getTextResource($scope->getIdentifier() . "_scope_label");
+            $scopeArray["identifier"] = $scope->getIdentifier();
+            $scopes[] = $scopeArray;
         }
         return $scopes;
     }

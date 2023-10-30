@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class TemplateVarDef extends Entity {
 
-    private string $_name;
-    private ?string $_default_value = null;
+    private string $name;
+    private ?string $defaultValue = null;
 
     public static function constructFromRecord(array $row): TemplateVarDef {
-        $template_var_def = new TemplateVarDef();
-        $template_var_def->initFromDb($row);
-        return $template_var_def;
+        $templateVarDef = new TemplateVarDef();
+        $templateVarDef->initFromDb($row);
+        return $templateVarDef;
     }
 
     protected function initFromDb(array $row): void {
@@ -19,18 +19,18 @@ class TemplateVarDef extends Entity {
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName(string $name): void {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     public function getDefaultValue(): ?string {
-        return $this->_default_value;
+        return $this->defaultValue;
     }
 
-    public function setDefaultValue(?string $default_value): void {
-        $this->_default_value = $default_value;
+    public function setDefaultValue(?string $defaultValue): void {
+        $this->defaultValue = $defaultValue;
     }
 }

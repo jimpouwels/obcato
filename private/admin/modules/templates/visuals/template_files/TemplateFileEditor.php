@@ -1,13 +1,13 @@
 <?php
 
 class TemplateFileEditor extends Panel {
-    private TemplateDao $_template_dao;
-    private TemplateFile $_current_template_file;
+    private TemplateDao $templateDao;
+    private TemplateFile $currentTemplateFile;
 
-    public function __construct(TemplateFile $current_template_file) {
+    public function __construct(TemplateFile $currentTemplateFile) {
         parent::__construct('template_file_editor_panel_title', 'template_file_editor_panel');
-        $this->_template_dao = TemplateDaoMysql::getInstance();
-        $this->_current_template_file = $current_template_file;
+        $this->templateDao = TemplateDaoMysql::getInstance();
+        $this->currentTemplateFile = $currentTemplateFile;
     }
 
     public function getPanelContentTemplate(): string {
@@ -15,23 +15,21 @@ class TemplateFileEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $id = $this->_current_template_file->getId();
+        $id = $this->currentTemplateFile->getId();
         $data->assign("id", $id);
 
-        $name_field = new TextField("template_file_{$id}_name_field", $this->getTextResource("template_file_editor_name_field"), $this->_current_template_file->getName(), true, false, null);
-        $data->assign("name_field", $name_field->render());
-        $filename_field = new TextField("template_file_{$id}_filename_field", $this->getTextResource("template_file_editor_filename_field"), $this->_current_template_file->getFileName(), false, false, null);
-        $data->assign("filename_field", $filename_field->render());
+        $nameField = new TextField("template_file_{$id}_name_field", $this->getTextResource("template_file_editor_name_field"), $this->currentTemplateFile->getName(), true, false, null);
+        $data->assign("name_field", $nameField->render());
+        $filenameField = new TextField("template_file_{$id}_filename_field", $this->getTextResource("template_file_editor_filename_field"), $this->currentTemplateFile->getFileName(), false, false, null);
+        $data->assign("filename_field", $filenameField->render());
 
-        $var_def_fields = array();
-        foreach ($this->_template_dao->getTemplateVarDefs($this->_current_template_file) as $template_var_def) {
-            $var_def_id = $template_var_def->getId();
-            $var_def_field = new TextField("var_def_{$var_def_id}_default_value_field", $template_var_def->getName(), $template_var_def->getDefaultValue(), false, false, null);
-            $var_def_fields[] = $var_def_field->render();
+        $varDefFields = array();
+        foreach ($this->templateDao->getTemplateVarDefs($this->currentTemplateFile) as $template_var_def) {
+            $varDefId = $template_var_def->getId();
+            $varDefField = new TextField("var_def_{$varDefId}_default_value_field", $template_var_def->getName(), $template_var_def->getDefaultValue(), false, false, null);
+            $varDefFields[] = $varDefField->render();
         }
-        $data->assign("var_defs", $var_def_fields);
+        $data->assign("var_defs", $varDefFields);
     }
 
 }
-
-?>

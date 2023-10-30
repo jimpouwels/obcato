@@ -6,13 +6,13 @@ require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateVarMi
 
 class TemplateFilesTab extends Visual {
 
-    private ?TemplateFile $_current_template_file;
-    private TemplateFilesRequestHandler $_request_handler;
+    private ?TemplateFile $currentTemplateFile;
+    private TemplateFilesRequestHandler $requestHandler;
 
     public function __construct(TemplateFilesRequestHandler $requestHandler) {
         parent::__construct();
-        $this->_current_template_file = $requestHandler->getCurrentTemplateFile();
-        $this->_request_handler = $requestHandler;
+        $this->currentTemplateFile = $requestHandler->getCurrentTemplateFile();
+        $this->requestHandler = $requestHandler;
     }
 
     public function getTemplateFilename(): string {
@@ -21,43 +21,40 @@ class TemplateFilesTab extends Visual {
 
     public function load(): void {
         $this->assign("current_template_file_id", $this->getCurrentTemplateFileId());
-        $template_files_list = new TemplateFilesList();
-        $this->assign("template_files_list", $template_files_list->render());
+        $templateFilesList = new TemplateFilesList();
+        $this->assign("template_files_list", $templateFilesList->render());
 
-        $editor_html = "";
-        if ($this->_current_template_file) {
-            $template_file_editor = new TemplateFileEditor($this->_current_template_file);
-            $editor_html = $template_file_editor->render();
+        $editorHtml = "";
+        if ($this->currentTemplateFile) {
+            $templateFileEditor = new TemplateFileEditor($this->currentTemplateFile);
+            $editorHtml = $templateFileEditor->render();
         }
-        $this->assign("template_file_editor", $editor_html);
+        $this->assign("template_file_editor", $editorHtml);
 
-        $var_migration_html = "";
-        if (count($this->_request_handler->getParsedVarDefs()) > 0) {
-            $template_var_migration = new TemplateVarMigration($this->_request_handler);
-            $var_migration_html = $template_var_migration->render();
+        $varMigrationHtml = "";
+        if (count($this->requestHandler->getParsedVarDefs()) > 0) {
+            $templateVarMigration = new TemplateVarMigration($this->requestHandler);
+            $varMigrationHtml = $templateVarMigration->render();
         }
-        $this->assign("template_var_migration", $var_migration_html);
+        $this->assign("template_var_migration", $varMigrationHtml);
 
-        $code_viewer_html = "";
-        if ($this->_current_template_file) {
-            $code_viewer_html = $this->renderTemplateCodeViewer();
+        $codeViewerHtml = "";
+        if ($this->currentTemplateFile) {
+            $codeViewerHtml = $this->renderTemplateCodeViewer();
         }
-        $this->assign("template_code_viewer", $code_viewer_html);
+        $this->assign("template_code_viewer", $codeViewerHtml);
     }
 
     private function getCurrentTemplateFileId(): string {
         $id = "";
-        if ($this->_current_template_file) {
-            $id = $this->_current_template_file->getId();
+        if ($this->currentTemplateFile) {
+            $id = $this->currentTemplateFile->getId();
         }
         return $id;
     }
 
     private function renderTemplateCodeViewer(): string {
-        $template_code_viewer = new TemplateFileCodeViewer($this->_current_template_file);
-        return $template_code_viewer->render();
+        return (new TemplateFileCodeViewer($this->currentTemplateFile))->render();
     }
 
 }
-
-?>

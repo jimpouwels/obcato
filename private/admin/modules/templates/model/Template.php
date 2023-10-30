@@ -5,10 +5,10 @@ require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class Template extends Entity {
 
-    private string $_name;
-    private int $_scope_id;
-    private array $_template_vars = array();
-    private ?int $_template_file_id = null;
+    private string $name;
+    private int $scopeId;
+    private array $templateVars = array();
+    private ?int $templateFileId = null;
 
     public static function constructFromRecord(array $row): Template {
         $template = new Template();
@@ -25,49 +25,49 @@ class Template extends Entity {
     }
 
     public function getTemplateVars(): array {
-        return $this->_template_vars;
+        return $this->templateVars;
     }
 
-    public function setTemplateVars(array $template_vars): void {
-        $this->_template_vars = $template_vars;
+    public function setTemplateVars(array $templateVars): void {
+        $this->templateVars = $templateVars;
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName(string $name): void {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     public function getTemplateFileId(): ?int {
-        return $this->_template_file_id;
+        return $this->templateFileId;
     }
 
-    public function setTemplateFileId(?int $template_file_id): void {
-        $this->_template_file_id = $template_file_id;
+    public function setTemplateFileId(?int $templateFileId): void {
+        $this->templateFileId = $templateFileId;
     }
 
     public function getScope(): Scope {
         $dao = ScopeDaoMysql::getInstance();
-        return $dao->getScope($this->_scope_id);
+        return $dao->getScope($this->scopeId);
     }
 
     public function getScopeId(): int {
-        return $this->_scope_id;
+        return $this->scopeId;
     }
 
-    public function setScopeId(int $scope_id): void {
-        $this->_scope_id = $scope_id;
+    public function setScopeId(int $scopeId): void {
+        $this->scopeId = $scopeId;
     }
 
-    public function addTemplateVar(TemplateVar $template_var): void {
-        $this->_template_vars[] = $template_var;
+    public function addTemplateVar(TemplateVar $templateVar): void {
+        $this->templateVars[] = $templateVar;
     }
 
-    public function deleteTemplateVar(TemplateVar $template_var_to_delete): void {
-        $this->_template_vars = array_filter($this->_template_vars, function ($template_var) use ($template_var_to_delete) {
-            return $template_var->getId() !== $template_var_to_delete->getId();
+    public function deleteTemplateVar(TemplateVar $templateVarToDelete): void {
+        $this->templateVars = array_filter($this->templateVars, function ($templateVar) use ($templateVarToDelete) {
+            return $templateVar->getId() !== $templateVarToDelete->getId();
         });
     }
 

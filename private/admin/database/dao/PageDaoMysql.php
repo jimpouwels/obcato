@@ -30,7 +30,7 @@ class PageDaoMysql implements PageDao {
     }
 
     public function getHomepage(): ?Page {
-        $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM pages WHERE is_homepage = 1");
+        $statement = $this->mysqlConnector->prepareStatement("SELECT " . self::$myAllColumns . " FROM pages p, element_holders e WHERE p.is_homepage = 1");
         $result = $this->mysqlConnector->executeStatement($statement);
         while ($row = $result->fetch_assoc()) {
             return Page::constructFromRecord($row);

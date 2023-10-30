@@ -3,9 +3,9 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class TemplateFIle extends Entity {
 
-    private ?string $_file_name = null;
-    private string $_name;
-    private array $_template_var_defs = array();
+    private ?string $fileName = null;
+    private string $name;
+    private array $templateVarDefs = array();
 
     public static function constructFromRecord(array $row): TemplateFile {
         $template = new TemplateFile();
@@ -21,48 +21,48 @@ class TemplateFIle extends Entity {
     }
 
     public function getTemplateVarDefs(): array {
-        return $this->_template_var_defs;
+        return $this->templateVarDefs;
     }
 
-    public function setTemplateVarDefs(array $template_var_defs): void {
-        $this->_template_var_defs = $template_var_defs;
+    public function setTemplateVarDefs(array $templateVarDefs): void {
+        $this->templateVarDefs = $templateVarDefs;
     }
 
     public function getCode(): string {
         $code = "";
-        $file_path = FRONTEND_TEMPLATE_DIR . '/' . $this->getFilename();
-        if (is_file($file_path) && file_exists($file_path)) {
-            $code = file_get_contents($file_path);
+        $filepath = FRONTEND_TEMPLATE_DIR . '/' . $this->getFilename();
+        if (is_file($filepath) && file_exists($filepath)) {
+            $code = file_get_contents($filepath);
         }
         return $code;
     }
 
     public function getFileName(): ?string {
-        return $this->_file_name;
+        return $this->fileName;
     }
 
-    public function setFileName(?string $file_name): void {
-        $this->_file_name = $file_name;
+    public function setFileName(?string $fileName): void {
+        $this->fileName = $fileName;
     }
 
-    public function getTemplateVarDef(string $var_name): TemplateVarDef {
-        return array_filter($this->_template_var_defs, fn($template_var_def) => $var_name == $template_var_def->getName())[0];
+    public function getTemplateVarDef(string $varName): TemplateVarDef {
+        return array_filter($this->templateVarDefs, fn($templateVarDef) => $varName == $templateVarDef->getName())[0];
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName(string $name): void {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
-    public function addTemplateVarDef(TemplateVarDef $template_var_def): void {
-        $this->_template_var_defs[] = $template_var_def;
+    public function addTemplateVarDef(TemplateVarDef $templateVarDef): void {
+        $this->templateVarDefs[] = $templateVarDef;
     }
 
-    public function deleteTemplateVarDef(TemplateVarDef $template_var_def_to_delete): void {
-        $this->_template_var_defs = array_filter($this->_template_var_defs, fn($template_var_def) => $template_var_def->getId() !== $template_var_def_to_delete->getId());
+    public function deleteTemplateVarDef(TemplateVarDef $templateVarDefToDelete): void {
+        $this->templateVarDefs = array_filter($this->templateVarDefs, fn($templateVarDef) => $templateVarDef->getId() !== $templateVarDefToDelete->getId());
     }
 
 }

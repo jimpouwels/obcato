@@ -3,7 +3,7 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 class Scope extends Entity {
 
-    private string $_identifier;
+    private string $identifier;
 
     public static function constructFromRecord(array $row): Scope {
         $scope = new Scope();
@@ -17,11 +17,11 @@ class Scope extends Entity {
     }
 
     public function getIdentifier(): string {
-        return $this->_identifier;
+        return $this->identifier;
     }
 
     public function setIdentifier(string $identifier): void {
-        $this->_identifier = $identifier;
+        $this->identifier = $identifier;
     }
 
 }

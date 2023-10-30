@@ -1,11 +1,11 @@
 <?php
 
 class TemplateFilesList extends Panel {
-    private TemplateDao $_template_dao;
+    private TemplateDao $templateDao;
 
     public function __construct() {
         parent::__construct('template_files_list_title', 'template_files_list_panel');
-        $this->_template_dao = TemplateDaoMysql::getInstance();
+        $this->templateDao = TemplateDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -18,15 +18,13 @@ class TemplateFilesList extends Panel {
 
     private function getAllTemplateFiles(): array {
         $template_files = array();
-        foreach ($this->_template_dao->getTemplateFiles() as $template_file) {
-            $template_file_array = array();
-            $template_file_array["id"] = $template_file->getId();
-            $template_file_array["name"] = $template_file->getName();
-            $template_files[] = $template_file_array;
+        foreach ($this->templateDao->getTemplateFiles() as $templateFile) {
+            $templateFileArray = array();
+            $templateFileArray["id"] = $templateFile->getId();
+            $templateFileArray["name"] = $templateFile->getName();
+            $template_files[] = $templateFileArray;
         }
         return $template_files;
     }
 
 }
-
-?>

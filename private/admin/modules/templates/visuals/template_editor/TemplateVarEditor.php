@@ -23,8 +23,8 @@ class TemplateVarEditor extends Panel {
 
             $defaultValue = $this->templateService->getTemplateVarDefByTemplateVar($this->template, $templateVar)->getDefaultValue();
             $postfix = "<strong>Default:</strong> $defaultValue";
-            $var_field = new TextField("template_var_{$templateVarId}_field", $templateVar->getName(), $templateVar->getValue(), false, false, null, true, $postfix);
-            $varFields[] = $var_field->render();
+            $varField = new TextField("template_var_{$templateVarId}_field", $templateVar->getName(), $templateVar->getValue(), false, false, null, true, $postfix);
+            $varFields[] = $varField->render();
         }
         $data->assign("var_fields", $varFields);
 

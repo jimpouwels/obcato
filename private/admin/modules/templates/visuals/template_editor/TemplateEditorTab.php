@@ -5,13 +5,13 @@ require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateVarE
 
 class TemplateEditorTab extends Visual {
 
-    private ?Template $_current_template;
-    private ?Scope $_current_scope;
+    private ?Template $currentTemplate;
+    private ?Scope $currentScope;
 
-    public function __construct(?Template $current_template, ?Scope $current_scope) {
+    public function __construct(?Template $current, ?Scope $currentScope) {
         parent::__construct();
-        $this->_current_template = $current_template;
-        $this->_current_scope = $current_scope;
+        $this->currentTemplate = $current;
+        $this->currentScope = $currentScope;
     }
 
     public function getTemplateFilename(): string {
@@ -20,44 +20,34 @@ class TemplateEditorTab extends Visual {
 
     public function load(): void {
         $this->assign("current_template_id", $this->getCurrentTemplateId());
-        if (!is_null($this->_current_template)) {
+        if (!is_null($this->currentTemplate)) {
             $this->assign("template_editor", $this->renderTemplateEditor());
             $this->assign("template_var_editor", $this->renderTemplateVarEditor());
         }
         $this->assign("scope_selector", $this->getScopeSelector());
-        if (!is_null($this->_current_scope)) {
+        if (!is_null($this->currentScope)) {
             $this->assign("template_list", $this->renderTemplateList());
         }
     }
 
     private function getScopeSelector(): string {
-        $scope_selector = new ScopeSelector();
-        return $scope_selector->render();
+        return (new ScopeSelector())->render();
     }
 
     private function renderTemplateEditor(): string {
-        $template_editor = new TemplateEditor($this->_current_template);
-        return $template_editor->render();
+        return (new TemplateEditor($this->currentTemplate))->render();
     }
 
     private function renderTemplateVarEditor(): string {
-        $template_var_editor = new TemplateVarEditor($this->_current_template);
-        return $template_var_editor->render();
+        return (new TemplateVarEditor($this->currentTemplate))->render();
     }
 
     private function renderTemplateList(): string {
-        $template_list = new TemplateList($this->_current_scope);
-        return $template_list->render();
+        return (new TemplateList($this->currentScope))->render();
     }
 
     private function getCurrentTemplateId(): ?int {
-        $current_template_id = null;
-        if (!is_null($this->_current_template)) {
-            $current_template_id = $this->_current_template->getId();
-        }
-        return $current_template_id;
+        return $this->currentTemplate?->getId();
     }
 
 }
-
-?>

@@ -3,35 +3,35 @@ require_once CMS_ROOT . "/core/form/Form.php";
 require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class TemplateEditorForm extends Form {
-    private Template $_template;
-    private TemplateDao $_template_dao;
+    private Template $template;
+    private TemplateDao $templateDao;
 
     public function __construct(Template $template) {
-        $this->_template = $template;
-        $this->_template_dao = TemplateDaoMysql::getInstance();
+        $this->template = $template;
+        $this->templateDao = TemplateDaoMysql::getInstance();
     }
 
     public function loadFields(): void {
-        $this->_template->setName($this->getMandatoryFieldValue("name"));
-        $this->_template->setScopeId($this->getMandatoryFieldValue("scope"));
+        $this->template->setName($this->getMandatoryFieldValue("name"));
+        $this->template->setScopeId($this->getMandatoryFieldValue("scope"));
 
-        $new_template_file_id = $this->getFieldValue("template_editor_template_file");
-        if ($new_template_file_id != $this->_template->getTemplateFileId()) {
-            foreach ($this->_template->getTemplateVars() as $template_var) {
-                $this->_template_dao->deleteTemplateVar($template_var);
+        $newTemplateFileId = $this->getFieldValue("template_editor_template_file");
+        if ($newTemplateFileId != $this->template->getTemplateFileId()) {
+            foreach ($this->template->getTemplateVars() as $templateVar) {
+                $this->templateDao->deleteTemplateVar($templateVar);
             }
-            $this->_template->setTemplateVars([]);
+            $this->template->setTemplateVars([]);
         }
 
-        if ($new_template_file_id) {
-            $this->_template->setTemplateFileId(intval($new_template_file_id));
+        if ($newTemplateFileId) {
+            $this->template->setTemplateFileId(intval($newTemplateFileId));
 
-            foreach ($this->_template_dao->getTemplateFile($this->_template->getTemplateFileId())->getTemplateVarDefs() as $var_def) {
-                if (!Arrays::firstMatch($this->_template->getTemplateVars(), function ($tv) use ($var_def) {
-                    return $var_def->getName() == $tv->getName();
+            foreach ($this->templateDao->getTemplateFile($this->template->getTemplateFileId())->getTemplateVarDefs() as $varDef) {
+                if (!Arrays::firstMatch($this->template->getTemplateVars(), function ($tv) use ($varDef) {
+                    return $varDef->getName() == $tv->getName();
                 })) {
-                    $template_var = $this->_template_dao->storeTemplateVar($this->_template, $var_def->getName());
-                    $this->_template->addTemplateVar($template_var);
+                    $templateVar = $this->templateDao->storeTemplateVar($this->template, $varDef->getName());
+                    $this->template->addTemplateVar($templateVar);
                 }
             }
         }
@@ -39,10 +39,10 @@ class TemplateEditorForm extends Form {
         if ($this->hasErrors()) {
             throw new FormException();
         }
-        foreach ($this->_template->getTemplateVars() as $template_var) {
-            $template_var_id = $template_var->getId();
-            $template_var->setValue($this->getFieldValue("template_var_{$template_var_id}_field"));
-            $this->_template_dao->updateTemplateVar($template_var);
+        foreach ($this->template->getTemplateVars() as $templateVar) {
+            $templateVarId = $templateVar->getId();
+            $templateVar->setValue($this->getFieldValue("template_var_{$templateVarId}_field"));
+            $this->templateDao->updateTemplateVar($templateVar);
         }
     }
 

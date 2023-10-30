@@ -3,47 +3,45 @@ require_once CMS_ROOT . "/core/model/Entity.php";
 
 abstract class Presentable extends Entity {
 
-    private ?int $_template_id = null;
-    private int $_scope_id;
+    private ?int $templateId = null;
+    private int $scopeId;
 
     public function __construct(int $scopeId) {
-        $this->_scope_id = $scopeId;
+        $this->scopeId = $scopeId;
     }
 
     public function getTemplate(): ?Template {
         $dao = TemplateDaoMysql::getInstance();
-        if ($this->_template_id) {
-            return $dao->getTemplate($this->_template_id);
+        if ($this->templateId) {
+            return $dao->getTemplate($this->templateId);
         } else {
             return null;
         }
     }
 
     public function setTemplate(Template $template): void {
-        if (!is_null($template)) {
-            $this->_template_id = $template->getId();
-        }
+        $this->templateId = $template->getId();
     }
 
     public function getTemplateId(): ?int {
-        return $this->_template_id;
+        return $this->templateId;
     }
 
-    public function setTemplateId(?int $template_id): void {
-        $this->_template_id = $template_id;
+    public function setTemplateId(?int $templateId): void {
+        $this->templateId = $templateId;
     }
 
     public function getScope(): Scope {
         $dao = ScopeDaoMysql::getInstance();
-        return $dao->getScope($this->_scope_id);
+        return $dao->getScope($this->scopeId);
     }
 
     public function getScopeId(): int {
-        return $this->_scope_id;
+        return $this->scopeId;
     }
 
-    public function setScopeId(int $scope_id): void {
-        $this->_scope_id = $scope_id;
+    public function setScopeId(int $scopeId): void {
+        $this->scopeId = $scopeId;
     }
 
     protected function initFromDb(array $row): void {

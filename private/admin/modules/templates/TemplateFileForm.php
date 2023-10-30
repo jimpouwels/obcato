@@ -4,18 +4,18 @@ require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
 
 class TemplateFileForm extends Form {
 
-    private TemplateFile $_template_file;
-    private TemplateDao $_template_dao;
-    private array $_parsed_var_defs = array();
+    private TemplateFile $templateFile;
+    private TemplateDao $templateDao;
+    private array $parseVarDefs = array();
     private bool $reloading = false;
 
-    public function __construct(TemplateFile $template_file) {
-        $this->_template_file = $template_file;
-        $this->_template_dao = TemplateDaoMysql::getInstance();
+    public function __construct(TemplateFile $templateFile) {
+        $this->templateFile = $templateFile;
+        $this->templateDao = TemplateDaoMysql::getInstance();
     }
 
-    public function getParsedVarDefs(): array {
-        return $this->_parsed_var_defs;
+    public function getParseVarDefs(): array {
+        return $this->parseVarDefs;
     }
 
     public function setReloading(): void {
@@ -23,46 +23,46 @@ class TemplateFileForm extends Form {
     }
 
     public function loadFields(): void {
-        $id = $this->_template_file->getId();
-        $this->_template_file->setName($this->getMandatoryFieldValue("template_file_{$id}_name_field"));
-        $this->_template_file->setFileName($this->getFieldValue("template_file_{$id}_filename_field"));
+        $id = $this->templateFile->getId();
+        $this->templateFile->setName($this->getMandatoryFieldValue("template_file_{$id}_name_field"));
+        $this->templateFile->setFileName($this->getFieldValue("template_file_{$id}_filename_field"));
 
-        $this->_parsed_var_defs = $this->parseVarDefs();
+        $this->parseVarDefs = $this->parseVarDefs();
 
-        foreach ($this->_template_file->getTemplateVarDefs() as $var_def) {
-            $var_def_id = $var_def->getId();
-            $var_def->setDefaultValue($this->getFieldValue("var_def_{$var_def_id}_default_value_field"));
-            $this->_template_dao->updateTemplateVarDef($var_def);
+        foreach ($this->templateFile->getTemplateVarDefs() as $varDef) {
+            $varDefId = $varDef->getId();
+            $varDef->setDefaultValue($this->getFieldValue("var_def_{$varDefId}_default_value_field"));
+            $this->templateDao->updateTemplateVarDef($varDef);
         }
 
         // update template file
-        foreach ($this->_parsed_var_defs as $parsed_var_def) {
-            if (!array_filter($this->_template_file->getTemplateVarDefs(), fn($var_def) => $var_def->getName() == $parsed_var_def)) {
-                $template_var_def = $this->_template_dao->storeTemplateVarDef($this->_template_file, $parsed_var_def);
-                $this->_template_file->addTemplateVarDef($template_var_def);
+        foreach ($this->parseVarDefs as $parsedVarDef) {
+            if (!array_filter($this->templateFile->getTemplateVarDefs(), fn($varDef) => $varDef->getName() == $parsedVarDef)) {
+                $template_var_def = $this->templateDao->storeTemplateVarDef($this->templateFile, $parsedVarDef);
+                $this->templateFile->addTemplateVarDef($template_var_def);
             }
         }
-        foreach ($this->_template_file->getTemplateVarDefs() as $template_file_var_def) {
-            if (!array_filter($this->_parsed_var_defs, fn($parsed_var_def) => $template_file_var_def->getName() == $parsed_var_def)) {
-                $this->_template_dao->deleteTemplateVarDef($template_file_var_def);
-                $this->_template_file->deleteTemplateVarDef($template_file_var_def);
+        foreach ($this->templateFile->getTemplateVarDefs() as $templateFileVarDef) {
+            if (!array_filter($this->parseVarDefs, fn($parsedVarDef) => $templateFileVarDef->getName() == $parsedVarDef)) {
+                $this->templateDao->deleteTemplateVarDef($templateFileVarDef);
+                $this->templateFile->deleteTemplateVarDef($templateFileVarDef);
             }
         }
 
         // update all templates (migration)
         if (!$this->reloading) {
-            foreach ($this->_template_dao->getTemplatesForTemplateFile($this->_template_file) as $template) {
-                foreach ($template->getTemplateVars() as $template_var) {
-                    if (!array_filter($this->_parsed_var_defs, fn($parsed_var_def) => $template_var->getName() == $parsed_var_def)) {
-                        $this->_template_dao->deleteTemplateVar($template_var);
-                        $template->deleteTemplateVar($template_var);
+            foreach ($this->templateDao->getTemplatesForTemplateFile($this->templateFile) as $template) {
+                foreach ($template->getTemplateVars() as $templateVar) {
+                    if (!array_filter($this->parseVarDefs, fn($parsedVarDef) => $templateVar->getName() == $parsedVarDef)) {
+                        $this->templateDao->deleteTemplateVar($templateVar);
+                        $template->deleteTemplateVar($templateVar);
                     }
                 }
-                foreach ($this->_parsed_var_defs as $parsed_var_def) {
-                    foreach ($this->_template_dao->getTemplatesForTemplateFile($this->_template_file) as $template) {
-                        if (!array_filter($template->getTemplateVars(), fn($template_var) => $template_var->getName() == $parsed_var_def)) {
+                foreach ($this->parseVarDefs as $parseVarDef) {
+                    foreach ($this->templateDao->getTemplatesForTemplateFile($this->templateFile) as $template) {
+                        if (!array_filter($template->getTemplateVars(), fn($templateVar) => $templateVar->getName() == $parseVarDef)) {
                             $templateId = $template->getId();
-                            $this->_template_dao->storeTemplateVar($template, $parsed_var_def, $this->getFieldValue("new_var_$templateId|{$parsed_var_def}"));
+                            $this->templateDao->storeTemplateVar($template, $parseVarDef, $this->getFieldValue("new_var_$templateId|{$parseVarDef}"));
                         }
                     }
                 }
@@ -71,18 +71,17 @@ class TemplateFileForm extends Form {
 
     }
 
-    private
-    function parseVarDefs(): array {
-        $parsed_var_defs = array();
-        $code = $this->_template_file->getCode();
+    private function parseVarDefs(): array {
+        $parsedVarDefs = array();
+        $code = $this->templateFile->getCode();
         $matches = null;
         preg_match_all('/\$var\.(.*?)[\ })|]/', $code, $matches);
 
         for ($i = 0; $i < count($matches[1]); $i++) {
-            $var_def_name = $matches[1][$i];
-            $parsed_var_defs[] = $var_def_name;
+            $varDefName = $matches[1][$i];
+            $parsedVarDefs[] = $varDefName;
         }
-        return array_unique($parsed_var_defs);
+        return array_unique($parsedVarDefs);
     }
 
 }
