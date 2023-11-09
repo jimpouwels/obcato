@@ -21,7 +21,7 @@ class TermForm extends Form {
 
     private function termExists(): bool {
         $existingTerm = $this->articleDao->getTermByName($this->term->getName());
-        if ($this->term->getId() != $existingTerm?->getId()) {
+        if ($existingTerm && $this->term->getId() != $existingTerm->getId()) {
             $this->raiseError("name", $this->getTextResource("terms_error_message_duplicate_term_name"));
             return true;
         }

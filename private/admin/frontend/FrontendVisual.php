@@ -219,5 +219,3 @@ abstract class FrontendVisual {
         return "<a title=\"{$title}\" {$targetHtml} href=\"{$url}\" class=\"{$link_class}\">";
     }
 }
-
-?>
