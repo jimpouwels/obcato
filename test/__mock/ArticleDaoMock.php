@@ -24,7 +24,7 @@ class ArticleDaoMock implements ArticleDao {
         // TODO: Implement getAllChildArticles() method.
     }
 
-    public function searchArticles(string $keyword, int $termId): array {
+    public function searchArticles(string $keyword, ?int $termId): array {
         // TODO: Implement searchArticles() method.
     }
 

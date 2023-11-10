@@ -9,7 +9,7 @@ interface ArticleDao {
 
     public function getAllChildArticles(int $parentArticleId): array;
 
-    public function searchArticles(string $keyword, int $termId): array;
+    public function searchArticles(string $keyword, ?int $termId): array;
 
     public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array;
 

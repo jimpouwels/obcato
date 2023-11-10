@@ -78,7 +78,7 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchArticles(string $keyword, int $termId): array {
+    public function searchArticles(string $keyword, ?int $termId): array {
         $from = " FROM element_holders e, articles a";
         $where = " WHERE
                       e.id = a.element_holder_id";
