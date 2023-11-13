@@ -25,6 +25,7 @@ articles_list_message_no_articles_found: Geen artikelen gevonden
 article_editor_title_label: Titel
 article_editor_template_field: Template
 article_editor_description_label: Beschrijving
+article_editor_url_title_field: URL titel
 article_editor_published_label: Gepubliceerd
 article_editor_publication_date_label: Publicatiedatum
 article_editor_sort_date_label: Sorteerdatum

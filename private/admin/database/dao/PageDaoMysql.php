@@ -11,7 +11,7 @@ require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
 class PageDaoMysql implements PageDao {
 
     private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, p.navigation_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
+                      e.created_at, e.created_by, e.type, p.navigation_title, p.url_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
                       p.include_in_searchindex, p.follow_up, p.is_homepage";
     private static ?PageDaoMysql $instance = null;
     private MysqlConnector $mysqlConnector;
@@ -113,7 +113,7 @@ class PageDaoMysql implements PageDao {
     }
 
     public function updatePage(Page $page): void {
-        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_in_searchindex = ?, follow_up = ?, `description` = ? WHERE element_holder_id = ?";
+        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_in_searchindex = ?, follow_up = ?, `description` = ?, url_title = ? WHERE element_holder_id = ?";
 
         $navigationTitle = $page->getNavigationTitle();
         $keywords = $page->getKeywords();
@@ -122,9 +122,10 @@ class PageDaoMysql implements PageDao {
         $followUp = $page->getFollowUp();
         $description = $page->getDescription();
         $elementHolderId = $page->getId();
+        $urlTitle = $page->getUrlTitle();
 
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiisi', $navigationTitle, $keywords, $showInNavigation, $includeInSearchEngine, $followUp, $description, $elementHolderId);
+        $statement->bind_param('ssiiisis', $navigationTitle, $keywords, $showInNavigation, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($page);
     }

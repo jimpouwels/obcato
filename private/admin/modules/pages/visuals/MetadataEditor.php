@@ -18,6 +18,7 @@ class MetadataEditor extends Panel {
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $titleField = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->currentPage->getTitle(), true, false, null);
+        $urlTitleField = new TextField("url_title", $this->getTextResource('pages_edit_metadata_url_title_field_label'), $this->currentPage->getUrlTitle(), false, false, null);
         $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
         $keywordsField = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->currentPage->getKeywords(), false, false, "keywords_field");
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->friendUrlManager->getFriendlyUrlForElementHolder($this->currentPage), '');
@@ -31,6 +32,7 @@ class MetadataEditor extends Panel {
         $data->assign("page_title_field", $titleField->render());
         $data->assign("keywords_field", $keywordsField->render());
         $data->assign("navigation_title_field", $navigationTitleField->render());
+        $data->assign('url_title_field', $urlTitleField->render());
         $data->assign('url_field', $urlField->render());
         $data->assign("description_field", $descriptionField->render());
         $data->assign("published_field", $publishedField->render());

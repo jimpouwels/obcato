@@ -8,6 +8,7 @@ class Article extends ElementHolder {
     private ?string $description;
     private ?int $imageId = null;
     private ?string $keywords = null;
+    private ?string $urlTitle = null;
     private string $publicationDate;
     private string $sortDate;
     private ?int $targetPageId = null;
@@ -29,6 +30,7 @@ class Article extends ElementHolder {
         $this->setDescription($row['description']);
         $this->setImageId($row['image_id']);
         $this->setKeywords($row['keywords']);
+        $this->setUrlTitle($row['url_title']);
         $this->setPublicationDate($row['publication_date']);
         $this->setSortDate($row['sort_date']);
         $this->setTargetPageId(!is_null($row['target_page']) ? intval($row['target_page']) : null);
@@ -43,6 +45,14 @@ class Article extends ElementHolder {
 
     public function setDescription(?string $description): void {
         $this->description = $description;
+    }
+
+    public function setUrlTitle(?string $urlTitle): void {
+        $this->urlTitle = $urlTitle;
+    }
+
+    public function getUrlTitle(): ?string {
+        return $this->urlTitle;
     }
 
     public function getKeywords(): ?string {

@@ -12,7 +12,7 @@ require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
+                      e.created_at, e.created_by, e.type, a.description, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
     private static ?ArticleDaoMysql $instance = null;
     private PageDao $pageDao;
@@ -144,41 +144,22 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function updateArticle(Article $article): void {
-        $query = "UPDATE articles SET description = '" . $this->mysqlConnector->realEscapeString($article->getDescription()) . "',
-                      publication_date = '" . $article->getPublicationDate() . "',
-                      sort_date = '" . $article->getSortDate() . "'";
-        if (!is_null($article->getImageId()) && $article->getImageId() != '') {
-            $query = $query . ", image_id = " . $article->getImageId();
-        } else {
-            $query = $query . ", image_id = NULL";
-        }
-        if (!is_null($article->getTargetPageId()) && $article->getTargetPageId() != '') {
-            $query = $query . ", target_page = " . $article->getTargetPageId();
-        } else {
-            $query = $query . ", target_page = NULL";
-        }
-        if (!is_null($article->getParentArticleId())) {
-            $query = $query . ", parent_article_id = " . $article->getParentArticleId();
-        } else {
-            $query = $query . ", parent_article_id = NULL";
-        }
-        if (!is_null($article->getTemplateId())) {
-            $query = $query . ", template_id = " . $article->getTemplateId();
-        } else {
-            $query = $query . ", template_id = NULL";
-        }
-        if ($article->getKeywords()) {
-            $query = $query . ", keywords = '" . $article->getKeywords() . "'";
-        } else {
-            $query = $query . ", keywords = NULL";
-        }
-        if (!is_null($article->getCommentWebFormId()) && $article->getCommentWebFormId() != '') {
-            $query = $query . ", comment_webform_id = " . $article->getCommentWebFormId();
-        } else {
-            $query = $query . ", comment_webform_id = NULL";
-        }
-        $query = $query . " WHERE element_holder_id = " . $article->getId();
-        $this->mysqlConnector->executeQuery($query);
+        $description = $this->mysqlConnector->realEscapeString($article->getDescription());
+        $publicationDate = $article->getPublicationDate();
+        $sortDate = $article->getSortDate();
+        $imageId = $article->getImageId();
+        $targetPage = $article->getTargetPageId();
+        $parentArticleId = $article->getParentArticleId();
+        $templateId = $article->getTemplateId();
+        $keywords = $article->getKeywords();
+        $urlTitle = $article->getUrlTitle();
+        $commentWebformId = $article->getCommentWebFormId();
+        $elementHolderId = $article->getId();
+
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE articles SET description = ?, publication_date = ?, url_title = ?, sort_date = ?, image_id = ?, target_page = ?, parent_article_id = ?, template_id = ?, keywords = ?, comment_webform_id = ? WHERE element_holder_id = ?");
+        $statement->bind_param('ssssiiiisii', $description, $publicationDate, $urlTitle, $sortDate, $imageId, $targetPage, $parentArticleId, $templateId, $keywords, $commentWebformId, $elementHolderId);
+
+        $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($article);
     }
 

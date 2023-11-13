@@ -265,8 +265,12 @@
         <query>UPDATE element_types SET domain_object = 'FormElement.php' WHERE id = 10</query>
         <query>UPDATE element_types SET domain_object = 'IFrameElement.php' WHERE id = 11</query>
 
-        <query>ALTER TABLE settings DROP COLUMN frontend_template_dir, DROP COLUMN static_files_dir, DROP COLUMN upload_dir, DROP COLUMN cms_root_dir,
+        <query>ALTER TABLE settings DROP COLUMN frontend_template_dir, DROP COLUMN static_files_dir, DROP COLUMN
+            upload_dir, DROP COLUMN cms_root_dir,
             DROP COLUMN backend_template_dir, DROP COLUMN public_root_dir, DROP COLUMN config_dir, DROP COLUMN
-            component_dir</query>
+            component_dir
+        </query>
+        <query>ALTER TABLE pages ADD COLUMN url_title TEXT DEFAULT NULL</query>
+        <query>ALTER TABLE articles ADD COLUMN url_title TEXT DEFAULT NULL</query>
     </version>
 </versions>

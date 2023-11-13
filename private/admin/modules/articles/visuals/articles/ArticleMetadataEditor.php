@@ -25,8 +25,9 @@ class ArticleMetadataEditor extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $titleField = new TextField("article_title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
+        $titleField = new TextField("title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
         $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
+        $urlTitleField = new TextField('url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle), '');
         $keywordsField = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->currentArticle->getKeywords(), false, false, "keywords_field");
         $descriptionField = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->currentArticle->getDescription(), false, true, null);
@@ -51,6 +52,7 @@ class ArticleMetadataEditor extends Panel {
         $data->assign('template_field', $templatePickerField->render());
         $data->assign('keywords_field', $keywordsField->render());
         $data->assign('url_field', $urlField->render());
+        $data->assign('url_title_field', $urlTitleField->render());
         $data->assign("description_field", $descriptionField->render());
         $data->assign("published_field", $publishedField->render());
         $data->assign("publication_date_field", $publicationDateField->render());

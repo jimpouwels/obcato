@@ -30,31 +30,13 @@ class FriendlyUrlManager {
         return self::$instance;
     }
 
-    private function writeHtaccessFileIfNotExists(): void {
-        $htaccessFilePath = PUBLIC_DIR . '/.htaccess';
-        if (file_exists($htaccessFilePath)) return;
-        $handle = fopen($htaccessFilePath, 'w');
-        fclose($handle);
-        file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
-            "RewriteCond %{HTTP_HOST} !=localhost\n" .
-            "RewriteCond %{HTTPS} !=on\n" .
-            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !^/index.php\n" .
-            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .
-            "RewriteCond %{REQUEST_URI} !^/admin(.*)\n" .
-            "RewriteRule ^.*$ index.php [NC,L]");
-    }
-
     public function insertOrUpdateFriendlyUrlForPage(Page $page): void {
         $url = $this->createUrlForPage($page);
         $this->insertOrUpdateFriendlyUrl($url, $page);
     }
 
     private function createUrlForPage(Page $page): string {
-        $url = '/' . $this->replaceSpecialCharacters($page->getNavigationTitle());
+        $url = '/' . $this->replaceSpecialCharacters($page->getUrlTitle() ?: $page->getNavigationTitle());
         $parentPage = $this->pageDao->getParent($page);
         if ($parentPage != null && $parentPage->getId() != $this->pageDao->getRootPage()->getId()) {
             $url = $this->createUrlForPage($this->pageDao->getParent($page)) . $url;
@@ -106,7 +88,7 @@ class FriendlyUrlManager {
 
     private function createUrlForArticle(Article $article): string {
         $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->articleDao->getArticle($article->getParentArticleId())) . '/') : '/';
-        return $base . $this->replaceSpecialCharacters($article->getTitle());
+        return $base . $this->replaceSpecialCharacters($article->getUrlTitle() ?: $article->getTitle());
     }
 
     public function matchUrl(string $url): ?UrlMatch {
@@ -166,5 +148,23 @@ class FriendlyUrlManager {
             }
         }
         $urlMatch->setArticle($article, $matchedUrl);
+    }
+
+    private function writeHtaccessFileIfNotExists(): void {
+        $htaccessFilePath = PUBLIC_DIR . '/.htaccess';
+        if (file_exists($htaccessFilePath)) return;
+        $handle = fopen($htaccessFilePath, 'w');
+        fclose($handle);
+        file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
+            "RewriteCond %{HTTP_HOST} !=localhost\n" .
+            "RewriteCond %{HTTPS} !=on\n" .
+            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
+            "RewriteCond %{REQUEST_URI} !^/index.php\n" .
+            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
+            "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .
+            "RewriteCond %{REQUEST_URI} !^/admin(.*)\n" .
+            "RewriteRule ^.*$ index.php [NC,L]");
     }
 }
