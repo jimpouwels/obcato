@@ -3,17 +3,14 @@ require_once CMS_ROOT . "/request_handlers/BackendRequestHandler.php";
 require_once CMS_ROOT . "/view/views/Cms.php";
 require_once CMS_ROOT . "/view/views/Popup.php";
 require_once CMS_ROOT . "/text_resource_loader.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 class Backend {
 
     private BackendRequestHandler $backendRequestHandler;
-    private SettingsDao $settingsDao;
     private ?ModuleVisual $moduleVisual = null;
 
     public function __construct() {
         $this->backendRequestHandler = new BackendRequestHandler();
-        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function start(): void {
@@ -27,7 +24,7 @@ class Backend {
 
     private function loadCurrentModule(): void {
         $current_module = $this->backendRequestHandler->getCurrentModule();
-        if (!is_null($current_module)) {
+        if ($current_module) {
             $currentModule = null;
             $currentModule = $current_module;
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
@@ -55,7 +52,7 @@ class Backend {
     }
 
     private function runModuleRequestHandler(): void {
-        if (!is_null($this->moduleVisual)) {
+        if ($this->moduleVisual) {
             foreach ($this->moduleVisual->getRequestHandlers() as $request_handler) {
                 $request_handler->handle();
             }
