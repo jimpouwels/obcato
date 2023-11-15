@@ -83,6 +83,14 @@ class PageInteractor implements PageService {
         $this->pageDao->moveDown($page);
     }
 
+    public function getRootPage(): Page {
+        return $this->pageDao->getRootPage();
+    }
+
+    public function getParents(Page $page): array {
+        return $this->pageDao->getParents($page);
+    }
+
     private function updateFollowUp(array $pages): void {
         for ($i = 0; $i < count($pages); $i++) {
             $pages[$i]->setFollowUp($i);

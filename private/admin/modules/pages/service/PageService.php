@@ -18,4 +18,8 @@ interface PageService {
     public function moveDown(Page $page): void;
 
     public function deletePage(Page $page): void;
+
+    public function getRootPage(): Page;
+
+    public function getParents(Page $page): array;
 }

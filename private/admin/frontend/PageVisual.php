@@ -3,12 +3,12 @@ require_once CMS_ROOT . "/frontend/FrontendVisual.php";
 require_once CMS_ROOT . "/frontend/BlockVisual.php";
 require_once CMS_ROOT . "/frontend/ArticleVisual.php";
 require_once CMS_ROOT . "/frontend/FormFrontendVisual.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
+require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class PageVisual extends FrontendVisual {
-    private PageDao $pageDao;
+    private PageInteractor $pageService;
     private BlockDao $blockDao;
 
     private ArticleDao $articleDao;
@@ -18,7 +18,7 @@ class PageVisual extends FrontendVisual {
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
-        $this->pageDao = PageDaoMysql::getInstance();
+        $this->pageService = PageInteractor::getInstance();
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
@@ -45,7 +45,7 @@ class PageVisual extends FrontendVisual {
             $this->assign("article", null);
         }
         $this->assign("canonical_url", $this->getCanonicalUrl());
-        $this->assign("root_page", $this->getPageMetaData($this->pageDao->getRootPage()));
+        $this->assign("root_page", $this->getPageMetaData($this->pageService->getRootPage()));
     }
 
     public function getPresentable(): ?Presentable {
@@ -68,7 +68,7 @@ class PageVisual extends FrontendVisual {
 
     private function renderChildren(Page $page): array {
         $children = array();
-        foreach ($this->pageDao->getSubPages($page) as $subPage) {
+        foreach ($this->pageService->getSubPages($page) as $subPage) {
             if (!$subPage->isPublished()) continue;
             $child = array();
             $this->addPageMetaData($subPage, $child, false);
@@ -144,9 +144,9 @@ class PageVisual extends FrontendVisual {
         $parentArticle = null;
         if ($this->getArticle() && $this->getArticle()->getParentArticleId()) {
             $parentArticle = $this->articleDao->getArticle($this->getArticle()->getParentArticleId());
-            $parents = $this->pageDao->getParents($this->pageDao->getPage($parentArticle->getTargetPageId()));
+            $parents = $this->pageService->getParents($this->pageService->getPageById($parentArticle->getTargetPageId()));
         } else {
-            $parents = $this->pageDao->getParents($this->getPage());
+            $parents = $this->pageService->getParents($this->getPage());
         }
         for ($i = 0; $i < count($parents); $i++) {
             if ($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) {
