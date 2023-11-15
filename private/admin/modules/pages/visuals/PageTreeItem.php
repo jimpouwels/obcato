@@ -3,13 +3,13 @@
 class PageTreeItem extends Visual {
 
     private Page $page;
-    private PageDao $pageDao;
+    private PageService $pageService;
     private Page $selectedPage;
 
     public function __construct(Page $page, Page $selectedPage) {
         parent::__construct();
         $this->page = $page;
-        $this->pageDao = PageDaoMysql::getInstance();
+        $this->pageService = PageInteractor::getInstance();
         $this->selectedPage = $selectedPage;
     }
 
@@ -19,7 +19,7 @@ class PageTreeItem extends Visual {
 
     public function load(): void {
         $subPages = array();
-        foreach ($this->pageDao->getSubPages($this->page) as $subPage) {
+        foreach ($this->pageService->getSubPages($this->page) as $subPage) {
             $treeItem = new PageTreeItem($subPage, $this->selectedPage);
             $subPages[] = $treeItem->render();
         }
