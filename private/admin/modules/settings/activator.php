@@ -18,7 +18,7 @@ class SettingsModuleVisual extends ModuleVisual {
         parent::__construct($settingsModule);
         $this->settingsModule = $settingsModule;
         $this->settings = SettingsDaoMysql::getInstance()->getSettings();
-        $this->settingsRequestHandler = new SettingsRequestHandler();
+        $this->settingsRequestHandler = new SettingsRequestHandler($this->settings);
     }
 
     public function getTemplateFilename(): string {

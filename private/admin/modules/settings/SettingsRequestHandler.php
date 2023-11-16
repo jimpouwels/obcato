@@ -6,19 +6,20 @@ require_once CMS_ROOT . "/modules/settings/SettingsForm.php";
 class SettingsRequestHandler extends HttpRequestHandler {
 
     private SettingsDao $settingsDao;
+    private Settings $settings;
 
-    public function __construct() {
+    public function __construct(Settings $settings) {
         $this->settingsDao = SettingsDaoMysql::getInstance();
+        $this->settings = $settings;
     }
 
     public function handleGet(): void {}
 
     public function handlePost(): void {
         try {
-            $settings = $this->settingsDao->getSettings();
-            $settingsForm = new SettingsForm($settings);
+            $settingsForm = new SettingsForm($this->settings);
             $settingsForm->loadFields();
-            $this->settingsDao->update($settings);
+            $this->settingsDao->update($this->settings);
             $this->settingsDao->setHomepage($settingsForm->getHomepageId());
             $this->sendSuccessMessage("Instellingen succesvol opgeslagen");
         } catch (FormException) {
