@@ -38,7 +38,7 @@ class RequestHandler {
         } else if ($this->isImageRequest()) {
             $this->loadImage();
         } else {
-            $url = $_SERVER['REQUEST_URI'];
+            $url = explode('?', $_SERVER['REQUEST_URI'])[0];
             $urlMatch = $this->friendlyUrlManager->matchUrl($url);
             if ($url == "/") {
                 $this->renderHomepage();
@@ -101,5 +101,3 @@ class RequestHandler {
     }
 
 }
-
-?>
