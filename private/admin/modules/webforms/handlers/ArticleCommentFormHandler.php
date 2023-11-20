@@ -36,7 +36,7 @@ class ArticleCommentFormHandler extends Formhandler {
         $email = $this->getFilledInPropertyValue('email');
         $message = $this->getFilledInPropertyValue('message');
         $parent = $this->getFilledInPropertyValue('parent');
-        if ($parent) {
+        if (!$parent) {
             $parent = null;
         }
         $article_id = $article->getId();
@@ -47,5 +47,3 @@ class ArticleCommentFormHandler extends Formhandler {
         $this->_mysql_connector->executeStatement($statement);
     }
 }
-
-?>
