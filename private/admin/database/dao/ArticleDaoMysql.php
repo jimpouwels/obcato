@@ -144,7 +144,7 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function updateArticle(Article $article): void {
-        $description = $this->mysqlConnector->realEscapeString($article->getDescription());
+        $description = $article->getDescription();
         $publicationDate = $article->getPublicationDate();
         $sortDate = $article->getSortDate();
         $imageId = $article->getImageId();
