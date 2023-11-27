@@ -4,6 +4,7 @@ require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/modules/images/model/ImageLabel.php";
 require_once CMS_ROOT . "/modules/images/model/Image.php";
+require_once CMS_ROOT . "/database/util/QueryUtils.php";
 
 class ImageDaoMysql implements ImageDao {
 
@@ -77,31 +78,22 @@ class ImageDaoMysql implements ImageDao {
     }
 
     public function searchImages(?string $keyword, ?string $filename, ?int $labelId): array {
-        $query = "SELECT DISTINCT " . self::$myAllColumns . " FROM images i";
+        $statement = new SelectStatement(true);
+        $statement->addFrom("images", explode(', ', str_replace("i.", "", self::$myAllColumns)));
 
-        if (!is_null($labelId)) {
-            $query = $query . ", images_labels ils WHERE ils.label_id = " . $labelId . " AND ils.image_id = i.id";
+        if ($labelId) {
+            $statement->addFrom("images_labels", ["label_id"]);
+            $statement->addWhereByValue("images_labels", "label_id", WhereType::Equals, $labelId);
+            $statement->addWhereByRef("images_labels", "image_id", "images", "id");
         }
-        if (!is_null($keyword)) {
-            $pos = strpos($query, 'WHERE');
-            if ($pos) {
-                $query = $query . ' AND';
-            } else {
-                $query = $query . ' WHERE';
-            }
-            $query = $query . " i.title LIKE '" . $keyword . "%'";
+        if ($keyword) {
+            $statement->addWhereByValue("images", "title", WhereType::Like, $keyword);
         }
-        if (!is_null($filename)) {
-            $pos = strpos($query, 'WHERE');
-            if ($pos) {
-                $query = $query . ' AND';
-            } else {
-                $query = $query . ' WHERE';
-            }
-            $query = $query . " i.file_name LIKE '" . $filename . "%'";
+        if ($filename) {
+            $statement->addWhereByValue("images", "file_name", WhereType::Like, $filename);
         }
-        $query = $query . " ORDER BY created_at";
-        $result = $this->mysqlConnector->executeQuery($query);
+        $statement->orderBy("images", "created_at");
+        $result = $statement->execute($this->mysqlConnector);
         $images = array();
         while ($row = $result->fetch_assoc()) {
             $images[] = Image::constructFromRecord($row);
