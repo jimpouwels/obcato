@@ -2,10 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../../setup.php";
+require_once __DIR__ . "/../setup.php";
 require_once CMS_ROOT . '/database/util/QueryUtils.php';
 
-class QueryUtilsTest extends TestCase {
+class SelectStatementTest extends TestCase {
 
     public function testCreateSelectStatementWithWhereClause() {
         $statement = new SelectStatement();

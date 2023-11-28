@@ -4,7 +4,6 @@ require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/modules/images/model/ImageLabel.php";
 require_once CMS_ROOT . "/modules/images/model/Image.php";
-require_once CMS_ROOT . "/database/util/QueryUtils.php";
 
 class ImageDaoMysql implements ImageDao {
 
