@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../setup.php";
-require_once CMS_ROOT . '/database/util/QueryUtils.php';
+require_once CMS_ROOT . '/database/SelectStatement.php';
 
 class SelectStatementTest extends TestCase {
 
