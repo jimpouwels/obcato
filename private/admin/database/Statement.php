@@ -4,17 +4,24 @@ abstract class Statement {
     private array $tables = array();
     private array $whereClauses = array();
     private ?OrderBy $orderBy = null;
+    private ?Join $join = null;
 
-    public function addWhereByValue(string $table, string $column, WhereType $type, string $match): void {
-        $this->addWhere($table, new WhereClauseValue($column, $type, $match));
+    public function addWhere(string $table, string $column, WhereType $type, string $match): void {
+        if (!isset($this->whereClauses[$table])) {
+            $this->whereClauses[$table] = array();
+        }
+        $this->whereClauses[$table][] = (new WhereClause($column, $type, $match));
     }
 
-    public function addWhereByRef(string $table, string $column, string $otherTable, string $otherColumn): void {
-        $this->addWhere($table, new WhereClauseRef($column, $otherTable, $otherColumn));
+    public function innerJoin(string $tableLeft, string $columnLeft, string $tableRight, string $columnRight): void {
+        $this->join = new Join(JoinType::Inner, $tableLeft, $columnLeft, $tableRight, $columnRight);
     }
 
     public function toQuery(): string {
         $query = $this->getBaseString() . $this->formatTables();
+        if ($this->join) {
+            $query .= " " . $this->join->toString();
+        }
         if ($this->whereClauses) {
             $query .= " WHERE ";
         }
@@ -60,22 +67,16 @@ abstract class Statement {
 
     protected abstract function getBaseString(): string;
 
-
     protected function addTable(string $table): void {
         $this->tables[] = $table;
-    }
-
-    private function addWhere(string $table, WhereClause $whereClauseRef): void {
-        if (!isset($this->whereClauses[$table])) {
-            $this->whereClauses[$table] = array();
-        }
-        $this->whereClauses[$table][] = $whereClauseRef;
     }
 
     private function formatTables(): string {
         $from = "";
         foreach ($this->tables as $table) {
-            $from .= $table . " " . $table . ", ";
+            if (!$this->join || $this->join->getTableRight() != $table) {
+                $from .= $table . " " . $table . ", ";
+            }
         }
         return rtrim($from, ", ");
     }
@@ -95,13 +96,43 @@ class OrderBy {
     }
 }
 
-abstract class WhereClause {
+class Join {
+    private JoinType $joinType;
+    private string $tableLeft;
+    private string $columnLeft;
+    private string $tableRight;
+    private string $columnRight;
+
+    public function __construct(JoinType $joinType, string $tableLeft, string $columnLeft, string $tableRight, string $columnRight) {
+        $this->joinType = $joinType;
+        $this->tableLeft = $tableLeft;
+        $this->columnLeft = $columnLeft;
+        $this->tableRight = $tableRight;
+        $this->columnRight = $columnRight;
+    }
+
+    public function toString(): string {
+        return $this->joinType->value . " JOIN " . $this->tableRight . " ON " . $this->tableLeft . "." . $this->columnLeft . " = " . $this->tableRight . "." . $this->columnRight;
+    }
+
+    public function getTableRight(): string {
+        return $this->tableRight;
+    }
+}
+
+enum JoinType: string {
+    case Inner = "INNER";
+}
+
+class WhereClause {
 
     private string $column;
+    private string $match;
     private WhereType $type;
 
-    public function __construct(string $column, WhereType $type) {
+    public function __construct(string $column, WhereType $type, string $match) {
         $this->column = $column;
+        $this->match = $match;
         $this->type = $type;
     }
 
@@ -113,20 +144,6 @@ abstract class WhereClause {
         return $this->type;
     }
 
-    public abstract function getMatch(): ?string;
-
-    public abstract function getMatchString(): string;
-}
-
-class WhereClauseValue extends WhereClause {
-
-    private string $match;
-
-    public function __construct(string $column, WhereType $type, string $match) {
-        parent::__construct($column, $type);
-        $this->match = $match;
-    }
-
     public function getMatch(): ?string {
         return $this->match;
     }
@@ -134,26 +151,7 @@ class WhereClauseValue extends WhereClause {
     public function getMatchString(): string {
         return "?";
     }
-}
 
-class WhereClauseRef extends WhereClause {
-
-    private string $otherTable;
-    private string $otherColumn;
-
-    public function __construct(string $column, string $otherTable, string $otherColumn) {
-        parent::__construct($column, WhereType::Equals);
-        $this->otherTable = $otherTable;
-        $this->otherColumn = $otherColumn;
-    }
-
-    public function getMatch(): ?string {
-        return null;
-    }
-
-    public function getMatchString(): string {
-        return $this->otherTable . "." . $this->otherColumn;
-    }
 }
 
 enum WhereType: string {

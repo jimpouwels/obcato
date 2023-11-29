@@ -82,14 +82,14 @@ class ImageDaoMysql implements ImageDao {
 
         if ($labelId) {
             $statement->addFrom("images_labels", ["label_id"]);
-            $statement->addWhereByValue("images_labels", "label_id", WhereType::Equals, $labelId);
-            $statement->addWhereByRef("images_labels", "image_id", "images", "id");
+            $statement->innerJoin("images", "id", "images_labels", "image_id");
+            $statement->addWhere("images_labels", "label_id", WhereType::Equals, $labelId);
         }
         if ($keyword) {
-            $statement->addWhereByValue("images", "title", WhereType::Like, $keyword);
+            $statement->addWhere("images", "title", WhereType::Like, $keyword);
         }
         if ($filename) {
-            $statement->addWhereByValue("images", "file_name", WhereType::Like, $filename);
+            $statement->addWhere("images", "file_name", WhereType::Like, $filename);
         }
         $statement->orderBy("images", "created_at");
         $result = $statement->execute($this->mysqlConnector);

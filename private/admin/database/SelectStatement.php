@@ -32,7 +32,6 @@ class SelectStatement extends Statement {
         return $mysqlConnector->executeStatement($sqlStatement);
     }
 
-
     protected function getBaseString(): string {
         $selectString = "";
         foreach (array_keys($this->selectFields) as $fromTable) {
