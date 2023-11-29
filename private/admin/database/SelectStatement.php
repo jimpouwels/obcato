@@ -10,7 +10,7 @@ class SelectStatement extends Statement {
         $this->distinct = $distinct;
     }
 
-    public function addFrom(string $table, array $fields): void {
+    public function from(string $table, array $fields): void {
         $this->addTable($table);
         if (!isset($this->selectFields[$table])) {
             $this->selectFields[$table] = array();

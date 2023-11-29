@@ -78,18 +78,18 @@ class ImageDaoMysql implements ImageDao {
 
     public function searchImages(?string $keyword, ?string $filename, ?int $labelId): array {
         $statement = new SelectStatement(true);
-        $statement->addFrom("images", explode(', ', str_replace("i.", "", self::$myAllColumns)));
+        $statement->from("images", explode(', ', str_replace("i.", "", self::$myAllColumns)));
 
         if ($labelId) {
-            $statement->addFrom("images_labels", ["label_id"]);
+            $statement->from("images_labels", ["label_id"]);
             $statement->innerJoin("images", "id", "images_labels", "image_id");
-            $statement->addWhere("images_labels", "label_id", WhereType::Equals, $labelId);
+            $statement->where("images_labels", "label_id", WhereType::Equals, $labelId);
         }
         if ($keyword) {
-            $statement->addWhere("images", "title", WhereType::Like, $keyword);
+            $statement->where("images", "title", WhereType::Like, $keyword);
         }
         if ($filename) {
-            $statement->addWhere("images", "file_name", WhereType::Like, $filename);
+            $statement->where("images", "file_name", WhereType::Like, $filename);
         }
         $statement->orderBy("images", "created_at");
         $result = $statement->execute($this->mysqlConnector);

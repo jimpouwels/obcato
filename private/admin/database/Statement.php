@@ -6,7 +6,7 @@ abstract class Statement {
     private ?OrderBy $orderBy = null;
     private ?Join $join = null;
 
-    public function addWhere(string $table, string $column, WhereType $type, string $match): void {
+    public function where(string $table, string $column, WhereType $type, string $match): void {
         if (!isset($this->whereClauses[$table])) {
             $this->whereClauses[$table] = array();
         }
