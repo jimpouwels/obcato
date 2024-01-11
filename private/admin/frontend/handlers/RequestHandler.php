@@ -4,8 +4,9 @@ require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/frontend/WebsiteVisual.php";
-require_once CMS_ROOT . '/frontend/SitemapVisual.php';
 require_once CMS_ROOT . '/utilities/UrlHelper.php';
+require_once CMS_ROOT . '/frontend/SitemapVisual.php';
+require_once CMS_ROOT . '/frontend/RobotsVisual.php';
 require_once CMS_ROOT . '/utilities/Arrays.php';
 require_once CMS_ROOT . '/view/views/Visual.php';
 require_once CMS_ROOT . '/view/views/Panel.php';
@@ -35,6 +36,10 @@ class RequestHandler {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');
             echo $sitemap->render();
+        } else if ($this->isRobotsRequest()) {
+            $robots = new RobotsVisual();
+            header('Content-Type: text/plain');
+            echo $robots->render();
         } else if ($this->isImageRequest()) {
             $this->loadImage();
         } else {
@@ -57,6 +62,10 @@ class RequestHandler {
 
     private function isSitemapRequest(): bool {
         return isset($_GET['sitemap']) && $_GET['sitemap'];
+    }
+
+    private function isRobotsRequest(): bool {
+        return isset($_GET['robots']) && $_GET['robots'];
     }
 
     private function isImageRequest(): bool {

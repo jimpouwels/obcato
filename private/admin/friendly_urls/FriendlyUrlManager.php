@@ -160,7 +160,8 @@ class FriendlyUrlManager {
             "RewriteCond %{HTTPS} !=on\n" .
             "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
             "RewriteCond %{REQUEST_URI} !^/index.php\n" .
-            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n\n" .
+            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
+            "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
             "RewriteCond %{REQUEST_URI} !^/index(.*)\n" .
             "RewriteCond %{REQUEST_URI} !^/static(.*)\n" .
             "RewriteCond %{REQUEST_URI} !^/upload(.*)\n" .

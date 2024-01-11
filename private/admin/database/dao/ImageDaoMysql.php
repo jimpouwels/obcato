@@ -147,7 +147,7 @@ class ImageDaoMysql implements ImageDao {
     }
 
     public function getAllLabels(): array {
-        $query = "SELECT * FROM image_labels";
+        $query = "SELECT * FROM image_labels ORDER BY name";
         $result = $this->mysqlConnector->executeQuery($query);
         $labels = array();
         while ($row = $result->fetch_assoc()) {
