@@ -50,5 +50,3 @@ abstract class FormHandler {
 
     abstract function handle(array $fields, Page $page, ?Article $article): void;
 }
-
-?>

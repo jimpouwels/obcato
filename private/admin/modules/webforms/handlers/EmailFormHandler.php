@@ -43,5 +43,3 @@ class EmailFormHandler extends Formhandler {
         mail($target_email_address, $subject, $message, $headers);
     }
 }
-
-?>

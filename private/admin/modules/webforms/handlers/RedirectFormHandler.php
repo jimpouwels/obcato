@@ -39,5 +39,3 @@ class RedirectFormHandler extends Formhandler {
         }
     }
 }
-
-?>
