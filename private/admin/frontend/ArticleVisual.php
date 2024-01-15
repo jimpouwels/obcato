@@ -34,6 +34,7 @@ class ArticleVisual extends FrontendVisual {
         $data["publication_date"] = $this->getArticle()->getPublicationDate();
         $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
         $data["image"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getImageId()));
+        $data["wallpaper"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getWallpaperId()));
         $data["elements"] = $this->renderElementHolderContent($this->getArticle());
         $data["comments"] = $this->renderArticleComments($this->getArticle());
         $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());

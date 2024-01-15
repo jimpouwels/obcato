@@ -125,7 +125,7 @@ class PageDaoMysql implements PageDao {
         $urlTitle = $page->getUrlTitle();
 
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiisis', $navigationTitle, $keywords, $showInNavigation, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
+        $statement->bind_param('ssiiissi', $navigationTitle, $keywords, $showInNavigation, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($page);
     }

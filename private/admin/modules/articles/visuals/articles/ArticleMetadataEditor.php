@@ -39,7 +39,9 @@ class ArticleMetadataEditor extends Panel {
         $parentArticlePicker = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->currentArticle->getParentArticleId(), "update_element_holder");
         $parentArticleDeleteButton = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
         $imagePickerField = new ImagePicker("article_image_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_image_label'), $this->currentArticle->getImageId(), "update_element_holder");
+        $wallpaperPickerField = new ImagePicker("article_wallpaper_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_wallpaper_label'), $this->currentArticle->getWallpaperId(), "update_element_holder");
         $imageDeleteButton = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
+        $wallpaperDeleteButton = new Button("delete_wallpaper", $this->getTextResource('article_editor_delete_wallpaper_button_label'), null);
 
         if ($this->currentArticle->getParentArticleId()) {
             $parentArticle = $this->articleDao->getArticle($this->currentArticle->getParentArticleId());
@@ -61,9 +63,12 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("parent_article_field", $parentArticlePicker->render());
         $data->assign("delete_parent_article_button", $parentArticleDeleteButton->render());
         $data->assign("comment_forms_field", $commentFormsField->render());
+        $data->assign("wallpaper_picker_field", $wallpaperPickerField->render());
+        $data->assign("wallpaper_id", $this->currentArticle->getWallpaperId());
         $data->assign("image_picker_field", $imagePickerField->render());
         $data->assign("lead_image_id", $this->currentArticle->getImageId());
         $data->assign("delete_lead_image_button", $imageDeleteButton->render());
+        $data->assign("delete_wallpaper_button", $wallpaperDeleteButton->render());
         $this->assignElementHolderFormIds($data);
     }
 

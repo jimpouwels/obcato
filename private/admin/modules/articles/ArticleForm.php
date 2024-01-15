@@ -23,12 +23,14 @@ class ArticleForm extends Form {
         $this->article->setDescription($this->getFieldValue("article_description"));
         $this->article->setPublished($this->getCheckboxValue("article_published"));
         $this->article->setImageId($this->getNumber("article_image_ref_" . $this->article->getId()));
+        $this->article->setWallpaperId($this->getNumber("article_wallpaper_ref_" . $this->article->getId()));
         $this->article->setTargetPageId($this->getNumber("article_target_page"));
         $this->article->setParentArticleId($this->getNumber("parent_article_id"));
         $this->article->setCommentWebFormId($this->getNumber("article_comment_webform"));
         $publicationDate = $this->loadPublicationDate();
         $sortDate = $this->loadSortDate();
         $this->deleteLeadImageIfNeeded();
+        $this->deleteWallpaperIfNeeded();
         $this->deleteParentArticleIfNeeded();
         $this->selectedTerm = $this->getSelectValue("select_terms_" . $this->article->getId());
         if ($this->hasErrors()) {
@@ -57,6 +59,12 @@ class ArticleForm extends Form {
     private function deleteLeadImageIfNeeded(): void {
         if ($this->getFieldValue("delete_lead_image_field") == "true") {
             $this->article->setImageId(null);
+        }
+    }
+
+    private function deleteWallpaperIfNeeded(): void {
+        if ($this->getFieldValue("delete_wallpaper_field") == "true") {
+            $this->article->setWallpaperId(null);
         }
     }
 

@@ -12,7 +12,7 @@ require_once CMS_ROOT . "/utilities/DateUtility.php";
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
+                      e.created_at, e.created_by, e.type, a.description, a.wallpaper_id, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
     private static ?ArticleDaoMysql $instance = null;
     private PageDao $pageDao;
@@ -148,6 +148,7 @@ class ArticleDaoMysql implements ArticleDao {
         $publicationDate = $article->getPublicationDate();
         $sortDate = $article->getSortDate();
         $imageId = $article->getImageId();
+        $wallpaperId = $article->getWallpaperId();
         $targetPage = $article->getTargetPageId();
         $parentArticleId = $article->getParentArticleId();
         $templateId = $article->getTemplateId();
@@ -156,8 +157,8 @@ class ArticleDaoMysql implements ArticleDao {
         $commentWebformId = $article->getCommentWebFormId();
         $elementHolderId = $article->getId();
 
-        $statement = $this->mysqlConnector->prepareStatement("UPDATE articles SET description = ?, publication_date = ?, url_title = ?, sort_date = ?, image_id = ?, target_page = ?, parent_article_id = ?, template_id = ?, keywords = ?, comment_webform_id = ? WHERE element_holder_id = ?");
-        $statement->bind_param('ssssiiiisii', $description, $publicationDate, $urlTitle, $sortDate, $imageId, $targetPage, $parentArticleId, $templateId, $keywords, $commentWebformId, $elementHolderId);
+        $statement = $this->mysqlConnector->prepareStatement("UPDATE articles SET description = ?, publication_date = ?, url_title = ?, sort_date = ?, image_id = ?, wallpaper_id = ?, target_page = ?, parent_article_id = ?, template_id = ?, keywords = ?, comment_webform_id = ? WHERE element_holder_id = ?");
+        $statement->bind_param('ssssiiiiisii', $description, $publicationDate, $urlTitle, $sortDate, $imageId, $wallpaperId, $targetPage, $parentArticleId, $templateId, $keywords, $commentWebformId, $elementHolderId);
 
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($article);

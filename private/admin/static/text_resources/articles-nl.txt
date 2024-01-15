@@ -35,10 +35,12 @@ article_editor_target_page_label: Doelpagina
 article_editor_comment_webform_label: Reactieformulier
 article_editor_image_label: Afbeelding
 article_editor_delete_image_button_label: Afbeelding verwijderen
+article_editor_delete_wallpaper_button_label: Wallpaper verwijderen
 article_editor_delete_parent_article_label: Verwijzing verwijderen
 article_editor_child_articles_label: Subartikelen
 article_editor_select_parent_article_label: Hoofdartikel
 article_editor_selected_image_label: Geselecteerde afbeelding
+article_editor_selected_wallpaper_label: Geselecteerde wallpaper
 
 # TERMS EDITOR
 articles_terms_editor_title: Term bewerken

@@ -7,6 +7,7 @@ class Article extends ElementHolder {
     private static int $SCOPE = 9;
     private ?string $description;
     private ?int $imageId = null;
+    private ?int $wallpaperId = null;
     private ?string $keywords = null;
     private ?string $urlTitle = null;
     private string $publicationDate;
@@ -29,6 +30,7 @@ class Article extends ElementHolder {
     protected function initFromDb(array $row): void {
         $this->setDescription($row['description']);
         $this->setImageId($row['image_id']);
+        $this->setWallpaperId($row['wallpaper_id']);
         $this->setKeywords($row['keywords']);
         $this->setUrlTitle($row['url_title']);
         $this->setPublicationDate($row['publication_date']);
@@ -69,6 +71,14 @@ class Article extends ElementHolder {
 
     public function setImageId(?int $image_id): void {
         $this->imageId = $image_id;
+    }
+
+    public function getWallpaperId(): ?int {
+        return $this->wallpaperId;
+    }
+
+    public function setWallpaperId(?int $wallpaperId): void {
+        $this->wallpaperId = $wallpaperId;
     }
 
     public function getPublicationDate(): string {
