@@ -34,6 +34,7 @@ article_editor_target_page_label: Target page
 article_editor_parent_article_label: Select main article
 article_editor_comment_webform_label: Comment form
 article_editor_image_label: Image
+article_editor_wallpaper_label: Wallpaper
 article_editor_delete_image_button_label: Delete image
 article_editor_delete_wallpaper_button_label: Delete wallpaper
 article_editor_delete_parent_article_label: Delete reference

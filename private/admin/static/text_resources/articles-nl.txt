@@ -34,6 +34,7 @@ article_editor_parent_article_label: Selecteer hoofdartikel
 article_editor_target_page_label: Doelpagina
 article_editor_comment_webform_label: Reactieformulier
 article_editor_image_label: Afbeelding
+article_editor_wallpaper_label: Wallpaper
 article_editor_delete_image_button_label: Afbeelding verwijderen
 article_editor_delete_wallpaper_button_label: Wallpaper verwijderen
 article_editor_delete_parent_article_label: Verwijzing verwijderen
