@@ -55,20 +55,26 @@ class LinkDaoMysql implements LinkDao {
     }
 
     public function updateLink(Link $link): void {
-        if (!is_null($link->getTargetElementHolder()) && $link->getTargetElementHolder() != '')
+        if (!is_null($link->getTargetElementHolder()) && $link->getTargetElementHolder() != '') {
             $link->setType(Link::INTERNAL);
-        else
+        } else {
             $link->setType(Link::EXTERNAL);
+        }
 
-        $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = '" . $link->getTargetAddress() . "',
+        $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = ?,
                       code = '" . $link->getCode() . "', target = '" . $link->getTarget() . "', type = '" . $link->getType() . "'";
 
-        if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId()))
+        if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId())) {
             $query = $query . ", target_element_holder = " . $link->getTargetElementHolderId();
-        else
+        } else {
             $query = $query . ", target_element_holder = NULL";
+        }
         $query = $query . " WHERE id = " . $link->getId();
-        $this->mysqlConnector->executeQuery($query);
+
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $targetAddress = $link->getTargetAddress();
+        $statement->bind_param('s', $targetAddress);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function getBrokenLinks(): array {
