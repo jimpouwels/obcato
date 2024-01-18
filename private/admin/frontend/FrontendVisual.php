@@ -2,8 +2,8 @@
 require_once CMS_ROOT . "/modules/articles/model/Article.php";
 require_once CMS_ROOT . "/modules/pages/model/Page.php";
 require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
 require_once CMS_ROOT . "/modules/templates/service/TemplateInteractor.php";
+require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 
@@ -12,7 +12,7 @@ abstract class FrontendVisual {
     private TemplateEngine $templateEngine;
     private Smarty_Internal_Data $templateData;
     private LinkDao $linkDao;
-    private PageDao $pageDao;
+    private PageService $pageService;
     private ArticleDao $articleDao;
     private FriendlyUrlManager $friendlyUrlManager;
     private TemplateService $templateService;
@@ -21,7 +21,7 @@ abstract class FrontendVisual {
 
     public function __construct(?Page $page, ?Article $article) {
         $this->linkDao = LinkDaoMysql::getInstance();
-        $this->pageDao = PageDaoMysql::getInstance();
+        $this->pageService = PageInteractor::getInstance();
         $this->templateService = TemplateInteractor::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->page = $page;
@@ -101,15 +101,11 @@ abstract class FrontendVisual {
     }
 
     protected function getElementHolder(): ElementHolder {
-        if ($this->article) {
-            return $this->article;
-        } else {
-            return $this->page;
-        }
+        return !is_null($this->article) ? $this->article : $this->page;
     }
 
     protected function getArticleUrl(Article $article, bool $absolute = false): string {
-        $targetPage = $this->pageDao->getPage($article->getTargetPageId());
+        $targetPage = $this->pageService->getPageById($article->getTargetPageId());
         if (!$targetPage) {
             $targetPage = $this->page;
         }
@@ -129,7 +125,7 @@ abstract class FrontendVisual {
     protected function getPageUrl(Page $page, bool $absolute = false): string {
         $url = $absolute ? $this->getBaseUrl() : "";
         if ($page->isHomepage()) {
-            return "${url}" . ($absolute ? "" : "/");
+            return "$url" . ($absolute ? "" : "/");
         }
         $url = $absolute ? $this->getBaseUrl() : "";
         $friendlyUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($page);
@@ -196,7 +192,7 @@ abstract class FrontendVisual {
         $targetElementHolder = $link->getTargetElementHolder();
         switch ($targetElementHolder->getType()) {
             case Page::ElementHolderType:
-                $targetPage = $this->pageDao->getPage($targetElementHolder->getId());
+                $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
                 return $this->getPageUrl($targetPage);
             case Article::ElementHolderType:
                 $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
