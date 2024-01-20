@@ -34,7 +34,7 @@ class ListElement extends Element {
         $this->listItems = array_filter($this->listItems, function ($listItem) use ($listItemToDelete) {
             return $listItem->getId() !== $listItemToDelete->getId();
         });
-        $this->getMetaDataProvider()->deleteListItem();
+        $this->getMetaDataProvider()->deleteListItem($listItemToDelete);
     }
 
     public function getStatics(): Visual {
