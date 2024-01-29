@@ -46,7 +46,6 @@ abstract class ModuleInstaller extends Installer {
         $module = new Module();
         $module->setTitleTextResourceIdentifier($this->getTitleTextResourceIdentifier());
         $module->setIdentifier($this->getIdentifier());
-        $module->setIconUrl($this->getIconPath());
         $module->setModuleGroupId($this->_module_dao->getModuleGroupByIdentifier($this->getModuleGroup())->getId());
         $module->setPopUp($this->isPopup());
         $module->setEnabled(true);

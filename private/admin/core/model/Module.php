@@ -5,7 +5,6 @@ require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 class Module extends Entity {
 
     private string $_title_text_resource_identifier;
-    private string $_icon_url;
     private string $_identifier;
     private bool $_popup;
     private bool $_enabled;
@@ -21,7 +20,6 @@ class Module extends Entity {
 
     protected function initFromDb(array $row): void {
         $this->setTitleTextResourceIdentifier($row['title_text_resource_identifier']);
-        $this->setIconUrl($row['icon_url']);
         $this->setIdentifier($row['identifier']);
         $this->setPopUp($row['popup']);
         $this->setEnabled($row['enabled']);
@@ -49,14 +47,6 @@ class Module extends Entity {
 
     public function setClass(string $class): void {
         $this->_class = $class;
-    }
-
-    public function getIconUrl(): string {
-        return $this->_icon_url;
-    }
-
-    public function setIconUrl(string $icon_url): void {
-        $this->_icon_url = $icon_url;
     }
 
     public function getIdentifier(): string {

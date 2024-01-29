@@ -3,8 +3,7 @@ require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
 
 class ModulesListPanel extends Panel {
 
-    private static $TEMPLATE = 'components/modules_list.tpl';
-    private $_module_dao;
+    private ModuleDao $_module_dao;
     private $_components_request_handler;
 
     public function __construct($components_requestHandler) {
@@ -21,20 +20,20 @@ class ModulesListPanel extends Panel {
         $data->assign('modules', $this->getModulesData());
     }
 
-    private function getModulesData() {
+    private function getModulesData(): array {
         $modules_data = array();
         foreach ($this->_module_dao->getAllModules() as $module) {
             $module_data = array();
             $module_data['id'] = $module->getId();
             $module_data['title'] = $this->getTextResource($module->getTitleTextResourceIdentifier());
-            $module_data['icon_url'] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . $module->getIconUrl();
+            $module_data['icon_url'] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . 'png';
             $module_data['is_current'] = $this->isCurrentModule($module);
             $modules_data[] = $module_data;
         }
         return $modules_data;
     }
 
-    private function isCurrentModule($module) {
+    private function isCurrentModule($module): bool {
         $current_module = $this->_components_request_handler->getCurrentModule();
         return $current_module && $current_module->getId() == $module->getId();
     }
