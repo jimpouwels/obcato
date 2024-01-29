@@ -10,7 +10,7 @@ abstract class ModuleVisual extends Visual {
     }
 
     public function getTitle(): string {
-        return $this->getTextResource($this->module->getTitleTextResourceIdentifier());
+        return $this->getTextResource($this->module->getIdentifier() . '_module_title');
     }
 
     abstract function getActionButtons(): array;

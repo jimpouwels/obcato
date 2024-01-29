@@ -276,6 +276,7 @@
         <query>ALTER TABLE articles ADD CONSTRAINT articles_wallpaper_images FOREIGN KEY articles_wallpaper_images
             (wallpaper_id) REFERENCES images (id) ON DELETE CASCADE ON UPDATE RESTRICT
         </query>
-        <query>ALTER TABLE modules DROP COLUMN 'icon_url'</query>
+        <query>ALTER TABLE modules DROP COLUMN icon_url</query>
+        <query>ALTER TABLE modules DROP COLUMN title_text_resource_identifier</query>
     </version>
 </versions>

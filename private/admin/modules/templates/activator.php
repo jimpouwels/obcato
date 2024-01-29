@@ -78,7 +78,7 @@ class TemplateModuleVisual extends ModuleVisual {
     }
 
     public function getTitle(): string {
-        return $this->getTextResource($this->module->getTitleTextResourceIdentifier());
+        return $this->getTextResource($this->module->getIdentifier() . '_module_title');
     }
 
     public function getTabMenu(): ?TabMenu {

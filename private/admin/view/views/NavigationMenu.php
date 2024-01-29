@@ -38,7 +38,7 @@ class NavigationMenu extends Visual {
         $count = 1;
         foreach ($modules as $module) {
             $sub_item = array();
-            $sub_item["title"] = $this->getTextResource($module->getTitleTextResourceIdentifier());
+            $sub_item["title"] = $this->getTextResource($module->getIdentifier() . '_module_title');
             $sub_item["id"] = $module->getId();
             $sub_item["popup"] = $module->isPopUp();
             $sub_item["icon_url"] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
