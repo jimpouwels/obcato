@@ -29,6 +29,8 @@ $(document).ready(function () {
                 $checked = true;
             }
         });
+        var $actionField = $('#action');
+        $actionField.attr('value', 'delete_templates');
         if (!$checked) {
             alert('U heeft geen templates geselecteerd');
         } else {
