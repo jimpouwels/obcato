@@ -5,34 +5,45 @@ require_once CMS_ROOT . '/modules/components/installer/Logger.php';
 
 class ComponentRequestHandler extends HttpRequestHandler {
 
-    private $_module_dao;
-    private $_element_dao;
-    private $_current_module;
-    private $_current_element;
+    private ModuleDao $moduleDao;
+    private ElementDao $elementDao;
+    private ?Module $currentModule;
+    private ?ElementType $currentElementType;
 
     public function __construct() {
-        $this->_module_dao = ModuleDaoMysql::getInstance();
-        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->moduleDao = ModuleDaoMysql::getInstance();
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
-        $this->_current_module = $this->getModuleFromGetRequest();
-        $this->_current_element = $this->getElementFromGetRequest();
+        $this->currentModule = $this->getModuleFromGetRequest();
+        $this->currentElementType = $this->getElementTypeFromGetRequest();
     }
 
     private function getModuleFromGetRequest() {
         if (isset($_GET['module']) && $_GET['module'])
-            return $this->_module_dao->getModule($_GET['module']);
+            return $this->moduleDao->getModule($_GET['module']);
     }
 
-    private function getElementFromGetRequest() {
-        if (isset($_GET['element']) && $_GET['element'])
-            return $this->_element_dao->getElementType($_GET['element']);
+    private function getElementTypeFromGetRequest(): ?ElementType {
+        if (isset($_GET['element']) && $_GET['element']) {
+            return $this->elementDao->getElementType($_GET['element']);
+        }
+        return null;
     }
 
     public function handlePost(): void {
-        if ($this->isUninstallAction())
+        if ($this->isUninstallAction()) {
             $this->uninstallComponent();
+        }
+    }
+
+    public function getCurrentModule(): ?Module {
+        return $this->currentModule;
+    }
+
+    public function getCurrentElementType(): ?ElementType {
+        return $this->currentElementType;
     }
 
     private function isUninstallAction(): bool {
@@ -60,7 +71,7 @@ class ComponentRequestHandler extends HttpRequestHandler {
     }
 
     private function getModuleFromPostRequest(): Module {
-        return $this->_module_dao->getModule($_POST['module_id']);
+        return $this->moduleDao->getModule($_POST['module_id']);
     }
 
     private function isUninstalElementAction(): bool {
@@ -76,14 +87,6 @@ class ComponentRequestHandler extends HttpRequestHandler {
     }
 
     private function getElementFromPostRequest(): ElementType {
-        return $this->_element_dao->getElementType($_POST['element_id']);
-    }
-
-    public function getCurrentModule(): Module {
-        return $this->_current_module;
-    }
-
-    public function getCurrentElement(): Element {
-        return $this->_current_element;
+        return $this->elementDao->getElementType($_POST['element_id']);
     }
 }

@@ -1,14 +1,15 @@
 <?php
-require_once CMS_ROOT . '/modules/components/visuals/installation/component_install_form_panel.php';
-require_once CMS_ROOT . '/modules/components/visuals/installation/component_install_log_panel.php';
+
+require_once CMS_ROOT . '/modules/components/visuals/installation/ComponentInstallFormPanel.php';
+require_once CMS_ROOT . '/modules/components/visuals/installation/ComponentInstallLogPanel.php';
 
 class InstallationTabVisual extends Visual {
 
-    private $_install_request_handler;
+    private InstallRequestHandler $installRequestHandler;
 
     public function __construct($install_requestHandler) {
         parent::__construct();
-        $this->_install_request_handler = $install_requestHandler;
+        $this->installRequestHandler = $install_requestHandler;
     }
 
     public function getTemplateFilename(): string {
@@ -20,13 +21,13 @@ class InstallationTabVisual extends Visual {
         $this->assign("component_install_log", $this->renderComponentInstallLogPanel());
     }
 
-    private function renderComponentInstallFormPanel() {
+    private function renderComponentInstallFormPanel(): string {
         $component_install_form = new ComponentInstallFormPanel();
         return $component_install_form->render();
     }
 
-    private function renderComponentInstallLogPanel() {
-        $component_install_log = new ComponentInstallLogPanel($this->_install_request_handler);
+    private function renderComponentInstallLogPanel(): string {
+        $component_install_log = new ComponentInstallLogPanel($this->installRequestHandler);
         return $component_install_log->render();
     }
 }

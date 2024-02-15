@@ -3,27 +3,26 @@ require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
 
 class ElementsListPanel extends Panel {
 
-    private $_element_dao;
-    private $_components_request_handler;
+    private ElementDao $elementDao;
+    private ComponentRequestHandler $componentsRequestHandler;
 
     public function __construct($components_requestHandler) {
         parent::__construct('Elementen', 'component-list-fieldset');
-        $this->_components_request_handler = $components_requestHandler;
-        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->componentsRequestHandler = $components_requestHandler;
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/elements_list.tpl';
+        return 'modules/components/components/elements_list.tpl';
     }
-
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign('elements', $this->getElementsData());
     }
 
-    private function getElementsData() {
+    private function getElementsData(): array {
         $elements_data = array();
-        foreach ($this->_element_dao->getElementTypes() as $element_type) {
+        foreach ($this->elementDao->getElementTypes() as $element_type) {
             $element_data = array();
             $element_data['id'] = $element_type->getId();
             $element_data['name'] = $this->getTextResource($element_type->getIdentifier() . '_label');
@@ -35,7 +34,7 @@ class ElementsListPanel extends Panel {
     }
 
     private function isCurrentElement($element) {
-        $current_element = $this->_components_request_handler->getCurrentElement();
+        $current_element = $this->componentsRequestHandler->getCurrentElementType();
         return $current_element && $current_element->getId() == $element->getId();
     }
 }

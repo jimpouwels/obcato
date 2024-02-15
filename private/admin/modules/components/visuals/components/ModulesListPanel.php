@@ -3,17 +3,17 @@ require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
 
 class ModulesListPanel extends Panel {
 
-    private ModuleDao $_module_dao;
-    private $_components_request_handler;
+    private ModuleDao $moduleDao;
+    private ComponentRequestHandler $componentsRequestHandler;
 
     public function __construct($components_requestHandler) {
         parent::__construct('Modules', 'component-list-fieldset');
-        $this->_components_request_handler = $components_requestHandler;
-        $this->_module_dao = ModuleDaoMysql::getInstance();
+        $this->componentsRequestHandler = $components_requestHandler;
+        $this->moduleDao = ModuleDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/modules_list.tpl';
+        return 'modules/components/components/modules_list.tpl';
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
@@ -22,7 +22,7 @@ class ModulesListPanel extends Panel {
 
     private function getModulesData(): array {
         $modules_data = array();
-        foreach ($this->_module_dao->getAllModules() as $module) {
+        foreach ($this->moduleDao->getAllModules() as $module) {
             $module_data = array();
             $module_data['id'] = $module->getId();
             $module_data['title'] = $this->getTextResource($module->getIdentifier() . '_module_title');
@@ -34,7 +34,7 @@ class ModulesListPanel extends Panel {
     }
 
     private function isCurrentModule($module): bool {
-        $current_module = $this->_components_request_handler->getCurrentModule();
+        $current_module = $this->componentsRequestHandler->getCurrentModule();
         return $current_module && $current_module->getId() == $module->getId();
     }
 }

@@ -2,11 +2,11 @@
 
 class ComponentInstallLogPanel extends Panel {
 
-    private $_install_request_handler;
+    private $installRequestHandler;
 
     public function __construct($install_requestHandler) {
         parent::__construct('Log', 'installation-log-fieldset');
-        $this->_install_request_handler = $install_requestHandler;
+        $this->installRequestHandler = $install_requestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -14,6 +14,6 @@ class ComponentInstallLogPanel extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign('log_messages', $this->_install_request_handler->getLogMessages());
+        $data->assign('log_messages', $this->installRequestHandler->getLogMessages());
     }
 }

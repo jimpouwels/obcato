@@ -1,15 +1,15 @@
 <?php
-require_once CMS_ROOT . '/modules/components/visuals/components/modules_list_panel.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/elements_list_panel.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/component_details_panel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/ModulesListPanel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/ElementsListPanel.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/ComponentsDetailsPanel.php';
 
 class ComponentsTabVisual extends Visual {
 
-    private $_component_request_handler;
+    private ComponentRequestHandler $componentRequestHandler;
 
     public function __construct($component_requestHandler) {
         parent::__construct();
-        $this->_component_request_handler = $component_requestHandler;
+        $this->componentRequestHandler = $component_requestHandler;
     }
 
     public function getTemplateFilename(): string {
@@ -17,9 +17,9 @@ class ComponentsTabVisual extends Visual {
     }
 
     public function load(): void {
-        $modules_list = new ModulesListPanel($this->_component_request_handler);
-        $elements_list = new ElementsListPanel($this->_component_request_handler);
-        $details = new ComponentsDetailsPanel($this->_component_request_handler);
+        $modules_list = new ModulesListPanel($this->componentRequestHandler);
+        $elements_list = new ElementsListPanel($this->componentRequestHandler);
+        $details = new ComponentsDetailsPanel($this->componentRequestHandler);
         $this->assign('modules_list', $modules_list->render());
         $this->assign('elements_list', $elements_list->render());
         $this->assign('details', $details->render());

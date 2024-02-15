@@ -1,36 +1,37 @@
 <?php
+
+use installRequestHandler\InstallationTabVisual;
+
 require_once CMS_ROOT . '/view/views/ModuleVisual.php';
 require_once CMS_ROOT . '/view/views/TabMenu.php';
-require_once CMS_ROOT . '/modules/components/visuals/installation/installation_tab_visual.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/components_tab_visual.php';
+require_once CMS_ROOT . '/modules/components/visuals/installation/InstallationTabVisual.php';
+require_once CMS_ROOT . '/modules/components/visuals/components/ComponentsTabVisual.php';
 require_once CMS_ROOT . '/modules/components/InstallRequestHandler.php';
 require_once CMS_ROOT . '/modules/components/ComponentRequestHandler.php';
 
 class ComponentsModuleVisual extends ModuleVisual {
 
-    private static $HEAD_INCLUDES_TEMPLATE = 'components/head_includes.tpl';
-    private static $COMPONENTS_TAB = 0;
-    private static $INSTALLATION_TAB = 1;
-    private $module;
-    private $_install_request_handler;
-    private $_component_request_handler;
+    private static string $HEAD_INCLUDES_TEMPLATE = 'components/head_includes.tpl';
+    private static int $COMPONENTS_TAB = 0;
+    private static int $INSTALLATION_TAB = 1;
+    private InstallRequestHandler $installRequestHandler;
+    private ComponentRequestHandler $componentRequestHandler;
 
     public function __construct($components_module) {
         parent::__construct($components_module);
-        $this->module = $components_module;
-        $this->_install_request_handler = new InstallRequestHandler();
-        $this->_component_request_handler = new ComponentRequestHandler();
+        $this->installRequestHandler = new InstallRequestHandler();
+        $this->componentRequestHandler = new ComponentRequestHandler();
     }
 
     public function getTemplateFilename(): string {
-        return 'components/root.tpl';
+        return 'modules/components/root.tpl';
     }
 
     public function load(): void {
         if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
-            $content = new ComponentsTabVisual($this->_component_request_handler);
-        } else if ($this->getCurrentTabId() == self::$INSTALLATION_TAB) {
-            $content = new InstallationTabVisual($this->_install_request_handler);
+            $content = new ComponentsTabVisual($this->componentRequestHandler);
+        } else {
+            $content = new InstallationTabVisual($this->installRequestHandler);
         }
         $this->assign('content', $content->render());
     }
@@ -39,12 +40,12 @@ class ComponentsModuleVisual extends ModuleVisual {
         return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
-    public function getRequestHandlers() {
+    public function getRequestHandlers(): array {
         $request_handlers = array();
         if ($this->getCurrentTabId() == self::$COMPONENTS_TAB)
-            $request_handlers[] = $this->_component_request_handler;
+            $request_handlers[] = $this->componentRequestHandler;
         if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
-            $request_handlers[] = $this->_install_request_handler;
+            $request_handlers[] = $this->installRequestHandler;
         return $request_handlers;
     }
 
@@ -59,20 +60,22 @@ class ComponentsModuleVisual extends ModuleVisual {
         return $action_buttons;
     }
 
-    private function isCurrentComponentUninstallable(): bool {
-        $current_module = $this->_component_request_handler->getCurrentModule();
-        if ($current_module && !$current_module->isSystemDefault())
-            return true;
-        $current_element = $this->_component_request_handler->getCurrentElement();
-        if ($current_element && !$current_element->getSystemDefault())
-            return true;
-        return false;
-    }
-
-    private function getTabMenu(): ?TabMenu {
+    public function getTabMenu(): ?TabMenu {
         $tab_menu = new TabMenu($this->getCurrentTabId());
         $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB);
         $tab_menu->addItem("Installeren", self::$INSTALLATION_TAB);
         return $tab_menu;
+    }
+
+    private function isCurrentComponentUninstallable(): bool {
+        $current_module = $this->componentRequestHandler->getCurrentModule();
+        if ($current_module && $current_module->isSystemDefault()) {
+            return true;
+        }
+        $current_element = $this->componentRequestHandler->getCurrentElementType();
+        if ($current_module && !$current_element->getSystemDefault()) {
+            return true;
+        }
+        return false;
     }
 }

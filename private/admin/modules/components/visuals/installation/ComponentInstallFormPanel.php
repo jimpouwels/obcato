@@ -3,7 +3,7 @@
 class ComponentInstallFormPanel extends Panel {
 
     public function __construct() {
-        parent::__construct('Instaleer component', 'install-form-panel');
+        parent::__construct('Installeer component', 'install-form-panel');
     }
 
     public function getPanelContentTemplate(): string {
@@ -14,7 +14,7 @@ class ComponentInstallFormPanel extends Panel {
         $data->assign('upload_field', $this->renderUploadField());
     }
 
-    private function renderUploadField() {
+    private function renderUploadField(): string {
         $upload_field = new UploadField('upload_field', 'Upload component', true, "");
         return $upload_field->render();
     }
