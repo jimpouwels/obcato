@@ -7,9 +7,6 @@ abstract class Installer {
 
     private MysqlConnector $mysqlConnector;
     private Logger $logger;
-    private static string $STATIC_DIR = 'static';
-    private static string $TEMPLATE_DIR = 'templates';
-    private static string $TEXT_RESOURCE_DIR = 'text_resources';
 
     public function __construct($logger) {
         $this->logger = $logger;
@@ -21,6 +18,12 @@ abstract class Installer {
     abstract function getUninstallQueries(): array;
 
     abstract function getIdentifier(): string;
+
+    abstract function getPackageStaticDir(): string;
+
+    abstract function getPackageTemplateDir(): string;
+
+    abstract function getPackageTextResourceDir(): string;
 
     protected function runInstallQueries(): void {
         $this->logger->log('Installatiequeries uitvoeren');
@@ -41,7 +44,7 @@ abstract class Installer {
     }
 
     protected function installStaticFiles($targetDir): void {
-        $sourceDir = COMPONENT_TEMP_DIR . '/' . self::$STATIC_DIR;
+        $sourceDir = COMPONENT_TEMP_DIR . '/' . $this->getPackageStaticDir();
         if (file_exists($sourceDir)) {
             $this->createDir($targetDir);
             $this->logger->log('Statische bestanden kopiëren naar ' . $targetDir);
@@ -52,7 +55,7 @@ abstract class Installer {
     }
 
     protected function installTextResources($targetDir): void {
-        $sourceDir = COMPONENT_TEMP_DIR . '/' . self::$TEXT_RESOURCE_DIR;
+        $sourceDir = COMPONENT_TEMP_DIR . '/' . $this->getPackageTextResourceDir();
         if (file_exists($sourceDir)) {
             $this->logger->log('Text resource bestanden kopiëren naar ' . $targetDir);
             FileUtility::moveDirectoryContents($sourceDir, $targetDir, true);
@@ -62,7 +65,7 @@ abstract class Installer {
     }
 
     protected function installBackendTemplates($targetDir): void {
-        $resourceDir = COMPONENT_TEMP_DIR . '/' . self::$TEMPLATE_DIR;
+        $resourceDir = COMPONENT_TEMP_DIR . '/' . $this->getPackageTemplateDir();
         if (file_exists($resourceDir)) {
             $this->createDir($targetDir);
             $this->logger->log('Backend templates kopiëren naar ' . $targetDir);
