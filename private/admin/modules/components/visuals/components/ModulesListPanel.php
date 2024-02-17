@@ -26,7 +26,7 @@ class ModulesListPanel extends Panel {
             $module_data = array();
             $module_data['id'] = $module->getId();
             $module_data['title'] = $this->getTextResource($module->getIdentifier() . '_module_title');
-            $module_data['icon_url'] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . 'png';
+            $module_data['icon_url'] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
             $module_data['is_current'] = $this->isCurrentModule($module);
             $modules_data[] = $module_data;
         }

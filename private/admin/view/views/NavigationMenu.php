@@ -55,7 +55,7 @@ class NavigationMenu extends Visual {
             $sub_item = array();
             $sub_item["id"] = $element_type->getId();
             $sub_item["name"] = $this->getTextResource($element_type->getIdentifier() . '_label');
-            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
+            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . "/" . $element_type->getIdentifier() . ".png";
             $sub_items[] = $sub_item;
         }
         return $sub_items;

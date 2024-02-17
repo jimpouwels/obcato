@@ -1,7 +1,5 @@
 <?php
 
-use installRequestHandler\InstallationTabVisual;
-
 require_once CMS_ROOT . '/view/views/ModuleVisual.php';
 require_once CMS_ROOT . '/view/views/TabMenu.php';
 require_once CMS_ROOT . '/modules/components/visuals/installation/InstallationTabVisual.php';
@@ -17,8 +15,8 @@ class ComponentsModuleVisual extends ModuleVisual {
     private InstallRequestHandler $installRequestHandler;
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct($components_module) {
-        parent::__construct($components_module);
+    public function __construct($componentsModule) {
+        parent::__construct($componentsModule);
         $this->installRequestHandler = new InstallRequestHandler();
         $this->componentRequestHandler = new ComponentRequestHandler();
     }

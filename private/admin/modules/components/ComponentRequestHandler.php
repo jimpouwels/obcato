@@ -7,8 +7,8 @@ class ComponentRequestHandler extends HttpRequestHandler {
 
     private ModuleDao $moduleDao;
     private ElementDao $elementDao;
-    private ?Module $currentModule;
-    private ?ElementType $currentElementType;
+    private ?Module $currentModule = null;
+    private ?ElementType $currentElementType = null;
 
     public function __construct() {
         $this->moduleDao = ModuleDaoMysql::getInstance();

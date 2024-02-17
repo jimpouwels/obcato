@@ -5,86 +5,84 @@ require_once CMS_ROOT . '/utilities/FileUtility.php';
 
 abstract class Installer {
 
-    private $_mysql_connector;
-    private $_logger;
-    private static $STATIC_DIR = 'static';
-    private static $TEMPLATE_DIR = 'templates';
-    private static $TEXT_RESOURCE_DIR = 'text_resources';
+    private MysqlConnector $mysqlConnector;
+    private Logger $logger;
+    private static string $STATIC_DIR = 'static';
+    private static string $TEMPLATE_DIR = 'templates';
+    private static string $TEXT_RESOURCE_DIR = 'text_resources';
 
     public function __construct($logger) {
-        $this->_logger = $logger;
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->logger = $logger;
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
-    abstract function getInstallQueries();
+    abstract function getInstallQueries(): array;
 
-    abstract function getUninstallQueries();
+    abstract function getUninstallQueries(): array;
 
-    abstract function getIconPath();
+    abstract function getIdentifier(): string;
 
-    abstract function getIdentifier();
-
-    protected function runInstallQueries() {
-        $this->_logger->log('Installatiequeries uitvoeren');
+    protected function runInstallQueries(): void {
+        $this->logger->log('Installatiequeries uitvoeren');
         $queries = $this->getInstallQueries();
-        if (!is_array($queries)) return;
+        if (!$queries) return;
         foreach ($queries as $query) {
-            $this->_logger->log('Query uitvoeren: ' . $query);
-            $this->_mysql_connector->executeQuery($query);
+            $this->logger->log('Query uitvoeren: ' . $query);
+            $this->mysqlConnector->executeQuery($query);
         }
     }
 
-    protected function runUninstallQueries() {
-        $uninstall_queries = $this->getUninstallQueries();
-        if (!is_array($uninstall_queries)) return;
-        foreach ($uninstall_queries as $query) {
-            $this->_mysql_connector->executeQuery($query);
+    protected function runUninstallQueries(): void {
+        $uninstallQueries = $this->getUninstallQueries();
+        if (!$uninstallQueries) return;
+        foreach ($uninstallQueries as $query) {
+            $this->mysqlConnector->executeQuery($query);
         }
     }
 
-    protected function installStaticFiles($target_dir) {
-        $source_dir = COMPONENT_TEMP_DIR . '/' . self::$STATIC_DIR;
-        if (file_exists($source_dir)) {
-            $this->createDir($target_dir);
-            $this->_logger->log('Statische bestanden kopiëren naar ' . $target_dir);
-            FileUtility::moveDirectoryContents($source_dir, $target_dir, true);
+    protected function installStaticFiles($targetDir): void {
+        $sourceDir = COMPONENT_TEMP_DIR . '/' . self::$STATIC_DIR;
+        if (file_exists($sourceDir)) {
+            $this->createDir($targetDir);
+            $this->logger->log('Statische bestanden kopiëren naar ' . $targetDir);
+            FileUtility::moveDirectoryContents($sourceDir, $targetDir, true);
         } else {
-            $this->_logger->log('Geen statische bestanden gevonden');
+            $this->logger->log('Geen statische bestanden gevonden');
         }
     }
 
-    protected function installTextResources($target_dir) {
-        $source_dir = COMPONENT_TEMP_DIR . '/' . self::$TEXT_RESOURCE_DIR;
-        if (file_exists($source_dir)) {
-            $this->_logger->log('Text resource bestanden kopiëren naar ' . $target_dir);
-            FileUtility::moveDirectoryContents($source_dir, $target_dir, true);
+    protected function installTextResources($targetDir): void {
+        $sourceDir = COMPONENT_TEMP_DIR . '/' . self::$TEXT_RESOURCE_DIR;
+        if (file_exists($sourceDir)) {
+            $this->logger->log('Text resource bestanden kopiëren naar ' . $targetDir);
+            FileUtility::moveDirectoryContents($sourceDir, $targetDir, true);
         } else {
-            $this->_logger->log('Geen text resources bestanden gevonden');
+            $this->logger->log('Geen text resources bestanden gevonden');
         }
     }
 
-    protected function installBackendTemplates($target_dir): void {
-        $source_dir = COMPONENT_TEMP_DIR . '/' . self::$TEMPLATE_DIR;
-        if (file_exists($source_dir)) {
-            $this->createDir($target_dir);
-            $this->_logger->log('Backend templates kopiëren naar ' . $target_dir);
-            FileUtility::moveDirectoryContents($source_dir, $target_dir, true);
+    protected function installBackendTemplates($targetDir): void {
+        $resourceDir = COMPONENT_TEMP_DIR . '/' . self::$TEMPLATE_DIR;
+        if (file_exists($resourceDir)) {
+            $this->createDir($targetDir);
+            $this->logger->log('Backend templates kopiëren naar ' . $targetDir);
+            FileUtility::moveDirectoryContents($resourceDir, $targetDir, true);
         } else {
-            $this->_logger->log('Geen backend templates gevonden');
+            $this->logger->log('Geen backend templates gevonden');
         }
     }
 
-    protected function installComponentFiles($target_dir): void {
-        $this->createDir($target_dir);
-        $this->_logger->log('Overige bestanden kopiëren naar ' . $target_dir);
-        FileUtility::moveDirectoryContents(COMPONENT_TEMP_DIR, $target_dir);
+    protected function installComponentFiles($targetDir): void {
+        $this->createDir($targetDir);
+        $this->logger->log('Overige bestanden kopiëren naar ' . $targetDir);
+        FileUtility::moveDirectoryContents(COMPONENT_TEMP_DIR, $targetDir);
     }
 
-    protected function createDir($target_dir): void {
-        if (file_exists($target_dir)) {
-            FileUtility::recursiveDelete($target_dir);
+    protected function createDir($targetDir): void {
+        if (file_exists($targetDir)) {
+            FileUtility::recursiveDelete($targetDir);
         } else {
-            mkdir($target_dir);
+            mkdir($targetDir);
         }
     }
 

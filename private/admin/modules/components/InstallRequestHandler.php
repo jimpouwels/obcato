@@ -9,10 +9,10 @@ require_once CMS_ROOT . '/modules/components/installer/Logger.php';
 
 class InstallRequestHandler extends HttpRequestHandler {
 
-    private $_logger;
+    private $logger;
 
     public function __construct() {
-        $this->_logger = new Logger();
+        $this->logger = new Logger();
     }
 
     public function handleGet(): void {}
@@ -22,11 +22,11 @@ class InstallRequestHandler extends HttpRequestHandler {
             $this->installComponent();
     }
 
-    private function isInstallComponentAction() {
+    private function isInstallComponentAction(): bool {
         return isset($_POST['action']) && $_POST['action'] == 'install_component';
     }
 
-    private function installComponent() {
+    private function installComponent(): void {
         $form = new InstallComponentForm();
         try {
             $form->loadFields();
@@ -38,36 +38,36 @@ class InstallRequestHandler extends HttpRequestHandler {
         }
     }
 
-    private function handleComponentZip($file_path) {
-        $zip_archive = new ZipArchive();
-        $zip = $zip_archive->open($file_path);
+    private function handleComponentZip($filePath): void {
+        $zipArchive = new ZipArchive();
+        $zip = $zipArchive->open($filePath);
         try {
             $this->checkIfFileIsZip($zip);
-            $this->_logger->log('ZIP archief gevonden');
-            $this->extractZip($zip_archive);
+            $this->logger->log('ZIP archief gevonden');
+            $this->extractZip($zipArchive);
             $this->runInstaller();
         } finally {
-            $zip_archive->close();
-            $this->_logger->log('Tijdelijke bestanden opruimen');
+            $zipArchive->close();
+            $this->logger->log('Tijdelijke bestanden opruimen');
             FileUtility::recursiveDelete(COMPONENT_TEMP_DIR);
         }
-        $this->_logger->log('Installatie succesvol afgerond');
+        $this->logger->log('Installatie succesvol afgerond');
     }
 
-    private function checkIfFileIsZip($zip) {
+    private function checkIfFileIsZip($zip): void {
         if (is_numeric($zip)) {
-            $this->_logger->log('Invalide ZIP archief');
+            $this->logger->log('Invalide ZIP archief');
             throw new InstallationException();
         }
     }
 
-    private function extractZip($zip_archive) {
+    private function extractZip($zipArchive): void {
         if (!file_exists(COMPONENT_TEMP_DIR)) mkdir(COMPONENT_TEMP_DIR);
-        $this->_logger->log('ZIP archief uitpakken naar ' . COMPONENT_TEMP_DIR);
-        $zip_archive->extractTo(COMPONENT_TEMP_DIR);
+        $this->logger->log('ZIP archief uitpakken naar ' . COMPONENT_TEMP_DIR);
+        $zipArchive->extractTo(COMPONENT_TEMP_DIR);
     }
 
-    private function runInstaller() {
+    private function runInstaller(): void {
         $this->checkInstallerFileProvided();
         require_once COMPONENT_TEMP_DIR . '/installer.php';
         $installer = null;
@@ -76,56 +76,56 @@ class InstallRequestHandler extends HttpRequestHandler {
         else if ($this->uploadedFileIs(ElementInstaller::$CUSTOM_INSTALLER_CLASSNAME))
             $installer = $this->getElementInstaller();
         else {
-            $this->_logger->log('Er is geen geldige installer implementatie gevonden');
+            $this->logger->log('Er is geen geldige installer implementatie gevonden');
             throw new InstallationException();
         }
-        $this->_logger->log('Installer uitvoeren');
+        $this->logger->log('Installer uitvoeren');
         $installer->install();
     }
 
     private function checkInstallerFileProvided() {
         if (!file_exists(COMPONENT_TEMP_DIR . '/installer.php')) {
-            $this->_logger->log('installer.php bestand niet gevonden');
+            $this->logger->log('installer.php bestand niet gevonden');
             throw new InstallationException();
         }
-        $this->_logger->log('installer.php bestand gevonden');
+        $this->logger->log('installer.php bestand gevonden');
     }
 
     private function uploadedFileIs($installer_classname) {
         if (class_exists($installer_classname)) {
-            $this->_logger->log($installer_classname . ' class gevonden');
+            $this->logger->log($installer_classname . ' class gevonden');
             return true;
         }
         return false;
     }
 
     private function getModuleInstaller() {
-        $installer = new CustomModuleInstaller($this->_logger);
+        $installer = new CustomModuleInstaller($this->logger);
         $this->isModuleInstaller($installer);
         return $installer;
     }
 
     private function isModuleInstaller($installer) {
         if (!$installer instanceof ModuleInstaller) {
-            $this->_logger->log('Installer class moet een implementatie zijn van ModuleInstaller');
+            $this->logger->log('Installer class moet een implementatie zijn van ModuleInstaller');
             throw new InstallationException();
         }
     }
 
     private function getElementInstaller() {
-        $installer = new CustomElementInstaller($this->_logger);
+        $installer = new CustomElementInstaller($this->logger);
         $this->isElementInstaller($installer);
         return $installer;
     }
 
     private function isElementInstaller($installer) {
         if (!$installer instanceof ElementInstaller) {
-            $this->_logger->log('Installer class moet een implementatie zijn van ElementInstaller');
+            $this->logger->log('Installer class moet een implementatie zijn van ElementInstaller');
             throw new InstallationException();
         }
     }
 
     public function getLogMessages() {
-        return $this->_logger->getLogMessages();
+        return $this->logger->getMessages();
     }
 }

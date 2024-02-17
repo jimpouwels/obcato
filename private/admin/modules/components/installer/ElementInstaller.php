@@ -9,15 +9,15 @@ require_once CMS_ROOT . '/modules/components/installer/Installer.php';
 abstract class ElementInstaller extends Installer {
 
     public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomElementInstaller';
-    private $_logger;
-    private ElementDao $_element_dao;
-    private ScopeDao $_scope_dao;
+    private Logger $logger;
+    private ElementDao $elementDao;
+    private ScopeDao $scopeDao;
 
     public function __construct($logger) {
         parent::__construct($logger);
-        $this->_logger = $logger;
-        $this->_element_dao = ElementDaoMysql::getInstance();
-        $this->_scope_dao = ScopeDaoMysql::getInstance();
+        $this->logger = $logger;
+        $this->elementDao = ElementDaoMysql::getInstance();
+        $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 
     abstract function getName(): string;
@@ -29,7 +29,7 @@ abstract class ElementInstaller extends Installer {
     abstract function getScope(): string;
 
     public function install(): void {
-        $this->_logger->log('Installer voor component \'' . $this->getName() . '\' gestart');
+        $this->logger->log('Installer voor component \'' . $this->getName() . '\' gestart');
         $this->installElementType();
         $this->installStaticFiles(STATIC_DIR . '/elements/' . $this->getIdentifier());
         $this->installBackendTemplates(BACKEND_TEMPLATE_DIR . '/elements/' . $this->getIdentifier());
@@ -37,7 +37,7 @@ abstract class ElementInstaller extends Installer {
     }
 
     public function uninstall(): void {
-        $this->_scope_dao->deleteScope($this->_scope_dao->getScopeByIdentifier($this->getScope()));
+        $this->scopeDao->deleteScope($this->scopeDao->getScopeByIdentifier($this->getScope()));
         $this->runUninstallQueries();
         $this->uninstallStaticFiles();
         $this->uninstallBackendTemplates();
@@ -45,29 +45,27 @@ abstract class ElementInstaller extends Installer {
     }
 
     private function installElementType(): void {
-        $element_type = new ElementType();
-        $element_type->setIdentifier($this->getIdentifier());
-        $element_type->setIdentifier($this->getIdentifier());
-        $element_type->setIconUrl($this->getIconPath());
-        $element_type->setSystemDefault(false);
-        $element_type->setClassName($this->getClassName());
-        $element_type->setDomainObject($this->getClassFile());
-        if (!$this->_element_dao->getElementTypeByIdentifier($this->getIdentifier())) {
-            $element_type->setScopeId($this->createNewScope()->getId());
+        $elementType = new ElementType();
+        $elementType->setIdentifier($this->getIdentifier());
+        $elementType->setSystemDefault(false);
+        $elementType->setClassName($this->getClassName());
+        $elementType->setDomainObject($this->getClassFile());
+        if (!$this->elementDao->getElementTypeByIdentifier($this->getIdentifier())) {
+            $elementType->setScopeId($this->createNewScope()->getId());
             $this->runInstallQueries();
-            $this->_logger->log('Element wordt toegevoegd aan de database');
-            $this->_element_dao->persistElementType($element_type);
+            $this->logger->log('Element wordt toegevoegd aan de database');
+            $this->elementDao->persistElementType($elementType);
         } else {
-            $element_type->setScopeId($this->_scope_dao->getScopeByIdentifier($this->getScope())->getId());
-            $this->_logger->log('Element database record wordt geupdate');
-            $this->_element_dao->updateElementType($element_type);
+            $elementType->setScopeId($this->scopeDao->getScopeByIdentifier($this->getScope())->getId());
+            $this->logger->log('Element database record wordt geupdate');
+            $this->elementDao->updateElementType($elementType);
         }
     }
 
     private function createNewScope(): Scope {
         $scope = new Scope();
         $scope->setIdentifier($this->getScope());
-        $this->_scope_dao->persistScope($scope);
+        $this->scopeDao->persistScope($scope);
         return $scope;
     }
 

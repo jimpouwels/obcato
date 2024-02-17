@@ -5,9 +5,9 @@ class ComponentsDetailsPanel extends Panel {
 
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct($component_requestHandler) {
+    public function __construct($componentRequestHandler) {
         parent::__construct('Component details');
-        $this->componentRequestHandler = $component_requestHandler;
+        $this->componentRequestHandler = $componentRequestHandler;
     }
 
     public function getPanelContentTemplate(): string {
@@ -20,15 +20,14 @@ class ComponentsDetailsPanel extends Panel {
     }
 
     private function getCurrentElementData(): array {
-        $current_element = $this->componentRequestHandler->getCurrentElementType();
-        if ($current_element) {
+        $currentElementType = $this->componentRequestHandler->getCurrentElementType();
+        if ($currentElementType) {
             $element_data = array();
-            $element_data['id'] = $current_element->getId();
-            $element_data['identifier'] = $current_element->getIdentifier();
-            $element_data['name'] = $current_element->getName();
-            $element_data['class'] = $current_element->getClassName();
-            $element_data['object_file'] = $current_element->getDomainObject();
-            $element_data['system_default'] = $current_element->getSystemDefault();
+            $element_data['id'] = $currentElementType->getId();
+            $element_data['identifier'] = $currentElementType->getIdentifier();
+            $element_data['class'] = $currentElementType->getClassName();
+            $element_data['object_file'] = $currentElementType->getDomainObject();
+            $element_data['system_default'] = $currentElementType->getSystemDefault();
             return $element_data;
         }
         return array();

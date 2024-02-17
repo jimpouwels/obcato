@@ -73,16 +73,15 @@ class ElementDaoMysql implements ElementDao {
     }
 
     public function updateElementType(ElementType $elementType): void {
-        $query = "UPDATE element_types SET classname = '" . $elementType->getClassName() . "', icon_url = '" . $elementType->getIconUrl() . "', domain_object = '" . $elementType->getDomainObject() . "', scope_id = " .
+        $query = "UPDATE element_types SET classname = '" . $elementType->getClassName() . "', domain_object = '" . $elementType->getDomainObject() . "', scope_id = " .
             $elementType->getScopeId() . ", identifier = '" . $elementType->getIdentifier() . "', system_default = " .
             ($elementType->getSystemDefault() ? 1 : 0) . " WHERE identifier = '" . $elementType->getIdentifier() . "'";
         $this->mysqlConnector->executeQuery($query);
     }
 
     public function persistElementType(ElementType $elementType): void {
-        $query = "INSERT INTO element_types (classname, icon_url, domain_object, scope_id, identifier, system_default)" .
-            " VALUES ('" . $elementType->getClassName() . "', '" . $elementType->getIconUrl() .
-            "', '" . $elementType->getDomainObject() . "', " . $elementType->getScopeId() . ", " .
+        $query = "INSERT INTO element_types (classname, domain_object, scope_id, identifier, system_default)" .
+            " VALUES ('" . $elementType->getClassName() . "', '" . $elementType->getDomainObject() . "', " . $elementType->getScopeId() . ", " .
             "'" . $elementType->getIdentifier() . "', " . ($elementType->getSystemDefault() ? 1 : 0) . ")";
         $this->mysqlConnector->executeQuery($query);
         $elementType->setId($this->mysqlConnector->getInsertId());

@@ -6,26 +6,24 @@ require_once CMS_ROOT . '/modules/components/installer/Installer.php';
 
 abstract class ModuleInstaller extends Installer {
 
-    public static $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
-    private $_logger;
-    private $_module_dao;
+    public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
+    private Logger $logger;
+    private ModuleDao $moduleDao;
 
     public function __construct($logger) {
         parent::__construct($logger);
-        $this->_logger = $logger;
-        $this->_module_dao = ModuleDaoMysql::getInstance();
+        $this->logger = $logger;
+        $this->moduleDao = ModuleDaoMysql::getInstance();
     }
 
-    abstract function getTitleTextResourceIdentifier();
+    abstract function isPopup(): bool;
 
-    abstract function isPopup();
+    abstract function getModuleGroup(): int;
 
-    abstract function getModuleGroup();
+    abstract function getActivatorClassName(): string;
 
-    abstract function getActivatorClassName();
-
-    public function install() {
-        $this->_logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
+    public function install(): void {
+        $this->logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
         $this->installModule();
         $this->installStaticFiles(STATIC_DIR . '/modules/' . $this->getIdentifier());
         $this->installTextResources(STATIC_DIR . '/text_resources');
@@ -33,7 +31,7 @@ abstract class ModuleInstaller extends Installer {
         $this->installComponentFiles(CMS_ROOT . 'modules/' . $this->getIdentifier());
     }
 
-    public function unInstall() {
+    public function unInstall(): void {
         $this->uninstallModule();
         $this->uninstallStaticFiles();
         $this->uninstallTextResources();
@@ -42,37 +40,36 @@ abstract class ModuleInstaller extends Installer {
         $this->runUninstallQueries();
     }
 
-    private function installModule() {
+    private function installModule(): void {
         $module = new Module();
-        $module->setTitleTextResourceIdentifier($this->getTitleTextResourceIdentifier());
         $module->setIdentifier($this->getIdentifier());
-        $module->setModuleGroupId($this->_module_dao->getModuleGroupByIdentifier($this->getModuleGroup())->getId());
+        $module->setModuleGroupId($this->moduleDao->getModuleGroupByIdentifier($this->getModuleGroup())->getId());
         $module->setPopUp($this->isPopup());
         $module->setEnabled(true);
         $module->setClass($this->getActivatorClassName());
-        if (!$this->_module_dao->getModuleByIdentifier($module->getIdentifier())) {
+        if (!$this->moduleDao->getModuleByIdentifier($module->getIdentifier())) {
             $this->runInstallQueries();
-            $this->_logger->log('Module wordt toegevoegd aan de database');
-            $this->_module_dao->persistModule($module);
+            $this->logger->log('Module wordt toegevoegd aan de database');
+            $this->moduleDao->persistModule($module);
         } else {
-            $this->_logger->log('Module database record wordt geupdate');
-            $this->_module_dao->updateModule($module);
+            $this->logger->log('Module database record wordt geupdate');
+            $this->moduleDao->updateModule($module);
         }
     }
 
-    private function uninstallModule() {
-        $this->_module_dao->removeModule($this->getIdentifier());
+    private function uninstallModule(): void {
+        $this->moduleDao->removeModule($this->getIdentifier());
     }
 
-    private function uninstallModuleFiles() {
+    private function uninstallModuleFiles(): void {
         FileUtility::recursiveDelete(CMS_ROOT . 'modules/' . $this->getIdentifier(), true);
     }
 
-    private function uninstallStaticFiles() {
+    private function uninstallStaticFiles(): void {
         FileUtility::recursiveDelete(STATIC_DIR . '/modules/' . $this->getIdentifier(), true);
     }
 
-    private function uninstallBackendTemplates() {
+    private function uninstallBackendTemplates(): void {
         FileUtility::recursiveDelete(BACKEND_TEMPLATE_DIR . '/modules/' . $this->getIdentifier(), true);
     }
 

@@ -21,20 +21,20 @@ class ElementsListPanel extends Panel {
     }
 
     private function getElementsData(): array {
-        $elements_data = array();
-        foreach ($this->elementDao->getElementTypes() as $element_type) {
-            $element_data = array();
-            $element_data['id'] = $element_type->getId();
-            $element_data['name'] = $this->getTextResource($element_type->getIdentifier() . '_label');
-            $element_data['icon_url'] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . $element_type->getIconUrl();
-            $element_data['is_current'] = $this->isCurrentElement($element_type);
-            $elements_data[] = $element_data;
+        $elementsData = array();
+        foreach ($this->elementDao->getElementTypes() as $elementType) {
+            $elementData = array();
+            $elementData['id'] = $elementType->getId();
+            $elementData['name'] = $this->getTextResource($elementType->getIdentifier() . '_label');
+            $elementData['icon_url'] = '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
+            $elementData['is_current'] = $this->isCurrentElement($elementType);
+            $elementsData[] = $elementData;
         }
-        return $elements_data;
+        return $elementsData;
     }
 
     private function isCurrentElement($element) {
-        $current_element = $this->componentsRequestHandler->getCurrentElementType();
-        return $current_element && $current_element->getId() == $element->getId();
+        $currentElement = $this->componentsRequestHandler->getCurrentElementType();
+        return $currentElement && $currentElement->getId() == $element->getId();
     }
 }

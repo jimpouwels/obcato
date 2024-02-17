@@ -32,7 +32,7 @@ abstract class ElementVisual extends Visual {
         $this->assign("element_form", $this->fetch($this->getElementFormTemplateFilename(), $panelContentTemplateData));
         $this->assign("index", $element->getOrderNr());
         $this->assign("id", $element->getId());
-        $this->assign("icon_url", '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . '/' . $elementType->getIconUrl());
+        $this->assign("icon_url", '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . '/img/' . $elementType->getIdentifier() . ".png");
         $this->assign("type", $this->getTextResource($elementType->getIdentifier() . '_label'));
         $this->assign("template_picker", $templatePicker->render());
 

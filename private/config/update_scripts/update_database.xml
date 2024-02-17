@@ -278,5 +278,7 @@
         </query>
         <query>ALTER TABLE modules DROP COLUMN icon_url</query>
         <query>ALTER TABLE modules DROP COLUMN title_text_resource_identifier</query>
+
+        <query>ALTER TABLE element_types DROP COLUMN icon_url</query>
     </version>
 </versions>

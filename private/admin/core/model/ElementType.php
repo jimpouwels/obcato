@@ -6,7 +6,6 @@ class ElementType extends Entity {
 
     private string $_class_name;
     private string $_domain_object;
-    private string $_icon_url;
     private string $_identifier;
     private int $_scope_id;
     private bool $_system_default;
@@ -15,16 +14,6 @@ class ElementType extends Entity {
         $element_type = new ElementType();
         $element_type->initFromDb($row);
         return $element_type;
-    }
-
-    protected function initFromDb(array $row): void {
-        $this->setClassName($row['classname']);
-        $this->setIconUrl($row['icon_url']);
-        $this->setIdentifier($row['identifier']);
-        $this->setDomainObject($row['domain_object']);
-        $this->setScopeId($row['scope_id']);
-        $this->setSystemDefault($row['system_default']);
-        parent::initFromDb($row);
     }
 
     public function getClassName(): string {
@@ -37,14 +26,6 @@ class ElementType extends Entity {
 
     public function getRootDirectory(): string {
         return "elements/" . $this->_identifier;
-    }
-
-    public function getIconUrl(): string {
-        return $this->_icon_url;
-    }
-
-    public function setIconUrl(string $icon_url): void {
-        $this->_icon_url = $icon_url;
     }
 
     public function getIdentifier(): string {
@@ -82,6 +63,15 @@ class ElementType extends Entity {
 
     public function setSystemDefault($system_default): void {
         $this->_system_default = $system_default;
+    }
+
+    protected function initFromDb(array $row): void {
+        $this->setClassName($row['classname']);
+        $this->setIdentifier($row['identifier']);
+        $this->setDomainObject($row['domain_object']);
+        $this->setScopeId($row['scope_id']);
+        $this->setSystemDefault($row['system_default']);
+        parent::initFromDb($row);
     }
 
 }

@@ -2,13 +2,13 @@
 
 class Logger {
 
-    private $_log_messages = array();
+    private $messages = array();
 
     public function log($message) {
-        $this->_log_messages[] = date('H:m:s') . ': ' . $message;
+        $this->messages[] = date('H:m:s') . ': ' . $message;
     }
 
-    public function getLogMessages() {
-        return $this->_log_messages;
+    public function getMessages() {
+        return $this->messages;
     }
 }
