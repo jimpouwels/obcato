@@ -1,5 +1,4 @@
 <?php
-require '../vendor/autoload.php';
 
 $configFilePath = __DIR__ . "/config.php";
 if (file_exists($configFilePath)) {
@@ -19,6 +18,9 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'localhost') {
         define("PRIVATE_DIR", __DIR__ . "/../private");
     }
 }
+
+require PRIVATE_DIR . '/vendor/autoload.php';
+
 const CMS_ROOT = PRIVATE_DIR . "/admin";
 const PUBLIC_DIR = __DIR__;
 
