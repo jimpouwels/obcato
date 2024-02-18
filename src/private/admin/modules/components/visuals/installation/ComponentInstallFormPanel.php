@@ -15,7 +15,7 @@ class ComponentInstallFormPanel extends Panel {
     }
 
     private function renderUploadField(): string {
-        $upload_field = new UploadField('upload_field', 'Upload component', true, "");
-        return $upload_field->render();
+        $uploadField = new UploadField('upload_field', 'Upload component', true, "");
+        return $uploadField->render();
     }
 }

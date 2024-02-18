@@ -1,10 +1,13 @@
 <?php
+
 require_once CMS_ROOT . '/utilities/FileUtility.php';
 require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
 require_once CMS_ROOT . '/core/model/Module.php';
 require_once CMS_ROOT . '/modules/components/installer/Installer.php';
 
-abstract class ModuleInstaller extends Installer {
+use Obcato\ComponentApi\ModuleInstaller as IModuleInstaller;
+
+abstract class ModuleInstaller extends Installer implements IModuleInstaller {
 
     public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
     private Logger $logger;
@@ -15,12 +18,6 @@ abstract class ModuleInstaller extends Installer {
         $this->logger = $logger;
         $this->moduleDao = ModuleDaoMysql::getInstance();
     }
-
-    abstract function isPopup(): bool;
-
-    abstract function getModuleGroup(): int;
-
-    abstract function getActivatorClassName(): string;
 
     public function install(): void {
         $this->logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');

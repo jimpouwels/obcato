@@ -13,16 +13,6 @@ abstract class ModuleVisual extends Visual {
         return $this->getTextResource($this->module->getIdentifier() . '_module_title');
     }
 
-    abstract function getActionButtons(): array;
-
-    abstract function renderHeadIncludes(): string;
-
-    abstract function getTabMenu(): ?TabMenu;
-
-    abstract function getRequestHandlers(): array;
-
-    public function onRequestHandled(): void {}
-
     public function getModuleIdentifier(): string {
         return $this->module->getIdentifier();
     }

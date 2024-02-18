@@ -1,7 +1,9 @@
 <?php
 require_once CMS_ROOT . '/core/Notifications.php';
 
-abstract class HttpRequestHandler {
+use Obcato\ComponentApi\RequestHandler as IHttpRequestHandler;
+
+abstract class HttpRequestHandler implements IHttpRequestHandler {
 
     public function handle(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,10 +12,6 @@ abstract class HttpRequestHandler {
             $this->handleGet();
         }
     }
-
-    abstract function handleGet(): void;
-
-    abstract function handlePost(): void;
 
     protected function sendSuccessMessage(string $message): void {
         Notifications::setSuccessMessage($message);

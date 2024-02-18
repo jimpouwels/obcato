@@ -1,4 +1,5 @@
 <?php
+require '../vendor/autoload.php';
 
 $configFilePath = __DIR__ . "/config.php";
 if (file_exists($configFilePath)) {

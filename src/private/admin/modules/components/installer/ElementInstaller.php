@@ -6,7 +6,9 @@ require_once CMS_ROOT . '/core/model/ElementType.php';
 require_once CMS_ROOT . '/modules/templates/model/Scope.php';
 require_once CMS_ROOT . '/modules/components/installer/Installer.php';
 
-abstract class ElementInstaller extends Installer {
+use Obcato\ComponentApi\ElementInstaller as IElementInstaller;
+
+abstract class ElementInstaller extends Installer implements IElementInstaller {
 
     public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomElementInstaller';
     private Logger $logger;
@@ -20,16 +22,8 @@ abstract class ElementInstaller extends Installer {
         $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 
-    abstract function getName(): string;
-
-    abstract function getClassName(): string;
-
-    abstract function getClassFile(): string;
-
-    abstract function getScope(): string;
-
     public function install(): void {
-        $this->logger->log('Installer voor component \'' . $this->getName() . '\' gestart');
+        $this->logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
         $this->installElementType();
         $this->installStaticFiles(STATIC_DIR . '/elements/' . $this->getIdentifier());
         $this->installBackendTemplates(BACKEND_TEMPLATE_DIR . '/elements/' . $this->getIdentifier());
@@ -53,7 +47,7 @@ abstract class ElementInstaller extends Installer {
         if (!$this->elementDao->getElementTypeByIdentifier($this->getIdentifier())) {
             $elementType->setScopeId($this->createNewScope()->getId());
             $this->runInstallQueries();
-            $this->logger->log('Element wordt toegevoegd aan de database');
+            $this->logger->log('Element word toegevoegd aan de database');
             $this->elementDao->persistElementType($elementType);
         } else {
             $elementType->setScopeId($this->scopeDao->getScopeByIdentifier($this->getScope())->getId());

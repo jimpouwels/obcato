@@ -12,10 +12,10 @@ class Cms extends Visual {
     private Settings $settings;
     private ModuleDao $moduleDao;
 
-    public function __construct(?ModuleVisual $module_visual) {
+    public function __construct(?ModuleVisual $moduleVisual) {
         parent::__construct();
         $this->moduleDao = ModuleDaoMysql::getInstance();
-        $this->moduleVisual = $module_visual;
+        $this->moduleVisual = $moduleVisual;
         $this->settings = SettingsDaoMysql::getInstance()->getSettings();
     }
 

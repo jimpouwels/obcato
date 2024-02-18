@@ -1,4 +1,5 @@
 <?php
+
 require_once CMS_ROOT . '/request_handlers/HttpRequestHandler.php';
 require_once CMS_ROOT . '/modules/components/InstallComponentForm.php';
 require_once CMS_ROOT . '/utilities/FileUtility.php';
@@ -83,7 +84,7 @@ class InstallRequestHandler extends HttpRequestHandler {
         $installer->install();
     }
 
-    private function checkInstallerFileProvided() {
+    private function checkInstallerFileProvided(): void {
         if (!file_exists(COMPONENT_TEMP_DIR . '/installer.php')) {
             $this->logger->log('installer.php bestand niet gevonden');
             throw new InstallationException();
@@ -91,9 +92,9 @@ class InstallRequestHandler extends HttpRequestHandler {
         $this->logger->log('installer.php bestand gevonden');
     }
 
-    private function uploadedFileIs($installer_classname) {
-        if (class_exists($installer_classname)) {
-            $this->logger->log($installer_classname . ' class gevonden');
+    private function uploadedFileIs($installerClassname) {
+        if (class_exists($installerClassname)) {
+            $this->logger->log($installerClassname . ' class gevonden');
             return true;
         }
         return false;

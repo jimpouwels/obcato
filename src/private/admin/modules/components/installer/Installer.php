@@ -3,7 +3,9 @@ require_once CMS_ROOT . '/database/MysqlConnector.php';
 require_once CMS_ROOT . '/modules/components/installer/Installer.php';
 require_once CMS_ROOT . '/utilities/FileUtility.php';
 
-abstract class Installer {
+use Obcato\ComponentApi\Installer as IInstaller;
+
+abstract class Installer implements IInstaller {
 
     private MysqlConnector $mysqlConnector;
     private Logger $logger;
@@ -12,18 +14,6 @@ abstract class Installer {
         $this->logger = $logger;
         $this->mysqlConnector = MysqlConnector::getInstance();
     }
-
-    abstract function getInstallQueries(): array;
-
-    abstract function getUninstallQueries(): array;
-
-    abstract function getIdentifier(): string;
-
-    abstract function getPackageStaticDir(): string;
-
-    abstract function getPackageTemplateDir(): string;
-
-    abstract function getPackageTextResourceDir(): string;
 
     protected function runInstallQueries(): void {
         $this->logger->log('Installatiequeries uitvoeren');

@@ -22,8 +22,8 @@ class InstallationTabVisual extends Visual {
     }
 
     private function renderComponentInstallFormPanel(): string {
-        $component_install_form = new ComponentInstallFormPanel();
-        return $component_install_form->render();
+        $componentInstallFormPanel = new ComponentInstallFormPanel();
+        return $componentInstallFormPanel->render();
     }
 
     private function renderComponentInstallLogPanel(): string {

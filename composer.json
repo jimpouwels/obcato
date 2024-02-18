@@ -1,5 +1,21 @@
 {
+  "name": "obcato/obcato",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Obcato\\Obcato\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Jim Pouwels",
+      "email": "jim.pouwels@gmail.com"
+    }
+  ],
+  "require": {
+    "obcato/component-api": "v1.0.3"
+  },
   "require-dev": {
-    "phpunit/phpunit": "^10.3"
+    "phpunit/phpunit": "^11.0"
   }
 }
