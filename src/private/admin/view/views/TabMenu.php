@@ -1,6 +1,8 @@
 <?php
 
-class TabMenu extends Visual {
+use Obcato\ComponentApi\TabMenu as ITabMenu;
+
+class TabMenu extends Visual implements ITabMenu {
 
     private array $tabItems = array();
     private int $currentTabId = 0;
