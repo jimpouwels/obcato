@@ -1,13 +1,13 @@
 <?php
 require_once CMS_ROOT . "/view/views/Search.php";
 
-class Popup extends Visual {
+class Popup extends Obcato\ComponentApi\Visual {
 
-    private string $_popup_type;
+    private string $popupType;
 
-    public function __construct(string $popup_type) {
-        parent::__construct();
-        $this->_popup_type = $popup_type;
+    public function __construct(TemplateEngine $templateEngine, string $popupType) {
+        parent::__construct($templateEngine);
+        $this->popupType = $popupType;
     }
 
     public function getTemplateFilename(): string {
@@ -16,7 +16,7 @@ class Popup extends Visual {
 
     public function load(): void {
         $content = null;
-        if ($this->_popup_type == "search") {
+        if ($this->popupType == "search") {
             $content = new Search();
         }
         $this->assign("content", $content->render());

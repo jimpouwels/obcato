@@ -9,8 +9,8 @@ class TableOfContentsElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_form.tpl";
     private TableOfContentsElement $element;
 
-    public function __construct(TableOfContentsElement $element) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, TableOfContentsElement $element) {
+        parent::__construct($templateEngine);
         $this->element = $element;
     }
 
@@ -23,7 +23,7 @@ class TableOfContentsElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(Smarty_Internal_Data $data): void {
-        $titleField = new TextField("element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
+        $titleField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
     }
 

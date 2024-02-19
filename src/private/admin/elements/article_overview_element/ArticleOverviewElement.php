@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\Visual;
+
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
@@ -107,11 +110,11 @@ class ArticleOverviewElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ArticleOverviewElementStatics();
+        return new ArticleOverviewElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ArticleOverviewElementEditor($this);
+        return new ArticleOverviewElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

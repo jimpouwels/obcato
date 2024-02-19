@@ -1,14 +1,16 @@
 <?php
+
+use Obcato\ComponentApi\BlackBoard;
+
 require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/core/Blackboard.php";
 
 class BackendRequestHandler extends HttpRequestHandler {
 
-    private ModuleDao $_module_dao;
-    private ?Module $_current_module = null;
+    private ModuleDao $moduleDao;
+    private ?Module $currentModule = null;
 
     public function __construct() {
-        $this->_module_dao = ModuleDaoMysql::getInstance();
+        $this->moduleDao = ModuleDaoMysql::getInstance();
     }
 
     public function handleGet(): void {
@@ -20,16 +22,16 @@ class BackendRequestHandler extends HttpRequestHandler {
     }
 
     public function getCurrentModule(): ?Module {
-        return $this->_current_module;
+        return $this->currentModule;
     }
 
     public function loadCurrentModule(): void {
-        $module_id = intval($this->getParam('module_id'));
-        if ($module_id) {
-            $this->_current_module = $this->_module_dao->getModule($module_id);
-            BlackBoard::$MODULE_ID = $module_id;
-            $module_tab_id = intval($this->getParam('module_tab_id'));
-            BlackBoard::$MODULE_TAB_ID = $module_tab_id;
+        $moduleId = intval($this->getParam('module_id'));
+        if ($moduleId) {
+            $this->currentModule = $this->moduleDao->getModule($moduleId);
+            BlackBoard::$MODULE_ID = $moduleId;
+            $moduleTabId = intval($this->getParam('module_tab_id'));
+            BlackBoard::$MODULE_TAB_ID = $moduleTabId;
         }
     }
 
@@ -44,5 +46,3 @@ class BackendRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

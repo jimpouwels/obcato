@@ -4,8 +4,8 @@ require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformItemVi
 
 abstract class WebformFieldVisual extends WebformItemVisual {
 
-    public function __construct(WebFormItem $webform_item) {
-        parent::__construct($webform_item);
+    public function __construct(TemplateEngine $templateEngine, WebFormItem $webform_item) {
+        parent::__construct($templateEngine, $webform_item);
     }
 
     public function getFormItemTemplate(): string {
@@ -21,7 +21,7 @@ abstract class WebformFieldVisual extends WebformItemVisual {
         $this->loadFieldContent($form_field_content_template_data);
         $data->assign('field_editor', $this->getTemplateEngine()->fetch($this->getFormFieldTemplate(), $form_field_content_template_data));
 
-        $mandatory_field = new SingleCheckbox("webform_field_{$this->getWebFormItem()->getId()}_mandatory", 'webforms_editor_field_mandatory_label', $this->getWebFormItem()->getMandatory(), false, null);
+        $mandatory_field = new SingleCheckbox($this->getTemplateEngine(), "webform_field_{$this->getWebFormItem()->getId()}_mandatory", 'webforms_editor_field_mandatory_label', $this->getWebFormItem()->getMandatory(), false, null);
         $data->assign('mandatory_field', $mandatory_field->render());
     }
 

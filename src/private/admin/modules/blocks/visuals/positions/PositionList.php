@@ -5,8 +5,8 @@ class PositionList extends Panel {
 
     private BlockDao $blockDao;
 
-    public function __construct() {
-        parent::__construct('Posities');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'Posities');
         $this->blockDao = BlockDaoMysql::getInstance();
     }
 
@@ -16,7 +16,7 @@ class PositionList extends Panel {
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign("all_positions", $this->getAllPositions());
-        $noPositionsMessage = new InformationMessage($this->getTextResource("blocks_no_positions_found"));
+        $noPositionsMessage = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("blocks_no_positions_found"));
         $data->assign("no_positions_message", $noPositionsMessage->render());
     }
 
@@ -29,7 +29,7 @@ class PositionList extends Panel {
             $positionValue["id"] = $position->getId();
             $positionValue["name"] = $position->getName();
             $positionValue["explanation"] = $position->getExplanation();
-            $deleteField = new SingleCheckbox("position_" . $position->getId() . "_delete", "", false, false, "");
+            $deleteField = new SingleCheckbox($this->getTemplateEngine(), "position_" . $position->getId() . "_delete", "", false, false, "");
             $positionValue["delete_field"] = $deleteField->render();
 
             $allPositionsValues[] = $positionValue;

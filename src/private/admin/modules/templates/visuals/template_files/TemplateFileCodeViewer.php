@@ -5,8 +5,8 @@ class TemplateFileCodeViewer extends Panel {
 
     private TemplateFile $templateFile;
 
-    public function __construct(TemplateFile $templateFile) {
-        parent::__construct('Markup', 'template_content_panel');
+    public function __construct(TemplateEngine $templateEngine, TemplateFile $templateFile) {
+        parent::__construct($templateEngine, 'Markup', 'template_content_panel');
         $this->templateFile = $templateFile;
     }
 

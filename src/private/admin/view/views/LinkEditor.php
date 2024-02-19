@@ -6,8 +6,8 @@ class LinkEditor extends Panel {
 
     private array $_links;
 
-    public function __construct(array $links) {
-        parent::__construct($this->getTextResource('link_editor_title'), 'element_holder_links');
+    public function __construct(TemplateEngine $templateEngine, array $links) {
+        parent::__construct($templateEngine, $this->getTextResource('link_editor_title'), 'element_holder_links');
         $this->_links = $links;
     }
 
@@ -45,34 +45,34 @@ class LinkEditor extends Panel {
         $link_target_field = null;
         $link_target = $link->getTargetElementHolder();
         if (is_null($link_target)) {
-            $target_text_field = new TextField('link_' . $link->getId() . '_url', '', $link->getTargetAddress(), false, false, '');
+            $target_text_field = new TextField($this->getTemplateEngine(), 'link_' . $link->getId() . '_url', '', $link->getTargetAddress(), false, false, '');
             $link_target_field = $target_text_field->render();
         }
         return $link_target_field;
     }
 
     private function renderTitleField(Link $link): string {
-        $title_field = new TextField('link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, '');
+        $title_field = new TextField($this->getTemplateEngine(), 'link_' . $link->getId() . '_title', '', $link->getTitle(), false, false, '');
         return $title_field->render();
     }
 
     private function renderCodeField(Link $link): string {
-        $code_field = new TextField('link_' . $link->getId() . '_code', 'Code', $link->getCode(), true, false, '');
+        $code_field = new TextField($this->getTemplateEngine(), 'link_' . $link->getId() . '_code', 'Code', $link->getCode(), true, false, '');
         return $code_field->render();
     }
 
     private function renderDeleteField(Link $link): string {
-        $delete_field = new SingleCheckbox('link_' . $link->getId() . '_delete', '', false, false, '');
+        $delete_field = new SingleCheckbox($this->getTemplateEngine(), 'link_' . $link->getId() . '_delete', '', false, false, '');
         return $delete_field->render();
     }
 
     private function renderBrowserTargetField(Link $link): string {
-        $target_field = new Pulldown('link_' . $link->getId() . '_target', '', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
+        $target_field = new Pulldown($this->getTemplateEngine(), 'link_' . $link->getId() . '_target', '', $link->getTarget(), $this->getTargetOptions(), false, 'link_target_selector');
         return $target_field->render();
     }
 
     private function renderLinkTargetPicker(Link $link): string {
-        $element_holder_picker = new ObjectPicker('link_element_holder_ref_' . $link->getId(), '', $link->getTargetElementHolderId(), 'update_element_holder');
+        $element_holder_picker = new ObjectPicker($this->getTemplateEngine(), 'link_element_holder_ref_' . $link->getId(), '', $link->getTargetElementHolderId(), 'update_element_holder');
         return $element_holder_picker->render();
     }
 
@@ -87,7 +87,7 @@ class LinkEditor extends Panel {
 
     private function renderNoLinksFoundMessage(): string {
         $message = $this->getTextResource('link_editor_no_links_found_message');
-        $message = new InformationMessage($message);
+        $message = new InformationMessage($this->getTemplateEngine(), $message);
         return $message->render();
     }
 

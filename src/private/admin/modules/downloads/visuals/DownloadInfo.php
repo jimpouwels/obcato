@@ -4,8 +4,8 @@ class DownloadInfo extends Panel {
 
     private Download $download;
 
-    public function __construct(Download $download) {
-        parent::__construct('Bestandsinformatie');
+    public function __construct(TemplateEngine $templateEngine, Download $download) {
+        parent::__construct($templateEngine, 'Bestandsinformatie');
         $this->download = $download;
     }
 

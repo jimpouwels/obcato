@@ -1,5 +1,7 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/modules/downloads/visuals/ListVisual.php";
 require_once CMS_ROOT . "/modules/downloads/visuals/EditorVisual.php";
 require_once CMS_ROOT . "/modules/downloads/visuals/SearchBoxVisual.php";
@@ -10,11 +12,9 @@ class DownloadModuleVisual extends ModuleVisual {
     private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
     private ?Download $currentDownload;
     private DownloadRequestHandler $requestHandler;
-    private Module $module;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
-        $this->module = $module;
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->requestHandler = new DownloadRequestHandler();
     }
 

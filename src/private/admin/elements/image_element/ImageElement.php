@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\Visual;
+
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
@@ -61,11 +64,11 @@ class ImageElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ImageElementStatics();
+        return new ImageElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ImageElementEditor($this);
+        return new ImageElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ImageElementFrontendVisual {
@@ -130,5 +133,3 @@ class ImageElementMetadataProvider extends ElementMetadataProvider {
     }
 
 }
-
-?>

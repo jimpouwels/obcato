@@ -1,4 +1,8 @@
 <?php
+
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\Session;
+
 require_once CMS_ROOT . "/request_handlers/BackendRequestHandler.php";
 require_once CMS_ROOT . "/view/views/Cms.php";
 require_once CMS_ROOT . "/view/views/Popup.php";
@@ -23,13 +27,11 @@ class Backend {
     }
 
     private function loadCurrentModule(): void {
-        $current_module = $this->backendRequestHandler->getCurrentModule();
-        if ($current_module) {
-            $currentModule = null;
-            $currentModule = $current_module;
+        $currentModule = $this->backendRequestHandler->getCurrentModule();
+        if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
             $class = $currentModule->getClass();
-            $this->moduleVisual = new $class($currentModule);
+            $this->moduleVisual = new $class(TemplateEngine::getInstance(), $currentModule, MysqlConnector::getInstance(), TemplateEngine::getInstance());
         }
     }
 
@@ -42,12 +44,12 @@ class Backend {
     }
 
     private function renderCmsView(): void {
-        $cms = new Cms($this->moduleVisual);
+        $cms = new Cms(TemplateEngine::getInstance(), $this->moduleVisual);
         echo $cms->render();
     }
 
     private function renderPopupView(): void {
-        $popup = new Popup($_GET['popup']);
+        $popup = new Popup(TemplateEngine::getInstance(), $_GET['popup']);
         echo $popup->render();
     }
 

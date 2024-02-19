@@ -8,8 +8,8 @@ class IFrameElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/iframe_element/iframe_element_form.tpl";
     private IFrameElement $iframeElement;
 
-    public function __construct(IFrameElement $iframeElement) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, IFrameElement $iframeElement) {
+        parent::__construct($templateEngine);
         $this->iframeElement = $iframeElement;
     }
 
@@ -22,10 +22,10 @@ class IFrameElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(Smarty_Internal_Data $data): void {
-        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("iframe_element_editor_title"), htmlentities($this->iframeElement->getTitle()), false, false, null);
-        $urlField = new TextField($this->createFieldId("url"), $this->getTextResource("iframe_element_editor_url"), $this->iframeElement->getUrl(), false, true, null);
-        $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("iframe_element_editor_width"), $this->iframeElement->getWidth(), false, false, "size_field");
-        $heightField = new TextField($this->createFieldId("height"), $this->getTextResource("iframe_element_editor_height"), $this->iframeElement->getHeight(), false, false, "size_field");
+        $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("iframe_element_editor_title"), htmlentities($this->iframeElement->getTitle()), false, false, null);
+        $urlField = new TextField($this->getTemplateEngine(), $this->createFieldId("url"), $this->getTextResource("iframe_element_editor_url"), $this->iframeElement->getUrl(), false, true, null);
+        $widthField = new TextField($this->getTemplateEngine(), $this->createFieldId("width"), $this->getTextResource("iframe_element_editor_width"), $this->iframeElement->getWidth(), false, false, "size_field");
+        $heightField = new TextField($this->getTemplateEngine(), $this->createFieldId("height"), $this->getTextResource("iframe_element_editor_height"), $this->iframeElement->getHeight(), false, false, "size_field");
 
         $data->assign("title_field", $titleField->render());
         $data->assign("url_field", $urlField->render());
@@ -38,5 +38,3 @@ class IFrameElementEditor extends ElementVisual {
     }
 
 }
-
-?>

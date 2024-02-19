@@ -4,8 +4,8 @@ class TermEditor extends Panel {
 
     private ArticleTerm $currentTerm;
 
-    public function __construct(ArticleTerm $currentTerm) {
-        parent::__construct($this->getTextResource("articles_terms_editor_title"), 'term_editor_panel');
+    public function __construct(TemplateEngine $templateEngine, ArticleTerm $currentTerm) {
+        parent::__construct($templateEngine, $this->getTextResource("articles_terms_editor_title"), 'term_editor_panel');
         $this->currentTerm = $currentTerm;
     }
 
@@ -20,7 +20,7 @@ class TermEditor extends Panel {
 
     private function renderNameField(): string {
         $nameValue = $this->currentTerm->getName();
-        $nameField = new TextField("name", $this->getTextResource("articles_terms_editor_name_field"), $nameValue, true, false, null);
+        $nameField = new TextField($this->getTemplateEngine(), "name", $this->getTextResource("articles_terms_editor_name_field"), $nameValue, true, false, null);
         return $nameField->render();
     }
 }

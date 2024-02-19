@@ -3,8 +3,8 @@
 class TemplateFilesList extends Panel {
     private TemplateDao $templateDao;
 
-    public function __construct() {
-        parent::__construct('template_files_list_title', 'template_files_list_panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'template_files_list_title', 'template_files_list_panel');
         $this->templateDao = TemplateDaoMysql::getInstance();
     }
 

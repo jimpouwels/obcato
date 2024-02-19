@@ -1,5 +1,7 @@
 <?php
 
+use Obcato\ComponentApi\Visual;
+
 class HandlerProperty {
 
     private string $_name;

@@ -3,12 +3,12 @@ require_once CMS_ROOT . "/view/views/ElementContainer.php";
 require_once CMS_ROOT . "/view/views/LinkEditor.php";
 require_once CMS_ROOT . '/modules/blocks/visuals/blocks/BlockMetadataEditor.php';
 
-class BlockEditor extends Visual {
+class BlockEditor extends Obcato\ComponentApi\Visual {
 
     private Block $currentBlock;
 
-    public function __construct(Block $current) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, Block $current) {
+        parent::__construct($templateEngine);
         $this->currentBlock = $current;
     }
 
@@ -25,14 +25,14 @@ class BlockEditor extends Visual {
     }
 
     private function renderBlockMetaDataPanel(): string {
-        return (new BlockMetadataEditor($this->currentBlock))->render();
+        return (new BlockMetadataEditor($this->getTemplateEngine(), $this->currentBlock))->render();
     }
 
     private function renderElementContainer(): string {
-        return (new ElementContainer($this->currentBlock->getElements()))->render();
+        return (new ElementContainer($this->getTemplateEngine(), $this->currentBlock->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        return (new LinkEditor($this->currentBlock->getLinks()))->render();
+        return (new LinkEditor($this->getTemplateEngine(), $this->currentBlock->getLinks()))->render();
     }
 }

@@ -8,8 +8,8 @@ class ListElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/list_element/list_element_form.tpl";
     private ListElement $listElement;
 
-    public function __construct(ListElement $listElement) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ListElement $listElement) {
+        parent::__construct($templateEngine);
         $this->listElement = $listElement;
     }
 
@@ -22,8 +22,8 @@ class ListElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(Smarty_Internal_Data $data): void {
-        $titleField = new TextField('element_' . $this->listElement->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->listElement->getTitle(), false, true, null);
-        $addItemButton = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
+        $titleField = new TextField($this->getTemplateEngine(), 'element_' . $this->listElement->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->listElement->getTitle(), false, true, null);
+        $addItemButton = new Button($this->getTemplateEngine(), "", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
         $data->assign("list_items", $this->getListItems());
         $data->assign("add_item_button", $addItemButton->render());

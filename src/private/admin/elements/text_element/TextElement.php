@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\Visual;
+
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/elements/text_element/visuals/TextElementEditor.php";
@@ -24,11 +27,11 @@ class TextElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new TextElementStatics();
+        return new TextElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new TextElementEditor($this);
+        return new TextElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

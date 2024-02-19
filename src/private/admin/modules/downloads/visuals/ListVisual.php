@@ -7,8 +7,8 @@ class ListVisual extends Panel {
     private DownloadDao $downloadDao;
     private DownloadRequestHandler $downloadRequestHandler;
 
-    public function __construct(DownloadRequestHandler $download_requestHandler) {
-        parent::__construct('Gevonden downloads', 'download_list');
+    public function __construct(TemplateEngine $templateEngine, DownloadRequestHandler $download_requestHandler) {
+        parent::__construct($templateEngine, 'Gevonden downloads', 'download_list');
         $this->downloadRequestHandler = $download_requestHandler;
         $this->downloadDao = DownloadDaoMysql::getInstance();
     }
@@ -52,6 +52,6 @@ class ListVisual extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        return (new InformationMessage("Geen downloads gevonden"))->render();
+        return (new InformationMessage(TemplateEngine::getInstance(), "Geen downloads gevonden"))->render();
     }
 }

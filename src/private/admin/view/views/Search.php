@@ -2,7 +2,7 @@
 require_once CMS_ROOT . "/view/views/ElementHolderSearch.php";
 require_once CMS_ROOT . "/view/views/ImageSearchBox.php";
 
-class Search extends Visual {
+class Search extends Obcato\ComponentApi\Visual {
 
     public static string $ARTICLES = "articles";
     public static string $PAGES = "pages";
@@ -17,8 +17,8 @@ class Search extends Visual {
     private string $_objects_to_search;
     private string $_popup_type;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine,) {
+        parent::__construct($templateEngine);
         $this->_back_click_id = $_GET[self::$BACK_CLICK_ID_KEY];
         $this->_backfill_id = $_GET[self::$BACKFILL_KEY];
         $this->_objects_to_search = $_GET[self::$OBJECT_TO_SEARCH_KEY];

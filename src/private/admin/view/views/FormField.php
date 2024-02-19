@@ -1,9 +1,12 @@
 <?php
+
+use Obcato\ComponentApi\Session;
+
 require_once CMS_ROOT . '/authentication/Session.php';
 require_once CMS_ROOT . '/view/views/FormError.php';
 require_once CMS_ROOT . '/view/views/FormLabel.php';
 
-abstract class FormField extends Visual {
+abstract class FormField extends Obcato\ComponentApi\Visual {
 
     private ?string $_css_class;
     private string $_field_name;
@@ -12,8 +15,8 @@ abstract class FormField extends Visual {
     private bool $_linkable;
     private ?string $_value;
 
-    protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
-        parent::__construct();
+    protected function __construct(TemplateEngine $templateEngine, string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
+        parent::__construct($templateEngine);
         $this->_field_name = $field_name;
         $this->_css_class = $css_class;
         $this->_label_resource_identifier = $label_resource_identifier;
@@ -48,7 +51,7 @@ abstract class FormField extends Visual {
     public function getErrorHtml(string $field_name): string {
         $error_html = "";
         if (Session::hasError($field_name)) {
-            $error = new FormError(Session::popError($field_name));
+            $error = new FormError($this->getTemplateEngine(), Session::popError($field_name));
             return $error->render();
         }
         return $error_html;
@@ -72,7 +75,7 @@ abstract class FormField extends Visual {
 
     protected function getInputLabelHtml(string $label_resource_identifier, string $field_name, bool $mandatory): string {
         if ($label_resource_identifier) {
-            $label = new FormLabel($field_name, $label_resource_identifier, $mandatory);
+            $label = new FormLabel($this->getTemplateEngine(), $field_name, $label_resource_identifier, $mandatory);
             return $label->render();
         }
         return "";

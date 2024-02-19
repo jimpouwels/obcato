@@ -5,8 +5,8 @@ class LabelsList extends Panel {
 
     private ImageDao $_image_dao;
 
-    public function __construct() {
-        parent::__construct('Labels');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'Labels');
         $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
@@ -29,7 +29,7 @@ class LabelsList extends Panel {
     }
 
     private function getNoLabelsMessage(): string {
-        $message = new InformationMessage("Geen labels gevonden");
+        $message = new InformationMessage($this->getTemplateEngine(), "Geen labels gevonden");
         return $message->render();
     }
 
@@ -42,7 +42,7 @@ class LabelsList extends Panel {
     }
 
     private function getDeleteCheckBox(ImageLabel $label): string {
-        $checkbox = new SingleCheckBox("label_" . $label->getId() . "_delete", "", 0, false, "");
+        $checkbox = new SingleCheckBox($this->getTemplateEngine(), "label_" . $label->getId() . "_delete", "", 0, false, "");
         return $checkbox->render();
     }
 }

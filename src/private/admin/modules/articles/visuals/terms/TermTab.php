@@ -2,15 +2,15 @@
 require_once CMS_ROOT . "/modules/articles/visuals/terms/TermsList.php";
 require_once CMS_ROOT . "/modules/articles/visuals/terms/TermEditor.php";
 
-class TermTab extends Visual {
+class TermTab extends Obcato\ComponentApi\Visual {
 
     private static string $TERM_QUERYSTRING_KEY = "term";
     private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";
 
     private ?ArticleTerm $currentTerm;
 
-    public function __construct(?ArticleTerm $currentTerm) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ?ArticleTerm $currentTerm) {
+        parent::__construct($templateEngine);
         $this->currentTerm = $currentTerm;
     }
 
@@ -31,12 +31,10 @@ class TermTab extends Visual {
     }
 
     private function renderTermEditor(): string {
-        return (new TermEditor($this->currentTerm))->render();
+        return (new TermEditor($this->getTemplateEngine(), $this->currentTerm))->render();
     }
 
     private function renderTermsList(): string {
-        return (new TermsList())->render();
+        return (new TermsList($this->getTemplateEngine()))->render();
     }
 }
-
-?>

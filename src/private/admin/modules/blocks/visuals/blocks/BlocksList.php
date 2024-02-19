@@ -6,17 +6,19 @@ class BlocksList extends Panel {
     private ?Block $currentBlock;
     private BlockDao $blockDao;
 
-    public function __construct(?Block $current) {
-        parent::__construct('Blokken', 'block_list');
+    public function __construct(TemplateEngine $templateEngine, ?Block $current) {
+        parent::__construct($templateEngine, 'Blokken', 'block_list');
         $this->currentBlock = $current;
         $this->blockDao = BlockDaoMysql::getInstance();
     }
 
-    public function getPanelContentTemplate(): string {
+    public
+    function getPanelContentTemplate(): string {
         return "modules/blocks/blocks/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public
+    function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign("block_lists", $this->getBlockLists());
         $data->assign("no_results_message", $this->renderNoResultsMessage());
         $currentBlockValue = null;
@@ -26,12 +28,14 @@ class BlocksList extends Panel {
         $data->assign("current_block", $currentBlockValue);
     }
 
-    private function renderNoResultsMessage(): string {
-        $noResultMessage = new InformationMessage($this->getTextResource("blocks_no_blocks_found"));
+    private
+    function renderNoResultsMessage(): string {
+        $noResultMessage = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("blocks_no_blocks_found"));
         return $noResultMessage->render();
     }
 
-    private function getBlockLists(): array {
+    private
+    function getBlockLists(): array {
         $blockLists = array();
         // blocks with position
         foreach ($this->blockDao->getBlockPositions() as $position) {
@@ -48,7 +52,8 @@ class BlocksList extends Panel {
         return $blockLists;
     }
 
-    private function getBlocks(?BlockPosition $position): array {
+    private
+    function getBlocks(?BlockPosition $position): array {
         $blocks = array();
         if (!is_null($position)) {
             foreach ($this->blockDao->getBlocksByPosition($position) as $block) {
@@ -62,7 +67,8 @@ class BlocksList extends Panel {
         return $blocks;
     }
 
-    private function toArray(Block $block): array {
+    private
+    function toArray(Block $block): array {
         $blockValue = array();
         $blockValue["id"] = $block->getId();
         $blockValue["title"] = $block->getTitle();
@@ -70,5 +76,3 @@ class BlocksList extends Panel {
         return $blockValue;
     }
 }
-
-?>

@@ -3,12 +3,12 @@ require_once CMS_ROOT . '/modules/components/visuals/components/ModulesListPanel
 require_once CMS_ROOT . '/modules/components/visuals/components/ElementsListPanel.php';
 require_once CMS_ROOT . '/modules/components/visuals/components/ComponentsDetailsPanel.php';
 
-class ComponentsTabVisual extends Visual {
+class ComponentsTabVisual extends Obcato\ComponentApi\Visual {
 
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct($componentRequestHandler) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, $componentRequestHandler) {
+        parent::__construct($templateEngine);
         $this->componentRequestHandler = $componentRequestHandler;
     }
 
@@ -17,10 +17,10 @@ class ComponentsTabVisual extends Visual {
     }
 
     public function load(): void {
-        $modules_list = new ModulesListPanel($this->componentRequestHandler);
-        $elements_list = new ElementsListPanel($this->componentRequestHandler);
+        $modules_list = new ModulesListPanel($this->getTemplateEngine(), $this->componentRequestHandler);
+        $elements_list = new ElementsListPanel($this->getTemplateEngine(), $this->componentRequestHandler);
         if ($this->componentRequestHandler->getCurrentElementType() || $this->componentRequestHandler->getCurrentModule()) {
-            $details = new ComponentsDetailsPanel($this->componentRequestHandler);
+            $details = new ComponentsDetailsPanel($this->getTemplateEngine(), $this->componentRequestHandler);
             $this->assign('details', $details->render());
         }
         $this->assign('modules_list', $modules_list->render());

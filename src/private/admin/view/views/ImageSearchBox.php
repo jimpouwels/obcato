@@ -13,13 +13,13 @@ class ImageSearchBox extends Panel {
     private string $_popup_type;
     private ImageDao $_image_dao;
 
-    public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search, string $popup_type) {
-        parent::__construct('Zoeken', 'popup_search_fieldset');
-        $this->_back_click_id = $back_click_id;
-        $this->_backfill_id = $backfill_id;
-        $this->_objects_to_search = $objects_to_search;
+    public function __construct(TemplateEngine $templateEngine, string $backClickId, string $backfillId, string $objectsToSearch, string $popupType) {
+        parent::__construct($templateEngine, 'Zoeken', 'popup_search_fieldset');
+        $this->_back_click_id = $backClickId;
+        $this->_backfill_id = $backfillId;
+        $this->_objects_to_search = $objectsToSearch;
         $this->_image_dao = ImageDaoMysql::getInstance();
-        $this->_popup_type = $popup_type;
+        $this->_popup_type = $popupType;
     }
 
     public function getPanelContentTemplate(): string {

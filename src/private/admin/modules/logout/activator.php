@@ -1,13 +1,15 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/modules/logout/LogoutRequestHandler.php";
 
 class LogoutModuleVisual extends ModuleVisual {
 
     private LogoutRequestHandler $logoutRequestHandler;
 
-    public function __construct($module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->logoutRequestHandler = new LogoutRequestHandler();
     }
 

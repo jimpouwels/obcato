@@ -2,14 +2,14 @@
 require_once CMS_ROOT . "/modules/blocks/visuals/positions/PositionEditor.php";
 require_once CMS_ROOT . "/modules/blocks/visuals/positions/PositionList.php";
 
-class PositionTab extends Visual {
+class PositionTab extends Obcato\ComponentApi\Visual {
 
     private static string $POSITION_QUERYSTRING_KEY = "position";
 
     private ?BlockPosition $currentPosition;
 
-    public function __construct(?BlockPosition $currentPosition) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ?BlockPosition $currentPosition) {
+        parent::__construct($templateEngine);
         $this->currentPosition = $currentPosition;
     }
 
@@ -29,13 +29,11 @@ class PositionTab extends Visual {
     }
 
     private function renderPositionEditor(): string {
-        return (new PositionEditor($this->currentPosition))->render();
+        return (new PositionEditor($this->getTemplateEngine(), $this->currentPosition))->render();
     }
 
     private function renderPositionList(): string {
-        return (new PositionList())->render();
+        return (new PositionList($this->getTemplateEngine()))->render();
     }
 
 }
-
-?>

@@ -3,15 +3,15 @@ require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 
 class BlockSelector extends Panel {
 
-    private array $_selected_blocks;
-    private BlockDao $_block_dao;
-    private int $_context_id;
+    private array $selectedBlocks;
+    private BlockDao $blockDao;
+    private int $contextId;
 
-    public function __construct(array $selected_blocks, int $context_id) {
-        parent::__construct($this->getTextResource('block_selection_title'), 'page_blocks');
-        $this->_block_dao = BlockDaoMysql::getInstance();
-        $this->_context_id = $context_id;
-        $this->_selected_blocks = $selected_blocks;
+    public function __construct(TemplateEngine $templateEngine, array $selectedBlocks, int $contextId) {
+        parent::__construct($templateEngine, $this->getTextResource('block_selection_title'), 'page_blocks');
+        $this->blockDao = BlockDaoMysql::getInstance();
+        $this->contextId = $contextId;
+        $this->selectedBlocks = $selectedBlocks;
     }
 
     public function getPanelContentTemplate(): string {
@@ -21,13 +21,13 @@ class BlockSelector extends Panel {
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign("blocks_to_select", $this->getBlocksToSelect());
         $data->assign("selected_blocks", $this->getSelectedBlocksHtml());
-        $data->assign("context_id", $this->_context_id);
+        $data->assign("context_id", $this->contextId);
     }
 
     private function getBlocksToSelect(): array {
         $blocks_to_select = array();
-        foreach ($this->_block_dao->getAllBlocks() as $block) {
-            if (!Arrays::firstMatch($this->_selected_blocks, function (Block $b) use ($block) {
+        foreach ($this->blockDao->getAllBlocks() as $block) {
+            if (!Arrays::firstMatch($this->selectedBlocks, function (Block $b) use ($block) {
                 return $b->getId() == $block->getId();
             })) {
                 $block_to_select["id"] = $block->getId();
@@ -40,14 +40,14 @@ class BlockSelector extends Panel {
 
     private function getSelectedBlocksHtml(): array {
         $selected_blocks = array();
-        if (count($this->_selected_blocks) > 0) {
-            foreach ($this->_selected_blocks as $selected_block) {
+        if (count($this->selectedBlocks) > 0) {
+            foreach ($this->selectedBlocks as $selected_block) {
                 $selected_block_item = array();
                 $selected_block_item["title"] = $selected_block->getTitle();
                 $selected_block_item["position_name"] = $selected_block->getPositionName();
                 $selected_block_item["published"] = $selected_block->isPublished();
 
-                $delete_field = new SingleCheckbox("block_" . $this->_context_id . "_" . $selected_block->getId() . "_delete", "", false, false, "");
+                $delete_field = new SingleCheckbox($this->getTemplateEngine(), "block_" . $this->contextId . "_" . $selected_block->getId() . "_delete", "", false, false, "");
                 $selected_block_item["delete_field"] = $delete_field->render();
                 $selected_blocks[] = $selected_block_item;
             }

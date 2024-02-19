@@ -1,7 +1,8 @@
 <?php
-require_once CMS_ROOT . "/view/smarty/Smarty.class.php";
 
-class TemplateEngine {
+use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
+
+class TemplateEngine implements ITemplateEngine {
     private static ?TemplateEngine $_instance = null;
     private Smarty $smarty;
 

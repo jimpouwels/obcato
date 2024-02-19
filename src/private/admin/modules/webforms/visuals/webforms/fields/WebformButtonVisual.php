@@ -4,8 +4,8 @@ require_once CMS_ROOT . "/modules/webforms/model/WebformButton.php";
 
 class WebformButtonVisual extends WebformItemVisual {
 
-    public function __construct(WebFormItem $webform_item) {
-        parent::__construct($webform_item);
+    public function __construct(TemplateEngine $templateEngine, WebFormItem $webform_item) {
+        parent::__construct($templateEngine, $webform_item);
     }
 
     public function getFormItemTemplate(): string {

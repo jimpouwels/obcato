@@ -8,11 +8,11 @@ class TermSelector extends Panel {
     private ArticleDao $_article_dao;
     private int $_context_id;
 
-    public function __construct(array $selected_terms, int $context_id) {
-        parent::__construct($this->getTextResource("term_selector_title"), 'term_selector');
+    public function __construct(TemplateEngine $templateEngine, array $selected_terms, int $contextId) {
+        parent::__construct($templateEngine, $this->getTextResource("term_selector_title"), 'term_selector');
         $this->_selected_terms = $selected_terms;
         $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_context_id = $context_id;
+        $this->_context_id = $contextId;
     }
 
     public function getPanelContentTemplate(): string {

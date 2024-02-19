@@ -6,9 +6,9 @@ class ElementsListPanel extends Panel {
     private ElementDao $elementDao;
     private ComponentRequestHandler $componentsRequestHandler;
 
-    public function __construct($components_requestHandler) {
-        parent::__construct('Elementen', 'component-list-fieldset');
-        $this->componentsRequestHandler = $components_requestHandler;
+    public function __construct(TemplateEngine $templateEngine, $requestHandler) {
+        parent::__construct($templateEngine, 'Elementen', 'component-list-fieldset');
+        $this->componentsRequestHandler = $requestHandler;
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 
@@ -33,7 +33,7 @@ class ElementsListPanel extends Panel {
         return $elementsData;
     }
 
-    private function isCurrentElement($element) {
+    private function isCurrentElement($element): bool {
         $currentElement = $this->componentsRequestHandler->getCurrentElementType();
         return $currentElement && $currentElement->getId() == $element->getId();
     }

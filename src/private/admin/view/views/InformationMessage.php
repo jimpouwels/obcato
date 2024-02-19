@@ -1,11 +1,11 @@
 <?php
 
-class InformationMessage extends Visual {
+class InformationMessage extends Obcato\ComponentApi\Visual {
 
     private string $_message;
 
-    public function __construct(string $message) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, string $message) {
+        parent::__construct($templateEngine);
         $this->_message = $message;
     }
 

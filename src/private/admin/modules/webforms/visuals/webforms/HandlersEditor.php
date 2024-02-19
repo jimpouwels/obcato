@@ -10,8 +10,8 @@ class HandlersEditor extends Panel {
     private WebForm $_webform;
     private WebformDao $_webform_dao;
 
-    public function __construct(WebForm $webform) {
-        parent::__construct('webforms_handlers_editor_title');
+    public function __construct(TemplateEngine $templateEngine, WebForm $webform) {
+        parent::__construct($templateEngine, 'webforms_handlers_editor_title');
         $this->_webform = $webform;
         $this->_webform_handler_manager = WebformHandlerManager::getInstance();
         $this->_webform_dao = WebformDaoMysql::getInstance();
@@ -29,7 +29,7 @@ class HandlersEditor extends Panel {
     private function renderHandlerButtons(): array {
         $handler_buttons = array();
         foreach ($this->_webform_handler_manager->getAllHandlers() as $handler) {
-            $handler_button = new Button("webforms_add_{$handler->getType()}_button", "{$handler->getNameResourceIdentifier()}_add_button", "addFormHandler('{$handler->getType()}');");
+            $handler_button = new Button($this->getTemplateEngine(), "webforms_add_{$handler->getType()}_button", "{$handler->getNameResourceIdentifier()}_add_button", "addFormHandler('{$handler->getType()}');");
             $handler_buttons[] = $handler_button->render();
         }
         return $handler_buttons;
@@ -68,9 +68,9 @@ class HandlersEditor extends Panel {
                 $property_field->setCurrentValue($existing_property);
             } else {
                 if ($property->getType() == 'textfield') {
-                    $property_field = new TextField("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                    $property_field = new TextField($this->getTemplateEngine(), "handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
                 } else {
-                    $property_field = new TextArea("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                    $property_field = new TextArea($this->getTemplateEngine(), "handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
                 }
             }
             $handler_property['id'] = $existing_property->getId();
@@ -81,5 +81,3 @@ class HandlersEditor extends Panel {
         return $handler_properties;
     }
 }
-
-?>

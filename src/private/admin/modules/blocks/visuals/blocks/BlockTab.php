@@ -2,12 +2,12 @@
 require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlocksList.php";
 require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlockEditor.php";
 
-class BlockTab extends Visual {
+class BlockTab extends Obcato\ComponentApi\Visual {
 
     private ?Block $currentBlock;
 
-    public function __construct(?Block $current) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ?Block $current) {
+        parent::__construct($templateEngine);
         $this->currentBlock = $current;
     }
 
@@ -23,13 +23,11 @@ class BlockTab extends Visual {
     }
 
     private function renderBlocksList(): string {
-        return (new BlocksList($this->currentBlock))->render();
+        return (new BlocksList($this->getTemplateEngine(), $this->currentBlock))->render();
     }
 
     private function renderBlockEditor(): string {
-        return (new BlockEditor($this->currentBlock))->render();
+        return (new BlockEditor($this->getTemplateEngine(), $this->currentBlock))->render();
     }
 
 }
-
-?>

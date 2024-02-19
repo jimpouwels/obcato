@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticleEditor.php";
 require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticlesList.php";
 require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticlesSearch.php";
 
-class ArticleTab extends Visual {
+class ArticleTab extends Obcato\ComponentApi\Visual {
 
     private ?Article $currentArticle;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(ArticleRequestHandler $articleRequestHandler) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ArticleRequestHandler $articleRequestHandler) {
+        parent::__construct($templateEngine);
         $this->articleRequestHandler = $articleRequestHandler;
         $this->currentArticle = $articleRequestHandler->getCurrentArticle();
     }
@@ -28,17 +28,15 @@ class ArticleTab extends Visual {
     }
 
     private function renderArticlesSearchPanel(): string {
-        return (new ArticlesSearch($this->articleRequestHandler))->render();
+        return (new ArticlesSearch($this->getTemplateEngine(), $this->articleRequestHandler))->render();
     }
 
     private function renderArticlesList(): string {
-        return (new ArticlesList($this->articleRequestHandler))->render();
+        return (new ArticlesList($this->getTemplateEngine(), $this->articleRequestHandler))->render();
     }
 
     private function renderArticleEditor(): string {
-        return (new ArticleEditor($this->currentArticle))->render();
+        return (new ArticleEditor($this->getTemplateEngine(), $this->currentArticle))->render();
     }
 
 }
-
-?>

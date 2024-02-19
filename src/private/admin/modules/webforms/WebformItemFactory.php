@@ -1,7 +1,6 @@
 <?php
 
 namespace {
-    require_once CMS_ROOT . '/view/views/Visual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformButtonVisual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextfieldVisual.php';
     require_once CMS_ROOT . '/modules/webforms/visuals/webforms/fields/WebformTextareaVisual.php';
@@ -38,7 +37,7 @@ namespace {
 
         public function getBackendVisualFor(WebFormItem $webform_item): WebformItemVisual {
             $backend_visual_classname = $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
-            return new $backend_visual_classname($webform_item);
+            return new $backend_visual_classname(TemplateEngine::getInstance(), $webform_item);
         }
 
         public function getBackendFormFor(WebFormItem $webform_item): WebformItemForm {

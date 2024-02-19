@@ -1,6 +1,8 @@
 <?php
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/modules/settings/model/Settings.php";
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
 require_once CMS_ROOT . "/view/views/WarningMessage.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 require_once CMS_ROOT . "/modules/settings/SettingsRequestHandler.php";
@@ -14,8 +16,8 @@ class SettingsModuleVisual extends ModuleVisual {
     private Settings $settings;
     private SettingsRequestHandler $settingsRequestHandler;
 
-    public function __construct(Module $settingsModule) {
-        parent::__construct($settingsModule);
+    public function __construct(TemplateEngine $templateEngine, Module $settingsModule) {
+        parent::__construct($templateEngine, $settingsModule);
         $this->settingsModule = $settingsModule;
         $this->settings = SettingsDaoMysql::getInstance()->getSettings();
         $this->settingsRequestHandler = new SettingsRequestHandler($this->settings);
@@ -33,7 +35,7 @@ class SettingsModuleVisual extends ModuleVisual {
 
     public function getActionButtons(): array {
         $actionButtons = array();
-        $actionButtons[] = new ActionButtonSave('apply_settings');
+        $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'apply_settings');
         return $actionButtons;
     }
 
@@ -55,15 +57,15 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
     private function renderGlobalSettingsPanel(): string {
-        return (new GlobalSettingsPanel($this->settings))->render();
+        return (new GlobalSettingsPanel($this->getTemplateEngine(), $this->settings))->render();
     }
 
     private function renderDomainSettingsPanel(): string {
-        return (new DomainSettingsPanel($this->settings))->render();
+        return (new DomainSettingsPanel($this->getTemplateEngine(), $this->settings))->render();
     }
 
     private function renderWarningMessage(): string {
-        return (new WarningMessage("settings_warning_message"))->render();
+        return (new WarningMessage($this->getTemplateEngine(), "settings_warning_message"))->render();
     }
 
 }

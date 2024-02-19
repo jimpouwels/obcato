@@ -4,26 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e885315110c851c936b0f0a6bae06f8d",
+    "content-hash": "9656952b510c7d7b1673048bf7414fd3",
     "packages": [
         {
             "name": "obcato/component-api",
-            "version": "v1.0.3",
+            "version": "v1.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jimpouwels/obcato-component-api.git",
-                "reference": "b9a2aecdb7628a24855cba14c61c3f8660528eac"
+                "reference": "ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jimpouwels/obcato-component-api/zipball/b9a2aecdb7628a24855cba14c61c3f8660528eac",
-                "reference": "b9a2aecdb7628a24855cba14c61c3f8660528eac",
+                "url": "https://api.github.com/repos/jimpouwels/obcato-component-api/zipball/ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df",
+                "reference": "ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df",
                 "shasum": ""
+            },
+            "require": {
+                "smarty/smarty": "^4.3"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Obcato\\ComponentApi\\": "src/"
+                    "Obcato\\ComponentApi\\": [
+                        "src/",
+                        "src/database",
+                        "src/install",
+                        "src/visual"
+                    ]
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -36,9 +44,75 @@
             "description": "Custom Component API for Obcato",
             "support": {
                 "issues": "https://github.com/jimpouwels/obcato-component-api/issues",
-                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v1.0.3"
+                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v1.0.26"
             },
-            "time": "2024-02-18T11:52:52+00:00"
+            "time": "2024-02-19T12:22:40+00:00"
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "e0cbbdf6ea21768d0194e59d2f8c2e20d5f0868c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/e0cbbdf6ea21768d0194e59d2f8c2e20d5f0868c",
+                "reference": "e0cbbdf6ea21768d0194e59d2f8c2e20d5f0868c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^7.5",
+                "smarty/smarty-lexer": "^3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "libs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
+                },
+                {
+                    "name": "Simon Wisselink",
+                    "homepage": "https://www.iwink.nl/"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "https://smarty-php.github.io/smarty/",
+            "keywords": [
+                "templating"
+            ],
+            "support": {
+                "forum": "https://github.com/smarty-php/smarty/discussions",
+                "issues": "https://github.com/smarty-php/smarty/issues",
+                "source": "https://github.com/smarty-php/smarty/tree/v4.3.5"
+            },
+            "time": "2024-01-23T10:47:54+00:00"
         }
     ],
     "packages-dev": [
@@ -1672,7 +1746,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-mysqli": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

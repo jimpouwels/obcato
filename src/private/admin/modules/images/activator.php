@@ -1,7 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/modules/images/visuals/import/ImportTab.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/images_tab.php";
+require_once CMS_ROOT . "/modules/images/visuals/images/ImagesTab.php";
 require_once CMS_ROOT . "/modules/images/visuals/labels/LabelsTab.php";
 require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/modules/images/ImageRequestHandler.php";
@@ -20,8 +22,8 @@ class ImageModuleVisual extends ModuleVisual {
     private ImportRequestHandler $importRequestHandler;
     private int $currentTabId;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->imageRequestHandler = new ImageRequestHandler();
         $this->labelRequestHandler = new LabelRequestHandler();
         $this->importRequestHandler = new ImportRequestHandler();
@@ -35,11 +37,11 @@ class ImageModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->currentTabId == self::$IMAGES_TAB) {
-            $content = new ImagesTab($this->imageRequestHandler);
+            $content = new ImagesTab($this->getTemplateEngine(), $this->imageRequestHandler);
         } else if ($this->currentTabId == self::$LABELS_TAB) {
-            $content = new LabelsTab($this->labelRequestHandler);
+            $content = new LabelsTab($this->getTemplateEngine(), $this->labelRequestHandler);
         } else if ($this->currentTabId == self::$IMPORT_TAB) {
-            $content = new ImportTab();
+            $content = new ImportTab($this->getTemplateEngine());
         }
 
         if (!is_null($content)) {
@@ -53,22 +55,22 @@ class ImageModuleVisual extends ModuleVisual {
             $saveButton = null;
             $deleteButton = null;
             if (!is_null($this->imageRequestHandler->getCurrentImage())) {
-                $saveButton = new ActionButtonSave('update_image');
-                $deleteButton = new ActionButtonDelete('delete_image');
+                $saveButton = new ActionButtonSave($this->getTemplateEngine(), 'update_image');
+                $deleteButton = new ActionButtonDelete($this->getTemplateEngine(), 'delete_image');
             }
             $actionButtons[] = $saveButton;
-            $actionButtons[] = new ActionButtonAdd('add_image');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_image');
             $actionButtons[] = $deleteButton;
         }
         if ($this->currentTabId == self::$LABELS_TAB) {
             if (!is_null($this->labelRequestHandler->getCurrentLabel())) {
-                $actionButtons[] = new ActionButtonSave('update_label');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_label');
             }
-            $actionButtons[] = new ActionButtonAdd('add_label');
-            $actionButtons[] = new ActionButtonDelete('delete_labels');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_label');
+            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_labels');
         }
         if ($this->currentTabId == self::$IMPORT_TAB) {
-            $actionButtons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");
+            $actionButtons[] = new ActionButton($this->getTemplateEngine(), "Importeren", "upload_zip", "icon_upload");
         }
         return $actionButtons;
     }
@@ -89,7 +91,7 @@ class ImageModuleVisual extends ModuleVisual {
     public function onRequestHandled(): void {}
 
     public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
         $tabMenu->addItem("images_tab_images", self::$IMAGES_TAB);
         $tabMenu->addItem("images_tab_labels", self::$LABELS_TAB);
         $tabMenu->addItem("images_tab_import", self::$IMPORT_TAB);
@@ -97,5 +99,3 @@ class ImageModuleVisual extends ModuleVisual {
     }
 
 }
-
-?>

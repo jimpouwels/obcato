@@ -4,7 +4,6 @@ define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";
 
-require_once CMS_ROOT . "/view/views/Visual.php";
 require_once CMS_ROOT . "/view/views/Panel.php";
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/Backend.php";

@@ -343,5 +343,3 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
 }
-
-?>

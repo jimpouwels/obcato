@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\Visual;
+
 require_once CMS_ROOT . "/modules/templates/model/Presentable.php";
 
 abstract class Element extends Presentable {

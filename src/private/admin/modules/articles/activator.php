@@ -1,6 +1,8 @@
 <?php
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
 require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
 require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticleTab.php";
 require_once CMS_ROOT . "/modules/articles/visuals/terms/TermTab.php";
@@ -22,8 +24,8 @@ class ArticleModuleVisual extends ModuleVisual {
     private TermRequestHandler $termRequestsHandler;
     private TargetPagesRequestHandler $targetPagesRequestHandler;
 
-    public function __construct(Module $articleModule) {
-        parent::__construct($articleModule);
+    public function __construct(TemplateEngine $templateEngine, Module $articleModule) {
+        parent::__construct($templateEngine, $articleModule);
         $this->articleModule = $articleModule;
         $this->articleRequestHandler = new ArticleRequestHandler();
         $this->termRequestsHandler = new TermRequestHandler();
@@ -37,11 +39,11 @@ class ArticleModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
-            $content = new ArticleTab($this->articleRequestHandler);
+            $content = new ArticleTab($this->getTemplateEngine(), $this->articleRequestHandler);
         } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
-            $content = new TermTab($this->currentTerm);
+            $content = new TermTab($this->getTemplateEngine(), $this->currentTerm);
         } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-            $content = new TargetPagesList();
+            $content = new TargetPagesList($this->getTemplateEngine());
         }
         $this->assign("content", $content?->render());
     }
@@ -64,22 +66,22 @@ class ArticleModuleVisual extends ModuleVisual {
             $saveButton = null;
             $deleteButton = null;
             if ($this->currentArticle) {
-                $saveButton = new ActionButtonSave('update_element_holder');
-                $deleteButton = new ActionButtonDelete('delete_element_holder');
+                $saveButton = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
+                $deleteButton = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
             }
             $actionButtons[] = $saveButton;
-            $actionButtons[] = new ActionButtonAdd('add_element_holder');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
             $actionButtons[] = $deleteButton;
         }
         if ($this->getCurrentTabId() == self::$TERMS_TAB) {
             if ($this->currentTerm || TermTab::isEditTermMode()) {
-                $actionButtons[] = new ActionButtonSave('update_term');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_term');
             }
-            $actionButtons[] = new ActionButtonAdd('add_term');
-            $actionButtons[] = new ActionButtonDelete('delete_terms');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_term');
+            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_terms');
         }
         if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-            $actionButtons[] = new ActionButtonDelete('delete_target_pages');
+            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_target_pages');
         }
 
         return $actionButtons;
@@ -106,7 +108,7 @@ class ArticleModuleVisual extends ModuleVisual {
     }
 
     public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
         $tabMenu->addItem("articles_tab_articles", self::$ARTICLES_TAB);
         $tabMenu->addItem("articles_tab_terms", self::$TERMS_TAB);
         $tabMenu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);

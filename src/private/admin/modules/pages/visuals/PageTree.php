@@ -6,8 +6,8 @@ class PageTree extends Panel {
     private Page $rootPage;
     private Page $selectedPage;
 
-    public function __construct(Page $rootPage, Page $selectedPage) {
-        parent::__construct($this->getTextResource('page_tree_title'), 'page_tree_panel');
+    public function __construct(TemplateEngine $templateEngine, Page $rootPage, Page $selectedPage) {
+        parent::__construct($templateEngine, $this->getTextResource('page_tree_title'), 'page_tree_panel');
         $this->rootPage = $rootPage;
         $this->selectedPage = $selectedPage;
     }
@@ -17,7 +17,7 @@ class PageTree extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $rootTreeItem = new PageTreeItem($this->rootPage, $this->selectedPage);
+        $rootTreeItem = new PageTreeItem($this->getTemplateEngine(), $this->rootPage, $this->selectedPage);
         $data->assign("items_html", $rootTreeItem->render());
     }
 

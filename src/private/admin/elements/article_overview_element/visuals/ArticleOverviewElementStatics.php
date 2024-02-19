@@ -1,10 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/Visual.php";
 
-class ArticleOverviewElementStatics extends Visual {
+class ArticleOverviewElementStatics extends Obcato\ComponentApi\Visual {
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
     }
 
     public function getTemplateFilename(): string {

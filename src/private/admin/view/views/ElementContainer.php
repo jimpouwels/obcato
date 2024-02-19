@@ -3,11 +3,11 @@ require_once CMS_ROOT . "/view/views/InformationMessage.php";
 
 class ElementContainer extends Panel {
 
-    private array $_elements;
+    private array $elements;
 
-    public function __construct(array $elements) {
-        parent::__construct($this->getTextResource('element_holder_content_title'), 'element_container');
-        $this->_elements = $elements;
+    public function __construct(TemplateEngine $templateEngine, array $elements) {
+        parent::__construct($templateEngine, $this->getTextResource('element_holder_content_title'), 'element_container');
+        $this->elements = $elements;
     }
 
     public function getPanelContentTemplate(): string {
@@ -15,7 +15,7 @@ class ElementContainer extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        if (count($this->_elements) > 0) {
+        if (count($this->elements) > 0) {
             $data->assign("elements", $this->renderElements());
         } else {
             $data->assign("message", $this->renderInformationMessage());
@@ -29,7 +29,7 @@ class ElementContainer extends Panel {
 
     private function renderElements(): array {
         $elements = array();
-        foreach ($this->_elements as $element) {
+        foreach ($this->elements as $element) {
             $elements[] = $element->getBackendVisual()->render();
         }
         return $elements;

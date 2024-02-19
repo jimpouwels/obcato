@@ -9,8 +9,8 @@ class FormElementEditor extends ElementVisual {
     private FormElement $formElement;
     private WebformDao $webformDao;
 
-    public function __construct(FormElement $formElement) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, FormElement $formElement) {
+        parent::__construct($templateEngine);
         $this->formElement = $formElement;
         $this->webformDao = WebformDaoMysql::getInstance();
     }
@@ -24,10 +24,10 @@ class FormElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(Smarty_Internal_Data $data): void {
-        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
+        $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
         $currentSelectedWebform = $this->formElement->getWebForm();
         $currentWebformId = $currentSelectedWebform?->getId();
-        $webformPicker = new Pulldown($this->createFieldId("selected_webform"), $this->getTextResource("form_element_editor_webform"), $currentWebformId, array(), false, null, true);
+        $webformPicker = new Pulldown($this->getTemplateEngine(), $this->createFieldId("selected_webform"), $this->getTextResource("form_element_editor_webform"), $currentWebformId, array(), false, null, true);
         foreach ($this->webformDao->getAllWebForms() as $webform) {
             $webformPicker->addOption($webform->getTitle(), $webform->getId());
         }
@@ -41,5 +41,3 @@ class FormElementEditor extends ElementVisual {
     }
 
 }
-
-?>

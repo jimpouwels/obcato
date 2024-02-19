@@ -1,13 +1,13 @@
 <?php
 
-class ActionButton extends Visual {
+class ActionButton extends Obcato\ComponentApi\Visual {
 
     private string $_label;
     private string $_action_id;
     private string $_icon_class;
 
-    public function __construct(string $label, string $action_id, string $icon_class) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, string $label, string $action_id, string $icon_class) {
+        parent::__construct($templateEngine);
         $this->_label = $label;
         $this->_action_id = $action_id;
         $this->_icon_class = $icon_class;

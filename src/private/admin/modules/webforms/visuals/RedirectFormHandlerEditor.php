@@ -3,13 +3,13 @@ require_once CMS_ROOT . '/view/views/PagePicker.php';
 require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
 require_once CMS_ROOT . '/modules/webforms/model/WebformHandlerProperty.php';
 
-class RedirectFormHandlerEditor extends Visual {
+class RedirectFormHandlerEditor extends Obcato\ComponentApi\Visual {
 
     private ?WebFormHandlerProperty $_property = null;
     private PageDao $_page_dao;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->_page_dao = PageDaoMysql::getInstance();
     }
 
@@ -25,7 +25,7 @@ class RedirectFormHandlerEditor extends Visual {
                 $this->assign('selected_page', $page->getTitle());
             }
         }
-        $page_picker = new PagePicker("handler_property_{$id}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
+        $page_picker = new PagePicker($this->getTemplateEngine(), "handler_property_{$id}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
         $this->assign('page_picker', $page_picker->render());
     }
 
@@ -34,5 +34,3 @@ class RedirectFormHandlerEditor extends Visual {
     }
 
 }
-
-?>

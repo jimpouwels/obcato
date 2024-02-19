@@ -1,8 +1,9 @@
 <?php
-class TextElementStatics extends Visual {
 
-    public function __construct() {
-        parent::__construct();
+class TextElementStatics extends Obcato\ComponentApi\Visual {
+
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
     }
 
     public function getTemplateFilename(): string {
@@ -12,5 +13,3 @@ class TextElementStatics extends Visual {
     public function load(): void {}
 
 }
-
-?>

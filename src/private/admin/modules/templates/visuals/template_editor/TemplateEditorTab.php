@@ -3,13 +3,13 @@ require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateList
 require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateEditor.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateVarEditor.php";
 
-class TemplateEditorTab extends Visual {
+class TemplateEditorTab extends Obcato\ComponentApi\Visual {
 
     private ?Template $currentTemplate;
     private ?Scope $currentScope;
 
-    public function __construct(?Template $current, ?Scope $currentScope) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ?Template $current, ?Scope $currentScope) {
+        parent::__construct($templateEngine);
         $this->currentTemplate = $current;
         $this->currentScope = $currentScope;
     }
@@ -31,19 +31,19 @@ class TemplateEditorTab extends Visual {
     }
 
     private function getScopeSelector(): string {
-        return (new ScopeSelector())->render();
+        return (new ScopeSelector($this->getTemplateEngine()))->render();
     }
 
     private function renderTemplateEditor(): string {
-        return (new TemplateEditor($this->currentTemplate))->render();
+        return (new TemplateEditor($this->getTemplateEngine(), $this->currentTemplate))->render();
     }
 
     private function renderTemplateVarEditor(): string {
-        return (new TemplateVarEditor($this->currentTemplate))->render();
+        return (new TemplateVarEditor($this->getTemplateEngine(), $this->currentTemplate))->render();
     }
 
     private function renderTemplateList(): string {
-        return (new TemplateList($this->currentScope))->render();
+        return (new TemplateList($this->getTemplateEngine(), $this->currentScope))->render();
     }
 
     private function getCurrentTemplateId(): ?int {

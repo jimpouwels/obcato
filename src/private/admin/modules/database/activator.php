@@ -1,10 +1,12 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
+require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/modules/database/DatabaseRequestHandler.php";
 require_once CMS_ROOT . "/modules/database/visuals/Configuration.php";
 require_once CMS_ROOT . "/modules/database/visuals/Tables.php";
 require_once CMS_ROOT . "/modules/database/visuals/QueriesTab.php";
-require_once CMS_ROOT . "/view/views/TabMenu.php";
 
 class DatabaseModuleVisual extends ModuleVisual {
 
@@ -15,8 +17,8 @@ class DatabaseModuleVisual extends ModuleVisual {
     private Module $module;
     private DatabaseRequestHandler $databaseRequestHandler;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->module = $module;
         $this->databaseRequestHandler = new DatabaseRequestHandler();
     }
@@ -28,11 +30,11 @@ class DatabaseModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
-            $content = new Configuration();
+            $content = new Configuration($this->getTemplateEngine());
         } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
-            $content = new Tables();
+            $content = new Tables($this->getTemplateEngine());
         } else if ($this->getCurrentTabId() == self::$QUERY_TAB) {
-            $content = new QueriesTab($this->databaseRequestHandler);
+            $content = new QueriesTab($this->getTemplateEngine(), $this->databaseRequestHandler);
         }
         $this->assign("content", $content?->render());
     }
@@ -55,7 +57,7 @@ class DatabaseModuleVisual extends ModuleVisual {
     public function onRequestHandled(): void {}
 
     public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
         $tabMenu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB);
         $tabMenu->addItem("database_tab_menu_tabels", self::$TABLES_TAB);
         $tabMenu->addItem("database_tab_menu_query", self::$QUERY_TAB);

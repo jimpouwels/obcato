@@ -1,4 +1,5 @@
 <?php
+
 require_once CMS_ROOT . "/core/model/ElementHolder.php";
 
 class Page extends ElementHolder {

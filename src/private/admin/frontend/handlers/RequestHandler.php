@@ -8,7 +8,6 @@ require_once CMS_ROOT . '/utilities/UrlHelper.php';
 require_once CMS_ROOT . '/frontend/SitemapVisual.php';
 require_once CMS_ROOT . '/frontend/RobotsVisual.php';
 require_once CMS_ROOT . '/utilities/Arrays.php';
-require_once CMS_ROOT . '/view/views/Visual.php';
 require_once CMS_ROOT . '/view/views/Panel.php';
 require_once CMS_ROOT . '/view/TemplateEngine.php';
 require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';

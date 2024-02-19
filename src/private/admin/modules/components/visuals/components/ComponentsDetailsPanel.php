@@ -5,8 +5,8 @@ class ComponentsDetailsPanel extends Panel {
 
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct($componentRequestHandler) {
-        parent::__construct('Component details');
+    public function __construct(TemplateEngine $templateEngine, $componentRequestHandler) {
+        parent::__construct($templateEngine, 'Component details');
         $this->componentRequestHandler = $componentRequestHandler;
     }
 

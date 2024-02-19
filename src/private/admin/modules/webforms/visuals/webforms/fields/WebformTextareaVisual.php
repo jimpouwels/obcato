@@ -4,8 +4,8 @@ require_once CMS_ROOT . "/modules/webforms/model/WebformTextField.php";
 
 class WebformTextareaVisual extends WebformFieldVisual {
 
-    public function __construct(?WebFormTextArea $form_field) {
-        parent::__construct($form_field);
+    public function __construct(TemplateEngine $templateEngine, ?WebFormTextArea $form_field) {
+        parent::__construct($templateEngine, $form_field);
     }
 
     public function getFormFieldTemplate(): string {

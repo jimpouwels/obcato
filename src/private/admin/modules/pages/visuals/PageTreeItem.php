@@ -1,13 +1,13 @@
 <?php
 
-class PageTreeItem extends Visual {
+class PageTreeItem extends Obcato\ComponentApi\Visual {
 
     private Page $page;
     private PageService $pageService;
     private Page $selectedPage;
 
-    public function __construct(Page $page, Page $selectedPage) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, Page $page, Page $selectedPage) {
+        parent::__construct($templateEngine);
         $this->page = $page;
         $this->pageService = PageInteractor::getInstance();
         $this->selectedPage = $selectedPage;
@@ -20,7 +20,7 @@ class PageTreeItem extends Visual {
     public function load(): void {
         $subPages = array();
         foreach ($this->pageService->getSubPages($this->page) as $subPage) {
-            $treeItem = new PageTreeItem($subPage, $this->selectedPage);
+            $treeItem = new PageTreeItem($this->getTemplateEngine(), $subPage, $this->selectedPage);
             $subPages[] = $treeItem->render();
         }
 

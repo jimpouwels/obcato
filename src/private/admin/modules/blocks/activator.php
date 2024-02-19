@@ -1,5 +1,7 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
 require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlockTab.php";
@@ -18,8 +20,8 @@ class BlockModuleVisual extends ModuleVisual {
     private BlockRequestHandler $blockRequestHandler;
     private PositionRequestHandler $positionRequestHandler;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->module = $module;
         $this->blockRequestHandler = new BlockRequestHandler();
         $this->positionRequestHandler = new PositionRequestHandler();
@@ -32,9 +34,9 @@ class BlockModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
-            $content = new BlockTab($this->currentBlock);
+            $content = new BlockTab($this->getTemplateEngine(), $this->currentBlock);
         } else if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
-            $content = new PositionTab($this->currentPosition);
+            $content = new PositionTab($this->getTemplateEngine(), $this->currentPosition);
         }
         if ($content) {
             $this->assign("content", $content->render());
@@ -45,17 +47,17 @@ class BlockModuleVisual extends ModuleVisual {
         $actionButtons = array();
         if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
             if ($this->currentBlock) {
-                $actionButtons[] = new ActionButtonSave('update_element_holder');
-                $actionButtons[] = new ActionButtonDelete('delete_element_holder');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
+                $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
             }
-            $actionButtons[] = new ActionButtonAdd('add_element_holder');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
         }
         if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
             if ($this->currentPosition || PositionTab::isEditPositionMode()) {
-                $actionButtons[] = new ActionButtonSave('update_position');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_position');
             }
-            $actionButtons[] = new ActionButtonAdd('add_position');
-            $actionButtons[] = new ActionButtonDelete('delete_positions');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_position');
+            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_positions');
         }
         return $actionButtons;
     }
@@ -86,7 +88,7 @@ class BlockModuleVisual extends ModuleVisual {
     }
 
     public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
         $tabMenu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB);
         $tabMenu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
         return $tabMenu;

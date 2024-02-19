@@ -6,8 +6,8 @@ class ObjectPicker extends FormField {
     private ?string $_value = null;
     private string $_opener_click_id;
 
-    public function __construct(string $field_name, string $labelResourceIdentifier, ?string $value, string $opener_click_id) {
-        parent::__construct($field_name, $value, $labelResourceIdentifier, false, false, null);
+    public function __construct(TemplateEngine $templateEngine, string $field_name, string $labelResourceIdentifier, ?string $value, string $opener_click_id) {
+        parent::__construct($templateEngine, $field_name, $value, $labelResourceIdentifier, false, false, null);
         $this->_value = $value;
         $this->_opener_click_id = $opener_click_id;
     }
@@ -21,7 +21,7 @@ class ObjectPicker extends FormField {
     }
 
     public function loadFormField($data): void {
-        $picker_button = new Button(null, $this->getTextResource('object_picker_button_title'), "window.open('" . $this->getBackendBaseUrlRaw() . "?"
+        $picker_button = new Button($this->getTemplateEngine(), null, $this->getTextResource('object_picker_button_title'), "window.open('" . $this->getBackendBaseUrlRaw() . "?"
             . Search::$POPUP_TYPE_KEY . "=search&amp;" . Search::$OBJECT_TO_SEARCH_KEY . "="
             . $this->getType() . "&amp;" . Search::$BACK_CLICK_ID_KEY . "=" . $this->_opener_click_id
             . "&amp;" . Search::$BACKFILL_KEY . "=" . $this->getFieldName() . "', '" . $this->getTextResource("select_field_default_text")

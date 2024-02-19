@@ -1,6 +1,11 @@
 <?php
 
-class MysqlConnector {
+use Obcato\ComponentApi\MysqlConnector as IMysqlConnector;
+use Obcato\ComponentApi\MysqlStatement;
+use Obcato\ComponentApi\MysqlResult;
+
+
+class MysqlConnector implements IMysqlConnector {
 
     private static ?MysqlConnector $instance = null;
     private mysqli $conn;
@@ -24,18 +29,18 @@ class MysqlConnector {
         return $this->conn;
     }
 
-    public function prepareStatement(string $query): mysqli_stmt {
-        return $this->conn->prepare($query);
+    public function prepareStatement(string $query): MysqlStatement {
+        return new MysqlStatement($this->conn->prepare($query));
     }
 
-    public function executeStatement(mysqli_stmt $statement): bool|mysqli_result {
+    public function executeStatement(MysqlStatement $statement): bool|MysqlResult {
         $statement->execute();
         $result = $statement->get_result();
         $statement->close();
         return $result;
     }
 
-    public function executeQuery(string $query): bool|mysqli_result {
+    public function executeQuery(string $query): bool|MysqlResult {
         $statement = $this->prepareStatement($query);
         $statement->execute();
         $result = $statement->get_result();
@@ -80,5 +85,3 @@ class MysqlConnector {
         return "";
     }
 }
-
-?>

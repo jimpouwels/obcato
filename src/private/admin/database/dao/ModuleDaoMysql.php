@@ -1,4 +1,5 @@
 <?php
+
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/core/model/ModuleGroup.php";
 require_once CMS_ROOT . "/core/model/Module.php";

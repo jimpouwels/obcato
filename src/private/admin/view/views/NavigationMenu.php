@@ -2,13 +2,13 @@
 require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
-class NavigationMenu extends Visual {
+class NavigationMenu extends Obcato\ComponentApi\Visual {
 
     private array $_module_groups;
     private ElementDao $_element_dao;
 
-    public function __construct(array $module_groups) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, array $module_groups) {
+        parent::__construct($templateEngine);
         $this->_module_groups = $module_groups;
         $this->_element_dao = ElementDaoMysql::getInstance();
     }
@@ -55,7 +55,7 @@ class NavigationMenu extends Visual {
             $sub_item = array();
             $sub_item["id"] = $element_type->getId();
             $sub_item["name"] = $this->getTextResource($element_type->getIdentifier() . '_label');
-            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . "/" . $element_type->getIdentifier() . ".png";
+            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . "/img/" . $element_type->getIdentifier() . ".png";
             $sub_items[] = $sub_item;
         }
         return $sub_items;

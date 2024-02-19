@@ -1,7 +1,9 @@
 <?php
 require_once CMS_ROOT . '/core/Notifications.php';
 
+use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\RequestHandler as IHttpRequestHandler;
+use Obcato\ComponentApi\Session;
 
 abstract class HttpRequestHandler implements IHttpRequestHandler {
 

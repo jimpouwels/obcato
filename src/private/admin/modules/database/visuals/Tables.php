@@ -3,12 +3,12 @@ require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/DatabaseDaoMysql.php";
 require_once CMS_ROOT . '/modules/database/visuals/TablePanel.php';
 
-class Tables extends Visual {
+class Tables extends Obcato\ComponentApi\Visual {
 
     private DatabaseDao $databaseDao;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->databaseDao = DatabaseDaoMysql::getInstance();
     }
 
@@ -27,7 +27,7 @@ class Tables extends Visual {
             $tableValue = array();
             $tableValue["name"] = $table;
             $tableValue["columns"] = $this->getColumns($table);
-            $tablePanels[] = (new TablePanel($tableValue))->render();
+            $tablePanels[] = (new TablePanel($this->getTemplateEngine(), $tableValue))->render();
         }
         return $tablePanels;
     }

@@ -5,8 +5,8 @@ class ScopeSelector extends Panel {
 
     private ScopeDao $scopeDao;
 
-    public function __construct() {
-        parent::__construct('templates_scope_list_title', 'scope_selector_panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'templates_scope_list_title', 'scope_selector_panel');
         $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 

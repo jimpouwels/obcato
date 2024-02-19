@@ -59,20 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php endif; ?>
 
                 <?php
-                $username = new TextField('username', 'Gebruikersnaam', "", true, false, null);
+                $username = new TextField(TemplateEngine::getInstance(), 'username', 'Gebruikersnaam', "", true, false, null);
                 echo $username->render();
-                $password = new PasswordField('password', 'Wachtwoord', "", true, false);
+                $password = new PasswordField(TemplateEngine::getInstance(), 'password', 'Wachtwoord', "", true, false);
                 echo $password->render();
                 $languages = array();
                 $languages[] = array('name' => 'Nederlands', 'value' => 'nl');
                 $languages[] = array('name' => 'English', 'value' => 'en');
-                $language = new Pulldown('language', 'Taal', 'nl', $languages, false, null);
+                $language = new Pulldown(TemplateEngine::getInstance(), 'language', 'Taal', 'nl', $languages, false, null);
                 echo $language->render();
                 ?>
 
                 <div class="button-holder">
                     <?php
-                    $button = new Button("", "Inloggen", "document.getElementById('form-login').submit(); return false;");
+                    $button = new Button(TemplateEngine::getInstance(), "", "Inloggen", "document.getElementById('form-login').submit(); return false;");
                     echo $button->render();
                     ?>
                 </div>

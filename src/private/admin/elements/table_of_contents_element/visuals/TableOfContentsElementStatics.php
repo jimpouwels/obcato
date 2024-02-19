@@ -1,8 +1,9 @@
 <?php
-class TableOfContentsElementStatics extends Visual {
 
-    public function __construct() {
-        parent::__construct();
+class TableOfContentsElementStatics extends Obcato\ComponentApi\Visual {
+
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
     }
 
     public function getTemplateFilename(): string {

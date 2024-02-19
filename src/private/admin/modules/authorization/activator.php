@@ -1,5 +1,7 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/modules/authorization/AuthorizationRequestHandler.php";
 require_once CMS_ROOT . "/modules/authorization/visuals/UserList.php";
 require_once CMS_ROOT . "/modules/authorization/visuals/UserEditor.php";
@@ -10,8 +12,8 @@ class AuthorizationModuleVisual extends ModuleVisual {
     private ?User $currentUser;
     private AuthorizationRequestHandler $authorizationRequestHandler;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->authorizationRequestHandler = new AuthorizationRequestHandler();
     }
 
@@ -20,8 +22,8 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
     public function load(): void {
-        $userList = new UserList($this->currentUser);
-        $userEditor = new UserEditor($this->currentUser);
+        $userList = new UserList($this->getTemplateEngine(), $this->currentUser);
+        $userEditor = new UserEditor($this->getTemplateEngine(), $this->currentUser);
         $this->assign("user_list", $userList->render());
         $this->assign("user_editor", $userEditor->render());
     }
@@ -29,12 +31,12 @@ class AuthorizationModuleVisual extends ModuleVisual {
     public function getActionButtons(): array {
         $actionButtons = array();
         if (!is_null($this->currentUser)) {
-            $actionButtons[] = new ActionButtonSave('update_user');
+            $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_user');
             if (!$this->currentUser->isLoggedInUser()) {
-                $actionButtons[] = new ActionButtonDelete('delete_user');
+                $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_user');
             }
         }
-        $actionButtons[] = new ActionButtonAdd('add_user');
+        $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_user');
         return $actionButtons;
     }
 

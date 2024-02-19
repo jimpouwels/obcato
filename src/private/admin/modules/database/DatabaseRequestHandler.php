@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\MysqlResult;
+
 require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/modules/database/QueryForm.php";
@@ -6,7 +9,7 @@ require_once CMS_ROOT . "/modules/database/QueryForm.php";
 class DatabaseRequestHandler extends HttpRequestHandler {
 
     private ?string $query = null;
-    private ?mysqli_result $queryResult = null;
+    private ?MysqlResult $queryResult = null;
     private int $affectedRows = 0;
     private MysqlConnector $mysqlConnector;
 
@@ -62,5 +65,3 @@ class DatabaseRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

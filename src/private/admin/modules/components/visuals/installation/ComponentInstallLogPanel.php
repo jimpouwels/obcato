@@ -4,8 +4,8 @@ class ComponentInstallLogPanel extends Panel {
 
     private $installRequestHandler;
 
-    public function __construct($install_requestHandler) {
-        parent::__construct('Log', 'installation-log-fieldset');
+    public function __construct(TemplateEngine $templateEngine, $install_requestHandler) {
+        parent::__construct($templateEngine, 'Log', 'installation-log-fieldset');
         $this->installRequestHandler = $install_requestHandler;
     }
 

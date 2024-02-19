@@ -6,8 +6,8 @@ class TermsList extends Panel {
 
     private ArticleDao $articleDao;
 
-    public function __construct() {
-        parent::__construct('Termen', 'term_list_panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'Termen', 'term_list_panel');
         $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
@@ -17,7 +17,7 @@ class TermsList extends Panel {
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
         $data->assign("all_terms", $this->getAllTerms());
-        $noTermsMessage = new InformationMessage("Geen termen gevonden");
+        $noTermsMessage = new InformationMessage($this->getTemplateEngine(), "Geen termen gevonden");
         $data->assign("no_terms_message", $noTermsMessage->render());
     }
 
@@ -29,7 +29,7 @@ class TermsList extends Panel {
             $termValue = array();
             $termValue["id"] = $term->getId();
             $termValue["name"] = $term->getName();
-            $deleteField = new SingleCheckbox("term_" . $term->getId() . "_delete", "", false, false, "");
+            $deleteField = new SingleCheckbox($this->getTemplateEngine(), "term_" . $term->getId() . "_delete", "", false, false, "");
             $termValue["delete_field"] = $deleteField->render();
 
             $allTermsValues[] = $termValue;

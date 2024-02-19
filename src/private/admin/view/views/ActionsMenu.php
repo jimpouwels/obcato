@@ -1,12 +1,12 @@
 <?php
 
-class ActionsMenu extends Visual {
+class ActionsMenu extends Obcato\ComponentApi\Visual {
 
-    private array $_action_buttons;
+    private array $actionButtons;
 
-    public function __construct(array $action_buttons) {
-        parent::__construct();
-        $this->_action_buttons = $action_buttons;
+    public function __construct(TemplateEngine $templateEngine, array $actionButtons) {
+        parent::__construct($templateEngine);
+        $this->actionButtons = $actionButtons;
     }
 
     public function getTemplateFilename(): string {
@@ -18,13 +18,13 @@ class ActionsMenu extends Visual {
     }
 
     private function getActionButtonsHtml(): array {
-        $buttons_html = array();
-        foreach ($this->_action_buttons as $action_button) {
-            if (!is_null($action_button)) {
-                $buttons_html[] = $action_button->render();
+        $buttonsHtml = array();
+        foreach ($this->actionButtons as $actionButton) {
+            if (!is_null($actionButton)) {
+                $buttonsHtml[] = $actionButton->render();
             }
         }
-        return $buttons_html;
+        return $buttonsHtml;
     }
 
 }

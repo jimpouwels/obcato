@@ -9,21 +9,21 @@ class ElementHolderSearch extends Panel {
 
     private static string $OBJECT_TYPE_KEY = "s_element_holder";
     private static string $SEARCH_QUERY_KEY = "s_term";
-    private string $_objects_to_search;
-    private string $_back_click_id;
-    private string $_backfill_id;
-    private ArticleDao $_article_dao;
-    private PageDao $_page_dao;
-    private string $_popup_type;
+    private string $objectsToSearch;
+    private string $backClickId;
+    private string $backfillId;
+    private ArticleDao $articleDao;
+    private PageDao $pageDao;
+    private string $popupType;
 
-    public function __construct(string $back_click_id, string $backfill_id, string $objects_to_search, string $popup_type) {
-        parent::__construct('Zoeken', 'popup_search_fieldset');
-        $this->_objects_to_search = $objects_to_search;
-        $this->_back_click_id = $back_click_id;
-        $this->_backfill_id = $backfill_id;
-        $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_page_dao = PageDaoMysql::getInstance();
-        $this->_popup_type = $popup_type;
+    public function __construct(TemplateEngine $templateEngine, string $backClickId, string $backfillId, string $objectsToSearch, string $popupType) {
+        parent::__construct($templateEngine, 'Zoeken', 'popup_search_fieldset');
+        $this->objectsToSearch = $objectsToSearch;
+        $this->backClickId = $backClickId;
+        $this->backfillId = $backfillId;
+        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->pageDao = PageDaoMysql::getInstance();
+        $this->popupType = $popupType;
     }
 
     public function getPanelContentTemplate(): string {
@@ -31,16 +31,16 @@ class ElementHolderSearch extends Panel {
     }
 
     public function loadPanelContent(Smarty_Internal_Data $data): void {
-        $data->assign("search_object", $this->_objects_to_search);
-        $data->assign("backfill", $this->_backfill_id);
-        $data->assign("back_click_id", $this->_back_click_id);
+        $data->assign("search_object", $this->objectsToSearch);
+        $data->assign("backfill", $this->backfillId);
+        $data->assign("back_click_id", $this->backClickId);
 
         $data->assign("search_field", $this->renderSearchField());
         $data->assign("search_options", $this->renderSearchOptionsField());
         $data->assign("search_button", $this->renderSearchButton());
         $data->assign("search_results", $this->renderSearchResults());
         $data->assign("no_results_message", $this->renderNoResultsMessage());
-        $data->assign("popup_type", $this->_popup_type);
+        $data->assign("popup_type", $this->popupType);
     }
 
     private function renderSearchField(): string {
@@ -56,9 +56,9 @@ class ElementHolderSearch extends Panel {
         $search_results = null;
         if (isset($_GET[self::$OBJECT_TYPE_KEY])) {
             if ($_GET[self::$OBJECT_TYPE_KEY] == "element_holder_page") {
-                $search_results = $this->_page_dao->searchByTerm($search_query);
+                $search_results = $this->pageDao->searchByTerm($search_query);
             } else if ($_GET[self::$OBJECT_TYPE_KEY] == "element_holder_article") {
-                $search_results = $this->_article_dao->searchArticles($search_query, null);
+                $search_results = $this->articleDao->searchArticles($search_query, null);
             }
         }
         if (!is_null($search_results) && count($search_results) > 0) {
@@ -74,7 +74,7 @@ class ElementHolderSearch extends Panel {
 
     private function renderSearchOptionsField(): string {
         $search_options = array();
-        switch ($this->_objects_to_search) {
+        switch ($this->objectsToSearch) {
             case Search::$PAGES:
                 $this->addPageOption($search_options);
                 break;

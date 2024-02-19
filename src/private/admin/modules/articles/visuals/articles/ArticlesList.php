@@ -8,8 +8,8 @@ class ArticlesList extends Panel {
     private AuthorizationDao $authorizationDao;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(ArticleRequestHandler $articleRequestHandler) {
-        parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
+    public function __construct(TemplateEngine $templateEngine, ArticleRequestHandler $articleRequestHandler) {
+        parent::__construct($templateEngine, $this->getTextResource('articles_search_results_title'), 'article_list');
         $this->articleRequestHandler = $articleRequestHandler;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();
@@ -72,10 +72,8 @@ class ArticlesList extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        $message = new InformationMessage($this->getTextResource("articles_list_message_no_articles_found"));
+        $message = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("articles_list_message_no_articles_found"));
         return $message->render();
     }
 
 }
-
-?>

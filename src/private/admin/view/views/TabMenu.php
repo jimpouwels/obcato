@@ -2,14 +2,14 @@
 
 use Obcato\ComponentApi\TabMenu as ITabMenu;
 
-class TabMenu extends Visual implements ITabMenu {
+class TabMenu extends Obcato\ComponentApi\Visual implements ITabMenu {
 
     private array $tabItems = array();
     private int $currentTabId = 0;
 
-    public function __construct($current_tab_id) {
-        parent::__construct();
-        $this->currentTabId = $current_tab_id;
+    public function __construct(TemplateEngine $templateEngine, int $currentTabId) {
+        parent::__construct($templateEngine);
+        $this->currentTabId = $currentTabId;
     }
 
     public function getTemplateFilename(): string {

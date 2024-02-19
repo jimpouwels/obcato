@@ -1,4 +1,7 @@
 <?php
+
+use Obcato\ComponentApi\Visual;
+
 require_once CMS_ROOT . "/core/model/Element.php";
 require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
 require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
@@ -26,11 +29,11 @@ class FormElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new FormElementStatics();
+        return new FormElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new FormElementEditor($this);
+        return new FormElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ElementFrontendVisual {
@@ -97,5 +100,3 @@ class FormElementMetadataProvider extends ElementMetadataProvider {
     }
 
 }
-
-?>

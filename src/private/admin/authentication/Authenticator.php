@@ -38,7 +38,11 @@ class Authenticator {
         $statement = $mysqlConnector->prepareStatement("SELECT * FROM auth_users WHERE username = ? AND password = ?");
         $statement->bind_param("ss", $username, $password);
         $result = $mysqlConnector->executeStatement($statement);
-        return $result->num_rows > 0;
+
+        while ($result->fetch_assoc()) {
+            return true;
+        }
+        return false;
     }
 
     public static function logOut(): void {

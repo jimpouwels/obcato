@@ -2,7 +2,7 @@
 require_once CMS_ROOT . "/view/views/TemplatePicker.php";
 require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
-abstract class ElementVisual extends Visual {
+abstract class ElementVisual extends Obcato\ComponentApi\Visual {
 
     private ElementDao $elementDao;
 
@@ -12,8 +12,8 @@ abstract class ElementVisual extends Visual {
 
     abstract function getElementFormTemplateFilename(): string;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine,) {
+        parent::__construct($templateEngine);
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 
@@ -25,7 +25,7 @@ abstract class ElementVisual extends Visual {
         $element = $this->getElement();
         $elementType = $this->elementDao->getElementTypeForElement($element->getId());
 
-        $templatePicker = new TemplatePicker("element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $elementType->getScope());
+        $templatePicker = new TemplatePicker($this->getTemplateEngine(), "element_" . $element->getId() . "_template", "", false, "template_picker", $element->getTemplate(), $elementType->getScope());
 
         $panelContentTemplateData = $this->createChildData();
         $this->loadElementForm($panelContentTemplateData);
@@ -38,7 +38,7 @@ abstract class ElementVisual extends Visual {
 
         $tableOfContentsHtml = "";
         if ($elementType->getIdentifier() != 'table_of_contents_element') {
-            $includeInTocField = new SingleCheckbox("element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
+            $includeInTocField = new SingleCheckbox($this->getTemplateEngine(), "element_" . $element->getId() . "_toc", $this->getTextResource("element_include_in_table_of_contents"), $element->includeInTableOfContents() ? 1 : 0, false, "element_include_in_toc");
             $tableOfContentsHtml = $includeInTocField->render();
         }
         $this->assign("include_in_table_of_contents", $tableOfContentsHtml);

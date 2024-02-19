@@ -1,5 +1,7 @@
 <?php
-require_once CMS_ROOT . "/view/views/ModuleVisual.php";
+
+use Obcato\ComponentApi\ModuleVisual;
+
 require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateEditorTab.php";
 require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFilesTab.php";
@@ -17,8 +19,8 @@ class TemplateModuleVisual extends ModuleVisual {
     private TemplateEditorRequestHandler $templateEditorRequestHandler;
     private TemplateFilesRequestHandler $templateFilesRequestHandler;
 
-    public function __construct(Module $module) {
-        parent::__construct($module);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->module = $module;
         $this->templateEditorRequestHandler = new TemplateEditorRequestHandler();
         $this->templateFilesRequestHandler = new TemplateFilesRequestHandler();
@@ -30,9 +32,9 @@ class TemplateModuleVisual extends ModuleVisual {
 
     public function load(): void {
         if ($this->getCurrentTabId() == self::$TEMPLATES_TAB) {
-            $content = new TemplateEditorTab($this->currentTemplate, $this->currentScope);
+            $content = new TemplateEditorTab($this->getTemplateEngine(), $this->currentTemplate, $this->currentScope);
         } else {
-            $content = new TemplateFilesTab($this->templateFilesRequestHandler);
+            $content = new TemplateFilesTab($this->getTemplateEngine(), $this->templateFilesRequestHandler);
         }
         $this->assign("content", $content->render());
     }
@@ -41,20 +43,20 @@ class TemplateModuleVisual extends ModuleVisual {
         $actionButtons = array();
         if ($this->getCurrentTabId() == self::$TEMPLATES_TAB) {
             if ($this->currentTemplate) {
-                $actionButtons[] = new ActionButtonSave('update_template');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_template');
             }
-            $actionButtons[] = new ActionButtonAdd('add_template');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_template');
             if ($this->currentScope) {
-                $actionButtons[] = new ActionButtonDelete('delete_template');
+                $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_template');
             }
         } else if ($this->getCurrentTabId() == self::$TEMPLATE_FILES_TAB) {
             if ($this->templateFilesRequestHandler->getCurrentTemplateFile()) {
-                $actionButtons[] = new ActionButtonSave('update_template_file');
+                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_template_file');
             }
-            $actionButtons[] = new ActionButtonAdd('add_template_file');
+            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_template_file');
             if ($this->templateFilesRequestHandler->getCurrentTemplateFile()) {
-                $actionButtons[] = new ActionButtonReload('reload_template_file');
-                $actionButtons[] = new ActionButtonDelete('delete_template_file');
+                $actionButtons[] = new ActionButtonReload($this->getTemplateEngine(), 'reload_template_file');
+                $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_template_file');
             }
         }
         return $actionButtons;
@@ -82,7 +84,7 @@ class TemplateModuleVisual extends ModuleVisual {
     }
 
     public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getCurrentTabId());
+        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
         $tabMenu->addItem("templates_tab_menu_templates", self::$TEMPLATES_TAB);
         $tabMenu->addItem("templates_tab_menu_template_files", self::$TEMPLATE_FILES_TAB);
         return $tabMenu;
