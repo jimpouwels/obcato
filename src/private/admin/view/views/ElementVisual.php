@@ -8,7 +8,7 @@ abstract class ElementVisual extends Obcato\ComponentApi\Visual {
 
     abstract function getElement(): Element;
 
-    abstract function loadElementForm(Smarty_Internal_Data $data): void;
+    abstract function loadElementForm(TemplateData $data): void;
 
     abstract function getElementFormTemplateFilename(): string;
 

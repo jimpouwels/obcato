@@ -14,7 +14,7 @@ class ImageViewer extends Panel {
         return "modules/images/images/viewer.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("title", $this->currentImage->getTitle());
         $data->assign("url", $this->currentImage->getUrl());
     }

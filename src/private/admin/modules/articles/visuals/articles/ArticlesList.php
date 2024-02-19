@@ -19,7 +19,7 @@ class ArticlesList extends Panel {
         return "modules/articles/articles/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("search_results", $this->renderSearchResults());
         $data->assign("search_query", $this->articleRequestHandler->getSearchQuery());
         $data->assign("search_term", $this->getSearchTermName());

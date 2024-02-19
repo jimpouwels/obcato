@@ -26,7 +26,7 @@ class ImageSearchBox extends Panel {
         return "system/image_search.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("object", $this->_objects_to_search);
         $data->assign("backfill", $this->_backfill_id);
         $data->assign("back_click_id", $this->_back_click_id);

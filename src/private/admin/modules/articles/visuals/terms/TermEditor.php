@@ -13,7 +13,7 @@ class TermEditor extends Panel {
         return "modules/articles/terms/editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("id", $this->currentTerm->getId());
         $data->assign("name_field", $this->renderNameField());
     }

@@ -11,7 +11,7 @@ class DateField extends FormField {
         return "system/form_date.tpl";
     }
 
-    public function loadFormField(Smarty_Internal_Data $data) {}
+    public function loadFormField(TemplateData $data) {}
 
     public function getFieldType(): string {
         return 'date';

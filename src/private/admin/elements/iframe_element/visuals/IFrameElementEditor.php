@@ -21,7 +21,7 @@ class IFrameElementEditor extends ElementVisual {
         return self::$TEMPLATE;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("iframe_element_editor_title"), htmlentities($this->iframeElement->getTitle()), false, false, null);
         $urlField = new TextField($this->getTemplateEngine(), $this->createFieldId("url"), $this->getTextResource("iframe_element_editor_url"), $this->iframeElement->getUrl(), false, true, null);
         $widthField = new TextField($this->getTemplateEngine(), $this->createFieldId("width"), $this->getTextResource("iframe_element_editor_width"), $this->iframeElement->getWidth(), false, false, "size_field");

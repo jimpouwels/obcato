@@ -20,7 +20,7 @@ abstract class WebformItemVisual extends Obcato\ComponentApi\Visual {
 
     abstract function getFormItemTemplate(): string;
 
-    abstract function loadItemContent(Smarty_Internal_Data $data): void;
+    abstract function loadItemContent(TemplateData $data): void;
 
     public function load(): void {
         $form_item_content_template_data = $this->createChildData();

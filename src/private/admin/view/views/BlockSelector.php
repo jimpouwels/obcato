@@ -18,7 +18,7 @@ class BlockSelector extends Panel {
         return "system/block_selector.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("blocks_to_select", $this->getBlocksToSelect());
         $data->assign("selected_blocks", $this->getSelectedBlocksHtml());
         $data->assign("context_id", $this->contextId);

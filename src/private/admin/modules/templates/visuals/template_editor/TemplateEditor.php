@@ -18,7 +18,7 @@ class TemplateEditor extends Panel {
         return "modules/templates/template_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("template_id", $this->template->getId());
         $this->assignEditFields($data);
     }

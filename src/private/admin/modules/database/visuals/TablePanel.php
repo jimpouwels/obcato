@@ -15,7 +15,7 @@ class TablePanel extends Panel {
         return "modules/database/table.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("table", $this->table);
     }
 }

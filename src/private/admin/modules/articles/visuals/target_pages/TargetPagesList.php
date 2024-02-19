@@ -15,7 +15,7 @@ class TargetPagesList extends Panel {
         return "modules/articles/target_pages/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("target_pages", $this->getTargetPages());
         $data->assign("default_target_page", $this->getDefaultTargetPage());
 

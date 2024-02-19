@@ -14,7 +14,7 @@ class TemplateVarMigration extends Panel {
         return "modules/templates/template_files/template_var_migration.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $currentTemplateFile = $this->requestHandler->getCurrentTemplateFile();
         $templatesForFile = array();
         foreach ($this->templateDao->getTemplatesForTemplateFile($currentTemplateFile) as $template) {

@@ -14,7 +14,7 @@ class ImageMetadataEditor extends Panel {
         return "modules/images/images/metadata_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $this->assignImageMetaDataFields($data);
         $data->assign("current_image_id", $this->currentImage->getId());
         $data->assign("action_form_id", ACTION_FORM_ID);

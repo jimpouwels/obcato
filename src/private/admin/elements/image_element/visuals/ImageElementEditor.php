@@ -21,7 +21,7 @@ class ImageElementEditor extends ElementVisual {
         return self::$TEMPLATE;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
         $imagePicker = new ImagePicker($this->getTemplateEngine(), "image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
         $widthField = new TextField($this->getTemplateEngine(), $this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");

@@ -16,7 +16,7 @@ class UserList extends Panel {
         return "modules/authorization/user_list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("users", $this->getAllUsers());
     }
 

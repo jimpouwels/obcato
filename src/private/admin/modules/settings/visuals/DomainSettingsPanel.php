@@ -13,7 +13,7 @@ class DomainSettingsPanel extends Panel {
         return "modules/settings/domain_settings_panel.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $frontendHostname = new TextField($this->getTemplateEngine(), "frontend_hostname", "settings_form_frontend_hostname_field", $this->settings->getFrontendHostname(), true, false, null);
         $backendHostname = new TextField($this->getTemplateEngine(), "backend_hostname", "settings_form_backend_hostname_field", $this->settings->getBackendHostname(), true, false, null);
         $smtpHost = new TextField($this->getTemplateEngine(), "smtp_host", "settings_form_backend_smtp_host_field", $this->settings->getSmtpHost(), false, false, null);

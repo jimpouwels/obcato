@@ -12,7 +12,7 @@ class TemplateFilesList extends Panel {
         return "modules/templates/template_files/template_files_list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("template_files", $this->getAllTemplateFiles());
     }
 

@@ -16,7 +16,7 @@ class TextField extends FormField {
         return "system/form_textfield.tpl";
     }
 
-    public function loadFormField(Smarty_Internal_Data $data): void {
+    public function loadFormField(TemplateData $data): void {
         $data->assign("postfix", $this->postfix);
         $data->assign("is_visible", $this->isVisible);
     }

@@ -18,7 +18,7 @@ class BlocksList extends Panel {
     }
 
     public
-    function loadPanelContent(Smarty_Internal_Data $data): void {
+    function loadPanelContent(TemplateData $data): void {
         $data->assign("block_lists", $this->getBlockLists());
         $data->assign("no_results_message", $this->renderNoResultsMessage());
         $currentBlockValue = null;

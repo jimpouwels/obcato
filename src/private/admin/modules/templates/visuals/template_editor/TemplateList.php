@@ -18,7 +18,7 @@ class TemplateList extends Panel {
         return "modules/templates/template_list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("scope", $this->scope->getIdentifier());
         $data->assign("templates", $this->getTemplatesForScope($this->scope));
         $data->assign("information_message", $this->renderInformationMessage());

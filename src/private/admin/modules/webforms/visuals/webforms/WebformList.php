@@ -16,7 +16,7 @@ class WebformList extends Panel {
         return "modules/webforms/webforms/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $webforms = $this->_webform_dao->getAllWebForms();
         $webforms_data = array();
         foreach ($webforms as $webform) {

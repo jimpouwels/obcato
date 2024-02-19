@@ -13,7 +13,7 @@ class QueryFieldPanel extends Panel {
         return "modules/database/query_field_panel.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("query_field", $this->renderQueryField());
         $data->assign("execute_query_button", $this->renderExecuteButton());
     }

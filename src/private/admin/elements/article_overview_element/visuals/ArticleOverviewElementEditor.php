@@ -22,7 +22,7 @@ class ArticleOverviewElementEditor extends ElementVisual {
         return self::$TEMPLATE;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_title", $this->getTextResource("article_overview_element_editor_title"), $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
         $showFromField = new DateField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_show_from", $this->getTextResource("article_overview_element_editor_publication_date_from"), $this->getDateValue($this->element->getShowFrom()), false, "datepicker");

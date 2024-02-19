@@ -21,7 +21,7 @@ class HandlersEditor extends Panel {
         return 'modules/webforms/webforms/handlers_editor.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('handlers_add_buttons', $this->renderHandlerButtons());
         $data->assign('selected_handlers', $this->renderSelectedHandlers());
     }

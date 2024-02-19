@@ -22,7 +22,7 @@ class TableOfContentsElementEditor extends ElementVisual {
         return $this->element;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
     }

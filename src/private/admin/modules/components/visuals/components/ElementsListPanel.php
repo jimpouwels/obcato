@@ -16,7 +16,7 @@ class ElementsListPanel extends Panel {
         return 'modules/components/components/elements_list.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('elements', $this->getElementsData());
     }
 

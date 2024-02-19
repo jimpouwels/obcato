@@ -15,7 +15,7 @@ class ImageSearch extends Panel {
         return "modules/images/images/search.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("title_search_field", $this->getTitleSearchField()->render());
         $data->assign("filename_search_field", $this->getFileNameSearchField()->render());
         $data->assign("labels_search_field", $this->getLabelPullDown()->render());

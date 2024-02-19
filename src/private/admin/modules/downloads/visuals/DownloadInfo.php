@@ -13,7 +13,7 @@ class DownloadInfo extends Panel {
         return "modules/downloads/download_info.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("file", $this->getFileData());
     }
 

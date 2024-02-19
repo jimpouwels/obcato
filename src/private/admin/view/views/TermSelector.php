@@ -19,7 +19,7 @@ class TermSelector extends Panel {
         return "system/term_selector.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("terms_to_select", $this->getTermsToSelect());
         $data->assign("selected_terms", $this->getSelectedTermsHtml());
         $data->assign("context_id", $this->_context_id);
@@ -46,7 +46,7 @@ class TermSelector extends Panel {
         foreach ($this->_selected_terms as $selected_term) {
             $selected_term_item = array();
             $selected_term_item['name'] = $selected_term->getName();
-            $delete_field = new SingleCheckbox("term_" . $this->_context_id . "_" . $selected_term->getId() . "_delete", "", false, false, "");
+            $delete_field = new SingleCheckbox($this->getTemplateEngine(), "term_" . $this->_context_id . "_" . $selected_term->getId() . "_delete", "", false, false, "");
             $selected_term_item['delete_field'] = $delete_field->render();
             $selected_terms[] = $selected_term_item;
         }

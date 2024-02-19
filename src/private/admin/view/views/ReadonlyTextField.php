@@ -11,7 +11,7 @@ class ReadonlyTextField extends FormField {
         return "system/form_readonly_textfield.tpl";
     }
 
-    public function loadFormField(Smarty_Internal_Data $data) {}
+    public function loadFormField(TemplateData $data) {}
 
     public function getFieldType(): string {
         return 'readonly-textfield';

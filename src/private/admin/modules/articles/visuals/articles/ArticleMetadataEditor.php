@@ -24,7 +24,7 @@ class ArticleMetadataEditor extends Panel {
         return "modules/articles/articles/metadata.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
         $templatePickerField = new TemplatePicker($this->getTemplateEngine(), "template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
         $urlTitleField = new TextField($this->getTemplateEngine(), 'url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
@@ -117,7 +117,7 @@ class ArticleMetadataEditor extends Panel {
         return $webformOptions;
     }
 
-    private function assignElementHolderFormIds(Smarty_Internal_Data $data): void {
+    private function assignElementHolderFormIds(TemplateData $data): void {
         $data->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
         $data->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
         $data->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);

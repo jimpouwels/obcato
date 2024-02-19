@@ -12,7 +12,5 @@ class WebformButtonVisual extends WebformItemVisual {
         return "modules/webforms/webforms/fields/webform_button.tpl";
     }
 
-    public function loadItemContent(Smarty_Internal_Data $data): void {}
+    public function loadItemContent(TemplateData $data): void {}
 }
-
-?>

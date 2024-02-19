@@ -14,7 +14,7 @@ class ComponentsDetailsPanel extends Panel {
         return 'modules/components/components/details.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('current_element', $this->getCurrentElementData());
         $data->assign('current_module', $this->getCurrentModuleData());
     }

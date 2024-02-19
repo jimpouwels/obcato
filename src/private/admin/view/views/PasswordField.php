@@ -11,7 +11,7 @@ class PasswordField extends FormField {
         return "system/form_password.tpl";
     }
 
-    public function loadFormField(Smarty_Internal_Data $data) {}
+    public function loadFormField(TemplateData $data) {}
 
     public function getFieldType(): string {
         return 'password';

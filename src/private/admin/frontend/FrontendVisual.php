@@ -10,7 +10,7 @@ require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
 abstract class FrontendVisual {
 
     private TemplateEngine $templateEngine;
-    private Smarty_Internal_Data $templateData;
+    private TemplateData $templateData;
     private LinkDao $linkDao;
     private PageService $pageService;
     private ArticleDao $articleDao;
@@ -64,7 +64,7 @@ abstract class FrontendVisual {
         return $this->templateEngine;
     }
 
-    protected function createChildData(): Smarty_Internal_Data {
+    protected function createChildData(): TemplateData {
         return $this->templateEngine->createChildData();
     }
 

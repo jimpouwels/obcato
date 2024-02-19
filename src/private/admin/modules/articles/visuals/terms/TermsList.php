@@ -15,7 +15,7 @@ class TermsList extends Panel {
         return "modules/articles/terms/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("all_terms", $this->getAllTerms());
         $noTermsMessage = new InformationMessage($this->getTemplateEngine(), "Geen termen gevonden");
         $data->assign("no_terms_message", $noTermsMessage->render());

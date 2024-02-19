@@ -15,7 +15,7 @@ class LinkEditor extends Panel {
         return 'system/link_editor.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         if (count($this->_links) > 0) {
             $data->assign('links', $this->getLinksData());
         } else {

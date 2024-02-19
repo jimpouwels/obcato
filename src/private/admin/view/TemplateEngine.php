@@ -1,6 +1,9 @@
 <?php
 
 use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
+use Obcato\ComponentApi\TemplateData as ITemplateData;
+
+require_once CMS_ROOT . "/view/TemplateData.php";
 
 class TemplateEngine implements ITemplateEngine {
     private static ?TemplateEngine $_instance = null;
@@ -13,9 +16,9 @@ class TemplateEngine implements ITemplateEngine {
     public static function getInstance(): TemplateEngine {
         if (!self::$_instance) {
             $smarty = new Smarty();
-            $smarty->template_dir = BACKEND_TEMPLATE_DIR;
-            $smarty->compile_dir = BACKEND_TEMPLATE_DIR . "/compiled_templates";
-            $smarty->cache_dir = BACKEND_TEMPLATE_DIR . "/cache";
+            $smarty->setTemplateDir(BACKEND_TEMPLATE_DIR);
+            $smarty->setCompileDir(BACKEND_TEMPLATE_DIR . "/compiled_templates");
+            $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");
             self::$_instance = new TemplateEngine($smarty);
         }
         return self::$_instance;
@@ -25,17 +28,17 @@ class TemplateEngine implements ITemplateEngine {
         $this->smarty->assign($key, $value);
     }
 
-    public function fetch(string $template, ?Smarty_Internal_Data $data = null): string {
+    public function fetch(string $template, ?ITemplateData $data = null): string {
         if ($data) {
-            $tpl = $this->smarty->createTemplate($template, $data);
+            $tpl = $this->smarty->createTemplate($template, $data->getData());
             return $tpl->fetch();
         } else {
             return $this->smarty->fetch($template);
         }
     }
 
-    public function createChildData(): Smarty_Internal_Data {
-        return $this->smarty->createData($this->smarty);
+    public function createChildData(): ITemplateData {
+        return new TemplateData($this->smarty->createData($this->smarty));
     }
 
     public function display(string $template): void {

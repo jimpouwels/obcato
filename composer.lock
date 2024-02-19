@@ -4,24 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9656952b510c7d7b1673048bf7414fd3",
+    "content-hash": "f4a1a82ca20f96a68c56e21df01e9e90",
     "packages": [
         {
             "name": "obcato/component-api",
-            "version": "v1.0.26",
+            "version": "v1.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jimpouwels/obcato-component-api.git",
-                "reference": "ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df"
+                "reference": "b6024a8b654568e50e996807548b1b6c7510c775"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jimpouwels/obcato-component-api/zipball/ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df",
-                "reference": "ae8769fcb8e4cb5c14fe2b1afe4adda5bda410df",
+                "url": "https://api.github.com/repos/jimpouwels/obcato-component-api/zipball/b6024a8b654568e50e996807548b1b6c7510c775",
+                "reference": "b6024a8b654568e50e996807548b1b6c7510c775",
                 "shasum": ""
-            },
-            "require": {
-                "smarty/smarty": "^4.3"
             },
             "type": "library",
             "autoload": {
@@ -30,6 +27,7 @@
                         "src/",
                         "src/database",
                         "src/install",
+                        "src/templates",
                         "src/visual"
                     ]
                 }
@@ -44,9 +42,9 @@
             "description": "Custom Component API for Obcato",
             "support": {
                 "issues": "https://github.com/jimpouwels/obcato-component-api/issues",
-                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v1.0.26"
+                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v1.0.31"
             },
-            "time": "2024-02-19T12:22:40+00:00"
+            "time": "2024-02-19T20:06:07+00:00"
         },
         {
             "name": "smarty/smarty",

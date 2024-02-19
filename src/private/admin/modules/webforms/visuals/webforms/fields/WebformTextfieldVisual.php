@@ -12,7 +12,5 @@ class WebformTextfieldVisual extends WebformFieldVisual {
         return "modules/webforms/webforms/fields/webform_textfield.tpl";
     }
 
-    public function loadFieldContent(Smarty_Internal_Data $data): void {}
+    public function loadFieldContent(TemplateData $data): void {}
 }
-
-?>

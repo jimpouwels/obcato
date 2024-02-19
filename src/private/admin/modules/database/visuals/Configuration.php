@@ -14,7 +14,7 @@ class Configuration extends Panel {
         return "modules/database/configuration.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("hostname", $this->mysqlConnector->getHostName());
         $data->assign("database_name", $this->mysqlConnector->getDatabaseName());
         $data->assign("database_type", $this->mysqlConnector->getDatabaseType());

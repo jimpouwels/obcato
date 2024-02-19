@@ -13,7 +13,7 @@ class SearchBoxVisual extends Panel {
         return "modules/downloads/search_box.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('search_query_field', $this->renderSearchQueryField());
         $data->assign('search_button', $this->renderSearchButton());
     }

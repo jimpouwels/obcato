@@ -17,7 +17,7 @@ class ListVisual extends Panel {
         return "modules/downloads/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("search_results", $this->getDownloads());
         $data->assign("no_results_message", $this->renderNoResultsMessage());
     }

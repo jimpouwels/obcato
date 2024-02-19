@@ -22,7 +22,7 @@ class PhotoAlbumElementEditor extends ElementVisual {
         return self::$TEMPLATE;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->element->getTitle(), false, true, null);
         $maxResultsField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->element->getNumberOfResults(), false, true, "number_of_results_field");
         $labelSelectField = new ImageLabelSelector($this->getTemplateEngine(), $this->element->getLabels(), $this->element->getId());

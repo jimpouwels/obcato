@@ -18,7 +18,7 @@ class ImageLabelSelector extends Panel {
         return "system/image_label_selector.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $this->assignLabelSelector($data);
     }
 

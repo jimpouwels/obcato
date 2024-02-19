@@ -14,7 +14,7 @@ class PositionList extends Panel {
         return "modules/blocks/positions/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("all_positions", $this->getAllPositions());
         $noPositionsMessage = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("blocks_no_positions_found"));
         $data->assign("no_positions_message", $noPositionsMessage->render());

@@ -30,7 +30,7 @@ class ElementHolderSearch extends Panel {
         return "system/element_holder_search.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("search_object", $this->objectsToSearch);
         $data->assign("backfill", $this->backfillId);
         $data->assign("back_click_id", $this->backClickId);

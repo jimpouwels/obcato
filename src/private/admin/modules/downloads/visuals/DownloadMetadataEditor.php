@@ -13,7 +13,7 @@ class DownloadMetadataEditor extends Panel {
         return "modules/downloads/metadata_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "download_title", "Titel", $this->download->getTitle(), true, false, null);
         $publishedField = new SingleCheckbox($this->getTemplateEngine(), "download_published", "Gepubliceerd", $this->download->isPublished(), false, null);
         $uploadField = new UploadField($this->getTemplateEngine(), "download_file", "Bestand", false, null);

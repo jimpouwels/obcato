@@ -14,7 +14,7 @@ class ScopeSelector extends Panel {
         return "modules/templates/scope_selector.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("scopes", $this->getAllScopes());
     }
 

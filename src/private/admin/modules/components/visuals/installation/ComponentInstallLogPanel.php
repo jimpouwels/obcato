@@ -13,7 +13,7 @@ class ComponentInstallLogPanel extends Panel {
         return 'modules/components/installation/component_install_log.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('log_messages', $this->installRequestHandler->getLogMessages());
     }
 }

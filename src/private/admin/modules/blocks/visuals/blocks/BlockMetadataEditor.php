@@ -19,7 +19,7 @@ class BlockMetadataEditor extends Panel {
         return "modules/blocks/blocks/metadata.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->currentBlock->getTitle(), true, false, null);
         $publishedField = new SingleCheckbox($this->getTemplateEngine(), "published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->currentBlock->isPublished(), false, null);
         $templatePickerField = new TemplatePicker($this->getTemplateEngine(), "block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->currentBlock->getTemplate(), $this->currentBlock->getScope());

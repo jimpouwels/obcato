@@ -16,7 +16,7 @@ class TemplateVarEditor extends Panel {
         return "modules/templates/template_var_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $varFields = array();
         foreach ($this->template->getTemplateVars() as $templateVar) {
             $templateVarId = $templateVar->getId();

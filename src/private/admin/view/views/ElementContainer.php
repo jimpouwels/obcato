@@ -14,7 +14,7 @@ class ElementContainer extends Panel {
         return "system/element_container.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         if (count($this->elements) > 0) {
             $data->assign("elements", $this->renderElements());
         } else {
@@ -23,7 +23,7 @@ class ElementContainer extends Panel {
     }
 
     private function renderInformationMessage(): string {
-        $information_message = new InformationMessage($this->getTextResource('no_elements_found_message'));
+        $information_message = new InformationMessage($this->getTemplateEngine(), $this->getTextResource('no_elements_found_message'));
         return $information_message->render();
     }
 

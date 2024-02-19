@@ -14,9 +14,9 @@ abstract class WebformFieldVisual extends WebformItemVisual {
 
     abstract function getFormFieldTemplate(): string;
 
-    abstract function loadFieldContent(Smarty_Internal_Data $data): void;
+    abstract function loadFieldContent(TemplateData $data): void;
 
-    public function loadItemContent(Smarty_Internal_Data $data): void {
+    public function loadItemContent(TemplateData $data): void {
         $form_field_content_template_data = $this->createChildData();
         $this->loadFieldContent($form_field_content_template_data);
         $data->assign('field_editor', $this->getTemplateEngine()->fetch($this->getFormFieldTemplate(), $form_field_content_template_data));

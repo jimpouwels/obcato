@@ -16,7 +16,7 @@ class MetadataEditor extends Panel {
         return "modules/pages/metadata.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), "page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->currentPage->getTitle(), true, false, null);
         $urlTitleField = new TextField($this->getTemplateEngine(), "url_title", $this->getTextResource('pages_edit_metadata_url_title_field_label'), $this->currentPage->getUrlTitle(), false, false, null);
         $navigationTitleField = new TextField($this->getTemplateEngine(), "navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);

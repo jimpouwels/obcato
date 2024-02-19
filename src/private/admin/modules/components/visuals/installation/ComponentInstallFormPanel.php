@@ -10,7 +10,7 @@ class ComponentInstallFormPanel extends Panel {
         return 'modules/components/installation/component_install_form.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('upload_field', $this->renderUploadField());
     }
 

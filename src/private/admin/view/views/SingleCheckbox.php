@@ -13,7 +13,7 @@ class SingleCheckbox extends FormField {
         return "system/form_checkbox_single.tpl";
     }
 
-    public function loadFormField(Smarty_Internal_Data $data) {
+    public function loadFormField(TemplateData $data) {
         $data->assign('onchange_js', "onChange={$this->_onchange_js}");
     }
 

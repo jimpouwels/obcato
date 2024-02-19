@@ -23,7 +23,7 @@ class FormElementEditor extends ElementVisual {
         return self::$TEMPLATE;
     }
 
-    public function loadElementForm(Smarty_Internal_Data $data): void {
+    public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
         $currentSelectedWebform = $this->formElement->getWebForm();
         $currentWebformId = $currentSelectedWebform?->getId();

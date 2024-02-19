@@ -19,7 +19,7 @@ class WebformEditor extends Panel {
         return 'modules/webforms/webforms/webform_editor.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $add_textfield_button = new Button($this->getTemplateEngine(), "", "webforms_add_textfield_button_label", "addFormField('textfield');");
         $data->assign("button_add_textfield", $add_textfield_button->render());
 

@@ -17,7 +17,7 @@ abstract class Panel extends Obcato\ComponentApi\Visual {
 
     abstract function getPanelContentTemplate(): string;
 
-    abstract function loadPanelContent(Smarty_Internal_Data $data): void;
+    abstract function loadPanelContent(TemplateData $data): void;
 
     public function load(): void {
         $panelContentTemplateData = $this->createChildData();

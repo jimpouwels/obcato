@@ -19,7 +19,7 @@ class ImageList extends Panel {
         return "modules/images/images/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("search_results", $this->getSearchResults());
         $data->assign("action_form_id", ACTION_FORM_ID);
         $data->assign("no_results_message", $this->renderNoResultsMessage());

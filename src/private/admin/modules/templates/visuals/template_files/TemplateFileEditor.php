@@ -14,7 +14,7 @@ class TemplateFileEditor extends Panel {
         return "modules/templates/template_files/template_file_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $id = $this->currentTemplateFile->getId();
         $data->assign("id", $id);
 

@@ -33,7 +33,7 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
 
     abstract function getFieldType(): string;
 
-    abstract function loadFormField(Smarty_Internal_Data $data);
+    abstract function loadFormField(TemplateData $data);
 
     public function load(): void {
         $this->assign("error", $this->getErrorHtml($this->_field_name));

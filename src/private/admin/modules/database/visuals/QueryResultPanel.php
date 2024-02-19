@@ -13,7 +13,7 @@ class QueryResultPanel extends Panel {
         return "modules/database/query_result_panel.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("fields", $this->requestHandler->getFields());
         $data->assign("values", $this->requestHandler->getValues());
         $data->assign("affected_rows", $this->requestHandler->getAffectedRows());

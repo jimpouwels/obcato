@@ -16,7 +16,7 @@ class PageTree extends Panel {
         return "modules/pages/tree.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $rootTreeItem = new PageTreeItem($this->getTemplateEngine(), $this->rootPage, $this->selectedPage);
         $data->assign("items_html", $rootTreeItem->render());
     }

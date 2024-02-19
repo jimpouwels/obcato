@@ -14,7 +14,7 @@ class LabelsList extends Panel {
         return "modules/images/labels/list.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("all_labels", $this->getAllLabels());
         $data->assign("no_labels_message", $this->getNoLabelsMessage());
     }

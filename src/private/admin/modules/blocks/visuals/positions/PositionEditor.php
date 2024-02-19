@@ -13,7 +13,7 @@ class PositionEditor extends Panel {
         return "modules/blocks/positions/editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $positionId = $this->currentPosition->getId();
         $data->assign("id", $positionId);
         $data->assign("name_field", $this->renderNameField());

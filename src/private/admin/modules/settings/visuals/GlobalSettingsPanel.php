@@ -17,7 +17,7 @@ class GlobalSettingsPanel extends Panel {
         return "modules/settings/global_settings_panel.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $currentHomepage = $this->pageService->getHomepage();
         $current404Page = $this->settings->getPage404();
 

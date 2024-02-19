@@ -14,7 +14,7 @@ class ImportTab extends Panel {
         return "modules/images/import/root.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("upload_field", $this->renderUploadField());
         $data->assign("labels_pulldown", $this->renderLabelPullDown());
     }

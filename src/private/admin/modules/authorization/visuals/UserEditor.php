@@ -13,7 +13,7 @@ class UserEditor extends Panel {
         return "modules/authorization/user_editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("user_id", $this->currentUser->getId());
         $data->assign("username_field", $this->renderUserNameField());
         $data->assign("firstname_field", $this->renderFirstNameField());

@@ -17,7 +17,7 @@ class WebformMetadataEditor extends Panel {
         return 'modules/webforms/webforms/metadata_editor.tpl';
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $title_text_field = new TextField($this->getTemplateEngine(), "title", "webforms_editor_title_field", $this->_current_webform->getTitle(), true, false, null);
         $data->assign("title_field", $title_text_field->render());
 

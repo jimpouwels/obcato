@@ -13,7 +13,7 @@ class LabelEditor extends Panel {
         return "modules/images/labels/editor.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign("id", $this->_current_label->getId());
         $data->assign("label_name_field", $this->renderLabelNameField());
     }

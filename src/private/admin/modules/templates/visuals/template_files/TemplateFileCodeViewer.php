@@ -14,7 +14,7 @@ class TemplateFileCodeViewer extends Panel {
         return "modules/templates/template_code_viewer.tpl";
     }
 
-    public function loadPanelContent(Smarty_Internal_Data $data): void {
+    public function loadPanelContent(TemplateData $data): void {
         $data->assign('file_content', $this->getTemplateCode());
     }
 
