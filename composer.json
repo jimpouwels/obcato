@@ -3,7 +3,7 @@
   "type": "project",
   "autoload": {
     "psr-4": {
-      "Obcato\\Core\\": "src/Obcato/Core"
+      "Obcato\\Core\\": "src/"
     }
   },
   "authors": [
