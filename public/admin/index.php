@@ -3,6 +3,8 @@
 namespace Obcato\Core;
 
 // DIRECT ACCESS GRANTED
+use Obcato\Core\admin\authentication\Authenticator;
+
 define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";

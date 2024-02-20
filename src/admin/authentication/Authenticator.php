@@ -2,6 +2,9 @@
 
 namespace Obcato\Core\admin\authentication;
 
+use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
+use Obcato\Core\MysqlConnector;
+
 class Authenticator {
 
     public static function isAuthenticated(): bool {
