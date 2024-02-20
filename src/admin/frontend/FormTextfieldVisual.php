@@ -10,7 +10,7 @@ use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\model\WebformField;
 use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
 
-class FormTextFieldVisual extends FormFieldVisual {
+class FormTextfieldVisual extends FormFieldVisual {
 
     private TemplateDao $templateDao;
 
@@ -26,5 +26,3 @@ class FormTextFieldVisual extends FormFieldVisual {
     public function loadFormField(): void {}
 
 }
-
-?>
