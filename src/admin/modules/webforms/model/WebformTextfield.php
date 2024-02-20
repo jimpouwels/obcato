@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebformTextField extends WebformField {
+class WebformTextfield extends WebformField {
 
     public static string $TYPE = "textfield";
     private static int $SCOPE = 13;
@@ -11,8 +11,8 @@ class WebformTextField extends WebformField {
         parent::__construct(self::$SCOPE);
     }
 
-    public static function constructFromRecord(array $row): WebformTextField {
-        $field = new WebformTextField();
+    public static function constructFromRecord(array $row): WebformTextfield {
+        $field = new WebformTextfield();
         $field->initFromDb($row);
         return $field;
     }

@@ -11,7 +11,7 @@ use Obcato\Core\admin\modules\webforms\model\WebformButton;
 use Obcato\Core\admin\modules\webforms\model\WebformDropdown;
 use Obcato\Core\admin\modules\webforms\model\WebformItem;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
-use Obcato\Core\admin\modules\webforms\model\WebformTextField;
+use Obcato\Core\admin\modules\webforms\model\WebformTextfield;
 use Obcato\Core\admin\modules\webforms\visuals\webforms\fields\WebformItemVisual;
 use Obcato\Core\admin\view\TemplateEngine;
 
@@ -21,7 +21,7 @@ class WebformItemFactory {
     private static ?WebformItemFactory $_instance = null;
 
     private function __construct() {
-        $this->addType(WebformTextField::$TYPE, "WebformTextfieldVisual", "WebformTextFieldForm", "FormTextFieldVisual");
+        $this->addType(WebformTextfield::$TYPE, "WebformTextfieldVisual", "WebformTextfieldForm", "FormTextfieldVisual");
         $this->addType(WebFormTextArea::$TYPE, "WebformTextAreaVisual", "WebformTextAreaForm", "FormTextAreaVisual");
         $this->addType(WebformDropdown::$TYPE, "WebformDropDownVisual", "WebformDropDownForm", "FormDropDownVisual");
         $this->addType(WebformButton::$TYPE, "WebformButtonVisual", "WebformButtonForm", "FormButtonVisual");

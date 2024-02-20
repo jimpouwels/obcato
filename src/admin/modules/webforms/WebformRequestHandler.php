@@ -14,7 +14,7 @@ use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\model\WebformButton;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
-use Obcato\Core\admin\modules\webforms\model\WebformTextField;
+use Obcato\Core\admin\modules\webforms\model\WebformTextfield;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class WebformRequestHandler extends HttpRequestHandler {
@@ -141,7 +141,7 @@ class WebformRequestHandler extends HttpRequestHandler {
     }
 
     private function addTextField(WebForm $webform): void {
-        $text_field = new WebformTextField();
+        $text_field = new WebformTextfield();
         $this->_webform_dao->persistWebFormItem($webform, $text_field);
     }
 
