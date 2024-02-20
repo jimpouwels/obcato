@@ -9,7 +9,7 @@ require_once "discovery.php";
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once PRIVATE_DIR . "/database_config.php";
-require_once CMS_ROOT . "/constants.php";
+require_once "admin/constants.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/bootstrap.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
