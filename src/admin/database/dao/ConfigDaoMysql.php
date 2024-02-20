@@ -2,6 +2,8 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use const Obcato\Core\admin\CONFIG_DIR;
+
 class ConfigDaoMysql implements ConfigDao {
 
     private static ?ConfigDaoMysql $instance = null;
@@ -33,5 +35,3 @@ class ConfigDaoMysql implements ConfigDao {
         return null;
     }
 }
-
-?>

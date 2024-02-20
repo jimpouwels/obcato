@@ -13,8 +13,6 @@ use Obcato\Core\admin\modules\blocks\visuals\positions\PositionTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
-use Obcato\Core\BlockRequestHandler;
-use Obcato\Core\PositionRequestHandler;
 
 class BlockModuleVisual extends ModuleVisual {
 

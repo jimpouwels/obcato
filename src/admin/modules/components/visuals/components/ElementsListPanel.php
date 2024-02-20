@@ -6,8 +6,8 @@ use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\modules\components\ComponentRequestHandler;
 use Obcato\Core\admin\view\views\Panel;
-use Obcato\Core\ComponentRequestHandler;
 
 class ElementsListPanel extends Panel {
 

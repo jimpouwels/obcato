@@ -4,6 +4,7 @@ namespace Obcato\Core\admin\modules\components\visuals\components;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\components\ComponentRequestHandler;
 
 class ComponentsTabVisual extends Visual {
 

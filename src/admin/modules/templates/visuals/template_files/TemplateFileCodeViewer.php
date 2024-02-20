@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\visuals\template_files;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
+use Obcato\Core\admin\view\views\Panel;
 
 class TemplateFileCodeViewer extends Panel {
 

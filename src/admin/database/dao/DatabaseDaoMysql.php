@@ -2,6 +2,8 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use Obcato\Core\admin\database\MysqlConnector;
+
 class DatabaseDaoMysql implements DatabaseDao {
 
     private static ?DatabaseDaoMysql $instance = null;

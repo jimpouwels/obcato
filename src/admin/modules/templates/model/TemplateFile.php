@@ -4,6 +4,7 @@ namespace Obcato\Core\admin\modules\templates\model;
 
 use Obcato\Core\admin\core\model\Entity;
 use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
 
 class TemplateFile extends Entity {
 

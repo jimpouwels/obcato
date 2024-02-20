@@ -6,6 +6,7 @@ use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
+use Obcato\Core\admin\modules\components\ComponentRequestHandler;
 use Obcato\Core\admin\view\views\Panel;
 
 class ModulesListPanel extends Panel {

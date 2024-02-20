@@ -4,13 +4,13 @@ namespace Obcato\Core\admin\modules\components\visuals\installation;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
-use Obcato\Core\InstallRequestHandler;
+use Obcato\Core\admin\modules\components\InstallRequestHandler;
 
 class InstallationTabVisual extends Visual {
 
     private InstallRequestHandler $installRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $requestHandler) {
+    public function __construct(TemplateEngine $templateEngine, InstallRequestHandler $requestHandler) {
         parent::__construct($templateEngine);
         $this->installRequestHandler = $requestHandler;
     }

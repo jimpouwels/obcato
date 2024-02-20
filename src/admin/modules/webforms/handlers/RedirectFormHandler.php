@@ -6,7 +6,7 @@ use Obcato\Core\admin\database\dao\PageDao;
 use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
-use Obcato\Core\admin\modules\webforms\visuals\webforms\RedirectFormHandlerEditor;
+use Obcato\Core\admin\modules\webforms\visuals\RedirectFormHandlerEditor;
 use Obcato\Core\admin\view\TemplateEngine;
 use const Obcato\Core\CMS_ROOT;
 

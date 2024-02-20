@@ -7,6 +7,7 @@ use Obcato\Core\admin\database\dao\ConfigDao;
 use Obcato\Core\admin\database\dao\ConfigDaoMysql;
 use Obcato\Core\admin\database\dao\WebformDao;
 use Obcato\Core\admin\database\dao\WebformDaoMysql;
+use Obcato\Core\admin\modules\webforms\form\WebformForm;
 use Obcato\Core\admin\modules\webforms\handlers\ArticleCommentFormHandler;
 use Obcato\Core\admin\modules\webforms\handlers\EmailFormHandler;
 use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;

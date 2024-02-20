@@ -4,6 +4,7 @@ namespace Obcato\Core\admin\modules\database\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\database\DatabaseRequestHandler;
 
 class QueriesTab extends Visual {
 

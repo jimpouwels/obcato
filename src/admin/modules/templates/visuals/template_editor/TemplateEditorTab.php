@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\visuals\template_editor;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\templates\model\Scope;
+use Obcato\Core\admin\modules\templates\model\Template;
 
 class TemplateEditorTab extends Visual {
 

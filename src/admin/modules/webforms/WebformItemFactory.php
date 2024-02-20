@@ -35,18 +35,18 @@ class WebformItemFactory {
     }
 
     public function getBackendVisualFor(WebformItem $webform_item): WebformItemVisual {
-        $backend_visual_classname = $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
-        return new $backend_visual_classname(TemplateEngine::getInstance(), $webform_item);
+        $className = "Obcato\\Core\\admin\\modules\\webforms\\visuals\\webforms\\fields\\" . $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
+        return new $className(TemplateEngine::getInstance(), $webform_item);
     }
 
     public function getBackendFormFor(WebformItem $webform_item): WebformItemForm {
-        $backend_form_classname = $this->getFormItemType($webform_item->getType())->getBackendFormClassname();
-        return new $backend_form_classname($webform_item);
+        $className = "Obcato\\Core\\admin\\modules\\webforms\\form\\" . $this->getFormItemType($webform_item->getType())->getBackendFormClassname();
+        return new $className($webform_item);
     }
 
     public function getFrontendVisualFor(WebForm $webform, WebformItem $webform_item, Page $page, ?Article $article): FormItemVisual {
-        $frontend_form_classname = $this->getFormItemType($webform_item->getType())->getFrontendVisualClassname();
-        return new $frontend_form_classname($page, $article, $webform, $webform_item);
+        $className = "Obcato\\Core\\admin\\frontend\\" . $this->getFormItemType($webform_item->getType())->getFrontendVisualClassname();
+        return new $className($page, $article, $webform, $webform_item);
     }
 
     private function getFormItemType(string $type_to_find): FormItemType {

@@ -4,10 +4,16 @@ namespace Obcato\Core\admin\modules\templates;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\templates\model\Scope;
 use Obcato\Core\admin\modules\templates\model\Template;
-use Obcato\Core\TemplateEditorRequestHandler;
+use Obcato\Core\admin\modules\templates\visuals\template_editor\TemplateEditorTab;
+use Obcato\Core\admin\modules\templates\visuals\template_files\TemplateFilesTab;
+use Obcato\Core\admin\view\views\ActionButtonAdd;
+use Obcato\Core\admin\view\views\ActionButtonDelete;
+use Obcato\Core\admin\view\views\ActionButtonReload;
+use Obcato\Core\admin\view\views\ActionButtonSave;
 
 class TemplateModuleVisual extends ModuleVisual {
     private static int $TEMPLATES_TAB = 0;

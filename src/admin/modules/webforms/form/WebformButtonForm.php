@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\webforms\form;
 
 use Obcato\Core\admin\modules\webforms\model\WebFormButton;
-use Obcato\Core\WebformItemForm;
 
 class WebformButtonForm extends WebformItemForm {
 

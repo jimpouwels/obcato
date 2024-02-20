@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\visuals\template_files;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
+use Obcato\Core\admin\modules\templates\TemplateFilesRequestHandler;
 
 class TemplateFilesTab extends Visual {
 

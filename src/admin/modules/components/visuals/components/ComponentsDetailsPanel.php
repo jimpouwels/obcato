@@ -4,8 +4,8 @@ namespace Obcato\Core\admin\modules\components\visuals\components;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\components\ComponentRequestHandler;
 use Obcato\Core\admin\view\views\Panel;
-use Obcato\Core\ComponentRequestHandler;
 
 class ComponentsDetailsPanel extends Panel {
 
