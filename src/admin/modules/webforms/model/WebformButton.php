@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebFormButton extends WebFormItem {
+class WebformButton extends WebFormItem {
 
     public static string $TYPE = "button";
     private static int $SCOPE = 17;
@@ -11,8 +11,8 @@ class WebFormButton extends WebFormItem {
         parent::__construct(self::$SCOPE);
     }
 
-    public static function constructFromRecord(array $row): WebFormButton {
-        $field = new WebFormButton();
+    public static function constructFromRecord(array $row): WebformButton {
+        $field = new WebformButton();
         $field->initFromDb($row);
         return $field;
     }

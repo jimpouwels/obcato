@@ -7,7 +7,7 @@ use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
 
-class ArticleCommentFormHandler extends Formhandler {
+class ArticleCommentFormHandler extends FormHandler {
 
     public static string $TYPE = 'article_comment_form_handler';
     private MysqlConnector $_mysql_connector;

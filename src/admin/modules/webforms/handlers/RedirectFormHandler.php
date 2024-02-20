@@ -10,7 +10,7 @@ use Obcato\Core\admin\modules\webforms\visuals\RedirectFormHandlerEditor;
 use Obcato\Core\admin\view\TemplateEngine;
 use const Obcato\Core\CMS_ROOT;
 
-class RedirectFormHandler extends Formhandler {
+class RedirectFormHandler extends FormHandler {
 
     public static string $TYPE = 'redirect_form_handler';
     private PageDao $_page_dao;

@@ -12,7 +12,7 @@ use Obcato\Core\admin\modules\webforms\handlers\ArticleCommentFormHandler;
 use Obcato\Core\admin\modules\webforms\handlers\EmailFormHandler;
 use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;
 use Obcato\Core\admin\modules\webforms\model\Webform;
-use Obcato\Core\admin\modules\webforms\model\WebFormButton;
+use Obcato\Core\admin\modules\webforms\model\WebformButton;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
 use Obcato\Core\admin\modules\webforms\model\WebformTextField;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
@@ -151,7 +151,7 @@ class WebformRequestHandler extends HttpRequestHandler {
     }
 
     private function addButton(WebForm $webform): void {
-        $button = new WebFormButton();
+        $button = new WebformButton();
         $this->_webform_dao->persistWebFormItem($webform, $button);
     }
 

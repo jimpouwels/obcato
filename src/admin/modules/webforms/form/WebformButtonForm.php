@@ -2,11 +2,11 @@
 
 namespace Obcato\Core\admin\modules\webforms\form;
 
-use Obcato\Core\admin\modules\webforms\model\WebFormButton;
+use Obcato\Core\admin\modules\webforms\model\WebformButton;
 
 class WebformButtonForm extends WebformItemForm {
 
-    public function __construct(WebFormButton $webformButton) {
+    public function __construct(WebformButton $webformButton) {
         parent::__construct($webformButton);
     }
 
