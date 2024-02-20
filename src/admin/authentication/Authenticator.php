@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\authentication;
 
-
 class Authenticator {
 
     public static function isAuthenticated(): bool {
