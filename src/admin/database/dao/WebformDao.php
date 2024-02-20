@@ -5,7 +5,7 @@ namespace Obcato\Core\admin\database\dao;
 
 use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
 use Obcato\Core\admin\modules\webforms\model\Webform;
-use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
+use Obcato\Core\admin\modules\webforms\model\WebformHandlerProperty;
 use Obcato\Core\admin\modules\webforms\model\WebformItem;
 
 interface WebformDao {
@@ -35,9 +35,9 @@ interface WebformDao {
 
     public function deleteWebFormHandler(WebForm $webform, int $webformHandlerId): void;
 
-    public function storeProperty(int $handler_id, WebFormHandlerProperty $property): void;
+    public function storeProperty(int $handler_id, WebformHandlerProperty $property): void;
 
-    public function deleteProperty(WebFormHandlerProperty $webFormHandlerProperty): void;
+    public function deleteProperty(WebformHandlerProperty $webFormHandlerProperty): void;
 
-    public function updateHandlerProperty(WebFormHandlerProperty $property): void;
+    public function updateHandlerProperty(WebformHandlerProperty $property): void;
 }

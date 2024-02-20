@@ -9,7 +9,7 @@ use Obcato\Core\admin\modules\webforms\model\WebformButton;
 use Obcato\Core\admin\modules\webforms\model\WebformDropdown;
 use Obcato\Core\admin\modules\webforms\model\WebformField;
 use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
-use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
+use Obcato\Core\admin\modules\webforms\model\WebformHandlerProperty;
 use Obcato\Core\admin\modules\webforms\model\WebformItem;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
 use Obcato\Core\admin\modules\webforms\model\WebformTextfield;
@@ -202,7 +202,7 @@ class WebformDaoMysql implements WebformDao {
         $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function storeProperty(int $handler_id, WebFormHandlerProperty $property): void {
+    public function storeProperty(int $handler_id, WebformHandlerProperty $property): void {
         $name = $property->getName();
         $type = $property->getType();
         $query = "INSERT INTO webforms_handlers_properties (handler_id, `name`, `value`, `type`) VALUES ('{$handler_id}', '{$name}', '', '{$type}')";
@@ -210,7 +210,7 @@ class WebformDaoMysql implements WebformDao {
         $property->setId($this->mysqlConnector->getInsertId());
     }
 
-    public function deleteProperty(WebFormHandlerProperty $webFormHandlerProperty): void {
+    public function deleteProperty(WebformHandlerProperty $webFormHandlerProperty): void {
         $query = 'DELETE FROM webforms_handlers_properties WHERE id = ?';
         $statement = $this->mysqlConnector->prepareStatement($query);
         $id = $webFormHandlerProperty->getId();
@@ -218,7 +218,7 @@ class WebformDaoMysql implements WebformDao {
         $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function updateHandlerProperty(WebFormHandlerProperty $property): void {
+    public function updateHandlerProperty(WebformHandlerProperty $property): void {
         $query = 'UPDATE webforms_handlers_properties SET `value` = ? WHERE id = ?';
         $statement = $this->mysqlConnector->prepareStatement($query);
 
@@ -236,7 +236,7 @@ class WebformDaoMysql implements WebformDao {
 
         $properties = array();
         while ($row = $result->fetch_assoc()) {
-            $properties[] = WebFormHandlerProperty::constructFromRecord($row);
+            $properties[] = WebformHandlerProperty::constructFromRecord($row);
         }
         return $properties;
     }

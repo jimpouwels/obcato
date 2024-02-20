@@ -9,7 +9,7 @@ use Obcato\Core\admin\database\dao\WebformDaoMysql;
 use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
-use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
+use Obcato\Core\admin\modules\webforms\model\WebformHandlerProperty;
 use Obcato\Core\admin\modules\webforms\WebformHandlerManager;
 use Obcato\Core\admin\view\views\Button;
 use Obcato\Core\admin\view\views\Panel;
@@ -69,7 +69,7 @@ class HandlersEditor extends Panel {
             $handler_property = array();
             $existing_property = $webform_handler_instance->getProperty($property->getName());
             if (!$existing_property) {
-                $existing_property = new WebFormHandlerProperty();
+                $existing_property = new WebformHandlerProperty();
                 $existing_property->setName($property->getName());
                 $existing_property->setType($property->getType());
                 $this->_webform_dao->storeProperty($webform_handler_instance->getId(), $existing_property);

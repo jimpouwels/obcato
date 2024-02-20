@@ -4,14 +4,14 @@ namespace Obcato\Core\admin\modules\webforms\model;
 
 use Obcato\Core\admin\core\model\Entity;
 
-class WebFormHandlerProperty extends Entity {
+class WebformHandlerProperty extends Entity {
 
     private string $_name;
     private ?string $_value = null;
     private string $_type;
 
-    public static function constructFromRecord(array $row): WebFormHandlerProperty {
-        $webform_handler_property = new WebFormHandlerProperty();
+    public static function constructFromRecord(array $row): WebformHandlerProperty {
+        $webform_handler_property = new WebformHandlerProperty();
         $webform_handler_property->initFromDb($row);
         return $webform_handler_property;
     }
