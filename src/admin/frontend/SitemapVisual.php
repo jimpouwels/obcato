@@ -2,6 +2,13 @@
 
 namespace Obcato\Core\admin\frontend;
 
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\dao\PageDao;
+use Obcato\Core\admin\database\dao\PageDaoMysql;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
+
 class SitemapVisual extends FrontendVisual {
 
     private PageDao $pageDao;

@@ -3,6 +3,20 @@
 namespace Obcato\Core\admin\frontend;
 
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\database\dao\TemplateDao;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\database\dao\WebformDao;
+use Obcato\Core\admin\database\dao\WebformDaoMysql;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
 
 class ArticleVisual extends FrontendVisual {
 

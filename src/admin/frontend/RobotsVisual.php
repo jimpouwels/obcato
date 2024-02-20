@@ -2,6 +2,9 @@
 
 namespace Obcato\Core\admin\frontend;
 
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
+
 class RobotsVisual extends FrontendVisual {
 
     public function __construct() {

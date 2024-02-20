@@ -4,7 +4,28 @@ namespace Obcato\Core;
 
 use Obcato\Core\admin\frontend\handlers\RequestHandler;
 
-require_once "discovery.php";
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'localhost') {
+    if (defined("PRIVATE_DIR_LOCAL")) {
+        define("PRIVATE_DIR", __DIR__ . PRIVATE_DIR_LOCAL);
+    } else {
+        define("PRIVATE_DIR", __DIR__ . "/../private");
+    }
+} else {
+    if (defined("PRIVATE_DIR_PRODUCTION")) {
+        define("PRIVATE_DIR", __DIR__ . PRIVATE_DIR_PRODUCTION);
+    } else {
+        define("PRIVATE_DIR", __DIR__ . "/../private");
+    }
+}
+const CMS_ROOT = PRIVATE_DIR . "/vendor/obcato/obcato/src/admin";
+const PUBLIC_DIR = __DIR__;
+
+if (!defined("IS_TEST_RUN")) {
+    require_once PRIVATE_DIR . "/database_config.php";
+}
+
+require CMS_ROOT . "/constants.php";
+require PRIVATE_DIR . '/vendor/autoload.php';
 
 function renderFrontend(): void {
     $request_handler = new RequestHandler();

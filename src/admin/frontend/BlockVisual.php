@@ -2,6 +2,13 @@
 
 namespace Obcato\Core\admin\frontend;
 
+use Obcato\Core\admin\database\dao\TemplateDao;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
+
 class BlockVisual extends FrontendVisual {
 
     private Block $block;

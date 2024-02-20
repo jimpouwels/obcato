@@ -2,6 +2,21 @@
 
 namespace Obcato\Core\admin\frontend\handlers;
 
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\database\dao\SettingsDao;
+use Obcato\Core\admin\database\dao\SettingsDaoMysql;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\frontend\RobotsVisual;
+use Obcato\Core\admin\frontend\SitemapVisual;
+use Obcato\Core\admin\frontend\WebsiteVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\pages\service\PageInteractor;
+use Obcato\Core\admin\modules\pages\service\PageService;
+use const Obcato\Core\admin\UPLOAD_DIR;
+
 class RequestHandler {
 
     private FormRequestHandler $formRequestHandler;
@@ -62,6 +77,7 @@ class RequestHandler {
     private function loadImage(): void {
         $image = $this->getImageFromRequest();
         if ($image->isPublished()) {
+            echo $image->getExtension();
             if ($image->getExtension() == "jpg") {
                 header("Content-Type: image/jpeg");
             } else if ($image->getExtension() == "gif") {

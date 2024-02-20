@@ -3,8 +3,8 @@
 namespace Obcato\Core;
 
 // DIRECT ACCESS GRANTED
-use Obcato\Core\admin\Backend;
 use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\Backend;
 
 define("_ACCESS", "GRANTED");
 

@@ -2,6 +2,9 @@
 
 namespace Obcato\Core\admin\friendly_urls;
 
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+
 class UrlMatch {
 
     private ?Page $page = null;

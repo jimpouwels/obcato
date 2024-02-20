@@ -1,7 +1,7 @@
 <?php
 defined('_ACCESS') or die;
 
-require_once "../../bootstrap.php";
+require_once "../../frontend_bootstrap.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 

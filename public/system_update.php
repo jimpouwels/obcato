@@ -4,7 +4,7 @@ namespace Obcato\Core;
 
 use DOMDocument;
 
-require_once "discovery.php";
+require_once "bootstrap.php";
 
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";
