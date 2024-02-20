@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\authorization;
 
 use Obcato\Core\admin\core\form\Form;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\AuthorizationDao;
+use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
+use Obcato\Core\admin\modules\authorization\model\User;
 
 class AuthorizationForm extends Form {
 

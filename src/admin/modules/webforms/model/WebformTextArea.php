@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebFormTextArea extends WebFormField {
+class WebformTextArea extends WebformField {
 
     public static string $TYPE = "textarea";
     private static int $SCOPE = 14;
@@ -11,8 +11,8 @@ class WebFormTextArea extends WebFormField {
         parent::__construct(self::$SCOPE);
     }
 
-    public static function constructFromRecord(array $row): WebFormTextArea {
-        $field = new WebFormTextArea();
+    public static function constructFromRecord(array $row): WebformTextArea {
+        $field = new WebformTextArea();
         $field->initFromDb($row);
         return $field;
     }

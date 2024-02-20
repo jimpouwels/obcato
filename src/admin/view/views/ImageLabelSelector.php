@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
 
 class ImageLabelSelector extends Panel {
 

@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\database\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\database\DatabaseRequestHandler;
+use Obcato\Core\admin\view\views\Panel;
 
 class QueryResultPanel extends Panel {
 

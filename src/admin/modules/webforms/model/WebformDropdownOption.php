@@ -1,8 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebFormDropDownOption extends Entity {
+use Obcato\Core\admin\core\model\Entity;
+
+class WebformDropdownOption extends Entity {
 
     private string $_text;
     private string $_name;

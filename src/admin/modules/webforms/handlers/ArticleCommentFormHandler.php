@@ -1,6 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\handlers;
+
+
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 class ArticleCommentFormHandler extends Formhandler {
 

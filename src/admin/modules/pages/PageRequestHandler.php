@@ -1,9 +1,18 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages;
 
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\modules\blocks\service\BlockInteractor;
+use Obcato\Core\admin\modules\blocks\service\BlockService;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\pages\service\PageInteractor;
+use Obcato\Core\admin\modules\pages\service\PageService;
+use Obcato\Core\admin\request_handlers\ElementHolderRequestHandler;
+use Obcato\Core\admin\request_handlers\exceptions\ElementHolderContainsErrorsException;
 
 class PageRequestHandler extends ElementHolderRequestHandler {
 

@@ -1,8 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element\visuals;
 
-class ListElementStatics extends Obcato\ComponentApi\Visual {
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ListElementStatics extends Visual {
 
     public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);

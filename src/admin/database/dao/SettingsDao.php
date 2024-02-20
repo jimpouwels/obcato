@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\modules\settings\model\Settings;
 
 interface SettingsDao {
     public function update(Settings $settings): void;

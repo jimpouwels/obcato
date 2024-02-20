@@ -1,9 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\article_overview_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\elements\article_overview_element\ArticleOverviewElement;
+use Obcato\Core\admin\utilities\DateUtility;
+use Obcato\Core\admin\view\views\DateField;
+use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Pulldown;
+use Obcato\Core\admin\view\views\TermSelector;
+use Obcato\Core\admin\view\views\TextField;
 
 class ArticleOverviewElementEditor extends ElementVisual {
 

@@ -1,9 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\visuals\positions;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\view\views\InformationMessage;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
 
 class PositionList extends Panel {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
 
 class FormTextAreaVisual extends FormFieldVisual {
     private TemplateDao $_template_dao;

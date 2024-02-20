@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element;
+
+use Obcato\Core\admin\request_handlers\ElementForm;
 
 class ListElementForm extends ElementForm {
 

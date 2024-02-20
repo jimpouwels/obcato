@@ -1,8 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\components;
 
+use FileUtility;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\modules\components\installer\InstallationException;
+use Obcato\Core\admin\modules\components\installer\Logger;
+use Obcato\Core\admin\modules\components\installer\ModuleInstaller;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use ZipArchive;
 
 class InstallRequestHandler extends HttpRequestHandler {

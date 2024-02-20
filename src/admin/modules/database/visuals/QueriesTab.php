@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\database\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;

@@ -1,8 +1,19 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms;
 
-use TemplateEngine;
+use Obcato\Core\admin\frontend\FormItemVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\webforms\form\WebformItemForm;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\modules\webforms\model\WebFormButton;
+use Obcato\Core\admin\modules\webforms\model\WebformDropDown;
+use Obcato\Core\admin\modules\webforms\model\WebformItem;
+use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
+use Obcato\Core\admin\modules\webforms\model\WebformTextField;
+use Obcato\Core\admin\modules\webforms\visuals\webforms\fields\WebformItemVisual;
+use Obcato\Core\admin\view\TemplateEngine;
 
 class WebformItemFactory {
 
@@ -23,17 +34,17 @@ class WebformItemFactory {
         return self::$_instance;
     }
 
-    public function getBackendVisualFor(WebFormItem $webform_item): WebformItemVisual {
+    public function getBackendVisualFor(WebformItem $webform_item): WebformItemVisual {
         $backend_visual_classname = $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
         return new $backend_visual_classname(TemplateEngine::getInstance(), $webform_item);
     }
 
-    public function getBackendFormFor(WebFormItem $webform_item): WebformItemForm {
+    public function getBackendFormFor(WebformItem $webform_item): WebformItemForm {
         $backend_form_classname = $this->getFormItemType($webform_item->getType())->getBackendFormClassname();
         return new $backend_form_classname($webform_item);
     }
 
-    public function getFrontendVisualFor(WebForm $webform, WebFormItem $webform_item, Page $page, ?Article $article): FormItemVisual {
+    public function getFrontendVisualFor(WebForm $webform, WebformItem $webform_item, Page $page, ?Article $article): FormItemVisual {
         $frontend_form_classname = $this->getFormItemType($webform_item->getType())->getFrontendVisualClassname();
         return new $frontend_form_classname($page, $article, $webform, $webform_item);
     }

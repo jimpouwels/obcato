@@ -1,11 +1,25 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\photo_album_element;
 
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\ElementMetadataProvider;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\elements\photo_album_element\visuals\PhotoAlbumElementEditor;
+use Obcato\Core\admin\elements\photo_album_element\visuals\PhotoAlbumElementStatics;
+use Obcato\Core\admin\frontend\FrontendVisual;
+use Obcato\Core\admin\frontend\PhotoAlbumElementFrontendVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\ElementVisual;
 
 class PhotoAlbumElement extends Element {
-
     private array $labels;
     private ?int $numberOfResults = null;
 
@@ -160,5 +174,3 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider {
         $this->mysqlConnector->executeStatement($statement);
     }
 }
-
-?>

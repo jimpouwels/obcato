@@ -1,9 +1,22 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\ReadonlyTextField;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TemplatePicker;
+use Obcato\Core\admin\view\views\TextArea;
+use Obcato\Core\admin\view\views\TextField;
+use const Obcato\Core\admin\ACTION_FORM_ID;
+use const Obcato\Core\admin\ADD_ELEMENT_FORM_ID;
+use const Obcato\Core\admin\DELETE_ELEMENT_FORM_ID;
+use const Obcato\Core\admin\EDIT_ELEMENT_HOLDER_ID;
+use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class MetadataEditor extends Panel {
 
@@ -46,7 +59,7 @@ class MetadataEditor extends Panel {
         $this->assignElementHolderFormIds($data);
     }
 
-    private function assignElementHolderFormIds($data): void {
+    private function assignElementHolderFormIds(TemplateData $data): void {
         $data->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
         $data->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
         $data->assign("action_form_id", ACTION_FORM_ID);

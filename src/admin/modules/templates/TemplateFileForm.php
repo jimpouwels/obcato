@@ -1,8 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates;
 
 use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\database\dao\TemplateDao;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
 
 class TemplateFileForm extends Form {
 

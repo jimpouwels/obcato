@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\service;
+
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 interface ArticleService {
     public function updateArticle(Article $article): void;

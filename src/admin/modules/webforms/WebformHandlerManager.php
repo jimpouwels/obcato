@@ -1,6 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms;
+
+use Obcato\Core\admin\modules\webforms\handlers\ArticleCommentFormHandler;
+use Obcato\Core\admin\modules\webforms\handlers\EmailFormHandler;
+use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
+use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;
 
 class WebformHandlerManager {
 

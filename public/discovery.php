@@ -21,12 +21,12 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'localhost') {
     }
 }
 
-const CMS_ROOT = PRIVATE_DIR . "/admin";
+const CMS_ROOT = PRIVATE_DIR . "/vendor/obcato/obcato/src/admin";
 const PUBLIC_DIR = __DIR__;
 
 if (!defined("IS_TEST_RUN")) {
     require_once PRIVATE_DIR . "/database_config.php";
 }
-require_once "constants.php";
 
+require CMS_ROOT . "/constants.php";
 require PRIVATE_DIR . '/vendor/autoload.php';

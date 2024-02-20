@@ -2,6 +2,10 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\modules\blocks\model\BlockPosition;
+use Obcato\Core\admin\modules\pages\model\Page;
+
 interface BlockDao {
     public function getAllBlocks(): array;
 

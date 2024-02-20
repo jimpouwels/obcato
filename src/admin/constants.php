@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core;
-
-defined("_ACCESS") or die;
+namespace Obcato\Core\admin;
 
 // EDITOR FORM CONSTANTS
+use const Obcato\Core\CMS_ROOT;
+
 const ADD_ELEMENT_FORM_ID = 'add_element_type_id';
 const EDIT_ELEMENT_HOLDER_ID = 'element_holder_id';
 const ACTION_FORM_ID = 'action';

@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\downloads\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\downloads\model\Download;
+use Obcato\Core\admin\view\views\Panel;
 
 class DownloadInfo extends Panel {
 

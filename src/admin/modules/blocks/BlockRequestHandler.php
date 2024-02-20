@@ -1,9 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks;
 
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\request_handlers\ElementHolderRequestHandler;
+use Obcato\Core\admin\request_handlers\exceptions\ElementHolderContainsErrorsException;
 
 class BlockRequestHandler extends ElementHolderRequestHandler {
 

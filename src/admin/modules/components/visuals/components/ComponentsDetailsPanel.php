@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\components\visuals\components;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\ComponentRequestHandler;
 
 class ComponentsDetailsPanel extends Panel {
 
@@ -38,14 +40,14 @@ class ComponentsDetailsPanel extends Panel {
     }
 
     private function getCurrentModuleData(): array {
-        $current_module = $this->componentRequestHandler->getCurrentModule();
-        if ($current_module) {
+        $currentModule = $this->componentRequestHandler->getCurrentModule();
+        if ($currentModule) {
             $module_data = array();
-            $module_data['id'] = $current_module->getId();
-            $module_data['identifier'] = $current_module->getIdentifier();
-            $module_data['title'] = $this->getTextResource($current_module->getIdentifier() . '_module_title');
-            $module_data['class'] = $current_module->getClass();
-            $module_data['system_default'] = $current_module->isSystemDefault();
+            $module_data['id'] = $currentModule->getId();
+            $module_data['identifier'] = $currentModule->getIdentifier();
+            $module_data['title'] = $this->getTextResource($currentModule->getIdentifier() . '_module_title');
+            $module_data['class'] = $currentModule->getClass();
+            $module_data['system_default'] = $currentModule->isSystemDefault();
             return $module_data;
         }
         return array();

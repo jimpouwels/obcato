@@ -3,6 +3,12 @@
 namespace Obcato\Core;
 
 use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\PasswordField;
+use Obcato\Core\admin\view\views\Pulldown;
+use Obcato\Core\admin\view\views\TextField;
 
 define("_ACCESS", "GRANTED");
 
@@ -11,10 +17,6 @@ require_once "../bootstrap.php";
 if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
     header("Location: /admin/index.php");
 }
-
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/authentication/Session.php";
-require_once CMS_ROOT . "/utilities/StringUtility.php";
 
 $errors = array();
 

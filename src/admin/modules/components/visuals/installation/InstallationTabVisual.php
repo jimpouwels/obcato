@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\components\visuals\installation;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\InstallRequestHandler;
 
 class InstallationTabVisual extends Visual {
 

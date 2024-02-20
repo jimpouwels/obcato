@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\request_handlers\BackendRequestHandler;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\Cms;
+use Obcato\Core\admin\view\views\Popup;
+use const Obcato\Core\CMS_ROOT;
 
 class Backend {
 
@@ -27,7 +33,7 @@ class Backend {
         $currentModule = $this->backendRequestHandler->getCurrentModule();
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
-            $class = $currentModule->getClass();
+            $class = "Obcato\\Core\\admin\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
             $this->moduleVisual = new $class(TemplateEngine::getInstance(), $currentModule, MysqlConnector::getInstance(), TemplateEngine::getInstance());
         }
     }

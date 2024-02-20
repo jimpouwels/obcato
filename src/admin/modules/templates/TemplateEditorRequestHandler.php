@@ -1,8 +1,16 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ScopeDao;
+use Obcato\Core\admin\database\dao\ScopeDaoMysql;
+use Obcato\Core\admin\database\dao\TemplateDao;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\modules\templates\model\Scope;
+use Obcato\Core\admin\modules\templates\model\Template;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\TemplateEditorForm;
 
 class TemplateEditorRequestHandler extends HttpRequestHandler {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
 
 use Obcato\Core\admin\core\model\ElementHolder;
 

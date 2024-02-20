@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages\service;
+
+use Obcato\Core\admin\modules\pages\model\Page;
 
 interface PageService {
     public function getHomepage(): Page;

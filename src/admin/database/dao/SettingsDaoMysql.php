@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\settings\model\Settings;
 
 class SettingsDaoMysql implements SettingsDao {
 

@@ -2,9 +2,8 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\Core\ElementHolderDao;
-use Obcato\Core\ElementHolderDaoMysql;
-use Obcato\Core\Entity;
+use Obcato\Core\admin\database\dao\ElementHolderDao;
+use Obcato\Core\admin\database\dao\ElementHolderDaoMysql;
 
 class Link extends Entity {
 

@@ -2,8 +2,8 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\Core\Scope;
-use Obcato\Core\ScopeDaoMysql;
+use Obcato\Core\admin\database\dao\ScopeDaoMysql;
+use Obcato\Core\admin\modules\templates\model\Scope;
 
 class ElementType extends Entity {
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\visuals\positions;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\blocks\model\BlockPosition;
 
 class PositionTab extends Visual {
 

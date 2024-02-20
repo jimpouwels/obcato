@@ -1,11 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\settings;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\database\dao\SettingsDaoMysql;
+use Obcato\Core\admin\modules\settings\model\Settings;
+use Obcato\Core\admin\modules\settings\visuals\DomainSettingsPanel;
+use Obcato\Core\admin\modules\settings\visuals\GlobalSettingsPanel;
+use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\WarningMessage;
 
 class SettingsModuleVisual extends ModuleVisual {
 
@@ -50,7 +56,9 @@ class SettingsModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function loadTabMenu(TabMenu $tabMenu): void {}
+    public function loadTabMenu(TabMenu $tabMenu): int {
+        return $this->getCurrentTabId();
+    }
 
     private function renderGlobalSettingsPanel(): string {
         return (new GlobalSettingsPanel($this->getTemplateEngine(), $this->settings))->render();

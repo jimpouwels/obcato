@@ -1,10 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\image_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 
-class ImageElementStatics extends Obcato\ComponentApi\Visual {
+class ImageElementStatics extends Visual {
 
     public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);
@@ -17,5 +18,3 @@ class ImageElementStatics extends Obcato\ComponentApi\Visual {
     public function load(): void {}
 
 }
-
-?>

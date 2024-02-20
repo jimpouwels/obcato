@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\visuals\labels;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
+use Obcato\Core\admin\view\views\InformationMessage;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
 
 class LabelsList extends Panel {
 

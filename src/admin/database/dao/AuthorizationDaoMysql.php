@@ -1,6 +1,11 @@
 <?php
 
 namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\authorization\model\User;
+use Obcato\Core\admin\utilities\StringUtility;
+
 class AuthorizationDaoMysql implements AuthorizationDao {
 
     private static ?AuthorizationDaoMysql $instance = null;

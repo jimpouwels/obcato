@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\authorization\model;
+
+
+use Obcato\Core\admin\core\model\Entity;
 
 class User extends Entity {
 

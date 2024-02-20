@@ -1,18 +1,22 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin;
 
 use Obcato\Core\admin\core\model\ElementType;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\database\dao\ModuleDao;
+use Obcato\Core\admin\database\dao\ModuleDaoMysql;
 
 class TextResourceLoader {
 
-    private string $_language;
+    private string $language;
     private ModuleDao $_module_dao;
     private ElementDao $_element_dao;
 
     public function __construct(string $language) {
-        $this->_language = $language;
+        $this->language = $language;
         $this->_module_dao = ModuleDaoMysql::getInstance();
         $this->_element_dao = ElementDaoMysql::getInstance();
     }
@@ -29,7 +33,7 @@ class TextResourceLoader {
     }
 
     private function getGlobalTextResources(): array {
-        return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/common-' . $this->_language . '.txt');
+        return $this->getTextResourcesFromFile(STATIC_DIR . '/text_resources/common-' . $this->language . '.txt');
     }
 
     private function getModuleTextResources(Module $module): array {
@@ -58,7 +62,7 @@ class TextResourceLoader {
     }
 
     private function getResourceFilePath(string $identifier): string {
-        $path = STATIC_DIR . '/text_resources/' . $identifier . '-' . $this->_language . '.txt';
+        $path = STATIC_DIR . '/text_resources/' . $identifier . '-' . $this->language . '.txt';
         if (!file_exists($path)) {
             $path = STATIC_DIR . '/text_resources/' . $identifier . '-nl.txt';
         }

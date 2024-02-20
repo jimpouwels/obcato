@@ -2,6 +2,11 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\Backend;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use const Obcato\Core\admin\UPLOAD_DIR;
+
 define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";
@@ -46,4 +51,3 @@ if (isset($_GET['image']) && $_GET['image'] != '') {
 } else if (isset($_GET['download']) && $_GET['download'] != '') {
     // TODO
 }
-?>

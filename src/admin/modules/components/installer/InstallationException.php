@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\components\installer;
+
+use Exception;
 
 class InstallationException extends Exception {
 

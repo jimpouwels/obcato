@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
 
 class FormDropDownVisual extends FormFieldVisual {
 

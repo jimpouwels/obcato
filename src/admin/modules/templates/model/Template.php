@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\model;
+
+use Obcato\Core\admin\core\model\Entity;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
 
 class Template extends Entity {
 

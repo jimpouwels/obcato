@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\service;
+
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 class BlockInteractor implements BlockService {
 

@@ -1,11 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\authorization;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\modules\authorization\model\User;
+use Obcato\Core\admin\modules\authorization\visuals\UserEditor;
+use Obcato\Core\admin\modules\authorization\visuals\UserList;
+use Obcato\Core\admin\view\views\ActionButtonAdd;
+use Obcato\Core\admin\view\views\ActionButtonDelete;
+use Obcato\Core\admin\view\views\ActionButtonSave;
 
 class AuthorizationModuleVisual extends ModuleVisual {
 
@@ -55,6 +61,8 @@ class AuthorizationModuleVisual extends ModuleVisual {
         $this->currentUser = $this->authorizationRequestHandler->getCurrentUser();
     }
 
-    public function loadTabMenu(TabMenu $tabMenu): void {}
+    public function loadTabMenu(TabMenu $tabMenu): int {
+        return $this->getCurrentTabId();
+    }
 
 }

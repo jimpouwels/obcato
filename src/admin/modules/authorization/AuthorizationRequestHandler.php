@@ -1,8 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\authorization;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\AuthorizationDao;
+use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
+use Obcato\Core\admin\modules\authorization\model\User;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\PasswordUtility;
 
 class AuthorizationRequestHandler extends HttpRequestHandler {
 

@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\templates\model\Scope;
 
 class ScopeDaoMysql implements ScopeDao {
 
@@ -65,5 +68,3 @@ class ScopeDaoMysql implements ScopeDao {
         $this->mysqlConnector->executeStatement($statement);
     }
 }
-
-?>

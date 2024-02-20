@@ -1,18 +1,20 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
-
-require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlockTab.php";
-require_once CMS_ROOT . "/modules/blocks/visuals/positions/PositionTab.php";
-require_once CMS_ROOT . "/modules/blocks/BlockRequestHandler.php";
-require_once CMS_ROOT . "/modules/blocks/PositionRequestHandler.php";
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\modules\blocks\model\BlockPosition;
+use Obcato\Core\admin\modules\blocks\visuals\blocks\BlockTab;
+use Obcato\Core\admin\modules\blocks\visuals\positions\PositionTab;
+use Obcato\Core\admin\view\views\ActionButtonAdd;
+use Obcato\Core\admin\view\views\ActionButtonDelete;
+use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\BlockRequestHandler;
+use Obcato\Core\PositionRequestHandler;
 
 class BlockModuleVisual extends ModuleVisual {
 
@@ -92,9 +94,10 @@ class BlockModuleVisual extends ModuleVisual {
         $this->currentPosition = $this->positionRequestHandler->getCurrentPosition();
     }
 
-    public function loadTabMenu(TabMenu $tabMenu): void {
+    public function loadTabMenu(TabMenu $tabMenu): int {
         $tabMenu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB);
         $tabMenu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
+        return $this->getCurrentTabId();
     }
 
 }

@@ -1,9 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\downloads\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\downloads\model\Download;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TextField;
+use Obcato\Core\admin\view\views\UploadField;
 
 class DownloadMetadataEditor extends Panel {
     private Download $download;

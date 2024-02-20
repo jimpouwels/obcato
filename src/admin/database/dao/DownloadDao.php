@@ -1,6 +1,9 @@
 <?php
 
 namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\modules\downloads\model\Download;
+
 interface DownloadDao {
     public function getDownload(string $id): ?Download;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\database;
 
 use Obcato\Core\admin\core\form\Form;
 use Obcato\Core\admin\core\form\FormException;

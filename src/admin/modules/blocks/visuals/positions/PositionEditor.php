@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\visuals\positions;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\blocks\model\BlockPosition;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\TextField;
 
 class PositionEditor extends Panel {
 

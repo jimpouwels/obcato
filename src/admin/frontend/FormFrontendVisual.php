@@ -1,6 +1,16 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
+
+use Obcato\Core\admin\database\dao\TemplateDao;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\frontend\handlers\FormStatus;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\WebformItemFactory;
+use const Obcato\Core\admin\FRONTEND_TEMPLATE_DIR;
 
 class FormFrontendVisual extends FrontendVisual {
 

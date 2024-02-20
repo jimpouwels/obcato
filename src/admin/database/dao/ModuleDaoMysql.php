@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\core\model\ModuleGroup;
+use Obcato\Core\admin\database\MysqlConnector;
 
 class ModuleDaoMysql implements ModuleDao {
 

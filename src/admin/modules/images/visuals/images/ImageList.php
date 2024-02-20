@@ -1,9 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\authorization\service\AuthorizationInteractor;
+use Obcato\Core\admin\modules\authorization\service\AuthorizationService;
+use Obcato\Core\admin\modules\images\ImageRequestHandler;
+use Obcato\Core\admin\view\views\InformationMessage;
+use Obcato\Core\admin\view\views\Panel;
+use const Obcato\Core\admin\ACTION_FORM_ID;
 
 class ImageList extends Panel {
 

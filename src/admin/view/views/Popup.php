@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
@@ -21,7 +21,7 @@ class Popup extends Visual {
     public function load(): void {
         $content = null;
         if ($this->popupType == "search") {
-            $content = new Search();
+            $content = new Search($this->getTemplateEngine());
         }
         $this->assign("content", $content->render());
     }

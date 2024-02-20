@@ -2,11 +2,10 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\Core\DateTime;
-use Obcato\Core\ElementDaoMysql;
-use Obcato\Core\LinkDaoMysql;
-use Obcato\Core\Presentable;
-use const Obcato\Core\CMS_ROOT;
+use DateTime;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\database\dao\LinkDaoMysql;
+use Obcato\Core\admin\modules\templates\model\Presentable;
 
 class ElementHolder extends Presentable {
 
@@ -95,7 +94,6 @@ class ElementHolder extends Presentable {
     }
 
     public function getElementStatics(): array {
-        require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
         $elementDao = ElementDaoMysql::getInstance();
         $element_statics = array();
         foreach ($this->getElements() as $element) {
@@ -130,7 +128,6 @@ class ElementHolder extends Presentable {
     }
 
     protected function initFromDb(array $row): void {
-        require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
         $this->setTitle($row['title']);
         $this->setPublished($row['published'] == 1);
         $this->setCreatedAt($row['created_at']);

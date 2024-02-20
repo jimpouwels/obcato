@@ -1,6 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\service;
+
+use Obcato\Core\admin\modules\templates\model\Template;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
+use Obcato\Core\admin\modules\templates\model\TemplateVar;
+use Obcato\Core\admin\modules\templates\model\TemplateVarDef;
 
 interface TemplateService {
 

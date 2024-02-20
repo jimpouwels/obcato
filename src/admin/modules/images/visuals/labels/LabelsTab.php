@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\visuals\labels;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\images\LabelRequestHandler;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
 
 class LabelsTab extends Visual {
 

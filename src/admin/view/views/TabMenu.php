@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TabMenu as ITabMenu;
 use Obcato\ComponentApi\TemplateEngine;
@@ -9,11 +9,10 @@ use Obcato\ComponentApi\Visual;
 class TabMenu extends Visual implements ITabMenu {
 
     private array $tabItems = array();
-    private int $currentTabId = 0;
+    private int $currentTabId;
 
-    public function __construct(TemplateEngine $templateEngine, int $currentTabId) {
+    public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);
-        $this->currentTabId = $currentTabId;
     }
 
     public function getTemplateFilename(): string {
@@ -30,5 +29,9 @@ class TabMenu extends Visual implements ITabMenu {
         $tab_item["text_resource_identifier"] = $textResourceIdentifier;
         $tab_item["id"] = $id;
         $this->tabItems[] = $tab_item;
+    }
+
+    public function setCurrentTabId(int $tabId): void {
+        $this->currentTabId = $tabId;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\handlers;
 
 use Obcato\ComponentApi\Visual;
 

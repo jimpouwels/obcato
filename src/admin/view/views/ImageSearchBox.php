@@ -1,9 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
 
 class ImageSearchBox extends Panel {
 

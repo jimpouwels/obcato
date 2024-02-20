@@ -1,15 +1,16 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\form;
 
 use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\modules\webforms\model\WebformItem;
 
 abstract class WebformItemForm extends Form {
 
-    private WebFormItem $_webform_item;
+    private WebformItem $_webform_item;
 
-    public function __construct(WebFormItem $webform_item) {
-        $this->_webform_item = $webform_item;
+    public function __construct(WebformItem $webformButton) {
+        $this->_webform_item = $webformButton;
     }
 
     public function loadFields(): void {
@@ -28,7 +29,7 @@ abstract class WebformItemForm extends Form {
 
     public abstract function loadItemFields(): void;
 
-    protected function getWebFormItem(): WebFormItem {
+    protected function getWebFormItem(): WebformItem {
         return $this->_webform_item;
     }
 }

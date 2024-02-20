@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks;
 
 use Obcato\Core\admin\core\form\Form;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\modules\blocks\model\Block;
 
 class BlockForm extends Form {
 

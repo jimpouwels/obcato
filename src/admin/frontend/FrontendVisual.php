@@ -1,9 +1,27 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
 
+use Obcato\ComponentApi\TemplateData;
 use Obcato\Core\admin\core\model\ElementHolder;
 use Obcato\Core\admin\core\model\Link;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\dao\LinkDao;
+use Obcato\Core\admin\database\dao\LinkDaoMysql;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\pages\service\PageInteractor;
+use Obcato\Core\admin\modules\pages\service\PageService;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use Obcato\Core\admin\modules\templates\model\TemplateVar;
+use Obcato\Core\admin\modules\templates\service\TemplateInteractor;
+use Obcato\Core\admin\modules\templates\service\TemplateService;
+use Obcato\Core\admin\utilities\Arrays;
+use Obcato\Core\admin\utilities\UrlHelper;
+use Obcato\Core\admin\view\TemplateEngine;
 
 abstract class FrontendVisual {
 

@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\frontend\handlers\RequestHandler;
+
 require_once "discovery.php";
 
 function renderFrontend(): void {

@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\model;
+
+use Obcato\Core\admin\core\model\Entity;
+
 class ImageLabel extends Entity {
 
     private string $name;

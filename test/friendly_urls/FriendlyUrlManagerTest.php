@@ -1,5 +1,6 @@
 <?php
 
+use Obcato\Core\admin\database\dao\FriendlyUrlDao;
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../setup.php";

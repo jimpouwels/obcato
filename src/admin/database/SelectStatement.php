@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database;
+
+use Obcato\ComponentApi\MysqlResult;
+use Obcato\ComponentApi\MysqlStatement;
 
 class SelectStatement extends Statement {
     private array $selectFields = array();
@@ -22,9 +25,9 @@ class SelectStatement extends Statement {
         return $this->selectFields;
     }
 
-    public function prepare(mysqli_stmt $sqlStatement) {}
+    public function prepare(MysqlStatement $sqlStatement) {}
 
-    public function execute(MysqlConnector $mysqlConnector): bool|mysqli_result {
+    public function execute(MysqlConnector $mysqlConnector): bool|MysqlResult {
         $sqlStatement = $mysqlConnector->prepareStatement($this->toQuery());
         if ($this->getBindString()) {
             $sqlStatement->bind_param($this->getBindString(), ...$this->getMatches());

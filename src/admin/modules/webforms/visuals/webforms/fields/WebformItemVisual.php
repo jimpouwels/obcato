@@ -1,16 +1,19 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms\fields;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\webforms\model\WebformItem;
+use Obcato\Core\admin\view\views\TemplatePicker;
+use Obcato\Core\admin\view\views\TextField;
 
 abstract class WebformItemVisual extends Visual {
 
-    private WebFormItem $_webform_item;
+    private WebformItem $_webform_item;
 
-    public function __construct(TemplateEngine $templateEngine, WebFormItem $webform_item) {
+    public function __construct(TemplateEngine $templateEngine, WebformItem $webform_item) {
         parent::__construct($templateEngine);
         $this->_webform_item = $webform_item;
     }
@@ -19,7 +22,7 @@ abstract class WebformItemVisual extends Visual {
         return "modules/webforms/webforms/fields/webform_item.tpl";
     }
 
-    protected function getWebFormItem(): WebFormItem {
+    protected function getWebFormItem(): WebformItem {
         return $this->_webform_item;
     }
 

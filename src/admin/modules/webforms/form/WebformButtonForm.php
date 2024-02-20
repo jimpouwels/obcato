@@ -1,11 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\form;
+
+use Obcato\Core\admin\modules\webforms\model\WebFormButton;
+use Obcato\Core\WebformItemForm;
 
 class WebformButtonForm extends WebformItemForm {
 
-    public function __construct(WebFormButton $webform_item) {
-        parent::__construct($webform_item);
+    public function __construct(WebFormButton $webformButton) {
+        parent::__construct($webformButton);
     }
 
     public function loadItemFields(): void {}

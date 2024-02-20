@@ -1,6 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
+
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\elements\article_overview_element\ArticleOverviewElement;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\utilities\DateUtility;
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 

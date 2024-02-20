@@ -2,8 +2,7 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\Core\Entity;
-use Obcato\Core\MysqlConnector;
+use Obcato\Core\admin\database\MysqlConnector;
 
 class ModuleGroup extends Entity {
 

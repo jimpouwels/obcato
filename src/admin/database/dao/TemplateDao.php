@@ -1,6 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\modules\templates\model\Scope;
+use Obcato\Core\admin\modules\templates\model\Template;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
+use Obcato\Core\admin\modules\templates\model\TemplateVar;
+use Obcato\Core\admin\modules\templates\model\TemplateVarDef;
 
 interface TemplateDao {
     public function getTemplate(int $id): ?Template;

@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element;
+
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class ListElementRequestHandler extends HttpRequestHandler {
 
@@ -32,5 +36,3 @@ class ListElementRequestHandler extends HttpRequestHandler {
             $_POST['element' . $this->listElement->getId() . '_add_item'] != '';
     }
 }
-
-?>

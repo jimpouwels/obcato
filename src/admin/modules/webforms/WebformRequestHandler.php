@@ -1,8 +1,20 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ConfigDao;
+use Obcato\Core\admin\database\dao\ConfigDaoMysql;
+use Obcato\Core\admin\database\dao\WebformDao;
+use Obcato\Core\admin\database\dao\WebformDaoMysql;
+use Obcato\Core\admin\modules\webforms\handlers\ArticleCommentFormHandler;
+use Obcato\Core\admin\modules\webforms\handlers\EmailFormHandler;
+use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\modules\webforms\model\WebFormButton;
+use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
+use Obcato\Core\admin\modules\webforms\model\WebformTextField;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class WebformRequestHandler extends HttpRequestHandler {
 
@@ -157,5 +169,3 @@ class WebformRequestHandler extends HttpRequestHandler {
     }
 
 }
-
-?>

@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\elements\list_element\ListElement;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TextField;
 
 class ListElementEditor extends ElementVisual {
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\modules\templates\model\Scope;
 
 interface ScopeDao {
     public function getScopes(): array;

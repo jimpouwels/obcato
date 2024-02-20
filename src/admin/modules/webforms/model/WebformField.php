@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-abstract class WebFormField extends WebFormItem {
+abstract class WebformField extends WebformItem {
 
     private bool $_mandatory = false;
 

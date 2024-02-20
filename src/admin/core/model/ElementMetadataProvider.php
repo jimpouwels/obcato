@@ -2,27 +2,27 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\Core\MysqlConnector;
+use Obcato\Core\admin\database\MysqlConnector;
 
 abstract class ElementMetadataProvider {
 
-    private Element $_element;
+    private Element $element;
     private MysqlConnector $_mysql_connector;
 
     public function __construct(Element $element) {
-        $this->_element = $element;
+        $this->element = $element;
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 
     public function getElement(): Element {
-        return $this->_element;
+        return $this->element;
     }
 
     public function loadMetaData(): void {
-        $query = "SELECT * FROM " . $this->getTableName() . " WHERE element_id = " . $this->_element->getId();
+        $query = "SELECT * FROM " . $this->getTableName() . " WHERE element_id = " . $this->element->getId();
         $result = $this->_mysql_connector->executeQuery($query);
         while ($row = $result->fetch_assoc()) {
-            $this->constructMetadata($row, $this->_element);
+            $this->constructMetadata($row, $this->element);
         }
     }
 

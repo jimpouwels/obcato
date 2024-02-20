@@ -1,8 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-abstract class WebFormItem extends Presentable {
+use Obcato\Core\admin\modules\templates\model\Presentable;
+
+abstract class WebformItem extends Presentable {
 
     private string $_label = "";
     private string $_name = "";

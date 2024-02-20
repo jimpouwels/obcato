@@ -2,6 +2,8 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use Obcato\Core\admin\modules\authorization\model\User;
+
 interface AuthorizationDao {
     public function getUser(string $username): ?User;
 

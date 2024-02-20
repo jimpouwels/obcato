@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images;
 
 use Obcato\Core\admin\core\form\Form;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\modules\images\model\Image;
 
 class ImageForm extends Form {
 

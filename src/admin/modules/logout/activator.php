@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\logout;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
@@ -39,6 +39,8 @@ class LogoutModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function loadTabMenu(TabMenu $tabMenu): void {}
+    public function loadTabMenu(TabMenu $tabMenu): int {
+        return $this->getCurrentTabId();
+    }
 
 }

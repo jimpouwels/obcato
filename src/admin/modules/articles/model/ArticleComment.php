@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\model;
+
+use Obcato\Core\admin\core\model\Entity;
 
 class ArticleComment extends Entity {
 

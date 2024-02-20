@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\Link;
 
 interface LinkDao {
     public function createLink(int $elementHolderId, $title): Link;

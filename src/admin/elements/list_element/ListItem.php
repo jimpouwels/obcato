@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element;
+
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\Entity;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
 
 class ListItem extends Entity {
 
@@ -38,5 +42,3 @@ class ListItem extends Entity {
     }
 
 }
-
-?>

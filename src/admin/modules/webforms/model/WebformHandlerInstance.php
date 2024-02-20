@@ -1,8 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebFormHandlerInstance extends Entity {
+use Obcato\Core\admin\core\model\Entity;
+use Obcato\Core\admin\utilities\Arrays;
+
+class WebformHandlerInstance extends Entity {
 
     private string $_type;
     private array $_properties;
@@ -27,8 +30,8 @@ class WebFormHandlerInstance extends Entity {
         return Arrays::firstMatch($this->_properties, fn($p) => $property_to_find == $p->getName());
     }
 
-    public static function constructFromRecord(array $row, array $properties): WebFormHandlerInstance {
-        $webform_handler_instance = new WebFormHandlerInstance();
+    public static function constructFromRecord(array $row, array $properties): WebformHandlerInstance {
+        $webform_handler_instance = new WebformHandlerInstance();
         $webform_handler_instance->setProperties($properties);
         $webform_handler_instance->initFromDb($row);
         return $webform_handler_instance;

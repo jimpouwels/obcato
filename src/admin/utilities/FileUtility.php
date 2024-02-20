@@ -1,5 +1,8 @@
 <?php
-require_once CMS_ROOT . '/utilities/StringUtility.php';
+
+namespace Obcato\Core\admin\utilities;
+
+use Obcato\Core\admin\modules\images\model\Image;
 
 class FileUtility {
 
@@ -105,5 +108,3 @@ class FileUtility {
     }
 
 }
-
-?>

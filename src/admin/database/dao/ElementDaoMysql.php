@@ -5,6 +5,7 @@ namespace Obcato\Core\admin\database\dao;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementHolder;
 use Obcato\Core\admin\core\model\ElementType;
+use Obcato\Core\admin\database\MysqlConnector;
 
 class ElementDaoMysql implements ElementDao {
 

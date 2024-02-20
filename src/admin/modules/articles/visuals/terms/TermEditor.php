@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\visuals\terms;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\TextField;
 
 class TermEditor extends Panel {
 

@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\text_element;
+
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class TextElementRequestHandler extends HttpRequestHandler {
 

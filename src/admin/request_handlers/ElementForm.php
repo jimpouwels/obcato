@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\request_handlers;
+
+use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\core\model\Element;
 
 abstract class ElementForm extends Form {
 

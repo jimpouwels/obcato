@@ -1,6 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\table_of_contents_element;
+
+use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\elements\ElementContainsErrorsException;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 
@@ -25,5 +31,3 @@ class TableOfContentsElementRequestHandler extends HttpRequestHandler {
         }
     }
 }
-
-?>

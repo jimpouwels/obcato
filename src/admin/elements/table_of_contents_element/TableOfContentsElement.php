@@ -1,9 +1,20 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\table_of_contents_element;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\ElementMetadataProvider;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\elements\table_of_contents_element\visuals\TableOfContentsElementEditor;
+use Obcato\Core\admin\elements\table_of_contents_element\visuals\TableOfContentsElementStatics;
+use Obcato\Core\admin\frontend\FrontendVisual;
+use Obcato\Core\admin\frontend\TableOfContentsElementFrontendVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\ElementVisual;
 
 class TableOfContentsElement extends Element {
 
@@ -61,5 +72,3 @@ class TableOfContentsElementMetadataProvider extends ElementMetadataProvider {
     }
 
 }
-
-?>

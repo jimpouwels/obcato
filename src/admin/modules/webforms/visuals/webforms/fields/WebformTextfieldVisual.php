@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms\fields;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\webforms\model\WebformTextField;
 
 class WebformTextfieldVisual extends WebformFieldVisual {
 

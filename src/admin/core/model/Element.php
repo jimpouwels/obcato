@@ -3,12 +3,12 @@
 namespace Obcato\Core\admin\core\model;
 
 use Obcato\ComponentApi\Visual;
-use Obcato\Core\Article;
-use Obcato\Core\ElementVisual;
-use Obcato\Core\FrontendVisual;
-use Obcato\Core\HttpRequestHandler;
-use Obcato\Core\Page;
-use Obcato\Core\Presentable;
+use Obcato\Core\admin\frontend\FrontendVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\templates\model\Presentable;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\views\ElementVisual;
 use const Obcato\Core\CMS_ROOT;
 
 abstract class Element extends Presentable {
@@ -31,7 +31,8 @@ abstract class Element extends Presentable {
         $elementType = $record['classname'];
 
         // the constructor for each type will initialize specific metadata
-        $element = new $elementType($record["scope_id"]);
+        $className = "Obcato\\Core\\admin\\elements\\" . $record['identifier'] . "\\" . $elementType;
+        $element = new $className($record["scope_id"]);
 
         $element->setId($record['id']);
         $element->setOrderNr($record['follow_up']);

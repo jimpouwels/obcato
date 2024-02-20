@@ -1,9 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\view\views\ElementContainer;
+use Obcato\Core\admin\view\views\LinkEditor;
+use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class BlockEditor extends Visual {
 

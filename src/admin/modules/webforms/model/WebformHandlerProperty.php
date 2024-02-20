@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
+
+use Obcato\Core\admin\core\model\Entity;
 
 class WebFormHandlerProperty extends Entity {
 

@@ -1,12 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\form_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
 
 class FormElementStatics extends Visual {
-
 
     public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);

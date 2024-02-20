@@ -2,6 +2,14 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\articles\model\ArticleComment;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\utilities\DateUtility;
+
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,
                       e.created_at, e.created_by, e.type, a.description, a.wallpaper_id, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";

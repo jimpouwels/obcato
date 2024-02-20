@@ -1,8 +1,24 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\article_overview_element;
 
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\ElementMetadataProvider;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\elements\article_overview_element\visuals\ArticleOverviewElementEditor;
+use Obcato\Core\admin\elements\article_overview_element\visuals\ArticleOverviewElementStatics;
+use Obcato\Core\admin\frontend\ArticleOverviewElementFrontendVisual;
+use Obcato\Core\admin\frontend\FrontendVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\utilities\DateUtility;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\ElementVisual;
 
 class ArticleOverviewElement extends Element {
 
@@ -226,5 +242,3 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider {
     }
 
 }
-
-?>

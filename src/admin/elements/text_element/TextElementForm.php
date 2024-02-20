@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\text_element;
+
+use Obcato\Core\admin\request_handlers\ElementForm;
 
 class TextElementForm extends ElementForm {
 
@@ -17,5 +19,3 @@ class TextElementForm extends ElementForm {
         $this->textElement->setText($this->getFieldValue('element_' . $this->textElement->getId() . '_text'));
     }
 }
-
-?>

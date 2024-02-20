@@ -1,8 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+use Obcato\Core\admin\modules\templates\model\Scope;
+use Obcato\Core\admin\modules\templates\model\Template;
 
 class TemplatePicker extends Pulldown {
 

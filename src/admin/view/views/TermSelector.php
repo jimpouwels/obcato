@@ -1,11 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
-
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
 
 class TermSelector extends Panel {
 

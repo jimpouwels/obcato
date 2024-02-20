@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TextField;
+use Obcato\Core\admin\view\views\UploadField;
+use const Obcato\Core\admin\ACTION_FORM_ID;
 
 class ImageMetadataEditor extends Panel {
 

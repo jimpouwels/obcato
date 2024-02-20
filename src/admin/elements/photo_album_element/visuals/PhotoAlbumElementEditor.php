@@ -1,9 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\photo_album_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\elements\photo_album_element\PhotoAlbumElement;
+use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\ImageLabelSelector;
+use Obcato\Core\admin\view\views\TextField;
 
 class PhotoAlbumElementEditor extends ElementVisual {
 

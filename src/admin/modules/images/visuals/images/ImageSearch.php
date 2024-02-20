@@ -1,9 +1,16 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\images\ImageRequestHandler;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\Pulldown;
+use Obcato\Core\admin\view\views\TextField;
 
 class ImageSearch extends Panel {
 
@@ -28,21 +35,21 @@ class ImageSearch extends Panel {
     }
 
     private function getTitleSearchField(): TextField {
-        return new TextField(TemplateEngine::getInstance(), "s_title", "images_search_title_field", $this->requestHandler->getCurrentSearchTitleFromGetRequest(), false, false, null);
+        return new TextField($this->getTemplateEngine(), "s_title", "images_search_title_field", $this->requestHandler->getCurrentSearchTitleFromGetRequest(), false, false, null);
     }
 
     private function getFileNameSearchField(): TextField {
-        return new TextField(TemplateEngine::getInstance(), "s_filename", "images_search_filename_field", $this->requestHandler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
+        return new TextField($this->getTemplateEngine(), "s_filename", "images_search_filename_field", $this->requestHandler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
     }
 
     private function getLabelPullDown(): Pulldown {
         $labels = $this->getLabels();
         $currentlySelectedLabel = $this->requestHandler->getCurrentSearchLabelFromGetRequest();
-        return new Pulldown(TemplateEngine::getInstance(), "s_label", "images_search_label_field", (is_null($currentlySelectedLabel) ? null : $currentlySelectedLabel), $labels, false, null, true);
+        return new Pulldown($this->getTemplateEngine(), "s_label", "images_search_label_field", (is_null($currentlySelectedLabel) ? null : $currentlySelectedLabel), $labels, false, null, true);
     }
 
     private function getSearchButton(): Button {
-        return new Button(TemplateEngine::getInstance(), "", "Zoeken", "document.getElementById('image_search').submit(); return false;");
+        return new Button($this->getTemplateEngine(), "", "Zoeken", "document.getElementById('image_search').submit(); return false;");
     }
 
     private function getLabels(): array {

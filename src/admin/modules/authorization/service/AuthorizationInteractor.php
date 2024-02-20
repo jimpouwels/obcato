@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\authorization\service;
+
+use Obcato\Core\admin\database\dao\AuthorizationDao;
+use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
+use Obcato\Core\admin\modules\authorization\model\User;
 
 class AuthorizationInteractor implements AuthorizationService {
 

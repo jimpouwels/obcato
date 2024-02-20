@@ -1,8 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class LabelRequestHandler extends HttpRequestHandler {
 

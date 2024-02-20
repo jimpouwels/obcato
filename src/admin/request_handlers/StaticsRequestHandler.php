@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\request_handlers;
+
+use const Obcato\Core\admin\STATIC_DIR;
 
 class StaticsRequestHandler extends HttpRequestHandler {
 

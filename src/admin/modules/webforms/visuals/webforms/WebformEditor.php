@@ -1,9 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\modules\webforms\WebformItemFactory;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\Panel;
 
 class WebformEditor extends Panel {
 

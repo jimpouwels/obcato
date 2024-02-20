@@ -1,8 +1,20 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\list_element;
 
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\ElementMetadataProvider;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\elements\list_element\visuals\ListElementEditor;
+use Obcato\Core\admin\elements\list_element\visuals\ListElementStatics;
+use Obcato\Core\admin\frontend\FrontendVisual;
+use Obcato\Core\admin\frontend\ListElementFrontendVisual;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\views\ElementVisual;
 
 class ListElement extends Element {
 

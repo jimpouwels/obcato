@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\components;
 
 use Obcato\Core\admin\core\model\ElementType;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\database\dao\ModuleDao;
+use Obcato\Core\admin\database\dao\ModuleDaoMysql;
+use Obcato\Core\admin\modules\components\installer\Logger;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class ComponentRequestHandler extends HttpRequestHandler {
 

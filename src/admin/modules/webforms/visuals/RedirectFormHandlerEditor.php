@@ -1,9 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\database\dao\PageDao;
+use Obcato\Core\admin\database\dao\PageDaoMysql;
+use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
+use Obcato\Core\admin\view\views\PagePicker;
 
 class RedirectFormHandlerEditor extends Visual {
 

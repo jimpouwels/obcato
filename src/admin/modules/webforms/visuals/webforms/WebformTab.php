@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\modules\webforms\WebformRequestHandler;
+use const Obcato\Core\admin\ACTION_FORM_ID;
 
 class WebformTab extends Visual {
 

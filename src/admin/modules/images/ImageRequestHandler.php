@@ -1,8 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images;
 
+use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\utilities\FileUtility;
+use const Obcato\Core\admin\UPLOAD_DIR;
 
 class ImageRequestHandler extends HttpRequestHandler {
 

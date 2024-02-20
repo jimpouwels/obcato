@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\core\model\ModuleGroup;
 
 interface ModuleDao {
     public function getAllModules(): array;

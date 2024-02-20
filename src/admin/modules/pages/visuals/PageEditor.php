@@ -1,9 +1,16 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\view\views\BlockSelector;
+use Obcato\Core\admin\view\views\ElementContainer;
+use Obcato\Core\admin\view\views\LinkEditor;
+use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class PageEditor extends Visual {
 

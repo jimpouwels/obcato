@@ -1,9 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\Pulldown;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TemplatePicker;
+use Obcato\Core\admin\view\views\TextField;
 
 class BlockMetadataEditor extends Panel {
 

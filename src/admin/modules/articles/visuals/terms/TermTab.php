@@ -1,10 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\visuals\terms;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
 
-class TermTab extends Obcato\ComponentApi\Visual {
+class TermTab extends Visual {
 
     private static string $TERM_QUERYSTRING_KEY = "term";
     private static string $NEW_TERM_QUERYSTRING_KEY = "new_term";

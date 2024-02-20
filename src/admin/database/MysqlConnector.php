@@ -1,10 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database;
 
+use mysqli;
 use Obcato\ComponentApi\MysqlConnector as IMysqlConnector;
-use Obcato\ComponentApi\MysqlStatement;
 use Obcato\ComponentApi\MysqlResult;
+use Obcato\ComponentApi\MysqlStatement;
 
 class MysqlConnector implements IMysqlConnector {
 

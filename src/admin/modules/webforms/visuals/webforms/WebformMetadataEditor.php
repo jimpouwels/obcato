@@ -1,12 +1,18 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ConfigDao;
+use Obcato\Core\admin\database\dao\ConfigDaoMysql;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\views\TemplatePicker;
+use Obcato\Core\admin\view\views\TextField;
 
 class WebformMetadataEditor extends Panel {
-
     private WebForm $_current_webform;
     private ConfigDao $_config_dao;
 

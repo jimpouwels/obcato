@@ -1,8 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class TermRequestHandler extends HttpRequestHandler {
 

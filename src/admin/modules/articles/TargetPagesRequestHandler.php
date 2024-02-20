@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles;
+
+use Obcato\Core\admin\modules\articles\service\ArticleInteractor;
+use Obcato\Core\admin\modules\articles\service\ArticleService;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class TargetPagesRequestHandler extends HttpRequestHandler {
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages;
 
 use Obcato\Core\admin\core\form\Form;
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 class PageForm extends Form {
 

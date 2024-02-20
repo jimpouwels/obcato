@@ -1,11 +1,19 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\modules\articles\visuals\articles\ArticleTab;
+use Obcato\Core\admin\modules\articles\visuals\target_pages\TargetPagesList;
+use Obcato\Core\admin\modules\articles\visuals\terms\TermTab;
+use Obcato\Core\admin\view\views\ActionButtonAdd;
+use Obcato\Core\admin\view\views\ActionButtonDelete;
+use Obcato\Core\admin\view\views\ActionButtonSave;
 
 class ArticleModuleVisual extends ModuleVisual {
 
@@ -103,10 +111,11 @@ class ArticleModuleVisual extends ModuleVisual {
         $this->currentTerm = $this->termRequestsHandler->getCurrentTerm();
     }
 
-    public function loadTabMenu(TabMenu $tabMenu): void {
+    public function loadTabMenu(TabMenu $tabMenu): int {
         $tabMenu->addItem("articles_tab_articles", self::$ARTICLES_TAB);
         $tabMenu->addItem("articles_tab_terms", self::$TERMS_TAB);
         $tabMenu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
+        return $this->getCurrentTabId();
     }
 
 }

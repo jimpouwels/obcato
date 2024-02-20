@@ -2,6 +2,9 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\modules\images\model\ImageLabel;
+
 interface ImageDao {
     public function getImage(?int $imageId): ?Image;
 

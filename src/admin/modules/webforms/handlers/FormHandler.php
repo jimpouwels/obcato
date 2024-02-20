@@ -1,17 +1,21 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\handlers;
 
 use Obcato\ComponentApi\BlackBoard;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
 
 abstract class FormHandler {
 
-    private FriendlyUrlManager $_friendly_url_manager;
+    private FriendlyUrlManager $friendlyUrlManager;
     private array $_fields;
-    private WebFormHandlerInstance $_webform_handler_instance;
+    private WebFormHandlerInstance $webformHandlerInstance;
 
     public function __construct() {
-        $this->_friendly_url_manager = FriendlyUrlManager::getInstance();
+        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
     }
 
     abstract function getRequiredProperties(): array;
@@ -30,11 +34,11 @@ abstract class FormHandler {
     }
 
     protected function getPageUrl(Page $page): string {
-        return $this->_friendly_url_manager->getFriendlyUrlForElementHolder($page);
+        return $this->friendlyUrlManager->getFriendlyUrlForElementHolder($page);
     }
 
     protected function getFilledInPropertyValue(string $property_name): string {
-        $property_value = $this->_webform_handler_instance->getProperty($property_name)->getValue();
+        $property_value = $this->webformHandlerInstance->getProperty($property_name)->getValue();
         foreach ($this->_fields as $field) {
             $property_value = str_replace('${' . $field['name'] . '}', $field['value'], $property_value);
         }
@@ -43,12 +47,12 @@ abstract class FormHandler {
 
 
     protected function getProperty(string $property_name): string {
-        return $this->_webform_handler_instance->getProperty($property_name)->getValue();
+        return $this->webformHandlerInstance->getProperty($property_name)->getValue();
     }
 
     public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields, Page $page, ?Article $article): void {
         $this->_fields = $fields;
-        $this->_webform_handler_instance = $webform_handler_instance;
+        $this->webformHandlerInstance = $webform_handler_instance;
         $this->handle($fields, $page, $article);
     }
 

@@ -1,6 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\service;
+
+use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use const Obcato\Core\admin\ELEMENT_HOLDER_ARTICLE;
 
 class ArticleInteractor implements ArticleService {
 

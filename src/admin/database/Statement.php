@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database;
 
 abstract class Statement {
     private array $tables = array();

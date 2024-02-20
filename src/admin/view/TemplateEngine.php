@@ -1,10 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view;
 
-use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
 use Obcato\ComponentApi\TemplateData as ITemplateData;
+use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
 use Smarty;
+use const Obcato\Core\admin\BACKEND_TEMPLATE_DIR;
 
 
 class TemplateEngine implements ITemplateEngine {

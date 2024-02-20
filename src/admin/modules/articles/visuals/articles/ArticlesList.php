@@ -1,9 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\dao\AuthorizationDao;
+use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
+use Obcato\Core\admin\modules\articles\ArticleRequestHandler;
+use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\view\views\InformationMessage;
+use Obcato\Core\admin\view\views\Panel;
 
 class ArticlesList extends Panel {
 

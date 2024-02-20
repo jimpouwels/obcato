@@ -1,9 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\utilities\Arrays;
 
 class BlockSelector extends Panel {
 

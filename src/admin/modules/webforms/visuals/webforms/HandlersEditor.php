@@ -1,9 +1,20 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\WebformDao;
+use Obcato\Core\admin\database\dao\WebformDaoMysql;
+use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
+use Obcato\Core\admin\modules\webforms\model\Webform;
+use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
+use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
+use Obcato\Core\admin\modules\webforms\WebformHandlerManager;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\TextArea;
+use Obcato\Core\admin\view\views\TextField;
 
 class HandlersEditor extends Panel {
 

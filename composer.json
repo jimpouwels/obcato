@@ -13,11 +13,12 @@
     }
   ],
   "require": {
-    "obcato/component-api": "v1.0.33",
+    "obcato/component-api": "v1.0.34",
     "ext-mysqli": "*",
     "smarty/smarty": "^4.3",
     "ext-zip": "*",
-    "ext-dom": "*"
+    "ext-dom": "*",
+    "ext-gd": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.0"

@@ -1,11 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\form;
+
+use Obcato\Core\admin\modules\webforms\model\WebformField;
 
 class WebformDropDownForm extends WebformFieldForm {
 
-    public function __construct(WebFormField $webform_field) {
-        parent::__construct($webform_field);
+    public function __construct(WebFormField $webform_textField) {
+        parent::__construct($webform_textField);
     }
 
     public function loadFieldFields(): void {}

@@ -1,8 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\modules\blocks\model\BlockPosition;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class PositionRequestHandler extends HttpRequestHandler {
 

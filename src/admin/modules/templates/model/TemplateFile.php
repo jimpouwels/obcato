@@ -1,8 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\templates\model;
 
-class TemplateFIle extends Entity {
+use Obcato\Core\admin\core\model\Entity;
+use Obcato\Core\admin\database\dao\TemplateDaoMysql;
+
+class TemplateFile extends Entity {
 
     private ?string $fileName = null;
     private string $name;

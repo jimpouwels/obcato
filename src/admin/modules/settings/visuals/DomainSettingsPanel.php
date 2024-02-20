@@ -1,9 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\settings\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\settings\model\Settings;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\TextField;
 
 class DomainSettingsPanel extends Panel {
 

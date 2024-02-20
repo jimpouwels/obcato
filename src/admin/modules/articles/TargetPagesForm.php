@@ -1,8 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles;
 
 use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 
 class TargetPagesForm extends Form {
 

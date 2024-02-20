@@ -1,6 +1,22 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\request_handlers;
+
+use Obcato\Core\admin\core\form\ElementHolderForm;
+use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\core\form\LinkForm;
+use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\core\model\ElementType;
+use Obcato\Core\admin\core\model\Link;
+use Obcato\Core\admin\database\dao\ElementDao;
+use Obcato\Core\admin\database\dao\ElementDaoMysql;
+use Obcato\Core\admin\database\dao\LinkDao;
+use Obcato\Core\admin\database\dao\LinkDaoMysql;
+use Obcato\Core\admin\elements\ElementContainsErrorsException;
+use Obcato\Core\admin\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use const Obcato\Core\admin\ADD_ELEMENT_FORM_ID;
+use const Obcato\Core\admin\DELETE_ELEMENT_FORM_ID;
+use const Obcato\Core\admin\EDIT_ELEMENT_HOLDER_ID;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 

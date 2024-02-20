@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebformTextField extends WebFormField {
+class WebformTextField extends WebformField {
 
     public static string $TYPE = "textfield";
     private static int $SCOPE = 13;

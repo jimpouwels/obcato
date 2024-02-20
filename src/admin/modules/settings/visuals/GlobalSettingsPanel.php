@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\settings\visuals;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\modules\pages\service\PageInteractor;
+use Obcato\Core\admin\modules\pages\service\PageService;
+use Obcato\Core\admin\modules\settings\model\Settings;
+use Obcato\Core\admin\view\views\PagePicker;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\TextField;
 
 class GlobalSettingsPanel extends Panel {
 

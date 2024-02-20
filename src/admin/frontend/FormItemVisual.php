@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
 
 abstract class FormItemVisual extends FrontendVisual {
 

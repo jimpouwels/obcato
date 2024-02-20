@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\frontend;
+
+use Obcato\Core\admin\elements\image_element\ImageElement;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 class ImageElementFrontendVisual extends ElementFrontendVisual {
 

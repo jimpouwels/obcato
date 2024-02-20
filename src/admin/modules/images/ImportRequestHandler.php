@@ -1,7 +1,11 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images;
 
+use FileUtility;
+use Obcato\Core\admin\database\dao\ImageDao;
+use Obcato\Core\admin\database\dao\ImageDaoMysql;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use ZipArchive;
 
 class ImportRequestHandler extends HttpRequestHandler {

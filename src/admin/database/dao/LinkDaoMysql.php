@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\Link;
+use Obcato\Core\admin\database\MysqlConnector;
 
 class LinkDaoMysql implements LinkDao {
 

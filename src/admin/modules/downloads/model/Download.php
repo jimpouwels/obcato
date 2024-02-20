@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\downloads\model;
+
+use Obcato\Core\admin\core\model\Entity;
 
 class Download extends Entity {
 

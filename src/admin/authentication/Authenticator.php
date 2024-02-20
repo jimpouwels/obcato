@@ -3,7 +3,10 @@
 namespace Obcato\Core\admin\authentication;
 
 use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\MysqlConnector;
+use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\modules\authorization\model\User;
+use Obcato\Core\admin\utilities\StringUtility;
+use const Obcato\Core\admin\SESSION_TIMEOUT;
 
 class Authenticator {
 

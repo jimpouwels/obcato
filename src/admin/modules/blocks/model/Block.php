@@ -1,8 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\blocks\model;
 
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
 
 class Block extends ElementHolder {
 

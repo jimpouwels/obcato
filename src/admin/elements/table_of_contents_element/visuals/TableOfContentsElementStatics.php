@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\table_of_contents_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
@@ -18,5 +18,3 @@ class TableOfContentsElementStatics extends Visual {
     public function load(): void {}
 
 }
-
-?>

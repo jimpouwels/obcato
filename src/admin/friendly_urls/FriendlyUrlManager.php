@@ -1,8 +1,18 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\friendly_urls;
 
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\database\dao\FriendlyUrlDao;
+use Obcato\Core\admin\database\dao\FriendlyUrlDaoMysql;
+use Obcato\Core\admin\database\dao\PageDao;
+use Obcato\Core\admin\database\dao\PageDaoMysql;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\pages\model\Page;
+use Obcato\Core\admin\utilities\UrlHelper;
+use const Obcato\Core\PUBLIC_DIR;
 
 class FriendlyUrlManager {
 

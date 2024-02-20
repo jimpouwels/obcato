@@ -1,10 +1,17 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\database\dao\ArticleDao;
+use Obcato\Core\admin\database\dao\ArticleDaoMysql;
+use Obcato\Core\admin\modules\articles\ArticleRequestHandler;
+use Obcato\Core\admin\view\views\Button;
+use Obcato\Core\admin\view\views\Panel;
+use Obcato\Core\admin\view\views\Pulldown;
+use Obcato\Core\admin\view\views\TextField;
 
 class ArticlesSearch extends Panel {
 

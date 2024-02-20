@@ -1,8 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\pages\service;
 
 use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\database\dao\BlockDao;
+use Obcato\Core\admin\database\dao\BlockDaoMysql;
+use Obcato\Core\admin\database\dao\PageDao;
+use Obcato\Core\admin\database\dao\PageDaoMysql;
+use Obcato\Core\admin\modules\pages\model\Page;
 
 class PageInteractor implements PageService {
 

@@ -1,9 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\articles;
 
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\admin\modules\articles\model\Article;
+use Obcato\Core\admin\modules\articles\service\ArticleInteractor;
+use Obcato\Core\admin\modules\articles\service\ArticleService;
+use Obcato\Core\admin\request_handlers\ElementHolderRequestHandler;
+use Obcato\Core\admin\request_handlers\exceptions\ElementHolderContainsErrorsException;
 
 class ArticleRequestHandler extends ElementHolderRequestHandler {
 

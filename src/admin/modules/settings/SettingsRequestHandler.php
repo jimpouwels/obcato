@@ -1,8 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\settings;
 
 use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\database\dao\SettingsDao;
+use Obcato\Core\admin\database\dao\SettingsDaoMysql;
+use Obcato\Core\admin\modules\settings\model\Settings;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class SettingsRequestHandler extends HttpRequestHandler {
 

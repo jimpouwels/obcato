@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\elements\table_of_contents_element;
+
+use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\request_handlers\ElementForm;
 
 class TableOfContentsElementForm extends ElementForm {
 

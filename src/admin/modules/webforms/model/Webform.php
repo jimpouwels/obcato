@@ -1,8 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebForm extends Presentable {
+use Obcato\Core\admin\modules\templates\model\Presentable;
+
+class Webform extends Presentable {
 
     public static int $SCOPE = 19;
     private string $_title;
@@ -14,8 +16,8 @@ class WebForm extends Presentable {
         parent::__construct(self::$SCOPE);
     }
 
-    public static function constructFromRecord(array $record, array $form_fields): WebForm {
-        $form = new WebForm();
+    public static function constructFromRecord(array $record, array $form_fields): Webform {
+        $form = new Webform();
         $form->setFormFields($form_fields);
         $form->initFromDb($record);
         return $form;

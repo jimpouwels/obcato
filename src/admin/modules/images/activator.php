@@ -1,11 +1,18 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\images;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\modules\images\visuals\images\ImagesTab;
+use Obcato\Core\admin\modules\images\visuals\import\ImportTab;
+use Obcato\Core\admin\modules\images\visuals\labels\LabelsTab;
+use Obcato\Core\admin\view\views\ActionButton;
+use Obcato\Core\admin\view\views\ActionButtonAdd;
+use Obcato\Core\admin\view\views\ActionButtonDelete;
+use Obcato\Core\admin\view\views\ActionButtonSave;
 
 class ImageModuleVisual extends ModuleVisual {
 
@@ -87,10 +94,11 @@ class ImageModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function loadTabMenu(TabMenu $tabMenu): void {
+    public function loadTabMenu(TabMenu $tabMenu): int {
         $tabMenu->addItem("images_tab_images", self::$IMAGES_TAB);
         $tabMenu->addItem("images_tab_labels", self::$LABELS_TAB);
         $tabMenu->addItem("images_tab_import", self::$IMPORT_TAB);
+        return $this->getCurrentTabId();
     }
 
 }

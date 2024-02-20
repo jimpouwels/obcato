@@ -1,11 +1,14 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\modules\database;
 
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
+use Obcato\Core\admin\modules\database\visuals\Configuration;
+use Obcato\Core\admin\modules\database\visuals\QueriesTab;
+use Obcato\Core\admin\modules\database\visuals\Tables;
 
 class DatabaseModuleVisual extends ModuleVisual {
 
@@ -55,9 +58,10 @@ class DatabaseModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function loadTabMenu(TabMenu $tabMenu): void {
+    public function loadTabMenu(TabMenu $tabMenu): int {
         $tabMenu->addItem("database_tab_menu_configuration", self::$CONFIGURATION_TAB);
         $tabMenu->addItem("database_tab_menu_tabels", self::$TABLES_TAB);
         $tabMenu->addItem("database_tab_menu_query", self::$QUERY_TAB);
+        return $this->getCurrentTabId();
     }
 }
