@@ -77,7 +77,6 @@ class RequestHandler {
     private function loadImage(): void {
         $image = $this->getImageFromRequest();
         if ($image->isPublished()) {
-            echo $image->getExtension();
             if ($image->getExtension() == "jpg") {
                 header("Content-Type: image/jpeg");
             } else if ($image->getExtension() == "gif") {
