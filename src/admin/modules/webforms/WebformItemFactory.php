@@ -8,7 +8,7 @@ use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\webforms\form\WebformItemForm;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\model\WebFormButton;
-use Obcato\Core\admin\modules\webforms\model\WebformDropDown;
+use Obcato\Core\admin\modules\webforms\model\WebformDropdown;
 use Obcato\Core\admin\modules\webforms\model\WebformItem;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
 use Obcato\Core\admin\modules\webforms\model\WebformTextField;
@@ -23,7 +23,7 @@ class WebformItemFactory {
     private function __construct() {
         $this->addType(WebformTextField::$TYPE, "WebformTextfieldVisual", "WebformTextFieldForm", "FormTextFieldVisual");
         $this->addType(WebFormTextArea::$TYPE, "WebformTextAreaVisual", "WebformTextAreaForm", "FormTextAreaVisual");
-        $this->addType(WebFormDropDown::$TYPE, "WebformDropDownVisual", "WebformDropDownForm", "FormDropDownVisual");
+        $this->addType(WebformDropdown::$TYPE, "WebformDropDownVisual", "WebformDropDownForm", "FormDropDownVisual");
         $this->addType(WebFormButton::$TYPE, "WebformButtonVisual", "WebformButtonForm", "FormButtonVisual");
     }
 

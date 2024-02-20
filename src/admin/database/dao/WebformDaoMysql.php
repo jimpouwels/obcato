@@ -6,7 +6,7 @@ use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\model\WebFormButton;
-use Obcato\Core\admin\modules\webforms\model\WebformDropDown;
+use Obcato\Core\admin\modules\webforms\model\WebformDropdown;
 use Obcato\Core\admin\modules\webforms\model\WebformField;
 use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
 use Obcato\Core\admin\modules\webforms\model\WebFormHandlerProperty;
@@ -136,8 +136,8 @@ class WebformDaoMysql implements WebformDao {
                     return WebformTextField::constructFromRecord($row);
                 case WebFormTextArea::$TYPE:
                     return WebFormTextArea::constructFromRecord($row);
-                case WebFormDropDown::$TYPE:
-                    return WebFormDropDown::constructFromRecord($row);
+                case WebformDropdown::$TYPE:
+                    return WebformDropdown::constructFromRecord($row);
                 case WebFormButton::$TYPE:
                     return WebFormButton::constructFromRecord($row);
             }
@@ -159,8 +159,8 @@ class WebformDaoMysql implements WebformDao {
                 case WebFormTextArea::$TYPE:
                     $formFields[] = WebFormTextArea::constructFromRecord($row);
                     break;
-                case WebFormDropDown::$TYPE:
-                    $formFields[] = WebFormDropDown::constructFromRecord($row);
+                case WebformDropdown::$TYPE:
+                    $formFields[] = WebformDropdown::constructFromRecord($row);
                     break;
                 case WebFormButton::$TYPE:
                     $formFields[] = WebFormButton::constructFromRecord($row);

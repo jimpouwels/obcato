@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\model;
 
-class WebformDropDown extends WebformField {
+class WebformDropdown extends WebformField {
 
     public static string $TYPE = "dropdown";
     private static int $SCOPE = 15;
@@ -12,8 +12,8 @@ class WebformDropDown extends WebformField {
         parent::__construct(self::$SCOPE);
     }
 
-    public static function constructFromRecord(array $row): WebformDropDown {
-        $field = new WebformDropDown();
+    public static function constructFromRecord(array $row): WebformDropdown {
+        $field = new WebformDropdown();
         $field->initFromDb($row);
         return $field;
     }
