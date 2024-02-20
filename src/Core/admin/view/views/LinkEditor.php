@@ -4,6 +4,7 @@ namespace Obcato\Core;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Link;
 
 class LinkEditor extends Panel {
 

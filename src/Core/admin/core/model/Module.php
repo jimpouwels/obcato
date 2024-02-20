@@ -1,8 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
 
 use Obcato\ComponentApi\Module as IModule;
+use Obcato\Core\Entity;
+use Obcato\Core\ModuleDaoMysql;
 
 
 class Module extends Entity implements IModule {

@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\form;
+
+use Obcato\ComponentApi\Session;
 
 abstract class Form {
 

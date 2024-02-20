@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class FriendlyUrlManager {
 
     private static ?FriendlyUrlManager $instance = null;

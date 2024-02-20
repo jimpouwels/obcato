@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class AuthorizationRequestHandler extends HttpRequestHandler {
 
     private AuthorizationDao $authorizationDao;

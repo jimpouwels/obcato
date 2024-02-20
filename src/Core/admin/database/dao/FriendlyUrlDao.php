@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\ElementHolder;
 
 interface FriendlyUrlDao {
     public function insertFriendlyUrl(string $url, ElementHolder $elementHolder): void;

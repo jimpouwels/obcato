@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\form;
+
+use Obcato\Core\admin\core\model\Link;
 
 class LinkForm extends Form {
 

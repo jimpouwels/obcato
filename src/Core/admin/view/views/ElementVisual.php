@@ -5,6 +5,7 @@ namespace Obcato\Core;
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\core\model\Element;
 
 abstract class ElementVisual extends Visual {
 

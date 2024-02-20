@@ -2,6 +2,9 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementType;
+use Obcato\Core\admin\core\model\Module;
+
 class ComponentRequestHandler extends HttpRequestHandler {
 
     private ModuleDao $moduleDao;

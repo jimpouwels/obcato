@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\Element;
+
 abstract class ElementFrontendVisual extends FrontendVisual {
 
     private Element $element;

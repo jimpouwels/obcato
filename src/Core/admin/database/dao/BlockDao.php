@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
 
 interface BlockDao {
     public function getAllBlocks(): array;

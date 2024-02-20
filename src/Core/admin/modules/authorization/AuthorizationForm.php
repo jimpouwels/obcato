@@ -2,6 +2,9 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\core\form\FormException;
+
 class AuthorizationForm extends Form {
 
     private User $user;

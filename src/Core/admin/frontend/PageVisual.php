@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class PageVisual extends FrontendVisual {
     private PageInteractor $pageService;
     private BlockDao $blockDao;

@@ -2,6 +2,9 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class ArticleRequestHandler extends ElementHolderRequestHandler {
 
     private static string $ARTICLE_ID_POST = "element_holder_id";

@@ -2,6 +2,7 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
 use ZipArchive;
 
 class InstallRequestHandler extends HttpRequestHandler {

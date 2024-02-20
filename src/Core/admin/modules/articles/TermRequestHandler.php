@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class TermRequestHandler extends HttpRequestHandler {
 
     private ?ArticleTerm $currentTerm = null;

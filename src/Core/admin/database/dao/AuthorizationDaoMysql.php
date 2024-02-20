@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
 class AuthorizationDaoMysql implements AuthorizationDao {
 
     private static ?AuthorizationDaoMysql $instance = null;

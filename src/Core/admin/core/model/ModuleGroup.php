@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
+
+use Obcato\Core\Entity;
+use Obcato\Core\MysqlConnector;
 
 class ModuleGroup extends Entity {
 

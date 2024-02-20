@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\Form;
+
 abstract class WebformItemForm extends Form {
 
     private WebFormItem $_webform_item;

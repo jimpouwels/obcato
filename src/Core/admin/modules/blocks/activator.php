@@ -5,6 +5,7 @@ namespace Obcato\Core;
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 
 require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";

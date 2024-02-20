@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class TemplateEditorRequestHandler extends HttpRequestHandler {
 
     private static string $TEMPLATE_ID_GET = "template";

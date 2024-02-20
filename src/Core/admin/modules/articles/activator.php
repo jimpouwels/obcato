@@ -5,6 +5,7 @@ namespace Obcato\Core;
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 
 class ArticleModuleVisual extends ModuleVisual {
 

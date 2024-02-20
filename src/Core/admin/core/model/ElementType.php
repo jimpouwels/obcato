@@ -1,6 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
+
+use Obcato\Core\Scope;
+use Obcato\Core\ScopeDaoMysql;
 
 class ElementType extends Entity {
 

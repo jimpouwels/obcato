@@ -1,8 +1,15 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
 
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\Article;
+use Obcato\Core\ElementVisual;
+use Obcato\Core\FrontendVisual;
+use Obcato\Core\HttpRequestHandler;
+use Obcato\Core\Page;
+use Obcato\Core\Presentable;
+use const Obcato\Core\CMS_ROOT;
 
 abstract class Element extends Presentable {
 

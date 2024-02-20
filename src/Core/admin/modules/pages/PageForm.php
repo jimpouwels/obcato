@@ -2,6 +2,9 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\Form;
+use Obcato\Core\admin\core\form\FormException;
+
 class PageForm extends Form {
 
     private Page $page;

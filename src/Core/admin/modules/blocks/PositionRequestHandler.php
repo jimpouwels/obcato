@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class PositionRequestHandler extends HttpRequestHandler {
 
     private static string $POSITION_ID_POST = "position_id";

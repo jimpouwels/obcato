@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class LabelRequestHandler extends HttpRequestHandler {
 
     private static string $LABEL_QUERYSTRING_KEY = "label";

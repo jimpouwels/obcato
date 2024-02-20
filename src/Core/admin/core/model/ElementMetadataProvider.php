@@ -1,6 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
+
+use Obcato\Core\MysqlConnector;
 
 abstract class ElementMetadataProvider {
 

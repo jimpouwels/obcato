@@ -3,6 +3,7 @@
 namespace Obcato\Core;
 
 use Obcato\ComponentApi\MysqlResult;
+use Obcato\Core\admin\core\form\FormException;
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

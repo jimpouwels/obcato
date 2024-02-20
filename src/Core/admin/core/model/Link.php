@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
+
+use Obcato\Core\ElementHolderDao;
+use Obcato\Core\ElementHolderDaoMysql;
+use Obcato\Core\Entity;
 
 class Link extends Entity {
 

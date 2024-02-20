@@ -3,6 +3,7 @@
 namespace Obcato\Core;
 
 use Obcato\ComponentApi\ModuleInstaller as IModuleInstaller;
+use Obcato\Core\admin\core\model\Module;
 
 abstract class ModuleInstaller extends Installer implements IModuleInstaller {
 

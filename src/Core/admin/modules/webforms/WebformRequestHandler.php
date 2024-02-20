@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\FormException;
+
 class WebformRequestHandler extends HttpRequestHandler {
 
     private static string $FORM_QUERYSTRING_KEY = "webform_id";

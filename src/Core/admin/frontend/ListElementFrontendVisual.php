@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class ListElementFrontendVisual extends ElementFrontendVisual {
 
     public function __construct(Page $page, ?Article $article, ListElement $listElement) {

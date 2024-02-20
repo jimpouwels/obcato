@@ -1,6 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\core\model;
+
+use Obcato\Core\DateTime;
+use Obcato\Core\ElementDaoMysql;
+use Obcato\Core\LinkDaoMysql;
+use Obcato\Core\Presentable;
+use const Obcato\Core\CMS_ROOT;
 
 class ElementHolder extends Presentable {
 

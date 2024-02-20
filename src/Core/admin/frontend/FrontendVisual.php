@@ -2,6 +2,9 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\core\model\Link;
+
 abstract class FrontendVisual {
 
     private TemplateEngine $templateEngine;

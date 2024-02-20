@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
 interface DownloadDao {
     public function getDownload(string $id): ?Download;
 

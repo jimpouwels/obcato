@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class Block extends ElementHolder {
 
     private static int $SCOPE = 6;

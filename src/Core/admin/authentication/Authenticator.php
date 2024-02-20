@@ -1,6 +1,7 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\authentication;
+
 
 class Authenticator {
 

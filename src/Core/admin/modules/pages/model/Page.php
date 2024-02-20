@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\model\ElementHolder;
+
 class Page extends ElementHolder {
 
     const ElementHolderType = "ELEMENT_HOLDER_PAGE";

@@ -2,6 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\Core\admin\core\form\Form;
+
 class TemplateFileForm extends Form {
 
     private TemplateFile $templateFile;

@@ -1,6 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\admin\database\dao;
+
+use Obcato\Core\admin\core\model\Element;
+use Obcato\Core\admin\core\model\ElementHolder;
+use Obcato\Core\admin\core\model\ElementType;
 
 interface ElementDao {
     public function getElements(ElementHolder $elementHolder): array;
