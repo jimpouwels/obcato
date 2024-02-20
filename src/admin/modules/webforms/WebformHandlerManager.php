@@ -2,10 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms;
 
-use Obcato\Core\admin\modules\webforms\handlers\ArticleCommentFormHandler;
-use Obcato\Core\admin\modules\webforms\handlers\EmailFormHandler;
 use Obcato\Core\admin\modules\webforms\handlers\FormHandler;
-use Obcato\Core\admin\modules\webforms\handlers\RedirectFormHandler;
 
 class WebformHandlerManager {
 
@@ -13,9 +10,9 @@ class WebformHandlerManager {
     private static ?WebformHandlerManager $_instance = null;
 
     private function __construct() {
-        $this->_all_handlers[] = new EmailFormHandler();
-        $this->_all_handlers[] = new RedirectFormHandler();
-        $this->_all_handlers[] = new ArticleCommentFormHandler();
+//        $this->_all_handlers[] = new EmailFormHandler();
+//        $this->_all_handlers[] = new RedirectFormHandler();
+//        $this->_all_handlers[] = new ArticleCommentFormHandler();
     }
 
     public static function getInstance() {

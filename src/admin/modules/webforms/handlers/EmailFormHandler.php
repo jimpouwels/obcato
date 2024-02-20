@@ -7,6 +7,7 @@ use Obcato\Core\admin\database\dao\SettingsDaoMysql;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
 
+
 class EmailFormHandler extends Formhandler {
 
     public static string $TYPE = 'email_form_handler';

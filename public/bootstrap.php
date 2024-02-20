@@ -4,6 +4,11 @@ namespace Obcato\Core;
 
 use Obcato\Core\admin\frontend\handlers\RequestHandler;
 
+$configFilePath = __DIR__ . "/config.php";
+if (file_exists($configFilePath)) {
+    require_once $configFilePath;
+}
+
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'localhost') {
     if (defined("PRIVATE_DIR_LOCAL")) {
         define("PRIVATE_DIR", __DIR__ . PRIVATE_DIR_LOCAL);
