@@ -1,14 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/images/visuals/import/ImportTab.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/ImagesTab.php";
-require_once CMS_ROOT . "/modules/images/visuals/labels/LabelsTab.php";
-require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/modules/images/ImageRequestHandler.php";
-require_once CMS_ROOT . "/modules/images/LabelRequestHandler.php";
-require_once CMS_ROOT . "/modules/images/ImportRequestHandler.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ImageModuleVisual extends ModuleVisual {
 
@@ -90,12 +86,10 @@ class ImageModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
+    public function loadTabMenu(TabMenu $tabMenu): void {
         $tabMenu->addItem("images_tab_images", self::$IMAGES_TAB);
         $tabMenu->addItem("images_tab_labels", self::$LABELS_TAB);
         $tabMenu->addItem("images_tab_import", self::$IMPORT_TAB);
-        return $tabMenu;
     }
 
 }

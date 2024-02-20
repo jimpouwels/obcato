@@ -1,6 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/SingleCheckbox.php";
-require_once CMS_ROOT . "/view/views/InformationMessage.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TermsList extends Panel {
 

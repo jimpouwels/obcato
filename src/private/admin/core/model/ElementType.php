@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/model/Presentable.php";
-require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
+
+namespace Obcato\Core;
 
 class ElementType extends Entity {
 

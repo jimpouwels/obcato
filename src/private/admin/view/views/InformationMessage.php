@@ -1,6 +1,11 @@
 <?php
 
-class InformationMessage extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class InformationMessage extends Visual {
 
     private string $_message;
 

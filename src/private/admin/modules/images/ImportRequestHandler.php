@@ -1,5 +1,8 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
+
+namespace Obcato\Core;
+
+use ZipArchive;
 
 class ImportRequestHandler extends HttpRequestHandler {
     private static string $ZIP_FILE_ID = "import_zip_file";

@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ElementDao.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/core/model/ElementType.php";
-require_once CMS_ROOT . "/core/model/Element.php";
+
+namespace Obcato\Core;
 
 class ElementDaoMysql implements ElementDao {
 

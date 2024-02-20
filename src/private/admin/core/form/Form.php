@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/authentication/Session.php";
-require_once CMS_ROOT . "/utilities/StringUtility.php";
+
+namespace Obcato\Core;
 
 abstract class Form {
 

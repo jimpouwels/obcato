@@ -1,9 +1,11 @@
 <?php
 
-require_once CMS_ROOT . '/modules/components/visuals/installation/ComponentInstallFormPanel.php';
-require_once CMS_ROOT . '/modules/components/visuals/installation/ComponentInstallLogPanel.php';
+namespace Obcato\Core;
 
-class InstallationTabVisual extends Obcato\ComponentApi\Visual {
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class InstallationTabVisual extends Visual {
 
     private InstallRequestHandler $installRequestHandler;
 

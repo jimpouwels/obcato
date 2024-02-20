@@ -1,9 +1,11 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
 use Obcato\ComponentApi\TemplateData as ITemplateData;
+use Smarty;
 
-require_once CMS_ROOT . "/view/TemplateData.php";
 
 class TemplateEngine implements ITemplateEngine {
     private static ?TemplateEngine $_instance = null;

@@ -1,9 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ImageDao.php";
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/images/model/ImageLabel.php";
-require_once CMS_ROOT . "/modules/images/model/Image.php";
+
+namespace Obcato\Core;
 
 class ImageDaoMysql implements ImageDao {
 

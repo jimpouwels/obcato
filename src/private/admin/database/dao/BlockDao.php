@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface BlockDao {
     public function getAllBlocks(): array;
 

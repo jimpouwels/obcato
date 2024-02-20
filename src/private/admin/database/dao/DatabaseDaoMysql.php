@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/DatabaseDao.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
+
+namespace Obcato\Core;
 
 class DatabaseDaoMysql implements DatabaseDao {
 

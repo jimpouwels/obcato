@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Download extends Entity {
 

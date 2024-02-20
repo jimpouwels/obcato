@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+
+namespace Obcato\Core;
 
 class TemplateEditorForm extends Form {
     private Template $template;

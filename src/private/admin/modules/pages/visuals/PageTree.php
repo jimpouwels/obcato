@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/modules/pages/visuals/PageTreeItem.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class PageTree extends Panel {
 

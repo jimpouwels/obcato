@@ -1,18 +1,23 @@
 <?php
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/view/views/Panel.php";
 
 class TermSelector extends Panel {
 
-    private array $_selected_terms;
-    private ArticleDao $_article_dao;
-    private int $_context_id;
+    private array $selectedTerms;
+    private ArticleDao $articleDao;
+    private int $contextId;
 
     public function __construct(TemplateEngine $templateEngine, array $selected_terms, int $contextId) {
         parent::__construct($templateEngine, $this->getTextResource("term_selector_title"), 'term_selector');
-        $this->_selected_terms = $selected_terms;
-        $this->_article_dao = ArticleDaoMysql::getInstance();
-        $this->_context_id = $contextId;
+        $this->selectedTerms = $selected_terms;
+        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->contextId = $contextId;
     }
 
     public function getPanelContentTemplate(): string {
@@ -22,7 +27,7 @@ class TermSelector extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         $data->assign("terms_to_select", $this->getTermsToSelect());
         $data->assign("selected_terms", $this->getSelectedTermsHtml());
-        $data->assign("context_id", $this->_context_id);
+        $data->assign("context_id", $this->contextId);
 
         $data->assign("label_selected_terms", $this->getTextResource("term_selector_label_selected_terms"));
         $data->assign("label_delete_selected_term", $this->getTextResource("term_selector_label_delete_selected_term"));
@@ -30,27 +35,27 @@ class TermSelector extends Panel {
     }
 
     private function getTermsToSelect(): array {
-        $terms_to_select = array();
-        foreach ($this->_article_dao->getAllTerms() as $term) {
-            if (!in_array($term, $this->_selected_terms)) {
-                $term_to_select['id'] = $term->getId();
-                $term_to_select['name'] = $term->getName();
-                $terms_to_select[] = $term_to_select;
+        $termsToSelect = array();
+        foreach ($this->articleDao->getAllTerms() as $term) {
+            if (!in_array($term, $this->selectedTerms)) {
+                $termToSelect['id'] = $term->getId();
+                $termToSelect['name'] = $term->getName();
+                $termsToSelect[] = $termToSelect;
             }
         }
-        return $terms_to_select;
+        return $termsToSelect;
     }
 
     private function getSelectedTermsHtml(): array {
-        $selected_terms = array();
-        foreach ($this->_selected_terms as $selected_term) {
-            $selected_term_item = array();
-            $selected_term_item['name'] = $selected_term->getName();
-            $delete_field = new SingleCheckbox($this->getTemplateEngine(), "term_" . $this->_context_id . "_" . $selected_term->getId() . "_delete", "", false, false, "");
-            $selected_term_item['delete_field'] = $delete_field->render();
-            $selected_terms[] = $selected_term_item;
+        $selectedTerms = array();
+        foreach ($this->selectedTerms as $selectedTerm) {
+            $selectedTermItem = array();
+            $selectedTermItem['name'] = $selectedTerm->getName();
+            $deleteField = new SingleCheckbox($this->getTemplateEngine(), "term_" . $this->contextId . "_" . $selectedTerm->getId() . "_delete", "", false, false, "");
+            $selectedTermItem['delete_field'] = $deleteField->render();
+            $selectedTerms[] = $selectedTermItem;
         }
-        return $selected_terms;
+        return $selectedTerms;
     }
 
 }

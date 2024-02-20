@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 // EDITOR FORM CONSTANTS
 const ADD_ELEMENT_FORM_ID = 'add_element_type_id';
 const EDIT_ELEMENT_HOLDER_ID = 'element_holder_id';

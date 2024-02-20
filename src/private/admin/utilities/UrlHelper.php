@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class UrlHelper {
 
     public static function addQueryStringParameter(string $url, string $name, string $value): string {

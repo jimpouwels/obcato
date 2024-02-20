@@ -1,10 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\MysqlResult;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/database/QueryForm.php";
+use Obcato\ComponentApi\MysqlResult;
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

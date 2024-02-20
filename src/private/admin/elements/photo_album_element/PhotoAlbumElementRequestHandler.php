@@ -1,9 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/elements/photo_album_element/PhotoAlbumElementForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
+
+namespace Obcato\Core;
 
 class PhotoAlbumElementRequestHandler extends HttpRequestHandler {
 

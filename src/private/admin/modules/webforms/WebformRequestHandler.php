@@ -1,11 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebformForm.php";
-require_once CMS_ROOT . "/modules/webforms/handlers/EmailFormHandler.php";
-require_once CMS_ROOT . "/modules/webforms/handlers/ArticleCommentFormHandler.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformTextField.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformTextArea.php";
+
+namespace Obcato\Core;
 
 class WebformRequestHandler extends HttpRequestHandler {
 

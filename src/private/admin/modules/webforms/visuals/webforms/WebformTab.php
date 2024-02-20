@@ -1,10 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformList.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformMetadataEditor.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformEditor.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/HandlersEditor.php";
 
-class WebformTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class WebformTab extends Visual {
 
     private ?WebForm $_current_webform;
     private WebformRequestHandler $_webform_request_handler;
@@ -50,5 +51,3 @@ class WebformTab extends Obcato\ComponentApi\Visual {
         return $handlers_editor->render();
     }
 }
-
-?>

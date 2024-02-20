@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/templates/model/Scope.php";
-require_once CMS_ROOT . "/database/dao/ScopeDao.php";
+
+namespace Obcato\Core;
 
 class ScopeDaoMysql implements ScopeDao {
 

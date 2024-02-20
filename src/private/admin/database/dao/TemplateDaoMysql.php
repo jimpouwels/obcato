@@ -1,10 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/templates/model/Template.php";
-require_once CMS_ROOT . "/modules/templates/model/TemplateVar.php";
-require_once CMS_ROOT . "/modules/templates/model/TemplateVarDef.php";
-require_once CMS_ROOT . "/modules/templates/model/TemplateFile.php";
-require_once CMS_ROOT . "/database/dao/TemplateDao.php";
+
+namespace Obcato\Core;
 
 class TemplateDaoMysql implements TemplateDao {
 

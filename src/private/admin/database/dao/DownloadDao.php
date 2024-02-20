@@ -1,5 +1,6 @@
 <?php
 
+namespace Obcato\Core;
 interface DownloadDao {
     public function getDownload(string $id): ?Download;
 

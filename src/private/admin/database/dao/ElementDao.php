@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ElementDao {
     public function getElements(ElementHolder $elementHolder): array;
 

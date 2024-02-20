@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/articles/model/Article.php";
+
+namespace Obcato\Core;
 
 interface ArticleService {
     public function updateArticle(Article $article): void;

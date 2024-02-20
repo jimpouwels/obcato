@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
+
+namespace Obcato\Core;
 
 class BlockPosition extends Entity {
 

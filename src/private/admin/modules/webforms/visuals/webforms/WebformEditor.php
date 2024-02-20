@@ -1,8 +1,9 @@
 <?php
-require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformTextfieldVisual.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformTextareaVisual.php";
-require_once CMS_ROOT . "/modules/webforms/WebformItemFactory.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class WebformEditor extends Panel {
 

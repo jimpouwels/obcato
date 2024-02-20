@@ -1,15 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticleTab.php";
-require_once CMS_ROOT . "/modules/articles/visuals/terms/TermTab.php";
-require_once CMS_ROOT . "/modules/articles/visuals/target_pages/TargetPagesList.php";
-require_once CMS_ROOT . "/modules/articles/ArticleRequestHandler.php";
-require_once CMS_ROOT . "/modules/articles/TermRequestHandler.php";
-require_once CMS_ROOT . "/modules/articles/TargetPagesRequestHandler.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ArticleModuleVisual extends ModuleVisual {
 
@@ -107,12 +102,10 @@ class ArticleModuleVisual extends ModuleVisual {
         $this->currentTerm = $this->termRequestsHandler->getCurrentTerm();
     }
 
-    public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
+    public function loadTabMenu(TabMenu $tabMenu): void {
         $tabMenu->addItem("articles_tab_articles", self::$ARTICLES_TAB);
         $tabMenu->addItem("articles_tab_terms", self::$TERMS_TAB);
         $tabMenu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
-        return $tabMenu;
     }
 
 }

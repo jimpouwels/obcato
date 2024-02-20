@@ -1,11 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/downloads/visuals/ListVisual.php";
-require_once CMS_ROOT . "/modules/downloads/visuals/EditorVisual.php";
-require_once CMS_ROOT . "/modules/downloads/visuals/SearchBoxVisual.php";
-require_once CMS_ROOT . "/modules/downloads/DownloadRequestHandler.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class DownloadModuleVisual extends ModuleVisual {
 
@@ -32,22 +31,22 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     private function renderSearchBox(): string {
-        return (new SearchBoxVisual($this->requestHandler))->render();
+        return (new SearchBoxVisual($this->getTemplateEngine(), $this->requestHandler))->render();
     }
 
     private function renderEditor(): string {
-        return (new EditorVisual($this->currentDownload))->render();
+        return (new EditorVisual($this->getTemplateEngine(), $this->currentDownload))->render();
     }
 
     private function renderList(): string {
-        return (new ListVisual($this->requestHandler))->render();
+        return (new ListVisual($this->getTemplateEngine(), $this->requestHandler))->render();
     }
 
     public function getActionButtons(): array {
         $actionButtons = array();
         if ($this->currentDownload) {
-            $actionButtons[] = new ActionButtonSave('update_download');
-            $actionButtons[] = new ActionButtonDelete('delete_download');
+            $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_download');
+            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_download');
         }
         $actionButtons[] = new ActionButtonAdd('add_download');
         return $actionButtons;
@@ -67,5 +66,5 @@ class DownloadModuleVisual extends ModuleVisual {
         $this->currentDownload = $this->requestHandler->getCurrentDownload();
     }
 
-    function getTabMenu(): ?TabMenu {}
+    function loadTabMenu(TabMenu $tabMenu): void {}
 }

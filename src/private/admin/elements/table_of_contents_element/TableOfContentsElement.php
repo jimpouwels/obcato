@@ -1,14 +1,9 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/TableOfContentsElementStatics.php";
-require_once CMS_ROOT . "/elements/table_of_contents_element/visuals/TableOfContentsElementEditor.php";
-require_once CMS_ROOT . "/elements/table_of_contents_element/TableOfContentsElementRequestHandler.php";
-require_once CMS_ROOT . "/frontend/TableOfContentsElementFrontendVisual.php";
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 
 class TableOfContentsElement extends Element {
 

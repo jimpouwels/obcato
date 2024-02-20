@@ -1,16 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/utilities/DateUtility.php";
-require_once CMS_ROOT . "/elements/article_overview_element/visuals/ArticleOverviewElementStatics.php";
-require_once CMS_ROOT . "/elements/article_overview_element/visuals/ArticleOverviewElementEditor.php";
-require_once CMS_ROOT . "/elements/article_overview_element/ArticleOverviewElementRequestHandler.php";
-require_once CMS_ROOT . "/frontend/ArticleOverviewElementFrontendVisual.php";
+use Obcato\ComponentApi\Visual;
 
 class ArticleOverviewElement extends Element {
 

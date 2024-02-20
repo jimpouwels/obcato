@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
-require_once CMS_ROOT . '/modules/components/installer/Logger.php';
+
+namespace Obcato\Core;
 
 class ComponentRequestHandler extends HttpRequestHandler {
 

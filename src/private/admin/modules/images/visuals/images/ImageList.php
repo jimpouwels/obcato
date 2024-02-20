@@ -1,6 +1,9 @@
 <?php
 
-require_once CMS_ROOT . "/modules/authorization/service/AuthorizationInteractor.php";
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ImageList extends Panel {
 

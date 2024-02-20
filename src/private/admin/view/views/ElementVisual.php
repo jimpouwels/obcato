@@ -1,8 +1,12 @@
 <?php
-require_once CMS_ROOT . "/view/views/TemplatePicker.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
 
-abstract class ElementVisual extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+abstract class ElementVisual extends Visual {
 
     private ElementDao $elementDao;
 

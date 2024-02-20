@@ -1,5 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
+use Closure;
+
 class Arrays {
 
     static function firstMatch(array $array, Closure $lambda): object|array|string|null {

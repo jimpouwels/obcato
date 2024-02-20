@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface FriendlyUrlDao {
     public function insertFriendlyUrl(string $url, ElementHolder $elementHolder): void;
 

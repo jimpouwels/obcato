@@ -1,9 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/elements/article_overview_element/ArticleOverviewElementForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
+
+namespace Obcato\Core;
 
 class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
 

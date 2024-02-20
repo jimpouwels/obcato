@@ -1,15 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/WebformDao.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformTextField.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformTextArea.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformDropdown.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformButton.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformHandlerInstance.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformHandlerProperty.php";
-require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
+
+namespace Obcato\Core;
 
 class WebformDaoMysql implements WebformDao {
 

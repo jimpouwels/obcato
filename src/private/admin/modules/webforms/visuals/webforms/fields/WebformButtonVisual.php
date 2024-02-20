@@ -1,6 +1,9 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/fields/WebformItemVisual.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformButton.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class WebformButtonVisual extends WebformItemVisual {
 

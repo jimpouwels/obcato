@@ -1,16 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
-require_once CMS_ROOT . "/elements/form_element/visuals/FormElementStatics.php";
-require_once CMS_ROOT . "/elements/form_element/visuals/FormElementEditor.php";
-require_once CMS_ROOT . "/elements/form_element/FormElementRequestHandler.php";
-require_once CMS_ROOT . "/frontend/FormElementFrontendVisual.php";
+use Obcato\ComponentApi\Visual;
 
 class FormElement extends Element {
 

@@ -1,4 +1,9 @@
 <?php
+
+namespace Obcato\Core;
+
+use DOMDocument;
+
 require_once "discovery.php";
 
 // INCLUDE SYSTEM CONSTANTS

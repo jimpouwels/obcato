@@ -1,12 +1,11 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementContainer.php";
-require_once CMS_ROOT . "/view/views/LinkEditor.php";
-require_once CMS_ROOT . "/view/views/TermSelector.php";
-require_once CMS_ROOT . "/view/views/ImagePicker.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . '/modules/articles/visuals/articles/ArticleMetadataEditor.php';
 
-class ArticleEditor extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ArticleEditor extends Visual {
 
     private Article $currentArticle;
     private ArticleDao $articleDao;

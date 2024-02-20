@@ -1,5 +1,10 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class DownloadInfo extends Panel {
 
     private Download $download;

@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TemplateFileCodeViewer extends Panel {
 

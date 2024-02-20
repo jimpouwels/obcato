@@ -1,12 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/dao/PageDao.php';
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
-require_once CMS_ROOT . "/modules/pages/model/Page.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+
+namespace Obcato\Core;
 
 class PageDaoMysql implements PageDao {
 
@@ -211,5 +205,3 @@ class PageDaoMysql implements PageDao {
         return $parents;
     }
 }
-
-?>

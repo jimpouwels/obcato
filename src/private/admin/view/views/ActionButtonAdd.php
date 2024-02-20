@@ -1,5 +1,8 @@
 <?php
-require_once CMS_ROOT . '/view/views/ActionButton.php';
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
 
 class ActionButtonAdd extends ActionButton {
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface SettingsDao {
     public function update(Settings $settings): void;
 

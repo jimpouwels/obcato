@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . '/core/Notifications.php';
+
+namespace Obcato\Core;
 
 use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\RequestHandler as IHttpRequestHandler;

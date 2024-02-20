@@ -1,6 +1,11 @@
 <?php
 
-class Button extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class Button extends Visual {
 
     private ?string $_id;
     private string $_label_resource_identifier;

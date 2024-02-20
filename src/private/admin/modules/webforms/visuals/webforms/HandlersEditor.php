@@ -1,8 +1,9 @@
 <?php
-require_once CMS_ROOT . '/modules/webforms/model/Webform.php';
-require_once CMS_ROOT . '/modules/webforms/handlers/EmailFormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/WebformHandlerManager.php';
-require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class HandlersEditor extends Panel {
 

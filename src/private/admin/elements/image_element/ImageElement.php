@@ -1,15 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/elements/image_element/visuals/ImageElementStatics.php";
-require_once CMS_ROOT . "/elements/image_element/visuals/ImageElementEditor.php";
-require_once CMS_ROOT . "/elements/image_element/ImageElementRequestHandler.php";
-require_once CMS_ROOT . "/frontend/ImageElementFrontendVisual.php";
+use Obcato\ComponentApi\Visual;
 
 class ImageElement extends Element {
 

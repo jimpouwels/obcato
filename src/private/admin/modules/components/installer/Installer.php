@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/MysqlConnector.php';
-require_once CMS_ROOT . '/modules/components/installer/Installer.php';
-require_once CMS_ROOT . '/utilities/FileUtility.php';
+
+namespace Obcato\Core;
 
 use Obcato\ComponentApi\Installer as IInstaller;
 

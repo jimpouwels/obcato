@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . '/frontend/FrontendVisual.php';
-require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
+
+namespace Obcato\Core;
 
 abstract class FormItemVisual extends FrontendVisual {
 

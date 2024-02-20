@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/FrontendVisual.php";
-require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/TemplateDaoMysql.php';
+
+namespace Obcato\Core;
 
 class BlockVisual extends FrontendVisual {
 

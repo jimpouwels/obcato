@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
+
+namespace Obcato\Core;
 
 class SettingsForm extends Form {
 

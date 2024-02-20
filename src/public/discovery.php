@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 $configFilePath = __DIR__ . "/config.php";
 if (file_exists($configFilePath)) {
     require_once $configFilePath;
@@ -26,4 +28,5 @@ if (!defined("IS_TEST_RUN")) {
     require_once PRIVATE_DIR . "/database_config.php";
 }
 require_once CMS_ROOT . "/constants.php";
+
 require PRIVATE_DIR . '/vendor/autoload.php';

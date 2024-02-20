@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 // DIRECT ACCESS GRANTED
 define("_ACCESS", "GRANTED");
 
@@ -15,9 +17,6 @@ if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {
 }
 
 function runBackend(): void {
-    require_once CMS_ROOT . "/includes.php";
-    require_once CMS_ROOT . "/Backend.php";
-    require_once CMS_ROOT . "/authentication/Authenticator.php";
     checkAuthentication();
     $backend = new Backend();
     $backend->start();

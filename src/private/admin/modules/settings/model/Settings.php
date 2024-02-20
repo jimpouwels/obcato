@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Settings extends Entity {
     private string $websiteTitle;

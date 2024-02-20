@@ -1,9 +1,11 @@
 <?php
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/DatabaseDaoMysql.php";
-require_once CMS_ROOT . '/modules/database/visuals/TablePanel.php';
 
-class Tables extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class Tables extends Visual {
 
     private DatabaseDao $databaseDao;
 

@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
-require_once CMS_ROOT . "/utilities/DateUtility.php";
+
+namespace Obcato\Core;
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
@@ -50,5 +50,3 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         return $article->isPublished() && strtotime($article->getPublicationDate()) < strtotime('now');
     }
 }
-
-?>

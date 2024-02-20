@@ -1,6 +1,11 @@
 <?php
 
-class ArticleOverviewElementStatics extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ArticleOverviewElementStatics extends Visual {
 
     public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);

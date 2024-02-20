@@ -1,8 +1,13 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class ComponentInstallLogPanel extends Panel {
 
-    private $installRequestHandler;
+    private InstallRequestHandler $installRequestHandler;
 
     public function __construct(TemplateEngine $templateEngine, $install_requestHandler) {
         parent::__construct($templateEngine, 'Log', 'installation-log-fieldset');

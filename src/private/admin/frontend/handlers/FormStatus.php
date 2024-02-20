@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . '/frontend/handlers/ErrorType.php';
+
+namespace Obcato\Core;
 
 class FormStatus {
 

@@ -1,8 +1,8 @@
 <?php
-require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/model/Webform.php';
-require_once CMS_ROOT . '/database/dao/SettingsDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
+
+namespace Obcato\Core;
+
+use TemplateEngine;
 
 class RedirectFormHandler extends Formhandler {
 

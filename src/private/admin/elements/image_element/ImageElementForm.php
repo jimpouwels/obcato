@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/ElementForm.php";
 
+namespace Obcato\Core;
 class ImageElementForm extends ElementForm {
 
     private ImageElement $imageElement;

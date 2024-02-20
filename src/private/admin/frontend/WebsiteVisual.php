@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/FrontendVisual.php";
-require_once CMS_ROOT . "/frontend/PageVisual.php";
-require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
+
+namespace Obcato\Core;
 
 class WebsiteVisual extends FrontendVisual {
 

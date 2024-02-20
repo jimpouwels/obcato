@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/elements/list_element/ListElementForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
+
+namespace Obcato\Core;
 
 class ListElementRequestHandler extends HttpRequestHandler {
 

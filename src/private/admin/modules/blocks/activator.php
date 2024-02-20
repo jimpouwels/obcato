@@ -1,6 +1,10 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 require_once CMS_ROOT . "/view/views/TabMenu.php";
 require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
@@ -87,11 +91,9 @@ class BlockModuleVisual extends ModuleVisual {
         $this->currentPosition = $this->positionRequestHandler->getCurrentPosition();
     }
 
-    public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
+    public function loadTabMenu(TabMenu $tabMenu): void {
         $tabMenu->addItem("blocks_tabmenu_blocks", self::$BLOCKS_TAB);
         $tabMenu->addItem("blocks_tabmenu_positions", self::$POSITIONS_TAB);
-        return $tabMenu;
     }
 
 }

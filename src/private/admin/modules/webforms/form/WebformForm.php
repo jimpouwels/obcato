@@ -1,10 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebformTextFieldForm.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebformTextAreaForm.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebformDropDownForm.php";
-require_once CMS_ROOT . "/modules/webforms/WebformItemFactory.php";
-require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
+
+namespace Obcato\Core;
 
 class WebformForm extends Form {
 

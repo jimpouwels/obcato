@@ -1,7 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/modules/authorization/service/AuthorizationService.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+namespace Obcato\Core;
 
 class AuthorizationInteractor implements AuthorizationService {
 

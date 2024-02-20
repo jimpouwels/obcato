@@ -1,7 +1,9 @@
 <?php
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
-require_once CMS_ROOT . "/view/views/InformationMessage.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_editor/ScopeSelector.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TemplateList extends Panel {
 

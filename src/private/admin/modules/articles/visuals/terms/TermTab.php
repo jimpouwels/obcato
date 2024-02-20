@@ -1,6 +1,8 @@
 <?php
-require_once CMS_ROOT . "/modules/articles/visuals/terms/TermsList.php";
-require_once CMS_ROOT . "/modules/articles/visuals/terms/TermEditor.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
 
 class TermTab extends Obcato\ComponentApi\Visual {
 

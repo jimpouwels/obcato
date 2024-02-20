@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/DownloadDao.php";
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
+
+namespace Obcato\Core;
 
 class DownloadDaoMysql implements DownloadDao {
 

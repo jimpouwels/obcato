@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/ElementForm.php";
-require_once CMS_ROOT . "/utilities/DateUtility.php";
+
+namespace Obcato\Core;
 
 class TableOfContentsElementForm extends ElementForm {
 

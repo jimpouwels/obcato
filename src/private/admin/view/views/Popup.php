@@ -1,7 +1,11 @@
 <?php
-require_once CMS_ROOT . "/view/views/Search.php";
 
-class Popup extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class Popup extends Visual {
 
     private string $popupType;
 

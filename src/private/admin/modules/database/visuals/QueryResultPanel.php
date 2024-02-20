@@ -1,5 +1,10 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class QueryResultPanel extends Panel {
 
     private DatabaseRequestHandler $requestHandler;

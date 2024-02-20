@@ -1,11 +1,6 @@
 <?php
-require_once CMS_ROOT . '/modules/pages/model/Page.php';
-require_once CMS_ROOT . '/modules/articles/model/Article.php';
-require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
-require_once CMS_ROOT . '/modules/webforms/WebformHandlerManager.php';
-require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
-require_once CMS_ROOT . '/frontend/handlers/ErrorType.php';
+
+namespace Obcato\Core;
 
 class FormRequestHandler {
 

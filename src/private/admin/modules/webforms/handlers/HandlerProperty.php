@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\Visual;
 
 class HandlerProperty {

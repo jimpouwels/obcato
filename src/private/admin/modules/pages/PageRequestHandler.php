@@ -1,12 +1,6 @@
 <?php
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
-require_once CMS_ROOT . "/modules/blocks/service/BlockInteractor.php";
-require_once CMS_ROOT . "/modules/pages/PageForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/ElementHolderRequestHandler.php";
-require_once CMS_ROOT . "/request_handlers/exceptions/ElementHolderContainsErrorsException.php";
-require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
+
+namespace Obcato\Core;
 
 class PageRequestHandler extends ElementHolderRequestHandler {
 

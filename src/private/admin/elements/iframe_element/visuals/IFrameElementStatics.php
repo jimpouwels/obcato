@@ -1,6 +1,11 @@
 <?php
 
-class IFrameElementStatics extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class IFrameElementStatics extends Visual {
 
     public function __construct(TemplateEngine $templateEngine) {
         parent::__construct($templateEngine);

@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class WebFormDropDownOption extends Entity {
 
     private string $_text;

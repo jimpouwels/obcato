@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/utilities/StringUtility.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Authenticator {
 

@@ -1,9 +1,6 @@
 <?php
 
-require_once CMS_ROOT . '/utilities/FileUtility.php';
-require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
-require_once CMS_ROOT . '/core/model/Module.php';
-require_once CMS_ROOT . '/modules/components/installer/Installer.php';
+namespace Obcato\Core;
 
 use Obcato\ComponentApi\ModuleInstaller as IModuleInstaller;
 

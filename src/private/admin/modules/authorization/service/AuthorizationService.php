@@ -1,6 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/modules/authorization/model/User.php";
+namespace Obcato\Core;
 
 interface AuthorizationService {
     public function getUser(int $id): User;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class PasswordUtility {
 
     private function __construct() {}
@@ -37,5 +39,3 @@ class PasswordUtility {
     }
 
 }
-
-?>

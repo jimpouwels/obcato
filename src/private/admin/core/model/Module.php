@@ -1,9 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\Module as IModule;
 
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
 
 class Module extends Entity implements IModule {
     private string $_identifier;

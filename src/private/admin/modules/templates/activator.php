@@ -1,12 +1,11 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateEditorTab.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFilesTab.php";
-require_once CMS_ROOT . "/modules/templates/TemplateEditorRequestHandler.php";
-require_once CMS_ROOT . "/modules/templates/TemplateFilesRequestHandler.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
+
 
 class TemplateModuleVisual extends ModuleVisual {
     private static int $TEMPLATES_TAB = 0;
@@ -83,10 +82,8 @@ class TemplateModuleVisual extends ModuleVisual {
         return $this->getTextResource($this->module->getIdentifier() . '_module_title');
     }
 
-    public function getTabMenu(): ?TabMenu {
-        $tabMenu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
+    public function loadTabMenu(TabMenu $tabMenu): void {
         $tabMenu->addItem("templates_tab_menu_templates", self::$TEMPLATES_TAB);
         $tabMenu->addItem("templates_tab_menu_template_files", self::$TEMPLATE_FILES_TAB);
-        return $tabMenu;
     }
 }

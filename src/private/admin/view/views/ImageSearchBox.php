@@ -1,7 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/Search.php";
-require_once CMS_ROOT . "/view/views/InformationMessage.php";
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ImageSearchBox extends Panel {
 
@@ -41,7 +43,7 @@ class ImageSearchBox extends Panel {
 
     private function renderSearchField(): string {
         $search_query = $this->getCurrentSearchQuery();
-        $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
+        $search_field = new TextField($this->getTemplateEngine(), self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
         return $search_field->render();
     }
 
@@ -52,7 +54,7 @@ class ImageSearchBox extends Panel {
         foreach ($image_labels as $image_label) {
             $image_labels_values[] = array("name" => $image_label->getName(), "value" => $image_label->getId());
         }
-        $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null, true);
+        $image_labels_field = new Pulldown($this->getTemplateEngine(), self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null, true);
         return $image_labels_field->render();
     }
 
@@ -72,7 +74,7 @@ class ImageSearchBox extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        $information_message = new InformationMessage("Geen resultaten gevonden");
+        $information_message = new InformationMessage($this->getTemplateEngine(), "Geen resultaten gevonden");
         return $information_message->render();
     }
 
@@ -93,7 +95,7 @@ class ImageSearchBox extends Panel {
     }
 
     private function renderSearchButton(): string {
-        $search_button = new Button("", "Zoeken", "document.getElementById('search_form').submit(); return false;");
+        $search_button = new Button($this->getTemplateEngine(), "", "Zoeken", "document.getElementById('search_form').submit(); return false;");
         return $search_button->render();
     }
 

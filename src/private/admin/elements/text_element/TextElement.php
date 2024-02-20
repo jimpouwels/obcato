@@ -1,14 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/elements/text_element/visuals/TextElementEditor.php";
-require_once CMS_ROOT . "/elements/text_element/visuals/TextElementStatics.php";
-require_once CMS_ROOT . "/elements/text_element/TextElementRequestHandler.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/frontend/TextElementFrontendVisual.php";
+use Obcato\ComponentApi\Visual;
 
 class TextElement extends Element {
 

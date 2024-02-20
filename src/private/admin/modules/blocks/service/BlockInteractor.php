@@ -1,7 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/modules/blocks/service/BlockService.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
+namespace Obcato\Core;
 
 class BlockInteractor implements BlockService {
 

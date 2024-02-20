@@ -1,18 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/settings/model/Settings.php";
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
-require_once CMS_ROOT . "/frontend/WebsiteVisual.php";
-require_once CMS_ROOT . '/utilities/UrlHelper.php';
-require_once CMS_ROOT . '/frontend/SitemapVisual.php';
-require_once CMS_ROOT . '/frontend/RobotsVisual.php';
-require_once CMS_ROOT . '/utilities/Arrays.php';
-require_once CMS_ROOT . '/view/views/Panel.php';
-require_once CMS_ROOT . '/view/TemplateEngine.php';
-require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
-require_once CMS_ROOT . '/frontend/handlers/FormRequestHandler.php';
-require_once CMS_ROOT . '/modules/pages/service/PageInteractor.php';
+
+namespace Obcato\Core;
 
 class RequestHandler {
 

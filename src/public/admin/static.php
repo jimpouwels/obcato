@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";

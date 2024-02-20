@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface TemplateDao {
     public function getTemplate(int $id): ?Template;
 

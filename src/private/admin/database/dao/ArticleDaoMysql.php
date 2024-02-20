@@ -1,14 +1,6 @@
 <?php
 
-require_once CMS_ROOT . '/database/dao/ArticleDao.php';
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
-require_once CMS_ROOT . "/modules/articles/model/Article.php";
-require_once CMS_ROOT . "/modules/articles/model/ArticleComment.php";
-require_once CMS_ROOT . "/modules/articles/model/ArticleTerm.php";
-require_once CMS_ROOT . "/utilities/DateUtility.php";
+namespace Obcato\Core;
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,

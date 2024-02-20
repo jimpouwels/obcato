@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementHolderSearch.php";
-require_once CMS_ROOT . "/view/views/ImageSearchBox.php";
 
-class Search extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class Search extends Visual {
 
     public static string $ARTICLES = "articles";
     public static string $PAGES = "pages";
@@ -12,17 +15,17 @@ class Search extends Obcato\ComponentApi\Visual {
     public static string $BACKFILL_KEY = "backfill";
     public static string $OBJECT_TO_SEARCH_KEY = "object";
     public static string $POPUP_TYPE_KEY = "popup";
-    private string $_back_click_id;
-    private string $_backfill_id;
-    private string $_objects_to_search;
-    private string $_popup_type;
+    private string $backClickId;
+    private string $backfillId;
+    private string $objectsToSearch;
+    private string $popupType;
 
     public function __construct(TemplateEngine $templateEngine,) {
         parent::__construct($templateEngine);
-        $this->_back_click_id = $_GET[self::$BACK_CLICK_ID_KEY];
-        $this->_backfill_id = $_GET[self::$BACKFILL_KEY];
-        $this->_objects_to_search = $_GET[self::$OBJECT_TO_SEARCH_KEY];
-        $this->_popup_type = $_GET[self::$POPUP_TYPE_KEY];
+        $this->backClickId = $_GET[self::$BACK_CLICK_ID_KEY];
+        $this->backfillId = $_GET[self::$BACKFILL_KEY];
+        $this->objectsToSearch = $_GET[self::$OBJECT_TO_SEARCH_KEY];
+        $this->popupType = $_GET[self::$POPUP_TYPE_KEY];
     }
 
     public function getTemplateFilename(): string {
@@ -31,9 +34,9 @@ class Search extends Obcato\ComponentApi\Visual {
 
     public function load(): void {
         if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES_POPUP_TYPE) {
-            $search = new ImageSearchBox($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search, $this->_popup_type);
+            $search = new ImageSearchBox($this->getTemplateEngine(), $this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
         } else {
-            $search = new ElementHolderSearch($this->_back_click_id, $this->_backfill_id, $this->_objects_to_search, $this->_popup_type);
+            $search = new ElementHolderSearch($this->getTemplateEngine(), $this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
         }
         $this->assign("search_content", $search->render());
     }

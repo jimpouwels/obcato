@@ -1,6 +1,11 @@
 <?php
 
-class FormLabel extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class FormLabel extends Visual {
 
     private string $_field_name;
     private string $_label_resource_identifier;

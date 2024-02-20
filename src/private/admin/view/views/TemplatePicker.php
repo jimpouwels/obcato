@@ -1,6 +1,8 @@
 <?php
-require_once CMS_ROOT . "/view/views/Pulldown.php";
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
 
 class TemplatePicker extends Pulldown {
 

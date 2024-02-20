@@ -1,5 +1,10 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class LabelEditor extends Panel {
 
     private ImageLabel $_current_label;

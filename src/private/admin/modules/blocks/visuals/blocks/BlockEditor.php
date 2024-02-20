@@ -1,9 +1,11 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementContainer.php";
-require_once CMS_ROOT . "/view/views/LinkEditor.php";
-require_once CMS_ROOT . '/modules/blocks/visuals/blocks/BlockMetadataEditor.php';
 
-class BlockEditor extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class BlockEditor extends Visual {
 
     private Block $currentBlock;
 

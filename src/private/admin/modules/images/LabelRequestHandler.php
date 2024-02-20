@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/modules/images/model/ImageLabel.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/images/LabelForm.php";
+
+namespace Obcato\Core;
 
 class LabelRequestHandler extends HttpRequestHandler {
 

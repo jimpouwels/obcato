@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ModuleDao {
     public function getAllModules(): array;
 

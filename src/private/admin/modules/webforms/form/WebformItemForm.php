@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformItem.php";
+
+namespace Obcato\Core;
 
 abstract class WebformItemForm extends Form {
 

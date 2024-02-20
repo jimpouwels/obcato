@@ -1,9 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/utilities/FileUtility.php";
-require_once CMS_ROOT . "/modules/images/ImageForm.php";
-require_once CMS_ROOT . "/modules/images/ImageListForm.php";
+
+namespace Obcato\Core;
 
 class ImageRequestHandler extends HttpRequestHandler {
 

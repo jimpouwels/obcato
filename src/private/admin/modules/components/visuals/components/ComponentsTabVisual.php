@@ -1,9 +1,11 @@
 <?php
-require_once CMS_ROOT . '/modules/components/visuals/components/ModulesListPanel.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/ElementsListPanel.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/ComponentsDetailsPanel.php';
 
-class ComponentsTabVisual extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ComponentsTabVisual extends Visual {
 
     private ComponentRequestHandler $componentRequestHandler;
 

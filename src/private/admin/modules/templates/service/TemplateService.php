@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface TemplateService {
 
     public function getTemplateVarDefByTemplateVar(Template $template, TemplateVar $templateVar): TemplateVarDef;

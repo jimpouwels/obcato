@@ -1,12 +1,11 @@
 <?php
-require_once CMS_ROOT . "/view/views/TemplatePicker.php";
-require_once CMS_ROOT . "/view/views/ElementContainer.php";
-require_once CMS_ROOT . "/view/views/LinkEditor.php";
-require_once CMS_ROOT . "/view/views/BlockSelector.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . '/modules/pages/visuals/MetadataEditor.php';
 
-class PageEditor extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class PageEditor extends Visual {
 
     private Page $currentPage;
     private BlockDao $blockDao;

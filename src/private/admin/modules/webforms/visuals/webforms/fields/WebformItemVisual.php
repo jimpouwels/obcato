@@ -1,7 +1,12 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
 
-abstract class WebformItemVisual extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+abstract class WebformItemVisual extends Visual {
 
     private WebFormItem $_webform_item;
 

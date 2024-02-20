@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Image extends Entity {
 

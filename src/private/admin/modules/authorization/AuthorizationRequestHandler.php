@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/authorization/AuthorizationForm.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
-require_once CMS_ROOT . "/utilities/PasswordUtility.php";
+
+namespace Obcato\Core;
 
 class AuthorizationRequestHandler extends HttpRequestHandler {
 

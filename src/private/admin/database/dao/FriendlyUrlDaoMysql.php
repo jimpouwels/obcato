@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/dao/FriendlyUrlDao.php';
+
+namespace Obcato\Core;
 
 class FriendlyUrlDaoMysql implements FriendlyUrlDao {
 

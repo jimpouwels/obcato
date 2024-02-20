@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/LinkDao.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/core/model/Link.php";
+
+namespace Obcato\Core;
 
 class LinkDaoMysql implements LinkDao {
 

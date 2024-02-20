@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/FormField.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class SingleCheckbox extends FormField {
 

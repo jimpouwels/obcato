@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class DateUtility {
 
     private function __construct() {}
@@ -24,5 +26,3 @@ class DateUtility {
     }
 
 }
-
-?>

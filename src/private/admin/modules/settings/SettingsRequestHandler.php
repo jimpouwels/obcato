@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/settings/SettingsForm.php";
+
+namespace Obcato\Core;
 
 class SettingsRequestHandler extends HttpRequestHandler {
 

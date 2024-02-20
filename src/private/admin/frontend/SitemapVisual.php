@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/FrontendVisual.php";
-require_once CMS_ROOT . "/database/dao/PageDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+
+namespace Obcato\Core;
 
 class SitemapVisual extends FrontendVisual {
 

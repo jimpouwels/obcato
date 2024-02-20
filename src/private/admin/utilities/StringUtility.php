@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class StringUtility {
 
     private function __construct() {}
@@ -19,8 +21,7 @@ class StringUtility {
         $string_value = str_replace("&iexcl;", "�", $string_value);
         $string_value = str_replace("&iquest;", "�", $string_value);
         $string_value = str_replace("&ldquo;", "�", $string_value);
-        $string_value = str_replace("&rdquo;", "�", $string_value);
-        return $string_value;
+        return str_replace("&rdquo;", "�", $string_value);
     }
 
     public static function escapeXml(?string $string_value): string {
@@ -36,10 +37,7 @@ class StringUtility {
         $string_value = str_replace("�", "&iquest;", $string_value);
         $string_value = str_replace("'", "&#39;", $string_value);
         $string_value = str_replace("�", "&ldquo;", $string_value);
-        $string_value = str_replace("�", "&rdquo;", $string_value);
-        return $string_value;
+        return str_replace("�", "&rdquo;", $string_value);
     }
 
 }
-
-?>

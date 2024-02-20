@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . '/frontend/FormFieldVisual.php';
+
+namespace Obcato\Core;
 
 class FormDropDownVisual extends FormFieldVisual {
 

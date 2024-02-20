@@ -1,6 +1,11 @@
 <?php
 
-class PageTreeItem extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class PageTreeItem extends Visual {
 
     private Page $page;
     private PageService $pageService;

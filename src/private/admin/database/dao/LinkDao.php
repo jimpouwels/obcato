@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface LinkDao {
     public function createLink(int $elementHolderId, $title): Link;
 

@@ -1,6 +1,11 @@
 <?php
 
-class FormElementStatics extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class FormElementStatics extends Visual {
 
 
     public function __construct(TemplateEngine $templateEngine) {
@@ -14,5 +19,3 @@ class FormElementStatics extends Obcato\ComponentApi\Visual {
     public function load(): void {}
 
 }
-
-?>

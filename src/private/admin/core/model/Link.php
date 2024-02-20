@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Link extends Entity {
 

@@ -1,6 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\TemplateData as ITemplateData;
+use Smarty_Internal_Data;
 
 class TemplateData implements ITemplateData {
 

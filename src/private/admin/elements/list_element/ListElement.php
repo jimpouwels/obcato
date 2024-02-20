@@ -1,15 +1,8 @@
 <?php
 
-use Obcato\ComponentApi\Visual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/core/model/Element.php";
-require_once CMS_ROOT . "/core/model/ElementMetadataProvider.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/elements/list_element/ListItem.php";
-require_once CMS_ROOT . "/elements/list_element/visuals/ListElementStatics.php";
-require_once CMS_ROOT . "/elements/list_element/visuals/ListElementEditor.php";
-require_once CMS_ROOT . "/frontend/ListElementFrontendVisual.php";
-require_once CMS_ROOT . "/elements/list_element/ListElementRequestHandler.php";
+use Obcato\ComponentApi\Visual;
 
 class ListElement extends Element {
 

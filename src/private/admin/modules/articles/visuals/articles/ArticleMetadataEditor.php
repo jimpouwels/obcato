@@ -1,9 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/ImagePicker.php";
-require_once CMS_ROOT . "/view/views/ArticlePicker.php";
-require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/WebformDaoMysql.php';
-require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ArticleMetadataEditor extends Panel {
 

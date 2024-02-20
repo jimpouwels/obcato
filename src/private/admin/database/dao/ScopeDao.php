@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ScopeDao {
     public function getScopes(): array;
 

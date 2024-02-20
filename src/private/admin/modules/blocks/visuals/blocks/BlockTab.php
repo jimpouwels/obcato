@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlocksList.php";
-require_once CMS_ROOT . "/modules/blocks/visuals/blocks/BlockEditor.php";
 
-class BlockTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class BlockTab extends Visual {
 
     private ?Block $currentBlock;
 

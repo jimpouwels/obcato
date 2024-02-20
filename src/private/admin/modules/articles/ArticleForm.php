@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
-require_once CMS_ROOT . "/core/form/FormException.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/utilities/DateUtility.php";
+
+namespace Obcato\Core;
 
 class ArticleForm extends Form {
 

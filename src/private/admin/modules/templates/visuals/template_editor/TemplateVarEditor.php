@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/service/TemplateInteractor.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TemplateVarEditor extends Panel {
 

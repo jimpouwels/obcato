@@ -1,11 +1,11 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/view/views/TabMenu.php";
-require_once CMS_ROOT . "/modules/webforms/WebformRequestHandler.php";
-require_once CMS_ROOT . "/modules/webforms/visuals/webforms/WebformTab.php";
-require_once CMS_ROOT . "/database/dao/WebformDaoMysql.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
+
 
 class WebFormsModuleVisual extends ModuleVisual {
 
@@ -59,10 +59,8 @@ class WebFormsModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function getTabMenu(): ?TabMenu {
-        $tab_menu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
-        $tab_menu->addItem("webforms_tab_forms", self::$FORMS_TAB);
-        return $tab_menu;
+    public function loadTabMenu(TabMenu $tabMenu): void {
+        $tabMenu->addItem("webforms_tab_forms", self::$FORMS_TAB);
     }
 
 }

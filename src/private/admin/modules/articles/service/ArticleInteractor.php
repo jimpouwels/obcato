@@ -1,7 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/modules/articles/service/ArticleService.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+namespace Obcato\Core;
 
 class ArticleInteractor implements ArticleService {
 

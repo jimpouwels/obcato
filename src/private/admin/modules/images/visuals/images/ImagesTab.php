@@ -1,9 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/images/visuals/images/ImageSearch.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/ImageList.php";
-require_once CMS_ROOT . "/modules/images/visuals/images/ImageEditor.php";
 
-class ImagesTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ImagesTab extends Visual {
 
     private ?Image $currentImage;
     private ImageRequestHandler $requestHandler;

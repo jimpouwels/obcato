@@ -1,5 +1,8 @@
 <?php
-require_once CMS_ROOT . "/view/views/ObjectPicker.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
 
 class PagePicker extends ObjectPicker {
 

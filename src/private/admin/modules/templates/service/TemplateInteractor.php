@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/service/TemplateService.php";
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+
+namespace Obcato\Core;
 
 class TemplateInteractor implements TemplateService {
 

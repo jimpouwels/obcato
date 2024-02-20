@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . '/modules/downloads/visuals/DownloadMetadataEditor.php';
-require_once CMS_ROOT . '/modules/downloads/visuals/DownloadInfo.php';
 
-class EditorVisual extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class EditorVisual extends Visual {
 
     private Download $download;
 

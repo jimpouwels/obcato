@@ -1,6 +1,12 @@
 <?php
 
-abstract class Panel extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+abstract class Panel extends Visual {
 
     private string $_title_resource_identifier;
     private string $_class;

@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . '/frontend/FormItemVisual.php';
-require_once CMS_ROOT . '/database/dao/TemplateDaoMysql.php';
+
+namespace Obcato\Core;
 
 class FormButtonVisual extends FormItemVisual {
 

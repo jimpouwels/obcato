@@ -1,6 +1,9 @@
 <?php
-require_once CMS_ROOT . '/database/dao/ConfigDaoMysql.php';
-require_once CMS_ROOT . "/view/views/TemplatePicker.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class WebformMetadataEditor extends Panel {
 

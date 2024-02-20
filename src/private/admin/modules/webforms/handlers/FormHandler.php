@@ -1,5 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\BlackBoard;
+
 abstract class FormHandler {
 
     private FriendlyUrlManager $_friendly_url_manager;

@@ -1,7 +1,11 @@
 <?php
-require_once CMS_ROOT . "/authentication/Authenticator.php";
 
-class CurrentUserIndicator extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class CurrentUserIndicator extends Visual {
 
     public function __construct(TemplateEngine $templateEngine,) {
         parent::__construct($templateEngine);

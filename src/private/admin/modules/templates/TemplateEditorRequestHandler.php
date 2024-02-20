@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/templates/TemplateEditorForm.php";
+
+namespace Obcato\Core;
 
 class TemplateEditorRequestHandler extends HttpRequestHandler {
 

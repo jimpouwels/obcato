@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class Notifications {
 
     public static function setSuccessMessage(string $message): void {

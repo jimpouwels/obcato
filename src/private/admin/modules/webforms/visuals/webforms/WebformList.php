@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/model/Webform.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class WebformList extends Panel {
 

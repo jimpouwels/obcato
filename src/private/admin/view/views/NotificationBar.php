@@ -1,7 +1,11 @@
 <?php
-require_once CMS_ROOT . "/core/Notifications.php";
 
-class NotificationBar extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class NotificationBar extends Visual {
 
     public function __construct(TemplateEngine $templateEngine,) {
         parent::__construct($templateEngine);

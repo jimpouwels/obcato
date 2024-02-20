@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/ElementHolder.php";
 
+namespace Obcato\Core;
 class Article extends ElementHolder {
 
     const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";

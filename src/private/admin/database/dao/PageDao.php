@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface PageDao {
     public function getHomepage(): ?Page;
 

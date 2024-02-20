@@ -1,8 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementVisual.php";
-require_once CMS_ROOT . "/view/views/TextField.php";
-require_once CMS_ROOT . "/view/views/DateField.php";
-require_once CMS_ROOT . "/view/views/TermSelector.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ArticleOverviewElementEditor extends ElementVisual {
 

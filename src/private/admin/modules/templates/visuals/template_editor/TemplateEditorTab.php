@@ -1,9 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateList.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateEditor.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_editor/TemplateVarEditor.php";
 
-class TemplateEditorTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class TemplateEditorTab extends Visual {
 
     private ?Template $currentTemplate;
     private ?Scope $currentScope;

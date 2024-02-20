@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/blocks/visuals/positions/PositionEditor.php";
-require_once CMS_ROOT . "/modules/blocks/visuals/positions/PositionList.php";
 
-class PositionTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class PositionTab extends Visual {
 
     private static string $POSITION_QUERYSTRING_KEY = "position";
 

@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/modules/articles/TermForm.php";
+
+namespace Obcato\Core;
 
 class TermRequestHandler extends HttpRequestHandler {
 

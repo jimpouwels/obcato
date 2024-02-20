@@ -1,5 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+
 class ImageElementStatics extends Obcato\ComponentApi\Visual {
 
     public function __construct(TemplateEngine $templateEngine) {

@@ -1,9 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/database/dao/ElementHolderDao.php";
-require_once CMS_ROOT . "/database/dao/AuthorizationDaoMysql.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/core/model/ElementHolder.php";
+namespace Obcato\Core;
 
 class ElementHolderDaoMysql implements ElementHolderDao {
 

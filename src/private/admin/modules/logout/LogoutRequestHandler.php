@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/authentication/Authenticator.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
+
+namespace Obcato\Core;
 
 class LogoutRequestHandler extends HttpRequestHandler {
 

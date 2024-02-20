@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/elements/iframe_element/IFrameElementForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
+
+namespace Obcato\Core;
 
 class IFrameElementRequestHandler extends HttpRequestHandler {
 

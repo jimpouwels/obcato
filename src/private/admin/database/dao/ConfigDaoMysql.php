@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ConfigDao.php";
+
+namespace Obcato\Core;
 
 class ConfigDaoMysql implements ConfigDao {
 

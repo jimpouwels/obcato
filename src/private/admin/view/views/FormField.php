@@ -1,15 +1,16 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\Session;
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 
-require_once CMS_ROOT . '/authentication/Session.php';
-require_once CMS_ROOT . '/view/views/FormError.php';
-require_once CMS_ROOT . '/view/views/FormLabel.php';
-
-abstract class FormField extends Obcato\ComponentApi\Visual {
+abstract class FormField extends Visual {
 
     private ?string $_css_class;
-    private string $_field_name;
+    private string $fieldName;
     private ?string $_label_resource_identifier;
     private bool $_mandatory;
     private bool $_linkable;
@@ -17,7 +18,7 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
 
     protected function __construct(TemplateEngine $templateEngine, string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
         parent::__construct($templateEngine);
-        $this->_field_name = $field_name;
+        $this->fieldName = $field_name;
         $this->_css_class = $css_class;
         $this->_label_resource_identifier = $label_resource_identifier;
         $this->_mandatory = $mandatory;
@@ -36,14 +37,14 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
     abstract function loadFormField(TemplateData $data);
 
     public function load(): void {
-        $this->assign("error", $this->getErrorHtml($this->_field_name));
+        $this->assign("error", $this->getErrorHtml($this->fieldName));
         $this->assign('label', $this->getLabelHtml());
         $this->assign('type', $this->getFieldType());
 
         $fieldTemplateData = $this->createChildData();
         $this->loadFormField($fieldTemplateData);
         $fieldTemplateData->assign('classes', $this->getCssClassesHtml());
-        $fieldTemplateData->assign("field_name", $this->_field_name);
+        $fieldTemplateData->assign("field_name", $this->fieldName);
         $fieldTemplateData->assign("field_value", $this->getFieldValue());
         $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $fieldTemplateData));
     }
@@ -59,7 +60,7 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
 
     public function getCssClassesHtml(): string {
         $css_class_html = $this->_css_class;
-        $css_class_html .= ' ' . $this->errorClass($this->_field_name);
+        $css_class_html .= ' ' . $this->errorClass($this->fieldName);
         if ($this->_linkable) {
             $css_class_html .= 'linkable ';
         }
@@ -73,21 +74,21 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
         return "";
     }
 
-    protected function getInputLabelHtml(string $label_resource_identifier, string $field_name, bool $mandatory): string {
-        if ($label_resource_identifier) {
-            $label = new FormLabel($this->getTemplateEngine(), $field_name, $label_resource_identifier, $mandatory);
+    protected function getInputLabelHtml(string $labelResourceIdentifier, string $fieldName, bool $mandatory): string {
+        if ($labelResourceIdentifier) {
+            $label = new FormLabel($this->getTemplateEngine(), $fieldName, $labelResourceIdentifier, $mandatory);
             return $label->render();
         }
         return "";
     }
 
     protected function getFieldName(): string {
-        return $this->_field_name;
+        return $this->fieldName;
     }
 
     private function getFieldValue(): ?string {
-        if (isset($_POST[$this->_field_name])) {
-            return StringUtility::escapeXml($_POST[$this->_field_name]);
+        if (isset($_POST[$this->fieldName])) {
+            return StringUtility::escapeXml($_POST[$this->fieldName]);
         } else {
             return StringUtility::escapeXml($this->_value);
         }
@@ -95,7 +96,7 @@ abstract class FormField extends Obcato\ComponentApi\Visual {
 
     private function getLabelHtml(): ?string {
         if ($this->_label_resource_identifier) {
-            return $this->getInputLabelHtml($this->_label_resource_identifier, $this->_field_name, $this->_mandatory);
+            return $this->getInputLabelHtml($this->_label_resource_identifier, $this->fieldName, $this->_mandatory);
         } else {
             return null;
         }

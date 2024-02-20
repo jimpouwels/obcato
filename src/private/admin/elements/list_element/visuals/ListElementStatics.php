@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class ListElementStatics extends Obcato\ComponentApi\Visual {
 
     public function __construct(TemplateEngine $templateEngine) {

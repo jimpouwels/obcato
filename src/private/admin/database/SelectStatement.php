@@ -1,6 +1,6 @@
 <?php
 
-require_once CMS_ROOT . "/database/Statement.php";
+namespace Obcato\Core;
 
 class SelectStatement extends Statement {
     private array $selectFields = array();

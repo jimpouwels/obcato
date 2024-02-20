@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/ElementHolderRequestHandler.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/modules/blocks/BlockForm.php";
+
+namespace Obcato\Core;
 
 class BlockRequestHandler extends ElementHolderRequestHandler {
 

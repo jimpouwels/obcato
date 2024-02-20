@@ -1,12 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . '/view/views/TabMenu.php';
-require_once CMS_ROOT . '/modules/components/visuals/installation/InstallationTabVisual.php';
-require_once CMS_ROOT . '/modules/components/visuals/components/ComponentsTabVisual.php';
-require_once CMS_ROOT . '/modules/components/InstallRequestHandler.php';
-require_once CMS_ROOT . '/modules/components/ComponentRequestHandler.php';
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ComponentsModuleVisual extends ModuleVisual {
 
@@ -59,11 +57,9 @@ class ComponentsModuleVisual extends ModuleVisual {
         return $action_buttons;
     }
 
-    public function getTabMenu(): ?TabMenu {
-        $tab_menu = new TabMenu($this->getTemplateEngine(), $this->getCurrentTabId());
-        $tab_menu->addItem("Componenten", self::$COMPONENTS_TAB);
-        $tab_menu->addItem("Installeren", self::$INSTALLATION_TAB);
-        return $tab_menu;
+    public function loadTabMenu(TabMenu $tabMenu): void {
+        $tabMenu->addItem("Componenten", self::$COMPONENTS_TAB);
+        $tabMenu->addItem("Installeren", self::$INSTALLATION_TAB);
     }
 
     private function isCurrentComponentUninstallable(): bool {

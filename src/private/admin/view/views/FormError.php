@@ -1,7 +1,11 @@
 <?php
-require_once CMS_ROOT . '/authentication/Session.php';
 
-class FormError extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class FormError extends Visual {
 
     private string $_message;
 

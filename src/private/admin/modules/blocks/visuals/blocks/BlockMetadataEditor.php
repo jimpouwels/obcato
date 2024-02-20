@@ -1,8 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementContainer.php";
-require_once CMS_ROOT . "/view/views/TemplatePicker.php";
-require_once CMS_ROOT . "/view/views/LinkEditor.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class BlockMetadataEditor extends Panel {
 

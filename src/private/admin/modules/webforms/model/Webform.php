@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/model/Presentable.php";
+
+namespace Obcato\Core;
 
 class WebForm extends Presentable {
 

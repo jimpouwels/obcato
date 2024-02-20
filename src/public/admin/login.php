@@ -1,4 +1,9 @@
 <?php
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\Session;
+
 define("_ACCESS", "GRANTED");
 
 require_once "../bootstrap.php";
@@ -9,7 +14,6 @@ if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
 
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once CMS_ROOT . "/authentication/Session.php";
-require_once CMS_ROOT . "/includes.php";
 require_once CMS_ROOT . "/utilities/StringUtility.php";
 
 $errors = array();

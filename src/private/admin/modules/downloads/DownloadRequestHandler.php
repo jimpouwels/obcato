@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/database/dao/DownloadDaoMysql.php";
-require_once CMS_ROOT . "/modules/downloads/DownloadForm.php";
-require_once CMS_ROOT . "/core/model/Download.php";
+
+namespace Obcato\Core;
 
 class DownloadRequestHandler extends HttpRequestHandler {
 

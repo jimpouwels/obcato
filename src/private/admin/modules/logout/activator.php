@@ -1,8 +1,11 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/logout/LogoutRequestHandler.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
+
 
 class LogoutModuleVisual extends ModuleVisual {
 
@@ -35,8 +38,6 @@ class LogoutModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function getTabMenu(): ?TabMenu {
-        return null;
-    }
+    public function loadTabMenu(TabMenu $tabMenu): void {}
 
 }

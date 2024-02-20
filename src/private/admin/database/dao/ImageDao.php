@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ImageDao {
     public function getImage(?int $imageId): ?Image;
 

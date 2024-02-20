@@ -1,12 +1,9 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\Session;
-
-require_once CMS_ROOT . "/request_handlers/BackendRequestHandler.php";
-require_once CMS_ROOT . "/view/views/Cms.php";
-require_once CMS_ROOT . "/view/views/Popup.php";
-require_once CMS_ROOT . "/text_resource_loader.php";
 
 class Backend {
 
@@ -64,8 +61,8 @@ class Backend {
 
     private function loadTextResources(): void {
         if (!Session::areTextResourcesLoaded()) {
-            $text_resource_loader = new TextResourceLoader(Session::getCurrentLanguage());
-            $text_resources = $text_resource_loader->loadTextResources();
+            $textResourceLoader = new TextResourceLoader(Session::getCurrentLanguage());
+            $text_resources = $textResourceLoader->loadTextResources();
             Session::setTextResources($text_resources);
         }
     }

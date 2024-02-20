@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ElementHolderDao {
     public function getElementHolder(int $id): ?ElementHolder;
 

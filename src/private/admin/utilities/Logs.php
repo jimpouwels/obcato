@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class Logs {
     public static $LOGS = array();
 
@@ -27,5 +29,3 @@ function dumpVar(mixed $var): void {
     $class = $trace[1]['class'];
     Logs::$LOGS[] = "<strong>{$class}</strong>: " . var_export($var, true);
 }
-
-?>

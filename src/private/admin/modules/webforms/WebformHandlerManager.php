@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . '/modules/webforms/handlers/FormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/handlers/EmailFormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/handlers/RedirectFormHandler.php';
-require_once CMS_ROOT . '/modules/webforms/handlers/ArticleCommentFormHandler.php';
+
+namespace Obcato\Core;
 
 class WebformHandlerManager {
 

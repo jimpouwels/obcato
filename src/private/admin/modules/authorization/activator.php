@@ -1,10 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/authorization/AuthorizationRequestHandler.php";
-require_once CMS_ROOT . "/modules/authorization/visuals/UserList.php";
-require_once CMS_ROOT . "/modules/authorization/visuals/UserEditor.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class AuthorizationModuleVisual extends ModuleVisual {
 
@@ -54,8 +54,6 @@ class AuthorizationModuleVisual extends ModuleVisual {
         $this->currentUser = $this->authorizationRequestHandler->getCurrentUser();
     }
 
-    public function getTabMenu(): ?TabMenu {
-        return null;
-    }
+    public function loadTabMenu(TabMenu $tabMenu): void {}
 
 }

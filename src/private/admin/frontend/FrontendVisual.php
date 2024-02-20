@@ -1,11 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/articles/model/Article.php";
-require_once CMS_ROOT . "/modules/pages/model/Page.php";
-require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
-require_once CMS_ROOT . "/modules/templates/service/TemplateInteractor.php";
-require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
+
+namespace Obcato\Core;
 
 abstract class FrontendVisual {
 

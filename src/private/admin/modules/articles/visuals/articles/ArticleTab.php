@@ -1,7 +1,8 @@
 <?php
-require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticleEditor.php";
-require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticlesList.php";
-require_once CMS_ROOT . "/modules/articles/visuals/articles/ArticlesSearch.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
 
 class ArticleTab extends Obcato\ComponentApi\Visual {
 

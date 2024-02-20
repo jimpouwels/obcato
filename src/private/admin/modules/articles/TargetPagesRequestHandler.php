@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/modules/articles/TargetPagesForm.php";
+
+namespace Obcato\Core;
 
 class TargetPagesRequestHandler extends HttpRequestHandler {
 

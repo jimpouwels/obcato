@@ -1,7 +1,8 @@
 <?php
-require_once CMS_ROOT . '/modules/pages/service/PageService.php';
-require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/BlockDaoMysql.php';
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\Session;
 
 class PageInteractor implements PageService {
 

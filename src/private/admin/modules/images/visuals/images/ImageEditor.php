@@ -1,10 +1,11 @@
 <?php
-require_once CMS_ROOT . "/database/dao/ImageDaoMysql.php";
-require_once CMS_ROOT . '/modules/images/visuals/images/ImageMetadataEditor.php';
-require_once CMS_ROOT . '/modules/images/visuals/images/ImageViewer.php';
-require_once CMS_ROOT . '/view/views/ImageLabelSelector.php';
 
-class ImageEditor extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class ImageEditor extends Visual {
     private Image $currentImage;
     private ImageDao $imageDao;
 

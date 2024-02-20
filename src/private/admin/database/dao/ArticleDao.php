@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface ArticleDao {
     public function getArticle($id): ?Article;
 

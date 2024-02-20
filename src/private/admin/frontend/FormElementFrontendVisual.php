@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . '/frontend/ElementFrontendVisual.php';
-require_once CMS_ROOT . '/frontend/FormFrontendVisual.php';
-require_once CMS_ROOT . '/frontend/handlers/FormStatus.php';
+
+namespace Obcato\Core;
 
 class FormElementFrontendVisual extends ElementFrontendVisual {
 

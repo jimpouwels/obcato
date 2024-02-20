@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/elements/table_of_contents_element/TableOfContentsElementForm.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
+
+namespace Obcato\Core;
 
 class TableOfContentsElementRequestHandler extends HttpRequestHandler {
 

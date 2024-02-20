@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
-require_once CMS_ROOT . "/database/dao/ScopeDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/TemplateDaoMysql.php";
+
+namespace Obcato\Core;
 
 class Template extends Entity {
 

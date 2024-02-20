@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . '/modules/database/visuals/QueryFieldPanel.php';
-require_once CMS_ROOT . '/modules/database/visuals/QueryResultPanel.php';
 
-class QueriesTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class QueriesTab extends Visual {
 
     private DatabaseRequestHandler $requestHandler;
 

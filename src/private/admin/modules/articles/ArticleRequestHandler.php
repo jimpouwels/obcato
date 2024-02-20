@@ -1,10 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/ElementHolderRequestHandler.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/modules/articles/ArticleForm.php";
-require_once CMS_ROOT . "/modules/articles/service/ArticleInteractor.php";
-require_once CMS_ROOT . '/friendly_urls/FriendlyUrlManager.php';
+
+namespace Obcato\Core;
 
 class ArticleRequestHandler extends ElementHolderRequestHandler {
 

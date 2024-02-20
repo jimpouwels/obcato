@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/model/WebformTextField.php";
-require_once CMS_ROOT . "/modules/webforms/form/WebformFieldForm.php";
+
+namespace Obcato\Core;
 
 class WebformTextFieldForm extends WebformFieldForm {
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface PageService {
     public function getHomepage(): Page;
 

@@ -1,16 +1,12 @@
 <?php
 
-require_once CMS_ROOT . '/request_handlers/HttpRequestHandler.php';
-require_once CMS_ROOT . '/modules/components/InstallComponentForm.php';
-require_once CMS_ROOT . '/utilities/FileUtility.php';
-require_once CMS_ROOT . '/modules/components/installer/InstallationException.php';
-require_once CMS_ROOT . '/modules/components/installer/ModuleInstaller.php';
-require_once CMS_ROOT . '/modules/components/installer/ElementInstaller.php';
-require_once CMS_ROOT . '/modules/components/installer/Logger.php';
+namespace Obcato\Core;
+
+use ZipArchive;
 
 class InstallRequestHandler extends HttpRequestHandler {
 
-    private $logger;
+    private Logger $logger;
 
     public function __construct() {
         $this->logger = new Logger();

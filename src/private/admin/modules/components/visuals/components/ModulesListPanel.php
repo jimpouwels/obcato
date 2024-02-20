@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . '/database/dao/ModuleDaoMysql.php';
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ModulesListPanel extends Panel {
 

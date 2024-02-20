@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 abstract class ElementMetadataProvider {
 
     private Element $_element;

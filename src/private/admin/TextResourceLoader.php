@@ -1,8 +1,6 @@
 <?php
-require_once CMS_ROOT . "/authentication/Session.php";
-require_once CMS_ROOT . "/utilities/StringUtility.php";
-require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
+
+namespace Obcato\Core;
 
 class TextResourceLoader {
 

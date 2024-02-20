@@ -1,11 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/FrontendVisual.php";
-require_once CMS_ROOT . "/frontend/BlockVisual.php";
-require_once CMS_ROOT . "/frontend/ArticleVisual.php";
-require_once CMS_ROOT . "/frontend/FormFrontendVisual.php";
-require_once CMS_ROOT . "/modules/pages/service/PageInteractor.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/BlockDaoMysql.php";
+
+namespace Obcato\Core;
 
 class PageVisual extends FrontendVisual {
     private PageInteractor $pageService;

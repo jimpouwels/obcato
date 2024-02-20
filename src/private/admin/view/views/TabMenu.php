@@ -1,8 +1,12 @@
 <?php
 
-use Obcato\ComponentApi\TabMenu as ITabMenu;
+namespace Obcato\Core;
 
-class TabMenu extends Obcato\ComponentApi\Visual implements ITabMenu {
+use Obcato\ComponentApi\TabMenu as ITabMenu;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class TabMenu extends Visual implements ITabMenu {
 
     private array $tabItems = array();
     private int $currentTabId = 0;

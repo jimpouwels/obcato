@@ -1,13 +1,10 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/settings/model/Settings.php";
-require_once CMS_ROOT . "/view/views/WarningMessage.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
-require_once CMS_ROOT . "/modules/settings/SettingsRequestHandler.php";
-require_once CMS_ROOT . "/modules/settings/visuals/GlobalSettingsPanel.php";
-require_once CMS_ROOT . "/modules/settings/visuals/DomainSettingsPanel.php";
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 
 class SettingsModuleVisual extends ModuleVisual {
 
@@ -52,9 +49,7 @@ class SettingsModuleVisual extends ModuleVisual {
 
     public function onRequestHandled(): void {}
 
-    public function getTabMenu(): ?TabMenu {
-        return null;
-    }
+    public function loadTabMenu(TabMenu $tabMenu): void {}
 
     private function renderGlobalSettingsPanel(): string {
         return (new GlobalSettingsPanel($this->getTemplateEngine(), $this->settings))->render();

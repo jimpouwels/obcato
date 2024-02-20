@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
-require_once CMS_ROOT . '/database/dao/ElementDaoMysql.php';
+
+namespace Obcato\Core;
 
 class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
 

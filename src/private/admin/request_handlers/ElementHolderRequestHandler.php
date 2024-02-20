@@ -1,12 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/ElementHolderForm.php";
-require_once CMS_ROOT . "/database/dao/ElementHolderDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/LinkDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/ElementDaoMysql.php";
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
-require_once CMS_ROOT . "/core/form/LinkForm.php";
-require_once CMS_ROOT . "/request_handlers/exceptions/ElementHolderContainsErrorsException.php";
-require_once CMS_ROOT . "/elements/ElementContainsErrorsException.php";
+
+namespace Obcato\Core;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 

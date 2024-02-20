@@ -1,6 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/PagePicker.php";
-require_once CMS_ROOT . "/database/dao/ArticleDaoMysql.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TargetPagesList extends Panel {
 

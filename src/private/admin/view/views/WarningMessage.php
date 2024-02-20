@@ -1,6 +1,11 @@
 <?php
 
-class WarningMessage extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class WarningMessage extends Visual {
 
     private string $_message_resource_identifier;
 

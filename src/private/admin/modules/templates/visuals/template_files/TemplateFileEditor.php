@@ -1,5 +1,10 @@
 <?php
 
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class TemplateFileEditor extends Panel {
     private TemplateDao $templateDao;
     private TemplateFile $currentTemplateFile;

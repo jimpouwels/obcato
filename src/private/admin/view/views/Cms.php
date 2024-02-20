@@ -1,17 +1,15 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\Session;
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+use TabMenu;
 
-require_once CMS_ROOT . "/database/dao/ModuleDaoMysql.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
-require_once CMS_ROOT . "/view/views/NavigationMenu.php";
-require_once CMS_ROOT . "/view/views/CurrentUserIndicator.php";
-require_once CMS_ROOT . "/view/views/ActionsMenu.php";
-require_once CMS_ROOT . "/view/views/NotificationBar.php";
-
-class Cms extends Obcato\ComponentApi\Visual {
+class Cms extends Visual {
     private ?ModuleVisual $moduleVisual;
     private Settings $settings;
     private ModuleDao $moduleDao;
@@ -81,8 +79,9 @@ class Cms extends Obcato\ComponentApi\Visual {
 
     private function renderTabMenu(): string {
         if (!is_null($this->moduleVisual)) {
-            $tab_menu = $this->moduleVisual->getTabMenu();
-            return $tab_menu ? $tab_menu->render() : "";
+            $tabMenu = new TabMenu($this->getTemplateEngine(), 0);
+            $this->moduleVisual->loadTabMenu($tabMenu);
+            return $tabMenu->render();
 
         }
         return "";

@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/form/Form.php";
+
+namespace Obcato\Core;
 
 abstract class ElementForm extends Form {
 

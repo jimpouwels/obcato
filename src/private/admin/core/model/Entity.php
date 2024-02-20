@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 abstract class Entity {
 
     private ?int $_id = null;

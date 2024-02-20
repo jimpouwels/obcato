@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface WebformDao {
     public function getWebForm(int $webformId): ?WebForm;
 

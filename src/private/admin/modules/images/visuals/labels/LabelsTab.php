@@ -1,8 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/images/visuals/labels/LabelsList.php";
-require_once CMS_ROOT . "/modules/images/visuals/labels/LabelEditor.php";
 
-class LabelsTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class LabelsTab extends Visual {
 
     private ?ImageLabel $_current_label;
     private LabelRequestHandler $_label_request_handler;

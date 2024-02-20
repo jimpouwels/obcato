@@ -1,12 +1,11 @@
 <?php
 
-use Obcato\ComponentApi\ModuleVisual;
+namespace Obcato\Core;
 
-require_once CMS_ROOT . "/modules/pages/model/Page.php";
-require_once CMS_ROOT . "/modules/pages/visuals/PageTree.php";
-require_once CMS_ROOT . "/modules/pages/visuals/PageEditor.php";
-require_once CMS_ROOT . "/modules/pages/PageRequestHandler.php";
-require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
+use Obcato\ComponentApi\ModuleVisual;
+use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
+
 
 class PageModuleVisual extends ModuleVisual {
 
@@ -73,9 +72,7 @@ class PageModuleVisual extends ModuleVisual {
         $this->currentPage = $this->pageRequestHandler->getCurrentPage();
     }
 
-    public function getTabMenu(): ?TabMenu {
-        return null;
-    }
+    public function loadTabMenu(TabMenu $tabMenu): void {}
 
     private function currentPageIsHomepage(): bool {
         return $this->currentPage->getId() == 1;

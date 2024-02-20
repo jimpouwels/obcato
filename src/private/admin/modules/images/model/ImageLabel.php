@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
 
+namespace Obcato\Core;
 class ImageLabel extends Entity {
 
     private string $name;

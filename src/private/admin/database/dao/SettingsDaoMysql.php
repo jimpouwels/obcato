@@ -1,7 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/dao/SettingsDao.php';
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/modules/settings/model/Settings.php";
+
+namespace Obcato\Core;
 
 class SettingsDaoMysql implements SettingsDao {
 

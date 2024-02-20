@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 interface AuthorizationDao {
     public function getUser(string $username): ?User;
 

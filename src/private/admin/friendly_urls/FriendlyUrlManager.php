@@ -1,9 +1,6 @@
 <?php
-require_once CMS_ROOT . '/database/dao/FriendlyUrlDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/PageDaoMysql.php';
-require_once CMS_ROOT . '/database/dao/ArticleDaoMysql.php';
-require_once CMS_ROOT . '/friendly_urls/UrlMatch.php';
-require_once CMS_ROOT . '/utilities/UrlHelper.php';
+
+namespace Obcato\Core;
 
 class FriendlyUrlManager {
 

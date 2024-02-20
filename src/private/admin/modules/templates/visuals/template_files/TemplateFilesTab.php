@@ -1,10 +1,11 @@
 <?php
-require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFilesList.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFileEditor.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateFileCodeViewer.php";
-require_once CMS_ROOT . "/modules/templates/visuals/template_files/TemplateVarMigration.php";
 
-class TemplateFilesTab extends Obcato\ComponentApi\Visual {
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
+
+class TemplateFilesTab extends Visual {
 
     private ?TemplateFile $currentTemplateFile;
     private TemplateFilesRequestHandler $requestHandler;

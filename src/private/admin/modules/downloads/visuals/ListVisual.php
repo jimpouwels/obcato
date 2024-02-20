@@ -1,6 +1,9 @@
 <?php
-require_once CMS_ROOT . "/database/dao/DownloadDaoMysql.php";
-require_once CMS_ROOT . "/view/views/InformationMessage.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ListVisual extends Panel {
 

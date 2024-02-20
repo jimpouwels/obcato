@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";
+
+namespace Obcato\Core;
 
 class RestRequestHandler extends HttpRequestHandler {
 

@@ -1,5 +1,9 @@
 <?php
-require_once CMS_ROOT . "/database/MysqlConnector.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class Configuration extends Panel {
 

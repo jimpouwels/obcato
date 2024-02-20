@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/frontend/ElementFrontendVisual.php";
+
+namespace Obcato\Core;
 
 class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
 

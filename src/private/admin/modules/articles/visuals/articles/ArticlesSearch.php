@@ -1,5 +1,11 @@
 <?php
 
+namespace Obcato\Core;
+
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
+
 class ArticlesSearch extends Panel {
 
     private ArticleDao $articleDao;

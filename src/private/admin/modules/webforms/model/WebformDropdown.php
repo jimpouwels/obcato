@@ -1,6 +1,6 @@
 <?php
-require_once CMS_ROOT . "/modules/webforms/model/WebformDropdownOption.php";
-require_once CMS_ROOT . "/modules/webforms/model/WebformField.php";
+
+namespace Obcato\Core;
 
 class WebFormDropDown extends WebFormField {
 

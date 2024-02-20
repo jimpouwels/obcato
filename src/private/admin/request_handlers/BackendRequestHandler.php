@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 use Obcato\ComponentApi\BlackBoard;
 
 require_once CMS_ROOT . "/request_handlers/HttpRequestHandler.php";

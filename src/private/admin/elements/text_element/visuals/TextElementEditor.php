@@ -1,7 +1,9 @@
 <?php
-require_once CMS_ROOT . "/view/views/ElementVisual.php";
-require_once CMS_ROOT . "/view/views/TextField.php";
-require_once CMS_ROOT . "/view/views/TextArea.php";
+
+namespace Obcato\Core;
+
+use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class TextElementEditor extends ElementVisual {
 

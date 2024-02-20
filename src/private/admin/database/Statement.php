@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 abstract class Statement {
     private array $tables = array();
     private array $whereClauses = array();

@@ -1,5 +1,7 @@
 <?php
 
+namespace Obcato\Core;
+
 class UrlMatch {
 
     private ?Page $page = null;

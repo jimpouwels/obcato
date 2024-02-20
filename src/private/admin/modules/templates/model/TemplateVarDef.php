@@ -1,5 +1,6 @@
 <?php
-require_once CMS_ROOT . "/core/model/Entity.php";
+
+namespace Obcato\Core;
 
 class TemplateVarDef extends Entity {
 
