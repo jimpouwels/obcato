@@ -5,7 +5,6 @@ namespace Obcato\Core\admin\view\views;
 use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\authentication\Session;
-use Obcato\Core\admin\core\Blackboard;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
 use Obcato\Core\admin\database\dao\SettingsDaoMysql;

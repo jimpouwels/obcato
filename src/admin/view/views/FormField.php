@@ -4,6 +4,7 @@ namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\utilities\StringUtility;
 

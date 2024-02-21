@@ -2,8 +2,10 @@
 
 namespace Obcato\Core\admin\modules\articles;
 
+use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
 use Obcato\Core\admin\modules\articles\visuals\articles\ArticleTab;
@@ -12,7 +14,6 @@ use Obcato\Core\admin\modules\articles\visuals\terms\TermTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
-use Obcato\Core\admin\view\views\ModuleVisual;
 
 class ArticleModuleVisual extends ModuleVisual {
 
@@ -22,12 +23,14 @@ class ArticleModuleVisual extends ModuleVisual {
     private static int $TARGET_PAGES_TAB = 2;
     private ?ArticleTerm $currentTerm;
     private ?Article $currentArticle;
+    private Module $articleModule;
     private ArticleRequestHandler $articleRequestHandler;
     private TermRequestHandler $termRequestsHandler;
     private TargetPagesRequestHandler $targetPagesRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct(TemplateEngine $templateEngine, Module $articleModule) {
+        parent::__construct($templateEngine, $articleModule);
+        $this->articleModule = $articleModule;
         $this->articleRequestHandler = new ArticleRequestHandler();
         $this->termRequestsHandler = new TermRequestHandler();
         $this->targetPagesRequestHandler = new TargetPagesRequestHandler();

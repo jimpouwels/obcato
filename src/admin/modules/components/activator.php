@@ -2,13 +2,14 @@
 
 namespace Obcato\Core\admin\modules\components;
 
+use Obcato\ComponentApi\Module;
+use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\components\visuals\components\ComponentsTabVisual;
 use Obcato\Core\admin\modules\components\visuals\installation\InstallationTabVisual;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
-use Obcato\Core\admin\view\views\ModuleVisual;
 
 class ComponentsModuleVisual extends ModuleVisual {
 
@@ -18,8 +19,8 @@ class ComponentsModuleVisual extends ModuleVisual {
     private InstallRequestHandler $installRequestHandler;
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
         $this->installRequestHandler = new InstallRequestHandler();
         $this->componentRequestHandler = new ComponentRequestHandler();
     }

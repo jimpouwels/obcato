@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\admin\modules\blocks;
 
+use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
@@ -12,7 +13,6 @@ use Obcato\Core\admin\modules\blocks\visuals\positions\PositionTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
-use Obcato\Core\admin\view\views\ModuleVisual;
 
 class BlockModuleVisual extends ModuleVisual {
 
@@ -25,7 +25,7 @@ class BlockModuleVisual extends ModuleVisual {
     private BlockRequestHandler $blockRequestHandler;
     private PositionRequestHandler $positionRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine) {
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
         parent::__construct($templateEngine, $module);
         $this->module = $module;
         $this->blockRequestHandler = new BlockRequestHandler();

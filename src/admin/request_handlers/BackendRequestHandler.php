@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\request_handlers;
 
-use Obcato\Core\admin\core\Blackboard;
+use Obcato\ComponentApi\BlackBoard;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
@@ -32,7 +32,7 @@ class BackendRequestHandler extends HttpRequestHandler {
         $moduleId = intval($this->getParam('module_id'));
         if ($moduleId) {
             $this->currentModule = $this->moduleDao->getModule($moduleId);
-            BlackBoard::$MODULE = $this->currentModule;
+            BlackBoard::$MODULE_ID = $moduleId;
             $moduleTabId = intval($this->getParam('module_tab_id'));
             BlackBoard::$MODULE_TAB_ID = $moduleTabId;
         }

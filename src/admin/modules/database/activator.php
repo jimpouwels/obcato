@@ -2,12 +2,13 @@
 
 namespace Obcato\Core\admin\modules\database;
 
+use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\database\visuals\Configuration;
 use Obcato\Core\admin\modules\database\visuals\QueriesTab;
 use Obcato\Core\admin\modules\database\visuals\Tables;
-use Obcato\Core\admin\view\views\ModuleVisual;
 
 class DatabaseModuleVisual extends ModuleVisual {
 
@@ -15,10 +16,12 @@ class DatabaseModuleVisual extends ModuleVisual {
     private static int $CONFIGURATION_TAB = 0;
     private static int $TABLES_TAB = 1;
     private static int $QUERY_TAB = 2;
+    private Module $module;
     private DatabaseRequestHandler $databaseRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct(TemplateEngine $templateEngine, Module $module) {
+        parent::__construct($templateEngine, $module);
+        $this->module = $module;
         $this->databaseRequestHandler = new DatabaseRequestHandler();
     }
 
