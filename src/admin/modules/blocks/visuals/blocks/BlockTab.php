@@ -3,8 +3,8 @@
 namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\blocks\model\Block;
+use Obcato\Core\admin\view\views\Visual;
 
 class BlockTab extends Visual {
 

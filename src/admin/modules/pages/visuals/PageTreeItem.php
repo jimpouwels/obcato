@@ -3,10 +3,10 @@
 namespace Obcato\Core\admin\modules\pages\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\pages\service\PageInteractor;
 use Obcato\Core\admin\modules\pages\service\PageService;
+use Obcato\Core\admin\view\views\Visual;
 
 class PageTreeItem extends Visual {
 

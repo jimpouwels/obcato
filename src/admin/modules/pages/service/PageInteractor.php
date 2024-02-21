@@ -2,8 +2,8 @@
 
 namespace Obcato\Core\admin\modules\pages\service;
 
-use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\database\dao\BlockDao;
 use Obcato\Core\admin\database\dao\BlockDaoMysql;
 use Obcato\Core\admin\database\dao\PageDao;

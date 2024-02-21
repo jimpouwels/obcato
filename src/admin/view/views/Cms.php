@@ -2,11 +2,9 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\Session;
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
 use Obcato\Core\admin\database\dao\SettingsDaoMysql;

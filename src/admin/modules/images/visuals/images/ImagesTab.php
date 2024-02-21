@@ -3,9 +3,9 @@
 namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\images\ImageRequestHandler;
 use Obcato\Core\admin\modules\images\model\Image;
+use Obcato\Core\admin\view\views\Visual;
 
 class ImagesTab extends Visual {
 

@@ -2,8 +2,8 @@
 
 namespace Obcato\Core;
 
-use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\Button;
 use Obcato\Core\admin\view\views\PasswordField;

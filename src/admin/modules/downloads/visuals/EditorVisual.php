@@ -3,8 +3,8 @@
 namespace Obcato\Core\admin\modules\downloads\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\downloads\model\Download;
+use Obcato\Core\admin\view\views\Visual;
 
 class EditorVisual extends Visual {
 

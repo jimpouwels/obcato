@@ -4,7 +4,6 @@ namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;

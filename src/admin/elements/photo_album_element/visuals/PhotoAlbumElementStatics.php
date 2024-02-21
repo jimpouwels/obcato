@@ -3,7 +3,7 @@
 namespace Obcato\Core\admin\elements\photo_album_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\view\views\Visual;
 
 class PhotoAlbumElementStatics extends Visual {
 

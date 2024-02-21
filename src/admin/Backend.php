@@ -3,7 +3,7 @@
 namespace Obcato\Core\admin;
 
 use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\request_handlers\BackendRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
