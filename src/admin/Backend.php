@@ -34,7 +34,7 @@ class Backend {
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
             $class = "Obcato\\Core\\admin\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
-            $this->moduleVisual = new $class(TemplateEngine::getInstance(), $currentModule, MysqlConnector::getInstance(), TemplateEngine::getInstance());
+            $this->moduleVisual = new $class(TemplateEngine::getInstance(), MysqlConnector::getInstance(), TemplateEngine::getInstance());
         }
     }
 

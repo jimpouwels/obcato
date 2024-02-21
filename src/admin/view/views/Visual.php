@@ -8,50 +8,62 @@ use Obcato\ComponentApi\Visual as IVisual;
 use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\core\Blackboard;
 
-abstract class Visual extends IVisual {
+abstract class Visual implements IVisual {
 
-    public function __construct(TemplateEngine $templateEngine, ?Visual $parent = null) {
-        parent::__construct($templateEngine, $parent);
+    private TemplateEngine $templateEngine;
+    private TemplateData $templateData;
+
+    public function __construct(TemplateEngine $templateEngine) {
+        $this->templateEngine = $templateEngine;
+        $this->templateData = $this->templateEngine->createChildData();
     }
 
     public function render(): string {
         $this->load();
-        return $this->getTemplateEngine()->fetch($this->getTemplateFilename(), $this->getTemplateData());
+        return $this->templateEngine->fetch($this->getTemplateFilename(), $this->templateData);
     }
 
-    protected function assign(string $key, mixed $value): void {
-        $this->getTemplateEngine()->assign($key, $value);
+    public function getTemplateEngine(): TemplateEngine {
+        return $this->templateEngine;
     }
 
-    protected function assignGlobal(string $key, mixed $value): void {
-        $this->getTemplateEngine()->assign($key, $value);
+    public function getTemplateData(): TemplateData {
+        return $this->templateData;
     }
 
-    protected function createChildData(): TemplateData {
-        return $this->getTemplateEngine()->createChildData();
+    public function assign(string $key, mixed $value): void {
+        $this->templateEngine->assign($key, $value);
     }
 
-    protected function fetch(string $template, TemplateData $data): string {
-        return $this->getTemplateEngine()->fetch($template, $data);
+    public function assignGlobal(string $key, mixed $value): void {
+        $this->templateEngine->assign($key, $value);
     }
 
-    protected function getTextResource(string $identifier): string {
+    public function createChildData(): TemplateData {
+        return $this->templateEngine->createChildData();
+    }
+
+    public function fetch(string $template, TemplateData $data): string {
+        return $this->templateEngine->fetch($template, $data);
+    }
+
+    public function getTextResource(string $identifier): string {
         return Session::getTextResource($identifier);
     }
 
-    protected function getBackendBaseUrl(): string {
+    public function getBackendBaseUrl(): string {
         return BlackBoard::getBackendBaseUrl();
     }
 
-    protected function getBackendBaseUrlRaw(): string {
+    public function getBackendBaseUrlRaw(): string {
         return BlackBoard::getBackendBaseUrlRaw();
     }
 
-    protected function getBackendBaseUrlWithoutTab(): string {
+    public function getBackendBaseUrlWithoutTab(): string {
         return BlackBoard::getBackendBaseUrlWithoutTab();
     }
 
-    protected function getCurrentTabId(): int {
+    public function getCurrentTabId(): int {
         return BlackBoard::$MODULE_TAB_ID;
     }
 }

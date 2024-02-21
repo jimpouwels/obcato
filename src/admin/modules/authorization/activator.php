@@ -2,16 +2,15 @@
 
 namespace Obcato\Core\admin\modules\authorization;
 
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\authorization\model\User;
 use Obcato\Core\admin\modules\authorization\visuals\UserEditor;
 use Obcato\Core\admin\modules\authorization\visuals\UserList;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
 
 class AuthorizationModuleVisual extends ModuleVisual {
 
@@ -19,8 +18,8 @@ class AuthorizationModuleVisual extends ModuleVisual {
     private ?User $currentUser;
     private AuthorizationRequestHandler $authorizationRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->authorizationRequestHandler = new AuthorizationRequestHandler();
     }
 

@@ -2,8 +2,6 @@
 
 namespace Obcato\Core\admin\modules\pages;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\PageDao;
@@ -16,18 +14,17 @@ use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonDown;
 use Obcato\Core\admin\view\views\ActionButtonSave;
 use Obcato\Core\admin\view\views\ActionButtonUp;
+use Obcato\Core\admin\view\views\ModuleVisual;
 
 class PageModuleVisual extends ModuleVisual {
 
     private static string $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
     private ?Page $currentPage;
-    private Module $pageModule;
     private PageRequestHandler $pageRequestHandler;
     private PageDao $pageDao;
 
-    public function __construct(TemplateEngine $templateEngine, Module $pageModule) {
-        parent::__construct($templateEngine, $pageModule);
-        $this->pageModule = $pageModule;
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->pageRequestHandler = new PageRequestHandler();
         $this->pageDao = PageDaoMysql::getInstance();
     }
@@ -62,7 +59,7 @@ class PageModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->pageModule->getIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
         $elementStaticsValues = array();
         $elementStatics = $this->currentPage->getElementStatics();
         foreach ($elementStatics as $element_static) {
@@ -89,5 +86,4 @@ class PageModuleVisual extends ModuleVisual {
     private function currentPageIsHomepage(): bool {
         return $this->currentPage->getId() == 1;
     }
-
 }

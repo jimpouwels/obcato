@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\settings;
 
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
@@ -11,6 +10,7 @@ use Obcato\Core\admin\modules\settings\model\Settings;
 use Obcato\Core\admin\modules\settings\visuals\DomainSettingsPanel;
 use Obcato\Core\admin\modules\settings\visuals\GlobalSettingsPanel;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
 use Obcato\Core\admin\view\views\WarningMessage;
 
 class SettingsModuleVisual extends ModuleVisual {
@@ -20,8 +20,8 @@ class SettingsModuleVisual extends ModuleVisual {
     private Settings $settings;
     private SettingsRequestHandler $settingsRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $settingsModule) {
-        parent::__construct($templateEngine, $settingsModule);
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->settingsModule = $settingsModule;
         $this->settings = SettingsDaoMysql::getInstance()->getSettings();
         $this->settingsRequestHandler = new SettingsRequestHandler($this->settings);

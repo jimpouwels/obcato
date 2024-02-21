@@ -2,14 +2,13 @@
 
 namespace Obcato\Core\admin\modules\webforms;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\webforms\visuals\webforms\WebformTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
 
 
 class WebFormsModuleVisual extends ModuleVisual {
@@ -18,8 +17,8 @@ class WebFormsModuleVisual extends ModuleVisual {
     private WebformRequestHandler $webformRequestHandler;
     private int $currentTabId = 0;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->webformRequestHandler = new WebformRequestHandler();
     }
 

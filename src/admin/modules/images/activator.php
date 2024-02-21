@@ -2,10 +2,8 @@
 
 namespace Obcato\Core\admin\modules\images;
 
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\images\visuals\images\ImagesTab;
 use Obcato\Core\admin\modules\images\visuals\import\ImportTab;
 use Obcato\Core\admin\modules\images\visuals\labels\LabelsTab;
@@ -13,6 +11,7 @@ use Obcato\Core\admin\view\views\ActionButton;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
 
 class ImageModuleVisual extends ModuleVisual {
 
@@ -26,8 +25,8 @@ class ImageModuleVisual extends ModuleVisual {
     private ImportRequestHandler $importRequestHandler;
     private int $currentTabId;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->imageRequestHandler = new ImageRequestHandler();
         $this->labelRequestHandler = new LabelRequestHandler();
         $this->importRequestHandler = new ImportRequestHandler();

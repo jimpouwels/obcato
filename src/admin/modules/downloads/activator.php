@@ -2,8 +2,6 @@
 
 namespace Obcato\Core\admin\modules\downloads;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
 use Obcato\ComponentApi\TabMenu;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\downloads\model\Download;
@@ -13,6 +11,7 @@ use Obcato\Core\admin\modules\downloads\visuals\SearchBoxVisual;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
 
 class DownloadModuleVisual extends ModuleVisual {
 
@@ -20,8 +19,8 @@ class DownloadModuleVisual extends ModuleVisual {
     private ?Download $currentDownload;
     private DownloadRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->requestHandler = new DownloadRequestHandler();
     }
 
