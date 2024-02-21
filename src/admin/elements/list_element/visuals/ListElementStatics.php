@@ -3,7 +3,7 @@
 namespace Obcato\Core\admin\elements\list_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\Core\admin\view\views\Visual;
+use Obcato\ComponentApi\Visual;
 
 class ListElementStatics extends Visual {
 

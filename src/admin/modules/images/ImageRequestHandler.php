@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\images;
 
-use Obcato\Core\admin\authentication\Session;
+use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\database\dao\ImageDao;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;

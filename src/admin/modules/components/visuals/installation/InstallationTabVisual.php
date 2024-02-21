@@ -3,8 +3,8 @@
 namespace Obcato\Core\admin\modules\components\visuals\installation;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\components\InstallRequestHandler;
-use Obcato\Core\admin\view\views\Visual;
 
 class InstallationTabVisual extends Visual {
 

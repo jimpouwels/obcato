@@ -4,10 +4,10 @@ namespace Obcato\Core\admin\modules\webforms\visuals\webforms\fields;
 
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\webforms\model\WebformItem;
 use Obcato\Core\admin\view\views\TemplatePicker;
 use Obcato\Core\admin\view\views\TextField;
-use Obcato\Core\admin\view\views\Visual;
 
 abstract class WebformItemVisual extends Visual {
 

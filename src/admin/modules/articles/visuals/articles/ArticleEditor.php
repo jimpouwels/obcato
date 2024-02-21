@@ -3,13 +3,13 @@
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\view\views\ElementContainer;
 use Obcato\Core\admin\view\views\LinkEditor;
 use Obcato\Core\admin\view\views\TermSelector;
-use Obcato\Core\admin\view\views\Visual;
 use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class ArticleEditor extends Visual {

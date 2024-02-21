@@ -3,9 +3,9 @@
 namespace Obcato\Core\admin\modules\images\visuals\labels;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\images\LabelRequestHandler;
 use Obcato\Core\admin\modules\images\model\ImageLabel;
-use Obcato\Core\admin\view\views\Visual;
 
 class LabelsTab extends Visual {
 

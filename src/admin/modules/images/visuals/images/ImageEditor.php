@@ -3,11 +3,11 @@
 namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\database\dao\ImageDao;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;
 use Obcato\Core\admin\modules\images\model\Image;
 use Obcato\Core\admin\view\views\ImageLabelSelector;
-use Obcato\Core\admin\view\views\Visual;
 
 class ImageEditor extends Visual {
     private Image $currentImage;

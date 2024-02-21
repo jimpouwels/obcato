@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\core\form;
 
-use Obcato\Core\admin\authentication\Session;
+use Obcato\ComponentApi\Session;
 
 abstract class Form {
 

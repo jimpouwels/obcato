@@ -3,8 +3,8 @@
 namespace Obcato\Core\admin\modules\articles\visuals\terms;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
-use Obcato\Core\admin\view\views\Visual;
 
 class TermTab extends Visual {
 

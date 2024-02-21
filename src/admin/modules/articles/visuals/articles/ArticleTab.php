@@ -3,9 +3,9 @@
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\articles\ArticleRequestHandler;
 use Obcato\Core\admin\modules\articles\model\Article;
-use Obcato\Core\admin\view\views\Visual;
 
 class ArticleTab extends Visual {
 

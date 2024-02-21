@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateEngine;
+use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\authentication\Authenticator;
 
 class CurrentUserIndicator extends Visual {

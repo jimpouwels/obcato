@@ -3,7 +3,7 @@
 namespace Obcato\Core\admin\elements\iframe_element\visuals;
 
 use Obcato\ComponentApi\TemplateEngine;
-use Obcato\Core\admin\view\views\Visual;
+use Obcato\ComponentApi\Visual;
 
 class IFrameElementStatics extends Visual {
 
