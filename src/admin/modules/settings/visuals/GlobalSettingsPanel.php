@@ -16,8 +16,8 @@ class GlobalSettingsPanel extends Panel {
     private Settings $settings;
     private PageService $pageService;
 
-    public function __construct(TemplateEngine $templateEngine, Settings $settings) {
-        parent::__construct($templateEngine, 'Algemene instellingen');
+    public function __construct( Settings $settings) {
+        parent::__construct( 'Algemene instellingen');
         $this->settings = $settings;
         $this->pageService = PageInteractor::getInstance();
     }
@@ -30,10 +30,10 @@ class GlobalSettingsPanel extends Panel {
         $currentHomepage = $this->pageService->getHomepage();
         $current404Page = $this->settings->getPage404();
 
-        $websiteTitle = new TextField($this->getTemplateEngine(), "website_title", "settings_form_website_title_field", $this->settings->getWebsiteTitle(), true, false, null);
-        $emailField = new TextField($this->getTemplateEngine(), "email_address", "settings_form_website_email_address_field", $this->settings->getEmailAddress(), false, false, null);
-        $homepagePicker = new PagePicker($this->getTemplateEngine(), "homepage_page_id", "settings_form_website_homepage_field", $currentHomepage->getId(), "apply_settings");
-        $picker404 = new PagePicker($this->getTemplateEngine(), "404_page_id", "settings_form_404_page", $current404Page?->getId(), "apply_settings");
+        $websiteTitle = new TextField("website_title", "settings_form_website_title_field", $this->settings->getWebsiteTitle(), true, false, null);
+        $emailField = new TextField("email_address", "settings_form_website_email_address_field", $this->settings->getEmailAddress(), false, false, null);
+        $homepagePicker = new PagePicker("homepage_page_id", "settings_form_website_homepage_field", $currentHomepage->getId(), "apply_settings");
+        $picker404 = new PagePicker("404_page_id", "settings_form_404_page", $current404Page?->getId(), "apply_settings");
 
         $data->assign("website_title", $websiteTitle->render());
         $data->assign("email_field", $emailField->render());

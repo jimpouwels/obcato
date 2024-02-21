@@ -14,8 +14,8 @@ class ModulesListPanel extends Panel {
     private ModuleDao $moduleDao;
     private ComponentRequestHandler $componentsRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $requestHandler) {
-        parent::__construct($templateEngine, 'Modules', 'component-list-fieldset');
+    public function __construct($requestHandler) {
+        parent::__construct('Modules', 'component-list-fieldset');
         $this->componentsRequestHandler = $requestHandler;
         $this->moduleDao = ModuleDaoMysql::getInstance();
     }

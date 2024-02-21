@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\elements\image_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\elements\image_element\ImageElement;
 use Obcato\Core\admin\view\views\ElementVisual;
@@ -16,8 +15,8 @@ class ImageElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
     private ImageElement $imageElement;
 
-    public function __construct(TemplateEngine $templateEngine, ImageElement $element) {
-        parent::__construct($templateEngine);
+    public function __construct(ImageElement $element) {
+        parent::__construct();
         $this->imageElement = $element;
     }
 
@@ -30,10 +29,10 @@ class ImageElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
-        $imagePicker = new ImagePicker($this->getTemplateEngine(), "image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
-        $widthField = new TextField($this->getTemplateEngine(), $this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
-        $heightField = new TextField($this->getTemplateEngine(), $this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->imageElement->getHeight(), false, false, "size_field");
+        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
+        $imagePicker = new ImagePicker("image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
+        $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
+        $heightField = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->imageElement->getHeight(), false, false, "size_field");
 
         $data->assign("alignment_field", $this->renderAlignmentField());
         $data->assign("title_field", $titleField->render());
@@ -50,7 +49,7 @@ class ImageElementEditor extends ElementVisual {
         $alignmentOptions[] = array("name" => $this->getTextResource("image_element_align_right"), "value" => "right");
         $alignmentOptions[] = array("name" => $this->getTextResource("image_element_align_center"), "value" => "center");
         $currentAlignment = $this->imageElement->getAlign();
-        $alignmentField = new Pulldown($this->getTemplateEngine(), "element_" . $this->imageElement->getId() . "_align", $this->getTextResource("image_element_editor_alignment"), $currentAlignment, $alignmentOptions, false, null);
+        $alignmentField = new Pulldown("element_" . $this->imageElement->getId() . "_align", $this->getTextResource("image_element_editor_alignment"), $currentAlignment, $alignmentOptions, false, null);
         return $alignmentField->render();
     }
 

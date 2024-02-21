@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\images\model\Image;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\SingleCheckbox;
@@ -15,8 +14,8 @@ class ImageMetadataEditor extends Panel {
 
     private Image $currentImage;
 
-    public function __construct(TemplateEngine $templateEngine, Image $current) {
-        parent::__construct($templateEngine, 'Algemeen', 'image_meta');
+    public function __construct(Image $current) {
+        parent::__construct('Algemeen', 'image_meta');
         $this->currentImage = $current;
     }
 
@@ -32,10 +31,10 @@ class ImageMetadataEditor extends Panel {
 
 
     private function assignImageMetaDataFields($data): void {
-        $titleField = new TextField($this->getTemplateEngine(), "image_title", "Titel", $this->currentImage->getTitle(), true, false, null);
-        $altTextField = new TextField($this->getTemplateEngine(), "image_alt_text", $this->getTextResource('image_editor_alt_text_label'), $this->currentImage->getAltText(), false, false, null);
-        $publishedField = new SingleCheckbox($this->getTemplateEngine(), "image_published", "Gepubliceerd", $this->currentImage->isPublished(), false, null);
-        $uploadField = new UploadField($this->getTemplateEngine(), "image_file", "Afbeelding", false, null);
+        $titleField = new TextField("image_title", "Titel", $this->currentImage->getTitle(), true, false, null);
+        $altTextField = new TextField("image_alt_text", $this->getTextResource('image_editor_alt_text_label'), $this->currentImage->getAltText(), false, false, null);
+        $publishedField = new SingleCheckbox("image_published", "Gepubliceerd", $this->currentImage->isPublished(), false, null);
+        $uploadField = new UploadField("image_file", "Afbeelding", false, null);
 
         $data->assign("image_id", $this->currentImage->getId());
         $data->assign("title_field", $titleField->render());

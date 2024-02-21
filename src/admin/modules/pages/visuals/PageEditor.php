@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\pages\visuals;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\BlockDao;
 use Obcato\Core\admin\database\dao\BlockDaoMysql;
 use Obcato\Core\admin\modules\pages\model\Page;
@@ -17,8 +16,8 @@ class PageEditor extends Visual {
     private Page $currentPage;
     private BlockDao $blockDao;
 
-    public function __construct(TemplateEngine $templateEngine, Page $currentPage) {
-        parent::__construct($templateEngine);
+    public function __construct(Page $currentPage) {
+        parent::__construct();
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->currentPage = $currentPage;
     }
@@ -37,19 +36,19 @@ class PageEditor extends Visual {
     }
 
     private function renderPageMetaDataPanel(): string {
-        return (new MetadataEditor($this->getTemplateEngine(), $this->currentPage))->render();
+        return (new MetadataEditor($this->currentPage))->render();
     }
 
     private function renderElementContainerPanel(): string {
-        return (new ElementContainer($this->getTemplateEngine(), $this->currentPage->getElements()))->render();
+        return (new ElementContainer($this->currentPage->getElements()))->render();
     }
 
     private function renderLinkEditorPanel(): string {
-        return (new LinkEditor($this->getTemplateEngine(), $this->currentPage->getLinks()))->render();
+        return (new LinkEditor($this->currentPage->getLinks()))->render();
     }
 
     private function renderBlockSelectorPanel(): string {
-        return (new BlockSelector($this->getTemplateEngine(), $this->blockDao->getBlocksByPage($this->currentPage), $this->currentPage->getId()))->render();
+        return (new BlockSelector($this->blockDao->getBlocksByPage($this->currentPage), $this->currentPage->getId()))->render();
     }
 
 }

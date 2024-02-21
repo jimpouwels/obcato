@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\components\visuals\components;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
 use Obcato\Core\admin\modules\components\ComponentRequestHandler;
@@ -14,8 +13,8 @@ class ElementsListPanel extends Panel {
     private ElementDao $elementDao;
     private ComponentRequestHandler $componentsRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $requestHandler) {
-        parent::__construct($templateEngine, 'Elementen', 'component-list-fieldset');
+    public function __construct($requestHandler) {
+        parent::__construct('Elementen', 'component-list-fieldset');
         $this->componentsRequestHandler = $requestHandler;
         $this->elementDao = ElementDaoMysql::getInstance();
     }

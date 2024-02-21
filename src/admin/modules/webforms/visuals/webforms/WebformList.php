@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\WebformDao;
 use Obcato\Core\admin\database\dao\WebformDaoMysql;
 use Obcato\Core\admin\modules\webforms\model\Webform;
@@ -15,8 +14,8 @@ class WebformList extends Panel {
     private ?WebForm $_current_webform;
     private WebformDao $_webform_dao;
 
-    public function __construct(TemplateEngine $templateEngine, ?WebForm $current_webform, WebformRequestHandler $webform_request_handler) {
-        parent::__construct($templateEngine, "webforms_list_panel_title", 'webforms_list');
+    public function __construct(?WebForm $current_webform, WebformRequestHandler $webform_request_handler) {
+        parent::__construct("webforms_list_panel_title", 'webforms_list');
         $this->_current_webform = $current_webform;
         $this->_webform_dao = WebformDaoMysql::getInstance();
     }

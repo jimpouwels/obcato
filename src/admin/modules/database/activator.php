@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\database;
 
 use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\database\visuals\Configuration;
 use Obcato\Core\admin\modules\database\visuals\QueriesTab;
 use Obcato\Core\admin\modules\database\visuals\Tables;
@@ -17,8 +16,8 @@ class DatabaseModuleVisual extends ModuleVisual {
     private static int $QUERY_TAB = 2;
     private DatabaseRequestHandler $databaseRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
         $this->databaseRequestHandler = new DatabaseRequestHandler();
     }
 
@@ -29,11 +28,11 @@ class DatabaseModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$CONFIGURATION_TAB) {
-            $content = new Configuration($this->getTemplateEngine());
+            $content = new Configuration();
         } else if ($this->getCurrentTabId() == self::$TABLES_TAB) {
-            $content = new Tables($this->getTemplateEngine());
+            $content = new Tables();
         } else if ($this->getCurrentTabId() == self::$QUERY_TAB) {
-            $content = new QueriesTab($this->getTemplateEngine(), $this->databaseRequestHandler);
+            $content = new QueriesTab($this->databaseRequestHandler);
         }
         $this->assign("content", $content?->render());
     }
@@ -43,7 +42,7 @@ class DatabaseModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
         return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 

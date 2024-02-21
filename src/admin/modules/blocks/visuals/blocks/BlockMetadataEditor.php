@@ -23,8 +23,8 @@ class BlockMetadataEditor extends Panel {
     private Block $currentBlock;
     private BlockDao $blockDao;
 
-    public function __construct(TemplateEngine $templateEngine, Block $current) {
-        parent::__construct($templateEngine, 'Algemeen', 'block_meta');
+    public function __construct(Block $current) {
+        parent::__construct('Algemeen', 'block_meta');
         $this->currentBlock = $current;
         $this->blockDao = BlockDaoMysql::getInstance();
     }
@@ -34,9 +34,9 @@ class BlockMetadataEditor extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
-        $titleField = new TextField($this->getTemplateEngine(), "title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->currentBlock->getTitle(), true, false, null);
-        $publishedField = new SingleCheckbox($this->getTemplateEngine(), "published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->currentBlock->isPublished(), false, null);
-        $templatePickerField = new TemplatePicker($this->getTemplateEngine(), "block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->currentBlock->getTemplate(), $this->currentBlock->getScope());
+        $titleField = new TextField("title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->currentBlock->getTitle(), true, false, null);
+        $publishedField = new SingleCheckbox("published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->currentBlock->isPublished(), false, null);
+        $templatePickerField = new TemplatePicker("block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->currentBlock->getTemplate(), $this->currentBlock->getScope());
 
         $this->assignElementHolderFormIds($data);
         $data->assign("current_block_id", $this->currentBlock->getId());
@@ -55,7 +55,7 @@ class BlockMetadataEditor extends Panel {
         if (!is_null($this->currentBlock->getPosition())) {
             $currentPosition = $this->currentBlock->getPosition()->getId();
         }
-        $positionsField = new Pulldown($this->getTemplateEngine(), "block_position", $this->getTextResource("blocks_edit_metadata_position_field_label"), $currentPosition, $positionsOptions, false, null, true);
+        $positionsField = new Pulldown("block_position", $this->getTextResource("blocks_edit_metadata_position_field_label"), $currentPosition, $positionsOptions, false, null, true);
         return $positionsField->render();
     }
 

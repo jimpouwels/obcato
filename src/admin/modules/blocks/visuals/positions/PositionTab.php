@@ -12,8 +12,8 @@ class PositionTab extends Visual {
 
     private ?BlockPosition $currentPosition;
 
-    public function __construct(TemplateEngine $templateEngine, ?BlockPosition $currentPosition) {
-        parent::__construct($templateEngine);
+    public function __construct(?BlockPosition $currentPosition) {
+        parent::__construct();
         $this->currentPosition = $currentPosition;
     }
 
@@ -33,11 +33,11 @@ class PositionTab extends Visual {
     }
 
     private function renderPositionEditor(): string {
-        return (new PositionEditor($this->getTemplateEngine(), $this->currentPosition))->render();
+        return (new PositionEditor($this->currentPosition))->render();
     }
 
     private function renderPositionList(): string {
-        return (new PositionList($this->getTemplateEngine()))->render();
+        return (new PositionList())->render();
     }
 
 }

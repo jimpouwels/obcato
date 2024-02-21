@@ -2,14 +2,12 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateEngine;
-
 class FormError extends Visual {
 
     private string $_message;
 
-    public function __construct(TemplateEngine $templateEngine, string $message) {
-        parent::__construct($templateEngine);
+    public function __construct(string $message) {
+        parent::__construct();
         $this->_message = $message;
     }
 

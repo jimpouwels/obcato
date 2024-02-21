@@ -2,14 +2,12 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateEngine;
-
 class WarningMessage extends Visual {
 
     private string $_message_resource_identifier;
 
-    public function __construct(TemplateEngine $templateEngine, string $message_resource_identifier) {
-        parent::__construct($templateEngine);
+    public function __construct(string $message_resource_identifier) {
+        parent::__construct();
         $this->_message_resource_identifier = $message_resource_identifier;
     }
 

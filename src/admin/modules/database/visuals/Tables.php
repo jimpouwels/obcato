@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\database\visuals;
 
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\DatabaseDao;
 use Obcato\Core\admin\database\dao\DatabaseDaoMysql;
 use Obcato\Core\admin\view\views\Visual;
@@ -12,8 +11,8 @@ class Tables extends Visual {
 
     private DatabaseDao $databaseDao;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
         $this->databaseDao = DatabaseDaoMysql::getInstance();
     }
 
@@ -32,7 +31,7 @@ class Tables extends Visual {
             $tableValue = array();
             $tableValue["name"] = $table;
             $tableValue["columns"] = $this->getColumns($table);
-            $tablePanels[] = (new TablePanel($this->getTemplateEngine(), $tableValue))->render();
+            $tablePanels[] = (new TablePanel($tableValue))->render();
         }
         return $tablePanels;
     }

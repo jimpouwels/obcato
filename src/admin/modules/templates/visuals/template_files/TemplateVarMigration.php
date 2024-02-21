@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\templates\visuals\template_files;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\TemplateDao;
 use Obcato\Core\admin\database\dao\TemplateDaoMysql;
 use Obcato\Core\admin\modules\templates\TemplateFilesRequestHandler;
@@ -15,8 +14,8 @@ class TemplateVarMigration extends Panel {
     private TemplateDao $templateDao;
     private TemplateFilesRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, TemplateFilesRequestHandler $requestHandler) {
-        parent::__construct($templateEngine, 'template_var_migration_panel_title', 'template_var_migration_panel');
+    public function __construct(TemplateFilesRequestHandler $requestHandler) {
+        parent::__construct('template_var_migration_panel_title', 'template_var_migration_panel');
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->requestHandler = $requestHandler;
     }
@@ -51,7 +50,7 @@ class TemplateVarMigration extends Panel {
             foreach ($this->requestHandler->getParsedVarDefs() as $parsedVar) {
                 if (!Arrays::firstMatch($template->getTemplateVars(), fn($template_var) => $template_var->getName() == $parsedVar)) {
                     $templateId = $template->getId();
-                    $newVarTextfield = new TextField($this->getTemplateEngine(), "new_var_$templateId|{$parsedVar}", $parsedVar, "", false, false, null);
+                    $newVarTextfield = new TextField("new_var_$templateId|{$parsedVar}", $parsedVar, "", false, false, null);
                     $newVarsField[] = $newVarTextfield->render();
                 }
             }

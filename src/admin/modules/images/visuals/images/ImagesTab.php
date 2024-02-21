@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\images\visuals\images;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\images\ImageRequestHandler;
 use Obcato\Core\admin\modules\images\model\Image;
 use Obcato\Core\admin\view\views\Visual;
@@ -12,8 +11,8 @@ class ImagesTab extends Visual {
     private ?Image $currentImage;
     private ImageRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, ImageRequestHandler $requestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct(ImageRequestHandler $requestHandler) {
+        parent::__construct();
         $this->requestHandler = $requestHandler;
         $this->currentImage = $this->requestHandler->getCurrentImage();
     }
@@ -32,15 +31,15 @@ class ImagesTab extends Visual {
     }
 
     private function renderImageSearch(): string {
-        return (new ImageSearch($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new ImageSearch($this->requestHandler))->render();
     }
 
     private function renderImageList(): string {
-        return (new ImageList($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new ImageList($this->requestHandler))->render();
     }
 
     private function renderImageEditor(): string {
-        return (new ImageEditor($this->getTemplateEngine(), $this->currentImage))->render();
+        return (new ImageEditor($this->currentImage))->render();
     }
 
 }

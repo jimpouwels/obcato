@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\blocks\model\Block;
 use Obcato\Core\admin\view\views\Visual;
 
@@ -10,8 +9,8 @@ class BlockTab extends Visual {
 
     private ?Block $currentBlock;
 
-    public function __construct(TemplateEngine $templateEngine, ?Block $current) {
-        parent::__construct($templateEngine);
+    public function __construct(?Block $current) {
+        parent::__construct();
         $this->currentBlock = $current;
     }
 
@@ -27,11 +26,11 @@ class BlockTab extends Visual {
     }
 
     private function renderBlocksList(): string {
-        return (new BlocksList($this->getTemplateEngine(), $this->currentBlock))->render();
+        return (new BlocksList($this->currentBlock))->render();
     }
 
     private function renderBlockEditor(): string {
-        return (new BlockEditor($this->getTemplateEngine(), $this->currentBlock))->render();
+        return (new BlockEditor($this->currentBlock))->render();
     }
 
 }

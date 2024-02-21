@@ -2,9 +2,11 @@
 
 namespace Obcato\Core\admin\modules\components\installer;
 
-use FileUtility;
 use Obcato\ComponentApi\Installer as IInstaller;
 use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\utilities\FileUtility;
+use const Obcato\Core\admin\COMPONENT_TEMP_DIR;
+use const Obcato\Core\admin\STATIC_DIR;
 
 abstract class Installer implements IInstaller {
 

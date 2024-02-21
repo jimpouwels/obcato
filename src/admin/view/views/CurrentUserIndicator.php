@@ -2,13 +2,12 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\authentication\Authenticator;
 
 class CurrentUserIndicator extends Visual {
 
-    public function __construct(TemplateEngine $templateEngine,) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
     }
 
     public function getTemplateFilename(): string {

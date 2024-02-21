@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\pages;
 
 use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\PageDao;
 use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\pages\model\Page;
@@ -23,8 +22,8 @@ class PageModuleVisual extends ModuleVisual {
     private PageRequestHandler $pageRequestHandler;
     private PageDao $pageDao;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
         $this->pageRequestHandler = new PageRequestHandler();
         $this->pageDao = PageDaoMysql::getInstance();
     }
@@ -34,25 +33,25 @@ class PageModuleVisual extends ModuleVisual {
     }
 
     public function load(): void {
-        $pageTree = new PageTree($this->getTemplateEngine(), $this->pageDao->getRootPage(), $this->currentPage);
-        $pageEditor = new PageEditor($this->getTemplateEngine(), $this->currentPage);
+        $pageTree = new PageTree($this->pageDao->getRootPage(), $this->currentPage);
+        $pageEditor = new PageEditor($this->currentPage);
         $this->assign("tree", $pageTree->render());
         $this->assign("editor", $pageEditor->render());
     }
 
     public function getActionButtons(): array {
         $buttons = array();
-        $buttons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
+        $buttons[] = new ActionButtonSave('update_element_holder');
         if (!$this->currentPageIsHomepage()) {
-            $buttons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
+            $buttons[] = new ActionButtonDelete('delete_element_holder');
         }
-        $buttons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
+        $buttons[] = new ActionButtonAdd('add_element_holder');
         if ($this->currentPage->getId() != 1) {
             if (!$this->pageDao->isFirst($this->currentPage)) {
-                $buttons[] = new ActionButtonUp($this->getTemplateEngine(), 'moveup_element_holder');
+                $buttons[] = new ActionButtonUp('moveup_element_holder');
             }
             if (!$this->pageDao->isLast($this->currentPage)) {
-                $buttons[] = new ActionButtonDown($this->getTemplateEngine(), 'movedown_element_holder');
+                $buttons[] = new ActionButtonDown('movedown_element_holder');
             }
         }
         return $buttons;

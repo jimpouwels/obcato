@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\articles\ArticleRequestHandler;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\view\views\Visual;
@@ -12,8 +11,8 @@ class ArticleTab extends Visual {
     private ?Article $currentArticle;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, ArticleRequestHandler $articleRequestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct(ArticleRequestHandler $articleRequestHandler) {
+        parent::__construct();
         $this->articleRequestHandler = $articleRequestHandler;
         $this->currentArticle = $articleRequestHandler->getCurrentArticle();
     }
@@ -32,15 +31,15 @@ class ArticleTab extends Visual {
     }
 
     private function renderArticlesSearchPanel(): string {
-        return (new ArticlesSearch($this->getTemplateEngine(), $this->articleRequestHandler))->render();
+        return (new ArticlesSearch($this->articleRequestHandler))->render();
     }
 
     private function renderArticlesList(): string {
-        return (new ArticlesList($this->getTemplateEngine(), $this->articleRequestHandler))->render();
+        return (new ArticlesList($this->articleRequestHandler))->render();
     }
 
     private function renderArticleEditor(): string {
-        return (new ArticleEditor($this->getTemplateEngine(), $this->currentArticle))->render();
+        return (new ArticleEditor($this->currentArticle))->render();
     }
 
 }

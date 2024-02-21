@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\modules\articles\model\Article;
@@ -17,8 +16,8 @@ class ArticleEditor extends Visual {
     private Article $currentArticle;
     private ArticleDao $articleDao;
 
-    public function __construct(TemplateEngine $templateEngine, $currentArticle) {
-        parent::__construct($templateEngine);
+    public function __construct(Article $currentArticle) {
+        parent::__construct();
         $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
     }
@@ -37,19 +36,19 @@ class ArticleEditor extends Visual {
     }
 
     private function renderArticleMetaDataPanel(): string {
-        return (new ArticleMetadataEditor($this->getTemplateEngine(), $this->currentArticle))->render();
+        return (new ArticleMetadataEditor($this->currentArticle))->render();
     }
 
     private function renderElementContainer(): string {
-        return (new ElementContainer($this->getTemplateEngine(), $this->currentArticle->getElements()))->render();
+        return (new ElementContainer($this->currentArticle->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        return (new LinkEditor($this->getTemplateEngine(), $this->currentArticle->getLinks()))->render();
+        return (new LinkEditor($this->currentArticle->getLinks()))->render();
     }
 
     private function renderTermSelector(): string {
-        return (new TermSelector($this->getTemplateEngine(), $this->articleDao->getTermsForArticle($this->currentArticle->getId()), $this->currentArticle->getId()))->render();
+        return (new TermSelector($this->articleDao->getTermsForArticle($this->currentArticle->getId()), $this->currentArticle->getId()))->render();
     }
 
 }

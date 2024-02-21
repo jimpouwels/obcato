@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\modules\database\visuals;
 
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\database\DatabaseRequestHandler;
 use Obcato\Core\admin\view\views\Visual;
 
@@ -10,8 +9,8 @@ class QueriesTab extends Visual {
 
     private DatabaseRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $requestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct($requestHandler) {
+        parent::__construct();
         $this->requestHandler = $requestHandler;
     }
 
@@ -25,10 +24,10 @@ class QueriesTab extends Visual {
     }
 
     private function renderQueryFieldPanel(): string {
-        return (new QueryFieldPanel($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new QueryFieldPanel($this->requestHandler))->render();
     }
 
     private function renderQueryResultPanel(): string {
-        return (new QueryResultPanel($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new QueryResultPanel($this->requestHandler))->render();
     }
 }

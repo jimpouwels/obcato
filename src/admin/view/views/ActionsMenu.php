@@ -8,8 +8,8 @@ class ActionsMenu extends Visual {
 
     private array $actionButtons;
 
-    public function __construct(TemplateEngine $templateEngine, array $actionButtons) {
-        parent::__construct($templateEngine);
+    public function __construct(array $actionButtons) {
+        parent::__construct();
         $this->actionButtons = $actionButtons;
     }
 

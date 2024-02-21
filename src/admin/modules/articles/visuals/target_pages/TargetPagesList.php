@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\articles\visuals\target_pages;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\view\views\PagePicker;
@@ -13,8 +12,8 @@ class TargetPagesList extends Panel {
 
     private ArticleDao $articleDao;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine, 'Beschikbare doelpagina\'s', 'target_pages_fieldset');
+    public function __construct() {
+        parent::__construct('Beschikbare doelpagina\'s', 'target_pages_fieldset');
         $this->articleDao = ArticleDaoMysql::getInstance();
     }
 
@@ -26,7 +25,7 @@ class TargetPagesList extends Panel {
         $data->assign("target_pages", $this->getTargetPages());
         $data->assign("default_target_page", $this->getDefaultTargetPage());
 
-        $pagePicker = new PagePicker($this->getTemplateEngine(), "add_target_page_ref", "", null, "update_target_pages");
+        $pagePicker = new PagePicker("add_target_page_ref", "", null, "update_target_pages");
         $data->assign("page_picker", $pagePicker->render());
     }
 

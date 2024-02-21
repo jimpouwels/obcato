@@ -3,16 +3,15 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 
 class Pulldown extends FormField {
 
     private array $_options;
-    private bool $_include_select_indication;
+    private bool $includeSelectIndication;
 
-    public function __construct(TemplateEngine $templateEngine, string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $className, bool $include_select_indication = false) {
-        parent::__construct($templateEngine, $name, $value, $label, $mandatory, false, $className);
-        $this->_include_select_indication = $include_select_indication;
+    public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $className, bool $includeSelectIndication = false) {
+        parent::__construct($name, $value, $label, $mandatory, false, $className);
+        $this->includeSelectIndication = $includeSelectIndication;
         $this->_options = $options;
     }
 
@@ -22,7 +21,7 @@ class Pulldown extends FormField {
 
     public function loadFormField(TemplateData $data): void {
         $data->assign("options", $this->_options);
-        $data->assign("include_select_indication", $this->_include_select_indication);
+        $data->assign("include_select_indication", $this->includeSelectIndication);
     }
 
     public function addOption(string $name, string $value): void {

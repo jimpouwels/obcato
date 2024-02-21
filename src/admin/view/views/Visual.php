@@ -3,18 +3,17 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual as IVisual;
 use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\core\Blackboard;
+use Obcato\Core\admin\view\TemplateEngine;
 
-abstract class Visual implements IVisual {
+abstract class Visual implements \Obcato\ComponentApi\Visual {
 
     private TemplateEngine $templateEngine;
     private TemplateData $templateData;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        $this->templateEngine = $templateEngine;
+    public function __construct() {
+        $this->templateEngine = TemplateEngine::getInstance();
         $this->templateData = $this->templateEngine->createChildData();
     }
 

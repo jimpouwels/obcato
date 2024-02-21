@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\components\visuals\components;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\components\ComponentRequestHandler;
 use Obcato\Core\admin\view\views\Panel;
 
@@ -11,8 +10,8 @@ class ComponentsDetailsPanel extends Panel {
 
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $componentRequestHandler) {
-        parent::__construct($templateEngine, 'Component details');
+    public function __construct($componentRequestHandler) {
+        parent::__construct('Component details');
         $this->componentRequestHandler = $componentRequestHandler;
     }
 

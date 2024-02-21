@@ -2,16 +2,14 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateEngine;
-
 class ActionButton extends Visual {
 
     private string $_label;
     private string $_action_id;
     private string $_icon_class;
 
-    public function __construct(TemplateEngine $templateEngine, string $label, string $action_id, string $icon_class) {
-        parent::__construct($templateEngine);
+    public function __construct(string $label, string $action_id, string $icon_class) {
+        parent::__construct();
         $this->_label = $label;
         $this->_action_id = $action_id;
         $this->_icon_class = $icon_class;

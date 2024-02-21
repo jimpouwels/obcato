@@ -3,16 +3,16 @@
 namespace Obcato\Core\admin\modules\downloads\visuals;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\downloads\model\Download;
 use Obcato\Core\admin\view\views\Panel;
+use const Obcato\Core\admin\UPLOAD_DIR;
 
 class DownloadInfo extends Panel {
 
     private Download $download;
 
-    public function __construct(TemplateEngine $templateEngine, Download $download) {
-        parent::__construct($templateEngine, 'Bestandsinformatie');
+    public function __construct(Download $download) {
+        parent::__construct('Bestandsinformatie');
         $this->download = $download;
     }
 

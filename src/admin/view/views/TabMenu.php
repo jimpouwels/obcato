@@ -3,16 +3,14 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TabMenu as ITabMenu;
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 
 class TabMenu extends Visual implements ITabMenu {
 
     private array $tabItems = array();
     private int $currentTabId;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
     }
 
     public function getTemplateFilename(): string {
