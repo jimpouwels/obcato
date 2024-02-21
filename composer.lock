@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f3a3804910b44845791f9e4854c0f1f",
+    "content-hash": "c416e6aab5872d36726bce8f57667ede",
     "packages": [
         {
             "name": "obcato/component-api",
-            "version": "v1.0.44",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jimpouwels/obcato-component-api.git",
@@ -42,7 +42,7 @@
             "description": "Custom Component API for Obcato",
             "support": {
                 "issues": "https://github.com/jimpouwels/obcato-component-api/issues",
-                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v1.0.44"
+                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v0.0.1"
             },
             "time": "2024-02-21T09:44:58+00:00"
         },

@@ -6,7 +6,7 @@ use Obcato\ComponentApi\TemplateData;
 use Obcato\Core\admin\modules\authorization\model\User;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\PasswordField;
-use Obcato\Core\admin\view\views\TextField;
+use Obcato\Core\admin\view\views\TextField;gi
 
 class UserEditor extends Panel {
 
