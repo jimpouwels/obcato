@@ -23,7 +23,6 @@ class BlockModuleVisual extends ModuleVisual {
     private PositionRequestHandler $positionRequestHandler;
 
     public function __construct() {
-        parent::__construct();
         $this->blockRequestHandler = new BlockRequestHandler();
         $this->positionRequestHandler = new PositionRequestHandler();
     }
@@ -64,7 +63,7 @@ class BlockModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
+        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
         $elementStaticsValues = array();
         if ($this->currentBlock) {
             $elementStatics = $this->currentBlock->getElementStatics();
@@ -73,7 +72,7 @@ class BlockModuleVisual extends ModuleVisual {
             }
         }
         $this->getTemplateEngine()->assign("element_statics", $elementStaticsValues);
-        return $this->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

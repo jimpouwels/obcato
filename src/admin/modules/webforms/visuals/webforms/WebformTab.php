@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\WebformRequestHandler;
 use Obcato\Core\admin\view\views\Visual;
@@ -26,7 +27,7 @@ class WebformTab extends Visual {
         $this->assign("action_form_id", ACTION_FORM_ID);
         $this->assign('list', $this->renderWebFormsList());
         if ($this->_current_webform) {
-            $this->assign('webform_id', $this->_current_webform->getId());
+            $this->assign('id', $this->_current_webform->getId());
             $this->assign('metadata_editor', $this->renderMetadataEditor());
             $this->assign('webform_editor', $this->renderWebFormEditor());
             $this->assign('handlers_editor', $this->renderHandlersEditor());

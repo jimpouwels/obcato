@@ -12,8 +12,9 @@ use Obcato\Core\admin\frontend\FrontendVisual;
 use Obcato\Core\admin\frontend\TextElementFrontendVisual;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
-use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 
 class TextElement extends Element {
 
@@ -32,11 +33,11 @@ class TextElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new TextElementStatics();
+        return new TextElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new TextElementEditor($this);
+        return new TextElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

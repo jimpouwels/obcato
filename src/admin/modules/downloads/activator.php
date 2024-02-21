@@ -59,7 +59,7 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        return $this->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

@@ -50,11 +50,11 @@ class IFrameElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new IFrameElementStatics();
+        return new IFrameElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new IFrameElementEditor($this);
+        return new IFrameElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): IFrameElementFrontendVisual {

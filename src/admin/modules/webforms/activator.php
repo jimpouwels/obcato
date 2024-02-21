@@ -50,8 +50,8 @@ class WebFormsModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->assign("path", $this->getModuleIdentifier());
-        return $this->fetch("modules/webforms/head_includes.tpl");
+        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
+        return $this->getTemplateEngine()->fetch("modules/webforms/head_includes.tpl");
     }
 
     public function getRequestHandlers(): array {

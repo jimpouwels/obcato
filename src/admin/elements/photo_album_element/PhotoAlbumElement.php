@@ -60,11 +60,11 @@ class PhotoAlbumElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new PhotoAlbumElementStatics();
+        return new PhotoAlbumElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new PhotoAlbumElementEditor($this);
+        return new PhotoAlbumElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

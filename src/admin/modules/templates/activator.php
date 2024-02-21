@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\templates;
 
 use Obcato\ComponentApi\TabMenu;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\templates\model\Scope;
 use Obcato\Core\admin\modules\templates\model\Template;
 use Obcato\Core\admin\modules\templates\visuals\template_editor\TemplateEditorTab;
@@ -20,6 +21,7 @@ class TemplateModuleVisual extends ModuleVisual {
 
     private ?Template $currentTemplate;
     private ?Scope $currentScope;
+    private Module $module;
     private TemplateEditorRequestHandler $templateEditorRequestHandler;
     private TemplateFilesRequestHandler $templateFilesRequestHandler;
 
@@ -66,8 +68,8 @@ class TemplateModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
+        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {
@@ -83,7 +85,7 @@ class TemplateModuleVisual extends ModuleVisual {
     }
 
     public function getTitle(): string {
-        return $this->getTextResource($this->getModuleIdentifier() . '_module_title');
+        return $this->getTextResource($this->module->getIdentifier() . '_module_title');
     }
 
     public function loadTabMenu(TabMenu $tabMenu): int {

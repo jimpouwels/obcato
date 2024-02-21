@@ -46,11 +46,11 @@ class ListElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ListElementStatics();
+        return new ListElementStatics(TemplateEngine::getInstance());
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ListElementEditor($this);
+        return new ListElementEditor(TemplateEngine::getInstance(), $this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

@@ -13,6 +13,7 @@ use Obcato\Core\admin\modules\webforms\model\WebformItem;
 use Obcato\Core\admin\modules\webforms\model\WebformTextArea;
 use Obcato\Core\admin\modules\webforms\model\WebformTextfield;
 use Obcato\Core\admin\modules\webforms\visuals\webforms\fields\WebformItemVisual;
+use Obcato\Core\admin\view\TemplateEngine;
 
 class WebformItemFactory {
 
@@ -35,7 +36,7 @@ class WebformItemFactory {
 
     public function getBackendVisualFor(WebformItem $webform_item): WebformItemVisual {
         $className = "Obcato\\Core\\admin\\modules\\webforms\\visuals\\webforms\\fields\\" . $this->getFormItemType($webform_item->getType())->getBackendVisualClassname();
-        return new $className($webform_item);
+        return new $className(TemplateEngine::getInstance(), $webform_item);
     }
 
     public function getBackendFormFor(WebformItem $webform_item): WebformItemForm {

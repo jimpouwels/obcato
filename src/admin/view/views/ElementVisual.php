@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
@@ -19,7 +20,6 @@ abstract class ElementVisual extends Visual {
     abstract function getElementFormTemplateFilename(): string;
 
     public function __construct() {
-        parent::__construct();
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 

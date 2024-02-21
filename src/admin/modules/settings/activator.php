@@ -40,8 +40,8 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        $this->getTemplateEngine()->assign("path", $this->settingsModule->getIdentifier());
+        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

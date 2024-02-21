@@ -82,7 +82,7 @@ class ArticlesList extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        $message = new InformationMessage($this->getTextResource("articles_list_message_no_articles_found"));
+        $message = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("articles_list_message_no_articles_found"));
         return $message->render();
     }
 

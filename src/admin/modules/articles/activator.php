@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\articles;
 
 use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
 use Obcato\Core\admin\modules\articles\visuals\articles\ArticleTab;
@@ -26,7 +27,6 @@ class ArticleModuleVisual extends ModuleVisual {
     private TargetPagesRequestHandler $targetPagesRequestHandler;
 
     public function __construct() {
-        parent::__construct();
         $this->articleRequestHandler = new ArticleRequestHandler();
         $this->termRequestsHandler = new TermRequestHandler();
         $this->targetPagesRequestHandler = new TargetPagesRequestHandler();
@@ -88,7 +88,7 @@ class ArticleModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->assign("path", $this->getModuleIdentifier());
+        ->assign("path", $this->articleModule->getIdentifier());
 
         $elementStaticValues = array();
         if ($this->currentArticle) {
@@ -97,9 +97,9 @@ class ArticleModuleVisual extends ModuleVisual {
                 $elementStaticValues[] = $elementStatic->render();
             }
         }
-        $this->assign("element_statics", $elementStaticValues);
-        $this->assign("path", $this->getModuleIdentifier());
-        return $this->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        ->assign("element_statics", $elementStaticValues);
+        ->assign("path", $this->articleModule->getIdentifier());
+        return ->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function onRequestHandled(): void {

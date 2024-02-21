@@ -78,8 +78,8 @@ class ImageModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        $this->assign("path", $this->getModuleIdentifier());
-        return $this->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        ->assign("path", $this->getModuleIdentifier());
+        return ->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {
