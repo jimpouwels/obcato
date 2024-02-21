@@ -2,10 +2,10 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\Session;
 use Obcato\ComponentApi\TemplateData;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\utilities\StringUtility;
 
 abstract class FormField extends Visual {
@@ -52,8 +52,8 @@ abstract class FormField extends Visual {
 
     public function getErrorHtml(string $field_name): string {
         $error_html = "";
-        if (Session::hasError($field_name)) {
-            $error = new FormError($this->getTemplateEngine(), Session::popError($field_name));
+        if (Session::getInstance()->hasError($field_name)) {
+            $error = new FormError($this->getTemplateEngine(), Session::getInstance()->popError($field_name));
             return $error->render();
         }
         return $error_html;
@@ -69,7 +69,7 @@ abstract class FormField extends Visual {
     }
 
     public function errorClass(string $field_name): string {
-        if (Session::hasError($field_name)) {
+        if (Session::getInstance()->hasError($field_name)) {
             return "invalid ";
         }
         return "";

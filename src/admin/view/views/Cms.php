@@ -2,11 +2,11 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\Session;
 use Obcato\ComponentApi\TemplateEngine;
 use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\authentication\Session;
+use Obcato\Core\admin\core\Blackboard;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
 use Obcato\Core\admin\database\dao\SettingsDaoMysql;
@@ -35,7 +35,7 @@ class Cms extends Visual {
         $notification_bar = new NotificationBar($this->getTemplateEngine());
         $current_user_indicator = new CurrentUserIndicator($this->getTemplateEngine());
 
-        $this->assignGlobal("text_resources", Session::getTextResources());
+        $this->assignGlobal("text_resources", Session::getInstance()->getTextResources());
 
         if ($this->moduleVisual) {
             $this->assignGlobal("page_title", $this->moduleVisual->getTitle());
@@ -45,9 +45,9 @@ class Cms extends Visual {
         $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
         $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 
-        $module_id_text_field = new TextField($this->getTemplateEngine(), "module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
+        $module_id_text_field = new TextField($this->getTemplateEngine(), "module_id", "", BlackBoard::getInstance()->getCurrentModule()->getId(), true, false, "", false);
         $this->assignGlobal("module_id_form_field", $module_id_text_field->render());
-        $module_tab_id_text_field = new TextField($this->getTemplateEngine(), "module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
+        $module_tab_id_text_field = new TextField($this->getTemplateEngine(), "module_tab_id", "", BlackBoard::getInstance()->getCurrentTabId(), true, false, "", false);
         $this->assignGlobal("module_tab_id_form_field", $module_tab_id_text_field->render());
 
         $this->assignGlobal("actions_menu", $this->getActionsMenu()->render());

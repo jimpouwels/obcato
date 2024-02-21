@@ -2,7 +2,8 @@
 
 namespace Obcato\Core\admin\core\form;
 
-use Obcato\ComponentApi\Session;
+
+use Obcato\Core\admin\authentication\Session;
 
 abstract class Form {
 
@@ -25,7 +26,7 @@ abstract class Form {
     }
 
     protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
-        Session::addFieldError($errorField, $errorMessageResourceIdentifier);
+        Session::getInstance()->addFieldError($errorField, $errorMessageResourceIdentifier);
     }
 
     public function getFieldValues(string $fieldName): array {
@@ -136,15 +137,15 @@ abstract class Form {
     }
 
     protected function hasErrors(): bool {
-        return Session::getErrorCount() > 0;
+        return Session::getInstance()->getErrorCount() > 0;
     }
 
     protected function getError(string $fieldName): string {
-        return Session::getError($fieldName);
+        return Session::getInstance()->getError($fieldName);
     }
 
     protected function getTextResource(string $identifier): string {
-        return Session::getTextResource($identifier);
+        return Session::getInstance()->getTextResource($identifier);
     }
 
 }

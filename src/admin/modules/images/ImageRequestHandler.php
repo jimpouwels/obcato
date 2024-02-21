@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\images;
 
-use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\database\dao\ImageDao;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;
@@ -83,7 +83,7 @@ class ImageRequestHandler extends HttpRequestHandler {
             if ($imageToToggle->isPublished()) {
                 $successMessageTextResourceId = "image_successfully_published";
             }
-            $this->sendSuccessMessage(Session::getTextResource($successMessageTextResourceId));
+            $this->sendSuccessMessage(Session::getInstance()->getTextResource($successMessageTextResourceId));
             $this->redirectTo($this->getBackendBaseUrl());
         } catch (FormException $e) {
             $this->sendErrorMessage("Afbeelding niet worden ge(de)publiseerd");

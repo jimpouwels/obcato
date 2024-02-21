@@ -2,13 +2,14 @@
 
 namespace Obcato\Core\admin\modules\pages\service;
 
-use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\authentication\Authenticator;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\database\dao\BlockDao;
 use Obcato\Core\admin\database\dao\BlockDaoMysql;
 use Obcato\Core\admin\database\dao\PageDao;
 use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\pages\model\Page;
+use const Obcato\Core\admin\ELEMENT_HOLDER_PAGE;
 
 class PageInteractor implements PageService {
 
@@ -45,9 +46,9 @@ class PageInteractor implements PageService {
         $newPage = new Page();
         $newPage->setParentId($page->getId());
         $newPage->setShowInNavigation(true);
-        $newPage->setDescription(Session::getTextResource('new_page_default_title'));
-        $newPage->setNavigationTitle(Session::getTextResource('new_page_default_navigation_title'));
-        $newPage->setTitle(Session::getTextResource('new_page_default_title'));
+        $newPage->setDescription(Session::getInstance()->getTextResource('new_page_default_title'));
+        $newPage->setNavigationTitle(Session::getInstance()->getTextResource('new_page_default_navigation_title'));
+        $newPage->setTitle(Session::getInstance()->getInstance()->getTextResource('new_page_default_title'));
         $user = Authenticator::getCurrentUser();
         $newPage->setCreatedById($user->getId());
         $newPage->setType(ELEMENT_HOLDER_PAGE);
