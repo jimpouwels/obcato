@@ -3,13 +3,14 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 
 class ElementContainer extends Panel {
 
     private array $elements;
 
-    public function __construct(array $elements) {
-        parent::__construct($this->getTextResource('element_holder_content_title'), 'element_container');
+    public function __construct(TemplateEngine $templateEngine, array $elements) {
+        parent::__construct($templateEngine, $this->getTextResource('element_holder_content_title'), 'element_container');
         $this->elements = $elements;
     }
 
@@ -26,7 +27,7 @@ class ElementContainer extends Panel {
     }
 
     private function renderInformationMessage(): string {
-        $information_message = new InformationMessage($this->getTextResource('no_elements_found_message'));
+        $information_message = new InformationMessage($this->getTemplateEngine(), $this->getTextResource('no_elements_found_message'));
         return $information_message->render();
     }
 

@@ -12,8 +12,8 @@ class LabelEditor extends Panel {
 
     private ImageLabel $_current_label;
 
-    public function __construct( ImageLabel $current_label) {
-        parent::__construct( 'Label bewerken');
+    public function __construct(TemplateEngine $templateEngine, ImageLabel $current_label) {
+        parent::__construct($templateEngine, 'Label bewerken');
         $this->_current_label = $current_label;
     }
 
@@ -27,7 +27,7 @@ class LabelEditor extends Panel {
     }
 
     private function renderLabelNameField(): string {
-        $name_field = new TextField("name", "Naam", $this->_current_label->getName(), true, false, null);
+        $name_field = new TextField($this->getTemplateEngine(), "name", "Naam", $this->_current_label->getName(), true, false, null);
         return $name_field->render();
     }
 }

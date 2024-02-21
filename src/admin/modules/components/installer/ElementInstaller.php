@@ -10,9 +10,6 @@ use Obcato\Core\admin\database\dao\ElementDaoMysql;
 use Obcato\Core\admin\database\dao\ScopeDao;
 use Obcato\Core\admin\database\dao\ScopeDaoMysql;
 use Obcato\Core\admin\modules\templates\model\Scope;
-use const Obcato\Core\admin\BACKEND_TEMPLATE_DIR;
-use const Obcato\Core\admin\STATIC_DIR;
-use const Obcato\Core\CMS_ROOT;
 
 abstract class ElementInstaller extends Installer implements IElementInstaller {
 

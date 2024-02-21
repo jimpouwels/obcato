@@ -14,8 +14,8 @@ class ImportTab extends Panel {
 
     private ImageDao $_image_dao;
 
-    public function __construct() {
-        parent::__construct( 'Importeren');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'Importeren');
         $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
@@ -29,13 +29,13 @@ class ImportTab extends Panel {
     }
 
     private function renderUploadField(): string {
-        $upload_field = new UploadField("import_zip_file", "ZIP bestand", false, "");
+        $upload_field = new UploadField($this->getTemplateEngine(), "import_zip_file", "ZIP bestand", false, "");
         return $upload_field->render();
     }
 
     private function renderLabelPullDown(): string {
         $labels_name_value_pair = $this->getLabelsValuePair();
-        $pulldown = new Pulldown("import_label", "Label", null, $labels_name_value_pair, 200, false);
+        $pulldown = new Pulldown($this->getTemplateEngine(), "import_label", "Label", null, $labels_name_value_pair, 200, false);
         return $pulldown->render();
     }
 

@@ -7,9 +7,8 @@ use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\database\dao\DownloadDao;
 use Obcato\Core\admin\database\dao\DownloadDaoMysql;
 use Obcato\Core\admin\modules\downloads\model\Download;
-use Obcato\Core\admin\modules\downloads\model\DownloadForm;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
-use const Obcato\Core\admin\UPLOAD_DIR;
+use Obcato\Core\DownloadForm;
 
 class DownloadRequestHandler extends HttpRequestHandler {
 

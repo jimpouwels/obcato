@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\templates\visuals\template_editor;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ScopeDao;
 use Obcato\Core\admin\database\dao\ScopeDaoMysql;
 use Obcato\Core\admin\view\views\Panel;
@@ -11,8 +12,8 @@ class ScopeSelector extends Panel {
 
     private ScopeDao $scopeDao;
 
-    public function __construct() {
-        parent::__construct('templates_scope_list_title', 'scope_selector_panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'templates_scope_list_title', 'scope_selector_panel');
         $this->scopeDao = ScopeDaoMysql::getInstance();
     }
 

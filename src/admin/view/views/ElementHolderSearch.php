@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\database\dao\PageDao;
@@ -19,8 +20,8 @@ class ElementHolderSearch extends Panel {
     private PageDao $pageDao;
     private string $popupType;
 
-    public function __construct(string $backClickId, string $backfillId, string $objectsToSearch, string $popupType) {
-        parent::__construct('Zoeken', 'popup_search_fieldset');
+    public function __construct(TemplateEngine $templateEngine, string $backClickId, string $backfillId, string $objectsToSearch, string $popupType) {
+        parent::__construct($templateEngine, 'Zoeken', 'popup_search_fieldset');
         $this->objectsToSearch = $objectsToSearch;
         $this->backClickId = $backClickId;
         $this->backfillId = $backfillId;
@@ -48,7 +49,7 @@ class ElementHolderSearch extends Panel {
 
     private function renderSearchField(): string {
         $search_query = $this->getCurrentSearchQuery();
-        $search_field = new TextField(self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
+        $search_field = new TextField($this->getTemplateEngine(), self::$SEARCH_QUERY_KEY, "Zoekterm", $search_query, false, false, "");
         return $search_field->render();
     }
 
@@ -93,12 +94,12 @@ class ElementHolderSearch extends Panel {
         if (isset($_GET[self::$OBJECT_TYPE_KEY])) {
             $current_search_option = $_GET[self::$OBJECT_TYPE_KEY];
         }
-        $search_options_field = new Pulldown(self::$OBJECT_TYPE_KEY, "Type", $current_search_option, $search_options, false, null);
+        $search_options_field = new Pulldown($this->getTemplateEngine(), self::$OBJECT_TYPE_KEY, "Type", $current_search_option, $search_options, false, null);
         return $search_options_field->render();
     }
 
     private function renderNoResultsMessage(): string {
-        $information_message = new InformationMessage("Geen resultaten gevonden");
+        $information_message = new InformationMessage($this->getTemplateEngine(), "Geen resultaten gevonden");
         return $information_message->render();
     }
 
@@ -111,7 +112,7 @@ class ElementHolderSearch extends Panel {
     }
 
     private function renderSearchButton(): string {
-        $search_button = new Button("", "Zoeken", "document.getElementById('search_form').submit(); return false;");
+        $search_button = new Button($this->getTemplateEngine(), "", "Zoeken", "document.getElementById('search_form').submit(); return false;");
         return $search_button->render();
     }
 

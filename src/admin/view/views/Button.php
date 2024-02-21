@@ -2,14 +2,16 @@
 
 namespace Obcato\Core\admin\view\views;
 
+use Obcato\ComponentApi\TemplateEngine;
+
 class Button extends Visual {
 
     private ?string $_id;
     private string $_label_resource_identifier;
     private ?string $_onclick;
 
-    public function __construct(?string $id, string $labelResourceIdentifier, ?string $onclick) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, ?string $id, string $labelResourceIdentifier, ?string $onclick) {
+        parent::__construct($templateEngine);
         $this->_id = $id;
         $this->_label_resource_identifier = $labelResourceIdentifier;
         $this->_onclick = $onclick;

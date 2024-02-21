@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\templates\visuals\template_editor;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\TemplateDao;
 use Obcato\Core\admin\database\dao\TemplateDaoMysql;
 use Obcato\Core\admin\modules\templates\model\Scope;
@@ -16,8 +17,8 @@ class TemplateList extends Panel {
     private TemplateDao $templateDao;
     private Scope $scope;
 
-    public function __construct(Scope $scope) {
-        parent::__construct($this->getTextResource($scope->getIdentifier() . '_scope_label') . ' templates', 'template_list_panel');
+    public function __construct(TemplateEngine $templateEngine, Scope $scope) {
+        parent::__construct($templateEngine, $this->getTextResource($scope->getIdentifier() . '_scope_label') . ' templates', 'template_list_panel');
         $this->scope = $scope;
         $this->templateDao = TemplateDaoMysql::getInstance();
     }
@@ -45,12 +46,12 @@ class TemplateList extends Panel {
     }
 
     private function renderDeleteCheckBox(Template $template): string {
-        $checkbox = new SingleCheckbox("template_" . $template->getId() . "_delete", "", "", false, "");
+        $checkbox = new SingleCheckbox($this->getTemplateEngine(), "template_" . $template->getId() . "_delete", "", "", false, "");
         return $checkbox->render();
     }
 
     private function renderInformationMessage(): string {
-        $informationMessage = new InformationMessage("Geen templates gevonden. Klik op 'toevoegen' om een nieuw template te maken.");
+        $informationMessage = new InformationMessage($this->getTemplateEngine(), "Geen templates gevonden. Klik op 'toevoegen' om een nieuw template te maken.");
         return $informationMessage->render();
     }
 

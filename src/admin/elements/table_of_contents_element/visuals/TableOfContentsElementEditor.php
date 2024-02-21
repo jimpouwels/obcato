@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\elements\table_of_contents_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\elements\table_of_contents_element\TableOfContentsElement;
 use Obcato\Core\admin\view\views\ElementVisual;
@@ -13,8 +14,8 @@ class TableOfContentsElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_form.tpl";
     private TableOfContentsElement $element;
 
-    public function __construct(TableOfContentsElement $element) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, TableOfContentsElement $element) {
+        parent::__construct($templateEngine);
         $this->element = $element;
     }
 
@@ -27,7 +28,7 @@ class TableOfContentsElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField("element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
+        $titleField = new TextField($this->getTemplateEngine(), "element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
     }
 

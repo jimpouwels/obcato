@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\webforms;
 
 use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\webforms\visuals\webforms\WebformTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
@@ -16,8 +17,8 @@ class WebFormsModuleVisual extends ModuleVisual {
     private WebformRequestHandler $webformRequestHandler;
     private int $currentTabId = 0;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->webformRequestHandler = new WebformRequestHandler();
     }
 
@@ -28,7 +29,7 @@ class WebFormsModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->currentTabId == self::$FORMS_TAB) {
-            $content = new WebformTab($this->webformRequestHandler);
+            $content = new WebformTab($this->getTemplateEngine(), $this->webformRequestHandler);
         }
         $this->assign("content", $content->render());
     }
@@ -39,11 +40,11 @@ class WebFormsModuleVisual extends ModuleVisual {
             $save_button = null;
             $delete_button = null;
             if (!is_null($this->webformRequestHandler->getCurrentWebForm())) {
-                $save_button = new ActionButtonSave('update_webform');
-                $delete_button = new ActionButtonDelete('delete_webform');
+                $save_button = new ActionButtonSave($this->getTemplateEngine(), 'update_webform');
+                $delete_button = new ActionButtonDelete($this->getTemplateEngine(), 'delete_webform');
             }
             $action_buttons[] = $save_button;
-            $action_buttons[] = new ActionButtonAdd('add_webform');
+            $action_buttons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_webform');
             $action_buttons[] = $delete_button;
         }
         return $action_buttons;

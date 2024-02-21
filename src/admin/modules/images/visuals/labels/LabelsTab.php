@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\admin\modules\images\visuals\labels;
 
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\images\LabelRequestHandler;
 use Obcato\Core\admin\modules\images\model\ImageLabel;
 use Obcato\Core\admin\view\views\Visual;
@@ -11,8 +12,8 @@ class LabelsTab extends Visual {
     private ?ImageLabel $_current_label;
     private LabelRequestHandler $_label_request_handler;
 
-    public function __construct(LabelRequestHandler $label_requestHandler) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, LabelRequestHandler $label_requestHandler) {
+        parent::__construct($templateEngine);
         $this->_label_request_handler = $label_requestHandler;
         $this->_current_label = $this->_label_request_handler->getCurrentLabel();
     }
@@ -29,12 +30,12 @@ class LabelsTab extends Visual {
     }
 
     private function renderLabelEditor(): string {
-        $label_editor = new LabelEditor($this->_current_label);
+        $label_editor = new LabelEditor($this->getTemplateEngine(), $this->_current_label);
         return $label_editor->render();
     }
 
     private function renderLabelsList(): string {
-        $labels_list = new LabelsList();
+        $labels_list = new LabelsList($this->getTemplateEngine());
         return $labels_list->render();
     }
 

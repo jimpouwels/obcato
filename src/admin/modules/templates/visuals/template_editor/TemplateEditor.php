@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\templates\visuals\template_editor;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ScopeDao;
 use Obcato\Core\admin\database\dao\ScopeDaoMysql;
 use Obcato\Core\admin\database\dao\TemplateDao;
@@ -18,8 +19,8 @@ class TemplateEditor extends Panel {
     private ScopeDao $scopeDao;
     private TemplateDao $templateDao;
 
-    public function __construct(Template $template) {
-        parent::__construct('Template bewerken', 'template_editor_panel');
+    public function __construct(TemplateEngine $templateEngine, Template $template) {
+        parent::__construct($templateEngine, 'Template bewerken', 'template_editor_panel');
         $this->template = $template;
         $this->scopeDao = ScopeDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
@@ -35,11 +36,11 @@ class TemplateEditor extends Panel {
     }
 
     private function assignEditFields($data): void {
-        $name_field = new TextField("name", "template_editor_name_field", $this->template->getName(), true, false, null);
+        $name_field = new TextField($this->getTemplateEngine(), "name", "template_editor_name_field", $this->template->getName(), true, false, null);
         $data->assign("name_field", $name_field->render());
         $data->assign("scopes_field", $this->renderScopesField());
 
-        $templateFileSelect = new Pulldown("template_editor_template_file", $this->getTextResource('template_editor_template_file_field'), $this->template->getTemplateFileId(), $this->getTemplateFilesData(), false, null, true);
+        $templateFileSelect = new Pulldown($this->getTemplateEngine(), "template_editor_template_file", $this->getTextResource('template_editor_template_file_field'), $this->template->getTemplateFileId(), $this->getTemplateFilesData(), false, null, true);
         $data->assign("template_files_selector", $templateFileSelect->render());
     }
 
@@ -60,7 +61,7 @@ class TemplateEditor extends Panel {
             $scopesIdentifierValuePair[] = array("name" => $this->getTextResource($scope->getIdentifier() . '_scope_label'), "value" => $scope->getId());
         }
         $currentScope = $this->template->getScope();
-        $scopesField = new Pulldown("scope", "Scope", $currentScope->getId(), $scopesIdentifierValuePair, 200, true);
+        $scopesField = new Pulldown($this->getTemplateEngine(), "scope", "Scope", $currentScope->getId(), $scopesIdentifierValuePair, 200, true);
         return $scopesField->render();
     }
 

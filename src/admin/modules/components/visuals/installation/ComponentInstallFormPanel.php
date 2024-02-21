@@ -3,13 +3,14 @@
 namespace Obcato\Core\admin\modules\components\visuals\installation;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\UploadField;
 
 class ComponentInstallFormPanel extends Panel {
 
-    public function __construct() {
-        parent::__construct('Installeer component', 'install-form-panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'Installeer component', 'install-form-panel');
     }
 
     public function getPanelContentTemplate(): string {
@@ -21,7 +22,7 @@ class ComponentInstallFormPanel extends Panel {
     }
 
     private function renderUploadField(): string {
-        $uploadField = new UploadField('upload_field', 'Upload component', true, "");
+        $uploadField = new UploadField($this->getTemplateEngine(), 'upload_field', 'Upload component', true, "");
         return $uploadField->render();
     }
 }

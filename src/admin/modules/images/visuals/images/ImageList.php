@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\images\visuals\images;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ImageDao;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;
 use Obcato\Core\admin\modules\authorization\service\AuthorizationInteractor;
@@ -18,8 +19,8 @@ class ImageList extends Panel {
     private ImageRequestHandler $requestHandler;
     private AuthorizationService $authorizationService;
 
-    public function __construct(ImageRequestHandler $requestHandler) {
-        parent::__construct($this->getTextResource("images_list_panel_title"), 'images_list');
+    public function __construct(TemplateEngine $templateEngine, ImageRequestHandler $requestHandler) {
+        parent::__construct($templateEngine, $this->getTextResource("images_list_panel_title"), 'images_list');
         $this->requestHandler = $requestHandler;
         $this->authorizationService = AuthorizationInteractor::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
@@ -81,7 +82,7 @@ class ImageList extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        $noResultsMessage = new InformationMessage("Geen afbeeldingen gevonden");
+        $noResultsMessage = new InformationMessage($this->getTemplateEngine(), "Geen afbeeldingen gevonden");
         return $noResultsMessage->render();
     }
 

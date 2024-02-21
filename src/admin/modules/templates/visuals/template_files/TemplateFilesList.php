@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\templates\visuals\template_files;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\TemplateDao;
 use Obcato\Core\admin\database\dao\TemplateDaoMysql;
 use Obcato\Core\admin\view\views\Panel;
@@ -10,8 +11,8 @@ use Obcato\Core\admin\view\views\Panel;
 class TemplateFilesList extends Panel {
     private TemplateDao $templateDao;
 
-    public function __construct() {
-        parent::__construct('template_files_list_title', 'template_files_list_panel');
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine, 'template_files_list_title', 'template_files_list_panel');
         $this->templateDao = TemplateDaoMysql::getInstance();
     }
 

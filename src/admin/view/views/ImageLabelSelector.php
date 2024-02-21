@@ -14,8 +14,8 @@ class ImageLabelSelector extends Panel {
     private ImageDao $_image_dao;
     private int $_context_id;
 
-    public function __construct( array $selected_labels, int $contextId) {
-        parent::__construct('Labels', 'image_label_selector');
+    public function __construct(TemplateEngine $templateEngine, array $selected_labels, int $contextId) {
+        parent::__construct($templateEngine, 'Labels', 'image_label_selector');
         $this->_selected_labels = $selected_labels;
         $this->_image_dao = ImageDaoMysql::getInstance();
         $this->_context_id = $contextId;
@@ -58,7 +58,7 @@ class ImageLabelSelector extends Panel {
     }
 
     private function renderSelectedLabelCheckbox(ImageLabel $label): string {
-        $checkbox = new SingleCheckbox("label_" . $this->_context_id . "_" . $label->getId() . "_delete", "", 0, false, "");
+        $checkbox = new SingleCheckbox($this->getTemplateEngine(), "label_" . $this->_context_id . "_" . $label->getId() . "_delete", "", 0, false, "");
         return $checkbox->render();
     }
 

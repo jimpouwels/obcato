@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\blocks\model\Block;
 use Obcato\Core\admin\view\views\ElementContainer;
 use Obcato\Core\admin\view\views\LinkEditor;
@@ -12,8 +13,8 @@ class BlockEditor extends Visual {
 
     private Block $currentBlock;
 
-    public function __construct(Block $current) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, Block $current) {
+        parent::__construct($templateEngine);
         $this->currentBlock = $current;
     }
 
@@ -30,14 +31,14 @@ class BlockEditor extends Visual {
     }
 
     private function renderBlockMetaDataPanel(): string {
-        return (new BlockMetadataEditor($this->currentBlock))->render();
+        return (new BlockMetadataEditor($this->getTemplateEngine(), $this->currentBlock))->render();
     }
 
     private function renderElementContainer(): string {
-        return (new ElementContainer($this->currentBlock->getElements()))->render();
+        return (new ElementContainer($this->getTemplateEngine(), $this->currentBlock->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        return (new LinkEditor($this->currentBlock->getLinks()))->render();
+        return (new LinkEditor($this->getTemplateEngine(), $this->currentBlock->getLinks()))->render();
     }
 }

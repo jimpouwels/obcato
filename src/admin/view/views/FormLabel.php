@@ -2,14 +2,16 @@
 
 namespace Obcato\Core\admin\view\views;
 
+use Obcato\ComponentApi\TemplateEngine;
+
 class FormLabel extends Visual {
 
     private string $_field_name;
     private string $_label_resource_identifier;
     private bool $_mandatory;
 
-    public function __construct(string $field_name, string $labelResourceIdentifier, bool $mandatory) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, string $field_name, string $labelResourceIdentifier, bool $mandatory) {
+        parent::__construct($templateEngine);
         $this->_field_name = $field_name;
         $this->_label_resource_identifier = $labelResourceIdentifier;
         $this->_mandatory = $mandatory;

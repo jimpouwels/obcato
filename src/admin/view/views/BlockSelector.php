@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\view\views;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\BlockDao;
 use Obcato\Core\admin\database\dao\BlockDaoMysql;
 use Obcato\Core\admin\modules\blocks\model\Block;
@@ -14,8 +15,8 @@ class BlockSelector extends Panel {
     private BlockDao $blockDao;
     private int $contextId;
 
-    public function __construct(array $selectedBlocks, int $contextId) {
-        parent::__construct($this->getTextResource('block_selection_title'), 'page_blocks');
+    public function __construct(TemplateEngine $templateEngine, array $selectedBlocks, int $contextId) {
+        parent::__construct($templateEngine, $this->getTextResource('block_selection_title'), 'page_blocks');
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->contextId = $contextId;
         $this->selectedBlocks = $selectedBlocks;
@@ -54,7 +55,7 @@ class BlockSelector extends Panel {
                 $selected_block_item["position_name"] = $selected_block->getPositionName();
                 $selected_block_item["published"] = $selected_block->isPublished();
 
-                $delete_field = new SingleCheckbox("block_" . $this->contextId . "_" . $selected_block->getId() . "_delete", "", false, false, "");
+                $delete_field = new SingleCheckbox($this->getTemplateEngine(), "block_" . $this->contextId . "_" . $selected_block->getId() . "_delete", "", false, false, "");
                 $selected_block_item["delete_field"] = $delete_field->render();
                 $selected_blocks[] = $selected_block_item;
             }

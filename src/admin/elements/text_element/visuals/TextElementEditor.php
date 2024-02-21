@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\elements\text_element\visuals;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\elements\text_element\TextElement;
 use Obcato\Core\admin\view\views\ElementVisual;
@@ -15,8 +16,8 @@ class TextElementEditor extends ElementVisual {
 
     private TextElement $textElement;
 
-    public function __construct(TextElement $textElement) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, TextElement $textElement) {
+        parent::__construct($templateEngine);
         $this->textElement = $textElement;
     }
 
@@ -29,8 +30,8 @@ class TextElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField('element_' . $this->textElement->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->textElement->getTitle(), false, true, null);
-        $textField = new TextArea('element_' . $this->textElement->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->textElement->getText(), false, true, null);
+        $titleField = new TextField($this->getTemplateEngine(), 'element_' . $this->textElement->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->textElement->getTitle(), false, true, null);
+        $textField = new TextArea($this->getTemplateEngine(), 'element_' . $this->textElement->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->textElement->getText(), false, true, null);
 
         $data->assign("title_field", $titleField->render());
         $data->assign("text_field", $textField->render());

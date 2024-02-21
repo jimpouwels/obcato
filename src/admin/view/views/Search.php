@@ -19,8 +19,8 @@ class Search extends Visual {
     private string $objectsToSearch;
     private string $popupType;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine,) {
+        parent::__construct($templateEngine);
         $this->backClickId = $_GET[self::$BACK_CLICK_ID_KEY];
         $this->backfillId = $_GET[self::$BACKFILL_KEY];
         $this->objectsToSearch = $_GET[self::$OBJECT_TO_SEARCH_KEY];
@@ -33,9 +33,9 @@ class Search extends Visual {
 
     public function load(): void {
         if ($_GET[self::$OBJECT_TO_SEARCH_KEY] == self::$IMAGES_POPUP_TYPE) {
-            $search = new ImageSearchBox($this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
+            $search = new ImageSearchBox($this->getTemplateEngine(), $this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
         } else {
-            $search = new ElementHolderSearch($this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
+            $search = new ElementHolderSearch($this->getTemplateEngine(), $this->backClickId, $this->backfillId, $this->objectsToSearch, $this->popupType);
         }
         $this->assign("search_content", $search->render());
     }

@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\database\dao\AuthorizationDao;
@@ -18,8 +19,8 @@ class ArticlesList extends Panel {
     private AuthorizationDao $authorizationDao;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(ArticleRequestHandler $articleRequestHandler) {
-        parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
+    public function __construct(TemplateEngine $templateEngine, ArticleRequestHandler $articleRequestHandler) {
+        parent::__construct($templateEngine, $this->getTextResource('articles_search_results_title'), 'article_list');
         $this->articleRequestHandler = $articleRequestHandler;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();

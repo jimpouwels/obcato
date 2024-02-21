@@ -8,8 +8,8 @@ class Popup extends Visual {
 
     private string $popupType;
 
-    public function __construct(string $popupType) {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine, string $popupType) {
+        parent::__construct($templateEngine);
         $this->popupType = $popupType;
     }
 
@@ -20,7 +20,7 @@ class Popup extends Visual {
     public function load(): void {
         $content = null;
         if ($this->popupType == "search") {
-            $content = new Search();
+            $content = new Search($this->getTemplateEngine());
         }
         $this->assign("content", $content->render());
     }

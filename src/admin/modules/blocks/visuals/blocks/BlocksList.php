@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
 use Obcato\ComponentApi\TemplateData;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\BlockDao;
 use Obcato\Core\admin\database\dao\BlockDaoMysql;
 use Obcato\Core\admin\modules\blocks\model\Block;
@@ -15,8 +16,8 @@ class BlocksList extends Panel {
     private ?Block $currentBlock;
     private BlockDao $blockDao;
 
-    public function __construct(?Block $current) {
-        parent::__construct('Blokken', 'block_list');
+    public function __construct(TemplateEngine $templateEngine, ?Block $current) {
+        parent::__construct($templateEngine, 'Blokken', 'block_list');
         $this->currentBlock = $current;
         $this->blockDao = BlockDaoMysql::getInstance();
     }
@@ -39,7 +40,7 @@ class BlocksList extends Panel {
 
     private
     function renderNoResultsMessage(): string {
-        $noResultMessage = new InformationMessage($this->getTextResource("blocks_no_blocks_found"));
+        $noResultMessage = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("blocks_no_blocks_found"));
         return $noResultMessage->render();
     }
 

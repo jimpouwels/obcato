@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\components;
 
 use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\components\visuals\components\ComponentsTabVisual;
 use Obcato\Core\admin\modules\components\visuals\installation\InstallationTabVisual;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
@@ -17,8 +18,8 @@ class ComponentsModuleVisual extends ModuleVisual {
     private InstallRequestHandler $installRequestHandler;
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->installRequestHandler = new InstallRequestHandler();
         $this->componentRequestHandler = new ComponentRequestHandler();
     }
@@ -29,9 +30,9 @@ class ComponentsModuleVisual extends ModuleVisual {
 
     public function load(): void {
         if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
-            $content = new ComponentsTabVisual($this->componentRequestHandler);
+            $content = new ComponentsTabVisual($this->getTemplateEngine(), $this->componentRequestHandler);
         } else {
-            $content = new InstallationTabVisual($this->installRequestHandler);
+            $content = new InstallationTabVisual($this->getTemplateEngine(), $this->installRequestHandler);
         }
         $this->assign('content', $content->render());
     }
@@ -54,9 +55,9 @@ class ComponentsModuleVisual extends ModuleVisual {
     public function getActionButtons(): array {
         $action_buttons = array();
         if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
-            $action_buttons[] = new ActionButtonSave('upload_component');
+            $action_buttons[] = new ActionButtonSave($this->getTemplateEngine(), 'upload_component');
         if ($this->isCurrentComponentUninstallable())
-            $action_buttons[] = new ActionButtonDelete('uninstall_component');
+            $action_buttons[] = new ActionButtonDelete($this->getTemplateEngine(), 'uninstall_component');
         return $action_buttons;
     }
 

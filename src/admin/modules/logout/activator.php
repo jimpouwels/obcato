@@ -3,6 +3,7 @@
 namespace Obcato\Core\admin\modules\logout;
 
 use Obcato\ComponentApi\TabMenu;
+use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\view\views\ModuleVisual;
 
 
@@ -10,8 +11,8 @@ class LogoutModuleVisual extends ModuleVisual {
 
     private LogoutRequestHandler $logoutRequestHandler;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct(TemplateEngine $templateEngine) {
+        parent::__construct($templateEngine);
         $this->logoutRequestHandler = new LogoutRequestHandler();
     }
 
