@@ -2,9 +2,9 @@
 
 namespace Obcato\Core\admin\request_handlers;
 
+use Obcato\ComponentApi\BlackBoard;
 use Obcato\ComponentApi\RequestHandler as IHttpRequestHandler;
-use Obcato\Core\admin\authentication\Session;
-use Obcato\Core\admin\core\Blackboard;
+use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\core\model\Notifications;
 
 abstract class HttpRequestHandler implements IHttpRequestHandler {
@@ -31,11 +31,11 @@ abstract class HttpRequestHandler implements IHttpRequestHandler {
     }
 
     protected function getTextResource(string $identifier): string {
-        return Session::getInstance()->getTextResource($identifier);
+        return Session::getTextResource($identifier);
     }
 
     protected function getBackendBaseUrl(): string {
-        return BlackBoard::getInstance()->getBackendBaseUrl();
+        return BlackBoard::getBackendBaseUrl();
     }
 
 }

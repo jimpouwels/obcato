@@ -2,9 +2,6 @@
 
 namespace Obcato\Core\admin\elements\photo_album_element;
 
-use Obcato\Core\admin\core\form\FormException;
-use Obcato\Core\admin\request_handlers\ElementForm;
-
 class PhotoAlbumElementForm extends ElementForm {
 
     private PhotoAlbumElement $photoAlbumElement;

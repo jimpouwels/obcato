@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\handlers;
 
-use Obcato\Core\admin\core\Blackboard;
+use Obcato\ComponentApi\BlackBoard;
 use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
@@ -30,7 +30,7 @@ abstract class FormHandler {
     }
 
     protected function getBackendBaseUrl(): string {
-        return BlackBoard::getInstance()->getBackendBaseUrl();
+        return BlackBoard::getBackendBaseUrl();
     }
 
     protected function getPageUrl(Page $page): string {

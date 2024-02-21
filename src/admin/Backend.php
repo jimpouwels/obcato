@@ -2,10 +2,8 @@
 
 namespace Obcato\Core\admin;
 
-use Obcato\ComponentApi\Dependencies;
 use Obcato\ComponentApi\ModuleVisual;
-use Obcato\Core\admin\authentication\Session;
-use Obcato\Core\admin\core\Blackboard;
+use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\request_handlers\BackendRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
@@ -23,7 +21,7 @@ class Backend {
     }
 
     public function start(): void {
-        Session::getInstance()->clearErrors();
+        Session::clearErrors();
         $this->loadTextResources();
         $this->backendRequestHandler->handle();
         $this->loadCurrentModule();
@@ -36,7 +34,7 @@ class Backend {
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
             $class = "Obcato\\Core\\admin\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
-            $this->moduleVisual = new $class(new Dependencies(TemplateEngine::getInstance(), Session::getInstance(), MysqlConnector::getInstance(), Blackboard::getInstance()));
+            $this->moduleVisual = new $class(TemplateEngine::getInstance(), $currentModule, MysqlConnector::getInstance(), TemplateEngine::getInstance());
         }
     }
 
@@ -68,10 +66,10 @@ class Backend {
     }
 
     private function loadTextResources(): void {
-        if (!Session::getInstance()->areTextResourcesLoaded()) {
-            $textResourceLoader = new TextResourceLoader(Session::getInstance()->getCurrentLanguage());
+        if (!Session::areTextResourcesLoaded()) {
+            $textResourceLoader = new TextResourceLoader(Session::getCurrentLanguage());
             $text_resources = $textResourceLoader->loadTextResources();
-            Session::getInstance()->setTextResources($text_resources);
+            Session::setTextResources($text_resources);
         }
     }
 

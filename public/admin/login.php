@@ -2,8 +2,8 @@
 
 namespace Obcato\Core;
 
+use Obcato\ComponentApi\Session;
 use Obcato\Core\admin\authentication\Authenticator;
-use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\Button;
 use Obcato\Core\admin\view\views\PasswordField;
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     Authenticator::logIn($username, $password);
-    Session::getInstance()->setCurrentLanguage($_POST['language']);
+    Session::setCurrentLanguage($_POST['language']);
     if (Authenticator::isAuthenticated()) {
         $redirect_to = '/admin';
         if (isset($_POST['org_url']) && $_POST['org_url'] != '') {
