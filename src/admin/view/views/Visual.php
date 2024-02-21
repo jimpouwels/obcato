@@ -42,8 +42,12 @@ abstract class Visual implements \Obcato\ComponentApi\Visual {
         return $this->templateEngine->createChildData();
     }
 
-    public function fetch(string $template, TemplateData $data): string {
-        return $this->templateEngine->fetch($template, $data);
+    public function fetch(string $template, TemplateData $data = null): string {
+        if ($data) {
+            return $this->templateEngine->fetch($template, $data);
+        } else {
+            return $this->templateEngine->fetch($template);
+        }
     }
 
     public function getTextResource(string $identifier): string {

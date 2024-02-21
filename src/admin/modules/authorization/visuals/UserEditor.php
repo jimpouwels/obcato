@@ -3,7 +3,6 @@
 namespace Obcato\Core\admin\modules\authorization\visuals;
 
 use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\authorization\model\User;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\PasswordField;
@@ -14,7 +13,7 @@ class UserEditor extends Panel {
     private ?User $currentUser;
 
     public function __construct(User $currentUser) {
-        parent::__construct($templateEngine, $currentUser->getFullName(), 'user_meta');
+        parent::__construct($currentUser->getFullName(), 'user_meta');
         $this->currentUser = $currentUser;
     }
 

@@ -23,11 +23,11 @@ class TableOfContentsElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new TableOfContentsElementStatics(TemplateEngine::getInstance());
+        return new TableOfContentsElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new TableOfContentsElementEditor(TemplateEngine::getInstance(), $this);
+        return new TableOfContentsElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

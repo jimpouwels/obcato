@@ -34,7 +34,7 @@ class Backend {
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
             $class = "Obcato\\Core\\admin\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
-            $this->moduleVisual = new $class(TemplateEngine::getInstance(), MysqlConnector::getInstance(), TemplateEngine::getInstance());
+            $this->moduleVisual = new $class(MysqlConnector::getInstance(), TemplateEngine::getInstance());
         }
     }
 
@@ -47,12 +47,12 @@ class Backend {
     }
 
     private function renderCmsView(): void {
-        $cms = new Cms(TemplateEngine::getInstance(), $this->moduleVisual);
+        $cms = new Cms( $this->moduleVisual);
         echo $cms->render();
     }
 
     private function renderPopupView(): void {
-        $popup = new Popup(TemplateEngine::getInstance(), $_GET['popup']);
+        $popup = new Popup( $_GET['popup']);
         echo $popup->render();
     }
 

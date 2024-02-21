@@ -70,11 +70,11 @@ class ImageElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ImageElementStatics(TemplateEngine::getInstance());
+        return new ImageElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ImageElementEditor(TemplateEngine::getInstance(), $this);
+        return new ImageElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ImageElementFrontendVisual {

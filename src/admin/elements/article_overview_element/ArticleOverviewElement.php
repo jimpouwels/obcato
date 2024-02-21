@@ -118,11 +118,11 @@ class ArticleOverviewElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ArticleOverviewElementStatics(TemplateEngine::getInstance());
+        return new ArticleOverviewElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ArticleOverviewElementEditor(TemplateEngine::getInstance(), $this);
+        return new ArticleOverviewElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

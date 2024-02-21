@@ -36,11 +36,11 @@ class FormElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new FormElementStatics(TemplateEngine::getInstance());
+        return new FormElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new FormElementEditor(TemplateEngine::getInstance(), $this);
+        return new FormElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ElementFrontendVisual {

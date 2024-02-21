@@ -43,7 +43,7 @@ class DatabaseModuleVisual extends ModuleVisual {
 
     public function renderHeadIncludes(): string {
         $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

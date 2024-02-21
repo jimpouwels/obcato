@@ -7,7 +7,6 @@ use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\webforms\visuals\RedirectFormHandlerEditor;
-use Obcato\Core\admin\view\TemplateEngine;
 use const Obcato\Core\CMS_ROOT;
 
 class RedirectFormHandler extends FormHandler {
@@ -23,7 +22,7 @@ class RedirectFormHandler extends FormHandler {
     public function getRequiredProperties(): array {
         require_once CMS_ROOT . '/modules/webforms/visuals/RedirectFormHandlerEditor.php';
         return array(
-            new HandlerProperty('page_id', 'textfield', new RedirectFormHandlerEditor(TemplateEngine::getInstance())),
+            new HandlerProperty('page_id', 'textfield', new RedirectFormHandlerEditor()),
         );
     }
 

@@ -18,6 +18,7 @@ class AuthorizationModuleVisual extends ModuleVisual {
     private AuthorizationRequestHandler $authorizationRequestHandler;
 
     public function __construct() {
+        parent::__construct();
         $this->authorizationRequestHandler = new AuthorizationRequestHandler();
     }
 
@@ -45,7 +46,7 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

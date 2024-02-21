@@ -76,7 +76,7 @@ class Cms extends Visual {
         if (!is_null($this->moduleVisual)) {
             return $this->moduleVisual->render();
         } else {
-            return ->fetch("system/home_wrapper.tpl");
+            return $this->getTemplateEngine()->fetch("system/home_wrapper.tpl");
         }
     }
 
