@@ -2,13 +2,15 @@
 
 namespace Obcato\Core\admin\modules\components\installer;
 
-use FileUtility;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
-use Obcato\Core\admin\view\views\ModuleInstaller as IModuleInstaller;
+use Obcato\Core\admin\utilities\FileUtility;
+use const Obcato\Core\admin\BACKEND_TEMPLATE_DIR;
+use const Obcato\Core\admin\STATIC_DIR;
+use const Obcato\Core\CMS_ROOT;
 
-abstract class ModuleInstaller extends Installer implements IModuleInstaller {
+abstract class ModuleInstaller extends Installer {
 
     public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomModuleInstaller';
     private Logger $logger;
@@ -19,6 +21,12 @@ abstract class ModuleInstaller extends Installer implements IModuleInstaller {
         $this->logger = $logger;
         $this->moduleDao = ModuleDaoMysql::getInstance();
     }
+
+    public abstract function isPopup(): bool;
+
+    public abstract function getModuleGroup(): string;
+
+    public abstract function getActivatorClassName(): string;
 
     public function install(): void {
         $this->logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');

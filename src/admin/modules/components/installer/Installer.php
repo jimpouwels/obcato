@@ -2,11 +2,12 @@
 
 namespace Obcato\Core\admin\modules\components\installer;
 
-use FileUtility;
 use Obcato\Core\admin\database\MysqlConnector;
-use Obcato\Core\admin\view\views\Installer as IInstaller;
+use Obcato\Core\admin\utilities\FileUtility;
+use const Obcato\Core\admin\COMPONENT_TEMP_DIR;
+use const Obcato\Core\admin\STATIC_DIR;
 
-abstract class Installer implements IInstaller {
+abstract class Installer {
 
     private MysqlConnector $mysqlConnector;
     private Logger $logger;
@@ -15,6 +16,18 @@ abstract class Installer implements IInstaller {
         $this->logger = $logger;
         $this->mysqlConnector = MysqlConnector::getInstance();
     }
+
+    public abstract function getInstallQueries(): array;
+
+    public abstract function getUninstallQueries(): array;
+
+    public abstract function getIdentifier(): string;
+
+    public abstract function getPackageStaticDir(): string;
+
+    public abstract function getPackageTemplateDir(): string;
+
+    public abstract function getPackageTextResourceDir(): string;
 
     protected function runInstallQueries(): void {
         $this->logger->log('Installatiequeries uitvoeren');

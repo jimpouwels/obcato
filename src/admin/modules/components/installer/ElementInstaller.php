@@ -2,16 +2,18 @@
 
 namespace Obcato\Core\admin\modules\components\installer;
 
-use FileUtility;
 use Obcato\Core\admin\core\model\ElementType;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
 use Obcato\Core\admin\database\dao\ScopeDao;
 use Obcato\Core\admin\database\dao\ScopeDaoMysql;
 use Obcato\Core\admin\modules\templates\model\Scope;
-use Obcato\Core\admin\view\views\ElementInstaller as IElementInstaller;
+use Obcato\Core\admin\utilities\FileUtility;
+use const Obcato\Core\admin\BACKEND_TEMPLATE_DIR;
+use const Obcato\Core\admin\STATIC_DIR;
+use const Obcato\Core\CMS_ROOT;
 
-abstract class ElementInstaller extends Installer implements IElementInstaller {
+abstract class ElementInstaller extends Installer {
 
     public static string $CUSTOM_INSTALLER_CLASSNAME = 'CustomElementInstaller';
     private Logger $logger;
@@ -24,6 +26,12 @@ abstract class ElementInstaller extends Installer implements IElementInstaller {
         $this->elementDao = ElementDaoMysql::getInstance();
         $this->scopeDao = ScopeDaoMysql::getInstance();
     }
+
+    public abstract function getClassName(): string;
+
+    public abstract function getClassFile(): string;
+
+    public abstract function getScope(): string;
 
     public function install(): void {
         $this->logger->log('Installer voor component \'' . $this->getIdentifier() . '\' gestart');
