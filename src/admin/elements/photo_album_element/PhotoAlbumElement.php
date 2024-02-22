@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\photo_album_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\dao\ImageDao;
@@ -18,6 +17,7 @@ use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class PhotoAlbumElement extends Element {
     private array $labels;
@@ -64,7 +64,7 @@ class PhotoAlbumElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new PhotoAlbumElementEditor(TemplateEngine::getInstance(), $this);
+        return new PhotoAlbumElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

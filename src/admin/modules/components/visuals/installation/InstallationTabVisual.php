@@ -2,16 +2,15 @@
 
 namespace Obcato\Core\admin\modules\components\visuals\installation;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\components\InstallRequestHandler;
+use Obcato\Core\admin\view\views\Visual;
 
 class InstallationTabVisual extends Visual {
 
     private InstallRequestHandler $installRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, InstallRequestHandler $requestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct(InstallRequestHandler $requestHandler) {
+        parent::__construct();
         $this->installRequestHandler = $requestHandler;
     }
 
@@ -25,12 +24,12 @@ class InstallationTabVisual extends Visual {
     }
 
     private function renderComponentInstallFormPanel(): string {
-        $componentInstallFormPanel = new ComponentInstallFormPanel($this->getTemplateEngine());
+        $componentInstallFormPanel = new ComponentInstallFormPanel();
         return $componentInstallFormPanel->render();
     }
 
     private function renderComponentInstallLogPanel(): string {
-        $component_install_log = new ComponentInstallLogPanel($this->getTemplateEngine(), $this->installRequestHandler);
+        $component_install_log = new ComponentInstallLogPanel($this->installRequestHandler);
         return $component_install_log->render();
     }
 }

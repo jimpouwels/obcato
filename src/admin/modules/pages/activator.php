@@ -2,10 +2,7 @@
 
 namespace Obcato\Core\admin\modules\pages;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\database\dao\PageDao;
 use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\pages\model\Page;
@@ -16,6 +13,8 @@ use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonDown;
 use Obcato\Core\admin\view\views\ActionButtonSave;
 use Obcato\Core\admin\view\views\ActionButtonUp;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class PageModuleVisual extends ModuleVisual {
 
@@ -25,8 +24,8 @@ class PageModuleVisual extends ModuleVisual {
     private PageRequestHandler $pageRequestHandler;
     private PageDao $pageDao;
 
-    public function __construct(TemplateEngine $templateEngine, Module $pageModule) {
-        parent::__construct($templateEngine, $pageModule);
+    public function __construct(Module $pageModule) {
+        parent::__construct($pageModule);
         $this->pageModule = $pageModule;
         $this->pageRequestHandler = new PageRequestHandler();
         $this->pageDao = PageDaoMysql::getInstance();
@@ -37,25 +36,25 @@ class PageModuleVisual extends ModuleVisual {
     }
 
     public function load(): void {
-        $pageTree = new PageTree($this->getTemplateEngine(), $this->pageDao->getRootPage(), $this->currentPage);
-        $pageEditor = new PageEditor($this->getTemplateEngine(), $this->currentPage);
+        $pageTree = new PageTree($this->pageDao->getRootPage(), $this->currentPage);
+        $pageEditor = new PageEditor($this->currentPage);
         $this->assign("tree", $pageTree->render());
         $this->assign("editor", $pageEditor->render());
     }
 
     public function getActionButtons(): array {
         $buttons = array();
-        $buttons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
+        $buttons[] = new ActionButtonSave('update_element_holder');
         if (!$this->currentPageIsHomepage()) {
-            $buttons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
+            $buttons[] = new ActionButtonDelete('delete_element_holder');
         }
-        $buttons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
+        $buttons[] = new ActionButtonAdd('add_element_holder');
         if ($this->currentPage->getId() != 1) {
             if (!$this->pageDao->isFirst($this->currentPage)) {
-                $buttons[] = new ActionButtonUp($this->getTemplateEngine(), 'moveup_element_holder');
+                $buttons[] = new ActionButtonUp('moveup_element_holder');
             }
             if (!$this->pageDao->isLast($this->currentPage)) {
-                $buttons[] = new ActionButtonDown($this->getTemplateEngine(), 'movedown_element_holder');
+                $buttons[] = new ActionButtonDown('movedown_element_holder');
             }
         }
         return $buttons;

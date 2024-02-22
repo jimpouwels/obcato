@@ -2,16 +2,15 @@
 
 namespace Obcato\Core\admin\modules\components\visuals\components;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\components\ComponentRequestHandler;
+use Obcato\Core\admin\view\views\Visual;
 
 class ComponentsTabVisual extends Visual {
 
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, $componentRequestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct($componentRequestHandler) {
+        parent::__construct();
         $this->componentRequestHandler = $componentRequestHandler;
     }
 
@@ -20,10 +19,10 @@ class ComponentsTabVisual extends Visual {
     }
 
     public function load(): void {
-        $modules_list = new ModulesListPanel($this->getTemplateEngine(), $this->componentRequestHandler);
-        $elements_list = new ElementsListPanel($this->getTemplateEngine(), $this->componentRequestHandler);
+        $modules_list = new ModulesListPanel($this->componentRequestHandler);
+        $elements_list = new ElementsListPanel($this->componentRequestHandler);
         if ($this->componentRequestHandler->getCurrentElementType() || $this->componentRequestHandler->getCurrentModule()) {
-            $details = new ComponentsDetailsPanel($this->getTemplateEngine(), $this->componentRequestHandler);
+            $details = new ComponentsDetailsPanel($this->componentRequestHandler);
             $this->assign('details', $details->render());
         }
         $this->assign('modules_list', $modules_list->render());

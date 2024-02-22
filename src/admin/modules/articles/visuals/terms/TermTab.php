@@ -2,9 +2,8 @@
 
 namespace Obcato\Core\admin\modules\articles\visuals\terms;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\view\views\Visual;
 
 class TermTab extends Visual {
 
@@ -13,8 +12,8 @@ class TermTab extends Visual {
 
     private ?ArticleTerm $currentTerm;
 
-    public function __construct(TemplateEngine $templateEngine, ?ArticleTerm $currentTerm) {
-        parent::__construct($templateEngine);
+    public function __construct(?ArticleTerm $currentTerm) {
+        parent::__construct();
         $this->currentTerm = $currentTerm;
     }
 
@@ -35,10 +34,10 @@ class TermTab extends Visual {
     }
 
     private function renderTermEditor(): string {
-        return (new TermEditor($this->getTemplateEngine(), $this->currentTerm))->render();
+        return (new TermEditor($this->currentTerm))->render();
     }
 
     private function renderTermsList(): string {
-        return (new TermsList($this->getTemplateEngine()))->render();
+        return (new TermsList())->render();
     }
 }

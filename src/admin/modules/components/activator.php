@@ -2,14 +2,13 @@
 
 namespace Obcato\Core\admin\modules\components;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\components\visuals\components\ComponentsTabVisual;
 use Obcato\Core\admin\modules\components\visuals\installation\InstallationTabVisual;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class ComponentsModuleVisual extends ModuleVisual {
 
@@ -19,8 +18,8 @@ class ComponentsModuleVisual extends ModuleVisual {
     private InstallRequestHandler $installRequestHandler;
     private ComponentRequestHandler $componentRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(Module $module) {
+        parent::__construct($module);
         $this->installRequestHandler = new InstallRequestHandler();
         $this->componentRequestHandler = new ComponentRequestHandler();
     }
@@ -31,9 +30,9 @@ class ComponentsModuleVisual extends ModuleVisual {
 
     public function load(): void {
         if ($this->getCurrentTabId() == self::$COMPONENTS_TAB) {
-            $content = new ComponentsTabVisual($this->getTemplateEngine(), $this->componentRequestHandler);
+            $content = new ComponentsTabVisual($this->componentRequestHandler);
         } else {
-            $content = new InstallationTabVisual($this->getTemplateEngine(), $this->installRequestHandler);
+            $content = new InstallationTabVisual($this->installRequestHandler);
         }
         $this->assign('content', $content->render());
     }
@@ -56,9 +55,9 @@ class ComponentsModuleVisual extends ModuleVisual {
     public function getActionButtons(): array {
         $action_buttons = array();
         if ($this->getCurrentTabId() == self::$INSTALLATION_TAB)
-            $action_buttons[] = new ActionButtonSave($this->getTemplateEngine(), 'upload_component');
+            $action_buttons[] = new ActionButtonSave('upload_component');
         if ($this->isCurrentComponentUninstallable())
-            $action_buttons[] = new ActionButtonDelete($this->getTemplateEngine(), 'uninstall_component');
+            $action_buttons[] = new ActionButtonDelete('uninstall_component');
         return $action_buttons;
     }
 

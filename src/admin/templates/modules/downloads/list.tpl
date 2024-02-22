@@ -16,14 +16,15 @@
         <tbody>
         {foreach from=$search_results item=search_result}
             <tr>
-                <td><a href="{$backend_base_url}&download={$search_result.id}" title="{$search_result.title}">{$search_result.title}</a></td>
+                <td><a href="{$backend_base_url}&download={$search_result.id}"
+                       title="{$search_result.title}">{$search_result.title}</a></td>
                 <td>{$search_result.created_at}</td>
                 <td>{$search_result.created_by}</td>
                 <td>
                     {if $search_result.published}
-                        <img alt="Publiceren" src="/admin/static.php?file=/default/img/default_icons/green_flag.png" />
+                        <img alt="Publiceren" src="/admin/static.php?file=/default/img/default_icons/green_flag.png"/>
                     {else}
-                        <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png" />
+                        <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png"/>
                     {/if}
                 </td>
             </tr>

@@ -1,5 +1,5 @@
 <div class="page_tree">
-	<ul>
-		{$items_html}
-	</ul>
+    <ul>
+        {$items_html}
+    </ul>
 </div>

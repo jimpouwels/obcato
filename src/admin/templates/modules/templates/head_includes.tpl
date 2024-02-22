@@ -1,2 +1,2 @@
-<link rel="stylesheet" href="/admin/static.php?file=/modules/{$path}/css/templates.css" type="text/css" />
+<link rel="stylesheet" href="/admin/static.php?file=/modules/{$path}/css/templates.css" type="text/css"/>
 <script type="text/javascript" src="/admin/static.php?file=/modules/{$path}/js/templates.js?v=2"></script>

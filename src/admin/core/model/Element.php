@@ -2,13 +2,13 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\frontend\FrontendVisual;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\templates\model\Presentable;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 use const Obcato\Core\CMS_ROOT;
 
 abstract class Element extends Presentable {

@@ -2,9 +2,6 @@
 
 namespace Obcato\Core\admin\modules\articles;
 
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
@@ -14,6 +11,8 @@ use Obcato\Core\admin\modules\articles\visuals\terms\TermTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class ArticleModuleVisual extends ModuleVisual {
 
@@ -28,8 +27,8 @@ class ArticleModuleVisual extends ModuleVisual {
     private TermRequestHandler $termRequestsHandler;
     private TargetPagesRequestHandler $targetPagesRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $articleModule) {
-        parent::__construct($templateEngine, $articleModule);
+    public function __construct(Module $articleModule) {
+        parent::__construct($articleModule);
         $this->articleModule = $articleModule;
         $this->articleRequestHandler = new ArticleRequestHandler();
         $this->termRequestsHandler = new TermRequestHandler();
@@ -43,11 +42,11 @@ class ArticleModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
-            $content = new ArticleTab($this->getTemplateEngine(), $this->articleRequestHandler);
+            $content = new ArticleTab($this->articleRequestHandler);
         } else if ($this->getCurrentTabId() == self::$TERMS_TAB) {
-            $content = new TermTab($this->getTemplateEngine(), $this->currentTerm);
+            $content = new TermTab($this->currentTerm);
         } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-            $content = new TargetPagesList($this->getTemplateEngine());
+            $content = new TargetPagesList();
         }
         $this->assign("content", $content?->render());
     }
@@ -70,22 +69,22 @@ class ArticleModuleVisual extends ModuleVisual {
             $saveButton = null;
             $deleteButton = null;
             if ($this->currentArticle) {
-                $saveButton = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
-                $deleteButton = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
+                $saveButton = new ActionButtonSave('update_element_holder');
+                $deleteButton = new ActionButtonDelete('delete_element_holder');
             }
             $actionButtons[] = $saveButton;
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
+            $actionButtons[] = new ActionButtonAdd('add_element_holder');
             $actionButtons[] = $deleteButton;
         }
         if ($this->getCurrentTabId() == self::$TERMS_TAB) {
             if ($this->currentTerm || TermTab::isEditTermMode()) {
-                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_term');
+                $actionButtons[] = new ActionButtonSave('update_term');
             }
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_term');
-            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_terms');
+            $actionButtons[] = new ActionButtonAdd('add_term');
+            $actionButtons[] = new ActionButtonDelete('delete_terms');
         }
         if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
-            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_target_pages');
+            $actionButtons[] = new ActionButtonDelete('delete_target_pages');
         }
 
         return $actionButtons;

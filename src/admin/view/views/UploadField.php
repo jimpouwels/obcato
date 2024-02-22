@@ -2,13 +2,12 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\view\TemplateData;
 
 class UploadField extends FormField {
 
-    public function __construct(TemplateEngine $templateEngine, string $name, string $label, bool $mandatory, ?string $class_name) {
-        parent::__construct($templateEngine, $name, null, $label, $mandatory, false, $class_name);
+    public function __construct(string $name, string $label, bool $mandatory, ?string $class_name) {
+        parent::__construct($name, null, $label, $mandatory, false, $class_name);
     }
 
     public function getFormFieldTemplateFilename(): string {

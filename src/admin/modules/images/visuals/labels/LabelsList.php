@@ -2,11 +2,10 @@
 
 namespace Obcato\Core\admin\modules\images\visuals\labels;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ImageDao;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;
 use Obcato\Core\admin\modules\images\model\ImageLabel;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\InformationMessage;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\SingleCheckbox;
@@ -15,8 +14,8 @@ class LabelsList extends Panel {
 
     private ImageDao $_image_dao;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine, 'Labels');
+    public function __construct() {
+        parent::__construct('Labels');
         $this->_image_dao = ImageDaoMysql::getInstance();
     }
 
@@ -39,7 +38,7 @@ class LabelsList extends Panel {
     }
 
     private function getNoLabelsMessage(): string {
-        $message = new InformationMessage($this->getTemplateEngine(), "Geen labels gevonden");
+        $message = new InformationMessage("Geen labels gevonden");
         return $message->render();
     }
 
@@ -52,7 +51,7 @@ class LabelsList extends Panel {
     }
 
     private function getDeleteCheckBox(ImageLabel $label): string {
-        $checkbox = new SingleCheckBox($this->getTemplateEngine(), "label_" . $label->getId() . "_delete", "", 0, false, "");
+        $checkbox = new SingleCheckBox("label_" . $label->getId() . "_delete", "", 0, false, "");
         return $checkbox->render();
     }
 }

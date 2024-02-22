@@ -2,11 +2,10 @@
 
 namespace Obcato\Core\admin\modules\downloads\visuals;
 
-use Obcato\ComponentApi\TemplateData;
 use Obcato\Core\admin\database\dao\DownloadDao;
 use Obcato\Core\admin\database\dao\DownloadDaoMysql;
 use Obcato\Core\admin\modules\downloads\DownloadRequestHandler;
-use Obcato\Core\admin\view\TemplateEngine;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\InformationMessage;
 use Obcato\Core\admin\view\views\Panel;
 
@@ -15,8 +14,8 @@ class ListVisual extends Panel {
     private DownloadDao $downloadDao;
     private DownloadRequestHandler $downloadRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, DownloadRequestHandler $download_requestHandler) {
-        parent::__construct($templateEngine, 'Gevonden downloads', 'download_list');
+    public function __construct(DownloadRequestHandler $download_requestHandler) {
+        parent::__construct('Gevonden downloads', 'download_list');
         $this->downloadRequestHandler = $download_requestHandler;
         $this->downloadDao = DownloadDaoMysql::getInstance();
     }
@@ -60,6 +59,6 @@ class ListVisual extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        return (new InformationMessage(TemplateEngine::getInstance(), "Geen downloads gevonden"))->render();
+        return (new InformationMessage("Geen downloads gevonden"))->render();
     }
 }

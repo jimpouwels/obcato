@@ -2,11 +2,10 @@
 
 namespace Obcato\Core\admin\modules\authorization\visuals;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\AuthorizationDao;
 use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
 use Obcato\Core\admin\modules\authorization\model\User;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\Panel;
 
 class UserList extends Panel {
@@ -14,8 +13,8 @@ class UserList extends Panel {
     private AuthorizationDao $authorizationDao;
     private ?User $currentUser;
 
-    public function __construct(TemplateEngine $templateEngine, ?User $currentUser) {
-        parent::__construct($templateEngine, 'users_list_panel_title', 'user_tree_fieldset');
+    public function __construct(?User $currentUser) {
+        parent::__construct('users_list_panel_title', 'user_tree_fieldset');
         $this->currentUser = $currentUser;
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }

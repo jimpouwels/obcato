@@ -2,10 +2,9 @@
 
 namespace Obcato\Core\admin\view;
 
-use Obcato\ComponentApi\TemplateData as ITemplateData;
 use Smarty_Internal_Data;
 
-class TemplateData implements ITemplateData {
+class TemplateData {
 
     private Smarty_Internal_Data $data;
 

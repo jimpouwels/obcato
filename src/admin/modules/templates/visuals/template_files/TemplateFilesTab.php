@@ -2,18 +2,17 @@
 
 namespace Obcato\Core\admin\modules\templates\visuals\template_files;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\templates\model\TemplateFile;
 use Obcato\Core\admin\modules\templates\TemplateFilesRequestHandler;
+use Obcato\Core\admin\view\views\Visual;
 
 class TemplateFilesTab extends Visual {
 
     private ?TemplateFile $currentTemplateFile;
     private TemplateFilesRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, TemplateFilesRequestHandler $requestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct(TemplateFilesRequestHandler $requestHandler) {
+        parent::__construct();
         $this->currentTemplateFile = $requestHandler->getCurrentTemplateFile();
         $this->requestHandler = $requestHandler;
     }
@@ -24,19 +23,19 @@ class TemplateFilesTab extends Visual {
 
     public function load(): void {
         $this->assign("current_template_file_id", $this->getCurrentTemplateFileId());
-        $templateFilesList = new TemplateFilesList($this->getTemplateEngine());
+        $templateFilesList = new TemplateFilesList();
         $this->assign("template_files_list", $templateFilesList->render());
 
         $editorHtml = "";
         if ($this->currentTemplateFile) {
-            $templateFileEditor = new TemplateFileEditor($this->getTemplateEngine(), $this->currentTemplateFile);
+            $templateFileEditor = new TemplateFileEditor($this->currentTemplateFile);
             $editorHtml = $templateFileEditor->render();
         }
         $this->assign("template_file_editor", $editorHtml);
 
         $varMigrationHtml = "";
         if (count($this->requestHandler->getParsedVarDefs()) > 0) {
-            $templateVarMigration = new TemplateVarMigration($this->getTemplateEngine(), $this->requestHandler);
+            $templateVarMigration = new TemplateVarMigration($this->requestHandler);
             $varMigrationHtml = $templateVarMigration->render();
         }
         $this->assign("template_var_migration", $varMigrationHtml);
@@ -57,7 +56,7 @@ class TemplateFilesTab extends Visual {
     }
 
     private function renderTemplateCodeViewer(): string {
-        return (new TemplateFileCodeViewer($this->getTemplateEngine(), $this->currentTemplateFile))->render();
+        return (new TemplateFileCodeViewer($this->currentTemplateFile))->render();
     }
 
 }

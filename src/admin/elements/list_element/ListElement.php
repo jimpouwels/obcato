@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\list_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\MysqlConnector;
@@ -15,6 +14,7 @@ use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class ListElement extends Element {
 
@@ -50,7 +50,7 @@ class ListElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ListElementEditor(TemplateEngine::getInstance(), $this);
+        return new ListElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

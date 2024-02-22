@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\article_overview_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\dao\ArticleDao;
@@ -19,6 +18,7 @@ use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\utilities\DateUtility;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class ArticleOverviewElement extends Element {
 
@@ -122,7 +122,7 @@ class ArticleOverviewElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ArticleOverviewElementEditor(TemplateEngine::getInstance(), $this);
+        return new ArticleOverviewElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {

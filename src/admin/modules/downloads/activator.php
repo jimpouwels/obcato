@@ -2,10 +2,7 @@
 
 namespace Obcato\Core\admin\modules\downloads;
 
-use Obcato\ComponentApi\Module;
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\downloads\model\Download;
 use Obcato\Core\admin\modules\downloads\visuals\EditorVisual;
 use Obcato\Core\admin\modules\downloads\visuals\ListVisual;
@@ -13,6 +10,8 @@ use Obcato\Core\admin\modules\downloads\visuals\SearchBoxVisual;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class DownloadModuleVisual extends ModuleVisual {
 
@@ -20,8 +19,8 @@ class DownloadModuleVisual extends ModuleVisual {
     private ?Download $currentDownload;
     private DownloadRequestHandler $requestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(Module $module) {
+        parent::__construct($module);
         $this->requestHandler = new DownloadRequestHandler();
     }
 
@@ -39,24 +38,24 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     private function renderSearchBox(): string {
-        return (new SearchBoxVisual($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new SearchBoxVisual($this->requestHandler))->render();
     }
 
     private function renderEditor(): string {
-        return (new EditorVisual($this->getTemplateEngine(), $this->currentDownload))->render();
+        return (new EditorVisual($this->currentDownload))->render();
     }
 
     private function renderList(): string {
-        return (new ListVisual($this->getTemplateEngine(), $this->requestHandler))->render();
+        return (new ListVisual($this->requestHandler))->render();
     }
 
     public function getActionButtons(): array {
         $actionButtons = array();
         if ($this->currentDownload) {
-            $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_download');
-            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_download');
+            $actionButtons[] = new ActionButtonSave('update_download');
+            $actionButtons[] = new ActionButtonDelete('delete_download');
         }
-        $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_download');
+        $actionButtons[] = new ActionButtonAdd('add_download');
         return $actionButtons;
     }
 

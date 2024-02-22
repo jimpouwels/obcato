@@ -1,14 +1,14 @@
 <form id="add_form_hidden" class="displaynone" method="post" action="{$backend_base_url}">
-	<fieldset>
-		<input id="add_block_action" name="add_block_action" type="hidden" value="" />
-	</fieldset>
+    <fieldset>
+        <input id="add_block_action" name="add_block_action" type="hidden" value=""/>
+    </fieldset>
 </form>
 
 <div class="content_left_column">
-	{$blocks_list}
+    {$blocks_list}
 </div>
 <div class="content_right_column">
-	{if isset($editor)}
-		{$editor}
-	{/if}
+    {if isset($editor)}
+        {$editor}
+    {/if}
 </div>

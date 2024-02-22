@@ -2,13 +2,11 @@
 
 namespace Obcato\Core\admin\view;
 
-use Obcato\ComponentApi\TemplateData as ITemplateData;
-use Obcato\ComponentApi\TemplateEngine as ITemplateEngine;
 use Smarty;
 use const Obcato\Core\admin\BACKEND_TEMPLATE_DIR;
 
 
-class TemplateEngine implements ITemplateEngine {
+class TemplateEngine {
     private static ?TemplateEngine $_instance = null;
     private Smarty $smarty;
 
@@ -31,7 +29,7 @@ class TemplateEngine implements ITemplateEngine {
         $this->smarty->assign($key, $value);
     }
 
-    public function fetch(string $template, ?ITemplateData $data = null): string {
+    public function fetch(string $template, ?TemplateData $data = null): string {
         if ($data) {
             $tpl = $this->smarty->createTemplate($template, $data->getData());
             return $tpl->fetch();
@@ -40,7 +38,7 @@ class TemplateEngine implements ITemplateEngine {
         }
     }
 
-    public function createChildData(): ITemplateData {
+    public function createChildData(): TemplateData {
         return new TemplateData($this->smarty->createData($this->smarty));
     }
 

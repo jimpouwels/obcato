@@ -2,11 +2,8 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\BlackBoard;
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\Session;
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\authentication\Session;
+use Obcato\Core\admin\core\BlackBoard;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
 use Obcato\Core\admin\database\dao\SettingsDaoMysql;
@@ -19,8 +16,8 @@ class Cms extends Visual {
     private Settings $settings;
     private ModuleDao $moduleDao;
 
-    public function __construct(TemplateEngine $templateEngine, ?ModuleVisual $moduleVisual) {
-        parent::__construct($templateEngine);
+    public function __construct(?ModuleVisual $moduleVisual) {
+        parent::__construct();
         $this->moduleDao = ModuleDaoMysql::getInstance();
         $this->moduleVisual = $moduleVisual;
         $this->settings = SettingsDaoMysql::getInstance()->getSettings();
@@ -31,9 +28,9 @@ class Cms extends Visual {
     }
 
     public function load(): void {
-        $navigation_menu = new NavigationMenu($this->getTemplateEngine(), $this->moduleDao->getModuleGroups());
-        $notification_bar = new NotificationBar($this->getTemplateEngine());
-        $current_user_indicator = new CurrentUserIndicator($this->getTemplateEngine());
+        $navigation_menu = new NavigationMenu($this->moduleDao->getModuleGroups());
+        $notification_bar = new NotificationBar();
+        $current_user_indicator = new CurrentUserIndicator();
 
         $this->assignGlobal("text_resources", Session::getTextResources());
 
@@ -45,9 +42,9 @@ class Cms extends Visual {
         $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
         $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 
-        $module_id_text_field = new TextField($this->getTemplateEngine(), "module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
+        $module_id_text_field = new TextField("module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
         $this->assignGlobal("module_id_form_field", $module_id_text_field->render());
-        $module_tab_id_text_field = new TextField($this->getTemplateEngine(), "module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
+        $module_tab_id_text_field = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
         $this->assignGlobal("module_tab_id_form_field", $module_tab_id_text_field->render());
 
         $this->assignGlobal("actions_menu", $this->getActionsMenu()->render());
@@ -61,7 +58,7 @@ class Cms extends Visual {
         $this->assignGlobal("db_version", $this->settings->getDatabaseVersion());
 
         if (Logs::hasLogs()) {
-            $system_logs = new WarningMessage($this->getTemplateEngine(), Logs::asString());
+            $system_logs = new WarningMessage(Logs::asString());
             $this->assign('system_logs', $system_logs->render());
         }
     }
@@ -71,7 +68,7 @@ class Cms extends Visual {
         if ($this->moduleVisual) {
             $action_buttons = $this->moduleVisual->getActionButtons();
         }
-        return new ActionsMenu($this->getTemplateEngine(), $action_buttons);
+        return new ActionsMenu($action_buttons);
     }
 
     private function renderContentPane(): string {
@@ -84,7 +81,7 @@ class Cms extends Visual {
 
     private function renderTabMenu(): string {
         if (!is_null($this->moduleVisual)) {
-            $tabMenu = new TabMenu($this->getTemplateEngine(), 0);
+            $tabMenu = new TabMenu();
             $activeTabId = $this->moduleVisual->loadTabMenu($tabMenu);
             $tabMenu->setCurrentTabId($activeTabId);
             return $tabMenu->render();

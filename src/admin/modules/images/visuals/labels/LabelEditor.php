@@ -2,9 +2,8 @@
 
 namespace Obcato\Core\admin\modules\images\visuals\labels;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\modules\images\model\ImageLabel;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\Panel;
 use Obcato\Core\admin\view\views\TextField;
 
@@ -12,8 +11,8 @@ class LabelEditor extends Panel {
 
     private ImageLabel $_current_label;
 
-    public function __construct(TemplateEngine $templateEngine, ImageLabel $current_label) {
-        parent::__construct($templateEngine, 'Label bewerken');
+    public function __construct(ImageLabel $current_label) {
+        parent::__construct('Label bewerken');
         $this->_current_label = $current_label;
     }
 
@@ -27,7 +26,7 @@ class LabelEditor extends Panel {
     }
 
     private function renderLabelNameField(): string {
-        $name_field = new TextField($this->getTemplateEngine(), "name", "Naam", $this->_current_label->getName(), true, false, null);
+        $name_field = new TextField("name", "Naam", $this->_current_label->getName(), true, false, null);
         return $name_field->render();
     }
 }

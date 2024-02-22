@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\image_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\dao\ImageDaoMysql;
@@ -16,6 +15,7 @@ use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class ImageElement extends Element {
 
@@ -74,7 +74,7 @@ class ImageElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new ImageElementEditor(TemplateEngine::getInstance(), $this);
+        return new ImageElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ImageElementFrontendVisual {

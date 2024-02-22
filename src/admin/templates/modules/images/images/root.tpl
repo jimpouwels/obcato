@@ -1,14 +1,14 @@
 <div class="content_left_column">
-	{$search}
+    {$search}
 </div>
 <div class="content_right_column">
-	{if isset($list)}
-		{$list}
-	{else}
-		{$editor}
-	{/if}
+    {if isset($list)}
+        {$list}
+    {else}
+        {$editor}
+    {/if}
 </div>
 
 <form id="add_form_hidden" class="displaynone" method="post" action="{$backend_base_url}">
-	<input id="add_image_action" name="add_image_action" type="hidden" value="" />
+    <input id="add_image_action" name="add_image_action" type="hidden" value=""/>
 </form>

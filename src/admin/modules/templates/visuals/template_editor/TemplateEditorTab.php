@@ -2,18 +2,17 @@
 
 namespace Obcato\Core\admin\modules\templates\visuals\template_editor;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\templates\model\Scope;
 use Obcato\Core\admin\modules\templates\model\Template;
+use Obcato\Core\admin\view\views\Visual;
 
 class TemplateEditorTab extends Visual {
 
     private ?Template $currentTemplate;
     private ?Scope $currentScope;
 
-    public function __construct(TemplateEngine $templateEngine, ?Template $current, ?Scope $currentScope) {
-        parent::__construct($templateEngine);
+    public function __construct(?Template $current, ?Scope $currentScope) {
+        parent::__construct();
         $this->currentTemplate = $current;
         $this->currentScope = $currentScope;
     }
@@ -35,19 +34,19 @@ class TemplateEditorTab extends Visual {
     }
 
     private function getScopeSelector(): string {
-        return (new ScopeSelector($this->getTemplateEngine()))->render();
+        return (new ScopeSelector())->render();
     }
 
     private function renderTemplateEditor(): string {
-        return (new TemplateEditor($this->getTemplateEngine(), $this->currentTemplate))->render();
+        return (new TemplateEditor($this->currentTemplate))->render();
     }
 
     private function renderTemplateVarEditor(): string {
-        return (new TemplateVarEditor($this->getTemplateEngine(), $this->currentTemplate))->render();
+        return (new TemplateVarEditor($this->currentTemplate))->render();
     }
 
     private function renderTemplateList(): string {
-        return (new TemplateList($this->getTemplateEngine(), $this->currentScope))->render();
+        return (new TemplateList($this->currentScope))->render();
     }
 
     private function getCurrentTemplateId(): ?int {

@@ -2,20 +2,19 @@
 
 namespace Obcato\Core\admin\modules\webforms\visuals;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\database\dao\PageDao;
 use Obcato\Core\admin\database\dao\PageDaoMysql;
 use Obcato\Core\admin\modules\webforms\model\WebformHandlerProperty;
 use Obcato\Core\admin\view\views\PagePicker;
+use Obcato\Core\admin\view\views\Visual;
 
 class RedirectFormHandlerEditor extends Visual {
 
     private ?WebformHandlerProperty $_property = null;
     private PageDao $_page_dao;
 
-    public function __construct(TemplateEngine $templateEngine) {
-        parent::__construct($templateEngine);
+    public function __construct() {
+        parent::__construct();
         $this->_page_dao = PageDaoMysql::getInstance();
     }
 
@@ -31,7 +30,7 @@ class RedirectFormHandlerEditor extends Visual {
                 $this->assign('selected_page', $page->getTitle());
             }
         }
-        $page_picker = new PagePicker($this->getTemplateEngine(), "handler_property_{$id}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
+        $page_picker = new PagePicker("handler_property_{$id}_field", 'webforms_redirect_handler_page_picker', $this->_property->getValue(), 'update_webform');
         $this->assign('page_picker', $page_picker->render());
     }
 

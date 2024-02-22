@@ -4,48 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "377eff788d2e9d846f565bcf76157cb2",
+    "content-hash": "77f5738ef59ce45143aea9fddcc5019a",
     "packages": [
-        {
-            "name": "obcato/component-api",
-            "version": "v0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jimpouwels/obcato-component-api.git",
-                "reference": "054281dd9b1490148d5a3efe401a383d63563c4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jimpouwels/obcato-component-api/zipball/054281dd9b1490148d5a3efe401a383d63563c4e",
-                "reference": "054281dd9b1490148d5a3efe401a383d63563c4e",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Obcato\\ComponentApi\\": [
-                        "src/",
-                        "src/database",
-                        "src/install",
-                        "src/templates",
-                        "src/visual"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Jim Pouwels",
-                    "email": "jim.pouwels@gmail.com"
-                }
-            ],
-            "description": "Custom Component API for Obcato",
-            "support": {
-                "issues": "https://github.com/jimpouwels/obcato-component-api/issues",
-                "source": "https://github.com/jimpouwels/obcato-component-api/tree/v0.0.4"
-            },
-            "time": "2024-02-21T18:16:32+00:00"
-        },
         {
             "name": "smarty/smarty",
             "version": "v4.3.5",
@@ -175,16 +135,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4a21235f7e56e713259a6f76bf4b5ea08502b9dc"
+                "reference": "2218c2252c874a4624ab2f613d86ac32d227bc69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4a21235f7e56e713259a6f76bf4b5ea08502b9dc",
-                "reference": "4a21235f7e56e713259a6f76bf4b5ea08502b9dc",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/2218c2252c874a4624ab2f613d86ac32d227bc69",
+                "reference": "2218c2252c874a4624ab2f613d86ac32d227bc69",
                 "shasum": ""
             },
             "require": {
@@ -227,9 +187,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.1"
             },
-            "time": "2024-01-07T17:17:35+00:00"
+            "time": "2024-02-21T19:24:10+00:00"
         },
         {
             "name": "phar-io/manifest",

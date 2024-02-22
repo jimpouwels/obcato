@@ -2,11 +2,11 @@
 
 namespace Obcato\Core\admin\modules\webforms\handlers;
 
-use Obcato\ComponentApi\BlackBoard;
 use Obcato\Core\admin\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\webforms\model\WebformHandlerInstance;
+use Obcato\Core\admin\core\BlackBoard;
 
 abstract class FormHandler {
 

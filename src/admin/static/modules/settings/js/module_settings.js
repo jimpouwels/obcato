@@ -4,9 +4,9 @@
 */
 
 // initialize event handlers
-$(document).ready(function() {
-	// apply button
-	$('#apply_settings').click(function() {
-		$('#settings_form').submit();
-	});
+$(document).ready(function () {
+    // apply button
+    $('#apply_settings').click(function () {
+        $('#settings_form').submit();
+    });
 });

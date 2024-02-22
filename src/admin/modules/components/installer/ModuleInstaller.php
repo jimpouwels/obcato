@@ -3,10 +3,10 @@
 namespace Obcato\Core\admin\modules\components\installer;
 
 use FileUtility;
-use Obcato\ComponentApi\ModuleInstaller as IModuleInstaller;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;
+use Obcato\Core\admin\view\views\ModuleInstaller as IModuleInstaller;
 
 abstract class ModuleInstaller extends Installer implements IModuleInstaller {
 

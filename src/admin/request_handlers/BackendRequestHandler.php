@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\request_handlers;
 
-use Obcato\ComponentApi\BlackBoard;
+use Obcato\Core\admin\core\BlackBoard;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\database\dao\ModuleDao;
 use Obcato\Core\admin\database\dao\ModuleDaoMysql;

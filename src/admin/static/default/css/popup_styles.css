@@ -46,6 +46,7 @@ body {
 .popup_search_result_table tbody tr td {
     border-bottom: 1px solid gray;
 }
+
 .popup_search_result_table a {
     color: gray;
 }

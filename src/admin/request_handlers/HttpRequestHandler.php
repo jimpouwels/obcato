@@ -2,12 +2,11 @@
 
 namespace Obcato\Core\admin\request_handlers;
 
-use Obcato\ComponentApi\BlackBoard;
-use Obcato\ComponentApi\RequestHandler as IHttpRequestHandler;
-use Obcato\ComponentApi\Session;
+use Obcato\Core\admin\authentication\Session;
+use Obcato\Core\admin\core\BlackBoard;
 use Obcato\Core\admin\core\model\Notifications;
 
-abstract class HttpRequestHandler implements IHttpRequestHandler {
+abstract class HttpRequestHandler {
 
     public function handle(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

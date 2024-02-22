@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\form_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\dao\WebformDao;
@@ -18,6 +17,7 @@ use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class FormElement extends Element {
 
@@ -40,7 +40,7 @@ class FormElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new FormElementEditor(TemplateEngine::getInstance(), $this);
+        return new FormElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): ElementFrontendVisual {

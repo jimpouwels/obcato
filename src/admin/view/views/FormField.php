@@ -2,11 +2,9 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\Session;
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\utilities\StringUtility;
+use Obcato\Core\admin\view\TemplateData;
 
 abstract class FormField extends Visual {
 
@@ -17,8 +15,8 @@ abstract class FormField extends Visual {
     private bool $linkable;
     private ?string $value;
 
-    protected function __construct(TemplateEngine $templateEngine, string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
-        parent::__construct($templateEngine);
+    protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
+        parent::__construct();
         $this->fieldName = $field_name;
         $this->cssClass = $css_class;
         $this->labelResourceIdentifier = $label_resource_identifier;
@@ -53,7 +51,7 @@ abstract class FormField extends Visual {
     public function getErrorHtml(string $field_name): string {
         $error_html = "";
         if (Session::hasError($field_name)) {
-            $error = new FormError($this->getTemplateEngine(), Session::popError($field_name));
+            $error = new FormError(Session::popError($field_name));
             return $error->render();
         }
         return $error_html;
@@ -77,7 +75,7 @@ abstract class FormField extends Visual {
 
     protected function getInputLabelHtml(string $label_resource_identifier, string $field_name, bool $mandatory): string {
         if ($label_resource_identifier) {
-            $label = new FormLabel($this->getTemplateEngine(), $field_name, $label_resource_identifier, $mandatory);
+            $label = new FormLabel($field_name, $label_resource_identifier, $mandatory);
             return $label->render();
         }
         return "";

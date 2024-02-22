@@ -2,10 +2,9 @@
 
 namespace Obcato\Core\admin\elements\list_element\visuals;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\elements\list_element\ListElement;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\Button;
 use Obcato\Core\admin\view\views\ElementVisual;
 use Obcato\Core\admin\view\views\SingleCheckbox;
@@ -16,8 +15,8 @@ class ListElementEditor extends ElementVisual {
     private static string $TEMPLATE = "elements/list_element/list_element_form.tpl";
     private ListElement $listElement;
 
-    public function __construct(TemplateEngine $templateEngine, ListElement $listElement) {
-        parent::__construct($templateEngine);
+    public function __construct(ListElement $listElement) {
+        parent::__construct();
         $this->listElement = $listElement;
     }
 
@@ -30,8 +29,8 @@ class ListElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField($this->getTemplateEngine(), 'element_' . $this->listElement->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->listElement->getTitle(), false, true, null);
-        $addItemButton = new Button($this->getTemplateEngine(), "", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
+        $titleField = new TextField('element_' . $this->listElement->getId() . '_title', $this->getTextResource("list_element_editor_title"), $this->listElement->getTitle(), false, true, null);
+        $addItemButton = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
         $data->assign("list_items", $this->getListItems());
         $data->assign("add_item_button", $addItemButton->render());

@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\frontend;
 
-use Obcato\ComponentApi\TemplateData;
 use Obcato\Core\admin\core\model\ElementHolder;
 use Obcato\Core\admin\core\model\Link;
 use Obcato\Core\admin\database\dao\ArticleDao;
@@ -21,6 +20,7 @@ use Obcato\Core\admin\modules\templates\service\TemplateInteractor;
 use Obcato\Core\admin\modules\templates\service\TemplateService;
 use Obcato\Core\admin\utilities\Arrays;
 use Obcato\Core\admin\utilities\UrlHelper;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\TemplateEngine;
 
 abstract class FrontendVisual {

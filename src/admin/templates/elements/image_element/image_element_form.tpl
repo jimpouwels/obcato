@@ -5,9 +5,9 @@
     {$height_field}
     {$image_picker}
     {if !is_null($image_id) && $image_id != ""}
-        <br />
+        <br/>
         <div class="image_element_image">
-            <img title="{$selected_image_title}" src="/admin/upload.php?image={$image_id}&amp;thumb=true" />	
+            <img title="{$selected_image_title}" src="/admin/upload.php?image={$image_id}&amp;thumb=true"/>
         </div>
     {/if}
 </div>

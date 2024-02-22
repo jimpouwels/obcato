@@ -4,10 +4,10 @@ namespace Obcato\Core\admin\database\dao;
 
 
 use Obcato\Core\admin\database\MysqlConnector;
-use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\articles\model\Article;
 use Obcato\Core\admin\modules\articles\model\ArticleComment;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\utilities\DateUtility;
 
 class ArticleDaoMysql implements ArticleDao {

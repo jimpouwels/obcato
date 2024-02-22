@@ -2,8 +2,6 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\ModuleGroup;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
@@ -13,8 +11,8 @@ class NavigationMenu extends Visual {
     private array $_module_groups;
     private ElementDao $_element_dao;
 
-    public function __construct(TemplateEngine $templateEngine, array $module_groups) {
-        parent::__construct($templateEngine);
+    public function __construct(array $module_groups) {
+        parent::__construct();
         $this->_module_groups = $module_groups;
         $this->_element_dao = ElementDaoMysql::getInstance();
     }

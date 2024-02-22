@@ -6,9 +6,9 @@ namespace Obcato\Core\admin\modules\templates\service;
 use Obcato\Core\admin\database\dao\TemplateDao;
 use Obcato\Core\admin\database\dao\TemplateDaoMysql;
 use Obcato\Core\admin\modules\templates\model\Template;
+use Obcato\Core\admin\modules\templates\model\TemplateFile;
 use Obcato\Core\admin\modules\templates\model\TemplateVar;
 use Obcato\Core\admin\modules\templates\model\TemplateVarDef;
-use Obcato\Core\admin\modules\templates\model\TemplateFile;
 use Obcato\Core\admin\utilities\Arrays;
 
 class TemplateInteractor implements TemplateService {

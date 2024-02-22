@@ -2,12 +2,11 @@
 
 namespace Obcato\Core\admin\elements\form_element\visuals;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\database\dao\WebformDao;
 use Obcato\Core\admin\database\dao\WebformDaoMysql;
 use Obcato\Core\admin\elements\form_element\FormElement;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\ElementVisual;
 use Obcato\Core\admin\view\views\Pulldown;
 use Obcato\Core\admin\view\views\TextField;
@@ -18,8 +17,8 @@ class FormElementEditor extends ElementVisual {
     private FormElement $formElement;
     private WebformDao $webformDao;
 
-    public function __construct(TemplateEngine $templateEngine, FormElement $formElement) {
-        parent::__construct($templateEngine);
+    public function __construct(FormElement $formElement) {
+        parent::__construct();
         $this->formElement = $formElement;
         $this->webformDao = WebformDaoMysql::getInstance();
     }
@@ -33,10 +32,10 @@ class FormElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField($this->getTemplateEngine(), $this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
+        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("form_element_editor_title"), htmlentities($this->formElement->getTitle()), false, false, null);
         $currentSelectedWebform = $this->formElement->getWebForm();
         $currentWebformId = $currentSelectedWebform?->getId();
-        $webformPicker = new Pulldown($this->getTemplateEngine(), $this->createFieldId("selected_webform"), $this->getTextResource("form_element_editor_webform"), $currentWebformId, array(), false, null, true);
+        $webformPicker = new Pulldown($this->createFieldId("selected_webform"), $this->getTextResource("form_element_editor_webform"), $currentWebformId, array(), false, null, true);
         foreach ($this->webformDao->getAllWebForms() as $webform) {
             $webformPicker->addOption($webform->getTitle(), $webform->getId());
         }

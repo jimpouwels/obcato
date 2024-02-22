@@ -1,6 +1,7 @@
-<form action="{$backend_base_url}&download={$download_id}" method="post" id="download-editor-form" enctype="multipart/form-data">
-    <input type="hidden" id="action" name="action" value="" />
-    <input type="hidden" id="download_id" name="download_id" value="{$download_id}" />
+<form action="{$backend_base_url}&download={$download_id}" method="post" id="download-editor-form"
+      enctype="multipart/form-data">
+    <input type="hidden" id="action" name="action" value=""/>
+    <input type="hidden" id="download_id" name="download_id" value="{$download_id}"/>
 
     <ul class="admin_form">
         <li>{$title_field}</li>

@@ -2,11 +2,10 @@
 
 namespace Obcato\Core\admin\modules\pages\visuals;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\modules\pages\service\PageInteractor;
 use Obcato\Core\admin\modules\pages\service\PageService;
+use Obcato\Core\admin\view\views\Visual;
 
 class PageTreeItem extends Visual {
 
@@ -14,8 +13,8 @@ class PageTreeItem extends Visual {
     private PageService $pageService;
     private Page $selectedPage;
 
-    public function __construct(TemplateEngine $templateEngine, Page $page, Page $selectedPage) {
-        parent::__construct($templateEngine);
+    public function __construct(Page $page, Page $selectedPage) {
+        parent::__construct();
         $this->page = $page;
         $this->pageService = PageInteractor::getInstance();
         $this->selectedPage = $selectedPage;
@@ -28,7 +27,7 @@ class PageTreeItem extends Visual {
     public function load(): void {
         $subPages = array();
         foreach ($this->pageService->getSubPages($this->page) as $subPage) {
-            $treeItem = new PageTreeItem($this->getTemplateEngine(), $subPage, $this->selectedPage);
+            $treeItem = new PageTreeItem($subPage, $this->selectedPage);
             $subPages[] = $treeItem->render();
         }
 

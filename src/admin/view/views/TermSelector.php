@@ -2,12 +2,9 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
-use Obcato\Core\admin\view\views\Panel;
-use Obcato\Core\admin\view\views\SingleCheckbox;
+use Obcato\Core\admin\view\TemplateData;
 
 class TermSelector extends Panel {
 
@@ -15,8 +12,8 @@ class TermSelector extends Panel {
     private ArticleDao $articleDao;
     private int $contextId;
 
-    public function __construct(TemplateEngine $templateEngine, array $selected_terms, int $contextId) {
-        parent::__construct($templateEngine, $this->getTextResource("term_selector_title"), 'term_selector');
+    public function __construct(array $selected_terms, int $contextId) {
+        parent::__construct($this->getTextResource("term_selector_title"), 'term_selector');
         $this->selectedTerms = $selected_terms;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->contextId = $contextId;
@@ -53,7 +50,7 @@ class TermSelector extends Panel {
         foreach ($this->selectedTerms as $selectedTerm) {
             $selectedTermItem = array();
             $selectedTermItem['name'] = $selectedTerm->getName();
-            $deleteField = new SingleCheckbox($this->getTemplateEngine(), "term_" . $this->contextId . "_" . $selectedTerm->getId() . "_delete", "", false, false, "");
+            $deleteField = new SingleCheckbox("term_" . $this->contextId . "_" . $selectedTerm->getId() . "_delete", "", false, false, "");
             $selectedTermItem['delete_field'] = $deleteField->render();
             $selectedTerms[] = $selectedTermItem;
         }

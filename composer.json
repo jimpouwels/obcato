@@ -13,7 +13,6 @@
     }
   ],
   "require": {
-    "obcato/component-api": "v0.0.4",
     "ext-mysqli": "*",
     "smarty/smarty": "^4.3",
     "ext-zip": "*",

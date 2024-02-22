@@ -2,9 +2,6 @@
 
 namespace Obcato\Core\admin\modules\blocks;
 
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\blocks\model\Block;
 use Obcato\Core\admin\modules\blocks\model\BlockPosition;
@@ -13,6 +10,8 @@ use Obcato\Core\admin\modules\blocks\visuals\positions\PositionTab;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class BlockModuleVisual extends ModuleVisual {
 
@@ -25,8 +24,8 @@ class BlockModuleVisual extends ModuleVisual {
     private BlockRequestHandler $blockRequestHandler;
     private PositionRequestHandler $positionRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(Module $module) {
+        parent::__construct($module);
         $this->module = $module;
         $this->blockRequestHandler = new BlockRequestHandler();
         $this->positionRequestHandler = new PositionRequestHandler();
@@ -39,9 +38,9 @@ class BlockModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
-            $content = new BlockTab($this->getTemplateEngine(), $this->currentBlock);
+            $content = new BlockTab($this->currentBlock);
         } else if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
-            $content = new PositionTab($this->getTemplateEngine(), $this->currentPosition);
+            $content = new PositionTab($this->currentPosition);
         }
         if ($content) {
             $this->assign("content", $content->render());
@@ -52,17 +51,17 @@ class BlockModuleVisual extends ModuleVisual {
         $actionButtons = array();
         if ($this->getCurrentTabId() == self::$BLOCKS_TAB) {
             if ($this->currentBlock) {
-                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_element_holder');
-                $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_element_holder');
+                $actionButtons[] = new ActionButtonSave('update_element_holder');
+                $actionButtons[] = new ActionButtonDelete('delete_element_holder');
             }
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_element_holder');
+            $actionButtons[] = new ActionButtonAdd('add_element_holder');
         }
         if ($this->getCurrentTabId() == self::$POSITIONS_TAB) {
             if ($this->currentPosition || PositionTab::isEditPositionMode()) {
-                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_position');
+                $actionButtons[] = new ActionButtonSave('update_position');
             }
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_position');
-            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_positions');
+            $actionButtons[] = new ActionButtonAdd('add_position');
+            $actionButtons[] = new ActionButtonDelete('delete_positions');
         }
         return $actionButtons;
     }

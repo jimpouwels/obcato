@@ -2,12 +2,10 @@
 
 namespace Obcato\Core\admin;
 
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\Session;
-use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\authentication\Session;
 use Obcato\Core\admin\request_handlers\BackendRequestHandler;
-use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\Cms;
+use Obcato\Core\admin\view\views\ModuleVisual;
 use Obcato\Core\admin\view\views\Popup;
 use const Obcato\Core\CMS_ROOT;
 
@@ -34,7 +32,7 @@ class Backend {
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
             $class = "Obcato\\Core\\admin\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
-            $this->moduleVisual = new $class(TemplateEngine::getInstance(), $currentModule, MysqlConnector::getInstance(), TemplateEngine::getInstance());
+            $this->moduleVisual = new $class($currentModule);
         }
     }
 
@@ -47,12 +45,12 @@ class Backend {
     }
 
     private function renderCmsView(): void {
-        $cms = new Cms(TemplateEngine::getInstance(), $this->moduleVisual);
+        $cms = new Cms($this->moduleVisual);
         echo $cms->render();
     }
 
     private function renderPopupView(): void {
-        $popup = new Popup(TemplateEngine::getInstance(), $_GET['popup']);
+        $popup = new Popup($_GET['popup']);
         echo $popup->render();
     }
 

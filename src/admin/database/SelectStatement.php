@@ -2,8 +2,8 @@
 
 namespace Obcato\Core\admin\database;
 
-use Obcato\ComponentApi\MysqlResult;
-use Obcato\ComponentApi\MysqlStatement;
+use Obcato\Core\admin\view\views\MysqlResult;
+use Obcato\Core\admin\view\views\MysqlStatement;
 
 class SelectStatement extends Statement {
     private array $selectFields = array();

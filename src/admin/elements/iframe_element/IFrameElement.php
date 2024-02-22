@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\admin\elements\iframe_element;
 
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementMetadataProvider;
 use Obcato\Core\admin\database\MysqlConnector;
@@ -14,6 +13,7 @@ use Obcato\Core\admin\modules\pages\model\Page;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
 use Obcato\Core\admin\view\TemplateEngine;
 use Obcato\Core\admin\view\views\ElementVisual;
+use Obcato\Core\admin\view\views\Visual;
 
 class IFrameElement extends Element {
 
@@ -54,7 +54,7 @@ class IFrameElement extends Element {
     }
 
     public function getBackendVisual(): ElementVisual {
-        return new IFrameElementEditor(TemplateEngine::getInstance(), $this);
+        return new IFrameElementEditor($this);
     }
 
     public function getFrontendVisual(Page $page, ?Article $article): IFrameElementFrontendVisual {

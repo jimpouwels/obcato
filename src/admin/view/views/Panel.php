@@ -2,17 +2,15 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\view\TemplateData;
 
 abstract class Panel extends Visual {
 
     private string $_title_resource_identifier;
     private string $_class;
 
-    public function __construct(TemplateEngine $templateEngine, string $title_resource_identifier, string $class = "") {
-        parent::__construct($templateEngine);
+    public function __construct(string $title_resource_identifier, string $class = "") {
+        parent::__construct();
         $this->_title_resource_identifier = $title_resource_identifier;
         $this->_class = $class;
     }

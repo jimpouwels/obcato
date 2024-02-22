@@ -2,19 +2,18 @@
 
 namespace Obcato\Core\admin\modules\blocks\visuals\blocks;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\blocks\model\Block;
 use Obcato\Core\admin\view\views\ElementContainer;
 use Obcato\Core\admin\view\views\LinkEditor;
+use Obcato\Core\admin\view\views\Visual;
 use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class BlockEditor extends Visual {
 
     private Block $currentBlock;
 
-    public function __construct(TemplateEngine $templateEngine, Block $current) {
-        parent::__construct($templateEngine);
+    public function __construct(Block $current) {
+        parent::__construct();
         $this->currentBlock = $current;
     }
 
@@ -31,14 +30,14 @@ class BlockEditor extends Visual {
     }
 
     private function renderBlockMetaDataPanel(): string {
-        return (new BlockMetadataEditor($this->getTemplateEngine(), $this->currentBlock))->render();
+        return (new BlockMetadataEditor($this->currentBlock))->render();
     }
 
     private function renderElementContainer(): string {
-        return (new ElementContainer($this->getTemplateEngine(), $this->currentBlock->getElements()))->render();
+        return (new ElementContainer($this->currentBlock->getElements()))->render();
     }
 
     private function renderLinkEditor(): string {
-        return (new LinkEditor($this->getTemplateEngine(), $this->currentBlock->getLinks()))->render();
+        return (new LinkEditor($this->currentBlock->getLinks()))->render();
     }
 }

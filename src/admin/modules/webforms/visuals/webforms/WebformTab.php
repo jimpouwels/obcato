@@ -2,10 +2,9 @@
 
 namespace Obcato\Core\admin\modules\webforms\visuals\webforms;
 
-use Obcato\ComponentApi\TemplateEngine;
-use Obcato\ComponentApi\Visual;
 use Obcato\Core\admin\modules\webforms\model\Webform;
 use Obcato\Core\admin\modules\webforms\WebformRequestHandler;
+use Obcato\Core\admin\view\views\Visual;
 use const Obcato\Core\admin\ACTION_FORM_ID;
 
 class WebformTab extends Visual {
@@ -13,8 +12,8 @@ class WebformTab extends Visual {
     private ?WebForm $_current_webform;
     private WebformRequestHandler $_webform_request_handler;
 
-    public function __construct(TemplateEngine $templateEngine, $webform_requestHandler) {
-        parent::__construct($templateEngine);
+    public function __construct($webform_requestHandler) {
+        parent::__construct();
         $this->_webform_request_handler = $webform_requestHandler;
         $this->_current_webform = $this->_webform_request_handler->getCurrentWebForm();
     }
@@ -35,22 +34,22 @@ class WebformTab extends Visual {
     }
 
     private function renderWebFormsList(): string {
-        $webform_list = new WebformList($this->getTemplateEngine(), $this->_current_webform, $this->_webform_request_handler);
+        $webform_list = new WebformList($this->_current_webform, $this->_webform_request_handler);
         return $webform_list->render();
     }
 
     private function renderMetadataEditor(): string {
-        $metadata_editor = new WebformMetadataEditor($this->getTemplateEngine(), $this->_current_webform);
+        $metadata_editor = new WebformMetadataEditor($this->_current_webform);
         return $metadata_editor->render();
     }
 
     private function renderWebFormEditor(): string {
-        $webform_editor = new WebformEditor($this->getTemplateEngine(), $this->_current_webform);
+        $webform_editor = new WebformEditor($this->_current_webform);
         return $webform_editor->render();
     }
 
     private function renderHandlersEditor(): string {
-        $handlers_editor = new HandlersEditor($this->getTemplateEngine(), $this->_current_webform);
+        $handlers_editor = new HandlersEditor($this->_current_webform);
         return $handlers_editor->render();
     }
 }

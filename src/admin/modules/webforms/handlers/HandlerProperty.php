@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\admin\modules\webforms\handlers;
 
-use Obcato\ComponentApi\Visual;
+use Obcato\Core\admin\view\views\Visual;
 
 class HandlerProperty {
 

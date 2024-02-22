@@ -2,14 +2,13 @@
 
 namespace Obcato\Core\admin\modules\articles\visuals\articles;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\database\dao\ArticleDao;
 use Obcato\Core\admin\database\dao\ArticleDaoMysql;
 use Obcato\Core\admin\database\dao\AuthorizationDao;
 use Obcato\Core\admin\database\dao\AuthorizationDaoMysql;
 use Obcato\Core\admin\modules\articles\ArticleRequestHandler;
 use Obcato\Core\admin\modules\articles\model\ArticleTerm;
+use Obcato\Core\admin\view\TemplateData;
 use Obcato\Core\admin\view\views\InformationMessage;
 use Obcato\Core\admin\view\views\Panel;
 
@@ -19,8 +18,8 @@ class ArticlesList extends Panel {
     private AuthorizationDao $authorizationDao;
     private ArticleRequestHandler $articleRequestHandler;
 
-    public function __construct(TemplateEngine $templateEngine, ArticleRequestHandler $articleRequestHandler) {
-        parent::__construct($templateEngine, $this->getTextResource('articles_search_results_title'), 'article_list');
+    public function __construct(ArticleRequestHandler $articleRequestHandler) {
+        parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
         $this->articleRequestHandler = $articleRequestHandler;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();
@@ -83,7 +82,7 @@ class ArticlesList extends Panel {
     }
 
     private function renderNoResultsMessage(): string {
-        $message = new InformationMessage($this->getTemplateEngine(), $this->getTextResource("articles_list_message_no_articles_found"));
+        $message = new InformationMessage($this->getTextResource("articles_list_message_no_articles_found"));
         return $message->render();
     }
 

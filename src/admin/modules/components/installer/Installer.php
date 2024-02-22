@@ -3,8 +3,8 @@
 namespace Obcato\Core\admin\modules\components\installer;
 
 use FileUtility;
-use Obcato\ComponentApi\Installer as IInstaller;
 use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\admin\view\views\Installer as IInstaller;
 
 abstract class Installer implements IInstaller {
 

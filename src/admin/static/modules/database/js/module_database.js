@@ -4,6 +4,6 @@
 */
 
 // initialize event handlers
-$(document).ready(function() {
-	
+$(document).ready(function () {
+
 });

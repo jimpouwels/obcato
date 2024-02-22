@@ -2,13 +2,12 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\view\TemplateData;
 
 class TextArea extends FormField {
 
-    public function __construct(TemplateEngine $templateEngine, string $name, string $label, ?string $value, bool $mandatory, bool $linkable, ?string $className) {
-        parent::__construct($templateEngine, $name, $value, $label, $mandatory, $linkable, $className);
+    public function __construct(string $name, string $label, ?string $value, bool $mandatory, bool $linkable, ?string $className) {
+        parent::__construct($name, $value, $label, $mandatory, $linkable, $className);
     }
 
     public function getFormFieldTemplateFilename(): string {

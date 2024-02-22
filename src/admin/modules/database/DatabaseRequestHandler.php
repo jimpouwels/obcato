@@ -2,10 +2,10 @@
 
 namespace Obcato\Core\admin\modules\database;
 
-use Obcato\ComponentApi\MysqlResult;
 use Obcato\Core\admin\core\form\FormException;
 use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\request_handlers\HttpRequestHandler;
+use Obcato\Core\admin\view\views\MysqlResult;
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

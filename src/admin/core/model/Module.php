@@ -2,9 +2,7 @@
 
 namespace Obcato\Core\admin\core\model;
 
-use Obcato\ComponentApi\Module as IModule;
-
-class Module extends Entity implements IModule {
+class Module extends Entity {
     private string $_identifier;
     private bool $_popup;
     private bool $_enabled;

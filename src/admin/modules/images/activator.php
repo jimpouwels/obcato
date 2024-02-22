@@ -2,9 +2,6 @@
 
 namespace Obcato\Core\admin\modules\images;
 
-use Obcato\ComponentApi\ModuleVisual;
-use Obcato\ComponentApi\TabMenu;
-use Obcato\ComponentApi\TemplateEngine;
 use Obcato\Core\admin\core\model\Module;
 use Obcato\Core\admin\modules\images\visuals\images\ImagesTab;
 use Obcato\Core\admin\modules\images\visuals\import\ImportTab;
@@ -13,6 +10,8 @@ use Obcato\Core\admin\view\views\ActionButton;
 use Obcato\Core\admin\view\views\ActionButtonAdd;
 use Obcato\Core\admin\view\views\ActionButtonDelete;
 use Obcato\Core\admin\view\views\ActionButtonSave;
+use Obcato\Core\admin\view\views\ModuleVisual;
+use Obcato\Core\admin\view\views\TabMenu;
 
 class ImageModuleVisual extends ModuleVisual {
 
@@ -26,8 +25,8 @@ class ImageModuleVisual extends ModuleVisual {
     private ImportRequestHandler $importRequestHandler;
     private int $currentTabId;
 
-    public function __construct(TemplateEngine $templateEngine, Module $module) {
-        parent::__construct($templateEngine, $module);
+    public function __construct(Module $module) {
+        parent::__construct($module);
         $this->imageRequestHandler = new ImageRequestHandler();
         $this->labelRequestHandler = new LabelRequestHandler();
         $this->importRequestHandler = new ImportRequestHandler();
@@ -41,11 +40,11 @@ class ImageModuleVisual extends ModuleVisual {
     public function load(): void {
         $content = null;
         if ($this->currentTabId == self::$IMAGES_TAB) {
-            $content = new ImagesTab($this->getTemplateEngine(), $this->imageRequestHandler);
+            $content = new ImagesTab($this->imageRequestHandler);
         } else if ($this->currentTabId == self::$LABELS_TAB) {
-            $content = new LabelsTab($this->getTemplateEngine(), $this->labelRequestHandler);
+            $content = new LabelsTab($this->labelRequestHandler);
         } else if ($this->currentTabId == self::$IMPORT_TAB) {
-            $content = new ImportTab($this->getTemplateEngine());
+            $content = new ImportTab();
         }
 
         if (!is_null($content)) {
@@ -59,22 +58,22 @@ class ImageModuleVisual extends ModuleVisual {
             $saveButton = null;
             $deleteButton = null;
             if (!is_null($this->imageRequestHandler->getCurrentImage())) {
-                $saveButton = new ActionButtonSave($this->getTemplateEngine(), 'update_image');
-                $deleteButton = new ActionButtonDelete($this->getTemplateEngine(), 'delete_image');
+                $saveButton = new ActionButtonSave('update_image');
+                $deleteButton = new ActionButtonDelete('delete_image');
             }
             $actionButtons[] = $saveButton;
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_image');
+            $actionButtons[] = new ActionButtonAdd('add_image');
             $actionButtons[] = $deleteButton;
         }
         if ($this->currentTabId == self::$LABELS_TAB) {
             if (!is_null($this->labelRequestHandler->getCurrentLabel())) {
-                $actionButtons[] = new ActionButtonSave($this->getTemplateEngine(), 'update_label');
+                $actionButtons[] = new ActionButtonSave('update_label');
             }
-            $actionButtons[] = new ActionButtonAdd($this->getTemplateEngine(), 'add_label');
-            $actionButtons[] = new ActionButtonDelete($this->getTemplateEngine(), 'delete_labels');
+            $actionButtons[] = new ActionButtonAdd('add_label');
+            $actionButtons[] = new ActionButtonDelete('delete_labels');
         }
         if ($this->currentTabId == self::$IMPORT_TAB) {
-            $actionButtons[] = new ActionButton($this->getTemplateEngine(), "Importeren", "upload_zip", "icon_upload");
+            $actionButtons[] = new ActionButton("Importeren", "upload_zip", "icon_upload");
         }
         return $actionButtons;
     }

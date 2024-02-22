@@ -2,16 +2,15 @@
 
 namespace Obcato\Core\admin\view\views;
 
-use Obcato\ComponentApi\TemplateData;
-use Obcato\ComponentApi\TemplateEngine;
+use Obcato\Core\admin\view\TemplateData;
 
 class TextField extends FormField {
 
     private bool $isVisible;
     private string $postfix;
 
-    public function __construct(TemplateEngine $templateEngine, string $name, ?string $labelResourceIdentifier, ?string $value, bool $mandatory, bool $linkable, ?string $className, bool $isVisible = true, string $postfix = "") {
-        parent::__construct($templateEngine, $name, $value, $labelResourceIdentifier, $mandatory, $linkable, $className);
+    public function __construct(string $name, ?string $labelResourceIdentifier, ?string $value, bool $mandatory, bool $linkable, ?string $className, bool $isVisible = true, string $postfix = "") {
+        parent::__construct($name, $value, $labelResourceIdentifier, $mandatory, $linkable, $className);
         $this->isVisible = $isVisible;
         $this->postfix = $postfix;
     }

@@ -3,13 +3,13 @@
 namespace Obcato\Core\admin\modules\components\installer;
 
 use FileUtility;
-use Obcato\ComponentApi\ElementInstaller as IElementInstaller;
 use Obcato\Core\admin\core\model\ElementType;
 use Obcato\Core\admin\database\dao\ElementDao;
 use Obcato\Core\admin\database\dao\ElementDaoMysql;
 use Obcato\Core\admin\database\dao\ScopeDao;
 use Obcato\Core\admin\database\dao\ScopeDaoMysql;
 use Obcato\Core\admin\modules\templates\model\Scope;
+use Obcato\Core\admin\view\views\ElementInstaller as IElementInstaller;
 
 abstract class ElementInstaller extends Installer implements IElementInstaller {
 
