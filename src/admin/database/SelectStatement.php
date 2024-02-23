@@ -2,9 +2,6 @@
 
 namespace Obcato\Core\admin\database;
 
-use Obcato\Core\admin\view\views\MysqlResult;
-use Obcato\Core\admin\view\views\MysqlStatement;
-
 class SelectStatement extends Statement {
     private array $selectFields = array();
     private bool $distinct;

@@ -2,11 +2,13 @@
 
 namespace Obcato\Core\admin\database\dao;
 
+use Obcato\Core\admin\authentication\Authenticator;
 use Obcato\Core\admin\database\MysqlConnector;
 use Obcato\Core\admin\database\SelectStatement;
 use Obcato\Core\admin\database\WhereType;
 use Obcato\Core\admin\modules\images\model\Image;
 use Obcato\Core\admin\modules\images\model\ImageLabel;
+use const Obcato\Core\admin\UPLOAD_DIR;
 
 class ImageDaoMysql implements ImageDao {
 

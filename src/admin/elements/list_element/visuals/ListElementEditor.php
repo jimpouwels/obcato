@@ -9,6 +9,7 @@ use Obcato\Core\admin\view\views\Button;
 use Obcato\Core\admin\view\views\ElementVisual;
 use Obcato\Core\admin\view\views\SingleCheckbox;
 use Obcato\Core\admin\view\views\TextField;
+use const Obcato\Core\admin\ELEMENT_HOLDER_FORM_ID;
 
 class ListElementEditor extends ElementVisual {
 

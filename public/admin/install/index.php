@@ -1,9 +1,8 @@
 <?php
-defined('_ACCESS') or die;
 
-require_once "../../frontend_bootstrap.php";
-require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
+use Obcato\Core\admin\database\MysqlConnector;
+
+defined('_ACCESS') or die;
 
 if (file_exists(PRIVATE_DIR . "/database_config.php")) {
     require_once PRIVATE_DIR . "/database_config.php";

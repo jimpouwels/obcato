@@ -6,6 +6,7 @@ use Obcato\Core\admin\core\model\Element;
 use Obcato\Core\admin\core\model\ElementHolder;
 use Obcato\Core\admin\core\model\ElementType;
 use Obcato\Core\admin\database\MysqlConnector;
+use const Obcato\Core\CMS_ROOT;
 
 class ElementDaoMysql implements ElementDao {
 
@@ -124,7 +125,7 @@ class ElementDaoMysql implements ElementDao {
 
     public function createElement(ElementType $elementType, int $elementHolderId): Element {
         require_once CMS_ROOT . "/elements/" . $elementType->getIdentifier() . "/" . $elementType->getDomainObject();
-        $elementClassName = $elementType->getClassName();
+        $elementClassName = "Obcato\\Core\\admin\\elements\\" . $elementType->getIdentifier() . "\\" . $elementType->getClassName();
         $newElement = new $elementClassName($elementType->getScopeId());
         $newElement->setOrderNr(999);
         $this->persistElement($elementType, $newElement, $elementHolderId);
