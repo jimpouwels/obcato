@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\TemplateDaoMysql;
 use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
-use const use Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class BlockVisual extends FrontendVisual {
 

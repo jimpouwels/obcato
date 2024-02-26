@@ -6,7 +6,7 @@ use Obcato\Core\core\model\Element;
 use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\core\model\ElementType;
 use Obcato\Core\database\MysqlConnector;
-use const Obcato\Core\CMS_ROOT;
+use const Obcato\CMS_ROOT;
 
 class ElementDaoMysql implements ElementDao {
 

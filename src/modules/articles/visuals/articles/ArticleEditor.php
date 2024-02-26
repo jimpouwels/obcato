@@ -9,7 +9,7 @@ use Obcato\Core\view\views\ElementContainer;
 use Obcato\Core\view\views\LinkEditor;
 use Obcato\Core\view\views\TermSelector;
 use Obcato\Core\view\views\Visual;
-use const use Obcato\Core\ELEMENT_HOLDER_FORM_ID;
+use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
 
 class ArticleEditor extends Visual {
 

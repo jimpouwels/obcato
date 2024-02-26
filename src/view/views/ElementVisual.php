@@ -6,7 +6,7 @@ use Obcato\Core\core\model\Element;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\view\TemplateData;
-use const use Obcato\Core\DELETE_ELEMENT_FORM_ID;
+use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
 
 abstract class ElementVisual extends Visual {
 

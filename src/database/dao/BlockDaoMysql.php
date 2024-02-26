@@ -7,7 +7,7 @@ use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\blocks\model\BlockPosition;
 use Obcato\Core\modules\pages\model\Page;
-use const use Obcato\Core\ELEMENT_HOLDER_BLOCK;
+use const Obcato\ELEMENT_HOLDER_BLOCK;
 
 class BlockDaoMysql implements BlockDao {
 

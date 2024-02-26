@@ -5,7 +5,6 @@ namespace Obcato;
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\Backend;
 use Obcato\Core\database\dao\ImageDaoMysql;
-use const Obcato\Core\CMS_ROOT;
 use const Obcato\Core\UPLOAD_DIR;
 
 define("_ACCESS", "GRANTED");

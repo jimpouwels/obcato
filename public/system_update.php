@@ -6,8 +6,8 @@ use DOMDocument;
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\database\MysqlConnector;
-use const Obcato\Core\CONFIG_DIR;
-use const Obcato\Core\SYSTEM_VERSION;
+use const Obcato\CONFIG_DIR;
+use const Obcato\core\SYSTEM_VERSION;
 
 require_once "bootstrap.php";
 

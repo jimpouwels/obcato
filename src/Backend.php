@@ -7,7 +7,7 @@ use Obcato\Core\request_handlers\BackendRequestHandler;
 use Obcato\Core\view\views\Cms;
 use Obcato\Core\view\views\ModuleVisual;
 use Obcato\Core\view\views\Popup;
-use const Obcato\Core\CMS_ROOT;
+use const Obcato\CMS_ROOT;
 
 class Backend {
 

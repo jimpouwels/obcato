@@ -11,11 +11,11 @@ use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\SingleCheckbox;
 use Obcato\Core\view\views\TemplatePicker;
 use Obcato\Core\view\views\TextField;
-use const use Obcato\Core\ACTION_FORM_ID;
-use const use Obcato\Core\ADD_ELEMENT_FORM_ID;
-use const use Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const use Obcato\Core\EDIT_ELEMENT_HOLDER_ID;
-use const use Obcato\Core\ELEMENT_HOLDER_FORM_ID;
+use const Obcato\Core\ACTION_FORM_ID;
+use const Obcato\core\ADD_ELEMENT_FORM_ID;
+use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
+use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
+use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
 
 class BlockMetadataEditor extends Panel {
 

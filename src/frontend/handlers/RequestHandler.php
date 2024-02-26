@@ -15,7 +15,7 @@ use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
-use const use Obcato\Core\UPLOAD_DIR;
+use const Obcato\Core\UPLOAD_DIR;
 
 class RequestHandler {
 

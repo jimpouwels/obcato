@@ -10,7 +10,7 @@ use Obcato\Core\modules\images\ImageRequestHandler;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\InformationMessage;
 use Obcato\Core\view\views\Panel;
-use const use Obcato\Core\ACTION_FORM_ID;
+use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
 
 class ImageList extends Panel {
 

@@ -5,7 +5,7 @@ namespace Obcato\Core\modules\downloads\visuals;
 use Obcato\Core\modules\downloads\model\Download;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\Panel;
-use const use Obcato\Core\UPLOAD_DIR;
+use const Obcato\core\STATIC_DIR;
 
 class DownloadInfo extends Panel {
 

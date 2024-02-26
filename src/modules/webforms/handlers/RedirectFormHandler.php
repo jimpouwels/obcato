@@ -8,7 +8,7 @@ use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\webforms\visuals\RedirectFormHandlerEditor;
 use Obcato\Core\view\TemplateEngine;
-use const Obcato\Core\CMS_ROOT;
+use const Obcato\CMS_ROOT;
 
 class RedirectFormHandler extends FormHandler {
 

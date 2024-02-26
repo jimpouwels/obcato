@@ -22,7 +22,7 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'localhost') {
         define("PRIVATE_DIR", __DIR__ . "/../private");
     }
 }
-const CMS_ROOT = PRIVATE_DIR . "/vendor/obcato/obcato/src/admin";
+const CMS_ROOT = PRIVATE_DIR . "/vendor/obcato/obcato/src";
 const PUBLIC_DIR = __DIR__;
 
 if (!defined("IS_TEST_RUN")) {

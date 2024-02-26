@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\database\dao;
 
-use const use Obcato\Core\CONFIG_DIR;
+use const Obcato\CONFIG_DIR;
 
 class ConfigDaoMysql implements ConfigDao {
 

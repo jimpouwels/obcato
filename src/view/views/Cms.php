@@ -9,7 +9,7 @@ use Obcato\Core\database\dao\ModuleDaoMysql;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\utilities\Logs;
-use const use Obcato\Core\SYSTEM_VERSION;
+use const Obcato\core\SYSTEM_VERSION;
 
 class Cms extends Visual {
     private ?ModuleVisual $moduleVisual;

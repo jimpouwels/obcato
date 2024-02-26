@@ -16,7 +16,7 @@ use Obcato\Core\database\dao\WebformDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
-use const use Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class ArticleVisual extends FrontendVisual {
 

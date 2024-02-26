@@ -8,7 +8,7 @@ use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\modules\webforms\model\WebformItem;
-use const use Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class FormButtonVisual extends FormItemVisual {
 

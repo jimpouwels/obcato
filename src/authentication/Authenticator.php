@@ -6,7 +6,7 @@ use Obcato\Core\database\dao\AuthorizationDaoMysql;
 use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\authorization\model\User;
 use Obcato\Core\utilities\StringUtility;
-use const use Obcato\Core\SESSION_TIMEOUT;
+use const Obcato\Core\SESSION_TIMEOUT;
 
 class Authenticator {
 

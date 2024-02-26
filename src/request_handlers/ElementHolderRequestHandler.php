@@ -14,9 +14,9 @@ use Obcato\Core\database\dao\LinkDao;
 use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\ElementContainsErrorsException;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
-use const use Obcato\Core\ADD_ELEMENT_FORM_ID;
-use const use Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const use Obcato\Core\EDIT_ELEMENT_HOLDER_ID;
+use const Obcato\core\ADD_ELEMENT_FORM_ID;
+use const Obcato\core\DELETE_ELEMENT_FORM_ID;
+use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 

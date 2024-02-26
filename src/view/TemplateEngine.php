@@ -3,7 +3,7 @@
 namespace Obcato\Core\view;
 
 use Smarty;
-use const use Obcato\Core\BACKEND_TEMPLATE_DIR;
+use const Obcato\Core\BACKEND_TEMPLATE_DIR;
 
 
 class TemplateEngine {

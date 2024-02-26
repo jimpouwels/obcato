@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\modules\templates\model\Presentable;
-use const use Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class SitemapVisual extends FrontendVisual {
 

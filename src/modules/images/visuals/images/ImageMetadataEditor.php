@@ -8,7 +8,7 @@ use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\SingleCheckbox;
 use Obcato\Core\view\views\TextField;
 use Obcato\Core\view\views\UploadField;
-use const use Obcato\Core\ACTION_FORM_ID;
+use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
 
 class ImageMetadataEditor extends Panel {
 

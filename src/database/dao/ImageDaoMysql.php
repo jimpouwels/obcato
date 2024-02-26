@@ -8,7 +8,7 @@ use Obcato\Core\database\SelectStatement;
 use Obcato\Core\database\WhereType;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\images\model\ImageLabel;
-use const use Obcato\Core\UPLOAD_DIR;
+use const Obcato\core\STATIC_DIR;
 
 class ImageDaoMysql implements ImageDao {
 

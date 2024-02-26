@@ -3,7 +3,7 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\modules\templates\model\Presentable;
-use const use Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class RobotsVisual extends FrontendVisual {
 

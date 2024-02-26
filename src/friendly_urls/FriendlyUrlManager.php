@@ -12,7 +12,7 @@ use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\UrlHelper;
-use const Obcato\Core\PUBLIC_DIR;
+use const Obcato\PUBLIC_DIR;
 
 class FriendlyUrlManager {
 

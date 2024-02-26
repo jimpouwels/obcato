@@ -9,7 +9,7 @@ use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Visual;
-use const Obcato\Core\CMS_ROOT;
+use const Obcato\CMS_ROOT;
 
 abstract class Element extends Presentable {
 

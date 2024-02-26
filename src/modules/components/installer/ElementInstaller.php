@@ -9,9 +9,9 @@ use Obcato\Core\database\dao\ScopeDao;
 use Obcato\Core\database\dao\ScopeDaoMysql;
 use Obcato\Core\modules\templates\model\Scope;
 use Obcato\Core\utilities\FileUtility;
-use const use Obcato\Core\BACKEND_TEMPLATE_DIR;
-use const use Obcato\Core\STATIC_DIR;
-use const Obcato\Core\CMS_ROOT;
+use const Obcato\BACKEND_TEMPLATE_DIR;
+use const Obcato\core\STATIC_DIR;
+use const Obcato\CMS_ROOT;
 
 abstract class ElementInstaller extends Installer {
 

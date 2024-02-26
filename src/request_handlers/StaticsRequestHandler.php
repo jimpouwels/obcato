@@ -2,7 +2,7 @@
 
 namespace Obcato\Core\request_handlers;
 
-use const use Obcato\Core\STATIC_DIR;
+use const Obcato\core\STATIC_DIR;
 
 class StaticsRequestHandler extends HttpRequestHandler {
 

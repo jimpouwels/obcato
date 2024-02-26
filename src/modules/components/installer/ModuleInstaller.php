@@ -7,8 +7,8 @@ use Obcato\Core\database\dao\ModuleDao;
 use Obcato\Core\database\dao\ModuleDaoMysql;
 use Obcato\Core\utilities\FileUtility;
 use const Obcato\CMS_ROOT;
-use const Obcato\Core\BACKEND_TEMPLATE_DIR;
-use const Obcato\Core\STATIC_DIR;
+use const Obcato\BACKEND_TEMPLATE_DIR;
+use const Obcato\core\STATIC_DIR;
 
 abstract class ModuleInstaller extends Installer {
 
