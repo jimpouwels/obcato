@@ -1,14 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato;
 
-use Obcato\Core\admin\authentication\Authenticator;
-use Obcato\Core\admin\authentication\Session;
-use Obcato\Core\admin\view\TemplateEngine;
-use Obcato\Core\admin\view\views\Button;
-use Obcato\Core\admin\view\views\PasswordField;
-use Obcato\Core\admin\view\views\Pulldown;
-use Obcato\Core\admin\view\views\TextField;
+use Obcato\Core\authentication\Authenticator;
+use Obcato\Core\authentication\Session;
+use Obcato\Core\view\views\Button;
+use Obcato\Core\view\views\PasswordField;
+use Obcato\Core\view\views\Pulldown;
+use Obcato\Core\view\views\TextField;
 
 define("_ACCESS", "GRANTED");
 

@@ -1,6 +1,6 @@
 <?php
 
-use Obcato\Core\admin\database\MysqlConnector;
+use Obcato\Core\database\MysqlConnector;
 
 defined('_ACCESS') or die;
 

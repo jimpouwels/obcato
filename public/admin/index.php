@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato;
 
 // DIRECT ACCESS GRANTED
-use Obcato\Core\admin\authentication\Authenticator;
-use Obcato\Core\admin\Backend;
+use Obcato\Core\authentication\Authenticator;
+use Obcato\Core\Backend;
 
 define("_ACCESS", "GRANTED");
 

@@ -1,11 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato;
 
-use Obcato\Core\admin\authentication\Authenticator;
-use Obcato\Core\admin\Backend;
-use Obcato\Core\admin\database\dao\ImageDaoMysql;
-use const Obcato\Core\admin\UPLOAD_DIR;
+use Obcato\Core\authentication\Authenticator;
+use Obcato\Core\Backend;
+use Obcato\Core\database\dao\ImageDaoMysql;
+use const Obcato\Core\CMS_ROOT;
+use const Obcato\Core\UPLOAD_DIR;
 
 define("_ACCESS", "GRANTED");
 

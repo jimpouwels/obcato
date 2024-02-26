@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato;
 
-use Obcato\Core\admin\frontend\handlers\RequestHandler;
+use Obcato\Core\frontend\handlers\RequestHandler;
 
 $configFilePath = __DIR__ . "/config.php";
 if (file_exists($configFilePath)) {

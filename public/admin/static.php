@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato;
 
-use Obcato\Core\admin\authentication\Authenticator;
-use Obcato\Core\admin\request_handlers\StaticsRequestHandler;
+use Obcato\Core\authentication\Authenticator;
+use Obcato\Core\request_handlers\StaticsRequestHandler;
 
 define("_ACCESS", "GRANTED");
 
