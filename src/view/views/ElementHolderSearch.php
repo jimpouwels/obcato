@@ -6,6 +6,7 @@ use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
+use Obcato\Core\view\TemplateData;
 
 class ElementHolderSearch extends Panel {
 

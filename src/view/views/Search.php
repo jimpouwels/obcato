@@ -17,7 +17,7 @@ class Search extends Visual {
     private string $objectsToSearch;
     private string $popupType;
 
-    public function __construct(TemplateEngine $templateEngine,) {
+    public function __construct() {
         parent::__construct();
         $this->backClickId = $_GET[self::$BACK_CLICK_ID_KEY];
         $this->backfillId = $_GET[self::$BACKFILL_KEY];

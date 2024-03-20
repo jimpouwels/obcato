@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
-use const Obcato\ELEMENT_HOLDER_ARTICLE;
+use const Obcato\Core\ELEMENT_HOLDER_ARTICLE;
 
 class ArticleInteractor implements ArticleService {
 

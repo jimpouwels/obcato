@@ -9,7 +9,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\utilities\FileUtility;
-use const Obcato\core\STATIC_DIR;
+use const Obcato\Core\UPLOAD_DIR;
 
 class ImageRequestHandler extends HttpRequestHandler {
 
