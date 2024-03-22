@@ -10,7 +10,6 @@ const EDIT_ELEMENT_HOLDER_ID = 'element_holder_id';
 const ACTION_FORM_ID = 'action';
 const DELETE_ELEMENT_FORM_ID = 'delete_element';
 const ELEMENT_HOLDER_FORM_ID = 'element_holder_form_id';
-const ELEMENT_ORDER_ID = 'element_order';
 
 // ELEMENT HOLDER TYPES
 const ELEMENT_HOLDER_PAGE = 'ELEMENT_HOLDER_PAGE';

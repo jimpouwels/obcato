@@ -3,12 +3,13 @@
 namespace Obcato\Core\modules\pages\service;
 
 use Obcato\Core\authentication\Authenticator;
+use Obcato\Core\authentication\Session;
 use Obcato\Core\database\dao\BlockDao;
 use Obcato\Core\database\dao\BlockDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\authentication\Session;
+use const Obcato\Core\ELEMENT_HOLDER_PAGE;
 
 class PageInteractor implements PageService {
 
