@@ -18,10 +18,10 @@ This section contains the following:
   * `templates` directory, containing frontend templates
 * `vendor` directory, containing all software that is required to run Obcato
 
-The private section is supposed to be located in a location that is not served by the webserver, as the contents are not to be directly downloaded directory via the internet.
+The private section must be located in a location that is not served by the webserver, as the contents are not to be directly downloaded directory via the internet.
 
 ## Public
 
 This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI and the frontend. Any static files required by the frontend, such as stylesheets, images and javascript source files can be placed here.
 
-The public section is supposed to be located in the root of the directory that is served to the internet by the webserver.
+The public section must be located in the root of the directory that is served to the internet by the webserver.
