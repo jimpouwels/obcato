@@ -4,7 +4,7 @@ Obcato is an initiative to offer a simple, modular and multi-language web conten
 * Programming Smarty Templates according to the Obcato API's and configuring them in the Obcato WebUI.
 * Authoring articles, pages, images, etc. in the Obcato WebUI. Templates will be linked to these presentable elements and will be rendered as HTML.
 
-# Installation
+# Getting started
 Obcato is written in PHP and runs on top of an Mysql Database. A hosting platform therefore requires at least a PHP runtime and a Mysql database.
 
 On the highest level, Obcato consists of two sections:
