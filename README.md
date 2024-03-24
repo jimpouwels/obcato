@@ -9,7 +9,7 @@ Obcato is written in PHP and runs on top of an Mysql Database. A hosting platfor
 
 On the highest level, Obcato consists of two sections:
 
-**Private**
+## Private
 
 This section contains the following:
 * Directories containing static data
@@ -20,7 +20,7 @@ This section contains the following:
 
 The private section is supposed to be located in a location that is not served by the webserver, as the contents are not to be directly downloaded directory via the internet.
 
-**Public**
+## Public
 
 This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI and the frontend. Any static files required by the frontend, such as stylesheets, images and javascript source files can be placed here.
 
