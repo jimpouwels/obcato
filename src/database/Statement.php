@@ -5,14 +5,15 @@ namespace Obcato\Core\database;
 abstract class Statement {
     private array $tables = array();
     private array $whereClauses = array();
+    private array $fixedWhereClauses = array();
     private ?OrderBy $orderBy = null;
     private ?Join $join = null;
 
-    public function where(string $table, string $column, WhereType $type, string $match): void {
+    public function where(string $table, string $column, WhereType $type, string|int $match, Prepared $prepared = Prepared::Yes): void {
         if (!isset($this->whereClauses[$table])) {
             $this->whereClauses[$table] = array();
         }
-        $this->whereClauses[$table][] = (new WhereClause($column, $type, $match));
+        $this->whereClauses[$table][] = (new WhereClause($column, $type, $match, $prepared));
     }
 
     public function innerJoin(string $tableLeft, string $columnLeft, string $tableRight, string $columnRight): void {
@@ -36,6 +37,14 @@ abstract class Statement {
                 $where .= $whereTable . "." . $whereClause->getColumn() . " " . $whereClause->getType()->value . " " . $whereClause->getMatchString();
             }
         }
+        foreach (array_keys($this->fixedWhereClauses) as $whereTable) {
+            foreach ($this->fixedWhereClauses[$whereTable] as $whereClause) {
+                if ($where) {
+                    $where .= " AND ";
+                }
+                $where .= $whereTable . "." . $whereClause->getColumn() . " " . $whereClause->getType()->value . " " . $whereClause->getMatch();
+            }
+        }
         $query .= $where;
         if ($this->orderBy) {
             $query .= " " . $this->orderBy->toString();
@@ -48,14 +57,20 @@ abstract class Statement {
     }
 
     public function getBindString(): string {
-        return str_repeat("s", count($this->whereClauses));
+        $bindString = "";
+        foreach (array_keys($this->whereClauses) as $table) {
+            foreach ($this->whereClauses[$table] as $whereClause) {
+                $bindString .= $whereClause->getBindString();
+            }
+        }
+        return $bindString;
     }
 
     public function getMatches(): array {
         $matches = array();
         foreach (array_keys($this->whereClauses) as $table) {
             foreach ($this->whereClauses[$table] as $whereClause) {
-                if ($whereClause->getMatch()) {
+                if ($whereClause->getMatch() && $whereClause->isPrepared()) {
                     $match = $whereClause->getMatch();
                     if ($whereClause->getType() == WhereType::Like) {
                         $match = "%$match%";
@@ -129,13 +144,15 @@ enum JoinType: string {
 class WhereClause {
 
     private string $column;
-    private string $match;
+    private string|int $match;
     private WhereType $type;
+    private Prepared $prepared;
 
-    public function __construct(string $column, WhereType $type, string $match) {
+    public function __construct(string $column, WhereType $type, string|int $match, Prepared $prepared) {
         $this->column = $column;
         $this->match = $match;
         $this->type = $type;
+        $this->prepared = $prepared;
     }
 
     public function getColumn(): string {
@@ -150,8 +167,19 @@ class WhereClause {
         return $this->match;
     }
 
+    public function getBindString(): string {
+        if ($this->isPrepared()) {
+            return (is_int($this->match)) ? "i" : "s";
+        }
+        return "";
+    }
+
+    public function isPrepared(): bool {
+        return $this->prepared == Prepared::Yes;
+    }
+
     public function getMatchString(): string {
-        return "?";
+        return $this->prepared == Prepared::Yes ? "?" : $this->getMatch();
     }
 
 }
@@ -159,4 +187,10 @@ class WhereClause {
 enum WhereType: string {
     case Equals = "=";
     case Like = "LIKE";
+    case LowerThan = "<=";
+}
+
+enum Prepared: string {
+    case Yes = "true";
+    case No = "false";
 }

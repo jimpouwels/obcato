@@ -6,3 +6,5 @@ const HOST = "localhost";
 const DATABASE_NAME = "obcato";
 const USERNAME = "root";
 const PASSWORD = "";
+
+const CMS_ROOT = "../src/";

@@ -1,9 +1,9 @@
 <?php
 
+use Obcato\Core\database\Prepared;
+use Obcato\Core\database\SelectStatement;
+use Obcato\Core\database\WhereType;
 use PHPUnit\Framework\TestCase;
-
-require_once __DIR__ . "/../setup.php";
-require_once CMS_ROOT . '/database/SelectStatement.php';
 
 class SelectStatementTest extends TestCase {
 
@@ -43,6 +43,24 @@ class SelectStatementTest extends TestCase {
         $statement->innerJoin("table1", "table2_id", "table2", "id");
         $statement->where("table1", "name", WhereType::Equals, "someString1");
         $this->assertEquals("SELECT table1.name, table2.otherData FROM table1 table1 INNER JOIN table2 ON table1.table2_id = table2.id WHERE table1.name = ?", $statement->toQuery());
+    }
+
+    public function testCreateSelectStatementWithDateComparison() {
+        $statement = new SelectStatement();
+        $statement->from("table", ["name", "publication_date"]);
+        $statement->where("table", "publication_date", WhereType::LowerThan, "now()", Prepared::No);
+        $this->assertEquals("SELECT table.name, table.publication_date FROM table table WHERE table.publication_date <= now()", $statement->toQuery());
+        $this->assertEquals("", $statement->getBindString());
+    }
+
+    public function testCreateSelectStatementWithIntValueComparison() {
+        $statement = new SelectStatement();
+        $statement->from("table1", ["col1", "col2"]);
+        $statement->where("table1", "col1", WhereType::Equals, 1);
+        $statement->where("table1", "col2", WhereType::Equals, "test");
+        $this->assertEquals("SELECT table1.col1, table1.col2 FROM table1 table1 WHERE table1.col1 = ? AND table1.col2 = ?", $statement->toQuery());
+        $this->assertEquals("is", $statement->getBindString());
+        $this->assertEquals([1, "test"], $statement->getMatches());
     }
 
 }
