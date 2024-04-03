@@ -2,6 +2,8 @@
 
 namespace Obcato\Core\view\views;
 
+use Obcato\Core\authentication\Session;
+
 class Popup extends Visual {
 
     private string $popupType;
@@ -20,6 +22,7 @@ class Popup extends Visual {
         if ($this->popupType == "search") {
             $content = new Search();
         }
+        $this->assignGlobal("text_resources", Session::getTextResources());
         $this->assign("content", $content->render());
     }
 
