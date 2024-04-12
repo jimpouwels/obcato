@@ -27,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     Authenticator::logIn($username, $password);
     Session::setCurrentLanguage($_POST['language']);
     if (Authenticator::isAuthenticated()) {
-        $redirect_to = '/admin';
-        if (isset($_POST['org_url']) && $_POST['org_url'] != '') {
-            $redirect_to = $_POST['org_url'];
+        $redirectTo = '/admin';
+        if (isset($_POST['orgUrl']) && $_POST['orgUrl'] != '') {
+            $redirectTo = $_POST['orgUrl'];
         }
-        header('Location: ' . $redirect_to);
+        header('Location: ' . $redirectTo);
         exit();
     }
 
@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>Obcato</p>
             </div>
             <div class="fields">
-                <?php if (isset($_GET['org_url']) && $_GET['org_url'] != ''): ?>
-                    <input type="hidden" name="org_url" value="<?= urldecode($_GET['org_url']); ?>"/>
+                <?php if (isset($_GET['orgUrl']) && $_GET['orgUrl'] != ''): ?>
+                    <input type="hidden" name="orgUrl" value="<?= urldecode($_GET['orgUrl']); ?>"/>
                 <?php endif; ?>
 
                 <?php

@@ -33,7 +33,12 @@ function checkAuthentication(): void {
 
 function redirectToLoginPage(): void {
     session_destroy();
-    header('Location: /admin/login.php');
+    $redirectTarget = '/admin/login.php';
+    $uri = urlencode($_SERVER['REQUEST_URI']);
+    if (str_contains($uri, 'module_id')) {
+        $redirectTarget .= "?orgUrl={$uri}";
+    }
+    header("Location: {$redirectTarget}");
     exit();
 }
 
