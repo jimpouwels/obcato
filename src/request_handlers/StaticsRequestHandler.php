@@ -48,5 +48,3 @@ class StaticsRequestHandler extends HttpRequestHandler {
         return null;
     }
 }
-
-?>
