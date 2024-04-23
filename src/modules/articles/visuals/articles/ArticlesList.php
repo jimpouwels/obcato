@@ -2,26 +2,26 @@
 
 namespace Obcato\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\AuthorizationDao;
 use Obcato\Core\database\dao\AuthorizationDaoMysql;
 use Obcato\Core\modules\articles\ArticleRequestHandler;
 use Obcato\Core\modules\articles\model\ArticleTerm;
+use Obcato\Core\modules\articles\service\ArticleInteractor;
+use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\InformationMessage;
 use Obcato\Core\view\views\Panel;
 
 class ArticlesList extends Panel {
 
-    private ArticleDao $articleDao;
+    private ArticleService $articleService;
     private AuthorizationDao $authorizationDao;
     private ArticleRequestHandler $articleRequestHandler;
 
     public function __construct(ArticleRequestHandler $articleRequestHandler) {
         parent::__construct($this->getTextResource('articles_search_results_title'), 'article_list');
         $this->articleRequestHandler = $articleRequestHandler;
-        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->articleService = ArticleInteractor::getInstance();
         $this->authorizationDao = AuthorizationDaoMysql::getInstance();
     }
 
@@ -57,9 +57,9 @@ class ArticlesList extends Panel {
 
     private function getSearchResults(): array {
         if ($this->articleRequestHandler->isSearchAction()) {
-            return $this->articleDao->searchArticles($this->articleRequestHandler->getSearchQuery(), $this->getSearchTermId());
+            return $this->articleService->searchArticles($this->articleRequestHandler->getSearchQuery(), $this->getSearchTermId());
         } else {
-            return $this->articleDao->getAllArticles();
+            return $this->articleService->getAllArticles();
         }
     }
 
@@ -76,7 +76,7 @@ class ArticlesList extends Panel {
     private function getSearchTerm(): ?ArticleTerm {
         $search_term_name = $this->articleRequestHandler->getSearchTerm();
         if ($search_term_name) {
-            return $this->articleDao->getTerm($search_term_name);
+            return $this->articleService->getTerm($search_term_name);
         }
         return null;
     }

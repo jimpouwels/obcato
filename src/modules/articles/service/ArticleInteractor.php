@@ -6,6 +6,7 @@ use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 use const Obcato\Core\ELEMENT_HOLDER_ARTICLE;
 
@@ -73,5 +74,17 @@ class ArticleInteractor implements ArticleService {
 
     public function addTargetPage(int $pageId): void {
         $this->articleDao->addTargetPage($pageId);
+    }
+
+    public function searchArticles(?string $searchQuery, ?int $termId): array {
+        return $this->articleDao->searchArticles($searchQuery, $termId);
+    }
+
+    public function getAllArticles(): array {
+        return $this->articleDao->getAllArticles();
+    }
+
+    public function getTerm(string $name): ArticleTerm {
+        return $this->articleDao->getTerm($name);
     }
 }

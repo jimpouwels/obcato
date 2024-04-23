@@ -3,6 +3,7 @@
 namespace Obcato\Core\modules\articles\service;
 
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 
 interface ArticleService {
@@ -27,4 +28,10 @@ interface ArticleService {
     public function setDefaultArticleTargetPage(int $pageId): void;
 
     public function addTargetPage(int $pageId): void;
+
+    public function searchArticles(?string $searchQuery, ?int $termId): array;
+
+    public function getAllArticles(): array;
+
+    public function getTerm(string $name): ArticleTerm;
 }

@@ -55,17 +55,11 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function getSearchQuery(): string {
-        if (isset($_GET['search_query'])) {
-            return $_GET['search_query'];
-        }
-        return "";
+        return $_GET['search_query'] ?? "";
     }
 
     public function getSearchTerm(): ?string {
-        if (isset($_GET['s_term'])) {
-            return $_GET['s_term'];
-        }
-        return "";
+        return $_GET['s_term'] ?? "";
     }
 
     public function isSearchAction(): bool {

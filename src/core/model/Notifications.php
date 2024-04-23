@@ -12,10 +12,7 @@ class Notifications {
     }
 
     public static function getMessage(): ?string {
-        if (isset($_SESSION['cms_notification'])) {
-            return $_SESSION['cms_notification'];
-        }
-        return null;
+        return $_SESSION['cms_notification'] ?? null;
     }
 
     private static function setMessage(string $message): void {
@@ -30,11 +27,7 @@ class Notifications {
     }
 
     public static function getSuccess(): ?string {
-        $success = null;
-        if (isset($_SESSION['success'])) {
-            $success = $_SESSION['success'];
-        }
-        return $success;
+        return $_SESSION['success'] ?? null;
     }
 
     public static function clearMessage(): void {

@@ -43,6 +43,9 @@ article_editor_select_parent_article_label: Hoofdartikel
 article_editor_selected_image_label: Geselecteerde afbeelding
 article_editor_selected_wallpaper_label: Geselecteerde wallpaper
 
+# ARTICLES EDITOR
+article_saved_message: Artikel opgeslagen
+
 # TERMS EDITOR
 articles_terms_editor_title: Term bewerken
 articles_terms_editor_name_field: Naam

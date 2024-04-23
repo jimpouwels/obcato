@@ -43,6 +43,9 @@ article_editor_select_parent_article_label: Main article
 article_editor_selected_image_label: Selected image
 article_editor_selected_wallpaper_label: Selected wallpaper
 
+# ARTICLES EDITOR
+article_saved_message: Article saved
+
 # TERMS EDITOR
 articles_terms_editor_title: Edit term
 articles_terms_editor_name_field: Name
