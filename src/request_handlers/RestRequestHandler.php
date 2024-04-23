@@ -8,5 +8,3 @@ class RestRequestHandler extends HttpRequestHandler {
 
     public function handlePost(): void {}
 }
-
-?>
