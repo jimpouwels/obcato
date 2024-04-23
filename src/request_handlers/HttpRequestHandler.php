@@ -37,4 +37,8 @@ abstract class HttpRequestHandler {
         return BlackBoard::getBackendBaseUrl();
     }
 
+    protected function isPostParam(string $name, string $value): string {
+        return isset($_POST[$name]) && $_POST[$name] == $value;
+    }
+
 }

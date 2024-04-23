@@ -117,23 +117,23 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     private function isUpdatePageAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "update_element_holder";
+        return $this->isPostParam("action", "update_element_holder");
     }
 
     private function isDeletePageAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "delete_page";
+        return $this->isPostParam("action", "delete_page");
     }
 
     private function isAddSubPageAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "sub_page";
+        return $this->isPostParam("action", "sub_page");
     }
 
     private function isMoveUpAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "move_up";
+        return $this->isPostParam("action", "move_up");
     }
 
     private function isMoveDownAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "move_down";
+        return $this->isPostParam("action", "move_down");
     }
 
 }

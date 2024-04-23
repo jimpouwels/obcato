@@ -45,6 +45,7 @@ article_editor_selected_wallpaper_label: Selected wallpaper
 
 # ARTICLES EDITOR
 article_saved_message: Article saved
+article_not_saved_error_message: Article not saved, there are errors
 
 # TERMS EDITOR
 articles_terms_editor_title: Edit term

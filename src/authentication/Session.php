@@ -42,10 +42,7 @@ class Session {
     }
 
     public static function getTextResource(string $name): string {
-        if (isset($_SESSION['text_resources'][$name])) {
-            return $_SESSION['text_resources'][$name];
-        }
-        return $name;
+        return $_SESSION['text_resources'][$name] ?? $name;
     }
 
     public static function getErrorCount(): int {
@@ -59,10 +56,7 @@ class Session {
     }
 
     public static function getError(string $fieldName): ?string {
-        if (isset($_SESSION['errors'][$fieldName . '_error'])) {
-            return $_SESSION['errors'][$fieldName . '_error'];
-        }
-        return null;
+        return $_SESSION['errors'][$fieldName . '_error'] ?? null;
     }
 
     public static function clearErrors(): void {

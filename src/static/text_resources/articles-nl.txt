@@ -45,6 +45,7 @@ article_editor_selected_wallpaper_label: Geselecteerde wallpaper
 
 # ARTICLES EDITOR
 article_saved_message: Artikel opgeslagen
+article_not_saved_error_message: Artikel niet opgeslagen, verwerk de fouten
 
 # TERMS EDITOR
 articles_terms_editor_title: Term bewerken
