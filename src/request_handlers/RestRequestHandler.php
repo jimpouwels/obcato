@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core;
+namespace Obcato\Core\request_handlers;
 
 class RestRequestHandler extends HttpRequestHandler {
 
