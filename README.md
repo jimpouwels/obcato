@@ -25,3 +25,7 @@ The private section must be located in a location that is not served by the webs
 This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI and the frontend. Any static files required by the frontend, such as stylesheets, images and javascript source files can be placed here.
 
 The public section must be located in the root of the directory that is served to the internet by the webserver.
+
+# Installation
+
+...
