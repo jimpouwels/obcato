@@ -99,7 +99,7 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array {
-        $queryWhere = " WHERE e.id = a.element_holder_id";
+        $queryWhere = " WHERE published = 1 AND     e.id = a.element_holder_id";
         $queryWhere = $queryWhere . " AND publication_date <= now()";
         if ($toDate) {
             $queryWhere = $queryWhere . " AND publication_date <= '" . DateUtility::stringMySqlDate($toDate) . "'";
