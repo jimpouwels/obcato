@@ -110,16 +110,18 @@ class ListElementMetaDataProvider extends ElementMetadataProvider {
             $indent = $listItem->getIndent();
             $text = $listItem->getText();
             $elementId = $this->getElement()->getId();
-            if (!is_null($listItem->getId())) {
+            if ($listItem->getId()) {
                 $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
                 $statement = $this->mysqlConnector->prepareStatement($query);
                 $statement->bind_param('sii', $text, $indent, $id);
+                $this->mysqlConnector->executeStatement($statement);
             } else {
                 $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
                 $statement = $this->mysqlConnector->prepareStatement($query);
                 $statement->bind_param('ii', $indent, $elementId);
+                $this->mysqlConnector->executeStatement($statement);
+                $listItem->setId($this->mysqlConnector->getInsertId());
             }
-            $this->mysqlConnector->executeStatement($statement);
         }
     }
 
