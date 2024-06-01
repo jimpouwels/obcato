@@ -17,11 +17,11 @@ class ArticleOverviewElementRequestHandler extends HttpRequestHandler {
     private ArticleDao $articleDao;
     private ArticleOverviewElementForm $articleOverviewElementForm;
 
-    public function __construct(ArticleOverviewElement $article_overview_element) {
-        $this->articleOverviewElement = $article_overview_element;
+    public function __construct(ArticleOverviewElement $articleOverviewElement) {
+        $this->articleOverviewElement = $articleOverviewElement;
         $this->elementDao = ElementDaoMysql::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
-        $this->articleOverviewElementForm = new ArticleOverviewElementForm($article_overview_element);
+        $this->articleOverviewElementForm = new ArticleOverviewElementForm($articleOverviewElement);
     }
 
     public function handleGet(): void {}

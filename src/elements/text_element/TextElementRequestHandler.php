@@ -25,5 +25,3 @@ class TextElementRequestHandler extends HttpRequestHandler {
         $this->elementDao->updateElement($this->textElement);
     }
 }
-
-?>

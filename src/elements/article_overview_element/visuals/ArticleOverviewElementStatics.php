@@ -17,5 +17,3 @@ class ArticleOverviewElementStatics extends Visual {
     public function load(): void {}
 
 }
-
-?>

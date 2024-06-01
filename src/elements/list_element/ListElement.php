@@ -10,7 +10,6 @@ use Obcato\Core\frontend\ListElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\TemplateEngine;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Visual;
 
@@ -44,7 +43,7 @@ class ListElement extends Element {
     }
 
     public function getStatics(): Visual {
-        return new ListElementStatics(TemplateEngine::getInstance());
+        return new ListElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {

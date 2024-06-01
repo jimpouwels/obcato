@@ -22,7 +22,7 @@ class ListElementForm extends ElementForm {
     public function getListItemsToDelete(): array {
         $listItemsToDelete = array();
         foreach ($this->listElement->getListItems() as $listItem) {
-            if (!is_null($this->getFieldValue("listitem_" . $listItem->getId() . "_delete"))) {
+            if ($this->getFieldValue("listitem_" . $listItem->getId() . "_delete")) {
                 $listItemsToDelete[] = $listItem;
             }
         }

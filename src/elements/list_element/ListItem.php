@@ -36,9 +36,4 @@ class ListItem extends Entity {
         $this->elementId = $elementId;
     }
 
-    public function getElement(): Element {
-        $elementDao = ElementDaoMysql::getInstance();
-        return $elementDao->getElement($this->elementId);
-    }
-
 }
