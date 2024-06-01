@@ -9,8 +9,6 @@ use Obcato\Core\view\views\PasswordField;
 use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\TextField;
 
-define("_ACCESS", "GRANTED");
-
 require_once "../bootstrap.php";
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php")) {

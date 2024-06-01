@@ -14,8 +14,8 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
 
     public function loadElement(): void {
         $this->assign("title", $this->getElement()->getTitle());
-        $this->assign("img_title", $this->getElement()->getImage()->getTitle());
-        $this->assign("img_alt_text", $this->getElement()->getImage()->getAltText());
+        $this->assign("img_title", $this->getElement()->getImage()?->getTitle());
+        $this->assign("img_alt_text", $this->getElement()->getImage()?->getAltText());
         $this->assign("align", $this->getElement()->getAlign());
         $this->assign("width", $this->getElement()->getWidth());
         $this->assign("height", $this->getElement()->getHeight());
@@ -24,12 +24,11 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function createImageUrl(): string {
-        $image = $this->getElement()->getImage();
-        return $image ? $this->getImageUrl($image) : "";
+        return $this->getImageUrl($this->getElement()->getImage());
     }
 
     private function getExtension(): string {
         $image = $this->getElement()->getImage();
-        return $image ? $image->getExtension() : "";
+        return $image ? $image?->getExtension() : "";
     }
 }

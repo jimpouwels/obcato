@@ -6,8 +6,6 @@ namespace Obcato;
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\Backend;
 
-define("_ACCESS", "GRANTED");
-
 require_once "../bootstrap.php";
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {

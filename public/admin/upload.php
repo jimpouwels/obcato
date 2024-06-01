@@ -7,8 +7,6 @@ use Obcato\Core\Backend;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use const Obcato\Core\UPLOAD_DIR;
 
-define("_ACCESS", "GRANTED");
-
 require_once "../bootstrap.php";
 
 require_once CMS_ROOT . "/view/views/Panel.php";

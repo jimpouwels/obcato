@@ -2,8 +2,6 @@
 
 use Obcato\Core\database\MysqlConnector;
 
-defined('_ACCESS') or die;
-
 if (file_exists(PRIVATE_DIR . "/database_config.php")) {
     require_once PRIVATE_DIR . "/database_config.php";
     $mysql_connector = MySqlConnector::getInstance();

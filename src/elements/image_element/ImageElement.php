@@ -61,16 +61,15 @@ class ImageElement extends Element {
     }
 
     public function getImage(): ?Image {
-        $image = null;
         if ($this->imageId != null) {
             $image_dao = ImageDaoMysql::getInstance();
-            $image = $image_dao->getImage($this->imageId);
+            return $image_dao->getImage($this->imageId);
         }
-        return $image;
+        return null;
     }
 
     public function getStatics(): Visual {
-        return new ImageElementStatics(TemplateEngine::getInstance());
+        return new ImageElementStatics();
     }
 
     public function getBackendVisual(): ElementVisual {

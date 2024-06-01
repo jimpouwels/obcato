@@ -104,7 +104,10 @@ abstract class FrontendVisual {
         return $this->createLinksInString($value, $elementHolder);
     }
 
-    protected function getImageUrl(Image $image): string {
+    protected function getImageUrl(?Image $image): string {
+        if (!$image) {
+            return "";
+        }
         return $this->getPageUrl($this->page) . '?image=' . $image->getId();
     }
 
