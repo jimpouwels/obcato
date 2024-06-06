@@ -21,7 +21,7 @@ class WebformItemFactory {
 
     private function __construct() {
         $this->addType(WebformTextfield::$TYPE, "WebformTextfieldVisual", "WebformTextfieldForm", "FormTextfieldVisual");
-        $this->addType(WebFormTextArea::$TYPE, "WebformTextAreaVisual", "WebformTextAreaForm", "FormTextAreaVisual");
+        $this->addType(WebFormTextArea::$TYPE, "WebformTextareaVisual", "WebformTextAreaForm", "FormTextAreaVisual");
         $this->addType(WebformDropdown::$TYPE, "WebformDropDownVisual", "WebformDropDownForm", "FormDropDownVisual");
         $this->addType(WebformButton::$TYPE, "WebformButtonVisual", "WebformButtonForm", "FormButtonVisual");
     }

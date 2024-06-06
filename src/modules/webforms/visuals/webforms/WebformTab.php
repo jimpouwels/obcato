@@ -5,7 +5,7 @@ namespace Obcato\Core\modules\webforms\visuals\webforms;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\modules\webforms\WebformRequestHandler;
 use Obcato\Core\view\views\Visual;
-use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
+use const Obcato\Core\ACTION_FORM_ID;
 
 class WebformTab extends Visual {
 
