@@ -167,7 +167,9 @@ class FriendlyUrlManager {
         file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
             "RewriteCond %{HTTP_HOST} !=localhost\n" .
             "RewriteCond %{HTTPS} !=on\n" .
-            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
+            "RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
+            "RewriteCond %{HTTP_HOST} !^www\.\n" .
+            "RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
             "RewriteCond %{REQUEST_URI} !^/index.php\n" .
             "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
             "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .

@@ -166,7 +166,7 @@ abstract class FrontendVisual {
 
     protected function getBaseUrl(): string {
         $baseUrl = 'https://';
-        $baseUrl .= str_replace('www.', '', $_SERVER['HTTP_HOST']);
+        $baseUrl .= $_SERVER['HTTP_HOST'];
         return $baseUrl;
     }
 
