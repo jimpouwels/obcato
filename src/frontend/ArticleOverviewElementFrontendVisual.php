@@ -6,16 +6,20 @@ use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\elements\article_overview_element\ArticleOverviewElement;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\service\ArticleInteractor;
+use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 
     private ImageDao $imageDao;
+    private ArticleService $articleService;
 
     public function __construct(Page $page, ?Article $article, ArticleOverviewElement $articleOverviewElement) {
         parent::__construct($page, $article, $articleOverviewElement);
         $this->imageDao = ImageDaoMysql::getInstance();
+        $this->articleService = ArticleInteractor::getInstance();
     }
 
     public function loadElement(): void {
@@ -37,6 +41,14 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $articleData["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
             $articleData["sort_date"] = DateUtility::mysqlDateToString($article->getSortDate(), '-');
             $articleData["image"] = $this->getArticleImage($article);
+
+            $terms = $this->articleService->getTermsForArticle($article);
+            $termsData = array();
+            foreach ($terms as $term) {
+                $termsData[] = $term->getName();
+            }
+            $articleData["terms"] = $termsData;
+
             $articlesData[] = $articleData;
         }
         return $articlesData;
