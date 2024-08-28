@@ -277,6 +277,10 @@
             <query>ALTER TABLE modules DROP COLUMN icon_url</query>
             <query>ALTER TABLE modules DROP COLUMN title_text_resource_identifier</query>
             <query>ALTER TABLE element_types DROP COLUMN icon_url</query>
+            <query>ALTER TABLE articles DROP CONSTRAINT articles_wallpaper_images</query>
+            <query>ALTER TABLE articles ADD CONSTRAINT articles_wallpaper_images FOREIGN KEY articles_wallpaper_images
+                (wallpaper_id) REFERENCES images (id) ON DELETE SET NULL ON UPDATE RESTRICT
+            </query>
         </queries>
     </version>
 </versions>
