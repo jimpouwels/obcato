@@ -76,6 +76,9 @@ class RequestHandler {
 
     private function loadImage(): void {
         $image = $this->getImageFromRequest();
+        if (!$image) {
+            $this->render404Page();
+        }
         if ($image->isPublished()) {
             if ($image->getExtension() == "jpg") {
                 header("Content-Type: image/jpeg");
@@ -90,7 +93,7 @@ class RequestHandler {
         }
     }
 
-    private function getImageFromRequest(): Image {
+    private function getImageFromRequest(): ?Image {
         return $this->imageDao->getImage($_GET["image"]);
     }
 
