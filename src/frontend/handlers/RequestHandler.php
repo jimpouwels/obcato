@@ -34,6 +34,9 @@ class RequestHandler {
     }
 
     public function handleRequest(): void {
+        if (str_contains($_SERVER['HTTP_HOST'], "www.www")) {
+            $this->render404Page();
+        }
         if ($this->isSitemapRequest()) {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');

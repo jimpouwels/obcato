@@ -1,0 +1,6 @@
+# GENERAL
+separator_element_label: Scheider
+separator_element_scope_label: Scheider Element
+
+# EDITOR
+separator_element_editor_title: Title
