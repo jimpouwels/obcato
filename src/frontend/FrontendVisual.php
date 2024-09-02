@@ -6,6 +6,8 @@ use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\core\model\Link;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
+use Obcato\Core\database\dao\ElementDao;
+use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\LinkDao;
 use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
@@ -34,6 +36,7 @@ abstract class FrontendVisual {
     private TemplateService $templateService;
     private ?Page $page;
     private ?Article $article;
+    private ElementDao $elementDao;
 
     public function __construct(?Page $page, ?Article $article) {
         $this->linkDao = LinkDaoMysql::getInstance();
@@ -45,6 +48,7 @@ abstract class FrontendVisual {
         $this->templateEngine = TemplateEngine::getInstance();
         $this->templateData = $this->createChildData();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function render(array &$parentData = null): string {
@@ -78,6 +82,27 @@ abstract class FrontendVisual {
 
     protected function getTemplateEngine(): TemplateEngine {
         return $this->templateEngine;
+    }
+
+    protected function renderElementHolderContent(ElementHolder $elementHolder): array {
+        $elementGroups = array();
+        $elementGroup = array();
+        foreach ($elementHolder->getElements() as $element) {
+            $elementType = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
+            if ($elementType == 'separator_element') {
+                $elementGroups[] = $elementGroup;
+                $elementGroup = array();
+                continue;
+            }
+            $elementData = array();
+            $elementData["type"] = $elementType;
+            if ($element->getTemplate()) {
+                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+            }
+            $elementGroup[] = $elementData;
+        }
+        $elementGroups[] = $elementGroup;
+        return $elementGroups;
     }
 
     protected function createChildData(): TemplateData {

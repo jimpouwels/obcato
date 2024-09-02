@@ -47,7 +47,7 @@ class ArticleVisual extends FrontendVisual {
         $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
         $data["image"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getImageId()));
         $data["wallpaper"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getWallpaperId()));
-        $data["elements"] = $this->renderElementHolderContent($this->getArticle());
+        $data["element_groups"] = $this->renderElementHolderContent($this->getArticle());
         $data["comments"] = $this->renderArticleComments($this->getArticle());
         $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
         foreach ($data as $key => $value) {
@@ -67,20 +67,6 @@ class ArticleVisual extends FrontendVisual {
             $imageData["url"] = $this->getImageUrl($image);
         }
         return $imageData;
-    }
-
-    private function renderElementHolderContent(ElementHolder $element_holder): array {
-        $elementsContents = array();
-        foreach ($element_holder->getElements() as $element) {
-            $elementData = array();
-            $elementType = $this->elementDao->getElementTypeForElement($element->getId());
-            $elementData["type"] = $elementType->getIdentifier();
-            if ($element->getTemplate()) {
-                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
-            }
-            $elementsContents[] = $elementData;
-        }
-        return $elementsContents;
     }
 
     private function renderArticleComments(Article $article): array {

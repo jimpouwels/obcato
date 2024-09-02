@@ -24,7 +24,6 @@ class PageVisual extends FrontendVisual {
     private BlockDao $blockDao;
     private ArticleDao $articleDao;
     private TemplateDao $templateDao;
-    private ElementDao $elementDao;
     private SettingsDao $settingsDao;
 
     public function __construct(Page $page, ?Article $article) {
@@ -33,7 +32,6 @@ class PageVisual extends FrontendVisual {
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
-        $this->elementDao = ElementDaoMysql::getInstance();
         $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
@@ -65,7 +63,7 @@ class PageVisual extends FrontendVisual {
 
     private function getPageContentAndMetaData(Page $page): array {
         $pageData = array();
-        $pageData["elements"] = $this->renderElementHolderContent($page);
+        $pageData["element_groups"] = $this->renderElementHolderContent($page);
         $pageData["blocks"] = $this->renderBlocks();
         $this->addPageMetaData($page, $pageData);
         return $pageData;
@@ -135,19 +133,6 @@ class PageVisual extends FrontendVisual {
         $articleHtml = $articleVisual->render($articleData);
         $articleData["to_string"] = $articleHtml;
         return $articleData;
-    }
-
-    private function renderElementHolderContent(ElementHolder $elementHolder): array {
-        $elementsContent = array();
-        foreach ($elementHolder->getElements() as $element) {
-            $elementData = array();
-            $elementData["type"] = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
-            if ($element->getTemplate()) {
-                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
-            }
-            $elementsContent[] = $elementData;
-        }
-        return $elementsContent;
     }
 
     private function renderCrumbPath(): array {

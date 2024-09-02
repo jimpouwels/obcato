@@ -27,18 +27,10 @@ class BlockVisual extends FrontendVisual {
     public function loadVisual(?array &$data): void {
         $this->assign('id', $this->block->getId());
         $this->assign('title', $this->block->getTitle());
-        $this->assign('elements', $this->renderElements());
+        $this->assign('element_groups', $this->renderElementHolderContent($this->block));
     }
 
     public function getPresentable(): ?Presentable {
         return $this->block;
-    }
-
-    private function renderElements(): array {
-        $elementsContent = array();
-        foreach ($this->block->getElements() as $element) {
-            $elementsContent[] = $element->getFrontendVisual($this->getPage(), null)->render();
-        }
-        return $elementsContent;
     }
 }
