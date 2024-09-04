@@ -281,7 +281,6 @@
             <query>ALTER TABLE articles ADD CONSTRAINT articles_wallpaper_images FOREIGN KEY articles_wallpaper_images
                 (wallpaper_id) REFERENCES images (id) ON DELETE SET NULL ON UPDATE RESTRICT
             </query>
-
             <query>CREATE TABLE separator_elements_metadata (id int(10) unsigned NOT NULL AUTO_INCREMENT, title
                 varchar(255)
                 DEFAULT NULL, element_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY separator_element_metadata_to_element
@@ -294,6 +293,7 @@
             <query>INSERT INTO element_types VALUES (12
                 ,'SeparatorElement', 'SeparatorElement.php', 20,'separator_element',1)
             </query>
+            <query>ALTER TABLE links MODIFY target_address TEXT</query>
         </queries>
     </version>
 </versions>
