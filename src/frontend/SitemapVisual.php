@@ -36,7 +36,7 @@ class SitemapVisual extends FrontendVisual {
     private function renderPageUrls(): array {
         $pageUrls = array();
         foreach ($this->pageDao->getAllPages() as $page) {
-            if (!$page->getIncludeInSearchEngine()) {
+            if (!$page->getIncludeInSearchEngine() || !$page->isPublished()) {
                 continue;
             }
             $pageUrl = array();
@@ -50,6 +50,9 @@ class SitemapVisual extends FrontendVisual {
     private function renderArticleUrls(): array {
         $articleUrls = array();
         foreach ($this->articleDao->getAllArticles() as $article) {
+            if (!$article->isPublished()) {
+                continue;
+            }
             $articleUrl = array();
             $articleUrl['url'] = $this->getArticleUrl($article, true);
             $articleUrl['last_modified'] = date_format($article->getLastModified(), 'Y-m-d');
