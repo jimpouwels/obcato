@@ -31,7 +31,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         $articles = $this->getElement()->getArticles();
         $articlesData = array();
         foreach ($articles as $article) {
-            if (!$this->isPublished($article) || $this->getArticle()->getId() == $article->getId()) continue;
+            if (!$this->isPublished($article) || $this->getArticle()?->getId() == $article->getId()) continue;
             $articleData = array();
             $articleData["id"] = $article->getId();
             $articleData["title"] = $article->getTitle();
