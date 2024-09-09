@@ -151,7 +151,7 @@ class FriendlyUrlManager {
             $articlePartOfUrl = '/' . implode('/', $subArray);
             $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($articlePartOfUrl);
             $article = $this->articleDao->getArticleByElementHolderId($elementHolderId);
-            if ($article) {
+            if ($article && $article->isPublished()) {
                 $matchedUrl = $articlePartOfUrl;
                 break;
             }
