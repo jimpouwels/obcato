@@ -103,8 +103,7 @@ abstract class FrontendVisual {
             $elementData["type"] = $elementType;
             if ($element->getTemplate()) {
                 $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle());
-                $elementVisual->load($elementData);
-                $elementData["to_string"] = $elementVisual->render();
+                $elementData["to_string"] = $elementVisual->render($elementData);
             }
             $elementGroup[] = $elementData;
         }
