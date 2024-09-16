@@ -2,11 +2,8 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
@@ -24,7 +21,6 @@ class ArticleVisual extends FrontendVisual {
     private WebformDao $webformDao;
     private ArticleDao $articleDao;
     private ImageDao $imageDao;
-    private ElementDao $elementDao;
 
     public function __construct(Page $page, Article $article) {
         parent::__construct($page, $article);
@@ -32,7 +28,6 @@ class ArticleVisual extends FrontendVisual {
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
-        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -47,12 +42,9 @@ class ArticleVisual extends FrontendVisual {
         $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
         $data["image"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getImageId()));
         $data["wallpaper"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getWallpaperId()));
-        $data["element_groups"] = $this->renderElementHolderContent($this->getArticle());
+        $this->renderElementHolderContent($this->getArticle(), $data);
         $data["comments"] = $this->renderArticleComments($this->getArticle());
         $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
-        foreach ($data as $key => $value) {
-            $this->assign($key, $value);
-        }
     }
 
     public function getPresentable(): ?Presentable {

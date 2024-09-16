@@ -2,13 +2,10 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\BlockDao;
 use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
@@ -53,6 +50,7 @@ class PageVisual extends FrontendVisual {
         } else {
             $this->assign("article", null);
         }
+        $this->assign("blocks", $this->renderBlocks());
         $this->assign("canonical_url", $this->getCanonicalUrl());
         $this->assign("root_page", $this->getPageMetaData($this->pageService->getRootPage()));
     }
@@ -63,8 +61,7 @@ class PageVisual extends FrontendVisual {
 
     private function getPageContentAndMetaData(Page $page): array {
         $pageData = array();
-        $pageData["element_groups"] = $this->renderElementHolderContent($page);
-        $pageData["blocks"] = $this->renderBlocks();
+        $this->renderElementHolderContent($page, $pageData);
         $this->addPageMetaData($page, $pageData);
         return $pageData;
     }
@@ -123,8 +120,12 @@ class PageVisual extends FrontendVisual {
         return $blocks;
     }
 
-    private function renderBlock($block): string {
-        return (new BlockVisual($block, $this->getPage()))->render();
+    private function renderBlock($block): array {
+        $blockData = array();
+        $blockVisual = new BlockVisual($block, $this->getPage());
+        $blockHtml = $blockVisual->render($blockData);
+        $blockData["to_string"] = $blockHtml;
+        return $blockData;
     }
 
     private function renderArticle(): array {

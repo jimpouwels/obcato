@@ -12,9 +12,9 @@ class FormElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $formElement);
     }
 
-    public function loadElement(): void {
+    public function loadElement(array &$data): void {
         $formVisual = new FormFrontendVisual($this->getPage(), $this->getArticle(), $this->getElement()->getWebForm());
-        $this->assign('webform', $formVisual->render());
+        $data['webform'] = $formVisual->render();
     }
 
 }

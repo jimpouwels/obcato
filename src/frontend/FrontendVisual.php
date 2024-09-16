@@ -51,12 +51,12 @@ abstract class FrontendVisual {
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 
-    public function render(array &$parentData = null): string {
+    public function render(array &$parentData = array()): string {
         $this->load($parentData);
         return $this->templateEngine->fetch($this->getTemplateFilename(), $this->templateData);
     }
 
-    public function load(?array &$parentData): void {
+    public function load(array &$parentData): void {
         $presentable = $this->getPresentable();
         $templateVars = array();
 
@@ -72,9 +72,14 @@ abstract class FrontendVisual {
         }
         $this->assign("var", $templateVars);
         $this->loadVisual($parentData);
+        if ($parentData) {
+            foreach ($parentData as $key => $value) {
+                $this->assign($key, $value);
+            }
+        }
     }
 
-    abstract function loadVisual(?array &$data): void;
+    abstract function loadVisual(array &$data): void;
 
     abstract function getPresentable(): ?Presentable;
 
@@ -84,7 +89,7 @@ abstract class FrontendVisual {
         return $this->templateEngine;
     }
 
-    protected function renderElementHolderContent(ElementHolder $elementHolder): array {
+    protected function renderElementHolderContent(ElementHolder $elementHolder, ?array &$data): void {
         $elementGroups = array();
         $elementGroup = array();
         foreach ($elementHolder->getElements() as $element) {
@@ -97,12 +102,14 @@ abstract class FrontendVisual {
             $elementData = array();
             $elementData["type"] = $elementType;
             if ($element->getTemplate()) {
-                $elementData["to_string"] = $element->getFrontendVisual($this->getPage(), $this->getArticle())->render();
+                $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle());
+                $elementVisual->load($elementData);
+                $elementData["to_string"] = $elementVisual->render();
             }
             $elementGroup[] = $elementData;
         }
         $elementGroups[] = $elementGroup;
-        return $elementGroups;
+        $data['element_groups'] = $elementGroups;
     }
 
     protected function createChildData(): TemplateData {
@@ -117,8 +124,8 @@ abstract class FrontendVisual {
         $this->templateEngine->assign($key, $value);
     }
 
-    protected function fetch(string $templateFilename): string {
-        return $this->templateEngine->fetch($templateFilename, $this->templateData);
+    protected function fetch(string $templateFilename, ?TemplateData $templateData = null): string {
+        return $this->templateEngine->fetch($templateFilename, $templateData == null ? $this->templateData : $templateData);
     }
 
     protected function toHtml(?string $value, ElementHolder $elementHolder): string {

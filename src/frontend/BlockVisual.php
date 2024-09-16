@@ -25,9 +25,9 @@ class BlockVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign('id', $this->block->getId());
-        $this->assign('title', $this->block->getTitle());
-        $this->assign('element_groups', $this->renderElementHolderContent($this->block));
+        $data['id'] = $this->block->getId();
+        $data['title'] =$this->block->getTitle();
+        $this->renderElementHolderContent($this->block, $data);
     }
 
     public function getPresentable(): ?Presentable {

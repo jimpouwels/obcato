@@ -33,14 +33,19 @@ abstract class ElementFrontendVisual extends FrontendVisual {
         return FRONTEND_TEMPLATE_DIR . "/" . $this->templateDao->getTemplateFile($this->getElement()->getTemplate()->getTemplateFileId())->getFileName();
     }
 
-    abstract function loadElement(): void;
+    abstract function loadElement(array &$data): void;
 
-    public function loadVisual(?array &$data): void {
+    public function loadVisual(array &$data): void {
         $this->assign("toc_reference", $this->toAnchorValue($this->element->getTitle()));
         $this->assign("include_in_table_of_contents", $this->element->includeInTableOfContents());
         $this->assign("type", $this->elementDao->getElementTypeForElement($this->element->getId())->getIdentifier());
 
-        $this->loadElement();
+        $this->loadElement($data);
+        if ($data) {
+            foreach ($data as $key => $value) {
+                $this->assign($key, $value);
+            }
+        }
         $this->assign("element_html", $this->fetch($this->getElementTemplateFilename()));
     }
 

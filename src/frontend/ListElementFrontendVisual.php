@@ -13,9 +13,9 @@ class ListElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $listElement);
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-        $this->assign("items", $this->renderListItems($this->getElementHolder()));
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["items"] = $this->renderListItems($this->getElementHolder());
     }
 
     private function renderListItems(ElementHolder $element_holder): array {

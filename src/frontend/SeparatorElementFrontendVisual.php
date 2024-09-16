@@ -12,7 +12,7 @@ class SeparatorElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $separatorElement);
     }
 
-    public function loadElement(): void {
+    public function loadElement(array &$data): void {
     }
 
 }

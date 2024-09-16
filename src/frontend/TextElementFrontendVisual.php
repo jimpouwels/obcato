@@ -12,8 +12,8 @@ class TextElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $element);
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-        $this->assign("text", $this->toHtml($this->getElement()->getText(), $this->getElementHolder()));
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["text"] = $this->toHtml($this->getElement()->getText(), $this->getElementHolder());
     }
 }

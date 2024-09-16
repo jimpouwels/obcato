@@ -22,9 +22,9 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         $this->articleService = ArticleInteractor::getInstance();
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-        $this->assign("articles", $this->getArticles());
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["articles"] = $this->getArticles();
     }
 
     private function getArticles(): array {

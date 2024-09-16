@@ -29,6 +29,7 @@ class WebsiteVisual extends FrontendVisual {
         }
         $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_mobile_device", $isMobileUserAgent);
+        $this->assignGlobal("base_url", $this->getBaseUrl());
         if ($this->getPage()->isPublished()) {
             $page_visual = new PageVisual($this->getPage(), $this->article);
             $this->assign("html", $page_visual->render());

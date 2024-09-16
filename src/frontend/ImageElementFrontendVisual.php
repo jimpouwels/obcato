@@ -12,15 +12,15 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $imageElement);
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->getElement()->getTitle());
-        $this->assign("img_title", $this->getElement()->getImage()?->getTitle());
-        $this->assign("img_alt_text", $this->getElement()->getImage()?->getAltText());
-        $this->assign("align", $this->getElement()->getAlign());
-        $this->assign("width", $this->getElement()->getWidth());
-        $this->assign("height", $this->getElement()->getHeight());
-        $this->assign("image_url", $this->createImageUrl());
-        $this->assign("extension", $this->getExtension());
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->getElement()->getTitle();
+        $data["img_title"] = $this->getElement()->getImage()?->getTitle();
+        $data["img_alt_text"] = $this->getElement()->getImage()?->getAltText();
+        $data["align"] = $this->getElement()->getAlign();
+        $data["width"] = $this->getElement()->getWidth();
+        $data["height"] = $this->getElement()->getHeight();
+        $data["image_url"] = $this->createImageUrl();
+        $data["extension"] = $this->getExtension();
     }
 
     private function createImageUrl(): string {
@@ -29,6 +29,6 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
 
     private function getExtension(): string {
         $image = $this->getElement()->getImage();
-        return $image ? $image?->getExtension() : "";
+        return $image ? $image->getExtension() : "";
     }
 }

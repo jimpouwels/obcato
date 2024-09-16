@@ -12,9 +12,9 @@ class TableOfContentsElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $element);
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->getElement()->getTitle());
-        $this->assign("items", $this->renderItems());
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->getElement()->getTitle();
+        $data["items"] = $this->renderItems();
     }
 
     public function renderItems(): array {

@@ -12,9 +12,9 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
         parent::__construct($page, $article, $photoAlbumElement);
     }
 
-    public function loadElement(): void {
-        $this->assign("title", $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder()));
-        $this->assign("images", $this->getImages());
+    public function loadElement(array &$data): void {
+        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["images"] = $this->getImages();
     }
 
     private function getImages(): array {
