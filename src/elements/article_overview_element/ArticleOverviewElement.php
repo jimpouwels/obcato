@@ -3,20 +3,17 @@
 namespace Obcato\Core\elements\article_overview_element;
 
 use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\elements\article_overview_element\visuals\ArticleOverviewElementEditor;
 use Obcato\Core\elements\article_overview_element\visuals\ArticleOverviewElementStatics;
 use Obcato\Core\frontend\ArticleOverviewElementFrontendVisual;
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\model\ArticleTerm;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\utilities\DateUtility;
-use Obcato\Core\view\TemplateEngine;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Visual;
 
@@ -125,8 +122,8 @@ class ArticleOverviewElement extends Element {
         return new ArticleOverviewElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
-        return new ArticleOverviewElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual {
+        return new ArticleOverviewElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

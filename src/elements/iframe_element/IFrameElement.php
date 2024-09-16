@@ -9,6 +9,7 @@ use Obcato\Core\elements\iframe_element\visuals\IFrameElementEditor;
 use Obcato\Core\elements\iframe_element\visuals\IFrameElementStatics;
 use Obcato\Core\frontend\IFrameElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\TemplateEngine;
@@ -57,8 +58,8 @@ class IFrameElement extends Element {
         return new IFrameElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): IFrameElementFrontendVisual {
-        return new IFrameElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): IFrameElementFrontendVisual {
+        return new IFrameElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

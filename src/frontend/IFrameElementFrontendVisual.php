@@ -4,12 +4,13 @@ namespace Obcato\Core\frontend;
 
 use Obcato\Core\elements\iframe_element\IFrameElement;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 
 class IFrameElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, IFrameElement $iframeElement) {
-        parent::__construct($page, $article, $iframeElement);
+    public function __construct(Page $page, ?Article $article, ?Block $block, IFrameElement $iframeElement) {
+        parent::__construct($page, $article, $block, $iframeElement);
     }
 
     public function loadElement(array &$data): void {

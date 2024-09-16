@@ -12,6 +12,7 @@ use Obcato\Core\elements\form_element\visuals\FormElementStatics;
 use Obcato\Core\frontend\ElementFrontendVisual;
 use Obcato\Core\frontend\FormElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\request_handlers\HttpRequestHandler;
@@ -43,8 +44,8 @@ class FormElement extends Element {
         return new FormElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): ElementFrontendVisual {
-        return new FormElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): ElementFrontendVisual {
+        return new FormElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

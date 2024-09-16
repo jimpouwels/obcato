@@ -8,6 +8,7 @@ use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
 use Obcato\Core\database\dao\TemplateDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
 use const Obcato\core\FRONTEND_TEMPLATE_DIR;
@@ -18,8 +19,8 @@ abstract class ElementFrontendVisual extends FrontendVisual {
     private TemplateDao $templateDao;
     private ElementDao $elementDao;
 
-    public function __construct(Page $page, ?Article $article, Element $element) {
-        parent::__construct($page, $article);
+    public function __construct(Page $page, ?Article $article, ?Block $block, Element $element) {
+        parent::__construct($page, $article, $block);
         $this->element = $element;
         $this->templateDao = TemplateDaoMysql::getInstance();
         $this->elementDao = ElementDaoMysql::getInstance();

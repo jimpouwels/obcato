@@ -8,6 +8,7 @@ use Obcato\Core\elements\article_overview_element\ArticleOverviewElement;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\service\ArticleInteractor;
 use Obcato\Core\modules\articles\service\ArticleService;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
 
@@ -16,8 +17,8 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     private ImageDao $imageDao;
     private ArticleService $articleService;
 
-    public function __construct(Page $page, ?Article $article, ArticleOverviewElement $articleOverviewElement) {
-        parent::__construct($page, $article, $articleOverviewElement);
+    public function __construct(Page $page, ?Article $article, ?Block $block, ArticleOverviewElement $articleOverviewElement) {
+        parent::__construct($page, $article, $block, $articleOverviewElement);
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->articleService = ArticleInteractor::getInstance();
     }

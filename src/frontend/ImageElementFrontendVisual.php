@@ -4,12 +4,13 @@ namespace Obcato\Core\frontend;
 
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 
 class ImageElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, ImageElement $imageElement) {
-        parent::__construct($page, $article, $imageElement);
+    public function __construct(Page $page, ?Article $article, ?Block $block, ImageElement $imageElement) {
+        parent::__construct($page, $article, $block, $imageElement);
     }
 
     public function loadElement(array &$data): void {

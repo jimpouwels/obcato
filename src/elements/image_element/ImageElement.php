@@ -10,6 +10,7 @@ use Obcato\Core\elements\image_element\visuals\ImageElementEditor;
 use Obcato\Core\elements\image_element\visuals\ImageElementStatics;
 use Obcato\Core\frontend\ImageElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
@@ -76,8 +77,8 @@ class ImageElement extends Element {
         return new ImageElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): ImageElementFrontendVisual {
-        return new ImageElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): ImageElementFrontendVisual {
+        return new ImageElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

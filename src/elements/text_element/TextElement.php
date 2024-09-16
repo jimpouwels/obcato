@@ -10,6 +10,7 @@ use Obcato\Core\elements\text_element\visuals\TextElementStatics;
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\frontend\TextElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\TemplateEngine;
@@ -40,8 +41,8 @@ class TextElement extends Element {
         return new TextElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
-        return new TextElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual {
+        return new TextElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

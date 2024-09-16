@@ -9,6 +9,7 @@ use Obcato\Core\elements\photo_album_element\visuals\PhotoAlbumElementStatics;
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\frontend\PhotoAlbumElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\images\model\ImageLabel;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
@@ -63,8 +64,8 @@ class PhotoAlbumElement extends Element {
         return new PhotoAlbumElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
-        return new PhotoAlbumElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual {
+        return new PhotoAlbumElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

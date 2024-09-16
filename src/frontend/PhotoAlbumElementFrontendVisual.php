@@ -4,12 +4,13 @@ namespace Obcato\Core\frontend;
 
 use Obcato\Core\elements\photo_album_element\PhotoAlbumElement;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 
 class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
 
-    public function __construct(Page $page, ?Article $article, PhotoAlbumElement $photoAlbumElement) {
-        parent::__construct($page, $article, $photoAlbumElement);
+    public function __construct(Page $page, ?Article $article, ?Block $block, PhotoAlbumElement $photoAlbumElement) {
+        parent::__construct($page, $article, $block, $photoAlbumElement);
     }
 
     public function loadElement(array &$data): void {

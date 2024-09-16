@@ -12,6 +12,7 @@ use Obcato\Core\database\dao\LinkDao;
 use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
@@ -36,15 +37,17 @@ abstract class FrontendVisual {
     private TemplateService $templateService;
     private ?Page $page;
     private ?Article $article;
+    private ?Block $block;
     private ElementDao $elementDao;
 
-    public function __construct(?Page $page, ?Article $article) {
+    public function __construct(?Page $page, ?Article $article, ?Block $block = null) {
         $this->linkDao = LinkDaoMysql::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->templateService = TemplateInteractor::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->page = $page;
         $this->article = $article;
+        $this->block = $block;
         $this->templateEngine = TemplateEngine::getInstance();
         $this->templateData = $this->createChildData();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
@@ -102,7 +105,7 @@ abstract class FrontendVisual {
             $elementData = array();
             $elementData["type"] = $elementType;
             if ($element->getTemplate()) {
-                $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle());
+                $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
                 $elementData["to_string"] = $elementVisual->render($elementData);
             }
             $elementGroup[] = $elementData;
@@ -146,11 +149,18 @@ abstract class FrontendVisual {
         return $this->page;
     }
 
+    protected function getBlock(): ?Block {
+        return $this->block;
+    }
+
     protected function getArticle(): ?Article {
         return $this->article;
     }
 
     protected function getElementHolder(): ElementHolder {
+        if ($this->block) {
+            return $this->block;
+        }
         return !is_null($this->article) ? $this->article : $this->page;
     }
 

@@ -10,6 +10,7 @@ use Obcato\Core\elements\table_of_contents_element\visuals\TableOfContentsElemen
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\frontend\TableOfContentsElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\TemplateEngine;
@@ -30,8 +31,8 @@ class TableOfContentsElement extends Element {
         return new TableOfContentsElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
-        return new TableOfContentsElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual {
+        return new TableOfContentsElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

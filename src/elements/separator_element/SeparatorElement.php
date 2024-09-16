@@ -7,6 +7,7 @@ use Obcato\Core\elements\separator_element\visuals\SeparatorElementEditor;
 use Obcato\Core\elements\separator_element\visuals\SeparatorElementStatics;
 use Obcato\Core\frontend\SeparatorElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\views\ElementVisual;
@@ -54,8 +55,8 @@ class SeparatorElement extends Element {
         return new SeparatorElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): SeparatorElementFrontendVisual {
-        return new SeparatorElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): SeparatorElementFrontendVisual {
+        return new SeparatorElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

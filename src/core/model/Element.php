@@ -4,6 +4,7 @@ namespace Obcato\Core\core\model;
 
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\request_handlers\HttpRequestHandler;
@@ -88,7 +89,7 @@ abstract class Element extends Presentable {
 
     public abstract function getBackendVisual(): ElementVisual;
 
-    public abstract function getFrontendVisual(Page $page, ?Article $article): FrontendVisual;
+    public abstract function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual;
 
     public abstract function getRequestHandler(): HttpRequestHandler;
 

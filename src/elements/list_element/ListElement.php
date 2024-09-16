@@ -8,6 +8,7 @@ use Obcato\Core\elements\list_element\visuals\ListElementStatics;
 use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\frontend\ListElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\views\ElementVisual;
@@ -50,8 +51,8 @@ class ListElement extends Element {
         return new ListElementEditor($this);
     }
 
-    public function getFrontendVisual(Page $page, ?Article $article): FrontendVisual {
-        return new ListElementFrontendVisual($page, $article, $this);
+    public function getFrontendVisual(Page $page, ?Article $article, ?Block $block = null): FrontendVisual {
+        return new ListElementFrontendVisual($page, $article, $block, $this);
     }
 
     public function getRequestHandler(): HttpRequestHandler {

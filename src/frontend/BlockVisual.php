@@ -15,7 +15,7 @@ class BlockVisual extends FrontendVisual {
     private TemplateDao $templateDao;
 
     public function __construct(Block $block, Page $page) {
-        parent::__construct($page, null);
+        parent::__construct($page, null, $block);
         $this->block = $block;
         $this->templateDao = TemplateDaoMysql::getInstance();
     }
