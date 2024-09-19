@@ -13,11 +13,11 @@ use const Obcato\CMS_ROOT;
 class RedirectFormHandler extends FormHandler {
 
     public static string $TYPE = 'redirect_form_handler';
-    private PageDao $_page_dao;
+    private PageDao $pageDao;
 
     public function __construct() {
         parent::__construct();
-        $this->_page_dao = PageDaoMysql::getInstance();
+        $this->pageDao = PageDaoMysql::getInstance();
     }
 
     public function getRequiredProperties(): array {
@@ -36,9 +36,9 @@ class RedirectFormHandler extends FormHandler {
     }
 
     public function handle(array $fields, Page $page, ?Article $article): void {
-        $page_id = $this->getProperty('page_id');
-        if ($page_id) {
-            $page = $this->_page_dao->getPage($page_id);
+        $pageId = $this->getProperty('page_id');
+        if ($pageId) {
+            $page = $this->pageDao->getPage($pageId);
             if ($page) {
                 $this->redirectTo($this->getPageUrl($page));
             }

@@ -17,15 +17,15 @@ use Obcato\Core\view\views\TextField;
 
 class HandlersEditor extends Panel {
 
-    private WebformHandlerManager $_webform_handler_manager;
-    private WebForm $_webform;
-    private WebformDao $_webform_dao;
+    private WebformHandlerManager $webformHandlerManager;
+    private WebForm $webform;
+    private WebformDao $webformDao;
 
     public function __construct(WebForm $webform) {
         parent::__construct('webforms_handlers_editor_title');
-        $this->_webform = $webform;
-        $this->_webform_handler_manager = WebformHandlerManager::getInstance();
-        $this->_webform_dao = WebformDaoMysql::getInstance();
+        $this->webform = $webform;
+        $this->webformHandlerManager = WebformHandlerManager::getInstance();
+        $this->webformDao = WebformDaoMysql::getInstance();
     }
 
     public function getPanelContentTemplate(): string {
@@ -38,57 +38,57 @@ class HandlersEditor extends Panel {
     }
 
     private function renderHandlerButtons(): array {
-        $handler_buttons = array();
-        foreach ($this->_webform_handler_manager->getAllHandlers() as $handler) {
-            $handler_button = new Button("webforms_add_{$handler->getType()}_button", "{$handler->getNameResourceIdentifier()}_add_button", "addFormHandler('{$handler->getType()}');");
-            $handler_buttons[] = $handler_button->render();
+        $handlerButtons = array();
+        foreach ($this->webformHandlerManager->getAllHandlers() as $handler) {
+            $handlerButton = new Button("webforms_add_{$handler->getType()}_button", "{$handler->getNameResourceIdentifier()}_add_button", "addFormHandler('{$handler->getType()}');");
+            $handlerButtons[] = $handlerButton->render();
         }
-        return $handler_buttons;
+        return $handlerButtons;
     }
 
     private function renderSelectedHandlers(): array {
         $handlers = array();
-        $found_handler_instances = $this->_webform_dao->getWebFormHandlersFor($this->_webform);
-        foreach ($found_handler_instances as $found_handler_instance) {
-            $handler_data = array();
-            $handler = $this->_webform_handler_manager->getHandler($found_handler_instance->getType());
-            $handler_data['id'] = $found_handler_instance->getId();
-            $handler_data['type'] = $handler->getType();
-            $handler_data['name_resource_identifier'] = $handler->getNameResourceIdentifier();
-            $handler_data['properties'] = $this->renderHandlerProperties($handler, $found_handler_instance);
-            $handlers[] = $handler_data;
+        $foundHandlerInstances = $this->webformDao->getWebFormHandlersFor($this->webform);
+        foreach ($foundHandlerInstances as $foundHandlerInstance) {
+            $handlerData = array();
+            $handler = $this->webformHandlerManager->getHandler($foundHandlerInstance->getType());
+            $handlerData['id'] = $foundHandlerInstance->getId();
+            $handlerData['type'] = $handler->getType();
+            $handlerData['name_resource_identifier'] = $handler->getNameResourceIdentifier();
+            $handlerData['properties'] = $this->renderHandlerProperties($handler, $foundHandlerInstance);
+            $handlers[] = $handlerData;
         }
         return $handlers;
     }
 
-    private function renderHandlerProperties(FormHandler $form_handler, WebFormHandlerInstance $webform_handler_instance): array {
-        $handler_properties = array();
+    private function renderHandlerProperties(FormHandler $form_handler, WebFormHandlerInstance $webformHandlerInstance): array {
+        $handlerProperties = array();
 
         foreach ($form_handler->getRequiredProperties() as $property) {
-            $handler_property = array();
-            $existing_property = $webform_handler_instance->getProperty($property->getName());
-            if (!$existing_property) {
-                $existing_property = new WebformHandlerProperty();
-                $existing_property->setName($property->getName());
-                $existing_property->setType($property->getType());
-                $this->_webform_dao->storeProperty($webform_handler_instance->getId(), $existing_property);
+            $handlerProperty = array();
+            $existingProperty = $webformHandlerInstance->getProperty($property->getName());
+            if (!$existingProperty) {
+                $existingProperty = new WebformHandlerProperty();
+                $existingProperty->setName($property->getName());
+                $existingProperty->setType($property->getType());
+                $this->webformDao->storeProperty($webformHandlerInstance->getId(), $existingProperty);
             }
-            $property_field = null;
+            $propertyField = null;
             if ($property->getEditor()) {
-                $property_field = $property->getEditor();
-                $property_field->setCurrentValue($existing_property);
+                $propertyField = $property->getEditor();
+                $propertyField->setCurrentValue($existingProperty);
             } else {
                 if ($property->getType() == 'textfield') {
-                    $property_field = new TextField("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                    $propertyField = new TextField("handler_property_{$existingProperty->getId()}_field", $existingProperty->getName(), $existingProperty->getValue(), true, false, null);
                 } else {
-                    $property_field = new TextArea("handler_property_{$existing_property->getId()}_field", $existing_property->getName(), $existing_property->getValue(), true, false, null);
+                    $propertyField = new TextArea("handler_property_{$existingProperty->getId()}_field", $existingProperty->getName(), $existingProperty->getValue(), true, false, null);
                 }
             }
-            $handler_property['id'] = $existing_property->getId();
-            $handler_property['field'] = $property_field->render();
-            $handler_properties[] = $handler_property;
+            $handlerProperty['id'] = $existingProperty->getId();
+            $handlerProperty['field'] = $propertyField->render();
+            $handlerProperties[] = $handlerProperty;
         }
 
-        return $handler_properties;
+        return $handlerProperties;
     }
 }

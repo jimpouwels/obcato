@@ -45,13 +45,16 @@ class FormRequestHandler {
                 return;
             }
 
+            FormStatus::setSubmittedForm($webform->getId());
+
             $handlerInstances = $this->webformDao->getWebFormHandlersFor($webform);
-            foreach ($handlerInstances as $webform_handler_instance) {
-                $webformHandler = $this->webformHandlerManager->getHandler($webform_handler_instance->getType());
-                $webformHandler->handlePost($webform_handler_instance, $fields, $page, $article);
+            foreach ($handlerInstances as $webformHandlerInstance) {
+                $webformHandler = $this->webformHandlerManager->getHandler($webformHandlerInstance->getType());
+                $webformHandler->handlePost($webformHandlerInstance, $fields, $page, $article);
             }
 
-            FormStatus::setSubmittedForm($webform->getId());
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
         }
     }
 
