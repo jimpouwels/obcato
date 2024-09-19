@@ -25,6 +25,7 @@ use Obcato\Core\utilities\Arrays;
 use Obcato\Core\utilities\UrlHelper;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\TemplateEngine;
+use const Obcato\Core\FRONTEND_TEMPLATE_DIR;
 
 abstract class FrontendVisual {
 
@@ -56,7 +57,16 @@ abstract class FrontendVisual {
 
     public function render(array &$parentData = array()): string {
         $this->load($parentData);
-        return $this->templateEngine->fetch($this->getTemplateFilename(), $this->templateData);
+        $html = $this->templateEngine->fetch($this->getTemplateFilename(), $this->templateData);
+        $matches = null;
+        preg_match_all('/<include template="(.*)" \/>/', $html, $matches);
+
+        for ($i = 0; $i < count($matches[1]); $i++) {
+            $templateFile = $matches[1][$i];
+            $includeHtml = $this->templateEngine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $templateFile, $this->templateData);
+            $html = str_replace($matches[0][$i], $includeHtml, $html);
+        }
+        return $html;
     }
 
     public function load(array &$parentData): void {

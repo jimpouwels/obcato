@@ -86,6 +86,7 @@ class PageVisual extends FrontendVisual {
     private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren = true): void {
         $pageData["is_current_page"] = $this->getPage()->getId() == $page->getId();
         $pageData["title"] = $page->getTitle();
+        $pageData["id"] = $page->getId();
         $pageData["keywords"] = $page->getKeywords();
         $pageData["url"] = $this->getPageUrl($page);
         $pageData["is_homepage"] = $page->isHomepage();
