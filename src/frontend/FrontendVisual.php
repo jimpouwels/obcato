@@ -58,15 +58,7 @@ abstract class FrontendVisual {
     public function render(array &$parentData = array()): string {
         $this->load($parentData);
         $html = $this->templateEngine->fetch($this->getTemplateFilename(), $this->templateData);
-        $matches = null;
-        preg_match_all('/<include template="(.*)" \/>/', $html, $matches);
-
-        for ($i = 0; $i < count($matches[1]); $i++) {
-            $templateFile = $matches[1][$i];
-            $includeHtml = $this->templateEngine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $templateFile, $this->templateData);
-            $html = str_replace($matches[0][$i], $includeHtml, $html);
-        }
-        return $html;
+        return $this->replaceTemplateIncludes($html);
     }
 
     public function load(array &$parentData): void {
@@ -228,6 +220,18 @@ abstract class FrontendVisual {
         $anchorValue = str_replace(" ", "-", $anchorValue);
         $anchorValue = str_replace("--", "-", $anchorValue);
         return urlencode($anchorValue);
+    }
+
+    private function replaceTemplateIncludes(string $html): string {
+        $matches = null;
+        preg_match_all('/<include template="(.*)".*\/>/', $html, $matches);
+        for ($i = 0; $i < count($matches[1]); $i++) {
+            $templateFile = $matches[1][$i];
+            $includeHtml = $this->templateEngine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $templateFile, $this->templateData);
+            $html = str_replace($matches[0][$i], $includeHtml, $html);
+            $html = $this->replaceTemplateIncludes($html);
+        }
+        return $html;
     }
 
     private function createLinksInString(string $value, ElementHolder $elementHolder): string {
