@@ -227,7 +227,11 @@ abstract class FrontendVisual {
         preg_match_all('/<include template="(.*)".*\/>/', $html, $matches);
         for ($i = 0; $i < count($matches[1]); $i++) {
             $templateFile = $matches[1][$i];
-            $includeHtml = $this->templateEngine->fetch(FRONTEND_TEMPLATE_DIR . "/" . $templateFile, $this->templateData);
+            $templateContents = file_get_contents(FRONTEND_TEMPLATE_DIR . "/" . $templateFile);
+            if (str_ends_with($templateFile, '.js')) {
+                $templateContents = '{literal}' . $templateContents . '{/literal}';
+            }
+            $includeHtml = $this->templateEngine->fetch('string:' . $templateContents, $this->templateData);
             $html = str_replace($matches[0][$i], $includeHtml, $html);
             $html = $this->replaceTemplateIncludes($html);
         }
