@@ -65,7 +65,7 @@ abstract class FrontendVisual {
         $presentable = $this->getPresentable();
         $templateVars = array();
 
-        if ($presentable) {
+        if ($presentable && $presentable->getTemplate()) {
             $templateVarDefs = $this->templateService->getTemplateVarDefsByTemplate($presentable->getTemplate());
             foreach ($presentable->getTemplate()->getTemplateVars() as $templateVar) {
                 $varValue = $templateVar->getValue() ?: $this->getDefaultValueFor($templateVar, $templateVarDefs);
@@ -97,21 +97,38 @@ abstract class FrontendVisual {
     protected function renderElementHolderContent(ElementHolder $elementHolder, ?array &$data): void {
         $elementGroups = array();
         $elementGroup = array();
+
+        $previousSeparator = null;
         foreach ($elementHolder->getElements() as $element) {
             $elementType = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
             if ($elementType == 'separator_element') {
                 $elementGroups[] = $elementGroup;
                 $elementGroup = array();
-                continue;
             }
             $elementData = array();
             $elementData["type"] = $elementType;
-            $elementData["template"] = $element->getTemplate()->getName();
+            $elementData["template"] = $element->getTemplate()?->getName();
+            if ($elementType == 'separator_element') {
+                $elementData["is_closing"] = false;
+                $elementData["close_previous_separator"] = "";
+            }
+            if ($previousSeparator && $elementType == 'separator_element') {
+                $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
+                $closePrevious = array();
+                $closePrevious['is_closing'] = true;
+                $closePrevious['close_previous_separator'] = "";
+                $elementData["close_previous_separator"] = $previousVisual->render($closePrevious);
+            }
             if ($element->getTemplate()) {
                 $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
                 $elementData["to_string"] = $elementVisual->render($elementData);
+            } else {
+                $elementData["to_string"] = $elementData["close_previous_separator"];
             }
             $elementGroup[] = $elementData;
+            if ($elementType == 'separator_element') {
+                $previousSeparator = $element;
+            }
         }
         $elementGroups[] = $elementGroup;
         $data['element_groups'] = $elementGroups;

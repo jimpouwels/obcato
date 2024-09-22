@@ -46,7 +46,10 @@ abstract class ElementFrontendVisual extends FrontendVisual {
                 $this->assign($key, $value);
             }
         }
-        $this->assign("element_html", $this->fetch($this->getElementTemplateFilename()));
+        $this->assign("element_html", "");
+        if ($this->getElement()->getTemplate()) {
+            $this->assign("element_html", $this->fetch($this->getElementTemplateFilename()));
+        }
     }
 
     public function getPresentable(): ?Presentable {
