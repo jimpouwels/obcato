@@ -106,6 +106,12 @@ class RequestHandler {
     }
 
     private function renderPage(Page $page, ?Article $article): void {
+        if ($article && $article->getTargetPageId() != $page->getId()) {
+            $pageUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($article->getTargetPageId()));
+            $articleUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($article);
+            header("Location: $pageUrl$articleUrl");
+            exit();
+        }
         $website = new WebsiteVisual($page, $article);
         echo $website->render();
     }

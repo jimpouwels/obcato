@@ -22,4 +22,5 @@ class BlackBoard {
     public static function getBackendBaseUrlRaw(): string {
         return "/admin/index.php";
     }
+
 }

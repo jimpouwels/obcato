@@ -147,7 +147,7 @@ class PageVisual extends FrontendVisual {
             $parents = $this->pageService->getParents($this->getPage());
         }
         for ($i = 0; $i < count($parents); $i++) {
-            if ($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) {
+            if (($this->getPage()->getId() == $parents[$i]->getId() && !$this->getArticle()) || !$parents[$i]->getShowInNavigation()) {
                 continue;
             }
             $itemData = array();
