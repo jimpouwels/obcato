@@ -11,6 +11,7 @@ class SeparatorElementForm extends ElementForm {
     }
 
     public function loadFields(): void {
+        parent::loadFields();
     }
 
 }
