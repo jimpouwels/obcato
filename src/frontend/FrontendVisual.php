@@ -118,6 +118,7 @@ abstract class FrontendVisual {
                 $closePrevious['is_closing'] = true;
                 $closePrevious['close_previous_separator'] = "";
                 $elementData["close_previous_separator"] = $previousVisual->render($closePrevious);
+                $previousSeparator = null;
             }
             if ($element->getTemplate()) {
                 $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
@@ -129,6 +130,15 @@ abstract class FrontendVisual {
             if ($elementType == 'separator_element') {
                 $previousSeparator = $element;
             }
+        }
+        if ($previousSeparator && $previousSeparator->getTemplate()) {
+            $elementData = array();
+            $elementData["type"] = $this->elementDao->getElementTypeForElement($previousSeparator->getId())->getIdentifier();;
+            $elementData["template"] = $previousSeparator->getTemplate()?->getName();
+            $elementData['is_closing'] = true;
+            $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
+            $elementData["to_string"] = $previousVisual->render($elementData);
+            $elementGroup[] = $elementData;
         }
         $elementGroups[] = $elementGroup;
         $data['element_groups'] = $elementGroups;
