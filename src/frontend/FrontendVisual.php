@@ -124,7 +124,10 @@ abstract class FrontendVisual {
                 $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
                 $elementData["to_string"] = $elementVisual->render($elementData);
             } else {
-                $elementData["to_string"] = $elementData["close_previous_separator"];
+                $elementData["to_string"] = "";
+                if (isset($elementData["close_previous_separator"])) {
+                    $elementData["to_string"] = $elementData["close_previous_separator"];
+                }
             }
             $elementGroup[] = $elementData;
             if ($elementType == 'separator_element') {

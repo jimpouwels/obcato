@@ -136,7 +136,6 @@ $(document).ready(function () {
                 if ($order_field.length > 0) {
                     $order_field.attr("value", idString);
                 }
-                $(this).scrollIntoView();
             }
         });
     });
