@@ -23,6 +23,10 @@ interface ArticleService {
 
     public function getArticle(int $id): Article;
 
+    public function getArticleComments(int $articleId): array;
+
+    public function getChildArticleComments(int $commentId): array;
+
     public function deleteTargetPage(Page $page): void;
 
     public function setDefaultArticleTargetPage(int $pageId): void;

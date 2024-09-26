@@ -64,6 +64,14 @@ class ArticleInteractor implements ArticleService {
         return $this->articleDao->getArticle($id);
     }
 
+    public function getArticleComments(int $articleId): array {
+        return $this->articleDao->getArticleComments($articleId);
+    }
+
+    public function getChildArticleComments(int $commentId): array {
+        return $this->articleDao->getChildArticleComments($commentId);
+    }
+
     public function deleteTargetPage(Page $page): void {
         $this->articleDao->deleteTargetPage($page->getId());
     }

@@ -10,6 +10,7 @@ use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\LinkDao;
 use Obcato\Core\database\dao\LinkDaoMysql;
+use Obcato\Core\elements\separator_element\SeparatorElement;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
@@ -110,13 +111,11 @@ abstract class FrontendVisual {
             $elementData["template"] = $element->getTemplate()?->getName();
             if ($elementType == 'separator_element') {
                 $elementData["is_closing"] = false;
-                $elementData["close_previous_separator"] = "";
             }
             if ($previousSeparator && $elementType == 'separator_element') {
                 $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
                 $closePrevious = array();
                 $closePrevious['is_closing'] = true;
-                $closePrevious['close_previous_separator'] = "";
                 $elementData["close_previous_separator"] = $previousVisual->render($closePrevious);
                 $previousSeparator = null;
             }
@@ -135,12 +134,14 @@ abstract class FrontendVisual {
             }
         }
         if ($previousSeparator && $previousSeparator->getTemplate()) {
+            $separatorData = array();
+            $separatorData['is_closing'] = true;
+
             $elementData = array();
             $elementData["type"] = $this->elementDao->getElementTypeForElement($previousSeparator->getId())->getIdentifier();;
             $elementData["template"] = $previousSeparator->getTemplate()?->getName();
-            $elementData['is_closing'] = true;
             $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
-            $elementData["to_string"] = $previousVisual->render($elementData);
+            $elementData["to_string"] = $previousVisual->render($separatorData);
             $elementGroup[] = $elementData;
         }
         $elementGroups[] = $elementGroup;
