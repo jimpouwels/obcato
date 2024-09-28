@@ -47,7 +47,7 @@ class FriendlyUrlManager {
     private function createUrlForPage(Page $page): string {
         $url = '/' . $this->replaceSpecialCharacters($page->getUrlTitle() ?: $page->getNavigationTitle());
         $parentPage = $this->pageDao->getParent($page);
-        if ($parentPage != null && $parentPage->getId() != $this->pageDao->getRootPage()->getId()) {
+        if ($parentPage != null && $parentPage->getId() != $this->pageDao->getRootPage()->getId() && $page->getIncludeParentInUrl()) {
             $url = $this->createUrlForPage($this->pageDao->getParent($page)) . $url;
         }
         return $url;

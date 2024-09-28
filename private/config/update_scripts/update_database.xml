@@ -294,6 +294,7 @@
                 ,'SeparatorElement', 'SeparatorElement.php', 20,'separator_element',1)
             </query>
             <query>ALTER TABLE links MODIFY target_address TEXT</query>
+            <query>ALTER TABLE pages ADD COLUMN include_parent_in_url BOOL NOT NULL DEFAULT 1</query>
         </queries>
     </version>
 </versions>

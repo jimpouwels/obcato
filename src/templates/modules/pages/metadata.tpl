@@ -8,6 +8,7 @@
     {$navigation_title_field}
     {$url_title_field}
     {$url_field}
+    {$include_parent_in_url_field}
     {$keywords_field}
     {$description_field}
     {$published_field}

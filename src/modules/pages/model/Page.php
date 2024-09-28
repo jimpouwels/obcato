@@ -15,6 +15,7 @@ class Page extends ElementHolder {
     private ?int $parentId;
     private ?string $keywords = null;
     private bool $showInNavigation;
+    private bool $includeParentInUrl;
     private int $followUp;
     private bool $isHomepage;
 
@@ -38,6 +39,7 @@ class Page extends ElementHolder {
         $this->setIncludeInSearchEngine($row['include_in_searchindex'] == 1);
         $this->setFollowUp($row['follow_up']);
         $this->setIsHomepage($row['is_homepage'] == 1);
+        $this->setIncludeParentInUrl($row['include_parent_in_url'] == 1);
         parent::initFromDb($row);
     }
 
@@ -75,6 +77,14 @@ class Page extends ElementHolder {
 
     public function setNavigationTitle(string $navigationTitle): void {
         $this->navigationTitle = $navigationTitle;
+    }
+
+    public function setIncludeParentInUrl(bool $includeParentInUrl): void {
+        $this->includeParentInUrl = $includeParentInUrl;
+    }
+
+    public function getIncludeParentInUrl(): bool {
+        return $this->includeParentInUrl;
     }
 
     public function getParentId(): ?int {

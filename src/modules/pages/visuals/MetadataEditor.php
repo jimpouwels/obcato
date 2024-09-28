@@ -38,6 +38,7 @@ class MetadataEditor extends Panel {
         $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
         $keywordsField = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->currentPage->getKeywords(), false, false, "keywords_field");
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->friendUrlManager->getFriendlyUrlForElementHolder($this->currentPage), '');
+        $includeParentInUrlField = new SingleCheckbox("include_parent_in_url", $this->getTextResource('pages_edit_metadata_include_parent_in_url_field_label'), $this->currentPage->getIncludeParentInUrl(), false, "");
         $descriptionField = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->currentPage->getDescription(), false, true, null);
         $publishedField = new SingleCheckbox("published", $this->getTextResource('pages_edit_metadata_ispublished_field_label'), $this->currentPage->isPublished(), false, "");
         $includeInSearchEngineField = new SingleCheckbox("include_in_search_engine", $this->getTextResource('pages_edit_metadata_include_in_search_engine_field_label'), $this->currentPage->getIncludeInSearchEngine(), false, "");
@@ -50,6 +51,7 @@ class MetadataEditor extends Panel {
         $data->assign("navigation_title_field", $navigationTitleField->render());
         $data->assign('url_title_field', $urlTitleField->render());
         $data->assign('url_field', $urlField->render());
+        $data->assign('include_parent_in_url_field', $includeParentInUrlField->render());
         $data->assign("description_field", $descriptionField->render());
         $data->assign("published_field", $publishedField->render());
         $data->assign("include_in_search_engine_field", $includeInSearchEngineField->render());

@@ -18,6 +18,7 @@ class PageForm extends Form {
     public function loadFields(): void {
         $this->page->setTitle($this->getMandatoryFieldValue("page_title"));
         $this->page->setUrlTitle($this->getFieldValue("url_title"));
+        $this->page->setIncludeParentInUrl($this->getCheckboxValue("include_parent_in_url"));
         $this->page->setPublished($this->getCheckboxValue("published"));
         $this->page->setIncludeInSearchEngine($this->getCheckboxValue("include_in_search_engine"));
         $this->page->setNavigationTitle($this->getMandatoryFieldValue("navigation_title"));

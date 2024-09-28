@@ -9,7 +9,7 @@ class PageDaoMysql implements PageDao {
 
     private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, p.navigation_title, p.url_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
-                      p.include_in_searchindex, p.follow_up, p.is_homepage";
+                      p.include_in_searchindex, p.follow_up, p.is_homepage, p.include_parent_in_url";
     private static ?PageDaoMysql $instance = null;
     private MysqlConnector $mysqlConnector;
     private ElementHolderDao $elementHolderDao;
@@ -110,19 +110,20 @@ class PageDaoMysql implements PageDao {
     }
 
     public function updatePage(Page $page): void {
-        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_in_searchindex = ?, follow_up = ?, `description` = ?, url_title = ? WHERE element_holder_id = ?";
+        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_parent_in_url = ?, include_in_searchindex = ?, follow_up = ?, `description` = ?, url_title = ? WHERE element_holder_id = ?";
 
         $navigationTitle = $page->getNavigationTitle();
         $keywords = $page->getKeywords();
         $showInNavigation = $page->getShowInNavigation() ? 1 : 0;
         $includeInSearchEngine = $page->getIncludeInSearchEngine() ? 1 : 0;
+        $includeParentInUrl = $page->getIncludeParentInUrl() ? 1 : 0;
         $followUp = $page->getFollowUp();
         $description = $page->getDescription();
         $elementHolderId = $page->getId();
         $urlTitle = $page->getUrlTitle();
 
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiissi', $navigationTitle, $keywords, $showInNavigation, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
+        $statement->bind_param('ssiiiissi', $navigationTitle, $keywords, $showInNavigation, $includeParentInUrl, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($page);
     }
