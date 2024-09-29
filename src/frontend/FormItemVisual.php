@@ -20,7 +20,7 @@ abstract class FormItemVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/form_item.tpl';
+        return FRONTEND_TEMPLATE_DIR . '/system/form-item.tpl';
     }
 
     public function loadVisual(?array &$data): void {

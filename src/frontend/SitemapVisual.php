@@ -21,7 +21,7 @@ class SitemapVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/sitemap.tpl";
+        return FRONTEND_TEMPLATE_DIR . "/system/sitemap.tpl";
     }
 
     public function loadVisual(?array &$data): void {

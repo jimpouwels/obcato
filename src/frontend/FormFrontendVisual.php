@@ -27,7 +27,7 @@ class FormFrontendVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/sa_form.tpl';
+        return FRONTEND_TEMPLATE_DIR . '/system/sa-form.tpl';
     }
 
     public function loadVisual(?array &$data): void {

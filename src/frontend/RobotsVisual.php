@@ -12,7 +12,7 @@ class RobotsVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/robots.tpl";
+        return FRONTEND_TEMPLATE_DIR . "/system/robots.tpl";
     }
 
     public function loadVisual(?array &$data): void {

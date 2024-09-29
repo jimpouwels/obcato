@@ -16,7 +16,7 @@ abstract class FormFieldVisual extends FormItemVisual {
     }
 
     public function getFormItemTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/form_field.tpl';
+        return FRONTEND_TEMPLATE_DIR . '/system/form-field.tpl';
     }
 
     public function loadFormItem(): void {

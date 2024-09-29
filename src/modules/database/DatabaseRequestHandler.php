@@ -4,8 +4,8 @@ namespace Obcato\Core\modules\database;
 
 use Obcato\Core\core\form\FormException;
 use Obcato\Core\database\MysqlConnector;
+use Obcato\Core\database\MysqlResult;
 use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\MysqlResult;
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

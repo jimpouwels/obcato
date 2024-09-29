@@ -27,7 +27,7 @@ abstract class ElementFrontendVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/element.tpl";
+        return FRONTEND_TEMPLATE_DIR . "/system/element.tpl";
     }
 
     public function getElementTemplateFilename(): string {

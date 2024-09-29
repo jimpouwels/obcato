@@ -282,7 +282,8 @@ abstract class FrontendVisual {
     }
 
     private function getDefaultValueFor(TemplateVar $templateVar, array $templateVarDefs): string {
-        return Arrays::firstMatch($templateVarDefs, fn($item) => $templateVar->getName() == $item->getName())->getDefaultValue();
+        $value = Arrays::firstMatch($templateVarDefs, fn($item) => $templateVar->getName() == $item->getName())->getDefaultValue();
+        return $value ?: "";
     }
 
     private function replaceLinkCodeTags(string $value, Link $link, string $url): string {

@@ -18,7 +18,7 @@ class WebsiteVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/website.tpl";
+        return FRONTEND_TEMPLATE_DIR . "/system/website.tpl";
     }
 
     public function loadVisual(?array &$data): void {
