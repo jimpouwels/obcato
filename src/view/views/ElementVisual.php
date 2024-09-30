@@ -5,6 +5,7 @@ namespace Obcato\Core\view\views;
 use Obcato\Core\core\model\Element;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
+use Obcato\Core\utilities\StringUtility;
 use Obcato\Core\view\TemplateData;
 use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
 
@@ -50,6 +51,6 @@ abstract class ElementVisual extends Visual {
         $this->assign("include_in_table_of_contents", $tableOfContentsHtml);
         $this->assign("identifier", $elementType->getIdentifier());
         $this->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
-        $this->assign("summary_text", $element->getSummaryText());
+        $this->assign("summary_text", StringUtility::escapeXml($element->getSummaryText()));
     }
 }

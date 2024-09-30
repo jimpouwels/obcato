@@ -29,7 +29,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function getArticles(): array {
-        $articles = $this->getElement()->getArticles();
+        $articles = $this->getElement()->getArticles($this->getArticle()?->getId());
         $articlesData = array();
         foreach ($articles as $article) {
             if (!$this->isPublished($article) || $this->getArticle()?->getId() == $article->getId()) continue;

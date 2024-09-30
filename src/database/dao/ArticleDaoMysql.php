@@ -98,14 +98,17 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array {
-        $queryWhere = " WHERE published = 1 AND     e.id = a.element_holder_id";
+    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $exclude = null): array {
+        $queryWhere = " WHERE published = 1 AND e.id = a.element_holder_id";
         $queryWhere = $queryWhere . " AND publication_date <= now()";
         if ($toDate) {
             $queryWhere = $queryWhere . " AND publication_date <= '" . DateUtility::stringMySqlDate($toDate) . "'";
         }
         if ($fromDate) {
             $queryWhere = $queryWhere . " AND publication_date > '" . DateUtility::stringMySqlDate($fromDate) . "'";
+        }
+        if ($exclude) {
+            $queryWhere .= " AND e.id != " . $exclude;
         }
         $queryFrom = " FROM element_holders e, articles a";
         if ($terms && count($terms) > 0) {
@@ -133,7 +136,6 @@ class ArticleDaoMysql implements ArticleDao {
                     break;
             }
         }
-
         $query = "SELECT DISTINCT " . self::$myAllColumns . $queryFrom . $queryWhere . " ORDER BY " . $orderQueryPart . $limitQueryPart;
         $result = $this->mysqlConnector->executeQuery($query);
         $articles = array();

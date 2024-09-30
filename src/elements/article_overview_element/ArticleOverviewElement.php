@@ -98,20 +98,19 @@ class ArticleOverviewElement extends Element {
         return $this->terms;
     }
 
-    public function getArticles(): array {
-        $article_dao = ArticleDaoMysql::getInstance();
-        $show_to = null;
+    public function getArticles(?int $exclude): array {
+        $articleDao = ArticleDaoMysql::getInstance();
+        $showTo = null;
         if ($this->showUntilToday != 1 && $this->showTo) {
-            $show_to = DateUtility::mysqlDateToString($this->showTo, '-');
+            $showTo = DateUtility::mysqlDateToString($this->showTo, '-');
         }
-        $show_from = null;
+        $showFrom = null;
         if ($this->showFrom) {
-            $show_from = DateUtility::mysqlDateToString($this->showFrom, '-');
+            $showFrom = DateUtility::mysqlDateToString($this->showFrom, '-');
         }
-        $articles = $article_dao->searchPublishedArticles($show_from,
-            $show_to, $this->orderBy, $this->getOrderType(), $this->terms,
-            $this->numberOfResults);
-        return $articles;
+        return $articleDao->searchPublishedArticles($showFrom,
+            $showTo, $this->orderBy, $this->getOrderType(), $this->terms,
+            $this->numberOfResults, $exclude);
     }
 
     public function getStatics(): Visual {
