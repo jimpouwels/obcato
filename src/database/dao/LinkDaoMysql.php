@@ -63,8 +63,12 @@ class LinkDaoMysql implements LinkDao {
             $link->setType(Link::EXTERNAL);
         }
 
-        $query = "UPDATE links SET title = '" . $link->getTitle() . "', target_address = ?,
-                      code = '" . $link->getCode() . "', target = '" . $link->getTarget() . "', type = '" . $link->getType() . "'";
+        $title = $link->getTitle();
+        $targetAddress = $link->getTargetAddress();
+        $code = $link->getCode() ?: "";
+        $target = $link->getTarget();
+        $type = $link->getType();
+        $query = "UPDATE links SET title = ?, target_address = ?, code = ?, target = ?, type = ?";
 
         if ($link->getTargetElementHolderId() != '' && !is_null($link->getTargetElementHolderId())) {
             $query = $query . ", target_element_holder = " . $link->getTargetElementHolderId();
@@ -74,8 +78,7 @@ class LinkDaoMysql implements LinkDao {
         $query = $query . " WHERE id = " . $link->getId();
 
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $targetAddress = $link->getTargetAddress();
-        $statement->bind_param('s', $targetAddress);
+        $statement->bind_param('sssss', $title, $targetAddress, $code, $target, $type);
         $this->mysqlConnector->executeStatement($statement);
     }
 
