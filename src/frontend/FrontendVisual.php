@@ -254,6 +254,23 @@ abstract class FrontendVisual {
         return urlencode($anchorValue);
     }
 
+    protected function createUrlFromLink(Link $link): string {
+        if (!$link->getTargetElementHolderId()) {
+            return $link->getTargetAddress();
+        }
+        $targetElementHolder = $link->getTargetElementHolder();
+        switch ($targetElementHolder->getType()) {
+            case Page::ElementHolderType:
+                $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
+                return $this->getPageUrl($targetPage);
+            case Article::ElementHolderType:
+                $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
+                return $this->getArticleUrl($targetArticle);
+            default:
+                return "";
+        }
+    }
+
     private function replaceTemplateIncludes(string $html): string {
         $matches = null;
         preg_match_all('/<include template="(.*)".*\/>/', $html, $matches);
@@ -294,23 +311,6 @@ abstract class FrontendVisual {
 
     private function containsLink(string $value, Link $link): bool {
         return strpos($value, $this->getLinkCodeOpeningTag($link)) > -1;
-    }
-
-    private function createUrlFromLink(Link $link): string {
-        if (!$link->getTargetElementHolderId()) {
-            return $link->getTargetAddress();
-        }
-        $targetElementHolder = $link->getTargetElementHolder();
-        switch ($targetElementHolder->getType()) {
-            case Page::ElementHolderType:
-                $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
-                return $this->getPageUrl($targetPage);
-            case Article::ElementHolderType:
-                $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
-                return $this->getArticleUrl($targetArticle);
-            default:
-                return "";
-        }
     }
 
     private function getLinkCodeOpeningTag(Link $link): string {

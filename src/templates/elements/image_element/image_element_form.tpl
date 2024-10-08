@@ -3,6 +3,7 @@
     {$alignment_field}
     {$width_field}
     {$height_field}
+    {$link_selector_field}
     {$image_picker}
     {if !is_null($image_id) && $image_id != ""}
         <br/>

@@ -8,6 +8,7 @@ image_element_editor_image: Afbeelding
 image_element_editor_width: Breedte
 image_element_editor_height: Hoogte
 image_element_editor_alignment: Uitlijning
+image_element_editor_link: Link
 
 # ALIGNMENT OPTIONS
 image_element_align_left: Links

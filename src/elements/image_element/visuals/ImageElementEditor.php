@@ -3,6 +3,8 @@
 namespace Obcato\Core\elements\image_element\visuals;
 
 use Obcato\Core\core\model\Element;
+use Obcato\Core\database\dao\LinkDao;
+use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
@@ -14,10 +16,12 @@ class ImageElementEditor extends ElementVisual {
 
     private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
     private ImageElement $imageElement;
+    private LinkDao $linkDao;
 
     public function __construct(ImageElement $element) {
         parent::__construct();
         $this->imageElement = $element;
+        $this->linkDao = LinkDaoMysql::getInstance();
     }
 
     public function getElement(): Element {
@@ -33,6 +37,7 @@ class ImageElementEditor extends ElementVisual {
         $imagePicker = new ImagePicker("image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
         $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
         $heightField = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->imageElement->getHeight(), false, false, "size_field");
+        $linkSelector = new Pulldown($this->createFieldId("link"), $this->getTextResource("image_element_editor_link"), $this->imageElement->getLinkId(), $this->getLinkOptions(), false, "", true);
 
         $data->assign("alignment_field", $this->renderAlignmentField());
         $data->assign("title_field", $titleField->render());
@@ -41,6 +46,7 @@ class ImageElementEditor extends ElementVisual {
         $data->assign("image_picker", $imagePicker->render());
         $data->assign("image_id", $this->imageElement->getImageId());
         $data->assign("selected_image_title", $this->getSelectedImageTitle());
+        $data->assign("link_selector_field", $linkSelector->render());
     }
 
     private function renderAlignmentField(): string {
@@ -64,6 +70,14 @@ class ImageElementEditor extends ElementVisual {
 
     private function createFieldId($property_name): string {
         return "element_" . $this->imageElement->getId() . "_" . $property_name;
+    }
+
+    private function getLinkOptions(): array {
+        $linkOptions = array();
+        foreach ($this->linkDao->getLinksForElementHolder($this->imageElement->getElementHolderId()) as $link) {
+            $linkOptions[] = array('name' => $link->getTitle(), 'value' => $link->getId());
+        }
+        return $linkOptions;
     }
 
 }

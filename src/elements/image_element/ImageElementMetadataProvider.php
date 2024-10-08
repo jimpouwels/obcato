@@ -9,12 +9,12 @@ use Obcato\Core\database\MysqlConnector;
 class ImageElementMetadataProvider extends ElementMetadataProvider
 {
 
-    private MysqlConnector $_mysql_connector;
+    private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element)
     {
         parent::__construct($element);
-        $this->_mysql_connector = MysqlConnector::getInstance();
+        $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
     public function getTableName(): string
@@ -29,6 +29,7 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         $element->setImageId($record['image_id']);
         $element->setWidth($record['width']);
         $element->setHeight($record['height']);
+        $element->setLinkId($record['link_id']);
     }
 
     public function update(Element $element): void
@@ -38,11 +39,12 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         $align = $element->getAlign();
         $width = $element->getWidth();
         $height = $element->getHeight();
-        $element_id = $element->getId();
-        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ? WHERE element_id = ?";
-        $statement = $this->_mysql_connector->prepareStatement($query);
-        $statement->bind_param('ssiiii', $title, $align, $image_id, $width, $height, $element_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $elementId = $element->getId();
+        $linkId = $element->getLinkId();
+        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ?, link_id = ? WHERE element_id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param('ssiiiii', $title, $align, $image_id, $width, $height, $linkId, $elementId);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
     public function insert(Element $element): void
@@ -50,9 +52,9 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         $title = $element->getTitle();
         $element_id = $element->getId();
         $query = "INSERT INTO image_elements_metadata (title, align, width, height, image_id, element_id) VALUES (?, NULL, 0 , 0, NULL, ?)";
-        $statement = $this->_mysql_connector->prepareStatement($query);
+        $statement = $this->mysqlConnector->prepareStatement($query);
         $statement->bind_param('si', $title, $element_id);
-        $this->_mysql_connector->executeStatement($statement);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
 }

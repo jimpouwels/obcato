@@ -8,13 +8,13 @@ use Obcato\Core\database\dao\ElementDaoMysql;
 
 class NavigationMenu extends Visual {
 
-    private array $_module_groups;
-    private ElementDao $_element_dao;
+    private array $moduleGroups;
+    private ElementDao $elementDao;
 
-    public function __construct(array $module_groups) {
+    public function __construct(array $moduleGroups) {
         parent::__construct();
-        $this->_module_groups = $module_groups;
-        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->moduleGroups = $moduleGroups;
+        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -23,43 +23,43 @@ class NavigationMenu extends Visual {
 
     public function load(): void {
         $groups = array();
-        foreach ($this->_module_groups as $module_group) {
+        foreach ($this->moduleGroups as $moduleGroup) {
             $group = array();
-            $group['title'] = $this->getTextResource('menu_item_' . $module_group->getIdentifier());
-            if ($module_group->isElementGroup()) {
+            $group['title'] = $this->getTextResource('menu_item_' . $moduleGroup->getIdentifier());
+            if ($moduleGroup->isElementGroup()) {
                 $group['elements'] = $this->renderElementsMenuItem();
             } else {
-                $group['modules'] = $this->renderMenuItem($module_group);
+                $group['modules'] = $this->renderMenuItem($moduleGroup);
             }
             $groups[] = $group;
         }
         $this->assign('groups', $groups);
     }
 
-    private function renderMenuItem(ModuleGroup $module_group): array {
-        $sub_items = array();
-        $modules = $module_group->getModules();
+    private function renderMenuItem(ModuleGroup $moduleGroup): array {
+        $subItems = array();
+        $modules = $moduleGroup->getModules();
         $count = 1;
         foreach ($modules as $module) {
-            $sub_item = array();
-            $sub_item["title"] = $this->getTextResource($module->getIdentifier() . '_module_title');
-            $sub_item["id"] = $module->getId();
-            $sub_item["popup"] = $module->isPopUp();
-            $sub_item["icon_url"] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
-            $sub_item["last"] = ($count == count($modules));
+            $subItem = array();
+            $subItem["title"] = $this->getTextResource($module->getIdentifier() . '_module_title');
+            $subItem["id"] = $module->getId();
+            $subItem["popup"] = $module->isPopUp();
+            $subItem["icon_url"] = '/admin/static.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
+            $subItem["last"] = ($count == count($modules));
             $count++;
-            $sub_items[] = $sub_item;
+            $subItems[] = $subItem;
         }
-        return $sub_items;
+        return $subItems;
     }
 
     private function renderElementsMenuItem(): array {
         $sub_items = array();
-        foreach ($this->_element_dao->getElementTypes() as $element_type) {
+        foreach ($this->elementDao->getElementTypes() as $elementType) {
             $sub_item = array();
-            $sub_item["id"] = $element_type->getId();
-            $sub_item["name"] = $this->getTextResource($element_type->getIdentifier() . '_label');
-            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $element_type->getIdentifier() . "/img/" . $element_type->getIdentifier() . ".png";
+            $sub_item["id"] = $elementType->getId();
+            $sub_item["name"] = $this->getTextResource($elementType->getIdentifier() . '_label');
+            $sub_item["icon_url"] = '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
             $sub_items[] = $sub_item;
         }
         return $sub_items;

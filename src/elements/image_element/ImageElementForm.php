@@ -21,6 +21,7 @@ class ImageElementForm extends ElementForm {
         $this->imageElement->setImageId($this->getNumber('image_image_ref_' . $this->imageElement->getId()));
         $this->imageElement->setWidth($this->getNumber('element_' . $this->imageElement->getId() . '_width'));
         $this->imageElement->setHeight($this->getNumber('element_' . $this->imageElement->getId() . '_height'));
+        $this->imageElement->setLinkId($this->getNumber('element_' . $this->imageElement->getId() . '_link'));
         if ($this->hasErrors()) {
             throw new FormException();
         }

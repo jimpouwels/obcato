@@ -92,4 +92,14 @@ class LinkDaoMysql implements LinkDao {
         return $links;
     }
 
+    public function getLink(int $id): ?Link {
+        $query = "SELECT * FROM links WHERE id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param('i', $id);
+        $result = $this->mysqlConnector->executeStatement($statement);
+        while ($row = $result->fetch_assoc()) {
+            return Link::constructFromRecord($row);
+        }
+        return null;
+    }
 }

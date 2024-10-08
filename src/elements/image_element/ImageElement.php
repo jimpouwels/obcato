@@ -24,6 +24,7 @@ class ImageElement extends Element {
     private ?int $height = null;
     private ?int $width = null;
     private ?int $imageId = null;
+    private ?int $linkId = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ImageElementMetadataProvider($this));
@@ -69,6 +70,14 @@ class ImageElement extends Element {
         return null;
     }
 
+    public function getLinkId(): ?int {
+        return $this->linkId;
+    }
+
+    public function setLinkId(?int $linkId): void {
+        $this->linkId = $linkId;
+    }
+
     public function getStatics(): Visual {
         return new ImageElementStatics();
     }
@@ -86,11 +95,11 @@ class ImageElement extends Element {
     }
 
     public function getSummaryText(): string {
-        $summary_text = $this->getTitle() ?: '';
+        $summaryText = $this->getTitle() ?: '';
         $image = $this->getImage();
         if ($image) {
-            $summary_text .= ': ' . $image->getTitle() . ' (' . $image->getFilename() . ')';
+            $summaryText .= ': ' . $image->getTitle() . ' (' . $image->getFilename() . ')';
         }
-        return $summary_text;
+        return $summaryText;
     }
 }
