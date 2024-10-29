@@ -6,17 +6,15 @@ use DOMDocument;
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\database\MysqlConnector;
-use const Obcato\CONFIG_DIR;
+use const Obcato\Core\CONFIG_DIR;
 use const Obcato\core\SYSTEM_VERSION;
 
-require_once "bootstrap.php";
+require_once "../bootstrap.php";
 
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once PRIVATE_DIR . "/database_config.php";
-require_once "admin/constants.php";
 require_once CMS_ROOT . "/database/MysqlConnector.php";
-require_once CMS_ROOT . "/bootstrap.php";
 require_once CMS_ROOT . "/database/dao/SettingsDaoMysql.php";
 
 // AUTHENTICATE

@@ -77,8 +77,8 @@ abstract class Element extends Presentable {
         return $this->elementHolderId;
     }
 
-    public function setElementHolderId(int $element_holder_id): void {
-        $this->elementHolderId = $element_holder_id;
+    public function setElementHolderId(int $elementHolderId): void {
+        $this->elementHolderId = $elementHolderId;
     }
 
     public function updateMetaData(): void {

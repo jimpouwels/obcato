@@ -20,11 +20,11 @@ use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
-    private ElementDao $_element_dao;
+    private ElementDao $elementDao;
     private LinkDao $linkDao;
 
     public function __construct() {
-        $this->_element_dao = ElementDaoMysql::getInstance();
+        $this->elementDao = ElementDaoMysql::getInstance();
         $this->linkDao = LinkDaoMysql::getInstance();
     }
 
@@ -60,23 +60,24 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
         }
     }
 
-    private function addElement(ElementHolder $element_holder): void {
-        $element_type = $this->getElementTypeToAdd();
-        $createdElement = $this->_element_dao->createElement($element_type, $_POST[EDIT_ELEMENT_HOLDER_ID]);
-        $element_holder->addElement($createdElement);
+    private function addElement(ElementHolder $elementHolder): void {
+        $elementType = $this->getElementTypeToAdd();
+        $createdElement = $this->elementDao->createElement($elementType, $elementHolder->getId());
+        $createdElement->setElementHolderId($elementHolder->getId());
+        $elementHolder->addElement($createdElement);
     }
 
-    private function deleteElementFrom(ElementHolder $element_holder): void {
-        $elementToDelete = $this->_element_dao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
+    private function deleteElementFrom(ElementHolder $elementHolder): void {
+        $elementToDelete = $this->elementDao->getElement($_POST[DELETE_ELEMENT_FORM_ID]);
         if ($elementToDelete) {
-            $this->_element_dao->deleteElement($elementToDelete);
-            $element_holder->deleteElement($elementToDelete);
+            $this->elementDao->deleteElement($elementToDelete);
+            $elementHolder->deleteElement($elementToDelete);
         }
     }
 
     private function getElementTypeToAdd(): ElementType {
         $element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
-        return $this->_element_dao->getElementType($element_type_to_add);
+        return $this->elementDao->getElementType($element_type_to_add);
     }
 
     private function addLink(ElementHolder $elementHolder): void {

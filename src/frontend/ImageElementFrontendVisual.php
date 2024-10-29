@@ -29,12 +29,19 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         $data["extension"] = $this->getExtension();
 
         $linkData = array();
+        $openTag = "";
+        $closeTag = "";
         if ($this->getElement()->getLinkId()) {
             $link = $this->linkDao->getLink($this->getElement()->getLinkId());
+            $url = $this->createUrlFromLink($link);
             $linkData['title'] = $link->getTitle();
-            $linkData['url'] = $this->createUrlFromLink($link);
+            $linkData['url'] = $url;
             $linkData['target'] = $link->getTarget();
+            $openTag = "<a href=\"{$url}\" target=\"{$link->getTarget()}\" title=\"{$link->getTitle()}\">";
+            $closeTag = "</a>";
         }
+        $linkData['open_tag'] = $openTag;
+        $linkData['close_tag'] = $closeTag;
         $data['link'] = $linkData;
     }
 
