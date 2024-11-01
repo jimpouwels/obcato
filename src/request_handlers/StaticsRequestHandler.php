@@ -9,11 +9,11 @@ class StaticsRequestHandler extends HttpRequestHandler {
     public function __construct() {}
 
     public function handleGet(): void {
-        $relative_path = $this->getRelativePathFromGetRequest();
-        if (!empty($relative_path)) {
-            $absolute_path = $this->getAbsolutePathFor($relative_path);
-            $this->setResponseContentType($absolute_path);
-            readfile(explode('?', $absolute_path)[0]);
+        $relativePath = $this->getRelativePathFromGetRequest();
+        if (!empty($relativePath)) {
+            $absolutePath = $this->getAbsolutePathFor($relativePath);
+            $this->setResponseContentType($absolutePath);
+            readfile(explode('?', $absolutePath)[0]);
         }
     }
 
