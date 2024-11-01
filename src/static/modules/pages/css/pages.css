@@ -23,7 +23,7 @@
 }
 
 .published {
-    list-style-image: url(/admin/static.php?file=/modules/pages/img/page.png);
+    list-style-image: url(/admin/static.php?file=/modules/pages/img/pages.png);
     font-style: normal;
 }
 
