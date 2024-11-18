@@ -44,6 +44,11 @@ class FormElementEditor extends ElementVisual {
         $data->assign("webform_picker", $webformPicker->render());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
+
     private function createFieldId($propertyName): string {
         return "element_{$this->formElement->getId()}_{$propertyName}";
     }

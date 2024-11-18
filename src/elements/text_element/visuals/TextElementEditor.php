@@ -36,7 +36,10 @@ class TextElementEditor extends ElementVisual {
         $data->assign("id", $this->textElement->getId());
         $data->assign("title_field", $titleField->render());
         $data->assign("text_field", $textField->render());
-        $data->assign("link_options", $this->getLinkOptions());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return true;
+    }
 }

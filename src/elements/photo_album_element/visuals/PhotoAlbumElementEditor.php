@@ -37,4 +37,8 @@ class PhotoAlbumElementEditor extends ElementVisual {
         $data->assign("label_select_field", $labelSelectField->render());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
 }

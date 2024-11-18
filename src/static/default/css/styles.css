@@ -431,6 +431,10 @@ h1 {
 /*
 ============ ELEMENT STYLES
 */
+.element_footer {
+    clear: both;
+    margin-top: 20px;
+}
 
 .draggable_wrapper {
     overflow: auto;

@@ -47,6 +47,11 @@ class ImageElementEditor extends ElementVisual {
         $data->assign("link_selector_field", $linkSelector->render());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
+
     private function renderAlignmentField(): string {
         $alignmentOptions = array();
         $alignmentOptions[] = array("name" => $this->getTextResource("image_element_align_left"), "value" => "left");

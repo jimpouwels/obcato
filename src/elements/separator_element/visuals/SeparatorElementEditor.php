@@ -28,4 +28,9 @@ class SeparatorElementEditor extends ElementVisual {
     public function loadElementForm(TemplateData $data): void {
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
+
 }

@@ -31,4 +31,9 @@ class TableOfContentsElementEditor extends ElementVisual {
         $data->assign("title_field", $titleField->render());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
+
 }

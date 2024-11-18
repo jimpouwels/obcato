@@ -47,6 +47,11 @@ class ArticleOverviewElementEditor extends ElementVisual {
         $data->assign("term_select_field", $termSelectField->render());
     }
 
+    public function includeLinkSelector(): bool
+    {
+        return false;
+    }
+
     private function getDateValue(?string $date): ?string {
         return $date == null ? null : DateUtility::mysqlDateToString($date, '-');
     }

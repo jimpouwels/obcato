@@ -41,6 +41,21 @@
             <p id="element_summary_text_{$id}" class="element_summary_text">{$summary_text}</p>
             <div id="collapsable_body_{$id}" class="admin_form">
                 {$element_form}
+
+                <div class="element_footer">
+                    {if $link_options}
+                        <label for="element_{$id}_link">{$text_resources.text_element_editor_link}:</label>
+                        <select name="element_{$id}_link" id="element_{$id}_link">
+                            {foreach from=$link_options item=link}
+                                <option selected="selected" value="{$link.value}">{$link.name}</option>
+                            {/foreach}
+                        </select>
+                        <a href="#" onclick="putLink($('#element_{$id}_link').find(':selected').val()); return false;" title="{$text_resources.place_link}">
+                            <img src="/admin/static.php?file=/default/img/default_icons/place_link.png"
+                                 alt="{$text_resources.place_link}"/>
+                        </a>
+                    {/if}
+                </div>
             </div>
         </div>
     </div>

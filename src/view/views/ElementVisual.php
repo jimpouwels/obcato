@@ -16,6 +16,8 @@ abstract class ElementVisual extends Visual {
     private ElementDao $elementDao;
     private LinkDao $linkDao;
 
+    abstract function includeLinkSelector(): bool;
+
     abstract function getElement(): Element;
 
     abstract function loadElementForm(TemplateData $data): void;
@@ -56,6 +58,11 @@ abstract class ElementVisual extends Visual {
         $this->assign("identifier", $elementType->getIdentifier());
         $this->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
         $this->assign("summary_text", StringUtility::escapeXml($element->getSummaryText()));
+
+        $this->assign("link_options", "");
+        if ($this->includeLinkSelector()) {
+            $this->assign("link_options", $this->getLinkOptions());
+        }
     }
     protected function getLinkOptions(): array {
         $linkOptions = array();
