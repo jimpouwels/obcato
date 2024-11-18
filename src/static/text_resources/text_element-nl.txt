@@ -5,3 +5,4 @@ text_element_scope_label: Paragraaf Element
 # EDITOR
 text_element_editor_title: Titel
 text_element_editor_text: Tekst
+text_element_editor_link: Link invoegen

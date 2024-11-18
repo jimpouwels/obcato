@@ -5,3 +5,4 @@ text_element_scope_label: Paragraph Element
 # EDITOR
 text_element_editor_title: Title
 text_element_editor_text: Text
+text_element_editor_link: Insert link

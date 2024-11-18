@@ -3,7 +3,6 @@
 namespace Obcato\Core\elements\image_element\visuals;
 
 use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\LinkDao;
 use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\view\TemplateData;
@@ -16,7 +15,6 @@ class ImageElementEditor extends ElementVisual {
 
     private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
     private ImageElement $imageElement;
-    private LinkDao $linkDao;
 
     public function __construct(ImageElement $element) {
         parent::__construct();
@@ -70,14 +68,6 @@ class ImageElementEditor extends ElementVisual {
 
     private function createFieldId($property_name): string {
         return "element_" . $this->imageElement->getId() . "_" . $property_name;
-    }
-
-    private function getLinkOptions(): array {
-        $linkOptions = array();
-        foreach ($this->linkDao->getLinksForElementHolder($this->imageElement->getElementHolderId()) as $link) {
-            $linkOptions[] = array('name' => $link->getTitle(), 'value' => $link->getId());
-        }
-        return $linkOptions;
     }
 
 }

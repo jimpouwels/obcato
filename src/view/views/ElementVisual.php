@@ -5,6 +5,8 @@ namespace Obcato\Core\view\views;
 use Obcato\Core\core\model\Element;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
+use Obcato\Core\database\dao\LinkDao;
+use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\utilities\StringUtility;
 use Obcato\Core\view\TemplateData;
 use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
@@ -12,6 +14,7 @@ use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
 abstract class ElementVisual extends Visual {
 
     private ElementDao $elementDao;
+    private LinkDao $linkDao;
 
     abstract function getElement(): Element;
 
@@ -22,6 +25,7 @@ abstract class ElementVisual extends Visual {
     public function __construct() {
         parent::__construct();
         $this->elementDao = ElementDaoMysql::getInstance();
+        $this->linkDao = LinkDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -52,5 +56,12 @@ abstract class ElementVisual extends Visual {
         $this->assign("identifier", $elementType->getIdentifier());
         $this->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);
         $this->assign("summary_text", StringUtility::escapeXml($element->getSummaryText()));
+    }
+    protected function getLinkOptions(): array {
+        $linkOptions = array();
+        foreach ($this->linkDao->getLinksForElementHolder($this->getElement()->getElementHolderId()) as $link) {
+            $linkOptions[] = array('name' => $link->getTitle(), 'value' => $link->getId());
+        }
+        return $linkOptions;
     }
 }
