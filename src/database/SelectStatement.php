@@ -18,10 +18,6 @@ class SelectStatement extends Statement {
         $this->selectFields[$table] = array_merge($this->selectFields[$table], $fields);
     }
 
-    public function getSelectFields(): array {
-        return $this->selectFields;
-    }
-
     public function prepare(MysqlStatement $sqlStatement) {}
 
     public function execute(MysqlConnector $mysqlConnector): bool|MysqlResult {
