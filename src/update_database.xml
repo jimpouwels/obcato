@@ -297,6 +297,7 @@
             <query>ALTER TABLE pages ADD COLUMN include_parent_in_url BOOL NOT NULL DEFAULT 1</query>
             <query>ALTER TABLE image_elements_metadata ADD COLUMN link_id int(10) UNSIGNED DEFAULT NULL</query>
             <query>ALTER TABLE image_elements_metadata ADD CONSTRAINT image_elements_links FOREIGN KEY image_elements_links (link_id) REFERENCES links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE images ADD INDEX (id, title)</query>
         </queries>
     </version>
 </versions>
