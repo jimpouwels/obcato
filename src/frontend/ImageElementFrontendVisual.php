@@ -22,6 +22,7 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         $data["title"] = $this->getElement()->getTitle();
         $data["img_title"] = $this->getElement()->getImage()?->getTitle();
         $data["img_alt_text"] = $this->getElement()->getImage()?->getAltText();
+        $data["img_location"] = $this->getElement()->getImage()?->getLocation();
         $data["align"] = $this->getElement()->getAlign();
         $data["width"] = $this->getElement()->getWidth();
         $data["height"] = $this->getElement()->getHeight();

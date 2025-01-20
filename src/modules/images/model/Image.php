@@ -10,6 +10,7 @@ class Image extends Entity {
     private ?string $altText = null;
     private ?string $filename;
     private ?string $thumbnailFilename;
+    private ?string $location;
     private bool $published;
     private string $createdAt;
     private int $createdById;
@@ -28,6 +29,7 @@ class Image extends Entity {
         $this->setCreatedById($row['created_by']);
         $this->setFilename($row['file_name']);
         $this->setThumbFileName($row['thumb_file_name']);
+        $this->setLocation($row['location']);
         parent::initFromDb($row);
     }
 
@@ -100,6 +102,14 @@ class Image extends Entity {
 
     public function setFilename(?string $filename): void {
         $this->filename = $filename;
+    }
+
+    public function getLocation(): ?string {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): void {
+        $this->location = $location;
     }
 
 }

@@ -12,7 +12,7 @@ use const Obcato\Core\UPLOAD_DIR;
 
 class ImageDaoMysql implements ImageDao {
 
-    private static string $myAllColumns = "i.id, i.title, i.alt_text, i.published, i.created_at, i.created_by, i.file_name, i.thumb_file_name";
+    private static string $myAllColumns = "i.id, i.title, i.alt_text, i.published, i.created_at, i.created_by, i.file_name, i.thumb_file_name, i.location";
     private static ?ImageDaoMysql $instance = null;
     private MysqlConnector $mysqlConnector;
 
@@ -46,9 +46,10 @@ class ImageDaoMysql implements ImageDao {
         $filename = $image->getFilename();
         $id = $image->getId();
         $thumbFilename = $image->getThumbFileName();
-        $query = "UPDATE images SET title = ?, alt_text = ?, published = ?, file_name = ?, thumb_file_name = ? WHERE id = ?";
+        $location = $image->getLocation();
+        $query = "UPDATE images SET title = ?, alt_text = ?, published = ?, file_name = ?, thumb_file_name = ?, location = ? WHERE id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssissi', $title, $altText, $published, $filename, $thumbFilename, $id);
+        $statement->bind_param('ssisssi', $title, $altText, $published, $filename, $thumbFilename, $location, $id);
         $this->mysqlConnector->executeStatement($statement);
     }
 

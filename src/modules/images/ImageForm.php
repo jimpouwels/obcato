@@ -19,6 +19,7 @@ class ImageForm extends Form {
         $this->image->setTitle($this->getMandatoryFieldValue("image_title"));
         $this->image->setAltText($this->getFieldValue("image_alt_text"));
         $this->image->setPublished($this->getCheckboxValue("image_published"));
+        $this->image->setLocation($this->getFieldValue("image_location"));
         $this->selectedLabels = $this->getSelectValue("select_labels_" . $this->image->getId());
         if ($this->hasErrors()) {
             throw new FormException();

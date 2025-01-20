@@ -4,6 +4,7 @@
 <div class="admin_form_v2">
     {$title_field}
     {$alt_text_field}
+    {$location_field}
     {$published_field}
     {$upload_field}
 </div>

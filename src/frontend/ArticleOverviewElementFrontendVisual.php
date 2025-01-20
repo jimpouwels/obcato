@@ -61,6 +61,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         if ($image) {
             $imageData["title"] = $image->getTitle();
             $imageData["alt_text"] = $image->getAltText();
+            $imageData["location"] = $image->getLocation();
             $imageData["url"] = $this->getImageUrl($image);
         }
         return $imageData;

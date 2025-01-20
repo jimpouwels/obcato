@@ -31,14 +31,16 @@ class ImageMetadataEditor extends Panel {
 
 
     private function assignImageMetaDataFields($data): void {
-        $titleField = new TextField("image_title", "Titel", $this->currentImage->getTitle(), true, false, null);
+        $titleField = new TextField("image_title", $this->getTextResource('image_editor_title_label'), $this->currentImage->getTitle(), true, false, null);
         $altTextField = new TextField("image_alt_text", $this->getTextResource('image_editor_alt_text_label'), $this->currentImage->getAltText(), false, false, null);
-        $publishedField = new SingleCheckbox("image_published", "Gepubliceerd", $this->currentImage->isPublished(), false, null);
-        $uploadField = new UploadField("image_file", "Afbeelding", false, null);
+        $locationField = new TextField("image_location", $this->getTextResource("image_editor_location_label"), $this->currentImage->getLocation(), false, false, null);
+        $publishedField = new SingleCheckbox("image_published", $this->getTextResource('image_editor_published_label'), $this->currentImage->isPublished(), false, null);
+        $uploadField = new UploadField("image_file", $this->getTextResource('image_editor_file_label'), false, null);
 
         $data->assign("image_id", $this->currentImage->getId());
         $data->assign("title_field", $titleField->render());
         $data->assign("alt_text_field", $altTextField->render());
+        $data->assign("location_field", $locationField->render());
         $data->assign("published_field", $publishedField->render());
         $data->assign("upload_field", $uploadField->render());
     }

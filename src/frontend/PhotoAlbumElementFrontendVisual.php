@@ -27,6 +27,7 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
             $imageItem["id"] = $image->getId();
             $imageItem["title"] = $image->getTitle();
             $imageItem["alt_text"] = $image->getAltText();
+            $imageItem["location"] = $image->getLocation();
             $imageItem["url"] = $this->getImageUrl($image);
             $images_arr[] = $imageItem;
         }

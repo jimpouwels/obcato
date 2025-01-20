@@ -64,10 +64,11 @@ class ArticleVisual extends FrontendVisual {
 
     private function getImageData($image): ?array {
         $imageData = null;
-        if (!is_null($image)) {
+        if ($image) {
             $imageData = array();
             $imageData["title"] = $image->getTitle();
             $imageData["url"] = $this->getImageUrl($image);
+            $imageData["location"] = $image->getLocation();
         }
         return $imageData;
     }
