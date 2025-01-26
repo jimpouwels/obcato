@@ -17,7 +17,7 @@ class BlockForm extends Form {
     public function loadFields(): void {
         $this->block->setTitle($this->getMandatoryFieldValue("title"));
         $this->block->setPublished($this->getCheckboxValue("published"));
-        $this->block->setPositionId($this->getFieldValue("block_position"));
+        $this->block->setPositionId($this->getNumber("block_position"));
         $this->block->setTemplateId($this->getNumber("block_template"));
         if ($this->hasErrors()) {
             throw new FormException();

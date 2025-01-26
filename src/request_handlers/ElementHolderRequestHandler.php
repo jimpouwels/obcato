@@ -16,7 +16,6 @@ use Obcato\Core\elements\ElementContainsErrorsException;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
 use const Obcato\core\ADD_ELEMENT_FORM_ID;
 use const Obcato\core\DELETE_ELEMENT_FORM_ID;
-use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
@@ -47,12 +46,12 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
     protected abstract function loadElementHolderFromPostRequest(): ?ElementHolder;
 
-    protected function updateElementHolder(ElementHolder $element_holder): void {
-        $form = new ElementHolderForm($element_holder);
+    protected function updateElementHolder(ElementHolder $elementHolder): void {
+        $form = new ElementHolderForm($elementHolder);
         try {
             $form->loadFields();
-            $this->updateLinks($element_holder);
-            foreach ($element_holder->getElements() as $element) {
+            $this->updateLinks($elementHolder);
+            foreach ($elementHolder->getElements() as $element) {
                 $element->getRequestHandler()->handle();
             }
         } catch (ElementContainsErrorsException|FormException $e) {

@@ -9,6 +9,7 @@ use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\service\ArticleInteractor;
 use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\modules\blocks\model\Block;
+use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
 
@@ -41,7 +42,8 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $articleData["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
             $articleData["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
             $articleData["sort_date"] = DateUtility::mysqlDateToString($article->getSortDate(), '-');
-            $articleData["image"] = $this->getArticleImage($article);
+            $articleData["image"] = $this->getImageData($this->imageDao->getImage($article->getImageId()));
+            $articleData["wallpaper"] = $this->getImageData($this->imageDao->getImage($article->getWallpaperId()));
 
             $terms = $this->articleService->getTermsForArticle($article);
             $termsData = array();
@@ -55,8 +57,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         return $articlesData;
     }
 
-    private function getArticleImage(Article $article): ?array {
-        $image = $this->imageDao->getImage($article->getImageId());
+    private function getImageData(?Image $image): ?array {
         $imageData = array();
         if ($image) {
             $imageData["title"] = $image->getTitle();
