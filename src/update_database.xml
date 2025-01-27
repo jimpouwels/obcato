@@ -298,7 +298,6 @@
             <query>ALTER TABLE image_elements_metadata ADD CONSTRAINT image_elements_links FOREIGN KEY image_elements_links (link_id) REFERENCES links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>ALTER TABLE images ADD INDEX (id, title)</query>
             <query>ALTER TABLE images ADD COLUMN location TEXT DEFAULT NULL</query>
-
             <query>INSERT INTO modules (module_group_id, popup, identifier, enabled, system_default,
                 class) VALUES (4, 0, 'sitewide_pages', 1, 1,
                 'SitewidePagesModuleVisual')</query>
