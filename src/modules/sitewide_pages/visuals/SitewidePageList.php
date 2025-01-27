@@ -13,7 +13,7 @@ class SitewidePageList extends Panel {
     private PageService $pageService;
 
     public function __construct() {
-        parent::__construct('sitewide_pages_list_title', 'target_pages_fieldset');
+        parent::__construct('sitewide_pages_list_title', 'sitewide_pages_fieldset');
         $this->pageService = PageInteractor::getInstance();
     }
 

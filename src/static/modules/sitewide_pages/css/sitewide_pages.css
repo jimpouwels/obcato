@@ -13,3 +13,7 @@
 .sitewide_page_move_down_cell img {
     transform: scaleY(-1);
 }
+
+.sitewide_pages_fieldset {
+    width: fit-content;
+}

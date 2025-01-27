@@ -1,2 +1,2 @@
 sitewide_pages_module_title: Sitewide Pagina's
-sitewide_pages_list_title: Beheer sitewide pages
+sitewide_pages_list_title: Beheer sitewide pagina's
