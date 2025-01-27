@@ -748,6 +748,7 @@ h1 {
 */
 .listing {
     text-align: left;
+    border-spacing: 0;
 }
 
 .listing thead {
@@ -761,6 +762,10 @@ h1 {
 
 .listing .delete_column {
     text-align: center;
+}
+
+.listing td, th {
+    padding: 5px;
 }
 
 .listing .delete_column .admin_label {

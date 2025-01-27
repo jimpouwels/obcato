@@ -9,6 +9,8 @@ use Obcato\Core\database\dao\BlockDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\modules\pages\model\Page;
+use Obcato\Core\modules\sitewide_pages\persistence\SitewideDao;
+use Obcato\Core\modules\sitewide_pages\persistence\SitewideDaoMysql;
 use const Obcato\Core\ELEMENT_HOLDER_PAGE;
 
 class PageInteractor implements PageService {
@@ -16,11 +18,13 @@ class PageInteractor implements PageService {
     private static ?PageInteractor $instance = null;
 
     private PageDao $pageDao;
+    private SitewideDao $sitewideDao;
     private BlockDao $blockDao;
 
     private function __construct() {
         $this->pageDao = PageDaoMysql::getInstance();
         $this->blockDao = BlockDaoMysql::getInstance();
+        $this->sitewideDao = SitewideDaoMysql::getInstance();
     }
 
     public static function getInstance(): PageInteractor {
@@ -97,6 +101,29 @@ class PageInteractor implements PageService {
 
     public function getParents(Page $page): array {
         return $this->pageDao->getParents($page);
+    }
+
+    public function getSitewidePages(): array {
+        $sitewidePageIds = $this->sitewideDao->getSitewidePages();
+        $sitewidePages = [];
+        foreach ($sitewidePageIds as $sitewidePageId) {
+            $sitewidePages[] = $this->getPageById($sitewidePageId);
+        }
+        return $sitewidePages;
+    }
+
+    public function addSitewidePage(int $id): void {
+        $this->sitewideDao->addSitewidePage($id);
+    }
+
+    public function removeSitewidePage(Page $page): void {
+        $this->sitewideDao->removeSitewidePage($page->getId());
+    }
+
+    public function updateSitewidePages(array $pages): void {
+        for ($i = 0; $i < count($pages); $i++) {
+            $this->sitewideDao->updateSitewidePage($pages[$i]->getId(), $i);
+        }
     }
 
     private function updateFollowUp(array $pages): void {

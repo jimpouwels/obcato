@@ -1,0 +1,2 @@
+sitewide_pages_module_title: Sitewide Pages
+sitewide_pages_list_title: Maintain sitewide pages

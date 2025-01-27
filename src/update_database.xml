@@ -286,8 +286,7 @@
                 DEFAULT NULL, element_id int(10) unsigned NOT NULL, PRIMARY KEY (id), KEY separator_element_metadata_to_element
                 (element_id),
                 CONSTRAINT separator_element_metadata_to_element FOREIGN KEY (element_id) REFERENCES elements (id) ON
-                DELETE
-                CASCADE ON UPDATE CASCADE)
+                DELETE CASCADE ON UPDATE CASCADE)
             </query>
             <query>INSERT INTO scopes (id, identifier) VALUES (20, 'Scheider')</query>
             <query>INSERT INTO element_types VALUES (12
@@ -299,6 +298,12 @@
             <query>ALTER TABLE image_elements_metadata ADD CONSTRAINT image_elements_links FOREIGN KEY image_elements_links (link_id) REFERENCES links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>ALTER TABLE images ADD INDEX (id, title)</query>
             <query>ALTER TABLE images ADD COLUMN location TEXT DEFAULT NULL</query>
+
+            <query>INSERT INTO modules (module_group_id, popup, identifier, enabled, system_default,
+                class) VALUES (4, 0, 'sitewide_pages', 1, 1,
+                'SitewidePagesModuleVisual')</query>
+            <query>CREATE TABLE sitewide_pages (id int(10) unsigned NOT NULL AUTO_INCREMENT, page_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT sitewide_page_id_to_element_holder FOREIGN KEY (page_id) REFERENCES element_holders (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
+            <query>ALTER TABLE sitewide_pages ADD COLUMN order_number int(10) NOT NULL</query>
         </queries>
     </version>
 </versions>

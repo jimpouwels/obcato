@@ -15,7 +15,7 @@ $(document).ready(function () {
     });
 
     $('#delete_element_holder').click(function () {
-        var confirmed = confirm("Weet u zeker dat u dit artikel wilt verwijderen?");
+        let confirmed = confirm("Weet u zeker dat u dit artikel wilt verwijderen?");
         if (confirmed) {
             $('#action').attr('value', 'delete_article');
             $('#element_holder_form_id').submit();
@@ -83,6 +83,7 @@ $(document).ready(function () {
     });
 
     $('#update_target_pages').click(function () {
+        $('#action').attr('value', 'add_target_page');
         $('#update_target_page_form').submit();
     });
 

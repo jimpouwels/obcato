@@ -52,7 +52,7 @@ class TargetPagesRequestHandler extends HttpRequestHandler {
     }
 
     private function isUpdateOptionsAction(): bool {
-        return isset($_POST["action"]) && $_POST["action"] == "target_page_to_add";
+        return isset($_POST["action"]) && $_POST["action"] == "add_target_page";
     }
 
     private function isChangeDefaultTargetPageAction(): bool {

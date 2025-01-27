@@ -13,11 +13,12 @@ use Obcato\Core\database\dao\TemplateDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
+use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\templates\model\Presentable;
 use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class PageVisual extends FrontendVisual {
-    private PageInteractor $pageService;
+    private PageService $pageService;
     private BlockDao $blockDao;
     private ArticleDao $articleDao;
     private TemplateDao $templateDao;
@@ -53,6 +54,7 @@ class PageVisual extends FrontendVisual {
         $this->assign("blocks", $this->renderBlocks());
         $this->assign("canonical_url", $this->getCanonicalUrl());
         $this->assign("root_page", $this->getPageMetaData($this->pageService->getRootPage()));
+        $this->assign("sitewide_pages", $this->getSitewidePagesData());
     }
 
     public function getPresentable(): ?Presentable {
@@ -81,6 +83,20 @@ class PageVisual extends FrontendVisual {
             $children[] = $child;
         }
         return $children;
+    }
+
+    private function getSitewidePagesData(): array {
+        $data = array();
+        $pages = $this->pageService->getSitewidePages();
+        foreach ($pages as $page) {
+            if (!$page->isPublished()) continue;
+            $pageData = array();
+            $pageData['id'] = $page->getId();
+            $pageData['title'] = $page->getTitle();
+            $pageData['url'] = $this->getPageUrl($page);
+            $data[] = $pageData;
+        }
+        return $data;
     }
 
     private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren = true): void {

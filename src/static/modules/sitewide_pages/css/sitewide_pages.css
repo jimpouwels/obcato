@@ -1,0 +1,15 @@
+.listing {
+    margin-bottom: 20px;
+}
+
+.sitewide_page_move_cell img {
+    width: 20px;
+}
+
+.sitewide_page_move_cell {
+    text-align: center;
+}
+
+.sitewide_page_move_down_cell img {
+    transform: scaleY(-1);
+}
