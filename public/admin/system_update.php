@@ -76,8 +76,8 @@ $website_settings = $settings_dao->getSettings();
 </table>
 <?php if (SYSTEM_VERSION != $website_settings->getDatabaseVersion()): ?>
     <form action="/admin/system_update.php" method="post">
-        <input type="hidden" value="update_database" name="action"/>
-        <input type="submit" value="Update database"/>
+        <input type="hidden" value="update_database" name="action" />
+        <input type="submit" value="Update database" />
     </form>
 <?php endif; ?>
 </body>

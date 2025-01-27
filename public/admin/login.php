@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
 <head>
-    <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css"/>
-    <link rel="stylesheet" href="/admin/static/css/login.css" type="text/css"/>
+    <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/static/css/login.css" type="text/css" />
 
     <script type="text/javascript" src="/static/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="/static/js/login_functions.js"></script>
 
     <title>Obcato</title>
-    <meta name="robots" content="noindex"/>
+    <meta name="robots" content="noindex" />
 </head>
 <body>
 <div id="login-form-box">
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="fields">
                 <?php if (isset($_GET['orgUrl']) && $_GET['orgUrl'] != ''): ?>
-                    <input type="hidden" name="orgUrl" value="<?= urldecode($_GET['orgUrl']); ?>"/>
+                    <input type="hidden" name="orgUrl" value="<?= urldecode($_GET['orgUrl']); ?>" />
                 <?php endif; ?>
 
                 <?php

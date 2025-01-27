@@ -18,7 +18,7 @@
                            title="{$text_resources.webforms_delete_handler_link_title}">
                             <img src="/admin/static.php?file=/default/img/default_icons/delete_small.png"
                                  alt="{$text_resources.webforms_delete_handler_link_title}"
-                                 title="{$text_resources.webforms_delete_handler_link_title}"/>
+                                 title="{$text_resources.webforms_delete_handler_link_title}" />
                         </a>
                     </div>
                 </div>

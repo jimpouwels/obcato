@@ -1,4 +1,4 @@
-<input type="hidden" name="template_file_id" id="template_file_id" value="{$id}"/>
+<input type="hidden" name="template_file_id" id="template_file_id" value="{$id}" />
 <div class="admin_form_v2">
     {$name_field}
     {$filename_field}

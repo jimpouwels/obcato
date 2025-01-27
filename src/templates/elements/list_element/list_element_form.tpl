@@ -1,5 +1,5 @@
 <div class="admin_form_v2">
-    <input type="hidden" value="" name="element{$id}_add_item" id="element{$id}_add_item"/>
+    <input type="hidden" value="" name="element{$id}_add_item" id="element{$id}_add_item" />
     {$title_field}
     <div class="panel-title">Items</div>
     {if count($list_items) > 0}

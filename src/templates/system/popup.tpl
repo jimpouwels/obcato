@@ -3,12 +3,12 @@
 <head>
     <title>Obcato</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css"/>
-    <link rel="stylesheet" href="/admin/static.php?file=/default/css/styles.css" type="text/css"/>
-    <link rel="stylesheet" href="/admin/static.php?file=/default/css/popup_styles.css" type="text/css"/>
-    <link rel="stylesheet" href="/admin/static.php?file=/default/css/jquery-ui-1.8.23.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/static.php?file=/default/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/static.php?file=/default/css/popup_styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/static.php?file=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />
 
     <script type="text/javascript" src="/admin/static.php?file=/default/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/admin/static.php?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>

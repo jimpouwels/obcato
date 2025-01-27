@@ -4,5 +4,5 @@
 {$labels_list}
 
 <form id="add_form_hidden" class="displaynone" method="post" action="{$backend_base_url}">
-    <input id="add_label_action" name="add_label_action" type="hidden" value=""/>
+    <input id="add_label_action" name="add_label_action" type="hidden" value="" />
 </form>

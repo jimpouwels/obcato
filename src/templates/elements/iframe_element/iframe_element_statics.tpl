@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin/static.php?file=/elements/iframe_element/css/iframe_element.css" type="text/css"/>
+<link rel="stylesheet" href="/admin/static.php?file=/elements/iframe_element/css/iframe_element.css" type="text/css" />

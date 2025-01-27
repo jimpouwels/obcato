@@ -1,5 +1,5 @@
 <form id="term_delete_form" action="{$backend_base_url}" method="post">
-    <input type="hidden" name="term_delete_action" id="term_delete_action" value=""/>
+    <input type="hidden" name="term_delete_action" id="term_delete_action" value="" />
     {if count($all_terms) > 0}
         <table class="listing terms_listing" cellpadding="5" cellspacing="0" border="0">
             <colgroup width="300px"></colgroup>

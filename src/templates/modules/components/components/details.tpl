@@ -1,6 +1,6 @@
 <table class="listing" cellspacing="0" cellpadding="5">
-    <colgroup width="150px"/>
-    <colgroup width="200px"/>
+    <colgroup width="150px" />
+    <colgroup width="200px" />
     <thead>
     <tr>
         <th>Eigenschap</th>
@@ -55,10 +55,10 @@
     </tbody>
 </table>
 <form id="uninstall_component_form" method="POST" action="{$backend_base_url}&" class="displaynone">
-    <input type="hidden" name="action" id="action" value=""/>
+    <input type="hidden" name="action" id="action" value="" />
     {if !is_null($current_module)}
-        <input type="hidden" name="module_id" id="module_id" value="{$current_module.id}"/>
+        <input type="hidden" name="module_id" id="module_id" value="{$current_module.id}" />
     {else}
-        <input type="hidden" name="element_id" id="element_id" value="{$current_element.id}"/>
+        <input type="hidden" name="element_id" id="element_id" value="{$current_element.id}" />
     {/if}
 </form>

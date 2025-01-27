@@ -1,6 +1,6 @@
 <form action="{$backend_base_url}&user={$user_id}" method="post" id="user_form" name="update_user">
-    <input type="hidden" name="user_id" value="{$user_id}"/>
-    <input type="hidden" id="action" name="action" value=""/>
+    <input type="hidden" name="user_id" value="{$user_id}" />
+    <input type="hidden" id="action" name="action" value="" />
 
     <div class="admin_form_v2">
         {$username_field}

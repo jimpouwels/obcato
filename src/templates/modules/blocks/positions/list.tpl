@@ -1,5 +1,5 @@
 <form id="positions_delete_form" action="{$backend_base_url}" method="post">
-    <input type="hidden" name="position_delete_action" id="position_delete_action" value=""/>
+    <input type="hidden" name="position_delete_action" id="position_delete_action" value="" />
     {if count($all_positions) > 0}
         <table class="listing" cellpadding="5" cellspacing="0" border="0">
             <colgroup width="300px"></colgroup>

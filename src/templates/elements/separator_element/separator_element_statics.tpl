@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin/static.php?file=/elements/separator_element/css/separator_element.css" type="text/css"/>
+<link rel="stylesheet" href="/admin/static.php?file=/elements/separator_element/css/separator_element.css" type="text/css" />

@@ -4,7 +4,7 @@
             <div class="displaynone">
                 {$module_id_form_field}
                 {$module_tab_id_form_field}
-                <input type="hidden" name="action" value="search"/>
+                <input type="hidden" name="action" value="search" />
             </div>
             {$title_search_field}
             {$filename_search_field}

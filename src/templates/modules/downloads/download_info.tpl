@@ -19,9 +19,9 @@
             </td>
             <td class="center">
                 {if $file.exists}
-                    <img src="/admin/static.php?file=/modules/templates/img/check.gif" alt="Bestand aanwezig"/>
+                    <img src="/admin/static.php?file=/modules/templates/img/check.gif" alt="Bestand aanwezig" />
                 {else}
-                    <img src="/admin/static.php?file=/modules/templates/img/delete.png" alt="Bestand ontbreekt"/>
+                    <img src="/admin/static.php?file=/modules/templates/img/delete.png" alt="Bestand ontbreekt" />
                 {/if}
             </td>
         </tr>

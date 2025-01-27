@@ -1,6 +1,6 @@
 <div>
     <form method="post" id="update_sitewide_pages_form" action="{$backend_base_url}">
-        <input type="hidden" name="action" id="action" value=""/>
+        <input type="hidden" name="action" id="action" value="" />
         <input type="hidden" name="moveSitewidePage" id="moveSitewidePage" value="" />
 
         <a href="#" id="update_sitewide_pages" class="displaynone"></a>
@@ -34,7 +34,7 @@
                         <td class="delete_column center_column">
                             <label for="sitewide_page_{$sitewide_page.id}_delete" class="admin_label"></label>
                             <input type="checkbox" id="sitewide_page_{$sitewide_page.id}_delete"
-                                   name="sitewide_page_{$sitewide_page.id}_delete" class="admin_field_checkbox"/>
+                                   name="sitewide_page_{$sitewide_page.id}_delete" class="admin_field_checkbox" />
                         </td>
                     </tr>
                 {/foreach}

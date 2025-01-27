@@ -1,9 +1,9 @@
 <form id="search_form" method="get">
     <div class="popup_search_container">
-        <input type="hidden" name="object" value="{$object}"/>
-        <input type="hidden" name="backfill" value="{$backfill}"/>
-        <input type="hidden" name="back_click_id" value="{$back_click_id}"/>
-        <input type="hidden" name="popup" value="{$popup_type}"/>
+        <input type="hidden" name="object" value="{$object}" />
+        <input type="hidden" name="backfill" value="{$backfill}" />
+        <input type="hidden" name="back_click_id" value="{$back_click_id}" />
+        <input type="hidden" name="popup" value="{$popup_type}" />
 
         <div class="admin_form_v2">
             {$search_field}
@@ -26,7 +26,7 @@
                         <p><a class="{$image_class}" href="#"
                               onclick="submitSelectionBackToOpener('{$backfill}', {$image.id}, '{$back_click_id}'); return false;"
                               title="Selecteer">{$image.title}</a></p>
-                        <img title="{$image.title}" src="/admin/upload.php?image={$image.id}&amp;thumb=true"/>
+                        <img title="{$image.title}" src="/admin/upload.php?image={$image.id}&amp;thumb=true" />
                         {assign var="counter" value=$counter + 1}
                     </div>
                 {/foreach}

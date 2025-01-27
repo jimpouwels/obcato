@@ -1,6 +1,6 @@
 <form method="post" id="update_target_page_form" action="{$backend_base_url}">
-    <input type="hidden" id="new_default_target_page" name="new_default_target_page"/>
-    <input type="hidden" name="action" id="action" value=""/>
+    <input type="hidden" id="new_default_target_page" name="new_default_target_page" />
+    <input type="hidden" name="action" id="action" value="" />
 
     <a href="#" id="update_target_pages" class="displaynone"></a>
 
@@ -42,7 +42,7 @@
                     <td class="delete_column center_column">
                         <label for="target_page_{$target_page.id}_delete" class="admin_label"></label>
                         <input type="checkbox" id="target_page_{$target_page.id}_delete"
-                               name="target_page_{$target_page.id}_delete" class="admin_field_checkbox"/>
+                               name="target_page_{$target_page.id}_delete" class="admin_field_checkbox" />
                     </td>
                 </tr>
             {/foreach}

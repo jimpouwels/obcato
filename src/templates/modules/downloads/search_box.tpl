@@ -1,7 +1,7 @@
 <form id="download_search" action="{$backend_base_url}" method="get">
     <ul class="admin_form">
         <li class="displaynone">
-            <input type="hidden" name="action" value="search"/>
+            <input type="hidden" name="action" value="search" />
         </li>
         <li>{$search_query_field}</li>
     </ul>

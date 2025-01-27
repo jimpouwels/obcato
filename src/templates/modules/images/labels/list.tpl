@@ -1,5 +1,5 @@
 <form id="label_delete_form" method="post" action="{$backend_base_url}">
-    <input type="hidden" name="label_delete_action" id="label_delete_action" value=""/>
+    <input type="hidden" name="label_delete_action" id="label_delete_action" value="" />
 
     {if (count($all_labels) > 0)}
         <table class="listing" cellpadding="5" cellspacing="0" border="0">

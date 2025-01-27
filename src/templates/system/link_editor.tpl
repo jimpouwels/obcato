@@ -1,4 +1,4 @@
-<input type="hidden" id="delete_link_target" name="delete_link_target" value=""/>
+<input type="hidden" id="delete_link_target" name="delete_link_target" value="" />
 
 {if isset($links) > 0}
     <table class="link-table" cellpadding="5px" cellspacing="0" border="0">
@@ -26,7 +26,7 @@
                 <td class="link-addlink">
                     <a href="#" onclick="putLink('{$link.id}'); return false;" title="{$text_resources.place_link}">
                         <img src="/admin/static.php?file=/default/img/default_icons/place_link.png"
-                             alt="{$text_resources.place_link}"/>
+                             alt="{$text_resources.place_link}" />
                     </a>
                 </td>
                 <td class="link-title">
@@ -40,7 +40,7 @@
                         <span class="link_delete_link"><a href="#" onclick="deleteLink('{$link.id}'); return false;"
                                                           title="Verwijder linkdoel"><img
                                         src="/admin/static.php?file=/default/img/default_icons/delete_small.png"
-                                        alt="Verwijder linkdoel"/></a></span>
+                                        alt="Verwijder linkdoel" /></a></span>
                     {/if}
                 </td>
                 <td class="link-code">

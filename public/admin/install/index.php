@@ -80,10 +80,10 @@ function deleteFile($path) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl_NL" lang="nl_NL">
 <head>
     <title>Obcato - Installation</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" href="static/css/styles.css" type="text/css"/>
-    <link rel="stylesheet" href="static/css/install.css" type="text/css"/>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/install.css" type="text/css" />
 
     <script type="text/javascript" src="static/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="static/js/install.js"></script>
@@ -96,7 +96,7 @@ function deleteFile($path) {
             <div class="content">
                 <p>Obcato vereist opslag van data in een MySQL database met InnoDB als storage engine.
                     Vul de volgende gegevens van uw database in om het systeem correct te laten werken.</p>
-                <input type="hidden" id="step" name="step" value="1"/>
+                <input type="hidden" id="step" name="step" value="1" />
                 <ul class="admin_form">
                     <li>
                         <label class="admin_label" for="database_url">URL</label>
@@ -135,7 +135,7 @@ function deleteFile($path) {
             </div>
         <?php elseif ($_GET["step"] == "2"): ?>
             <div class="panel-title">Initialiseer database</div>
-            <input type="hidden" id="step" name="step" value="2"/>
+            <input type="hidden" id="step" name="step" value="2" />
             <ul class="admin_form">
                 <li class="success">
                     <p>Succesvol verbonden met de database. Klik op "Database initialiseren" om de database te creëren
@@ -149,9 +149,9 @@ function deleteFile($path) {
         <?php elseif ($_GET["step"] == "3"): ?>
             <div class="panel-title">Installatie succesvol</div>
             <div class="content">
-                <input type="hidden" id="step" name="step" value="4"/>
+                <input type="hidden" id="step" name="step" value="4" />
                 <ul class="admin_form">
-                    <input type="hidden" value="" name="installation_finish_type" id="installation_finish_type"/>
+                    <input type="hidden" value="" name="installation_finish_type" id="installation_finish_type" />
                     <li>
                         <p>De installatie is succesvol afgerond. Wilt u de installatiebestanden verwijderen?</p>
                     </li>

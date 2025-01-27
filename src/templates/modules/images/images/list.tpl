@@ -1,7 +1,7 @@
 {if $search_results}
     <form action="{$backend_base_url}" method="post" id="toggle_image_published_form" enctype="multipart/form-data">
-        <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value=""/>
-        <input type="hidden" id="image_id" name="image_id" value=""/>
+        <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
+        <input type="hidden" id="image_id" name="image_id" value="" />
     </form>
     {if $current_search_title}
         <p class="article_list_searched_by_text">
@@ -36,7 +36,7 @@
         <tbody>
         {foreach from=$search_results item=search_result}
             <tr>
-                <td><img title="{$search_result.title}" src="{$search_result.thumb}" alt="{$search_result.title}"/></td>
+                <td><img title="{$search_result.title}" src="{$search_result.thumb}" alt="{$search_result.title}" /></td>
                 <td><a href="{$backend_base_url}&image={$search_result.id}"
                        title="{$search_result.title}">{$search_result.title}</a></td>
                 <td>{$search_result.created_at}</td>
@@ -45,9 +45,9 @@
                     <a onclick="toggleImagePublished('{$search_result.id}'); return false;" href="#">
                         {if $search_result.published}
                         <img alt="Publiceren"
-                             src="/admin/static.php?file=/default/img/default_icons/green_flag.png"/></a>
+                             src="/admin/static.php?file=/default/img/default_icons/green_flag.png" /></a>
                     {else}
-                    <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png"/>
+                    <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png" />
                     {/if}
                     </a>
                 </td>

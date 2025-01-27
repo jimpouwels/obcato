@@ -1,6 +1,6 @@
 <form id="add_form_hidden" class="displaynone" method="post" action="{$backend_base_url}">
     <fieldset>
-        <input id="add_block_action" name="add_block_action" type="hidden" value=""/>
+        <input id="add_block_action" name="add_block_action" type="hidden" value="" />
     </fieldset>
 </form>
 

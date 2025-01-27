@@ -1,6 +1,6 @@
 <form method="post">
-    <input type="hidden" name="webform_id" value="{$webform_id}"/>
-    <input type="hidden" id="captcha_token" name="captcha_token" value=""/>
+    <input type="hidden" name="webform_id" value="{$webform_id}" />
+    <input type="hidden" id="captcha_token" name="captcha_token" value="" />
     {$form_html}
 </form>
 {if isset($captcha_key)}
