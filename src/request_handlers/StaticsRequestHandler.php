@@ -19,9 +19,9 @@ class StaticsRequestHandler extends HttpRequestHandler {
 
     public function handlePost(): void {}
 
-    private function setResponseContentType(string $absolute_path): void {
-        $path_parts = explode(".", $absolute_path);
-        $extension = $path_parts[count($path_parts) - 1];
+    private function setResponseContentType(string $absolutePath): void {
+        $pathParts = explode(".", $absolutePath);
+        $extension = $pathParts[count($pathParts) - 1];
         if ($extension == "jpg") {
             header("Content-Type: image/jpeg");
         } else if ($extension == "gif") {
@@ -37,8 +37,8 @@ class StaticsRequestHandler extends HttpRequestHandler {
         }
     }
 
-    private function getAbsolutePathFor(string $relative_path): string {
-        return STATIC_DIR . $relative_path;
+    private function getAbsolutePathFor(string $relativePath): string {
+        return STATIC_DIR . $relativePath;
     }
 
     private function getRelativePathFromGetRequest(): ?string {

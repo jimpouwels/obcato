@@ -9,5 +9,5 @@ require_once "../bootstrap.php";
 
 Authenticator::isAuthenticated();
 
-$statics_request_handler = new StaticsRequestHandler();
-$statics_request_handler->handle();
+$staticsRequestHandler = new StaticsRequestHandler();
+$staticsRequestHandler->handle();
