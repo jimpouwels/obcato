@@ -4,15 +4,15 @@ namespace Obcato\Core\view\views;
 
 class ActionButton extends Visual {
 
-    private string $_label;
-    private string $_action_id;
-    private string $_icon_class;
+    private string $label;
+    private string $actionId;
+    private string $iconClass;
 
-    public function __construct(string $label, string $action_id, string $icon_class) {
+    public function __construct(string $label, string $actionId, string $iconClass) {
         parent::__construct();
-        $this->_label = $label;
-        $this->_action_id = $action_id;
-        $this->_icon_class = $icon_class;
+        $this->label = $label;
+        $this->actionId = $actionId;
+        $this->iconClass = $iconClass;
     }
 
     public function getTemplateFilename(): string {
@@ -20,9 +20,9 @@ class ActionButton extends Visual {
     }
 
     public function load(): void {
-        $this->assign("action_id", $this->_action_id);
-        $this->assign("icon_class", $this->_icon_class);
-        $this->assign("label", $this->_label);
+        $this->assign("action_id", $this->actionId);
+        $this->assign("icon_class", $this->iconClass);
+        $this->assign("label", $this->label);
     }
 
 }
