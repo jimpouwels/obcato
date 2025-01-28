@@ -72,7 +72,7 @@
                 <label class="admin_label">{$text_resources.article_editor_selected_wallpaper_label}</label>
             </div>
             <div class="admin_field_wrapper">
-                <img class="article_selected_wallpaper" title="Wallpaper verwijderen"
+                <img class="article_selected_wallpaper" title=""
                      src="/admin/upload.php?image={$wallpaper_id}&amp;thumb=true" />
                 {$delete_wallpaper_button}
             </div>
