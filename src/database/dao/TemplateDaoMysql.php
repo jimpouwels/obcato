@@ -38,7 +38,7 @@ class TemplateDaoMysql implements TemplateDao {
     public function getTemplatesByScope(Scope $scope): array {
         $templates = array();
         if ($scope != "") {
-            $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM templates WHERE scope_id = ?");
+            $statement = $this->mysqlConnector->prepareStatement("SELECT * FROM templates WHERE scope_id = ? ORDER BY NAME ASC");
             $scopeId = $scope->getId();
             $statement->bind_param("i", $scopeId);
             $result = $this->mysqlConnector->executeStatement($statement);
