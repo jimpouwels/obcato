@@ -40,7 +40,7 @@
                 <label class="admin_label">{$text_resources.article_editor_child_articles_label}</label>
             </div>
             <div class="admin_field_wrapper">
-                <ul style="padding: 0px; margin: 0px; padding-left: 15px;">
+                <ul style="margin: 0; padding: 0 0 0 15px;">
                     {foreach from=$child_articles item=child_article}
                         <li>
                             <i><a title="{$child_article.title}" href="{$child_article.url}">{$child_article.title}</a></i>

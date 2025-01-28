@@ -39,7 +39,7 @@ article_editor_delete_image_button_label: Delete image
 article_editor_delete_wallpaper_button_label: Delete wallpaper
 article_editor_delete_parent_article_label: Delete reference
 article_editor_child_articles_label: Sub articles
-article_editor_select_parent_article_label: Main article
+article_editor_select_parent_article_label: Selected main article
 article_editor_selected_image_label: Selected image
 article_editor_selected_wallpaper_label: Selected wallpaper
 
