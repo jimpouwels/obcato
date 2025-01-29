@@ -7,6 +7,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\frontend\cache\Cache;
 use Obcato\Core\frontend\RobotsVisual;
 use Obcato\Core\frontend\SitemapVisual;
 use Obcato\Core\frontend\WebsiteVisual;
@@ -24,6 +25,7 @@ class RequestHandler {
     private SettingsDao $settingsDao;
     private FriendlyUrlManager $friendlyUrlManager;
     private PageService $pageService;
+    private Cache $cache;
 
     public function __construct() {
         $this->settingsDao = SettingsDaoMysql::getInstance();
@@ -31,6 +33,7 @@ class RequestHandler {
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->formRequestHandler = FormRequestHandler::getInstance();
         $this->pageService = PageInteractor::getInstance();
+        $this->cache = Cache::getInstance();
     }
 
     public function handleRequest(): void {
@@ -59,7 +62,7 @@ class RequestHandler {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $this->formRequestHandler->handlePost($urlMatch->getPage(), $urlMatch->getArticle());
                     }
-                    $this->renderPage($urlMatch->getPage(), $urlMatch->getArticle());
+                    $this->renderPage($urlMatch->getPage(), $urlMatch->getArticle(), $urlMatch->getOriginalUrl());
                 }
             }
         }
@@ -102,10 +105,10 @@ class RequestHandler {
 
     private function renderHomepage(): void {
         $homePage = $this->pageService->getHomepage();
-        $this->renderPage($homePage, null);
+        $this->renderPage($homePage, null, "");
     }
 
-    private function renderPage(Page $page, ?Article $article): void {
+    private function renderPage(Page $page, ?Article $article, string $originalUrl): void {
         if ($article && $article->getTargetPageId() != $page->getId()) {
             $pageUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($article->getTargetPageId()));
             $articleUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($article);
@@ -113,7 +116,9 @@ class RequestHandler {
             exit();
         }
         $website = new WebsiteVisual($page, $article);
-        echo $website->render();
+        $html = $website->render();
+        $this->cache->insert($originalUrl, $html);
+        echo $html;
     }
 
     private function render404Page(): void {

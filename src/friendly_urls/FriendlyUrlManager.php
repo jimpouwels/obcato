@@ -104,7 +104,7 @@ class FriendlyUrlManager {
         if (str_ends_with($url, '/')) {
             $url = rtrim($url, "/");
         }
-        $urlMatch = new UrlMatch();
+        $urlMatch = new UrlMatch($url);
         $this->getPageFromUrl($url, $urlMatch);
 
         if (!$urlMatch->getPage()) {

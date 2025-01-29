@@ -4,7 +4,7 @@ namespace Obcato\Core\modules\components\installer;
 
 use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\utilities\FileUtility;
-use const Obcato\COMPONENT_TEMP_DIR;
+use const Obcato\Core\COMPONENT_TEMP_DIR;
 use const Obcato\core\STATIC_DIR;
 
 abstract class Installer {

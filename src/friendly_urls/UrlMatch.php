@@ -7,10 +7,15 @@ use Obcato\Core\modules\pages\model\Page;
 
 class UrlMatch {
 
+    private ?string $originalUrl;
     private ?Page $page = null;
     private ?string $pageUrl = null;
     private ?Article $article = null;
     private ?string $articleUrl = null;
+
+    public function __construct(?string $originalUrl) {
+        $this->originalUrl = $originalUrl;
+    }
 
     public function getPage(): ?Page {
         return $this->page;
@@ -36,6 +41,10 @@ class UrlMatch {
 
     public function getArticleUrl(): string {
         return $this->articleUrl;
+    }
+
+    public function getOriginalUrl(): string {
+        return $this->originalUrl;
     }
 
 }

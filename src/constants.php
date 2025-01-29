@@ -27,6 +27,7 @@ const COMPONENT_DIR = PRIVATE_DIR . '/components';
 const COMPONENT_TEMP_DIR = COMPONENT_DIR . '/temp';
 const UPLOAD_DIR = PRIVATE_DIR . '/upload';
 const FRONTEND_TEMPLATE_DIR = PRIVATE_DIR . '/templates';
+const CACHE_DIR = PRIVATE_DIR . '/cache';
 const BACKEND_TEMPLATE_DIR = CMS_ROOT . '/templates';
 const STATIC_DIR = CMS_ROOT . '/static';
 const CONFIG_DIR = PRIVATE_DIR . '/config';
