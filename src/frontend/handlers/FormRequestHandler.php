@@ -91,6 +91,11 @@ class FormRequestHandler {
         ];
 
         $context = stream_context_create($options);
-        return file_get_contents($url, false, $context);
+        $response = file_get_contents($url, false, $context);
+        $result = json_decode($response, true);
+        foreach($result as &$item) {
+            return $item;
+        }
+        return false;
     }
 }

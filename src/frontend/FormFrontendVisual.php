@@ -41,6 +41,7 @@ class FormFrontendVisual extends FrontendVisual {
         $webformChildData = $this->createChildData();
         $webformData = $this->renderWebForm($this->webform);
         $webformChildData->assign('webform', $webformData);
+        $webformChildData->assign('has_captcha_error', FormStatus::getError("captcha"));
         $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->templateDao->getTemplateFile($this->webform->getTemplate()->getTemplateFileId())->getFileName(), $webformChildData));
     }
 

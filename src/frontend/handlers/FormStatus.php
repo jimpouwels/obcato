@@ -41,5 +41,3 @@ class FormStatus {
         return null;
     }
 }
-
-?>

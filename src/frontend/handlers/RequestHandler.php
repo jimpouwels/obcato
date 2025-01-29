@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\frontend\cache\Cache;
+use Obcato\Core\frontend\session\Cache;
 use Obcato\Core\frontend\RobotsVisual;
 use Obcato\Core\frontend\SitemapVisual;
 use Obcato\Core\frontend\WebsiteVisual;

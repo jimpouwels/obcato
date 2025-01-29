@@ -49,12 +49,12 @@ abstract class FormField extends Visual {
     }
 
     public function getErrorHtml(string $field_name): string {
-        $error_html = "";
+        $errorHtml = "";
         if (Session::hasError($field_name)) {
             $error = new FormError(Session::popError($field_name));
             return $error->render();
         }
-        return $error_html;
+        return $errorHtml;
     }
 
     public function getCssClassesHtml(): string {
