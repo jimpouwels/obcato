@@ -30,7 +30,7 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
             $imageItem["alt_text"] = $image->getAltText();
             $imageItem["location"] = $image->getLocation();
             $imageItem["url"] = $this->getImageUrl($image);
-            list($width, $height) = getimagesize(UPLOAD_DIR . '/' . $image->getFilename());
+            list($width, $height) = getimagesize(UPLOAD_DIR . '/' . $image->getFilename()); // better have a getWidth() and getHeight() on the image?
             $imageItem["width"] = $width;
             $imageItem["height"] = $height;
             $images_arr[] = $imageItem;
