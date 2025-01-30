@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\frontend\session\Cache;
+use Obcato\Core\frontend\cache\Cache;
 use Obcato\Core\frontend\RobotsVisual;
 use Obcato\Core\frontend\SitemapVisual;
 use Obcato\Core\frontend\WebsiteVisual;
@@ -124,7 +124,7 @@ class RequestHandler {
     private function render404Page(): void {
         $page404 = $this->settingsDao->getSettings()->getPage404();
         http_response_code(404);
-        $this->renderPage($page404, null);
+        $this->renderPage($page404, null, "404");
         exit();
     }
 

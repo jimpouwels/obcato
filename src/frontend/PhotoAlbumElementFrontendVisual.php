@@ -6,6 +6,7 @@ use Obcato\Core\elements\photo_album_element\PhotoAlbumElement;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
+use const Obcato\Core\UPLOAD_DIR;
 
 class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
 
@@ -29,6 +30,9 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
             $imageItem["alt_text"] = $image->getAltText();
             $imageItem["location"] = $image->getLocation();
             $imageItem["url"] = $this->getImageUrl($image);
+            list($width, $height) = getimagesize(UPLOAD_DIR . '/' . $image->getFilename());
+            $imageItem["width"] = $width;
+            $imageItem["height"] = $height;
             $images_arr[] = $imageItem;
         }
         return $images_arr;
