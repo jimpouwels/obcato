@@ -39,8 +39,8 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     public function handlePost(): void {
         $this->currentPage = $this->getPageFromPostRequest();
         try {
-            parent::handlePost();
             if ($this->isUpdatePageAction()) {
+                parent::handlePost();
                 $this->updatePage();
             } else if ($this->isDeletePageAction()) {
                 $this->deletePage();
