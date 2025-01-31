@@ -27,6 +27,7 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
+        $this->currentBlock = $this->getBlockFromPostRequest();
         try {
             parent::handlePost();
             if ($this->isUpdateBlockAction()) {
@@ -41,8 +42,10 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ?ElementHolder {
-        $this->currentBlock = $this->getBlockFromPostRequest();
+    public function getElementHolderFromPostRequest(): ?ElementHolder {
+        if (!$this->currentBlock) {
+            $this->currentBlock = $this->getBlockFromPostRequest();
+        }
         return $this->currentBlock;
     }
 

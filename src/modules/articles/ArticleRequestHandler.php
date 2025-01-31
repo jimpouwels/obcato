@@ -30,11 +30,12 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
+        $this->currentArticle = $this->getArticleFromPostRequest();
         try {
-            parent::handlePost();
             if ($this->isAddArticleAction()) {
                 $this->addArticle();
             } else if ($this->isUpdateArticleAction()) {
+                parent::handlePost();
                 $this->updateArticle();
             } else if ($this->isDeleteArticleAction()) {
                 $this->deleteArticle();
@@ -44,8 +45,10 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ?ElementHolder {
-        $this->currentArticle = $this->getArticleFromPostRequest();
+    public function getElementHolderFromPostRequest(): ?ElementHolder {
+        if (!$this->currentArticle) {
+            $this->currentArticle = $this->getArticleFromPostRequest();
+        }
         return $this->currentArticle;
     }
 

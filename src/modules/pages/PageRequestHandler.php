@@ -20,7 +20,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     private static string $PAGE_ID_GET = "page";
     private static int $FALLBACK_PAGE_ID = 1;
 
-    private Page $currentPage;
+    private ?Page $currentPage;
     private PageService $pageService;
     private BlockService $blockService;
     private FriendlyUrlManager $friendlyUrlManager;
@@ -37,6 +37,7 @@ class PageRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
+        $this->currentPage = $this->getPageFromPostRequest();
         try {
             parent::handlePost();
             if ($this->isUpdatePageAction()) {
@@ -55,8 +56,10 @@ class PageRequestHandler extends ElementHolderRequestHandler {
         }
     }
 
-    public function loadElementHolderFromPostRequest(): ?ElementHolder {
-        $this->currentPage = $this->getPageFromPostRequest();
+    public function getElementHolderFromPostRequest(): ?ElementHolder {
+        if (!$this->currentPage) {
+            $this->currentPage = $this->getPageFromPostRequest();
+        }
         return $this->currentPage;
     }
 
