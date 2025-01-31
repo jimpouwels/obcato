@@ -40,5 +40,5 @@ interface ImageDao {
 
     public function deleteLabelForImage(int $labelId, Image $image): void;
 
-    public function getLabelsForImage(int $labelId): array;
+    public function getLabelsForImage(int $imageId): array;
 }

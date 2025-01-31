@@ -65,11 +65,29 @@ class ImageRequestHandler extends HttpRequestHandler {
             $this->addNewlySelectedLabelsToImage($imageForm->getSelectedLabels());
             $this->deleteSelectedLabelsFromImage();
             $this->saveUploadedImage();
+            if (!empty($imageForm->getNewImageLabelName())) {
+                $label = $this->imageDao->getLabelByName($imageForm->getNewImageLabelName());
+                if (!$label) {
+                    $label = $this->imageDao->createLabel($imageForm->getNewImageLabelName());
+                }
+                if (!$this->hasLabel($this->currentImage, $label->getId())) {
+                    $this->imageDao->addLabelToImage($label->getId(), $this->currentImage);
+                }
+            }
             $this->imageDao->updateImage($this->currentImage);
-            $this->sendSuccessMessage("Afbeelding succesvol opgeslagen");
+            $this->sendSuccessMessage($this->getTextResource("images_save_success_message"));
         } catch (FormException $e) {
-            $this->sendErrorMessage("Afbeelding niet opgeslagen, verwerk de fouten");
+            $this->sendErrorMessage($this->getTextResource("images_save_failed_message"));
         }
+    }
+
+    private function hasLabel(Image $image, int $labelId): bool {
+        foreach ($this->imageDao->getLabelsForImage($image->getId()) as $label) {
+            if ($label->getId() === $labelId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private function toggleImagePublished(): void {
@@ -115,9 +133,9 @@ class ImageRequestHandler extends HttpRequestHandler {
             return;
         }
         $existingLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
-        foreach ($selectedLabels as $selected_label_id) {
-            if (!$this->isLabelAlreadyAdded($selected_label_id, $existingLabels)) {
-                $this->imageDao->addLabelToImage($selected_label_id, $this->currentImage);
+        foreach ($selectedLabels as $selectedLabelId) {
+            if (!$this->isLabelAlreadyAdded($selectedLabelId, $existingLabels)) {
+                $this->imageDao->addLabelToImage($selectedLabelId, $this->currentImage);
             }
         }
     }

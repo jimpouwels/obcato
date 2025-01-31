@@ -29,3 +29,6 @@ image_editor_title_label: Title
 image_editor_location_label: Location
 image_editor_published_label: Published
 image_editor_file_label: File
+new_image_label_field_label: New label
+images_save_success_message: Image successfully saved
+images_save_failed_message: Image not saved, process the errors

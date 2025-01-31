@@ -86,11 +86,7 @@ abstract class FormField extends Visual {
     }
 
     private function getFieldValue(): ?string {
-        if (isset($_POST[$this->fieldName])) {
-            return StringUtility::escapeXml($_POST[$this->fieldName]);
-        } else {
-            return StringUtility::escapeXml($this->value);
-        }
+        return StringUtility::escapeXml($this->value);
     }
 
     private function getLabelHtml(): ?string {

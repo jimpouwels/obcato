@@ -1,4 +1,8 @@
 <div class="selector_panel">
+    {if isset($new_image_label_field)}
+        {$new_image_label_field}
+    {/if}
+
     <select class="label-selector" multiple="multiple" size="10" name="select_labels_{$context_id}[]">
         {if count($all_labels) > 0}
             {foreach from=$all_labels item=label}

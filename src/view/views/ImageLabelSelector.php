@@ -9,15 +9,17 @@ use Obcato\Core\view\TemplateData;
 
 class ImageLabelSelector extends Panel {
 
-    private array $_selected_labels;
-    private ImageDao $_image_dao;
-    private int $_context_id;
+    private array $selectedLabels;
+    private ImageDao $imageDao;
+    private int $contextId;
+    private bool $includeNewLabelField;
 
-    public function __construct(array $selected_labels, int $contextId) {
+    public function __construct(array $selectedLabels, int $contextId, bool $includeNewLabelField = false) {
         parent::__construct('Labels', 'image_label_selector');
-        $this->_selected_labels = $selected_labels;
-        $this->_image_dao = ImageDaoMysql::getInstance();
-        $this->_context_id = $contextId;
+        $this->selectedLabels = $selectedLabels;
+        $this->imageDao = ImageDaoMysql::getInstance();
+        $this->contextId = $contextId;
+        $this->includeNewLabelField = $includeNewLabelField;
     }
 
     public function getPanelContentTemplate(): string {
@@ -25,47 +27,47 @@ class ImageLabelSelector extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
-        $this->assignLabelSelector($data);
-    }
-
-    private function assignLabelSelector($data): void {
-        $all_label_values = $this->labelsToArray($this->_image_dao->getAllLabels(), $this->_selected_labels);
-        $image_label_values = $this->selectedLabelsToArray($this->_selected_labels);
-        $data->assign('context_id', $this->_context_id);
-        $data->assign("all_labels", $all_label_values);
-        $data->assign("image_labels", $image_label_values);
-    }
-
-    private function labelsToArray(array $labels, array $image_labels): array {
-        $label_values = array();
-        foreach ($labels as $label) {
-            $label_value = $this->createLabelValue($label);
-            $label_value["is_selected"] = in_array($label, $image_labels);
-            $label_values[] = $label_value;
+        $allLabelValues = $this->labelsToArray($this->imageDao->getAllLabels(), $this->selectedLabels);
+        $imageLabelValues = $this->selectedLabelsToArray($this->selectedLabels);
+        $data->assign('context_id', $this->contextId);
+        if ($this->includeNewLabelField) {
+            $newLabelField = new TextField("new_image_label_" . $this->contextId, $this->getTextResource("new_image_label_field_label"), "", false, false, false);
+            $data->assign('new_image_label_field', $newLabelField->render());
         }
-        return $label_values;
+        $data->assign("all_labels", $allLabelValues);
+        $data->assign("image_labels", $imageLabelValues);
+    }
+
+    private function labelsToArray(array $labels, array $imageLabels): array {
+        $labelValues = array();
+        foreach ($labels as $label) {
+            $labelValue = $this->createLabelValue($label);
+            $labelValue["is_selected"] = in_array($label, $imageLabels);
+            $labelValues[] = $labelValue;
+        }
+        return $labelValues;
     }
 
     private function selectedLabelsToArray(array $labels): array {
-        $label_values = array();
+        $labelValues = array();
         foreach ($labels as $label) {
-            $label_value = $this->createLabelValue($label);
-            $label_value["delete_checkbox"] = $this->renderSelectedLabelCheckbox($label);
-            $label_values[] = $label_value;
+            $labelValue = $this->createLabelValue($label);
+            $labelValue["delete_checkbox"] = $this->renderSelectedLabelCheckbox($label);
+            $labelValues[] = $labelValue;
         }
-        return $label_values;
+        return $labelValues;
     }
 
     private function renderSelectedLabelCheckbox(ImageLabel $label): string {
-        $checkbox = new SingleCheckbox("label_" . $this->_context_id . "_" . $label->getId() . "_delete", "", 0, false, "");
+        $checkbox = new SingleCheckbox("label_" . $this->contextId . "_" . $label->getId() . "_delete", "", 0, false, "");
         return $checkbox->render();
     }
 
     private function createLabelValue(ImageLabel $label): array {
-        $label_value = array();
-        $label_value["id"] = $label->getId();
-        $label_value["name"] = $label->getName();
-        return $label_value;
+        $labelValue = array();
+        $labelValue["id"] = $label->getId();
+        $labelValue["name"] = $label->getName();
+        return $labelValue;
     }
 
 }

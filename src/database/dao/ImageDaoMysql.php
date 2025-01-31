@@ -138,9 +138,9 @@ class ImageDaoMysql implements ImageDao {
         $image->setId($this->mysqlConnector->getInsertId());
     }
 
-    public function createLabel(): ImageLabel {
+    public function createLabel(string $name = "Nieuw label"): ImageLabel {
         $newLabel = new ImageLabel();
-        $newLabel->setName("Nieuw label");
+        $newLabel->setName($name);
         $postfix = 1;
         while (!is_null($this->getLabelByName($newLabel->getName()))) {
             $newLabel->setName("Nieuw label " . $postfix);
@@ -208,9 +208,9 @@ class ImageDaoMysql implements ImageDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function getLabelsForImage(int $labelId): array {
+    public function getLabelsForImage(int $imageId): array {
         $query = "SELECT il.id, il.name FROM image_labels il, images_labels ils, 
-                      images i WHERE ils.image_id = " . $labelId . " AND ils.image_id =
+                      images i WHERE ils.image_id = " . $imageId . " AND ils.image_id =
                       i.id AND il.id = ils.label_id";
         $result = $this->mysqlConnector->executeQuery($query);
         $labels = array();

@@ -10,6 +10,7 @@ class ImageForm extends Form {
 
     private Image $image;
     private array $selectedLabels;
+    private ?string $newImageLabel;
 
     public function __construct(Image $image) {
         $this->image = $image;
@@ -20,6 +21,7 @@ class ImageForm extends Form {
         $this->image->setAltText($this->getFieldValue("image_alt_text"));
         $this->image->setPublished($this->getCheckboxValue("image_published"));
         $this->image->setLocation($this->getFieldValue("image_location"));
+        $this->newImageLabel = $this->getFieldValue("new_image_label_" . $this->image->getId());
         $this->selectedLabels = $this->getSelectValue("select_labels_" . $this->image->getId());
         if ($this->hasErrors()) {
             throw new FormException();
@@ -28,6 +30,10 @@ class ImageForm extends Form {
 
     public function getSelectedLabels(): array {
         return $this->selectedLabels;
+    }
+
+    public function getNewImageLabelName(): ?string {
+        return $this->newImageLabel;
     }
 
 }
