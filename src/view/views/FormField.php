@@ -48,22 +48,22 @@ abstract class FormField extends Visual {
         $this->assign('form_field', $this->getTemplateEngine()->fetch($this->getFormFieldTemplateFilename(), $fieldTemplateData));
     }
 
-    public function getErrorHtml(string $field_name): string {
+    public function getErrorHtml(string $fieldName): string {
         $errorHtml = "";
-        if (Session::hasError($field_name)) {
-            $error = new FormError(Session::popError($field_name));
+        if (Session::hasError($fieldName)) {
+            $error = new FormError(Session::popError($fieldName));
             return $error->render();
         }
         return $errorHtml;
     }
 
     public function getCssClassesHtml(): string {
-        $css_class_html = $this->cssClass;
-        $css_class_html .= ' ' . $this->errorClass($this->fieldName);
+        $cssClassHtml = $this->cssClass;
+        $cssClassHtml .= ' ' . $this->errorClass($this->fieldName);
         if ($this->linkable) {
-            $css_class_html .= 'linkable ';
+            $cssClassHtml .= 'linkable ';
         }
-        return trim($css_class_html);
+        return trim($cssClassHtml);
     }
 
     public function errorClass(string $field_name): string {
@@ -73,9 +73,9 @@ abstract class FormField extends Visual {
         return "";
     }
 
-    protected function getInputLabelHtml(string $label_resource_identifier, string $field_name, bool $mandatory): string {
-        if ($label_resource_identifier) {
-            $label = new FormLabel($field_name, $label_resource_identifier, $mandatory);
+    protected function getInputLabelHtml(string $labelResourceIdentifier, string $fieldName, bool $mandatory): string {
+        if ($labelResourceIdentifier) {
+            $label = new FormLabel($fieldName, $labelResourceIdentifier, $mandatory);
             return $label->render();
         }
         return "";

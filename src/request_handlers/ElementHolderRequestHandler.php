@@ -47,15 +47,19 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     protected abstract function loadElementHolderFromPostRequest(): ?ElementHolder;
 
     protected function updateElementHolder(ElementHolder $elementHolder): void {
+        $errorThrown = false;
         $form = new ElementHolderForm($elementHolder);
-        try {
-            $form->loadFields();
-            $this->updateLinks($elementHolder);
-            foreach ($elementHolder->getElements() as $element) {
+        $form->loadFields();
+        $this->updateLinks($elementHolder);
+        foreach ($elementHolder->getElements() as $element) {
+            try {
                 $element->getRequestHandler()->handle();
+            } catch (ElementContainsErrorsException|FormException $e) {
+                $errorThrown = true;
             }
-        } catch (ElementContainsErrorsException|FormException $e) {
-            throw new ElementHolderContainsErrorsException($e->getMessage());
+        }
+        if ($errorThrown) {
+            throw new ElementHolderContainsErrorsException();
         }
     }
 
