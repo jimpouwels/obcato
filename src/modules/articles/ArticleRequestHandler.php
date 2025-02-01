@@ -30,12 +30,12 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
-        $this->currentArticle = $this->getArticleFromPostRequest();
         try {
+            $this->currentArticle = $this->getArticleFromPostRequest();
+            parent::handlePost();
             if ($this->isAddArticleAction()) {
                 $this->addArticle();
             } else if ($this->isUpdateArticleAction()) {
-                parent::handlePost();
                 $this->updateArticle();
             } else if ($this->isDeleteArticleAction()) {
                 $this->deleteArticle();

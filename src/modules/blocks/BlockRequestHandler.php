@@ -27,10 +27,10 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
     }
 
     public function handlePost(): void {
-        $this->currentBlock = $this->getBlockFromPostRequest();
         try {
+            $this->currentBlock = $this->getBlockFromPostRequest();
+            parent::handlePost();
             if ($this->isUpdateBlockAction()) {
-                parent::handlePost();
                 $this->updateBlock();
             } else if ($this->isDeleteBlockAction()) {
                 $this->deleteBlock();
