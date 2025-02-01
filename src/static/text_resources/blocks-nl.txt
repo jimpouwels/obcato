@@ -13,7 +13,7 @@ blocks_no_positions_found: Geen posities gevonden
 blocks_position_successfully_created: Positie succesvol aangemaakt
 blocks_position_successfully_updated: Positie succesvol opgeslagen
 blocks_position_successfully_deleted: Positie(s) succesvol verwijdered
-blocks_position_could_not_be_updated_error: Positie niet opgeslagen, verwerk de fouten
+blocks_position_could_not_be_updated_error: Positie niet volledig opgeslagen, verwerk de fouten
 
 # POSITION EDITOR
 blocks_default_position_title: Nieuwe positie

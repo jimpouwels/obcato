@@ -1,5 +1,5 @@
 # MESSAGES
-page_not_saved_error_message: Page could not be saved, please resolve the errors
+page_not_saved_error_message: Page could not be fully saved, please resolve the errors
 page_saved_message: Page saved succesfully
 page_deleted_message: Page deleted succesfully
 page_added_message: Page added succesfully

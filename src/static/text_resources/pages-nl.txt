@@ -1,5 +1,5 @@
 # MESSAGES
-page_not_saved_error_message: Pagina niet opgeslagen, verwerk de fouten
+page_not_saved_error_message: Pagina niet volledig opgeslagen, verwerk de fouten
 page_saved_message: Pagina succesvol opgeslagen
 page_deleted_message: Pagina succesvol verwijderd
 page_added_message: Pagina succesvol aangemaakt

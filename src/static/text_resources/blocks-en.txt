@@ -13,7 +13,7 @@ blocks_no_positions_found: No positions found
 blocks_position_successfully_created: Position successfully created
 blocks_position_successfully_updated: Position successfully updated
 blocks_position_successfully_deleted: Position(s) successfully deleted
-blocks_position_could_not_be_updated_error: Position not saved, please correct errors
+blocks_position_could_not_be_updated_error: Position not fully saved, please correct errors
 
 # POSITION EDITOR
 blocks_default_position_title: New position
