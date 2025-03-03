@@ -25,6 +25,7 @@ blocks_positions_list_description_column: Description
 blocks_positions_list_delete_column: Delete
 
 # BLOCK METADATA
+blocks_edit_metadata_name_field_label: Name
 blocks_edit_metadata_title_field_label: Title
 blocks_edit_metadata_ispublished_field_label: Published
 blocks_edit_metadata_template_field_label: Template
