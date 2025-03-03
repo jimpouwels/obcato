@@ -9,7 +9,7 @@
     {if $active}
         {assign var='class' value=$class|cat:' active'}
     {/if}
-    <a title="{$title}" href="{$backend_base_url}&page={$page_id}" class="{$class}">{$name}</a>
+    <a title="{$name}" href="{$backend_base_url}&page={$page_id}" class="{$class}">{$name}</a>
     {if isset($sub_pages) && count($sub_pages) > 0}
         <ul>
             {foreach from=$sub_pages item=sub_page}
