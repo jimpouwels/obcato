@@ -9,6 +9,7 @@ use Obcato\Core\modules\templates\model\Presentable;
 
 class ElementHolder extends Presentable {
 
+    private string $name;
     private string $title;
     private bool $published;
     private string $createdAt;
@@ -39,6 +40,14 @@ class ElementHolder extends Presentable {
 
     public function setPublished(bool $published): void {
         $this->published = $published;
+    }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function setName(string $name): void {
+        $this->name = $name;
     }
 
     public function getTitle(): string {
@@ -128,6 +137,7 @@ class ElementHolder extends Presentable {
     }
 
     protected function initFromDb(array $row): void {
+        $this->setName($row['name']);
         $this->setTitle($row['title']);
         $this->setPublished($row['published'] == 1);
         $this->setCreatedAt($row['created_at']);

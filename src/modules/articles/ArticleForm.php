@@ -21,6 +21,7 @@ class ArticleForm extends Form {
     }
 
     public function loadFields(): void {
+        $this->article->setName($this->getMandatoryFieldValue("name"));
         $this->article->setTitle($this->getMandatoryFieldValue("title"));
         $this->article->setUrlTitle($this->getFieldValue('url_title'));
         $this->article->setTemplateId($this->getNumber('template'));

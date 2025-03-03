@@ -11,7 +11,7 @@ use const Obcato\Core\ELEMENT_HOLDER_BLOCK;
 
 class BlockDaoMysql implements BlockDao {
 
-    public static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id, 
+    public static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.name, e.title, e.published, e.scope_id, 
                       e.created_at, e.created_by, e.type, b.position_id";
     private static ?BlockDaoMysql $instance = null;
     private ElementHolderDao $elementHolderDao;
@@ -127,6 +127,7 @@ class BlockDaoMysql implements BlockDao {
         $newBlock = new Block();
         $newBlock->setPublished(false);
         $newBlock->setTitle('Nieuw block');
+        $newBlock->setName('Nieuw block');
         $newBlock->setCreatedById(Authenticator::getCurrentUser()->getId());
         $newBlock->setType(ELEMENT_HOLDER_BLOCK);
         $this->persistBlock($newBlock);

@@ -11,7 +11,7 @@ use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
 
 class ArticleDaoMysql implements ArticleDao {
-    private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.last_modified, e.scope_id,
+    private static string $myAllColumns = "e.id, e.template_id, e.name, e.title, e.published, e.last_modified, e.scope_id,
                       e.created_at, e.created_by, e.type, a.description, a.wallpaper_id, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
     private static ?ArticleDaoMysql $instance = null;
@@ -58,7 +58,7 @@ class ArticleDaoMysql implements ArticleDao {
 
     public function getAllArticles(): array {
         $query = "SELECT " . self::$myAllColumns . " FROM element_holders e, articles a WHERE e.id = a.element_holder_id
-                      order by title ASC";
+                      order by name ASC";
         $result = $this->mysqlConnector->executeQuery($query);
         $articles = array();
         while ($row = $result->fetch_assoc()) {
@@ -89,7 +89,7 @@ class ArticleDaoMysql implements ArticleDao {
             $where = $where . " AND ats.term_id = " . $termId . " AND ats.article_id = e.id";
         }
 
-        $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY title";
+        $query = "SELECT DISTINCT " . self::$myAllColumns . $from . $where . " ORDER BY name";
         $result = $this->mysqlConnector->executeQuery($query);
         $articles = array();
         while ($row = $result->fetch_assoc()) {
@@ -113,9 +113,16 @@ class ArticleDaoMysql implements ArticleDao {
         $queryFrom = " FROM element_holders e, articles a";
         if ($terms && count($terms) > 0) {
             $queryFrom = $queryFrom . ", articles_terms at";
+            $termWhere = "";
             foreach ($terms as $term) {
-                $queryWhere = $queryWhere . " AND EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
+                if ($termWhere) {
+                    $termWhere .= ' OR ';
+                } else {
+                    $termWhere .= ' AND (';
+                }
+                $termWhere = $termWhere . "EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
             }
+            $queryWhere .= $termWhere . ')';
         }
         $limitQueryPart = '';
         if ($maxResults) {

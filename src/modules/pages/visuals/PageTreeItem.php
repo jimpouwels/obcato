@@ -32,7 +32,7 @@ class PageTreeItem extends Visual {
         }
 
         $this->assign("sub_pages", $subPages);
-        $this->assign("title", $this->page->getTitle());
+        $this->assign("name", $this->page->getName());
         $this->assign("show_in_navigation", $this->page->getShowInNavigation());
         $this->assign("published", $this->page->isPublished());
         $this->assign("page_id", $this->page->getId());

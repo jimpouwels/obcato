@@ -4,6 +4,7 @@
 <input type="hidden" id="draggable_order" name="draggable_order" value="" />
 <input type="hidden" id="{$action_form_id}" name="{$action_form_id}" value="" />
 <div class="admin_form_v2">
+    {$page_name_field}
     {$page_title_field}
     {$navigation_title_field}
     {$url_title_field}

@@ -8,6 +8,7 @@
 <input type="hidden" id="delete_parent_article_field" name="delete_parent_article_field" value="" />
 
 <div class="admin_form_v2">
+    {$name_field}
     {$title_field}
     {$url_title_field}
     {$url_field}

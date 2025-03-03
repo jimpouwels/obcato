@@ -33,12 +33,14 @@ class BlockMetadataEditor extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
+        $nameField = new TextField("name", $this->getTextResource('blocks_edit_metadata_name_field_label'), $this->currentBlock->getName(), true, false, null);
         $titleField = new TextField("title", $this->getTextResource("blocks_edit_metadata_title_field_label"), $this->currentBlock->getTitle(), true, false, null);
         $publishedField = new SingleCheckbox("published", $this->getTextResource("blocks_edit_metadata_ispublished_field_label"), $this->currentBlock->isPublished(), false, null);
         $templatePickerField = new TemplatePicker("block_template", $this->getTextResource("blocks_edit_metadata_template_field_label"), false, "", $this->currentBlock->getTemplate(), $this->currentBlock->getScope());
 
         $this->assignElementHolderFormIds($data);
         $data->assign("current_block_id", $this->currentBlock->getId());
+        $data->assign("name_field", $nameField->render());
         $data->assign("title_field", $titleField->render());
         $data->assign("published_field", $publishedField->render());
         $data->assign("template_picker_field", $templatePickerField->render());

@@ -80,7 +80,7 @@ class BlocksList extends Panel {
     function toArray(Block $block): array {
         $blockValue = array();
         $blockValue["id"] = $block->getId();
-        $blockValue["title"] = $block->getTitle();
+        $blockValue["name"] = $block->getName();
         $blockValue["published"] = $block->isPublished();
         return $blockValue;
     }

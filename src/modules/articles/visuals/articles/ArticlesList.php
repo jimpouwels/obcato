@@ -43,7 +43,7 @@ class ArticlesList extends Panel {
         foreach ($articles as $article) {
             $searchResult = array();
             $searchResult["id"] = $article->getId();
-            $searchResult["title"] = $article->getTitle();
+            $searchResult["name"] = $article->getName();
 
             $user = $this->authorizationDao->getUserById($article->getCreatedById());
             $searchResult["created_by"] = $user == null ? "" : $user->getUsername();

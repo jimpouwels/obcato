@@ -7,7 +7,7 @@ use Obcato\Core\modules\pages\model\Page;
 
 class PageDaoMysql implements PageDao {
 
-    private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.title, e.published, e.scope_id,
+    private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.name, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, p.navigation_title, p.url_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
                       p.include_in_searchindex, p.follow_up, p.is_homepage, p.include_parent_in_url";
     private static ?PageDaoMysql $instance = null;

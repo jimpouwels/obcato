@@ -38,6 +38,7 @@ class ArticleInteractor implements ArticleService {
         $newArticle = new Article();
         $newArticle->setPublished(false);
         $newArticle->setTitle('Nieuw artikel');
+        $newArticle->setName('Nieuw artikel');
         $newArticle->setCreatedById(Authenticator::getCurrentUser()->getId());
         $newArticle->setType(ELEMENT_HOLDER_ARTICLE);
         $this->articleDao->createArticle($newArticle);

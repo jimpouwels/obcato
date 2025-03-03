@@ -7,7 +7,7 @@ use Obcato\Core\database\MysqlConnector;
 
 class ElementHolderDaoMysql implements ElementHolderDao {
 
-    private static string $myAllColumns = "e.id, e.template_id, e.title, e.published, e.scope_id,
+    private static string $myAllColumns = "e.id, e.template_id, e.name, e.title, e.published, e.scope_id,
                       e.created_at, e.created_by, e.type, e.last_modified";
 
     private static ?ElementHolderDaoMysql $instance = null;
@@ -36,15 +36,15 @@ class ElementHolderDaoMysql implements ElementHolderDao {
     }
 
     public function persist(ElementHolder $elementHolder): void {
-        $query = "INSERT INTO element_holders (template_id, title, published, scope_id, created_at, created_by, type) VALUES
-                      (NULL, '" . $elementHolder->getTitle() . "', 0," . $elementHolder->getScopeId() . ", now(), " . $this->authorizationDao->getUserById($elementHolder->getCreatedById())->getId() . "
+        $query = "INSERT INTO element_holders (template_id, name, title, published, scope_id, created_at, created_by, type) VALUES
+                      (NULL, '" . $elementHolder->getName() . "', '" . $elementHolder->getTitle() . "', 0," . $elementHolder->getScopeId() . ", now(), " . $this->authorizationDao->getUserById($elementHolder->getCreatedById())->getId() . "
                       , '" . $elementHolder->getType() . "')";
         $this->mysqlConnector->executeQuery($query);
         $elementHolder->setId($this->mysqlConnector->getInsertId());
     }
 
     public function update(ElementHolder $elementHolder): void {
-        $query = "UPDATE element_holders SET title = '" . $this->mysqlConnector->realEscapeString($elementHolder->getTitle()) . "', published = " . ($elementHolder->isPublished() ? 1 : 0) . ",
+        $query = "UPDATE element_holders SET name = '" . $this->mysqlConnector->realEscapeString($elementHolder->getName()) . "', title = '" . $this->mysqlConnector->realEscapeString($elementHolder->getTitle()) . "', published = " . ($elementHolder->isPublished() ? 1 : 0) . ",
                       scope_id = " . $elementHolder->getScopeId() . ", template_id = " . ($elementHolder->getTemplateId() ? $elementHolder->getTemplateId() : "NULL") . ", last_modified = NOW()";
         $query .= " WHERE id = " . $elementHolder->getId();
         $this->mysqlConnector->executeQuery($query);

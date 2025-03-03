@@ -47,6 +47,7 @@ class ArticleMetadataEditor extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
+        $nameField = new TextField("name", $this->getTextResource('article_editor_name_label'), $this->currentArticle->getName(), true, false, null);
         $titleField = new TextField("title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
         $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
         $urlTitleField = new TextField('url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
@@ -72,6 +73,7 @@ class ArticleMetadataEditor extends Panel {
 
         $data->assign("child_articles", $this->renderChildArticles());
         $data->assign("current_article_id", $this->currentArticle->getId());
+        $data->assign("name_field", $nameField->render());
         $data->assign("title_field", $titleField->render());
         $data->assign('template_field', $templatePickerField->render());
         $data->assign('keywords_field', $keywordsField->render());

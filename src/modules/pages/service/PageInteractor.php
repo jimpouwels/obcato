@@ -53,6 +53,7 @@ class PageInteractor implements PageService {
         $newPage->setDescription(Session::getTextResource('new_page_default_title'));
         $newPage->setNavigationTitle(Session::getTextResource('new_page_default_navigation_title'));
         $newPage->setTitle(Session::getTextResource('new_page_default_title'));
+        $newPage->setName(Session::getTextResource('new_page_default_title'));
         $user = Authenticator::getCurrentUser();
         $newPage->setCreatedById($user->getId());
         $newPage->setType(ELEMENT_HOLDER_PAGE);

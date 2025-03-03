@@ -26,7 +26,7 @@
         {foreach from=$search_results item=search_result}
             <tr>
                 <td><a href="{$backend_base_url}&article={$search_result.id}"
-                       title="{$search_result.title}">{$search_result.title}</a></td>
+                       title="{$search_result.name}">{$search_result.name}</a></td>
                 <td>{$search_result.created_at}</td>
                 <td>{$search_result.created_by}</td>
                 <td class="center">

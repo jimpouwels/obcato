@@ -4,6 +4,7 @@
 <input type="hidden" id="{$delete_element_form_id}" name="{$delete_element_form_id}" value="" />
 <input type="hidden" id="draggable_order" name="draggable_order" value="" />
 <div class="admin_form_v2">
+    {$name_field}
     {$title_field}
     {$published_field}
     {$template_picker_field}

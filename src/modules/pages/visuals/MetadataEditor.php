@@ -33,6 +33,7 @@ class MetadataEditor extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
+        $nameField = new TextField("name", $this->getTextResource('pages_edit_metadata_name_field_label'), $this->currentPage->getName(), true, false, null);
         $titleField = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->currentPage->getTitle(), true, false, null);
         $urlTitleField = new TextField("url_title", $this->getTextResource('pages_edit_metadata_url_title_field_label'), $this->currentPage->getUrlTitle(), false, false, null);
         $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
@@ -46,6 +47,7 @@ class MetadataEditor extends Panel {
         $templatePickerField = new TemplatePicker("page_template", $this->getTextResource('pages_edit_metadata_template_field_label'), false, "", $this->currentPage->getTemplate(), $this->currentPage->getScope());
 
         $data->assign("current_page_id", $this->currentPage->getId());
+        $data->assign("page_name_field", $nameField->render());
         $data->assign("page_title_field", $titleField->render());
         $data->assign("keywords_field", $keywordsField->render());
         $data->assign("navigation_title_field", $navigationTitleField->render());

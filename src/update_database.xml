@@ -302,7 +302,9 @@
                 class) VALUES (4, 0, 'sitewide_pages', 1, 1,
                 'SitewidePagesModuleVisual')</query>
             <query>CREATE TABLE sitewide_pages (id int(10) unsigned NOT NULL AUTO_INCREMENT, page_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT sitewide_page_id_to_element_holder FOREIGN KEY (page_id) REFERENCES element_holders (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
-            <query>ALTER TABLE sitewide_pages ADD COLUMN order_number int(10) NOT NULL</query>
+            <query>ALTER TABLE sitewide_pages ADD COLUMN order_number int(10) NOT NULL DEFAULT (0)</query>
+            <query>ALTER TABLE element_holders ADD COLUMN name TEXT NOT NULL DEFAULT (0)</query>
+            <query>UPDATE element_holders SET name = title WHERE name = 0</query>
         </queries>
     </version>
 </versions>
