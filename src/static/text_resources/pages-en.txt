@@ -1,8 +1,8 @@
 # MESSAGES
 page_not_saved_error_message: Page could not be fully saved, please resolve the errors
-page_saved_message: Page saved succesfully
+page_saved_message: Page saved successfully
 page_deleted_message: Page deleted succesfully
-page_added_message: Page added succesfully
+page_added_message: Page added successfully
 
 # TITLES
 page_tree_title: Page tree
