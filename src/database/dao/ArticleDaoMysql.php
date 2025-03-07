@@ -83,7 +83,7 @@ class ArticleDaoMysql implements ArticleDao {
         $where = " WHERE
                       e.id = a.element_holder_id";
         if ($keyword)
-            $where = $where . " AND e.title LIKE '" . $keyword . "%'";
+            $where = $where . " AND e.name LIKE '" . $keyword . "%'";
         if ($termId) {
             $from = $from . ", articles_terms ats";
             $where = $where . " AND ats.term_id = " . $termId . " AND ats.article_id = e.id";

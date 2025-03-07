@@ -18,7 +18,7 @@
             <table class="popup_search_result_table" cellpadding="5">
                 <thead>
                 <tr>
-                    <th>Titel</th>
+                    <th>Naam</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                         <td>
                             <a href="#"
                                onclick="submitSelectionBackToOpener('{$backfill}', {$search_result.id}, '{$back_click_id}'); return false;"
-                               title="Selecteer">{$search_result.title}</a>
+                               title="Selecteer">{$search_result.name}</a>
                         </td>
                     </tr>
                 {/foreach}

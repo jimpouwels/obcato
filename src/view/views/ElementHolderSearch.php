@@ -68,7 +68,7 @@ class ElementHolderSearch extends Panel {
             foreach ($search_results as $search_result) {
                 $search_result_value = array();
                 $search_result_value["id"] = $search_result->getId();
-                $search_result_value["title"] = $search_result->getTitle();
+                $search_result_value["name"] = $search_result->getName();
                 $search_results_value[] = $search_result_value;
             }
         }
@@ -103,11 +103,11 @@ class ElementHolderSearch extends Panel {
     }
 
     private function getCurrentSearchQuery(): string {
-        $search_title = "";
+        $searchName = "";
         if (isset($_GET[self::$SEARCH_QUERY_KEY])) {
-            $search_title = $_GET[self::$SEARCH_QUERY_KEY];
+            $searchName = $_GET[self::$SEARCH_QUERY_KEY];
         }
-        return $search_title;
+        return $searchName;
     }
 
     private function renderSearchButton(): string {
