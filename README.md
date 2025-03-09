@@ -5,7 +5,7 @@ Obcato is an initiative to offer a simple, modular and multi-language web conten
 * Authoring articles, pages, images, etc. in the Obcato WebUI. Templates will be linked to these presentable elements and will be rendered as HTML.
 
 # Getting started
-Obcato is written in PHP and runs on top of an Mysql Database. A hosting platform therefore requires at least a PHP runtime and a Mysql database.
+Obcato is written in PHP and runs on top of a Mysql Database. A hosting platform therefore requires at least a PHP runtime and a Mysql database.
 
 On the highest level, Obcato consists of two sections:
 
@@ -18,7 +18,7 @@ This section contains the following:
   * `templates` directory, containing frontend templates
 * `vendor` directory, containing all software that is required to run Obcato
 
-The private section must be located in a location that is not served by the webserver, as the contents are not to be directly downloaded directory via the internet.
+The private section must be located in a location that is not served by the webserver, as the contents are not to be directly downloaded via the internet.
 
 ## Public
 
