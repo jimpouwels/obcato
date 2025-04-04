@@ -2,8 +2,6 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
@@ -44,6 +42,7 @@ class ArticleVisual extends FrontendVisual {
         $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
         $data["image"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getImageId()));
         $data["wallpaper"] = $this->getImageData($this->imageDao->getImage($this->getArticle()->getWallpaperId()));
+        $data["terms"] = $this->getTermList();
         $this->renderElementHolderContent($this->getArticle(), $data);
         $data["comments"] = $this->renderArticleComments($this->getArticle());
         $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
@@ -103,5 +102,13 @@ class ArticleVisual extends FrontendVisual {
             return $formVisual->render();
         }
         return "";
+    }
+
+    private function getTermList(): array {
+        $termList = array();
+        foreach ($this->articleService->getTermsForArticle($this->getArticle()) as $term) {
+            $termList[] = $term->getName();
+        }
+        return $termList;
     }
 }
