@@ -76,12 +76,12 @@ class AuthorizationDaoMysql implements AuthorizationDao {
     }
 
     public function createUser(): User {
-        $new_user = new User();
-        $new_user->setUsername("user" . $new_user->getId());
-        $new_user->setFirstName('Nieuwe');
-        $new_user->setLastName('Gebruiker');
-        $new_user->setId($this->persistUser($new_user));
-        return $new_user;
+        $newUser = new User();
+        $newUser->setUsername("user" . $newUser->getId());
+        $newUser->setFirstName('Nieuwe');
+        $newUser->setLastName('Gebruiker');
+        $newUser->setId($this->persistUser($newUser));
+        return $newUser;
     }
 
     private function persistUser(User $user): string {
