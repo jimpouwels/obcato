@@ -53,6 +53,39 @@ class FriendlyUrlManager {
         return $url;
     }
 
+    public function getFriendlyUrlForElementHolder(ElementHolder $elementHolder): ?string {
+        return $this->friendlyUrlDao->getUrlFromElementHolder($elementHolder);
+    }
+
+    public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
+        $url = $this->createUrlForArticle($article);
+        $this->insertOrUpdateFriendlyUrl($url, $article);
+    }
+
+    public function matchUrl(string $url): ?UrlMatch {
+        if (str_ends_with($url, '/')) {
+            $url = rtrim($url, "/");
+        }
+        $urlMatch = new UrlMatch($url);
+        $this->getPageFromUrl($url, $urlMatch);
+
+        if (!$urlMatch->getPage()) {
+            return null;
+        }
+        if (strlen($urlMatch->getPageUrl()) < strlen($url)) {
+            $this->getArticleFromUrl($url, $urlMatch);
+            if (!$urlMatch->getArticle()) {
+                return null;
+            }
+        }
+        return $urlMatch;
+    }
+
+    private function createUrlForArticle(Article $article): string {
+        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->articleDao->getArticle($article->getParentArticleId())) . '/') : '/';
+        return $base . $this->replaceSpecialCharacters($article->getUrlTitle() ?: $article->getTitle());
+    }
+
     private function replaceSpecialCharacters(string $value): string {
         $value = strtolower($value);
         $value = str_replace(' - ', ' ', $value);
@@ -84,39 +117,6 @@ class FriendlyUrlManager {
             $existingElementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($newUrl);
         }
         return $newUrl;
-    }
-
-    public function getFriendlyUrlForElementHolder(ElementHolder $elementHolder): ?string {
-        return $this->friendlyUrlDao->getUrlFromElementHolder($elementHolder);
-    }
-
-    public function insertOrUpdateFriendlyUrlForArticle(Article $article): void {
-        $url = $this->createUrlForArticle($article);
-        $this->insertOrUpdateFriendlyUrl($url, $article);
-    }
-
-    private function createUrlForArticle(Article $article): string {
-        $base = $article->getParentArticleId() ? ($this->getFriendlyUrlForElementHolder($this->articleDao->getArticle($article->getParentArticleId())) . '/') : '/';
-        return $base . $this->replaceSpecialCharacters($article->getUrlTitle() ?: $article->getTitle());
-    }
-
-    public function matchUrl(string $url): ?UrlMatch {
-        if (str_ends_with($url, '/')) {
-            $url = rtrim($url, "/");
-        }
-        $urlMatch = new UrlMatch($url);
-        $this->getPageFromUrl($url, $urlMatch);
-
-        if (!$urlMatch->getPage()) {
-            return null;
-        }
-        if (strlen($urlMatch->getPageUrl()) < strlen($url)) {
-            $this->getArticleFromUrl($url, $urlMatch);
-            if (!$urlMatch->getArticle()) {
-                return null;
-            }
-        }
-        return $urlMatch;
     }
 
     private function getPageFromUrl(string $url, UrlMatch $urlMatch): void {

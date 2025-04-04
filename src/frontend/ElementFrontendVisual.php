@@ -3,8 +3,6 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
 use Obcato\Core\database\dao\TemplateDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
@@ -17,13 +15,11 @@ abstract class ElementFrontendVisual extends FrontendVisual {
 
     private Element $element;
     private TemplateDao $templateDao;
-    private ElementDao $elementDao;
 
     public function __construct(Page $page, ?Article $article, ?Block $block, Element $element) {
         parent::__construct($page, $article, $block);
         $this->element = $element;
         $this->templateDao = TemplateDaoMysql::getInstance();
-        $this->elementDao = ElementDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
