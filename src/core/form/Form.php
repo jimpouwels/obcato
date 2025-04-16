@@ -21,7 +21,7 @@ abstract class Form {
         if (isset($_POST[$fieldName])) {
             $value = $_POST[$fieldName];
         }
-        return $value;
+        return trim($value);
     }
 
     protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
