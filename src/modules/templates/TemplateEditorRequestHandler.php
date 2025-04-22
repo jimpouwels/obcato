@@ -55,9 +55,9 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
     }
 
     private function addTemplate(): void {
-        $new_template = $this->templateDao->createTemplate();
+        $newTemplate = $this->templateDao->createTemplate();
         $this->sendSuccessMessage("Template succesvol aangemaakt");
-        $this->redirectTo($this->getBackendBaseUrl() . "&template=" . $new_template->getId());
+        $this->redirectTo($this->getBackendBaseUrl() . "&template=" . $newTemplate->getId());
     }
 
     private function deleteTemplates(): void {

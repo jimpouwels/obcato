@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
     $('#add_template').click(function () {
-        submitTemplateForm('add_template', 'template_editor_form');
+        submitTemplateForm('add_template', 'template_add_form');
     });
 
     $('#delete_template').click(function () {
