@@ -1,11 +1,11 @@
 $(document).ready(function () {
     function submitTemplateForm(action, form_id) {
-        var $actionField = $('#action');
+        let $actionField = $('#action');
         if ($actionField.length == 0) {
             alert('Fout: Kan de actie niet bepalen');
         } else {
             $actionField.attr('value', action);
-            var $template_form = $('#' + form_id);
+            let $template_form = $('#' + form_id);
             if ($template_form.length == 0) {
                 alert('Fout: Kan template niet opslaan');
             } else {
@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
 
     $('#delete_template').click(function () {
-        var $checked = false;
+        let $checked = false;
         $('input:checkbox').each(function () {
             if ($(this).attr('checked')) {
                 $checked = true;
@@ -32,7 +32,7 @@ $(document).ready(function () {
         if (!$checked) {
             alert('U heeft geen templates geselecteerd');
         } else {
-            var confirmed = confirm('Weet u zeker dat u de geselecteerde templates wilt verwijderen?');
+            let confirmed = confirm('Weet u zeker dat u de geselecteerde templates wilt verwijderen?');
             if (confirmed) {
                 submitTemplateForm('delete_templates', 'template_editor_form');
             }
@@ -52,7 +52,7 @@ $(document).ready(function () {
     });
 
     $('#delete_template_file').click(function () {
-        var confirmed = confirm('Weet u zeker dat u de geselecteerde template bestand wilt verwijderen?');
+        let confirmed = confirm('Weet u zeker dat u de geselecteerde template bestand wilt verwijderen?');
         if (confirmed) {
             submitTemplateForm('delete_template_file', 'template_file_form');
         }
