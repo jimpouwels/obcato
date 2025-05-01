@@ -21,6 +21,6 @@ abstract class ElementForm extends Form {
         }
         $includeInTableOfContents = $this->getCheckboxValue('element_' . $this->element->getId() . '_toc');
         $this->element->setTemplateId($templateId);
-        $this->element->setIncludeInTableOfContents($includeInTableOfContents == 1 ? true : false);
+        $this->element->setIncludeInTableOfContents($includeInTableOfContents == 1);
     }
 }
