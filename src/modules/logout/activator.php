@@ -31,9 +31,7 @@ class LogoutModuleVisual extends ModuleVisual {
     }
 
     public function getRequestHandlers(): array {
-        $requestHandlers = array();
-        $requestHandlers[] = $this->logoutRequestHandler;
-        return $requestHandlers;
+        return array($this->logoutRequestHandler);
     }
 
     public function onRequestHandled(): void {}

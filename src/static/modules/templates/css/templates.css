@@ -17,7 +17,7 @@
 }
 
 .scope_selector_panel ul {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 /* TEMPLATE FILES */
@@ -41,13 +41,11 @@
 
 .template_var_migration_panel {
     width: 1050px;
-    margin: auto;
-    margin-top: 30px;
+    margin: 30px auto auto;
 }
 
 .template_content_panel {
-    margin: auto;
-    margin-top: 30px;
+    margin: 30px auto auto;
     font-size: 1.2em;
     width: 1050px;
 }
