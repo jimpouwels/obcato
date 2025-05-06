@@ -305,6 +305,7 @@
             <query>ALTER TABLE sitewide_pages ADD COLUMN order_number int(10) NOT NULL DEFAULT (0)</query>
             <query>ALTER TABLE element_holders ADD COLUMN name TEXT NOT NULL DEFAULT (0)</query>
             <query>UPDATE element_holders SET name = title WHERE name = 0</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN url TEXT DEFAULT NULL</query>
         </queries>
     </version>
 </versions>

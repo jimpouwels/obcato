@@ -19,6 +19,7 @@ class ImageElementForm extends ElementForm {
         $this->imageElement->setTitle($this->getFieldValue('element_' . $this->imageElement->getId() . '_title'));
         $this->imageElement->setAlign($this->getFieldValue('element_' . $this->imageElement->getId() . '_align'));
         $this->imageElement->setImageId($this->getNumber('image_image_ref_' . $this->imageElement->getId()));
+        $this->imageElement->setUrl($this->getFieldValue('element_' . $this->imageElement->getId() . '_url'));
         $this->imageElement->setWidth($this->getNumber('element_' . $this->imageElement->getId() . '_width'));
         $this->imageElement->setHeight($this->getNumber('element_' . $this->imageElement->getId() . '_height'));
         $this->imageElement->setLinkId($this->getNumber('element_' . $this->imageElement->getId() . '_link'));

@@ -3,9 +3,7 @@
 namespace Obcato\Core\elements\image_element;
 
 use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
 use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\elements\image_element\visuals\ImageElementEditor;
 use Obcato\Core\elements\image_element\visuals\ImageElementStatics;
 use Obcato\Core\frontend\ImageElementFrontendVisual;
@@ -14,7 +12,6 @@ use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\TemplateEngine;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Visual;
 
@@ -23,6 +20,7 @@ class ImageElement extends Element {
     private ?string $align = null;
     private ?int $height = null;
     private ?int $width = null;
+    private ?string $url = null;
     private ?int $imageId = null;
     private ?int $linkId = null;
 
@@ -68,6 +66,14 @@ class ImageElement extends Element {
             return $image_dao->getImage($this->imageId);
         }
         return null;
+    }
+
+    public function getUrl(): ?string {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): void {
+        $this->url = $url;
     }
 
     public function getLinkId(): ?int {

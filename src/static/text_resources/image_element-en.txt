@@ -5,6 +5,7 @@ image_element_scope_label: Image Element
 # EDITOR
 image_element_editor_title: Title
 image_element_editor_image: Image
+image_element_editor_url: URL
 image_element_editor_width: Width
 image_element_editor_height: Height
 image_element_editor_alignment: Alignment

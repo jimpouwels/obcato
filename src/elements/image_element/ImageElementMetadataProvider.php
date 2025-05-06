@@ -22,9 +22,9 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         return "image_elements_metadata";
     }
 
-    public function constructMetaData(array $record, Element $element): void
-    {
+    public function constructMetaData(array $record, Element $element): void {
         $element->setTitle($record['title']);
+        $element->setUrl($record['url']);
         $element->setAlign($record['align']);
         $element->setImageId($record['image_id']);
         $element->setWidth($record['width']);
@@ -34,16 +34,17 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
 
     public function update(Element $element): void
     {
-        $image_id = $element->getImageId();
+        $imageId = $element->getImageId();
         $title = $element->getTitle();
         $align = $element->getAlign();
+        $url = $element->getUrl();
         $width = $element->getWidth();
         $height = $element->getHeight();
         $elementId = $element->getId();
         $linkId = $element->getLinkId();
-        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ?, link_id = ? WHERE element_id = ?";
+        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ?, link_id = ?, url = ? WHERE element_id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiiii', $title, $align, $image_id, $width, $height, $linkId, $elementId);
+        $statement->bind_param('ssiiiisi', $title, $align, $imageId, $width, $height, $linkId, $url, $elementId);
         $this->mysqlConnector->executeStatement($statement);
     }
 

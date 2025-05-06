@@ -47,7 +47,7 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function createImageUrl(): string {
-        return $this->getImageUrl($this->getElement()->getImage());
+        return $this->getElement()->getUrl() ?: $this->getImageUrl($this->getElement()->getImage());
     }
 
     private function getExtension(): string {

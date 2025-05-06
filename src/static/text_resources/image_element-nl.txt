@@ -5,6 +5,7 @@ image_element_scope_label: Afbeelding Element
 # EDITOR
 image_element_editor_title: Titel
 image_element_editor_image: Afbeelding
+image_element_editor_url: URL
 image_element_editor_width: Breedte
 image_element_editor_height: Hoogte
 image_element_editor_alignment: Uitlijning

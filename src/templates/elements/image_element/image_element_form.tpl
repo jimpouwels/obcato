@@ -4,6 +4,7 @@
     {$width_field}
     {$height_field}
     {$link_selector_field}
+    {$url_field}
     {$image_picker}
     {if !is_null($image_id) && $image_id != ""}
         <br/>
