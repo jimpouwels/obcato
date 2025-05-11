@@ -12,9 +12,9 @@ On the highest level, Obcato consists of two sections:
 ## Private
 
 This section contains the following:
-* src directory: the source code of Obcato
+* `src` directory: the source code of Obcato
 * Directories containing static data
-  * `config` directory, containing configuration data
+  * config` directory, containing configuration data
   * `upload` directory, containing uploaded images and files via the Obcato WebUI
   * `templates` directory, containing frontend templates
 * `vendor` directory, containing all software that is required to run Obcato
