@@ -12,6 +12,7 @@ On the highest level, Obcato consists of two sections:
 ## Private
 
 This section contains the following:
+* src directory: the source code of Obcato
 * Directories containing static data
   * `config` directory, containing configuration data
   * `upload` directory, containing uploaded images and files via the Obcato WebUI
