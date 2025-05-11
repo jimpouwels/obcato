@@ -10,14 +10,13 @@ Obcato is written in PHP and runs on top of a Mysql Database. A hosting platform
 On the highest level, Obcato consists of two sections:
 
 ## Private
-
+This section will have all the files that are required to run Obcato, but are not publicly available directly via the internet.
 This section contains the following:
-* `src` directory: the source code of Obcato
 * Directories containing static data
   * config` directory, containing configuration data
   * `upload` directory, containing uploaded images and files via the Obcato WebUI
   * `templates` directory, containing frontend templates
-* `vendor` directory, containing all external software that is required to run Obcato
+* `vendor` directory, containing all software that is required to run Obcato
 
 The private section must be located in a location that is not served by the webserver, as the contents are not to be directly downloaded via the internet.
 
