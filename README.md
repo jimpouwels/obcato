@@ -27,5 +27,4 @@ This section contains the files that are to be accessed directly via the interne
 The public section must be located in the root of the directory that is served to the internet by the webserver.
 
 # Installation
-
-...
+A new website that is based on Obcato starts with the creation of a new PHP packagist application.
