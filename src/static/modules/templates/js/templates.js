@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 
     $('#add_template_file').click(function () {
-        submitTemplateForm('add_template_file', 'template_file_form');
+        submitTemplateForm('add_template_file', 'template_add_form');
     });
 
     $('#update_template_file').click(function () {
