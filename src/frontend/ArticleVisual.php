@@ -53,6 +53,7 @@ class ArticleVisual extends FrontendVisual {
             $parentArticle = $this->articleService->getArticle($this->getArticle()->getParentArticleId());
             $parentArticleData["id"] = $parentArticle->getId();
             $parentArticleData["title"] = $parentArticle->getTitle();
+            $parentArticleData["description"] = $parentArticle->getDescription();
             $data["parent_article"] = $parentArticleData;
         }
     }

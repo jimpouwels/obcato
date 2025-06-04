@@ -45,7 +45,7 @@ class PageVisual extends FrontendVisual {
         $this->assign("keywords", $this->getPage()->getKeywords());
         if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
             $articleData = $this->renderArticle();
-            $this->assign("article", $articleData);
+            $this->assignGlobal("article", $articleData);
             $this->assign("title", $this->getArticle()->getTitle());
             $this->assign("keywords", $this->getArticle()->getKeywords());
         } else {
