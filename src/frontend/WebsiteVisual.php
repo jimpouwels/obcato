@@ -6,15 +6,19 @@ use Obcato\Core\frontend\handlers\FormStatus;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
+use Obcato\Core\database\dao\SettingsDao;
+use Obcato\Core\database\dao\SettingsDaoMysql;
 use const Obcato\core\FRONTEND_TEMPLATE_DIR;
 
 class WebsiteVisual extends FrontendVisual {
 
+    private SettingsDao $settingsDao;
     private ?Article $article;
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
         $this->article = $article;
+        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -30,6 +34,7 @@ class WebsiteVisual extends FrontendVisual {
         $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_mobile_device", $isMobileUserAgent);
         $this->assignGlobal("base_url", $this->getBaseUrl());
+        $this->assignGlobal("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
         if ($this->getPage()->isPublished()) {
             $pageVisual = new PageVisual($this->getPage(), $this->article);
             $this->assign("html", $pageVisual->render());

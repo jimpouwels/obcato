@@ -6,8 +6,6 @@ use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\BlockDao;
 use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\database\dao\TemplateDao;
 use Obcato\Core\database\dao\TemplateDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
@@ -22,7 +20,6 @@ class PageVisual extends FrontendVisual {
     private BlockDao $blockDao;
     private ArticleDao $articleDao;
     private TemplateDao $templateDao;
-    private SettingsDao $settingsDao;
 
     public function __construct(Page $page, ?Article $article) {
         parent::__construct($page, $article);
@@ -30,7 +27,6 @@ class PageVisual extends FrontendVisual {
         $this->blockDao = BlockDaoMysql::getInstance();
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->templateDao = TemplateDaoMysql::getInstance();
-        $this->settingsDao = SettingsDaoMysql::getInstance();
     }
 
     public function getTemplateFilename(): string {
@@ -38,9 +34,7 @@ class PageVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
-        $this->assign("page", $this->getPageContentAndMetaData($this->getPage()));
-        $this->assign("title", $this->getPage()->getTitle());
+        $this->assignGlobal("page", $this->getPageContentAndMetaData($this->getPage()));
         $this->assign("crumb_path", $this->renderCrumbPath());
         $this->assign("keywords", $this->getPage()->getKeywords());
         if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
