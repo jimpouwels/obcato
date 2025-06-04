@@ -169,6 +169,7 @@ abstract class FrontendVisual {
             return "";
         }
         $value = nl2br($value);
+        $value = $this->replaceSmartyQuery($value);
         return $this->createLinksInString($value, $elementHolder);
     }
 
@@ -324,5 +325,30 @@ abstract class FrontendVisual {
             $targetHtml = "target=\"$target\"";
         }
         return "<a title=\"{$title}\" {$targetHtml} href=\"{$url}\" class=\"{$link_class}\">";
+    }
+
+    private function replaceSmartyQuery(string $text): string {
+        $matches = array();
+        preg_match_all('/\{\$[^ ]*?}/', $text, $matches);
+
+        for ($i = 0; $i < count($matches[0]); $i++) {
+            $placeholder = $matches[0][$i];
+            $globalValueQuery = str_replace('{', '', $placeholder);
+            $globalValueQuery = str_replace('}', '', $globalValueQuery);
+            $globalValueQuery = str_replace('$', '', $globalValueQuery);
+            $parts = explode('.', $globalValueQuery);
+
+            $currentPos = null;
+            while (count($parts) > 0) {
+                $part = array_shift($parts);
+                if (!$currentPos) {
+                    $currentPos = $this->getTemplateEngine()->getGlobal($part);
+                } else {
+                    $currentPos = $currentPos[$part];
+                }
+            }
+            $text = str_replace($placeholder, $currentPos, $text);
+        }
+        return $text;
     }
 }

@@ -29,6 +29,10 @@ class TemplateEngine {
         $this->smarty->assign($key, $value);
     }
 
+    public function getGlobal(string $key): mixed {
+        return $this->smarty->getTemplateVars($key);
+    }
+
     public function fetch(string $template, ?TemplateData $data = null): string {
         if ($data) {
             $tpl = $this->smarty->createTemplate($template, $data->getData());
