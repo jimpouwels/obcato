@@ -27,6 +27,15 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     public function loadElement(array &$data): void {
         $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
         $data["articles"] = $this->getArticles();
+        $data["terms"] = $this->getTermsData();
+    }
+
+    private function getTermsData(): array {
+        $termsData = array();
+        foreach ($this->getElement()->getTerms() as $term) {
+            $termsData[] = $term->getName();
+        }
+        return $termsData;
     }
 
     private function getArticles(): array {
