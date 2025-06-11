@@ -98,7 +98,7 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
-    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $exclude = null): array {
+    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $siblingsOnlyId, ?int $exclude = null): array {
         $queryWhere = " WHERE published = 1 AND e.id = a.element_holder_id";
         $queryWhere = $queryWhere . " AND publication_date <= now()";
         if ($toDate) {
@@ -109,6 +109,9 @@ class ArticleDaoMysql implements ArticleDao {
         }
         if ($exclude) {
             $queryWhere .= " AND e.id != " . $exclude;
+        }
+        if ($siblingsOnlyId) {
+            $queryWhere .= " AND a.parent_article_id = " . $siblingsOnlyId;
         }
         $queryFrom = " FROM element_holders e, articles a";
         if ($terms && count($terms) > 0) {

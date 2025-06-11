@@ -26,6 +26,7 @@ class ArticleOverviewElement extends Element {
     private ?string $orderType = null;
     private array $terms;
     private ?int $numberOfResults = null;
+    private bool $siblingsOnly = false;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ArticleOverviewElementMetadataProvider($this));
@@ -97,8 +98,15 @@ class ArticleOverviewElement extends Element {
     public function getTerms(): array {
         return $this->terms;
     }
+    public function setSiblingsOnly(bool $siblingsOnly): void {
+        $this->siblingsOnly = $siblingsOnly;
+    }
 
-    public function getArticles(?int $exclude): array {
+    public function getSiblingsOnly(): bool {
+        return $this->siblingsOnly;
+    }
+
+    public function getArticles(?int $exclude, ?int $currentArticleId): array {
         $articleDao = ArticleDaoMysql::getInstance();
         $showTo = null;
         if ($this->showUntilToday != 1 && $this->showTo) {
@@ -108,9 +116,10 @@ class ArticleOverviewElement extends Element {
         if ($this->showFrom) {
             $showFrom = DateUtility::mysqlDateToString($this->showFrom, '-');
         }
+        $siblingsOnlyId = ($currentArticleId && $this->getSiblingsOnly()) ? $currentArticleId : null;
         return $articleDao->searchPublishedArticles($showFrom,
             $showTo, $this->orderBy, $this->getOrderType(), $this->terms,
-            $this->numberOfResults, $exclude);
+            $this->numberOfResults, $siblingsOnlyId, $exclude);
     }
 
     public function getStatics(): Visual {
@@ -128,6 +137,7 @@ class ArticleOverviewElement extends Element {
     public function getRequestHandler(): HttpRequestHandler {
         return new ArticleOverviewElementRequestHandler($this);
     }
+
 
     public function getSummaryText(): string {
         $summary_text = $this->getTitle() ?? "";

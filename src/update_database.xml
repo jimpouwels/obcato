@@ -306,6 +306,7 @@
             <query>ALTER TABLE element_holders ADD COLUMN name TEXT NOT NULL DEFAULT (0)</query>
             <query>UPDATE element_holders SET name = title WHERE name = 0</query>
             <query>ALTER TABLE image_elements_metadata ADD COLUMN url TEXT DEFAULT NULL</query>
+            <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN siblings_only tinyint(1) DEFAULT 0</query>
         </queries>
     </version>
 </versions>

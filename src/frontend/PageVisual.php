@@ -133,7 +133,7 @@ class PageVisual extends FrontendVisual {
 
     private function renderBlock($block): array {
         $blockData = array();
-        $blockVisual = new BlockVisual($block, $this->getPage());
+        $blockVisual = new BlockVisual($block, $this->getPage(), $this->getArticle());
         $blockHtml = $blockVisual->render($blockData);
         $blockData["to_string"] = $blockHtml;
         return $blockData;

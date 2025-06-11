@@ -9,6 +9,7 @@ use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\DateField;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Pulldown;
+use Obcato\Core\view\views\SingleCheckbox;
 use Obcato\Core\view\views\TermSelector;
 use Obcato\Core\view\views\TextField;
 
@@ -43,6 +44,8 @@ class ArticleOverviewElementEditor extends ElementVisual {
         $data->assign("order_by_field", $orderByField->render());
         $orderTypeField = new Pulldown("element_" . $this->element->getId() . "_order_type", $this->getTextResource("article_overview_element_editor_ordering"), $this->element->getOrderType(), $this->getOrderTypeOptions(), false, "");
         $data->assign("order_type_field", $orderTypeField->render());
+        $siblingsOnlyField = new SingleCheckbox("element_" . $this->element->getId() . "_siblings_only", "article_overview_element_editor_siblings_only", $this->element->getSiblingsOnly(), false, "");
+        $data->assign("siblings_only_field", $siblingsOnlyField->render());
         $termSelectField = new TermSelector($this->element->getTerms(), $this->element->getId());
         $data->assign("term_select_field", $termSelectField->render());
     }

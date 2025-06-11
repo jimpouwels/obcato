@@ -25,6 +25,7 @@ class ArticleOverviewElementForm extends ElementForm {
         $numberOfResults = $this->getNumber('element_' . $elementId . '_number_of_results');
         $orderBy = $this->getFieldValue('element_' . $elementId . '_order_by');
         $orderType = $this->getFieldValue('element_' . $elementId . '_order_type');
+        $siblingsOnly = $this->getFieldValue('element_' . $elementId . '_siblings_only');
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
@@ -35,6 +36,7 @@ class ArticleOverviewElementForm extends ElementForm {
             $this->articleOverviewElement->setNumberOfResults($numberOfResults);
             $this->articleOverviewElement->setOrderBy($orderBy);
             $this->articleOverviewElement->setOrderType($orderType);
+            $this->articleOverviewElement->setSiblingsOnly($siblingsOnly);
         }
 
         $this->selectedTerms = $this->getFieldValues('select_terms_' . $this->articleOverviewElement->getId());

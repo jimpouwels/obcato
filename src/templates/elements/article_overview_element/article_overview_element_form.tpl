@@ -5,5 +5,6 @@
     {$max_results_field}
     {$order_by_field}
     {$order_type_field}
+    {$siblings_only_field}
     {$term_select_field}
 </div>

@@ -16,21 +16,18 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
     private Element $_element;
     private MysqlConnector $_mysql_connector;
 
-    public function __construct($element)
-    {
+    public function __construct($element) {
         parent::__construct($element);
         $this->_element = $element;
         $this->_article_dao = ArticleDaoMysql::getInstance();
         $this->_mysql_connector = MysqlConnector::getInstance();
     }
 
-    public function getTableName(): string
-    {
+    public function getTableName(): string {
         return "article_overview_elements_metadata";
     }
 
-    public function constructMetaData(array $record, $element): void
-    {
+    public function constructMetaData(array $record, $element): void {
         $element->setTitle($record['title']);
         $element->setShowFrom($record['show_from']);
         $element->setShowTo($record['show_to']);
@@ -38,10 +35,10 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
         $element->setOrderType($record['order_type']);
         $element->setNumberOfResults($record['number_of_results']);
         $element->setTerms($this->getTerms());
+        $element->setSiblingsOnly($record['siblings_only']);
     }
 
-    public function update(Element $element): void
-    {
+    public function update(Element $element): void {
         $query = "UPDATE article_overview_elements_metadata SET title = '" . $element->getTitle() . "', ";
         if ($element->getShowFrom() == '') {
             $query = $query . "show_from = NULL, ";
@@ -58,23 +55,21 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
         } else {
             $query = $query . "number_of_results = " . $element->getNumberOfResults() . ",";
         }
-        $query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() .
-            "' WHERE element_id = " . $element->getId();
+        $query = $query . " order_by = '" . $element->getOrderBy() . "', order_type = '" . $element->getOrderType() . "', siblings_only = " . ($element->getSiblingsOnly() ? 1 : 0) .
+            " WHERE element_id = " . $element->getId();
 
         $this->_mysql_connector->executeQuery($query);
         $this->addTerms();
     }
 
-    public function insert(Element $element): void
-    {
+    public function insert(Element $element): void {
         $query = "INSERT INTO article_overview_elements_metadata (title, show_from, show_to, order_by, order_type, element_id, number_of_results) VALUES
                         ('" . $element->getTitle() . "', NULL, NULL, 'PublicationDate', 'asc', " . $element->getId() . ", NULL)";
         $this->_mysql_connector->executeQuery($query);
         $this->addTerms();
     }
 
-    private function getTerms(): array
-    {
+    private function getTerms(): array {
         $query = "SELECT * FROM articles_element_terms WHERE element_id = " . $this->_element->getId();
         $result = $this->_mysql_connector->executeQuery($query);
         $terms = array();
@@ -84,8 +79,7 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
         return $terms;
     }
 
-    private function addTerms(): void
-    {
+    private function addTerms(): void {
         $existing_terms = $this->getTerms();
         foreach ($existing_terms as $existing_term) {
             if (!in_array($existing_term, $this->_element->getTerms())) {
@@ -103,8 +97,7 @@ class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
         }
     }
 
-    private function removeTerm(ArticleTerm $term): void
-    {
+    private function removeTerm(ArticleTerm $term): void {
         $statement = $this->_mysql_connector->prepareStatement("DELETE FROM articles_element_terms WHERE element_id = ? AND term_id = ?");
         $elementId = $this->_element->getId();
         $termId = $term->getId();
