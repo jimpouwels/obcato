@@ -14,14 +14,16 @@ abstract class FormField extends Visual {
     private bool $mandatory;
     private bool $linkable;
     private ?string $value;
+    private ?string $helpText;
 
-    protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $css_class) {
+    protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $cssClass, ?string $helpTextResourceIdentifier = "") {
         parent::__construct();
         $this->fieldName = $field_name;
-        $this->cssClass = $css_class;
+        $this->cssClass = $cssClass;
         $this->labelResourceIdentifier = $label_resource_identifier;
         $this->mandatory = $mandatory;
         $this->linkable = $linkable;
+        $this->helpText = $this->getTextResource($helpTextResourceIdentifier);
         $this->value = $value;
     }
 
@@ -39,6 +41,7 @@ abstract class FormField extends Visual {
         $this->assign("error", $this->getErrorHtml($this->fieldName));
         $this->assign('label', $this->getLabelHtml());
         $this->assign('type', $this->getFieldType());
+        $this->assign('help_text', $this->helpText);
 
         $fieldTemplateData = $this->createChildData();
         $this->loadFormField($fieldTemplateData);

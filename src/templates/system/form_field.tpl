@@ -11,5 +11,8 @@
     </div>
     <div class="admin_field_wrapper admin_field_wrapper-{$type}">
         {$form_field}
+        {if $help_text}
+            <span class="form_field_helptext">{$help_text}</span>
+        {/if}
     </div>
 </div>

@@ -580,6 +580,12 @@ h1 {
     margin-top: 7px;
 }
 
+.form_field_helptext {
+    color: gray;
+    margin-left: 25px;
+    font-style: italic;
+}
+
 .admin_field_text {
     margin: 0px;
     width: 300px;

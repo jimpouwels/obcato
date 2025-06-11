@@ -6,8 +6,8 @@ use Obcato\Core\view\TemplateData;
 
 class DateField extends FormField {
 
-    public function __construct(string $name, string $label, ?string $value, bool $mandatory, ?string $class_name) {
-        parent::__construct($name, $value, $label, $mandatory, false, $class_name);
+    public function __construct(string $name, string $label, ?string $value, bool $mandatory, ?string $className) {
+        parent::__construct($name, $value, $label, $mandatory, false, $className);
     }
 
     public function getFormFieldTemplateFilename(): string {

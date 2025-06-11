@@ -9,6 +9,8 @@ article_overview_element_editor_publication_date_until: Publicatiedatum tot
 article_overview_element_editor_max_results: Max aantal resultaten
 article_overview_element_editor_sort_by: Sorteren op
 article_overview_element_editor_ordering: Volgorde
+article_overview_element_editor_siblings_only: Alleen artikelen met zelfde hoofdartikel als huidige artikel
+article_overview_element_editor_siblings_only_helptext: Heeft alleen effect als er op dat moment een artikel word getoond
 
 # SORT OPTIONS
 article_overview_element_editor_sort_publication_date: Publication date
