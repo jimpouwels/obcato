@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\frontend;
 
+use Obcato\Core\core\BlackBoard;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\BlockDao;
@@ -37,7 +38,7 @@ class PageVisual extends FrontendVisual {
         $this->assignGlobal("page", $this->getPageContentAndMetaData($this->getPage()));
         $this->assign("crumb_path", $this->renderCrumbPath());
         $this->assign("keywords", $this->getPage()->getKeywords());
-        if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
+        if ($this->getArticle()) {
             $articleData = $this->renderArticle();
             $this->assignGlobal("article", $articleData);
             $this->assign("title", $this->getArticle()->getTitle());

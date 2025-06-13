@@ -9,6 +9,7 @@ use Obcato\Core\database\dao\FriendlyUrlDao;
 use Obcato\Core\database\dao\FriendlyUrlDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
+use Obcato\Core\frontend\FrontendHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\UrlHelper;
@@ -151,7 +152,7 @@ class FriendlyUrlManager {
             $articlePartOfUrl = '/' . implode('/', $subArray);
             $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($articlePartOfUrl);
             $article = $this->articleDao->getArticleByElementHolderId($elementHolderId);
-            if ($article && $article->isPublished()) {
+            if ($article && ($article->isPublished() || FrontendHelper::getQueryStringParam("preview") == "true")) {
                 $matchedUrl = $articlePartOfUrl;
                 break;
             }

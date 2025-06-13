@@ -272,6 +272,10 @@ abstract class FrontendVisual {
         }
     }
 
+    protected function isPreviewMode(): bool {
+        return FrontendHelper::getQueryStringParam("preview");
+    }
+
     private function replaceTemplateIncludes(string $html): string {
         $matches = null;
         preg_match_all('/<include template="(.*)".*\/>/', $html, $matches);
