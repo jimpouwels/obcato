@@ -104,8 +104,8 @@ class Article extends ElementHolder {
         return $this->targetPageId;
     }
 
-    public function setTargetPageId(?int $target_page_id): void {
-        $this->targetPageId = $target_page_id;
+    public function setTargetPageId(?int $targetPageId): void {
+        $this->targetPageId = $targetPageId;
     }
 
     public function getParentArticleId(): ?int {

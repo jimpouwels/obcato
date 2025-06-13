@@ -6,8 +6,8 @@ use Obcato\Core\view\TemplateData;
 
 class ReadonlyTextField extends FormField {
 
-    public function __construct(string $name, string $label, ?string $value, ?string $class_name) {
-        parent::__construct($name, $value, $label, false, false, $class_name);
+    public function __construct(string $name, string $label, ?string $value, ?string $className, ?string $helpText = null) {
+        parent::__construct($name, $value, $label, false, false, $className, $helpText);
     }
 
     public function getFormFieldTemplateFilename(): string {

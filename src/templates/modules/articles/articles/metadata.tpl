@@ -11,7 +11,7 @@
     {$name_field}
     {$title_field}
     {$url_title_field}
-    {$url_field}
+    {$url_field} <span>(<a href="{$url}?mode=preview" target="_blank">Preview</a>)</span>
     {$description_field}
     {$keywords_field}
     {$published_field}

@@ -2,12 +2,15 @@
 
 namespace Obcato\Core\modules\articles\visuals\articles;
 
+use Obcato\Core\core\BlackBoard;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\WebformDao;
 use Obcato\Core\database\dao\WebformDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\pages\service\PageInteractor;
+use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\utilities\DateUtility;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ArticlePicker;
@@ -32,6 +35,7 @@ class ArticleMetadataEditor extends Panel {
     private Article $currentArticle;
     private ArticleDao $articleDao;
     private WebformDao $webformDao;
+    private PageService $pageService;
     private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct(Article $currentArticle) {
@@ -39,6 +43,7 @@ class ArticleMetadataEditor extends Panel {
         $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->webformDao = WebformDaoMysql::getInstance();
+        $this->pageService = PageInteractor::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
     }
 
@@ -51,7 +56,10 @@ class ArticleMetadataEditor extends Panel {
         $titleField = new TextField("title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
         $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
         $urlTitleField = new TextField('url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
-        $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle), '');
+
+        $url = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($this->currentArticle->getTargetPageId())) . "/" . $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle);
+        $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $url, '');
+
         $keywordsField = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->currentArticle->getKeywords(), false, false, "keywords_field");
         $descriptionField = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->currentArticle->getDescription(), false, true, null);
         $publishedField = new SingleCheckbox("article_published", $this->getTextResource('article_editor_published_label'), $this->currentArticle->isPublished(), false, "");
@@ -78,6 +86,7 @@ class ArticleMetadataEditor extends Panel {
         $data->assign('template_field', $templatePickerField->render());
         $data->assign('keywords_field', $keywordsField->render());
         $data->assign('url_field', $urlField->render());
+        $data->assign('url', $url);
         $data->assign('url_title_field', $urlTitleField->render());
         $data->assign("description_field", $descriptionField->render());
         $data->assign("published_field", $publishedField->render());

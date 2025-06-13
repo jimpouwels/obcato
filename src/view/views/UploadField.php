@@ -6,8 +6,8 @@ use Obcato\Core\view\TemplateData;
 
 class UploadField extends FormField {
 
-    public function __construct(string $name, string $label, bool $mandatory, ?string $class_name) {
-        parent::__construct($name, null, $label, $mandatory, false, $class_name);
+    public function __construct(string $name, string $label, bool $mandatory, ?string $className) {
+        parent::__construct($name, null, $label, $mandatory, false, $className);
     }
 
     public function getFormFieldTemplateFilename(): string {

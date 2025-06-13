@@ -4,6 +4,7 @@ namespace Obcato\Core\modules\articles\visuals\articles;
 
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
+use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\view\views\ElementContainer;
 use Obcato\Core\view\views\LinkEditor;
@@ -15,11 +16,13 @@ class ArticleEditor extends Visual {
 
     private Article $currentArticle;
     private ArticleDao $articleDao;
+    private FriendlyUrlManager $friendlyUrlManager;
 
     public function __construct($currentArticle) {
         parent::__construct();
         $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
     }
 
     public function getTemplateFilename(): string {
