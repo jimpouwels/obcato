@@ -57,7 +57,7 @@ class ArticleMetadataEditor extends Panel {
         $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
         $urlTitleField = new TextField('url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
 
-        $url = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($this->currentArticle->getTargetPageId())) . "/" . $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle);
+        $url = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($this->currentArticle->getTargetPageId())) . $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle);
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $url, '');
 
         $keywordsField = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->currentArticle->getKeywords(), false, false, "keywords_field");
