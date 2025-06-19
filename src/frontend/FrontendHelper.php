@@ -4,10 +4,15 @@ namespace Obcato\Core\frontend;
 
 class FrontendHelper {
 
-    static function getQueryStringParam(string $name): ?string {
-        if (isset($_GET[$name])) {
-            return $_GET[$name];
+    static function isPreviewMode(): ?string {
+        if (isset($_GET["mode"])) {
+            return $_GET["mode"] == "preview";
         }
-        return "";
+        return false;
+    }
+
+    public static function asPreviewUrl(?string $url): string
+    {
+        return $url . "?mode=preview";
     }
 }

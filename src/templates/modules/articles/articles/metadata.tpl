@@ -11,7 +11,7 @@
     {$name_field}
     {$title_field}
     {$url_title_field}
-    {$url_field} <span>(<a href="{$url}?mode=preview" target="_blank">Preview</a>)</span>
+    {$url_field}
     {$description_field}
     {$keywords_field}
     {$published_field}
@@ -79,4 +79,5 @@
             </div>
         </div>
     {/if}
+    <span style="margin-bottom: 15px">[<a href="{$url}?mode=preview" target="_blank">Preview</a>]</span>
 </div>

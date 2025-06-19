@@ -256,24 +256,28 @@ abstract class FrontendVisual {
     }
 
     protected function createUrlFromLink(Link $link): string {
+        $url = "";
         if (!$link->getTargetElementHolderId()) {
-            return $link->getTargetAddress();
+            $url = $link->getTargetAddress();
+        } else {
+            $targetElementHolder = $link->getTargetElementHolder();
+            switch ($targetElementHolder->getType()) {
+                case Page::ElementHolderType:
+                    $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
+                    $url = $this->getPageUrl($targetPage);
+                    break;
+                case Article::ElementHolderType:
+                    $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
+                    $url = $this->getArticleUrl($targetArticle);
+                    break;
+                default:
+                    return "";
+            }
         }
-        $targetElementHolder = $link->getTargetElementHolder();
-        switch ($targetElementHolder->getType()) {
-            case Page::ElementHolderType:
-                $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
-                return $this->getPageUrl($targetPage);
-            case Article::ElementHolderType:
-                $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
-                return $this->getArticleUrl($targetArticle);
-            default:
-                return "";
+        if (FrontendHelper::isPreviewMode()) {
+            $url = FrontendHelper::asPreviewUrl($url);
         }
-    }
-
-    protected function isPreviewMode(): bool {
-        return FrontendHelper::getQueryStringParam("preview");
+        return $url;
     }
 
     private function replaceTemplateIncludes(string $html): string {
