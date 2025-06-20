@@ -46,7 +46,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $articleData = array();
             $articleData["id"] = $article->getId();
             $articleData["title"] = $article->getTitle();
-            $articleData["url"] = $this->getArticleUrl($article);
+            $articleData["url"] = $this->getLinkHelper()->createArticleUrl($article);
             $articleData["description"] = $this->toHtml($article->getDescription(), $article);
             $articleData["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
             $articleData["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
@@ -72,7 +72,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $imageData["title"] = $image->getTitle();
             $imageData["alt_text"] = $image->getAltText();
             $imageData["location"] = $image->getLocation();
-            $imageData["url"] = $this->getImageUrl($image);
+            $imageData["url"] = $this->getLinkHelper()->createImageUrl($image);
         }
         return $imageData;
     }

@@ -3,27 +3,17 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\core\model\Link;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\database\dao\LinkDao;
-use Obcato\Core\database\dao\LinkDaoMysql;
-use Obcato\Core\elements\separator_element\SeparatorElement;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\frontend\helper\LinkHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\modules\templates\model\TemplateVar;
 use Obcato\Core\modules\templates\service\TemplateInteractor;
 use Obcato\Core\modules\templates\service\TemplateService;
 use Obcato\Core\utilities\Arrays;
-use Obcato\Core\utilities\UrlHelper;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\TemplateEngine;
 use const Obcato\Core\FRONTEND_TEMPLATE_DIR;
@@ -32,27 +22,21 @@ abstract class FrontendVisual {
 
     private TemplateEngine $templateEngine;
     private TemplateData $templateData;
-    private LinkDao $linkDao;
-    private PageService $pageService;
-    private ArticleDao $articleDao;
-    private FriendlyUrlManager $friendlyUrlManager;
     private TemplateService $templateService;
+    private LinkHelper $linkHelper;
     private ?Page $page;
     private ?Article $article;
     private ?Block $block;
     private ElementDao $elementDao;
 
     public function __construct(?Page $page, ?Article $article, ?Block $block = null) {
-        $this->linkDao = LinkDaoMysql::getInstance();
-        $this->pageService = PageInteractor::getInstance();
-        $this->templateService = TemplateInteractor::getInstance();
-        $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->linkHelper = LinkHelper::getInstance($page, $article);
         $this->page = $page;
         $this->article = $article;
         $this->block = $block;
         $this->templateEngine = TemplateEngine::getInstance();
         $this->templateData = $this->createChildData();
-        $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
+        $this->templateService = TemplateInteractor::getInstance();
         $this->elementDao = ElementDaoMysql::getInstance();
     }
 
@@ -93,6 +77,10 @@ abstract class FrontendVisual {
 
     protected function getTemplateEngine(): TemplateEngine {
         return $this->templateEngine;
+    }
+
+    protected function getLinkHelper(): LinkHelper {
+        return $this->linkHelper;
     }
 
     protected function renderElementHolderContent(ElementHolder $elementHolder, ?array &$data): void {
@@ -170,14 +158,7 @@ abstract class FrontendVisual {
         }
         $value = nl2br($value);
         $value = $this->replaceSmartyQuery($value);
-        return $this->createLinksInString($value, $elementHolder);
-    }
-
-    protected function getImageUrl(?Image $image): string {
-        if (!$image) {
-            return "";
-        }
-        return $this->getPageUrl($this->page) . '?image=' . $image->getId();
+        return $this->linkHelper->createLinksInString($value, $elementHolder);
     }
 
     protected function getPage(): Page {
@@ -199,53 +180,6 @@ abstract class FrontendVisual {
         return !is_null($this->article) ? $this->article : $this->page;
     }
 
-    protected function getArticleUrl(Article $article, bool $absolute = false): string {
-        $targetPage = $this->pageService->getPageById($article->getTargetPageId());
-        if (!$targetPage) {
-            $targetPage = $this->page;
-        }
-        $url = $absolute ? $this->getBaseUrl() : "";
-        if ($targetPage) {
-            $url .= $this->getPageUrl($targetPage);
-        }
-        $friendlyUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($article);
-        if (!$friendlyUrl) {
-            $url .= UrlHelper::addQueryStringParameter($url, 'articleid', $article->getId());
-        } else {
-            $url .= $friendlyUrl;
-        }
-        return $url;
-    }
-
-    protected function getPageUrl(Page $page, bool $absolute = false): string {
-        $url = $absolute ? $this->getBaseUrl() : "";
-        if ($page->isHomepage()) {
-            return "$url" . ($absolute ? "" : "/");
-        }
-        $url = $absolute ? $this->getBaseUrl() : "";
-        $friendlyUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($page);
-        if (!$friendlyUrl) {
-            $url .= '/index.php?id=' . $page->getId();
-        } else {
-            $url .= $friendlyUrl;
-        }
-        return $url;
-    }
-
-    protected function getCanonicalUrl(): string {
-        if ($this->getArticle()) {
-            return $this->getArticleUrl($this->getArticle(), true);
-        } else {
-            return $this->getPageUrl($this->getPage(), true);
-        }
-    }
-
-    protected function getBaseUrl(): string {
-        $baseUrl = 'https://';
-        $baseUrl .= $_SERVER['HTTP_HOST'];
-        return $baseUrl;
-    }
-
     protected function toAnchorValue(string $value): string {
         $anchorValue = strtolower($value);
         $anchorValue = str_replace("-", " ", $anchorValue);
@@ -253,31 +187,6 @@ abstract class FrontendVisual {
         $anchorValue = str_replace(" ", "-", $anchorValue);
         $anchorValue = str_replace("--", "-", $anchorValue);
         return urlencode($anchorValue);
-    }
-
-    protected function createUrlFromLink(Link $link): string {
-        $url = "";
-        if (!$link->getTargetElementHolderId()) {
-            $url = $link->getTargetAddress();
-        } else {
-            $targetElementHolder = $link->getTargetElementHolder();
-            switch ($targetElementHolder->getType()) {
-                case Page::ElementHolderType:
-                    $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
-                    $url = $this->getPageUrl($targetPage);
-                    break;
-                case Article::ElementHolderType:
-                    $targetArticle = $this->articleDao->getArticle($targetElementHolder->getId());
-                    $url = $this->getArticleUrl($targetArticle);
-                    break;
-                default:
-                    return "";
-            }
-        }
-        if (FrontendHelper::isPreviewMode()) {
-            $url = FrontendHelper::asPreviewUrl($url);
-        }
-        return $url;
     }
 
     private function replaceTemplateIncludes(string $html): string {
@@ -296,43 +205,9 @@ abstract class FrontendVisual {
         return $html;
     }
 
-    private function createLinksInString(string $value, ElementHolder $elementHolder): string {
-        $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
-        foreach ($links as $link) {
-            if ($this->containsLink($value, $link)) {
-                $url = $this->createUrlFromLink($link);
-                $value = $this->replaceLinkCodeTags($value, $link, $url);
-            }
-        }
-        return $value;
-    }
-
     private function getDefaultValueFor(TemplateVar $templateVar, array $templateVarDefs): string {
         $value = Arrays::firstMatch($templateVarDefs, fn($item) => $templateVar->getName() == $item->getName())->getDefaultValue();
         return $value ?: "";
-    }
-
-    private function replaceLinkCodeTags(string $value, Link $link, string $url): string {
-        $linkClass = $link->getTargetElementHolderId() ? "internal" : "external";
-        $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $link->getTarget(), $url, $linkClass), $value);
-        return str_replace("[/LINK]", "</a>", $value);
-    }
-
-    private function containsLink(string $value, Link $link): bool {
-        return strpos($value, $this->getLinkCodeOpeningTag($link)) > -1;
-    }
-
-    private function getLinkCodeOpeningTag(Link $link): string {
-        return "[LINK C=\"" . $link->getCode() . "\"]";
-    }
-
-    private function createHyperlinkOpeningTag(string $title, string $target, string $url, string $link_class): string {
-        if ($target == '[popup]') {
-            $targetHtml = "onclick=\"window.open('$url','$title', 'width=800,height=600, scrollbars=no,toolbar=no,location=no'); return false\"";
-        } else {
-            $targetHtml = "target=\"$target\"";
-        }
-        return "<a title=\"{$title}\" {$targetHtml} href=\"{$url}\" class=\"{$link_class}\">";
     }
 
     private function replaceSmartyQuery(string $text): string {

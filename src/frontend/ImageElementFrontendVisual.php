@@ -34,7 +34,7 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         $closeTag = "";
         if ($this->getElement()->getLinkId()) {
             $link = $this->linkDao->getLink($this->getElement()->getLinkId());
-            $url = $this->createUrlFromLink($link);
+            $url = $this->getLinkHelper()->createUrlFromLink($link);
             $linkData['title'] = $link->getTitle();
             $linkData['url'] = $url;
             $linkData['target'] = $link->getTarget();
@@ -47,7 +47,7 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function createImageUrl(): string {
-        return $this->getElement()->getUrl() ?: $this->getImageUrl($this->getElement()->getImage());
+        return $this->getElement()->getUrl() ?: $this->getLinkHelper()->createImageUrl($this->getElement()->getImage());
     }
 
     private function getExtension(): string {

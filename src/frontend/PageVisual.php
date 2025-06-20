@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\core\BlackBoard;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\BlockDao;
@@ -47,7 +46,7 @@ class PageVisual extends FrontendVisual {
             $this->assign("article", null);
         }
         $this->assign("blocks", $this->renderBlocks());
-        $this->assign("canonical_url", $this->getCanonicalUrl());
+        $this->assign("canonical_url", $this->getLinkHelper()->createCanonicalUrl());
         $this->assign("root_page", $this->getPageMetaData($this->pageService->getRootPage()));
         $this->assign("sitewide_pages", $this->getSitewidePagesData());
     }
@@ -88,7 +87,7 @@ class PageVisual extends FrontendVisual {
             $pageData = array();
             $pageData['id'] = $page->getId();
             $pageData['title'] = $page->getTitle();
-            $pageData['url'] = $this->getPageUrl($page);
+            $pageData['url'] = $this->getLinkHelper()->createPageUrl($page);
             $data[] = $pageData;
         }
         return $data;
@@ -99,7 +98,7 @@ class PageVisual extends FrontendVisual {
         $pageData["title"] = $page->getTitle();
         $pageData["id"] = $page->getId();
         $pageData["keywords"] = $page->getKeywords();
-        $pageData["url"] = $this->getPageUrl($page);
+        $pageData["url"] = $this->getLinkHelper()->createPageUrl($page);
         $pageData["is_homepage"] = $page->isHomepage();
         $pageData["navigation_title"] = $page->getNavigationTitle();
         $page_description = $page->getDescription();
@@ -162,13 +161,13 @@ class PageVisual extends FrontendVisual {
                 continue;
             }
             $itemData = array();
-            $itemData['url'] = $this->getPageUrl($parents[$i]);
+            $itemData['url'] = $this->getLinkHelper()->createPageUrl($parents[$i]);
             $itemData['title'] = $parents[$i]->getNavigationTitle();
             $crumbPathItems[] = $itemData;
         }
         if ($parentArticle) {
             $itemData = array();
-            $itemData['url'] = $this->getArticleUrl($parentArticle);
+            $itemData['url'] = $this->getLinkHelper()->createArticleUrl($parentArticle);
             $itemData['title'] = $parentArticle->getTitle();
             $crumbPathItems[] = $itemData;
         }

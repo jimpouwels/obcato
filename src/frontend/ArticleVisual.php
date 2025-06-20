@@ -54,7 +54,7 @@ class ArticleVisual extends FrontendVisual {
             $parentArticleData["id"] = $parentArticle->getId();
             $parentArticleData["title"] = $parentArticle->getTitle();
             $parentArticleData["description"] = $parentArticle->getDescription();
-            $parentArticleData["url"] = $this->getArticleUrl($parentArticle);
+            $parentArticleData["url"] = $this->getLinkHelper()->createArticleUrl($parentArticle);
             $data["parent_article"] = $parentArticleData;
         }
     }
@@ -68,7 +68,7 @@ class ArticleVisual extends FrontendVisual {
         if ($image) {
             $imageData = array();
             $imageData["title"] = $image->getTitle();
-            $imageData["url"] = $this->getImageUrl($image);
+            $imageData["url"] = $this->getLinkHelper()->createImageUrl($image);
             $imageData["location"] = $image->getLocation();
         }
         return $imageData;

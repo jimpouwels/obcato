@@ -16,7 +16,7 @@ class RobotsVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assign('sitemap_url', $this->getBaseUrl() . '/sitemap.xml');
+        $this->assign('sitemap_url', $this->getLinkHelper()->createBaseUrl() . '/sitemap.xml');
     }
 
     public function getPresentable(): ?Presentable {

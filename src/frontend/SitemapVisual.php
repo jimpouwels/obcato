@@ -40,7 +40,7 @@ class SitemapVisual extends FrontendVisual {
                 continue;
             }
             $pageUrl = array();
-            $pageUrl['url'] = $this->getPageUrl($page, true);
+            $pageUrl['url'] = $this->getLinkHelper()->createPageUrl($page, true);
             $pageUrl['last_modified'] = date_format($page->getLastModified(), 'Y-m-d');
             $pageUrls[] = $pageUrl;
         }
@@ -54,7 +54,7 @@ class SitemapVisual extends FrontendVisual {
                 continue;
             }
             $articleUrl = array();
-            $articleUrl['url'] = $this->getArticleUrl($article, true);
+            $articleUrl['url'] = $this->getLinkHelper()->createArticleUrl($article, true);
             $articleUrl['last_modified'] = date_format($article->getLastModified(), 'Y-m-d');
             $articleUrls[] = $articleUrl;
         }

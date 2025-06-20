@@ -33,7 +33,7 @@ class WebsiteVisual extends FrontendVisual {
         }
         $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_mobile_device", $isMobileUserAgent);
-        $this->assignGlobal("base_url", $this->getBaseUrl());
+        $this->assignGlobal("base_url", $this->getLinkHelper()->createBaseUrl());
         $this->assignGlobal("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
         if ($this->getPage()->isPublished()) {
             $pageVisual = new PageVisual($this->getPage(), $this->article);

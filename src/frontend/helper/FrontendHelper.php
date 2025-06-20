@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Obcato\Core\frontend\helper;
 
 class FrontendHelper {
 
