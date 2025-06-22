@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\core\BlackBoard;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\WebformDao;
