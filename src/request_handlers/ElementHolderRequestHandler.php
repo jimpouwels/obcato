@@ -38,6 +38,7 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
             $this->updateElementHolder($this->getElementHolderFromPostRequest());
         } else if ($this->isDeleteElementAction()) {
             $this->deleteElementFrom($this->getElementHolderFromPostRequest());
+            $this->updateElementHolder($this->getElementHolderFromPostRequest());
         } else if ($this->isAddLinkAction()) {
             $this->addLink($this->getElementHolderFromPostRequest());
             $this->updateElementHolder($this->getElementHolderFromPostRequest());
