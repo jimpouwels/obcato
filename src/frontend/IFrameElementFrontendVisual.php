@@ -15,7 +15,7 @@ class IFrameElementFrontendVisual extends ElementFrontendVisual {
 
     public function loadElement(array &$data): void {
         $data["title"] = $this->getElement()->getTitle();
-        $data["url"] = $this->toHtml($this->getElement()->getUrl(), $this->getElementHolder());
+        $data["url"] = $this->getElement()->getUrl();
         $data["height"] = $this->getElement()->getHeight();
         $data["width"] = $this->getElement()->getWidth();
     }

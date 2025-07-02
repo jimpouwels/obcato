@@ -5,6 +5,7 @@ namespace Obcato\Core\frontend;
 use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
+use Obcato\Core\frontend\helper\FontStyleHelper;
 use Obcato\Core\frontend\helper\LinkHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
@@ -158,6 +159,9 @@ abstract class FrontendVisual {
         }
         $value = nl2br($value);
         $value = $this->replaceSmartyQuery($value);
+        $value = FontStyleHelper::createColors($value);
+        $value = FontStyleHelper::createItalic($value);
+        $value = FontStyleHelper::createBold($value);
         return $this->linkHelper->createLinksInString($value, $elementHolder);
     }
 
