@@ -39,10 +39,14 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     }
 
     private function getArticles(): array {
-        $articles = $this->getElement()->getArticles($this->getArticle()?->getId(), $this->getArticle()?->getParentArticleId());
+        $exclude = null;
+        if (!$this->getElement()->includeCurrentArticle()) {
+            $exclude = $this->getArticle()?->getId();
+        }
+        $articles = $this->getElement()->getArticles($exclude, $this->getArticle()?->getParentArticleId());
         $articlesData = array();
         foreach ($articles as $article) {
-            if (!$this->isPublished($article) || $this->getArticle()?->getId() == $article->getId()) continue;
+            if (!$this->isPublished($article)) continue;
             $articleData = array();
             $articleData["id"] = $article->getId();
             $articleData["title"] = $article->getTitle();

@@ -47,7 +47,11 @@ class PageVisual extends FrontendVisual {
         }
         $this->assign("blocks", $this->renderBlocks());
         $this->assign("canonical_url", $this->getLinkHelper()->createCanonicalUrl());
-        $this->assign("root_page", $this->getPageMetaData($this->pageService->getRootPage()));
+
+        $rootPageData = array();
+        $this->addPageMetaData($this->pageService->getRootPage(), $rootPageData, true, false);
+        $this->assign("root_page", $rootPageData);
+
         $this->assign("sitewide_pages", $this->getSitewidePagesData());
     }
 
@@ -58,13 +62,7 @@ class PageVisual extends FrontendVisual {
     private function getPageContentAndMetaData(Page $page): array {
         $pageData = array();
         $this->renderElementHolderContent($page, $pageData);
-        $this->addPageMetaData($page, $pageData);
-        return $pageData;
-    }
-
-    private function getPageMetaData(Page $page): array {
-        $pageData = array();
-        $this->addPageMetaData($page, $pageData);
+        $this->addPageMetaData($page, $pageData, true, true);
         return $pageData;
     }
 
@@ -73,7 +71,7 @@ class PageVisual extends FrontendVisual {
         foreach ($this->pageService->getSubPages($page) as $subPage) {
             if (!$subPage->isPublished()) continue;
             $child = array();
-            $this->addPageMetaData($subPage, $child, false);
+            $this->addPageMetaData($subPage, $child, false, false);
             $children[] = $child;
         }
         return $children;
@@ -93,7 +91,7 @@ class PageVisual extends FrontendVisual {
         return $data;
     }
 
-    private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren = true): void {
+    private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren, bool $renderParent): void {
         $pageData["is_current_page"] = $this->getPage()->getId() == $page->getId();
         $pageData["title"] = $page->getTitle();
         $pageData["id"] = $page->getId();
@@ -107,6 +105,14 @@ class PageVisual extends FrontendVisual {
         }
         $pageData["description"] = $this->toHtml($page_description, $page);
         $pageData["show_in_navigation"] = $page->getShowInNavigation();
+        if ($renderParent) {
+            $parentData = array();
+            $parent = $this->pageService->getParent($this->getPage());
+            if ($parent) {
+                $this->addPageMetaData($parent, $parentData, false, false);
+                $pageData["parent"] = $parentData;
+            }
+        }
         if ($renderChildren) {
             $pageData["children"] = $this->renderChildren($page);
         }

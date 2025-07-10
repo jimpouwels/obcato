@@ -27,6 +27,7 @@ class ArticleOverviewElement extends Element {
     private array $terms;
     private ?int $numberOfResults = null;
     private bool $siblingsOnly = false;
+    private bool $includeCurrentArticle = false;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ArticleOverviewElementMetadataProvider($this));
@@ -138,6 +139,13 @@ class ArticleOverviewElement extends Element {
         return new ArticleOverviewElementRequestHandler($this);
     }
 
+    public function includeCurrentArticle(): bool {
+        return $this->includeCurrentArticle;
+    }
+
+    public function setIncludeCurrentArticle(bool $includeCurrentArticle): void {
+        $this->includeCurrentArticle = $includeCurrentArticle;
+    }
 
     public function getSummaryText(): string {
         $summary_text = $this->getTitle() ?? "";

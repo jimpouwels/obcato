@@ -5,6 +5,7 @@ namespace Obcato\Core\elements\article_overview_element;
 use Obcato\Core\core\form\FormException;
 use Obcato\Core\request_handlers\ElementForm;
 use Obcato\Core\utilities\DateUtility;
+use function Obcato\Core\utilities\dumpVar;
 
 class ArticleOverviewElementForm extends ElementForm {
 
@@ -26,6 +27,7 @@ class ArticleOverviewElementForm extends ElementForm {
         $orderBy = $this->getFieldValue('element_' . $elementId . '_order_by');
         $orderType = $this->getFieldValue('element_' . $elementId . '_order_type');
         $siblingsOnly = $this->getFieldValue('element_' . $elementId . '_siblings_only');
+        $includeCurrentArticle = $this->getFieldValue('element_' . $elementId . '_include_current_article');
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
@@ -37,6 +39,7 @@ class ArticleOverviewElementForm extends ElementForm {
             $this->articleOverviewElement->setOrderBy($orderBy);
             $this->articleOverviewElement->setOrderType($orderType);
             $this->articleOverviewElement->setSiblingsOnly($siblingsOnly);
+            $this->articleOverviewElement->setIncludeCurrentArticle($includeCurrentArticle);
         }
 
         $this->selectedTerms = $this->getFieldValues('select_terms_' . $this->articleOverviewElement->getId());

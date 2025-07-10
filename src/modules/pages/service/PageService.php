@@ -27,6 +27,8 @@ interface PageService {
 
     public function getParents(Page $page): array;
 
+    public function getParent(Page $page): ?Page;
+
     public function getSitewidePages(): array;
 
     public function addSitewidePage(int $id): void;

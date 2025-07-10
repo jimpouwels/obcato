@@ -104,6 +104,10 @@ class PageInteractor implements PageService {
         return $this->pageDao->getParents($page);
     }
 
+    public function getParent(Page $page): ?Page {
+        return $this->pageDao->getParent($page);
+    }
+
     public function getSitewidePages(): array {
         $sitewidePageIds = $this->sitewideDao->getSitewidePages();
         $sitewidePages = [];

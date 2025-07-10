@@ -11,6 +11,7 @@ article_overview_element_editor_sort_by: Sort by
 article_overview_element_editor_ordering: Ordering
 article_overview_element_editor_siblings_only: Show siblings only
 article_overview_element_editor_siblings_only_helptext: Only has effect when an article is currently rendered
+article_overview_element_editor_include_current_article: Include current article
 
 # SORT OPTIONS
 article_overview_element_editor_sort_publication_date: Publication date

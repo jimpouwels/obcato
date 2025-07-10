@@ -6,5 +6,6 @@
     {$order_by_field}
     {$order_type_field}
     {$siblings_only_field}
+    {$include_current_article_field}
     {$term_select_field}
 </div>

@@ -46,6 +46,8 @@ class ArticleOverviewElementEditor extends ElementVisual {
         $data->assign("order_type_field", $orderTypeField->render());
         $siblingsOnlyField = new SingleCheckbox("element_" . $this->element->getId() . "_siblings_only", "article_overview_element_editor_siblings_only", $this->element->getSiblingsOnly(), false, "", "article_overview_element_editor_siblings_only_helptext");
         $data->assign("siblings_only_field", $siblingsOnlyField->render());
+        $includeCurrentArticleField = new SingleCheckbox("element_" . $this->element->getId() . "_include_current_article", "article_overview_element_editor_include_current_article", $this->element->includeCurrentArticle(), false, "");
+        $data->assign("include_current_article_field", $includeCurrentArticleField->render());
         $termSelectField = new TermSelector($this->element->getTerms(), $this->element->getId());
         $data->assign("term_select_field", $termSelectField->render());
     }
