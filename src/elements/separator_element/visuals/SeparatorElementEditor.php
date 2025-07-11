@@ -6,6 +6,7 @@ use Obcato\Core\core\model\Element;
 use Obcato\Core\elements\separator_element\SeparatorElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
+use Obcato\Core\view\views\TextField;
 
 class SeparatorElementEditor extends ElementVisual {
 
@@ -26,6 +27,8 @@ class SeparatorElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
+        $titleField = new TextField("element_" . $this->separatorElement->getId() . "_title", $this->getTextResource("separator_element_editor_title"), $this->separatorElement->getTitle(), false, true, null);
+        $data->assign("title_field", $titleField->render());
     }
 
     public function includeLinkSelector(): bool

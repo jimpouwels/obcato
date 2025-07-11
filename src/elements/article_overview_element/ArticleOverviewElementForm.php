@@ -19,6 +19,7 @@ class ArticleOverviewElementForm extends ElementForm {
     }
 
     public function loadFields(): void {
+        parent::loadFields();
         $elementId = $this->articleOverviewElement->getId();
         $title = $this->getFieldValue('element_' . $elementId . '_title');
         $showTo = $this->getDate('element_' . $elementId . '_show_to');
@@ -31,7 +32,6 @@ class ArticleOverviewElementForm extends ElementForm {
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
-            parent::loadFields();
             $this->articleOverviewElement->setTitle($title);
             $this->articleOverviewElement->setShowTo(DateUtility::stringMySqlDate($showTo));
             $this->articleOverviewElement->setShowFrom(DateUtility::stringMySqlDate($showFrom));

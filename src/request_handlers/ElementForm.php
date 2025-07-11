@@ -13,6 +13,10 @@ abstract class ElementForm extends Form {
         $this->element = $element;
     }
 
+    protected function getElement(): ?Element {
+        return $this->element;
+    }
+
     public function loadFields(): void {
         $templateIdString = $this->getFieldValue('element_' . $this->element->getId() . '_template');
         $templateId = null;
