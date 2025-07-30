@@ -7,6 +7,7 @@ use Obcato\Core\core\form\FormException;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
 use Obcato\Core\utilities\DateUtility;
 
 class ArticleForm extends Form {
@@ -14,6 +15,8 @@ class ArticleForm extends Form {
     private Article $article;
     private array $selectedTerm;
     private ArticleDao $articleDao;
+    private array $updatedMetadataFieldValues = array();
+    private array $newMetadataFieldValues = array();
 
     public function __construct(Article $article) {
         $this->article = $article;
@@ -45,6 +48,28 @@ class ArticleForm extends Form {
             $this->article->setPublicationDate(DateUtility::stringMySqlDate($publicationDate));
             $this->article->setSortDate(DateUtility::stringMySqlDate($sortDate));
         }
+        foreach ($this->articleDao->getMetadataFields() as $metadataField) {
+            $fieldValue = $this->articleDao->getMetadataFieldValue($this->article, $metadataField);
+            $value = $this->getFieldValue("metadata_field_" . $metadataField->getId());
+            if (!$fieldValue) {
+                $fieldValue = new ArticleMetadataFieldValue();
+                $fieldValue->setValue($value);
+                $fieldValue->setArticleId($this->article->getId());
+                $fieldValue->setMetadataFieldId($metadataField->getId());
+                $this->newMetadataFieldValues[] = $fieldValue;
+            } else {
+                $fieldValue->setValue($value);
+                $this->updatedMetadataFieldValues[] = $fieldValue;
+            }
+        }
+    }
+
+    public function getUpdatedMetadataFieldValues(): array {
+        return $this->updatedMetadataFieldValues;
+    }
+
+    public function getNewMetadataFieldValues(): array {
+        return $this->newMetadataFieldValues;
     }
 
     public function getSelectedTerm(): array {

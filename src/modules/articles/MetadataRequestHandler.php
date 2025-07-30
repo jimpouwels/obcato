@@ -11,7 +11,7 @@ use Obcato\Core\request_handlers\HttpRequestHandler;
 class MetadataRequestHandler extends HttpRequestHandler {
 
     private ArticleService $articleService;
-    private ?ArticleMetadataField $currentMetadataField;
+    private ?ArticleMetadataField $currentMetadataField = null;
 
     public function __construct() {
         $this->articleService = ArticleInteractor::getInstance();

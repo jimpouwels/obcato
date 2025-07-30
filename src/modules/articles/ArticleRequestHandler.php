@@ -80,6 +80,12 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
             foreach ($this->articleService->getAllChildArticlesFor($this->currentArticle) as $child_article) {
                 $this->friendlyUrlManager->insertOrUpdateFriendlyUrlForArticle($child_article);
             }
+            foreach ($articleForm->getUpdatedMetadataFieldValues() as $updatedMetadataFieldValue) {
+                $this->articleService->updateMetadataFieldValue($updatedMetadataFieldValue);
+            }
+            foreach ($articleForm->getNewMetadataFieldValues() as $newMetadataFieldValue) {
+                $this->articleService->addMetadataFieldValue($newMetadataFieldValue);
+            }
             $this->sendSuccessMessage($this->getTextResource('article_saved_message'));
         } catch (ElementHolderContainsErrorsException|FormException) {
             $this->sendErrorMessage($this->getTextResource('article_not_saved_error_message'));

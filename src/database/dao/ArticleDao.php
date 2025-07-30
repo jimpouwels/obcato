@@ -4,6 +4,7 @@ namespace Obcato\Core\database\dao;
 
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\model\ArticleMetadataField;
+use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 
@@ -67,4 +68,10 @@ interface ArticleDao {
     public function updateMetadataField(ArticleMetadataField $field): void;
 
     public function deleteMetadataField(ArticleMetadataField $field): void;
+
+    public function getMetadataFieldValue(Article $article, ArticleMetadataField $field): ?ArticleMetadataFieldValue;
+
+    public function updateMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void;
+
+    public function addMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void;
 }

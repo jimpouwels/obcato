@@ -106,6 +106,16 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("delete_lead_image_button", $imageDeleteButton->render());
         $data->assign("delete_wallpaper_button", $wallpaperDeleteButton->render());
         $this->assignElementHolderFormIds($data);
+
+        // metadata fields
+        $metadataFields = array();
+        foreach ($this->articleDao->getMetadataFields() as $metadataField) {
+            $fieldValue = $this->articleDao->getMetadataFieldValue($this->currentArticle, $metadataField);
+            $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+            $metadataField = new TextField('metadata_field_' . $metadataField->getId(), $metadataField->getName(), $value, false, false, "");
+            $metadataFields[] = $metadataField->render();
+        }
+        $data->assign("metadata_fields", $metadataFields);
     }
 
     private function renderChildArticles(): array {

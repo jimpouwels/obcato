@@ -98,10 +98,10 @@ class ArticleModuleVisual extends ModuleVisual {
             $actionButtons[] = new ActionButtonDelete('delete_target_pages');
         }
         if ($this->getCurrentTabId() == self::$METADATA_TAB) {
-            $actionButtons[] = new ActionButtonAdd('add_metadata_field');
             if ($this->currentMetadataField) {
                 $actionButtons[] = new ActionButtonSave('update_metadata_field');
             }
+            $actionButtons[] = new ActionButtonAdd('add_metadata_field');
             $actionButtons[] = new ActionButtonDelete('delete_metadata_fields');
         }
 

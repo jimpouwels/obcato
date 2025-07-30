@@ -7,6 +7,7 @@ use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\model\ArticleMetadataField;
+use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 use const Obcato\Core\ELEMENT_HOLDER_ARTICLE;
@@ -116,5 +117,17 @@ class ArticleInteractor implements ArticleService {
 
     public function deleteMetadataField(ArticleMetadataField $field): void {
         $this->articleDao->deleteMetadataField($field);
+    }
+
+    public function getMetadataFieldValue(Article $article, ArticleMetadataField $field): ?ArticleMetadataFieldValue {
+        return $this->articleDao->getMetadataFieldValue($article, $field);
+    }
+
+    public function updateMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        $this->articleDao->updateMetadataFieldValue($fieldValue);
+    }
+
+    public function addMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        $this->articleDao->addMetadataFieldValue($fieldValue);
     }
 }

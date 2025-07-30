@@ -309,6 +309,7 @@
             <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN siblings_only tinyint(1) DEFAULT 0</query>
             <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN include_current_article tinyint(1) DEFAULT 0</query>
             <query>CREATE TABLE article_metadata_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, name TEXT NOT NULL, default_value TEXT DEFAULT NULL, PRIMARY KEY (id))</query>
+            <query>CREATE TABLE articles_metadata_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, value TEXT DEFAULT NULL, article_id int(10) unsigned NOT NULL, metadata_field_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT articles_metadata_values_to_metadata_fields FOREIGN KEY (metadata_field_id) REFERENCES article_metadata_fields (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT articles_metadata_values_to_element_holders FOREIGN KEY (article_id) REFERENCES element_holders (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
         </queries>
     </version>
 </versions>

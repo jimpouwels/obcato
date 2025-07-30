@@ -79,5 +79,8 @@
             </div>
         </div>
     {/if}
+    {foreach from=$metadata_fields item=metadata_field}
+        {$metadata_field}
+    {/foreach}
     <span style="margin-bottom: 15px">[<a href="{$url}?mode=preview" target="_blank">Preview</a>]</span>
 </div>

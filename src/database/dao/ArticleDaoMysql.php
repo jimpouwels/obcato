@@ -7,6 +7,7 @@ use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\model\ArticleComment;
 use Obcato\Core\modules\articles\model\ArticleMetadataField;
+use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
@@ -402,6 +403,38 @@ class ArticleDaoMysql implements ArticleDao {
         $statement = $this->mysqlConnector->prepareStatement($query);
         $id = $field->getId();
         $statement->bind_param("i", $id);
+        $this->mysqlConnector->executeStatement($statement);
+    }
+
+    public function getMetadataFieldValue(Article $article, ArticleMetadataField $field): ?ArticleMetadataFieldValue {
+        $query = "SELECT * FROM articles_metadata_fields WHERE article_id = ? AND metadata_field_id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $articleId = $article->getId();
+        $fieldId = $field->getId();
+        $statement->bind_param("ii", $articleId, $fieldId);
+        $result = $this->mysqlConnector->executeStatement($statement);
+        while ($row = $result->fetch_assoc()) {
+            return ArticleMetadataFieldValue::constructFromRecord($row);
+        }
+        return null;
+    }
+
+    public function updateMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        $query = "UPDATE articles_metadata_fields SET value = ? WHERE id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $id = $fieldValue->getId();
+        $value = $fieldValue->getValue();
+        $statement->bind_param("si", $value, $id);
+        $this->mysqlConnector->executeStatement($statement);
+    }
+
+    public function addMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        $query = "INSERT INTO articles_metadata_fields (article_id, metadata_field_id, value) VALUES (?, ?, ?)";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $articleId = $fieldValue->getArticleId();
+        $metadataFieldId = $fieldValue->getMetadataFieldId();
+        $value = $fieldValue->getValue();
+        $statement->bind_param("iis", $articleId, $metadataFieldId, $value);
         $this->mysqlConnector->executeStatement($statement);
     }
 
