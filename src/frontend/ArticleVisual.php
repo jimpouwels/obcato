@@ -47,6 +47,12 @@ class ArticleVisual extends FrontendVisual {
         $data["comments"] = $this->renderArticleComments($this->getArticle());
         $data["comment_webform"] = $this->renderArticleCommentWebForm($this->getArticle());
 
+        foreach ($this->articleService->getMetadataFields() as $metadataField) {
+            $fieldValue = $this->articleService->getMetadataFieldValue($this->getArticle(), $metadataField);
+            $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+            $data[$metadataField->getName()] = $value;
+        }
+
         $data["parent_article"] = "";
         if ($this->getArticle()->getParentArticleId()) {
             $parentArticleData = array();
@@ -55,6 +61,12 @@ class ArticleVisual extends FrontendVisual {
             $parentArticleData["title"] = $parentArticle->getTitle();
             $parentArticleData["description"] = $parentArticle->getDescription();
             $parentArticleData["url"] = $this->getLinkHelper()->createArticleUrl($parentArticle);
+
+            foreach ($this->articleService->getMetadataFields() as $metadataField) {
+                $fieldValue = $this->articleService->getMetadataFieldValue($parentArticle, $metadataField);
+                $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+                $parentArticleData[$metadataField->getName()] = $value;
+            }
             $data["parent_article"] = $parentArticleData;
         }
     }

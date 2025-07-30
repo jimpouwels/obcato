@@ -111,7 +111,7 @@ class ArticleMetadataEditor extends Panel {
         $metadataFields = array();
         foreach ($this->articleDao->getMetadataFields() as $metadataField) {
             $fieldValue = $this->articleDao->getMetadataFieldValue($this->currentArticle, $metadataField);
-            $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+            $value = $fieldValue ? $fieldValue->getValue() : "";
             $metadataField = new TextField('metadata_field_' . $metadataField->getId(), $metadataField->getName(), $value, false, false, "");
             $metadataFields[] = $metadataField->render();
         }
