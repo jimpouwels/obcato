@@ -6,13 +6,13 @@ use Obcato\Core\view\TemplateData;
 
 abstract class Panel extends Visual {
 
-    private string $_title_resource_identifier;
-    private string $_class;
+    private string $titleResrouceIdentifier;
+    private string $class;
 
-    public function __construct(string $title_resource_identifier, string $class = "") {
+    public function __construct(string $titleResrouceIdentifier, string $class = "") {
         parent::__construct();
-        $this->_title_resource_identifier = $title_resource_identifier;
-        $this->_class = $class;
+        $this->titleResrouceIdentifier = $titleResrouceIdentifier;
+        $this->class = $class;
     }
 
     public function getTemplateFilename(): string {
@@ -28,8 +28,8 @@ abstract class Panel extends Visual {
         $this->loadPanelContent($panelContentTemplateData);
 
         $this->assign('content', $this->fetch($this->getPanelContentTemplate(), $panelContentTemplateData));
-        $this->assign('title_resource_identifier', $this->_title_resource_identifier);
-        $this->assign('class', $this->_class);
+        $this->assign('title_resource_identifier', $this->titleResrouceIdentifier);
+        $this->assign('class', $this->class);
     }
 
 }

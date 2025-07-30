@@ -308,6 +308,7 @@
             <query>ALTER TABLE image_elements_metadata ADD COLUMN url TEXT DEFAULT NULL</query>
             <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN siblings_only tinyint(1) DEFAULT 0</query>
             <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN include_current_article tinyint(1) DEFAULT 0</query>
+            <query>CREATE TABLE article_metadata_fields (id int(10) unsigned NOT NULL AUTO_INCREMENT, name TEXT NOT NULL, default_value TEXT DEFAULT NULL, PRIMARY KEY (id))</query>
         </queries>
     </version>
 </versions>

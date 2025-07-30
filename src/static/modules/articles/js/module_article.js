@@ -52,6 +52,33 @@ $(document).ready(function () {
         }
     });
 
+    $('#add_metadata_field').click(function () {
+        $('#add_metadata_field_form_hidden').submit();
+    });
+
+    $('#update_metadata_field').click(function () {
+        $('#action').attr('value', 'update_metadata_field');
+        $('#metadata_field_form').submit();
+    });
+
+    $('#delete_metadata_fields').click(function () {
+        var $checked = false;
+        $('input:checkbox').each(function () {
+            if ($(this).attr('checked')) {
+                $checked = true;
+            }
+        });
+        if (!$checked) {
+            alert('U heeft geen metadata velden geselecteerd');
+        } else {
+            var confirmed = confirm('Weet u zeker dat u de geselecteerde metadata velden wilt verwijderen?');
+            if (confirmed) {
+                $('#metadata_field_delete_action').attr('value', 'delete_metadata_fields');
+                $('#metadata_field_delete_form').submit();
+            }
+        }
+    });
+
     $('#delete_lead_image').click(function () {
         var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");
         if (confirmed) {

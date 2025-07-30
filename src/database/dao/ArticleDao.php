@@ -3,6 +3,7 @@
 namespace Obcato\Core\database\dao;
 
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 
@@ -56,4 +57,14 @@ interface ArticleDao {
     public function getDefaultTargetPage(): ?Page;
 
     public function setDefaultArticleTargetPage($targetPageId): void;
+
+    public function getMetadataFields(): array;
+
+    public function getMetadataField(int $id): ?ArticleMetadataField;
+
+    public function createNewArticleMetadataField(string $name): ArticleMetadataField;
+
+    public function updateMetadataField(ArticleMetadataField $field): void;
+
+    public function deleteMetadataField(ArticleMetadataField $field): void;
 }

@@ -6,6 +6,7 @@ namespace Obcato\Core\database\dao;
 use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\model\ArticleComment;
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\DateUtility;
@@ -352,6 +353,56 @@ class ArticleDaoMysql implements ArticleDao {
         $query2 = "UPDATE article_target_pages SET is_default = 1 WHERE element_holder_id = " . $targetPageId;
         $this->mysqlConnector->executeQuery($query1);
         $this->mysqlConnector->executeQuery($query2);
+    }
+
+    public function getMetadataFields(): array {
+        $query = "SELECT * FROM article_metadata_fields";
+        $result = $this->mysqlConnector->executeQuery($query);
+        $fields = array();
+        while ($row = $result->fetch_assoc()) {
+            $fields[] = ArticleMetadataField::constructFromRecord($row);
+        }
+        return $fields;
+    }
+
+    public function getMetadataField(int $id): ?ArticleMetadataField {
+        $query = "SELECT * FROM article_metadata_fields WHERE id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param("i", $id);
+        $result = $this->mysqlConnector->executeStatement($statement);
+        while ($row = $result->fetch_assoc()) {
+            return ArticleMetadataField::constructFromRecord($row);
+        }
+        return null;
+    }
+
+    public function createNewArticleMetadataField(string $name): ArticleMetadataField {
+        $query = "INSERT INTO article_metadata_fields (name) VALUES (?)";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $statement->bind_param("s", $name);
+        $this->mysqlConnector->executeStatement($statement);
+        $field = new ArticleMetadataField();
+        $field->setName($name);
+        $field->setId($this->mysqlConnector->getInsertId());
+        return $field;
+    }
+
+    public function updateMetadataField(ArticleMetadataField $field): void {
+        $query = "UPDATE article_metadata_fields SET name = ?, default_value = ? WHERE id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $id = $field->getId();
+        $name = $field->getName();
+        $defaultValue = $field->getDefaultValue();
+        $statement->bind_param("ssi", $name, $defaultValue, $id);
+        $this->mysqlConnector->executeStatement($statement);
+    }
+
+    public function deleteMetadataField(ArticleMetadataField $field): void {
+        $query = "DELETE FROM article_metadata_fields WHERE id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $id = $field->getId();
+        $statement->bind_param("i", $id);
+        $this->mysqlConnector->executeStatement($statement);
     }
 
 }

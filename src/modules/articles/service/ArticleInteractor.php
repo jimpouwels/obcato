@@ -6,6 +6,7 @@ use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\pages\model\Page;
 use const Obcato\Core\ELEMENT_HOLDER_ARTICLE;
@@ -95,5 +96,25 @@ class ArticleInteractor implements ArticleService {
 
     public function getTerm(string $name): ArticleTerm {
         return $this->articleDao->getTerm($name);
+    }
+
+    public function getMetadataFields(): array {
+        return $this->articleDao->getMetadataFields();
+    }
+
+    public function getMetadataField(int $id): ?ArticleMetadataField {
+        return $this->articleDao->getMetadataField($id);
+    }
+
+    public function createNewArticleMetadataField(string $name): ArticleMetadataField {
+        return $this->articleDao->createNewArticleMetadataField($name);
+    }
+
+    public function updateMetadataField(ArticleMetadataField $field): void {
+        $this->articleDao->updateMetadataField($field);
+    }
+
+    public function deleteMetadataField(ArticleMetadataField $field): void {
+        $this->articleDao->deleteMetadataField($field);
     }
 }

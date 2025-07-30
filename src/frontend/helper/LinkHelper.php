@@ -126,7 +126,7 @@ class LinkHelper
                     return "";
             }
         }
-        if (FrontendHelper::isPreviewMode()) {
+        if (FrontendHelper::isPreviewMode() && $link->getTargetElementHolderId()) {
             $url = FrontendHelper::asPreviewUrl($url);
         }
         return $url;

@@ -4,8 +4,10 @@ namespace Obcato\Core\modules\articles;
 
 use Obcato\Core\core\model\Module;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
 use Obcato\Core\modules\articles\model\ArticleTerm;
 use Obcato\Core\modules\articles\visuals\articles\ArticleTab;
+use Obcato\Core\modules\articles\visuals\metadata\MetadataTab;
 use Obcato\Core\modules\articles\visuals\target_pages\TargetPagesList;
 use Obcato\Core\modules\articles\visuals\terms\TermTab;
 use Obcato\Core\view\views\ActionButtonAdd;
@@ -20,12 +22,16 @@ class ArticleModuleVisual extends ModuleVisual {
     private static int $ARTICLES_TAB = 0;
     private static int $TERMS_TAB = 1;
     private static int $TARGET_PAGES_TAB = 2;
+    private static int $METADATA_TAB = 3;
     private ?ArticleTerm $currentTerm;
     private ?Article $currentArticle;
+    private ?ArticleMetadataField $currentMetadataField;
     private Module $articleModule;
     private ArticleRequestHandler $articleRequestHandler;
     private TermRequestHandler $termRequestsHandler;
     private TargetPagesRequestHandler $targetPagesRequestHandler;
+
+    private MetadataRequestHandler $metadataRequestHandler;
 
     public function __construct(Module $articleModule) {
         parent::__construct($articleModule);
@@ -33,6 +39,7 @@ class ArticleModuleVisual extends ModuleVisual {
         $this->articleRequestHandler = new ArticleRequestHandler();
         $this->termRequestsHandler = new TermRequestHandler();
         $this->targetPagesRequestHandler = new TargetPagesRequestHandler();
+        $this->metadataRequestHandler = new MetadataRequestHandler();
     }
 
     public function getTemplateFilename(): string {
@@ -47,6 +54,8 @@ class ArticleModuleVisual extends ModuleVisual {
             $content = new TermTab($this->currentTerm);
         } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
             $content = new TargetPagesList();
+        } else if ($this->getCurrentTabId() == self::$METADATA_TAB) {
+            $content = new MetadataTab($this->currentMetadataField);
         }
         $this->assign("content", $content?->render());
     }
@@ -59,6 +68,8 @@ class ArticleModuleVisual extends ModuleVisual {
             $preHandlers[] = $this->termRequestsHandler;
         } else if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
             $preHandlers[] = $this->targetPagesRequestHandler;
+        } else if ($this->getCurrentTabId() == self::$METADATA_TAB) {
+            $preHandlers[] = $this->metadataRequestHandler;
         }
         return $preHandlers;
     }
@@ -86,6 +97,13 @@ class ArticleModuleVisual extends ModuleVisual {
         if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
             $actionButtons[] = new ActionButtonDelete('delete_target_pages');
         }
+        if ($this->getCurrentTabId() == self::$METADATA_TAB) {
+            $actionButtons[] = new ActionButtonAdd('add_metadata_field');
+            if ($this->currentMetadataField) {
+                $actionButtons[] = new ActionButtonSave('update_metadata_field');
+            }
+            $actionButtons[] = new ActionButtonDelete('delete_metadata_fields');
+        }
 
         return $actionButtons;
     }
@@ -108,12 +126,14 @@ class ArticleModuleVisual extends ModuleVisual {
     public function onRequestHandled(): void {
         $this->currentArticle = $this->articleRequestHandler->getCurrentArticle();
         $this->currentTerm = $this->termRequestsHandler->getCurrentTerm();
+        $this->currentMetadataField = $this->metadataRequestHandler->getCurrentMetadataField();
     }
 
     public function loadTabMenu(TabMenu $tabMenu): int {
         $tabMenu->addItem("articles_tab_articles", self::$ARTICLES_TAB);
         $tabMenu->addItem("articles_tab_terms", self::$TERMS_TAB);
         $tabMenu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
+        $tabMenu->addItem("articles_metadata", self::$METADATA_TAB);
         return $this->getCurrentTabId();
     }
 
