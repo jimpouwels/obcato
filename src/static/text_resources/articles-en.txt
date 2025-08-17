@@ -61,3 +61,8 @@ articles_edit_metadata_friendly_url_label: URL
 # TERMS LIST
 articles_terms_list_name: Name
 articles_terms_list_delete: Delete
+
+# ARTICLES METADATA FIELDS
+article_metadata_field_editor_name_field=Name
+article_metadata_field_editor_default_value_field=Default value
+article_metadata_fields_saved=Metadata fields saved

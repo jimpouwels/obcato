@@ -61,3 +61,8 @@ articles_edit_metadata_friendly_url_label: URL
 # TERMS LIST
 articles_terms_list_name: Naam
 articles_terms_list_delete: Verwijder
+
+# ARTICLES METADATA FIELDS
+article_metadata_field_editor_name_field=Naam
+article_metadata_field_editor_default_value_field=Standaardwaarde
+article_metadata_fields_saved=Metadata velden opgeslagen

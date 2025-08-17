@@ -6,7 +6,7 @@ class FontStyleHelper {
 
     public static function createItalic(string $text): string {
         $matches = array();
-        preg_match_all('/(_.*?_)/', $text, $matches);
+        preg_match_all('/(__.*?__)/', $text, $matches);
 
         for ($i = 0; $i < count($matches[0]); $i++) {
             $capture = $matches[0][$i];
@@ -19,7 +19,7 @@ class FontStyleHelper {
     }
     public static function createBold(string $text): string {
         $matches = array();
-        preg_match_all('/\*(.*?)\*/', $text, $matches);
+        preg_match_all('/\*\*(.*?)\*\*/', $text, $matches);
 
         for ($i = 0; $i < count($matches[0]); $i++) {
             $text = str_replace($matches[0][$i], '<strong>' . $matches[1][$i] . '</strong>', $text);

@@ -79,6 +79,7 @@
             </div>
         </div>
     {/if}
+    <h3>Metadata</h3>
     {foreach from=$metadata_fields item=metadata_field}
         {$metadata_field}
     {/foreach}

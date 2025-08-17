@@ -49,8 +49,13 @@ class ArticleVisual extends FrontendVisual {
 
         foreach ($this->articleService->getMetadataFields() as $metadataField) {
             $fieldValue = $this->articleService->getMetadataFieldValue($this->getArticle(), $metadataField);
-            $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
-            $data[$metadataField->getName()] = $value;
+
+            $fieldData = array();
+            $fieldData['default_value'] = $metadataField->getDefaultValue();
+            $fieldData['dedicated_value'] = $fieldValue?->getValue();
+            $fieldData["value"] = $fieldValue?->getValue() ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+
+            $data[$metadataField->getName()] = $fieldData;
         }
 
         $data["parent_article"] = "";
@@ -64,8 +69,13 @@ class ArticleVisual extends FrontendVisual {
 
             foreach ($this->articleService->getMetadataFields() as $metadataField) {
                 $fieldValue = $this->articleService->getMetadataFieldValue($parentArticle, $metadataField);
-                $value = $fieldValue ? $fieldValue->getValue() : $metadataField->getDefaultValue();
-                $parentArticleData[$metadataField->getName()] = $value;
+
+                $fieldData = array();
+                $fieldData['default_value'] = $metadataField->getDefaultValue();
+                $fieldData['dedicated_value'] = $fieldValue?->getValue();
+                $fieldData["value"] = $fieldValue?->getValue() ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+
+                $parentArticleData[$metadataField->getName()] = $fieldData;
             }
             $data["parent_article"] = $parentArticleData;
         }

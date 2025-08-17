@@ -17,6 +17,7 @@ class TemplateEngine {
     public static function getInstance(): TemplateEngine {
         if (!self::$_instance) {
             $smarty = new Smarty();
+            $smarty->registerPlugin("modifier", "strstr", "strstr");
             $smarty->setTemplateDir(BACKEND_TEMPLATE_DIR);
             $smarty->setCompileDir(BACKEND_TEMPLATE_DIR . "/compiled_templates");
             $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");
