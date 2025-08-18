@@ -8,6 +8,8 @@ use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\frontend\helper\FontStyleHelper;
 use Obcato\Core\frontend\helper\LinkHelper;
 use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\service\ArticleInteractor;
+use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
@@ -29,6 +31,7 @@ abstract class FrontendVisual {
     private ?Article $article;
     private ?Block $block;
     private ElementDao $elementDao;
+    private ArticleService $articleService;
 
     public function __construct(?Page $page, ?Article $article, ?Block $block = null) {
         $this->linkHelper = LinkHelper::getInstance($page, $article);
@@ -39,6 +42,7 @@ abstract class FrontendVisual {
         $this->templateData = $this->createChildData();
         $this->templateService = TemplateInteractor::getInstance();
         $this->elementDao = ElementDaoMysql::getInstance();
+        $this->articleService = ArticleInteractor::getInstance();
     }
 
     public function render(array &$parentData = array()): string {
@@ -162,6 +166,7 @@ abstract class FrontendVisual {
         $value = FontStyleHelper::createColors($value);
         $value = FontStyleHelper::createItalic($value);
         $value = FontStyleHelper::createBold($value);
+        $value = $this->replaceArticleMetadataReferences($value);
         return $this->linkHelper->createLinksInString($value, $elementHolder);
     }
 
@@ -237,5 +242,21 @@ abstract class FrontendVisual {
             $text = str_replace($placeholder, $currentPos, $text);
         }
         return $text;
+    }
+
+    private function replaceArticleMetadataReferences($value): string {
+        if ($this->article) {
+            preg_match_all('/\$([A-Za-z_]*)/', $value, $matches);
+            $metadataFields = $this->articleService->getMetadataFields();
+            for ($i = 0; $i < count($matches[0]); $i++) {
+                foreach ($metadataFields as $field) {
+                    if ($matches[1][$i] == $field->getName()) {
+                        $fieldValue = $this->articleService->getMetadataFieldValue($this->article, $field)->getValue() ?: $field->getDefaultValue();
+                        $value = str_replace($matches[0][$i], $fieldValue, $value);
+                    }
+                }
+            }
+        }
+        return $value;
     }
 }

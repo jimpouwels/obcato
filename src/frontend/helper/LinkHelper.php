@@ -136,21 +136,8 @@ class LinkHelper
     private function processMarkdownStyleLinks(string $value): string {
         $matches = null;
         preg_match_all('/\[(.*?)]\((.*?)\)/', $value, $matches);
-        $metadataFields = [];
-        if ($this->currentArticle) {
-            $metadataFields = $this->articleService->getMetadataFields();
-        }
         for ($i = 0; $i < count($matches[0]); $i++) {
-            $target = $matches[2][$i];
-            if ($this->currentArticle) {
-                foreach ($metadataFields as $field) {
-                    if ($target == ("$" . $field->getName())) {
-                        $target = $this->articleService->getMetadataFieldValue($this->currentArticle, $field)->getValue() ?: $field->getDefaultValue();
-                        break;
-                    }
-                }
-            }
-            $link = "<a target=\"_blank\" class=\"external\" href=\"$target\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
+            $link = "<a target=\"_blank\" class=\"external\" href=\"{$matches[2][$i]}\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
             $value = str_replace($matches[0][$i], $link, $value);
         }
         return $value;
