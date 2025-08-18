@@ -97,7 +97,7 @@ class LinkHelper
     }
 
     public function createLinksInString(string $value, ElementHolder $elementHolder): string {
-        $value = $this->processMarkdownStyleLinks($value, $elementHolder);
+        $value = $this->processMarkdownStyleLinks($value);
         $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
         foreach ($links as $link) {
             if ($this->containsLink($value, $link)) {
@@ -133,7 +133,7 @@ class LinkHelper
         return $url;
     }
 
-    private function processMarkdownStyleLinks(string $value, ?ElementHolder $elementHolder): string {
+    private function processMarkdownStyleLinks(string $value): string {
         $matches = null;
         preg_match_all('/\[(.*?)]\((.*?)\)/', $value, $matches);
         $metadataFields = [];
@@ -144,13 +144,13 @@ class LinkHelper
             $target = $matches[2][$i];
             if ($this->currentArticle) {
                 foreach ($metadataFields as $field) {
-                    if (str_starts_with($target, '$') && $target == ("$" . $field->getName())) {
+                    if ($target == ("$" . $field->getName())) {
                         $target = $this->articleService->getMetadataFieldValue($this->currentArticle, $field)->getValue() ?: $field->getDefaultValue();
                         break;
                     }
                 }
             }
-            $link = "<a target=\"_blank\" href=\"$target\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
+            $link = "<a target=\"_blank\" class=\"external\" href=\"$target\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
             $value = str_replace($matches[0][$i], $link, $value);
         }
         return $value;
