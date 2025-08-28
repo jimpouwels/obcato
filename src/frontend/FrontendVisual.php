@@ -244,7 +244,7 @@ abstract class FrontendVisual {
         return $text;
     }
 
-    private function replaceArticleMetadataReferences($value): string {
+    private function replaceArticleMetadataReferences(string $value): string {
         if ($this->article) {
             preg_match_all('/\$([A-Za-z_.]*)/', $value, $matches);
             $metadataFields = $this->articleService->getMetadataFields();
@@ -253,7 +253,7 @@ abstract class FrontendVisual {
                     if ($matches[1][$i] == $field->getName()) {
                         $fieldValue = $this->articleService->getMetadataFieldValue($this->article, $field)->getValue() ?: $field->getDefaultValue();
                         $value = str_replace($matches[0][$i], $fieldValue, $value);
-                    } else if (explode('.', $matches[1][$i])[0] == "parent_article" && explode('.', $matches[1][$i])[1] == $field->getName()) {
+                    } else if ($this->isParentMetadataPlaceHolder($matches[1][$i], $field->getName())) {
                         $fieldValue = $this->articleService->getMetadataFieldValue($this->articleService->getArticle($this->article->getParentArticleId()), $field)->getValue() ?: $field->getDefaultValue();
                         $value = str_replace($matches[0][$i], $fieldValue, $value);
                     }
@@ -261,5 +261,10 @@ abstract class FrontendVisual {
             }
         }
         return $value;
+    }
+
+    private function isParentMetadataPlaceHolder(string $placeholder, string $fieldName): bool {
+        $split = explode('.', $placeholder);
+        return $split[0] == "parent_article" && $split[1] == $fieldName;
     }
 }
