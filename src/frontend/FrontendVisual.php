@@ -246,12 +246,15 @@ abstract class FrontendVisual {
 
     private function replaceArticleMetadataReferences($value): string {
         if ($this->article) {
-            preg_match_all('/\$([A-Za-z_]*)/', $value, $matches);
+            preg_match_all('/\$([A-Za-z_.]*)/', $value, $matches);
             $metadataFields = $this->articleService->getMetadataFields();
             for ($i = 0; $i < count($matches[0]); $i++) {
                 foreach ($metadataFields as $field) {
                     if ($matches[1][$i] == $field->getName()) {
                         $fieldValue = $this->articleService->getMetadataFieldValue($this->article, $field)->getValue() ?: $field->getDefaultValue();
+                        $value = str_replace($matches[0][$i], $fieldValue, $value);
+                    } else if (explode('.', $matches[1][$i])[0] == "parent_article" && explode('.', $matches[1][$i])[1] == $field->getName()) {
+                        $fieldValue = $this->articleService->getMetadataFieldValue($this->articleService->getArticle($this->article->getParentArticleId()), $field)->getValue() ?: $field->getDefaultValue();
                         $value = str_replace($matches[0][$i], $fieldValue, $value);
                     }
                 }
