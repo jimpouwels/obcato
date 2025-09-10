@@ -7,24 +7,36 @@ Obcato is an initiative to offer a simple, modular and multi-language web conten
 # Getting started
 Obcato is written in PHP and runs on top of a Mysql Database. A hosting platform therefore requires at least a PHP runtime and a Mysql database.
 
-On the highest level, Obcato consists of two sections:
-
-## Private
-This section will have all the files that are required to run Obcato, but are not publicly available directly via the internet.
-This section contains the following:
-* Directories containing static data
-  * config` directory, containing configuration data
-  * `upload` directory, containing uploaded images and files via the Obcato WebUI
-  * `templates` directory, containing frontend templates
-* `vendor` directory, containing all software that is required to run Obcato
-
-The private section must be located in a location that is not served by the webserver, as the contents are not to be directly downloaded via the internet.
+When you look at the source of Obcato, it has 2 sections:
 
 ## Public
+This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI.
 
-This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI and the frontend. Any static files required by the frontend, such as stylesheets, images and javascript source files can be placed here.
-
-The public section must be located in the root of the directory that is served to the internet by the webserver.
+## src
+This contains all the sources for the Obcato WebUI.
 
 # Installation
-A new website that is based on Obcato starts with the creation of a new PHP packagist application.
+A new website that is based on Obcato starts with the creation of a new PHP packagist application. Make Obcato a dependency. It will be installed to the `vendor` section.
+
+In the public section of your hosting, you will need two files at a minimum to run the frontend and the Obcato WebUI:
+
+`index.php`
+```
+<?php
+
+namespace <your_namespace>; // e.g. <reisvirus/reisvirus>
+require_once "bootstrap.php";
+
+\Obcato\renderFrontend();
+```
+
+`config.php`
+```
+<?php
+const PRIVATE_DIR_PRODUCTION = "<relative_path_to_public_section_of_webspace>"; // e.g. "/../httpd.private";
+
+// for local runs (when host is localhost)
+const PRIVATE_DIR_LOCAL = "<relative_path_to_private_section_of_webspace>"; // e.g. "/../private";
+```
+
+Upload the contents of the `/public` directory in the Obcato source to the public section of your webspace.
