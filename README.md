@@ -16,9 +16,12 @@ This section contains the files that are to be accessed directly via the interne
 This contains all the sources for the Obcato WebUI.
 
 # Installation
+
+## Make a new website
 A new website that is based on Obcato starts with the creation of a new PHP packagist application. Make Obcato a dependency. It will be installed to the `vendor` section.
 
-In the public section of your hosting, you will need two files at a minimum to run the frontend and the Obcato WebUI:
+## Initialize the frontend and prepare the Obcato WebUI
+In the public section (e.g. `httpd.www`) of your webspace, you will need two files at a minimum to run the frontend and the Obcato WebUI:
 
 `index.php`
 ```
@@ -40,3 +43,13 @@ const PRIVATE_DIR_LOCAL = "<relative_path_to_private_section_of_webspace>"; // e
 ```
 
 Upload the contents of the `/public` directory in the Obcato source to the public section of your webspace.
+
+Create directory:
+```
+<PRIVATE_DIR_PRODUCTION>/templates
+<PRIVATE_DIR_PRODUCTION>/config
+<PRIVATE_DIR_PRODUCTION>/upload
+```
+
+## Frontend Templates
+You can now start adding frontend templates to `<PRIVATE_DIR_PRODUCTION>/templates`
