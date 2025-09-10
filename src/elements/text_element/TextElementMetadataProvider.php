@@ -26,8 +26,8 @@ class TextElementMetadataProvider extends ElementMetadataProvider
     }
 
     public function update(Element $element): void {
-        $title = $this->mysqlConnector->realEscapeString($element->getTitle());
-        $text = $this->mysqlConnector->realEscapeString($element->getText());
+        $title = $element->getTitle();
+        $text = $element->getText();
         $elementId = $element->getId();
         $query = "UPDATE text_elements_metadata SET title = ?, text = ? WHERE element_id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
