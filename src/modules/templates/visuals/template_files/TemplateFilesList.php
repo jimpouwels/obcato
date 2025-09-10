@@ -16,7 +16,7 @@ class TemplateFilesList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_files/template_files_list.tpl";
+        return "templates/templates/template_files/template_files_list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

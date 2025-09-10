@@ -18,7 +18,7 @@ class BlockEditor extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/blocks/blocks/editor.tpl";
+        return "blocks/templates/blocks/editor.tpl";
     }
 
     public function load(): void {

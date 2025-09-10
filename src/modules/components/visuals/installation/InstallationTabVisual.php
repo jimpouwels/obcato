@@ -15,7 +15,7 @@ class InstallationTabVisual extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return 'modules/components/installation/root.tpl';
+        return 'components/templates/installation/root.tpl';
     }
 
     public function load(): void {

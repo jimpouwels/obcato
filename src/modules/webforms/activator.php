@@ -23,7 +23,7 @@ class WebFormsModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/webforms/root.tpl";
+        return "webforms/templates/root.tpl";
     }
 
     public function load(): void {
@@ -52,7 +52,7 @@ class WebFormsModuleVisual extends ModuleVisual {
 
     public function renderHeadIncludes(): string {
         $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->getTemplateEngine()->fetch("modules/webforms/head_includes.tpl");
+        return $this->getTemplateEngine()->fetch("webforms/templates/head_includes.tpl");
     }
 
     public function getRequestHandlers(): array {

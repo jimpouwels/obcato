@@ -17,7 +17,7 @@ class DownloadInfo extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/downloads/download_info.tpl";
+        return "downloads/templates/download_info.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

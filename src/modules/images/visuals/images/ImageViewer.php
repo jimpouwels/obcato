@@ -16,7 +16,7 @@ class ImageViewer extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/images/viewer.tpl";
+        return "images/templates/images/viewer.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

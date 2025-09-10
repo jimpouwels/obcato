@@ -18,7 +18,7 @@ class LabelsTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/images/labels/root.tpl";
+        return "images/templates/labels/root.tpl";
     }
 
     public function load(): void {

@@ -23,7 +23,7 @@ class ImageSearch extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/images/search.tpl";
+        return "images/templates/images/search.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

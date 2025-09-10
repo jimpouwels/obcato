@@ -18,7 +18,7 @@ class ArticleTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/articles/articles/root.tpl";
+        return "articles/templates/articles/root.tpl";
     }
 
     public function load(): void {

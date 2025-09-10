@@ -21,7 +21,7 @@ class TemplateVarEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_var_editor.tpl";
+        return "templates/templates/template_var_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

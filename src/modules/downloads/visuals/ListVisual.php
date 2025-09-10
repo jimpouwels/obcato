@@ -21,7 +21,7 @@ class ListVisual extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/downloads/list.tpl";
+        return "downloads/templates/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

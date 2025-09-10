@@ -17,7 +17,7 @@ class LabelEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/labels/editor.tpl";
+        return "images/templates/labels/editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

@@ -21,7 +21,7 @@ class TemplateVarMigration extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_files/template_var_migration.tpl";
+        return "templates/templates/template_files/template_var_migration.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

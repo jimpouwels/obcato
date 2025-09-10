@@ -29,7 +29,7 @@ class MetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/pages/metadata.tpl";
+        return "pages/templates/metadata.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

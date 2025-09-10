@@ -17,7 +17,7 @@ class ScopeSelector extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/scope_selector.tpl";
+        return "templates/templates/scope_selector.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

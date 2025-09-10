@@ -18,7 +18,7 @@ class TemplateFilesTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/templates/template_files/template_files_tab.tpl";
+        return "templates/templates/template_files/template_files_tab.tpl";
     }
 
     public function load(): void {

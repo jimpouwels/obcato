@@ -17,7 +17,7 @@ class TermEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/terms/editor.tpl";
+        return "articles/templates/terms/editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

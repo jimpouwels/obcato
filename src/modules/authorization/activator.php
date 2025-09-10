@@ -14,7 +14,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class AuthorizationModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "modules/authorization/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "authorization/templates/head_includes.tpl";
     private ?User $currentUser;
     private AuthorizationRequestHandler $authorizationRequestHandler;
 
@@ -24,7 +24,7 @@ class AuthorizationModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/authorization/root.tpl";
+        return "authorization/templates/root.tpl";
     }
 
     public function load(): void {

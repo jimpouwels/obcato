@@ -19,7 +19,7 @@ class RedirectFormHandlerEditor extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return 'modules/webforms/webforms/redirect_form_handler_editor.tpl';
+        return 'webforms/templates/webforms/redirect_form_handler_editor.tpl';
     }
 
     public function load(): void {

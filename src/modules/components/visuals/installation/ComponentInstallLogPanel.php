@@ -16,7 +16,7 @@ class ComponentInstallLogPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/installation/component_install_log.tpl';
+        return 'components/templates/installation/component_install_log.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

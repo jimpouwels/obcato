@@ -26,7 +26,7 @@ class ArticleEditor extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/articles/articles/editor.tpl";
+        return "articles/templates/articles/editor.tpl";
     }
 
     public function load(): void {

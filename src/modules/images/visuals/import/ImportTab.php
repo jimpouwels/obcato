@@ -19,7 +19,7 @@ class ImportTab extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/import/root.tpl";
+        return "images/templates/import/root.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

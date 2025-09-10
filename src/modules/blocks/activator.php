@@ -15,7 +15,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class BlockModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "blocks/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "blocks/templates/head_includes.tpl";
     private static int $BLOCKS_TAB = 0;
     private static int $POSITIONS_TAB = 1;
     private ?Block $currentBlock = null;
@@ -32,7 +32,7 @@ class BlockModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/blocks/root.tpl";
+        return "blocks/templates/root.tpl";
     }
 
     public function load(): void {
@@ -76,7 +76,7 @@ class BlockModuleVisual extends ModuleVisual {
             }
         }
         $this->getTemplateEngine()->assign("element_statics", $elementStaticsValues);
-        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

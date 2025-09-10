@@ -47,7 +47,7 @@ class ArticleMetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/articles/metadata.tpl";
+        return "articles/templates/articles/metadata.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

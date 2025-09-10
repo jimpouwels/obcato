@@ -18,7 +18,7 @@ class TermTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/articles/terms/root.tpl";
+        return "articles/templates/terms/root.tpl";
     }
 
     public function load(): void {

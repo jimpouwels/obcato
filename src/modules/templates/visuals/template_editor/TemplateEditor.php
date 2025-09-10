@@ -26,7 +26,7 @@ class TemplateEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_editor.tpl";
+        return "templates/templates/template_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

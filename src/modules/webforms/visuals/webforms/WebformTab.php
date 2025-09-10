@@ -19,7 +19,7 @@ class WebformTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/webforms/webforms/root.tpl";
+        return "webforms/templates/webforms/root.tpl";
     }
 
     public function load(): void {

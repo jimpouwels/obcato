@@ -18,7 +18,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class PageModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "modules/pages/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "pages/templates/head_includes.tpl";
     private ?Page $currentPage;
     private Module $pageModule;
     private PageRequestHandler $pageRequestHandler;
@@ -32,7 +32,7 @@ class PageModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/pages/root.tpl";
+        return "pages/templates/root.tpl";
     }
 
     public function load(): void {

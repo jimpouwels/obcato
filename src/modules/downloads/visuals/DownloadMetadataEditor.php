@@ -18,7 +18,7 @@ class DownloadMetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/downloads/metadata_editor.tpl";
+        return "downloads/templates/metadata_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

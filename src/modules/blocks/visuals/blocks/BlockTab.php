@@ -15,7 +15,7 @@ class BlockTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/blocks/blocks/root.tpl";
+        return "blocks/templates/blocks/root.tpl";
     }
 
     public function load(): void {

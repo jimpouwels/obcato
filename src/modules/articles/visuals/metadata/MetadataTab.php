@@ -14,7 +14,7 @@ class MetadataTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/articles/metadata/root.tpl";
+        return "articles/templates/metadata/root.tpl";
     }
 
     public function load(): void {

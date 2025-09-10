@@ -12,7 +12,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class SitewidePagesModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "modules/sitewide_pages/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "sitewide_pages/templates/head_includes.tpl";
     private Module $module;
     private SitewidePagesRequestHandler $requestHandler;
     private PageService $pageService;
@@ -25,7 +25,7 @@ class SitewidePagesModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/sitewide_pages/root.tpl";
+        return "sitewide_pages/templates/root.tpl";
     }
 
     public function load(): void {

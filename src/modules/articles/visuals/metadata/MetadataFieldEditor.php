@@ -17,7 +17,7 @@ class MetadataFieldEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/metadata/editor.tpl";
+        return "articles/templates/metadata/editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

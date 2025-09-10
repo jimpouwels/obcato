@@ -15,7 +15,7 @@ class ComponentsTabVisual extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return 'modules/components/components/root.tpl';
+        return 'components/templates/components/root.tpl';
     }
 
     public function load(): void {

@@ -23,7 +23,7 @@ class BlocksList extends Panel {
 
     public
     function getPanelContentTemplate(): string {
-        return "modules/blocks/blocks/list.tpl";
+        return "blocks/templates/blocks/list.tpl";
     }
 
     public

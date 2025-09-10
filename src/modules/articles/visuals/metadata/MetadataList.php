@@ -17,7 +17,7 @@ class MetadataList extends Panel {
     }
 
     function getPanelContentTemplate(): string {
-        return "modules/articles/metadata/list.tpl";
+        return "articles/templates/metadata/list.tpl";
     }
 
     function loadPanelContent(TemplateData $data): void {

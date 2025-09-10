@@ -19,7 +19,7 @@ class TermsList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/terms/list.tpl";
+        return "articles/templates/terms/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

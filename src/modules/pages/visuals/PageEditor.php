@@ -23,7 +23,7 @@ class PageEditor extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/pages/editor.tpl";
+        return "pages/templates/editor.tpl";
     }
 
     public function load(): void {

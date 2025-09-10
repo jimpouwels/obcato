@@ -15,7 +15,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class DownloadModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "downloads/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "downloads/templates/head_includes.tpl";
     private ?Download $currentDownload;
     private DownloadRequestHandler $requestHandler;
 
@@ -25,7 +25,7 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/downloads/root.tpl";
+        return "downloads/templates/root.tpl";
     }
 
     public function load(): void {
@@ -60,7 +60,7 @@ class DownloadModuleVisual extends ModuleVisual {
     }
 
     public function renderHeadIncludes(): string {
-        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function getRequestHandlers(): array {

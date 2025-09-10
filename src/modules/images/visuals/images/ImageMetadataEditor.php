@@ -20,7 +20,7 @@ class ImageMetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/images/metadata_editor.tpl";
+        return "images/templates/images/metadata_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

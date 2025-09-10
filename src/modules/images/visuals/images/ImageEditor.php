@@ -20,7 +20,7 @@ class ImageEditor extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/images/images/editor.tpl";
+        return "images/templates/images/editor.tpl";
     }
 
     public function load(): void {

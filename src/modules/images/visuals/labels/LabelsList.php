@@ -20,7 +20,7 @@ class LabelsList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/labels/list.tpl";
+        return "images/templates/labels/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

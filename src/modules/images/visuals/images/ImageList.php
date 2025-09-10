@@ -26,7 +26,7 @@ class ImageList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/images/images/list.tpl";
+        return "images/templates/images/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

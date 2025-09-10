@@ -17,7 +17,7 @@ class PositionTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/blocks/positions/root.tpl";
+        return "blocks/templates/positions/root.tpl";
     }
 
     public function load(): void {

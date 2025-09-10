@@ -15,7 +15,7 @@ class EditorVisual extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/downloads/editor.tpl";
+        return "downloads/templates/editor.tpl";
     }
 
     public function load(): void {

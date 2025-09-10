@@ -4,6 +4,7 @@ namespace Obcato\Core\view;
 
 use Smarty;
 use const Obcato\Core\BACKEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 
 class TemplateEngine {
@@ -21,6 +22,7 @@ class TemplateEngine {
             $smarty->setTemplateDir(BACKEND_TEMPLATE_DIR);
             $smarty->setCompileDir(BACKEND_TEMPLATE_DIR . "/compiled_templates");
             $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");
+            $smarty->addTemplateDir(CMS_ROOT . "/modules");
             self::$_instance = new TemplateEngine($smarty);
         }
         return self::$_instance;

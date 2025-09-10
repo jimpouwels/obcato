@@ -18,7 +18,7 @@ abstract class WebformItemVisual extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/webforms/webforms/fields/webform_item.tpl";
+        return "webforms/templates/webforms/fields/webform_item.tpl";
     }
 
     protected function getWebFormItem(): WebformItem {

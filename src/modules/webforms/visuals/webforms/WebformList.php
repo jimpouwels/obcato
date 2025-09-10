@@ -21,7 +21,7 @@ class WebformList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/webforms/webforms/list.tpl";
+        return "webforms/templates/webforms/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

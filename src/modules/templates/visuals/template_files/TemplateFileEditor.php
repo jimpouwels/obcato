@@ -20,7 +20,7 @@ class TemplateFileEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_files/template_file_editor.tpl";
+        return "templates/templates/template_files/template_file_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

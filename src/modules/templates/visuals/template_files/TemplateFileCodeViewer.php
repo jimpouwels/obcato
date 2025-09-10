@@ -16,7 +16,7 @@ class TemplateFileCodeViewer extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_code_viewer.tpl";
+        return "templates/templates/template_code_viewer.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

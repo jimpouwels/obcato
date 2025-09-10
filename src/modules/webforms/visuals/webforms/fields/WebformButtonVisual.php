@@ -12,7 +12,7 @@ class WebformButtonVisual extends WebformItemVisual {
     }
 
     public function getFormItemTemplate(): string {
-        return "modules/webforms/webforms/fields/webform_button.tpl";
+        return "webforms/templates/webforms/fields/webform_button.tpl";
     }
 
     public function loadItemContent(TemplateData $data): void {}

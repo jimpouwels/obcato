@@ -24,7 +24,7 @@ class ArticlesSearch extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/articles/search.tpl";
+        return "articles/templates/articles/search.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

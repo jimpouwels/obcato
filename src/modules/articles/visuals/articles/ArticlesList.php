@@ -26,7 +26,7 @@ class ArticlesList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/articles/list.tpl";
+        return "articles/templates/articles/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

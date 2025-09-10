@@ -18,7 +18,7 @@ class ImagesTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/images/images/root.tpl";
+        return "images/templates/images/root.tpl";
     }
 
     public function load(): void {

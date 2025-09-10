@@ -20,7 +20,7 @@ class ElementsListPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/components/elements_list.tpl';
+        return 'components/templates/components/elements_list.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

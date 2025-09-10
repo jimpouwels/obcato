@@ -13,7 +13,7 @@ class ComponentInstallFormPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/installation/component_install_form.tpl';
+        return 'components/templates/installation/component_install_form.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

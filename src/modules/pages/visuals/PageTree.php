@@ -18,7 +18,7 @@ class PageTree extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/pages/tree.tpl";
+        return "pages/templates/tree.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

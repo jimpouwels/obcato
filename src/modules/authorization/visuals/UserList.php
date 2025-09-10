@@ -20,7 +20,7 @@ class UserList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/authorization/user_list.tpl";
+        return "authorization/templates/user_list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

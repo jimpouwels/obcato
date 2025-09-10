@@ -13,7 +13,7 @@ abstract class WebformFieldVisual extends WebformItemVisual {
     }
 
     public function getFormItemTemplate(): string {
-        return "modules/webforms/webforms/fields/webform_field.tpl";
+        return "webforms/templates/webforms/fields/webform_field.tpl";
     }
 
     abstract function getFormFieldTemplate(): string;

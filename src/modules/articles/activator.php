@@ -18,7 +18,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class ArticleModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "articles/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "articles/templates/head_includes.tpl";
     private static int $ARTICLES_TAB = 0;
     private static int $TERMS_TAB = 1;
     private static int $TARGET_PAGES_TAB = 2;
@@ -43,7 +43,7 @@ class ArticleModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/articles/root.tpl";
+        return "articles/templates/root.tpl";
     }
 
     public function load(): void {
@@ -120,7 +120,7 @@ class ArticleModuleVisual extends ModuleVisual {
         }
         $this->getTemplateEngine()->assign("element_statics", $elementStaticValues);
         $this->getTemplateEngine()->assign("path", $this->articleModule->getIdentifier());
-        return $this->getTemplateEngine()->fetch("modules/" . self::$HEAD_INCLUDES_TEMPLATE);
+        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
     }
 
     public function onRequestHandled(): void {

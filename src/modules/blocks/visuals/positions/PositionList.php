@@ -19,7 +19,7 @@ class PositionList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/blocks/positions/list.tpl";
+        return "blocks/templates/positions/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

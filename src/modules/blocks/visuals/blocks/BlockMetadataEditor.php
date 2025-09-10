@@ -29,7 +29,7 @@ class BlockMetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/blocks/blocks/metadata.tpl";
+        return "blocks/templates/blocks/metadata.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

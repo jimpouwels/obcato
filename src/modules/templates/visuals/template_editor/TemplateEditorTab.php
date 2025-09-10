@@ -18,7 +18,7 @@ class TemplateEditorTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/templates/template_editor_tab.tpl";
+        return "templates/templates/template_editor_tab.tpl";
     }
 
     public function load(): void {

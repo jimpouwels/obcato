@@ -22,7 +22,7 @@ class WebformMetadataEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/webforms/webforms/metadata_editor.tpl';
+        return 'webforms/templates/webforms/metadata_editor.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

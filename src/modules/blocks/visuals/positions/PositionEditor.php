@@ -17,7 +17,7 @@ class PositionEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/blocks/positions/editor.tpl";
+        return "blocks/templates/positions/editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

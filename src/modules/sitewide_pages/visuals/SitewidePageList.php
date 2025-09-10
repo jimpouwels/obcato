@@ -18,7 +18,7 @@ class SitewidePageList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/sitewide_pages/list.tpl";
+        return "sitewide_pages/templates/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

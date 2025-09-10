@@ -22,7 +22,7 @@ class GlobalSettingsPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/settings/global_settings_panel.tpl";
+        return "settings/templates/global_settings_panel.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

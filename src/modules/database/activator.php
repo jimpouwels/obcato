@@ -11,7 +11,7 @@ use Obcato\Core\view\views\TabMenu;
 
 class DatabaseModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "modules/database/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "database/templates/head_includes.tpl";
     private static int $CONFIGURATION_TAB = 0;
     private static int $TABLES_TAB = 1;
     private static int $QUERY_TAB = 2;

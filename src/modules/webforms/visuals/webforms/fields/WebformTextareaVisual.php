@@ -12,7 +12,7 @@ class WebformTextareaVisual extends WebformFieldVisual {
     }
 
     public function getFormFieldTemplate(): string {
-        return "modules/webforms/webforms/fields/webform_textarea.tpl";
+        return "webforms/templates/webforms/fields/webform_textarea.tpl";
     }
 
     public function loadFieldContent(TemplateData $data): void {}

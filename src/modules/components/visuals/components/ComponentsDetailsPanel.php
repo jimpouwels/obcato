@@ -16,7 +16,7 @@ class ComponentsDetailsPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/components/components/details.tpl';
+        return 'components/templates/components/details.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

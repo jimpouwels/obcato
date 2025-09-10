@@ -18,7 +18,7 @@ class SearchBoxVisual extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/downloads/search_box.tpl";
+        return "downloads/templates/search_box.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

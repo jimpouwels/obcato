@@ -14,7 +14,7 @@ use Obcato\Core\view\views\WarningMessage;
 
 class SettingsModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "modules/settings/head_includes.tpl";
+    private static string $HEAD_INCLUDES_TEMPLATE = "settings/templates/head_includes.tpl";
     private Module $settingsModule;
     private Settings $settings;
     private SettingsRequestHandler $settingsRequestHandler;
@@ -27,7 +27,7 @@ class SettingsModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/settings/root.tpl";
+        return "settings/templates/root.tpl";
     }
 
     public function load(): void {

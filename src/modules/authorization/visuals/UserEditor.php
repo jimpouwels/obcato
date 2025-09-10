@@ -18,7 +18,7 @@ class UserEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/authorization/user_editor.tpl";
+        return "authorization/templates/user_editor.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

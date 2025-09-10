@@ -18,7 +18,7 @@ class TargetPagesList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/articles/target_pages/list.tpl";
+        return "articles/templates/target_pages/list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

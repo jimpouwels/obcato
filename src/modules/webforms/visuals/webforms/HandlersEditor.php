@@ -29,7 +29,7 @@ class HandlersEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'modules/webforms/webforms/handlers_editor.tpl';
+        return 'webforms/templates/webforms/handlers_editor.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

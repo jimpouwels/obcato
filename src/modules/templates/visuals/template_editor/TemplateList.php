@@ -23,7 +23,7 @@ class TemplateList extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/templates/template_list.tpl";
+        return "templates/templates/template_list.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

@@ -21,7 +21,7 @@ class PageTreeItem extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/pages/tree_item.tpl";
+        return "pages/templates/tree_item.tpl";
     }
 
     public function load(): void {
