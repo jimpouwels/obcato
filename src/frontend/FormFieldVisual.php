@@ -7,7 +7,7 @@ use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\modules\webforms\model\WebformField;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 abstract class FormFieldVisual extends FormItemVisual {
 
@@ -16,7 +16,7 @@ abstract class FormFieldVisual extends FormItemVisual {
     }
 
     public function getFormItemTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/system/form-field.tpl';
+        return CMS_ROOT . "/frontend/templates/form-field.tpl";
     }
 
     public function loadFormItem(): void {

@@ -10,6 +10,7 @@ use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
 use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 abstract class ElementFrontendVisual extends FrontendVisual {
 
@@ -23,7 +24,7 @@ abstract class ElementFrontendVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/system/element.tpl";
+        return CMS_ROOT . "/frontend/templates/element.tpl";
     }
 
     public function getElementTemplateFilename(): string {

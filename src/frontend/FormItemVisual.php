@@ -8,7 +8,7 @@ use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\modules\webforms\model\WebformItem;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 abstract class FormItemVisual extends FrontendVisual {
 
@@ -20,7 +20,7 @@ abstract class FormItemVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/system/form-item.tpl';
+        return CMS_ROOT . "/frontend/templates/form-item.tpl";
     }
 
     public function loadVisual(?array &$data): void {

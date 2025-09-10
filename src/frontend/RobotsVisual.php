@@ -3,7 +3,7 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 class RobotsVisual extends FrontendVisual {
 
@@ -12,7 +12,7 @@ class RobotsVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/system/robots.tpl";
+        return CMS_ROOT . "/frontend/templates/robots.tpl";
     }
 
     public function loadVisual(?array &$data): void {

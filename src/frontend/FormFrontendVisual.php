@@ -11,6 +11,7 @@ use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\modules\webforms\model\Webform;
 use Obcato\Core\modules\webforms\WebformItemFactory;
 use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 class FormFrontendVisual extends FrontendVisual {
 
@@ -27,7 +28,7 @@ class FormFrontendVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . '/system/sa-form.tpl';
+        return CMS_ROOT . "/frontend/templates/sa-form.tpl";
     }
 
     public function loadVisual(?array &$data): void {

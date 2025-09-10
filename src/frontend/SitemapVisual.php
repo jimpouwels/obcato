@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 class SitemapVisual extends FrontendVisual {
 
@@ -21,7 +21,7 @@ class SitemapVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/system/sitemap.tpl";
+        return CMS_ROOT . "/frontend/templates/sitemap.tpl";
     }
 
     public function loadVisual(?array &$data): void {

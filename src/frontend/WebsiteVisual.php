@@ -8,7 +8,7 @@ use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use const Obcato\CMS_ROOT;
 
 class WebsiteVisual extends FrontendVisual {
 
@@ -22,7 +22,7 @@ class WebsiteVisual extends FrontendVisual {
     }
 
     public function getTemplateFilename(): string {
-        return FRONTEND_TEMPLATE_DIR . "/system/website.tpl";
+        return CMS_ROOT . "/frontend/templates/website.tpl";
     }
 
     public function loadVisual(?array &$data): void {
