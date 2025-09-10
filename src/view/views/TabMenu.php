@@ -12,7 +12,7 @@ class TabMenu extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/tab_menu.tpl";
+        return "tab_menu.tpl";
     }
 
     public function load(): void {

@@ -16,11 +16,11 @@ abstract class FormField extends Visual {
     private ?string $value;
     private ?string $helpText;
 
-    protected function __construct(string $field_name, ?string $value, ?string $label_resource_identifier, bool $mandatory, bool $linkable, ?string $cssClass, ?string $helpTextResourceIdentifier = "") {
+    protected function __construct(string $field_name, ?string $value, ?string $labelResourceIdentifier, bool $mandatory, bool $linkable, ?string $cssClass, ?string $helpTextResourceIdentifier = "") {
         parent::__construct();
         $this->fieldName = $field_name;
         $this->cssClass = $cssClass;
-        $this->labelResourceIdentifier = $label_resource_identifier;
+        $this->labelResourceIdentifier = $labelResourceIdentifier;
         $this->mandatory = $mandatory;
         $this->linkable = $linkable;
         $this->helpText = $this->getTextResource($helpTextResourceIdentifier);
@@ -28,7 +28,7 @@ abstract class FormField extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/form_field.tpl";
+        return "form_field.tpl";
     }
 
     abstract function getFormFieldTemplateFilename(): string;

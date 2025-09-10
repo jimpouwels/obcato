@@ -23,7 +23,7 @@ class ImageLabelSelector extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/image_label_selector.tpl";
+        return "image_label_selector.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

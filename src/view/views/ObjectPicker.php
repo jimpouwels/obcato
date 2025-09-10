@@ -14,7 +14,7 @@ class ObjectPicker extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/object_picker.tpl";
+        return "object_picker.tpl";
     }
 
     public function getType(): string {

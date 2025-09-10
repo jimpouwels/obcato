@@ -13,7 +13,7 @@ class SingleCheckbox extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/form_checkbox_single.tpl";
+        return "form_checkbox_single.tpl";
     }
 
     public function loadFormField(TemplateData $data) {

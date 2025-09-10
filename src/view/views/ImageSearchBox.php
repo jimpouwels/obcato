@@ -26,7 +26,7 @@ class ImageSearchBox extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/image_search.tpl";
+        return "image_search.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

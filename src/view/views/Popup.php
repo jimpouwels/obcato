@@ -14,7 +14,7 @@ class Popup extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/popup.tpl";
+        return "popup.tpl";
     }
 
     public function load(): void {

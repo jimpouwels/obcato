@@ -24,7 +24,7 @@ class Cms extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/cms.tpl";
+        return "cms.tpl";
     }
 
     public function load(): void {
@@ -75,7 +75,7 @@ class Cms extends Visual {
         if (!is_null($this->moduleVisual)) {
             return $this->moduleVisual->render();
         } else {
-            return $this->getTemplateEngine()->fetch("system/home_wrapper.tpl");
+            return $this->getTemplateEngine()->fetch("home_wrapper.tpl");
         }
     }
 

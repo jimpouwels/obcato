@@ -11,7 +11,7 @@ class DateField extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/form_date.tpl";
+        return "form_date.tpl";
     }
 
     public function loadFormField(TemplateData $data) {}

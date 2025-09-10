@@ -20,7 +20,7 @@ class TermSelector extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/term_selector.tpl";
+        return "term_selector.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

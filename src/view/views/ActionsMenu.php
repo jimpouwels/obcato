@@ -12,7 +12,7 @@ class ActionsMenu extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/actions_menu.tpl";
+        return "actions_menu.tpl";
     }
 
     public function load(): void {

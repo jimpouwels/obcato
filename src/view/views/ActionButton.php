@@ -16,7 +16,7 @@ class ActionButton extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/actions_menu_button.tpl";
+        return "actions_menu_button.tpl";
     }
 
     public function load(): void {

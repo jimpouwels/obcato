@@ -22,7 +22,7 @@ class BlockSelector extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/block_selector.tpl";
+        return "block_selector.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

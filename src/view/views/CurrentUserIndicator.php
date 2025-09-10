@@ -10,7 +10,7 @@ class CurrentUserIndicator extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/current_user_indicator.tpl";
+        return "current_user_indicator.tpl";
     }
 
     public function load(): void {

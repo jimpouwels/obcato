@@ -12,7 +12,7 @@ class NotificationBar extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/notification_bar.tpl";
+        return "notification_bar.tpl";
     }
 
     public function load(): void {

@@ -16,7 +16,7 @@ class Button extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/button.tpl";
+        return "button.tpl";
     }
 
     public function load(): void {

@@ -16,7 +16,7 @@ class FormLabel extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/form_label.tpl";
+        return "form_label.tpl";
     }
 
     public function load(): void {

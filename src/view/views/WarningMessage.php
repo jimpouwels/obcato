@@ -12,7 +12,7 @@ class WarningMessage extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/warning_message.tpl";
+        return "warning_message.tpl";
     }
 
     public function load(): void {

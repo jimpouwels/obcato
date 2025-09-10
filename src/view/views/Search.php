@@ -26,7 +26,7 @@ class Search extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/popup_search.tpl";
+        return "popup_search.tpl";
     }
 
     public function load(): void {

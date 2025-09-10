@@ -15,7 +15,7 @@ class LinkEditor extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return 'system/link_editor.tpl';
+        return 'link_editor.tpl';
     }
 
     public function loadPanelContent(TemplateData $data): void {

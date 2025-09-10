@@ -11,7 +11,7 @@ class UploadField extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/form_upload_field.tpl";
+        return "form_upload_field.tpl";
     }
 
     public function loadFormField(TemplateData $data): void {}

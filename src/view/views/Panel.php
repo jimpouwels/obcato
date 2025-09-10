@@ -16,7 +16,7 @@ abstract class Panel extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/panel.tpl";
+        return "panel.tpl";
     }
 
     abstract function getPanelContentTemplate(): string;

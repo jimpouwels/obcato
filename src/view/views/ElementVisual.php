@@ -31,7 +31,7 @@ abstract class ElementVisual extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/element.tpl";
+        return "element.tpl";
     }
 
     public function load(): void {

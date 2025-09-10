@@ -12,7 +12,7 @@ class FormError extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/form_error.tpl";
+        return "form_error.tpl";
     }
 
     public function load(): void {

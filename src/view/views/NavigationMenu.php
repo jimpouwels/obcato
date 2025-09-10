@@ -18,7 +18,7 @@ class NavigationMenu extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/navigation_menu.tpl";
+        return "navigation_menu.tpl";
     }
 
     public function load(): void {

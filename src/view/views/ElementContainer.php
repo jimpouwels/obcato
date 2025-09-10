@@ -14,7 +14,7 @@ class ElementContainer extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/element_container.tpl";
+        return "element_container.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

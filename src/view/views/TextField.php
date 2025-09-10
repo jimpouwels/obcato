@@ -16,7 +16,7 @@ class TextField extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/form_textfield.tpl";
+        return "form_textfield.tpl";
     }
 
     public function loadFormField(TemplateData $data): void {

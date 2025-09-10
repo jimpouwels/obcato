@@ -30,7 +30,7 @@ class ElementHolderSearch extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "system/element_holder_search.tpl";
+        return "element_holder_search.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

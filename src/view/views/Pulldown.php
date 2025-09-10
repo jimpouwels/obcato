@@ -16,7 +16,7 @@ class Pulldown extends FormField {
     }
 
     public function getFormFieldTemplateFilename(): string {
-        return "system/form_pulldown.tpl";
+        return "form_pulldown.tpl";
     }
 
     public function loadFormField(TemplateData $data): void {

@@ -12,7 +12,7 @@ class InformationMessage extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "system/information_message.tpl";
+        return "information_message.tpl";
     }
 
     public function load(): void {

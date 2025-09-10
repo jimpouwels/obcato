@@ -5,6 +5,7 @@ namespace Obcato\Core\view;
 use Smarty;
 use const Obcato\Core\BACKEND_TEMPLATE_DIR;
 use const Obcato\CMS_ROOT;
+use const Obcato\Core\FRONTEND_TEMPLATE_DIR;
 
 
 class TemplateEngine {
@@ -20,7 +21,7 @@ class TemplateEngine {
             $smarty = new Smarty();
             $smarty->registerPlugin("modifier", "strstr", "strstr");
             $smarty->setTemplateDir(BACKEND_TEMPLATE_DIR);
-            $smarty->setCompileDir(BACKEND_TEMPLATE_DIR . "/compiled_templates");
+            $smarty->setCompileDir(FRONTEND_TEMPLATE_DIR . "/compiled_templates");
             $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");
             $smarty->addTemplateDir(CMS_ROOT . "/modules");
             $smarty->addTemplateDir(CMS_ROOT . "/elements");
