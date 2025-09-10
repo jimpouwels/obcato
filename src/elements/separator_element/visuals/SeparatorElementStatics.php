@@ -11,7 +11,7 @@ class SeparatorElementStatics extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "elements/separator_element/separator_element_statics.tpl";
+        return "separator_element/templates/separator_element_statics.tpl";
     }
 
     public function load(): void {}

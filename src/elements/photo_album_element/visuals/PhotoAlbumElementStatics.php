@@ -11,7 +11,7 @@ class PhotoAlbumElementStatics extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "elements/photo_album_element/photo_album_element_statics.tpl";
+        return "photo_album_element/templates/photo_album_element_statics.tpl";
     }
 
     public function load(): void {}

@@ -10,7 +10,7 @@ use Obcato\Core\view\views\TextField;
 
 class TableOfContentsElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/table_of_contents_element/table_of_contents_element_form.tpl";
+    private static string $TEMPLATE = "table_of_contents_element/templates/table_of_contents_element_form.tpl";
     private TableOfContentsElement $element;
 
     public function __construct(TableOfContentsElement $element) {

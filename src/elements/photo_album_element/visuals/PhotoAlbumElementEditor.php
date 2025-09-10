@@ -11,7 +11,7 @@ use Obcato\Core\view\views\TextField;
 
 class PhotoAlbumElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/photo_album_element/photo_album_element_form.tpl";
+    private static string $TEMPLATE = "photo_album_element/templates/photo_album_element_form.tpl";
     private PhotoAlbumElement $element;
 
     public function __construct($element) {

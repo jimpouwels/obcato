@@ -11,7 +11,7 @@ class ListElementStatics extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "elements/list_element/list_element_statics.tpl";
+        return "list_element/templates/list_element_statics.tpl";
     }
 
     public function load(): void {}

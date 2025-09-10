@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\templates\elements;
+namespace Obcato\Core\modules\images;
 
 use Obcato\Core\core\form\Form;
 use Obcato\Core\core\form\FormException;

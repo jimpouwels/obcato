@@ -10,7 +10,7 @@ use Obcato\Core\view\views\TextField;
 
 class SeparatorElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/separator_element/separator_element_form.tpl";
+    private static string $TEMPLATE = "separator_element/templates/separator_element_form.tpl";
     private SeparatorElement $separatorElement;
 
     public function __construct(SeparatorElement $separatorElement) {

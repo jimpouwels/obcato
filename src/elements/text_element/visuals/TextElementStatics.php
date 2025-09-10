@@ -11,7 +11,7 @@ class TextElementStatics extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "elements/text_element/text_element_statics.tpl";
+        return "text_element/templates/text_element_statics.tpl";
     }
 
     public function load(): void {}

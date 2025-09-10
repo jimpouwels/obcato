@@ -15,7 +15,7 @@ use Obcato\Core\view\views\TextField;
 
 class ArticleOverviewElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/article_overview_element/article_overview_element_form.tpl";
+    private static string $TEMPLATE = "article_overview_element/templates/article_overview_element_form.tpl";
     private ArticleOverviewElement $element;
 
     public function __construct(ArticleOverviewElement $element) {

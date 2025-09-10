@@ -12,7 +12,7 @@ use Obcato\Core\view\views\TextField;
 
 class TextElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/text_element/text_element_form.tpl";
+    private static string $TEMPLATE = "text_element/templates/text_element_form.tpl";
 
     private TextElement $textElement;
 

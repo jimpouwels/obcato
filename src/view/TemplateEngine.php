@@ -23,6 +23,7 @@ class TemplateEngine {
             $smarty->setCompileDir(BACKEND_TEMPLATE_DIR . "/compiled_templates");
             $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");
             $smarty->addTemplateDir(CMS_ROOT . "/modules");
+            $smarty->addTemplateDir(CMS_ROOT . "/elements");
             self::$_instance = new TemplateEngine($smarty);
         }
         return self::$_instance;

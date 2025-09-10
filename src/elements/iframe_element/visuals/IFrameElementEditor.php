@@ -10,7 +10,7 @@ use Obcato\Core\view\views\TextField;
 
 class IFrameElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/iframe_element/iframe_element_form.tpl";
+    private static string $TEMPLATE = "iframe_element/templates/iframe_element_form.tpl";
     private IFrameElement $iframeElement;
 
     public function __construct(IFrameElement $iframeElement) {

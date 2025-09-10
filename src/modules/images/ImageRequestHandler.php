@@ -8,7 +8,6 @@ use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\templates\elements\ImageForm;
 use Obcato\Core\utilities\FileUtility;
 use const Obcato\Core\UPLOAD_DIR;
 

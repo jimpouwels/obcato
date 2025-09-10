@@ -11,7 +11,7 @@ class FormElementStatics extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "elements/form_element/form_element_statics.tpl";
+        return "form_element/templates/form_element_statics.tpl";
     }
 
     public function load(): void {}

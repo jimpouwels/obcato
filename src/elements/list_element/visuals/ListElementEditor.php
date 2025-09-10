@@ -13,7 +13,7 @@ use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
 
 class ListElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/list_element/list_element_form.tpl";
+    private static string $TEMPLATE = "list_element/templates/list_element_form.tpl";
     private ListElement $listElement;
 
     public function __construct(ListElement $listElement) {

@@ -13,7 +13,7 @@ use Obcato\Core\view\views\TextField;
 
 class ImageElementEditor extends ElementVisual {
 
-    private static string $TEMPLATE = "elements/image_element/image_element_form.tpl";
+    private static string $TEMPLATE = "image_element/templates/image_element_form.tpl";
     private ImageElement $imageElement;
 
     public function __construct(ImageElement $element) {
