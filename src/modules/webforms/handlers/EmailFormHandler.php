@@ -36,13 +36,13 @@ class EmailFormHandler extends FormHandler {
     public function handle(array $fields, Page $page, ?Article $article): void {
         $message = $this->getFilledInPropertyValue('template');
         $subject = $this->getFilledInPropertyValue('subject');
-        $target_email_address = $this->_settings_dao->getSettings()->getEmailAddress();
-        if (!$target_email_address) {
-            $target_email_address = $this->getProperty('target_email_address');
+        $targetEmailAddress = $this->_settings_dao->getSettings()->getEmailAddress();
+        if (!$targetEmailAddress) {
+            $targetEmailAddress = $this->getProperty('target_email_address');
         }
         $headers = array(
-            'From' => $target_email_address
+            'From' => $targetEmailAddress
         );
-        mail($target_email_address, $subject, $message, $headers);
+        mail($targetEmailAddress, $subject, $message, $headers);
     }
 }
