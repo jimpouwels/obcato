@@ -16,7 +16,7 @@ class QueryResultPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/database/query_result_panel.tpl";
+        return "database/templates/query_result_panel.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

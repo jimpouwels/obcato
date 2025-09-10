@@ -15,7 +15,7 @@ class QueriesTab extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/database/queries_tab.tpl";
+        return "database/templates/queries_tab.tpl";
     }
 
     public function load(): void {

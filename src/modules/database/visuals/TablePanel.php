@@ -15,7 +15,7 @@ class TablePanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/database/table.tpl";
+        return "database/templates/table.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

@@ -25,7 +25,7 @@ class DatabaseModuleVisual extends ModuleVisual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/database/root.tpl";
+        return "database/templates/root.tpl";
     }
 
     public function load(): void {

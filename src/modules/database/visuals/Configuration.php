@@ -16,7 +16,7 @@ class Configuration extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/database/configuration.tpl";
+        return "database/templates/configuration.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {

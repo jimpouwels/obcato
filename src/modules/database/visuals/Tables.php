@@ -17,7 +17,7 @@ class Tables extends Visual {
     }
 
     public function getTemplateFilename(): string {
-        return "modules/database/tables.tpl";
+        return "database/templates/tables.tpl";
     }
 
     public function load(): void {

@@ -18,7 +18,7 @@ class QueryFieldPanel extends Panel {
     }
 
     public function getPanelContentTemplate(): string {
-        return "modules/database/query_field_panel.tpl";
+        return "database/templates/query_field_panel.tpl";
     }
 
     public function loadPanelContent(TemplateData $data): void {
