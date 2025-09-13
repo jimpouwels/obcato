@@ -19,6 +19,11 @@ class StaticsRequestHandler extends HttpRequestHandler {
 
     public function handlePost(): void {}
 
+    public function isPublicFileRequest(): bool {
+        $relPath = $this->getRelativePathFromGetRequest();
+        return str_starts_with($relPath, "/public");
+    }
+
     private function setResponseContentType(string $absolutePath): void {
         $pathParts = explode(".", $absolutePath);
         $extension = $pathParts[count($pathParts) - 1];

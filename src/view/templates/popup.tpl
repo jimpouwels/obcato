@@ -5,7 +5,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" href="/admin/static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/static.php?file=/public/css/styles.css" type="text/css" />
     <link rel="stylesheet" href="/admin/static.php?file=/default/css/styles.css" type="text/css" />
     <link rel="stylesheet" href="/admin/static.php?file=/default/css/popup_styles.css" type="text/css" />
     <link rel="stylesheet" href="/admin/static.php?file=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />

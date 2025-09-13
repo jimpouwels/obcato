@@ -10,7 +10,7 @@ use const Obcato\Core\SESSION_TIMEOUT;
 
 class Authenticator {
 
-    public static function isAuthenticated(): bool {
+    public static function isAuthenticated(): void {
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -21,13 +21,13 @@ class Authenticator {
             $user = $authorizationDao->getUser($_SESSION['username']);
             if ($user->getUuid() == $_SESSION['uuid']) {
                 $_SESSION['last_activity'] = time();
-                return true;
+                return;
             }
         }
-        return false;
+        self::redirectToLoginPage();
     }
 
-    public static function logIn(string $username, string $password): void {
+    public static function logIn(string $username, string $password): bool {
         if (self::authenticate($username, $password)) {
             session_start();
             $authorizationDao = AuthorizationDaoMysql::getInstance();
@@ -35,17 +35,6 @@ class Authenticator {
             $_SESSION['username'] = $username;
             $_SESSION['uuid'] = $user->getUuid();
             $_SESSION['last_activity'] = time();
-        }
-    }
-
-    private static function authenticate(string $username, string $password): bool {
-        $mysqlConnector = MysqlConnector::getInstance();
-        $password = StringUtility::hashStringValue($password);
-        $statement = $mysqlConnector->prepareStatement("SELECT * FROM auth_users WHERE username = ? AND password = ?");
-        $statement->bind_param("ss", $username, $password);
-        $result = $mysqlConnector->executeStatement($statement);
-
-        while ($result->fetch_assoc()) {
             return true;
         }
         return false;
@@ -61,6 +50,30 @@ class Authenticator {
     public static function getCurrentUser(): User {
         $authorizationDao = AuthorizationDaoMysql::getInstance();
         return $authorizationDao->getUser($_SESSION["username"]);
+    }
+
+    private static function authenticate(string $username, string $password): bool {
+        $mysqlConnector = MysqlConnector::getInstance();
+        $password = StringUtility::hashStringValue($password);
+        $statement = $mysqlConnector->prepareStatement("SELECT * FROM auth_users WHERE username = ? AND password = ?");
+        $statement->bind_param("ss", $username, $password);
+        $result = $mysqlConnector->executeStatement($statement);
+
+        while ($result->fetch_assoc()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static function redirectToLoginPage(): void {
+        session_destroy();
+        $redirectTarget = '/admin/login.php';
+        $uri = urlencode($_SERVER['REQUEST_URI']);
+        if (str_contains($uri, 'module_id')) {
+            $redirectTarget .= "?orgUrl={$uri}";
+        }
+        header("Location: {$redirectTarget}");
+        exit();
     }
 
 }
