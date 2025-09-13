@@ -9,11 +9,11 @@ Obcato is written in PHP and runs on top of a Mysql Database. A hosting platform
 
 When you look at the source of Obcato, it has 2 sections:
 
-## Public
-This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of both the Obcato WebUI.
+## public
+This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of the Obcato WebUI.
 
 ## src
-This contains all the sources for the Obcato WebUI.
+This contains all the sources for the Obcato WebUI. The contents of this folder is packaged and available as a packagist component.
 
 # Installation
 
