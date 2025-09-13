@@ -21,6 +21,8 @@ class StaticsRequestHandler extends HttpRequestHandler {
 
     public function isPublicFileRequest(): bool {
         $relPath = $this->getRelativePathFromGetRequest();
+        // SECURITY MEASURE: Do NOT allow '..' to be present in the path, since this would
+        // allow any in the webserver to be downloaded.
         return str_starts_with($relPath, "/public") && !str_contains($relPath, "..");
     }
 
