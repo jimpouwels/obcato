@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin/static.php?file=/elements/text_element/css/text_element.css" type="text/css" />
+<link rel="stylesheet" href="/admin/index.php?file=/elements/text_element/css/text_element.css" type="text/css" />

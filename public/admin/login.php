@@ -39,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
 <head>
-    <link rel="stylesheet" href="/admin/static.php?file=/public/css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="/admin/static.php?file=/public/css/login.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/index.php?file=/public/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="/admin/index.php?file=/public/css/login.css" type="text/css" />
 
-    <script type="text/javascript" src="/admin/static.php?file=/public/js/jquery-1.6.1.min.js"></script>
-    <script type="text/javascript" src="/admin/static.php?file=/public/js/login_functions.js"></script>
+    <script type="text/javascript" src="/admin/index.php?file=/public/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/admin/index.php?file=/public/js/login_functions.js"></script>
 
     <title>Obcato</title>
     <meta name="robots" content="noindex" />

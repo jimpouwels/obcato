@@ -5,6 +5,7 @@ namespace Obcato;
 // DIRECT ACCESS GRANTED
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\Backend;
+use Obcato\Core\request_handlers\StaticsRequestHandler;
 
 require_once "../bootstrap.php";
 
@@ -14,13 +15,17 @@ if (!file_exists(PRIVATE_DIR . "/database_config.php") || isInstallMode()) {
     }
     runInstaller();
 } else {
-    runBackend();
-}
-
-function runBackend(): void {
-    Authenticator::isAuthenticated();
-    $backend = new Backend();
-    $backend->start();
+    if (StaticsRequestHandler::isFileRequest()) {
+        $staticsRequestHandler = new StaticsRequestHandler();
+        if (!$staticsRequestHandler->isPublicFileRequest()) {
+            Authenticator::isAuthenticated();
+        }
+        $staticsRequestHandler->handle();
+    } else {
+        Authenticator::isAuthenticated();
+        $backend = new Backend();
+        $backend->start();
+    }
 }
 
 function runInstaller(): void {

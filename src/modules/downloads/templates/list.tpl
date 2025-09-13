@@ -22,9 +22,9 @@
                 <td>{$search_result.created_by}</td>
                 <td>
                     {if $search_result.published}
-                        <img alt="Publiceren" src="/admin/static.php?file=/default/img/default_icons/green_flag.png" />
+                        <img alt="Publiceren" src="/admin/index.php?file=/default/img/default_icons/green_flag.png" />
                     {else}
-                        <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png" />
+                        <img alt="Depubliceren" src="/admin/index.php?file=/default/img/default_icons/red_flag.png" />
                     {/if}
                 </td>
             </tr>

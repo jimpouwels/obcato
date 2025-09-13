@@ -1,2 +1,2 @@
-<link rel="stylesheet" href="/admin/static.php?file=/modules/{$path}/css/webforms.css" type="text/css" />
-<script type="text/javascript" src="/admin/static.php?file=/modules/{$path}/js/module_webform.js"></script>
+<link rel="stylesheet" href="/admin/index.php?file=/modules/{$path}/css/webforms.css" type="text/css" />
+<script type="text/javascript" src="/admin/index.php?file=/modules/{$path}/js/module_webform.js"></script>

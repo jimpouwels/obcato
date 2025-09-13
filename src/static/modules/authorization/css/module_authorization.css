@@ -27,7 +27,7 @@
 }
 
 .user_list_item {
-    list-style-image: url(/admin/static.php?file=/modules/authorization/img/user_icon.png);
+    list-style-image: url(/admin/index.php?file=/modules/authorization/img/user_icon.png);
     font-style: normal;
 }
 

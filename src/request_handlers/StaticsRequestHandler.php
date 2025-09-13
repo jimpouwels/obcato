@@ -21,7 +21,11 @@ class StaticsRequestHandler extends HttpRequestHandler {
 
     public function isPublicFileRequest(): bool {
         $relPath = $this->getRelativePathFromGetRequest();
-        return str_starts_with($relPath, "/public");
+        return str_starts_with($relPath, "/public") && !str_contains($relPath, "..");
+    }
+
+    public static function isFileRequest(): bool {
+        return isset($_GET["file"]);
     }
 
     private function setResponseContentType(string $absolutePath): void {

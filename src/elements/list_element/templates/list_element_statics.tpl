@@ -1,2 +1,2 @@
-<link rel="stylesheet" href="/admin/static.php?file=/elements/list_element/css/list_element.css" type="text/css" />
-<script type="text/javascript" src="/admin/static.php?file=/elements/list_element/js/list_element.js"></script>
+<link rel="stylesheet" href="/admin/index.php?file=/elements/list_element/css/list_element.css" type="text/css" />
+<script type="text/javascript" src="/admin/index.php?file=/elements/list_element/js/list_element.js"></script>

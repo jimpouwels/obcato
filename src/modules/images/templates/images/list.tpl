@@ -45,9 +45,9 @@
                     <a onclick="toggleImagePublished('{$search_result.id}'); return false;" href="#">
                         {if $search_result.published}
                         <img alt="Publiceren"
-                             src="/admin/static.php?file=/default/img/default_icons/green_flag.png" /></a>
+                             src="/admin/index.php?file=/default/img/default_icons/green_flag.png" /></a>
                     {else}
-                    <img alt="Depubliceren" src="/admin/static.php?file=/default/img/default_icons/red_flag.png" />
+                    <img alt="Depubliceren" src="/admin/index.php?file=/default/img/default_icons/red_flag.png" />
                     {/if}
                     </a>
                 </td>

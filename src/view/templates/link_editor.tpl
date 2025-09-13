@@ -25,7 +25,7 @@
             <tr>
                 <td class="link-addlink">
                     <a href="#" onclick="putLink('{$link.id}'); return false;" title="{$text_resources.place_link}">
-                        <img src="/admin/static.php?file=/default/img/default_icons/place_link.png"
+                        <img src="/admin/index.php?file=/default/img/default_icons/place_link.png"
                              alt="{$text_resources.place_link}" />
                     </a>
                 </td>
@@ -39,7 +39,7 @@
                         <em>{$link.target_title}</em>
                         <span class="link_delete_link"><a href="#" onclick="deleteLink('{$link.id}'); return false;"
                                                           title="Verwijder linkdoel"><img
-                                        src="/admin/static.php?file=/default/img/default_icons/delete_small.png"
+                                        src="/admin/index.php?file=/default/img/default_icons/delete_small.png"
                                         alt="Verwijder linkdoel" /></a></span>
                     {/if}
                 </td>

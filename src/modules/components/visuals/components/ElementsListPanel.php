@@ -33,7 +33,7 @@ class ElementsListPanel extends Panel {
             $elementData = array();
             $elementData['id'] = $elementType->getId();
             $elementData['name'] = $this->getTextResource($elementType->getIdentifier() . '_label');
-            $elementData['icon_url'] = '/admin/static.php?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
+            $elementData['icon_url'] = '/admin/index.php?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
             $elementData['is_current'] = $this->isCurrentElement($elementType);
             $elementsData[] = $elementData;
         }
