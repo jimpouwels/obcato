@@ -174,6 +174,7 @@ class FriendlyUrlManager {
             "RewriteCond %{REQUEST_URI} !^/index.php\n" .
             "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
             "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
+            "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
             "RewriteCond %{REQUEST_URI} !^/admin(.*)\n" .
             "RewriteRule ^.*$ index.php [NC,L]");
     }
