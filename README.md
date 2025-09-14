@@ -37,4 +37,4 @@ require_once OBCATO_ROOT . "/bootstrap.php";
 Fill in `<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>` as required.
 
 ## Frontend Templates
-You can now start adding frontend templates to `<PRIVATE_DIR_PRODUCTION>/templates`
+You can now start adding frontend templates to `<PRIVATE_DIR>/templates`
