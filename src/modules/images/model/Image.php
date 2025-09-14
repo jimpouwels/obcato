@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\modules\images\model;
 
+use Obcato\Core\core\BlackBoard;
 use Obcato\Core\core\model\Entity;
 
 class Image extends Entity {
@@ -63,12 +64,12 @@ class Image extends Entity {
 
     public function getThumbUrl(): string {
         $id = $this->getId();
-        return "/admin?image=$id&amp;thumb=true";
+        return BlackBoard::getImageBaseUrl() . "/$id?thumb=true";
     }
 
     public function getUrl(): string {
         $id = $this->getId();
-        return "/admin?image=$id";
+        return BlackBoard::getImageBaseUrl() . "/$id";
     }
 
     public function getThumbFileName(): ?string {

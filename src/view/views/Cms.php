@@ -39,6 +39,7 @@ class Cms extends Visual {
             $this->assignGlobal("module_head_includes", $this->moduleVisual->renderHeadIncludes());
         }
         $this->assignGlobal("backend_base_url", $this->getBackendBaseUrl());
+        $this->assignGlobal("image_base_url", $this->getImageBaseUrl());
         $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
         $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 

@@ -43,5 +43,3 @@ class ImagesTab extends Visual {
     }
 
 }
-
-?>

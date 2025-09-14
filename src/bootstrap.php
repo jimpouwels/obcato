@@ -8,6 +8,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\frontend\handlers\RequestHandler;
 use Obcato\Core\request_handlers\StaticsRequestHandler;
+use Obcato\Core\utilities\UrlHelper;
 use const Obcato\Core\UPLOAD_DIR;
 
 const PUBLIC_DIR = PUBLIC_ROOT;
@@ -26,9 +27,10 @@ require CMS_ROOT . "/constants.php";
 require PRIVATE_DIR . '/vendor/autoload.php';
 
 function render(): void {
-    if (isset($_GET["image"]) && $_GET['image'] != '') {
-        loadImage();
-    } else if (isset($_GET['download']) && $_GET['download'] != '') {
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/image')) {
+        $urlParts = UrlHelper::splitIntoParts($_SERVER['REQUEST_URI']);
+        loadImage($urlParts[count($urlParts) - 1]);
+    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/download')) {
         // TODO
     } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
         runSystemUpdate();
@@ -36,6 +38,8 @@ function render(): void {
         runLogin();
     } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin')) {
         runBackend();
+    } else if (isset($_GET["image"])) {
+        loadImage($_GET["image"]);
     } else {
         runFrontend();
     }
@@ -83,34 +87,32 @@ function isInstallMode(): bool {
     return isset($_GET["mode"]) && $_GET["mode"] == "install";
 }
 
-function loadImage(): void {
-    if (isset($_GET['image']) && $_GET['image'] != '') {
-        $imageDao = ImageDaoMysql::getInstance();
-        $image = $imageDao->getImage($_GET['image']);
+function loadImage(int $id): void {
+    $imageDao = ImageDaoMysql::getInstance();
+    $image = $imageDao->getImage($id);
 
-        if (!$image->isPublished())
-            Authenticator::isAuthenticated();
+    if (!$image->isPublished())
+        Authenticator::isAuthenticated();
 
-        if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {
-            $filename = $image->getThumbFileName();
-        } else {
-            $filename = $image->getFilename();
-        }
-
-        $path = UPLOAD_DIR . "/" . $filename;
-        $splits = explode('.', $filename);
-        $extension = $splits[count($splits) - 1];
-
-        if ($extension == "jpg") {
-            header("Content-Type: image/jpeg");
-        } else if ($extension == "gif") {
-            header("Content-Type: image/gif");
-        } else if ($extension == "png") {
-            header("Content-Type: img/png");
-        } else {
-            header("Content-Type: image/$extension");
-        }
-
-        readfile($path);
+    if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {
+        $filename = $image->getThumbFileName();
+    } else {
+        $filename = $image->getFilename();
     }
+
+    $path = UPLOAD_DIR . "/" . $filename;
+    $splits = explode('.', $filename);
+    $extension = $splits[count($splits) - 1];
+
+    if ($extension == "jpg") {
+        header("Content-Type: image/jpeg");
+    } else if ($extension == "gif") {
+        header("Content-Type: image/gif");
+    } else if ($extension == "png") {
+        header("Content-Type: img/png");
+    } else {
+        header("Content-Type: image/$extension");
+    }
+
+    readfile($path);
 }

@@ -23,4 +23,8 @@ class BlackBoard {
         return "/admin";
     }
 
+    public static function getImageBaseUrl(): string {
+        return "/admin/image";
+    }
+
 }

@@ -54,6 +54,10 @@ abstract class Visual {
         return BlackBoard::getBackendBaseUrl();
     }
 
+    protected function getImageBaseUrl(): string {
+        return BlackBoard::getImageBaseUrl();
+    }
+
     protected function getBackendBaseUrlRaw(): string {
         return BlackBoard::getBackendBaseUrlRaw();
     }
