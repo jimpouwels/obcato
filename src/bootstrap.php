@@ -10,7 +10,8 @@ use Obcato\Core\frontend\handlers\RequestHandler;
 use Obcato\Core\request_handlers\StaticsRequestHandler;
 use const Obcato\Core\UPLOAD_DIR;
 
-const PUBLIC_DIR = __DIR__;
+const PUBLIC_DIR = PUBLIC_ROOT;
+const PRIVATE_DIR = PRIVATE_ROOT;
 const CMS_ROOT = OBCATO_ROOT;
 
 if (!file_exists(".htaccess")) {
