@@ -22,12 +22,11 @@ In the public section (e.g. `httpd.www`) of your webspace, you will need to crea
 
 `index.php`
 ```
-<?php
-
 namespace reisvirus\reisvirus;
 
-define("PRIVATE_DIR", __DIR__ . "<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>"); // e.g. /../httpd.private
-define("OBCATO_ROOT", PRIVATE_DIR . "/vendor/obcato/obcato/src");
+define("PUBLIC_ROOT", __DIR__);
+define("PRIVATE_ROOT", PUBLIC_ROOT . "/<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>");
+define("OBCATO_ROOT", PRIVATE_ROOT . "/vendor/obcato/obcato/src");
 
 require_once OBCATO_ROOT . "/bootstrap.php";
 
