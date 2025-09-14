@@ -9,40 +9,26 @@ Obcato is written in PHP and runs on top of a Mysql Database. A hosting platform
 
 When you look at the source of Obcato, it has 2 sections:
 
-## public
-This section contains the files that are to be accessed directly via the internet. These will be the entrypoint of the Obcato WebUI.
-
-## src
-This contains all the sources for the Obcato WebUI. The contents of this folder is packaged and available as a packagist component.
-
 # Installation
 
 ## Make a new website
 A new website that is based on Obcato starts with the creation of a new PHP packagist application. Make Obcato a dependency. It will be installed to the `vendor` section.
 
 ## Initialize the frontend and prepare the Obcato WebUI
-In the public section (e.g. `httpd.www`) of your webspace, you will need two files at a minimum to run the frontend and the Obcato WebUI:
+In the public section (e.g. `httpd.www`) of your webspace, you will need to create one file to render the frontend and the Obcato WebUI:
 
 `index.php`
 ```
 <?php
 
-namespace <your_namespace>; // e.g. <reisvirus/reisvirus>
-require_once "bootstrap.php";
+namespace reisvirus\reisvirus;
 
-\Obcato\renderFrontend();
-```
+define("PRIVATE_DIR", __DIR__ . "<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>"); // e.g. /../httpd.private
+define("OBCATO_ROOT", PRIVATE_DIR . "/vendor/obcato/obcato/src");
 
-`config.php`
-```
-<?php
-const PRIVATE_DIR_PRODUCTION = "<relative_path_to_public_section_of_webspace>"; // e.g. "/../httpd.private";
+require_once OBCATO_ROOT . "/bootstrap.php";
 
-// for local runs (when host is localhost)
-const PRIVATE_DIR_LOCAL = "<relative_path_to_private_section_of_webspace>"; // e.g. "/../private";
-```
-
-Upload the contents of the `/public` directory in the Obcato source to the public section of your webspace.
+\Obcato\render();
 
 Create directory:
 ```
