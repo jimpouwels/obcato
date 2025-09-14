@@ -63,12 +63,12 @@ class Image extends Entity {
 
     public function getThumbUrl(): string {
         $id = $this->getId();
-        return "/admin/upload.php?image=$id&amp;thumb=true";
+        return "/admin?image=$id&amp;thumb=true";
     }
 
     public function getUrl(): string {
         $id = $this->getId();
-        return "/admin/upload.php?image=$id";
+        return "/admin?image=$id";
     }
 
     public function getThumbFileName(): ?string {

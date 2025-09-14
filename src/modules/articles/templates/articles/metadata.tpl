@@ -61,7 +61,7 @@
             </div>
             <div class="admin_field_wrapper">
                 <img class="article_selected_image" title="Afbeelding verwijderen"
-                     src="/admin/upload.php?image={$lead_image_id}&amp;thumb=true" />
+                     src="/admin?image={$lead_image_id}&amp;thumb=true" />
                 {$delete_lead_image_button}
             </div>
         </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="admin_field_wrapper">
                 <img class="article_selected_wallpaper" title=""
-                     src="/admin/upload.php?image={$wallpaper_id}&amp;thumb=true" />
+                     src="/admin?image={$wallpaper_id}&amp;thumb=true" />
                 {$delete_wallpaper_button}
             </div>
         </div>

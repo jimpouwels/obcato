@@ -1,6 +1,6 @@
 @font-face {
     font-family: GeosansLight;
-    src: url(/admin/index.php?file=/public/fonts/GeosansLight.ttf);
+    src: url(/admin?file=/public/fonts/GeosansLight.ttf);
 }
 
 /*
@@ -83,7 +83,7 @@ body {
 =========== CONTENT PANE
 */
 #content-wrapper {
-    background: url('/admin/index.php?file=/default/img/cms_background.jpg') no-repeat center top fixed;
+    background: url('/admin?file=/default/img/cms_background.jpg') no-repeat center top fixed;
     background-attachment: scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -330,43 +330,43 @@ body {
 }
 
 .icon_apply {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/apply.png");
+    background-image: url("/admin?file=/default/img/default_icons/apply.png");
     width: 36px;
     margin-left: 6px;
 }
 
 .icon_reload {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/reload.png");
+    background-image: url("/admin?file=/default/img/default_icons/reload.png");
     width: 36px;
     margin-left: 6px;
 }
 
 .icon_delete {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/delete.png");
+    background-image: url("/admin?file=/default/img/default_icons/delete.png");
     width: 37px;
     margin-left: 6px;
 }
 
 .icon_upload {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/upload.png");
+    background-image: url("/admin?file=/default/img/default_icons/upload.png");
     width: 32px;
     margin-left: 8px;
 }
 
 .icon_add {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/add.png");
+    background-image: url("/admin?file=/default/img/default_icons/add.png");
     width: 38px;
     margin-left: 5px;
 }
 
 .icon_moveup {
-    background-image: url("/admin/index.php?file=/default/img/default_icons/up.png");
+    background-image: url("/admin?file=/default/img/default_icons/up.png");
     width: 36px;
     margin-left: 7px;
 }
 
 .icon_movedown {
-    background: url("/admin/index.php?file=/default/img/default_icons/down.png");
+    background: url("/admin?file=/default/img/default_icons/down.png");
     width: 36px;
     margin-left: 14px;
 }
@@ -657,11 +657,11 @@ h1 {
 }
 
 .notification-holder .success {
-    background: url(/admin/index.php?file=/default/img/default_icons/success.png) no-repeat;
+    background: url(/admin?file=/default/img/default_icons/success.png) no-repeat;
 }
 
 .notification-holder .fail {
-    background: url(/admin/index.php?file=/default/img/default_icons/failed.png) no-repeat;
+    background: url(/admin?file=/default/img/default_icons/failed.png) no-repeat;
 }
 
 /*

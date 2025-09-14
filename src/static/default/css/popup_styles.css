@@ -1,5 +1,5 @@
 body {
-    background: url(/admin/index.php?file=/default/img/cms_background.jpg) no-repeat center top fixed;
+    background: url(/admin?file=/default/img/cms_background.jpg) no-repeat center top fixed;
 }
 
 /*

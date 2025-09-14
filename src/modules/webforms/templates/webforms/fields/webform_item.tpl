@@ -12,7 +12,7 @@
                 <a href="#"
                    onclick="deleteFormField('{$id}', '{$text_resources.webforms_delete_item_confirm_message}'); return false;"
                    title="<TODO TITLE>">
-                    <img src="/admin/index.php?file=/default/img/default_icons/delete_small.png" alt="<TODO TITLE>"
+                    <img src="/admin?file=/default/img/default_icons/delete_small.png" alt="<TODO TITLE>"
                          title="<TODO TITLE>" />
                 </a>
             </div>

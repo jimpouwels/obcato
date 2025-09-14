@@ -16,7 +16,7 @@
                         <a href="#"
                            onclick="deleteFormHandler('{$handler.id}', '{$text_resources.webforms_delete_handler_confirm_message}'); return false;"
                            title="{$text_resources.webforms_delete_handler_link_title}">
-                            <img src="/admin/index.php?file=/default/img/default_icons/delete_small.png"
+                            <img src="/admin?file=/default/img/default_icons/delete_small.png"
                                  alt="{$text_resources.webforms_delete_handler_link_title}"
                                  title="{$text_resources.webforms_delete_handler_link_title}" />
                         </a>

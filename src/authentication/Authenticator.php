@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\authentication;
 
+use JetBrains\PhpStorm\NoReturn;
 use Obcato\Core\database\dao\AuthorizationDaoMysql;
 use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\authorization\model\User;
@@ -43,7 +44,7 @@ class Authenticator {
     public static function logOut(): void {
         session_start();
         session_destroy();
-        header('Location: /admin/login.php');
+        header('Location: /admin/login');
         exit();
     }
 
@@ -65,9 +66,10 @@ class Authenticator {
         return false;
     }
 
+    #[NoReturn]
     private static function redirectToLoginPage(): void {
         session_destroy();
-        $redirectTarget = '/admin/login.php';
+        $redirectTarget = '/admin/login';
         $uri = urlencode($_SERVER['REQUEST_URI']);
         if (str_contains($uri, 'module_id')) {
             $redirectTarget .= "?orgUrl={$uri}";

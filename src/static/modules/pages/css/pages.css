@@ -23,12 +23,12 @@
 }
 
 .published {
-    list-style-image: url(/admin/index.php?file=/modules/pages/img/pages.png);
+    list-style-image: url(/admin?file=/modules/pages/img/pages.png);
     font-style: normal;
 }
 
 .depublished {
-    list-style-image: url(/admin/index.php?file=/modules/pages/img/page_non_published.png);
+    list-style-image: url(/admin?file=/modules/pages/img/page_non_published.png);
     font-style: italic;
 }
 

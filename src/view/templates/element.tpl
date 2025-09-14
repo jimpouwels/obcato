@@ -17,20 +17,20 @@
                 <div class="draggable_action_buttons">
                     <a href="#" onclick="toggleElement('{$id}'); return false;"
                        title="{$text_resources.element_button_label_minimize}">
-                        <img src="/admin/index.php?file=/default/img/default_icons/minimize.png" width="16px"
+                        <img src="/admin?file=/default/img/default_icons/minimize.png" width="16px"
                              height="16px" alt="{$text_resources.element_button_label_minimize}"
                              title="{$text_resources.element_button_label_minimize}" />
                     </a>
                     <a href="#" onclick="toggleAllElements('{$id}'); return false;"
                        title="{$text_resources.element_button_label_minimize_all}">
-                        <img src="/admin/index.php?file=/default/img/default_icons/minimize_all.png" width="16px"
+                        <img src="/admin?file=/default/img/default_icons/minimize_all.png" width="16px"
                              height="16px" alt="{$text_resources.element_button_label_minimize_all}"
                              title="{$text_resources.element_button_label_minimize_all}" />
                     </a>
                     <a href="#"
                        onclick="deleteElement('{$id}','{$delete_element_form_id}', '{$text_resources.element_holder_delete_element_confirm_message}'); return false;"
                        title="{$text_resources.element_button_label_delete}">
-                        <img src="/admin/index.php?file=/default/img/default_icons/delete_small.png"
+                        <img src="/admin?file=/default/img/default_icons/delete_small.png"
                              alt="{$text_resources.element_button_label_delete}"
                              title="{$text_resources.element_button_label_delete}" />
                     </a>
@@ -51,7 +51,7 @@
                             {/foreach}
                         </select>
                         <a href="#" onclick="putLink($('#element_{$id}_link').find(':selected').val()); return false;" title="{$text_resources.place_link}">
-                            <img src="/admin/index.php?file=/default/img/default_icons/place_link.png"
+                            <img src="/admin?file=/default/img/default_icons/place_link.png"
                                  alt="{$text_resources.place_link}" />
                         </a>
                     {/if}

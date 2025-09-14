@@ -1,2 +1,2 @@
-<link rel="stylesheet" href="/admin/index.php?file=/modules/sitewide_pages/css/sitewide_pages.css" type="text/css" />
-<script type="text/javascript" src="/admin/index.php?file=/modules/sitewide_pages/js/module_sitewide_pages.js"></script>
+<link rel="stylesheet" href="/admin?file=/modules/sitewide_pages/css/sitewide_pages.css" type="text/css" />
+<script type="text/javascript" src="/admin?file=/modules/sitewide_pages/js/module_sitewide_pages.js"></script>

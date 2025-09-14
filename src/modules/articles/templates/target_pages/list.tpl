@@ -34,7 +34,7 @@
                         {if $render_link}
                         <a title="{$txt}" onclick="changeDefaultTargetPage({$target_page.id});" href="#">
                             {/if}
-                            <img alt="{$txt}" src="/admin/index.php?file=/default/img/default_icons/{$icon}">
+                            <img alt="{$txt}" src="/admin?file=/default/img/default_icons/{$icon}">
                             {if $render_link}
                         </a>
                         {/if}

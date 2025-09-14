@@ -23,18 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION["step1_error"] = "Kan niet verbinden met de database, controleer de gegevens";
             } else {
                 createDatabaseConfig($database_url, $database_port, $database_username, $database_password, $database_name);
-                header("Location: /admin/index.php?mode=install&step=2");
+                header("Location: /admin?mode=install&step=2");
             }
         }
     } else if (getStepFromPostRequest() == "2") {
         $mysql_connector = MySqlConnector::getInstance();
         $mysql_connector->executeQuery("CREATE DATABASE IF NOT EXISTS " . DATABASE_NAME);
         $mysql_connector->executeSql(file_get_contents("./install/install_script.sql"));
-        header("Location: /admin/index.php?mode=install&step=3");
+        header("Location: /admin?mode=install&step=3");
     } else if (getStepFromPostRequest() == "3") {
         if ($_POST["installation_finish_type"] == "delete_install_files")
             deleteInstallationFiles();
-        header("Location: /admin/login.php");
+        header("Location: /admin/login");
     }
 }
 
@@ -89,7 +89,7 @@ function deleteFile($path) {
     <script type="text/javascript" src="static/js/install.js"></script>
 </head>
 <body>
-<form id="install_form" method="post" action="/admin/index.php?mode=install&amp;step=<?= $_GET["step"] ?>">
+<form id="install_form" method="post" action="/admin?mode=install&amp;step=<?= $_GET["step"] ?>">
     <fieldset class="panel">
         <?php if ($_GET["step"] == "1"): ?>
             <div class="panel-title">Configureer database</div>

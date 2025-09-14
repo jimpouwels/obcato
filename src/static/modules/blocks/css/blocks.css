@@ -28,11 +28,11 @@
 
 .published {
     font-style: normal;
-    list-style-image: url(/admin/index.php?file=/modules/blocks/img/block_published.png);
+    list-style-image: url(/admin?file=/modules/blocks/img/block_published.png);
 }
 
 .depublished {
-    list-style-image: url(/admin/index.php?file=/modules/blocks/img/block_depublished.png);
+    list-style-image: url(/admin?file=/modules/blocks/img/block_depublished.png);
     font-style: italic;
 }
 

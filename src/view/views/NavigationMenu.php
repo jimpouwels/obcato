@@ -45,7 +45,7 @@ class NavigationMenu extends Visual {
             $subItem["title"] = $this->getTextResource($module->getIdentifier() . '_module_title');
             $subItem["id"] = $module->getId();
             $subItem["popup"] = $module->isPopUp();
-            $subItem["icon_url"] = '/admin/index.php?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
+            $subItem["icon_url"] = '/admin?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
             $subItem["last"] = ($count == count($modules));
             $count++;
             $subItems[] = $subItem;
@@ -59,7 +59,7 @@ class NavigationMenu extends Visual {
             $sub_item = array();
             $sub_item["id"] = $elementType->getId();
             $sub_item["name"] = $this->getTextResource($elementType->getIdentifier() . '_label');
-            $sub_item["icon_url"] = '/admin/index.php?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
+            $sub_item["icon_url"] = '/admin?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
             $sub_items[] = $sub_item;
         }
         return $sub_items;

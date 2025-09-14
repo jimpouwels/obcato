@@ -26,7 +26,7 @@
                         <p><a class="{$image_class}" href="#"
                               onclick="submitSelectionBackToOpener('{$backfill}', {$image.id}, '{$back_click_id}'); return false;"
                               title="Selecteer">{$image.title}</a></p>
-                        <img title="{$image.title}" src="/admin/upload.php?image={$image.id}&amp;thumb=true" />
+                        <img title="{$image.title}" src="/admin?image={$image.id}&amp;thumb=true" />
                         {assign var="counter" value=$counter + 1}
                     </div>
                 {/foreach}

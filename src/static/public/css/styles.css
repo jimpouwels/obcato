@@ -1,6 +1,6 @@
 @font-face {
     font-family: GeosansLight;
-    src: url(/admin/index.php?file=/public/fonts/GeosansLight.ttf);
+    src: url(/admin?file=/public/fonts/GeosansLight.ttf);
 }
 
 /*

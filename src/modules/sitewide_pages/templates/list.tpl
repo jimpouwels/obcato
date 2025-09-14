@@ -23,12 +23,12 @@
                         <td>{$sitewide_page.title}</td>
                         <td class="sitewide_page_move_cell">
                             {if $sitewide_page@iteration != 1}
-                                <a href="#" onclick="moveUp({$sitewide_page.id});"><img src="/admin/index.php?file=/default/img/default_icons/up.png" /></a>
+                                <a href="#" onclick="moveUp({$sitewide_page.id});"><img src="/admin?file=/default/img/default_icons/up.png" /></a>
                             {/if}
                         </td>
                         <td class="sitewide_page_move_cell sitewide_page_move_down_cell">
                             {if $sitewide_page@iteration < count($sitewide_pages)}
-                                <a href="#" onclick="moveDown({$sitewide_page.id});"><img src="/admin/index.php?file=/default/img/default_icons/up.png" /></a>
+                                <a href="#" onclick="moveDown({$sitewide_page.id});"><img src="/admin?file=/default/img/default_icons/up.png" /></a>
                             {/if}
                         </td>
                         <td class="delete_column center_column">
