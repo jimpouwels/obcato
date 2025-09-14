@@ -35,5 +35,8 @@ require_once OBCATO_ROOT . "/bootstrap.php";
 
 Fill in `<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>` as required.
 
+Make a request from the browser to the root of your webspace, e.g. https://www.yourdomain.com.
+This will initialize a .htaccess file so that all routing works properly.
+
 ## Frontend Templates
 You can now start adding frontend templates to `<PRIVATE_DIR>/templates`
