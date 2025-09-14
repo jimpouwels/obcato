@@ -9,8 +9,6 @@ use Obcato\Core\database\MysqlConnector;
 use const Obcato\Core\CONFIG_DIR;
 use const Obcato\core\SYSTEM_VERSION;
 
-require_once "../bootstrap.php";
-
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";
 require_once PRIVATE_DIR . "/database_config.php";

@@ -47,6 +47,8 @@ function render(): void {
         loadImage();
     } else if (isset($_GET['download']) && $_GET['download'] != '') {
         // TODO
+    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
+        runSystemUpdate();
     } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/login')) {
         runLogin();
     } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin')) {
@@ -54,6 +56,10 @@ function render(): void {
     } else {
         runFrontend();
     }
+}
+
+function runSystemUpdate(): void {
+    include CMS_ROOT . "/system_update.php";
 }
 
 function runLogin(): void {

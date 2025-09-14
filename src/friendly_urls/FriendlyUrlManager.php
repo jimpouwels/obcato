@@ -46,8 +46,6 @@ class FriendlyUrlManager {
             "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
             "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
             "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
-            "RewriteCond %{REQUEST_URI} !^/admin/system_update.php\n" .
-            "RewriteCond %{REQUEST_URI} !^/admin\n" .
             "RewriteRule ^.*$ index.php [NC,L]");
     }
 
