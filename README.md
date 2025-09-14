@@ -14,6 +14,9 @@ When you look at the source of Obcato, it has 2 sections:
 ## Make a new website
 A new website that is based on Obcato starts with the creation of a new PHP packagist application. Make Obcato a dependency. It will be installed to the `vendor` section.
 
+## Upload Obcato
+Upload your `vendor` folder to the private webspace of your webhosting. This includes Obcato sources.
+
 ## Initialize the frontend and prepare the Obcato WebUI
 In the public section (e.g. `httpd.www`) of your webspace, you will need to create one file to render the frontend and the Obcato WebUI:
 
@@ -30,6 +33,8 @@ require_once OBCATO_ROOT . "/bootstrap.php";
 
 \Obcato\render();
 ```
+
+Fill in `<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>` as required.
 
 ## Frontend Templates
 You can now start adding frontend templates to `<PRIVATE_DIR_PRODUCTION>/templates`
