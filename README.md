@@ -29,12 +29,6 @@ define("OBCATO_ROOT", PRIVATE_DIR . "/vendor/obcato/obcato/src");
 require_once OBCATO_ROOT . "/bootstrap.php";
 
 \Obcato\render();
-
-Create directory:
-```
-<PRIVATE_DIR_PRODUCTION>/templates
-<PRIVATE_DIR_PRODUCTION>/config
-<PRIVATE_DIR_PRODUCTION>/upload
 ```
 
 ## Frontend Templates
