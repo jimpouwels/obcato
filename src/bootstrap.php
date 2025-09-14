@@ -38,8 +38,6 @@ function render(): void {
         runLogin();
     } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin')) {
         runBackend();
-    } else if (isset($_GET["image"])) {
-        loadImage($_GET["image"]);
     } else {
         runFrontend();
     }
@@ -54,8 +52,12 @@ function runLogin(): void {
 }
 
 function runFrontend(): void {
-    $requestHandler = new RequestHandler();
-    $requestHandler->handleRequest();
+    if (isset($_GET["image"])) {
+        loadImage($_GET["image"]);
+    } else {
+        $requestHandler = new RequestHandler();
+        $requestHandler->handleRequest();
+    }
 }
 
 function runBackend(): void {
