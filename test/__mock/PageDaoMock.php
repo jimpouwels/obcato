@@ -1,5 +1,9 @@
 <?php
 
+use Obcato\Core\database\dao\PageDao;
+use Obcato\Core\modules\pages\model\Page;
+use Obcato\Core\utilities\Arrays;
+
 require_once CMS_ROOT . '/database/dao/PageDao.php';
 require_once CMS_ROOT . '/utilities/Arrays.php';
 

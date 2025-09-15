@@ -1,6 +1,11 @@
 <?php
 
+use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\FriendlyUrlDao;
+use Obcato\Core\database\dao\PageDao;
+use Obcato\Core\friendly_urls\FriendlyUrlManager;
+use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\pages\model\Page;
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../setup.php";

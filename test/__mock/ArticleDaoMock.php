@@ -1,5 +1,13 @@
 <?php
 
+use Obcato\Core\database\dao\ArticleDao;
+use Obcato\Core\modules\articles\model\Article;
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
+use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Obcato\Core\modules\articles\model\ArticleTerm;
+use Obcato\Core\modules\pages\model\Page;
+use Obcato\Core\utilities\Arrays;
+
 require_once(CMS_ROOT . '/database/dao/ArticleDao.php');
 
 class ArticleDaoMock implements ArticleDao {
@@ -8,6 +16,7 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getArticle($id): ?Article {
         // TODO: Implement getArticle() method.
+        return null;
     }
 
     public function getArticleByElementHolderId($elementHolderId): ?Article {
@@ -18,18 +27,22 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getAllArticles(): array {
         // TODO: Implement getAllArticles() method.
+        return [];
     }
 
     public function getAllChildArticles(int $parentArticleId): array {
         // TODO: Implement getAllChildArticles() method.
+        return [];
     }
 
     public function searchArticles(string $keyword, ?int $termId): array {
         // TODO: Implement searchArticles() method.
+        return [];
     }
 
-    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults): array {
+    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $exclude): array {
         // TODO: Implement searchPublishedArticles() method.
+        return [];
     }
 
     public function updateArticle(Article $article): void {
@@ -46,26 +59,32 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getArticleComments(int $articleId): array {
         // TODO: Implement getArticleComments() method.
+        return [];
     }
 
     public function getChildArticleComments(int $commentId): array {
         // TODO: Implement getChildArticleComments() method.
+        return [];
     }
 
     public function getAllTerms(): array {
         // TODO: Implement getAllTerms() method.
+        return [];
     }
 
     public function getTerm($id): ?ArticleTerm {
         // TODO: Implement getTerm() method.
+        return null;
     }
 
     public function createTerm($termName): ArticleTerm {
         // TODO: Implement createTerm() method.
+        return new ArticleTerm();
     }
 
     public function getTermByName($name): ?ArticleTerm {
         // TODO: Implement getTermByName() method.
+        return null;
     }
 
     public function updateTerm($term): void {
@@ -78,6 +97,7 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getTermsForArticle(int $articleId): array {
         // TODO: Implement getTermsForArticle() method.
+        return [];
     }
 
     public function addTermToArticle($termId, $article): void {
@@ -94,6 +114,7 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getTargetPages(): array {
         // TODO: Implement getTargetPages() method.
+        return [];
     }
 
     public function deleteTargetPage($targetPageId): void {
@@ -102,6 +123,7 @@ class ArticleDaoMock implements ArticleDao {
 
     public function getDefaultTargetPage(): ?Page {
         // TODO: Implement getDefaultTargetPage() method.
+        return null;
     }
 
     public function setDefaultArticleTargetPage($targetPageId): void {
@@ -110,5 +132,41 @@ class ArticleDaoMock implements ArticleDao {
 
     public function addArticle(Article $article): void {
         $this->articles[] = $article;
+    }
+
+    public function getMetadataFields(): array {
+        // TODO: Implement getMetadataFields() method.
+        return [];
+    }
+
+    public function getMetadataField(int $id): ?ArticleMetadataField {
+        // TODO: Implement getMetadataField() method.
+        return null;
+    }
+
+    public function createNewArticleMetadataField(string $name): ArticleMetadataField {
+        // TODO: Implement createNewArticleMetadataField() method.
+        return new ArticleMetadataField();
+    }
+
+    public function updateMetadataField(ArticleMetadataField $field): void {
+        // TODO: Implement updateMetadataField() method.
+    }
+
+    public function deleteMetadataField(ArticleMetadataField $field): void {
+        // TODO: Implement deleteMetadataField() method.
+    }
+
+    public function getMetadataFieldValue(Article $article, ArticleMetadataField $field): ?ArticleMetadataFieldValue {
+        // TODO: Implement getMetadataFieldValue() method.
+        return null;
+    }
+
+    public function updateMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        // TODO: Implement updateMetadataFieldValue() method.
+    }
+
+    public function addMetadataFieldValue(ArticleMetadataFieldValue $fieldValue): void {
+        // TODO: Implement addMetadataFieldValue() method.
     }
 }
