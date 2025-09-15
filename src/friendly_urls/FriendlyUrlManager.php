@@ -28,25 +28,6 @@ class FriendlyUrlManager {
         $this->friendlyUrlDao = $friendlyUrlDao;
         $this->pageDao = $pageDao;
         $this->articleDao = $articleDao;
-        self::writeHtaccessFileIfNotExists();
-    }
-
-    public static function writeHtaccessFileIfNotExists(): void {
-        $htaccessFilePath = PUBLIC_DIR . '/.htaccess';
-        if (file_exists($htaccessFilePath)) return;
-        $handle = fopen($htaccessFilePath, 'w');
-        fclose($handle);
-        file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
-            "RewriteCond %{HTTP_HOST} !=localhost\n" .
-            "RewriteCond %{HTTPS} !=on\n" .
-            "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
-            "RewriteCond %{HTTP_HOST} !^www\.\n" .
-            "RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !^/index.php\n" .
-            "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
-            "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
-            "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
-            "RewriteRule ^.*$ index.php [NC,L]");
     }
 
     public static function getInstance(): FriendlyUrlManager {

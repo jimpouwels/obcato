@@ -86,7 +86,7 @@ class RequestHandler {
             $this->render404Page();
         }
         if ($image->isPublished()) {
-            if ($image->getExtension() == "jpg") {
+            if ($image->getExtension() == "jpg" || $image->getExtension() == "jpeg") {
                 header("Content-Type: image/jpeg");
             } else if ($image->getExtension() == "gif") {
                 header("Content-Type: image/gif");
