@@ -4,11 +4,8 @@ namespace Obcato;
 
 use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\Backend;
-use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\frontend\handlers\RequestHandler;
 use Obcato\Core\request_handlers\StaticsRequestHandler;
-use Obcato\Core\utilities\UrlHelper;
-use const Obcato\Core\UPLOAD_DIR;
 
 const PUBLIC_DIR = PUBLIC_ROOT;
 const PRIVATE_DIR = PRIVATE_ROOT;
