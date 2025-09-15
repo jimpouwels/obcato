@@ -26,21 +26,26 @@ if (!defined("IS_TEST_RUN")) {
 require CMS_ROOT . "/constants.php";
 require PRIVATE_DIR . '/vendor/autoload.php';
 
-function render(): void {
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/image')) {
-        $urlParts = UrlHelper::splitIntoParts($_SERVER['REQUEST_URI']);
-        loadImage($urlParts[count($urlParts) - 1]);
-    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/download')) {
-        // TODO
-    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
-        runSystemUpdate();
-    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/login')) {
-        runLogin();
-    } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin')) {
-        runBackend();
-    } else {
-        runFrontend();
+if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/image')) {
+    Authenticator::isAuthenticated();
+    $urlParts = UrlHelper::splitIntoParts($_SERVER['REQUEST_URI']);
+    loadImage($urlParts[count($urlParts) - 1]);
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/download')) {
+    // TODO
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
+    runSystemUpdate();
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/login')) {
+    runLogin();
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin') && StaticsRequestHandler::isFileRequest()) {
+    $staticsRequestHandler = new StaticsRequestHandler();
+    if (!$staticsRequestHandler->isPublicFileRequest()) {
+        Authenticator::isAuthenticated();
     }
+    $staticsRequestHandler->handle();
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin')) {
+    runBackend();
+} else {
+    runFrontend();
 }
 
 function runSystemUpdate(): void {
@@ -67,17 +72,9 @@ function runBackend(): void {
         }
         runInstaller();
     } else {
-        if (StaticsRequestHandler::isFileRequest()) {
-            $staticsRequestHandler = new StaticsRequestHandler();
-            if (!$staticsRequestHandler->isPublicFileRequest()) {
-                Authenticator::isAuthenticated();
-            }
-            $staticsRequestHandler->handle();
-        } else {
-            Authenticator::isAuthenticated();
-            $backend = new Backend();
-            $backend->start();
-        }
+        Authenticator::isAuthenticated();
+        $backend = new Backend();
+        $backend->start();
     }
 }
 
@@ -93,8 +90,9 @@ function loadImage(int $id): void {
     $imageDao = ImageDaoMysql::getInstance();
     $image = $imageDao->getImage($id);
 
-    if (!$image->isPublished())
+    if (!$image->isPublished()) {
         Authenticator::isAuthenticated();
+    }
 
     if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {
         $filename = $image->getThumbFileName();

@@ -29,8 +29,6 @@ define("PRIVATE_ROOT", PUBLIC_ROOT . "/<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>")
 define("OBCATO_ROOT", PRIVATE_ROOT . "/vendor/obcato/obcato/src");
 
 require_once OBCATO_ROOT . "/bootstrap.php";
-
-\Obcato\render();
 ```
 
 Fill in `<RELATIVE_LOCATION_OF_PRIVATE_WEBSPACE>` as required.
