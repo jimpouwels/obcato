@@ -8,6 +8,7 @@ use Obcato\Core\database\dao\SettingsDao;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\frontend\cache\Cache;
+use Obcato\Core\frontend\helper\FrontendHelper;
 use Obcato\Core\frontend\RobotsVisual;
 use Obcato\Core\frontend\SitemapVisual;
 use Obcato\Core\frontend\WebsiteVisual;
@@ -109,6 +110,9 @@ class RequestHandler {
     }
 
     private function renderPage(Page $page, ?Article $article, string $originalUrl): void {
+        if (!FrontendHelper::isPreviewMode() && ((!is_null($article) && !$article->isPublished()) || !$page->isPublished())) {
+            $this->render404Page();
+        }
         if ($article && $article->getTargetPageId() != $page->getId()) {
             $pageUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($article->getTargetPageId()));
             $articleUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($article);

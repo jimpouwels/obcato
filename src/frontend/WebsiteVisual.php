@@ -35,10 +35,8 @@ class WebsiteVisual extends FrontendVisual {
         $this->assignGlobal("is_mobile_device", $isMobileUserAgent);
         $this->assignGlobal("base_url", $this->getLinkHelper()->createBaseUrl());
         $this->assignGlobal("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
-        if ($this->getPage()->isPublished()) {
-            $pageVisual = new PageVisual($this->getPage(), $this->article);
-            $this->assign("html", $pageVisual->render());
-        }
+        $pageVisual = new PageVisual($this->getPage(), $this->article);
+        $this->assign("html", $pageVisual->render());
     }
 
     public function getPresentable(): ?Presentable {

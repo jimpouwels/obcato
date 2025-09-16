@@ -9,11 +9,9 @@ use Obcato\Core\database\dao\FriendlyUrlDao;
 use Obcato\Core\database\dao\FriendlyUrlDaoMysql;
 use Obcato\Core\database\dao\PageDao;
 use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\frontend\helper\FrontendHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\utilities\UrlHelper;
-use const Obcato\PUBLIC_DIR;
 
 class FriendlyUrlManager {
 
