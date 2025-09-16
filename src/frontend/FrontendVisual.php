@@ -163,6 +163,7 @@ abstract class FrontendVisual {
         }
         $value = nl2br($value);
         $value = $this->replaceSmartyQuery($value);
+        $value = FontStyleHelper::replaceCharacterShortcuts($value);
         $value = FontStyleHelper::createColors($value);
         $value = FontStyleHelper::createItalic($value);
         $value = FontStyleHelper::createBold($value);

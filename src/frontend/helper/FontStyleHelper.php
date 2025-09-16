@@ -36,4 +36,8 @@ class FontStyleHelper {
         }
         return $text;
     }
+
+    public static function replaceCharacterShortcuts(string $text): string {
+        return str_replace("-->", "&rarr;", $text);
+    }
 }
