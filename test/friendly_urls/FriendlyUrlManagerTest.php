@@ -101,12 +101,12 @@ class FriendlyUrlManagerTest extends TestCase {
 
     public function testMatchUrl_matchesWhenBothPageAndArticleMatches() {
         $this->givenPageWithUrl(1, "/parent1/parent2/elementHolder1");
-        $this->givenArticleWithUrl(2, "/targetPage/elementHolder2");
-        $match = $this->friendlyUrlManager->matchUrl('/parent1/parent2/elementHolder1/targetPage/elementHolder2');
+        $this->givenArticleWithUrl(2, "/parentArticle/elementHolder2");
+        $match = $this->friendlyUrlManager->matchUrl('/parent1/parent2/elementHolder1/parentArticle/elementHolder2');
         $this->assertEquals(1, $match->getPage()->getId());
         $this->assertEquals("/parent1/parent2/elementHolder1", $match->getPageUrl());
         $this->assertEquals(2, $match->getArticle()->getId());
-        $this->assertEquals("/targetPage/elementHolder2", $match->getArticleUrl());
+        $this->assertEquals("/parentArticle/elementHolder2", $match->getArticleUrl());
     }
 
     public function testMatchUrl_trimsSlashesAtEnd() {

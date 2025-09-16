@@ -125,7 +125,7 @@ class FriendlyUrlManager {
         $page = $this->pageDao->getPageByElementHolderId($elementHolderId);
 
         $matchedUrl = $url;
-        if (is_null($page)) {
+        if (!$page) {
             $urlParts = UrlHelper::splitIntoParts($url);
             for ($i = 0; $i < count($urlParts); $i++) {
                 $subArray = array_slice($urlParts, 1, (count($urlParts) - $i - 1));
@@ -151,7 +151,7 @@ class FriendlyUrlManager {
             $articlePartOfUrl = '/' . implode('/', $subArray);
             $elementHolderId = $this->friendlyUrlDao->getElementHolderIdFromUrl($articlePartOfUrl);
             $article = $this->articleDao->getArticleByElementHolderId($elementHolderId);
-            if ($article && ($article->isPublished() || FrontendHelper::isPreviewMode())) {
+            if ($article) {
                 $matchedUrl = $articlePartOfUrl;
                 break;
             }

@@ -20,9 +20,12 @@ class ArticleDaoMock implements ArticleDao {
     }
 
     public function getArticleByElementHolderId($elementHolderId): ?Article {
-        return Arrays::firstMatch($this->articles, function ($article) use ($elementHolderId) {
-            return $article->getId() == $elementHolderId;
-        });
+        foreach ($this->articles as $article) {
+            if ($article->getId() === $elementHolderId) {
+                return $article;
+            }
+        }
+        return null;
     }
 
     public function getAllArticles(): array {

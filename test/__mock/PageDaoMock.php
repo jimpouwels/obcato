@@ -13,22 +13,31 @@ class PageDaoMock implements PageDao {
 
     public function getAllPages(): array {
         // TODO: Implement getAllPages() method.
+        return [];
     }
 
     public function getPage(?int $id): ?Page {
         // TODO: Implement getPage() method.
+        return null;
     }
 
     public function getPageByElementHolderId(?int $elementHolderId): ?Page {
-        return Arrays::firstMatch($this->pages, fn($page) => $page->getId() == $elementHolderId);
+        foreach ($this->pages as $page) {
+            if ($page->getId() === $elementHolderId) {
+                return $page;
+            }
+        }
+        return null;
     }
 
     public function getRootPage(): ?Page {
         // TODO: Implement getRootPage() method.
+        return null;
     }
 
     public function getSubPages(Page $page): array {
         // TODO: Implement getSubPages() method.
+        return [];
     }
 
     public function persist(Page $page): void {
@@ -45,14 +54,17 @@ class PageDaoMock implements PageDao {
 
     public function isLast(Page $page): bool {
         // TODO: Implement isLast() method.
+        return false;
     }
 
     public function isFirst(Page $page): bool {
         // TODO: Implement isFirst() method.
+        return false;
     }
 
     public function searchByTerm(string $term): array {
         // TODO: Implement searchByTerm() method.
+        return [];
     }
 
     public function moveUp(Page $page): void {
@@ -65,10 +77,12 @@ class PageDaoMock implements PageDao {
 
     public function getParent(Page $page): ?Page {
         // TODO: Implement getParent() method.
+        return null;
     }
 
     public function getParents(Page $page): array {
         // TODO: Implement getParents() method.
+        return [];
     }
 
     public function addPage(Page $page): void {
@@ -77,5 +91,6 @@ class PageDaoMock implements PageDao {
 
     public function getHomepage(): ?Page {
         // TODO: Implement getHomepage() method.
+        return null;
     }
 }
