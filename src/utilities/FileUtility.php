@@ -8,19 +8,19 @@ class FileUtility {
 
     private function __construct() {}
 
-    public static function deleteImage(Image $image, string $upload_dir): void {
+    public static function deleteImage(Image $image, string $directory): void {
         // first delete the old file
-        if (!is_null($image->getFilename()) && $image->getFilename() != '') {
-            $old_file_name = $upload_dir . "/" . $image->getFilename();
-            if (file_exists($old_file_name)) {
-                unlink($old_file_name);
+        if ($image->getFilename()) {
+            $oldFilePath = $directory . "/" . $image->getFilename();
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
             }
         }
         // now delete the thumb
-        if (!is_null($image->getThumbFileName()) && $image->getThumbFileName() != '') {
-            $old_file_name = $upload_dir . "/" . $image->getThumbFileName();
-            if (file_exists($old_file_name)) {
-                unlink($old_file_name);
+        if ($image->getThumbFileName()) {
+            $oldFilePath = $directory . "/" . $image->getThumbFileName();
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
             }
         }
     }
@@ -38,7 +38,7 @@ class FileUtility {
     /*
         Moves all contents from the given source directory to the given target directory.
 
-        @param $source The souce folder
+        @param $source The source folder
         @param $target The target folder
         @param $delete_source_dir True if the source directory should be deleted
     */
