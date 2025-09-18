@@ -169,8 +169,8 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function getNewImageFilename(): string {
         $currentImageId = $this->currentImage->getId();
-        $uploadedImageFilename = $_FILES["image_file"]["name"];
-        return "UPLIMG-00$currentImageId" . "_$uploadedImageFilename";
+        $uploadedImageFilename = pathinfo($_FILES["image_file"]["name"], PATHINFO_FILENAME);
+        return "UPLIMG-00$currentImageId" . "_$uploadedImageFilename.webp";
     }
 
     private function saveThumbnailForUploadedImage(string $newFilename): void {
@@ -180,7 +180,24 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function moveImageToUploadDirectory(string $newFilename): void {
-        rename($_FILES["image_file"]["tmp_name"], UPLOAD_DIR . "/" . $newFilename);
+        $uploadedFilePath = $_FILES["image_file"]["tmp_name"];
+        $imageObj = null;
+        if (str_ends_with($_FILES["image_file"]["name"],  "jpg") || str_ends_with($_FILES["image_file"]["name"], "jpeg")) {
+            $imageObj = imagecreatefromjpeg($uploadedFilePath);
+        } else if (str_ends_with($_FILES["image_file"]["name"], "gif")) {
+            $imageObj = imagecreatefromgif($uploadedFilePath);
+        } else if (str_ends_with($_FILES["image_file"]["name"], "png")) {
+            $imageObj = imagecreatefrompng($uploadedFilePath);
+        }
+
+        $width = imagesx($imageObj);
+        $height = imagesy($imageObj);
+
+        $webp = imagecreatetruecolor($width, $height);
+        imagecopy($webp, $imageObj,0,0,0,0, $width, $height);
+        imagewebp($webp, UPLOAD_DIR . "/" . $newFilename, 80);
+
+        unlink($uploadedFilePath);
         $this->currentImage->setFilename($newFilename);
     }
 

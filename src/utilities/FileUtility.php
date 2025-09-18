@@ -25,23 +25,14 @@ class FileUtility {
         }
     }
 
-    public static function saveThumb(string $source_image_filename, string $directory, string $thumb_file_name, int $thumb_width, int $thumb_height): void {
-        $splits = explode('.', $source_image_filename);
-        $extension = $splits[count($splits) - 1];
-        $target_image = imagecreatetruecolor($thumb_width, $thumb_height);
-        if ($extension == 'jpeg' || $extension == 'jpg' || $extension == 'JPEG' || $extension == 'JPG') {
-            $source_image = imagecreatefromjpeg($directory . "/" . $source_image_filename);
-            imagecopyresized($target_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height, imagesx($source_image), imagesy($source_image));
-            imagejpeg($target_image, $directory . "/" . $thumb_file_name);
-        } else if ($extension == 'png' || $extension == 'PNG') {
-            $source_image = imagecreatefrompng($directory . "/" . $source_image_filename);
-            imagecopyresized($target_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height, imagesx($source_image), imagesy($source_image));
-            imagepng($target_image, $directory . "/" . $thumb_file_name);
-        } else if ($extension == 'gif' || $extension == 'GIF') {
-            $source_image = imagecreatefromgif($directory . "/" . $source_image_filename);
-            imagecopyresized($target_image, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height, imagesx($source_image), imagesy($source_image));
-            imagegif($target_image, $directory . "/" . $thumb_file_name);
-        }
+    public static function saveThumb(string $srcImage, string $directory, string $thumbFilename, int $thumbWidth, int $thumbHeight): void {
+        $imageObj = imagecreatefromwebp($directory . '/' . $srcImage);
+        $width = imagesx($imageObj);
+        $height = imagesy($imageObj);
+        $thumb = imagecreatetruecolor($width, $height);
+        imagecopy($thumb, $imageObj,0,0,0,0, $width, $height);
+        $thumbResized = imagescale($thumb, $thumbWidth, $thumbHeight);
+        imagewebp($thumbResized, $directory . "/" . $thumbFilename, 80);
     }
 
     /*

@@ -87,7 +87,6 @@ class BackendRequestHandler extends HttpRequestHandler {
         } else {
             header("Content-Type: image/$extension");
         }
-
         readfile($path);
     }
 

@@ -105,6 +105,10 @@ class Image extends Entity {
         $this->filename = $filename;
     }
 
+    public function getFilenameWithoutExtension(): string {
+        return pathinfo($this->getFilename(), PATHINFO_FILENAME);
+    }
+
     public function getLocation(): ?string {
         return $this->location;
     }
