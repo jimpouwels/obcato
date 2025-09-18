@@ -11,6 +11,8 @@ class ImageForm extends Form {
     private Image $image;
     private array $selectedLabels;
     private ?string $newImageLabel;
+    private ?int $width = null;
+    private ?int $height = null;
 
     public function __construct(Image $image) {
         $this->image = $image;
@@ -23,9 +25,19 @@ class ImageForm extends Form {
         $this->image->setLocation($this->getFieldValue("image_location"));
         $this->newImageLabel = $this->getFieldValue("new_image_label_" . $this->image->getId());
         $this->selectedLabels = $this->getSelectValue("select_labels_" . $this->image->getId());
+        $this->width = $this->getNumber("image_width");
+        $this->height = $this->getNumber("image_height");
         if ($this->hasErrors()) {
             throw new FormException();
         }
+    }
+
+    public function getNewWidth(): ?int {
+        return $this->width;
+    }
+
+    public function getNewHeight(): ?int {
+        return $this->height;
     }
 
     public function getSelectedLabels(): array {

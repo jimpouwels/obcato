@@ -8,9 +8,9 @@ class FormLabel extends Visual {
     private string $_label_resource_identifier;
     private bool $_mandatory;
 
-    public function __construct(string $field_name, string $labelResourceIdentifier, bool $mandatory) {
+    public function __construct(string $fieldName, string $labelResourceIdentifier, bool $mandatory) {
         parent::__construct();
-        $this->_field_name = $field_name;
+        $this->_field_name = $fieldName;
         $this->_label_resource_identifier = $labelResourceIdentifier;
         $this->_mandatory = $mandatory;
     }

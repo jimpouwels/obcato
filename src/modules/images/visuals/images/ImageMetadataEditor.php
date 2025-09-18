@@ -9,6 +9,7 @@ use Obcato\Core\view\views\SingleCheckbox;
 use Obcato\Core\view\views\TextField;
 use Obcato\Core\view\views\UploadField;
 use const Obcato\Core\ACTION_FORM_ID;
+use const Obcato\Core\UPLOAD_DIR;
 
 class ImageMetadataEditor extends Panel {
 
@@ -37,12 +38,24 @@ class ImageMetadataEditor extends Panel {
         $publishedField = new SingleCheckbox("image_published", $this->getTextResource('image_editor_published_label'), $this->currentImage->isPublished(), false, null);
         $uploadField = new UploadField("image_file", $this->getTextResource('image_editor_file_label'), false, null);
 
+        $width = "";
+        $height = "";
+        if ($this->currentImage->getFilename()) {
+            $imageObj = imagecreatefromwebp(UPLOAD_DIR . '/' . $this->currentImage->getFilename());
+            $width = imagesx($imageObj);
+            $height = imagesy($imageObj);
+        }
+        $widthField = new TextField("image_width", $this->getTextResource('image_editor_width_label'), $width, false, false, "");
+        $heightField = new TextField("image_height", $this->getTextResource('image_editor_height_label'), $height, false, false, "");
+
         $data->assign("image_id", $this->currentImage->getId());
         $data->assign("title_field", $titleField->render());
         $data->assign("alt_text_field", $altTextField->render());
         $data->assign("location_field", $locationField->render());
         $data->assign("published_field", $publishedField->render());
         $data->assign("upload_field", $uploadField->render());
+        $data->assign("width_field", $widthField->render());
+        $data->assign("height_field", $heightField->render());
     }
 
 }

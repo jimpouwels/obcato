@@ -7,4 +7,6 @@
     {$location_field}
     {$published_field}
     {$upload_field}
+    {$width_field}
+    {$height_field}
 </div>

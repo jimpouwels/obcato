@@ -16,9 +16,9 @@ abstract class FormField extends Visual {
     private ?string $value;
     private ?string $helpText;
 
-    protected function __construct(string $field_name, ?string $value, ?string $labelResourceIdentifier, bool $mandatory, bool $linkable, ?string $cssClass, ?string $helpTextResourceIdentifier = "") {
+    protected function __construct(string $fieldName, ?string $value, ?string $labelResourceIdentifier, bool $mandatory, bool $linkable, ?string $cssClass, ?string $helpTextResourceIdentifier = "") {
         parent::__construct();
-        $this->fieldName = $field_name;
+        $this->fieldName = $fieldName;
         $this->cssClass = $cssClass;
         $this->labelResourceIdentifier = $labelResourceIdentifier;
         $this->mandatory = $mandatory;

@@ -65,6 +65,7 @@ class ImageRequestHandler extends HttpRequestHandler {
             $this->addNewlySelectedLabelsToImage($imageForm->getSelectedLabels());
             $this->deleteSelectedLabelsFromImage();
             $this->saveUploadedImage();
+            $this->resizeImageIfRequested($imageForm->getNewWidth(), $imageForm->getNewHeight());
             if (!empty($imageForm->getNewImageLabelName())) {
                 $label = $this->imageDao->getLabelByName($imageForm->getNewImageLabelName());
                 if (!$label) {
@@ -164,6 +165,21 @@ class ImageRequestHandler extends HttpRequestHandler {
             $this->deletePreviousImage();
             $this->moveImageToUploadDirectory($newFilename);
             $this->saveThumbnailForUploadedImage($newFilename);
+        }
+    }
+
+    private function resizeImageIfRequested(?int $newWidth, ?int $newHeight): void {
+        $imageObj = imagecreatefromwebp(UPLOAD_DIR . '/' . $this->currentImage->getFilename());
+        $oldWidth = imagesx($imageObj);
+        $oldHeight = imagesy($imageObj);
+        if ($newWidth && $newWidth != $oldWidth) {
+            $ratio = $newWidth / $oldWidth;
+            $imageObj = imagescale($imageObj, $newWidth, $newHeight * $ratio);
+            imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
+        } else if ($newHeight && $newHeight != $oldHeight) {
+            $ratio = $newHeight / $oldHeight;
+            $imageObj = imagescale($imageObj, $newWidth * $ratio, $newHeight);
+            imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
         }
     }
 
