@@ -29,8 +29,15 @@ image_editor_title_label: Title
 image_editor_location_label: Location
 image_editor_published_label: Published
 image_editor_file_label: File
-image_editor_width_label: Width
-image_editor_height_label: Height
+image_editor_new_width_label: New width
+image_editor_new_height_label: New height
+image_editor_crop_top: Crop top
+image_editor_crop_bottom: Crop bottom
+image_editor_crop_left: Crop left
+image_editor_crop_right: Crop right
+image_crop_cannot_be_negative: Cannot crop a negative number
+image_crop_cannot_be_bigger_than_height: The vertical crop cannot be bigger than the image height
+image_crop_cannot_be_bigger_than_width: The horizontal crop cannot be bigger than the image width
 new_image_label_field_label: New label
 images_save_success_message: Image successfully saved
 images_save_failed_message: Image not saved, process the errors

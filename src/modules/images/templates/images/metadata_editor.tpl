@@ -7,6 +7,11 @@
     {$location_field}
     {$published_field}
     {$upload_field}
-    {$width_field}
-    {$height_field}
+    {$size_field}
+    {$new_width_field}
+    {$new_height_field}
+    {$crop_top_field}
+    {$crop_bottom_field}
+    {$crop_left_field}
+    {$crop_right_field}
 </div>

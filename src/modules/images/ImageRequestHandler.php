@@ -65,7 +65,7 @@ class ImageRequestHandler extends HttpRequestHandler {
             $this->addNewlySelectedLabelsToImage($imageForm->getSelectedLabels());
             $this->deleteSelectedLabelsFromImage();
             $this->saveUploadedImage();
-            $this->resizeImageIfRequested($imageForm->getNewWidth(), $imageForm->getNewHeight());
+            $this->resizeImageIfRequested($imageForm);
             if (!empty($imageForm->getNewImageLabelName())) {
                 $label = $this->imageDao->getLabelByName($imageForm->getNewImageLabelName());
                 if (!$label) {
@@ -168,19 +168,43 @@ class ImageRequestHandler extends HttpRequestHandler {
         }
     }
 
-    private function resizeImageIfRequested(?int $newWidth, ?int $newHeight): void {
+    private function resizeImageIfRequested(ImageForm $imageForm): void {
         $imageObj = imagecreatefromwebp(UPLOAD_DIR . '/' . $this->currentImage->getFilename());
         $oldWidth = imagesx($imageObj);
         $oldHeight = imagesy($imageObj);
-        if ($newWidth && $newWidth != $oldWidth) {
-            $ratio = $newWidth / $oldWidth;
-            $imageObj = imagescale($imageObj, $newWidth, $newHeight * $ratio);
-            imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
-        } else if ($newHeight && $newHeight != $oldHeight) {
-            $ratio = $newHeight / $oldHeight;
-            $imageObj = imagescale($imageObj, $newWidth * $ratio, $newHeight);
-            imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
+        $newWidth = $oldWidth;
+        $newHeight = $oldHeight;
+        if ($imageForm->getCropTop() || $imageForm->getCropBottom() || $imageForm->getCropLeft() || $imageForm->getCropRight()) {
+            $x = 0;
+            $y = 0;
+            if ($imageForm->getCropTop()) {
+                $y = $imageForm->getCropTop();
+                $newHeight -= $imageForm->getCropTop();
+            }
+            if ($imageForm->getCropBottom()) {
+                $newHeight -= $imageForm->getCropBottom();
+            }
+            if ($imageForm->getCropLeft()) {
+                $x = $imageForm->getCropLeft();
+                $newWidth -= $imageForm->getCropLeft();
+            }
+            if ($imageForm->getCropRight()) {
+                $newWidth -= $imageForm->getCropRight();
+            }
+            $imageObj = imagecrop($imageObj, ['x' => $x, 'y' => $y, 'width' => $newWidth, 'height' => $newHeight]);
         }
+        if ($imageForm->getNewWidth() && $imageForm->getNewWidth() != $oldWidth) {
+            $newWidth = $imageForm->getNewWidth();
+            $ratio = $newWidth / $oldWidth;
+            $newHeight *= $ratio;
+            $imageObj = imagescale($imageObj, $newWidth, $newHeight);
+        } else if ($imageForm->getNewHeight() && $imageForm->getNewHeight() != $oldHeight) {
+            $newHeight = $imageForm->getNewHeight();
+            $ratio = $newHeight / $oldHeight;
+            $newWidth *= $ratio;
+            $imageObj = imagescale($imageObj, $newWidth, $newHeight);
+        }
+        imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
     }
 
     private function getNewImageFilename(): string {

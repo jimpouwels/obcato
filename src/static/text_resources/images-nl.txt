@@ -29,8 +29,15 @@ image_editor_title_label: Titel
 image_editor_location_label: Locatie
 image_editor_published_label: Gepubliceerd
 image_editor_file_label: Bestand
-image_editor_width_label: Breedte
-image_editor_height_label: Hoogte
+image_editor_new_width_label: Nieuwe breedte
+image_editor_new_height_label: Nieuwe hoogte
+image_editor_crop_top: Bijsnijden aan bovenkant
+image_editor_crop_bottom: Bijsnijden aan onderkant
+image_editor_crop_left: Bijsnijden aan linkerkant
+image_editor_crop_right: Bijsnijden aan rechterkant
+image_crop_cannot_be_negative: Je kunt geen negatief getal bijsnijden
+image_crop_cannot_be_bigger_than_height: Je kunt niet meer bijsnijden dan de hoogte van de afbeelding
+image_crop_cannot_be_bigger_than_width: Je kunt niet meer bijsnijden dan de breedte van de afbeelding
 new_image_label_field_label: Nieuw label
 images_save_success_message: Afbeelding successvol opgeslagen
 images_save_failed_message: Afbeelding niet opgeslagen, verwerk de fouten
