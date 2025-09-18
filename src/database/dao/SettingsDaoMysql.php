@@ -4,6 +4,7 @@ namespace Obcato\Core\database\dao;
 
 use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\modules\settings\model\Settings;
+use const Obcato\Core\SYSTEM_VERSION;
 
 class SettingsDaoMysql implements SettingsDao {
 
@@ -28,7 +29,8 @@ class SettingsDaoMysql implements SettingsDao {
                                                                                         smtp_host = ?,
                                                                                         email_address = ?,
                                                                                         database_version = ?,
-                                                                                        404_page_id = ?");
+                                                                                        404_page_id = ?,
+                                                                                        browser_image_cache_in_seconds = ?");
         $websiteTitle = $settings->getWebsiteTitle();
         $backendHostname = $settings->getBackEndHostname();
         $frontendHostname = $settings->getFrontEndHostname();
@@ -36,13 +38,15 @@ class SettingsDaoMysql implements SettingsDao {
         $emailAddress = $settings->getEmailAddress();
         $databaseVersion = $settings->getDatabaseVersion();
         $page404Id = $settings->get404PageId();
-        $statement->bind_param("ssssssi", $websiteTitle,
+        $browserCacheInSeconds = $settings->getBrowserImageCacheInSeconds();
+        $statement->bind_param("ssssssii", $websiteTitle,
             $backendHostname,
             $frontendHostname,
             $smtpHost,
             $emailAddress,
             $databaseVersion,
-            $page404Id);
+            $page404Id,
+            $browserCacheInSeconds);
         $this->mysqlConnector->executeStatement($statement);
     }
 

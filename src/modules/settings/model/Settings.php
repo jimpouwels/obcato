@@ -13,6 +13,7 @@ class Settings extends Entity {
     private string $emailAddress;
     private string $smtpHost;
     private string $databaseVersion;
+    private int $browserImageCacheInSeconds;
     private ?Page $page404 = null;
 
     public function getWebsiteTitle(): string {
@@ -75,6 +76,14 @@ class Settings extends Entity {
         $this->page404 = $page404;
     }
 
+    public function setBrowserImageCacheInSeconds(int $browserImageCacheInSeconds): void {
+        $this->browserImageCacheInSeconds = $browserImageCacheInSeconds;
+    }
+
+    public function getBrowserImageCacheInSeconds(): int {
+        return $this->browserImageCacheInSeconds;
+    }
+
     public static function constructFromRecord(array $row): Settings {
         $settings = new Settings();
         $settings->initFromDb($row);
@@ -88,6 +97,7 @@ class Settings extends Entity {
         $this->setEmailAddress($row['email_address']);
         $this->setSmtpHost($row['smtp_host']);
         $this->setDatabaseVersion($row['database_version']);
+        $this->setBrowserImageCacheInSeconds($row['browser_image_cache_in_seconds']);
         $this->setPage404(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
     }
 }

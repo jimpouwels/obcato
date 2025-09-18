@@ -3,5 +3,6 @@
         {$warning_message}
         {$global_settings_panel}
         {$domain_settings_panel}
+        {$frontend_settings_panel}
     </form>
 </div>

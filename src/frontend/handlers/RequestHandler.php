@@ -17,16 +17,19 @@ use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
+use Obcato\Core\modules\settings\model\Settings;
 use const Obcato\Core\UPLOAD_DIR;
 
 class RequestHandler {
 
+    private static int $BROWSER_IMAGE_CACHE_IN_HOURS = 48;
     private FormRequestHandler $formRequestHandler;
     private ImageDao $imageDao;
     private SettingsDao $settingsDao;
     private FriendlyUrlManager $friendlyUrlManager;
     private PageService $pageService;
     private Cache $cache;
+    private Settings $settings;
 
     public function __construct() {
         $this->settingsDao = SettingsDaoMysql::getInstance();
@@ -35,6 +38,7 @@ class RequestHandler {
         $this->formRequestHandler = FormRequestHandler::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->cache = Cache::getInstance();
+        $this->settings = $this->settingsDao->getSettings();
     }
 
     public function handleRequest(): void {
@@ -96,6 +100,7 @@ class RequestHandler {
             } else {
                 header("Content-Type: image/" . $image->getExtension());
             }
+            header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);
             readfile(UPLOAD_DIR . "/" . $image->getFilename());
         }
     }
@@ -126,7 +131,7 @@ class RequestHandler {
     }
 
     private function render404Page(): void {
-        $page404 = $this->settingsDao->getSettings()->getPage404();
+        $page404 = $this->settings->getPage404();
         http_response_code(404);
         $this->renderPage($page404, null, "404");
         exit();

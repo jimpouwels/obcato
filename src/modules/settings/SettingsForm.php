@@ -24,6 +24,7 @@ class SettingsForm extends Form {
         $this->settings->setBackendHostname($this->getMandatoryFieldValue("backend_hostname"));
         $this->settings->setSmtpHost($this->getFieldValue("smtp_host"));
         $this->settings->setEmailAddress($this->getEmailAddress("email_address"));
+        $this->settings->setBrowserImageCacheInSeconds($this->getNumber("browser_image_cache_in_seconds"));
 
         $selected404PageId = $this->getFieldValue("404_page_id");
         if ($selected404PageId) {

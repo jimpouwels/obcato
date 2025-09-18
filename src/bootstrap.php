@@ -19,6 +19,10 @@ if (!file_exists(".htaccess")) {
 require CMS_ROOT . "/constants.php";
 require PRIVATE_DIR . '/vendor/autoload.php';
 
+if (file_exists(PRIVATE_DIR . "/database_config.php")) {
+    require_once PRIVATE_DIR . "/database_config.php";
+}
+
 if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
     runSystemUpdate();
 } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/login')) {

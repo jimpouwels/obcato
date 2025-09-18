@@ -20,3 +20,4 @@ settings_form_backend_backend_template_dir_field: Backend template directory
 settings_form_backend_component_dir_field: Component directory
 settings_form_selected_homepage: Geselecteerde homepage
 settings_form_selected_404_page: Geselecteerde 404-Pagina
+settings_form_browser_image_cache_in_seconds: Browser afbeelding cache in secondes

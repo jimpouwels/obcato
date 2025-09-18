@@ -6,6 +6,7 @@ use Obcato\Core\core\model\Module;
 use Obcato\Core\database\dao\SettingsDaoMysql;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\modules\settings\visuals\DomainSettingsPanel;
+use Obcato\Core\modules\settings\visuals\FrontendSettingsPanel;
 use Obcato\Core\modules\settings\visuals\GlobalSettingsPanel;
 use Obcato\Core\view\views\ActionButtonSave;
 use Obcato\Core\view\views\ModuleVisual;
@@ -34,6 +35,7 @@ class SettingsModuleVisual extends ModuleVisual {
         $this->assign("warning_message", $this->renderWarningMessage());
         $this->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
         $this->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
+        $this->assign("frontend_settings_panel", $this->renderFrontendSettingsPanel());
     }
 
     public function getActionButtons(): array {
@@ -65,6 +67,10 @@ class SettingsModuleVisual extends ModuleVisual {
 
     private function renderDomainSettingsPanel(): string {
         return (new DomainSettingsPanel($this->settings))->render();
+    }
+
+    private function renderFrontendSettingsPanel(): string {
+        return (new FrontendSettingsPanel($this->settings))->render();
     }
 
     private function renderWarningMessage(): string {
