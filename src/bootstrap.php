@@ -78,7 +78,17 @@ function writeHtaccessFileIfNotExists(): void {
     if (file_exists($htaccessFilePath)) return;
     $handle = fopen($htaccessFilePath, 'w');
     fclose($handle);
-    file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
+    file_put_contents($htaccessFilePath, "<IfModule deflate_module>\n" .
+        "AddOutputFilterByType            \\" . "\n" .
+             "DEFLATE                         \\" . "\n" .
+              "application/javascript         \\" . "\n" .
+              "text/css                       \\" . "\n" .
+              "text/html                      \\" . "\n" .
+              "text/javascript                \\" . "\n" .
+              "text/plain                     \\" . "\n" .
+              "text/xml\n" .
+        "</IfModule>\n\n" .
+        "RewriteEngine on\n\n" .
         "RewriteCond %{HTTP_HOST} !=localhost\n" .
         "RewriteCond %{HTTPS} !=on\n" .
         "RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .

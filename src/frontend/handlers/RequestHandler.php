@@ -91,50 +91,11 @@ class RequestHandler {
         if (!$image) {
             $this->render404Page();
         }
-        $imageObj = null;
         $imageFilepath = UPLOAD_DIR . "/" . $image->getFilename();
         if ($image->isPublished()) {
-            if ($image->getExtension() == "jpg" || $image->getExtension() == "jpeg") {
-                $imageObj = imagecreatefromjpeg($imageFilepath);
-            } else if ($image->getExtension() == "gif") {
-                $imageObj = imagecreatefromgif($imageFilepath);
-            } else if ($image->getExtension() == "png") {
-                $imageObj = imagecreatefrompng($imageFilepath);
-            } else if ($image->getExtension() == "webp") {
-                header("Content-Type: image/webp");
-                header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);
-                readfile($imageFilepath);
-                return;
-            }
-            if ($imageObj) {
-                // CONVERT ALL ORIGINAL IMAGE TYPES TO WEBP
-                $newFilename = $image->getFilenameWithoutExtension() . ".webp";
-
-                $width = imagesx($imageObj);
-                $height = imagesy($imageObj);
-                $webp = imagecreatetruecolor($width, $height);
-                imagecopy($webp, $imageObj,0,0,0,0, $width, $height);
-                imagewebp($webp, UPLOAD_DIR . "/" . $newFilename, 80);
-
-                $oldFilename = $image->getFilename();
-                $oldThumbFilename = $image->getThumbFileName();
-
-                $image->setFilename($newFilename);
-                $newThumbFilename = "THUMB-" . $newFilename;
-                FileUtility::saveThumb($newFilename, UPLOAD_DIR, $newThumbFilename, 50, 50);
-                $image->setThumbFileName($newThumbFilename);
-
-                $this->imageDao->updateImage($image);
-
-                unlink($oldFilename);
-                unlink($oldThumbFilename);
-
-                header("Content-Type: image/webp");
-                header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);
-                readfile(UPLOAD_DIR . "/" . $image->getFilename());
-            } else {
-                $this->render404Page();
-            }
+            header("Content-Type: image/webp");
+            header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);
+            readfile($imageFilepath);
         }
     }
 
