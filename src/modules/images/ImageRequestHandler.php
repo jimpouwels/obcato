@@ -193,12 +193,14 @@ class ImageRequestHandler extends HttpRequestHandler {
             }
             $imageObj = imagecrop($imageObj, ['x' => $x, 'y' => $y, 'width' => $newWidth, 'height' => $newHeight]);
         }
-        if ($imageForm->getNewWidth() && $imageForm->getNewWidth() != $oldWidth) {
+        if ($imageForm->getNewWidth() && $imageForm->getNewWidth() != $newWidth) {
+            $oldWidth = $newWidth;
             $newWidth = $imageForm->getNewWidth();
             $ratio = $newWidth / $oldWidth;
             $newHeight *= $ratio;
             $imageObj = imagescale($imageObj, $newWidth, $newHeight);
-        } else if ($imageForm->getNewHeight() && $imageForm->getNewHeight() != $oldHeight) {
+        } else if ($imageForm->getNewHeight() && $imageForm->getNewHeight() != $newHeight) {
+            $oldHeight = $newHeight;
             $newHeight = $imageForm->getNewHeight();
             $ratio = $newHeight / $oldHeight;
             $newWidth *= $ratio;

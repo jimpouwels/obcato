@@ -37,6 +37,16 @@ class ImageForm extends Form {
 
         $this->newWidth = $this->getNumber("image_new_width");
         $this->newHeight = $this->getNumber("image_new_height");
+
+        $resultWidth = $imageWidth;
+        $resultHeight = $imageHeight;
+        if ($this->newWidth) {
+            $resultWidth = $this->newWidth;
+        }
+        if ($this->newHeight) {
+            $resultHeight = $this->newHeight;
+        }
+
         if ($this->newWidth > $imageWidth) {
             $this->raiseError('image_new_width', 'image_resize_loses_precision');
         }
@@ -59,10 +69,10 @@ class ImageForm extends Form {
         if ($this->cropRight < 0) {
             $this->raiseError('image_crop_right', 'image_crop_cannot_be_negative');
         }
-        if ($this->cropTop + $this->cropBottom > $this->newHeight) {
+        if ($this->cropTop + $this->cropBottom > $resultHeight) {
             $this->raiseError('image_crop_top', 'image_crop_cannot_be_bigger_than_height');
         }
-        if ($this->cropLeft + $this->cropRight > $this->newWidth) {
+        if ($this->cropLeft + $this->cropRight > $resultWidth) {
             $this->raiseError('image_crop_left', 'image_crop_cannot_be_bigger_than_width');
         }
         if ($this->hasErrors()) {
