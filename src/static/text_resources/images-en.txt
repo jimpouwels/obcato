@@ -36,6 +36,8 @@ image_editor_crop_top: Crop top
 image_editor_crop_bottom: Crop bottom
 image_editor_crop_left: Crop left
 image_editor_crop_right: Crop right
+image_editor_crop_vertical_center: Crop center vertically
+image_editor_crop_horizontal_center: Crop center horizontally
 image_crop_cannot_be_negative: Cannot crop a negative number
 image_crop_cannot_be_bigger_than_height: The vertical crop cannot be bigger than the image height
 image_crop_cannot_be_bigger_than_width: The horizontal crop cannot be bigger than the image width

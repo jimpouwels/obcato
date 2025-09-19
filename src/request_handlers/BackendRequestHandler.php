@@ -58,7 +58,8 @@ class BackendRequestHandler extends HttpRequestHandler {
         return $value;
     }
 
-    private function loadImage(): void {
+    private function loadImage(): void
+    {
         $urlParts = UrlHelper::splitIntoParts($_SERVER['REQUEST_URI']);
         $id = $urlParts[count($urlParts) - 1];
         $imageDao = ImageDaoMysql::getInstance();
@@ -70,6 +71,8 @@ class BackendRequestHandler extends HttpRequestHandler {
 
         if (isset($_GET['thumb']) && $_GET['thumb'] == 'true') {
             $filename = $image->getThumbFileName();
+        } else if (isset($_GET['mobile']) && $_GET['mobile'] == 'true') {
+            $filename = $image->getMobileFilename();
         } else {
             $filename = $image->getFilename();
         }

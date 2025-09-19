@@ -76,6 +76,7 @@ class ImageRequestHandler extends HttpRequestHandler {
                     $this->imageDao->addLabelToImage($label->getId(), $this->currentImage);
                 }
             }
+            $this->createMobileVersionIfNotExists();
             $this->imageDao->updateImage($this->currentImage);
             $this->sendSuccessMessage($this->getTextResource("images_save_success_message"));
         } catch (FormException $e) {
@@ -165,21 +166,73 @@ class ImageRequestHandler extends HttpRequestHandler {
         if (is_uploaded_file($_FILES["image_file"]["tmp_name"])) {
             $this->deletePreviousImage();
             $this->moveImageToUploadDirectory($newFilename);
+            $this->createMobileVersionIfNotExists();
             $this->saveThumbnailForUploadedImage($newFilename);
         }
     }
 
     private function resizeImageIfRequested(ImageForm $imageForm): void {
-        $imageObj = imagecreatefromwebp(UPLOAD_DIR . '/' . $this->currentImage->getFilename());
+        // Desktop
+        $desktopUpdate = false;
+        $imageObj = ImageUtility::loadImage($this->currentImage->getFilename());
         if ($imageForm->getCropTop() || $imageForm->getCropBottom() || $imageForm->getCropLeft() || $imageForm->getCropRight()) {
+            $desktopUpdate = true;
             $imageObj = ImageUtility::crop($imageObj, $imageForm->getCropTop(), $imageForm->getCropBottom(), $imageForm->getCropLeft(), $imageForm->getCropRight());
         }
+        if ($imageForm->getCropVertical()) {
+            $desktopUpdate = true;
+            $imageObj = ImageUtility::crop($imageObj, $imageForm->getCropVertical() / 2, $imageForm->getCropVertical() / 2, null, null);
+        }
+        if ($imageForm->getCropHorizontal()) {
+            $desktopUpdate = true;
+            $imageObj = ImageUtility::crop($imageObj, null, null,$imageForm->getCropHorizontal() / 2, $imageForm->getCropHorizontal() / 2);
+        }
         if ($imageForm->getNewWidth()) {
+            $desktopUpdate = true;
             $imageObj = ImageUtility::scaleX($imageObj, $imageForm->getNewWidth());
         } else if ($imageForm->getNewHeight()) {
+            $desktopUpdate = true;
             $imageObj = ImageUtility::scaleY($imageObj, $imageForm->getNewHeight());
         }
-        ImageUtility::saveImageAsWebp($imageObj, $this->currentImage->getFilename());
+        if ($desktopUpdate) {
+            ImageUtility::saveImageAsWebp($imageObj, $this->currentImage->getFilename());
+        }
+
+        // Mobile
+        if (!ImageUtility::exists($this->currentImage->getMobileFilename())) {
+            return;
+        }
+        $mobileUpdate = false;
+        $imageMobileObj = ImageUtility::loadImage($this->currentImage->getMobileFilename());
+        if ($imageForm->getCropMobileTop() || $imageForm->getCropMobileBottom() || $imageForm->getCropMobileLeft() || $imageForm->getCropMobileRight()) {
+            $mobileUpdate = true;
+            $imageMobileObj = ImageUtility::crop($imageMobileObj, $imageForm->getCropMobileTop(), $imageForm->getCropMobileBottom(), $imageForm->getCropMobileLeft(), $imageForm->getCropMobileRight());
+        }
+        if ($imageForm->getCropMobileVertical()) {
+            $mobileUpdate = true;
+            $imageMobileObj = ImageUtility::crop($imageMobileObj, $imageForm->getCropMobileVertical() / 2, $imageForm->getCropMobileVertical() / 2, null, null);
+        }
+        if ($imageForm->getCropMobileHorizontal()) {
+            $mobileUpdate = true;
+            $imageMobileObj = ImageUtility::crop($imageMobileObj, null, null,$imageForm->getCropMobileHorizontal() / 2, $imageForm->getCropMobileHorizontal() / 2);
+        }
+        if ($imageForm->getNewMobileWidth()) {
+            $mobileUpdate = true;
+            $imageMobileObj = ImageUtility::scaleX($imageMobileObj, $imageForm->getNewMobileWidth());
+        } else if ($imageForm->getNewMobileHeight()) {
+            $mobileUpdate = true;
+            $imageMobileObj = ImageUtility::scaleY($imageMobileObj, $imageForm->getNewMobileHeight());
+        }
+        if ($mobileUpdate) {
+            ImageUtility::saveImageAsWebp($imageMobileObj, $this->currentImage->getMobileFilename());
+        }
+    }
+
+    private function createMobileVersionIfNotExists(): void {
+        if ($this->currentImage->getFilename() && !ImageUtility::exists($this->currentImage->getMobileFilename())) {
+            $imageObj = ImageUtility::loadImage($this->currentImage->getFilename());
+            ImageUtility::saveImageAsWebp($imageObj, $this->currentImage->getMobileFilename());
+        }
     }
 
     private function getNewImageFilename(): string {
@@ -212,7 +265,8 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function deletePreviousImage(): void {
-        FileUtility::deleteImage($this->currentImage, UPLOAD_DIR);
+        ImageUtility::delete($this->currentImage->getFilename());
+        ImageUtility::delete($this->currentImage->getMobileFilename());
     }
 
     private function getImageIdFromPostRequest(): ?int {

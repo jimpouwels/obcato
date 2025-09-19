@@ -72,6 +72,11 @@ class Image extends Entity {
         return BlackBoard::getImageBaseUrl() . "/$id";
     }
 
+    public function getMobileUrl(): string {
+        $id = $this->getId();
+        return BlackBoard::getImageBaseUrl() . "/$id?mobile=true";
+    }
+
     public function getThumbFileName(): ?string {
         return $this->thumbnailFilename;
     }
@@ -99,6 +104,13 @@ class Image extends Entity {
 
     public function getFilename(): ?string {
         return $this->filename;
+    }
+
+    public function getMobileFilename(): ?string {
+        if ($this->getFilename()) {
+            return $this->getFilenameWithoutExtension() . '-mobile.' . $this->getExtension();
+        }
+        return null;
     }
 
     public function setFilename(?string $filename): void {

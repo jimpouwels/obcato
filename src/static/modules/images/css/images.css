@@ -81,3 +81,7 @@
 .image_label_selector {
     margin-left: 350px;
 }
+
+.image_editor_wrapper .admin_label_wrapper {
+    width: 30%;
+}

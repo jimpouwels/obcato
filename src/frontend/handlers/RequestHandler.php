@@ -91,7 +91,11 @@ class RequestHandler {
         if (!$image) {
             $this->render404Page();
         }
-        $imageFilepath = UPLOAD_DIR . "/" . $image->getFilename();
+        if (isset($_GET["mobile"]) && $_GET["mobile"] == "true") {
+            $imageFilepath = UPLOAD_DIR . "/" . $image->getMobileFilename();
+        } else {
+            $imageFilepath = UPLOAD_DIR . "/" . $image->getFilename();
+        }
         if ($image->isPublished()) {
             header("Content-Type: image/webp");
             header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);

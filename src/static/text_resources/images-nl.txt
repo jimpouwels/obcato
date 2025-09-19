@@ -36,6 +36,8 @@ image_editor_crop_top: Bijsnijden aan bovenkant
 image_editor_crop_bottom: Bijsnijden aan onderkant
 image_editor_crop_left: Bijsnijden aan linkerkant
 image_editor_crop_right: Bijsnijden aan rechterkant
+image_editor_crop_vertical_center: Verticaal evenredig bijsnijden
+image_editor_crop_horizontal_center: Horizontaal evenredig bijsnijden
 image_crop_cannot_be_negative: Je kunt geen negatief getal bijsnijden
 image_crop_cannot_be_bigger_than_height: Je kunt niet meer bijsnijden dan de hoogte van de afbeelding
 image_crop_cannot_be_bigger_than_width: Je kunt niet meer bijsnijden dan de breedte van de afbeelding
