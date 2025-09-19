@@ -92,6 +92,7 @@ class ArticleVisual extends FrontendVisual {
             $imageData["title"] = $image->getTitle();
             $imageData["alt_text"] = $image->getAltText();
             $imageData["url"] = $this->getLinkHelper()->createImageUrl($image);
+            $imageData["url_mobile"] = $this->getLinkHelper()->createMobileImageUrl($image);
             $imageData["location"] = $image->getLocation();
         }
         return $imageData;

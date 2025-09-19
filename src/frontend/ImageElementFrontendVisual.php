@@ -27,6 +27,7 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         $data["width"] = $this->getElement()->getWidth();
         $data["height"] = $this->getElement()->getHeight();
         $data["image_url"] = $this->createImageUrl();
+        $data["image_url_mobile"] = $this->createMobileImageUrl();
         $data["extension"] = $this->getExtension();
 
         $linkData = array();
@@ -48,6 +49,10 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
 
     private function createImageUrl(): string {
         return $this->getElement()->getUrl() ?: $this->getLinkHelper()->createImageUrl($this->getElement()->getImage());
+    }
+
+    private function createMobileImageUrl(): string {
+        return $this->getElement()->getUrl() ?: $this->getLinkHelper()->createMobileImageUrl($this->getElement()->getImage());
     }
 
     private function getExtension(): string {

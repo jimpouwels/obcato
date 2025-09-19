@@ -64,6 +64,13 @@ class LinkHelper
         return $this->createPageUrl($this->currentPage) . '?image=' . $image->getId();
     }
 
+    public function createMobileImageUrl(?Image $image): string {
+        if (!$image) {
+            return "";
+        }
+        return $this->createImageUrl($image) . '&mobile=true';
+    }
+
     public function createArticleUrl(Article $article, bool $absolute = false): string {
         $targetPage = $this->pageService->getPageById($article->getTargetPageId());
         if (!$targetPage) {

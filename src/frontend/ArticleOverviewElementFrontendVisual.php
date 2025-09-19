@@ -77,6 +77,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $imageData["alt_text"] = $image->getAltText();
             $imageData["location"] = $image->getLocation();
             $imageData["url"] = $this->getLinkHelper()->createImageUrl($image);
+            $imageData["url_mobile"] = $this->getLinkHelper()->createMobileImageUrl($image);
         }
         return $imageData;
     }

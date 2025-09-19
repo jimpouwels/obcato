@@ -42,6 +42,7 @@ image_editor_crop_horizontal_center: Horizontaal evenredig bijsnijden
 image_crop_cannot_be_negative: Je kunt geen negatief getal bijsnijden
 image_crop_cannot_be_bigger_than_height: Je kunt niet meer bijsnijden dan de hoogte van de afbeelding
 image_crop_cannot_be_bigger_than_width: Je kunt niet meer bijsnijden dan de breedte van de afbeelding
+image_mobile_copy_from_desktop: Kopiëer van desktop versie
 new_image_label_field_label: Nieuw label
 images_save_success_message: Afbeelding successvol opgeslagen
 images_save_failed_message: Afbeelding niet opgeslagen, verwerk de fouten

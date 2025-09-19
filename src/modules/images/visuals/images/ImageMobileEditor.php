@@ -57,7 +57,7 @@ class ImageMobileEditor extends Panel {
             $cropVerticalCenterField = new TextField("image_mobile_crop_vertical_center", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
             $cropHorizontalCenterField = new TextField("image_mobile_crop_horizontal_center", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
             $url = $this->currentImage->getMobileUrl();
-            $resetButton = new Button("image_mobile_reset", "Reset", null);
+            $resetButton = new Button("image_mobile_reset", "image_mobile_copy_from_desktop", null);
         }
         $data->assignVisual("size_field", $sizeField);
         $data->assignVisual("new_width_field", $newWidthField);
