@@ -205,12 +205,7 @@ class ImageRequestHandler extends HttpRequestHandler {
             $imageObj = imagecreatefrompng($uploadedFilePath);
         }
 
-        $width = imagesx($imageObj);
-        $height = imagesy($imageObj);
-
-        $webp = imagecreatetruecolor($width, $height);
-        imagecopy($webp, $imageObj,0,0,0,0, $width, $height);
-        imagewebp($webp, UPLOAD_DIR . "/" . $newFilename, 80);
+        imagewebp($imageObj, UPLOAD_DIR . "/" . $newFilename, 80);
 
         unlink($uploadedFilePath);
         $this->currentImage->setFilename($newFilename);
