@@ -9,6 +9,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\utilities\FileUtility;
+use Obcato\Core\utilities\ImageUtility;
 use const Obcato\Core\UPLOAD_DIR;
 
 class ImageRequestHandler extends HttpRequestHandler {
@@ -170,43 +171,15 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function resizeImageIfRequested(ImageForm $imageForm): void {
         $imageObj = imagecreatefromwebp(UPLOAD_DIR . '/' . $this->currentImage->getFilename());
-        $oldWidth = imagesx($imageObj);
-        $oldHeight = imagesy($imageObj);
-        $newWidth = $oldWidth;
-        $newHeight = $oldHeight;
         if ($imageForm->getCropTop() || $imageForm->getCropBottom() || $imageForm->getCropLeft() || $imageForm->getCropRight()) {
-            $x = 0;
-            $y = 0;
-            if ($imageForm->getCropTop()) {
-                $y = $imageForm->getCropTop();
-                $newHeight -= $imageForm->getCropTop();
-            }
-            if ($imageForm->getCropBottom()) {
-                $newHeight -= $imageForm->getCropBottom();
-            }
-            if ($imageForm->getCropLeft()) {
-                $x = $imageForm->getCropLeft();
-                $newWidth -= $imageForm->getCropLeft();
-            }
-            if ($imageForm->getCropRight()) {
-                $newWidth -= $imageForm->getCropRight();
-            }
-            $imageObj = imagecrop($imageObj, ['x' => $x, 'y' => $y, 'width' => $newWidth, 'height' => $newHeight]);
+            $imageObj = ImageUtility::crop($imageObj, $imageForm->getCropTop(), $imageForm->getCropBottom(), $imageForm->getCropLeft(), $imageForm->getCropRight());
         }
-        if ($imageForm->getNewWidth() && $imageForm->getNewWidth() != $newWidth) {
-            $oldWidth = $newWidth;
-            $newWidth = $imageForm->getNewWidth();
-            $ratio = $newWidth / $oldWidth;
-            $newHeight *= $ratio;
-            $imageObj = imagescale($imageObj, $newWidth, $newHeight);
-        } else if ($imageForm->getNewHeight() && $imageForm->getNewHeight() != $newHeight) {
-            $oldHeight = $newHeight;
-            $newHeight = $imageForm->getNewHeight();
-            $ratio = $newHeight / $oldHeight;
-            $newWidth *= $ratio;
-            $imageObj = imagescale($imageObj, $newWidth, $newHeight);
+        if ($imageForm->getNewWidth()) {
+            $imageObj = ImageUtility::scaleX($imageObj, $imageForm->getNewWidth());
+        } else if ($imageForm->getNewHeight()) {
+            $imageObj = ImageUtility::scaleY($imageObj, $imageForm->getNewHeight());
         }
-        imagewebp($imageObj, UPLOAD_DIR . "/" . $this->currentImage->getFilename(), 80);
+        ImageUtility::saveImageAsWebp($imageObj, $this->currentImage->getFilename());
     }
 
     private function getNewImageFilename(): string {

@@ -31,49 +31,51 @@ class ImageForm extends Form {
         $this->newImageLabel = $this->getFieldValue("new_image_label_" . $this->image->getId());
         $this->selectedLabels = $this->getSelectValue("select_labels_" . $this->image->getId());
 
-        $imageObj = imagecreatefromwebp(UPLOAD_DIR . "/" . $this->image->getFilename());
-        $imageWidth = imagesx($imageObj);
-        $imageHeight = imagesy($imageObj);
+        if ($this->image->getFilename()) {
+            $imageObj = imagecreatefromwebp(UPLOAD_DIR . "/" . $this->image->getFilename());
+            $imageWidth = imagesx($imageObj);
+            $imageHeight = imagesy($imageObj);
 
-        $this->newWidth = $this->getNumber("image_new_width");
-        $this->newHeight = $this->getNumber("image_new_height");
+            $this->newWidth = $this->getNumber("image_new_width");
+            $this->newHeight = $this->getNumber("image_new_height");
 
-        $resultWidth = $imageWidth;
-        $resultHeight = $imageHeight;
-        if ($this->newWidth) {
-            $resultWidth = $this->newWidth;
-        }
-        if ($this->newHeight) {
-            $resultHeight = $this->newHeight;
-        }
+            $resultWidth = $imageWidth;
+            $resultHeight = $imageHeight;
+            if ($this->newWidth) {
+                $resultWidth = $this->newWidth;
+            }
+            if ($this->newHeight) {
+                $resultHeight = $this->newHeight;
+            }
 
-        if ($this->newWidth > $imageWidth) {
-            $this->raiseError('image_new_width', 'image_resize_loses_precision');
-        }
-        if ($this->newHeight > $imageHeight) {
-            $this->raiseError('image_new_height', 'image_resize_loses_precision');
-        }
-        $this->cropTop = $this->getNumber("image_crop_top");
-        $this->cropBottom = $this->getNumber("image_crop_bottom");
-        $this->cropLeft = $this->getNumber("image_crop_left");
-        $this->cropRight = $this->getNumber("image_crop_right");
-        if ($this->cropTop < 0) {
-            $this->raiseError('image_crop_top', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropBottom < 0) {
-            $this->raiseError('image_crop_bottom', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropLeft < 0) {
-            $this->raiseError('image_crop_left', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropRight < 0) {
-            $this->raiseError('image_crop_right', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropTop + $this->cropBottom > $resultHeight) {
-            $this->raiseError('image_crop_top', 'image_crop_cannot_be_bigger_than_height');
-        }
-        if ($this->cropLeft + $this->cropRight > $resultWidth) {
-            $this->raiseError('image_crop_left', 'image_crop_cannot_be_bigger_than_width');
+            if ($this->newWidth > $imageWidth) {
+                $this->raiseError('image_new_width', 'image_resize_loses_precision');
+            }
+            if ($this->newHeight > $imageHeight) {
+                $this->raiseError('image_new_height', 'image_resize_loses_precision');
+            }
+            $this->cropTop = $this->getNumber("image_crop_top");
+            $this->cropBottom = $this->getNumber("image_crop_bottom");
+            $this->cropLeft = $this->getNumber("image_crop_left");
+            $this->cropRight = $this->getNumber("image_crop_right");
+            if ($this->cropTop < 0) {
+                $this->raiseError('image_crop_top', 'image_crop_cannot_be_negative');
+            }
+            if ($this->cropBottom < 0) {
+                $this->raiseError('image_crop_bottom', 'image_crop_cannot_be_negative');
+            }
+            if ($this->cropLeft < 0) {
+                $this->raiseError('image_crop_left', 'image_crop_cannot_be_negative');
+            }
+            if ($this->cropRight < 0) {
+                $this->raiseError('image_crop_right', 'image_crop_cannot_be_negative');
+            }
+            if ($this->cropTop + $this->cropBottom > $resultHeight) {
+                $this->raiseError('image_crop_top', 'image_crop_cannot_be_bigger_than_height');
+            }
+            if ($this->cropLeft + $this->cropRight > $resultWidth) {
+                $this->raiseError('image_crop_left', 'image_crop_cannot_be_bigger_than_width');
+            }
         }
         if ($this->hasErrors()) {
             throw new FormException();
