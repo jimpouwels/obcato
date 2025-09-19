@@ -19,6 +19,7 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\utilities\FileUtility;
+use Obcato\Core\utilities\ImageUtility;
 use const Obcato\Core\UPLOAD_DIR;
 
 class RequestHandler {
@@ -92,6 +93,10 @@ class RequestHandler {
             $this->render404Page();
         }
         if (isset($_GET["mobile"]) && $_GET["mobile"] == "true") {
+            if (!ImageUtility::exists($image->getMobileFilename())) {
+                $mobileImage = ImageUtility::loadImage($image->getFilename());
+                ImageUtility::saveImageAsWebp(ImageUtility::scaleX($mobileImage, 768), $image->getMobileFilename());
+            }
             $imageFilepath = UPLOAD_DIR . "/" . $image->getMobileFilename();
         } else {
             $imageFilepath = UPLOAD_DIR . "/" . $image->getFilename();
