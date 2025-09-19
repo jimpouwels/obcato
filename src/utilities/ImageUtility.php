@@ -49,6 +49,8 @@ class ImageUtility {
     }
 
     public static function delete(?string $filename) {
-        unlink(UPLOAD_DIR . "/" . $filename);
+        if ($filename) {
+            unlink(UPLOAD_DIR . "/" . $filename);
+        }
     }
 }
