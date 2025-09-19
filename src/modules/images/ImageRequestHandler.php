@@ -32,7 +32,9 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     public function handlePost(): void {
         $this->currentImage = $this->imageDao->getImage($this->getImageIdFromPostRequest());
-        if ($this->isUpdateImageAction()) {
+        if ($this->isResetMobileImageAction()) {
+           $this->resetMobileImage();
+        } else if ($this->isUpdateImageAction()) {
             $this->updateImage();
         } else if ($this->isDeleteImageAction()) {
             $this->deleteImage();
@@ -57,6 +59,13 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     public function getCurrentSearchLabelFromGetRequest(): ?string {
         return $this->getQueryStringValueFromGetRequest(self::$LABEL_SEARCH_QUERYSTRING_KEY);
+    }
+
+    private function resetMobileImage(): void {
+        if ($this->currentImage->getFilename()) {
+            $img = ImageUtility::loadImage($this->currentImage->getFilename());
+            ImageUtility::saveImageAsWebp($img, $this->currentImage->getMobileFilename());
+        }
     }
 
     private function updateImage(): void {
@@ -256,6 +265,8 @@ class ImageRequestHandler extends HttpRequestHandler {
             $imageObj = imagecreatefromgif($uploadedFilePath);
         } else if (str_ends_with($_FILES["image_file"]["name"], "png")) {
             $imageObj = imagecreatefrompng($uploadedFilePath);
+        } else if (str_ends_with($_FILES["image_file"]["name"], "webp")) {
+            $imageObj = imagecreatefromwebp($uploadedFilePath);
         }
 
         imagewebp($imageObj, UPLOAD_DIR . "/" . $newFilename, 80);
@@ -291,6 +302,10 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function isUpdateImageAction(): bool {
         return $this->isAction("update_image") && isset($_POST["image_id"]);
+    }
+
+    private function isResetMobileImageAction(): bool {
+        return $this->isAction("reset_mobile_image") && isset($_POST["image_id"]);
     }
 
     private function isAction(string $name): bool {

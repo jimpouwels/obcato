@@ -13,4 +13,10 @@
     <div style="width: fit-content; float: right">
         <img title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px;"/ />
     </div>
+    {if isset($reset_button)}
+        <div style="clear: both">
+            {$reset_button}
+        </div>
+    {/if}
+
 </div>

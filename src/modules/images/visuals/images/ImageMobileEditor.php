@@ -5,6 +5,7 @@ namespace Obcato\Core\modules\images\visuals\images;
 use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\utilities\ImageUtility;
 use Obcato\Core\view\TemplateData;
+use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\ReadonlyTextField;
 use Obcato\Core\view\views\SingleCheckbox;
@@ -43,6 +44,7 @@ class ImageMobileEditor extends Panel {
         $cropVerticalCenterField = null;
         $cropHorizontalCenterField = null;
         $url = null;
+        $resetButton = null;
         if (ImageUtility::exists($this->currentImage->getMobileFilename())) {
             $imageObj = ImageUtility::loadImage($this->currentImage->getMobileFilename());
             $sizeField = new ReadonlyTextField("image_mobile_size", $this->getTextResource("image_editor_size_label"), imagesx($imageObj) . ' x ' . imagesy($imageObj), false);
@@ -55,6 +57,7 @@ class ImageMobileEditor extends Panel {
             $cropVerticalCenterField = new TextField("image_mobile_crop_vertical_center", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
             $cropHorizontalCenterField = new TextField("image_mobile_crop_horizontal_center", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
             $url = $this->currentImage->getMobileUrl();
+            $resetButton = new Button("image_mobile_reset", "Reset", null);
         }
         $data->assignVisual("size_field", $sizeField);
         $data->assignVisual("new_width_field", $newWidthField);
@@ -67,5 +70,6 @@ class ImageMobileEditor extends Panel {
         $data->assignVisual("crop_horizontal_center_field", $cropHorizontalCenterField);
         $data->assign("url", $url);
         $data->assign("title", $this->currentImage->getTitle());
+        $data->assignVisual("reset_button", $resetButton);
     }
 }

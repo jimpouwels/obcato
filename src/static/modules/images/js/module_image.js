@@ -12,6 +12,11 @@ $(document).ready(function () {
         $('#image-editor-form').submit();
     });
 
+    $('#image_mobile_reset').click(function () {
+        $('#action').attr('value', 'reset_mobile_image');
+        $('#image-editor-form').submit();
+    });
+
     // delete image button
     $('#delete_image').click(function () {
         var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");

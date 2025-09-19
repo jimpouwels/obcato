@@ -126,6 +126,9 @@ class ImageForm extends Form {
     }
 
     private function validateDesktopEditorFields(): void {
+        if (!ImageUtility::exists($this->image->getFilename())) {
+            return;
+        }
         $imageObj = ImageUtility::loadImage($this->image->getFilename());
         $imageWidth = imagesx($imageObj);
         $imageHeight = imagesy($imageObj);
