@@ -41,7 +41,10 @@ class ImageUtility {
         return imagecreatefromwebp(UPLOAD_DIR . "/" . $filename);
     }
 
-    public static function exists(string $filename): bool {
+    public static function exists(?string $filename): bool {
+        if (!$filename) {
+            return false;
+        }
         return file_exists(UPLOAD_DIR . "/" . $filename);
     }
 

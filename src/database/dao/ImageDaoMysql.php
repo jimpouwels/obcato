@@ -98,6 +98,7 @@ class ImageDaoMysql implements ImageDao {
             $statement->where("images", "file_name", WhereType::Like, $filename);
         }
         $statement->orderBy("images", "created_at");
+        $statement->limit(500);
         $result = $statement->execute($this->mysqlConnector);
         $images = array();
         while ($row = $result->fetch_assoc()) {

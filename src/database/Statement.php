@@ -8,6 +8,7 @@ abstract class Statement {
     private array $fixedWhereClauses = array();
     private ?OrderBy $orderBy = null;
     private ?Join $join = null;
+    private ?int $limit = null;
 
     public function where(string $table, string $column, WhereType $type, string|int $match, Prepared $prepared = Prepared::Yes): void {
         if (!isset($this->whereClauses[$table])) {
@@ -49,11 +50,18 @@ abstract class Statement {
         if ($this->orderBy) {
             $query .= " " . $this->orderBy->toString();
         }
+        if ($this->limit) {
+            $query .= " LIMIT " . $this->limit;
+        }
         return $query;
     }
 
     public function orderBy(string $table, $column): void {
         $this->orderBy = new OrderBy($table, $column);
+    }
+
+    public function limit(int $value): void {
+        $this->limit = $value;
     }
 
     public function getBindString(): string {

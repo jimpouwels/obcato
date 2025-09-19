@@ -31,6 +31,7 @@
             <th>{$text_resources.images_list_created_at_column}</th>
             <th>{$text_resources.images_list_created_by_column}</th>
             <th>{$text_resources.images_list_published_column}</th>
+            <th>{$text_resources.images_list_has_mobile_version_column}</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +51,13 @@
                     <img alt="Depubliceren" src="/admin?file=/default/img/default_icons/red_flag.png" />
                     {/if}
                     </a>
+                </td>
+                <td>
+                    {if $search_result.has_mobile_version}
+                        <img src="/admin?file=/default/img/default_icons/green_flag.png" />
+                    {else}
+                        <img src="/admin?file=/default/img/default_icons/red_flag.png" />
+                    {/if}
                 </td>
             </tr>
         {/foreach}

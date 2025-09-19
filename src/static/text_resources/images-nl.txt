@@ -13,6 +13,7 @@ images_list_title_column: Titel
 images_list_created_at_column: Gecreëerd op
 images_list_created_by_column: Gecreëerd door
 images_list_published_column: Gepubliceerd
+images_list_has_mobile_version_column: Mobiele versie
 image_successfully_published: Afbeelding succesvol gepubliceerd
 image_successfully_depublished: Afbeelding succesvol gedepubliceerd
 

@@ -7,6 +7,7 @@ use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\modules\authorization\service\AuthorizationInteractor;
 use Obcato\Core\modules\authorization\service\AuthorizationService;
 use Obcato\Core\modules\images\ImageRequestHandler;
+use Obcato\Core\utilities\ImageUtility;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\InformationMessage;
 use Obcato\Core\view\views\Panel;
@@ -70,6 +71,7 @@ class ImageList extends Panel {
             $imageValue = array();
             $imageValue["id"] = $image->getId();
             $imageValue["title"] = $image->getTitle();
+            $imageValue["has_mobile_version"] = ImageUtility::exists($image->getMobileFilename());
             $imageValue["published"] = $image->isPublished();
             $imageValue["created_at"] = $image->getCreatedAt();
             $imageValue["thumb"] = $image->getThumbUrl();

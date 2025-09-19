@@ -13,6 +13,7 @@ images_list_title_column: Title
 images_list_created_at_column: Created at
 images_list_created_by_column: Created by
 images_list_published_column: Published
+images_list_has_mobile_version_column: Mobile version
 image_successfully_published: Image successfully published
 image_successfully_depublished: Image successfully depublished
 
