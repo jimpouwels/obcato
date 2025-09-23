@@ -20,6 +20,7 @@ class TemplateEngine {
         if (!self::$_instance) {
             $smarty = new Smarty();
             $smarty->registerPlugin("modifier", "strstr", "strstr");
+            $smarty->registerPlugin("modifier", "array_reverse", "array_reverse");
             $smarty->setTemplateDir(BACKEND_TEMPLATE_DIR);
             $smarty->setCompileDir(FRONTEND_TEMPLATE_DIR . "/compiled_templates");
             $smarty->setCacheDir(BACKEND_TEMPLATE_DIR . "/cache");

@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\frontend\handlers;
 
+use JetBrains\PhpStorm\NoReturn;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\SettingsDao;
@@ -18,13 +19,11 @@ use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\utilities\FileUtility;
 use Obcato\Core\utilities\ImageUtility;
 use const Obcato\Core\UPLOAD_DIR;
 
 class RequestHandler {
 
-    private static int $BROWSER_IMAGE_CACHE_IN_HOURS = 48;
     private FormRequestHandler $formRequestHandler;
     private ImageDao $imageDao;
     private SettingsDao $settingsDao;
@@ -122,10 +121,7 @@ class RequestHandler {
             $this->render404Page();
         }
         if ($article && $article->getTargetPageId() != $page->getId()) {
-            $pageUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->pageService->getPageById($article->getTargetPageId()));
-            $articleUrl = $this->friendlyUrlManager->getFriendlyUrlForElementHolder($article);
-            header("Location: $pageUrl$articleUrl");
-            exit();
+            $this->render404Page();
         }
         $website = new WebsiteVisual($page, $article);
         $html = $website->render();
@@ -133,6 +129,7 @@ class RequestHandler {
         echo $html;
     }
 
+    #[NoReturn]
     private function render404Page(): void {
         $page404 = $this->settings->getPage404();
         http_response_code(404);

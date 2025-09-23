@@ -104,7 +104,6 @@ class LinkHelper
     }
 
     public function createLinksInString(string $value, ElementHolder $elementHolder): string {
-        $value = $this->processMarkdownStyleLinks($value);
         $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
         foreach ($links as $link) {
             if ($this->containsLink($value, $link)) {
@@ -112,7 +111,7 @@ class LinkHelper
                 $value = $this->replaceLinkCodeTags($value, $link, $url);
             }
         }
-        return $value;
+        return $this->processMarkdownStyleLinks($value);
     }
 
     public function createUrlFromLink(Link $link): string {

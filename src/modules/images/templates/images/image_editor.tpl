@@ -10,9 +10,11 @@
         {$crop_vertical_center_field}
         {$crop_horizontal_center_field}
     </div>
-    <div style="width: fit-content; float: right">
-        <img title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px;"/ />
-    </div>
+    {if $url}
+        <div style="width: fit-content; float: right">
+            <img title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px;"/ />
+        </div>
+    {/if}
     {if isset($reset_button)}
         <div style="clear: both">
             {$reset_button}
