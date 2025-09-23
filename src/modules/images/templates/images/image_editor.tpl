@@ -14,6 +14,8 @@
         <div style="width: fit-content; float: right">
             <img title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px;"/ />
         </div>
+    {else}
+        <span><em>Geen afbeelding gevonden</em></span>
     {/if}
     {if isset($reset_button)}
         <div style="clear: both">
