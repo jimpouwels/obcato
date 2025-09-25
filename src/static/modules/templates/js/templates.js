@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function submitTemplateForm(action, form_id) {
-        let $actionField = $('#action');
+        let $actionField = $('#' + form_id + ' #action');
         if ($actionField.length == 0) {
             alert('Fout: Kan de actie niet bepalen');
         } else {
