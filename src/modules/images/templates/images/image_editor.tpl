@@ -15,7 +15,7 @@
             <img title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px;"/ />
         </div>
     {else}
-        <span><em>Geen afbeelding gevonden</em></span>
+        <span><em>{$text_resources.images_image_editor_no_image_found_yet_message}</em></span>
     {/if}
     {if isset($reset_button)}
         <div style="clear: both">

@@ -46,3 +46,4 @@ image_crop_cannot_be_bigger_than_width: The horizontal crop cannot be bigger tha
 new_image_label_field_label: New label
 images_save_success_message: Image successfully saved
 images_save_failed_message: Image not saved, process the errors
+images_image_editor_no_image_found_yet_message: No image uploaded yet
