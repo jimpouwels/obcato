@@ -29,7 +29,7 @@ class TableOfContentsElementMetadataProvider extends ElementMetadataProvider
 
     public function update(Element $element): void
     {
-        $query = "UPDATE table_of_contents_elements_metadata SET title = '" . $element->getTitle() . "'";
+        $query = "UPDATE table_of_contents_elements_metadata SET title = '" . $element->getTitle() . "' WHERE element_id = " . $element->getId();
         $this->mysqlConnector->executeQuery($query);
     }
 

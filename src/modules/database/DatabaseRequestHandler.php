@@ -24,7 +24,8 @@ class DatabaseRequestHandler extends HttpRequestHandler {
         try {
             $form = new QueryForm();
             $form->loadFields();
-            $queryRows = $this->mysqlConnector->executeQuery($form->getQuery());
+            $this->query = $form->getQuery();
+            $queryRows = $this->mysqlConnector->executeQuery($this->query);
             if ($queryRows && !is_bool($queryRows)) {
                 $this->queryResult = $queryRows;
                 $this->affectedRows = $this->mysqlConnector->getNumberOfAffectedRows();
