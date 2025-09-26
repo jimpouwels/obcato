@@ -53,7 +53,11 @@ class PhotoAlbumElement extends Element {
 
     public function getImages(): array {
         $image_dao = ImageDaoMysql::getInstance();
-        return $image_dao->searchImagesByLabels($this->labels);
+        $results = $image_dao->searchImagesByLabels($this->labels);
+        if ($this->getNumberOfResults()) {
+            return array_slice($results, 0, $this->getNumberOfResults());
+        }
+        return $results;
     }
 
     public function getStatics(): Visual {
