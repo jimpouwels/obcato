@@ -6,8 +6,11 @@ use Obcato\Core\view\TemplateData;
 
 class ImageLookup extends FormField {
 
-    public function __construct(string $name, ?string $labelResourceIdentifier, ?string $value, bool $mandatory, bool $linkable, ?string $className) {
-        parent::__construct($name, $value, $labelResourceIdentifier, $mandatory, $linkable, $className);
+    private ?string $contextId;
+
+    public function __construct(string $name, ?string $labelResourceIdentifier, ?string $value, ?string $contextId, ?string $className) {
+        parent::__construct($name, $value, $labelResourceIdentifier, false, false, $className);
+        $this->contextId = $contextId;
     }
 
     function getFormFieldTemplateFilename(): string {
@@ -18,7 +21,7 @@ class ImageLookup extends FormField {
         return 'image_lookup';
     }
 
-    function loadFormField(TemplateData $data) {
-
+    function loadFormField(TemplateData $data): void {
+        $data->assign('contextId', $this->contextId);
     }
 }

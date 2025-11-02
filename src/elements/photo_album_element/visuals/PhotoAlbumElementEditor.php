@@ -31,7 +31,7 @@ class PhotoAlbumElementEditor extends ElementVisual {
     public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField("element_" . $this->element->getId() . "_title", $this->getTextResource("photo_album_element_editor_title"), $this->element->getTitle(), false, true, null);
         $maxResultsField = new TextField("element_" . $this->element->getId() . "_number_of_results", $this->getTextResource("photo_album_element_editor_max_results"), $this->element->getNumberOfResults(), false, true, "number_of_results_field");
-        $imageLookupField = new ImageLookup("element_" . $this->element->getId() . "_image_search", $this->getTextResource("photo_album_element_editor_search_keyword"), "", false, false, null);
+        $imageLookupField = new ImageLookup("element_" . $this->element->getId() . "_image_search", $this->getTextResource("photo_album_element_editor_search_keyword"), "", $this->element->getId(), null);
         $labelSelectField = new ImageLabelSelector($this->element->getLabels(), $this->element->getId());
 
         $data->assign("element_id", $this->element->getId());

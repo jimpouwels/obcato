@@ -35,7 +35,7 @@ abstract class FormField extends Visual {
 
     abstract function getFieldType(): string;
 
-    abstract function loadFormField(TemplateData $data);
+    abstract function loadFormField(TemplateData $data): void;
 
     public function load(): void {
         $this->assign("error", $this->getErrorHtml($this->fieldName));

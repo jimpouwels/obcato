@@ -27,7 +27,7 @@
                 success: function(response) {
                     resultContainer.empty();
                     response.forEach(function(result) {
-                        resultContainer.append("<div class=\"image_lookup_result\" onclick=\"addImage('" + result.id + "')\"><div class=\"image_lookup_result_thumb\"><img src=\"" + result.url + "\" /></div><div class=\"image_lookup_result_details\"><p><strong>Titel: </strong>" + result.title + "</p><p><strong>AltText: </strong>" + result.alternative_text + "</p></div</div>")
+                        resultContainer.append("<div class=\"image_lookup_result\" onclick=\"addImage({$contextId}, '" + result.id + "');\"><div class=\"image_lookup_result_thumb\"><img src=\"" + result.url + "\" /></div><div class=\"image_lookup_result_details\"><p><strong>Titel: </strong>" + result.title + "</p><p><strong>AltText: </strong>" + result.alternative_text + "</p></div</div>")
                     })
                 },
                 error: function(xhr, status, error) {

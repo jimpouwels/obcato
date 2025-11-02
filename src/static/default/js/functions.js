@@ -270,7 +270,7 @@ function addImage(elementId, imageId) {
             'image': imageId
         }),
         success: function(response) {
-            updateSelectedImages();
+            updateSelectedImages(elementId);
         },
         error: function(xhr, status, error) {
             console.log(xhr, status, error);
@@ -304,7 +304,7 @@ function deleteImage(elementId, imageId) {
             'image': imageId
         }),
         success: function(response) {
-            updateSelectedImages();
+            updateSelectedImages(elementId);
         },
         error: function(xhr, status, error) {
             console.log(xhr, status, error);
