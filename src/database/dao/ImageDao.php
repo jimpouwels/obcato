@@ -16,7 +16,7 @@ interface ImageDao {
 
     public function searchImagesByLabels(array $labels): array;
 
-    public function searchImages(?string $keyword, ?string $filename, ?int $labelId): array;
+    public function searchImages(?string $keyword, ?string $filename, ?int $labelId, ?int $limit): array;
 
     public function createImage(): Image;
 

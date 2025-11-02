@@ -48,9 +48,10 @@ class ImageUtility {
         return file_exists(UPLOAD_DIR . "/" . $filename);
     }
 
-    public static function delete(?string $filename) {
-        if ($filename) {
-            unlink(UPLOAD_DIR . "/" . $filename);
+    public static function delete(?string $filename): void {
+        $filePath = UPLOAD_DIR . "/" . $filename;
+        if ($filename && file_exists($filePath)) {
+            unlink($filePath);
         }
     }
 }

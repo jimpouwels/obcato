@@ -11,8 +11,7 @@ class FrontendHelper {
         return false;
     }
 
-    public static function asPreviewUrl(?string $url): string
-    {
+    public static function asPreviewUrl(?string $url): string {
         return $url . "?mode=preview";
     }
 }

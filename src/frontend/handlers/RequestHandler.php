@@ -19,7 +19,9 @@ use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
+use Obcato\Core\rest\Router;
 use Obcato\Core\utilities\ImageUtility;
+use Obcato\Core\utilities\UrlHelper;
 use const Obcato\Core\UPLOAD_DIR;
 
 class RequestHandler {
@@ -43,9 +45,6 @@ class RequestHandler {
     }
 
     public function handleRequest(): void {
-        if (str_contains($_SERVER['HTTP_HOST'], "www.www")) {
-            $this->render404Page();
-        }
         if ($this->isSitemapRequest()) {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');
@@ -54,6 +53,9 @@ class RequestHandler {
             $robots = new RobotsVisual();
             header('Content-Type: text/plain');
             echo $robots->render();
+        } else if ($this->isRestRequest()) {
+            $router = new Router();
+            $router->route();
         } else if ($this->isImageRequest()) {
             $this->loadImage();
         } else {
@@ -82,8 +84,12 @@ class RequestHandler {
         return isset($_GET['robots']) && $_GET['robots'];
     }
 
+    private function isRestRequest(): bool {
+        return isset($_GET['rest']) && $_GET['rest'] == "true";
+    }
+
     private function isImageRequest(): bool {
-        return isset($_GET["image"]);
+        return str_starts_with($_SERVER['REQUEST_URI'], '/image/');
     }
 
     private function loadImage(): void {
@@ -108,7 +114,7 @@ class RequestHandler {
     }
 
     private function getImageFromRequest(): ?Image {
-        return $this->imageDao->getImage($_GET["image"]);
+        return $this->imageDao->getImage(intval(UrlHelper::splitIntoParts($_SERVER['REQUEST_URI'])[2]));
     }
 
     private function renderHomepage(): void {

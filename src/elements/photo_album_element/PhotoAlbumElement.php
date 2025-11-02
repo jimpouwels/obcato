@@ -18,6 +18,7 @@ use Obcato\Core\view\views\Visual;
 
 class PhotoAlbumElement extends Element {
     private array $labels;
+    private array $imageIds = array();
     private ?int $numberOfResults = null;
 
     public function __construct(int $scopeId) {
@@ -51,11 +52,35 @@ class PhotoAlbumElement extends Element {
         return $this->labels;
     }
 
+    public function addImage(int $imageId): void {
+        $this->imageIds[] = $imageId;
+    }
+
+    public function deleteImage(int $imageIdToDelete): void {
+        $this->imageIds = array_filter($this->imageIds, fn($imageId) => $imageId != $imageIdToDelete);
+    }
+
+    public function getImageIds(): array {
+        return $this->imageIds;
+    }
+
+    public function setImageIds(array $imageIds): void {
+        $this->imageIds = $imageIds;
+    }
+
     public function getImages(): array {
-        $image_dao = ImageDaoMysql::getInstance();
-        $results = $image_dao->searchImagesByLabels($this->labels);
+        $results = array();
+        $imageDao = ImageDaoMysql::getInstance();
+        if (count($this->labels) > 0) {
+            $results = $imageDao->searchImagesByLabels($this->labels);
+        }
+        if (count($this->imageIds) > 0) {
+            foreach ($this->imageIds as $imageId) {
+                $results[] = $imageDao->getImage($imageId);
+            }
+        }
         if ($this->getNumberOfResults()) {
-            return array_slice($results, 0, $this->getNumberOfResults());
+            $results = array_slice($results, 0, $this->getNumberOfResults());
         }
         return $results;
     }

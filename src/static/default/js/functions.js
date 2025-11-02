@@ -145,7 +145,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     // slides in the notification bar
     var slider = $("#notification-slider");
-    console.log(slider);
     var originalMarginTop = slider.css('margin-top');
     slider.animate({
         marginTop: "0"
@@ -238,7 +237,6 @@ function getScrollPosition(elementHolderId) {
     if (!scrollPos) {
         return 0;
     }
-    console.log(scrollPos.elementHolderId);
     if (scrollPos.elementHolderId == elementHolderId) {
         return scrollPos.pos;
     } else {

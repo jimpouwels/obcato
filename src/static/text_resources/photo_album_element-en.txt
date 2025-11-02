@@ -5,3 +5,4 @@ photo_album_element_scope_label: Photo Album Element
 # EDITOR
 photo_album_element_editor_title: Title
 photo_album_element_editor_max_results: Max number of results
+photo_album_element_editor_search_keyword: Search images

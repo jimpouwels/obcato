@@ -82,7 +82,7 @@ class ImageDaoMysql implements ImageDao {
         return $allImages;
     }
 
-    public function searchImages(?string $keyword, ?string $filename, ?int $labelId): array {
+    public function searchImages(?string $keyword, ?string $filename, ?int $labelId, ?int $limit = 500): array {
         $statement = new SelectStatement(true);
         $statement->from("images", explode(', ', str_replace("i.", "", self::$myAllColumns)));
 
@@ -98,7 +98,7 @@ class ImageDaoMysql implements ImageDao {
             $statement->where("images", "file_name", WhereType::Like, $filename);
         }
         $statement->orderBy("images", "created_at");
-        $statement->limit(500);
+        $statement->limit($limit);
         $result = $statement->execute($this->mysqlConnector);
         $images = array();
         while ($row = $result->fetch_assoc()) {

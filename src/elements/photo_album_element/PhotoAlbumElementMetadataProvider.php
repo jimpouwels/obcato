@@ -16,28 +16,25 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
     private ImageDao $imageDao;
     private Element $element;
 
-    public function __construct(Element $element)
-    {
+    public function __construct(Element $element) {
         parent::__construct($element);
         $this->element = $element;
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
-    public function getTableName(): string
-    {
+    public function getTableName(): string {
         return "photo_album_elements_metadata";
     }
 
-    public function constructMetaData(array $record, $element): void
-    {
+    public function constructMetaData(array $record, $element): void {
         $element->setTitle($record['title']);
         $element->setNumberOfResults($record['number_of_results']);
         $element->setLabels($this->getLabels());
+        $element->setImageIds($this->getImageIds($element));
     }
 
-    public function update(Element $element): void
-    {
+    public function update(Element $element): void {
         $query = "UPDATE photo_album_elements_metadata SET title = ?, ";
         if (!$element->getNumberOfResults()) {
             $query = $query . "number_of_results = NULL ";
@@ -51,10 +48,10 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
 
         $this->mysqlConnector->executeStatement($statement);
         $this->addLabels();
+        $this->addImageIdsIfNotExists($element);
     }
 
-    public function insert(Element $element): void
-    {
+    public function insert(Element $element): void {
         $statement = null;
         $query = "INSERT INTO photo_album_elements_metadata (title, element_id, number_of_results) VALUES
                     (?, ?, NULL)";
@@ -66,8 +63,7 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
         $this->addLabels();
     }
 
-    private function getLabels(): array
-    {
+    private function getLabels(): array {
         $query = "SELECT * FROM photo_album_element_labels WHERE element_id = " . $this->element->getId();
         $result = $this->mysqlConnector->executeQuery($query);
         $labels = array();
@@ -77,30 +73,67 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
         return $labels;
     }
 
-    private function addLabels(): void
-    {
-        $existing_labels = $this->getLabels();
-        foreach ($existing_labels as $existing_label) {
-            if (!in_array($existing_label, $this->element->getLabels()))
-                $this->removeLabel($existing_label);
+    private function addLabels(): void {
+        $existingLabels = $this->getLabels();
+        foreach ($existingLabels as $existingLabel) {
+            if (!in_array($existingLabel, $this->element->getLabels()))
+                $this->removeLabel($existingLabel);
         }
         foreach ($this->element->getLabels() as $label) {
-            if (!in_array($label, $existing_labels)) {
+            if (!in_array($label, $existingLabels)) {
                 $statement = $this->mysqlConnector->prepareStatement("INSERT INTO photo_album_element_labels (element_id, label_id) VALUES (?, ?)");
-                $label_id = $label->getId();
-                $element_id = $this->element->getId();
-                $statement->bind_param('ii', $element_id, $label_id);
+                $labelId = $label->getId();
+                $elementId = $this->element->getId();
+                $statement->bind_param('ii', $elementId, $labelId);
                 $this->mysqlConnector->executeStatement($statement);
             }
         }
     }
 
-    private function removeLabel(ImageLabel $label): void
-    {
+    private function removeLabel(ImageLabel $label): void {
         $statement = $this->mysqlConnector->prepareStatement("DELETE FROM photo_album_element_labels WHERE element_id = ? AND label_id = ?");
-        $element_id = $this->element->getId();
-        $label_id = $label->getId();
-        $statement->bind_param('ii', $element_id, $label_id);
+        $elementId = $this->element->getId();
+        $labelId = $label->getId();
+        $statement->bind_param('ii', $elementId, $labelId);
+        $this->mysqlConnector->executeStatement($statement);
+    }
+
+    private function getImageIds(Element $element): array {
+        $query = "SELECT * FROM photo_album_element_images WHERE photo_album_element_id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $elementId = $element->getId();
+        $statement->bind_param('i', $elementId);
+        $result = $this->mysqlConnector->executeStatement($statement);
+        $imageIds = array();
+        while ($row = $result->fetch_assoc()) {
+            $imageIds[] = $row['image_id'];
+        }
+        return $imageIds;
+    }
+
+    private function addImageIdsIfNotExists(Element $element): void {
+        $existingImageIds = $this->getImageIds($element);
+        foreach ($existingImageIds as $existingImageId) {
+            if (!in_array($existingImageId, $this->element->getImageIds()))
+                $this->removeImageId($element, $existingImageId);
+        }
+
+        $elementId = $element->getId();
+        foreach ($this->element->getImageIds() as $imageId) {
+            if (!in_array($imageId, $existingImageIds)) {
+                $query = "INSERT INTO photo_album_element_images (image_id, photo_album_element_id) VALUES (?, ?)";
+                $statement = $this->mysqlConnector->prepareStatement($query);
+                $statement->bind_param('ii', $imageId, $elementId);
+                $this->mysqlConnector->executeStatement($statement);
+            }
+        }
+    }
+
+    private function removeImageId(Element $element, int $imageId): void {
+        $query = "DELETE FROM photo_album_element_images WHERE photo_album_element_id = ? AND image_id = ?";
+        $statement = $this->mysqlConnector->prepareStatement($query);
+        $elementId = $element->getId();
+        $statement->bind_param('ii', $elementId, $imageId);
         $this->mysqlConnector->executeStatement($statement);
     }
 }

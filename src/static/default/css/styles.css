@@ -875,3 +875,21 @@ h1 {
 .content_left_column li {
     line-height: 20px;
 }
+
+/** IMAGE LOOKUP */
+.image_lookup_result {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.image_lookup_result:hover {
+    background-color: lightgray;
+}
+
+.image_lookup_result p {
+    padding: 0;
+    margin: 0;
+    line-height: 15px;
+}

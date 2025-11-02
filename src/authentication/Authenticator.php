@@ -11,7 +11,7 @@ use const Obcato\Core\SESSION_TIMEOUT;
 
 class Authenticator {
 
-    public static function isAuthenticated(): void {
+    public static function isAuthenticated(bool $redirect = true): bool {
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -22,10 +22,13 @@ class Authenticator {
             $user = $authorizationDao->getUser($_SESSION['username']);
             if ($user->getUuid() == $_SESSION['uuid']) {
                 $_SESSION['last_activity'] = time();
-                return;
+                return true;
             }
         }
-        self::redirectToLoginPage();
+        if ($redirect) {
+            self::redirectToLoginPage();
+        }
+        return false;
     }
 
     public static function logIn(string $username, string $password): bool {

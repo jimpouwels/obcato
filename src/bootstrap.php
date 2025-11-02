@@ -6,6 +6,7 @@ use Obcato\Core\authentication\Authenticator;
 use Obcato\Core\Backend;
 use Obcato\Core\frontend\handlers\RequestHandler;
 use Obcato\Core\request_handlers\StaticsRequestHandler;
+use Obcato\Core\rest\Router;
 
 const PUBLIC_DIR = PUBLIC_ROOT;
 const PRIVATE_DIR = PRIVATE_ROOT;
@@ -27,6 +28,15 @@ if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/update')) {
     runSystemUpdate();
 } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/login')) {
     runLogin();
+} else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/api')) {
+    if (!Authenticator::isAuthenticated(false)) {
+        header("HTTP/1.1 401 Unauthorized");
+        header("Content-type: application/json; charset=utf-8");
+        echo json_encode(array("error" => "401 Unauthorized"));
+        exit;
+    }
+    $router = new Router();
+    $router->route();
 } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin') && StaticsRequestHandler::isFileRequest()) {
     $staticsRequestHandler = new StaticsRequestHandler();
     if (!$staticsRequestHandler->isPublicFileRequest()) {
@@ -86,7 +96,7 @@ function writeHtaccessFileIfNotExists(): void {
         "RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
         "RewriteCond %{REQUEST_URI} !^/index.php\n" .
         "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
-        "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
+        "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n" .
         "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
         "RewriteRule ^.*$ index.php [NC,L]");
 }

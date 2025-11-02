@@ -61,7 +61,7 @@ class LinkHelper
         if (!$image) {
             return "";
         }
-        return $this->createPageUrl($this->currentPage) . '?image=' . $image->getId();
+        return "/image/" . $image->getId();
     }
 
     public function createMobileImageUrl(?Image $image): string {
