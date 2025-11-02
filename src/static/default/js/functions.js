@@ -259,3 +259,55 @@ $(document).ready(function () {
         }, 100));
     });
 });
+
+// Photo album element selected images
+function addImage(elementId, imageId) {
+    $.ajax({
+        url: '/admin/api/photo_album_element/add_image',
+        type: 'PUT',
+        data: JSON.stringify({
+            'id': elementId,
+            'image': imageId
+        }),
+        success: function(response) {
+            updateSelectedImages();
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+}
+
+function updateSelectedImages(elementId) {
+    let imagesContainer = $('#photo_album_element_' + elementId + '_selected_images');
+    $.ajax({
+        url: '/admin/api/photo_album_element/images?id=' + elementId,
+        type: 'GET',
+        success: function(response) {
+            imagesContainer.empty();
+            response.forEach(result => {
+                imagesContainer.append("<div class=\"photo_album_element_selected_image\"><div class=\"photo_album_element_selected_image_thumb\"><img src=\"" + result.url + "\" /></div><div class=\"photo_album_element_selected_image_details\"><p><strong>Titel: </strong>" + result.title + "</p><p><strong>AltText: </strong>" + result.alternative_text + "</p></div><div class\"photo_album_element_selected_image_delete\"><a href=\"#\" onclick=\"deleteImage(" + elementId + ", " + result.id + "); return false;\"><img src=\"/admin?file=/default/img/default_icons/delete_small.png\" /></a></div></div>");
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+}
+
+function deleteImage(elementId, imageId) {
+    $.ajax({
+        url: '/admin/api/photo_album_element/delete_image',
+        type: 'DELETE',
+        data: JSON.stringify({
+            'id': elementId,
+            'image': imageId
+        }),
+        success: function(response) {
+            updateSelectedImages();
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+}
