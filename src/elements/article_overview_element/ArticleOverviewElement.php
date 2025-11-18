@@ -107,7 +107,7 @@ class ArticleOverviewElement extends Element {
         return $this->siblingsOnly;
     }
 
-    public function getArticles(?int $exclude, ?int $currentArticleId): array {
+    public function getArticles(?int $exclude, ?int $currentArticleId, bool $published): array {
         $articleDao = ArticleDaoMysql::getInstance();
         $showTo = null;
         if ($this->showUntilToday != 1 && $this->showTo) {
@@ -118,9 +118,9 @@ class ArticleOverviewElement extends Element {
             $showFrom = DateUtility::mysqlDateToString($this->showFrom, '-');
         }
         $siblingsOnlyId = ($currentArticleId && $this->getSiblingsOnly()) ? $currentArticleId : null;
-        return $articleDao->searchPublishedArticles($showFrom,
+        return $articleDao->advancedSearchArticles($showFrom,
             $showTo, $this->orderBy, $this->getOrderType(), $this->terms,
-            $this->numberOfResults, $siblingsOnlyId, $exclude);
+            $this->numberOfResults, $siblingsOnlyId, $published, $exclude);
     }
 
     public function getStatics(): Visual {

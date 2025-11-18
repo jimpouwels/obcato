@@ -43,8 +43,8 @@ class ArticleDaoMock implements ArticleDao {
         return [];
     }
 
-    public function searchPublishedArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $exclude): array {
-        // TODO: Implement searchPublishedArticles() method.
+    public function advancedSearchArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $siblingsOnlyId, bool $published, ?int $exclude): array {
+        // TODO: Implement advancedSearchArticles() method.
         return [];
     }
 

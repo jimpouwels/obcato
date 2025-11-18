@@ -5,6 +5,7 @@ namespace Obcato\Core\frontend;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\elements\article_overview_element\ArticleOverviewElement;
+use Obcato\Core\frontend\helper\FrontendHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\service\ArticleInteractor;
 use Obcato\Core\modules\articles\service\ArticleService;
@@ -43,10 +44,13 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         if (!$this->getElement()->includeCurrentArticle()) {
             $exclude = $this->getArticle()?->getId();
         }
-        $articles = $this->getElement()->getArticles($exclude, $this->getArticle()?->getParentArticleId());
+        $publishedOnly = true;
+        if (FrontendHelper::isPreviewMode()) {
+            $publishedOnly = false;
+        }
+        $articles = $this->getElement()->getArticles($exclude, $this->getArticle()?->getParentArticleId(), $publishedOnly);
         $articlesData = array();
         foreach ($articles as $article) {
-            if (!$this->isPublished($article)) continue;
             $articleData = array();
             $articleData["id"] = $article->getId();
             $articleData["title"] = $article->getTitle();
