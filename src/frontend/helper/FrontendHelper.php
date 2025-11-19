@@ -2,6 +2,8 @@
 
 namespace Obcato\Core\frontend\helper;
 
+use Obcato\Core\utilities\UrlHelper;
+
 class FrontendHelper {
 
     static function isPreviewMode(): ?string {
@@ -12,6 +14,6 @@ class FrontendHelper {
     }
 
     public static function asPreviewUrl(?string $url): string {
-        return $url . "?mode=preview";
+        return UrlHelper::addQueryStringParameter($url, 'mode', 'preview');
     }
 }

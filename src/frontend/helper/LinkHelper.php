@@ -54,6 +54,9 @@ class LinkHelper
         } else {
             $url .= $friendlyUrl;
         }
+        if (FrontendHelper::isPreviewMode()) {
+            $url = FrontendHelper::asPreviewUrl($url);
+        }
         return $url;
     }
 
@@ -85,6 +88,9 @@ class LinkHelper
             $url .= UrlHelper::addQueryStringParameter($url, 'articleid', $article->getId());
         } else {
             $url .= $friendlyUrl;
+        }
+        if (FrontendHelper::isPreviewMode()) {
+            $url .= UrlHelper::addQueryStringParameter($url, 'mode', 'preview');
         }
         return $url;
     }
