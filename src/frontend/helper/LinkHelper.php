@@ -54,9 +54,6 @@ class LinkHelper
         } else {
             $url .= $friendlyUrl;
         }
-        if (FrontendHelper::isPreviewMode()) {
-            $url = FrontendHelper::asPreviewUrl($url);
-        }
         return $url;
     }
 
@@ -71,7 +68,7 @@ class LinkHelper
         if (!$image) {
             return "";
         }
-        return $this->createImageUrl($image) . '&mobile=true';
+        return $this->createImageUrl($image) . '?mobile=true';
     }
 
     public function createArticleUrl(Article $article, bool $absolute = false): string {
@@ -90,7 +87,7 @@ class LinkHelper
             $url .= $friendlyUrl;
         }
         if (FrontendHelper::isPreviewMode()) {
-            $url .= UrlHelper::addQueryStringParameter($url, 'mode', 'preview');
+            $url = FrontendHelper::asPreviewUrl($url);
         }
         return $url;
     }

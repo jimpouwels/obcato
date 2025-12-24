@@ -32,8 +32,7 @@ class ImageMobileEditor extends Panel {
     }
 
 
-    private function assignImageMetaDataFields(TemplateData $data): void
-    {
+    private function assignImageMetaDataFields(TemplateData $data): void {
         $sizeField = null;
         $newWidthField = null;
         $newHeightField = null;
