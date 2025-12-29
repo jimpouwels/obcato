@@ -11,7 +11,7 @@ use Obcato\Core\core\BlackBoard;
 abstract class FormHandler {
 
     private FriendlyUrlManager $friendlyUrlManager;
-    private array $_fields;
+    private array $fields;
     private WebFormHandlerInstance $webformHandlerInstance;
 
     public function __construct() {
@@ -38,11 +38,11 @@ abstract class FormHandler {
     }
 
     protected function getFilledInPropertyValue(string $property_name): string {
-        $property_value = $this->webformHandlerInstance->getProperty($property_name)->getValue();
-        foreach ($this->_fields as $field) {
-            $property_value = str_replace('${' . $field['name'] . '}', $field['value'], $property_value);
+        $propertyValue = $this->webformHandlerInstance->getProperty($property_name)->getValue();
+        foreach ($this->fields as $field) {
+            $propertyValue = str_replace('${' . $field['name'] . '}', $field['value'], $propertyValue);
         }
-        return $property_value;
+        return $propertyValue;
     }
 
 
@@ -51,7 +51,7 @@ abstract class FormHandler {
     }
 
     public function handlePost(WebFormHandlerInstance $webform_handler_instance, array $fields, Page $page, ?Article $article): void {
-        $this->_fields = $fields;
+        $this->fields = $fields;
         $this->webformHandlerInstance = $webform_handler_instance;
         $this->handle($fields, $page, $article);
     }

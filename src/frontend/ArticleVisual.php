@@ -104,7 +104,7 @@ class ArticleVisual extends FrontendVisual {
             $commentData = array();
             $commentData['id'] = htmlspecialchars($comment->getId());
             $commentData['name'] = htmlspecialchars($comment->getName());
-            $commentData['message'] = htmlspecialchars($comment->getMessage());
+            $commentData['message'] = nl2br(htmlspecialchars($comment->getMessage()));
             $commentData['created_at'] = $comment->getCreatedAt();
             $childComments = array();
             foreach ($this->articleService->getChildArticleComments($comment->getId()) as $child) {
@@ -112,7 +112,7 @@ class ArticleVisual extends FrontendVisual {
                 $childCommentData['id'] = htmlspecialchars($child->getId());
                 $childCommentData['created_at'] = $child->getCreatedAt();
                 $childCommentData['name'] = htmlspecialchars($child->getName());
-                $childCommentData['message'] = htmlspecialchars($child->getMessage());
+                $childCommentData['message'] = nl2br(htmlspecialchars($child->getMessage()));
                 $childComments[] = $childCommentData;
             }
             $commentData['children'] = $childComments;
