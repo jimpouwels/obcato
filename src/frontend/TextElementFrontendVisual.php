@@ -16,5 +16,6 @@ class TextElementFrontendVisual extends ElementFrontendVisual {
     public function loadElement(array &$data): void {
         $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
         $data["text"] = $this->toHtml($this->getElement()->getText(), $this->getElementHolder());
+        $data["text_wysiwyg"] = $this->getElement()->getText();
     }
 }

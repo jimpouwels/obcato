@@ -3,6 +3,7 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\frontend\handlers\FormStatus;
+use Obcato\Core\frontend\helper\FrontendHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\templates\model\Presentable;
@@ -33,8 +34,10 @@ class WebsiteVisual extends FrontendVisual {
         }
         $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_mobile_device", $isMobileUserAgent);
+        $this->assignGlobal("is_preview", FrontendHelper::isPreviewMode());
         $this->assignGlobal("base_url", $this->getLinkHelper()->createBaseUrl());
         $this->assignGlobal("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());
+        $this->assignGlobal("meta_description", $this->article ? $this->article->getDescription() : $this->getPage()->getDescription());
         $pageVisual = new PageVisual($this->getPage(), $this->article);
         $this->assign("html", $pageVisual->render());
     }
