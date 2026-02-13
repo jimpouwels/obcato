@@ -41,6 +41,7 @@ abstract class FormHandler {
         $propertyValue = $this->webformHandlerInstance->getProperty($property_name)->getValue();
         foreach ($this->fields as $field) {
             $propertyValue = str_replace('${' . $field['name'] . '}', $field['value'], $propertyValue);
+            $propertyValue = str_replace('${url}', $this->createBaseUrl() . $_SERVER['REQUEST_URI'], $propertyValue);
         }
         return $propertyValue;
     }
@@ -54,6 +55,12 @@ abstract class FormHandler {
         $this->fields = $fields;
         $this->webformHandlerInstance = $webform_handler_instance;
         $this->handle($fields, $page, $article);
+    }
+
+    private function createBaseUrl(): string {
+        $baseUrl = 'https://';
+        $baseUrl .= $_SERVER['HTTP_HOST'];
+        return $baseUrl;
     }
 
     abstract function handle(array $fields, Page $page, ?Article $article): void;
