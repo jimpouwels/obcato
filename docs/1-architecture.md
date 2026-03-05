@@ -1,25 +1,25 @@
-# Architecture Details
+# System Architecture
 
 ## Overview
-
-This document describes the architecture of the OBCATO project and provides insight into its structure and components.
+This document outlines the architecture of the PHP-based system, detailing the components, their interactions, and the overall design philosophy.
 
 ## Components
+1. **Frontend**
+   - Built with HTML, CSS, and JavaScript, serving as the user interface.
 
-1. **Frontend**: The user interface is built using React.js to provide a responsive and dynamic user experience.
-2. **Backend**: The backend is developed with Node.js and Express, designed to handle API requests and manage database interactions. 
-3. **Database**: A MongoDB database is utilized for storing user data and application state efficiently.
+2. **Backend**
+   - Written in PHP, handling business logic and data processing.
+   - Utilizes MVC (Model-View-Controller) architecture for better organization and separation of concerns.
 
-## Packagist Information
+3. **Database**
+   - MySQL is used for persistent data storage, with a schema designed to optimize queries and relationships.
+   
+## Data Flow Diagram
+1. User interacts with the frontend through the web browser.
+2. Frontend sends requests to the backend.
+3. Backend processes requests, interacts with the database as needed, and returns responses to the frontend.
 
-OBCATO integrates with Packagist for dependency management. This allows for seamless updates and versioning of libraries used throughout the application. The following packages are essential for our setup:
-- **laravel/framework**: Version 8.x provides the core structure for maintaining the web application framework.
-- **guzzlehttp/guzzle**: A great HTTP client for sending requests to external APIs.
-
-Additionally, we rely on the following packages for enhanced functionality:
-- **monolog/monolog**: For logging operations throughout the application.
-- **phpunit/phpunit**: A testing framework for ensuring the quality and stability of the project.
-
-## Conclusion
-
-The architecture of OBCATO is designed to be scalable and maintainable, allowing for future growth and integration as new technologies emerge. Continuous updates to the Packagist dependencies ensure that we are using the latest and most secure libraries to enhance our project.
+## Design Considerations
+- Scalability: The PHP backend is designed to handle increased load by separating services and optimizing SQL queries.
+- Security: Implement security best practices including prepared statements in SQL to prevent SQL injection attacks.
+- Maintainability: Adopting coding standards and best practices ensures code can be easily understood and modified by different developers.
