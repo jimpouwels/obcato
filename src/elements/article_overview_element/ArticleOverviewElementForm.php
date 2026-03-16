@@ -29,6 +29,7 @@ class ArticleOverviewElementForm extends ElementForm {
         $orderType = $this->getFieldValue('element_' . $elementId . '_order_type');
         $siblingsOnly = $this->getFieldValue('element_' . $elementId . '_siblings_only');
         $includeCurrentArticle = $this->getFieldValue('element_' . $elementId . '_include_current_article');
+        $randomArticles = $this->getFieldValue('element_' . $elementId . '_random_articles');
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
@@ -36,6 +37,7 @@ class ArticleOverviewElementForm extends ElementForm {
             $this->articleOverviewElement->setShowTo(DateUtility::stringMySqlDate($showTo));
             $this->articleOverviewElement->setShowFrom(DateUtility::stringMySqlDate($showFrom));
             $this->articleOverviewElement->setNumberOfResults($numberOfResults);
+            $this->articleOverviewElement->setRandomArticles($randomArticles);
             $this->articleOverviewElement->setOrderBy($orderBy);
             $this->articleOverviewElement->setOrderType($orderType);
             $this->articleOverviewElement->setSiblingsOnly($siblingsOnly);

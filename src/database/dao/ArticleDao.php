@@ -19,6 +19,8 @@ interface ArticleDao {
 
     public function searchArticles(string $keyword, ?int $termId): array;
 
+    public function getRandomArticles(?int $exclude, bool $published, int $numberOfResults, ?array $terms): array;
+
     public function advancedSearchArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $siblingsOnlyId, bool $published, ?int $exclude): array;
 
     public function updateArticle(Article $article): void;

@@ -100,6 +100,38 @@ class ArticleDaoMysql implements ArticleDao {
         return $articles;
     }
 
+    public function getRandomArticles(?int $exclude, bool $published, int $numberOfResults, ?array $terms): array {
+        $queryFrom = "element_holders e, articles a";
+        $queryWhere = " WHERE e.id = a.element_holder_id";
+        if ($published) {
+            $queryWhere = $queryWhere . " AND published = 1";
+        }
+        if ($exclude) {
+            $queryWhere .= " AND e.id != " . $exclude;
+        }
+        if ($terms && count($terms) > 0) {
+            $queryFrom = $queryFrom . ", articles_terms at";
+            $termWhere = "";
+            foreach ($terms as $term) {
+                if ($termWhere) {
+                    $termWhere .= ' OR ';
+                } else {
+                    $termWhere .= ' AND (';
+                }
+                $termWhere = $termWhere . "EXISTS(SELECT * FROM articles_terms at WHERE at.article_id = e.id AND at.term_id = " . $term->getId() . ")";
+            }
+            $queryWhere .= $termWhere . ')';
+        }
+        $query = "SELECT DISTINCT " . self::$myAllColumns . " FROM " . $queryFrom . " " . $queryWhere;
+        $query .= " ORDER BY RAND() LIMIT " . $numberOfResults;
+        $result = $this->mysqlConnector->executeQuery($query);
+        $articles = array();
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = Article::constructFromRecord($row);
+        }
+        return $articles;
+    }
+
     public function advancedSearchArticles(?string $fromDate, ?string $toDate, ?string $orderBy, ?string $orderType, ?array $terms, ?int $maxResults, ?int $siblingsOnlyId, bool $published, ?int $exclude = null): array {
         $queryWhere = " WHERE e.id = a.element_holder_id";
         if ($published) {

@@ -48,6 +48,8 @@ class ArticleOverviewElementEditor extends ElementVisual {
         $data->assign("siblings_only_field", $siblingsOnlyField->render());
         $includeCurrentArticleField = new SingleCheckbox("element_" . $this->element->getId() . "_include_current_article", "article_overview_element_editor_include_current_article", $this->element->includeCurrentArticle(), false, "");
         $data->assign("include_current_article_field", $includeCurrentArticleField->render());
+        $randomArticlesField = new SingleCheckbox("element_" . $this->element->getId() . "_random_articles", "article_overview_element_editor_random_articles", $this->element->isRandomArticles(), false, "");
+        $data->assign("random_articles_field", $randomArticlesField->render());
         $termSelectField = new TermSelector($this->element->getTerms(), $this->element->getId());
         $data->assign("term_select_field", $termSelectField->render());
     }

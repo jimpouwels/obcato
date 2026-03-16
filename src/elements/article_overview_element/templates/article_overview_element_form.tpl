@@ -2,6 +2,7 @@
     {$title_field}
     {$show_from_field}
     {$show_to_field}
+    {$random_articles_field}
     {$max_results_field}
     {$order_by_field}
     {$order_type_field}

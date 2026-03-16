@@ -24,6 +24,7 @@ class ArticleOverviewElement extends Element {
     private bool $showUntilToday = false;
     private ?string $orderBy = null;
     private ?string $orderType = null;
+    private bool $randomArticles = false;
     private array $terms;
     private ?int $numberOfResults = null;
     private bool $siblingsOnly = false;
@@ -107,8 +108,19 @@ class ArticleOverviewElement extends Element {
         return $this->siblingsOnly;
     }
 
+    public function isRandomArticles(): bool {
+        return $this->randomArticles;
+    }
+
+    public function setRandomArticles(bool $randomArticles): void {
+        $this->randomArticles = $randomArticles;
+    }
+
     public function getArticles(?int $exclude, ?int $currentArticleId, bool $published): array {
         $articleDao = ArticleDaoMysql::getInstance();
+        if ($this->isRandomArticles()) {
+            return $articleDao->getRandomArticles($exclude, $published, $this->numberOfResults, $this->terms);
+        }
         $showTo = null;
         if ($this->showUntilToday != 1 && $this->showTo) {
             $showTo = DateUtility::mysqlDateToString($this->showTo, '-');

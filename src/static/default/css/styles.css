@@ -569,6 +569,7 @@ h1 {
 .admin_form_field_v2 > .admin_label_wrapper {
     overflow: auto;
     float: left;
+    min-width: fit-content;
 }
 
 .admin_form_field_v2 > .admin_field_wrapper {
