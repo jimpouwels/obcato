@@ -14,7 +14,7 @@ class ReadonlyTextField extends FormField {
         return "form_readonly_textfield.tpl";
     }
 
-    public function loadFormField(TemplateData $data) {}
+    public function loadFormField(TemplateData $data): void {}
 
     public function getFieldType(): string {
         return 'readonly-textfield';

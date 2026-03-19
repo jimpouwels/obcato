@@ -26,13 +26,12 @@ class FileUtility {
     }
 
     public static function saveThumb(string $srcImage, string $directory, string $thumbFilename, int $thumbWidth, int $thumbHeight): void {
-        $imageObj = imagecreatefromwebp($directory . '/' . $srcImage);
-        $width = imagesx($imageObj);
-        $height = imagesy($imageObj);
-        $thumb = imagecreatetruecolor($width, $height);
-        imagecopy($thumb, $imageObj,0,0,0,0, $width, $height);
-        $thumbResized = imagescale($thumb, $thumbWidth, $thumbHeight);
-        imagewebp($thumbResized, $directory . "/" . $thumbFilename, 80);
+        $imageObj = new \Imagick();
+        $imageObj->readImage($directory . '/' . $srcImage);
+        $imageObj->scaleImage($thumbWidth, $thumbHeight);
+        $imageObj->setImageFormat('webp');
+        $imageObj->setImageCompressionQuality(80);
+        $imageObj->writeImage($directory . "/" . $thumbFilename);
     }
 
     /*

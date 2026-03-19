@@ -14,7 +14,7 @@ class TextArea extends FormField {
         return "form_textarea.tpl";
     }
 
-    public function loadFormField(TemplateData $data) {}
+    public function loadFormField(TemplateData $data): void {}
 
     public function getFieldType(): string {
         return 'textarea';

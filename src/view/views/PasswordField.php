@@ -14,7 +14,7 @@ class PasswordField extends FormField {
         return "form_password.tpl";
     }
 
-    public function loadFormField(TemplateData $data) {}
+    public function loadFormField(TemplateData $data): void {}
 
     public function getFieldType(): string {
         return 'password';

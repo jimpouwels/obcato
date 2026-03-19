@@ -44,7 +44,7 @@ class ImageDesktopEditor extends Panel {
         $url = null;
         if ($this->currentImage->getFilename()) {
             $imageObj = ImageUtility::loadImage($this->currentImage->getFilename());
-            $sizeField = new ReadonlyTextField("image_size", $this->getTextResource("image_editor_size_label"), imagesx($imageObj) . ' x ' . imagesy($imageObj), false);
+            $sizeField = new ReadonlyTextField("image_size", $this->getTextResource("image_editor_size_label"), $imageObj->getImageWidth() . ' x ' . $imageObj->getImageHeight(), false);
             $newWidthField = new TextField("image_new_width", $this->getTextResource('image_editor_new_width_label'), "", false, false, "");
             $newHeightField = new TextField("image_new_height", $this->getTextResource('image_editor_new_height_label'), "", false, false, "");
             $cropTopField = new TextField("image_crop_top", $this->getTextResource('image_editor_crop_top'), 0, false, false, "");

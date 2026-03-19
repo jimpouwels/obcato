@@ -258,18 +258,11 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function moveImageToUploadDirectory(string $newFilename): void {
         $uploadedFilePath = $_FILES["image_file"]["tmp_name"];
-        $imageObj = null;
-        if (str_ends_with($_FILES["image_file"]["name"],  "jpg") || str_ends_with($_FILES["image_file"]["name"], "jpeg")) {
-            $imageObj = imagecreatefromjpeg($uploadedFilePath);
-        } else if (str_ends_with($_FILES["image_file"]["name"], "gif")) {
-            $imageObj = imagecreatefromgif($uploadedFilePath);
-        } else if (str_ends_with($_FILES["image_file"]["name"], "png")) {
-            $imageObj = imagecreatefrompng($uploadedFilePath);
-        } else if (str_ends_with($_FILES["image_file"]["name"], "webp")) {
-            $imageObj = imagecreatefromwebp($uploadedFilePath);
-        }
-
-        imagewebp($imageObj, UPLOAD_DIR . "/" . $newFilename, 80);
+        $imageObj = new \Imagick();
+        $imageObj->readImage($uploadedFilePath);
+        $imageObj->setImageFormat('webp');
+        $imageObj->setImageCompressionQuality(80);
+        $imageObj->writeImage(UPLOAD_DIR . "/" . $newFilename);
 
         unlink($uploadedFilePath);
         $this->currentImage->setFilename($newFilename);

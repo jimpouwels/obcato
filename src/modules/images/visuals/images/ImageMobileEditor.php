@@ -46,7 +46,7 @@ class ImageMobileEditor extends Panel {
         $resetButton = null;
         if (ImageUtility::exists($this->currentImage->getMobileFilename())) {
             $imageObj = ImageUtility::loadImage($this->currentImage->getMobileFilename());
-            $sizeField = new ReadonlyTextField("image_mobile_size", $this->getTextResource("image_editor_size_label"), imagesx($imageObj) . ' x ' . imagesy($imageObj), false);
+            $sizeField = new ReadonlyTextField("image_mobile_size", $this->getTextResource("image_editor_size_label"), $imageObj->getImageWidth() . ' x ' . $imageObj->getImageHeight(), false);
             $newWidthField = new TextField("image_mobile_new_width", $this->getTextResource('image_editor_new_width_label'), "", false, false, "");
             $newHeightField = new TextField("image_mobile_new_height", $this->getTextResource('image_editor_new_height_label'), "", false, false, "");
             $cropTopField = new TextField("image_mobile_crop_top", $this->getTextResource('image_editor_crop_top'), 0, false, false, "");

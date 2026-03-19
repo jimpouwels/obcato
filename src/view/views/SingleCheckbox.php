@@ -16,7 +16,7 @@ class SingleCheckbox extends FormField {
         return "form_checkbox_single.tpl";
     }
 
-    public function loadFormField(TemplateData $data) {
+    public function loadFormField(TemplateData $data): void {
         $data->assign('onchange_js', "onChange={$this->onChangeJs}");
     }
 

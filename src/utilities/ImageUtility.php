@@ -2,43 +2,52 @@
 
 namespace Obcato\Core\utilities;
 
-use GdImage;
+use Imagick;
 use const Obcato\Core\UPLOAD_DIR;
 
 class ImageUtility {
 
     private function __construct() {}
 
-    public static function scaleX(GdImage $image, int $targetWidth): GdImage {
-        $oldWidth = imagesx($image);
+    public static function scaleX(Imagick $image, int $targetWidth): Imagick {
+        $oldWidth = $image->getImageWidth();
         if ($oldWidth != $targetWidth) {
-            return imagescale($image, $targetWidth, imagesy($image) * ($targetWidth / $oldWidth));
+            $targetHeight = (int)($image->getImageHeight() * ($targetWidth / $oldWidth));
+            $image->scaleImage($targetWidth, $targetHeight);
         }
         return $image;
     }
 
-    public static function scaleY(GdImage $image, int $targetHeight): GdImage {
-        $oldHeight = imagesy($image);
+    public static function scaleY(Imagick $image, int $targetHeight): Imagick {
+        $oldHeight = $image->getImageHeight();
         if ($oldHeight != $targetHeight) {
-            return imagescale($image, imagesx($image) * ($targetHeight / $oldHeight), $targetHeight);
+            $targetWidth = (int)($image->getImageWidth() * ($targetHeight / $oldHeight));
+            $image->scaleImage($targetWidth, $targetHeight);
         }
         return $image;
     }
 
-    public static function crop(GdImage $image, ?int $top, ?int $bottom, ?int $left, ?int $right): GdImage {
+    public static function crop(Imagick $image, ?int $top, ?int $bottom, ?int $left, ?int $right): Imagick {
         $top = $top ?? 0;
         $bottom = $bottom ?? 0;
         $left = $left ?? 0;
         $right = $right ?? 0;
-        return imagecrop($image, ['x' => $left, 'y' => $top, 'width' => (imagesx($image) - $left - $right), 'height' => (imagesy($image) - $top - $bottom)]);
+        $width = $image->getImageWidth() - $left - $right;
+        $height = $image->getImageHeight() - $top - $bottom;
+        $image->cropImage($width, $height, $left, $top);
+        return $image;
     }
 
-    public static function saveImageAsWebp(GdImage $image, string $filename): void {
-        imagewebp($image, UPLOAD_DIR . "/" . $filename, 80);
+    public static function saveImageAsWebp(Imagick $image, string $filename): void {
+        $image->setImageFormat('webp');
+        $image->setImageCompressionQuality(90);
+        $image->writeImage(UPLOAD_DIR . "/" . $filename);
     }
 
-    public static function loadImage(string $filename): GdImage {
-        return imagecreatefromwebp(UPLOAD_DIR . "/" . $filename);
+    public static function loadImage(string $filename): Imagick {
+        $image = new Imagick();
+        $image->readImage(UPLOAD_DIR . "/" . $filename);
+        return $image;
     }
 
     public static function exists(?string $filename): bool {

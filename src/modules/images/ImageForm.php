@@ -130,8 +130,8 @@ class ImageForm extends Form {
             return;
         }
         $imageObj = ImageUtility::loadImage($this->image->getFilename());
-        $imageWidth = imagesx($imageObj);
-        $imageHeight = imagesy($imageObj);
+        $imageWidth = $imageObj->getImageWidth();
+        $imageHeight = $imageObj->getImageHeight();
 
         $this->newWidth = $this->getNumber("image_new_width");
         $this->newHeight = $this->getNumber("image_new_height");
@@ -184,8 +184,8 @@ class ImageForm extends Form {
 
     private function validateMobileEditorFields(): void {
         $imageObj = ImageUtility::loadImage($this->image->getMobileFilename());
-        $imageWidth = imagesx($imageObj);
-        $imageHeight = imagesy($imageObj);
+        $imageWidth = $imageObj->getImageWidth();
+        $imageHeight = $imageObj->getImageHeight();
 
         $this->newMobileWidth = $this->getNumber("image_mobile_new_width");
         $this->newMobileHeight = $this->getNumber("image_mobile_new_height");
