@@ -91,53 +91,77 @@ abstract class FrontendVisual {
     protected function renderElementHolderContent(ElementHolder $elementHolder, ?array &$data): void {
         $elementGroups = array();
         $elementGroup = array();
-
         $previousSeparator = null;
+        $pendingSeparatorOpen = null;
+
         foreach ($elementHolder->getElements() as $element) {
             $elementType = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
+            
             if ($elementType == 'separator_element') {
-                $elementGroups[] = $elementGroup;
-                $elementGroup = array();
+                // Close current group by appending previous separator's closing to last element
+                if ($previousSeparator && $previousSeparator->getTemplate() && count($elementGroup) > 0) {
+                    $closePrevious = array();
+                    $closePrevious['is_closing'] = true;
+                    $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
+                    $closingHtml = $previousVisual->render($closePrevious);
+                    
+                    $lastIndex = count($elementGroup) - 1;
+                    $elementGroup[$lastIndex]["to_string"] .= $closingHtml;
+                }
+                
+                // Save the completed group
+                if (count($elementGroup) > 0) {
+                    $elementGroups[] = $elementGroup;
+                    $elementGroup = array();
+                }
+                
+                // Store the new separator to open the next group
+                if ($element->getTemplate()) {
+                    $elementData = array();
+                    $elementData["is_closing"] = false;
+                    $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
+                    $pendingSeparatorOpen = $elementVisual->render($elementData);
+                }
+                
+                $previousSeparator = $element;
+                continue;
             }
+            
+            // Regular element
             $elementData = array();
             $elementData["type"] = $elementType;
             $elementData["template"] = $element->getTemplate()?->getName();
-            if ($elementType == 'separator_element') {
-                $elementData["is_closing"] = false;
-            }
-            if ($previousSeparator && $elementType == 'separator_element') {
-                $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
-                $closePrevious = array();
-                $closePrevious['is_closing'] = true;
-                $elementData["close_previous_separator"] = $previousVisual->render($closePrevious);
-                $previousSeparator = null;
-            }
+            
             if ($element->getTemplate()) {
                 $elementVisual = $element->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
                 $elementData["to_string"] = $elementVisual->render($elementData);
+                
+                // Prepend pending separator opening HTML to FIRST element in group
+                if (count($elementGroup) == 0 && $pendingSeparatorOpen) {
+                    $elementData["to_string"] = $pendingSeparatorOpen . $elementData["to_string"];
+                    $pendingSeparatorOpen = null;
+                }
             } else {
                 $elementData["to_string"] = "";
-                if (isset($elementData["close_previous_separator"])) {
-                    $elementData["to_string"] = $elementData["close_previous_separator"];
-                }
             }
-            $elementGroup[] = $elementData;
-            if ($elementType == 'separator_element') {
-                $previousSeparator = $element;
-            }
-        }
-        if ($previousSeparator && $previousSeparator->getTemplate()) {
-            $separatorData = array();
-            $separatorData['is_closing'] = true;
-
-            $elementData = array();
-            $elementData["type"] = $this->elementDao->getElementTypeForElement($previousSeparator->getId())->getIdentifier();;
-            $elementData["template"] = $previousSeparator->getTemplate()?->getName();
-            $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
-            $elementData["to_string"] = $previousVisual->render($separatorData);
+            
             $elementGroup[] = $elementData;
         }
-        $elementGroups[] = $elementGroup;
+        
+        // Append closing separator to LAST element in final group
+        if (count($elementGroup) > 0) {
+            if ($previousSeparator && $previousSeparator->getTemplate()) {
+                $separatorData = array();
+                $separatorData['is_closing'] = true;
+                $previousVisual = $previousSeparator->getFrontendVisual($this->getPage(), $this->getArticle(), $this->getBlock());
+                $closingHtml = $previousVisual->render($separatorData);
+                
+                $lastIndex = count($elementGroup) - 1;
+                $elementGroup[$lastIndex]["to_string"] .= $closingHtml;
+            }
+            $elementGroups[] = $elementGroup;
+        }
+        
         $data['element_groups'] = $elementGroups;
     }
 
