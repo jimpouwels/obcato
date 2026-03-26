@@ -18,6 +18,7 @@ class SeparatorElement extends Element {
     private ?string $url = null;
     private ?int $width = null;
     private ?int $height = null;
+    private ?string $htmlId = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new SeparatorElementMetadataProvider($this));
@@ -45,6 +46,14 @@ class SeparatorElement extends Element {
 
     public function setHeight(?int $height): void {
         $this->height = $height;
+    }
+
+    public function getHtmlId(): ?string {
+        return $this->htmlId;
+    }
+
+    public function setHtmlId(?string $htmlId): void {
+        $this->htmlId = $htmlId;
     }
 
     public function getStatics(): Visual {

@@ -93,6 +93,7 @@ abstract class FrontendVisual {
         $elementGroup = array();
         $previousSeparator = null;
         $pendingSeparatorOpen = null;
+        $currentGroupHtmlId = null;
 
         foreach ($elementHolder->getElements() as $element) {
             $elementType = $this->elementDao->getElementTypeForElement($element->getId())->getIdentifier();
@@ -109,9 +110,12 @@ abstract class FrontendVisual {
                     $elementGroup[$lastIndex]["to_string"] .= $closingHtml;
                 }
                 
-                // Save the completed group
+                // Save the completed group with html_id
                 if (count($elementGroup) > 0) {
-                    $elementGroups[] = $elementGroup;
+                    $groupData = array();
+                    $groupData['html_id'] = $currentGroupHtmlId;
+                    $groupData['elements'] = $elementGroup;
+                    $elementGroups[] = $groupData;
                     $elementGroup = array();
                 }
                 
@@ -123,6 +127,7 @@ abstract class FrontendVisual {
                     $pendingSeparatorOpen = $elementVisual->render($elementData);
                 }
                 
+                $currentGroupHtmlId = $element->getHtmlId();
                 $previousSeparator = $element;
                 continue;
             }
@@ -159,7 +164,10 @@ abstract class FrontendVisual {
                 $lastIndex = count($elementGroup) - 1;
                 $elementGroup[$lastIndex]["to_string"] .= $closingHtml;
             }
-            $elementGroups[] = $elementGroup;
+            $groupData = array();
+            $groupData['html_id'] = $currentGroupHtmlId;
+            $groupData['elements'] = $elementGroup;
+            $elementGroups[] = $groupData;
         }
         
         $data['element_groups'] = $elementGroups;

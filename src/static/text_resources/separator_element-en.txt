@@ -4,3 +4,4 @@ separator_element_scope_label: Separator Element
 
 # EDITOR
 separator_element_editor_title: Title
+separator_element_editor_html_id: HTML ID

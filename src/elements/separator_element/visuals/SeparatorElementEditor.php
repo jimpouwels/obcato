@@ -28,7 +28,9 @@ class SeparatorElementEditor extends ElementVisual {
 
     public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField("element_" . $this->separatorElement->getId() . "_title", $this->getTextResource("separator_element_editor_title"), $this->separatorElement->getTitle(), false, true, null);
+        $htmlIdField = new TextField("element_" . $this->separatorElement->getId() . "_html_id", $this->getTextResource("separator_element_editor_html_id"), $this->separatorElement->getHtmlId(), false, false, null);
         $data->assign("title_field", $titleField->render());
+        $data->assign("html_id_field", $htmlIdField->render());
     }
 
     public function includeLinkSelector(): bool
