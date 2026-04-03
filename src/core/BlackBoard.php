@@ -27,4 +27,12 @@ class BlackBoard {
         return "/admin/image";
     }
 
+    public static function getModuleFileUrl(string $moduleIdentifier, string $filePath): string {
+        return '/admin?file=' . urlencode($filePath) . '&module=' . urlencode($moduleIdentifier);
+    }
+
+    public static function getElementFileUrl(string $elementIdentifier, string $filePath): string {
+        return '/admin?file=' . urlencode($filePath) . '&element=' . urlencode($elementIdentifier);
+    }
+
 }

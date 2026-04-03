@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\modules\components\visuals\components;
 
+use Obcato\Core\core\BlackBoard;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\modules\components\ComponentRequestHandler;
@@ -33,7 +34,7 @@ class ElementsListPanel extends Panel {
             $elementData = array();
             $elementData['id'] = $elementType->getId();
             $elementData['name'] = $this->getTextResource($elementType->getIdentifier() . '_label');
-            $elementData['icon_url'] = '/admin?file=/elements/' . $elementType->getIdentifier() . "/img/" . $elementType->getIdentifier() . ".png";
+            $elementData['icon_url'] = BlackBoard::getElementFileUrl($elementType->getIdentifier(), 'img/' . $elementType->getIdentifier() . '.png');
             $elementData['is_current'] = $this->isCurrentElement($elementType);
             $elementsData[] = $elementData;
         }

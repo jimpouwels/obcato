@@ -1,3 +1,3 @@
 <link rel="stylesheet"
-      href="/admin?file=/elements/table_of_contents_element/css/table_of_contents_element.css"
+      href="/admin?file=css/table_of_contents_element.css&element=table_of_contents_element"
       type="text/css" />

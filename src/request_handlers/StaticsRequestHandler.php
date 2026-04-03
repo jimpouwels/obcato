@@ -49,6 +49,27 @@ class StaticsRequestHandler extends HttpRequestHandler {
     }
 
     private function getAbsolutePathFor(string $relativePath): string {
+        // New cleaner URL structure: ?module=images&file=css/images.css
+        if (isset($_GET["module"]) && isset($_GET["file"])) {
+            return dirname(__DIR__) . '/modules/' . $_GET["module"] . '/static/' . $_GET["file"];
+        }
+        
+        // New cleaner URL structure: ?element=text_element&file=css/text.css
+        if (isset($_GET["element"]) && isset($_GET["file"])) {
+            return dirname(__DIR__) . '/elements/' . $_GET["element"] . '/static/' . $_GET["file"];
+        }
+        
+        // Backwards compatibility: old URL structure with /modules/ or /elements/ in path
+        if (str_starts_with($relativePath, '/modules/') || str_starts_with($relativePath, '/elements/')) {
+            $parts = explode('/', ltrim($relativePath, '/'), 3);
+            if (count($parts) === 3) {
+                $colocatedPath = dirname(__DIR__) . '/' . $parts[0] . '/' . $parts[1] . '/static/' . $parts[2];
+                if (file_exists($colocatedPath)) {
+                    return $colocatedPath;
+                }
+            }
+        }
+        
         return STATIC_DIR . $relativePath;
     }
 

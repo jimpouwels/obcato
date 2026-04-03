@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin?file=/elements/article_overview_element/css/article_overview_element.css" type="text/css" />
+<link rel="stylesheet" href="/admin?file=css/article_overview_element.css&element=article_overview_element" type="text/css" />

@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin?file=/elements/photo_album_element/css/photo_album_element.css" type="text/css" />
+<link rel="stylesheet" href="/admin?file=css/photo_album_element.css&element=photo_album_element" type="text/css" />

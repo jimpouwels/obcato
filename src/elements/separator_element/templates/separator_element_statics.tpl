@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin?file=/elements/separator_element/css/separator_element.css" type="text/css" />
+<link rel="stylesheet" href="/admin?file=css/separator_element.css&element=separator_element" type="text/css" />

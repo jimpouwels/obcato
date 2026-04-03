@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/admin?file=/elements/iframe_element/css/iframe_element.css" type="text/css" />
+<link rel="stylesheet" href="/admin?file=css/iframe_element.css&element=iframe_element" type="text/css" />
