@@ -111,31 +111,40 @@ class LinkHelper
         foreach ($links as $link) {
             if ($this->containsLink($value, $link)) {
                 $url = $this->createUrlFromLink($link);
-                $value = $this->replaceLinkCodeTags($value, $link, $url);
+                if ($url === null) {
+                    $value = $this->removeLinkCodeTags($value, $link);
+                } else {
+                    $value = $this->replaceLinkCodeTags($value, $link, $url);
+                }
             }
         }
         return $this->processMarkdownStyleLinks($value);
     }
 
-    public function createUrlFromLink(Link $link): string {
-        $url = "";
+    public function createUrlFromLink(Link $link): ?string {
         if (!$link->getTargetElementHolderId()) {
-            $url = $link->getTargetAddress();
-        } else {
-            $targetElementHolder = $link->getTargetElementHolder();
-            switch ($targetElementHolder->getType()) {
-                case Page::ElementHolderType:
-                    $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
-                    $url = $this->createPageUrl($targetPage);
-                    break;
-                case Article::ElementHolderType:
-                    $targetArticle = $this->articleService->getArticle($targetElementHolder->getId());
-                    $url = $this->createArticleUrl($targetArticle);
-                    break;
-                default:
-                    return "";
-            }
+            return $link->getTargetAddress() ?: null;
         }
+        
+        $targetElementHolder = $link->getTargetElementHolder();
+        switch ($targetElementHolder->getType()) {
+            case Page::ElementHolderType:
+                $targetPage = $this->pageService->getPageById($targetElementHolder->getId());
+                if (!$targetPage?->isPublished()) {
+                    return null;
+                }
+                return $this->createPageUrl($targetPage);
+            case Article::ElementHolderType:
+                $targetArticle = $this->articleService->getArticle($targetElementHolder->getId());
+                if (!$targetArticle?->isPublished()) {
+                    return null;
+                }
+                $url = $this->createArticleUrl($targetArticle);
+                break;
+            default:
+                return null;
+        }
+        
         if (FrontendHelper::isPreviewMode() && $link->getTargetElementHolderId()) {
             $url = FrontendHelper::asPreviewUrl($url);
         }
@@ -156,6 +165,11 @@ class LinkHelper
         $linkClass = $link->getTargetElementHolderId() ? "internal" : "external";
         $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $link->getTarget(), $url, $linkClass), $value);
         return str_replace("[/LINK]", "</a>", $value);
+    }
+
+    private function removeLinkCodeTags(string $value, Link $link): string {
+        $value = str_replace($this->getLinkCodeOpeningTag($link), "", $value);
+        return str_replace("[/LINK]", "", $value);
     }
 
     private function containsLink(string $value, Link $link): bool {
