@@ -252,7 +252,7 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function saveThumbnailForUploadedImage(string $newFilename): void {
         $thumbFilename = "THUMB-" . $newFilename;
-        FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 50, 50);
+        FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 80, 80);
         $this->currentImage->setThumbFileName($thumbFilename);
     }
 

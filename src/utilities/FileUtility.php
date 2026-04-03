@@ -28,7 +28,7 @@ class FileUtility {
     public static function saveThumb(string $srcImage, string $directory, string $thumbFilename, int $thumbWidth, int $thumbHeight): void {
         $imageObj = new \Imagick();
         $imageObj->readImage($directory . '/' . $srcImage);
-        $imageObj->scaleImage($thumbWidth, $thumbHeight);
+        $imageObj->thumbnailImage($thumbWidth, $thumbHeight, true);
         $imageObj->setImageFormat('webp');
         $imageObj->setImageCompressionQuality(80);
         $imageObj->writeImage($directory . "/" . $thumbFilename);

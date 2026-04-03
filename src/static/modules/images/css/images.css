@@ -85,3 +85,20 @@
 .image_editor_wrapper .admin_label_wrapper {
     width: 30%;
 }
+
+/* Image list thumbnails */
+.images_list .listing tbody td:first-child {
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.images_list .listing tbody td:first-child img {
+    max-width: 80px !important;
+    max-height: 80px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
