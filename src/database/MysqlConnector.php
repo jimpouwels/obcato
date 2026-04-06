@@ -22,6 +22,7 @@ class MysqlConnector {
         $this->host = HOST;
         $this->databaseName = DATABASE_NAME;
         $this->conn = new mysqli($this->host, USERNAME, PASSWORD, $this->databaseName) or die("Error connecting to MySQL database");
+        mysqli_set_charset($this->conn, "utf8mb4");
     }
 
     public function getConnection(): mysqli {

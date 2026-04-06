@@ -212,10 +212,10 @@ class ImageForm extends Form {
         if ($this->cropMobileRight < 0) {
             $this->raiseError('image_mobile_crop_right', 'image_crop_cannot_be_negative');
         }
-        if ($this->cropMobileTop + $this->cropMobileBottom > $imageWidth) {
+        if ($this->cropMobileTop + $this->cropMobileBottom > $imageHeight) {
             $this->raiseError('image_mobile_crop_top', 'image_crop_cannot_be_bigger_than_height');
         }
-        if ($this->cropMobileLeft + $this->cropMobileRight > $imageHeight) {
+        if ($this->cropMobileLeft + $this->cropMobileRight > $imageWidth) {
             $this->raiseError('image_mobile_crop_left', 'image_crop_cannot_be_bigger_than_width');
         }
 
@@ -228,7 +228,7 @@ class ImageForm extends Form {
         }
 
         $this->cropMobileHorizontal = $this->getNumber("image_mobile_crop_horizontal_center");
-        if ($this->cropHorizontal < 0) {
+        if ($this->cropMobileHorizontal < 0) {
             $this->raiseError('image_mobile_crop_horizontal_center', 'image_crop_cannot_be_negative');
         }
         if ($this->cropMobileHorizontal > $imageWidth) {
