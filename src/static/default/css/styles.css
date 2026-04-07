@@ -210,6 +210,7 @@ a:hover {
 
 #content-pane-wrapper {
     padding: var(--spacing-lg);
+    padding-top: 76px;
 }
 
 /*
@@ -256,6 +257,11 @@ for their own split view (e.g. page list + page editor)
 ============= ACTIONS MENU - Compact ribbon style
 */
 #actions_menu {
+    position: fixed;
+    top: var(--header-height);
+    left: var(--sidebar-width);
+    right: 0;
+    z-index: 100;
     display: flex;
     gap: 2px;
     padding: 6px var(--spacing-md);
