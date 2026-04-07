@@ -41,14 +41,11 @@ article_editor_delete_wallpaper_button_label: Wallpaper verwijderen
 
 # CONFIRMATIONS
 articles_confirm_delete_article: Weet u zeker dat u dit artikel wilt verwijderen?
-articles_confirm_delete_terms: Weet u zeker dat u de geselecteerde termen wilt verwijderen?
-articles_confirm_delete_metadata_fields: Weet u zeker dat u de geselecteerde metadata velden wilt verwijderen?
+articles_confirm_delete_term: Weet u zeker dat u deze term wilt verwijderen?
 articles_confirm_delete_image: Weet u zeker dat u deze afbeelding wilt verwijderen?
 articles_confirm_delete_wallpaper: Weet u zeker dat u deze wallpaper wilt verwijderen?
 articles_confirm_delete_related_article: Weet u zeker dat u deze verwijzing wilt verwijderen?
 articles_confirm_delete_target_pages: Weet u zeker dat u de geselecteerde doelpagina's wilt verwijderen?
-articles_alert_no_terms_selected: U heeft geen termen geselecteerd
-articles_alert_no_metadata_fields_selected: U heeft geen metadata velden geselecteerd
 articles_alert_no_target_pages_selected: U heeft geen doelpagina's geselecteerd
 article_editor_delete_parent_article_label: Verwijzing verwijderen
 article_editor_change_image_button: Wijzigen
@@ -72,11 +69,10 @@ articles_terms_term_delete_success_message: Termen succesvol verwijderd
 articles_terms_term_save_error_message: Term niet opgeslagen, verwerk de fouten
 articles_edit_metadata_friendly_url_label: URL
 
-# TERMS LIST
-articles_terms_list_name: Naam
-articles_terms_list_delete: Verwijder
-
 # ARTICLES METADATA FIELDS
-article_metadata_field_editor_name_field=Naam
-article_metadata_field_editor_default_value_field=Standaardwaarde
-article_metadata_fields_saved=Metadata velden opgeslagen
+# METADATA
+articles_metadata_field_editor_title: Metadata veld
+articles_confirm_delete_metadata_field: Weet u zeker dat u dit metadata veld wilt verwijderen?
+article_metadata_field_editor_name_field: Naam
+article_metadata_field_editor_default_value_field: Standaardwaarde
+article_metadata_fields_saved: Metadata velden opgeslagen

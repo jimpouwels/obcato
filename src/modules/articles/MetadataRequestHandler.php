@@ -52,9 +52,9 @@ class MetadataRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteMetadataFields(): void {
-        $metadataForm = new MetadataForm();
-        foreach ($metadataForm->getMetadataFieldsToDelete() as $metadataFieldToDelete) {
-            $this->articleService->deleteMetadataField($metadataFieldToDelete);
+        if ($this->currentMetadataField) {
+            $this->articleService->deleteMetadataField($this->currentMetadataField);
+            $this->redirectTo($this->getBackendBaseUrl());
         }
     }
 
@@ -78,6 +78,6 @@ class MetadataRequestHandler extends HttpRequestHandler {
     }
 
     private function isDeleteAction(): bool {
-        return isset($_POST["metadata_field_delete_action"]) && $_POST["metadata_field_delete_action"] == "delete_metadata_fields";
+        return isset($_POST["action"]) && $_POST["action"] == "delete_metadata_field";
     }
 }

@@ -27,8 +27,8 @@ class TermRequestHandler extends HttpRequestHandler {
             $this->addTerm();
         } else if ($this->isUpdateTermAction()) {
             $this->updateTerm();
-        } else if ($this->isDeleteTermsAction()) {
-            $this->deleteTerms();
+        } else if ($this->isDeleteTermAction()) {
+            $this->deleteTerm();
         }
     }
 
@@ -53,26 +53,24 @@ class TermRequestHandler extends HttpRequestHandler {
         }
     }
 
-    private function deleteTerms(): void {
-        $terms = $this->articleDao->getAllTerms();
-        foreach ($terms as $term) {
-            if (isset($_POST["term_" . $term->getId() . "_delete"])) {
-                $this->articleDao->deleteTerm($term);
-            }
+    private function deleteTerm(): void {
+        if ($this->currentTerm) {
+            $this->articleDao->deleteTerm($this->currentTerm);
+            $this->sendSuccessMessage($this->getTextResource("articles_terms_term_delete_success_message"));
+            $this->redirectTo($this->getBackendBaseUrl());
         }
-        $this->sendSuccessMessage($this->getTextResource("articles_terms_term_delete_success_message"));
     }
 
     private function getTermFromGetRequest(): ?ArticleTerm {
         if (isset($_GET["term"])) {
-            return $this->getTerm($_GET["term"]);
+            return $this->getTerm((int)$_GET["term"]);
         }
         return null;
     }
 
     private function getTermFromPostRequest(): ?ArticleTerm {
         if (isset($_POST["term_id"]) && $_POST["term_id"] != "") {
-            return $this->getTerm($_POST["term_id"]);
+            return $this->getTerm((int)$_POST["term_id"]);
         }
         return null;
     }
@@ -89,7 +87,7 @@ class TermRequestHandler extends HttpRequestHandler {
         return isset($_POST["add_term_action"]) && $_POST["add_term_action"] == "add_term";
     }
 
-    private function isDeleteTermsAction(): bool {
-        return isset($_POST["term_delete_action"]) && $_POST["term_delete_action"] == "delete_terms";
+    private function isDeleteTermAction(): bool {
+        return isset($_POST["action"]) && $_POST["action"] == "delete_term";
     }
 }

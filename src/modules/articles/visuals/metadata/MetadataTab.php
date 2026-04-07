@@ -29,6 +29,6 @@ class MetadataTab extends Visual {
     }
 
     private function renderMetadataFieldList(): string {
-        return (new MetadataList())->render();
+        return (new MetadataList($this->currentMetadataField))->render();
     }
 }

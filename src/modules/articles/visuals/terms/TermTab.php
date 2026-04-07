@@ -38,6 +38,6 @@ class TermTab extends Visual {
     }
 
     private function renderTermsList(): string {
-        return (new TermsList())->render();
+        return (new TermsList($this->currentTerm))->render();
     }
 }

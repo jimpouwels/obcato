@@ -12,10 +12,12 @@ use Obcato\Core\view\views\SingleCheckbox;
 class TermsList extends Panel {
 
     private ArticleDao $articleDao;
+    private ?\Obcato\Core\modules\articles\model\ArticleTerm $currentTerm;
 
-    public function __construct() {
-        parent::__construct('Termen', 'term_list_panel');
+    public function __construct(?\Obcato\Core\modules\articles\model\ArticleTerm $currentTerm = null) {
+        parent::__construct('Termen', 'term_list');
         $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->currentTerm = $currentTerm;
     }
 
     public function getPanelContentTemplate(): string {
@@ -36,8 +38,7 @@ class TermsList extends Panel {
             $termValue = array();
             $termValue["id"] = $term->getId();
             $termValue["name"] = $term->getName();
-            $deleteField = new SingleCheckbox("term_" . $term->getId() . "_delete", "", false, false, "");
-            $termValue["delete_field"] = $deleteField->render();
+            $termValue["is_active"] = $this->currentTerm && $this->currentTerm->getId() === $term->getId();
 
             $allTermsValues[] = $termValue;
         }

@@ -92,11 +92,11 @@ class ArticleModuleVisual extends ModuleVisual {
             $actionButtons[] = $deleteButton;
         }
         if ($this->getCurrentTabId() == self::$TERMS_TAB) {
-            if ($this->currentTerm || TermTab::isEditTermMode()) {
+            if ($this->currentTerm) {
                 $actionButtons[] = new ActionButtonSave('update_term');
+                $actionButtons[] = new ActionButtonDelete('delete_term');
             }
             $actionButtons[] = new ActionButtonAdd('add_term');
-            $actionButtons[] = new ActionButtonDelete('delete_terms');
         }
         if ($this->getCurrentTabId() == self::$TARGET_PAGES_TAB) {
             $actionButtons[] = new ActionButtonDelete('delete_target_pages');
@@ -104,9 +104,9 @@ class ArticleModuleVisual extends ModuleVisual {
         if ($this->getCurrentTabId() == self::$METADATA_TAB) {
             if ($this->currentMetadataField) {
                 $actionButtons[] = new ActionButtonSave('update_metadata_field');
+                $actionButtons[] = new ActionButtonDelete('delete_metadata_field');
             }
             $actionButtons[] = new ActionButtonAdd('add_metadata_field');
-            $actionButtons[] = new ActionButtonDelete('delete_metadata_fields');
         }
 
         return $actionButtons;

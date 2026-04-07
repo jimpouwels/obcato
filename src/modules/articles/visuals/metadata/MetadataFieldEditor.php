@@ -12,7 +12,7 @@ class MetadataFieldEditor extends Panel {
     private ArticleMetadataField $currentMetadataField;
 
     public function __construct(ArticleMetadataField $currentMetadataField) {
-        parent::__construct($this->getTextResource("articles_metdata_field_editor_title"), 'metadata_field_editor_panel');
+        parent::__construct($this->getTextResource("articles_metadata_field_editor_title"), 'metadata_field_editor_panel');
         $this->currentMetadataField = $currentMetadataField;
     }
 

@@ -62,6 +62,14 @@
     width: auto;
 }
 
+/* Metadata list uses generic content_left_column styling */
+
+/* METADATA FIELD EDITOR */
+.metadata_field_editor_panel .admin_form_v2 input[type="text"] {
+    width: 100%;
+    max-width: 500px;
+}
+
 /* ARTICLE METADATA EDITOR */
 .article_metadata_editor {
     /* Flows in content_right_column */
@@ -111,6 +119,8 @@
     max-width: 900px;
     margin: 0 auto var(--spacing-xl, 24px) auto;
 }
+
+/* Term list uses generic content_left_column styling */
 
 .term_list_panel {
     max-width: 900px;

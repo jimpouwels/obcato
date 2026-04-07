@@ -2,6 +2,7 @@
 
 namespace Obcato\Core\modules\articles\visuals\metadata;
 
+use Obcato\Core\modules\articles\model\ArticleMetadataField;
 use Obcato\Core\modules\articles\service\ArticleInteractor;
 use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\view\TemplateData;
@@ -10,10 +11,12 @@ use Obcato\Core\view\views\Panel;
 class MetadataList extends Panel {
 
     private ArticleService $articleService;
+    private ?ArticleMetadataField $currentMetadataField;
 
-    public function __construct() {
-        parent::__construct("Artikel Metadata velden");
+    public function __construct(?ArticleMetadataField $currentMetadataField = null) {
+        parent::__construct("Artikel Metadata velden", 'metadata_list');
         $this->articleService = ArticleInteractor::getInstance();
+        $this->currentMetadataField = $currentMetadataField;
     }
 
     function getPanelContentTemplate(): string {
@@ -36,7 +39,7 @@ class MetadataList extends Panel {
         $metadataFieldValue = array();
         $metadataFieldValue["id"] = $metadataField->getId();
         $metadataFieldValue["name"] = $metadataField->getName();
-        $metadataFieldValue["default_value"] = $metadataField->getDefaultValue();
+        $metadataFieldValue["is_active"] = $this->currentMetadataField && $this->currentMetadataField->getId() === $metadataField->getId();
         return $metadataFieldValue;
     }
 }

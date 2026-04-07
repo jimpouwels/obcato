@@ -4,43 +4,10 @@
     clear: both;
 }
 
-/* TEMPLATE SELECTOR */
+/* Scope selector uses generic content_left_column styling */
 .scope_selector_panel {
     float: left;
     width: 355px;
-}
-
-.scope_selector_panel ul {
-    padding-left: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.scope_selector_panel li {
-    margin: 0;
-    border-bottom: 1px solid var(--color-gray-200);
-}
-
-.scope_selector_panel a {
-    text-decoration: none;
-    color: var(--color-gray-900);
-    padding: var(--spacing-sm) var(--spacing-md);
-    display: block;
-    font-size: 13px;
-    transition: all 0.2s;
-}
-
-.scope_selector_panel a:hover {
-    background: var(--color-gray-50);
-}
-
-.scope_selector_panel li.active a,
-.scope_selector_panel li.selected a {
-    background: var(--color-blue-50);
-    color: var(--color-primary);
-    font-weight: 600;
-    border-left: 3px solid var(--color-primary);
-    padding-left: calc(var(--spacing-md) - 3px);
 }
 
 /* TEMPLATE LIST */
@@ -49,42 +16,10 @@
     display: none;
 }
 
-/* TEMPLATE FILES */
+/* Template files list uses generic content_left_column styling */
 .template_files_list_panel {
     width: 355px;
     float: left;
-}
-
-.template_files_list_panel ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.template_files_list_panel li {
-    margin: 0;
-    border-bottom: 1px solid var(--color-gray-200);
-}
-
-.template_files_list_panel a {
-    text-decoration: none;
-    color: var(--color-gray-900);
-    padding: var(--spacing-sm) var(--spacing-md);
-    display: block;
-    font-size: 13px;
-    transition: all 0.2s;
-}
-
-.template_files_list_panel a:hover {
-    background: var(--color-gray-50);
-}
-
-.template_files_list_panel li.active a {
-    background: var(--color-blue-50);
-    color: var(--color-primary);
-    font-weight: 600;
-    border-left: 3px solid var(--color-primary);
-    padding-left: calc(var(--spacing-md) - 3px);
 }
 
 .template_file_editor_panel {
