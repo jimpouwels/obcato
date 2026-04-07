@@ -36,24 +36,6 @@
     margin-top: var(--spacing-md, 12px);
 }
 
-.search_button {
-    /* Inherits button styling */
-}
-
-.show_all_link {
-    display: block;
-    margin: var(--spacing-md, 12px) 0;
-    font-size: 13px;
-}
-
-.show_all_link a {
-    color: var(--color-gray-600, #6b7280);
-}
-
-.show_all_link a:hover {
-    color: var(--color-primary, #2271b1);
-}
-
 /* IMAGE LIST */
 .images_list {
     /* Flows in content_right_column */

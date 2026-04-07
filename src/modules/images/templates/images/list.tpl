@@ -20,9 +20,9 @@
     {/if}
     <table class="listing" width="95%" cellspacing="0" cellpadding="5" border="0">
         <colgroup width="100px"></colgroup>
-        <colgroup width="200px"></colgroup>
-        <colgroup width="50px"></colgroup>
-        <colgroup width="50px"></colgroup>
+        <colgroup width="300px"></colgroup>
+        <colgroup width="150px"></colgroup>
+        <colgroup width="100px"></colgroup>
         <colgroup width="10px"></colgroup>
         <thead>
         <tr>

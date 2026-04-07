@@ -2,6 +2,7 @@
 articles_tab_articles: Articles
 articles_tab_terms: Terms
 articles_tab_target_pages: Target pages
+articles_metadata: Metadata
 
 # SEARCH RESULTS
 articles_module_title: Articles
@@ -15,7 +16,6 @@ articles_search_results_published_column: Published
 articles_search_box_title: Search
 articles_search_box_query: Query
 articles_search_box_term: Term
-articles_search_box_show_all: Show all
 articles_search_box_search_button: Search
 
 # LIST

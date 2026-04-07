@@ -13,13 +13,5 @@
         <div class="button_container">
             {$search_button}
         </div>
-        <div class="show_all_link">
-            <a href="{$backend_base_url}"
-               title="{$text_resources.images_search_show_all}">{$text_resources.images_search_show_all}</a>
-        </div>
-        <div class="show_all_link">
-            <a href="{$backend_base_url}&no_labels=true"
-               title="{$text_resources.images_search_show_all_without_label}">{$text_resources.images_search_show_all_without_label}</a>
-        </div>
     </form>
 </div>

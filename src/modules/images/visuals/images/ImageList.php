@@ -45,7 +45,7 @@ class ImageList extends Panel {
         } else if ($this->isNoLabelsSearchAction()) {
             $images = $this->imageDao->getAllImagesWithoutLabel();
         } else {
-            $images = $this->imageDao->getAllImages();
+            $images = array();
         }
         return $this->toArray($images);
     }
