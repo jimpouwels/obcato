@@ -1152,8 +1152,10 @@ textarea:focus {
 
 .element-insert-button {
     position: relative;
-    height: 2px;
-    margin: 16px 0;
+    height: 4px;
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
 }
 
 .empty-container .element-insert-button {
@@ -1166,7 +1168,8 @@ textarea:focus {
 .element-insert-button .insert-btn {
     position: absolute;
     left: -40px;
-    top: -13px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 28px;
     height: 28px;
     border: 2px dashed var(--color-gray-300);
@@ -1187,7 +1190,7 @@ textarea:focus {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background: var(--color-blue-50);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .empty-container .element-insert-button .insert-btn {
@@ -1196,13 +1199,20 @@ textarea:focus {
     display: inline-flex;
     width: 32px;
     height: 32px;
+    transform: none;
+}
+
+.empty-container .element-insert-button .insert-btn:hover {
+    transform: scale(1.1);
 }
 
 .insert-indicator {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
     display: flex;
     align-items: center;
     pointer-events: none;
@@ -1229,7 +1239,8 @@ textarea:focus {
     transition: all 0.2s;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .element-insert-button:hover .insert-arrow {
