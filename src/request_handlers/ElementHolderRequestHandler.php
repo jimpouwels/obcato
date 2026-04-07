@@ -71,6 +71,46 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
         $createdElement = $this->elementDao->createElement($elementType, $elementHolder->getId());
         $createdElement->setElementHolderId($elementHolder->getId());
         $elementHolder->addElement($createdElement);
+        
+        // Handle insert position if specified
+        if (isset($_POST['element_insert_position'])) {
+            $insertPosition = intval($_POST['element_insert_position']);
+            $this->reorderElementsAfterInsert($elementHolder, $createdElement->getId(), $insertPosition);
+        }
+    }
+
+    private function reorderElementsAfterInsert(ElementHolder $elementHolder, int $newElementId, int $insertPosition): void {
+        $elements = $elementHolder->getElements();
+        
+        // Build new order: insert new element at specified position
+        $orderArray = array();
+        $insertedNew = false;
+        
+        foreach ($elements as $element) {
+            if (count($orderArray) == $insertPosition && !$insertedNew) {
+                // Insert new element at this position
+                $orderArray[] = $newElementId;
+                $insertedNew = true;
+            }
+            
+            // Add existing element if it's not the newly created one
+            if ($element->getId() != $newElementId) {
+                $orderArray[] = $element->getId();
+            }
+        }
+        
+        // If not yet inserted (position at end or after all elements)
+        if (!$insertedNew) {
+            $orderArray[] = $newElementId;
+        }
+        
+        // Set order numbers based on position in array
+        foreach ($elements as $element) {
+            $position = array_search($element->getId(), $orderArray);
+            if ($position !== false) {
+                $element->setOrderNr($position);
+            }
+        }
     }
 
     private function deleteElementFrom(ElementHolder $elementHolder): void {

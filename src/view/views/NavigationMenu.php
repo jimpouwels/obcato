@@ -29,17 +29,14 @@ class NavigationMenu extends Visual {
     public function load(): void {
         $groups = array();
         foreach ($this->moduleGroups as $moduleGroup) {
-            if ($moduleGroup->isElementGroup() && !$this->isElementHolder) {
+            // Skip insert group - now handled by inline insert buttons
+            if ($moduleGroup->isElementGroup()) {
                 continue;
             }
             
             $group = array();
             $group['title'] = $this->getTextResource('menu_item_' . $moduleGroup->getIdentifier());
-            if ($moduleGroup->isElementGroup()) {
-                $group['elements'] = $this->renderElementsMenuItem();
-            } else {
-                $group['modules'] = $this->renderMenuItem($moduleGroup);
-            }
+            $group['modules'] = $this->renderMenuItem($moduleGroup);
             $groups[] = $group;
         }
         $this->assign('groups', $groups);

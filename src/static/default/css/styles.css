@@ -587,7 +587,7 @@ textarea:focus {
 .draggable_wrapper {
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
-    margin-bottom: 24px;
+    margin-bottom: 0;
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
     transition: all 0.2s;
@@ -1087,4 +1087,214 @@ textarea:focus {
     color: var(--color-gray-500);
     font-style: italic;
     font-size: 13px;
+}
+
+/*
+============= ELEMENT INSERT BUTTONS
+*/
+#element_container.draggable_items {
+    padding-left: 40px;
+    position: relative;
+}
+
+#element_container.empty-container {
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.element-insert-button {
+    position: relative;
+    height: 2px;
+    margin: 16px 0;
+}
+
+.empty-container .element-insert-button {
+    justify-content: center;
+    height: auto;
+    margin: var(--spacing-lg) 0;
+    position: static;
+}
+
+.element-insert-button .insert-btn {
+    position: absolute;
+    left: -40px;
+    top: -13px;
+    width: 28px;
+    height: 28px;
+    border: 2px dashed var(--color-gray-300);
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-gray-500);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    z-index: 10;
+}
+
+.element-insert-button:hover .insert-btn {
+    opacity: 1;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-blue-50);
+    transform: scale(1.1);
+}
+
+.empty-container .element-insert-button .insert-btn {
+    position: static;
+    opacity: 1;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+}
+
+.insert-indicator {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.empty-container .insert-indicator {
+    display: none;
+}
+
+.insert-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--color-gray-300), var(--color-gray-200), transparent);
+    transition: all 0.2s;
+}
+
+.element-insert-button:hover .insert-line {
+    background: linear-gradient(to right, var(--color-primary), var(--color-blue-300), transparent);
+}
+
+.insert-arrow {
+    color: var(--color-gray-400);
+    opacity: 0;
+    transition: all 0.2s;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.element-insert-button:hover .insert-arrow {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* Element Selector Modal */
+.element-selector-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.element-selector-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.element-selector-content {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.element-selector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.element-selector-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-gray-900);
+}
+
+.element-selector-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.element-selector-header .close-btn:hover {
+    background: var(--color-gray-100);
+    color: var(--color-gray-900);
+}
+
+.element-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    padding: var(--spacing-lg);
+}
+
+.element-type-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: var(--spacing-md);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.element-type-btn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-blue-50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.element-type-btn img {
+    width: 32px;
+    height: 32px;
+}
+
+.element-type-btn span {
+    font-size: 12px;
+    text-align: center;
+    color: var(--color-gray-700);
+    font-weight: 500;
+}
+
+.element-type-btn:hover span {
+    color: var(--color-primary);
 }

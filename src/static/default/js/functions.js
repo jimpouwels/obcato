@@ -11,6 +11,73 @@ function addElement(elementTypeId, errorMessage) {
     $editorForm.submit();
 }
 
+// Global variable to store insert position
+var elementInsertPosition = null;
+
+// Save scroll position before form submit
+function saveScrollPosition() {
+    sessionStorage.setItem('elementHolderScrollPosition', window.pageYOffset || document.documentElement.scrollTop);
+}
+
+// Restore scroll position after page load
+function restoreScrollPosition() {
+    var savedPosition = sessionStorage.getItem('elementHolderScrollPosition');
+    if (savedPosition !== null) {
+        window.scrollTo(0, parseInt(savedPosition));
+        sessionStorage.removeItem('elementHolderScrollPosition');
+    }
+}
+
+// Shows the element selector modal at a specific position
+function showElementSelector(position) {
+    elementInsertPosition = position;
+    $('#element-selector-modal').fadeIn(200);
+}
+
+// Hides the element selector modal
+function hideElementSelector() {
+    $('#element-selector-modal').fadeOut(200);
+    elementInsertPosition = null;
+}
+
+// Inserts element at the stored position
+function insertElementAtPosition(elementTypeId) {
+    var $inputField = $('#add_element_type_id');
+    if ($inputField.length == 0) {
+        alert('Fout: Kan element niet toevoegen');
+        return false;
+    }
+    
+    $inputField.attr('value', elementTypeId);
+    
+    // Set insert position
+    var $positionField = $('#element_insert_position');
+    if ($positionField.length == 0) {
+        // Create hidden field if it doesn't exist
+        $('<input>').attr({
+            type: 'hidden',
+            id: 'element_insert_position',
+            name: 'element_insert_position',
+            value: elementInsertPosition
+        }).appendTo('#element_holder_form_id');
+    } else {
+        $positionField.attr('value', elementInsertPosition);
+    }
+    
+    hideElementSelector();
+    $('#element_holder_form_id').submit();
+}
+
+// Restore scroll position on page load
+$(document).ready(function() {
+    restoreScrollPosition();
+    
+    // Save scroll position before any element holder form submit
+    $('#element_holder_form_id').on('submit', function() {
+        saveScrollPosition();
+    });
+});
+
 // Saves the selected element holder back to the link in the parent window
 function submitSelectionBackToOpener(backRef, backValue, backClickId) {
     var $backField = window.opener.$('#' + backRef);
