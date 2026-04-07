@@ -1,37 +1,37 @@
-<div class="selector_panel">
+<div class="selector_panel modern-selector">
     {if isset($new_image_label_field)}
         {$new_image_label_field}
     {/if}
 
-    <select class="label-selector" multiple="multiple" size="10" name="select_labels_{$context_id}[]">
-        {if count($all_labels) > 0}
-            {foreach from=$all_labels item=label}
-                {if !$label.is_selected}
-                    <option value="{$label.id}">{$label.name}</option>
-                {/if}
-            {/foreach}
-        {/if}
-        {if (count($all_labels) == 0 && (count($all_labels) - count($image_labels) ==0))}
-            <option value="-1"></option>
-        {/if}
-    </select>
+    <div class="selector-column">
+        <label class="selector-label">Beschikbare labels</label>
+        <select class="label-selector modern-select" multiple="multiple" size="10" name="select_labels_{$context_id}[]">
+            {if count($all_labels) > 0}
+                {foreach from=$all_labels item=label}
+                    {if !$label.is_selected}
+                        <option value="{$label.id}">{$label.name}</option>
+                    {/if}
+                {/foreach}
+            {/if}
+            {if (count($all_labels) == 0 && (count($all_labels) - count($image_labels) ==0))}
+                <option value="-1"></option>
+            {/if}
+        </select>
+    </div>
 
-    {if count($image_labels) > 0}
-        <table class="selected-labels" cellpadding="0" cellspacing="0">
-            <colgroup width="100px"></colgroup>
-            <colgroup width="50px"></colgroup>
-            <thead>
-            <th>Geselecteerde labels</th>
-            <th>Verwijder</th>
-            </thead>
-            <tbody>
-            {foreach from=$image_labels item=image_label}
-                <tr>
-                    <td>{$image_label.name}</td>
-                    <td class="delete_column">{$image_label.delete_checkbox}</td>
-                </tr>
-            {/foreach}
-            </tbody>
-        </table>
-    {/if}
+    <div class="selected-items-column">
+        <label class="selector-label">Geselecteerd</label>
+        <div class="selected-items-list">
+            {if count($image_labels) > 0}
+                {foreach from=$image_labels item=image_label}
+                    <div class="selected-item">
+                        <span class="item-name">{$image_label.name}</span>
+                        <div class="item-delete">{$image_label.delete_checkbox}</div>
+                    </div>
+                {/foreach}
+            {else}
+                <div class="no-items-message">Geen labels geselecteerd</div>
+            {/if}
+        </div>
+    </div>
 </div>
