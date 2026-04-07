@@ -339,7 +339,7 @@ for their own split view (e.g. page list + page editor)
 
 /* Compact headers for label/term selectors in elements */
 .image_label_selector .panel-title,
-.article_term_selector .panel-title {
+.term_selector .panel-title {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 13px;
 }

@@ -17,17 +17,19 @@
 .page_tree li {
     margin: 0;
     padding: 0;
+    border-bottom: none;
 }
 
 .page_tree_link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 3px 6px;
+    gap: 10px;
+    padding: 4px 8px;
     text-decoration: none;
     font-size: 13px;
     border-radius: 2px;
     transition: background 0.15s;
+    border-bottom: none;
 }
 
 .page_tree_link:hover {
@@ -39,6 +41,7 @@
     content: '';
     display: inline-block;
     width: 14px;
+    margin-right: 5px;
     height: 14px;
     background-image: url(/admin?file=/modules/pages/img/pages.png);
     background-size: contain;

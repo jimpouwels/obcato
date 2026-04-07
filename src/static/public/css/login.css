@@ -1,17 +1,23 @@
+/* Modern login form */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
 #login-form-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -250px;
-    margin-top: -150px;
-    display: block;
-    overflow: auto;
-    width: 500px;
-    border: 1px solid rgb(128, 128, 128);
-    font-family: Verdana;
-    font-size: 0.8em;
-    background-color: #fbf9ee;
-    box-shadow: 5px 5px 5px #888888;
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    margin: 20px;
 }
 
 .loginform {
@@ -20,50 +26,117 @@
     margin: 0;
 }
 
-.admin_label {
-    min-width: 135px;
-    padding-top: 12px;
-    display: block;
-}
-
-.admin_field {
-    margin-top: 8px;
-    width: 200px;
-}
-
-.fields {
-    width: 200px;
-    margin: 20px auto auto;
-}
-
 .header {
-    width: 100%;
-    background-color: #1f8dd6;
-    font-family: GeosansLight;
-    color: #ffffff;
+    background: linear-gradient(135deg, #2271b1 0%, #135e96 100%);
+    padding: 16px 20px;
+    text-align: center;
 }
 
 .header p {
-    margin: 0px;
-    padding: 8px;
-    font-size: 1.4em;
-    font-weight: bold;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
-.header img {
-    margin-top: 3px;
+.fields {
+    padding: 30px;
+}
+
+.admin_form_field_v2 {
+    margin-bottom: 20px;
+}
+
+.admin_label_wrapper {
+    margin-bottom: 6px;
+}
+
+.admin_label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: #2c3338;
+    margin-bottom: 6px;
+}
+
+.admin_field {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.admin_field:focus {
+    outline: none;
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
 }
 
 .button-holder {
-    width: 80px;
-    float: right;
-    margin-top: 20px;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.button-holder button,
+.button-holder input[type="button"] {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #2271b1 0%, #135e96 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.button-holder button:hover,
+.button-holder input[type="button"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.4);
+}
+
+.button-holder button:active,
+.button-holder input[type="button"]:active {
+    transform: translateY(0);
 }
 
 .error {
     text-align: center;
-    color: red;
-    margin: 60px auto auto;
-    clear: both;
-    width: 450px;
+    padding: 0;
+    margin: 0 30px 20px;
+}
+
+.error p {
+    color: #d63638;
+    font-size: 13px;
+    margin: 0;
+    padding: 10px;
+    background: #fcf0f1;
+    border-radius: 4px;
+    border-left: 3px solid #d63638;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    #login-form-box {
+        margin: 10px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .header p {
+        font-size: 24px;
+    }
+    
+    .fields {
+        padding: 20px;
+    }
 }

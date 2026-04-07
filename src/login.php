@@ -77,13 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ?>
                 </div>
             </div>
-            <div class="error">
-                <?php
-                if (!empty($errors['login_unsuccessful'])) {
-                    echo "<p class=\"red\">" . $errors['login_unsuccessful'] . "</p>";
-                }
-                ?>
-            </div>
+            <?php if (!empty($errors['login_unsuccessful'])): ?>
+                <div class="error">
+                    <p><?= $errors['login_unsuccessful']; ?></p>
+                </div>
+            <?php endif; ?>
         </fieldset>
     </form>
 </div>
