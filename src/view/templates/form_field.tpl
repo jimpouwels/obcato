@@ -1,9 +1,4 @@
 <div class="admin_form_field_v2">
-    {if $error}
-        <div class="admin_form_error">
-            {$error}
-        </div>
-    {/if}
     <div class="admin_label_wrapper">
         {if isset($label)}
             {$label}
@@ -15,4 +10,9 @@
             <span class="form_field_helptext">{$help_text}</span>
         {/if}
     </div>
+    {if $error}
+        <div class="admin_form_error">
+            {$error}
+        </div>
+    {/if}
 </div>

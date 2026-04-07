@@ -21,8 +21,6 @@ class LinkEditor extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         if (count($this->_links) > 0) {
             $data->assign('links', $this->getLinksData());
-        } else {
-            $data->assign('message', $this->renderNoLinksFoundMessage());
         }
     }
 
@@ -86,12 +84,6 @@ class LinkEditor extends Panel {
             $target_title = $link_target->getTitle();
         }
         return $target_title;
-    }
-
-    private function renderNoLinksFoundMessage(): string {
-        $message = $this->getTextResource('link_editor_no_links_found_message');
-        $message = new InformationMessage($message);
-        return $message->render();
     }
 
     private function getTargetOptions(): array {

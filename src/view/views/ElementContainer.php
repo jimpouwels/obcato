@@ -25,15 +25,8 @@ class ElementContainer extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         if (count($this->elements) > 0) {
             $data->assign("elements", $this->renderElements());
-        } else {
-            $data->assign("message", $this->renderInformationMessage());
         }
         $data->assign("element_types", $this->getElementTypes());
-    }
-
-    private function renderInformationMessage(): string {
-        $information_message = new InformationMessage($this->getTextResource('no_elements_found_message'));
-        return $information_message->render();
     }
 
     private function renderElements(): array {

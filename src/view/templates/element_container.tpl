@@ -59,8 +59,6 @@
     </div>
 {else}
     <div id="element_container" class="draggable_items empty-container">
-        {$message}
-        
         {* Insert button for empty container *}
         <div class="element-insert-button" data-insert-position="0">
             <button type="button" class="insert-btn" onclick="showElementSelector(0); return false;" title="Element invoegen">

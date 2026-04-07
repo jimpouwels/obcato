@@ -24,7 +24,7 @@ link_editor_target_same_page: Zelfde pagina
 link_editor_target_new_tab: Nieuw tab
 link_editor_target_popup: Popup
 link_editor_link_browser_target: Openen in
-link_editor_no_links_found_message: Geen links gevonden. Klik op &quot;Invoegen&quot; &gt; &quot;Link&quot; om een nieuwe link toe te voegen.
+
 link_editor_new_link_title: Nieuwe link
 place_link: Plaats link
 link_title: Titel
@@ -61,7 +61,6 @@ form_error_invalid_email: Ongeldig email adres
 # ELEMENT HOLDER
 element_include_in_table_of_contents: Inhoudsopgave
 element_holder_content_title: Inhoud
-no_elements_found_message: Geen elementen gevonden. Ga naar "Invoegen" om een nieuw element toe te voegen.
 element_button_label_delete: Verwijder
 element_button_label_minimize_all: Minimaliseer alle
 element_button_label_minimize: Minimaliseer

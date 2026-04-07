@@ -272,6 +272,13 @@ $(document).ready(function () {
 
 // handles add link
 function addLink() {
+    // Save scroll position before submitting
+    var data = {
+        position: window.pageYOffset || document.documentElement.scrollTop,
+        insertPosition: null
+    };
+    sessionStorage.setItem('elementHolderScrollData', JSON.stringify(data));
+    
     var $elementHolderForm = $('#element_holder_form_id');
     if ($elementHolderForm.length == 0) {
         alert('Fout: Kan link niet toevoegen');
