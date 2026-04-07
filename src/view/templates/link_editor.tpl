@@ -29,11 +29,12 @@
                     {if !is_null($link.target_field)}
                         {$link.target_field}
                     {else}
-                        <em>{$link.target_title}</em>
-                        <span class="link_delete_link"><a href="#" onclick="deleteLink('{$link.id}'); return false;"
-                                                          title="Verwijder linkdoel"><img
-                                        src="/admin?file=/default/img/default_icons/delete_small.png"
-                                        alt="Verwijder linkdoel" /></a></span>
+                        <div class="link-target-display">
+                            <span class="target-title">{$link.target_title}</span>
+                            <button type="button" class="delete-target-btn" onclick="deleteLink('{$link.id}'); return false;" title="Verwijder linkdoel">
+                                <img src="/admin?file=/default/img/default_icons/delete_small.png" alt="Verwijder linkdoel" />
+                            </button>
+                        </div>
                     {/if}
                 </td>
                 <td class="link-code">

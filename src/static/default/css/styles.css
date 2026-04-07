@@ -921,6 +921,54 @@ textarea:focus {
     max-height: 16px;
 }
 
+.link-target-display {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    max-width: 200px;
+}
+
+.link-target-display:hover {
+    border-color: var(--color-gray-300);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.link-target-display .target-title {
+    font-size: 13px;
+    color: var(--color-gray-900);
+    font-style: italic;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.link-target-display .delete-target-btn {
+    flex-shrink: 0;
+    padding: 2px 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.link-target-display .delete-target-btn:hover {
+    opacity: 1;
+}
+
+.link-target-display .delete-target-btn img {
+    width: 12px;
+    height: 12px;
+}
+
 .link_delete_link {
     margin-left: 4px;
 }
