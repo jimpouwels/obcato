@@ -11,6 +11,14 @@ class StaticsRequestHandler extends HttpRequestHandler {
     public function handleGet(): void {
         $relativePath = $this->getRelativePathFromGetRequest();
         if (!empty($relativePath)) {
+            // SECURITY: Block directory traversal and other path attacks
+            if ($this->containsBlacklistedChars($relativePath) ||
+                $this->containsBlacklistedChars($_GET["module"] ?? '') ||
+                $this->containsBlacklistedChars($_GET["element"] ?? '')) {
+                http_response_code(403);
+                exit('Access denied');
+            }
+            
             $absolutePath = $this->getAbsolutePathFor($relativePath);
             $this->setResponseContentType($absolutePath);
             readfile(explode('?', $absolutePath)[0]);
@@ -78,5 +86,22 @@ class StaticsRequestHandler extends HttpRequestHandler {
             return $_GET["file"];
         }
         return null;
+    }
+
+    private function containsBlacklistedChars(string $param): bool {
+        $blacklist = [
+            '..',  // Parent directory traversal
+            '~',   // Home directory
+            "\0",  // Null byte
+            '%00', // URL encoded null byte
+        ];
+        
+        foreach ($blacklist as $forbidden) {
+            if (str_contains($param, $forbidden)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
