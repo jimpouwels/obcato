@@ -38,6 +38,18 @@ article_editor_image_label: Image
 article_editor_wallpaper_label: Wallpaper
 article_editor_delete_image_button_label: Delete image
 article_editor_delete_wallpaper_button_label: Delete wallpaper
+
+# CONFIRMATIONS
+articles_confirm_delete_article: Are you sure you want to delete this article?
+articles_confirm_delete_terms: Are you sure you want to delete the selected terms?
+articles_confirm_delete_metadata_fields: Are you sure you want to delete the selected metadata fields?
+articles_confirm_delete_image: Are you sure you want to delete this image?
+articles_confirm_delete_wallpaper: Are you sure you want to delete this wallpaper?
+articles_confirm_delete_related_article: Are you sure you want to delete this reference?
+articles_confirm_delete_target_pages: Are you sure you want to delete the selected target pages?
+articles_alert_no_terms_selected: No terms selected
+articles_alert_no_metadata_fields_selected: No metadata fields selected
+articles_alert_no_target_pages_selected: No target pages selected
 article_editor_delete_parent_article_label: Delete reference
 article_editor_change_image_button: Change
 article_editor_delete_button: Delete

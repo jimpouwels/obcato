@@ -46,3 +46,6 @@ webforms_article_comment_form_handler_name_add_button: Opslaan als artikelreacti
 webforms_redirect_handler_page_picker: Selecteer pagina
 webforms_handlers_editor_title: Formulier afhandelingen
 webforms_editor_handler_property_mandatory_error_message: Dit veld is verplicht
+
+# CONFIRMATIONS
+webforms_confirm_delete_webform: Are you sure?

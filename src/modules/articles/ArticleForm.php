@@ -88,19 +88,19 @@ class ArticleForm extends Form {
     }
 
     private function deleteLeadImageIfNeeded(): void {
-        if ($this->getFieldValue("delete_lead_image_field") == "true") {
+        if ($this->getFieldValue("delete_article_image_ref_" . $this->article->getId()) == "true") {
             $this->article->setImageId(null);
         }
     }
 
     private function deleteWallpaperIfNeeded(): void {
-        if ($this->getFieldValue("delete_wallpaper_field") == "true") {
+        if ($this->getFieldValue("delete_article_wallpaper_ref_" . $this->article->getId()) == "true") {
             $this->article->setWallpaperId(null);
         }
     }
 
     private function deleteParentArticleIfNeeded(): void {
-        if ($this->getFieldValue("delete_parent_article_field") == "true") {
+        if ($this->getFieldValue("delete_parent_article_id") == "true") {
             $this->article->setParentArticleId(null);
         }
     }

@@ -39,8 +39,16 @@ class SitewidePagesModuleVisual extends ModuleVisual {
         return $buttons;
     }
 
-    public function renderHeadIncludes(): string {
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("sitewide_pages/templates/styles/sitewide_pages.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("sitewide_pages/templates/scripts/module_sitewide_pages.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

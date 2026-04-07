@@ -11,3 +11,6 @@ users_editor_lastname_field_label: Achternaam
 users_editor_email_address_field_label: Email adres
 users_editor_new_pwd_field_label: Nieuw wachtwoord
 users_editor_new_pwd_repeat_field_label: Nieuw wachtwoord (herhaal)
+
+# CONFIRMATIONS
+authorization_confirm_delete_user: Weet u zeker dat u deze gebruiker wilt verwijderen?

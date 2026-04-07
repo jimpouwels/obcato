@@ -112,19 +112,40 @@ class ArticleModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->articleModule->getIdentifier());
-
-        $elementStaticValues = array();
+    public function renderStyles(): array {
+        $styles = array();
+        
+        // Add element statics styles
         if ($this->currentArticle) {
             $elementStatics = $this->currentArticle->getElementStatics();
             foreach ($elementStatics as $elementStatic) {
-                $elementStaticValues[] = $elementStatic->render();
+                $elementStyles = $elementStatic->renderStyles();
+                $styles = array_merge($styles, $elementStyles);
             }
         }
-        $this->getTemplateEngine()->assign("element_statics", $elementStaticValues);
-        $this->getTemplateEngine()->assign("path", $this->articleModule->getIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        
+        // Render module CSS
+        $styles[] = $this->getTemplateEngine()->fetch("articles/templates/styles/articles.css.tpl");
+        
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        
+        // Add element statics scripts
+        if ($this->currentArticle) {
+            $elementStatics = $this->currentArticle->getElementStatics();
+            foreach ($elementStatics as $elementStatic) {
+                $elementScripts = $elementStatic->renderScripts();
+                $scripts = array_merge($scripts, $elementScripts);
+            }
+        }
+        
+        // Render module JS
+        $scripts[] = $this->getTemplateEngine()->fetch("articles/templates/scripts/module_article.js.tpl");
+        
+        return $scripts;
     }
 
     public function onRequestHandled(): void {

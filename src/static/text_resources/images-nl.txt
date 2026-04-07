@@ -47,3 +47,8 @@ new_image_label_field_label: Nieuw label
 images_save_success_message: Afbeelding succesvol opgeslagen
 images_save_failed_message: Afbeelding niet opgeslagen, verwerk de fouten
 images_image_editor_no_image_found_yet_message: Nog geen afbeelding geuploaded
+
+# CONFIRMATIONS
+images_confirm_delete_image: Weet u zeker dat u deze afbeelding wilt verwijderen?
+images_confirm_delete_labels: Weet u zeker dat u de geselecteerde label wilt verwijderen?
+images_alert_no_labels_selected: U heeft geen labels geselecteerd

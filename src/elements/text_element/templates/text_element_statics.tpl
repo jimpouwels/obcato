@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="/admin?file=css/text_element.css&element=text_element" type="text/css" />

@@ -1,1 +1,4 @@
 components_module_title: Components
+
+# CONFIRMATIONS
+components_confirm_delete: Are you sure you want to delete this component?

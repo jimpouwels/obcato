@@ -27,3 +27,6 @@ pages_edit_metadata_friendly_url_label: URL
 # NEW PAGE DEFAULT DATA
 new_page_default_title: New page
 new_page_default_navigation_title: New page
+
+# CONFIRMATIONS
+pages_confirm_delete: Are you sure you want to delete this page and all its child pages?

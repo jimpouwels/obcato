@@ -47,3 +47,8 @@ new_image_label_field_label: New label
 images_save_success_message: Image successfully saved
 images_save_failed_message: Image not saved, process the errors
 images_image_editor_no_image_found_yet_message: No image uploaded yet
+
+# CONFIRMATIONS
+images_confirm_delete_image: Are you sure you want to delete this image?
+images_confirm_delete_labels: Are you sure you want to delete the selected label?
+images_alert_no_labels_selected: No labels selected

@@ -28,5 +28,10 @@ blocks_positions_list_delete_column: Delete
 blocks_edit_metadata_name_field_label: Name
 blocks_edit_metadata_title_field_label: Title
 blocks_edit_metadata_ispublished_field_label: Published
+
+# CONFIRMATIONS
+blocks_confirm_delete_block: Are you sure you want to delete this block?
+blocks_confirm_delete_positions: Are you sure you want to delete the selected positions?
+blocks_alert_no_positions_selected: No positions selected
 blocks_edit_metadata_template_field_label: Template
 blocks_edit_metadata_position_field_label: Position

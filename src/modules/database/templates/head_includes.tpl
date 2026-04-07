@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="/admin?file=/modules/{$path}/css/database.css" type="text/css" />

@@ -78,11 +78,6 @@ class ArticleMetadataEditor extends Panel {
         $imagePickerField = new ImagePicker("article_image_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_image_label'), $this->currentArticle->getImageId(), "update_element_holder");
         $wallpaperPickerField = new ImagePicker("article_wallpaper_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_wallpaper_label'), $this->currentArticle->getWallpaperId(), "update_element_holder");
 
-        if ($this->currentArticle->getParentArticleId()) {
-            $parentArticle = $this->articleDao->getArticle($this->currentArticle->getParentArticleId());
-            $data->assign('parent_article', $this->renderParentArticle($parentArticle));
-        }
-
         $data->assign("child_articles", $this->renderChildArticles());
         $data->assign("current_article_id", $this->currentArticle->getId());
         $data->assign("name_field", $nameField->render());

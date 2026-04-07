@@ -18,7 +18,6 @@ use Obcato\Core\view\views\TabMenu;
 
 class PageModuleVisual extends ModuleVisual {
 
-    private static string $HEAD_INCLUDES_TEMPLATE = "pages/templates/head_includes.tpl";
     private ?Page $currentPage;
     private Module $pageModule;
     private PageRequestHandler $pageRequestHandler;
@@ -60,15 +59,36 @@ class PageModuleVisual extends ModuleVisual {
         return $buttons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->pageModule->getIdentifier());
-        $elementStaticsValues = array();
+    public function renderStyles(): array {
+        $styles = array();
+        
+        // Add element statics styles
         $elementStatics = $this->currentPage->getElementStatics();
-        foreach ($elementStatics as $element_static) {
-            $elementStaticsValues[] = $element_static->render();
+        foreach ($elementStatics as $elementStatic) {
+            $elementStyles = $elementStatic->renderStyles();
+            $styles = array_merge($styles, $elementStyles);
         }
-        $this->getTemplateEngine()->assign("element_statics", $elementStaticsValues);
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        
+        // Render module CSS
+        $styles[] = $this->getTemplateEngine()->fetch("pages/templates/styles/pages.css.tpl");
+        
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        
+        // Add element statics scripts
+        $elementStatics = $this->currentPage->getElementStatics();
+        foreach ($elementStatics as $elementStatic) {
+            $elementScripts = $elementStatic->renderScripts();
+            $scripts = array_merge($scripts, $elementScripts);
+        }
+        
+        // Render module JS
+        $scripts[] = $this->getTemplateEngine()->fetch("pages/templates/scripts/module_pages.js.tpl");
+        
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

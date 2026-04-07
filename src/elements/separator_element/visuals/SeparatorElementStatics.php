@@ -2,18 +2,22 @@
 
 namespace Obcato\Core\elements\separator_element\visuals;
 
-use Obcato\Core\view\views\Visual;
+use Obcato\Core\view\views\ElementStatic;
 
-class SeparatorElementStatics extends Visual {
+class SeparatorElementStatics extends ElementStatic {
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getTemplateFilename(): string {
-        return "separator_element/templates/separator_element_statics.tpl";
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("separator_element/templates/styles/separator_element.css.tpl");
+        return $styles;
     }
 
-    public function load(): void {}
+    public function renderScripts(): array {
+        return array();
+    }
 
 }

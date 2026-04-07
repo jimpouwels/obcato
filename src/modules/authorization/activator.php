@@ -46,8 +46,16 @@ class AuthorizationModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("authorization/templates/styles/module_authorization.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("authorization/templates/scripts/module_authorization.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

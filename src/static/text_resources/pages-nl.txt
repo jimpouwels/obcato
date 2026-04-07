@@ -27,3 +27,6 @@ pages_edit_metadata_friendly_url_label: URL
 # NEW PAGE DEFAULT DATA
 new_page_default_title: Nieuwe pagina
 new_page_default_navigation_title: Nieuwe pagina
+
+# CONFIRMATIONS
+pages_confirm_delete: Weet u zeker dat u deze, en alle onderliggende pagina's, wilt verwijderen?

@@ -46,3 +46,5 @@ webforms_article_comment_form_handler_name_add_button: Save as article comment
 webforms_redirect_handler_page_picker: Select page
 webforms_handlers_editor_title: Form handlers
 webforms_editor_handler_property_mandatory_error_message: This field is mandatory
+# CONFIRMATIONS
+webforms_confirm_delete_webform: Are you sure?

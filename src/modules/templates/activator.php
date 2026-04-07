@@ -68,9 +68,16 @@ class TemplateModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("templates/templates/styles/templates.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("templates/templates/scripts/templates.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

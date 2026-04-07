@@ -2,18 +2,22 @@
 
 namespace Obcato\Core\elements\photo_album_element\visuals;
 
-use Obcato\Core\view\views\Visual;
+use Obcato\Core\view\views\ElementStatic;
 
-class PhotoAlbumElementStatics extends Visual {
+class PhotoAlbumElementStatics extends ElementStatic {
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getTemplateFilename(): string {
-        return "photo_album_element/templates/photo_album_element_statics.tpl";
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("photo_album_element/templates/styles/photo_album_element.css.tpl");
+        return $styles;
     }
 
-    public function load(): void {}
+    public function renderScripts(): array {
+        return array();
+    }
 
 }

@@ -1,2 +1,4 @@
 sitewide_pages_module_title: Sitewide Pages
 sitewide_pages_list_title: Maintain sitewide pages
+# CONFIRMATIONS
+sitewide_pages_confirm_delete: Are you sure you want to delete the selected sitewide pages?

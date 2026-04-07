@@ -11,3 +11,6 @@ users_editor_lastname_field_label: Last name
 users_editor_email_address_field_label: Email address
 users_editor_new_pwd_field_label: New password
 users_editor_new_pwd_repeat_field_label: New password (repeat)
+
+# CONFIRMATIONS
+authorization_confirm_delete_user: Are you sure you want to delete this user?

@@ -78,9 +78,16 @@ class ImageModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("images/templates/styles/images.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("images/templates/scripts/module_image.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

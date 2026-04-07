@@ -28,5 +28,10 @@ blocks_positions_list_delete_column: Verwijderen
 blocks_edit_metadata_name_field_label: Naam
 blocks_edit_metadata_title_field_label: Titel
 blocks_edit_metadata_ispublished_field_label: Gepubliceerd
+
+# CONFIRMATIONS
+blocks_confirm_delete_block: Weet u zeker dat u dit blok wilt verwijderen?
+blocks_confirm_delete_positions: Weet u zeker dat u de geselecteerde posities wilt verwijderen?
+blocks_alert_no_positions_selected: U heeft geen posities geselecteerd
 blocks_edit_metadata_template_field_label: Presentatie
 blocks_edit_metadata_position_field_label: Positie

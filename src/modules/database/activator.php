@@ -44,9 +44,16 @@ class DatabaseModuleVisual extends ModuleVisual {
         return array();
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("database/templates/styles/database.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("database/templates/scripts/module_database.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

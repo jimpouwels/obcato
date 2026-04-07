@@ -1,15 +1,13 @@
 <div class="selected_image_display">
-    <div class="selected_image_info">
-        <p><i><a href="#" class="image-view-link" 
+    <div class="selected_image_info" style="display: flex; align-items: center; justify-content: space-between;">
+        <p style="margin: 0;"><i><a href="#" class="image-view-link" 
                data-image-id="{$image_id}" 
                data-image-title="{$image_title}" 
                data-image-type="{$field_name}" 
                data-image-url="{$image_url}" 
                data-picker-field="{$field_name}"
                data-modal-id="image-modal-{$field_name}">{$image_title}</a></i></p>
-    </div>
-    <div class="selected_image_delete_button">
-        <button type="button" class="delete-image-btn" data-delete-field="{$delete_field_name}">
+        <button type="button" class="delete-image-btn" data-delete-field="{$delete_field_name}" style="margin-left: 10px; padding: 2px 6px; background: none; border: none; cursor: pointer;">
             <img src="{$delete_icon_url}" alt="Verwijderen" />
         </button>
     </div>

@@ -2,18 +2,24 @@
 
 namespace Obcato\Core\elements\list_element\visuals;
 
-use Obcato\Core\view\views\Visual;
+use Obcato\Core\view\views\ElementStatic;
 
-class ListElementStatics extends Visual {
+class ListElementStatics extends ElementStatic {
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getTemplateFilename(): string {
-        return "list_element/templates/list_element_statics.tpl";
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("list_element/templates/styles/list_element.css.tpl");
+        return $styles;
     }
 
-    public function load(): void {}
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("list_element/templates/scripts/list_element.js.tpl");
+        return $scripts;
+    }
 
 }

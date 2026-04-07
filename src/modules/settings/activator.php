@@ -44,9 +44,22 @@ class SettingsModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->settingsModule->getIdentifier());
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        
+        // Render module CSS
+        $styles[] = $this->getTemplateEngine()->fetch("settings/templates/styles/settings.css.tpl");
+        
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        
+        // Render module JS
+        $scripts[] = $this->getTemplateEngine()->fetch("settings/templates/scripts/module_settings.js.tpl");
+        
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

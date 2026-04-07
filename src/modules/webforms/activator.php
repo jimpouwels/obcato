@@ -50,9 +50,16 @@ class WebFormsModuleVisual extends ModuleVisual {
         return $action_buttons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->getModuleIdentifier());
-        return $this->getTemplateEngine()->fetch("webforms/templates/head_includes.tpl");
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("webforms/templates/styles/webforms.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("webforms/templates/scripts/module_webform.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

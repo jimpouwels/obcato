@@ -2,18 +2,22 @@
 
 namespace Obcato\Core\elements\article_overview_element\visuals;
 
-use Obcato\Core\view\views\Visual;
+use Obcato\Core\view\views\ElementStatic;
 
-class ArticleOverviewElementStatics extends Visual {
+class ArticleOverviewElementStatics extends ElementStatic {
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getTemplateFilename(): string {
-        return "article_overview_element/templates/article_overview_element_statics.tpl";
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("article_overview_element/templates/styles/article_overview_element.css.tpl");
+        return $styles;
     }
 
-    public function load(): void {}
+    public function renderScripts(): array {
+        return array();
+    }
 
 }

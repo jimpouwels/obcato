@@ -1,2 +1,0 @@
-<link rel="stylesheet" href="/admin?file=css/list_element.css&element=list_element" type="text/css" />
-<script type="text/javascript" src="/admin?file=js/list_element.js&element=list_element"></script>

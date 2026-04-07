@@ -13,8 +13,20 @@
     <script type="text/javascript" src="/admin?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=7"></script>
 
-    {if isset($module_head_includes)}
-        {$module_head_includes}
+    {if isset($module_styles)}
+        {foreach from=$module_styles item=style}
+            <style>
+                {$style}
+            </style>
+        {/foreach}
+    {/if}
+    
+    {if isset($module_scripts)}
+        {foreach from=$module_scripts item=script}
+            <script type="text/javascript">
+                {$script}
+            </script>
+        {/foreach}
     {/if}
 </head>
 <body>

@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="/admin?file=css/image_element.css&element=image_element" type="text/css" />

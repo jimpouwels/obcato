@@ -1,1 +1,4 @@
 downloads_module_title: Downloads
+
+# CONFIRMATIONS
+downloads_confirm_delete: Weet u zeker dat u deze download wilt verwijderen?

@@ -1,2 +1,5 @@
 sitewide_pages_module_title: Sitewide Pagina's
 sitewide_pages_list_title: Beheer sitewide pagina's
+
+# CONFIRMATIONS
+sitewide_pages_confirm_delete: Weet u zeker dat u de geselecteerde sitewide pages wilt verwijderen?

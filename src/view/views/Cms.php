@@ -37,7 +37,8 @@ class Cms extends Visual {
 
         if ($this->moduleVisual) {
             $this->assignGlobal("page_title", $this->moduleVisual->getTitle());
-            $this->assignGlobal("module_head_includes", $this->moduleVisual->renderHeadIncludes());
+            $this->assignGlobal("module_styles", $this->moduleVisual->renderStyles());
+            $this->assignGlobal("module_scripts", $this->moduleVisual->renderScripts());
         }
         $this->assignGlobal("backend_base_url", $this->getBackendBaseUrl());
         $this->assignGlobal("image_base_url", $this->getImageBaseUrl());

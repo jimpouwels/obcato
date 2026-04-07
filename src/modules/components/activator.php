@@ -37,8 +37,16 @@ class ComponentsModuleVisual extends ModuleVisual {
         $this->assign('content', $content->render());
     }
 
-    public function renderHeadIncludes(): string {
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+    public function renderStyles(): array {
+        $styles = array();
+        $styles[] = $this->getTemplateEngine()->fetch("components/templates/styles/components.css.tpl");
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("components/templates/scripts/components.js.tpl");
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {

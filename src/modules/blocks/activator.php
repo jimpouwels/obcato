@@ -66,17 +66,40 @@ class BlockModuleVisual extends ModuleVisual {
         return $actionButtons;
     }
 
-    public function renderHeadIncludes(): string {
-        $this->getTemplateEngine()->assign("path", $this->module->getIdentifier());
-        $elementStaticsValues = array();
+    public function renderStyles(): array {
+        $styles = array();
+        
+        // Add element statics styles
         if ($this->currentBlock) {
             $elementStatics = $this->currentBlock->getElementStatics();
-            foreach ($elementStatics as $element_static) {
-                $elementStaticsValues[] = $element_static->render();
+            foreach ($elementStatics as $elementStatic) {
+                $elementStyles = $elementStatic->renderStyles();
+                $styles = array_merge($styles, $elementStyles);
             }
         }
-        $this->getTemplateEngine()->assign("element_statics", $elementStaticsValues);
-        return $this->getTemplateEngine()->fetch(self::$HEAD_INCLUDES_TEMPLATE);
+        
+        // Render module CSS
+        $styles[] = $this->getTemplateEngine()->fetch("blocks/templates/styles/blocks.css.tpl");
+        
+        return $styles;
+    }
+
+    public function renderScripts(): array {
+        $scripts = array();
+        
+        // Add element statics scripts
+        if ($this->currentBlock) {
+            $elementStatics = $this->currentBlock->getElementStatics();
+            foreach ($elementStatics as $elementStatic) {
+                $elementScripts = $elementStatic->renderScripts();
+                $scripts = array_merge($scripts, $elementScripts);
+            }
+        }
+        
+        // Render module JS
+        $scripts[] = $this->getTemplateEngine()->fetch("blocks/templates/scripts/module_blocks.js.tpl");
+        
+        return $scripts;
     }
 
     public function getRequestHandlers(): array {
