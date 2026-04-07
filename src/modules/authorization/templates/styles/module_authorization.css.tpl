@@ -1,39 +1,43 @@
-.user_tree_fieldset {
-    width: 315px;
-    float: left;
-}
-
 .user_tree {
-    margin-left: 10px;
+    /* Uses content_left_column styling */
 }
 
 .user_tree ul {
-    padding-left: 25px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .user_tree ul li {
     list-style-type: none;
-    margin-top: 5px;
+    margin: 0;
+    border-bottom: 1px solid var(--color-gray-200);
 }
 
 .user_tree a {
     text-decoration: none;
-    color: black;
+    color: var(--color-gray-900);
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: block;
+    font-size: 13px;
+    transition: all 0.2s;
 }
 
 .user_tree a:hover {
-    text-decoration: underline;
+    background: var(--color-gray-50);
+    text-decoration: none;
+}
+
+.user_tree strong a {
+    background: var(--color-blue-50);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-left: 3px solid var(--color-primary);
+    padding-left: calc(var(--spacing-md) - 3px);
 }
 
 .user_list_item {
-    list-style-image: url(/admin?file=/modules/authorization/img/user_icon.png);
-    font-style: normal;
-}
-
-.user_meta {
-    margin-left: 350px;;
-    height: 30%;
+    list-style: none;
 }
 
 .user_prefix_field {

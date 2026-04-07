@@ -4,15 +4,18 @@ namespace Obcato\Core\modules\templates\visuals\template_files;
 
 use Obcato\Core\database\dao\TemplateDao;
 use Obcato\Core\database\dao\TemplateDaoMysql;
+use Obcato\Core\modules\templates\model\TemplateFile;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\Panel;
 
 class TemplateFilesList extends Panel {
     private TemplateDao $templateDao;
+    private ?TemplateFile $currentTemplateFile;
 
-    public function __construct() {
+    public function __construct(?TemplateFile $currentTemplateFile = null) {
         parent::__construct('template_files_list_title', 'template_files_list_panel');
         $this->templateDao = TemplateDaoMysql::getInstance();
+        $this->currentTemplateFile = $currentTemplateFile;
     }
 
     public function getPanelContentTemplate(): string {
@@ -29,6 +32,7 @@ class TemplateFilesList extends Panel {
             $templateFileArray = array();
             $templateFileArray["id"] = $templateFile->getId();
             $templateFileArray["name"] = $templateFile->getName();
+            $templateFileArray["is_active"] = $this->currentTemplateFile && $this->currentTemplateFile->getId() === $templateFile->getId();
             $template_files[] = $templateFileArray;
         }
         return $template_files;

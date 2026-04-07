@@ -34,7 +34,7 @@ class TemplateEditorTab extends Visual {
     }
 
     private function getScopeSelector(): string {
-        return (new ScopeSelector())->render();
+        return (new ScopeSelector($this->currentScope))->render();
     }
 
     private function renderTemplateEditor(): string {

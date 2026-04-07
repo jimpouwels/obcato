@@ -1,1 +1,6 @@
-<div class="content_left_column">    {$user_list}</div><div class="content_right_column">    {$user_editor}</div>
+<div class="content_left_column">
+    {$user_list}
+</div>
+<div class="content_right_column">
+    {$user_editor}
+</div>

@@ -23,7 +23,7 @@ class TemplateFilesTab extends Visual {
 
     public function load(): void {
         $this->assign("current_template_file_id", $this->getCurrentTemplateFileId());
-        $templateFilesList = new TemplateFilesList();
+        $templateFilesList = new TemplateFilesList($this->currentTemplateFile);
         $this->assign("template_files_list", $templateFilesList->render());
 
         $editorHtml = "";
