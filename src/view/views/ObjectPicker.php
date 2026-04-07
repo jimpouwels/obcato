@@ -30,10 +30,33 @@ class ObjectPicker extends FormField {
 
         $data->assign("picker_button", $picker_button->render());
         $data->assign("value", $this->_value);
+        $data->assign("show_button", $this->shouldShowButton());
+        $data->assign("enhanced_display", $this->renderEnhancedDisplay());
+    }
+
+    protected function shouldShowButton(): bool {
+        return true;
+    }
+
+    /**
+     * Override this method to render enhanced display when a value is selected.
+     * For example, ImagePicker can show the image title with a delete button.
+     * @return string HTML to display when value is selected, or empty string for default behavior
+     */
+    protected function renderEnhancedDisplay(): string {
+        return "";
     }
 
     public function getFieldType(): string {
         return 'objectpicker';
+    }
+
+    protected function getValue(): ?string {
+        return $this->_value;
+    }
+
+    protected function getOpenerClickId(): string {
+        return $this->_opener_click_id;
     }
 
 }

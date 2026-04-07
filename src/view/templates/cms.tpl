@@ -20,32 +20,27 @@
 <body>
 <div id="header-wrapper">
     <div id="top">
-        <p class="title">Obcato</p>
-        <p class="version">SYS-version: {$system_version} / DB-version: {$db_version}</p>
+        <p class="title">Obcato <span class="version">v{$system_version}</span></p>
+        <div class="header-right">
+            {$current_user_indicator}
+        </div>
     </div>
+</div>
 
-    <div id="navigation_wrapper">
-        {$navigation_menu}
-        {$current_user_indicator}
-    </div>
+<div id="sidebar-navigation">
+    {$navigation_menu}
+</div>
 
-    {$notification_bar}
+{$notification_bar}
 
+<div id="main-content">
     {if isset($actions_menu)}
         {$actions_menu}
     {/if}
-</div>
-<div id="content-wrapper">
+    
     {if isset($system_logs)}
         {$system_logs}
     {/if}
-    <div class="module_title_wrapper">
-        <h1>
-            {if isset($page_title)}
-                {$page_title}
-            {/if}
-        </h1>
-    </div>
     <div id="content-pane-wrapper">
         {$tab_menu}
         {$content_pane}

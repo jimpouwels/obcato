@@ -11,7 +11,10 @@ $(document).ready(function () {
 
     $('#update_element_holder').click(function () {
         $('#action').attr('value', 'update_element_holder');
-        $('#element_holder_form_id').submit();
+        // Small delay to ensure popup callbacks have completed
+        setTimeout(function() {
+            $('#element_holder_form_id').submit();
+        }, 100);
     });
 
     $('#delete_element_holder').click(function () {
@@ -97,6 +100,20 @@ $(document).ready(function () {
             $('#element_holder_form_id').submit();
         }
         return false;
+    });
+
+    // Preview article button
+    $('#preview_article').on('click', function(e) {
+        e.preventDefault();
+        var previewUrl = $('#article_preview_url').val();
+        if (previewUrl) {
+            window.open(previewUrl, '_blank');
+        }
+    });
+
+    // Metadata fields toggle
+    $('.metadata-fields-toggle').on('click', function() {
+        $(this).closest('.metadata-fields-section').toggleClass('collapsed');
     });
 
     $('#delete_parent_article').click(function () {

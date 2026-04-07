@@ -11,11 +11,15 @@ class NavigationMenu extends Visual {
 
     private array $moduleGroups;
     private ElementDao $elementDao;
+    private ?int $activeModuleId;
+    private bool $isElementHolder;
 
-    public function __construct(array $moduleGroups) {
+    public function __construct(array $moduleGroups, ?int $activeModuleId = null, bool $isElementHolder = false) {
         parent::__construct();
         $this->moduleGroups = $moduleGroups;
         $this->elementDao = ElementDaoMysql::getInstance();
+        $this->activeModuleId = $activeModuleId;
+        $this->isElementHolder = $isElementHolder;
     }
 
     public function getTemplateFilename(): string {
@@ -25,6 +29,10 @@ class NavigationMenu extends Visual {
     public function load(): void {
         $groups = array();
         foreach ($this->moduleGroups as $moduleGroup) {
+            if ($moduleGroup->isElementGroup() && !$this->isElementHolder) {
+                continue;
+            }
+            
             $group = array();
             $group['title'] = $this->getTextResource('menu_item_' . $moduleGroup->getIdentifier());
             if ($moduleGroup->isElementGroup()) {
@@ -48,6 +56,7 @@ class NavigationMenu extends Visual {
             $subItem["popup"] = $module->isPopUp();
             $subItem["icon_url"] = '/admin?file=/modules/' . $module->getIdentifier() . '/img/' . $module->getIdentifier() . '.png';
             $subItem["last"] = ($count == count($modules));
+            $subItem["active"] = ($module->getId() == $this->activeModuleId);
             $count++;
             $subItems[] = $subItem;
         }

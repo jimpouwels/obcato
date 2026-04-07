@@ -16,8 +16,13 @@ function submitSelectionBackToOpener(backRef, backValue, backClickId) {
     var $backField = window.opener.$('#' + backRef);
     if ($backField.length > 0) {
         $backField.attr('value', backValue);
-        window.opener.$('#' + backClickId).click();
-        window.close();
+        // Delay the click and window close to ensure value is set
+        setTimeout(function() {
+            window.opener.$('#' + backClickId).click();
+            setTimeout(function() {
+                window.close();
+            }, 200);
+        }, 50);
     } else {
         alert('Fout: Kan niet opgeslagen worden, waarschijnlijk is het hoofdscherm gesloten');
     }
@@ -311,3 +316,123 @@ function deleteImage(elementId, imageId) {
         }
     });
 }
+
+// Auto-dismiss notification bar after 2.5 seconds
+$(function() {
+    var $notification = $('.notification-holder');
+    if ($notification.length > 0) {
+        setTimeout(function() {
+            $notification.addClass('hiding');
+            setTimeout(function() {
+                $notification.remove();
+            }, 500);
+        }, 2500);
+    }
+});
+
+// Enhanced ImagePicker functionality
+$(document).ready(function() {
+    // Image view link - open modal
+    $(document).on('click', '.image-view-link', function(e) {
+        e.preventDefault();
+        var $link = $(this);
+        var imageId = $link.data('image-id');
+        var imageTitle = $link.data('image-title');
+        var imageType = $link.data('image-type');
+        var imageUrl = $link.data('image-url');
+        var pickerField = $link.data('picker-field');
+        var modalId = $link.data('modal-id');
+        
+        var $modal = $('#' + modalId);
+        
+        // Set modal image
+        $modal.find('.modal-image-img').attr('src', imageUrl).attr('alt', imageTitle);
+        
+        // Store picker field reference on modal
+        $modal.data('picker-field', pickerField);
+        
+        // Show modal
+        $modal.fadeIn(300);
+    });
+    
+    // Image overlay actions - Change image
+    $(document).on('click', '.change-image-btn', function(e) {
+        console.log('Change image button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        // Find the modal this button is in
+        var $modal = $(this).closest('.image-modal');
+        var pickerField = $modal.data('picker-field');
+        
+        console.log('Picker field:', pickerField);
+        console.log('Looking for selector: #object_picker_button_wrapper_' + pickerField + ' a.button');
+        
+        // Close modal
+        $modal.fadeOut(300);
+        
+        // Find and click the picker button using the field name
+        if (pickerField) {
+            var $pickerButton = $('#object_picker_button_wrapper_' + pickerField + ' a.button');
+            console.log('Found picker button:', $pickerButton.length > 0);
+            $pickerButton.click();
+        }
+    });
+    
+    // Image overlay actions - Delete image (from modal)
+    $(document).on('click', '.delete-image-btn-modal', function(e) {
+        console.log('Delete image button (modal) clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        var deleteFieldId = $(this).data('delete-field');
+        var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");
+        
+        if (confirmed) {
+            $('#' + deleteFieldId).val('true');
+            $('#action').val('update_element_holder');
+            // Close modal
+            $(this).closest('.image-modal').fadeOut(300);
+            $('#element_holder_form_id').submit();
+        }
+    });
+    
+    // Image overlay actions - Delete image (from display, not modal)
+    $(document).on('click', '.delete-image-btn', function(e) {
+        e.preventDefault();
+        var deleteFieldId = $(this).data('delete-field');
+        var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");
+        
+        if (confirmed) {
+            $('#' + deleteFieldId).val('true');
+            $('#action').val('update_element_holder');
+            $('#element_holder_form_id').submit();
+        }
+    });
+    
+    // Close modal - only when clicking backdrop directly, not bubbled events
+    $(document).on('click', '.image-modal-backdrop', function(e) {
+        console.log('Backdrop clicked, target:', e.target, 'this:', this, 'match:', e.target === this);
+        if (e.target === this) {
+            console.log('Closing modal from backdrop');
+            $(this).closest('.image-modal').fadeOut(300);
+        }
+    });
+    
+    $(document).on('click', '.image-modal-close', function(e) {
+        console.log('Close button clicked');
+        e.stopPropagation();
+        $(this).closest('.image-modal').fadeOut(300);
+    });
+    
+    // Prevent modal close when clicking inside the content area
+    $(document).on('click', '.image-modal-content', function(e) {
+        console.log('Modal content clicked, target:', e.target);
+        e.stopPropagation();
+    });
+    
+    // ESC key to close modal
+    $(document).on('keyup', function(e) {
+        if (e.key === 'Escape') {
+            $('.image-modal:visible').fadeOut(300);
+        }
+    });
+});

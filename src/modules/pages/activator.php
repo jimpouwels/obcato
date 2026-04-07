@@ -85,6 +85,10 @@ class PageModuleVisual extends ModuleVisual {
         return 0;
     }
 
+    public function isElementHolder(): bool {
+        return true;
+    }
+
     private function currentPageIsHomepage(): bool {
         return $this->currentPage->getId() == 1;
     }

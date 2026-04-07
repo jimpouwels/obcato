@@ -28,9 +28,10 @@ class Cms extends Visual {
     }
 
     public function load(): void {
-        $navigation_menu = new NavigationMenu($this->moduleDao->getModuleGroups());
+        $isElementHolder = $this->moduleVisual && $this->moduleVisual->isElementHolder();
+        $navigation_menu = new NavigationMenu($this->moduleDao->getModuleGroups(), BlackBoard::$MODULE_ID, $isElementHolder);
         $notification_bar = new NotificationBar();
-        $current_user_indicator = new CurrentUserIndicator();
+        $currentUserIndicator = new CurrentUserIndicator();
 
         $this->assignGlobal("text_resources", Session::getTextResources());
 
@@ -43,15 +44,15 @@ class Cms extends Visual {
         $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
         $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 
-        $module_id_text_field = new TextField("module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
-        $this->assignGlobal("module_id_form_field", $module_id_text_field->render());
-        $module_tab_id_text_field = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
-        $this->assignGlobal("module_tab_id_form_field", $module_tab_id_text_field->render());
+        $moduleIdTextField = new TextField("module_id", "", BlackBoard::$MODULE_ID, true, false, "", false);
+        $this->assignGlobal("module_id_form_field", $moduleIdTextField->render());
+        $moduleTabIdTextField = new TextField("module_tab_id", "", BlackBoard::$MODULE_TAB_ID, true, false, "", false);
+        $this->assignGlobal("module_tab_id_form_field", $moduleTabIdTextField->render());
 
         $this->assignGlobal("actions_menu", $this->getActionsMenu()->render());
         $this->assignGlobal("website_title", $this->settings->getWebsiteTitle());
         $this->assignGlobal("navigation_menu", $navigation_menu->render());
-        $this->assignGlobal("current_user_indicator", $current_user_indicator->render());
+        $this->assignGlobal("current_user_indicator", $currentUserIndicator->render());
         $this->assignGlobal("notification_bar", $notification_bar->render());
         $this->assignGlobal("content_pane", $this->renderContentPane());
         $this->assignGlobal("tab_menu", $this->renderTabMenu());

@@ -97,4 +97,8 @@ class BlockModuleVisual extends ModuleVisual {
         return $this->getCurrentTabId();
     }
 
+    public function isElementHolder(): bool {
+        return $this->getCurrentTabId() == self::$BLOCKS_TAB;
+    }
+
 }

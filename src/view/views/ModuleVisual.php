@@ -23,4 +23,8 @@ abstract class ModuleVisual extends Visual {
 
     abstract function loadTabMenu(TabMenu $tabMenu): int;
 
+    public function isElementHolder(): bool {
+        return false;
+    }
+
 }

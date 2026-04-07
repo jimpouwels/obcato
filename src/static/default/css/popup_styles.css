@@ -1,5 +1,5 @@
 body {
-    background: url(/admin?file=/default/img/cms_background.jpg) no-repeat center top fixed;
+    background: var(--color-gray-100, #f3f4f6);
 }
 
 /*

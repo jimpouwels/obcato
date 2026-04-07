@@ -12,6 +12,7 @@ use Obcato\Core\modules\articles\visuals\target_pages\TargetPagesList;
 use Obcato\Core\modules\articles\visuals\terms\TermTab;
 use Obcato\Core\view\views\ActionButtonAdd;
 use Obcato\Core\view\views\ActionButtonDelete;
+use Obcato\Core\view\views\ActionButtonPreview;
 use Obcato\Core\view\views\ActionButtonSave;
 use Obcato\Core\view\views\ModuleVisual;
 use Obcato\Core\view\views\TabMenu;
@@ -79,12 +80,15 @@ class ArticleModuleVisual extends ModuleVisual {
         if ($this->getCurrentTabId() == self::$ARTICLES_TAB) {
             $saveButton = null;
             $deleteButton = null;
+            $previewButton = null;
             if ($this->currentArticle) {
                 $saveButton = new ActionButtonSave('update_element_holder');
                 $deleteButton = new ActionButtonDelete('delete_element_holder');
+                $previewButton = new ActionButtonPreview('preview_article');
             }
             $actionButtons[] = $saveButton;
             $actionButtons[] = new ActionButtonAdd('add_element_holder');
+            $actionButtons[] = $previewButton;
             $actionButtons[] = $deleteButton;
         }
         if ($this->getCurrentTabId() == self::$TERMS_TAB) {
@@ -135,6 +139,10 @@ class ArticleModuleVisual extends ModuleVisual {
         $tabMenu->addItem("articles_tab_target_pages", self::$TARGET_PAGES_TAB);
         $tabMenu->addItem("articles_metadata", self::$METADATA_TAB);
         return $this->getCurrentTabId();
+    }
+
+    public function isElementHolder(): bool {
+        return $this->getCurrentTabId() == self::$ARTICLES_TAB;
     }
 
 }

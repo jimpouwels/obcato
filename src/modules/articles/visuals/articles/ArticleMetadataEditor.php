@@ -4,6 +4,8 @@ namespace Obcato\Core\modules\articles\visuals\articles;
 
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
+use Obcato\Core\database\dao\ImageDao;
+use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\WebformDao;
 use Obcato\Core\database\dao\WebformDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
@@ -33,6 +35,7 @@ class ArticleMetadataEditor extends Panel {
 
     private Article $currentArticle;
     private ArticleDao $articleDao;
+    private ImageDao $imageDao;
     private WebformDao $webformDao;
     private PageService $pageService;
     private FriendlyUrlManager $friendlyUrlManager;
@@ -41,6 +44,7 @@ class ArticleMetadataEditor extends Panel {
         parent::__construct('Algemeen', 'article_metadata_editor');
         $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
+        $this->imageDao = ImageDaoMysql::getInstance();
         $this->webformDao = WebformDaoMysql::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
@@ -71,11 +75,8 @@ class ArticleMetadataEditor extends Panel {
         $targetPagesField = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->currentArticle->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
         $commentFormsField = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->currentArticle->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
         $parentArticlePicker = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->currentArticle->getParentArticleId(), "update_element_holder");
-        $parentArticleDeleteButton = new Button("delete_parent_article", $this->getTextResource('article_editor_delete_parent_article_label'), null);
         $imagePickerField = new ImagePicker("article_image_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_image_label'), $this->currentArticle->getImageId(), "update_element_holder");
         $wallpaperPickerField = new ImagePicker("article_wallpaper_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_wallpaper_label'), $this->currentArticle->getWallpaperId(), "update_element_holder");
-        $imageDeleteButton = new Button("delete_lead_image", $this->getTextResource('article_editor_delete_image_button_label'), null);
-        $wallpaperDeleteButton = new Button("delete_wallpaper", $this->getTextResource('article_editor_delete_wallpaper_button_label'), null);
 
         if ($this->currentArticle->getParentArticleId()) {
             $parentArticle = $this->articleDao->getArticle($this->currentArticle->getParentArticleId());
@@ -97,14 +98,9 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("sort_date_field", $sortDateField->render());
         $data->assign("target_pages_field", $targetPagesField->render());
         $data->assign("parent_article_field", $parentArticlePicker->render());
-        $data->assign("delete_parent_article_button", $parentArticleDeleteButton->render());
         $data->assign("comment_forms_field", $commentFormsField->render());
         $data->assign("wallpaper_picker_field", $wallpaperPickerField->render());
-        $data->assign("wallpaper_id", $this->currentArticle->getWallpaperId());
         $data->assign("image_picker_field", $imagePickerField->render());
-        $data->assign("lead_image_id", $this->currentArticle->getImageId());
-        $data->assign("delete_lead_image_button", $imageDeleteButton->render());
-        $data->assign("delete_wallpaper_button", $wallpaperDeleteButton->render());
         $this->assignElementHolderFormIds($data);
 
         // metadata fields
