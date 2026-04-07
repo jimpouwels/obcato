@@ -68,6 +68,7 @@ element_button_label_minimize: Minimize
 element_holder_delete_element_confirm_message: Are you sure you want to delete this element?
 
 # BLOCK SELECTOR
+available_blocks: Available blocks
 selected_blocks_header: Selected blocks
 selected_blocks_position: Position
 selected_blocks_delete: Delete

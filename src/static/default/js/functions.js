@@ -14,17 +14,59 @@ function addElement(elementTypeId, errorMessage) {
 // Global variable to store insert position
 var elementInsertPosition = null;
 
-// Save scroll position before form submit
+// Save scroll position and insert position before form submit
 function saveScrollPosition() {
-    sessionStorage.setItem('elementHolderScrollPosition', window.pageYOffset || document.documentElement.scrollTop);
+    var data = {
+        position: window.pageYOffset || document.documentElement.scrollTop,
+        insertPosition: elementInsertPosition
+    };
+    sessionStorage.setItem('elementHolderScrollData', JSON.stringify(data));
 }
 
-// Restore scroll position after page load
+// Restore scroll position after page load, compensating for newly inserted element
 function restoreScrollPosition() {
-    var savedPosition = sessionStorage.getItem('elementHolderScrollPosition');
-    if (savedPosition !== null) {
-        window.scrollTo(0, parseInt(savedPosition));
-        sessionStorage.removeItem('elementHolderScrollPosition');
+    var savedData = sessionStorage.getItem('elementHolderScrollData');
+    if (savedData !== null) {
+        try {
+            var data = JSON.parse(savedData);
+            
+            // Small delay to ensure DOM is fully rendered
+            setTimeout(function() {
+                // If we inserted an element, we need to adjust scroll position
+                if (data.insertPosition !== null && data.insertPosition !== undefined) {
+                    // Find the newly inserted element (it will be at the insert position)
+                    var $elements = $('.draggable_wrapper');
+                    if ($elements.length > data.insertPosition) {
+                        var newElement = $elements.eq(data.insertPosition)[0];
+                        if (newElement) {
+                            // Make sure the new element is expanded
+                            var elementId = getElementIdFromElementNode($(newElement).closest('.collapsable_root_wrapper'));
+                            if (elementId) {
+                                showElement(elementId);
+                            }
+                            
+                            // Get the height of the new element plus its margins  
+                            var $newElement = $(newElement);
+                            var elementHeight = $newElement.outerHeight(true);
+                            
+                            // Get the position of the new element
+                            var elementTop = $newElement.offset().top;
+                            
+                            // If the saved scroll position was below the insert point,
+                            // we need to add the element height to maintain visual position
+                            if (data.position > elementTop) {
+                                data.position += elementHeight + 32; // +32 for insert button spacing
+                            }
+                        }
+                    }
+                }
+                
+                window.scrollTo(0, data.position);
+            }, 100);
+        } catch (e) {
+            console.error('Error restoring scroll position:', e);
+        }
+        sessionStorage.removeItem('elementHolderScrollData');
     }
 }
 
