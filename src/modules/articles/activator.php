@@ -142,7 +142,7 @@ class ArticleModuleVisual extends ModuleVisual {
     }
 
     public function isElementHolder(): bool {
-        return $this->getCurrentTabId() == self::$ARTICLES_TAB;
+        return $this->getCurrentTabId() == self::$ARTICLES_TAB && $this->currentArticle !== null;
     }
 
 }

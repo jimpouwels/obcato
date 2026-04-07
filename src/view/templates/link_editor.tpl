@@ -1,14 +1,7 @@
 <input type="hidden" id="delete_link_target" name="delete_link_target" value="" />
 
 {if isset($links) > 0}
-    <table class="link-table" cellpadding="5px" cellspacing="0" border="0">
-        <colgroup width="25px"></colgroup>
-        <colgroup width="230px"></colgroup>
-        <colgroup width="230px"></colgroup>
-        <colgroup width="75px"></colgroup>
-        <colgroup width="125px"></colgroup>
-        <colgroup width="20px"></colgroup>
-
+    <table class="link-table">
         <thead>
         <tr>
             <th></th>

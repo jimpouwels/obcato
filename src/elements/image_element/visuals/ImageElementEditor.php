@@ -44,8 +44,6 @@ class ImageElementEditor extends ElementVisual {
         $data->assign("url_field", $urlField->render());
         $data->assign("height_field", $heightField->render());
         $data->assign("image_picker", $imagePicker->render());
-        $data->assign("image_id", $this->imageElement->getImageId());
-        $data->assign("selected_image_title", $this->getSelectedImageTitle());
         $data->assign("link_selector_field", $linkSelector->render());
     }
 
@@ -62,15 +60,6 @@ class ImageElementEditor extends ElementVisual {
         $currentAlignment = $this->imageElement->getAlign();
         $alignmentField = new Pulldown("element_" . $this->imageElement->getId() . "_align", $this->getTextResource("image_element_editor_alignment"), $currentAlignment, $alignmentOptions, false, null);
         return $alignmentField->render();
-    }
-
-    private function getSelectedImageTitle(): string {
-        $selected_image_title = "";
-        $selected_image = $this->imageElement->getImage();
-        if (!is_null($selected_image)) {
-            $selected_image_title = $selected_image->getTitle();
-        }
-        return $selected_image_title;
     }
 
     private function createFieldId($property_name): string {
