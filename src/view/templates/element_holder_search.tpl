@@ -15,24 +15,17 @@
 
     <div class="popup_search_results_container">
         {if count($search_results) > 0}
-            <table class="popup_search_result_table" cellpadding="5">
-                <thead>
-                <tr>
-                    <th>Naam</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="popup_search_results_list">
                 {foreach from=$search_results item=search_result}
-                    <tr>
-                        <td>
-                            <a href="#"
-                               onclick="submitSelectionBackToOpener('{$backfill}', {$search_result.id}, '{$back_click_id}'); return false;"
-                               title="Selecteer">{$search_result.name}</a>
-                        </td>
-                    </tr>
+                    <div class="popup_search_result_item">
+                        <a href="#"
+                           onclick="submitSelectionBackToOpener('{$backfill}', {$search_result.id}, '{$back_click_id}'); return false;"
+                           title="Selecteer">
+                            <span class="result_name">{$search_result.name}</span>
+                        </a>
+                    </div>
                 {/foreach}
-                </tbody>
-            </table>
+            </div>
         {else}
             {$no_results_message}
         {/if}

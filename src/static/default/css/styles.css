@@ -435,17 +435,9 @@ for their own split view (e.g. page list + page editor)
     background: var(--color-white);
     color: var(--color-primary);
     font-weight: 600;
-    box-shadow: 0 -2px 0 var(--color-primary) inset;
-}
-
-.tab_item_active a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-white);
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: -4px;
+    padding-bottom: 10px;
 }
 
 /*
