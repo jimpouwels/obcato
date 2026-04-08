@@ -624,6 +624,14 @@ textarea:focus {
     background: var(--color-gray-50, #f9fafb);
 }
 
+/* Override for list items - make them compact */
+.list-element_values .rich-text-content {
+    min-height: 2em !important;
+    max-height: 4em !important;
+    padding: 4px 8px !important;
+    height: auto !important;
+}
+
 .rich-text-content:empty:before {
     content: attr(data-placeholder);
     color: var(--color-gray-400);
@@ -631,15 +639,20 @@ textarea:focus {
 }
 
 .rich-text-content a {
-    color: var(--color-primary);
+    color: #2563eb;
     text-decoration: underline;
     cursor: pointer;
     position: relative;
+    padding: 2px 4px;
+    margin: -2px -4px;
+    border-radius: 3px;
+    transition: all 0.15s;
 }
 
 .rich-text-content a:hover {
-    background: var(--color-primary-light, #e0e7ff);
-    text-decoration: none;
+    background: #dbeafe;
+    color: #1e40af;
+    text-decoration: underline;
 }
 
 .rich-text-content a::after {

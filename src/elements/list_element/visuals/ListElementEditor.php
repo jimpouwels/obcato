@@ -8,7 +8,7 @@ use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TextArea;
+use Obcato\Core\view\views\RichTextArea;
 use Obcato\Core\view\views\TextField;
 use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
 
@@ -49,11 +49,12 @@ class ListElementEditor extends ElementVisual {
         $listItems = array();
         foreach ($this->listElement->getListItems() as $listItem) {
             $listItemValues = array();
-            $itemTextField = new TextArea("listitem_" . $listItem->getId() . "_text", "", $listItem->getText(), false, true, "list-item-textarea");
+            $itemTextField = new RichTextArea("listitem_" . $listItem->getId() . "_text", "", $listItem->getText(), false, true, "list-item-textarea list-item-rich-text");
             $deleteField = new SingleCheckbox("listitem_" . $listItem->getId() . "_delete", "", false, false, "");
 
             $listItemValues['item_text_field'] = $itemTextField->render();
             $listItemValues['delete_field'] = $deleteField->render();
+            $listItemValues['id'] = $listItem->getId();
 
             $listItems[] = $listItemValues;
         }

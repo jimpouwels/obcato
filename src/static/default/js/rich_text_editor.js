@@ -7,11 +7,11 @@ $(document).ready(function() {
 
 var currentLinkElement = null;
 var currentEditor = null;
+var savedRange = null;
 
 function initFormSubmitHandler() {
     // Sync all rich text editors before form submission
     $('form').on('submit', function() {
-        console.log('Form submit - syncing all rich text editors');
         $('.rich-text-editor-wrapper').each(function() {
             syncToHiddenField($(this));
         });
@@ -23,9 +23,6 @@ function initRichTextEditors() {
     $('.rich-text-content').each(function() {
         $(this).attr('contenteditable', 'true');
         $(this).prop('contentEditable', 'true');
-        
-        // Debug: log if contenteditable is working
-        console.log('Rich text editor initialized:', $(this).attr('id'), 'Editable:', this.isContentEditable);
     });
     
     // Handle toolbar button clicks
@@ -51,18 +48,12 @@ function initRichTextEditors() {
         return false;
     });
     
-    // Handle double-click on links to edit them
-    $('.rich-text-content').on('dblclick', 'a', function(e) {
+    // Handle click on links to edit them
+    $('.rich-text-content').on('click', 'a', function(e) {
         e.preventDefault();
         e.stopPropagation();
         const editor = $(this).closest('.rich-text-content');
         editLink($(this), editor);
-        return false;
-    });
-    
-    // Prevent links from navigating when clicked in editor
-    $('.rich-text-content').on('click', 'a', function(e) {
-        e.preventDefault();
         return false;
     });
     
@@ -167,13 +158,6 @@ function initRichTextEditors() {
     $('.rich-text-content').on('mouseup keyup', function() {
         updateActiveButtons($(this));
     });
-    
-    // Initialize content and height
-    $('.rich-text-content').each(function() {
-        adjustHeight(this);
-    }).on('input', function() {
-        adjustHeight(this);
-    });
 }
 
 function syncToHiddenField(wrapper) {
@@ -181,22 +165,7 @@ function syncToHiddenField(wrapper) {
     const hiddenTextarea = wrapper.find('textarea');
     const htmlContent = editor.html();
     
-    console.log('syncToHiddenField called');
-    console.log('Editor found:', editor.length > 0);
-    console.log('Textarea found:', hiddenTextarea.length > 0);
-    console.log('Textarea name:', hiddenTextarea.attr('name'));
-    console.log('Content length:', htmlContent.length);
-    
     hiddenTextarea.val(htmlContent);
-    console.log('Textarea value after sync:', hiddenTextarea.val().length);
-}
-
-function adjustHeight(element) {
-    // Reset height to get correct scrollHeight
-    const currentHeight = element.style.height;
-    element.style.height = 'auto';
-    const newHeight = Math.max(element.scrollHeight, 120); // Minimum 120px
-    element.style.height = newHeight + 'px';
 }
 
 function updateActiveButtons(editor) {
@@ -218,6 +187,13 @@ function updateActiveButtons(editor) {
 function createLink(editor) {
     const selection = window.getSelection();
     const selectedText = selection.toString();
+    
+    // Save the current selection range before dialog opens
+    if (selection.rangeCount > 0) {
+        savedRange = selection.getRangeAt(0).cloneRange();
+    } else {
+        savedRange = null;
+    }
     
     currentEditor = editor;
     currentLinkElement = null;
@@ -607,10 +583,24 @@ function saveLinkFromDialog() {
 }
 
 function createLinkElement(linkData) {
-    const selection = window.getSelection();
-    if (!selection.rangeCount) return;
+    // Use saved range if available, otherwise try to get current selection
+    let range = savedRange;
+    if (!range) {
+        const selection = window.getSelection();
+        if (!selection.rangeCount) return;
+        range = selection.getRangeAt(0);
+    }
     
-    const range = selection.getRangeAt(0);
+    // Focus the editor first to ensure range is valid
+    if (currentEditor) {
+        currentEditor.focus();
+    }
+    
+    // Restore the range
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    
     range.deleteContents();
     
     const link = document.createElement('a');
