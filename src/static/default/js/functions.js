@@ -30,11 +30,12 @@ function restoreScrollPosition() {
         try {
             var data = JSON.parse(savedData);
             
-            // Small delay to ensure DOM is fully rendered
-            setTimeout(function() {
-                // If we inserted an element, we need to adjust scroll position
-                if (data.insertPosition !== null && data.insertPosition !== undefined) {
-                    // Find the newly inserted element (it will be at the insert position)
+            // Restore scroll position immediately to prevent flickering
+            window.scrollTo(0, data.position);
+            
+            // Then adjust for newly inserted elements if needed
+            if (data.insertPosition !== null && data.insertPosition !== undefined) {
+                setTimeout(function() {
                     var $elements = $('.draggable_wrapper');
                     if ($elements.length > data.insertPosition) {
                         var newElement = $elements.eq(data.insertPosition)[0];
@@ -55,14 +56,12 @@ function restoreScrollPosition() {
                             // If the saved scroll position was below the insert point,
                             // we need to add the element height to maintain visual position
                             if (data.position > elementTop) {
-                                data.position += elementHeight + 32; // +32 for insert button spacing
+                                window.scrollTo(0, data.position + elementHeight + 32); // +32 for insert button spacing
                             }
                         }
                     }
-                }
-                
-                window.scrollTo(0, data.position);
-            }, 100);
+                }, 100);
+            }
         } catch (e) {
             console.error('Error restoring scroll position:', e);
         }
@@ -111,11 +110,25 @@ function insertElementAtPosition(elementTypeId) {
 }
 
 // Restore scroll position on page load
+// Do a quick restore immediately to prevent flickering
+(function() {
+    var savedData = sessionStorage.getItem('elementHolderScrollData');
+    if (savedData) {
+        try {
+            var data = JSON.parse(savedData);
+            // Only do immediate restore if there's no insert position to compensate for
+            if (!data.insertPosition && data.insertPosition !== 0) {
+                window.scrollTo(0, data.position);
+            }
+        } catch (e) {}
+    }
+})();
+
 $(document).ready(function() {
     restoreScrollPosition();
     
     // Save scroll position before any element holder form submit
-    $('#element_holder_form_id').on('submit', function() {
+    $('#element_holder_form_id').submit(function() {
         saveScrollPosition();
     });
 });

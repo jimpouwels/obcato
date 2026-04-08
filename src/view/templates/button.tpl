@@ -1,7 +1,7 @@
 {assign var='onclickhtml' value=''}
 {assign var='idhtml' value=''}
 {if $onclick != ""}
-    {assign var='onclickhtml' value='onclick="'|cat:{$onclick}|cat:'"'}
+    {assign var='onclickhtml' value='onclick="'|cat:{$onclick}|cat:' return false;"'}
 {/if}
 {if $id != ""}
     {assign var='idhtml' value='id="'|cat:{$id}|cat:'"'}
