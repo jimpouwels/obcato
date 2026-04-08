@@ -1,4 +1,4 @@
-/* PAGE TREE - Compact with proper nesting */
+/* PAGE TREE - Compact with proper nesting and tree lines */
 .page_tree {
     overflow-x: auto;
     padding: 0;
@@ -12,12 +12,48 @@
 
 .page_tree ul ul {
     padding-left: 20px;
+    position: relative;
+}
+
+/* Vertical line for nested items */
+.page_tree ul ul::before {
+    content: '';
+    position: absolute;
+    left: 18px; /* Further right */
+    top: 0;
+    bottom: 8px;
+    width: 1px;
+    background: var(--color-gray-300, #d1d5db);
 }
 
 .page_tree li {
     margin: 0;
     padding: 0;
     border-bottom: none;
+    position: relative;
+}
+
+/* Horizontal line connecting to parent */
+.page_tree ul ul > li::before {
+    content: '';
+    position: absolute;
+    left: -2px; /* Starts at vertical line (18px absolute) */
+    top: 15px; /* Good height */
+    width: 8px; /* Slightly longer */
+    height: 1px;
+    background: var(--color-gray-300, #d1d5db);
+}
+
+/* Hide vertical line after last child */
+.page_tree ul ul > li:last-child::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 16px;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-white, white);
+    z-index: 1;
 }
 
 .page_tree_link {
@@ -27,9 +63,12 @@
     padding: 4px 8px;
     text-decoration: none;
     font-size: 13px;
+    line-height: 14px; /* Match icon height for perfect alignment */
     border-radius: 2px;
     transition: background 0.15s;
     border-bottom: none;
+    position: relative;
+    z-index: 2;
 }
 
 .page_tree_link:hover {
