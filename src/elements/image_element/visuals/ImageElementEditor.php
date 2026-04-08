@@ -7,7 +7,7 @@ use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\ImagePicker;
+use Obcato\Core\view\views\ImageLookup;
 use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\TextField;
 
@@ -32,18 +32,30 @@ class ImageElementEditor extends ElementVisual {
 
     public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
-        $imagePicker = new ImagePicker("image_image_ref_" . $this->imageElement->getId(), $this->getTextResource("image_element_editor_image"), $this->imageElement->getImageId(), "update_element_holder");
+        $imageLookup = new ImageLookup(
+            "image_image_ref_" . $this->imageElement->getId(), 
+            $this->getTextResource("image_element_editor_image"), 
+            $this->imageElement->getImageId(), 
+            $this->imageElement->getId(), 
+            null, 
+            false,
+            "/admin/api/image_element/image?id=" . $this->imageElement->getId(),
+            "/admin/api/image_element/update_image",
+            "/admin/api/image_element/delete_image"
+        );
         $urlField = new TextField($this->createFieldId("url"), $this->getTextResource("image_element_editor_url"), $this->imageElement->getUrl(), false, false, "url_field");
         $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
         $heightField = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->imageElement->getHeight(), false, false, "size_field");
         $linkSelector = new Pulldown($this->createFieldId("link"), $this->getTextResource("image_element_editor_link"), $this->imageElement->getLinkId(), $this->getLinkOptions(), false, "", true);
 
+        $data->assign("element_id", $this->imageElement->getId());
+        $data->assign("current_image_id", $this->imageElement->getImageId());
         $data->assign("alignment_field", $this->renderAlignmentField());
         $data->assign("title_field", $titleField->render());
         $data->assign("width_field", $widthField->render());
         $data->assign("url_field", $urlField->render());
         $data->assign("height_field", $heightField->render());
-        $data->assign("image_picker", $imagePicker->render());
+        $data->assign("image_lookup", $imageLookup->render());
         $data->assign("link_selector_field", $linkSelector->render());
     }
 

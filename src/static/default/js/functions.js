@@ -383,11 +383,15 @@ $(document).ready(function () {
 
 // Photo album element selected images
 function addImage(elementId, imageId) {
+    let imagesContainer = $('#photo_album_element_' + elementId + '_selected_images');
+    let entityId = imagesContainer.data('entity-id');
+    let updateEndpoint = imagesContainer.data('update-endpoint');
+    
     $.ajax({
-        url: '/admin/api/photo_album_element/add_image',
+        url: updateEndpoint,
         type: 'PUT',
         data: JSON.stringify({
-            'id': elementId,
+            'id': entityId,
             'image': imageId
         }),
         success: function(response) {
@@ -401,13 +405,44 @@ function addImage(elementId, imageId) {
 
 function updateSelectedImages(elementId) {
     let imagesContainer = $('#photo_album_element_' + elementId + '_selected_images');
+    let getEndpoint = imagesContainer.data('get-endpoint');
+    
     $.ajax({
-        url: '/admin/api/photo_album_element/images?id=' + elementId,
+        url: getEndpoint,
         type: 'GET',
         success: function(response) {
-            imagesContainer.empty();
+            if (response.length === 0) {
+                imagesContainer.empty();
+                return;
+            }
+            
+            imagesContainer.html('<div class="selected-images-grid"></div>');
+            let gridContainer = imagesContainer.find('.selected-images-grid');
+            
             response.forEach(result => {
-                imagesContainer.append("<div class=\"photo_album_element_selected_image\"><div class=\"photo_album_element_selected_image_thumb\"><img src=\"" + result.url + "\" /></div><div class=\"photo_album_element_selected_image_details\"><p><strong>Titel: </strong>" + result.title + "</p><p><strong>AltText: </strong>" + result.alternative_text + "</p></div><div class\"photo_album_element_selected_image_delete\"><a href=\"#\" onclick=\"deleteImage(" + elementId + ", " + result.id + "); return false;\"><img src=\"/admin?file=/default/img/default_icons/delete_small.png\" /></a></div></div>");
+                let card = $('<div class="selected-image-card"></div>');
+                
+                // Delete button with X icon
+                let deleteBtn = $('<div class="selected-image-delete"></div>');
+                deleteBtn.html('<svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                deleteBtn.on('click', function(e) {
+                    e.stopPropagation();
+                    if (confirm('Weet u zeker dat u deze afbeelding wilt verwijderen?')) {
+                        deleteImage(elementId, result.id);
+                    }
+                });
+                card.append(deleteBtn);
+                
+                // Thumbnail
+                card.append('<div class="selected-image-thumb"><img src="' + result.url + '" alt="' + (result.alternative_text || '') + '" /></div>');
+                
+                // Info
+                let info = $('<div class="selected-image-info"></div>');
+                info.append('<div class="selected-image-title">' + (result.title || 'Untitled') + '</div>');
+                info.append('<div class="selected-image-alt">' + (result.alternative_text || 'Geen alt-tekst') + '</div>');
+                card.append(info);
+                
+                gridContainer.append(card);
             });
         },
         error: function(xhr, status, error) {
@@ -417,11 +452,15 @@ function updateSelectedImages(elementId) {
 }
 
 function deleteImage(elementId, imageId) {
+    let imagesContainer = $('#photo_album_element_' + elementId + '_selected_images');
+    let entityId = imagesContainer.data('entity-id');
+    let deleteEndpoint = imagesContainer.data('delete-endpoint');
+    
     $.ajax({
-        url: '/admin/api/photo_album_element/delete_image',
+        url: deleteEndpoint,
         type: 'DELETE',
         data: JSON.stringify({
-            'id': elementId,
+            'id': entityId,
             'image': imageId
         }),
         success: function(response) {
@@ -431,6 +470,231 @@ function deleteImage(elementId, imageId) {
             console.log(xhr, status, error);
         }
     });
+}
+
+// Image selector modal functions
+var imageSearchTimeout = null;
+var imageSelectMode = 'single'; // 'single' or 'multiple'
+var currentImageContext = null;
+var currentFieldName = null;
+
+function openImageSelector(contextId, multiple) {
+    currentImageContext = contextId;
+    imageSelectMode = multiple ? 'multiple' : 'single';
+    
+    // Get field name from global variable (only set in single mode)
+    if (!multiple) {
+        currentFieldName = window['imageSelector_fieldName_' + contextId];
+    }
+    
+    $('#image-selector-modal-' + contextId).fadeIn(200);
+    
+    // Focus on search input
+    setTimeout(function() {
+        $('#image-search-' + contextId).focus();
+    }, 250);
+    
+    // Setup search event
+    $('#image-search-' + contextId).off('input').on('input', function() {
+        var keyword = $(this).val();
+        clearTimeout(imageSearchTimeout);
+        
+        if (keyword.length > 0) {
+            imageSearchTimeout = setTimeout(function() {
+                searchImages(contextId, keyword);
+            }, 300);
+        } else {
+            $('#image-selector-grid-' + contextId).html('<div class="image-selector-loading">Start met typen om afbeeldingen te zoeken...</div>');
+        }
+    });
+    
+    // Setup escape key handler
+    $(document).off('keydown.imageSelector').on('keydown.imageSelector', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+            closeImageSelector(contextId);
+        }
+    });
+}
+
+function closeImageSelector(contextId) {
+    $('#image-selector-modal-' + contextId).fadeOut(200);
+    $('#image-search-' + contextId).val('');
+    $('#image-selector-grid-' + contextId).html('<div class="image-selector-loading">Start met typen om afbeeldingen te zoeken...</div>');
+    // Remove escape key handler
+    $(document).off('keydown.imageSelector');
+}
+
+function searchImages(contextId, keyword) {
+    var gridContainer = $('#image-selector-grid-' + contextId);
+    gridContainer.html('<div class="image-selector-loading">Zoeken...</div>');
+    
+    // Get already selected images for multiple mode
+    var selectedImageIds = [];
+    if (imageSelectMode === 'multiple') {
+        var getEndpoint = $('#photo_album_element_' + contextId + '_selected_images').data('get-endpoint');
+        // Fetch currently selected images
+        $.ajax({
+            url: getEndpoint,
+            method: 'GET',
+            async: false, // Make it synchronous so we have the data before searching
+            success: function(images) {
+                selectedImageIds = images.map(img => img.id);
+            }
+        });
+    }
+    
+    $.ajax({
+        url: '/admin/api/image/search?keyword=' + encodeURIComponent(keyword),
+        method: 'GET',
+        success: function(response) {
+            if (response.length === 0) {
+                gridContainer.html('<div class="image-selector-loading">Geen afbeeldingen gevonden.</div>');
+                return;
+            }
+            
+            gridContainer.empty();
+            response.forEach(function(image) {
+                var isSelected = selectedImageIds.includes(image.id);
+                
+                var item = $('<div class="image-selector-item' + (isSelected ? ' selected' : '') + '" data-image-id="' + image.id + '"></div>');
+                item.append('<div class="image-selector-checkmark"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>');
+                item.append('<div class="image-selector-thumb"><img src="' + image.url + '" alt="' + (image.alternative_text || '') + '" /></div>');
+                item.append('<div class="image-selector-info"><div class="image-selector-title">' + (image.title || 'Untitled') + '</div><div class="image-selector-alt">' + (image.alternative_text || 'Geen alt-tekst') + '</div></div>');
+                
+                item.on('click', function() {
+                    selectImage(contextId, image, $(this));
+                });
+                
+                gridContainer.append(item);
+            });
+        },
+        error: function(xhr, status, error) {
+            gridContainer.html('<div class="image-selector-loading">Fout bij het zoeken: ' + error + '</div>');
+            console.error(status, error);
+        }
+    });
+}
+
+function selectImage(contextId, image, element) {
+    if (imageSelectMode === 'single') {
+        // Get endpoint and entity ID from data attribute
+        let $field = $('#' + currentFieldName);
+        let entityId = $field.data('entity-id');
+        let updateEndpoint = $field.data('update-endpoint');
+        
+        // Single selection - save via REST and update preview
+        $.ajax({
+            url: updateEndpoint,
+            type: 'PUT',
+            data: JSON.stringify({
+                'id': entityId,
+                'image': image.id
+            }),
+            success: function(response) {
+                $('#' + currentFieldName).val(image.id);
+                updateSingleImagePreview(currentFieldName, image);
+                closeImageSelector(contextId);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error saving image:', status, error);
+            }
+        });
+    } else {
+        // Multiple selection - toggle selection
+        if (element.hasClass('selected')) {
+            element.removeClass('selected');
+            deleteImage(contextId, image.id);
+        } else {
+            element.addClass('selected');
+            addImage(contextId, image.id);
+        }
+    }
+}
+
+// Update single image preview (for both element and article)
+function updateSingleImagePreview(fieldName, image) {
+    let previewContainer = $('#' + fieldName + '_preview');
+    let $field = $('#' + fieldName);
+    let contextId = $field.data('context-id');
+    
+    // If image is just an ID (number/string), we need to fetch it
+    if (typeof image === 'number' || (typeof image === 'string' && !isNaN(image))) {
+        let imageId = image;
+        if (!imageId) {
+            previewContainer.empty();
+            return;
+        }
+        
+        // Get endpoint from data attribute
+        var getEndpoint = $field.data('get-endpoint');
+        
+        // Fetch image details
+        $.ajax({
+            url: getEndpoint,
+            method: 'GET',
+            success: function(response) {
+                if (response) {
+                    updateSingleImagePreview(fieldName, response);
+                } else {
+                    previewContainer.empty();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching image:', status, error);
+                previewContainer.empty();
+            }
+        });
+        return;
+    }
+    
+    // If no image data, clear preview
+    if (!image) {
+        previewContainer.empty();
+        return;
+    }
+    
+    // Build preview card
+    let card = $('<div class=\"single-image-preview-card\"></div>');
+    
+    // Delete button
+    let deleteBtn = $('<div class=\"single-image-preview-delete\"></div>');
+    deleteBtn.html('<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M18 6L6 18M6 6l12 12\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>');
+    deleteBtn.on('click', function(e) {
+        e.stopPropagation();
+        
+        // Get endpoint and entity ID from data attribute
+        let $field = $('#' + fieldName);
+        let entityId = $field.data('entity-id');
+        let deleteEndpoint = $field.data('delete-endpoint');
+        
+        // Delete via REST API
+        $.ajax({
+            url: deleteEndpoint,
+            type: 'DELETE',
+            data: JSON.stringify({
+                'id': entityId
+            }),
+            success: function(response) {
+                $('#' + fieldName).val('');
+                previewContainer.empty();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error deleting image:', status, error);
+            }
+        });
+    });
+    card.append(deleteBtn);
+    
+    // Thumbnail
+    card.append('<div class=\"single-image-preview-thumb\"><img src=\"' + image.url + '\" alt=\"' + (image.alternative_text || '') + '\" /></div>');
+    
+    // Info
+    let info = $('<div class=\"single-image-preview-info\"></div>');
+    info.append('<div class=\"single-image-preview-title\">' + (image.title || 'Untitled') + '</div>');
+    info.append('<div class=\"single-image-preview-alt\">' + (image.alternative_text || 'Geen alt-tekst') + '</div>');
+    card.append(info);
+    
+    previewContainer.html(card);
 }
 
 // Auto-dismiss notification bar after 2.5 seconds

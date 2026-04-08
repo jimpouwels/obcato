@@ -5,5 +5,5 @@
     {$height_field}
     {$link_selector_field}
     {$url_field}
-    {$image_picker}
+    {$image_lookup}
 </div>

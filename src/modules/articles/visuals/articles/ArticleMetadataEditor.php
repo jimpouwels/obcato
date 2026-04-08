@@ -17,7 +17,7 @@ use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ArticlePicker;
 use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\DateField;
-use Obcato\Core\view\views\ImagePicker;
+use Obcato\Core\view\views\ImageLookup;
 use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\ReadonlyTextField;
@@ -75,8 +75,30 @@ class ArticleMetadataEditor extends Panel {
         $targetPagesField = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->currentArticle->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
         $commentFormsField = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->currentArticle->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
         $parentArticlePicker = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->currentArticle->getParentArticleId(), "update_element_holder");
-        $imagePickerField = new ImagePicker("article_image_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_image_label'), $this->currentArticle->getImageId(), "update_element_holder");
-        $wallpaperPickerField = new ImagePicker("article_wallpaper_ref_" . $this->currentArticle->getId(), $this->getTextResource('article_editor_wallpaper_label'), $this->currentArticle->getWallpaperId(), "update_element_holder");
+        $imagePickerField = new ImageLookup(
+            "article_image_ref_" . $this->currentArticle->getId(), 
+            $this->getTextResource('article_editor_image_label'), 
+            $this->currentArticle->getImageId(), 
+            $this->currentArticle->getId() . "_image",  // Unique context ID for UI
+            null, 
+            false,
+            "/admin/api/article/image?id=" . $this->currentArticle->getId(),
+            "/admin/api/article/update_image",
+            "/admin/api/article/delete_image",
+            $this->currentArticle->getId()  // Entity ID for REST calls
+        );
+        $wallpaperPickerField = new ImageLookup(
+            "article_wallpaper_ref_" . $this->currentArticle->getId(), 
+            $this->getTextResource('article_editor_wallpaper_label'), 
+            $this->currentArticle->getWallpaperId(), 
+            $this->currentArticle->getId() . "_wallpaper",  // Unique context ID for UI
+            null, 
+            false,
+            "/admin/api/article/wallpaper?id=" . $this->currentArticle->getId(),
+            "/admin/api/article/update_wallpaper",
+            "/admin/api/article/delete_wallpaper",
+            $this->currentArticle->getId()  // Entity ID for REST calls
+        );
 
         $data->assign("child_articles", $this->renderChildArticles());
         $data->assign("current_article_id", $this->currentArticle->getId());

@@ -33,6 +33,15 @@ link_open_in: Open in
 link_delete: Delete
 link_editor_title: Links
 
+# IMAGE SELECTOR
+image_selector_title: Select image
+image_selector_search_placeholder: Search by title or alt-text...
+image_selector_start_typing: Start typing to search for images...
+image_selector_searching: Searching...
+image_selector_no_results: No images found.
+image_selector_select_multiple: Select images
+image_selector_select_single: Select image
+
 # TERM SELECTOR
 term_selector_title: Terms
 term_selector_label_selected_terms: Selected terms

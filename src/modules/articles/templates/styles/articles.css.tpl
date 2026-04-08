@@ -197,15 +197,6 @@
     margin-top: var(--spacing-md, 12px);
 }
 
-/* IMAGE PICKER HIDDEN */
-.image-picker-hidden {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
 /* SELECTED IMAGE DISPLAY (compact view with title) */
 .selected_image_display {
     display: inline-flex;

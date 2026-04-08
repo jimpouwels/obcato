@@ -34,6 +34,15 @@ link_open_in: Openen in
 link_delete: Verwijderen
 link_editor_title: Links
 
+# IMAGE SELECTOR
+image_selector_title: Afbeelding selecteren
+image_selector_search_placeholder: Zoek op titel of alt-tekst...
+image_selector_start_typing: Start met typen om afbeeldingen te zoeken...
+image_selector_searching: Zoeken...
+image_selector_no_results: Geen afbeeldingen gevonden.
+image_selector_select_multiple: Afbeeldingen selecteren
+image_selector_select_single: Afbeelding selecteren
+
 # TERM SELECTOR
 term_selector_title: Termen
 term_selector_label_selected_terms: Geselecteerde termen

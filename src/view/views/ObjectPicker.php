@@ -40,7 +40,7 @@ class ObjectPicker extends FormField {
 
     /**
      * Override this method to render enhanced display when a value is selected.
-     * For example, ImagePicker can show the image title with a delete button.
+     * For example, ArticlePicker can show the article title with a delete button.
      * @return string HTML to display when value is selected, or empty string for default behavior
      */
     protected function renderEnhancedDisplay(): string {
