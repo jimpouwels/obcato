@@ -3,8 +3,12 @@
 namespace Obcato\Core\frontend;
 
 use Obcato\Core\core\model\ElementHolder;
+use Obcato\Core\database\dao\ArticleDao;
+use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
+use Obcato\Core\database\dao\PageDao;
+use Obcato\Core\database\dao\PageDaoMysql;
 use Obcato\Core\frontend\helper\FontStyleHelper;
 use Obcato\Core\frontend\helper\LinkHelper;
 use Obcato\Core\modules\articles\model\Article;
@@ -193,14 +197,149 @@ abstract class FrontendVisual {
         if (!$value) {
             return "";
         }
-        $value = nl2br($value);
-        $value = $this->replaceSmartyQuery($value);
-        $value = FontStyleHelper::replaceCharacterShortcuts($value);
-        $value = FontStyleHelper::createColors($value);
-        $value = FontStyleHelper::createItalic($value);
-        $value = FontStyleHelper::createBold($value);
-        $value = $this->replaceArticleMetadataReferences($value);
-        return $this->linkHelper->createLinksInString($value, $elementHolder);
+        
+        // Check if content is already HTML (from rich text editor)
+        $isHtml = preg_match('/<(strong|em|u|a|p|div|br|span)\b/i', $value);
+        
+        if (!$isHtml) {
+            // Legacy markdown content - convert it
+            $value = nl2br($value);
+            $value = $this->replaceSmartyQuery($value);
+            $value = FontStyleHelper::replaceCharacterShortcuts($value);
+            $value = FontStyleHelper::createColors($value);
+            $value = FontStyleHelper::createItalic($value);
+            $value = FontStyleHelper::createBold($value);
+            $value = $this->replaceArticleMetadataReferences($value);
+            $value = $this->linkHelper->createLinksInString($value, $elementHolder);
+        } else {
+            // Already HTML from rich text editor - just process smarty and article refs
+            // But still convert newlines to <br> if they haven't been converted yet
+            $value = nl2br($value);
+            $value = $this->replaceSmartyQuery($value);
+            $value = $this->replaceArticleMetadataReferences($value);
+            // Still need to handle [linktext](url) syntax if present
+            $value = $this->linkHelper->createLinksInString($value, $elementHolder);
+        }
+        
+        // Add external class and target="_blank" to all links
+        $value = $this->convertDataAttributeLinks($value);
+        $value = $this->addExternalLinksAttributes($value);
+        
+        return $value;
+    }
+    
+    
+    private function convertDataAttributeLinks(string $html): string {
+        // Convert data-link-type links to actual URLs
+        return preg_replace_callback(
+            '/<a\s+([^>]*?)>/i',
+            function($matches) {
+                $attributes = $matches[1];
+                
+                // Check if there's already a valid href (URL always takes precedence)
+                if (preg_match('/href="([^"]+)"/i', $attributes, $hrefMatch)) {
+                    $existingHref = $hrefMatch[1];
+                    // If href exists and is not empty/placeholder, keep it and skip data-link processing
+                    if ($existingHref && $existingHref !== '#' && $existingHref !== '') {
+                        return $matches[0];
+                    }
+                }
+                
+                // Check for data-link-type attribute
+                if (!preg_match('/data-link-type="([^"]+)"/i', $attributes, $typeMatch)) {
+                    // No data-link-type, return unchanged
+                    return $matches[0];
+                }
+                
+                $linkType = $typeMatch[1];
+                
+                // For URL type, keep the href as-is (already checked above)
+                if ($linkType === 'url') {
+                    return $matches[0];
+                }
+                
+                // Extract data-link-id for page/article
+                if (!preg_match('/data-link-id="([^"]+)"/i', $attributes, $idMatch)) {
+                    // No ID, can't convert
+                    return $matches[0];
+                }
+                
+                $linkId = intval($idMatch[1]);
+                $href = '#';
+                
+                // Generate URL based on type using LinkHelper
+                if ($linkType === 'page') {
+                    $pageDao = PageDaoMysql::getInstance();
+                    $page = $pageDao->getPage($linkId);
+                    if ($page) {
+                        $href = $this->linkHelper->createPageUrl($page);
+                    }
+                } elseif ($linkType === 'article') {
+                    $articleDao = ArticleDaoMysql::getInstance();
+                    $article = $articleDao->getArticle($linkId);
+                    if ($article) {
+                        $href = $this->linkHelper->createArticleUrl($article);
+                    }
+                }
+                
+                // Remove data-attributes and add/update href
+                $cleanAttributes = preg_replace('/\s*data-link-type="[^"]+"/i', '', $attributes);
+                $cleanAttributes = preg_replace('/\s*data-link-id="[^"]+"/i', '', $cleanAttributes);
+                $cleanAttributes = preg_replace('/\s*href="[^"]*"/i', '', $cleanAttributes);
+                
+                // Keep data-link-target for further processing
+                return '<a ' . trim($cleanAttributes) . ' href="' . $href . '">';
+            },
+            $html
+        );
+    }
+    
+    private function addExternalLinksAttributes(string $html): string {
+        // Add class="external" and target="_blank" based on data-link-target
+        $html = preg_replace_callback(
+            '/<a\s+([^>]*)href="([^"]*)"([^>]*)>/i',
+            function($matches) {
+                $beforeHref = $matches[1];
+                $href = $matches[2];
+                $afterHref = $matches[3];
+                $combined = $beforeHref . $afterHref;
+                
+                // Check for data-link-target attribute
+                $linkTarget = 'external'; // default
+                if (preg_match('/data-link-target="([^"]+)"/i', $combined, $targetMatch)) {
+                    $linkTarget = $targetMatch[1];
+                    // Remove data-link-target attribute
+                    $combined = preg_replace('/\s*data-link-target="[^"]+"/i', '', $combined);
+                }
+                
+                // Only add external class and target="_blank" if linkTarget is external
+                if ($linkTarget === 'external') {
+                    // Check if class attribute exists
+                    if (preg_match('/class="([^"]*)"/i', $combined, $classMatch)) {
+                        // Add external to existing class
+                        $classes = $classMatch[1];
+                        if (strpos($classes, 'external') === false) {
+                            $classes .= ' external';
+                        }
+                        $replacement = 'class="' . trim($classes) . '"';
+                        $combined = preg_replace('/class="[^"]*"/i', $replacement, $combined, 1);
+                    } else {
+                        // Add new class attribute
+                        $combined .= ' class="external"';
+                    }
+                    
+                    // Check if target attribute exists
+                    if (strpos($combined, 'target=') === false) {
+                        $combined .= ' target="_blank"';
+                    }
+                }
+                
+                return '<a ' . trim($combined) . ' href="' . $href . '">';
+            },
+            $html
+        );
+        
+        return $html;
     }
 
     protected function getPage(): Page {

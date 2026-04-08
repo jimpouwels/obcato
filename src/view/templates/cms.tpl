@@ -5,13 +5,18 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" href="/admin?file=/public/css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="/admin?file=/default/css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="/admin?file=/default/css/jquery-ui-1.8.23.custom.css" type="text/css" />
+    {if isset($main_css)}
+        <style>
+            {$main_css}
+        </style>
+    {/if}
+
+    <link rel="stylesheet" href="/admin?file=/default/css/jquery-ui-1.8.23.custom.css?v=10" type="text/css" />
 
     <script type="text/javascript" src="/admin?file=/default/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
-    <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=7"></script>
+    <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=8"></script>
+    <script type="text/javascript" src="/admin?file=/default/js/rich_text_editor.js?v=5"></script>
 
     {if isset($module_styles)}
         {foreach from=$module_styles item=style}
@@ -60,6 +65,7 @@
 </div>
 
 {include file="confirm_dialog.tpl"}
+{include file="link_editor_dialog.tpl"}
 
 </body>
 </html>

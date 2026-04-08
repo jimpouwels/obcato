@@ -7,7 +7,7 @@ use Obcato\Core\elements\text_element\TextElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\TextArea;
+use Obcato\Core\view\views\RichTextArea;
 use Obcato\Core\view\views\TextField;
 
 class TextElementEditor extends ElementVisual {
@@ -31,7 +31,7 @@ class TextElementEditor extends ElementVisual {
 
     public function loadElementForm(TemplateData $data): void {
         $titleField = new TextField('element_' . $this->textElement->getId() . '_title', $this->getTextResource("text_element_editor_title"), $this->textElement->getTitle(), false, true, null);
-        $textField = new TextArea('element_' . $this->textElement->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->textElement->getText(), false, true, "text-element-textarea");
+        $textField = new RichTextArea('element_' . $this->textElement->getId() . '_text', $this->getTextResource("text_element_editor_text"), $this->textElement->getText(), false, true, "text-element-textarea");
 
         $data->assign("id", $this->textElement->getId());
         $data->assign("title_field", $titleField->render());

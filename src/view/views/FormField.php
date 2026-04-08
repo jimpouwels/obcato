@@ -88,6 +88,10 @@ abstract class FormField extends Visual {
         return $this->fieldName;
     }
 
+    protected function getValue(): ?string {
+        return $this->value;
+    }
+
     private function getFieldValue(): ?string {
         return StringUtility::escapeXml($this->value);
     }

@@ -35,6 +35,12 @@ class Cms extends Visual {
 
         $this->assignGlobal("text_resources", Session::getTextResources());
 
+        // Load main CSS inline
+        $mainCssPath = __DIR__ . '/../../static/default/css/styles.css';
+        if (file_exists($mainCssPath)) {
+            $this->assignGlobal("main_css", file_get_contents($mainCssPath));
+        }
+
         if ($this->moduleVisual) {
             $this->assignGlobal("page_title", $this->moduleVisual->getTitle());
             $this->assignGlobal("module_styles", $this->moduleVisual->renderStyles());

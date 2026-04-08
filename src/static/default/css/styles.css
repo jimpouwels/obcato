@@ -555,6 +555,119 @@ textarea:focus {
     box-shadow: 0 0 0 1px var(--color-primary);
 }
 
+/* Rich Text Editor Styles */
+.rich-text-editor-wrapper {
+    border: 1px solid var(--color-gray-300);
+    border-radius: 2px;
+    background: white;
+}
+
+.rich-text-toolbar {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    border-bottom: 1px solid var(--color-gray-200);
+    background: var(--color-gray-50);
+}
+
+.rich-text-btn {
+    width: 32px;
+    height: 28px;
+    border: 1px solid var(--color-gray-300);
+    background: white;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.rich-text-btn:hover {
+    background: var(--color-gray-100);
+    border-color: var(--color-gray-400);
+}
+
+.rich-text-btn.active {
+    background: var(--color-primary-light, #e0e7ff);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.toolbar-separator {
+    width: 1px;
+    background: var(--color-gray-300);
+    margin: 0 4px;
+}
+
+.rich-text-content {
+    padding: 12px;
+    min-height: 120px;
+    max-height: 600px;
+    overflow-y: auto;
+    font-size: 13px;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    outline: none;
+    cursor: text;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.rich-text-content:focus {
+    background: var(--color-gray-50, #f9fafb);
+}
+
+.rich-text-content:empty:before {
+    content: attr(data-placeholder);
+    color: var(--color-gray-400);
+    pointer-events: none;
+}
+
+.rich-text-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+}
+
+.rich-text-content a:hover {
+    background: var(--color-primary-light, #e0e7ff);
+    text-decoration: none;
+}
+
+.rich-text-content a::after {
+    content: '✏️';
+    font-size: 11px;
+    margin-left: 4px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.rich-text-content a:hover::after {
+    opacity: 1;
+}
+
+.rich-text-content strong {
+    font-weight: 600;
+}
+
+.rich-text-content em {
+    font-style: italic;
+}
+
+.rich-text-content u {
+    text-decoration: underline;
+}
+
 .admin_field_checkbox {
     width: auto;
     margin-right: 8px;
@@ -1036,10 +1149,6 @@ textarea:focus {
 .add-link-btn svg {
     width: 16px;
     height: 16px;
-}
-
-.link-editor-container {
-    /* Container for link table and add button */
 }
 
 .link-target-display .delete-target-btn img {
@@ -1972,6 +2081,289 @@ textarea:focus {
 }
 
 .confirm-dialog-btn-confirm.danger:hover {
+    background: rgb(185, 28, 28);
+}
+
+/* Link Editor Dialog */
+.link-editor-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.link-editor-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.link-editor-content {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: slideUp 0.2s ease-out;
+}
+
+.link-editor-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.link-editor-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-900);
+}
+
+.link-editor-body {
+    padding: 20px 24px;
+}
+
+.link-editor-body .form-field-group {
+    margin-bottom: 16px;
+}
+
+.link-editor-body .form-field-group:last-child {
+    margin-bottom: 0;
+}
+
+.link-editor-body label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-gray-700);
+}
+
+.link-editor-body label input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.link-editor-body input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.link-type-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.link-type-tab {
+    flex: 1;
+    padding: 8px 16px;
+    background: var(--color-gray-100);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-gray-700);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.link-type-tab:hover {
+    background: var(--color-gray-200);
+}
+
+.link-type-tab.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.link-search-results {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.link-search-results:empty {
+    display: none;
+}
+
+.link-search-no-results,
+.link-search-error {
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-gray-600);
+}
+
+.link-search-error {
+    color: var(--color-error);
+}
+
+.link-search-result-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-gray-100);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.link-search-result-item:last-child {
+    border-bottom: none;
+}
+
+.link-search-result-item:hover {
+    background: var(--color-gray-50);
+}
+
+.link-search-result-item .result-title {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-gray-900);
+}
+
+.link-search-result-item .result-path {
+    font-size: 12px;
+    color: var(--color-gray-600);
+    margin-top: 2px;
+}
+
+.link-selected-item {
+    padding: 10px 12px;
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-selected-item .selected-item-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-gray-900);
+}
+
+.link-selected-item .clear-selection {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.link-selected-item .clear-selection:hover {
+    background: var(--color-gray-200);
+    color: var(--color-gray-900);
+}
+
+#link-url-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#link-url-input-group label {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+}
+
+#link-url-input-group #link-editor-url {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.link-add-btn {
+    flex: 0 0 auto;
+    padding: 5px 16px;
+    background: var(--color-primary, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.15s;
+    height: 27px;
+    display: flex;
+    align-items: center;
+}
+
+.link-add-btn:hover {
+    background: var(--color-primary-dark, #0052a3);
+}
+
+/* Extra spacing for the "Open in new tab" checkbox group */
+.link-options-group {
+    margin-top: 24px;
+}
+
+.link-editor-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-gray-200);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.link-editor-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+}
+
+.link-editor-btn-cancel {
+    background: var(--color-white);
+    color: var(--color-gray-700);
+    border: 1px solid var(--color-gray-300);
+}
+
+.link-editor-btn-cancel:hover {
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-400);
+}
+
+.link-editor-btn-save {
+    background: var(--color-primary);
+    color: white;
+}
+
+.link-editor-btn-save:hover {
+    background: var(--color-primary-dark);
+}
+
+.link-editor-btn-delete {
+    background: rgb(220, 38, 38);
+    color: white;
+}
+
+.link-editor-btn-delete:hover {
     background: rgb(185, 28, 28);
 }
 

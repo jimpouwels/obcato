@@ -312,7 +312,10 @@ function findElementHeader(elementNode) {
 $(document).ready(function () {
     $(function () {
         $(".draggable_items").sortable({
-            opacity: 0.6, cursor: 'move', update: function () {
+            opacity: 0.6,
+            cursor: 'move',
+            cancel: '.rich-text-content, .rich-text-toolbar, input, textarea, select, button, a',
+            update: function () {
                 var idString = '';
                 $('.draggable_id_holder').each(function () {
                     if (idString != '') {

@@ -155,7 +155,13 @@ class LinkHelper
         $matches = null;
         preg_match_all('/\[(.*?)]\((.*?)\)/', $value, $matches);
         for ($i = 0; $i < count($matches[0]); $i++) {
-            $link = "<a target=\"_blank\" class=\"external\" href=\"{$matches[2][$i]}\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
+            $url = $matches[2][$i];
+            
+            if (!preg_match('/^https?:\/\//i', $url) && !preg_match('/^\//', $url)) {
+                $url = 'https://' . $url;
+            }
+            
+            $link = "<a target=\"_blank\" class=\"external\" href=\"{$url}\" title=\"{$matches[1][$i]}\" alt=\"{$matches[1][$i]}\">{$matches[1][$i]}</a>";
             $value = str_replace($matches[0][$i], $link, $value);
         }
         return $value;
