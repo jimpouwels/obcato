@@ -8,13 +8,13 @@ $(document).ready(function () {
 
     // uninstall button
     $('#uninstall_component').click(function () {
-        var confirmed = confirm("{$text_resources.components_confirm_delete}");
-        if (confirmed) {
-            $('#action').attr('value', 'uninstall_component');
-            $('#uninstall_component_form').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.components_confirm_delete|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'uninstall_component');
+                $('#uninstall_component_form').submit();
+            }
+        });
+        return false;
     });
 
 });

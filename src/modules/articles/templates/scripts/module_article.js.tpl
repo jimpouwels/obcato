@@ -18,13 +18,13 @@ $(document).ready(function () {
     });
 
     $('#delete_element_holder').click(function () {
-        let confirmed = confirm("{$text_resources.articles_confirm_delete_article}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_article');
-            $('#element_holder_form_id').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_article|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_article');
+                $('#element_holder_form_id').submit();
+            }
+        });
+        return false;
     });
 
     $('#add_term').click(function () {
@@ -38,11 +38,12 @@ $(document).ready(function () {
     });
 
     $('#delete_term').click(function () {
-        var confirmed = confirm("{$text_resources.articles_confirm_delete_term}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_term');
-            $('#term_form').submit();
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_term|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_term');
+                $('#term_form').submit();
+            }
+        });
     });
 
     $('#add_metadata_field').click(function () {
@@ -55,30 +56,33 @@ $(document).ready(function () {
     });
 
     $('#delete_metadata_field').click(function () {
-        var confirmed = confirm("{$text_resources.articles_confirm_delete_metadata_field}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_metadata_field');
-            $('#metadata_field_form').submit();
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_metadata_field|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_metadata_field');
+                $('#metadata_field_form').submit();
+            }
+        });
     });
 
     $('#delete_lead_image').click(function () {
-        var confirmed = confirm("{$text_resources.articles_confirm_delete_image}");
-        if (confirmed) {
-            $('#action').attr('value', 'update_element_holder');
-            $('#delete_lead_image_field').attr('value', 'true');
-            $('#element_holder_form_id').submit();
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_image|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'update_element_holder');
+                $('#delete_lead_image_field').attr('value', 'true');
+                $('#element_holder_form_id').submit();
+            }
+        });
         return false;
     });
 
     $('#delete_wallpaper').click(function () {
-        var confirmed = confirm("{$text_resources.articles_confirm_delete_wallpaper}");
-        if (confirmed) {
-            $('#action').attr('value', 'update_element_holder');
-            $('#delete_wallpaper_field').attr('value', 'true');
-            $('#element_holder_form_id').submit();
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_wallpaper|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'update_element_holder');
+                $('#delete_wallpaper_field').attr('value', 'true');
+                $('#element_holder_form_id').submit();
+            }
+        });
         return false;
     });
 
@@ -99,13 +103,14 @@ $(document).ready(function () {
     $(document).on('click', '.delete-article-btn', function(e) {
         e.preventDefault();
         var deleteFieldId = $(this).data('delete-field');
-        var confirmed = confirm("{$text_resources.articles_confirm_delete_related_article}");
         
-        if (confirmed) {
-            $('#' + deleteFieldId).val('true');
-            $('#action').val('update_element_holder');
-            $('#element_holder_form_id').submit();
-        }
+        confirmDialog("{$text_resources.articles_confirm_delete_related_article|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#' + deleteFieldId).val('true');
+                $('#action').val('update_element_holder');
+                $('#element_holder_form_id').submit();
+            }
+        });
     });
 
     $('#update_target_pages').click(function () {
@@ -123,11 +128,12 @@ $(document).ready(function () {
         if (!$checked) {
             alert("{$text_resources.articles_alert_no_target_pages_selected}");
         } else {
-            var confirmed = confirm("{$text_resources.articles_confirm_delete_target_pages}");
-            if (confirmed) {
-                $('#action').attr('value', 'delete_target_pages');
-                $('#update_target_page_form').submit();
-            }
+            confirmDialog("{$text_resources.articles_confirm_delete_target_pages|escape:'javascript'}").then(function(confirmed) {
+                if (confirmed) {
+                    $('#action').attr('value', 'delete_target_pages');
+                    $('#update_target_page_form').submit();
+                }
+            });
         }
     });
 });

@@ -13,13 +13,13 @@ $(document).ready(function () {
 
     // delete button
     $('#delete_user').click(function () {
-        var confirmed = confirm("{$text_resources.authorization_confirm_delete_user}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_user');
-            $('#user_form').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.authorization_confirm_delete_user|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_user');
+                $('#user_form').submit();
+            }
+        });
+        return false;
     });
 
     // add button

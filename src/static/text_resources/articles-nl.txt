@@ -57,6 +57,8 @@ article_editor_selected_wallpaper_label: Geselecteerde wallpaper
 
 # ARTICLES EDITOR
 article_saved_message: Artikel opgeslagen
+article_created_message: Artikel aangemaakt
+article_deleted_message: Artikel verwijderd
 article_not_saved_error_message: Artikel niet volledig opgeslagen, verwerk de fouten
 
 # TERMS EDITOR

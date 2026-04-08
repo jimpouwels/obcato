@@ -1,3 +1,65 @@
+// Modern Confirm Dialog
+// Replaces the native confirm() with a custom styled dialog
+function showConfirm(message, options) {
+    return new Promise(function(resolve) {
+        var opts = options || {};
+        var title = opts.title || 'Bevestiging';
+        var confirmText = opts.confirmText || 'Bevestigen';
+        var cancelText = opts.cancelText || 'Annuleren';
+        var isDanger = opts.danger || false;
+        
+        // Set dialog content
+        $('#confirm-dialog-title').text(title);
+        $('#confirm-dialog-message').text(message);
+        $('#confirm-dialog-confirm').text(confirmText);
+        $('#confirm-dialog-cancel').text(cancelText);
+        
+        // Add/remove danger class
+        if (isDanger) {
+            $('#confirm-dialog-confirm').addClass('danger');
+        } else {
+            $('#confirm-dialog-confirm').removeClass('danger');
+        }
+        
+        // Show dialog
+        $('#confirm-dialog').fadeIn(200);
+        
+        // Store handlers so we can remove them later
+        var confirmHandler = function() {
+            $('#confirm-dialog').fadeOut(200);
+            $('#confirm-dialog-confirm').off('click', confirmHandler);
+            $('#confirm-dialog-cancel').off('click', cancelHandler);
+            $('.confirm-dialog-backdrop').off('click', cancelHandler);
+            resolve(true);
+        };
+        
+        var cancelHandler = function() {
+            $('#confirm-dialog').fadeOut(200);
+            $('#confirm-dialog-confirm').off('click', confirmHandler);
+            $('#confirm-dialog-cancel').off('click', cancelHandler);
+            $('.confirm-dialog-backdrop').off('click', cancelHandler);
+            resolve(false);
+        };
+        
+        // Attach event listeners
+        $('#confirm-dialog-confirm').on('click', confirmHandler);
+        $('#confirm-dialog-cancel').on('click', cancelHandler);
+        $('.confirm-dialog-backdrop').on('click', cancelHandler);
+        
+        // ESC key to cancel
+        $(document).one('keydown', function(e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                cancelHandler();
+            }
+        });
+    });
+}
+
+// Convenience function that mimics the old confirm() behavior for easy migration
+function confirmDialog(message) {
+    return showConfirm(message, { danger: true });
+}
+
 // handles the 'add element' click in the navigation menu
 function addElement(elementTypeId, errorMessage) {
     var $inputField = $('#add_element_type_id');
@@ -159,13 +221,12 @@ function deleteElement(elementId, formFieldId, confirmMessage) {
     } else {
         $inputField.attr('value', elementId);
     }
-    var confirmed = confirm(confirmMessage);
-    if (confirmed) {
-        $('#action').attr('value', 'update_element_holder');
-        $('#element_holder_form_id').submit();
-    } else {
-        return false;
-    }
+    confirmDialog(confirmMessage).then(function(confirmed) {
+        if (confirmed) {
+            $('#action').attr('value', 'update_element_holder');
+            $('#element_holder_form_id').submit();
+        }
+    });
 }
 
 // elements visibility
@@ -336,13 +397,14 @@ function putLink(linkId) {
 
 // deletes the selected link target for a link
 function deleteLink(linkId) {
-    var confirmed = confirm("Weet u zeker dat u dit linkdoel wilt verwijderen?");
-    if (confirmed) {
-        $('#delete_link_target').attr('value', linkId);
-        $('#action').attr('value', 'update_element_holder');
-        var $editorForm = $('#element_holder_form_id');
-        $editorForm.submit();
-    }
+    confirmDialog("Weet u zeker dat u dit linkdoel wilt verwijderen?").then(function(confirmed) {
+        if (confirmed) {
+            $('#delete_link_target').attr('value', linkId);
+            $('#action').attr('value', 'update_element_holder');
+            var $editorForm = $('#element_holder_form_id');
+            $editorForm.submit();
+        }
+    });
     return false;
 }
 
@@ -440,9 +502,11 @@ function updateSelectedImages(elementId) {
                 deleteBtn.html('<svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>');
                 deleteBtn.on('click', function(e) {
                     e.stopPropagation();
-                    if (confirm('Weet u zeker dat u deze afbeelding wilt verwijderen?')) {
-                        deleteImage(elementId, result.id);
-                    }
+                    confirmDialog('Weet u zeker dat u deze afbeelding wilt verwijderen?').then(function(confirmed) {
+                        if (confirmed) {
+                            deleteImage(elementId, result.id);
+                        }
+                    });
                 });
                 card.append(deleteBtn);
                 
@@ -777,28 +841,31 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         var deleteFieldId = $(this).data('delete-field');
-        var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");
+        var $modal = $(this).closest('.image-modal');
         
-        if (confirmed) {
-            $('#' + deleteFieldId).val('true');
-            $('#action').val('update_element_holder');
-            // Close modal
-            $(this).closest('.image-modal').fadeOut(300);
-            $('#element_holder_form_id').submit();
-        }
+        confirmDialog("Weet u zeker dat u deze afbeelding wilt verwijderen?").then(function(confirmed) {
+            if (confirmed) {
+                $('#' + deleteFieldId).val('true');
+                $('#action').val('update_element_holder');
+                // Close modal
+                $modal.fadeOut(300);
+                $('#element_holder_form_id').submit();
+            }
+        });
     });
     
     // Image overlay actions - Delete image (from display, not modal)
     $(document).on('click', '.delete-image-btn', function(e) {
         e.preventDefault();
         var deleteFieldId = $(this).data('delete-field');
-        var confirmed = confirm("Weet u zeker dat u deze afbeelding wilt verwijderen?");
         
-        if (confirmed) {
-            $('#' + deleteFieldId).val('true');
-            $('#action').val('update_element_holder');
-            $('#element_holder_form_id').submit();
-        }
+        confirmDialog("Weet u zeker dat u deze afbeelding wilt verwijderen?").then(function(confirmed) {
+            if (confirmed) {
+                $('#' + deleteFieldId).val('true');
+                $('#action').val('update_element_holder');
+                $('#element_holder_form_id').submit();
+            }
+        });
     });
     
     // Close modal - only when clicking backdrop directly, not bubbled events

@@ -7,13 +7,13 @@ $(document).ready(function () {
 
     // delete block button
     $('#delete_element_holder').click(function () {
-        var confirmed = confirm("{$text_resources.blocks_confirm_delete_block}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_block');
-            $('#element_holder_form_id').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.blocks_confirm_delete_block}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_block');
+                $('#element_holder_form_id').submit();
+            }
+        });
+        return false;
     });
 
     // add block button
@@ -44,11 +44,12 @@ $(document).ready(function () {
         if (!$checked) {
             alert("{$text_resources.blocks_alert_no_positions_selected}");
         } else {
-            var confirmed = confirm("{$text_resources.blocks_confirm_delete_positions}");
-            if (confirmed) {
-                $('#position_delete_action').attr('value', 'delete_positions');
-                $('#positions_delete_form').submit();
-            }
+            confirmDialog("{$text_resources.blocks_confirm_delete_positions|escape:'javascript'}").then(function(confirmed) {
+                if (confirmed) {
+                    $('#position_delete_action').attr('value', 'delete_positions');
+                    $('#positions_delete_form').submit();
+                }
+            });
         }
     });
 });

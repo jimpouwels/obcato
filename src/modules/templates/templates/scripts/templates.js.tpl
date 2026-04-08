@@ -32,10 +32,11 @@ $(document).ready(function () {
         if (!$checked) {
             alert("{$text_resources.templates_alert_no_templates_selected}");
         } else {
-            let confirmed = confirm("{$text_resources.templates_confirm_delete_templates}");
-            if (confirmed) {
-                submitTemplateForm('delete_templates', 'template_editor_form');
-            }
+            confirmDialog("{$text_resources.templates_confirm_delete_templates|escape:'javascript'}").then(function(confirmed) {
+                if (confirmed) {
+                    submitTemplateForm('delete_templates', 'template_editor_form');
+                }
+            });
         }
     });
 
@@ -52,10 +53,11 @@ $(document).ready(function () {
     });
 
     $('#delete_template_file').click(function () {
-        let confirmed = confirm("{$text_resources.templates_confirm_delete_template_file}");
-        if (confirmed) {
-            submitTemplateForm('delete_template_file', 'template_file_form');
-        }
+        confirmDialog("{$text_resources.templates_confirm_delete_template_file|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                submitTemplateForm('delete_template_file', 'template_file_form');
+            }
+        });
     });
 
 });

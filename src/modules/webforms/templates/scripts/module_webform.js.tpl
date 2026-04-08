@@ -15,11 +15,12 @@ $(document).ready(function () {
 
     // delete webform action button
     $('#delete_webform').click(function () {
-        var confirmed = confirm("{$text_resources.webforms_confirm_delete_webform}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_webform');
-            $('#webform-editor-form').submit();
-        }
+        confirmDialog("{$text_resources.webforms_confirm_delete_webform|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_webform');
+                $('#webform-editor-form').submit();
+            }
+        });
     });
 });
 
@@ -29,14 +30,13 @@ function addFormField(type) {
 }
 
 function deleteFormField(itemId, confirmMessage) {
-    var confirmed = confirm(confirmMessage);
-    if (confirmed) {
-        $('#action').attr('value', 'delete_form_item');
-        $('#webform_item_to_delete').attr('value', itemId);
-        $('#webform-editor-form').submit();
-    } else {
-        return false;
-    }
+    confirmDialog(confirmMessage).then(function(confirmed) {
+        if (confirmed) {
+            $('#action').attr('value', 'delete_form_item');
+            $('#webform_item_to_delete').attr('value', itemId);
+            $('#webform-editor-form').submit();
+        }
+    });
 }
 
 function addFormHandler(type) {
@@ -45,14 +45,13 @@ function addFormHandler(type) {
 }
 
 function deleteFormHandler(handlerId, confirmMessage) {
-    var confirmed = confirm(confirmMessage);
-    if (confirmed) {
-        $('#action').attr('value', 'delete_form_handler');
-        $('#webform_handler_to_delete').attr('value', handlerId);
-        $('#webform-editor-form').submit();
-    } else {
-        return false;
-    }
+    confirmDialog(confirmMessage).then(function(confirmed) {
+        if (confirmed) {
+            $('#action').attr('value', 'delete_form_handler');
+            $('#webform_handler_to_delete').attr('value', handlerId);
+            $('#webform-editor-form').submit();
+        }
+    });
 }
 
 function onCaptchaChanged(captchaKeyFieldClass) {

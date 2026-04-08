@@ -58,5 +58,8 @@
         {$content_pane}
     </div>
 </div>
+
+{include file="confirm_dialog.tpl"}
+
 </body>
 </html>

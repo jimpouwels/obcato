@@ -9,13 +9,13 @@ $(document).ready(function () {
 
     // delete download button
     $('#delete_download').click(function () {
-        var confirmed = confirm("{$text_resources.downloads_confirm_delete}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_download');
-            $('#download-editor-form').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.downloads_confirm_delete|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_download');
+                $('#download-editor-form').submit();
+            }
+        });
+        return false;
     });
 
     // add download button

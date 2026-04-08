@@ -49,12 +49,14 @@
 <script type="text/javascript">
     $(document).ready(() => {
         {if $multiple_images}
-        updateSelectedImages({$context_id});
+        if (typeof updateSelectedImages === 'function') {
+            updateSelectedImages({$context_id});
+        }
         {else}
         // Store field name for this context
         window['imageSelector_fieldName_{$context_id}'] = '{$field_name}';
         var currentImageId = $('#{$field_name}').val();
-        if (currentImageId) {
+        if (currentImageId && typeof updateSingleImagePreview === 'function') {
             updateSingleImagePreview('{$field_name}', currentImageId);
         }
         {/if}

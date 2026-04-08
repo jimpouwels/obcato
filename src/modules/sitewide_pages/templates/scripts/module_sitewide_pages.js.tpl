@@ -5,13 +5,13 @@ $(document).ready(function () {
     });
 
     $('#remove_sitewide_pages').click(() => {
-        let confirmed = confirm("{$text_resources.sitewide_pages_confirm_delete}");
-        if (confirmed) {
-            $('#action').attr('value', 'remove_sitewide_pages');
-            $('#update_sitewide_pages_form').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.sitewide_pages_confirm_delete|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'remove_sitewide_pages');
+                $('#update_sitewide_pages_form').submit();
+            }
+        });
+        return false;
     });
 });
 

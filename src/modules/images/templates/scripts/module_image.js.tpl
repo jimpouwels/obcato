@@ -19,13 +19,13 @@ $(document).ready(function () {
 
     // delete image button
     $('#delete_image').click(function () {
-        var confirmed = confirm("{$text_resources.images_confirm_delete_image}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_image');
-            $('#image-editor-form').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.images_confirm_delete_image|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_image');
+                $('#image-editor-form').submit();
+            }
+        });
+        return false;
     });
 
     // add image button
@@ -59,11 +59,12 @@ $(document).ready(function () {
         if (!$checked) {
             alert("{$text_resources.images_alert_no_labels_selected}");
         } else {
-            var confirmed = confirm("{$text_resources.images_confirm_delete_labels}");
-            if (confirmed) {
-                $('#label_delete_action').attr('value', 'delete_labels');
-                $('#label_delete_form').submit();
-            }
+            confirmDialog("{$text_resources.images_confirm_delete_labels|escape:'javascript'}").then(function(confirmed) {
+                if (confirmed) {
+                    $('#label_delete_action').attr('value', 'delete_labels');
+                    $('#label_delete_form').submit();
+                }
+            });
         }
     });
 

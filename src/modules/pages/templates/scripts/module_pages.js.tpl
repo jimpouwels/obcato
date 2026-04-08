@@ -13,13 +13,13 @@ $(document).ready(function () {
 
     // delete button
     $('#delete_element_holder').click(function () {
-        var confirmed = confirm("{$text_resources.pages_confirm_delete}");
-        if (confirmed) {
-            $('#action').attr('value', 'delete_page');
-            $('#element_holder_form_id').submit();
-        } else {
-            return false;
-        }
+        confirmDialog("{$text_resources.pages_confirm_delete|escape:'javascript'}").then(function(confirmed) {
+            if (confirmed) {
+                $('#action').attr('value', 'delete_page');
+                $('#element_holder_form_id').submit();
+            }
+        });
+        return false;
     });
 
     // add button
