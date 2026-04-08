@@ -212,9 +212,7 @@ abstract class FrontendVisual {
             $value = $this->replaceArticleMetadataReferences($value);
             $value = $this->linkHelper->createLinksInString($value, $elementHolder);
         } else {
-            // Already HTML from rich text editor - just process smarty and article refs
-            // But still convert newlines to <br> if they haven't been converted yet
-            $value = nl2br($value);
+            // Already HTML from rich text editor - no nl2br needed (editor adds <br> tags itself)
             $value = $this->replaceSmartyQuery($value);
             $value = $this->replaceArticleMetadataReferences($value);
             // Still need to handle [linktext](url) syntax if present
