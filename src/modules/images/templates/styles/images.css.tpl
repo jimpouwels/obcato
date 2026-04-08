@@ -100,3 +100,54 @@
 .image_editor .admin_form {
     padding: 0;
 }
+
+/* IMAGE IMPORT FORM */
+.image-import-form {
+    max-width: 600px;
+}
+
+.image-import-form .import-form-content {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+}
+
+.image-import-form .import-help-text {
+    margin: 0 0 var(--spacing-lg) 0;
+    color: var(--color-gray-600);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.image-import-form .import-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.image-import-form .admin_form_field_v2 {
+    margin: 0;
+}
+
+/* Style file input as button */
+.image-import-form input[type="file"] {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.image-import-form input[type="file"]:hover {
+    background: var(--color-primary-dark);
+}
+
+.image-import-form input[type="file"]::file-selector-button {
+    display: none;
+}

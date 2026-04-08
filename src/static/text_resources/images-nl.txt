@@ -5,6 +5,7 @@ images_module_title: Afbeeldingen
 images_tab_images: Afbeeldingen
 images_tab_labels: Labels
 images_tab_import: Importeren
+images_import_instructions: Upload een ZIP bestand met afbeeldingen om meerdere afbeeldingen tegelijk te importeren.
 
 # LIST
 images_list_panel_title: Gevonden afbeeldingen

@@ -5,6 +5,7 @@ images_module_title: Images
 images_tab_images: Images
 images_tab_labels: Labels
 images_tab_import: Import
+images_import_instructions: Upload a ZIP file with images to import multiple images at once.
 
 # LIST
 images_list_panel_title: Found articles
