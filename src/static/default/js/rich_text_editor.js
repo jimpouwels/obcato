@@ -91,8 +91,15 @@ function initRichTextEditors() {
             }
             return false;
         }
+        // Ctrl+Z / Cmd+Z for undo
+        if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+            e.preventDefault();
+            document.execCommand('undo', false, null);
+            syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
+            return false;
+        }
         // Ctrl+B for bold
-        if (e.ctrlKey && e.key === 'b') {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
             e.preventDefault();
             document.execCommand('bold', false, null);
             updateActiveButtons($(this));
@@ -100,7 +107,7 @@ function initRichTextEditors() {
             return false;
         }
         // Ctrl+I for italic
-        else if (e.ctrlKey && e.key === 'i') {
+        else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
             e.preventDefault();
             document.execCommand('italic', false, null);
             updateActiveButtons($(this));
@@ -108,7 +115,7 @@ function initRichTextEditors() {
             return false;
         }
         // Ctrl+U for underline
-        else if (e.ctrlKey && e.key === 'u') {
+        else if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
             e.preventDefault();
             document.execCommand('underline', false, null);
             updateActiveButtons($(this));
@@ -376,14 +383,6 @@ function initLinkEditorDialog() {
             hideLinkEditorDialog();
         }
     });
-    
-    // Handle Enter key
-    $('#link-editor-text, #link-editor-url').on('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            $('#link-editor-save').click();
-        }
-    });
 }
 
 function switchLinkTab(tab) {
@@ -618,13 +617,9 @@ function createLinkElement(linkData) {
     
     range.insertNode(link);
     
-    // Insert a space after the link so cursor is outside of link context
-    const space = document.createTextNode('\u00A0'); // Non-breaking space
-    link.parentNode.insertBefore(space, link.nextSibling);
-    
-    // Move cursor after the space
-    range.setStartAfter(space);
-    range.setEndAfter(space);
+    // Move cursor after the link
+    range.setStartAfter(link);
+    range.setEndAfter(link);
     selection.removeAllRanges();
     selection.addRange(range);
 }
