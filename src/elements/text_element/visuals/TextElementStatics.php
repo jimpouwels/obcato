@@ -17,7 +17,9 @@ class TextElementStatics extends ElementStatic {
     }
 
     public function renderScripts(): array {
-        return array();
+        $scripts = array();
+        $scripts[] = $this->getTemplateEngine()->fetch("text_element/templates/scripts/text_element.js.tpl");
+        return $scripts;
     }
 
 }
