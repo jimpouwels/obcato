@@ -13,3 +13,20 @@ function addListItem(elementId, formId) {
         }
     }
 }
+
+// Auto-resize textareas in list items
+function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+
+// Initialize auto-resize for all list item textareas
+$(document).ready(function() {
+    // Set rows attribute and auto-resize on input
+    $('.list_element_item_value_field textarea').each(function() {
+        $(this).attr('rows', '1');
+        autoResizeTextarea(this);
+    }).on('input', function() {
+        autoResizeTextarea(this);
+    });
+});
