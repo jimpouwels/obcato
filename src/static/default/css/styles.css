@@ -625,11 +625,14 @@ textarea:focus {
 }
 
 /* Override for list items - make them compact */
-.list-element_values .rich-text-content {
-    min-height: 2em !important;
-    max-height: 4em !important;
-    padding: 4px 8px !important;
-    height: auto !important;
+.list_element_values .rich-text-editor-wrapper {
+    min-height: auto !important;
+}
+
+.list_element_values .rich-text-content {
+    min-height: 36px !important;
+    max-height: 120px !important;
+    padding: 6px 8px !important;
 }
 
 .rich-text-content:empty:before {
