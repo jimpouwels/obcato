@@ -23,6 +23,9 @@ function initRichTextEditors() {
     $('.rich-text-content').each(function() {
         $(this).attr('contenteditable', 'true');
         $(this).prop('contentEditable', 'true');
+        
+        // Make all existing links non-editable
+        $(this).find('a').attr('contenteditable', 'false');
     });
     
     // Handle toolbar button clicks
@@ -121,43 +124,6 @@ function initRichTextEditors() {
             updateActiveButtons($(this));
             syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
             return false;
-        }
-        // Prevent typing inside links (except for special keys)
-        else if (!e.ctrlKey && !e.metaKey && e.key.length === 1) {
-            const selection = window.getSelection();
-            if (selection.rangeCount > 0) {
-                const range = selection.getRangeAt(0);
-                let node = range.startContainer;
-                
-                // Check if we're inside a link element
-                while (node && node !== this) {
-                    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A') {
-                        // We're inside a link - move cursor outside
-                        e.preventDefault();
-                        
-                        // Create text node with the typed character
-                        const textNode = document.createTextNode(e.key);
-                        
-                        // Insert after the link
-                        if (node.nextSibling) {
-                            node.parentNode.insertBefore(textNode, node.nextSibling);
-                        } else {
-                            node.parentNode.appendChild(textNode);
-                        }
-                        
-                        // Move cursor after the new text
-                        range.setStartAfter(textNode);
-                        range.setEndAfter(textNode);
-                        selection.removeAllRanges();
-                        selection.addRange(range);
-                        
-                        // Trigger input event for sync
-                        $(this).trigger('input');
-                        return false;
-                    }
-                    node = node.parentNode;
-                }
-            }
         }
     });
     
@@ -628,6 +594,7 @@ function updateLinkElement($linkElement, linkData) {
     $linkElement.text(linkData.text);
     $linkElement.attr('data-link-target', linkData.target);
     $linkElement.attr('data-link-type', linkData.type);
+    $linkElement.attr('contenteditable', 'false');
     
     if (linkData.type === 'url') {
         $linkElement.attr('data-link-url', linkData.url);

@@ -666,6 +666,8 @@ textarea:focus {
     transition: opacity 0.2s;
     text-decoration: none;
     display: inline-block;
+    pointer-events: none;
+    user-select: none;
 }
 
 .rich-text-content a:hover::after {
@@ -2271,6 +2273,9 @@ textarea:focus {
     font-weight: 500;
     font-size: 13px;
     color: var(--color-gray-900);
+    word-break: break-all;
+    overflow-wrap: break-word;
+    flex: 1;
 }
 
 .link-selected-item .clear-selection {

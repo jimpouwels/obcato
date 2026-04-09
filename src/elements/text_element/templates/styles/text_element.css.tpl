@@ -1,3 +1,7 @@
+.text_element_form .admin_label_wrapper {
+    flex: 0 0 80px;
+}
+
 .text_element_form .admin_field_wrapper {
     max-width: none;
 }
