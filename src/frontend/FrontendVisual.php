@@ -19,6 +19,7 @@ use Obcato\Core\modules\templates\model\Presentable;
 use Obcato\Core\modules\templates\model\TemplateVar;
 use Obcato\Core\modules\templates\service\TemplateInteractor;
 use Obcato\Core\modules\templates\service\TemplateService;
+use Obcato\Core\frontend\helper\FontStyleHelper;
 use Obcato\Core\utilities\Arrays;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\TemplateEngine;
@@ -200,6 +201,7 @@ abstract class FrontendVisual {
         $value = $this->replaceSmartyQuery($value);
         $value = $this->replaceArticleMetadataReferences($value);
         $value = $this->addExternalLinksAttributes($value);
+        $value = FontStyleHelper::createColors($value);
         
         $value = nl2br($value);
         return $value;

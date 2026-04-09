@@ -17,6 +17,7 @@ class FontStyleHelper {
         }
         return $text;
     }
+    
     public static function createBold(string $text): string {
         $matches = array();
         preg_match_all('/\*\*(.*?)\*\*/', $text, $matches);
@@ -26,6 +27,7 @@ class FontStyleHelper {
         }
         return $text;
     }
+
     public static function createColors(string $text): string {
         $matches = array();
         preg_match_all('/\[color\((.*?)\)\](.*?)\[\/color\]/', $text, $matches);
