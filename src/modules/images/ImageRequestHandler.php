@@ -205,6 +205,9 @@ class ImageRequestHandler extends HttpRequestHandler {
         }
         if ($desktopUpdate) {
             ImageUtility::saveImageAsWebp($imageObj, $this->currentImage->getFilename());
+            if ($this->currentImage->getThumbFilename()) {
+                $this->saveThumbnailForUploadedImage($this->currentImage->getFilename());
+            }
         }
 
         // Mobile
@@ -251,9 +254,12 @@ class ImageRequestHandler extends HttpRequestHandler {
     }
 
     private function saveThumbnailForUploadedImage(string $newFilename): void {
-        $thumbFilename = "THUMB-" . $newFilename;
+        $thumbFilename = $this->currentImage->getThumbFilename();
+        if (!$thumbFilename) {
+            $thumbFilename = "THUMB-" . $newFilename;
+            $this->currentImage->setThumbFileName($thumbFilename);
+        }
         FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 80, 80);
-        $this->currentImage->setThumbFileName($thumbFilename);
     }
 
     private function moveImageToUploadDirectory(string $newFilename): void {
