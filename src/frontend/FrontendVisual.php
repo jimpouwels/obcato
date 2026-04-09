@@ -205,8 +205,9 @@ abstract class FrontendVisual {
     }
     
     private function addExternalLinksAttributes(string $html): string {
-        return preg_replace_callback('/<a\s+([^>]*)>/i', function($matches) {
+        return preg_replace_callback('/<a\s+([^>]*)>(.*?)<\/a>/is', function($matches) {
             $attrs = $matches[1];
+            $linkText = $matches[2];
             
             // Extract data-link-* attributes
             $linkType = preg_match('/data-link-type="([^"]+)"/i', $attrs, $m) ? $m[1] : null;
@@ -215,18 +216,33 @@ abstract class FrontendVisual {
             $linkTarget = preg_match('/data-link-target="([^"]+)"/i', $attrs, $m) ? $m[1] : null;
             
             $href = '';
+            $shouldRenderAsLink = true;
+            
             if ($linkType === 'url' && $linkUrl) {
                 $href = $linkUrl;
             } elseif ($linkType === 'page' && $linkId) {
                 $page = PageDaoMysql::getInstance()->getPage($linkId);
                 if ($page) {
-                    $href = $this->getLinkHelper()->createPageUrl($page);
+                    if (!$page->isPublished()) {
+                        $shouldRenderAsLink = false;
+                    } else {
+                        $href = $this->getLinkHelper()->createPageUrl($page);
+                    }
                 }
             } elseif ($linkType === 'article' && $linkId) {
                 $article = ArticleDaoMysql::getInstance()->getArticle($linkId);
                 if ($article) {
-                    $href = $this->getLinkHelper()->createArticleUrl($article);
+                    if (!$article->isPublished()) {
+                        $shouldRenderAsLink = false;
+                    } else {
+                        $href = $this->getLinkHelper()->createArticleUrl($article);
+                    }
                 }
+            }
+            
+            // If page/article is not published, return just the text
+            if (!$shouldRenderAsLink) {
+                return $linkText;
             }
             
             if ($linkTarget === 'external') {
@@ -240,7 +256,7 @@ abstract class FrontendVisual {
             // Remove all data-link-* attributes from final HTML
             $attrs = preg_replace('/\s*data-link-[a-z\-]+\s*=\s*"[^"]*"/i', '', $attrs);
             
-            return '<a ' . trim($attrs) . '>';
+            return '<a ' . trim($attrs) . '>' . $linkText . '</a>';
         }, $html);
     }
 
