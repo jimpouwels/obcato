@@ -235,7 +235,7 @@ function editLink(linkElement, editor) {
     // Determine link type and load appropriate data
     const linkType = linkElement.attr('data-link-type') || 'url';
     const linkId = linkElement.attr('data-link-id');
-    const href = linkElement.attr('href');
+    const linkUrl = linkElement.attr('data-link-url') || linkElement.attr('href'); // Support both old href and new data-link-url
     
     // Clear all selections first
     clearUrl();
@@ -245,9 +245,9 @@ function editLink(linkElement, editor) {
     // Switch to appropriate tab
     switchLinkTab(linkType);
     
-    if (linkType === 'url' && href && href !== '#') {
+    if (linkType === 'url' && linkUrl && linkUrl !== '#') {
         // Show URL as selected
-        selectUrl(href);
+        selectUrl(linkUrl);
     } else if (linkType === 'page' && linkId) {
         // Show page placeholder, then fetch real title
         $('#link-page-selected').show().find('.selected-item-name').text(linkElement.text());
@@ -609,7 +609,7 @@ function createLinkElement(linkData) {
     link.setAttribute('contenteditable', 'false');
     
     if (linkData.type === 'url') {
-        link.href = linkData.url;
+        link.setAttribute('data-link-url', linkData.url);
     } else {
         // Page or article - store ID in data-link-id
         link.setAttribute('data-link-id', linkData.id);
@@ -630,11 +630,13 @@ function updateLinkElement($linkElement, linkData) {
     $linkElement.attr('data-link-type', linkData.type);
     
     if (linkData.type === 'url') {
-        $linkElement.attr('href', linkData.url);
+        $linkElement.attr('data-link-url', linkData.url);
         $linkElement.removeAttr('data-link-id');
+        $linkElement.removeAttr('href'); // Remove old href if present
     } else {
         // Page or article - store ID in data-link-id
-        $linkElement.removeAttr('href');
+        $linkElement.removeAttr('data-link-url');
+        $linkElement.removeAttr('href'); // Remove old href if present
         $linkElement.attr('data-link-id', linkData.id);
     }
 }
