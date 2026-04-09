@@ -201,6 +201,7 @@ abstract class FrontendVisual {
         $value = $this->replaceArticleMetadataReferences($value);
         $value = $this->addExternalLinksAttributes($value);
         
+        $value = nl2br($value);
         return $value;
     }
     
