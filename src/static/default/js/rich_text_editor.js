@@ -1,13 +1,36 @@
 // Rich Text Editor functionality
+var currentLinkElement = null;
+var currentEditor = null;
+var savedRange = null;
+var linkSearchTimeout = null;
+
+// Cached DOM selectors
+var $dialog, $textInput, $urlInput, $newTabCheckbox, $deleteBtn, $dialogTitle;
+var $urlSelected, $pageSelected, $articleSelected;
+var $pageSearch, $articleSearch, $pageResults, $articleResults;
+var $urlInputGroup;
+
 $(document).ready(function() {
+    // Cache selectors once DOM is ready
+    $dialog = $('#link-editor-dialog');
+    $textInput = $('#link-editor-text');
+    $urlInput = $('#link-editor-url');
+    $newTabCheckbox = $('#link-new-tab');
+    $deleteBtn = $('#link-editor-delete');
+    $dialogTitle = $('#link-editor-title');
+    $urlSelected = $('#link-url-selected');
+    $pageSelected = $('#link-page-selected');
+    $articleSelected = $('#link-article-selected');
+    $pageSearch = $('#link-page-search');
+    $articleSearch = $('#link-article-search');
+    $pageResults = $('#link-page-results');
+    $articleResults = $('#link-article-results');
+    $urlInputGroup = $('#link-url-input-group');
+    
     initRichTextEditors();
     initLinkEditorDialog();
     initFormSubmitHandler();
 });
-
-var currentLinkElement = null;
-var currentEditor = null;
-var savedRange = null;
 
 function initFormSubmitHandler() {
     // Sync all rich text editors before form submission
@@ -62,8 +85,7 @@ function initRichTextEditors() {
     
     // Update hidden textarea on content change
     $('.rich-text-content').on('input', function() {
-        const wrapper = $(this).closest('.rich-text-editor-wrapper');
-        syncToHiddenField(wrapper);
+        syncToHiddenField(getWrapper($(this)));
     });
     
     // Handle keyboard shortcuts and prevent typing in links
@@ -98,7 +120,7 @@ function initRichTextEditors() {
         if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
             e.preventDefault();
             document.execCommand('undo', false, null);
-            syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
+            syncToHiddenField(getWrapper($(this)));
             return false;
         }
         // Ctrl+B for bold
@@ -106,7 +128,7 @@ function initRichTextEditors() {
             e.preventDefault();
             document.execCommand('bold', false, null);
             updateActiveButtons($(this));
-            syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
+            syncToHiddenField(getWrapper($(this)));
             return false;
         }
         // Ctrl+I for italic
@@ -114,7 +136,7 @@ function initRichTextEditors() {
             e.preventDefault();
             document.execCommand('italic', false, null);
             updateActiveButtons($(this));
-            syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
+            syncToHiddenField(getWrapper($(this)));
             return false;
         }
         // Ctrl+U for underline
@@ -122,7 +144,7 @@ function initRichTextEditors() {
             e.preventDefault();
             document.execCommand('underline', false, null);
             updateActiveButtons($(this));
-            syncToHiddenField($(this).closest('.rich-text-editor-wrapper'));
+            syncToHiddenField(getWrapper($(this)));
             return false;
         }
     });
@@ -141,8 +163,12 @@ function syncToHiddenField(wrapper) {
     hiddenTextarea.val(htmlContent);
 }
 
+function getWrapper($editor) {
+    return $editor.closest('.rich-text-editor-wrapper');
+}
+
 function updateActiveButtons(editor) {
-    const toolbar = editor.closest('.rich-text-editor-wrapper').find('.rich-text-toolbar');
+    const toolbar = getWrapper(editor).find('.rich-text-toolbar');
     
     toolbar.find('.rich-text-btn').removeClass('active');
     
@@ -172,11 +198,11 @@ function createLink(editor) {
     currentLinkElement = null;
     
     // Reset form
-    $('#link-editor-text').val(selectedText || '');
-    $('#link-editor-url').val('https://');
-    $('#link-new-tab').prop('checked', true);
-    $('#link-editor-delete').hide();
-    $('#link-editor-title').text('Link toevoegen');
+    $textInput.val(selectedText || '');
+    $urlInput.val('https://');
+    $newTabCheckbox.prop('checked', true);
+    $deleteBtn.hide();
+    $dialogTitle.text('Link toevoegen');
     
     // Reset to URL tab and clear all selections
     switchLinkTab('url');
@@ -191,12 +217,12 @@ function editLink(linkElement, editor) {
     currentEditor = editor;
     currentLinkElement = linkElement;
     
-    $('#link-editor-text').val(linkElement.text());
-    $('#link-editor-delete').show();
-    $('#link-editor-title').text('Link bewerken');
+    $textInput.val(linkElement.text());
+    $deleteBtn.show();
+    $dialogTitle.text('Link bewerken');
     
     const linkTarget = linkElement.attr('data-link-target') || 'external';
-    $('#link-new-tab').prop('checked', linkTarget === 'external');
+    $newTabCheckbox.prop('checked', linkTarget === 'external');
     
     // Determine link type and load appropriate data
     const linkType = linkElement.attr('data-link-type') || 'url';
@@ -216,9 +242,9 @@ function editLink(linkElement, editor) {
         selectUrl(linkUrl);
     } else if (linkType === 'page' && linkId) {
         // Show page placeholder, then fetch real title
-        $('#link-page-selected').show().find('.selected-item-name').text(linkElement.text());
-        $('#link-page-selected').data('page-id', linkId);
-        $('#link-page-search').val('').closest('.form-field-group').hide();
+        $pageSelected.show().find('.selected-item-name').text(linkElement.text());
+        $pageSelected.data('page-id', linkId);
+        $pageSearch.val('').closest('.form-field-group').hide();
         
         // Fetch actual page title
         $.ajax({
@@ -226,15 +252,15 @@ function editLink(linkElement, editor) {
             method: 'GET',
             success: function(page) {
                 if (page && page.title) {
-                    $('#link-page-selected .selected-item-name').text(page.title);
+                    $pageSelected.find('.selected-item-name').text(page.title);
                 }
             }
         });
     } else if (linkType === 'article' && linkId) {
         // Show article placeholder, then fetch real title
-        $('#link-article-selected').show().find('.selected-item-name').text(linkElement.text());
-        $('#link-article-selected').data('article-id', linkId);
-        $('#link-article-search').val('').closest('.form-field-group').hide();
+        $articleSelected.show().find('.selected-item-name').text(linkElement.text());
+        $articleSelected.data('article-id', linkId);
+        $articleSearch.val('').closest('.form-field-group').hide();
         
         // Fetch actual article title
         $.ajax({
@@ -242,7 +268,7 @@ function editLink(linkElement, editor) {
             method: 'GET',
             success: function(article) {
                 if (article && article.title) {
-                    $('#link-article-selected .selected-item-name').text(article.title);
+                    $articleSelected.find('.selected-item-name').text(article.title);
                 }
             }
         });
@@ -250,8 +276,6 @@ function editLink(linkElement, editor) {
     
     showLinkEditorDialog();
 }
-
-var linkSearchTimeout = null;
 
 function initLinkEditorDialog() {
     // Tab switching
@@ -261,12 +285,12 @@ function initLinkEditorDialog() {
     });
     
     // Page search
-    $('#link-page-search').on('input', function() {
+    $pageSearch.on('input', function() {
         const keyword = $(this).val().trim();
         clearTimeout(linkSearchTimeout);
         
         if (keyword.length < 2) {
-            $('#link-page-results').empty();
+            $pageResults.empty();
             return;
         }
         
@@ -276,12 +300,12 @@ function initLinkEditorDialog() {
     });
     
     // Article search
-    $('#link-article-search').on('input', function() {
+    $articleSearch.on('input', function() {
         const keyword = $(this).val().trim();
         clearTimeout(linkSearchTimeout);
         
         if (keyword.length < 2) {
-            $('#link-article-results').empty();
+            $articleResults.empty();
             return;
         }
         
@@ -292,24 +316,24 @@ function initLinkEditorDialog() {
     
     // URL add button
     $('#link-url-add').on('click', function() {
-        const url = $('#link-editor-url').val().trim();
+        const url = $urlInput.val().trim();
         if (url && url !== 'https://') {
             selectUrl(url);
         }
     });
     
     // Clear URL selection
-    $('#link-url-selected .clear-selection').on('click', function() {
+    $urlSelected.find('.clear-selection').on('click', function() {
         clearUrl();
     });
     
     // Clear page selection
-    $('#link-page-selected .clear-selection').on('click', function() {
+    $pageSelected.find('.clear-selection').on('click', function() {
         clearPage();
     });
     
     // Clear article selection
-    $('#link-article-selected .clear-selection').on('click', function() {
+    $articleSelected.find('.clear-selection').on('click', function() {
         clearArticle();
     });
     
@@ -327,8 +351,7 @@ function initLinkEditorDialog() {
             hideLinkEditorDialog();
             
             if (currentEditor) {
-                const wrapper = currentEditor.closest('.rich-text-editor-wrapper');
-                syncToHiddenField(wrapper);
+                syncToHiddenField(getWrapper(currentEditor));
             }
         }
     });
@@ -345,7 +368,7 @@ function initLinkEditorDialog() {
     
     // Close on ESC key
     $(document).on('keydown', function(e) {
-        if (e.key === 'Escape' && $('#link-editor-dialog').is(':visible')) {
+        if (e.key === 'Escape' && $dialog.is(':visible')) {
             hideLinkEditorDialog();
         }
     });
@@ -361,11 +384,11 @@ function switchLinkTab(tab) {
     $('#link-type-' + tab).show();
     
     // Show search inputs if nothing is selected
-    if (tab === 'page' && !$('#link-page-selected').is(':visible')) {
-        $('#link-page-search').closest('.form-field-group').show();
+    if (tab === 'page' && !$pageSelected.is(':visible')) {
+        $pageSearch.closest('.form-field-group').show();
     }
-    if (tab === 'article' && !$('#link-article-selected').is(':visible')) {
-        $('#link-article-search').closest('.form-field-group').show();
+    if (tab === 'article' && !$articleSelected.is(':visible')) {
+        $articleSearch.closest('.form-field-group').show();
     }
 }
 
@@ -390,11 +413,10 @@ function searchArticles(keyword) {
 }
 
 function displayPageResults(pages) {
-    const $results = $('#link-page-results');
-    $results.empty();
+    $pageResults.empty();
     
     if (pages.length === 0) {
-        $results.html('<div class="link-search-no-results">Geen pagina\'s gevonden</div>');
+        $pageResults.html('<div class="link-search-no-results">Geen pagina\'s gevonden</div>');
         return;
     }
     
@@ -406,16 +428,15 @@ function displayPageResults(pages) {
         $item.on('click', function() {
             selectPage(page.id, page.title);
         });
-        $results.append($item);
+        $pageResults.append($item);
     });
 }
 
 function displayArticleResults(articles) {
-    const $results = $('#link-article-results');
-    $results.empty();
+    $articleResults.empty();
     
     if (articles.length === 0) {
-        $results.html('<div class="link-search-no-results">Geen artikelen gevonden</div>');
+        $articleResults.html('<div class="link-search-no-results">Geen artikelen gevonden</div>');
         return;
     }
     
@@ -428,7 +449,7 @@ function displayArticleResults(articles) {
         $item.on('click', function() {
             selectArticle(article.id, article.title);
         });
-        $results.append($item);
+        $articleResults.append($item);
     });
 }
 
@@ -443,9 +464,9 @@ function selectUrl(url) {
     }
     
     // Show URL as selected
-    $('#link-url-selected').show().find('.selected-item-name').text(url);
-    $('#link-url-selected').data('url', url);
-    $('#link-url-input-group').hide();
+    $urlSelected.show().find('.selected-item-name').text(url);
+    $urlSelected.data('url', url);
+    $urlInputGroup.hide();
 }
 
 function selectPage(pageId, pageTitle) {
@@ -454,10 +475,10 @@ function selectPage(pageId, pageTitle) {
     clearArticle();
     
     // Show page selection
-    $('#link-page-selected').show().find('.selected-item-name').text(pageTitle);
-    $('#link-page-selected').data('page-id', pageId);
-    $('#link-page-results').empty();
-    $('#link-page-search').val('').closest('.form-field-group').hide();
+    $pageSelected.show().find('.selected-item-name').text(pageTitle);
+    $pageSelected.data('page-id', pageId);
+    $pageResults.empty();
+    $pageSearch.val('').closest('.form-field-group').hide();
 }
 
 function selectArticle(articleId, articleTitle) {
@@ -466,33 +487,33 @@ function selectArticle(articleId, articleTitle) {
     clearPage();
     
     // Show article selection
-    $('#link-article-selected').show().find('.selected-item-name').text(articleTitle);
-    $('#link-article-selected').data('article-id', articleId);
-    $('#link-article-results').empty();
-    $('#link-article-search').val('').closest('.form-field-group').hide();
+    $articleSelected.show().find('.selected-item-name').text(articleTitle);
+    $articleSelected.data('article-id', articleId);
+    $articleResults.empty();
+    $articleSearch.val('').closest('.form-field-group').hide();
 }
 
 function clearUrl() {
-    $('#link-url-selected').hide().data('url', null);
-    $('#link-editor-url').val('https://');
-    $('#link-url-input-group').show();
+    $urlSelected.hide().data('url', null);
+    $urlInput.val('https://');
+    $urlInputGroup.show();
 }
 
 function clearPage() {
-    $('#link-page-selected').hide().data('page-id', null);
-    $('#link-page-search').val('').closest('.form-field-group').show();
-    $('#link-page-results').empty();
+    $pageSelected.hide().data('page-id', null);
+    $pageSearch.val('').closest('.form-field-group').show();
+    $pageResults.empty();
 }
 
 function clearArticle() {
-    $('#link-article-selected').hide().data('article-id', null);
-    $('#link-article-search').val('').closest('.form-field-group').show();
-    $('#link-article-results').empty();
+    $articleSelected.hide().data('article-id', null);
+    $articleSearch.val('').closest('.form-field-group').show();
+    $articleResults.empty();
 }
 
 function saveLinkFromDialog() {
-    const text = $('#link-editor-text').val().trim();
-    const newTab = $('#link-new-tab').is(':checked');
+    const text = $textInput.val().trim();
+    const newTab = $newTabCheckbox.is(':checked');
     const linkTarget = newTab ? 'external' : 'internal';
     
     if (!text) {
@@ -500,9 +521,9 @@ function saveLinkFromDialog() {
     }
     
     // Check which item is selected (only one can be selected at a time)
-    const url = $('#link-url-selected').data('url');
-    const pageId = $('#link-page-selected').data('page-id');
-    const articleId = $('#link-article-selected').data('article-id');
+    const url = $urlSelected.data('url');
+    const pageId = $pageSelected.data('page-id');
+    const articleId = $articleSelected.data('article-id');
     
     // Exactly one must be selected
     if (!url && !pageId && !articleId) {
@@ -542,8 +563,7 @@ function saveLinkFromDialog() {
         currentEditor.focus();
         // Trigger input event to ensure sync happens
         currentEditor.trigger('input');
-        const wrapper = currentEditor.closest('.rich-text-editor-wrapper');
-        syncToHiddenField(wrapper);
+        syncToHiddenField(getWrapper(currentEditor));
     }
 }
 
@@ -609,17 +629,17 @@ function updateLinkElement($linkElement, linkData) {
 }
 
 function showLinkEditorDialog() {
-    $('#link-editor-dialog').fadeIn(200);
-    $('#link-editor-text').focus();
+    $dialog.fadeIn(200);
+    $textInput.focus();
 }
 
 function hideLinkEditorDialog() {
-    $('#link-editor-dialog').fadeOut(200);
+    $dialog.fadeOut(200);
     
     // Clear all form fields
-    $('#link-editor-text').val('');
-    $('#link-editor-url').val('https://');
-    $('#link-new-tab').prop('checked', true);
+    $textInput.val('');
+    $urlInput.val('https://');
+    $newTabCheckbox.prop('checked', true);
     
     // Clear all selections
     clearUrl();
