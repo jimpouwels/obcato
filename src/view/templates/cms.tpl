@@ -11,7 +11,7 @@
         </style>
     {/if}
 
-    <link rel="stylesheet" href="/admin?file=/default/css/jquery-ui-1.8.23.custom.css?v=10" type="text/css" />
+    <link rel="stylesheet" href="/admin?file=/default/css/jquery-ui-1.8.23.custom.css?v=14" type="text/css" />
 
     <script type="text/javascript" src="/admin?file=/default/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>

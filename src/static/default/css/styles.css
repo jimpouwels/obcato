@@ -556,6 +556,159 @@ textarea:focus {
     box-shadow: 0 0 0 1px var(--color-primary);
 }
 
+/* Date fields */
+.admin_field.datepicker,
+input.datepicker,
+input.hasDatepicker {
+    width: 125px;
+    min-width: 125px;
+    max-width: 125px;
+    box-sizing: border-box;
+    background: var(--color-white);
+    border-color: var(--color-gray-300);
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.date_format_hint {
+    display: inline-block;
+    margin-left: 8px;
+    margin-top: 0;
+    vertical-align: middle;
+    color: var(--color-gray-500);
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+/* Modernized jQuery UI datepicker */
+.ui-datepicker {
+    background: var(--color-white) !important;
+    border: 1px solid var(--color-gray-300) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16) !important;
+    padding: 10px !important;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background: var(--color-gray-50) !important;
+    border: 1px solid var(--color-gray-200) !important;
+    border-radius: 6px !important;
+    color: var(--color-gray-900) !important;
+    position: relative !important;
+    padding: 6px 8px !important;
+    min-height: 32px !important;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 40px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    position: absolute !important;
+    top: 6px !important;
+    transform: none !important;
+    width: 24px !important;
+    height: 24px !important;
+    border: 1px solid var(--color-gray-300) !important;
+    border-radius: 6px !important;
+    background: var(--color-white) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none;
+    color: var(--color-gray-700) !important;
+    z-index: 2;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    left: 8px !important;
+    right: auto !important;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    right: 8px !important;
+    left: auto !important;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover {
+    top: 6px !important;
+    transform: none !important;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover {
+    left: 8px !important;
+    right: auto !important;
+}
+
+.ui-datepicker .ui-datepicker-next-hover {
+    right: 8px !important;
+    left: auto !important;
+}
+
+.ui-datepicker .ui-datepicker-prev:hover,
+.ui-datepicker .ui-datepicker-next:hover {
+    background: var(--color-gray-100) !important;
+    border-color: var(--color-gray-400) !important;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+    display: none !important;
+}
+
+.ui-datepicker .ui-datepicker-prev:before,
+.ui-datepicker .ui-datepicker-next:before {
+    display: block;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--color-gray-700);
+    font-weight: 600;
+}
+
+.ui-datepicker .ui-datepicker-prev:before {
+    content: "\2039";
+}
+
+.ui-datepicker .ui-datepicker-next:before {
+    content: "\203A";
+}
+
+.ui-datepicker table {
+    margin-top: 8px !important;
+}
+
+.ui-datepicker th {
+    color: var(--color-gray-600) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.ui-datepicker td a,
+.ui-datepicker td span {
+    border-radius: 5px !important;
+    text-align: center !important;
+    border: 1px solid transparent !important;
+    background: var(--color-white) !important;
+    color: var(--color-gray-900) !important;
+}
+
+.ui-datepicker td a:hover {
+    background: var(--color-gray-100) !important;
+    border-color: var(--color-gray-300) !important;
+}
+
+.ui-datepicker .ui-state-active,
+.ui-datepicker .ui-widget-content .ui-state-active {
+    background: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-primary) !important;
+}
+
 /* Rich Text Editor Styles */
 .rich-text-editor-wrapper {
     border: 1px solid var(--color-gray-300);
