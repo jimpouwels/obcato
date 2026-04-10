@@ -6,7 +6,6 @@ use Obcato\Core\core\model\Element;
 use Obcato\Core\elements\photo_album_element\PhotoAlbumElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\ImageLabelSelector;
 use Obcato\Core\view\views\ImageLookup;
 use Obcato\Core\view\views\TextField;
 
@@ -42,12 +41,10 @@ class PhotoAlbumElementEditor extends ElementVisual {
             "/admin/api/photo_album_element/add_image",
             "/admin/api/photo_album_element/delete_image"
         );
-        $labelSelectField = new ImageLabelSelector($this->element->getLabels(), $this->element->getId());
 
         $data->assign("element_id", $this->element->getId());
         $data->assign("title_field", $titleField->render());
         $data->assign("max_results_field", $maxResultsField->render());
         $data->assign("image_lookup_field", $imageLookupField->render());
-        $data->assign("label_select_field", $labelSelectField->render());
     }
 }

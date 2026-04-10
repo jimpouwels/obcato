@@ -10,20 +10,17 @@ use Obcato\Core\frontend\FrontendVisual;
 use Obcato\Core\frontend\PhotoAlbumElementFrontendVisual;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\images\model\ImageLabel;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\request_handlers\HttpRequestHandler;
 use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\Visual;
 
 class PhotoAlbumElement extends Element {
-    private array $labels;
     private array $imageIds = array();
     private ?int $numberOfResults = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new PhotoAlbumElementMetadataProvider($this));
-        $this->labels = array();
     }
 
     public function setNumberOfResults(?int $numberOfResults): void {
@@ -32,24 +29,6 @@ class PhotoAlbumElement extends Element {
 
     public function getNumberOfResults(): ?int {
         return $this->numberOfResults;
-    }
-
-    public function addLabel(ImageLabel $label): void {
-        $this->labels[] = $label;
-    }
-
-    public function removeLabel(ImageLabel $label): void {
-        if (($key = array_search($label, $this->labels, true)) !== false) {
-            unset($this->labels[$key]);
-        }
-    }
-
-    public function setLabels(array $labels): void {
-        $this->labels = $labels;
-    }
-
-    public function getLabels(): array {
-        return $this->labels;
     }
 
     public function addImage(int $imageId): void {
@@ -71,12 +50,12 @@ class PhotoAlbumElement extends Element {
     public function getImages(): array {
         $results = array();
         $imageDao = ImageDaoMysql::getInstance();
-        if (count($this->labels) > 0) {
-            $results = $imageDao->searchImagesByLabels($this->labels);
-        }
         if (count($this->imageIds) > 0) {
             foreach ($this->imageIds as $imageId) {
-                $results[] = $imageDao->getImage($imageId);
+                $image = $imageDao->getImage($imageId);
+                if ($image) {
+                    $results[] = $image;
+                }
             }
         }
         if ($this->getNumberOfResults()) {
@@ -103,12 +82,9 @@ class PhotoAlbumElement extends Element {
 
     public function getSummaryText(): string {
         $summaryText = $this->getTitle() || '';
-        if ($this->getLabels()) {
-            $summaryText .= " (Labels:";
-            foreach ($this->getLabels() as $label) {
-                $summaryText .= " " . $label->getName();
-            }
-            $summaryText .= ")";
+        $imageCount = count($this->getImageIds());
+        if ($imageCount > 0) {
+            $summaryText .= " ($imageCount images)";
         }
         return $summaryText;
     }

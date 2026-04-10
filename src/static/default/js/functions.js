@@ -474,7 +474,12 @@ function updateSelectedImages(elementId) {
             let gridContainer = imagesContainer.find('.selected-images-grid');
             
             response.forEach(result => {
-                let card = $('<div class="selected-image-card"></div>');
+                let card = $('<div class="selected-image-card" data-image-id="' + result.id + '"></div>');
+                
+                // Drag handle with 4-way arrows icon
+                let dragHandle = $('<div class="selected-image-drag-handle"></div>');
+                dragHandle.html('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="3" x2="12" y2="21" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke-width="2"/><path d="M12 3l-3 3m3-3l3 3m-3 15l-3-3m3 3l3-3M3 12l3-3m-3 3l3 3m15-3l-3-3m3 3l-3 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                card.append(dragHandle);
                 
                 // Delete button with X icon
                 let deleteBtn = $('<div class="selected-image-delete"></div>');
@@ -500,6 +505,9 @@ function updateSelectedImages(elementId) {
                 
                 gridContainer.append(card);
             });
+            
+            // Initialize drag and drop functionality
+            initImageDragDrop(elementId);
         },
         error: function(xhr, status, error) {
             console.log(xhr, status, error);
@@ -524,6 +532,207 @@ function deleteImage(elementId, imageId) {
         },
         error: function(xhr, status, error) {
             console.log(xhr, status, error);
+        }
+    });
+}
+
+function initImageDragDrop(elementId) {
+    let gridContainer = $('#photo_album_element_' + elementId + '_selected_images .selected-images-grid');
+    
+    if (gridContainer.length === 0) {
+        return;
+    }
+    
+    let draggedCard = null;
+    let placeholder = null;
+    let offsetX, offsetY;
+    let lastTargetCardElement = null; // Store DOM element for hysteresis
+    let lastTargetBefore = false; // Store position for hysteresis
+    
+    gridContainer.find('.selected-image-card').each(function() {
+        let card = $(this);
+        let dragHandle = card.find('.selected-image-drag-handle');
+        
+        dragHandle.on('mousedown', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            draggedCard = card;
+            
+            // For fixed positioning, use viewport coordinates (clientX/Y) not document coordinates (pageX/Y)
+            let rect = card[0].getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            
+            // Store original dimensions
+            let width = card.outerWidth();
+            let height = card.outerHeight();
+            
+            // Create placeholder
+            placeholder = $('<div class="selected-image-card-placeholder"></div>');
+            placeholder.css({
+                width: width + 'px',
+                height: height + 'px'
+            });
+            
+            // Insert placeholder where card was
+            card.before(placeholder);
+            
+            // Lift card out of normal flow and make it follow mouse
+            card.css({
+                position: 'fixed',
+                width: width + 'px',
+                height: height + 'px',
+                left: (e.clientX - offsetX) + 'px',
+                top: (e.clientY - offsetY) + 'px',
+                zIndex: '10000',
+                margin: '0',
+                pointerEvents: 'none',
+                opacity: '0.95',
+                transform: 'scale(1.05) rotate(2deg)',
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
+                transition: 'none'
+            });
+            
+            $(document).on('mousemove.imagedrag', function(e) {
+                if (!draggedCard) return;
+                
+                // Move card with mouse
+                draggedCard.css({
+                    left: (e.clientX - offsetX) + 'px',
+                    top: (e.clientY - offsetY) + 'px'
+                });
+                
+                // Helper: calculate distance from mouse to element center
+                function distanceToCenter(element) {
+                    let rect = element.getBoundingClientRect();
+                    let dx = e.clientX - (rect.left + rect.width / 2);
+                    let dy = e.clientY - (rect.top + rect.height / 2);
+                    return Math.sqrt(dx * dx + dy * dy);
+                }
+                
+                let allCards = gridContainer.find('.selected-image-card').not(draggedCard);
+                let targetCard = null;
+                let targetBefore = false;
+                
+                // Check if mouse is directly over any card
+                allCards.each(function() {
+                    let rect = this.getBoundingClientRect();
+                    
+                    if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                        e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        
+                        targetCard = $(this);
+                        let relativeX = (e.clientX - rect.left) / rect.width;
+                        
+                        // Hysteresis: wider thresholds for same card to prevent flickering
+                        if (lastTargetCardElement === this) {
+                            targetBefore = lastTargetBefore ? relativeX < 0.65 : relativeX < 0.35;
+                        } else {
+                            targetBefore = relativeX < 0.5;
+                        }
+                        
+                        lastTargetCardElement = this;
+                        lastTargetBefore = targetBefore;
+                        return false; // Break
+                    }
+                });
+                
+                // If no direct hit, find closest card (but only use if significantly closer than placeholder)
+                if (!targetCard) {
+                    let minDist = Infinity;
+                    let closest = null;
+                    let closestBefore = false;
+                    
+                    allCards.each(function() {
+                        let dist = distanceToCenter(this);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            closest = this;
+                            let rect = this.getBoundingClientRect();
+                            let dx = e.clientX - (rect.left + rect.width / 2);
+                            let dy = e.clientY - (rect.top + rect.height / 2);
+                            closestBefore = Math.abs(dy) < rect.height ? dx < 0 : dy < 0;
+                        }
+                    });
+                    
+                    // Only use closest card if it's 30px+ closer than placeholder
+                    if (closest && minDist < distanceToCenter(placeholder[0]) - 30) {
+                        targetCard = $(closest);
+                        targetBefore = closestBefore;
+                    }
+                }
+                
+                // Move placeholder if needed
+                if (targetCard) {
+                    let sibling = targetBefore ? placeholder.next()[0] : placeholder.prev()[0];
+                    if (sibling !== targetCard[0]) {
+                        targetBefore ? targetCard.before(placeholder) : targetCard.after(placeholder);
+                    }
+                }
+            });
+            
+            $(document).on('mouseup.imagedrag', function() {
+                if (draggedCard) {
+                    // Reset card styles
+                    draggedCard.css({
+                        position: '',
+                        width: '',
+                        height: '',
+                        left: '',
+                        top: '',
+                        zIndex: '',
+                        margin: '',
+                        pointerEvents: '',
+                        opacity: '',
+                        transform: '',
+                        boxShadow: '',
+                        transition: ''
+                    });
+                    
+                    // Put card back in place of placeholder
+                    placeholder.replaceWith(draggedCard);
+                    
+                    // Cleanup
+                    draggedCard = null;
+                    placeholder = null;
+                    lastTargetCardElement = null;
+                    lastTargetBefore = false;
+                    
+                    $(document).off('mousemove.imagedrag');
+                    $(document).off('mouseup.imagedrag');
+                    
+                    // Save order
+                    saveImageOrder(elementId);
+                }
+            });
+        });
+    });
+}
+
+function saveImageOrder(elementId) {
+    let imagesContainer = $('#photo_album_element_' + elementId + '_selected_images');
+    let entityId = imagesContainer.data('entity-id');
+    let gridContainer = imagesContainer.find('.selected-images-grid');
+    
+    let imageIds = [];
+    gridContainer.find('.selected-image-card').each(function() {
+        imageIds.push(parseInt($(this).data('image-id')));
+    });
+    
+    $.ajax({
+        url: '/admin/api/photo_album_element/reorder_images',
+        type: 'POST',
+        data: JSON.stringify({
+            'id': entityId,
+            'imageIds': imageIds
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            // Order saved successfully
+        },
+        error: function(xhr, status, error) {
+            console.log('Error saving order:', xhr, status, error);
         }
     });
 }

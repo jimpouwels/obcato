@@ -514,6 +514,10 @@ for their own split view (e.g. page list + page editor)
     max-width: 500px;
 }
 
+.admin_field_wrapper.admin_field_wrapper-image_lookup {
+    max-width: 100%;
+}
+
 .admin_label {
     display: block;
     font-weight: 600;
@@ -684,6 +688,25 @@ textarea:focus {
 
 .rich-text-content u {
     text-decoration: underline;
+}
+
+/* Hide toolbar when editor doesn't have focus */
+.rich-text-editor-wrapper:not(.focused) .rich-text-toolbar {
+    display: none;
+}
+
+/* When not focused, show plain HTML text */
+.rich-text-editor-wrapper:not(.focused) .rich-text-content {
+    cursor: pointer;
+    background: var(--color-gray-50);
+}
+
+.rich-text-editor-wrapper:not(.focused) .rich-text-content strong,
+.rich-text-editor-wrapper:not(.focused) .rich-text-content em,
+.rich-text-editor-wrapper:not(.focused) .rich-text-content u {
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
 }
 
 .admin_field_checkbox {
@@ -1544,14 +1567,22 @@ textarea:focus {
 /* Selected images container (for photo album) */
 .selected-images-container {
     margin-bottom: var(--spacing-md);
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Selected images - modern card layout */
 .selected-images-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: var(--spacing-md);
+    width: 100%;
+}
+
+.selected-images-grid .selected-image-card {
+    width: 110px;
+    flex-shrink: 0;
 }
 
 .selected-image-card {
@@ -1563,7 +1594,7 @@ textarea:focus {
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
-    height: 160px;
+    height: 140px;
 }
 
 .selected-image-card:hover {
@@ -1571,9 +1602,60 @@ textarea:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.selected-image-card-placeholder {
+    background: var(--color-primary);
+    opacity: 0.1;
+    border: 3px dashed var(--color-primary);
+    border-radius: 8px;
+    height: 140px;
+    width: 110px;
+    flex-shrink: 0;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+}
+
+.selected-image-drag-handle {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.selected-image-drag-handle:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.selected-image-drag-handle:active {
+    cursor: grabbing;
+}
+
+.selected-image-drag-handle svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--color-gray-600);
+    stroke-width: 1.5;
+}
+
 .selected-image-thumb {
     width: 100%;
-    height: 100px;
+    height: 80px;
     overflow: hidden;
     background: var(--color-gray-100);
     display: flex;
@@ -1631,6 +1713,7 @@ textarea:focus {
     cursor: pointer;
     transition: all 0.2s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 .selected-image-delete:hover {

@@ -2,5 +2,4 @@
     {$title_field}
     {$max_results_field}
     {$image_lookup_field}
-    {$label_select_field}
 </div>

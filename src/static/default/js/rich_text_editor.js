@@ -42,13 +42,34 @@ function initFormSubmitHandler() {
 }
 
 function initRichTextEditors() {
-    // Ensure contenteditable is enabled
+    // Start with editors disabled (no focus)
     $('.rich-text-content').each(function() {
-        $(this).attr('contenteditable', 'true');
-        $(this).prop('contentEditable', 'true');
+        $(this).attr('contenteditable', 'false');
+        $(this).prop('contentEditable', 'false');
         
         // Make all existing links non-editable
         $(this).find('a').attr('contenteditable', 'false');
+    });
+    
+    // Handle focus - enable editor
+    $('.rich-text-content').on('focus', function() {
+        $(this).attr('contenteditable', 'true');
+        $(this).prop('contentEditable', 'true');
+        $(this).closest('.rich-text-editor-wrapper').addClass('focused');
+    });
+    
+    // Handle blur - disable editor
+    $('.rich-text-content').on('blur', function() {
+        $(this).attr('contenteditable', 'false');
+        $(this).prop('contentEditable', 'false');
+        $(this).closest('.rich-text-editor-wrapper').removeClass('focused');
+    });
+    
+    // Allow clicking to focus
+    $('.rich-text-content').on('click', function() {
+        if (!$(this).attr('contenteditable') || $(this).attr('contenteditable') === 'false') {
+            $(this).focus();
+        }
     });
     
     // Handle toolbar button clicks
@@ -97,25 +118,34 @@ function initRichTextEditors() {
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
-                const editor = $(this)[0];
+                
+                // Only delete if there's actually a selection
+                if (!range.collapsed) {
+                    range.deleteContents();
+                }
                 
                 // Insert a <br> element
                 const br = document.createElement('br');
-                range.deleteContents();
                 range.insertNode(br);
                 
-                // Find the very last element in the editor
-                function getLastElement(node) {
-                    while (node.lastChild) {
-                        node = node.lastChild;
+                // Check what comes after the new BR
+                let needsExtraBr = false;
+                const nextSibling = br.nextSibling;
+                
+                if (!nextSibling) {
+                    // Nothing after - definitely at the end
+                    needsExtraBr = true;
+                } else if (nextSibling.nodeType === Node.TEXT_NODE && nextSibling.textContent.trim() === '') {
+                    // Only whitespace text node - check what comes after that
+                    if (!nextSibling.nextSibling) {
+                        needsExtraBr = true;
                     }
-                    return node;
+                } else if (nextSibling.nodeType === Node.ELEMENT_NODE && nextSibling.tagName === 'BR') {
+                    // There's already a BR after ours - don't add another
+                    needsExtraBr = false;
                 }
                 
-                const lastElement = getLastElement(editor);
-                
-                // If the last element is NOT a BR, add another BR
-                if (!lastElement || lastElement.nodeType !== Node.ELEMENT_NODE || lastElement.tagName !== 'BR') {
+                if (needsExtraBr) {
                     const br2 = document.createElement('br');
                     br.parentNode.insertBefore(br2, br.nextSibling);
                 }

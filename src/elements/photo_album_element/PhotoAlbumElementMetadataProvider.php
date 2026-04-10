@@ -7,7 +7,6 @@ use Obcato\Core\core\model\ElementMetadataProvider;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\images\model\ImageLabel;
 
 class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
 {
@@ -30,7 +29,6 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
     public function constructMetaData(array $record, $element): void {
         $element->setTitle($record['title']);
         $element->setNumberOfResults($record['number_of_results']);
-        $element->setLabels($this->getLabels());
         $element->setImageIds($this->getImageIds($element));
     }
 
@@ -47,7 +45,6 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
         $statement->bind_param('s', $title);
 
         $this->mysqlConnector->executeStatement($statement);
-        $this->addLabels();
         $this->addImageIdsIfNotExists($element);
     }
 
@@ -60,46 +57,12 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
         $id = $element->getId();
         $statement->bind_param('si', $title, $id);
         $this->mysqlConnector->executeStatement($statement);
-        $this->addLabels();
-    }
-
-    private function getLabels(): array {
-        $query = "SELECT * FROM photo_album_element_labels WHERE element_id = " . $this->element->getId();
-        $result = $this->mysqlConnector->executeQuery($query);
-        $labels = array();
-        while ($row = $result->fetch_assoc()) {
-            array_push($labels, $this->imageDao->getLabel($row['label_id']));
-        }
-        return $labels;
-    }
-
-    private function addLabels(): void {
-        $existingLabels = $this->getLabels();
-        foreach ($existingLabels as $existingLabel) {
-            if (!in_array($existingLabel, $this->element->getLabels()))
-                $this->removeLabel($existingLabel);
-        }
-        foreach ($this->element->getLabels() as $label) {
-            if (!in_array($label, $existingLabels)) {
-                $statement = $this->mysqlConnector->prepareStatement("INSERT INTO photo_album_element_labels (element_id, label_id) VALUES (?, ?)");
-                $labelId = $label->getId();
-                $elementId = $this->element->getId();
-                $statement->bind_param('ii', $elementId, $labelId);
-                $this->mysqlConnector->executeStatement($statement);
-            }
-        }
-    }
-
-    private function removeLabel(ImageLabel $label): void {
-        $statement = $this->mysqlConnector->prepareStatement("DELETE FROM photo_album_element_labels WHERE element_id = ? AND label_id = ?");
-        $elementId = $this->element->getId();
-        $labelId = $label->getId();
-        $statement->bind_param('ii', $elementId, $labelId);
-        $this->mysqlConnector->executeStatement($statement);
     }
 
     private function getImageIds(Element $element): array {
-        $query = "SELECT * FROM photo_album_element_images WHERE photo_album_element_id = ?";
+        $query = "SELECT image_id FROM photo_album_element_images 
+                  WHERE photo_album_element_id = ? 
+                  ORDER BY display_order ASC, id ASC";
         $statement = $this->mysqlConnector->prepareStatement($query);
         $elementId = $element->getId();
         $statement->bind_param('i', $elementId);
@@ -119,13 +82,21 @@ class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
         }
 
         $elementId = $element->getId();
+        $order = 0;
         foreach ($this->element->getImageIds() as $imageId) {
             if (!in_array($imageId, $existingImageIds)) {
-                $query = "INSERT INTO photo_album_element_images (image_id, photo_album_element_id) VALUES (?, ?)";
+                $query = "INSERT INTO photo_album_element_images (image_id, photo_album_element_id, display_order) VALUES (?, ?, ?)";
                 $statement = $this->mysqlConnector->prepareStatement($query);
-                $statement->bind_param('ii', $imageId, $elementId);
+                $statement->bind_param('iii', $imageId, $elementId, $order);
+                $this->mysqlConnector->executeStatement($statement);
+            } else {
+                // Update order for existing images
+                $query = "UPDATE photo_album_element_images SET display_order = ? WHERE photo_album_element_id = ? AND image_id = ?";
+                $statement = $this->mysqlConnector->prepareStatement($query);
+                $statement->bind_param('iii', $order, $elementId, $imageId);
                 $this->mysqlConnector->executeStatement($statement);
             }
+            $order++;
         }
     }
 

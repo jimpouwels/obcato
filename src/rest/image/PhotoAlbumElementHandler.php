@@ -20,7 +20,7 @@ class PhotoAlbumElementHandler extends Handler {
         $this->register(HttpMethod::PUT, "/photo_album_element/add_image", $this->updateElement(...));
         $this->register(HttpMethod::GET, "/photo_album_element/images", $this->getImages(...));
         $this->register(HttpMethod::DELETE, "/photo_album_element/delete_image", $this->deleteImage(...));
-
+        $this->register(HttpMethod::POST, "/photo_album_element/reorder_images", $this->reorderImages(...));
     }
 
     public function updateElement(array $data): ?array {
@@ -50,5 +50,16 @@ class PhotoAlbumElementHandler extends Handler {
             $data[] = $imageData;
         }
         return $data;
+    }
+
+    public function reorderImages(array $data): ?array {
+        $element = $this->elementDao->getElement($data['id']);
+        $imageIds = $data['imageIds'];
+        
+        // Update the element with the new order
+        $element->setImageIds($imageIds);
+        $element->updateMetaData();
+        
+        return null;
     }
 }
