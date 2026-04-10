@@ -15,7 +15,7 @@ class PhotoAlbumElementFrontendVisual extends ElementFrontendVisual {
     }
 
     public function loadElement(array &$data): void {
-        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["title"] = $this->toHtml($this->getElement()->getTitle());
         $data["images"] = $this->getImages();
     }
 

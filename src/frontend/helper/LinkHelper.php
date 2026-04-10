@@ -150,6 +150,43 @@ class LinkHelper
         }
         return $url;
     }
+    
+    public function processRichTextLinks(string $html): string {
+        return preg_replace_callback('/<a\s+([^>]*)>(.*?)<\/a>/is', function($matches) {
+            $dataAttrs = $matches[1];
+            $linkText = $matches[2];
+            
+            // Extract data-link-* attributes
+            $linkType = preg_match('/data-link-type="([^"]+)"/i', $dataAttrs, $m) ? $m[1] : null;
+            $linkId = preg_match('/data-link-id="([^"]+)"/i', $dataAttrs, $m) ? (int)$m[1] : null;
+            $href = preg_match('/data-link-url="([^"]+)"/i', $dataAttrs, $m) ? htmlspecialchars_decode($m[1], ENT_QUOTES) : null;
+            $linkTarget = preg_match('/data-link-target="([^"]+)"/i', $dataAttrs, $m) ? $m[1] : null;
+            
+            
+            if ($linkType === 'page' && $linkId) {
+                $page = $this->pageService->getPageById($linkId);
+                if (!$page || !$page->isPublished()) {
+                    return $linkText;
+                } else {
+                    $href = $this->createPageUrl($page);
+                }
+            } elseif ($linkType === 'article' && $linkId) {
+                $article = $this->articleService->getArticle($linkId);
+                if (!$article || !$article->isPublished()) {
+                    return $linkText;
+                } else {
+                    $href = $this->createArticleUrl($article);
+                }
+            }
+            
+            $attrs = ' href="' . htmlspecialchars($href, ENT_QUOTES) . '"';
+            if ($linkTarget === 'external') {
+                $attrs .= ' class="external" target="_blank"';
+            }
+            
+            return '<a ' . trim($attrs) . '>' . $linkText . '</a>';
+        }, $html);
+    }
 
     private function processMarkdownStyleLinks(string $value): string {
         $matches = null;

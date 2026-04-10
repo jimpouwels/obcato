@@ -3,7 +3,6 @@
 namespace Obcato\Core\elements\image_element\visuals;
 
 use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ElementVisual;
@@ -19,7 +18,6 @@ class ImageElementEditor extends ElementVisual {
     public function __construct(ImageElement $element) {
         parent::__construct();
         $this->imageElement = $element;
-        $this->linkDao = LinkDaoMysql::getInstance();
     }
 
     public function getElement(): Element {

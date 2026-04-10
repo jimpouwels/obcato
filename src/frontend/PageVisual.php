@@ -103,7 +103,7 @@ class PageVisual extends FrontendVisual {
         if (!is_null($this->getArticle()) && $this->getArticle()->isPublished()) {
             $page_description = $this->getArticle()->getDescription();
         }
-        $pageData["description"] = $this->toHtml($page_description, $page);
+        $pageData["description"] = $this->toHtml($page_description);
         $pageData["show_in_navigation"] = $page->getShowInNavigation();
         if ($renderParent) {
             $parentData = array();

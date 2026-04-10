@@ -20,8 +20,9 @@ abstract class Form {
         $value = null;
         if (isset($_POST[$fieldName])) {
             $value = $_POST[$fieldName];
+            $value = trim($value);
         }
-        return trim($value);
+        return $value;
     }
 
     protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {

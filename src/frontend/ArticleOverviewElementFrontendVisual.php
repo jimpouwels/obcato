@@ -26,7 +26,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
     }
 
     public function loadElement(array &$data): void {
-        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["title"] = $this->toHtml($this->getElement()->getTitle());
         $data["articles"] = $this->getArticles();
         $data["terms"] = $this->getTermsData();
     }
@@ -55,7 +55,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
             $articleData["id"] = $article->getId();
             $articleData["title"] = $article->getTitle();
             $articleData["url"] = $this->getLinkHelper()->createArticleUrl($article);
-            $articleData["description"] = $this->toHtml($article->getDescription(), $article);
+            $articleData["description"] = $this->toHtml($article->getDescription());
             $articleData["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
             $articleData["sort_date_in_past"] = strtotime($article->getSortDate()) < strtotime(date('Y-m-d H:i:s', strtotime('00:00:00')));
             $articleData["sort_date"] = DateUtility::mysqlDateToString($article->getSortDate(), '-');

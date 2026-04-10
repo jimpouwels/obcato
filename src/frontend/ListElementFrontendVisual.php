@@ -15,7 +15,7 @@ class ListElementFrontendVisual extends ElementFrontendVisual {
     }
 
     public function loadElement(array &$data): void {
-        $data["title"] = $this->toHtml($this->getElement()->getTitle(), $this->getElementHolder());
+        $data["title"] = $this->toHtml($this->getElement()->getTitle());
         $data["items"] = $this->renderListItems($this->getElementHolder());
     }
 
@@ -23,7 +23,7 @@ class ListElementFrontendVisual extends ElementFrontendVisual {
         $listItems = array();
         
         foreach ($this->getElement()->getListItems() as $listItem) {
-            $listItems[] = $this->toHtml($listItem->getText(), $element_holder);
+            $listItems[] = $this->toHtml($listItem->getText());
         }
         
         return $listItems;
