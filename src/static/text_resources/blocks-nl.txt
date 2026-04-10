@@ -14,6 +14,8 @@ blocks_position_successfully_created: Positie succesvol aangemaakt
 blocks_position_successfully_updated: Positie succesvol opgeslagen
 blocks_position_successfully_deleted: Positie(s) succesvol verwijdered
 blocks_position_could_not_be_updated_error: Positie niet volledig opgeslagen, verwerk de fouten
+blocks_notification_successfully_updated: Blok succesvol opgeslagen
+blocks_notification_not_updated_error: Blok niet opgeslagen, verwerk de fouten
 
 # POSITION EDITOR
 blocks_default_position_title: Nieuwe positie

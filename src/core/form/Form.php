@@ -25,10 +25,6 @@ abstract class Form {
         return $value;
     }
 
-    protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
-        Session::addFieldError($errorField, $errorMessageResourceIdentifier);
-    }
-
     public function getFieldValues(string $fieldName): array {
         $value = array();
         if (isset($_POST[$fieldName])) {
@@ -45,6 +41,13 @@ abstract class Form {
         return $value;
     }
 
+    public function getBooleanValue(string $fieldName): bool {
+        return $this->getFieldValue($fieldName) == "on";
+    }
+
+    /**
+     * DEPRECATED. Use getBooleanValue instead.
+     */
     public function getCheckboxValue(string $fieldName): int {
         return $this->getFieldValue($fieldName) == "on" ? 1 : 0;
     }
@@ -134,6 +137,10 @@ abstract class Form {
             return $_FILES[$fieldName]["name"];
         }
         return null;
+    }
+
+    protected function raiseError(string $errorField, string $errorMessageResourceIdentifier): void {
+        Session::addFieldError($errorField, $errorMessageResourceIdentifier);
     }
 
     protected function hasErrors(): bool {

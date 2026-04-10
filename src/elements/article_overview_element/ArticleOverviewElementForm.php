@@ -27,9 +27,9 @@ class ArticleOverviewElementForm extends ElementForm {
         $numberOfResults = $this->getNumber('element_' . $elementId . '_number_of_results');
         $orderBy = $this->getFieldValue('element_' . $elementId . '_order_by');
         $orderType = $this->getFieldValue('element_' . $elementId . '_order_type');
-        $siblingsOnly = $this->getFieldValue('element_' . $elementId . '_siblings_only');
-        $includeCurrentArticle = $this->getFieldValue('element_' . $elementId . '_include_current_article');
-        $randomArticles = $this->getFieldValue('element_' . $elementId . '_random_articles');
+        $siblingsOnly = $this->getBooleanValue('element_' . $elementId . '_siblings_only');
+        $includeCurrentArticle = $this->getBooleanValue('element_' . $elementId . '_include_current_article');
+        $randomArticles = $this->getBooleanValue('element_' . $elementId . '_random_articles');
         if ($this->hasErrors()) {
             throw new FormException();
         } else {
