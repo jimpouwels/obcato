@@ -21,3 +21,14 @@ settings_form_backend_component_dir_field: Component directory
 settings_form_selected_homepage: Selected homepage
 settings_form_selected_404_page: Selected 404-Page
 settings_form_browser_image_cache_in_seconds: Browser image cache in seconds
+
+# PAGE LOOKUP
+settings_page_lookup_homepage_modal_title: Select homepage
+settings_page_lookup_404_modal_title: Select 404 page
+settings_page_lookup_homepage_selected_label: Selected
+settings_page_lookup_404_selected_label: Selected
+settings_page_lookup_search_placeholder: Search by page title...
+settings_page_lookup_start_typing: Type at least 2 characters to search for pages...
+settings_page_lookup_searching: Searching pages...
+settings_page_lookup_no_results: No pages found.
+settings_page_lookup_remove: Remove

@@ -100,19 +100,6 @@ $(document).ready(function () {
         $(this).closest('.metadata-fields-section').toggleClass('collapsed');
     });
 
-    $(document).on('click', '.delete-article-btn', function(e) {
-        e.preventDefault();
-        var deleteFieldId = $(this).data('delete-field');
-        
-        confirmDialog("{$text_resources.articles_confirm_delete_related_article|escape:'javascript'}").then(function(confirmed) {
-            if (confirmed) {
-                $('#' + deleteFieldId).val('true');
-                $('#action').val('update_element_holder');
-                $('#element_holder_form_id').submit();
-            }
-        });
-    });
-
     $('#update_target_pages').click(function () {
         $('#action').attr('value', 'add_target_page');
         $('#update_target_page_form').submit();

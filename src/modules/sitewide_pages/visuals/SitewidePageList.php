@@ -5,7 +5,7 @@ namespace Obcato\Core\modules\sitewide_pages\visuals;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PagePicker;
+use Obcato\Core\view\views\PageLookup;
 use Obcato\Core\view\views\Panel;
 
 class SitewidePageList extends Panel {
@@ -24,8 +24,18 @@ class SitewidePageList extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         $data->assign("sitewide_pages", $this->getSitewidePagesData());
 
-        $pagePicker = new PagePicker("add_sitewide_page_ref", "", null, "update_sitewide_pages");
-        $data->assign("page_picker", $pagePicker->render());
+        $pageLookup = new PageLookup(
+            "add_sitewide_page_ref",
+            "",
+            null,
+            "sitewide_pages_lookup_modal_title",
+            "sitewide_pages_lookup_selected_label",
+            false,
+            null,
+            null,
+            "update_sitewide_pages"
+        );
+        $data->assign("page_lookup", $pageLookup->render());
     }
 
     private function getSitewidePagesData(): array {

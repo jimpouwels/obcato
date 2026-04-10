@@ -14,7 +14,7 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\utilities\DateUtility;
 use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\ArticlePicker;
+use Obcato\Core\view\views\ArticleLookup;
 use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\DateField;
 use Obcato\Core\view\views\ImageLookup;
@@ -26,9 +26,9 @@ use Obcato\Core\view\views\TemplatePicker;
 use Obcato\Core\view\views\TextArea;
 use Obcato\Core\view\views\TextField;
 use const Obcato\Core\ACTION_FORM_ID;
-use const Obcato\core\ADD_ELEMENT_FORM_ID;
+use const Obcato\Core\ADD_ELEMENT_FORM_ID;
 use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
+use const Obcato\Core\EDIT_ELEMENT_HOLDER_ID;
 use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
 
 class ArticleMetadataEditor extends Panel {
@@ -74,7 +74,13 @@ class ArticleMetadataEditor extends Panel {
         $sortDateField = new DateField("sort_date", $this->getTextResource('article_editor_sort_date_label'), $this->getDateValue($this->currentArticle->getSortDate()), true, null);
         $targetPagesField = new Pulldown("article_target_page", $this->getTextResource('article_editor_target_page_label'), $this->currentArticle->getTargetPageId(), $this->getTargetPageOptions(), false, null, true);
         $commentFormsField = new Pulldown("article_comment_webform", $this->getTextResource('article_editor_comment_webform_label'), $this->currentArticle->getCommentWebFormId(), $this->getWebFormsOptions(), false, null, true);
-        $parentArticlePicker = new ArticlePicker("parent_article_id", $this->getTextResource('article_editor_parent_article_label'), $this->currentArticle->getParentArticleId(), "update_element_holder");
+        $parentArticleLookup = new ArticleLookup(
+            "parent_article_id",
+            'article_editor_parent_article_label',
+            $this->currentArticle->getParentArticleId(),
+            'delete_parent_article_id',
+            $this->currentArticle->getId()
+        );
         $imagePickerField = new ImageLookup(
             "article_image_ref_" . $this->currentArticle->getId(), 
             $this->getTextResource('article_editor_image_label'), 
@@ -114,7 +120,7 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("publication_date_field", $publicationDateField->render());
         $data->assign("sort_date_field", $sortDateField->render());
         $data->assign("target_pages_field", $targetPagesField->render());
-        $data->assign("parent_article_field", $parentArticlePicker->render());
+        $data->assign("parent_article_field", $parentArticleLookup->render());
         $data->assign("comment_forms_field", $commentFormsField->render());
         $data->assign("wallpaper_picker_field", $wallpaperPickerField->render());
         $data->assign("image_picker_field", $imagePickerField->render());

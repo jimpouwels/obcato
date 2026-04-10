@@ -1,4 +1,6 @@
 sitewide_pages_module_title: Sitewide Pages
 sitewide_pages_list_title: Maintain sitewide pages
+sitewide_pages_lookup_modal_title: Select sitewide page
+sitewide_pages_lookup_selected_label: Selected
 # CONFIRMATIONS
 sitewide_pages_confirm_delete: Are you sure you want to delete the selected sitewide pages?

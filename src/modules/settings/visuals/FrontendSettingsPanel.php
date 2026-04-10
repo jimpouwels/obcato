@@ -6,7 +6,6 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PagePicker;
 use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\TextField;
 

@@ -5,7 +5,7 @@ namespace Obcato\Core\modules\articles\visuals\target_pages;
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PagePicker;
+use Obcato\Core\view\views\PageLookup;
 use Obcato\Core\view\views\Panel;
 
 class TargetPagesList extends Panel {
@@ -25,8 +25,18 @@ class TargetPagesList extends Panel {
         $data->assign("target_pages", $this->getTargetPages());
         $data->assign("default_target_page", $this->getDefaultTargetPage());
 
-        $pagePicker = new PagePicker("add_target_page_ref", "", null, "update_target_pages");
-        $data->assign("page_picker", $pagePicker->render());
+        $pageLookup = new PageLookup(
+            "add_target_page_ref",
+            "",
+            null,
+            "articles_tab_target_pages",
+            "article_editor_select_parent_article_label",
+            false,
+            null,
+            null,
+            "update_target_pages"
+        );
+        $data->assign("page_lookup", $pageLookup->render());
     }
 
     private function getDefaultTargetPage(): ?array {

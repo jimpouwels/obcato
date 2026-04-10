@@ -5,12 +5,13 @@ namespace Obcato\Core\modules\settings;
 use Obcato\Core\core\form\Form;
 use Obcato\Core\core\form\FormException;
 use Obcato\Core\modules\pages\service\PageInteractor;
+use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 
 class SettingsForm extends Form {
 
     private Settings $settings;
-    private PageInteractor $pageService;
+    private PageService $pageService;
     private int $homepageId;
 
     public function __construct(Settings $settings) {
@@ -26,11 +27,13 @@ class SettingsForm extends Form {
         $this->settings->setEmailAddress($this->getEmailAddress("email_address"));
         $this->settings->setBrowserImageCacheInSeconds($this->getNumber("browser_image_cache_in_seconds"));
 
-        $selected404PageId = $this->getFieldValue("404_page_id");
-        if ($selected404PageId) {
-            $this->settings->setPage404($this->pageService->getPageById(intval($selected404PageId)));
+        $selected404PageId = $this->getNumber("404_page_id");
+        if ($this->getFieldValue("delete_404_page_id") === "true") {
+            $this->settings->setPage404(null);
+        } else if ($selected404PageId) {
+            $this->settings->setPage404($this->pageService->getPageById($selected404PageId));
         }
-        $this->homepageId = intval($this->getMandatoryFieldValue("homepage_page_id"));
+        $this->homepageId = $this->getNumber("homepage_page_id");
 
         if ($this->hasErrors()) {
             throw new FormException();

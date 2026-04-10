@@ -42,6 +42,17 @@ image_selector_no_results: Geen afbeeldingen gevonden.
 image_selector_select_multiple: Afbeeldingen selecteren
 image_selector_select_single: Afbeelding selecteren
 
+# ARTICLE LOOKUP
+article_lookup_modal_title: Artikel selecteren
+article_lookup_search_placeholder: Zoek op artikeltitel...
+article_lookup_start_typing: Typ minimaal 2 tekens om artikelen te zoeken...
+article_lookup_searching: Artikelen zoeken...
+article_lookup_no_results: Geen artikelen gevonden.
+article_lookup_remove_selection: Verwijderen
+article_lookup_selected_label: Geselecteerd
+article_lookup_edit_button: Artikel kiezen
+article_lookup_close_label: Sluiten
+
 # TERM SELECTOR
 term_selector_title: Termen
 term_selector_label_selected_terms: Geselecteerde termen

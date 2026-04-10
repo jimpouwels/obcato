@@ -41,6 +41,17 @@ image_selector_no_results: No images found.
 image_selector_select_multiple: Select images
 image_selector_select_single: Select image
 
+# ARTICLE LOOKUP
+article_lookup_modal_title: Select article
+article_lookup_search_placeholder: Search by article title...
+article_lookup_start_typing: Type at least 2 characters to search for articles...
+article_lookup_searching: Searching articles...
+article_lookup_no_results: No articles found.
+article_lookup_remove_selection: Remove
+article_lookup_selected_label: Selected
+article_lookup_edit_button: Select article
+article_lookup_close_label: Close
+
 # TERM SELECTOR
 term_selector_title: Terms
 term_selector_label_selected_terms: Selected terms

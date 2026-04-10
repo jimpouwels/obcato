@@ -51,7 +51,7 @@ article_editor_delete_parent_article_label: Verwijzing verwijderen
 article_editor_change_image_button: Wijzigen
 article_editor_delete_button: Verwijderen
 article_editor_child_articles_label: Subartikelen
-article_editor_select_parent_article_label: Geselecteerd hoofdartikel
+article_editor_select_parent_article_label: Geselecteerd
 article_editor_selected_image_label: Geselecteerde afbeelding
 article_editor_selected_wallpaper_label: Geselecteerde wallpaper
 

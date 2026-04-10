@@ -6,7 +6,7 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PagePicker;
+use Obcato\Core\view\views\PageLookup;
 use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\TextField;
 
@@ -31,19 +31,28 @@ class GlobalSettingsPanel extends Panel {
 
         $websiteTitle = new TextField("website_title", "settings_form_website_title_field", $this->settings->getWebsiteTitle(), true, false, null);
         $emailField = new TextField("email_address", "settings_form_website_email_address_field", $this->settings->getEmailAddress(), false, false, null);
-        $homepagePicker = new PagePicker("homepage_page_id", "settings_form_website_homepage_field", $currentHomepage->getId(), "apply_settings");
-        $picker404 = new PagePicker("404_page_id", "settings_form_404_page", $current404Page?->getId(), "apply_settings");
+        $homepageLookup = new PageLookup(
+            "homepage_page_id",
+            "settings_form_website_homepage_field",
+            (string)$currentHomepage->getId(),
+            "settings_page_lookup_homepage_modal_title",
+            "settings_page_lookup_homepage_selected_label",
+            false
+        );
+        $picker404 = new PageLookup(
+            "404_page_id",
+            "settings_form_404_page",
+            $current404Page ? (string)$current404Page->getId() : null,
+            "settings_page_lookup_404_modal_title",
+            "settings_page_lookup_404_selected_label",
+            true,
+            "delete_404_page_id"
+        );
 
         $data->assign("website_title", $websiteTitle->render());
         $data->assign("email_field", $emailField->render());
 
-        $data->assign("current_homepage_id", $currentHomepage->getId());
-        $data->assign("current_homepage_title", $currentHomepage->getTitle());
-        if ($current404Page) {
-            $data->assign("current_404_page_id", $current404Page->getId());
-            $data->assign("current_404_page_title", $current404Page->getTitle());
-        }
-        $data->assign("homepage_picker", $homepagePicker->render());
-        $data->assign("page_404_picker", $picker404->render());
+        $data->assign("homepage_lookup", $homepageLookup->render());
+        $data->assign("page_404_lookup", $picker404->render());
     }
 }

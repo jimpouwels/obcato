@@ -50,5 +50,5 @@
         </table>
     {/if}
 
-    {$page_picker}
+    {$page_lookup}
 </form>

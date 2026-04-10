@@ -137,6 +137,20 @@
     margin: 0 auto;
 }
 
+.target_pages_fieldset .admin_form_field_v2 .admin_label_wrapper {
+    display: none;
+}
+
+.target_pages_fieldset .admin_form_field_v2 .admin_field_wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
+.target_pages_fieldset .article-lookup-summary {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
 /* SELECTED PARENT ARTICLE */
 .selected_parent_article {
     display: inline-flex;
