@@ -319,6 +319,9 @@
             <query>ALTER TABLE image_elements_metadata ADD COLUMN link TEXT DEFAULT NULL</query>
             <query>DROP TABLE links</query>
             <query>ALTER TABLE photo_album_element_images ADD COLUMN display_order INT NOT NULL DEFAULT 0</query>
+            <query>DROP TABLE IF EXISTS photo_album_element_labels</query>
+            <query>DROP TABLE IF EXISTS images_labels</query>
+            <query>DROP TABLE IF EXISTS image_labels</query>
         </queries>
     </version>
 </versions>

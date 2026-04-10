@@ -2,11 +2,12 @@
 
 namespace Obcato\Core\modules\images;
 
-use FileUtility;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\request_handlers\HttpRequestHandler;
+use Obcato\Core\utilities\FileUtility;
 use ZipArchive;
+use const Obcato\Core\UPLOAD_DIR;
 
 class ImportRequestHandler extends HttpRequestHandler {
     private static string $ZIP_FILE_ID = "import_zip_file";
@@ -43,9 +44,6 @@ class ImportRequestHandler extends HttpRequestHandler {
                     $thumbFilename = "THUMB-" . $newFilename;
                     FileUtility::saveThumb($newFilename, UPLOAD_DIR, $thumbFilename, 50, 50);
                     $newImage->setThumbFileName($thumbFilename);
-                    if (isset($_POST["import_label"]) && $_POST["import_label"] != "") {
-                        $this->imageDao->addLabelToImage($_POST["import_label"], $newImage);
-                    }
                     $this->imageDao->updateImage($newImage);
                     $importCount += 1;
                 }

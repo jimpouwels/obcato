@@ -3,5 +3,4 @@
     {$metadata_editor}
     {$desktop_editor}
     {$mobile_editor}
-    {$label_selector}
 </form>

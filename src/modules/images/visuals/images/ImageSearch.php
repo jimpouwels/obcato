@@ -8,7 +8,6 @@ use Obcato\Core\modules\images\ImageRequestHandler;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\TextField;
 
 class ImageSearch extends Panel {
@@ -29,7 +28,6 @@ class ImageSearch extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         $data->assign("title_search_field", $this->getTitleSearchField()->render());
         $data->assign("filename_search_field", $this->getFileNameSearchField()->render());
-        $data->assign("labels_search_field", $this->getLabelPullDown()->render());
         $data->assign("search_button", $this->getSearchButton()->render());
     }
 
@@ -41,22 +39,8 @@ class ImageSearch extends Panel {
         return new TextField("s_filename", "images_search_filename_field", $this->requestHandler->getCurrentSearchFilenameFromGetRequest(), false, false, null);
     }
 
-    private function getLabelPullDown(): Pulldown {
-        $labels = $this->getLabels();
-        $currentlySelectedLabel = $this->requestHandler->getCurrentSearchLabelFromGetRequest();
-        return new Pulldown("s_label", "images_search_label_field", (is_null($currentlySelectedLabel) ? null : $currentlySelectedLabel), $labels, false, null, true);
-    }
-
     private function getSearchButton(): Button {
         return new Button("", "Zoeken", "document.getElementById('image_search').submit(); return false;");
-    }
-
-    private function getLabels(): array {
-        $labelsNameValuePair = array();
-        foreach ($this->imageDao->getAllLabels() as $label) {
-            $labelsNameValuePair[] = array('name' => $label->getName(), 'value' => $label->getId());
-        }
-        return $labelsNameValuePair;
     }
 
 }

@@ -13,11 +13,6 @@
             <strong><em>Bestandsnaam: </em></strong>&nbsp;'{$current_search_filename}'
         </p>
     {/if}
-    {if $current_search_label}
-        <p class="article_list_searched_by_text">
-            <strong><em>Label: </em></strong>&nbsp;'{$current_search_label}'</p>
-        </p>
-    {/if}
     <table class="listing" width="95%" cellspacing="0" cellpadding="5" border="0">
         <colgroup width="100px"></colgroup>
         <colgroup width="300px"></colgroup>

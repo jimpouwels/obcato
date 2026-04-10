@@ -35,39 +35,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // add label button
-    $('#add_label').click(function () {
-        $('#add_label_action').attr('value', 'add_label');
-        $('#add_form_hidden').submit();
-        return false;
-    });
-
-    // update label button
-    $('#update_label').click(function () {
-        $('#action').attr('value', 'update_label');
-        $('#label_form').submit();
-    });
-
-    // delete labels button
-    $('#delete_labels').click(function () {
-        var $checked = false;
-        $('input:checkbox').each(function () {
-            if ($(this).attr('checked')) {
-                $checked = true;
-            }
-        });
-        if (!$checked) {
-            alert("{$text_resources.images_alert_no_labels_selected}");
-        } else {
-            confirmDialog("{$text_resources.images_confirm_delete_labels|escape:'javascript'}").then(function(confirmed) {
-                if (confirmed) {
-                    $('#label_delete_action').attr('value', 'delete_labels');
-                    $('#label_delete_form').submit();
-                }
-            });
-        }
-    });
-
     // import images button
     $('#upload_zip').click(function () {
         $('#image-import-form').submit();

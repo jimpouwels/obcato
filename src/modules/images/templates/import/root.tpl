@@ -3,7 +3,6 @@
         <p class="import-help-text">{$text_resources.images_import_instructions}</p>
         <div class="import-fields">
             {$upload_field}
-            {$labels_pulldown}
         </div>
     </div>
 </form>

@@ -89,12 +89,6 @@
     margin-top: var(--spacing-lg, 16px);
 }
 
-/* IMAGE LABEL SELECTOR */
-.image_label_selector {
-    /* Flows in content_right_column */
-    margin-top: var(--spacing-lg, 16px);
-}
-
 /* FORM OVERRIDES FOR IMAGES MODULE */
 .image_search .admin_form,
 .image_editor .admin_form {
@@ -130,8 +124,9 @@
     margin: 0;
 }
 
-/* Style file input as button */
-.image-import-form input[type="file"] {
+/* Style file input as button (import + image editor) */
+.image-import-form input[type="file"],
+#image-editor-form input[type="file"] {
     display: inline-block;
     padding: 8px 16px;
     background: var(--color-primary);
@@ -144,10 +139,12 @@
     transition: all 0.2s;
 }
 
-.image-import-form input[type="file"]:hover {
+.image-import-form input[type="file"]:hover,
+#image-editor-form input[type="file"]:hover {
     background: var(--color-primary-dark);
 }
 
-.image-import-form input[type="file"]::file-selector-button {
+.image-import-form input[type="file"]::file-selector-button,
+#image-editor-form input[type="file"]::file-selector-button {
     display: none;
 }

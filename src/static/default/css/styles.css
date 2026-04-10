@@ -378,22 +378,19 @@ for their own split view (e.g. page list + page editor)
     align-items: center;
 }
 
-/* Compact headers for label/term selectors in elements */
-.image_label_selector .panel-title,
+/* Compact headers for term selectors in elements */
 .term_selector .panel-title {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 13px;
 }
 
 /* Compact content for selectors */
-.image_label_selector .panel-content,
 .term_selector .panel-content {
     padding: var(--spacing-lg);
     padding-bottom: var(--spacing-sm);
 }
 
 /* Add spacing above selectors */
-.image_label_selector,
 .term_selector {
     margin-top: var(--spacing-lg);
 }

@@ -17,7 +17,6 @@ class ImageRequestHandler extends HttpRequestHandler {
     private static string $IMAGE_QUERYSTRING_KEY = "image";
     private static string $TITLE_SEARCH_QUERYSTRING_KEY = "s_title";
     private static string $FILENAME_SEARCH_QUERYSTRING_KEY = "s_filename";
-    private static string $LABEL_SEARCH_QUERYSTRING_KEY = "s_label";
 
     private ImageDao $imageDao;
     private ?Image $currentImage = null;
@@ -57,10 +56,6 @@ class ImageRequestHandler extends HttpRequestHandler {
         return $this->getQueryStringValueFromGetRequest(self::$FILENAME_SEARCH_QUERYSTRING_KEY);
     }
 
-    public function getCurrentSearchLabelFromGetRequest(): ?string {
-        return $this->getQueryStringValueFromGetRequest(self::$LABEL_SEARCH_QUERYSTRING_KEY);
-    }
-
     private function resetMobileImage(): void {
         if ($this->currentImage->getFilename()) {
             $img = ImageUtility::loadImage($this->currentImage->getFilename());
@@ -72,34 +67,14 @@ class ImageRequestHandler extends HttpRequestHandler {
         try {
             $imageForm = new ImageForm($this->currentImage);
             $imageForm->loadFields();
-            $this->addNewlySelectedLabelsToImage($imageForm->getSelectedLabels());
-            $this->deleteSelectedLabelsFromImage();
             $this->saveUploadedImage();
             $this->resizeImageIfRequested($imageForm);
-            if (!empty($imageForm->getNewImageLabelName())) {
-                $label = $this->imageDao->getLabelByName($imageForm->getNewImageLabelName());
-                if (!$label) {
-                    $label = $this->imageDao->createLabel($imageForm->getNewImageLabelName());
-                }
-                if (!$this->hasLabel($this->currentImage, $label->getId())) {
-                    $this->imageDao->addLabelToImage($label->getId(), $this->currentImage);
-                }
-            }
             $this->createMobileVersionIfNotExists();
             $this->imageDao->updateImage($this->currentImage);
             $this->sendSuccessMessage($this->getTextResource("images_save_success_message"));
         } catch (FormException $e) {
             $this->sendErrorMessage($this->getTextResource("images_save_failed_message"));
         }
-    }
-
-    private function hasLabel(Image $image, int $labelId): bool {
-        foreach ($this->imageDao->getLabelsForImage($image->getId()) as $label) {
-            if ($label->getId() === $labelId) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private function toggleImagePublished(): void {
@@ -140,35 +115,6 @@ class ImageRequestHandler extends HttpRequestHandler {
         return $currentImage;
     }
 
-    private function addNewlySelectedLabelsToImage(array $selectedLabels): void {
-        if (count($selectedLabels) == 0) {
-            return;
-        }
-        $existingLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
-        foreach ($selectedLabels as $selectedLabelId) {
-            if (!$this->isLabelAlreadyAdded($selectedLabelId, $existingLabels)) {
-                $this->imageDao->addLabelToImage($selectedLabelId, $this->currentImage);
-            }
-        }
-    }
-
-    private function isLabelAlreadyAdded(int $selectedLabelId, array $existingLabels): bool {
-        foreach ($existingLabels as $existingLabel) {
-            if ($selectedLabelId == $existingLabel->getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function deleteSelectedLabelsFromImage(): void {
-        $imageLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
-        foreach ($imageLabels as $imageLabel) {
-            if (isset($_POST["label_" . $this->currentImage->getId() . "_" . $imageLabel->getId() . "_delete"])) {
-                $this->imageDao->deleteLabelForImage($imageLabel->getId(), $this->currentImage);
-            }
-        }
-    }
 
     private function saveUploadedImage(): void {
         $newFilename = $this->getNewImageFilename();

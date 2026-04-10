@@ -8,7 +8,6 @@
             </div>
             {$title_search_field}
             {$filename_search_field}
-            {$labels_search_field}
         </div>
         <div class="button_container">
             {$search_button}

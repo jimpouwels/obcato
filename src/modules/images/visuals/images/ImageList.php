@@ -36,14 +36,11 @@ class ImageList extends Panel {
         $data->assign("no_results_message", $this->renderNoResultsMessage());
         $data->assign("current_search_title", $this->requestHandler->getCurrentSearchTitleFromGetRequest());
         $data->assign("current_search_filename", $this->requestHandler->getCurrentSearchFilenameFromGetRequest());
-        $data->assign("current_search_label", $this->getCurrentSearchLabel());
     }
 
     private function getSearchResults(): array {
         if ($this->isSearchAction()) {
             $images = $this->searchImages();
-        } else if ($this->isNoLabelsSearchAction()) {
-            $images = $this->imageDao->getAllImagesWithoutLabel();
         } else {
             $images = array();
         }
@@ -57,12 +54,7 @@ class ImageList extends Panel {
     private function searchImages(): array {
         $keyword = $this->requestHandler->getCurrentSearchTitleFromGetRequest();
         $filename = $this->requestHandler->getCurrentSearchFilenameFromGetRequest();
-        $label = $this->requestHandler->getCurrentSearchLabelFromGetRequest();
-        return $this->imageDao->searchImages($keyword, $filename, $label);
-    }
-
-    private function isNoLabelsSearchAction(): bool {
-        return isset($_GET["no_labels"]) && $_GET["no_labels"] == "true";
+        return $this->imageDao->searchImages($keyword, $filename, 500);
     }
 
     private function toArray(array $images): array {
@@ -85,14 +77,6 @@ class ImageList extends Panel {
     private function renderNoResultsMessage(): string {
         $noResultsMessage = new InformationMessage("Geen afbeeldingen gevonden");
         return $noResultsMessage->render();
-    }
-
-    private function getCurrentSearchLabel(): ?string {
-        $currentLabelSearchId = $this->requestHandler->getCurrentSearchLabelFromGetRequest();
-        if ($currentLabelSearchId) {
-            return $this->imageDao->getLabel($currentLabelSearchId)->getName();
-        }
-        return null;
     }
 
 }

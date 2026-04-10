@@ -3,7 +3,6 @@ images_module_title: Images
 
 # TABS
 images_tab_images: Images
-images_tab_labels: Labels
 images_tab_import: Import
 images_import_instructions: Upload a ZIP file with images to import multiple images at once.
 
@@ -21,7 +20,6 @@ image_successfully_depublished: Image successfully depublished
 # SEARCH
 images_search_title_field: Title
 images_search_filename_field: File name
-images_search_label_field: Label
 
 # EDITOR
 image_editor_alt_text_label: Alternative text
@@ -42,12 +40,9 @@ image_mobile_copy_from_desktop: Copy from desktop version
 image_crop_cannot_be_negative: Cannot crop a negative number
 image_crop_cannot_be_bigger_than_height: The vertical crop cannot be bigger than the image height
 image_crop_cannot_be_bigger_than_width: The horizontal crop cannot be bigger than the image width
-new_image_label_field_label: New label
 images_save_success_message: Image successfully saved
 images_save_failed_message: Image not saved, process the errors
 images_image_editor_no_image_found_yet_message: No image uploaded yet
 
 # CONFIRMATIONS
 images_confirm_delete_image: Are you sure you want to delete this image?
-images_confirm_delete_labels: Are you sure you want to delete the selected label?
-images_alert_no_labels_selected: No labels selected

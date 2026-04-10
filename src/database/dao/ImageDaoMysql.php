@@ -7,7 +7,6 @@ use Obcato\Core\database\MysqlConnector;
 use Obcato\Core\database\SelectStatement;
 use Obcato\Core\database\WhereType;
 use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\modules\images\model\ImageLabel;
 use const Obcato\Core\UPLOAD_DIR;
 
 class ImageDaoMysql implements ImageDao {
@@ -63,34 +62,10 @@ class ImageDaoMysql implements ImageDao {
         return $images;
     }
 
-    public function getAllImagesWithoutLabel(): array {
-        $query = "SELECT " . self::$myAllColumns . " FROM images i LEFT JOIN images_labels ils ON i.id = ils.image_id 
-                      WHERE ils.image_id IS NULL";
-        $result = $this->mysqlConnector->executeQuery($query);
-        $images = array();
-        while ($row = $result->fetch_assoc()) {
-            $images[] = Image::constructFromRecord($row);
-        }
-        return $images;
-    }
-
-    public function searchImagesByLabels(array $labels): array {
-        $allImages = array();
-        foreach ($labels as $label) {
-            array_push($allImages, ...$this->searchImages(null, null, $label->getId()));
-        }
-        return $allImages;
-    }
-
-    public function searchImages(?string $keyword, ?string $filename, ?int $labelId, ?int $limit = 500): array {
+    public function searchImages(?string $keyword, ?string $filename, ?int $limit = 500): array {
         $statement = new SelectStatement(true);
         $statement->from("images", explode(', ', str_replace("i.", "", self::$myAllColumns)));
 
-        if ($labelId) {
-            $statement->from("images_labels", ["label_id"]);
-            $statement->innerJoin("images", "id", "images_labels", "image_id");
-            $statement->where("images_labels", "label_id", WhereType::Equals, $labelId);
-        }
         if ($keyword) {
             $statement->where("images", "title", WhereType::Like, $keyword);
         }
@@ -119,14 +94,15 @@ class ImageDaoMysql implements ImageDao {
     public function deleteImage($image): void {
         $query = "DELETE FROM images WHERE id = " . $image->getId();
 
-        // delete the uploaded images
         if (!is_null($image->getFileName()) && $image->getFileName() != '') {
             $filePath = UPLOAD_DIR . "/" . $image->getFileName();
             $thumbFilePath = UPLOAD_DIR . "/" . $image->getThumbFileName();
-            if (file_exists($filePath))
+            if (file_exists($filePath)) {
                 unlink($filePath);
-            if (file_exists($thumbFilePath))
+            }
+            if (file_exists($thumbFilePath)) {
                 unlink($thumbFilePath);
+            }
         }
         $this->mysqlConnector->executeQuery($query);
     }
@@ -137,88 +113,5 @@ class ImageDaoMysql implements ImageDao {
             $image->getCreatedById() . ", NULL, NULL)";
         $this->mysqlConnector->executeQuery($query);
         $image->setId($this->mysqlConnector->getInsertId());
-    }
-
-    public function createLabel(string $name = "Nieuw label"): ImageLabel {
-        $newLabel = new ImageLabel();
-        $newLabel->setName($name);
-        $postfix = 1;
-        while (!is_null($this->getLabelByName($newLabel->getName()))) {
-            $newLabel->setName("Nieuw label " . $postfix);
-            $postfix++;
-        }
-        $newId = $this->persistLabel($newLabel);
-        $newLabel->setId($newId);
-
-        return $newLabel;
-    }
-
-    public function getAllLabels(): array {
-        $query = "SELECT * FROM image_labels ORDER BY name";
-        $result = $this->mysqlConnector->executeQuery($query);
-        $labels = array();
-        while ($row = $result->fetch_assoc()) {
-            $labels[] = ImageLabel::constructFromRecord($row);
-        }
-        return $labels;
-    }
-
-    public function getLabel(int $id): ?ImageLabel {
-        $query = "SELECT * FROM image_labels WHERE id = " . $id;
-        $result = $this->mysqlConnector->executeQuery($query);
-        while ($row = $result->fetch_assoc()) {
-            return ImageLabel::constructFromRecord($row);
-        }
-        return null;
-    }
-
-    public function getLabelByName(string $name): ?ImageLabel {
-        $query = "SELECT * FROM image_labels WHERE name = '" . $name . "'";
-        $result = $this->mysqlConnector->executeQuery($query);
-        while ($row = $result->fetch_assoc()) {
-            return ImageLabel::constructFromRecord($row);
-        }
-        return null;
-    }
-
-    public function persistLabel(ImageLabel $label): string {
-        $query = "INSERT INTO image_labels (name) VALUES  ('" . $label->getName() . "')";
-        $this->mysqlConnector->executeQuery($query);
-        return $this->mysqlConnector->getInsertId();
-    }
-
-    public function updateLabel(ImageLabel $label): void {
-        $query = "UPDATE image_labels SET name = '" . $label->getName() .
-            "' WHERE id = " . $label->getId();
-        $this->mysqlConnector->executeQuery($query);
-    }
-
-    public function deleteLabel(ImageLabel $label): void {
-        $query = "DELETE FROM image_labels WHERE id = " . $label->getId();
-        $this->mysqlConnector->executeQuery($query);
-    }
-
-    public function addLabelToImage(int $labelId, Image $image): void {
-        $query = "INSERT INTO images_labels (image_id, label_id) VALUES (" . $image->getId() . ", " . $labelId . ")";
-        $this->mysqlConnector->executeQuery($query);
-    }
-
-    public function deleteLabelForImage(int $labelId, Image $image): void {
-        $query = "DELETE FROM images_labels WHERE image_id = " . $image->getId() . "
-                      AND label_id = " . $labelId;
-        $this->mysqlConnector->executeQuery($query);
-    }
-
-    public function getLabelsForImage(int $imageId): array {
-        $query = "SELECT il.id, il.name FROM image_labels il, images_labels ils, 
-                      images i WHERE ils.image_id = " . $imageId . " AND ils.image_id =
-                      i.id AND il.id = ils.label_id";
-        $result = $this->mysqlConnector->executeQuery($query);
-        $labels = array();
-        while ($row = $result->fetch_assoc()) {
-            $labels[] = ImageLabel::constructFromRecord($row);
-        }
-
-        return $labels;
     }
 }

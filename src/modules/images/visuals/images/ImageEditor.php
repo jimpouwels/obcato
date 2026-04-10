@@ -5,7 +5,6 @@ namespace Obcato\Core\modules\images\visuals\images;
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\view\views\ImageLabelSelector;
 use Obcato\Core\view\views\Visual;
 
 class ImageEditor extends Visual {
@@ -26,7 +25,6 @@ class ImageEditor extends Visual {
         $this->assignMetadataEditor();
         $this->assignDesktopEditor();
         $this->assignMobileEditor();
-        $this->assignLabelSelector();
         $this->assign("current_image_id", $this->currentImage->getId());
     }
 
@@ -43,12 +41,6 @@ class ImageEditor extends Visual {
     private function assignMobileEditor(): void {
         $mobileEditor = new ImageMobileEditor($this->currentImage);
         $this->assign('mobile_editor', $mobileEditor->render());
-    }
-
-    private function assignLabelSelector(): void {
-        $imageLabels = $this->imageDao->getLabelsForImage($this->currentImage->getId());
-        $labelSelect = new ImageLabelSelector($imageLabels, $this->currentImage->getId(), true);
-        $this->assign('label_selector', $labelSelect->render());
     }
 
 }

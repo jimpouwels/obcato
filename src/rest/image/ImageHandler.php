@@ -18,7 +18,7 @@ class ImageHandler extends Handler {
     }
 
     public function search(): array {
-        $images = $this->imageDao->searchImages($_GET["keyword"], null, null, 50);
+        $images = $this->imageDao->searchImages($_GET["keyword"], null, 50);
         $data = [];
         foreach ($images as $image) {
             $imageData = array();

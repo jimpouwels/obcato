@@ -9,7 +9,6 @@ use Obcato\Core\view\TemplateData;
 class ImageSearchBox extends Panel {
 
     private static string $SEARCH_QUERY_KEY = "s_term";
-    private static string $SEARCH_LABEL_KEY = "s_label";
     private string $_back_click_id;
     private string $_backfill_id;
     private string $_objects_to_search;
@@ -36,7 +35,6 @@ class ImageSearchBox extends Panel {
 
         $data->assign("search_field", $this->renderSearchField());
         $data->assign("search_button", $this->renderSearchButton());
-        $data->assign("image_labels_field", $this->renderImageLabelsField());
         $data->assign("search_results", $this->renderSearchResults());
         $data->assign("no_results_message", $this->renderNoResultsMessage());
         $data->assign("popup_type", $this->_popup_type);
@@ -48,20 +46,9 @@ class ImageSearchBox extends Panel {
         return $search_field->render();
     }
 
-    private function renderImageLabelsField(): string {
-        $image_labels_values = array();
-        $current_label_search = $this->getCurrentSearchLabel();
-        $image_labels = $this->_image_dao->getAllLabels();
-        foreach ($image_labels as $image_label) {
-            $image_labels_values[] = array("name" => $image_label->getName(), "value" => $image_label->getId());
-        }
-        $image_labels_field = new Pulldown(self::$SEARCH_LABEL_KEY, "Label", strval($current_label_search), $image_labels_values, false, null, true);
-        return $image_labels_field->render();
-    }
-
     private function renderSearchResults(): array {
         $search_results_value = array();
-        $search_results = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, $this->getCurrentSearchLabel());
+        $search_results = $this->_image_dao->searchImages($this->getCurrentSearchQuery(), null, 500);
         if (count($search_results) > 0) {
             foreach ($search_results as $search_result) {
                 $search_result_value = array();
@@ -85,14 +72,6 @@ class ImageSearchBox extends Panel {
             $search_title = $_GET[self::$SEARCH_QUERY_KEY];
         }
         return $search_title;
-    }
-
-    private function getCurrentSearchLabel(): ?string {
-        $current_search_label = null;
-        if (isset($_GET[self::$SEARCH_LABEL_KEY]) && !empty($_GET[self::$SEARCH_LABEL_KEY])) {
-            $current_search_label = intval($_GET[self::$SEARCH_LABEL_KEY]);
-        }
-        return $current_search_label;
     }
 
     private function renderSearchButton(): string {

@@ -7,7 +7,6 @@
 
         <div class="admin_form_v2">
             {$search_field}
-            {$image_labels_field}
         </div>
 
         {$search_button}
