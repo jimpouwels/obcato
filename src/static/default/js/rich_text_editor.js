@@ -97,13 +97,30 @@ function initRichTextEditors() {
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
+                const editor = $(this)[0];
                 
                 // Insert a <br> element
                 const br = document.createElement('br');
                 range.deleteContents();
                 range.insertNode(br);
                 
-                // Move cursor after the br
+                // Find the very last element in the editor
+                function getLastElement(node) {
+                    while (node.lastChild) {
+                        node = node.lastChild;
+                    }
+                    return node;
+                }
+                
+                const lastElement = getLastElement(editor);
+                
+                // If the last element is NOT a BR, add another BR
+                if (!lastElement || lastElement.nodeType !== Node.ELEMENT_NODE || lastElement.tagName !== 'BR') {
+                    const br2 = document.createElement('br');
+                    br.parentNode.insertBefore(br2, br.nextSibling);
+                }
+                
+                // Move cursor after the first br
                 range.setStartAfter(br);
                 range.setEndAfter(br);
                 range.collapse(false);
@@ -199,7 +216,7 @@ function createLink(editor) {
     
     // Reset form
     $textInput.val(selectedText || '');
-    $urlInput.val('https://');
+    $urlInput.val('');
     $newTabCheckbox.prop('checked', true);
     $deleteBtn.hide();
     $dialogTitle.text('Link toevoegen');
@@ -317,7 +334,7 @@ function initLinkEditorDialog() {
     // URL add button
     $('#link-url-add').on('click', function() {
         const url = $urlInput.val().trim();
-        if (url && url !== 'https://') {
+        if (url) {
             selectUrl(url);
         }
     });
@@ -457,11 +474,7 @@ function selectUrl(url) {
     // Clear other selections (mutual exclusion)
     clearPage();
     clearArticle();
-    
-    // Normalize URL
-    if (!url.match(/^https?:\/\//i)) {
-        url = 'https://' + url;
-    }
+
     
     // Show URL as selected
     $urlSelected.show().find('.selected-item-name').text(url);
@@ -495,7 +508,7 @@ function selectArticle(articleId, articleTitle) {
 
 function clearUrl() {
     $urlSelected.hide().data('url', null);
-    $urlInput.val('https://');
+    $urlInput.val();
     $urlInputGroup.show();
 }
 
@@ -638,7 +651,7 @@ function hideLinkEditorDialog() {
     
     // Clear all form fields
     $textInput.val('');
-    $urlInput.val('https://');
+    $urlInput.val();
     $newTabCheckbox.prop('checked', true);
     
     // Clear all selections
