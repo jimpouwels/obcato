@@ -88,6 +88,10 @@ function writeHtaccessFileIfNotExists(): void {
     if (file_exists($htaccessFilePath)) return;
     $handle = fopen($htaccessFilePath, 'w');
     fclose($handle);
+
+    if (file_exists(PRIVATE_DIR . "/htaccess-extension.txt")) {
+        $htaccessExtensionContent = file_get_contents(PRIVATE_DIR . "/htaccess-extension.txt");
+    }
     file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
         "RewriteCond %{HTTP_HOST} !=localhost\n" .
         "RewriteCond %{HTTPS} !=on\n" .
@@ -98,5 +102,6 @@ function writeHtaccessFileIfNotExists(): void {
         "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
         "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n" .
         "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
-        "RewriteRule ^.*$ index.php [NC,L]");
+        "RewriteRule ^.*$ index.php [NC,L]\n\n" .
+        ($htaccessExtensionContent ? $htaccessExtensionContent : ""));
 }
