@@ -32,7 +32,7 @@ class WebformDaoMysql implements WebformDao {
     }
 
     public function getWebForm(int $webformId): ?WebForm {
-        $query = "SELECT " . self::$myAllColumns . " FROM webforms i, scopes s WHERE i.id = ${webformId} AND s.id = " . WebForm::$SCOPE;
+        $query = "SELECT " . self::$myAllColumns . " FROM webforms i, scopes s WHERE i.id = {$webformId} AND s.id = " . WebForm::$SCOPE;
         $result = $this->mysqlConnector->executeQuery($query);
         while ($row = $result->fetch_assoc()) {
             return WebForm::constructFromRecord($row, $this->getWebFormItemsByWebForm($webformId));
