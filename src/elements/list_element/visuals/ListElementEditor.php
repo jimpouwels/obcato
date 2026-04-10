@@ -40,11 +40,6 @@ class ListElementEditor extends ElementVisual {
         $data->assign("id", $this->listElement->getId());
     }
 
-    public function includeLinkSelector(): bool
-    {
-        return true;
-    }
-
     private function getListItems(): array {
         $listItems = array();
         foreach ($this->listElement->getListItems() as $listItem) {

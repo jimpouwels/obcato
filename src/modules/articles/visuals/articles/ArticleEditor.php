@@ -7,7 +7,6 @@ use Obcato\Core\database\dao\ArticleDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\view\views\ElementContainer;
-use Obcato\Core\view\views\LinkEditor;
 use Obcato\Core\view\views\TermSelector;
 use Obcato\Core\view\views\Visual;
 use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
@@ -33,7 +32,6 @@ class ArticleEditor extends Visual {
         $this->assign("article_id", $this->currentArticle->getId());
         $this->assign("article_metadata", $this->renderArticleMetaDataPanel());
         $this->assign("element_container", $this->renderElementContainer());
-        $this->assign("link_editor", $this->renderLinkEditor());
         $this->assign("term_selector", $this->renderTermSelector());
         $this->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
     }
@@ -44,10 +42,6 @@ class ArticleEditor extends Visual {
 
     private function renderElementContainer(): string {
         return (new ElementContainer($this->currentArticle->getElements()))->render();
-    }
-
-    private function renderLinkEditor(): string {
-        return (new LinkEditor($this->currentArticle->getLinks()))->render();
     }
 
     private function renderTermSelector(): string {

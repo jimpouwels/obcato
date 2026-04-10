@@ -30,10 +30,4 @@ class TableOfContentsElementEditor extends ElementVisual {
         $titleField = new TextField("element_" . $this->element->getId() . "_title", "Titel", $this->element->getTitle(), false, true, null);
         $data->assign("title_field", $titleField->render());
     }
-
-    public function includeLinkSelector(): bool
-    {
-        return false;
-    }
-
 }

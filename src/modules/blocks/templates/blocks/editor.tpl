@@ -2,6 +2,4 @@
     {$block_metadata}
 
     {$element_container}
-
-    {$link_editor}
 </form>

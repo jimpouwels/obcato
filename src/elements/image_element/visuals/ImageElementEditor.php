@@ -44,7 +44,7 @@ class ImageElementEditor extends ElementVisual {
         $urlField = new TextField($this->createFieldId("url"), $this->getTextResource("image_element_editor_url"), $this->imageElement->getUrl(), false, false, "url_field");
         $widthField = new TextField($this->createFieldId("width"), $this->getTextResource("image_element_editor_width"), $this->imageElement->getWidth(), false, false, "size_field");
         $heightField = new TextField($this->createFieldId("height"), $this->getTextResource("image_element_editor_height"), $this->imageElement->getHeight(), false, false, "size_field");
-        $linkSelector = new Pulldown($this->createFieldId("link"), $this->getTextResource("image_element_editor_link"), $this->imageElement->getLinkId(), $this->getLinkOptions(), false, "", true);
+        $linkField = new TextField($this->createFieldId("link"), $this->getTextResource("image_element_editor_link"), $this->imageElement->getLink(), false, false, "size_field");
 
         $data->assign("element_id", $this->imageElement->getId());
         $data->assign("current_image_id", $this->imageElement->getImageId());
@@ -54,12 +54,7 @@ class ImageElementEditor extends ElementVisual {
         $data->assign("url_field", $urlField->render());
         $data->assign("height_field", $heightField->render());
         $data->assign("image_lookup", $imageLookup->render());
-        $data->assign("link_selector_field", $linkSelector->render());
-    }
-
-    public function includeLinkSelector(): bool
-    {
-        return false;
+        $data->assign("link_field", $linkField->render());
     }
 
     private function renderAlignmentField(): string {

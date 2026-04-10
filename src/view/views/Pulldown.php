@@ -7,11 +7,11 @@ use Obcato\Core\view\TemplateData;
 class Pulldown extends FormField {
 
     private array $options;
-    private bool $includeLinkSelectIndication;
+    private bool $includeSelectIndication;
 
-    public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $className, bool $includeLinkSelectIndication = false) {
+    public function __construct(string $name, string $label, ?string $value, array $options, bool $mandatory, ?string $className, bool $includeSelectIndication = false) {
         parent::__construct($name, $value, $label, $mandatory, false, $className);
-        $this->includeLinkSelectIndication = $includeLinkSelectIndication;
+        $this->includeSelectIndication = $includeSelectIndication;
         $this->options = $options;
     }
 
@@ -21,7 +21,7 @@ class Pulldown extends FormField {
 
     public function loadFormField(TemplateData $data): void {
         $data->assign("options", $this->options);
-        $data->assign("include_select_indication", $this->includeLinkSelectIndication);
+        $data->assign("include_select_indication", $this->includeSelectIndication);
     }
 
     public function addOption(string $name, string $value): void {

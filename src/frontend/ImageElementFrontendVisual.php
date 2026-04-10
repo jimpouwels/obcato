@@ -2,8 +2,6 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\database\dao\LinkDao;
-use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\elements\image_element\ImageElement;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\blocks\model\Block;
@@ -11,11 +9,8 @@ use Obcato\Core\modules\pages\model\Page;
 
 class ImageElementFrontendVisual extends ElementFrontendVisual {
 
-    private LinkDao $linkDao;
-
     public function __construct(Page $page, ?Article $article, ?Block $block, ImageElement $imageElement) {
         parent::__construct($page, $article, $block, $imageElement);
-        $this->linkDao = LinkDaoMysql::getInstance();
     }
 
     public function loadElement(array &$data): void {
@@ -30,16 +25,10 @@ class ImageElementFrontendVisual extends ElementFrontendVisual {
         $data["image_url_mobile"] = $this->createMobileImageUrl();
         $data["extension"] = $this->getExtension();
 
-        $linkData = array();
         $openTag = "";
         $closeTag = "";
-        if ($this->getElement()->getLinkId()) {
-            $link = $this->linkDao->getLink($this->getElement()->getLinkId());
-            $url = $this->getLinkHelper()->createUrlFromLink($link);
-            $linkData['title'] = $link->getTitle();
-            $linkData['url'] = $url;
-            $linkData['target'] = $link->getTarget();
-            $openTag = "<a href=\"{$url}\" target=\"{$link->getTarget()}\" title=\"{$link->getTitle()}\">";
+        if ($this->getElement()->getLink()) {
+            $openTag = "<a href=\"{$this->getElement()->getLink()}\" target=\"_blank\" title=\"{$this->getElement()->getImage()?->getTitle()}\">";
             $closeTag = "</a>";
         }
         $linkData['open_tag'] = $openTag;

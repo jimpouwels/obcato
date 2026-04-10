@@ -2,10 +2,7 @@
 
 namespace Obcato\Core\frontend\helper;
 
-use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\core\model\Link;
-use Obcato\Core\database\dao\LinkDao;
-use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\articles\service\ArticleInteractor;
@@ -22,7 +19,6 @@ class LinkHelper
     private FriendlyUrlManager $friendlyUrlManager;
     private PageService $pageService;
     private ArticleService $articleService;
-    private LinkDao $linkDao;
     private ?Page $currentPage;
     private ?Article $currentArticle;
 
@@ -30,7 +26,6 @@ class LinkHelper
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->articleService = ArticleInteractor::getInstance();
-        $this->linkDao = LinkDaoMysql::getInstance();
         $this->currentPage = $currentPage;
         $this->currentArticle = $currentArticle;
     }
@@ -104,21 +99,6 @@ class LinkHelper
         $baseUrl = 'https://';
         $baseUrl .= $_SERVER['HTTP_HOST'];
         return $baseUrl;
-    }
-
-    public function createLinksInString(string $value, ElementHolder $elementHolder): string {
-        $links = $this->linkDao->getLinksForElementHolder($elementHolder->getId());
-        foreach ($links as $link) {
-            if ($this->containsLink($value, $link)) {
-                $url = $this->createUrlFromLink($link);
-                if ($url === null) {
-                    $value = $this->removeLinkCodeTags($value, $link);
-                } else {
-                    $value = $this->replaceLinkCodeTags($value, $link, $url);
-                }
-            }
-        }
-        return $this->processMarkdownStyleLinks($value);
     }
 
     public function createUrlFromLink(Link $link): ?string {
@@ -202,33 +182,5 @@ class LinkHelper
             $value = str_replace($matches[0][$i], $link, $value);
         }
         return $value;
-    }
-
-    private function replaceLinkCodeTags(string $value, Link $link, string $url): string {
-        $linkClass = $link->getTargetElementHolderId() ? "internal" : "external";
-        $value = str_replace($this->getLinkCodeOpeningTag($link), $this->createHyperlinkOpeningTag($link->getTitle(), $link->getTarget(), $url, $linkClass), $value);
-        return str_replace("[/LINK]", "</a>", $value);
-    }
-
-    private function removeLinkCodeTags(string $value, Link $link): string {
-        $value = str_replace($this->getLinkCodeOpeningTag($link), "", $value);
-        return str_replace("[/LINK]", "", $value);
-    }
-
-    private function containsLink(string $value, Link $link): bool {
-        return strpos($value, $this->getLinkCodeOpeningTag($link)) > -1;
-    }
-
-    private function getLinkCodeOpeningTag(Link $link): string {
-        return "[LINK C=\"" . $link->getCode() . "\"]";
-    }
-
-    private function createHyperlinkOpeningTag(string $title, string $target, string $url, string $link_class): string {
-        if ($target == '[popup]') {
-            $targetHtml = "onclick=\"window.open('$url','$title', 'width=800,height=600, scrollbars=no,toolbar=no,location=no'); return false\"";
-        } else {
-            $targetHtml = "target=\"$target\"";
-        }
-        return "<a title=\"{$title}\" {$targetHtml} href=\"{$url}\" class=\"{$link_class}\">";
     }
 }

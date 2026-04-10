@@ -50,9 +50,4 @@ class PhotoAlbumElementEditor extends ElementVisual {
         $data->assign("image_lookup_field", $imageLookupField->render());
         $data->assign("label_select_field", $labelSelectField->render());
     }
-
-    public function includeLinkSelector(): bool
-    {
-        return false;
-    }
 }

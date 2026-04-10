@@ -3,7 +3,7 @@
     {$alignment_field}
     {$width_field}
     {$height_field}
-    {$link_selector_field}
+    {$link_field}
     {$url_field}
     {$image_lookup}
 </div>

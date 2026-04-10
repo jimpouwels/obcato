@@ -22,7 +22,7 @@ class ImageElement extends Element {
     private ?int $width = null;
     private ?string $url = null;
     private ?int $imageId = null;
-    private ?int $linkId = null;
+    private ?string $link = null;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId, new ImageElementMetadataProvider($this));
@@ -76,12 +76,12 @@ class ImageElement extends Element {
         $this->url = $url;
     }
 
-    public function getLinkId(): ?int {
-        return $this->linkId;
+    public function getLink(): ?string {
+        return $this->link;
     }
 
-    public function setLinkId(?int $linkId): void {
-        $this->linkId = $linkId;
+    public function setLink(?string $link): void {
+        $this->link = $link;
     }
 
     public function getStatics(): Visual {

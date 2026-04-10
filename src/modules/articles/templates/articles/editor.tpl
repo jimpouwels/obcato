@@ -3,7 +3,5 @@
 
     {$element_container}
 
-    {$link_editor}
-
     {$term_selector}
 </form>

@@ -11,14 +11,12 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
 
     private MysqlConnector $mysqlConnector;
 
-    public function __construct(Element $element)
-    {
+    public function __construct(Element $element) {
         parent::__construct($element);
         $this->mysqlConnector = MysqlConnector::getInstance();
     }
 
-    public function getTableName(): string
-    {
+    public function getTableName(): string {
         return "image_elements_metadata";
     }
 
@@ -29,11 +27,10 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         $element->setImageId($record['image_id']);
         $element->setWidth($record['width']);
         $element->setHeight($record['height']);
-        $element->setLinkId($record['link_id']);
+        $element->setLink($record['link']);
     }
 
-    public function update(Element $element): void
-    {
+    public function update(Element $element): void{
         $imageId = $element->getImageId();
         $title = $element->getTitle();
         $align = $element->getAlign();
@@ -41,15 +38,14 @@ class ImageElementMetadataProvider extends ElementMetadataProvider
         $width = $element->getWidth();
         $height = $element->getHeight();
         $elementId = $element->getId();
-        $linkId = $element->getLinkId();
-        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ?, link_id = ?, url = ? WHERE element_id = ?";
+        $link = $element->getLink();
+        $query = "UPDATE image_elements_metadata SET title = ?, align = ?, image_id = ?, width = ?, height = ?, link = ?, url = ? WHERE element_id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiiisi', $title, $align, $imageId, $width, $height, $linkId, $url, $elementId);
+        $statement->bind_param('ssiiissi', $title, $align, $imageId, $width, $height, $link, $url, $elementId);
         $this->mysqlConnector->executeStatement($statement);
     }
 
-    public function insert(Element $element): void
-    {
+    public function insert(Element $element): void {
         $title = $element->getTitle();
         $element_id = $element->getId();
         $query = "INSERT INTO image_elements_metadata (title, align, width, height, image_id, element_id) VALUES (?, NULL, 0 , 0, NULL, ?)";

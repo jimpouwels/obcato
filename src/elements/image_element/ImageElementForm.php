@@ -22,7 +22,7 @@ class ImageElementForm extends ElementForm {
         $this->imageElement->setUrl($this->getFieldValue('element_' . $this->imageElement->getId() . '_url'));
         $this->imageElement->setWidth($this->getNumber('element_' . $this->imageElement->getId() . '_width'));
         $this->imageElement->setHeight($this->getNumber('element_' . $this->imageElement->getId() . '_height'));
-        $this->imageElement->setLinkId($this->getNumber('element_' . $this->imageElement->getId() . '_link'));
+        $this->imageElement->setLink($this->getFieldValue('element_' . $this->imageElement->getId() . '_link'));
         if ($this->hasErrors()) {
             throw new FormException();
         }

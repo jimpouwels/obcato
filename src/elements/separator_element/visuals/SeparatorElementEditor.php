@@ -32,10 +32,4 @@ class SeparatorElementEditor extends ElementVisual {
         $data->assign("title_field", $titleField->render());
         $data->assign("html_id_field", $htmlIdField->render());
     }
-
-    public function includeLinkSelector(): bool
-    {
-        return false;
-    }
-
 }

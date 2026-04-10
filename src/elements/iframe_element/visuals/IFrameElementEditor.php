@@ -38,11 +38,6 @@ class IFrameElementEditor extends ElementVisual {
         $data->assign("height_field", $heightField->render());
     }
 
-    public function includeLinkSelector(): bool
-    {
-        return false;
-    }
-
     private function createFieldId($propertyName): string {
         return "element_" . $this->iframeElement->getId() . "_" . $propertyName;
     }

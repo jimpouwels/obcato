@@ -4,7 +4,6 @@ namespace Obcato\Core\core\model;
 
 use DateTime;
 use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\database\dao\LinkDaoMysql;
 use Obcato\Core\modules\templates\model\Presentable;
 
 class ElementHolder extends Presentable {
@@ -16,7 +15,6 @@ class ElementHolder extends Presentable {
     private int $createdById;
     private DateTime $lastModified;
     private array $elements = array();
-    private array $links = array();
     private string $type;
 
     public function __construct(int $scopeId) {
@@ -86,22 +84,6 @@ class ElementHolder extends Presentable {
         $this->lastModified = $last_modified;
     }
 
-    public function getLinks(): array {
-        return $this->links;
-    }
-
-    public function setLinks(array $links): void {
-        $this->links = $links;
-    }
-
-    public function addLink(Link $link): void {
-        $this->links[] = $link;
-    }
-
-    public function deleteLink(Link $linkToDelete): void {
-        $this->links = array_filter($this->links, fn($link) => $linkToDelete->getId() != $link->getId());
-    }
-
     public function getElementStatics(): array {
         $elementDao = ElementDaoMysql::getInstance();
         $element_statics = array();
@@ -146,7 +128,6 @@ class ElementHolder extends Presentable {
         $this->setType($row['type']);
         parent::initFromDb($row);
         $this->setElements(ElementDaoMysql::getInstance()->getElements($this));
-        $this->setLinks(LinkDaoMysql::getInstance()->getLinksForElementHolder($this->getId()));
     }
 
 }

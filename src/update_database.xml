@@ -314,6 +314,10 @@
             <query>CREATE TABLE photo_album_element_images (id int(10) unsigned NOT NULL AUTO_INCREMENT, photo_album_element_id int(10) unsigned NOT NULL, image_id int(10) unsigned NOT NULL, PRIMARY KEY (id), CONSTRAINT photo_album_elements_constraint FOREIGN KEY (photo_album_element_id) REFERENCES elements (id) ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT images_constraint FOREIGN KEY (image_id) REFERENCES images (id) ON DELETE CASCADE ON UPDATE CASCADE)</query>
             <query>ALTER TABLE article_overview_elements_metadata ADD COLUMN choose_random_articles tinyint(1) DEFAULT 0</query>
             <query>ALTER TABLE separator_elements_metadata ADD COLUMN html_id VARCHAR(255) DEFAULT NULL</query>
+            <query>ALTER TABLE image_elements_metadata DROP FOREIGN KEY image_elements_links</query>
+            <query>ALTER TABLE image_elements_metadata DROP COLUMN link_id</query>
+            <query>ALTER TABLE image_elements_metadata ADD COLUMN link TEXT DEFAULT NULL</query>
+            <query>DROP TABLE links</query>
         </queries>
     </version>
 </versions>
