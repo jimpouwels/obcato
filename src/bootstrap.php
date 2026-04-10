@@ -90,7 +90,7 @@ function writeHtaccessFileIfNotExists(): void {
     fclose($handle);
 
     if (file_exists(PRIVATE_DIR . "/htaccess-extension.txt")) {
-        $htaccessExtensionContent = file_get_contents(PRIVATE_DIR . "/htaccess-extension.txt");
+        $htaccessExtensionContent = "\n\n" . file_get_contents(PRIVATE_DIR . "/htaccess-extension.txt");
     }
     file_put_contents($htaccessFilePath, "RewriteEngine on\n\n" .
         "RewriteCond %{HTTP_HOST} !=localhost\n" .
@@ -100,8 +100,8 @@ function writeHtaccessFileIfNotExists(): void {
         "RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n\n" .
         "RewriteCond %{REQUEST_URI} !^/index.php\n" .
         "RewriteRule ^sitemap.xml$ /index.php?sitemap=true [NC,L]\n" .
-        "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n" .
+        "RewriteRule ^robots.txt$ /index.php?robots=true [NC,L]\n\n" .
+        "RewriteRule ^/api /index.php?rest=true [NC,L]\n" .
         "RewriteCond %{REQUEST_URI} !\.(.*)$\n" .
-        "RewriteRule ^.*$ index.php [NC,L]\n\n" .
-        ($htaccessExtensionContent ? $htaccessExtensionContent : ""));
+        "RewriteRule ^.*$ index.php [NC,L]" . $htaccessExtensionContent);
 }
