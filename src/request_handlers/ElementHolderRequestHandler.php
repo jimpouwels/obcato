@@ -72,20 +72,38 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     private function reorderElementsAfterInsert(ElementHolder $elementHolder, int $newElementId, int $insertPosition): void {
         $elements = $elementHolder->getElements();
         
+        // Check if draggable_order exists (user dragged elements before inserting)
+        $baseOrder = array();
+        if (isset($_POST['draggable_order']) && !empty($_POST['draggable_order'])) {
+            // Use the client's dragged order as the base
+            $draggedIds = explode(',', $_POST['draggable_order']);
+            foreach ($draggedIds as $id) {
+                $id = intval(trim($id));
+                if ($id > 0) {
+                    $baseOrder[] = $id;
+                }
+            }
+        } else {
+            // Use the saved order from database
+            foreach ($elements as $element) {
+                $baseOrder[] = $element->getId();
+            }
+        }
+        
         // Build new order: insert new element at specified position
         $orderArray = array();
         $insertedNew = false;
         
-        foreach ($elements as $element) {
+        foreach ($baseOrder as $elementId) {
             if (count($orderArray) == $insertPosition && !$insertedNew) {
                 // Insert new element at this position
                 $orderArray[] = $newElementId;
                 $insertedNew = true;
             }
             
-            // Add existing element if it's not the newly created one
-            if ($element->getId() != $newElementId) {
-                $orderArray[] = $element->getId();
+            // Add existing element (skip the newly created one if it's somehow in baseOrder)
+            if ($elementId != $newElementId) {
+                $orderArray[] = $elementId;
             }
         }
         

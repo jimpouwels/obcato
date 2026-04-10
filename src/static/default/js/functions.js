@@ -46,12 +46,16 @@ function showConfirm(message, options) {
         $('#confirm-dialog-cancel').on('click', cancelHandler);
         $('.confirm-dialog-backdrop').on('click', cancelHandler);
         
-        // ESC key to cancel
-        $(document).one('keydown', function(e) {
+        // Keyboard shortcuts
+        var keyHandler = function(e) {
             if (e.key === 'Escape' || e.keyCode === 27) {
                 cancelHandler();
+            } else if (e.key === 'Enter' || e.keyCode === 13) {
+                confirmHandler();
             }
-        });
+        };
+        
+        $(document).one('keydown', keyHandler);
     });
 }
 
@@ -287,11 +291,26 @@ function findElementHeader(elementNode) {
 // initializes sortable elements
 $(document).ready(function () {
     $(function () {
+        console.log('=== Initializing sortable ===');
+        var $container = $(".draggable_items");
+        console.log('Container found:', $container.length);
+        console.log('Container children:', $container.children().length);
+        $container.children().each(function(i) {
+            console.log('Child ' + i + ':', this.className, this.tagName);
+        });
+        
         $(".draggable_items").sortable({
+            items: '> .collapsable_root_wrapper',
             opacity: 0.6,
             cursor: 'move',
             cancel: '.rich-text-content, .rich-text-toolbar, input, textarea, select, button, a',
+            start: function() {
+                // Hide all insert buttons during drag
+                $('.element-insert-button').css('visibility', 'hidden');
+            },
             update: function () {
+                console.log('=== Sortable update triggered ===');
+                
                 var idString = '';
                 $('.draggable_id_holder').each(function () {
                     if (idString != '') {
@@ -303,6 +322,39 @@ $(document).ready(function () {
                 if ($order_field.length > 0) {
                     $order_field.attr("value", idString);
                 }
+                
+                console.log('Elements found:', $('.collapsable_root_wrapper').length);
+                
+                // Remove all existing insert buttons
+                $('.element-insert-button').remove();
+                console.log('Removed all insert buttons');
+                
+                // Re-insert buttons at correct positions
+                var $container = $('#element_container');
+                var buttonHtml = '<div class="element-insert-button" data-insert-position="POS">' +
+                    '<button type="button" class="insert-btn" onclick="showElementSelector(POS); return false;" title="Element invoegen">' +
+                    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none">' +
+                    '<path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+                    '</svg></button>' +
+                    '<div class="insert-indicator"><div class="insert-line"></div>' +
+                    '<div class="insert-arrow">' +
+                    '<svg width="12" height="12" viewBox="0 0 12 12" fill="none">' +
+                    '<path d="M6 2L6 10M6 10L3 7M6 10L9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+                    '</svg></div></div></div>';
+                
+                // Insert button at the beginning
+                $container.prepend(buttonHtml.replace(/POS/g, '0'));
+                console.log('Inserted button at position 0');
+                
+                // Insert button after each element
+                var elementIndex = 0;
+                $container.children('.collapsable_root_wrapper').each(function() {
+                    elementIndex++;
+                    $(this).after(buttonHtml.replace(/POS/g, elementIndex));
+                    console.log('Inserted button at position ' + elementIndex);
+                });
+                
+                console.log('=== Re-indexing complete, ' + (elementIndex + 1) + ' buttons created ===');
             }
         });
     });
