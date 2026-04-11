@@ -80,33 +80,6 @@ function addElement(elementTypeId, errorMessage) {
 // Global variable to store insert position
 var elementInsertPosition = null;
 
-// Save scroll position and insert position before form submit
-function saveScrollPosition() {
-    var data = {
-        position: window.pageYOffset || document.documentElement.scrollTop,
-        insertPosition: elementInsertPosition
-    };
-    sessionStorage.setItem('elementHolderScrollData', JSON.stringify(data));
-}
-
-// Restore scroll position after page load, compensating for newly inserted element
-function restoreScrollPosition() {
-    var savedData = sessionStorage.getItem('elementHolderScrollData');
-    if (savedData !== null) {
-        try {
-            var data = JSON.parse(savedData);
-            
-            // Simply restore scroll position - no compensation needed
-            // The browser maintains content position naturally
-            window.scrollTo(0, data.position);
-            
-        } catch (e) {
-            console.error('Error restoring scroll position:', e);
-        }
-        sessionStorage.removeItem('elementHolderScrollData');
-    }
-}
-
 // Shows the element selector modal at a specific position
 function showElementSelector(position) {
     elementInsertPosition = position;
@@ -147,32 +120,7 @@ function insertElementAtPosition(elementTypeId) {
     $('#element_holder_form_id').submit();
 }
 
-// Restore scroll position after page load
-function restoreScrollPosition() {
-    var savedData = sessionStorage.getItem('elementHolderScrollData');
-    if (savedData !== null) {
-        try {
-            var data = JSON.parse(savedData);
-            
-            // Simply restore scroll position
-            setTimeout(function() {
-                window.scrollTo(0, data.position);
-            }, 0);
-            
-        } catch (e) {
-            console.error('Error restoring scroll position:', e);
-        }
-        sessionStorage.removeItem('elementHolderScrollData');
-    }
-}
-
 $(document).ready(function() {
-    restoreScrollPosition();
-    
-    // Save scroll position before any element holder form submit
-    $('#element_holder_form_id').submit(function() {
-        saveScrollPosition();
-    });
 });
 
 // Saves the selected element holder back to the link in the parent window
@@ -291,13 +239,7 @@ function findElementHeader(elementNode) {
 // initializes sortable elements
 $(document).ready(function () {
     $(function () {
-        console.log('=== Initializing sortable ===');
         var $container = $(".draggable_items");
-        console.log('Container found:', $container.length);
-        console.log('Container children:', $container.children().length);
-        $container.children().each(function(i) {
-            console.log('Child ' + i + ':', this.className, this.tagName);
-        });
         
         $(".draggable_items").sortable({
             items: '> .collapsable_root_wrapper',
@@ -309,8 +251,6 @@ $(document).ready(function () {
                 $('.element-insert-button').css('visibility', 'hidden');
             },
             update: function () {
-                console.log('=== Sortable update triggered ===');
-                
                 var idString = '';
                 $('.draggable_id_holder').each(function () {
                     if (idString != '') {
@@ -323,11 +263,8 @@ $(document).ready(function () {
                     $order_field.attr("value", idString);
                 }
                 
-                console.log('Elements found:', $('.collapsable_root_wrapper').length);
-                
                 // Remove all existing insert buttons
                 $('.element-insert-button').remove();
-                console.log('Removed all insert buttons');
                 
                 // Re-insert buttons at correct positions
                 var $container = $('#element_container');
@@ -344,17 +281,13 @@ $(document).ready(function () {
                 
                 // Insert button at the beginning
                 $container.prepend(buttonHtml.replace(/POS/g, '0'));
-                console.log('Inserted button at position 0');
                 
                 // Insert button after each element
                 var elementIndex = 0;
                 $container.children('.collapsable_root_wrapper').each(function() {
                     elementIndex++;
                     $(this).after(buttonHtml.replace(/POS/g, elementIndex));
-                    console.log('Inserted button at position ' + elementIndex);
                 });
-                
-                console.log('=== Re-indexing complete, ' + (elementIndex + 1) + ' buttons created ===');
             }
         });
     });
@@ -377,13 +310,6 @@ $(document).ready(function () {
 
 // handles add link
 function addLink() {
-    // Save scroll position before submitting
-    var data = {
-        position: window.pageYOffset || document.documentElement.scrollTop,
-        insertPosition: null
-    };
-    sessionStorage.setItem('elementHolderScrollData', JSON.stringify(data));
-    
     var $elementHolderForm = $('#element_holder_form_id');
     if ($elementHolderForm.length == 0) {
         alert('Fout: Kan link niet toevoegen');
@@ -453,19 +379,20 @@ $(document).ready(function () {
 
 // element holder scrollbehaviour 
 function storeScrollPosition(elementHolderId, scrollPosition) {
+    var ratio = document.body.scrollHeight > 0 ? scrollPosition / document.body.scrollHeight : 0;
     localStorage.setItem("sa_element_holder_scroll_position", JSON.stringify({
         elementHolderId: elementHolderId,
-        pos: scrollPosition
+        ratio: ratio
     }));
 }
 
-function getScrollPosition(elementHolderId) {
+function getScrollRatio(elementHolderId) {
     var scrollPos = JSON.parse(localStorage.getItem("sa_element_holder_scroll_position"));
     if (!scrollPos) {
         return 0;
     }
     if (scrollPos.elementHolderId == elementHolderId) {
-        return scrollPos.pos;
+        return scrollPos.ratio || 0;
     } else {
         storeScrollPosition(elementHolderId, 0);
         return 0;
@@ -475,15 +402,29 @@ function getScrollPosition(elementHolderId) {
 $(document).ready(function () {
     var elementHolderId = $('#element_holder_id').attr('value');
     if (elementHolderId) {
-        var scrollPos = getScrollPosition(elementHolderId);
-        $('#content-wrapper').scrollTop(scrollPos);
+        var scrollRatio = getScrollRatio(elementHolderId);
+        if (scrollRatio > 0) {
+            setTimeout(function () {
+                window.scrollTo(0, Math.round(scrollRatio * document.body.scrollHeight));
+            }, 100);
+            setTimeout(function () {
+                window.scrollTo(0, Math.round(scrollRatio * document.body.scrollHeight));
+            }, 500);
+        }
     }
 
-    $('#content-wrapper').on('scroll', function () {
+    $(window).on('scroll', function () {
+        if (!elementHolderId) return;
         clearTimeout($.data(this, 'scrollTimer'));
         $.data(this, 'scrollTimer', setTimeout(function () {
-            storeScrollPosition(elementHolderId, $('#content-wrapper').scrollTop());
+            storeScrollPosition(elementHolderId, window.pageYOffset || document.documentElement.scrollTop);
         }, 100));
+    });
+
+    $('#element_holder_form_id').on('submit', function () {
+        if (elementHolderId) {
+            storeScrollPosition(elementHolderId, window.pageYOffset || document.documentElement.scrollTop);
+        }
     });
 });
 
