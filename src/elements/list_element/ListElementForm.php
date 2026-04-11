@@ -17,6 +17,7 @@ class ListElementForm extends ElementForm {
         parent::loadFields();
         $this->listElement->setTitle($this->getFieldValue('element_' . $this->listElement->getId() . '_title'));
         $this->loadListItemsFields();
+        $this->loadListItemOrder();
     }
 
     public function getListItemsToDelete(): array {
@@ -33,6 +34,23 @@ class ListElementForm extends ElementForm {
         foreach ($this->listElement->getListItems() as $listItem) {
             $listItem->setText($this->getFieldValue("listitem_" . $listItem->getId() . "_text"));
         }
+    }
+
+    private function loadListItemOrder(): void {
+        $itemOrder = $this->getFieldValue('element_' . $this->listElement->getId() . '_list_item_order');
+        $itemOrderArr = explode(',', $itemOrder);
+
+        $listItemsById = [];
+        foreach ($this->listElement->getListItems() as $listItem) {
+            $listItemsById[$listItem->getId()] = $listItem;
+        }
+        for ($i = 0; $i < count($itemOrderArr); $i++) {
+            $listItemsById[intval(trim($itemOrderArr[$i]))]->setOrderNr($i);
+        }
+
+        $items = $this->listElement->getListItems();
+        usort($items, fn($a, $b) => $a->getOrderNr() <=> $b->getOrderNr());
+        $this->listElement->setListItems($items);
     }
 
 }

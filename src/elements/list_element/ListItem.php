@@ -2,15 +2,14 @@
 
 namespace Obcato\Core\elements\list_element;
 
-use Obcato\Core\core\model\Element;
 use Obcato\Core\core\model\Entity;
-use Obcato\Core\database\dao\ElementDaoMysql;
 
 class ListItem extends Entity {
 
     private ?string $text = null;
     private int $ident = 0;
     private int $elementId;
+    private int $orderNr = 0;
 
     public function getText(): ?string {
         return $this->text;
@@ -34,6 +33,14 @@ class ListItem extends Entity {
 
     public function setElementId(int $elementId): void {
         $this->elementId = $elementId;
+    }
+
+    public function getOrderNr(): int {
+        return $this->orderNr;
+    }
+
+    public function setOrderNr(int $orderNr): void {
+        $this->orderNr = $orderNr;
     }
 
 }

@@ -323,6 +323,8 @@
             <query>DROP TABLE IF EXISTS images_labels</query>
             <query>DROP TABLE IF EXISTS image_labels</query>
             <query>ALTER TABLE modules DROP COLUMN popup</query>
+            <query>ALTER TABLE list_element_items ADD COLUMN display_order INT NOT NULL DEFAULT 0</query>
+            <query>UPDATE list_element_items SET display_order = id</query>
         </queries>
     </version>
 </versions>

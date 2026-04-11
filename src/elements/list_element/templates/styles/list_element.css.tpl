@@ -14,16 +14,63 @@
     font-style: italic;
 }
 
+.list-element-sortable-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .list_element_values {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--color-gray-200, #d1d5db);
+    border-radius: 8px;
+    background: var(--color-white, #fff);
 }
 
 /* Add spacing after panel-title */
 .panel-title + .list_element_values {
     margin-top: 12px;
+}
+
+.panel-title + .list-element-sortable-items {
+    margin-top: 12px;
+}
+
+.list_element_item_drag_handle {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-shrink: 0;
+    padding-top: 10px;
+    cursor: move;
+}
+
+.list_element_item_drag_handle span {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-gray-500, #6b7280);
+}
+
+.list-element-sortable-item-active {
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+}
+
+.list-element-sortable-items .ui-sortable-placeholder {
+    visibility: visible !important;
+    border: 1px dashed var(--color-gray-400, #9ca3af);
+    border-radius: 8px;
+    background: var(--color-gray-50, #f9fafb);
+    min-height: 64px;
+}
+
+.list_element_empty_state {
+    display: block;
 }
 
 /* Hide labels in list items */

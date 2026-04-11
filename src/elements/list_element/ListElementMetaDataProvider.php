@@ -9,7 +9,7 @@ use Obcato\Core\database\MysqlConnector;
 class ListElementMetaDataProvider extends ElementMetadataProvider
 {
 
-    private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id";
+    private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id, i.display_order";
     private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element)
@@ -64,7 +64,7 @@ class ListElementMetaDataProvider extends ElementMetadataProvider
     private function getListItems(Element $element): array
     {
         $query = "SELECT " . self::$myAllColumns . " FROM list_element_items i, elements e WHERE i.element_id = " . $element->getId() .
-            " AND e.id = " . $element->getId();
+            " AND e.id = " . $element->getId() . " ORDER BY i.display_order ASC, i.id ASC";
         $result = $this->mysqlConnector->executeQuery($query);
         $listItems = array();
         while ($row = $result->fetch_assoc()) {
@@ -73,6 +73,7 @@ class ListElementMetaDataProvider extends ElementMetadataProvider
             $listItem->setText($row['text']);
             $listItem->setIndent($row['indent']);
             $listItem->setElementId($row['element_id']);
+            $listItem->setOrderNr($row['display_order']);
 
             $listItems[] = $listItem;
         }
@@ -82,22 +83,24 @@ class ListElementMetaDataProvider extends ElementMetadataProvider
 
     private function updateListItem(mixed $listItem): void
     {
-        $query = "UPDATE list_element_items SET `text` = ?, indent = ? WHERE id = ?";
+        $query = "UPDATE list_element_items SET `text` = ?, indent = ?, display_order = ? WHERE id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
         $indent = $listItem->getIndent();
         $id = $listItem->getId();
         $text = $listItem->getText();
-        $statement->bind_param('sii', $text, $indent, $id);
+        $displayOrder = $listItem->getOrderNr();
+        $statement->bind_param('siii', $text, $indent, $displayOrder, $id);
         $this->mysqlConnector->executeStatement($statement);
     }
 
     private function insertListItem(mixed $listItem): void
     {
-        $query = "INSERT INTO list_element_items (`text`, indent, element_id) VALUES ('', ?, ?)";
+        $query = "INSERT INTO list_element_items (`text`, indent, element_id, display_order) VALUES ('', ?, ?, ?)";
         $statement = $this->mysqlConnector->prepareStatement($query);
         $indent = $listItem->getIndent();
         $elementId = $this->getElement()->getId();
-        $statement->bind_param('ii', $indent, $elementId);
+        $displayOrder = $listItem->getOrderNr();
+        $statement->bind_param('iii', $indent, $elementId, $displayOrder);
         $this->mysqlConnector->executeStatement($statement);
         $listItem->setId($this->mysqlConnector->getInsertId());
     }

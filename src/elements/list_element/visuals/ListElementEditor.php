@@ -10,7 +10,7 @@ use Obcato\Core\view\views\ElementVisual;
 use Obcato\Core\view\views\SingleCheckbox;
 use Obcato\Core\view\views\RichTextArea;
 use Obcato\Core\view\views\TextField;
-use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
+use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
 
 class ListElementEditor extends ElementVisual {
 
@@ -35,6 +35,7 @@ class ListElementEditor extends ElementVisual {
         $addItemButton = new Button("", $this->getTextResource("list_element_editor_add_item"), "addListItem(" . $this->listElement->getId() . ",'" . ELEMENT_HOLDER_FORM_ID . "');");
 
         $data->assign("list_items", $this->getListItems());
+        $data->assign("list_item_order", $this->getListItemOrder());
         $data->assign("add_item_button", $addItemButton->render());
         $data->assign("title_field", $titleField->render());
         $data->assign("id", $this->listElement->getId());
@@ -54,6 +55,11 @@ class ListElementEditor extends ElementVisual {
             $listItems[] = $listItemValues;
         }
         return $listItems;
+    }
+
+    private function getListItemOrder(): string {
+        $items = array_filter($this->listElement->getListItems(), fn($item) => $item->getId());
+        return implode(',', array_map(fn($item) => $item->getId(), $items));
     }
 
 }

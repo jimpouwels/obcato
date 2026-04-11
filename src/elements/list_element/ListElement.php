@@ -33,6 +33,7 @@ class ListElement extends Element {
     public function addListItem(): void {
         $listItem = new ListItem();
         $listItem->setIndent(0);
+        $listItem->setOrderNr(count($this->listItems));
         $this->listItems[] = $listItem;
     }
 
