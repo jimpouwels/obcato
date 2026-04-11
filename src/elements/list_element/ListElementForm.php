@@ -38,6 +38,9 @@ class ListElementForm extends ElementForm {
 
     private function loadListItemOrder(): void {
         $itemOrder = $this->getFieldValue('element_' . $this->listElement->getId() . '_list_item_order');
+        if (!$itemOrder) {
+            return;
+        }
         $itemOrderArr = explode(',', $itemOrder);
 
         $listItemsById = [];
@@ -45,7 +48,10 @@ class ListElementForm extends ElementForm {
             $listItemsById[$listItem->getId()] = $listItem;
         }
         for ($i = 0; $i < count($itemOrderArr); $i++) {
-            $listItemsById[intval(trim($itemOrderArr[$i]))]->setOrderNr($i);
+            $id = intval(trim($itemOrderArr[$i]));
+            if (isset($listItemsById[$id])) {
+                $listItemsById[$id]->setOrderNr($i);
+            }
         }
 
         $items = $this->listElement->getListItems();
