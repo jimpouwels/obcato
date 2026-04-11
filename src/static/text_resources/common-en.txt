@@ -22,7 +22,6 @@ action_button_down: Down
 # LINK EDITOR
 link_editor_target_same_page: Same page
 link_editor_target_new_tab: New tab
-link_editor_target_popup: Popup
 link_editor_link_browser_target: Open in
 place_link: Place link
 link_title: Title

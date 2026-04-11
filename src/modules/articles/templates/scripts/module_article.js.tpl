@@ -11,7 +11,6 @@ $(document).ready(function () {
 
     $('#update_element_holder').click(function () {
         $('#action').attr('value', 'update_element_holder');
-        // Small delay to ensure popup callbacks have completed
         setTimeout(function() {
             $('#element_holder_form_id').submit();
         }, 100);
