@@ -16,7 +16,7 @@
     <script type="text/javascript" src="/admin?file=/default/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=23"></script>
-    <script type="text/javascript" src="/admin?file=/default/js/rich_text_editor.js?v=5"></script>
+    <script type="text/javascript" src="/admin?file=/default/js/rich_text_editor.js?v=10"></script>
 
     {if isset($module_styles)}
         {foreach from=$module_styles item=style}

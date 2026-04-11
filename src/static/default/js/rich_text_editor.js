@@ -3,6 +3,7 @@ var currentLinkElement = null;
 var currentEditor = null;
 var savedRange = null;
 var linkSearchTimeout = null;
+var preserveEditorFocusState = false;
 
 // Cached DOM selectors
 var $dialog, $textInput, $urlInput, $newTabCheckbox, $deleteBtn, $dialogTitle;
@@ -42,27 +43,40 @@ function initFormSubmitHandler() {
 }
 
 function initRichTextEditors() {
-    // Start with editors disabled (no focus)
-    $('.rich-text-content').each(function() {
-        $(this).attr('contenteditable', 'false');
-        $(this).prop('contentEditable', 'false');
-        
-        // Make all existing links non-editable
-        $(this).find('a').attr('contenteditable', 'false');
+    // Click outside a focused editor wrapper should close editor focus state.
+    $(document).off('mousedown.richTextEditorBlur').on('mousedown.richTextEditorBlur', function(e) {
+        // Keep focus state while interacting with the link modal.
+        if ($dialog && $dialog.length > 0 && $dialog.is(':visible') && $(e.target).closest('#link-editor-dialog').length > 0) {
+            return;
+        }
+
+        $('.rich-text-editor-wrapper.focused').each(function() {
+            if ($(e.target).closest(this).length === 0) {
+                const wrapper = $(this);
+                wrapper.find('.rich-text-content').blur();
+                wrapper.removeClass('focused');
+            }
+        });
     });
-    
-    // Handle focus - enable editor
+
+    // Handle focus
     $('.rich-text-content').on('focus', function() {
-        $(this).attr('contenteditable', 'true');
-        $(this).prop('contentEditable', 'true');
         $(this).closest('.rich-text-editor-wrapper').addClass('focused');
     });
     
-    // Handle blur - disable editor
+    // Handle blur
     $('.rich-text-content').on('blur', function() {
-        $(this).attr('contenteditable', 'false');
-        $(this).prop('contentEditable', 'false');
-        $(this).closest('.rich-text-editor-wrapper').removeClass('focused');
+        if (preserveEditorFocusState) {
+            return;
+        }
+
+        const wrapper = $(this).closest('.rich-text-editor-wrapper');
+        // Delay so toolbar/button interactions can complete first.
+        setTimeout(function() {
+            if (wrapper.find(':focus').length === 0) {
+                wrapper.removeClass('focused');
+            }
+        }, 0);
     });
     
     // Allow clicking to focus
@@ -72,6 +86,11 @@ function initRichTextEditors() {
         }
     });
     
+    // Prevent toolbar buttons from stealing focus from the contenteditable editor.
+    $('.rich-text-btn').on('mousedown', function(e) {
+        e.preventDefault();
+    });
+
     // Handle toolbar button clicks
     $('.rich-text-btn').on('click', function(e) {
         e.preventDefault();
@@ -263,6 +282,7 @@ function createLink(editor) {
 function editLink(linkElement, editor) {
     currentEditor = editor;
     currentLinkElement = linkElement;
+    savedRange = null;
     
     $textInput.val(linkElement.text());
     $deleteBtn.show();
@@ -405,18 +425,18 @@ function initLinkEditorDialog() {
     
     // Cancel button
     $('#link-editor-cancel').on('click', function() {
-        hideLinkEditorDialog();
+        hideLinkEditorDialog(true);
     });
     
     // Close on backdrop click
     $('.link-editor-backdrop').on('click', function() {
-        hideLinkEditorDialog();
+        hideLinkEditorDialog(true);
     });
     
     // Close on ESC key
     $(document).on('keydown', function(e) {
         if (e.key === 'Escape' && $dialog.is(':visible')) {
-            hideLinkEditorDialog();
+            hideLinkEditorDialog(true);
         }
     });
 }
@@ -672,12 +692,33 @@ function updateLinkElement($linkElement, linkData) {
 }
 
 function showLinkEditorDialog() {
+    preserveEditorFocusState = true;
+
+    if (currentEditor && currentEditor.length > 0) {
+        currentEditor.closest('.rich-text-editor-wrapper').addClass('focused');
+    }
+
     $dialog.fadeIn(200);
     $textInput.focus();
 }
 
-function hideLinkEditorDialog() {
-    $dialog.fadeOut(200);
+function hideLinkEditorDialog(restoreSelection) {
+    var shouldRestoreSelection = !!restoreSelection && !currentLinkElement && !!savedRange && !!currentEditor;
+    var editorToRestore = shouldRestoreSelection ? currentEditor : null;
+    var rangeToRestore = shouldRestoreSelection ? savedRange.cloneRange() : null;
+
+    $dialog.fadeOut(200, function() {
+        if (editorToRestore && rangeToRestore) {
+            editorToRestore.focus();
+            editorToRestore.closest('.rich-text-editor-wrapper').addClass('focused');
+
+            var selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(rangeToRestore);
+        }
+
+        preserveEditorFocusState = false;
+    });
     
     // Clear all form fields
     $textInput.val('');
@@ -691,5 +732,6 @@ function hideLinkEditorDialog() {
     
     currentLinkElement = null;
     currentEditor = null;
+    savedRange = null;
 }
 

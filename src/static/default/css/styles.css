@@ -851,14 +851,6 @@ input.hasDatepicker {
     background: var(--color-gray-50);
 }
 
-.rich-text-editor-wrapper:not(.focused) .rich-text-content strong,
-.rich-text-editor-wrapper:not(.focused) .rich-text-content em,
-.rich-text-editor-wrapper:not(.focused) .rich-text-content u {
-    font-weight: normal;
-    font-style: normal;
-    text-decoration: none;
-}
-
 .admin_field_checkbox {
     width: auto;
     margin-right: 8px;
