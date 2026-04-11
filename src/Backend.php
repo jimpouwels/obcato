@@ -6,7 +6,6 @@ use Obcato\Core\authentication\Session;
 use Obcato\Core\request_handlers\BackendRequestHandler;
 use Obcato\Core\view\views\Cms;
 use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\Popup;
 use const Obcato\CMS_ROOT;
 
 class Backend {
@@ -37,21 +36,12 @@ class Backend {
     }
 
     private function renderCms(): void {
-        if ($this->isPopupView()) {
-            $this->renderPopupView();
-        } else {
-            $this->renderCmsView();
-        }
+        $this->renderCmsView();
     }
 
     private function renderCmsView(): void {
         $cms = new Cms($this->moduleVisual);
         echo $cms->render();
-    }
-
-    private function renderPopupView(): void {
-        $popup = new Popup($_GET['popup']);
-        echo $popup->render();
     }
 
     private function runModuleRequestHandler(): void {
@@ -69,10 +59,6 @@ class Backend {
             $text_resources = $textResourceLoader->loadTextResources();
             Session::setTextResources($text_resources);
         }
-    }
-
-    private function isPopupView(): bool {
-        return isset($_GET['popup']);
     }
 
 }
