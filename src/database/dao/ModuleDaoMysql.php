@@ -49,27 +49,25 @@ class ModuleDaoMysql implements ModuleDao {
     }
 
     public function persistModule(Module $module): void {
-        $query = 'INSERT INTO modules (module_group_id, popup, identifier, enabled, system_default, class)
-                      VALUES (?, ?, ?, ?, ?, ?)';
+        $query = 'INSERT INTO modules (module_group_id, identifier, enabled, system_default, class)
+                      VALUES (?, ?, ?, ?, ?)';
         $statement = $this->mysqlConnector->prepareStatement($query);
         $moduleGroupId = $module->getModuleGroupId();
-        $popup = $module->isPopup() ? 1 : 0;
         $identifier = $module->getIdentifier();
         $enabled = $module->isEnabled() ? 1 : 0;
         $systemDefault = $module->isSystemDefault() ? 1 : 0;
         $class = $module->getClass();
-        $statement->bind_param('siiiis', $moduleGroupId, $popup, $identifier, $enabled, $systemDefault, $class);
+        $statement->bind_param('isiis', $moduleGroupId, $identifier, $enabled, $systemDefault, $class);
         $this->mysqlConnector->executeStatement($statement);
     }
 
     public function updateModule(Module $module): void {
-        $query = 'UPDATE modules set module_group_id = ?, popup = ?, class = ? WHERE identifier = ?';
+        $query = 'UPDATE modules set module_group_id = ?, class = ? WHERE identifier = ?';
         $statement = $this->mysqlConnector->prepareStatement($query);
         $moduleGroupId = $module->getModuleGroupId();
-        $popup = $module->isPopup() ? 1 : 0;
         $class = $module->getClass();
         $identifier = $module->getIdentifier();
-        $statement->bind_param('iiss', $moduleGroupId, $popup, $class, $identifier);
+        $statement->bind_param('iss', $moduleGroupId, $class, $identifier);
         $this->mysqlConnector->executeStatement($statement);
     }
 

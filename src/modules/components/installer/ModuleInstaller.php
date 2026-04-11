@@ -22,8 +22,6 @@ abstract class ModuleInstaller extends Installer {
         $this->moduleDao = ModuleDaoMysql::getInstance();
     }
 
-    public abstract function isPopup(): bool;
-
     public abstract function getModuleGroup(): string;
 
     public abstract function getActivatorClassName(): string;
@@ -50,7 +48,6 @@ abstract class ModuleInstaller extends Installer {
         $module = new Module();
         $module->setIdentifier($this->getIdentifier());
         $module->setModuleGroupId($this->moduleDao->getModuleGroupByIdentifier($this->getModuleGroup())->getId());
-        $module->setPopUp($this->isPopup());
         $module->setEnabled(true);
         $module->setClass($this->getActivatorClassName());
         if (!$this->moduleDao->getModuleByIdentifier($module->getIdentifier())) {

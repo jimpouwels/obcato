@@ -322,6 +322,7 @@
             <query>DROP TABLE IF EXISTS photo_album_element_labels</query>
             <query>DROP TABLE IF EXISTS images_labels</query>
             <query>DROP TABLE IF EXISTS image_labels</query>
+            <query>ALTER TABLE modules DROP COLUMN popup</query>
         </queries>
     </version>
 </versions>

@@ -4,7 +4,6 @@ namespace Obcato\Core\core\model;
 
 class Module extends Entity {
     private string $_identifier;
-    private bool $_popup;
     private bool $_enabled;
     private bool $_is_system_default;
     private int $_module_group_id;
@@ -18,7 +17,6 @@ class Module extends Entity {
 
     protected function initFromDb(array $row): void {
         $this->setIdentifier($row['identifier']);
-        $this->setPopUp($row['popup']);
         $this->setEnabled($row['enabled']);
         $this->setSystemDefault($row['system_default']);
         $this->setModuleGroupId($row['module_group_id']);
@@ -44,14 +42,6 @@ class Module extends Entity {
 
     public function setIdentifier(string $identifier): void {
         $this->_identifier = $identifier;
-    }
-
-    public function isPopUp(): bool {
-        return $this->_popup;
-    }
-
-    public function setPopUp(bool $pop_up): void {
-        $this->_popup = $pop_up;
     }
 
     public function isEnabled(): bool {
