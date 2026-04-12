@@ -36,18 +36,15 @@ class Cms extends Visual {
         $this->assignGlobal("text_resources", Session::getTextResources());
 
         // Load main CSS inline
-        $mainCssPath = __DIR__ . '/../../static/default/css/styles.css';
-        if (file_exists($mainCssPath)) {
-            $this->assignGlobal("main_css", file_get_contents($mainCssPath));
-        }
+        $this->assignGlobal("main_css", file_get_contents(__DIR__ . '/../../static/default/css/styles.css'));
 
+        $this->assignGlobal("backend_base_url", $this->getBackendBaseUrl());
+        $this->assignGlobal("image_base_url", $this->getImageBaseUrl());
         if ($this->moduleVisual) {
             $this->assignGlobal("page_title", $this->moduleVisual->getTitle());
             $this->assignGlobal("module_styles", $this->moduleVisual->renderStyles());
             $this->assignGlobal("module_scripts", $this->moduleVisual->renderScripts());
         }
-        $this->assignGlobal("backend_base_url", $this->getBackendBaseUrl());
-        $this->assignGlobal("image_base_url", $this->getImageBaseUrl());
         $this->assignGlobal("backend_base_url_raw", $this->getBackendBaseUrlRaw());
         $this->assignGlobal("backend_base_url_without_tab", $this->getBackendBaseUrlWithoutTab());
 

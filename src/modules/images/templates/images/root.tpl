@@ -1,11 +1,9 @@
-<div class="content_left_column">
+<div class="images-module-wrapper">
     {$search}
-</div>
-<div class="content_right_column">
-    {if isset($list)}
-        {$list}
-    {else}
-        {$editor}
+    {if isset($editor)}
+        <div class="images-editor-wrapper">
+            {$editor}
+        </div>
     {/if}
 </div>
 

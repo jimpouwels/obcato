@@ -1,78 +1,130 @@
-/* IMAGE SEARCH PANEL */
-.image_search_wrapper {
-    /* Wrapper for search, flows naturally */
+/* IMAGES MODULE LAYOUT */
+.images-module-wrapper {
+    max-width: 900px;
 }
 
-.image_search {
-    /* Fits in content_left_column */
+.images-editor-wrapper {
+    margin-top: var(--spacing-lg, 16px);
 }
 
-.image_search_form {
-    /* Form flows naturally */
-}
-
-.image_search .admin_form_field_v2 {
-    display: block;
+/* IMAGE MODULE SEARCH BAR */
+.image-module-search-wrapper {
+    position: relative;
     margin-bottom: var(--spacing-md, 12px);
 }
 
-.image_search .admin_label_wrapper {
-    margin-bottom: var(--spacing-xs, 4px);
-}
-
-.image_search .admin_field_wrapper {
-    width: 100%;
-}
-
-.image_search .admin_field_wrapper input,
-.image_search .admin_field_wrapper select {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.button_container {
+.image-module-search-input-row {
     display: flex;
-    gap: var(--spacing-sm, 8px);
-    margin-top: var(--spacing-md, 12px);
+    align-items: center;
 }
 
-/* IMAGE LIST */
-.images_list {
-    /* Flows in content_right_column */
+.image-module-search-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--color-gray-300, #d1d5db);
+    border-radius: 6px;
+    background: var(--color-white, #fff);
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.15s;
 }
 
-.article_list_searched_by_text {
-    margin-bottom: var(--spacing-md, 12px);
-    padding: var(--spacing-md, 12px);
-    background: var(--color-gray-50, #f9fafb);
-    border-left: 3px solid var(--color-primary, #2271b1);
+.image-module-search-input:focus {
+    border-color: var(--color-primary, #2271b1);
+    box-shadow: 0 0 0 2px rgba(34, 113, 177, 0.12);
+}
+
+.image-module-search-dropdown {
+    position: fixed;
+    z-index: 9999;
+    background: var(--color-white, #fff);
+    border: 1px solid var(--color-gray-200, #e5e7eb);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    overflow-y: auto;
+    min-width: 500px;
+}
+
+.image-module-search-results {
+    /* results container */
+}
+
+.image-module-search-placeholder {
+    padding: 12px 14px;
+    color: var(--color-gray-500, #6b7280);
     font-size: 13px;
 }
 
-/* Image list thumbnails */
-.images_list .listing tbody td:first-child {
-    width: 120px;
-    text-align: center;
-    vertical-align: middle;
-    padding: var(--spacing-md, 12px);
+.image-module-search-result-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-gray-100, #f3f4f6);
+    background: var(--color-white, #fff);
+    box-sizing: border-box;
 }
 
-.images_list .listing tbody td:first-child img {
-    max-width: 100px;
-    max-height: 100px;
-    width: auto;
-    height: auto;
+.image-module-search-result-item:last-child {
+    border-bottom: none;
+}
+
+.image-module-search-result-item:hover {
+    background: var(--color-gray-50, #f9fafb);
+}
+
+.image-module-search-result-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.image-module-search-result-info {
+    min-width: 0;
+}
+
+.image-module-search-result-delete {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    color: var(--color-gray-400, #9ca3af);
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.image-module-search-result-delete:hover {
+    color: var(--color-danger, #dc2626);
+}
+
+.image-module-search-result-thumb {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
     object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    background: var(--color-gray-100, #f3f4f6);
 }
 
-/* IMAGE EDITOR */
-.image_editor {
-    /* Flows in content_right_column */
+.image-module-search-result-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-gray-900, #111827);
 }
+
+.image-module-search-result-alt {
+    font-size: 12px;
+    color: var(--color-gray-500, #6b7280);
+    margin-top: 2px;
+}
+
 
 .image_editor_wrapper .admin_label_wrapper {
     flex: 0 0 180px;

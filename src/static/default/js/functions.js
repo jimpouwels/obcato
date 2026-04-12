@@ -22,11 +22,11 @@ function showConfirm(message, options) {
         }
         
         // Show dialog
-        $('#confirm-dialog').fadeIn(200);
+        $('#confirm-dialog').css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 150);
         
         // Store handlers so we can remove them later
         var confirmHandler = function() {
-            $('#confirm-dialog').fadeOut(200);
+            $('#confirm-dialog').animate({ opacity: 0 }, 150, function() { $(this).hide(); });
             $('#confirm-dialog-confirm').off('click', confirmHandler);
             $('#confirm-dialog-cancel').off('click', cancelHandler);
             $('.confirm-dialog-backdrop').off('click', cancelHandler);
@@ -34,7 +34,7 @@ function showConfirm(message, options) {
         };
         
         var cancelHandler = function() {
-            $('#confirm-dialog').fadeOut(200);
+            $('#confirm-dialog').animate({ opacity: 0 }, 150, function() { $(this).hide(); });
             $('#confirm-dialog-confirm').off('click', confirmHandler);
             $('#confirm-dialog-cancel').off('click', cancelHandler);
             $('.confirm-dialog-backdrop').off('click', cancelHandler);

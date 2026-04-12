@@ -4,7 +4,6 @@ namespace Obcato\Core\rest\image;
 
 use Obcato\Core\database\dao\ImageDao;
 use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\frontend\helper\LinkHelper;
 use Obcato\Core\rest\Handler;
 use Obcato\Core\rest\HttpMethod;
 
@@ -15,6 +14,7 @@ class ImageHandler extends Handler {
     public function __construct() {
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->register(HttpMethod::GET, "/image/search", $this->search(...));
+        $this->register(HttpMethod::DELETE, "/image/delete", $this->delete(...));
     }
 
     public function search(): array {
@@ -29,5 +29,10 @@ class ImageHandler extends Handler {
             $data[] = $imageData;
         }
         return $data;
+    }
+
+    public function delete(): ?array {
+        $this->imageDao->deleteImage($this->imageDao->getImage((int)$_GET["id"]));
+        return null;
     }
 }

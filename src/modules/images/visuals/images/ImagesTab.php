@@ -25,17 +25,11 @@ class ImagesTab extends Visual {
         $this->assign("search", $this->renderImageSearch());
         if ($this->currentImage) {
             $this->assign("editor", $this->renderImageEditor());
-        } else {
-            $this->assign("list", $this->renderImageList());
         }
     }
 
     private function renderImageSearch(): string {
-        return (new ImageSearch($this->requestHandler))->render();
-    }
-
-    private function renderImageList(): string {
-        return (new ImageList($this->requestHandler))->render();
+        return (new ImageSearch())->render();
     }
 
     private function renderImageEditor(): string {

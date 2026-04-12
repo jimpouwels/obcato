@@ -6,6 +6,119 @@
 // initialize event handlers
 $(document).ready(function () {
 
+    // Image module autocomplete search
+    var imageSearchTexts = {
+        searching: '{$text_resources.image_selector_searching}',
+        noResults: '{$text_resources.image_selector_no_results}',
+        confirmDelete: '{$text_resources.images_confirm_delete_image}'
+    };
+    var $searchInput = $('#image-module-search-input');
+    var $dropdown = $('#image-module-search-dropdown');
+    var $results = $('#image-module-search-results');
+    var searchTimeout = null;
+
+    if ($searchInput.length) {
+        function positionDropdown() {
+            var rect = $searchInput[0].getBoundingClientRect();
+            var margin = 16;
+            var availableHeight = window.innerHeight - rect.bottom - margin;
+            $dropdown.css({
+                top: rect.bottom + 4,
+                left: rect.left,
+                width: rect.width,
+                maxHeight: availableHeight
+            });
+        }
+
+        $searchInput.on('input', function () {
+            var keyword = $(this).val().trim();
+            clearTimeout(searchTimeout);
+
+            if (keyword.length < 2) {
+                $dropdown.hide();
+                return;
+            }
+
+            searchTimeout = setTimeout(function () {
+                $results.html('<div class="image-module-search-placeholder">' + imageSearchTexts.searching + '</div>');
+                positionDropdown();
+                $dropdown.show();
+
+                $.ajax({
+                    url: '/admin/api/image/search?keyword=' + encodeURIComponent(keyword),
+                    type: 'GET',
+                    success: function (images) {
+                        if (!images || images.length === 0) {
+                            $results.html('<div class="image-module-search-placeholder">' + imageSearchTexts.noResults + '</div>');
+                            return;
+                        }
+                        $results.empty();
+                        $.each(images, function (i, image) {
+                            var $item = $('<div class="image-module-search-result-item"></div>');
+                            var $link = $('<button type="button" class="image-module-search-result-link"></button>');
+                            $link.append('<img class="image-module-search-result-thumb" src="' + image.url + '" alt="" />');
+                            var $info = $('<div class="image-module-search-result-info"></div>');
+                            $info.append('<div class="image-module-search-result-title">' + $('<div>').text(image.title).html() + '</div>');
+                            if (image.alternative_text) {
+                                $info.append('<div class="image-module-search-result-alt">' + $('<div>').text(image.alternative_text).html() + '</div>');
+                            }
+                            $link.append($info);
+                            $link.on('click', function () {
+                                $dropdown.hide();
+                                $searchInput.val('');
+                                window.location.href = '{$backend_base_url}&image=' + image.id;
+                            });
+                            var $deleteBtn = $('<button type="button" class="image-module-search-result-delete" title="Verwijderen">&#x2715;</button>');
+                            $deleteBtn.on('click', function (e) {
+                                e.stopPropagation();
+                                confirmDialog(imageSearchTexts.confirmDelete).then(function (confirmed) {
+                                    if (!confirmed) return;
+                                    $.ajax({
+                                        url: '/admin/api/image/delete?id=' + image.id,
+                                        type: 'DELETE',
+                                        success: function () {
+                                            $item.remove();
+                                            if ($results.children().length === 0) {
+                                                $results.html('<div class="image-module-search-placeholder">' + imageSearchTexts.noResults + '</div>');
+                                            }
+                                            var imageIdMatch = window.location.search.match(/[?&]image=(\d+)/);
+                                            if (imageIdMatch && parseInt(imageIdMatch[1]) === image.id) {
+                                                window.location.href = window.location.pathname + window.location.search.replace(/&image=\d+/, '');
+                                            }
+                                        },
+                                        error: function (xhr) {
+                                            console.error('Delete failed:', xhr.status, xhr.responseText);
+                                        }
+                                    });
+                                });
+                            });
+                            $item.append($link);
+                            $item.append($deleteBtn);
+                            $results.append($item);
+                        });
+                        positionDropdown();
+                    },
+                    error: function () {
+                        $results.html('<div class="image-module-search-placeholder">' + imageSearchTexts.noResults + '</div>');
+                    }
+                });
+            }, 300);
+        });
+
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.image-module-search-wrapper').length &&
+                    !$(e.target).closest('#confirm-dialog').length) {
+                $dropdown.hide();
+            }
+        });
+
+        $searchInput.on('keydown', function (e) {
+            if (e.key === 'Escape') {
+                $dropdown.hide();
+            }
+        });
+    }
+
     // update image button
     $('#update_image').click(function () {
         $('#action').attr('value', 'update_image');
