@@ -367,7 +367,7 @@ for their own split view (e.g. page list + page editor)
 }
 
 .panel-title {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border-bottom: 1px solid var(--color-gray-200);
     background: var(--color-gray-50);
     font-weight: 600;
@@ -894,7 +894,7 @@ input.hasDatepicker {
 }
 
 .listing thead th {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     text-align: left;
     font-weight: 600;
     font-size: 13px;
@@ -951,7 +951,7 @@ input.hasDatepicker {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     background: linear-gradient(to bottom, #fafafa, #f4f4f5);
     border-bottom: 1px solid var(--color-gray-200);
     cursor: move;
