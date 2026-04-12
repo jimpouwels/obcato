@@ -31,15 +31,12 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
         if ($this->isCurrentTemplateShown()) {
             $this->currentTemplate = $this->getTemplateFromGetRequest();
         }
-        $this->currentScope = $this->getScopeFromGetRequest();
-        if (is_null($this->currentScope) && !is_null($this->currentTemplate)) {
-            $this->currentScope = $this->scopeDao->getScope($this->currentTemplate->getScopeId());
-        }
+        $this->currentScope = $this->resolveScope();
     }
 
     public function handlePost(): void {
         $this->currentTemplate = $this->getTemplateFromPostRequest();
-        $this->currentScope = $this->getScopeFromGetRequest();
+        $this->currentScope = $this->resolveScope();
         if ($this->isUpdateAction()) {
             $this->updateTemplate();
         } else if ($this->isAddTemplateAction()) {
@@ -80,6 +77,14 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
         } catch (FormException $e) {
             $this->sendErrorMessage("Template niet opgeslagen, verwerk de fouten");
         }
+    }
+
+    private function resolveScope(): ?Scope {
+        $scope = $this->getScopeFromGetRequest();
+        if (is_null($scope) && !is_null($this->currentTemplate)) {
+            $scope = $this->scopeDao->getScope($this->currentTemplate->getScopeId());
+        }
+        return $scope;
     }
 
     private function getTemplateFromPostRequest(): ?Template {

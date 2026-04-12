@@ -73,6 +73,10 @@
     display: block;
 }
 
+.list-element-add-btn-wrapper {
+    margin-top: var(--spacing-lg, 16px);
+}
+
 /* Hide labels in list items */
 .list_element_values .admin_label_wrapper {
     display: none;
