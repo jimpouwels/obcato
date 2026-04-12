@@ -1,6 +1,5 @@
 /* IMAGES MODULE LAYOUT */
 .images-module-wrapper {
-    max-width: 600px;
 }
 
 .images-editor-wrapper {
@@ -8,6 +7,10 @@
 }
 
 /* IMAGE MODULE SEARCH BAR */
+.image_search.panel {
+    max-width: 420px;
+}
+
 .image-module-search-wrapper {
     position: relative;
     max-width: 420px;
