@@ -10,7 +10,6 @@
 /* IMAGE MODULE SEARCH BAR */
 .image-module-search-wrapper {
     position: relative;
-    margin-bottom: var(--spacing-md, 12px);
     max-width: 420px;
 }
 
