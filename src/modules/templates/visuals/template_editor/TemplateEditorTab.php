@@ -26,6 +26,9 @@ class TemplateEditorTab extends Visual {
         if (!is_null($this->currentTemplate)) {
             $this->assign("template_editor", $this->renderTemplateEditor());
             $this->assign("template_var_editor", $this->renderTemplateVarEditor());
+            if (!is_null($this->currentScope)) {
+                $this->assign("back_url", $this->getBackendBaseUrl() . "&scope=" . $this->currentScope->getIdentifier());
+            }
         }
         $this->assign("scope_selector", $this->getScopeSelector());
         if (!is_null($this->currentScope)) {

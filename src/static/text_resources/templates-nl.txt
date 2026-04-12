@@ -1,6 +1,7 @@
 # GENERAL
 templates_module_title: Templates
 templates_scope_list_title: Componenten
+templates_back_to_list: Terug naar lijst
 
 # EDITOR
 template_editor_name_field: Naam

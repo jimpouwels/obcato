@@ -32,6 +32,9 @@ class TemplateEditorRequestHandler extends HttpRequestHandler {
             $this->currentTemplate = $this->getTemplateFromGetRequest();
         }
         $this->currentScope = $this->getScopeFromGetRequest();
+        if (is_null($this->currentScope) && !is_null($this->currentTemplate)) {
+            $this->currentScope = $this->scopeDao->getScope($this->currentTemplate->getScopeId());
+        }
     }
 
     public function handlePost(): void {

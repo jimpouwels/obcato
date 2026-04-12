@@ -7,6 +7,9 @@
     </div>
     <div class="content_right_column">
         {if isset($template_editor)}
+            {if isset($back_url)}
+                <a href="{$back_url}" class="back-link">&larr; {$text_resources.templates_back_to_list}</a>
+            {/if}
             {$template_editor}
             {$template_var_editor}
         {elseif isset($template_list)}

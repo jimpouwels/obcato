@@ -880,10 +880,32 @@ input.hasDatepicker {
 }
 
 /*
+============= BACK LINK
+*/
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    font-size: 13px;
+    color: var(--color-primary);
+}
+
+.back-link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+/*
 ============= TABLES
 */
+.panel:has(.listing) {
+    width: fit-content;
+    max-width: 100%;
+}
+
 .listing {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
