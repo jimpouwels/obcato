@@ -943,6 +943,28 @@ input.hasDatepicker {
 /*
 ============= DRAGGABLE ELEMENTS - Modern card design
 */
+.element-drag-ghost {
+    background: linear-gradient(to bottom, #fafafa, #f4f4f5);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    padding: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--color-gray-800);
+    opacity: 0.95;
+}
+
+.element-drag-placeholder {
+    background: var(--color-gray-100);
+    border: 2px dashed var(--color-gray-400);
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
 .draggable_wrapper {
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
@@ -1290,6 +1312,14 @@ input.hasDatepicker {
     margin: 12px 0;
     display: flex;
     align-items: center;
+}
+
+.draggable_items.is-dragging .element-insert-button {
+    display: none;
+}
+
+.draggable_items.is-dragging .collapsable_root_wrapper {
+    margin-bottom: 28px;
 }
 
 .empty-container .element-insert-button {

@@ -243,6 +243,7 @@ $(document).ready(function () {
 
     var cancelSelectors = '.rich-text-content, .rich-text-toolbar, input, textarea, select, button, a';
     var dragSrc = null;
+    var placeholder = null;
     var lastTarget = null;
     var lastBefore = null;
 
@@ -284,40 +285,91 @@ $(document).ready(function () {
         var el = this;
         el.draggable = true;
 
+        var mousedownTarget = null;
+        var mousedownX = 0;
+        var mousedownY = 0;
+        el.addEventListener('mousedown', function (e) {
+            mousedownTarget = e.target;
+            mousedownX = e.clientX;
+            mousedownY = e.clientY;
+        });
+
         el.addEventListener('dragstart', function (e) {
-            if ($(e.target).closest(cancelSelectors).length) {
+            var fromHeader = mousedownTarget && $(mousedownTarget).closest('.draggable_header').length > 0;
+            var fromCancelTarget = mousedownTarget && $(mousedownTarget).closest(cancelSelectors).length > 0;
+            if (!fromHeader || fromCancelTarget) {
                 e.preventDefault();
                 return;
             }
             dragSrc = el;
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/plain', '');
-            requestAnimationFrame(function () { $(el).css('opacity', '0.6'); });
-            $('.element-insert-button').css('visibility', 'hidden');
+
+            // Custom drag ghost: styled bar with icon + element name (mirrors the header)
+            var ghost = document.createElement('div');
+            ghost.className = 'element-drag-ghost';
+            ghost.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:' + el.offsetWidth + 'px;';
+            var headerLeft = el.querySelector('.draggable_header_left');
+            if (headerLeft) {
+                ghost.appendChild(headerLeft.cloneNode(true));
+            }
+            document.body.appendChild(ghost);
+            var rect = el.getBoundingClientRect();
+            var offsetX = mousedownX - rect.left;
+            var offsetY = Math.min(mousedownY - rect.top, ghost.offsetHeight - 1);
+            e.dataTransfer.setDragImage(ghost, offsetX, offsetY);
+            setTimeout(function () { document.body.removeChild(ghost); }, 0);
+
+            // Placeholder shown where element will land
+            placeholder = document.createElement('div');
+            placeholder.className = 'element-drag-placeholder';
+            placeholder.style.height = el.offsetHeight + 'px';
+
+            requestAnimationFrame(function () {
+                $container[0].insertBefore(placeholder, el);
+                $(el).hide();
+                $container.addClass('is-dragging');
+            });
         });
 
         el.addEventListener('dragover', function (e) {
-            if (!dragSrc || dragSrc === el) return;
+            if (!dragSrc || !placeholder) return;
             e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
 
             var rect = el.getBoundingClientRect();
             var before = e.clientY < rect.top + rect.height / 2;
 
-            if (before && dragSrc.nextElementSibling === el) return;
-            if (!before && el.nextElementSibling === dragSrc) return;
+            // Skip over hidden insert buttons when resolving siblings so there
+            // is only one insertion point between any two elements.
+            function nextItem(node) {
+                var s = node.nextElementSibling;
+                while (s && s.classList.contains('element-insert-button')) s = s.nextElementSibling;
+                return s;
+            }
+
+            if (before && nextItem(placeholder) === el) return;
+            if (!before && nextItem(el) === placeholder) return;
             if (el === lastTarget && before === lastBefore) return;
             lastTarget = el;
             lastBefore = before;
 
-            $container[0].insertBefore(dragSrc, before ? el : el.nextElementSibling);
+            // Insert after el: find the first non-insert-button sibling after el
+            var insertRef = before ? el : nextItem(el);
+            $container[0].insertBefore(placeholder, insertRef || null);
         });
 
         el.addEventListener('dragend', function () {
-            $(el).css('opacity', '');
+            if (placeholder && placeholder.parentNode) {
+                placeholder.parentNode.insertBefore(el, placeholder);
+                placeholder.parentNode.removeChild(placeholder);
+            }
+            $(el).show();
+            placeholder = null;
             dragSrc = null;
             lastTarget = null;
             lastBefore = null;
+            $container.removeClass('is-dragging');
             updateOrder();
         });
     });
@@ -326,6 +378,54 @@ $(document).ready(function () {
         if (dragSrc) e.preventDefault();
     });
 });
+
+// Auto-scroll the page while dragging near the top or bottom edge
+(function () {
+    var HEADER_HEIGHT = 56; // fixed header height in px
+    var SCROLL_ZONE = 80;   // additional px below header / above bottom to start scrolling
+    var MAX_SPEED = 15;     // px per animation frame at full proximity
+    var scrollSpeed = 0;
+    var rafId = null;
+
+    function scrollLoop() {
+        if (scrollSpeed !== 0) {
+            window.scrollBy(0, scrollSpeed);
+            rafId = requestAnimationFrame(scrollLoop);
+        } else {
+            rafId = null;
+        }
+    }
+
+    document.addEventListener('dragover', function (e) {
+        var y = e.clientY;
+        var vh = window.innerHeight;
+        var topEdge = HEADER_HEIGHT + SCROLL_ZONE;
+        var bottomEdge = vh - SCROLL_ZONE;
+
+        if (y < topEdge) {
+            scrollSpeed = -Math.round(MAX_SPEED * (1 - y / topEdge));
+        } else if (y > bottomEdge) {
+            scrollSpeed = Math.round(MAX_SPEED * (1 - (vh - y) / SCROLL_ZONE));
+        } else {
+            scrollSpeed = 0;
+        }
+
+        if (scrollSpeed !== 0 && !rafId) {
+            rafId = requestAnimationFrame(scrollLoop);
+        }
+    });
+
+    function stopScroll() {
+        scrollSpeed = 0;
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    }
+
+    document.addEventListener('dragend', stopScroll);
+    document.addEventListener('drop', stopScroll);
+})();
 
 // starts sliding in the notification bar
 $(document).ready(function () {
