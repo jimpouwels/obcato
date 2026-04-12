@@ -1,4 +1,8 @@
 <div class="rich-text-editor-wrapper">
+    <div class="rich-text-content {$classes}"
+         contenteditable="true"
+         id="{$field_name}_editor"
+         data-field-name="{$field_name}">{if isset($html_value)}{$html_value}{/if}</div>
     <div class="rich-text-toolbar">
         <button type="button" class="rich-text-btn" data-command="bold" title="Bold (Ctrl+B)">
             <strong>B</strong>
@@ -14,10 +18,6 @@
             🔗
         </button>
     </div>
-    <div class="rich-text-content {$classes}"
-         contenteditable="true"
-         id="{$field_name}_editor"
-         data-field-name="{$field_name}">{if isset($html_value)}{$html_value}{/if}</div>
     <textarea name="{$field_name}"
               id="{$field_name}"
               style="display: none;">{if isset($html_value)}{$html_value}{/if}</textarea>

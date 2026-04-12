@@ -127,6 +127,13 @@ function initRichTextEditors() {
     $('.rich-text-content').on('input', function() {
         syncToHiddenField(getWrapper($(this)));
     });
+
+    // Strip formatting on paste — insert plain text only
+    $('.rich-text-content').on('paste', function(e) {
+        e.preventDefault();
+        var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+        document.execCommand('insertText', false, text);
+    });
     
     // Handle keyboard shortcuts and prevent typing in links
     $('.rich-text-content').on('keydown', function(e) {
