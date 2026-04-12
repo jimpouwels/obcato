@@ -89,12 +89,6 @@
     /* Flows in content_right_column */
 }
 
-/* DATEPICKER */
-.datepicker {
-    width: auto;
-    max-width: 120px;
-}
-
 /* ADD IMAGE BUTTON */
 .add_image_button {
     margin-top: var(--spacing-sm, 8px);
