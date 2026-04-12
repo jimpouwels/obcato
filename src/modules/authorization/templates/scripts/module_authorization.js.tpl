@@ -6,25 +6,25 @@
 // initialize event handlers
 $(document).ready(function () {
     // apply button
-    $('#update_user').click(function () {
+    $('#update_user').on('click', function () {
         $('#action').attr('value', 'update_user');
-        $('#user_form').submit();
+        $('#user_form').trigger('submit');
     });
 
     // delete button
-    $('#delete_user').click(function () {
+    $('#delete_user').on('click', function () {
         confirmDialog("{$text_resources.authorization_confirm_delete_user|escape:'javascript'}").then(function(confirmed) {
             if (confirmed) {
                 $('#action').attr('value', 'delete_user');
-                $('#user_form').submit();
+                $('#user_form').trigger('submit');
             }
         });
         return false;
     });
 
     // add button
-    $('#add_user').click(function () {
+    $('#add_user').on('click', function () {
         $('#action').attr('value', 'add_user');
-        $('#user_form').submit();
+        $('#user_form').trigger('submit');
     });
 });

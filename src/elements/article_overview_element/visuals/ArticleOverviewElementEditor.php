@@ -55,7 +55,7 @@ class ArticleOverviewElementEditor extends ElementVisual {
     }
 
     private function getDateValue(?string $date): ?string {
-        return $date == null ? null : DateUtility::mysqlDateToString($date, '-');
+        return $date ? substr($date, 0, 10) : null;
     }
 
     private function getOrderOptions(): array {

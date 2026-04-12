@@ -120,37 +120,37 @@ $(document).ready(function () {
     }
 
     // update image button
-    $('#update_image').click(function () {
+    $('#update_image').on('click', function () {
         $('#action').attr('value', 'update_image');
-        $('#image-editor-form').submit();
+        $('#image-editor-form').trigger('submit');
     });
 
-    $('#image_mobile_reset').click(function () {
+    $('#image_mobile_reset').on('click', function () {
         $('#action').attr('value', 'reset_mobile_image');
-        $('#image-editor-form').submit();
+        $('#image-editor-form').trigger('submit');
     });
 
     // delete image button
-    $('#delete_image').click(function () {
+    $('#delete_image').on('click', function () {
         confirmDialog("{$text_resources.images_confirm_delete_image|escape:'javascript'}").then(function(confirmed) {
             if (confirmed) {
                 $('#action').attr('value', 'delete_image');
-                $('#image-editor-form').submit();
+                $('#image-editor-form').trigger('submit');
             }
         });
         return false;
     });
 
     // add image button
-    $('#add_image').click(function () {
+    $('#add_image').on('click', function () {
         $('#add_image_action').attr('value', 'add_image');
-        $('#add_form_hidden').submit();
+        $('#add_form_hidden').trigger('submit');
         return false;
     });
 
     // import images button
-    $('#upload_zip').click(function () {
-        $('#image-import-form').submit();
+    $('#upload_zip').on('click', function () {
+        $('#image-import-form').trigger('submit');
     });
 
     // Initialize image cropping tool
@@ -371,5 +371,5 @@ function initSingleCropTool($container) {
 function toggleImagePublished(image_id) {
     $('#action').attr('value', 'toggle_image_published');
     $('#image_id').attr('value', image_id);
-    $('#toggle_image_published_form').submit();
+    $('#toggle_image_published_form').trigger('submit');
 }

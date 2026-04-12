@@ -9,7 +9,7 @@ function addListItem(elementId, formId) {
         if ($formToSubmit.length == 0) {
             alert('Fout: kan item niet toevoegen omdat er geen actieve editor is gevonden');
         } else {
-            $formToSubmit.submit();
+            $formToSubmit.trigger('submit');
         }
     }
 }
@@ -40,22 +40,54 @@ function initializeListItemSorting() {
             return;
         }
 
-        $container.sortable({
-            items: '> .list-element-sortable-item',
-            handle: '.list_element_item_drag_handle',
-            opacity: 0.85,
-            cursor: 'move',
-            tolerance: 'pointer',
-            cancel: 'input, textarea, select, button, a, iframe, .rich-text-toolbar, .rich-text-content',
-            start: function(event, ui) {
-                ui.item.addClass('list-element-sortable-item-active');
-            },
-            stop: function(event, ui) {
-                ui.item.removeClass('list-element-sortable-item-active');
-            },
-            update: function() {
+        var handle = '.list_element_item_drag_handle';
+        var dragSrc = null;
+        var lastTarget = null;
+        var lastBefore = null;
+
+        $container.children('.list-element-sortable-item').each(function () {
+            var item = this;
+            item.draggable = true;
+
+            item.addEventListener('dragstart', function (e) {
+                if (!$(e.target).closest(handle).length) {
+                    e.preventDefault();
+                    return;
+                }
+                dragSrc = item;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', '');
+                requestAnimationFrame(function () { $(item).addClass('list-element-sortable-item-active'); });
+            });
+
+            item.addEventListener('dragover', function (e) {
+                if (!dragSrc || dragSrc === item) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+
+                var rect = item.getBoundingClientRect();
+                var before = e.clientY < rect.top + rect.height / 2;
+
+                if (before && dragSrc.nextElementSibling === item) return;
+                if (!before && item.nextElementSibling === dragSrc) return;
+                if (item === lastTarget && before === lastBefore) return;
+                lastTarget = item;
+                lastBefore = before;
+
+                $container[0].insertBefore(dragSrc, before ? item : item.nextElementSibling);
+            });
+
+            item.addEventListener('dragend', function () {
+                $(item).removeClass('list-element-sortable-item-active');
+                dragSrc = null;
+                lastTarget = null;
+                lastBefore = null;
                 updateListItemOrder($container);
-            }
+            });
+        });
+
+        $container[0].addEventListener('dragover', function (e) {
+            if (dragSrc) e.preventDefault();
         });
 
         $container.data('sortable-initialized', true);

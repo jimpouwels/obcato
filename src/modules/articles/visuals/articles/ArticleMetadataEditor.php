@@ -4,18 +4,14 @@ namespace Obcato\Core\modules\articles\visuals\articles;
 
 use Obcato\Core\database\dao\ArticleDao;
 use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
 use Obcato\Core\database\dao\WebformDao;
 use Obcato\Core\database\dao\WebformDaoMysql;
 use Obcato\Core\friendly_urls\FriendlyUrlManager;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\utilities\DateUtility;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\ArticleLookup;
-use Obcato\Core\view\views\Button;
 use Obcato\Core\view\views\DateField;
 use Obcato\Core\view\views\ImageLookup;
 use Obcato\Core\view\views\Panel;
@@ -35,7 +31,6 @@ class ArticleMetadataEditor extends Panel {
 
     private Article $currentArticle;
     private ArticleDao $articleDao;
-    private ImageDao $imageDao;
     private WebformDao $webformDao;
     private PageService $pageService;
     private FriendlyUrlManager $friendlyUrlManager;
@@ -44,7 +39,6 @@ class ArticleMetadataEditor extends Panel {
         parent::__construct('Algemeen', 'article_metadata_editor');
         $this->currentArticle = $currentArticle;
         $this->articleDao = ArticleDaoMysql::getInstance();
-        $this->imageDao = ImageDaoMysql::getInstance();
         $this->webformDao = WebformDaoMysql::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
@@ -150,16 +144,8 @@ class ArticleMetadataEditor extends Panel {
         return $childArticlesData;
     }
 
-    private function renderParentArticle(Article $parentArticle): array {
-        $articleData = array();
-        $articleData['id'] = $parentArticle->getId();
-        $articleData['title'] = $parentArticle->getTitle();
-        $articleData['url'] = "{$this->getBackendBaseUrl()}&article={$parentArticle->getId()}";
-        return $articleData;
-    }
-
     private function getDateValue(string $date): string {
-        return DateUtility::mysqlDateToString($date, '-');
+        return substr($date, 0, 10);
     }
 
     private function getTargetPageOptions(): array {

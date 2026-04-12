@@ -1,43 +1,43 @@
 $(document).ready(function () {
     // update block button
-    $('#update_element_holder').click(function () {
+    $('#update_element_holder').on('click', function () {
         $('#action').attr('value', 'update_element_holder');
-        $('#element_holder_form_id').submit();
+        $('#element_holder_form_id').trigger('submit');
     });
 
     // delete block button
-    $('#delete_element_holder').click(function () {
+    $('#delete_element_holder').on('click', function () {
         confirmDialog("{$text_resources.blocks_confirm_delete_block}").then(function(confirmed) {
             if (confirmed) {
                 $('#action').attr('value', 'delete_block');
-                $('#element_holder_form_id').submit();
+                $('#element_holder_form_id').trigger('submit');
             }
         });
         return false;
     });
 
     // add block button
-    $('#add_element_holder').click(function () {
+    $('#add_element_holder').on('click', function () {
         $('#add_block_action').attr('value', 'add_block');
-        $('#add_form_hidden').submit();
+        $('#add_form_hidden').trigger('submit');
     });
 
     // update position button
-    $('#update_position').click(function () {
+    $('#update_position').on('click', function () {
         $('#action').attr('value', 'update_position');
-        $('#position_form').submit();
+        $('#position_form').trigger('submit');
     });
 
     // add position
-    $('#add_position').click(function () {
-        $('#add_position_form').submit();
+    $('#add_position').on('click', function () {
+        $('#add_position_form').trigger('submit');
     });
 
     // delete position button
-    $('#delete_positions').click(function () {
+    $('#delete_positions').on('click', function () {
         var $checked = false;
         $('input:checkbox').each(function () {
-            if ($(this).attr('checked')) {
+            if ($(this).prop('checked')) {
                 $checked = true;
             }
         });
@@ -47,7 +47,7 @@ $(document).ready(function () {
             confirmDialog("{$text_resources.blocks_confirm_delete_positions|escape:'javascript'}").then(function(confirmed) {
                 if (confirmed) {
                     $('#position_delete_action').attr('value', 'delete_positions');
-                    $('#positions_delete_form').submit();
+                    $('#positions_delete_form').trigger('submit');
                 }
             });
         }

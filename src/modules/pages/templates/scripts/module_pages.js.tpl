@@ -6,37 +6,37 @@
 // initialize event handlers
 $(document).ready(function () {
     // apply button
-    $('#update_element_holder').click(function () {
+    $('#update_element_holder').on('click', function () {
         $('#action').attr('value', 'update_element_holder');
-        $('#element_holder_form_id').submit();
+        $('#element_holder_form_id').trigger('submit');
     });
 
     // delete button
-    $('#delete_element_holder').click(function () {
+    $('#delete_element_holder').on('click', function () {
         confirmDialog("{$text_resources.pages_confirm_delete|escape:'javascript'}").then(function(confirmed) {
             if (confirmed) {
                 $('#action').attr('value', 'delete_page');
-                $('#element_holder_form_id').submit();
+                $('#element_holder_form_id').trigger('submit');
             }
         });
         return false;
     });
 
     // add button
-    $('#add_element_holder').click(function () {
+    $('#add_element_holder').on('click', function () {
         $('#action').attr('value', 'sub_page');
-        $('#element_holder_form_id').submit();
+        $('#element_holder_form_id').trigger('submit');
     });
 
     // move up button
-    $('#moveup_element_holder').click(function () {
+    $('#moveup_element_holder').on('click', function () {
         $('#action').attr('value', 'move_up');
-        $('#element_holder_form_id').submit();
+        $('#element_holder_form_id').trigger('submit');
     });
 
     // move down button
-    $('#movedown_element_holder').click(function () {
+    $('#movedown_element_holder').on('click', function () {
         $('#action').attr('value', 'move_down');
-        $('#element_holder_form_id').submit();
+        $('#element_holder_form_id').trigger('submit');
     });
 });

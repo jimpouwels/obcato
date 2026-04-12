@@ -48,9 +48,9 @@ function showConfirm(message, options) {
         
         // Keyboard shortcuts
         var keyHandler = function(e) {
-            if (e.key === 'Escape' || e.keyCode === 27) {
+            if (e.key === 'Escape') {
                 cancelHandler();
-            } else if (e.key === 'Enter' || e.keyCode === 13) {
+            } else if (e.key === 'Enter') {
                 confirmHandler();
             }
         };
@@ -74,7 +74,7 @@ function addElement(elementTypeId, errorMessage) {
         $inputField.attr('value', elementTypeId);
     }
     var $editorForm = $('#element_holder_form_id');
-    $editorForm.submit();
+    $editorForm.trigger('submit');
 }
 
 // Global variable to store insert position
@@ -117,7 +117,7 @@ function insertElementAtPosition(elementTypeId) {
     }
     
     hideElementSelector();
-    $('#element_holder_form_id').submit();
+    $('#element_holder_form_id').trigger('submit');
 }
 
 $(document).ready(function() {
@@ -130,7 +130,7 @@ function submitSelectionBackToOpener(backRef, backValue, backClickId) {
         $backField.attr('value', backValue);
         // Delay the click and window close to ensure value is set
         setTimeout(function() {
-            window.opener.$('#' + backClickId).click();
+            window.opener.$('#' + backClickId).trigger('click');
             setTimeout(function() {
                 window.close();
             }, 200);
@@ -152,7 +152,7 @@ function deleteElement(elementId, formFieldId, confirmMessage) {
     confirmDialog(confirmMessage).then(function(confirmed) {
         if (confirmed) {
             $('#action').attr('value', 'update_element_holder');
-            $('#element_holder_form_id').submit();
+            $('#element_holder_form_id').trigger('submit');
         }
     });
 }
@@ -166,7 +166,7 @@ $(document).ready(function () {
             hideElement(elementId);
         }
         var elementHeader = findElementHeader(rootNode);
-        elementHeader.click(function (e) {
+        elementHeader.on('click', function (e) {
             /*
                 currentTarget == the node where the click listener is attached to ('.collapsable_header')
                 target == the node that captured the event and bubbled it up the tree
@@ -236,60 +236,94 @@ function findElementHeader(elementNode) {
     return elementNode.find('.collapsable_header');
 }
 
-// initializes sortable elements
+// initializes sortable elements using native HTML5 drag-and-drop
 $(document).ready(function () {
-    $(function () {
-        var $container = $(".draggable_items");
-        
-        $(".draggable_items").sortable({
-            items: '> .collapsable_root_wrapper',
-            opacity: 0.6,
-            cursor: 'move',
-            cancel: '.rich-text-content, .rich-text-toolbar, input, textarea, select, button, a',
-            start: function() {
-                // Hide all insert buttons during drag
-                $('.element-insert-button').css('visibility', 'hidden');
-            },
-            update: function () {
-                var idString = '';
-                $('.draggable_id_holder').each(function () {
-                    if (idString != '') {
-                        idString += ',';
-                    }
-                    idString = idString + $(this).text();
-                });
-                var $order_field = $('#draggable_order');
-                if ($order_field.length > 0) {
-                    $order_field.attr("value", idString);
-                }
-                
-                // Remove all existing insert buttons
-                $('.element-insert-button').remove();
-                
-                // Re-insert buttons at correct positions
-                var $container = $('#element_container');
-                var buttonHtml = '<div class="element-insert-button" data-insert-position="POS">' +
-                    '<button type="button" class="insert-btn" onclick="showElementSelector(POS); return false;" title="Element invoegen">' +
-                    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none">' +
-                    '<path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
-                    '</svg></button>' +
-                    '<div class="insert-indicator"><div class="insert-line"></div>' +
-                    '<div class="insert-arrow">' +
-                    '<svg width="12" height="12" viewBox="0 0 12 12" fill="none">' +
-                    '<path d="M6 2L6 10M6 10L3 7M6 10L9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-                    '</svg></div></div></div>';
-                
-                // Insert button at the beginning
-                $container.prepend(buttonHtml.replace(/POS/g, '0'));
-                
-                // Insert button after each element
-                var elementIndex = 0;
-                $container.children('.collapsable_root_wrapper').each(function() {
-                    elementIndex++;
-                    $(this).after(buttonHtml.replace(/POS/g, elementIndex));
-                });
-            }
+    var $container = $(".draggable_items");
+    if (!$container.length) return;
+
+    var cancelSelectors = '.rich-text-content, .rich-text-toolbar, input, textarea, select, button, a';
+    var dragSrc = null;
+    var lastTarget = null;
+    var lastBefore = null;
+
+    var buttonHtml = '<div class="element-insert-button" data-insert-position="POS">' +
+        '<button type="button" class="insert-btn" onclick="showElementSelector(POS); return false;" title="Element invoegen">' +
+        '<svg width="16" height="16" viewBox="0 0 16 16" fill="none">' +
+        '<path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+        '</svg></button>' +
+        '<div class="insert-indicator"><div class="insert-line"></div>' +
+        '<div class="insert-arrow">' +
+        '<svg width="12" height="12" viewBox="0 0 12 12" fill="none">' +
+        '<path d="M6 2L6 10M6 10L3 7M6 10L9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg></div></div></div>';
+
+    function rebuildInsertButtons() {
+        var $c = $('#element_container');
+        $('.element-insert-button').remove();
+        if (!$c.length) return;
+        $c.prepend(buttonHtml.replace(/POS/g, '0'));
+        var idx = 0;
+        $c.children('.collapsable_root_wrapper').each(function () {
+            idx++;
+            $(this).after(buttonHtml.replace(/POS/g, idx));
         });
+    }
+
+    function updateOrder() {
+        var idString = '';
+        $container.find('.draggable_id_holder').each(function () {
+            if (idString !== '') idString += ',';
+            idString += $(this).text();
+        });
+        var $order_field = $('#draggable_order');
+        if ($order_field.length > 0) $order_field.attr('value', idString);
+        rebuildInsertButtons();
+    }
+
+    $container.children('.collapsable_root_wrapper').each(function () {
+        var el = this;
+        el.draggable = true;
+
+        el.addEventListener('dragstart', function (e) {
+            if ($(e.target).closest(cancelSelectors).length) {
+                e.preventDefault();
+                return;
+            }
+            dragSrc = el;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', '');
+            requestAnimationFrame(function () { $(el).css('opacity', '0.6'); });
+            $('.element-insert-button').css('visibility', 'hidden');
+        });
+
+        el.addEventListener('dragover', function (e) {
+            if (!dragSrc || dragSrc === el) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+
+            var rect = el.getBoundingClientRect();
+            var before = e.clientY < rect.top + rect.height / 2;
+
+            if (before && dragSrc.nextElementSibling === el) return;
+            if (!before && el.nextElementSibling === dragSrc) return;
+            if (el === lastTarget && before === lastBefore) return;
+            lastTarget = el;
+            lastBefore = before;
+
+            $container[0].insertBefore(dragSrc, before ? el : el.nextElementSibling);
+        });
+
+        el.addEventListener('dragend', function () {
+            $(el).css('opacity', '');
+            dragSrc = null;
+            lastTarget = null;
+            lastBefore = null;
+            updateOrder();
+        });
+    });
+
+    $container[0].addEventListener('dragover', function (e) {
+        if (dragSrc) e.preventDefault();
     });
 });
 
@@ -317,7 +351,7 @@ function addLink() {
     } else {
         var $actionField = $('#action');
         $actionField.attr('value', 'add_link');
-        $elementHolderForm.submit();
+        $elementHolderForm.trigger('submit');
     }
 }
 
@@ -326,7 +360,7 @@ function addLink() {
 var lastFocussedField = undefined;
 $(document).ready(function () {
     $('.linkable').each(function () {
-        $(this).focus(function () {
+        $(this).on('focus', function () {
             lastFocussedField = document.getElementById($(this).attr("id"));
         });
     });
@@ -359,7 +393,7 @@ function deleteLink(linkId) {
             $('#delete_link_target').attr('value', linkId);
             $('#action').attr('value', 'update_element_holder');
             var $editorForm = $('#element_holder_form_id');
-            $editorForm.submit();
+            $editorForm.trigger('submit');
         }
     });
     return false;
@@ -367,11 +401,11 @@ function deleteLink(linkId) {
 
 // horizontal dropdown menu
 $(document).ready(function () {
-    $('.module-group').mouseover(function () {
+    $('.module-group').on('mouseover', function () {
         var $submenu = $(this).find('.submenu');
         $submenu.show();
     });
-    $('#menu > li').mouseout(function () {
+    $('#menu > li').on('mouseout', function () {
         var $submenu = $(this).find('.submenu');
         $submenu.hide();
     });
@@ -749,7 +783,7 @@ function openImageSelector(contextId, multiple) {
     
     // Focus on search input
     setTimeout(function() {
-        $('#image-search-' + contextId).focus();
+        $('#image-search-' + contextId)[0].focus();
     }, 250);
     
     // Setup search event
@@ -768,7 +802,7 @@ function openImageSelector(contextId, multiple) {
     
     // Setup escape key handler
     $(document).off('keydown.imageSelector').on('keydown.imageSelector', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
+        if (e.key === 'Escape') {
             closeImageSelector(contextId);
         }
     });
@@ -785,22 +819,26 @@ function closeImageSelector(contextId) {
 function searchImages(contextId, keyword) {
     var gridContainer = $('#image-selector-grid-' + contextId);
     gridContainer.html('<div class="image-selector-loading">Zoeken...</div>');
-    
-    // Get already selected images for multiple mode
-    var selectedImageIds = [];
+
     if (imageSelectMode === 'multiple') {
         var getEndpoint = $('#photo_album_element_' + contextId + '_selected_images').data('get-endpoint');
-        // Fetch currently selected images
         $.ajax({
             url: getEndpoint,
             method: 'GET',
-            async: false, // Make it synchronous so we have the data before searching
             success: function(images) {
-                selectedImageIds = images.map(img => img.id);
+                var selectedImageIds = images.map(img => img.id);
+                performImageSearch(contextId, keyword, selectedImageIds, gridContainer);
+            },
+            error: function() {
+                performImageSearch(contextId, keyword, [], gridContainer);
             }
         });
+    } else {
+        performImageSearch(contextId, keyword, [], gridContainer);
     }
-    
+}
+
+function performImageSearch(contextId, keyword, selectedImageIds, gridContainer) {
     $.ajax({
         url: '/admin/api/image/search?keyword=' + encodeURIComponent(keyword),
         method: 'GET',
@@ -809,20 +847,20 @@ function searchImages(contextId, keyword) {
                 gridContainer.html('<div class="image-selector-loading">Geen afbeeldingen gevonden.</div>');
                 return;
             }
-            
+
             gridContainer.empty();
             response.forEach(function(image) {
                 var isSelected = selectedImageIds.includes(image.id);
-                
+
                 var item = $('<div class="image-selector-item' + (isSelected ? ' selected' : '') + '" data-image-id="' + image.id + '"></div>');
                 item.append('<div class="image-selector-checkmark"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>');
                 item.append('<div class="image-selector-thumb"><img src="' + image.url + '" alt="' + (image.alternative_text || '') + '" /></div>');
                 item.append('<div class="image-selector-info"><div class="image-selector-title">' + (image.title || 'Untitled') + '</div><div class="image-selector-alt">' + (image.alternative_text || 'Geen alt-tekst') + '</div></div>');
-                
+
                 item.on('click', function() {
                     selectImage(contextId, image, $(this));
                 });
-                
+
                 gridContainer.append(item);
             });
         },

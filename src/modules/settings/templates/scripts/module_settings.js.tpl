@@ -6,7 +6,7 @@
 // initialize event handlers
 $(document).ready(function () {
     // apply button
-    $('#apply_settings').click(function () {
-        $('#settings_form').submit();
+    $('#apply_settings').on('click', function () {
+        $('#settings_form').trigger('submit');
     });
 });

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="/admin?file=/public/css/styles.css" type="text/css" />
     <link rel="stylesheet" href="/admin?file=/public/css/login.css" type="text/css" />
 
-    <script type="text/javascript" src="/admin?file=/public/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/admin?file=/public/js/jquery.js"></script>
     <script type="text/javascript" src="/admin?file=/public/js/login_functions.js"></script>
 
     <title>Obcato</title>

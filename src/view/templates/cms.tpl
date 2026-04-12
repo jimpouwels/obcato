@@ -11,10 +11,7 @@
         </style>
     {/if}
 
-    <link rel="stylesheet" href="/admin?file=/default/css/jquery-ui-1.8.23.custom.css?v=14" type="text/css" />
-
-    <script type="text/javascript" src="/admin?file=/default/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="/admin?file=/default/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="/admin?file=/default/js/jquery.js"></script>
     <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=23"></script>
     <script type="text/javascript" src="/admin?file=/default/js/rich_text_editor.js?v=10"></script>
 

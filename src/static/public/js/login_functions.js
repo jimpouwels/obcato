@@ -4,9 +4,9 @@
 */
 $(document).ready(function () {
     $('.admin_field').each(function () {
-        $(this).keypress(function (e) {
-            if (e.keyCode == 13) {
-                $('#form-login').submit();
+        $(this).on('keydown', function (e) {
+            if (e.key === 'Enter') {
+                $('#form-login').trigger('submit');
             }
         });
     });

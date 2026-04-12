@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    $('.install_submit_button').click(function () {
-        $('#install_form').submit();
+    $('.install_submit_button').on('click', function () {
+        $('#install_form').trigger('submit');
     });
 
-    $('.delete_install_files_button').click(function () {
+    $('.delete_install_files_button').on('click', function () {
         $('#installation_finish_type').val("delete_install_files");
-        $('#install_form').submit();
+        $('#install_form').trigger('submit');
     });
 
-    $('.redirect_to_login').click(function () {
+    $('.redirect_to_login').on('click', function () {
         $('#installation_finish_type').val("redirect_to_login");
-        $('#install_form').submit();
+        $('#install_form').trigger('submit');
     });
 });

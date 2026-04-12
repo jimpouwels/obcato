@@ -1,6 +1,6 @@
 /* IMAGES MODULE LAYOUT */
 .images-module-wrapper {
-    max-width: 900px;
+    max-width: 600px;
 }
 
 .images-editor-wrapper {
@@ -11,6 +11,7 @@
 .image-module-search-wrapper {
     position: relative;
     margin-bottom: var(--spacing-md, 12px);
+    max-width: 420px;
 }
 
 .image-module-search-input-row {
@@ -20,8 +21,8 @@
 
 .image-module-search-input {
     width: 100%;
-    padding: 10px 14px;
-    font-size: 14px;
+    padding: 6px 10px;
+    font-size: 13px;
     border: 1px solid var(--color-gray-300, #d1d5db);
     border-radius: 6px;
     background: var(--color-white, #fff);
@@ -43,7 +44,8 @@
     border-radius: 6px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     overflow-y: auto;
-    min-width: 500px;
+    min-width: 380px;
+    max-width: 460px;
 }
 
 .image-module-search-results {
@@ -105,8 +107,8 @@
 }
 
 .image-module-search-result-thumb {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
     object-fit: contain;
     border-radius: 3px;

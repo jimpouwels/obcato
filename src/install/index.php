@@ -85,7 +85,7 @@ function deleteFile($path) {
     <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
     <link rel="stylesheet" href="static/css/install.css" type="text/css" />
 
-    <script type="text/javascript" src="static/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/install.js"></script>
 </head>
 <body>
