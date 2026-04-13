@@ -40,7 +40,7 @@ $(document).ready(function () {
             }
 
             searchTimeout = setTimeout(function () {
-                $results.html('<div class="image-module-search-placeholder">' + imageSearchTexts.searching + '</div>');
+                $results.html('<div class="ajax-spinner"><span></span></div>');
                 positionDropdown();
                 $dropdown.show();
 

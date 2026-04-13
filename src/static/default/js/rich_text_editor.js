@@ -467,7 +467,7 @@ function switchLinkTab(tab) {
 }
 
 function searchPages(keyword) {
-    $pageResults.html('<div class="link-search-spinner"><span></span></div>');
+    $pageResults.html('<div class="ajax-spinner"><span></span></div>');
     $.ajax({
         url: '/admin/api/page/search?keyword=' + encodeURIComponent(keyword),
         method: 'GET',
@@ -481,7 +481,7 @@ function searchPages(keyword) {
 }
 
 function searchArticles(keyword) {
-    $articleResults.html('<div class="link-search-spinner"><span></span></div>');
+    $articleResults.html('<div class="ajax-spinner"><span></span></div>');
     $.ajax({
         url: '/admin/api/article/search?keyword=' + encodeURIComponent(keyword),
         method: 'GET',

@@ -918,7 +918,7 @@ function closeImageSelector(contextId) {
 
 function searchImages(contextId, keyword) {
     var gridContainer = $('#image-selector-grid-' + contextId);
-    gridContainer.html('<div class="image-selector-loading">Zoeken...</div>');
+    gridContainer.html('<div class="ajax-spinner"><span></span></div>');
 
     if (imageSelectMode === 'multiple') {
         var getEndpoint = $('#photo_album_element_' + contextId + '_selected_images').data('get-endpoint');

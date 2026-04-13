@@ -157,10 +157,9 @@
 
                 var excludeId = parseInt($modal.data('exclude-id'), 10) || 0;
                 var searchEndpoint = $modal.data('search-endpoint') || '/admin/api/page/search';
-                var searchingText = $modal.data('searching') || '';
                 var noResultsText = $modal.data('no-results') || '';
 
-                $results.html('<div class="article-lookup-placeholder">' + window.pageLookupEscapeHtml(searchingText) + '</div>');
+                $results.html('<div class="ajax-spinner"><span></span></div>');
 
                 $.ajax({
                     url: searchEndpoint + '?keyword=' + encodeURIComponent(keyword),
