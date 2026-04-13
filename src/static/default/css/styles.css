@@ -2216,6 +2216,25 @@ input.hasDatepicker {
     border-color: var(--color-primary);
 }
 
+.link-search-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+}
+
+.link-search-spinner span {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-gray-200);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: link-search-spin 0.6s linear infinite;
+}
+
+@keyframes link-search-spin {
+    to { transform: rotate(360deg); }
+}
+
 .link-search-results {
     max-height: 200px;
     overflow-y: auto;

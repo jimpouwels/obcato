@@ -467,21 +467,29 @@ function switchLinkTab(tab) {
 }
 
 function searchPages(keyword) {
+    $pageResults.html('<div class="link-search-spinner"><span></span></div>');
     $.ajax({
         url: '/admin/api/page/search?keyword=' + encodeURIComponent(keyword),
         method: 'GET',
         success: function(pages) {
             displayPageResults(pages);
+        },
+        error: function() {
+            $pageResults.html('<div class="link-search-error">Zoeken mislukt</div>');
         }
     });
 }
 
 function searchArticles(keyword) {
+    $articleResults.html('<div class="link-search-spinner"><span></span></div>');
     $.ajax({
         url: '/admin/api/article/search?keyword=' + encodeURIComponent(keyword),
         method: 'GET',
         success: function(articles) {
             displayArticleResults(articles);
+        },
+        error: function() {
+            $articleResults.html('<div class="link-search-error">Zoeken mislukt</div>');
         }
     });
 }
