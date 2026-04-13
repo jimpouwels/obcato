@@ -39,8 +39,8 @@ class ImageDesktopEditor extends Panel {
         $cropBottomField = null;
         $cropLeftField = null;
         $cropRightField = null;
-        $cropVerticalCenterField = null;
-        $cropHorizontalCenterField = null;
+        $cropHorizontalField = null;
+        $cropVerticalField = null;
         $url = null;
         if ($this->currentImage->getFilename()) {
             $imageObj = ImageUtility::loadImage($this->currentImage->getFilename());
@@ -51,8 +51,8 @@ class ImageDesktopEditor extends Panel {
             $cropBottomField = new TextField("image_crop_bottom", $this->getTextResource('image_editor_crop_bottom'), 0, false, false, "");
             $cropLeftField = new TextField("image_crop_left", $this->getTextResource('image_editor_crop_left'), 0, false, false, "");
             $cropRightField = new TextField("image_crop_right", $this->getTextResource('image_editor_crop_right'), 0, false, false, "");
-            $cropVerticalCenterField = new TextField("image_crop_vertical_center", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
-            $cropHorizontalCenterField = new TextField("image_crop_horizontal_center", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
+            $cropHorizontalField = new TextField("image_crop_horizontal", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
+            $cropVerticalField = new TextField("image_crop_vertical", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
             $url = $this->currentImage->getUrl();
         }
         $data->assignVisual("size_field", $sizeField);
@@ -62,8 +62,9 @@ class ImageDesktopEditor extends Panel {
         $data->assignVisual("crop_bottom_field", $cropBottomField);
         $data->assignVisual("crop_left_field", $cropLeftField);
         $data->assignVisual("crop_right_field", $cropRightField);
-        $data->assignVisual("crop_vertical_center_field", $cropVerticalCenterField);
-        $data->assignVisual("crop_horizontal_center_field", $cropHorizontalCenterField);
+        $data->assignVisual("crop_horizontal_field", $cropHorizontalField);
+        $data->assignVisual("crop_vertical_field", $cropVerticalField);
+        $data->assign("crop_field_prefix", "image_crop_");
         $data->assign("url", $url);
         $data->assign("title", $this->currentImage->getTitle());
     }

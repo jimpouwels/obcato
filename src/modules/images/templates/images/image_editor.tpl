@@ -3,25 +3,30 @@
         {$size_field}
         {$new_width_field}
         {$new_height_field}
-        {$crop_top_field}
-        {$crop_bottom_field}
-        {$crop_left_field}
-        {$crop_right_field}
-        {$crop_vertical_center_field}
-        {$crop_horizontal_center_field}
+        {$crop_horizontal_field}
+        {$crop_vertical_field}
+        <input type="hidden" id="{$crop_field_prefix}top" name="{$crop_field_prefix}top" value="0" />
+        <input type="hidden" id="{$crop_field_prefix}bottom" name="{$crop_field_prefix}bottom" value="0" />
+        <input type="hidden" id="{$crop_field_prefix}left" name="{$crop_field_prefix}left" value="0" />
+        <input type="hidden" id="{$crop_field_prefix}right" name="{$crop_field_prefix}right" value="0" />
     </div>
     {if $url}
         <div style="width: fit-content; float: right">
-            <div class="image-crop-container" style="position: relative; display: inline-block; cursor: crosshair; overflow: hidden;">
-                <img class="crop-target-image" title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px; display: block;"/ />
-                <div class="crop-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                    <div class="crop-area" style="position: absolute; border: 2px dashed #fff; box-shadow: 0 0 0 9999px rgba(0,0,0,0.5); pointer-events: all; cursor: move; box-sizing: content-box;">
-                        <div class="crop-handle crop-handle-tl" style="position: absolute; top: -5px; left: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: nw-resize;"></div>
-                        <div class="crop-handle crop-handle-tr" style="position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: ne-resize;"></div>
-                        <div class="crop-handle crop-handle-bl" style="position: absolute; bottom: -5px; left: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: sw-resize;"></div>
-                        <div class="crop-handle crop-handle-br" style="position: absolute; bottom: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: se-resize;"></div>
-                    </div>
+            <div class="image-crop-container" style="position: relative; display: inline-block; cursor: crosshair;">
+                <img class="crop-target-image" title="{$title}" alt="{$title}" src="{$url}" style="max-width: 400px; max-height: 400px; display: block;" />
+                <div class="crop-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                    <div class="crop-area-shadow" style="position: absolute; box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);"></div>
                 </div>
+                <div class="crop-area" style="position: absolute; outline: 2px dashed #fff; pointer-events: all; cursor: move;">
+                    <div class="crop-handle crop-handle-tl" style="position: absolute; top: -5px; left: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: nw-resize;"></div>
+                    <div class="crop-handle crop-handle-tr" style="position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: ne-resize;"></div>
+                    <div class="crop-handle crop-handle-bl" style="position: absolute; bottom: -5px; left: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: sw-resize;"></div>
+                    <div class="crop-handle crop-handle-br" style="position: absolute; bottom: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: se-resize;"></div>
+                </div>
+            </div>
+            <div class="crop-center-buttons">
+                <button type="button" class="crop-center-btn crop-center-h" title="Centreer horizontaal">&#8596; Centreer horizontaal</button>
+                <button type="button" class="crop-center-btn crop-center-v" title="Centreer verticaal">&#8597; Centreer verticaal</button>
             </div>
         </div>
     {else}

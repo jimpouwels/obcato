@@ -134,14 +134,6 @@ class ImageRequestHandler extends HttpRequestHandler {
             $desktopUpdate = true;
             $imageObj = ImageUtility::crop($imageObj, $imageForm->getCropTop(), $imageForm->getCropBottom(), $imageForm->getCropLeft(), $imageForm->getCropRight());
         }
-        if ($imageForm->getCropVertical()) {
-            $desktopUpdate = true;
-            $imageObj = ImageUtility::crop($imageObj, $imageForm->getCropVertical() / 2, $imageForm->getCropVertical() / 2, null, null);
-        }
-        if ($imageForm->getCropHorizontal()) {
-            $desktopUpdate = true;
-            $imageObj = ImageUtility::crop($imageObj, null, null,$imageForm->getCropHorizontal() / 2, $imageForm->getCropHorizontal() / 2);
-        }
         if ($imageForm->getNewWidth()) {
             $desktopUpdate = true;
             $imageObj = ImageUtility::scaleX($imageObj, $imageForm->getNewWidth());
@@ -165,14 +157,6 @@ class ImageRequestHandler extends HttpRequestHandler {
         if ($imageForm->getCropMobileTop() || $imageForm->getCropMobileBottom() || $imageForm->getCropMobileLeft() || $imageForm->getCropMobileRight()) {
             $mobileUpdate = true;
             $imageMobileObj = ImageUtility::crop($imageMobileObj, $imageForm->getCropMobileTop(), $imageForm->getCropMobileBottom(), $imageForm->getCropMobileLeft(), $imageForm->getCropMobileRight());
-        }
-        if ($imageForm->getCropMobileVertical()) {
-            $mobileUpdate = true;
-            $imageMobileObj = ImageUtility::crop($imageMobileObj, $imageForm->getCropMobileVertical() / 2, $imageForm->getCropMobileVertical() / 2, null, null);
-        }
-        if ($imageForm->getCropMobileHorizontal()) {
-            $mobileUpdate = true;
-            $imageMobileObj = ImageUtility::crop($imageMobileObj, null, null,$imageForm->getCropMobileHorizontal() / 2, $imageForm->getCropMobileHorizontal() / 2);
         }
         if ($imageForm->getNewMobileWidth()) {
             $mobileUpdate = true;

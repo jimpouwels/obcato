@@ -23,10 +23,6 @@ class ImageForm extends Form {
     private ?int $cropMobileLeft = null;
     private ?int $cropRight = null;
     private ?int $cropMobileRight = null;
-    private ?int $cropVertical = null;
-    private ?int $cropMobileVertical = null;
-    private ?int $cropHorizontal = null;
-    private ?int $cropMobileHorizontal = null;
 
     public function __construct(Image $image) {
         $this->image = $image;
@@ -97,22 +93,6 @@ class ImageForm extends Form {
         return $this->cropMobileRight;
     }
 
-    public function getCropVertical(): ?int {
-        return $this->cropVertical;
-    }
-
-    public function getCropMobileVertical(): ?int {
-        return $this->cropMobileVertical;
-    }
-
-    public function getCropHorizontal(): ?int {
-        return $this->cropHorizontal;
-    }
-
-    public function getCropMobileHorizontal(): ?int {
-        return $this->cropMobileHorizontal;
-    }
-
     private function validateDesktopEditorFields(): void {
         if (!ImageUtility::exists($this->image->getFilename())) {
             return;
@@ -152,22 +132,6 @@ class ImageForm extends Form {
         if ($this->cropLeft + $this->cropRight > $imageWidth) {
             $this->raiseError('image_crop_left', 'image_crop_cannot_be_bigger_than_width');
         }
-
-        $this->cropVertical = $this->getNumber("image_crop_vertical_center");
-        if ($this->cropVertical < 0) {
-            $this->raiseError('image_crop_vertical_center', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropVertical > $imageHeight) {
-            $this->raiseError('image_crop_vertical_center', 'image_crop_cannot_be_bigger_than_height');
-        }
-
-        $this->cropHorizontal = $this->getNumber("image_crop_horizontal_center");
-        if ($this->cropHorizontal < 0) {
-            $this->raiseError('image_crop_horizontal_center', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropHorizontal > $imageWidth) {
-            $this->raiseError('image_crop_horizontal_center', 'image_crop_cannot_be_bigger_than_width');
-        }
     }
 
     private function validateMobileEditorFields(): void {
@@ -205,22 +169,6 @@ class ImageForm extends Form {
         }
         if ($this->cropMobileLeft + $this->cropMobileRight > $imageWidth) {
             $this->raiseError('image_mobile_crop_left', 'image_crop_cannot_be_bigger_than_width');
-        }
-
-        $this->cropMobileVertical = $this->getNumber("image_mobile_crop_vertical_center");
-        if ($this->cropMobileVertical < 0) {
-            $this->raiseError('image_mobile_crop_vertical_center', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropMobileVertical > $imageHeight) {
-            $this->raiseError('image_mobile_crop_vertical_center', 'image_crop_cannot_be_bigger_than_height');
-        }
-
-        $this->cropMobileHorizontal = $this->getNumber("image_mobile_crop_horizontal_center");
-        if ($this->cropMobileHorizontal < 0) {
-            $this->raiseError('image_mobile_crop_horizontal_center', 'image_crop_cannot_be_negative');
-        }
-        if ($this->cropMobileHorizontal > $imageWidth) {
-            $this->raiseError('image_mobile_crop_horizontal_center', 'image_crop_cannot_be_bigger_than_width');
         }
     }
 

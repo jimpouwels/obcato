@@ -40,8 +40,8 @@ class ImageMobileEditor extends Panel {
         $cropBottomField = null;
         $cropLeftField = null;
         $cropRightField = null;
-        $cropVerticalCenterField = null;
-        $cropHorizontalCenterField = null;
+        $cropHorizontalField = null;
+        $cropVerticalField = null;
         $url = null;
         $resetButton = null;
         if (ImageUtility::exists($this->currentImage->getMobileFilename())) {
@@ -53,8 +53,8 @@ class ImageMobileEditor extends Panel {
             $cropBottomField = new TextField("image_mobile_crop_bottom", $this->getTextResource('image_editor_crop_bottom'), 0, false, false, "");
             $cropLeftField = new TextField("image_mobile_crop_left", $this->getTextResource('image_editor_crop_left'), 0, false, false, "");
             $cropRightField = new TextField("image_mobile_crop_right", $this->getTextResource('image_editor_crop_right'), 0, false, false, "");
-            $cropVerticalCenterField = new TextField("image_mobile_crop_vertical_center", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
-            $cropHorizontalCenterField = new TextField("image_mobile_crop_horizontal_center", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
+            $cropHorizontalField = new TextField("image_mobile_crop_horizontal", $this->getTextResource('image_editor_crop_horizontal_center'), 0, false, false, "");
+            $cropVerticalField = new TextField("image_mobile_crop_vertical", $this->getTextResource('image_editor_crop_vertical_center'), 0, false, false, "");
             $url = $this->currentImage->getMobileUrl();
             $resetButton = new Button("image_mobile_reset", "image_mobile_copy_from_desktop", null);
         }
@@ -65,8 +65,9 @@ class ImageMobileEditor extends Panel {
         $data->assignVisual("crop_bottom_field", $cropBottomField);
         $data->assignVisual("crop_left_field", $cropLeftField);
         $data->assignVisual("crop_right_field", $cropRightField);
-        $data->assignVisual("crop_vertical_center_field", $cropVerticalCenterField);
-        $data->assignVisual("crop_horizontal_center_field", $cropHorizontalCenterField);
+        $data->assignVisual("crop_horizontal_field", $cropHorizontalField);
+        $data->assignVisual("crop_vertical_field", $cropVerticalField);
+        $data->assign("crop_field_prefix", "image_mobile_crop_");
         $data->assign("url", $url);
         $data->assign("title", $this->currentImage->getTitle());
         $data->assignVisual("reset_button", $resetButton);

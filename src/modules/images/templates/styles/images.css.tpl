@@ -6,6 +6,41 @@
     margin-top: var(--spacing-lg, 16px);
 }
 
+/* IMAGE EDITOR: SIZE DISPLAY */
+.image-size-display {
+    background: var(--color-gray-100, #f3f4f6);
+    border-color: var(--color-gray-200, #e5e7eb);
+    color: var(--color-gray-500, #6b7280);
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* IMAGE EDITOR: CENTER BUTTONS */
+.crop-center-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.crop-center-btn {
+    flex: 1;
+    padding: 5px 10px;
+    font-size: 12px;
+    background: var(--color-white, #fff);
+    border: 1px solid var(--color-gray-300, #d1d5db);
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--color-gray-700, #374151);
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.crop-center-btn:hover {
+    background: var(--color-gray-50, #f9fafb);
+    border-color: var(--color-primary, #2271b1);
+    color: var(--color-primary, #2271b1);
+}
+
 /* IMAGE MODULE SEARCH BAR */
 .image_search.panel {
     max-width: 420px;

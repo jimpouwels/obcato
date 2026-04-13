@@ -170,108 +170,128 @@ function initImageCropTool() {
 function initSingleCropTool($container) {
     var $image = $container.find('.crop-target-image');
     var $cropArea = $container.find('.crop-area');
-    var $overlay = $container.find('.crop-overlay');
-    
+    var $shadowArea = $container.find('.crop-area-shadow');
+    var $wrapper = $container.closest('.image_editor_wrapper');
+
+    function positionCropArea(css) {
+        $cropArea.css(css);
+        $shadowArea.css(css);
+    }
+    var $centerHBtn = $container.siblings('.crop-center-buttons').find('.crop-center-h');
+    var $centerVBtn = $container.siblings('.crop-center-buttons').find('.crop-center-v');
+
     var isDragging = false;
     var isResizing = false;
     var resizeHandle = null;
     var startX, startY;
     var startCropRect = {};
     var imageNaturalWidth, imageNaturalHeight;
-    
+
+    // Detect which fields to use (desktop or mobile)
+    var fieldPrefix = 'image_crop_';
+    var sizePrefix = 'image_';
+    if ($wrapper.find('#image_mobile_crop_horizontal').length > 0) {
+        fieldPrefix = 'image_mobile_crop_';
+        sizePrefix = 'image_mobile_';
+    }
+
     // Wait for image to load
     $image.on('load', function() {
         imageNaturalWidth = this.naturalWidth;
         imageNaturalHeight = this.naturalHeight;
-        
-        // Initialize crop area to full image
         updateCropAreaFromFields();
     });
-    
-    // Trigger load if already loaded
+
     if ($image[0].complete) {
         $image.trigger('load');
     }
-    
-    // Detect which fields to use (desktop or mobile)
-    var fieldPrefix = 'image_crop_';
-    var sizePrefix = 'image_';
-    var $testField = $('#image_crop_top');
-    if ($testField.length === 0 || !$testField.closest('.image_editor_wrapper').find($container).length) {
-        // Check if this is a mobile editor
-        var $mobileTestField = $('#image_mobile_crop_top');
-        if ($mobileTestField.length > 0 && $mobileTestField.closest('.image_editor_wrapper').find($container).length) {
-            fieldPrefix = 'image_mobile_crop_';
-            sizePrefix = 'image_mobile_';
-        }
-    }
-    
-    // Update crop area from field values
+
+    // Update crop area visual from hidden position fields
     function updateCropAreaFromFields() {
         var cropTop = parseInt($('#' + fieldPrefix + 'top').val()) || 0;
         var cropBottom = parseInt($('#' + fieldPrefix + 'bottom').val()) || 0;
         var cropLeft = parseInt($('#' + fieldPrefix + 'left').val()) || 0;
         var cropRight = parseInt($('#' + fieldPrefix + 'right').val()) || 0;
-        
+
         var imageWidth = $image.width();
         var imageHeight = $image.height();
         var scaleX = imageWidth / imageNaturalWidth;
         var scaleY = imageHeight / imageNaturalHeight;
-        
-        var top = cropTop * scaleY;
-        var left = cropLeft * scaleX;
-        var width = imageWidth - (cropLeft + cropRight) * scaleX;
-        var height = imageHeight - (cropTop + cropBottom) * scaleY;
-        
-        $cropArea.css({
-            top: top + 'px',
-            left: left + 'px',
-            width: width + 'px',
-            height: height + 'px'
+
+        positionCropArea({
+            top: (cropTop * scaleY) + 'px',
+            left: (cropLeft * scaleX) + 'px',
+            width: (imageWidth - (cropLeft + cropRight) * scaleX) + 'px',
+            height: (imageHeight - (cropTop + cropBottom) * scaleY) + 'px'
         });
-        
-        // Update size display with cropped dimensions
+
         updateSizeDisplay(cropLeft, cropRight, cropTop, cropBottom);
     }
-    
-    // Update form fields from crop area position
+
+    // Sync hidden position fields and visible size fields from crop area position
     function updateFieldsFromCropArea() {
         var imageWidth = $image.width();
         var imageHeight = $image.height();
         var scaleX = imageNaturalWidth / imageWidth;
         var scaleY = imageNaturalHeight / imageHeight;
-        
-        var top = Math.round($cropArea.position().top * scaleY);
-        var left = Math.round($cropArea.position().left * scaleX);
-        var right = Math.round((imageWidth - $cropArea.position().left - $cropArea.width()) * scaleX);
-        var bottom = Math.round((imageHeight - $cropArea.position().top - $cropArea.height()) * scaleY);
-        
-        // Ensure non-negative values
-        top = Math.max(0, top);
-        left = Math.max(0, left);
-        right = Math.max(0, right);
-        bottom = Math.max(0, bottom);
-        
+
+        var top = Math.max(0, Math.round($cropArea.position().top * scaleY));
+        var left = Math.max(0, Math.round($cropArea.position().left * scaleX));
+        var right = Math.max(0, Math.round((imageWidth - $cropArea.position().left - $cropArea.width()) * scaleX));
+        var bottom = Math.max(0, Math.round((imageHeight - $cropArea.position().top - $cropArea.height()) * scaleY));
+
         $('#' + fieldPrefix + 'top').val(top);
         $('#' + fieldPrefix + 'left').val(left);
         $('#' + fieldPrefix + 'right').val(right);
         $('#' + fieldPrefix + 'bottom').val(bottom);
-        
-        // Update size display with cropped dimensions
+
+        // Keep visible size fields in sync
+        $('#' + fieldPrefix + 'horizontal').val(left + right);
+        $('#' + fieldPrefix + 'vertical').val(top + bottom);
+
         updateSizeDisplay(left, right, top, bottom);
     }
-    
-    // Update the size display text
+
+    // Resize crop area when user types in a size field, centering the result
+    function updateCropFromSizeFields() {
+        var horizCrop = Math.min(Math.max(0, parseInt($('#' + fieldPrefix + 'horizontal').val()) || 0), imageNaturalWidth - 1);
+        var vertCrop = Math.min(Math.max(0, parseInt($('#' + fieldPrefix + 'vertical').val()) || 0), imageNaturalHeight - 1);
+
+        var cropLeft = Math.round(horizCrop / 2);
+        var cropTop = Math.round(vertCrop / 2);
+
+        $('#' + fieldPrefix + 'left').val(cropLeft);
+        $('#' + fieldPrefix + 'right').val(horizCrop - cropLeft);
+        $('#' + fieldPrefix + 'top').val(cropTop);
+        $('#' + fieldPrefix + 'bottom').val(vertCrop - cropTop);
+
+        updateCropAreaFromFields();
+    }
+
+    // Update the size display
     function updateSizeDisplay(cropLeft, cropRight, cropTop, cropBottom) {
         var croppedWidth = imageNaturalWidth - cropLeft - cropRight;
         var croppedHeight = imageNaturalHeight - cropTop - cropBottom;
-        // Find the size display element within the same container
-        var $sizeDisplay = $container.closest('.image_editor_wrapper').find('.image-size-display');
-        if ($sizeDisplay.length > 0) {
-            $sizeDisplay.text(croppedWidth + ' x ' + croppedHeight);
-        }
+        $wrapper.find('.image-size-display').text(croppedWidth + ' x ' + croppedHeight);
     }
-    
+
+    // Center buttons
+    $centerHBtn.on('click', function() {
+        var total = (parseInt($('#' + fieldPrefix + 'left').val()) || 0) + (parseInt($('#' + fieldPrefix + 'right').val()) || 0);
+        var newLeft = Math.round(total / 2);
+        $('#' + fieldPrefix + 'left').val(newLeft);
+        $('#' + fieldPrefix + 'right').val(total - newLeft);
+        updateCropAreaFromFields();
+    });
+
+    $centerVBtn.on('click', function() {
+        var total = (parseInt($('#' + fieldPrefix + 'top').val()) || 0) + (parseInt($('#' + fieldPrefix + 'bottom').val()) || 0);
+        var newTop = Math.round(total / 2);
+        $('#' + fieldPrefix + 'top').val(newTop);
+        $('#' + fieldPrefix + 'bottom').val(total - newTop);
+        updateCropAreaFromFields();
+    });
+
     // Handle mouse down on crop area (for dragging)
     $cropArea.on('mousedown', function(e) {
         if ($(e.target).hasClass('crop-handle')) {
@@ -291,76 +311,68 @@ function initSingleCropTool($container) {
         e.preventDefault();
         e.stopPropagation();
     });
-    
+
     // Handle mouse move
     $(document).on('mousemove', function(e) {
         if (!isDragging && !isResizing) return;
-        
+
         var deltaX = e.pageX - startX;
         var deltaY = e.pageY - startY;
         var imageWidth = $image.width();
         var imageHeight = $image.height();
-        
+
         if (isDragging) {
-            // Move crop area
             var newLeft = Math.max(0, Math.min(startCropRect.left + deltaX, imageWidth - startCropRect.width));
             var newTop = Math.max(0, Math.min(startCropRect.top + deltaY, imageHeight - startCropRect.height));
-            
-            $cropArea.css({
-                left: newLeft + 'px',
-                top: newTop + 'px'
-            });
+            positionCropArea({ left: newLeft + 'px', top: newTop + 'px' });
         } else if (isResizing) {
-            // Resize crop area
             var newRect = Object.assign({}, startCropRect);
-            
             switch(resizeHandle) {
-                case 'tl': // Top-left
+                case 'tl':
                     newRect.left = Math.max(0, Math.min(startCropRect.left + deltaX, startCropRect.left + startCropRect.width - 20));
                     newRect.top = Math.max(0, Math.min(startCropRect.top + deltaY, startCropRect.top + startCropRect.height - 20));
                     newRect.width = startCropRect.width - (newRect.left - startCropRect.left);
                     newRect.height = startCropRect.height - (newRect.top - startCropRect.top);
                     break;
-                case 'tr': // Top-right
+                case 'tr':
                     newRect.top = Math.max(0, Math.min(startCropRect.top + deltaY, startCropRect.top + startCropRect.height - 20));
                     newRect.width = Math.max(20, Math.min(startCropRect.width + deltaX, imageWidth - startCropRect.left));
                     newRect.height = startCropRect.height - (newRect.top - startCropRect.top);
                     break;
-                case 'bl': // Bottom-left
+                case 'bl':
                     newRect.left = Math.max(0, Math.min(startCropRect.left + deltaX, startCropRect.left + startCropRect.width - 20));
                     newRect.width = startCropRect.width - (newRect.left - startCropRect.left);
                     newRect.height = Math.max(20, Math.min(startCropRect.height + deltaY, imageHeight - startCropRect.top));
                     break;
-                case 'br': // Bottom-right
+                case 'br':
                     newRect.width = Math.max(20, Math.min(startCropRect.width + deltaX, imageWidth - startCropRect.left));
                     newRect.height = Math.max(20, Math.min(startCropRect.height + deltaY, imageHeight - startCropRect.top));
                     break;
             }
-            
-            $cropArea.css({
+            positionCropArea({
                 left: newRect.left + 'px',
                 top: newRect.top + 'px',
                 width: newRect.width + 'px',
                 height: newRect.height + 'px'
             });
         }
-        
+
         updateFieldsFromCropArea();
         e.preventDefault();
     });
-    
+
     // Handle mouse up
     $(document).on('mouseup', function() {
         isDragging = false;
         isResizing = false;
         resizeHandle = null;
     });
-    
-    // Update crop area when fields change
-    $('#' + fieldPrefix + 'top, #' + fieldPrefix + 'left, #' + fieldPrefix + 'right, #' + fieldPrefix + 'bottom').on('change keyup', function() {
-        updateCropAreaFromFields();
+
+    // Size field change listeners
+    $('#' + fieldPrefix + 'horizontal, #' + fieldPrefix + 'vertical').on('change keyup', function() {
+        updateCropFromSizeFields();
     });
-    
+
     // Update on window resize
     $(window).on('resize', function() {
         updateCropAreaFromFields();
