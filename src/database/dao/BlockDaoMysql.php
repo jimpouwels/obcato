@@ -12,7 +12,7 @@ use const Obcato\Core\ELEMENT_HOLDER_BLOCK;
 class BlockDaoMysql implements BlockDao {
 
     public static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.name, e.title, e.published, e.scope_id, 
-                      e.created_at, e.created_by, e.type, b.position_id";
+                      e.created_at, e.created_by, e.type, e.version, b.position_id";
     private static ?BlockDaoMysql $instance = null;
     private ElementHolderDao $elementHolderDao;
     private MysqlConnector $mysqlConnector;

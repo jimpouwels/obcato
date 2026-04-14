@@ -11,6 +11,11 @@ menu_item_configure: Configure
 menu_item_insert: Insert
 navigation_menu_add_element_error: Error: Can\'t add element. You can only add elements to pages, articles and blocks.
 
+# VERSION CONFLICT
+element_holder_version_conflict_banner: A newer version has been saved — your local version is outdated. Refresh the page to load the latest version.
+element_holder_version_conflict_save_blocked: Cannot save: a newer version has already been saved. Refresh the page to load the latest version.
+element_holder_version_conflict_save_error: Cannot save: this content has already been modified by another session.
+
 # ACTION BUTTONS
 action_button_save: Save
 action_button_reload: Reload

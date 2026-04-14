@@ -9,6 +9,7 @@ use Obcato\Core\database\dao\BlockDaoMysql;
 use Obcato\Core\modules\blocks\model\Block;
 use Obcato\Core\request_handlers\ElementHolderRequestHandler;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Obcato\Core\request_handlers\exceptions\VersionConflictException;
 
 class BlockRequestHandler extends ElementHolderRequestHandler {
 
@@ -37,6 +38,8 @@ class BlockRequestHandler extends ElementHolderRequestHandler {
             } else if ($this->isAddBlockAction()) {
                 $this->addBlock();
             }
+        } catch (VersionConflictException) {
+            $this->sendErrorMessage($this->getTextResource('element_holder_version_conflict_save_error'));
         } catch (ElementHolderContainsErrorsException) {
             $this->sendErrorMessage($this->getTextResource("blocks_notification_not_updated_error"));
         }

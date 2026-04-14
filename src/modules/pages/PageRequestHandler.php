@@ -13,6 +13,7 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\request_handlers\ElementHolderRequestHandler;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Obcato\Core\request_handlers\exceptions\VersionConflictException;
 
 class PageRequestHandler extends ElementHolderRequestHandler {
 
@@ -51,6 +52,8 @@ class PageRequestHandler extends ElementHolderRequestHandler {
             } else if ($this->isMoveDownAction()) {
                 $this->pageService->moveDown($this->currentPage);
             }
+        } catch (VersionConflictException) {
+            $this->sendErrorMessage($this->getTextResource('element_holder_version_conflict_save_error'));
         } catch (ElementHolderContainsErrorsException) {
             $this->sendErrorMessage($this->getTextResource('page_not_saved_error_message'));
         }

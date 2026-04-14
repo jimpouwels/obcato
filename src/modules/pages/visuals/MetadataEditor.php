@@ -47,6 +47,7 @@ class MetadataEditor extends Panel {
         $templatePickerField = new TemplatePicker("page_template", $this->getTextResource('pages_edit_metadata_template_field_label'), false, "", $this->currentPage->getTemplate(), $this->currentPage->getScope());
 
         $data->assign("current_page_id", $this->currentPage->getId());
+        $data->assign("element_holder_version", $this->currentPage->getVersion());
         $data->assign("page_name_field", $nameField->render());
         $data->assign("page_title_field", $titleField->render());
         $data->assign("keywords_field", $keywordsField->render());

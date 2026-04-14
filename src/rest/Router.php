@@ -4,6 +4,7 @@ namespace Obcato\Core\rest;
 
 use Obcato\Core\rest\article\ArticleHandler;
 use Obcato\Core\rest\article\ArticleSearchHandler;
+use Obcato\Core\rest\element_holder\ElementHolderHandler;
 use Obcato\Core\rest\image\ImageElementHandler;
 use Obcato\Core\rest\image\PhotoAlbumElementHandler;
 use Obcato\Core\rest\image\ImageHandler;
@@ -22,6 +23,7 @@ class Router {
         $this->handlers[] = new ArticleHandler();
         $this->handlers[] = new ArticleSearchHandler();
         $this->handlers[] = new PageSearchHandler();
+        $this->handlers[] = new ElementHolderHandler();
     }
 
     public function route(): void {

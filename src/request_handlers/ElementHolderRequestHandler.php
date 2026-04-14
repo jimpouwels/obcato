@@ -10,6 +10,7 @@ use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\elements\ElementContainsErrorsException;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Obcato\Core\request_handlers\exceptions\VersionConflictException;
 use const Obcato\core\ADD_ELEMENT_FORM_ID;
 use const Obcato\core\DELETE_ELEMENT_FORM_ID;
 
@@ -26,6 +27,11 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     public function handlePost(): void {
         if (!$this->getElementHolderFromPostRequest()) {
             return;
+        }
+        $holder = $this->getElementHolderFromPostRequest();
+        $submittedVersion = isset($_POST['element_holder_version']) ? (int)$_POST['element_holder_version'] : null;
+        if ($submittedVersion !== null && $submittedVersion !== $holder->getVersion()) {
+            throw new VersionConflictException();
         }
         if ($this->isAddElementAction()) {
             $this->addElement($this->getElementHolderFromPostRequest());

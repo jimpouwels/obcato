@@ -10,6 +10,7 @@ use Obcato\Core\modules\articles\service\ArticleInteractor;
 use Obcato\Core\modules\articles\service\ArticleService;
 use Obcato\Core\request_handlers\ElementHolderRequestHandler;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Obcato\Core\request_handlers\exceptions\VersionConflictException;
 
 class ArticleRequestHandler extends ElementHolderRequestHandler {
 
@@ -40,6 +41,8 @@ class ArticleRequestHandler extends ElementHolderRequestHandler {
             } else if ($this->isDeleteArticleAction()) {
                 $this->deleteArticle();
             }
+        } catch (VersionConflictException) {
+            $this->sendErrorMessage($this->getTextResource('element_holder_version_conflict_save_error'));
         } catch (ElementHolderContainsErrorsException) {
             $this->sendErrorMessage($this->getTextResource('article_not_saved_error_message'));
         }

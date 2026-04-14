@@ -325,6 +325,7 @@
             <query>ALTER TABLE modules DROP COLUMN popup</query>
             <query>ALTER TABLE list_element_items ADD COLUMN display_order INT NOT NULL DEFAULT 0</query>
             <query>UPDATE list_element_items SET display_order = id</query>
+            <query>ALTER TABLE element_holders ADD COLUMN version INT NOT NULL DEFAULT 1</query>
         </queries>
     </version>
 </versions>

@@ -171,6 +171,7 @@ class ArticleMetadataEditor extends Panel {
     private function assignElementHolderFormIds(TemplateData $data): void {
         $data->assign("add_element_form_id", ADD_ELEMENT_FORM_ID);
         $data->assign("edit_element_holder_id", EDIT_ELEMENT_HOLDER_ID);
+        $data->assign("element_holder_version", $this->currentArticle->getVersion());
         $data->assign("element_holder_form_id", ELEMENT_HOLDER_FORM_ID);
         $data->assign("action_form_id", ACTION_FORM_ID);
         $data->assign("delete_element_form_id", DELETE_ELEMENT_FORM_ID);

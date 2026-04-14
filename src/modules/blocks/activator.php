@@ -98,6 +98,7 @@ class BlockModuleVisual extends ModuleVisual {
         
         // Render module JS
         $scripts[] = $this->getTemplateEngine()->fetch("blocks/templates/scripts/module_blocks.js.tpl");
+        $scripts[] = $this->getTemplateEngine()->fetch("scripts/element_holder_version_check.js.tpl");
         
         return $scripts;
     }

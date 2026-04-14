@@ -11,6 +11,11 @@ menu_item_configure: Configuratie
 menu_item_insert: Invoegen
 navigation_menu_add_element_error: Fout: Kan element niet toevoegen. U kunt elementen plaatsen op pagina\'s, artikelen en blokken
 
+# VERSION CONFLICT
+element_holder_version_conflict_banner: Er is een nieuwe versie opgeslagen — je lokale versie is verouderd. Ververs de pagina om de laatste versie te laden.
+element_holder_version_conflict_save_blocked: Kan niet opslaan: er is al een nieuwere versie opgeslagen. Ververs de pagina om de laatste versie te laden.
+element_holder_version_conflict_save_error: Kan niet opslaan, de inhoud is al gewijzigd door een andere sessie.
+
 # ACTION BUTTONS
 action_button_save: Opslaan
 action_button_reload: Herladen

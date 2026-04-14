@@ -14,7 +14,7 @@ use Obcato\Core\utilities\DateUtility;
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.name, e.title, e.published, e.last_modified, e.scope_id,
-                      e.created_at, e.created_by, e.type, a.description, a.wallpaper_id, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
+                      e.created_at, e.created_by, e.type, e.version, a.description, a.wallpaper_id, a.url_title, a.keywords, a.image_id, a.template_id, a.parent_article_id, a.publication_date, a.sort_date, a.target_page, a.comment_webform_id";
 
     private static ?ArticleDaoMysql $instance = null;
     private PageDao $pageDao;

@@ -16,6 +16,7 @@ class ElementHolder extends Presentable {
     private DateTime $lastModified;
     private array $elements = array();
     private string $type;
+    private int $version = 1;
 
     public function __construct(int $scopeId) {
         parent::__construct($scopeId);
@@ -118,6 +119,14 @@ class ElementHolder extends Presentable {
         $this->type = $type;
     }
 
+    public function getVersion(): int {
+        return $this->version;
+    }
+
+    public function setVersion(int $version): void {
+        $this->version = $version;
+    }
+
     protected function initFromDb(array $row): void {
         $this->setName($row['name']);
         $this->setTitle($row['title']);
@@ -126,6 +135,7 @@ class ElementHolder extends Presentable {
         $this->setCreatedById($row['created_by']);
         $this->setLastModified(new DateTime($row['last_modified']));
         $this->setType($row['type']);
+        $this->setVersion((int)($row['version'] ?? 1));
         parent::initFromDb($row);
         $this->setElements(ElementDaoMysql::getInstance()->getElements($this));
     }

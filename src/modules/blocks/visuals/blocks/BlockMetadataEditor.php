@@ -40,6 +40,7 @@ class BlockMetadataEditor extends Panel {
 
         $this->assignElementHolderFormIds($data);
         $data->assign("current_block_id", $this->currentBlock->getId());
+        $data->assign("element_holder_version", $this->currentBlock->getVersion());
         $data->assign("name_field", $nameField->render());
         $data->assign("title_field", $titleField->render());
         $data->assign("published_field", $publishedField->render());

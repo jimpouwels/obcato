@@ -8,7 +8,7 @@ use Obcato\Core\database\MysqlConnector;
 class ElementHolderDaoMysql implements ElementHolderDao {
 
     private static string $myAllColumns = "e.id, e.template_id, e.name, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, e.last_modified";
+                      e.created_at, e.created_by, e.type, e.last_modified, e.version";
 
     private static ?ElementHolderDaoMysql $instance = null;
     private MysqlConnector $mysqlConnector;
@@ -45,9 +45,10 @@ class ElementHolderDaoMysql implements ElementHolderDao {
 
     public function update(ElementHolder $elementHolder): void {
         $query = "UPDATE element_holders SET name = '" . $this->mysqlConnector->realEscapeString($elementHolder->getName()) . "', title = '" . $this->mysqlConnector->realEscapeString($elementHolder->getTitle()) . "', published = " . ($elementHolder->isPublished() ? 1 : 0) . ",
-                      scope_id = " . $elementHolder->getScopeId() . ", template_id = " . ($elementHolder->getTemplateId() ? $elementHolder->getTemplateId() : "NULL") . ", last_modified = NOW()";
+                      scope_id = " . $elementHolder->getScopeId() . ", template_id = " . ($elementHolder->getTemplateId() ? $elementHolder->getTemplateId() : "NULL") . ", last_modified = NOW(), version = version + 1";
         $query .= " WHERE id = " . $elementHolder->getId();
         $this->mysqlConnector->executeQuery($query);
+        $elementHolder->setVersion($elementHolder->getVersion() + 1);
     }
 
     public function delete(ElementHolder $elementHolder): void {
