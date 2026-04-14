@@ -576,6 +576,9 @@ function addImage(elementId, imageId) {
             'image': imageId
         }),
         success: function(response) {
+            if (response && response.element_holder_version) {
+                $(document).trigger('element-holder-version-synced', response.element_holder_version);
+            }
             updateSelectedImages(elementId);
         },
         error: function(xhr, status, error) {
@@ -655,6 +658,9 @@ function deleteImage(elementId, imageId) {
             'image': imageId
         }),
         success: function(response) {
+            if (response && response.element_holder_version) {
+                $(document).trigger('element-holder-version-synced', response.element_holder_version);
+            }
             updateSelectedImages(elementId);
         },
         error: function(xhr, status, error) {
@@ -856,6 +862,9 @@ function saveImageOrder(elementId) {
         }),
         contentType: 'application/json',
         success: function(response) {
+            if (response && response.element_holder_version) {
+                $(document).trigger('element-holder-version-synced', response.element_holder_version);
+            }
             // Order saved successfully
         },
         error: function(xhr, status, error) {
@@ -987,6 +996,9 @@ function selectImage(contextId, image, element) {
                 'image': image.id
             }),
             success: function(response) {
+                if (response && response.element_holder_version) {
+                    $(document).trigger('element-holder-version-synced', response.element_holder_version);
+                }
                 $('#' + currentFieldName).val(image.id);
                 updateSingleImagePreview(currentFieldName, image);
                 closeImageSelector(contextId);
@@ -1071,6 +1083,9 @@ function updateSingleImagePreview(fieldName, image) {
                 'id': entityId
             }),
             success: function(response) {
+                if (response && response.element_holder_version) {
+                    $(document).trigger('element-holder-version-synced', response.element_holder_version);
+                }
                 $('#' + fieldName).val('');
                 previewContainer.empty();
             },

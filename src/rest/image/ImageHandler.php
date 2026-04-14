@@ -12,6 +12,7 @@ class ImageHandler extends Handler {
     private ImageDao $imageDao;
 
     public function __construct() {
+        parent::__construct();
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->register(HttpMethod::GET, "/image/search", $this->search(...));
         $this->register(HttpMethod::DELETE, "/image/delete", $this->delete(...));

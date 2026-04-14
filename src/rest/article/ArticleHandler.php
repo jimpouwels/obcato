@@ -29,28 +29,28 @@ class ArticleHandler extends Handler {
         $article = $this->articleDao->getArticle((int)$data['id']);
         $article->setImageId((int)$data['image']);
         $this->articleDao->updateArticle($article);
-        return null;
+        return ['element_holder_version' => $article->getVersion()];
     }
 
     public function updateWallpaper(array $data): ?array {
         $article = $this->articleDao->getArticle((int)$data['id']);
         $article->setWallpaperId((int)$data['image']);
         $this->articleDao->updateArticle($article);
-        return null;
+        return ['element_holder_version' => $article->getVersion()];
     }
 
     public function deleteImage(array $data): ?array {
         $article = $this->articleDao->getArticle((int)$data['id']);
         $article->setImageId(null);
         $this->articleDao->updateArticle($article);
-        return null;
+        return ['element_holder_version' => $article->getVersion()];
     }
 
     public function deleteWallpaper(array $data): ?array {
         $article = $this->articleDao->getArticle((int)$data['id']);
         $article->setWallpaperId(null);
         $this->articleDao->updateArticle($article);
-        return null;
+        return ['element_holder_version' => $article->getVersion()];
     }
 
     public function getImage(?array $data): ?array {

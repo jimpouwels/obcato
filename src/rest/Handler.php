@@ -3,10 +3,17 @@
 namespace Obcato\Core\rest;
 
 use Closure;
+use Obcato\Core\database\dao\ElementHolderDao;
+use Obcato\Core\database\dao\ElementHolderDaoMysql;
 
 abstract class Handler {
 
     private array $routes = array();
+    private ElementHolderDao $elementHolderDao;
+
+    public function __construct() {
+        $this->elementHolderDao = ElementHolderDaoMysql::getInstance();
+    }
 
     public function register(HttpMethod $method, string $path, Closure $callback): void {
         $this->routes[] = new Route($method, $path, $callback);
@@ -26,6 +33,17 @@ abstract class Handler {
             }
         }
         return false;
+    }
+
+    protected function getElementHolderVersion(int $elementHolderId): ?int {
+        $holder = ElementHolderDaoMysql::getInstance()->getElementHolder($elementHolderId);
+        return $holder?->getVersion();
+    }
+
+    protected function bumpElementHolderVersion(int $elementHolderId): ?int {
+        $holder = $this->elementHolderDao->getElementHolder($elementHolderId);
+        $this->elementHolderDao->update($holder);
+        return $holder->getVersion();
     }
 
 }

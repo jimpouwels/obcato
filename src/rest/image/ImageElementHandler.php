@@ -15,6 +15,7 @@ class ImageElementHandler extends Handler {
     private ImageDao $imageDao;
 
     public function __construct() {
+        parent::__construct();
         $this->elementDao = ElementDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
         $this->register(HttpMethod::PUT, "/image_element/update_image", $this->updateElement(...));
@@ -26,14 +27,14 @@ class ImageElementHandler extends Handler {
         $element = $this->elementDao->getElement($data['id']);
         $element->setImageId($data['image']);
         $element->updateMetaData();
-        return null;
+        return ['element_holder_version' => $this->bumpElementHolderVersion($element->getElementHolderId())];
     }
 
     public function deleteImage(array $data): ?array {
         $element = $this->elementDao->getElement($data['id']);
         $element->setImageId(null);
         $element->updateMetaData();
-        return null;
+        return ['element_holder_version' => $this->bumpElementHolderVersion($element->getElementHolderId())];
     }
 
     public function getImage(?array $data): ?array {
