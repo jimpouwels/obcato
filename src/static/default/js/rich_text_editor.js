@@ -140,53 +140,73 @@ function initRichTextEditors() {
         // Handle Enter key - insert <br> instead of <div>
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            
+
             const selection = window.getSelection();
-            if (selection.rangeCount > 0) {
-                const range = selection.getRangeAt(0);
-                
-                // Only delete if there's actually a selection
-                if (!range.collapsed) {
-                    range.deleteContents();
+            if (!selection.rangeCount) return false;
+
+            const range = selection.getRangeAt(0);
+            if (!range.collapsed) range.deleteContents();
+
+            const editor = e.currentTarget;
+            const inlineTags = new Set(['STRONG', 'B', 'EM', 'I', 'U', 'A', 'SPAN']);
+
+            // Returns true if there's no meaningful content after `afterNode` within `parentEl`
+            function isAtEnd(afterNode, parentEl) {
+                let sib = afterNode.nextSibling;
+                while (sib) {
+                    if (sib.nodeType === Node.TEXT_NODE && sib.textContent.trim() !== '') return false;
+                    if (sib.nodeType === Node.ELEMENT_NODE && sib.tagName !== 'BR') return false;
+                    sib = sib.nextSibling;
                 }
-                
-                // Insert a <br> element
-                const br = document.createElement('br');
-                range.insertNode(br);
-                
-                // Check what comes after the new BR
-                let needsExtraBr = false;
-                const nextSibling = br.nextSibling;
-                
-                if (!nextSibling) {
-                    // Nothing after - definitely at the end
-                    needsExtraBr = true;
-                } else if (nextSibling.nodeType === Node.TEXT_NODE && nextSibling.textContent.trim() === '') {
-                    // Only whitespace text node - check what comes after that
-                    if (!nextSibling.nextSibling) {
-                        needsExtraBr = true;
-                    }
-                } else if (nextSibling.nodeType === Node.ELEMENT_NODE && nextSibling.tagName === 'BR') {
-                    // There's already a BR after ours - don't add another
-                    needsExtraBr = false;
-                }
-                
-                if (needsExtraBr) {
-                    const br2 = document.createElement('br');
-                    br.parentNode.insertBefore(br2, br.nextSibling);
-                }
-                
-                // Move cursor after the first br
-                range.setStartAfter(br);
-                range.setEndAfter(br);
-                range.collapse(false);
-                
-                selection.removeAllRanges();
-                selection.addRange(range);
-                
-                // Trigger input event for sync
-                $(this).trigger('input');
+                return true;
             }
+
+            // Insert BR at cursor
+            const br = document.createElement('br');
+            range.insertNode(br);
+
+            // Bug 2: if BR landed at the end of an inline formatting ancestor, escape it.
+            // Walk up the tree; track the outermost inline ancestor where cursor is at end.
+            let escapeTarget = null;
+            let walkNode = br;
+            let walkParent = br.parentNode;
+            while (walkParent && walkParent !== editor) {
+                if (inlineTags.has(walkParent.tagName) && isAtEnd(walkNode, walkParent)) {
+                    escapeTarget = walkParent;
+                }
+                walkNode = walkParent;
+                walkParent = walkParent.parentNode;
+            }
+
+            // Bug 1: find the editor-level node to use for sentinel check.
+            // If we're escaping a formatting element, that element is at (or near) editor level.
+            const topNode = escapeTarget ? escapeTarget : (function() {
+                let n = br;
+                while (n.parentNode && n.parentNode !== editor) n = n.parentNode;
+                return n;
+            })();
+
+            // Add sentinel BR if nothing (visible) follows at editor level,
+            // but only if there isn't already a BR there (left from previous Enter).
+            const topNodeNext = topNode.nextSibling;
+            const alreadyHasSentinel = topNodeNext && topNodeNext.nodeType === Node.ELEMENT_NODE && topNodeNext.tagName === 'BR';
+            if (isAtEnd(topNode, editor) && !alreadyHasSentinel) {
+                const sentinel = document.createElement('br');
+                topNode.parentNode.insertBefore(sentinel, topNode.nextSibling);
+            }
+
+            // Position cursor
+            const newRange = document.createRange();
+            if (escapeTarget) {
+                newRange.setStartAfter(escapeTarget);
+            } else {
+                newRange.setStartAfter(br);
+            }
+            newRange.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(newRange);
+
+            $(this).trigger('input');
             return false;
         }
         // Ctrl+Z / Cmd+Z for undo
