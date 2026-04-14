@@ -128,6 +128,9 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function resizeImageIfRequested(ImageForm $imageForm): void {
         // Desktop
+        if (!$this->currentImage->getFilename() || !ImageUtility::exists($this->currentImage->getFilename())) {
+            return;
+        }
         $desktopUpdate = false;
         $imageObj = ImageUtility::loadImage($this->currentImage->getFilename());
         if ($imageForm->getCropTop() || $imageForm->getCropBottom() || $imageForm->getCropLeft() || $imageForm->getCropRight()) {
