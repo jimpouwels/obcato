@@ -22,6 +22,10 @@
                     <div class="crop-handle crop-handle-tr" style="position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: ne-resize;"></div>
                     <div class="crop-handle crop-handle-bl" style="position: absolute; bottom: -5px; left: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: sw-resize;"></div>
                     <div class="crop-handle crop-handle-br" style="position: absolute; bottom: -5px; right: -5px; width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: se-resize;"></div>
+                    <div class="crop-handle crop-handle-tc" style="position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: n-resize;"></div>
+                    <div class="crop-handle crop-handle-bc" style="position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: s-resize;"></div>
+                    <div class="crop-handle crop-handle-lc" style="position: absolute; left: -5px; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: w-resize;"></div>
+                    <div class="crop-handle crop-handle-rc" style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; background: #fff; border: 1px solid #000; cursor: e-resize;"></div>
                 </div>
             </div>
             <div class="crop-center-buttons">

@@ -348,6 +348,20 @@ function initSingleCropTool($container) {
                     newRect.width = Math.max(20, Math.min(startCropRect.width + deltaX, imageWidth - startCropRect.left));
                     newRect.height = Math.max(20, Math.min(startCropRect.height + deltaY, imageHeight - startCropRect.top));
                     break;
+                case 'tc':
+                    newRect.top = Math.max(0, Math.min(startCropRect.top + deltaY, startCropRect.top + startCropRect.height - 20));
+                    newRect.height = startCropRect.height - (newRect.top - startCropRect.top);
+                    break;
+                case 'bc':
+                    newRect.height = Math.max(20, Math.min(startCropRect.height + deltaY, imageHeight - startCropRect.top));
+                    break;
+                case 'lc':
+                    newRect.left = Math.max(0, Math.min(startCropRect.left + deltaX, startCropRect.left + startCropRect.width - 20));
+                    newRect.width = startCropRect.width - (newRect.left - startCropRect.left);
+                    break;
+                case 'rc':
+                    newRect.width = Math.max(20, Math.min(startCropRect.width + deltaX, imageWidth - startCropRect.left));
+                    break;
             }
             positionCropArea({
                 left: newRect.left + 'px',
