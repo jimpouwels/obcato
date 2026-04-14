@@ -484,6 +484,17 @@ function switchLinkTab(tab) {
     if (tab === 'article' && !$articleSelected.is(':visible')) {
         $articleSearch.closest('.form-field-group').show();
     }
+
+    // Auto-focus the input field if nothing is selected on this tab
+    setTimeout(function() {
+        if (tab === 'url' && !$urlSelected.is(':visible')) {
+            $urlInput.focus();
+        } else if (tab === 'page' && !$pageSelected.is(':visible')) {
+            $pageSearch.focus();
+        } else if (tab === 'article' && !$articleSelected.is(':visible')) {
+            $articleSearch.focus();
+        }
+    }, 50);
 }
 
 function searchPages(keyword) {
