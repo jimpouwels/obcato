@@ -369,7 +369,7 @@ function initSingleCropTool($container) {
     });
 
     // Size field change listeners
-    $('#' + fieldPrefix + 'horizontal, #' + fieldPrefix + 'vertical').on('change keyup', function() {
+    $('#' + fieldPrefix + 'horizontal, #' + fieldPrefix + 'vertical').on('input', function() {
         updateCropFromSizeFields();
     });
 
