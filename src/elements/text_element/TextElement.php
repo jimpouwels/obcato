@@ -51,7 +51,7 @@ class TextElement extends Element {
 
     public function getSummaryText(): string {
         $summaryText = $this->getTitle();
-        $summaryText .= ' (\'' . substr($this->getText(), 0, 50) . '...\')';
+        $summaryText .= ' (\'' . substr($this->getText() ?: "", 0, 50) . '...\')';
         return $summaryText;
     }
 
