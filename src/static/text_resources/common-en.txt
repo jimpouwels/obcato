@@ -12,7 +12,7 @@ menu_item_insert: Insert
 navigation_menu_add_element_error: Error: Can\'t add element. You can only add elements to pages, articles and blocks.
 
 # VERSION CONFLICT
-element_holder_version_conflict_banner: A newer version has been saved — your local version is outdated. Refresh the page to load the latest version.
+element_holder_version_conflict_banner: A newer version has been saved — your local version is outdated. Backup your work and refresh the page.
 element_holder_version_conflict_save_blocked: Cannot save: a newer version has already been saved. Refresh the page to load the latest version.
 element_holder_version_conflict_save_error: Cannot save: this content has already been modified by another session.
 
@@ -61,11 +61,6 @@ term_selector_title: Terms
 term_selector_label_selected_terms: Selected terms
 term_selector_label_delete_selected_term: Delete
 term_selector_message_no_terms_selected: No terms selected
-
-# LINK ERROR MESSAGES
-link_not_saved_error: A link could not be saved, resolve the error(s)
-link_code_field_missing: Link code is mandatory
-link_code_field_invalid: Fill in a valid number
 
 # FORM FIELDS
 object_picker_button_title: Select
