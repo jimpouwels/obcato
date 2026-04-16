@@ -29,7 +29,7 @@ class ImageElementEditor extends ElementVisual {
     }
 
     public function loadElementForm(TemplateData $data): void {
-        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle()), false, false, null);
+        $titleField = new TextField($this->createFieldId("title"), $this->getTextResource("image_element_editor_title"), htmlentities($this->imageElement->getTitle() ?: ""), false, false, null);
         $imageLookup = new ImageLookup(
             "image_image_ref_" . $this->imageElement->getId(), 
             $this->getTextResource("image_element_editor_image"), 
