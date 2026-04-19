@@ -97,12 +97,6 @@ class RequestHandler {
         if (!$image) {
             $this->render404Page();
         }
-        // BEGIN - TEMP CORRECTION
-        if (!str_starts_with(strtolower($image->getTitle()), 'wallpaper')) {
-            $img = ImageUtility::loadImage($image->getFilename());
-            ImageUtility::saveImageAsWebp($img, $image->getMobileFilename());
-        }
-        // END - TEMP CORRECTION
         if (isset($_GET["mobile"]) && $_GET["mobile"] == "true") {
             $imageFilepath = UPLOAD_DIR . "/" . $image->getMobileFilename();
         } else {

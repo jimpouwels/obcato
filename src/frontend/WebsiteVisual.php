@@ -2,7 +2,6 @@
 
 namespace Obcato\Core\frontend;
 
-use Obcato\Core\frontend\handlers\FormStatus;
 use Obcato\Core\frontend\helper\FrontendHelper;
 use Obcato\Core\modules\articles\model\Article;
 use Obcato\Core\modules\pages\model\Page;
@@ -27,7 +26,6 @@ class WebsiteVisual extends FrontendVisual {
     }
 
     public function loadVisual(?array &$data): void {
-        $this->assignGlobal('errors', FormStatus::getErrors());
         $this->assignGlobal("is_preview", FrontendHelper::isPreviewMode());
         $this->assignGlobal("base_url", $this->getLinkHelper()->createBaseUrl());
         $this->assignGlobal("website_title", $this->settingsDao->getSettings()->getWebsiteTitle());

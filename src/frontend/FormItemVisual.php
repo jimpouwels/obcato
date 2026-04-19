@@ -12,11 +12,13 @@ use const Obcato\CMS_ROOT;
 
 abstract class FormItemVisual extends FrontendVisual {
 
-    private WebFormItem $webformIte;
+    private WebformItem $webformItem;
+    private WebForm $webform;
 
-    public function __construct(Page $page, ?Article $article, WebForm $webform, WebFormItem $webformItem) {
+    public function __construct(Page $page, ?Article $article, WebForm $webform, WebformItem $webformItem) {
         parent::__construct($page, $article);
-        $this->webformIte = $webformItem;
+        $this->webform = $webform;
+        $this->webformItem = $webformItem;
     }
 
     public function getTemplateFilename(): string {
@@ -27,14 +29,18 @@ abstract class FormItemVisual extends FrontendVisual {
         $this->assign('label', $this->getFormItem()->getLabel());
         $this->assign('name', $this->getFormItem()->getName());
         $this->assign('value', FormStatus::getFieldValue($this->getFormItem()->getName()));
-        $this->assign('has_error', FormStatus::getError($this->getFormItem()->getName()) != null);
+        $this->assign('has_error', FormStatus::getError($this->webform->getId(), $this->getFormItem()->getName()) != null);
 
         $this->loadFormItem();
         $this->assign('form_item_html', $this->fetch($this->getFormItemTemplateFilename()));
     }
 
     protected function getFormItem(): WebFormItem {
-        return $this->webformIte;
+        return $this->webformItem;
+    }
+
+    protected function getWebform(): WebForm {
+        return $this->webform;
     }
 
     abstract function loadFormItem(): void;
@@ -42,6 +48,6 @@ abstract class FormItemVisual extends FrontendVisual {
     abstract function getFormItemTemplateFilename(): string;
 
     public function getPresentable(): ?Presentable {
-        return $this->webformIte;
+        return $this->webformItem;
     }
 }

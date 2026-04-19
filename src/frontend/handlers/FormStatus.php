@@ -4,40 +4,50 @@ namespace Obcato\Core\frontend\handlers;
 
 class FormStatus {
 
-    private static array $ERRORS = array();
-    private static ?int $SUBMITTED_FORM = null;
+    private const SESSION_KEY = 'obcato_form';
 
-    public static function raiseError(string $key, ErrorType $errorType): void {
-        self::$ERRORS[$key] = $errorType;
+    public static function raiseError(int $webformId, string $key, ErrorType $errorType): void {
+        self::ensureSession();
+        $_SESSION[self::SESSION_KEY][$webformId]['errors'][$key] = $errorType->value;
     }
 
-    public static function getError(string $key): ?ErrorType {
-        if (isset(self::$ERRORS[$key])) {
-            return self::$ERRORS[$key];
-        }
-        return null;
+    public static function getError(int $webformId, string $key): ?ErrorType {
+        self::ensureSession();
+        $value = $_SESSION[self::SESSION_KEY][$webformId]['errors'][$key] ?? null;
+        return $value !== null ? ErrorType::from($value) : null;
     }
 
-    public static function getErrors(): array {
-        return self::$ERRORS;
+    public static function hasErrors(int $webformId): bool {
+        self::ensureSession();
+        return !empty($_SESSION[self::SESSION_KEY][$webformId]['errors']);
     }
 
-    public static function hasErrors(): bool {
-        return count(self::$ERRORS) > 0;
-    }
-
-    public static function getSubmittedForm(): ?int {
-        return self::$SUBMITTED_FORM;
+    public static function clearErrors(int $webformId): void {
+        self::ensureSession();
+        unset($_SESSION[self::SESSION_KEY][$webformId]['errors']);
     }
 
     public static function setSubmittedForm(int $webformId): void {
-        self::$SUBMITTED_FORM = $webformId;
+        self::ensureSession();
+        $_SESSION[self::SESSION_KEY][$webformId]['submitted'] = true;
+    }
+
+    public static function isSubmitted(int $webformId): bool {
+        self::ensureSession();
+        if (!empty($_SESSION[self::SESSION_KEY][$webformId]['submitted'])) {
+            unset($_SESSION[self::SESSION_KEY][$webformId]['submitted']);
+            return true;
+        }
+        return false;
     }
 
     public static function getFieldValue(string $name): ?string {
-        if (isset($_POST[$name])) {
-            return $_POST[$name];
+        return $_POST[$name] ?? null;
+    }
+
+    private static function ensureSession(): void {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-        return null;
     }
 }

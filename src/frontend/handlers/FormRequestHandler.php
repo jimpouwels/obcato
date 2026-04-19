@@ -37,11 +37,11 @@ class FormRequestHandler {
             $webform = $this->webformDao->getWebForm($_POST['webform_id']);
 
             if ($webform->getIncludeCaptcha() && !$this->validCaptcha()) {
-                FormStatus::raiseError('captcha', ErrorType::InvalidValue);
+                FormStatus::raiseError($webform->getId(), 'captcha', ErrorType::InvalidValue);
             }
             $fields = $this->getFields($webform);
 
-            if (FormStatus::hasErrors()) {
+            if (FormStatus::hasErrors($webform->getId())) {
                 return;
             }
 
@@ -66,7 +66,7 @@ class FormRequestHandler {
                 continue;
             }
             if ($formField->getMandatory() && empty($_POST[$formField->getName()])) {
-                FormStatus::raiseError($formField->getName(), ErrorType::Mandatory);
+                FormStatus::raiseError($webform->getId(), $formField->getName(), ErrorType::Mandatory);
             }
             $filledInField = array();
             $filledInField['name'] = $formField->getName();

@@ -42,8 +42,16 @@ class FormFrontendVisual extends FrontendVisual {
         $webformChildData = $this->createChildData();
         $webformData = $this->renderWebForm($this->webform);
         $webformChildData->assign('webform', $webformData);
-        $webformChildData->assign('has_captcha_error', FormStatus::getError("captcha"));
+
+        // submit status
+        $webformChildData->assign('has_captcha_error', null);
+        $webformChildData->assign('is_submitted', false);
+        if (FormStatus::isSubmitted($this->webform->getId())) {
+            $webformChildData->assign('is_submitted', true);
+            $webformChildData->assign('has_captcha_error', FormStatus::getError($this->webform->getId(), "captcha"));
+        }
         $this->assign('form_html', $this->getTemplateEngine()->fetch(FRONTEND_TEMPLATE_DIR . "/" . $this->templateDao->getTemplateFile($this->webform->getTemplate()->getTemplateFileId())->getFileName(), $webformChildData));
+        FormStatus::clearErrors($this->webform->getId());
     }
 
     public function getPresentable(): ?Presentable {
@@ -54,7 +62,6 @@ class FormFrontendVisual extends FrontendVisual {
         $webformData = array();
         $webformData['title'] = $webform->getTitle();
         $webformData['fields'] = $this->renderFields($webform);
-        $webformData['is_submitted'] = FormStatus::getSubmittedForm() == $this->webform->getId();
         return $webformData;
     }
 
