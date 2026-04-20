@@ -46,7 +46,8 @@ class ElementHolderInteractor implements ElementHolderService {
     }
 
     private function bumpElementHolderVersion(ElementHolder $elementHolder): void {
-        $this->elementHolderDao->bumpVersion($elementHolder);
+        $elementHolder->setVersion($elementHolder->getVersion() + 1);
+        $this->elementHolderDao->updateVersion($elementHolder);
     }
 
 }

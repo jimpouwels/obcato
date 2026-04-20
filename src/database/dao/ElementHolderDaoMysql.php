@@ -56,9 +56,8 @@ class ElementHolderDaoMysql implements ElementHolderDao {
         $this->mysqlConnector->executeQuery($query);
     }
 
-    public function bumpVersion(ElementHolder $elementHolder): void {
-        $query = "UPDATE element_holders SET version = version + 1 WHERE id = " . $elementHolder->getId();
+    public function updateVersion(ElementHolder $elementHolder): void {
+        $query = "UPDATE element_holders SET version = ". $elementHolder->getVersion() . " WHERE id = " . $elementHolder->getId();
         $this->mysqlConnector->executeQuery($query);
-        $elementHolder->setVersion($elementHolder->getVersion() + 1);
     }
 }

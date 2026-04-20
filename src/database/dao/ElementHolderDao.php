@@ -13,5 +13,5 @@ interface ElementHolderDao {
 
     public function delete(ElementHolder $elementHolder): void;
 
-    public function bumpVersion(ElementHolder $elementHolder): void;
+    public function updateVersion(ElementHolder $elementHolder): void;
 }
