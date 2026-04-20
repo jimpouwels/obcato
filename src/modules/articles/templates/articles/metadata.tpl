@@ -9,7 +9,7 @@
 <div class="admin_form_v2">
     {$name_field}
     {$title_field}
-    {$h1_field}
+    {$seo_title_field}
     {$url_title_field}
     {$url_field}
     {$description_field}

@@ -36,13 +36,13 @@ class PageVisual extends FrontendVisual {
     public function loadVisual(?array &$data): void {
         $this->assignGlobal("page", $this->getPageContentAndMetaData($this->getPage()));
         $this->assign("crumb_path", $this->renderCrumbPath());
-        $this->assign("seo_title", $this->getPage()->getTitle());
-        $this->assign("title", $this->getPage()->getH1());
+        $this->assign("title", $this->getPage()->getTitle());
+        $this->assign("seo_title", $this->getPage()->getSeoTitle());
         if ($this->getArticle()) {
             $articleData = $this->renderArticle();
             $this->assignGlobal("article", $articleData);
-            $this->assign("seo_title", $this->getArticle()->getTitle());
-            $this->assign("title", $this->getArticle()->getH1());
+            $this->assign("title", $this->getArticle()->getTitle());
+            $this->assign("seo_title", $this->getArticle()->getSeoTitle());
         } else {
             $this->assign("article", null);
         }
@@ -85,8 +85,8 @@ class PageVisual extends FrontendVisual {
             if (!$page->isPublished()) continue;
             $pageData = array();
             $pageData['id'] = $page->getId();
-            $pageData['seo_title'] = $page->getTitle();
-            $pageData["title"] = $page->getH1();
+            $pageData["title"] = $page->getTitle();
+            $pageData['seo_title'] = $page->getSeoTitle();
             $pageData['url'] = $this->getLinkHelper()->createPageUrl($page);
             $data[] = $pageData;
         }
@@ -95,8 +95,8 @@ class PageVisual extends FrontendVisual {
 
     private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren, bool $renderParent): void {
         $pageData["is_current_page"] = $this->getPage()->getId() == $page->getId();
-        $pageData["seo_title"] = $page->getTitle();
-        $pageData["title"] = $page->getH1();
+        $pageData["title"] = $page->getTitle();
+        $pageData["seo_title"] = $page->getSeoTitle();
         $pageData["id"] = $page->getId();
         $pageData["url"] = $this->getLinkHelper()->createPageUrl($page);
         $pageData["is_homepage"] = $page->isHomepage();

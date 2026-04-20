@@ -9,7 +9,7 @@ class Article extends ElementHolder {
     const ElementHolderType = "ELEMENT_HOLDER_ARTICLE";
     private static int $SCOPE = 9;
     private ?string $description;
-    private ?string $h1 = null;
+    private ?string $seoTitle = null;
     private ?int $imageId = null;
     private ?int $wallpaperId = null;
     private ?string $urlTitle = null;
@@ -32,7 +32,7 @@ class Article extends ElementHolder {
 
     protected function initFromDb(array $row): void {
         $this->setDescription($row['description']);
-        $this->setH1($row['h1']);
+        $this->setSeoTitle($row['seo_title']);
         $this->setImageId($row['image_id']);
         $this->setWallpaperId($row['wallpaper_id']);
         $this->setUrlTitle($row['url_title']);
@@ -52,12 +52,12 @@ class Article extends ElementHolder {
         $this->description = $description;
     }
 
-    public function getH1(): ?string {
-        return $this->h1;
+    public function getSeoTitle(): ?string {
+        return $this->seoTitle;
     }
 
-    public function setH1(?string $h1): void {
-        $this->h1 = $h1;
+    public function setSeoTitle(?string $seoTitle): void {
+        $this->seoTitle = $seoTitle;
     }
 
     public function setUrlTitle(?string $urlTitle): void {

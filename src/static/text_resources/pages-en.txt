@@ -12,8 +12,8 @@ block_selection_title: Blocks
 
 # METADATA LABELS
 pages_edit_metadata_name_field_label: Name
-pages_edit_metadata_title_field_label: SEO-Title
-pages_edit_metadata_h1_field_label: Title
+pages_edit_metadata_title_field_label: Title
+pages_edit_metadata_seo_title_field_label: SEO-Title
 pages_edit_metadata_url_title_field_label: URL title
 pages_edit_metadata_include_parent_in_url_field_label: Include parent(s) in URL
 pages_edit_metadata_navigation_title_field_label: Navigation title

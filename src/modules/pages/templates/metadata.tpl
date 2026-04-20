@@ -7,7 +7,7 @@
 <div class="admin_form_v2">
     {$page_name_field}
     {$page_title_field}
-    {$h1_field}
+    {$seo_title_field}
     {$navigation_title_field}
     {$url_title_field}
     {$url_field}

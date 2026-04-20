@@ -51,7 +51,7 @@ class ArticleMetadataEditor extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         $nameField = new TextField("name", $this->getTextResource('article_editor_name_label'), $this->currentArticle->getName(), true, false, null);
         $titleField = new TextField("title", $this->getTextResource('article_editor_title_label'), $this->currentArticle->getTitle(), true, false, null);
-        $h1Field = new TextField("h1", $this->getTextResource('article_editor_h1_label'), $this->currentArticle->getH1(), false, false, null);
+        $seoTitleField = new TextField("seo_title", $this->getTextResource('article_editor_seo_title_label'), $this->currentArticle->getSeoTitle(), false, false, null);
         $templatePickerField = new TemplatePicker("template", $this->getTextResource("article_editor_template_field"), false, "", $this->currentArticle->getTemplate(), $this->currentArticle->getScope());
         $urlTitleField = new TextField('url_title', $this->getTextResource('article_editor_url_title_field'), $this->currentArticle->getUrlTitle(), false, false, "");
 
@@ -104,7 +104,7 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("current_article_id", $this->currentArticle->getId());
         $data->assign("name_field", $nameField->render());
         $data->assign("title_field", $titleField->render());
-        $data->assign("h1_field", $h1Field->render());
+        $data->assign("seo_title_field", $seoTitleField->render());
         $data->assign('template_field', $templatePickerField->render());
         $data->assign('url_field', $urlField->render());
         $data->assign('url', $url);

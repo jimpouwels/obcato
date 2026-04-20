@@ -36,8 +36,8 @@ class ArticleVisual extends FrontendVisual {
 
     public function loadVisual(?array &$data): void {
         $data["id"] = $this->getArticle()->getId();
-        $data["seo_title"] = $this->getArticle()->getTitle();
-        $data["title"] = $this->getArticle()->getH1();
+        $data["title"] = $this->getArticle()->getTitle();
+        $data["seo_title"] = $this->getArticle()->getSeoTitle();
         $data["description"] = $this->getArticle()->getDescription();
         $data["publication_date"] = $this->getArticle()->getPublicationDate();
         $data["sort_date"] = explode(' ', $this->getArticle()->getSortDate())[0];
@@ -64,8 +64,8 @@ class ArticleVisual extends FrontendVisual {
             $parentArticleData = array();
             $parentArticle = $this->articleService->getArticle($this->getArticle()->getParentArticleId());
             $parentArticleData["id"] = $parentArticle->getId();
-            $parentArticleData["seo_title"] = $parentArticle->getTitle();
-            $parentArticleData["title"] = $parentArticle->getH1();
+            $parentArticleData["title"] = $parentArticle->getTitle();
+            $parentArticleData["seo_title"] = $parentArticle->getSeoTitle();
             $parentArticleData["description"] = $parentArticle->getDescription();
             $parentArticleData["url"] = $this->getLinkHelper()->createArticleUrl($parentArticle);
 

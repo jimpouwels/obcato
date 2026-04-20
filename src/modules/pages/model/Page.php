@@ -9,7 +9,7 @@ class Page extends ElementHolder {
     const ElementHolderType = "ELEMENT_HOLDER_PAGE";
     private static int $SCOPE = 5;
     private ?string $description = null;
-    private ?string $h1 = null;
+    private ?string $seoTitle = null;
     private string $navigationTitle;
     private bool $includeInSearchEngine;
     private ?string $urlTitle = null;
@@ -32,7 +32,7 @@ class Page extends ElementHolder {
     protected function initFromDb(array $row): void {
         $this->setParentId($row['parent_id']);
         $this->setDescription($row['description']);
-        $this->setH1($row['h1']);
+        $this->setSeoTitle($row['seo_title']);
         $this->setUrlTitle($row['url_title']);
         $this->setNavigationTitle($row['navigation_title']);
         $this->setShowInNavigation($row['show_in_navigation'] == 1);
@@ -55,12 +55,12 @@ class Page extends ElementHolder {
         $this->description = $description;
     }
 
-    public function getH1(): ?string {
-        return $this->h1;
+    public function getSeoTitle(): ?string {
+        return $this->seoTitle;
     }
 
-    public function setH1(?string $h1): void {
-        $this->h1 = $h1;
+    public function setSeoTitle(?string $seoTitle): void {
+        $this->seoTitle = $seoTitle;
     }
 
     public function setUrlTitle(?string $urlTitle): void {
