@@ -29,5 +29,5 @@ interface ElementDao {
 
     public function getElementTypeForElement(int $elementId): ?ElementType;
 
-    public function createElement(ElementType $elementType, int $elementHolderId): Element;
+    public function insertElement(ElementType $elementType, Element $element): Element;
 }

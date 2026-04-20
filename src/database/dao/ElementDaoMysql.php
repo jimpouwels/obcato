@@ -6,7 +6,6 @@ use Obcato\Core\core\model\Element;
 use Obcato\Core\core\model\ElementHolder;
 use Obcato\Core\core\model\ElementType;
 use Obcato\Core\database\MysqlConnector;
-use const Obcato\CMS_ROOT;
 
 class ElementDaoMysql implements ElementDao {
 
@@ -123,21 +122,13 @@ class ElementDaoMysql implements ElementDao {
         return null;
     }
 
-    public function createElement(ElementType $elementType, int $elementHolderId): Element {
-        require_once CMS_ROOT . "/elements/" . $elementType->getIdentifier() . "/" . $elementType->getDomainObject();
-        $elementClassName = "Obcato\\Core\\elements\\" . $elementType->getIdentifier() . "\\" . $elementType->getClassName();
-        $newElement = new $elementClassName($elementType->getScopeId());
-        $newElement->setOrderNr(999);
-        $this->persistElement($elementType, $newElement, $elementHolderId);
-        return $newElement;
-    }
-
-    private function persistElement(ElementType $elementType, Element $element, int $elementHolderId): void {
+    public function insertElement(ElementType $elementType, Element $element): Element {
         $query = "INSERT INTO elements(follow_up, type_id, element_holder_id) VALUES (" . $element->getOrderNr() . " 
-                      , " . $elementType->getId() . ", " . $elementHolderId . ")";
+                      , " . $elementType->getId() . ", " . $element->getElementHolderId() . ")";
         $this->mysqlConnector->executeQuery($query);
         $element->setId($this->mysqlConnector->getInsertId());
         $element->updateMetaData();
+        return $element;
     }
 
 }

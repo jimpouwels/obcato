@@ -9,6 +9,8 @@ use Obcato\Core\core\model\ElementType;
 use Obcato\Core\database\dao\ElementDao;
 use Obcato\Core\database\dao\ElementDaoMysql;
 use Obcato\Core\elements\ElementContainsErrorsException;
+use Obcato\Core\service\ElementHolderService;
+use Obcato\Core\service\ElementHolderInteractor;
 use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
 use Obcato\Core\request_handlers\exceptions\VersionConflictException;
 use const Obcato\core\ADD_ELEMENT_FORM_ID;
@@ -17,9 +19,11 @@ use const Obcato\core\DELETE_ELEMENT_FORM_ID;
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
     private ElementDao $elementDao;
+    private ElementHolderService $elementHolderService; 
 
     public function __construct() {
         $this->elementDao = ElementDaoMysql::getInstance();
+        $this->elementHolderService = new ElementHolderInteractor();
     }
 
     public function handleGet(): void {}
@@ -64,9 +68,7 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 
     private function addElement(ElementHolder $elementHolder): void {
         $elementType = $this->getElementTypeToAdd();
-        $createdElement = $this->elementDao->createElement($elementType, $elementHolder->getId());
-        $createdElement->setElementHolderId($elementHolder->getId());
-        $elementHolder->addElement($createdElement);
+        $createdElement = $this->elementHolderService->addElementToElementHolder($elementType, $elementHolder);
         
         // Handle insert position if specified
         if (isset($_POST['element_insert_position'])) {
@@ -75,6 +77,7 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
         }
     }
 
+    // TODO: This function can probably be simplified
     private function reorderElementsAfterInsert(ElementHolder $elementHolder, int $newElementId, int $insertPosition): void {
         $elements = $elementHolder->getElements();
         
@@ -136,8 +139,8 @@ abstract class ElementHolderRequestHandler extends HttpRequestHandler {
     }
 
     private function getElementTypeToAdd(): ElementType {
-        $element_type_to_add = $_POST[ADD_ELEMENT_FORM_ID];
-        return $this->elementDao->getElementType($element_type_to_add);
+        $elementTypeToAdd = $_POST[ADD_ELEMENT_FORM_ID];
+        return $this->elementDao->getElementType($elementTypeToAdd);
     }
 
     private function isAddElementAction(): bool {

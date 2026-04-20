@@ -55,4 +55,10 @@ class ElementHolderDaoMysql implements ElementHolderDao {
         $query = "DELETE FROM element_holders WHERE id = " . $elementHolder->getId();
         $this->mysqlConnector->executeQuery($query);
     }
+
+    public function bumpVersion(ElementHolder $elementHolder): void {
+        $query = "UPDATE element_holders SET version = version + 1 WHERE id = " . $elementHolder->getId();
+        $this->mysqlConnector->executeQuery($query);
+        $elementHolder->setVersion($elementHolder->getVersion() + 1);
+    }
 }
