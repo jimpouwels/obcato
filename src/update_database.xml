@@ -328,6 +328,7 @@
             <query>ALTER TABLE element_holders ADD COLUMN version INT NOT NULL DEFAULT 1</query>
             <query>ALTER TABLE pages ADD COLUMN h1 VARCHAR(255) DEFAULT NULL</query>
             <query>ALTER TABLE articles ADD COLUMN h1 VARCHAR(255) DEFAULT NULL</query>
-        </queries>
+            <query>UPDATE pages p JOIN element_holders e ON p.element_holder_id = e.id SET p.h1 = e.title WHERE (p.h1 IS NULL OR p.h1 = '') AND e.title IS NOT NULL AND e.title != '';</query>
+            <query>UPDATE articles a JOIN element_holders e ON a.element_holder_id = e.id SET a.h1 = e.title WHERE (a.h1 IS NULL OR a.h1 = '') AND e.title IS NOT NULL AND e.title != '';</query>
     </version>
 </versions>
