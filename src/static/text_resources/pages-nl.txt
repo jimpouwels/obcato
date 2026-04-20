@@ -13,6 +13,7 @@ block_selection_title: Blokken
 # METADATA LABELS
 pages_edit_metadata_name_field_label: Naam
 pages_edit_metadata_title_field_label: Titel
+pages_edit_metadata_h1_field_label: H1
 pages_edit_metadata_url_title_field_label: URL titel
 pages_edit_metadata_include_parent_in_url_field_label: Parent(s) opnemen in URL
 pages_edit_metadata_navigation_title_field_label: Navigatietitel

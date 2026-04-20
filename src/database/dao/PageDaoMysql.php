@@ -8,7 +8,7 @@ use Obcato\Core\modules\pages\model\Page;
 class PageDaoMysql implements PageDao {
 
     private static string $myAllColumns = "e.id, e.template_id, e.last_modified, e.name, e.title, e.published, e.scope_id,
-                      e.created_at, e.created_by, e.type, e.version, p.navigation_title, p.url_title, p.keywords, p.description, p.parent_id, p.show_in_navigation,
+                      e.created_at, e.created_by, e.type, e.version, p.navigation_title, p.url_title, p.keywords, p.description, p.h1, p.parent_id, p.show_in_navigation,
                       p.include_in_searchindex, p.follow_up, p.is_homepage, p.include_parent_in_url";
     private static ?PageDaoMysql $instance = null;
     private MysqlConnector $mysqlConnector;
@@ -110,7 +110,7 @@ class PageDaoMysql implements PageDao {
     }
 
     public function updatePage(Page $page): void {
-        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_parent_in_url = ?, include_in_searchindex = ?, follow_up = ?, `description` = ?, url_title = ? WHERE element_holder_id = ?";
+        $query = "UPDATE pages SET navigation_title = ?, keywords = ?, show_in_navigation = ?, include_parent_in_url = ?, include_in_searchindex = ?, follow_up = ?, `description` = ?, url_title = ?, h1 = ? WHERE element_holder_id = ?";
 
         $navigationTitle = $page->getNavigationTitle();
         $keywords = $page->getKeywords();
@@ -121,9 +121,10 @@ class PageDaoMysql implements PageDao {
         $description = $page->getDescription();
         $elementHolderId = $page->getId();
         $urlTitle = $page->getUrlTitle();
+        $h1 = $page->getH1();
 
         $statement = $this->mysqlConnector->prepareStatement($query);
-        $statement->bind_param('ssiiiissi', $navigationTitle, $keywords, $showInNavigation, $includeParentInUrl, $includeInSearchEngine, $followUp, $description, $urlTitle, $elementHolderId);
+        $statement->bind_param('ssiiiisssi', $navigationTitle, $keywords, $showInNavigation, $includeParentInUrl, $includeInSearchEngine, $followUp, $description, $urlTitle, $h1, $elementHolderId);
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($page);
     }

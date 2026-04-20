@@ -35,6 +35,7 @@ class MetadataEditor extends Panel {
     public function loadPanelContent(TemplateData $data): void {
         $nameField = new TextField("name", $this->getTextResource('pages_edit_metadata_name_field_label'), $this->currentPage->getName(), true, false, null);
         $titleField = new TextField("page_title", $this->getTextResource('pages_edit_metadata_title_field_label'), $this->currentPage->getTitle(), true, false, null);
+        $h1Field = new TextField("h1", $this->getTextResource('pages_edit_metadata_h1_field_label'), $this->currentPage->getH1(), false, false, null);
         $urlTitleField = new TextField("url_title", $this->getTextResource('pages_edit_metadata_url_title_field_label'), $this->currentPage->getUrlTitle(), false, false, null);
         $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
         $keywordsField = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->currentPage->getKeywords(), false, false, "keywords_field");
@@ -50,6 +51,7 @@ class MetadataEditor extends Panel {
         $data->assign("element_holder_version", $this->currentPage->getVersion());
         $data->assign("page_name_field", $nameField->render());
         $data->assign("page_title_field", $titleField->render());
+        $data->assign("h1_field", $h1Field->render());
         $data->assign("keywords_field", $keywordsField->render());
         $data->assign("navigation_title_field", $navigationTitleField->render());
         $data->assign('url_title_field', $urlTitleField->render());
