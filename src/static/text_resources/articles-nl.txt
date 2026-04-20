@@ -23,8 +23,8 @@ articles_list_message_no_articles_found: Geen artikelen gevonden
 
 # EDITOR
 article_editor_name_label: Naam
-article_editor_title_label: Titel
-article_editor_h1_label: H1
+article_editor_title_label: SEO-Titel
+article_editor_h1_label: Title
 article_editor_template_field: Template
 article_editor_description_label: Beschrijving
 article_editor_url_title_field: URL titel

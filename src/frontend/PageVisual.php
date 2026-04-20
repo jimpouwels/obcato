@@ -36,13 +36,13 @@ class PageVisual extends FrontendVisual {
     public function loadVisual(?array &$data): void {
         $this->assignGlobal("page", $this->getPageContentAndMetaData($this->getPage()));
         $this->assign("crumb_path", $this->renderCrumbPath());
-        $this->assign("title", $this->getPage()->getTitle());
-        $this->assign("h1", $this->getPage()->getH1());
+        $this->assign("seo_title", $this->getPage()->getTitle());
+        $this->assign("title", $this->getPage()->getH1());
         if ($this->getArticle()) {
             $articleData = $this->renderArticle();
             $this->assignGlobal("article", $articleData);
-            $this->assign("title", $this->getArticle()->getTitle());
-            $this->assign("h1", $this->getArticle()->getH1());
+            $this->assign("seo_title", $this->getArticle()->getTitle());
+            $this->assign("title", $this->getArticle()->getH1());
         } else {
             $this->assign("article", null);
         }
@@ -85,7 +85,8 @@ class PageVisual extends FrontendVisual {
             if (!$page->isPublished()) continue;
             $pageData = array();
             $pageData['id'] = $page->getId();
-            $pageData['title'] = $page->getTitle();
+            $pageData['seo_title'] = $page->getTitle();
+            $pageData["title"] = $page->getH1();
             $pageData['url'] = $this->getLinkHelper()->createPageUrl($page);
             $data[] = $pageData;
         }
@@ -94,8 +95,8 @@ class PageVisual extends FrontendVisual {
 
     private function addPageMetaData(Page $page, array &$pageData, bool $renderChildren, bool $renderParent): void {
         $pageData["is_current_page"] = $this->getPage()->getId() == $page->getId();
-        $pageData["title"] = $page->getTitle();
-        $pageData["h1"] = $page->getH1();
+        $pageData["seo_title"] = $page->getTitle();
+        $pageData["title"] = $page->getH1();
         $pageData["id"] = $page->getId();
         $pageData["url"] = $this->getLinkHelper()->createPageUrl($page);
         $pageData["is_homepage"] = $page->isHomepage();

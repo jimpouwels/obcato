@@ -53,7 +53,7 @@ class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
         foreach ($articles as $article) {
             $articleData = array();
             $articleData["id"] = $article->getId();
-            $articleData["title"] = $article->getTitle();
+            $articleData["title"] = $article->getH1() ?: $article->getTitle();
             $articleData["url"] = $this->getLinkHelper()->createArticleUrl($article);
             $articleData["description"] = $this->toHtml($article->getDescription());
             $articleData["publication_date"] = DateUtility::mysqlDateToString($article->getPublicationDate(), '-');
