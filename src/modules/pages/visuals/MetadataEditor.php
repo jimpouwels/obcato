@@ -38,7 +38,6 @@ class MetadataEditor extends Panel {
         $h1Field = new TextField("h1", $this->getTextResource('pages_edit_metadata_h1_field_label'), $this->currentPage->getH1(), false, false, null);
         $urlTitleField = new TextField("url_title", $this->getTextResource('pages_edit_metadata_url_title_field_label'), $this->currentPage->getUrlTitle(), false, false, null);
         $navigationTitleField = new TextField("navigation_title", $this->getTextResource('pages_edit_metadata_navigation_title_field_label'), $this->currentPage->getNavigationTitle(), true, false, null);
-        $keywordsField = new TextField("keywords", $this->getTextResource('pages_edit_metadata_keywords_field_label'), $this->currentPage->getKeywords(), false, false, "keywords_field");
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('pages_edit_metadata_friendly_url_label'), $this->friendUrlManager->getFriendlyUrlForElementHolder($this->currentPage), '');
         $includeParentInUrlField = new SingleCheckbox("include_parent_in_url", $this->getTextResource('pages_edit_metadata_include_parent_in_url_field_label'), $this->currentPage->getIncludeParentInUrl(), false, "");
         $descriptionField = new TextArea("description", $this->getTextResource('pages_edit_metadata_description_field_label'), $this->currentPage->getDescription(), false, true, null);
@@ -52,7 +51,6 @@ class MetadataEditor extends Panel {
         $data->assign("page_name_field", $nameField->render());
         $data->assign("page_title_field", $titleField->render());
         $data->assign("h1_field", $h1Field->render());
-        $data->assign("keywords_field", $keywordsField->render());
         $data->assign("navigation_title_field", $navigationTitleField->render());
         $data->assign('url_title_field', $urlTitleField->render());
         $data->assign('url_field', $urlField->render());

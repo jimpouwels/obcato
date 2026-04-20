@@ -31,7 +31,6 @@ article_editor_url_title_field: URL title
 article_editor_published_label: Published
 article_editor_publication_date_label: Publication date
 article_editor_sort_date_label: Sort date
-article_editor_keyword_field: Keywords
 article_editor_target_page_label: Target page
 article_editor_parent_article_label: Select main article
 article_editor_comment_webform_label: Comment form

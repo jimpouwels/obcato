@@ -62,7 +62,6 @@ class ArticleMetadataEditor extends Panel {
         $url .= $this->friendlyUrlManager->getFriendlyUrlForElementHolder($this->currentArticle);
         $urlField = new ReadonlyTextField('friendly_url', $this->getTextResource('friendly_url_label'), $url, '');
 
-        $keywordsField = new TextField('keywords', $this->getTextResource('article_editor_keyword_field'), $this->currentArticle->getKeywords(), false, false, "keywords_field");
         $descriptionField = new TextArea("article_description", $this->getTextResource('article_editor_description_label'), $this->currentArticle->getDescription(), false, true, null);
         $publishedField = new SingleCheckbox("article_published", $this->getTextResource('article_editor_published_label'), $this->currentArticle->isPublished(), false, "");
         $publicationDateField = new DateField("publication_date", $this->getTextResource('article_editor_publication_date_label'), $this->getDateValue($this->currentArticle->getPublicationDate()), true, null);
@@ -107,7 +106,6 @@ class ArticleMetadataEditor extends Panel {
         $data->assign("title_field", $titleField->render());
         $data->assign("h1_field", $h1Field->render());
         $data->assign('template_field', $templatePickerField->render());
-        $data->assign('keywords_field', $keywordsField->render());
         $data->assign('url_field', $urlField->render());
         $data->assign('url', $url);
         $data->assign('url_title_field', $urlTitleField->render());

@@ -13,7 +13,6 @@
     {$url_title_field}
     {$url_field}
     {$description_field}
-    {$keywords_field}
     {$published_field}
     {$publication_date_field}
     {$sort_date_field}

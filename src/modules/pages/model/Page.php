@@ -14,7 +14,6 @@ class Page extends ElementHolder {
     private bool $includeInSearchEngine;
     private ?string $urlTitle = null;
     private ?int $parentId;
-    private ?string $keywords = null;
     private bool $showInNavigation;
     private bool $includeParentInUrl;
     private int $followUp;
@@ -34,7 +33,6 @@ class Page extends ElementHolder {
         $this->setParentId($row['parent_id']);
         $this->setDescription($row['description']);
         $this->setH1($row['h1']);
-        $this->setKeywords($row['keywords']);
         $this->setUrlTitle($row['url_title']);
         $this->setNavigationTitle($row['navigation_title']);
         $this->setShowInNavigation($row['show_in_navigation'] == 1);
@@ -71,14 +69,6 @@ class Page extends ElementHolder {
 
     public function getUrlTitle(): ?string {
         return $this->urlTitle;
-    }
-
-    public function getKeywords(): ?string {
-        return $this->keywords;
-    }
-
-    public function setKeywords(?string $keywords): void {
-        $this->keywords = $keywords;
     }
 
     public function getNavigationTitle(): string {

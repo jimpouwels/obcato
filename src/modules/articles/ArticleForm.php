@@ -29,7 +29,6 @@ class ArticleForm extends Form {
         $this->article->setH1($this->getFieldValue("h1"));
         $this->article->setUrlTitle($this->getFieldValue('url_title'));
         $this->article->setTemplateId($this->getNumber('template'));
-        $this->article->setKeywords($this->getFieldValue('keywords'));
         $this->article->setDescription($this->getFieldValue("article_description"));
         $this->article->setPublished($this->getCheckboxValue("article_published"));
         $this->article->setImageId($this->getNumber("article_image_ref_" . $this->article->getId()));

@@ -38,13 +38,11 @@ class PageVisual extends FrontendVisual {
         $this->assign("crumb_path", $this->renderCrumbPath());
         $this->assign("title", $this->getPage()->getTitle());
         $this->assign("h1", $this->getPage()->getH1());
-        $this->assign("keywords", $this->getPage()->getKeywords());
         if ($this->getArticle()) {
             $articleData = $this->renderArticle();
             $this->assignGlobal("article", $articleData);
             $this->assign("title", $this->getArticle()->getTitle());
             $this->assign("h1", $this->getArticle()->getH1());
-            $this->assign("keywords", $this->getArticle()->getKeywords());
         } else {
             $this->assign("article", null);
         }
@@ -99,7 +97,6 @@ class PageVisual extends FrontendVisual {
         $pageData["title"] = $page->getTitle();
         $pageData["h1"] = $page->getH1();
         $pageData["id"] = $page->getId();
-        $pageData["keywords"] = $page->getKeywords();
         $pageData["url"] = $this->getLinkHelper()->createPageUrl($page);
         $pageData["is_homepage"] = $page->isHomepage();
         $pageData["navigation_title"] = $page->getNavigationTitle();

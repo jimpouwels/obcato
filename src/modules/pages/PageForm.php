@@ -24,7 +24,6 @@ class PageForm extends Form {
         $this->page->setPublished($this->getCheckboxValue("published"));
         $this->page->setIncludeInSearchEngine($this->getCheckboxValue("include_in_search_engine"));
         $this->page->setNavigationTitle($this->getMandatoryFieldValue("navigation_title"));
-        $this->page->setKeywords($this->getFieldValue("keywords"));
         $this->page->setDescription($this->getFieldValue("description"));
         $this->page->setShowInNavigation($this->getCheckboxValue("show_in_navigation"));
         $this->page->setTemplateId($this->getNumber("page_template"));

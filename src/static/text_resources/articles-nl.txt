@@ -31,7 +31,6 @@ article_editor_url_title_field: URL titel
 article_editor_published_label: Gepubliceerd
 article_editor_publication_date_label: Publicatiedatum
 article_editor_sort_date_label: Sorteerdatum
-article_editor_keyword_field: Keywords
 article_editor_parent_article_label: Selecteer hoofdartikel
 article_editor_target_page_label: Doelpagina
 article_editor_comment_webform_label: Reactieformulier

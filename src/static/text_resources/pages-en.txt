@@ -17,7 +17,6 @@ pages_edit_metadata_h1_field_label: H1
 pages_edit_metadata_url_title_field_label: URL title
 pages_edit_metadata_include_parent_in_url_field_label: Include parent(s) in URL
 pages_edit_metadata_navigation_title_field_label: Navigation title
-pages_edit_metadata_keywords_field_label: Keywords
 pages_edit_metadata_description_field_label: Description
 pages_edit_metadata_ispublished_field_label: Published
 pages_edit_metadata_include_in_search_engine_field_label: Include in search engine

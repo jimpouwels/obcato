@@ -12,7 +12,6 @@ class Article extends ElementHolder {
     private ?string $h1 = null;
     private ?int $imageId = null;
     private ?int $wallpaperId = null;
-    private ?string $keywords = null;
     private ?string $urlTitle = null;
     private string $publicationDate;
     private string $sortDate;
@@ -36,7 +35,6 @@ class Article extends ElementHolder {
         $this->setH1($row['h1']);
         $this->setImageId($row['image_id']);
         $this->setWallpaperId($row['wallpaper_id']);
-        $this->setKeywords($row['keywords']);
         $this->setUrlTitle($row['url_title']);
         $this->setPublicationDate($row['publication_date']);
         $this->setSortDate($row['sort_date']);
@@ -68,14 +66,6 @@ class Article extends ElementHolder {
 
     public function getUrlTitle(): ?string {
         return $this->urlTitle;
-    }
-
-    public function getKeywords(): ?string {
-        return $this->keywords;
-    }
-
-    public function setKeywords(?string $keywords): void {
-        $this->keywords = $keywords;
     }
 
     public function getImageId(): ?int {
