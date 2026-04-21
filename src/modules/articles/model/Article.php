@@ -72,8 +72,8 @@ class Article extends ElementHolder {
         return $this->imageId;
     }
 
-    public function setImageId(?int $image_id): void {
-        $this->imageId = $image_id;
+    public function setImageId(?int $imageId): void {
+        $this->imageId = $imageId;
     }
 
     public function getWallpaperId(): ?int {
@@ -88,16 +88,16 @@ class Article extends ElementHolder {
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(string $publication_date): void {
-        $this->publicationDate = $publication_date;
+    public function setPublicationDate(string $publicationDate): void {
+        $this->publicationDate = $publicationDate;
     }
 
     public function getSortDate(): string {
         return $this->sortDate;
     }
 
-    public function setSortDate(string $sort_date): void {
-        $this->sortDate = $sort_date;
+    public function setSortDate(string $sortDate): void {
+        $this->sortDate = $sortDate;
     }
 
     public function getTargetPageId(): ?int {
@@ -112,8 +112,8 @@ class Article extends ElementHolder {
         return $this->parentArticleId;
     }
 
-    public function setParentArticleId(?int $parent_article_id): void {
-        $this->parentArticleId = $parent_article_id;
+    public function setParentArticleId(?int $parentArticleId): void {
+        $this->parentArticleId = $parentArticleId;
     }
 
     public function getCommentWebFormId(): ?int {

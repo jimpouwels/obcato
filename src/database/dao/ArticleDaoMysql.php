@@ -207,7 +207,7 @@ class ArticleDaoMysql implements ArticleDao {
         $elementHolderId = $article->getId();
 
         $statement = $this->mysqlConnector->prepareStatement("UPDATE articles SET description = ?, seo_title = ?, publication_date = ?, url_title = ?, sort_date = ?, image_id = ?, wallpaper_id = ?, target_page = ?, parent_article_id = ?, template_id = ?, comment_webform_id = ? WHERE element_holder_id = ?");
-        $statement->bind_param('ssssiiiiisii', $description, $seoTitle, $publicationDate, $urlTitle, $sortDate, $imageId, $wallpaperId, $targetPage, $parentArticleId, $templateId, $commentWebformId, $elementHolderId);
+        $statement->bind_param('ssssssiiiiii', $description, $seoTitle, $publicationDate, $urlTitle, $sortDate, $imageId, $wallpaperId, $targetPage, $parentArticleId, $templateId, $commentWebformId, $elementHolderId);
 
         $this->mysqlConnector->executeStatement($statement);
         $this->elementHolderDao->update($article);
