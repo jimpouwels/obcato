@@ -20,6 +20,10 @@
     gap: 8px;
 }
 
+.list_element .button {
+    margin-top: 15px;
+}
+
 .list_element_values {
     display: flex;
     align-items: flex-start;
