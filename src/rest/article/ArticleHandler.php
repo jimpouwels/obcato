@@ -23,6 +23,8 @@ class ArticleHandler extends Handler {
         $this->register(HttpMethod::DELETE, "/article/delete_wallpaper", $this->deleteWallpaper(...));
         $this->register(HttpMethod::GET, "/article/image", $this->getImage(...));
         $this->register(HttpMethod::GET, "/article/wallpaper", $this->getWallpaper(...));
+        $this->register(HttpMethod::GET, "/article/search", $this->search(...));
+        $this->register(HttpMethod::GET, "/article/get", $this->getArticle(...));
     }
 
     public function updateImage(array $data): ?array {
@@ -51,6 +53,52 @@ class ArticleHandler extends Handler {
         $article->setWallpaperId(null);
         $this->articleDao->updateArticle($article);
         return ['element_holder_version' => $article->getVersion()];
+    }
+    
+    public function getArticle(): array {
+        $id = $_GET["id"] ?? "";
+        if (empty($id)) {
+            return [];
+        }
+        
+        $article = $this->articleDao->getArticle(intval($id));
+        if (!$article) {
+            return [];
+        }
+        
+        $description = $article->getDescription();
+        return [
+            "id" => $article->getId(),
+            "name" => $article->getName() ?? "",
+            "url_title" => $article->getUrlTitle() ?? "",
+            "intro" => $description ? substr(strip_tags($description), 0, 100) : ""
+        ];
+    }
+
+    public function search(): array {
+        $keyword = $_GET["keyword"] ?? "";
+        if (empty($keyword)) {
+            return [];
+        }
+        
+        $foundArticles = $this->articleDao->searchArticles($keyword);
+        $data = [];
+        foreach ($foundArticles as $article) {
+            $articleData = array();
+            $articleData["id"] = $article->getId();
+            $articleData["name"] = $article->getName() ?? "";
+            $articleData["url_title"] = $article->getUrlTitle() ?? "";
+            $description = $article->getDescription();
+            if ($description) {
+                $articleData["intro"] = substr(strip_tags($description), 0, 100);
+            } else {
+                $articleData["intro"] = "";
+            }
+            $data[] = $articleData;
+            
+            if (count($data) >= 20) break;
+        }
+        return $data;
     }
 
     public function getImage(?array $data): ?array {

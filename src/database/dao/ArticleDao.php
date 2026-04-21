@@ -17,7 +17,7 @@ interface ArticleDao {
 
     public function getAllChildArticles(int $parentArticleId): array;
 
-    public function searchArticles(string $keyword, ?int $termId): array;
+    public function searchArticles(string $keyword, ?int $termId = null): array;
 
     public function getRandomArticles(?int $exclude, bool $published, int $numberOfResults, ?array $terms): array;
 

@@ -361,8 +361,8 @@ function editLink(linkElement, editor) {
             url: '/admin/api/article/get?id=' + linkId,
             method: 'GET',
             success: function(article) {
-                if (article && article.title) {
-                    $articleSelected.find('.selected-item-name').text(article.title);
+                if (article && article.name) {
+                    $articleSelected.find('.selected-item-name').text(article.name);
                 }
             }
         });
@@ -555,12 +555,12 @@ function displayArticleResults(articles) {
     
     articles.forEach(function(article) {
         const $item = $('<div class="link-search-result-item"></div>');
-        $item.html('<div class="result-title">' + article.title + '</div>' + 
+        $item.html('<div class="result-title">' + article.name + '</div>' + 
                    (article.intro ? '<div class="result-path">' + article.intro + '</div>' : ''));
         $item.data('article-id', article.id);
-        $item.data('article-title', article.title);
+        $item.data('article-name', article.name);
         $item.on('click', function() {
-            selectArticle(article.id, article.title);
+            selectArticle(article.id, article.name);
         });
         $articleResults.append($item);
     });
