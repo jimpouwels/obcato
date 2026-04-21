@@ -16,6 +16,9 @@ abstract class HttpRequestHandler {
         }
     }
 
+    abstract public function handleGet(): void;
+    abstract public function handlePost(): void;
+
     protected function sendSuccessMessage(string $message): void {
         Notifications::setSuccessMessage($message);
     }
