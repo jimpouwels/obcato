@@ -8,6 +8,7 @@ use Pageflow\Core\modules\settings\model\Settings;
 use Pageflow\Core\modules\settings\visuals\DomainSettingsPanel;
 use Pageflow\Core\modules\settings\visuals\FrontendSettingsPanel;
 use Pageflow\Core\modules\settings\visuals\GlobalSettingsPanel;
+use Pageflow\Core\modules\settings\visuals\SecuritySettingsPanel;
 use Pageflow\Core\view\views\ActionButtonSave;
 use Pageflow\Core\view\views\ModuleVisual;
 use Pageflow\Core\view\views\TabMenu;
@@ -36,6 +37,7 @@ class SettingsModuleVisual extends ModuleVisual {
         $this->assign("global_settings_panel", $this->renderGlobalSettingsPanel());
         $this->assign("domain_settings_panel", $this->renderDomainSettingsPanel());
         $this->assign("frontend_settings_panel", $this->renderFrontendSettingsPanel());
+        $this->assign("security_settings_panel", $this->renderSecuritySettingsPanel());
     }
 
     public function getActionButtons(): array {
@@ -84,6 +86,10 @@ class SettingsModuleVisual extends ModuleVisual {
 
     private function renderFrontendSettingsPanel(): string {
         return (new FrontendSettingsPanel($this->settings))->render();
+    }
+
+    private function renderSecuritySettingsPanel(): string {
+        return (new SecuritySettingsPanel($this->settings))->render();
     }
 
     private function renderWarningMessage(): string {
