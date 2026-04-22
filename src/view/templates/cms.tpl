@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl_NL" lang="nl_NL">
 <head>
-    <title>Obcato</title>
+    <title>Pageflow</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -34,7 +34,7 @@
 <body>
 <div id="header-wrapper">
     <div id="top">
-        <p class="title">Obcato <span class="version">v{$system_version}</span></p>
+        <p class="title">Pageflow <span class="version">v{$system_version}</span></p>
         <div class="header-right">
             {$current_user_indicator}
         </div>
