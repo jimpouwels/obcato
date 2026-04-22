@@ -24,14 +24,15 @@ class SettingsDaoMysql implements SettingsDao {
 
     public function update(Settings $settings): void {
         $statement = $this->mysqlConnector->prepareStatement("UPDATE settings SET website_title = ?, 
-                                                                                        backend_hostname = ?,
-                                                                                        frontend_hostname = ?,
-                                                                                        smtp_host = ?,
-                                                                                        email_address = ?,
-                                                                                        database_version = ?,
-                                                                                        404_page_id = ?,
-                                                                                        browser_image_cache_in_seconds = ?,
-                                                                                        iframe_security_policy = ?");
+                            backend_hostname = ?,
+                            frontend_hostname = ?,
+                            smtp_host = ?,
+                            email_address = ?,
+                            database_version = ?,
+                            404_page_id = ?,
+                            browser_image_cache_in_seconds = ?,
+                            iframe_security_policy = ?,
+                            force_https = ?");
         $websiteTitle = $settings->getWebsiteTitle();
         $backendHostname = $settings->getBackEndHostname();
         $frontendHostname = $settings->getFrontEndHostname();
@@ -41,7 +42,8 @@ class SettingsDaoMysql implements SettingsDao {
         $page404Id = $settings->get404PageId();
         $browserCacheInSeconds = $settings->getBrowserImageCacheInSeconds();
         $iFrameSecurityPolicy = $settings->getIFrameSecurityPolicy();
-        $statement->bind_param("ssssssiis", $websiteTitle,
+        $forceHttps = $settings->isForceHttps() ? 1 : 0;
+        $statement->bind_param("ssssssiisi", $websiteTitle,
             $backendHostname,
             $frontendHostname,
             $smtpHost,
@@ -49,18 +51,19 @@ class SettingsDaoMysql implements SettingsDao {
             $databaseVersion,
             $page404Id,
             $browserCacheInSeconds,
-            $iFrameSecurityPolicy);
+            $iFrameSecurityPolicy,
+            $forceHttps);
         $this->mysqlConnector->executeStatement($statement);
     }
 
     public function insert(Settings $settings): void {
-        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host 
-                    , email_address, database_version) VALUES ('Default', ?, ?, ?, ?, '" . SYSTEM_VERSION . "')");
+        $statement = $this->mysqlConnector->prepareStatement("INSERT INTO settings (website_title, backend_hostname, frontend_hostname, smtp_host, email_address, database_version, force_https) VALUES ('Default', ?, ?, ?, ?, '" . SYSTEM_VERSION . "', ?)");
         $backendHostname = $settings->getBackEndHostname();
         $frontendHostname = $settings->getFrontEndHostname();
         $smtpHost = $settings->getSmtpHost();
         $emailAddress = $settings->getEmailAddress();
-        $statement->bind_param("ssss", $backendHostname, $frontendHostname, $smtpHost, $emailAddress);
+        $forceHttps = $settings->isForceHttps() ? 1 : 0;
+        $statement->bind_param("ssssi", $backendHostname, $frontendHostname, $smtpHost, $emailAddress, $forceHttps);
         $this->mysqlConnector->executeStatement($statement);
     }
 

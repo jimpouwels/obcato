@@ -335,6 +335,7 @@
             <query>ALTER TABLE pages CHANGE COLUMN h1 seo_title VARCHAR(255) DEFAULT NULL</query>
             <query>ALTER TABLE articles CHANGE COLUMN h1 seo_title VARCHAR(255) DEFAULT NULL</query>
             <query>ALTER TABLE settings ADD COLUMN iframe_security_policy TEXT NOT NULL DEFAULT 'SAMEORIGIN'</query>
+            <query>ALTER TABLE settings ADD COLUMN force_https TINYINT(1) NOT NULL DEFAULT 1</query>
         </queries>
     </version>
 </versions>

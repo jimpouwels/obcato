@@ -15,6 +15,7 @@ class Settings extends Entity {
     private string $databaseVersion;
     private int $browserImageCacheInSeconds;
     private string $iFrameSecurityPolicy;
+    private bool $forceHttps;
     private ?Page $page404 = null;
 
     public function getWebsiteTitle(): string {
@@ -93,6 +94,14 @@ class Settings extends Entity {
         $this->iFrameSecurityPolicy = $iFrameSecurityPolicy;
     }
 
+    public function isForceHttps(): bool {
+        return $this->forceHttps;
+    }
+
+    public function setForceHttps(bool $forceHttps): void {
+        $this->forceHttps = $forceHttps;
+    }
+
     public static function constructFromRecord(array $row): Settings {
         $settings = new Settings();
         $settings->initFromDb($row);
@@ -108,6 +117,7 @@ class Settings extends Entity {
         $this->setDatabaseVersion($row['database_version']);
         $this->setBrowserImageCacheInSeconds($row['browser_image_cache_in_seconds']);
         $this->setIFrameSecurityPolicy($row['iframe_security_policy']);
+        $this->setForceHttps($row['force_https'] == 1);
         $this->setPage404(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
     }
 }

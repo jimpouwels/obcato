@@ -47,6 +47,9 @@ class RequestHandler {
         if ($this->settings->getIFrameSecurityPolicy() != "ALLOW") {
             header("X-Frame-Options: " . $this->settings->getIFrameSecurityPolicy());
         }
+        if ($this->settings->isForceHttps()) {
+            header("Strict-Transport-Security: max-age=31536000; includeSubDomains;");
+        }
         if ($this->isSitemapRequest()) {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');

@@ -2,13 +2,12 @@
 
 namespace Obcato\Core\modules\settings\visuals;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\view\TemplateData;
 use Obcato\Core\view\views\Panel;
 use Obcato\Core\view\views\Pulldown;
 use Obcato\Core\view\views\TextField;
+use Obcato\Core\view\views\SingleCheckbox;
 
 class FrontendSettingsPanel extends Panel {
 
@@ -25,12 +24,16 @@ class FrontendSettingsPanel extends Panel {
 
     public function loadPanelContent(TemplateData $data): void {
         $browserImageCacheInSeconds = new TextField("browser_image_cache_in_seconds", "settings_form_browser_image_cache_in_seconds", $this->settings->getBrowserImageCacheInSeconds(), true, false, null);
+        
         $iFrameSecurityPolicy = new Pulldown("iframe_security_policy", "settings_form_iframe_security_policy", $this->settings->getIFrameSecurityPolicy(), [], true, null);
         $iFrameSecurityPolicy->addOption($this->getTextResource("settings_form_iframe_security_policy_sameorigin"), "SAMEORIGIN");
         $iFrameSecurityPolicy->addOption($this->getTextResource("settings_form_iframe_security_policy_allow"), "ALLOW");
         $iFrameSecurityPolicy->addOption($this->getTextResource("settings_form_iframe_security_policy_deny"), "DENY");
 
+        $forceHttps = new SingleCheckbox("force_https", "settings_form_force_https", $this->settings->isForceHttps() ? "on" : "", false, null);
+
         $data->assign("browser_image_cache_in_seconds", $browserImageCacheInSeconds->render());
         $data->assign("iframe_security_policy", $iFrameSecurityPolicy->render());
+        $data->assign("force_https", $forceHttps->render());
     }
 }

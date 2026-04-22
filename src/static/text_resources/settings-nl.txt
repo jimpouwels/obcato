@@ -21,6 +21,7 @@ settings_form_backend_component_dir_field: Component directory
 settings_form_selected_homepage: Geselecteerde homepage
 settings_form_selected_404_page: Geselecteerde 404-Pagina
 settings_form_browser_image_cache_in_seconds: Browser afbeelding cache in secondes
+settings_form_force_https: Forceer veilige (HTTPS) verbinding
 settings_form_iframe_security_policy: Toestaan dat website word ingesloten in een iFrame
 settings_form_iframe_security_policy_sameorigin: Alleen vanaf hetzelfde domein
 settings_form_iframe_security_policy_allow: Altijd Toestaan

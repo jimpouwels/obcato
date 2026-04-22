@@ -858,7 +858,7 @@ input.hasDatepicker {
 }
 
 .admin_field_checkbox {
-    width: auto;
+    width: auto !important;
     margin-right: 8px;
 }
 
