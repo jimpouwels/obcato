@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\modules\templates\model\Presentable;
+use const Pageflow\CMS_ROOT;
 
 class RobotsVisual extends FrontendVisual {
 

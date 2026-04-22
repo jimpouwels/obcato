@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals\webforms;
+namespace Pageflow\Core\modules\webforms\visuals\webforms;
 
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\WebformItemFactory;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Button;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\WebformItemFactory;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Button;
+use Pageflow\Core\view\views\Panel;
 
 class WebformEditor extends Panel {
 

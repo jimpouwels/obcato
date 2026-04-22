@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\rest\article;
+namespace Pageflow\Core\rest\article;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\rest\Handler;
-use Obcato\Core\rest\HttpMethod;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\rest\Handler;
+use Pageflow\Core\rest\HttpMethod;
 
 class ArticleHandler extends Handler {
 

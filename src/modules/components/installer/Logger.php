@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\modules\components\installer;
+namespace Pageflow\Core\modules\components\installer;
 
 class Logger {
 

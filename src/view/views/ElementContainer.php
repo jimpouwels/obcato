@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\view\TemplateData;
 
 class ElementContainer extends Panel {
 

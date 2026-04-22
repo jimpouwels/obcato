@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\request_handlers;
+namespace Pageflow\Core\request_handlers;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\core\model\Notifications;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\core\model\Notifications;
 
 abstract class HttpRequestHandler {
 

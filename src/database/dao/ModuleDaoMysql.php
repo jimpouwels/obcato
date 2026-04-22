@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\core\model\ModuleGroup;
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\core\model\ModuleGroup;
+use Pageflow\Core\database\MysqlConnector;
 
 class ModuleDaoMysql implements ModuleDao {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\components;
+namespace Pageflow\Core\modules\components\visuals\components;
 
-use Obcato\Core\modules\components\ComponentRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\modules\components\ComponentRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class ComponentsDetailsPanel extends Panel {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\blocks;
+namespace Pageflow\Core\modules\blocks;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\blocks\model\Block;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\blocks\model\Block;
 
 class BlockForm extends Form {
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace Obcato\Core\elements\image_element;
+namespace Pageflow\Core\elements\image_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\elements\image_element\visuals\ImageElementEditor;
-use Obcato\Core\elements\image_element\visuals\ImageElementStatics;
-use Obcato\Core\frontend\ImageElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\elements\image_element\visuals\ImageElementEditor;
+use Pageflow\Core\elements\image_element\visuals\ImageElementStatics;
+use Pageflow\Core\frontend\ImageElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class ImageElement extends Element {
 

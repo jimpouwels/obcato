@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\elements\separator_element;
+namespace Pageflow\Core\elements\separator_element;
 
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\elements\text_element\TextElementForm;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\elements\text_element\TextElementForm;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class SeparatorElementRequestHandler extends HttpRequestHandler {
 

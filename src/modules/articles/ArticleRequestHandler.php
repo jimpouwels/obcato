@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\request_handlers\ElementHolderRequestHandler;
-use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
-use Obcato\Core\request_handlers\exceptions\VersionConflictException;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\request_handlers\ElementHolderRequestHandler;
+use Pageflow\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Pageflow\Core\request_handlers\exceptions\VersionConflictException;
 
 class ArticleRequestHandler extends ElementHolderRequestHandler {
 

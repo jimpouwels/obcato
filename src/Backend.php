@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core;
+namespace Pageflow\Core;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\request_handlers\BackendRequestHandler;
-use Obcato\Core\view\views\Cms;
-use Obcato\Core\view\views\ModuleVisual;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\request_handlers\BackendRequestHandler;
+use Pageflow\Core\view\views\Cms;
+use Pageflow\Core\view\views\ModuleVisual;
+use const Pageflow\CMS_ROOT;
 
 class Backend {
 
@@ -30,7 +30,7 @@ class Backend {
         $currentModule = $this->backendRequestHandler->getCurrentModule();
         if ($currentModule) {
             require_once CMS_ROOT . "/modules/" . $currentModule->getIdentifier() . "/activator.php";
-            $class = "Obcato\\Core\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
+            $class = "Pageflow\\Core\\modules\\" . $currentModule->getIdentifier() . "\\" . $currentModule->getClass();
             $this->moduleVisual = new $class($currentModule);
         }
     }

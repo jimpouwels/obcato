@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\webforms;
+namespace Pageflow\Core\modules\webforms;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\webforms\visuals\webforms\WebformTab;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\webforms\visuals\webforms\WebformTab;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 
 class WebFormsModuleVisual extends ModuleVisual {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface PageDao {
     public function getHomepage(): ?Page;

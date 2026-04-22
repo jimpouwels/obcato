@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\blocks;
+namespace Pageflow\Core\modules\blocks\visuals\blocks;
 
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
 
 class BlocksList extends Panel {
 

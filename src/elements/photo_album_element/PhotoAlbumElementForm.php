@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\elements\photo_album_element;
+namespace Pageflow\Core\elements\photo_album_element;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\request_handlers\ElementForm;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\request_handlers\ElementForm;
 
 class PhotoAlbumElementForm extends ElementForm {
 

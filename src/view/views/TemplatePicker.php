@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
 
 class TemplatePicker extends Pulldown {
 

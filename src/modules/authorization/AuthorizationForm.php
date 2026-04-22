@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\authorization;
+namespace Pageflow\Core\modules\authorization;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\AuthorizationDao;
-use Obcato\Core\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\modules\authorization\model\User;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\AuthorizationDao;
+use Pageflow\Core\database\dao\AuthorizationDaoMysql;
+use Pageflow\Core\modules\authorization\model\User;
 
 class AuthorizationForm extends Form {
 

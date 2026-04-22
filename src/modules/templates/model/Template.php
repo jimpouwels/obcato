@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\templates\model;
+namespace Pageflow\Core\modules\templates\model;
 
-use Obcato\Core\core\model\Entity;
-use Obcato\Core\database\dao\ScopeDaoMysql;
-use Obcato\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\core\model\Entity;
+use Pageflow\Core\database\dao\ScopeDaoMysql;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
 
 class Template extends Entity {
 

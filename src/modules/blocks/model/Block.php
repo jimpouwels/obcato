@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\model;
+namespace Pageflow\Core\modules\blocks\model;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\dao\BlockDaoMysql;
 
 class Block extends ElementHolder {
 

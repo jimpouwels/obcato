@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\list_element;
+namespace Pageflow\Core\elements\list_element;
 
-use Obcato\Core\request_handlers\ElementForm;
+use Pageflow\Core\request_handlers\ElementForm;
 
 class ListElementForm extends ElementForm {
 

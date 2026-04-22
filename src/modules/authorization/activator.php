@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\authorization;
+namespace Pageflow\Core\modules\authorization;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\authorization\model\User;
-use Obcato\Core\modules\authorization\visuals\UserEditor;
-use Obcato\Core\modules\authorization\visuals\UserList;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\authorization\model\User;
+use Pageflow\Core\modules\authorization\visuals\UserEditor;
+use Pageflow\Core\modules\authorization\visuals\UserList;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class AuthorizationModuleVisual extends ModuleVisual {
 

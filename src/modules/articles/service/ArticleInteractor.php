@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\articles\service;
+namespace Pageflow\Core\modules\articles\service;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\pages\model\Page;
-use const Obcato\Core\ELEMENT_HOLDER_ARTICLE;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\pages\model\Page;
+use const Pageflow\Core\ELEMENT_HOLDER_ARTICLE;
 
 class ArticleInteractor implements ArticleService {
 

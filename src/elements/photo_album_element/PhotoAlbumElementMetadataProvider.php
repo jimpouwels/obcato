@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\elements\photo_album_element;
+namespace Pageflow\Core\elements\photo_album_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\database\MysqlConnector;
 
 class PhotoAlbumElementMetadataProvider extends ElementMetadataProvider
 {

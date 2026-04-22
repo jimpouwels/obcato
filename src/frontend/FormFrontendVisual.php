@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\frontend\handlers\FormStatus;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\WebformItemFactory;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\frontend\handlers\FormStatus;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\WebformItemFactory;
+use const Pageflow\core\FRONTEND_TEMPLATE_DIR;
+use const Pageflow\CMS_ROOT;
 
 class FormFrontendVisual extends FrontendVisual {
 

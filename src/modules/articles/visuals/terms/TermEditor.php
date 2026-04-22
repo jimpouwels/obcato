@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\terms;
+namespace Pageflow\Core\modules\articles\visuals\terms;
 
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class TermEditor extends Panel {
 

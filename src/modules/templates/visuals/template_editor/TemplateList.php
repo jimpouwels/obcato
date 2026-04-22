@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\modules\templates\visuals\template_editor;
+namespace Pageflow\Core\modules\templates\visuals\template_editor;
 
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\SingleCheckbox;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\SingleCheckbox;
 
 class TemplateList extends Panel {
 

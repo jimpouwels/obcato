@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\rest\element_holder;
+namespace Pageflow\Core\rest\element_holder;
 
-use Obcato\Core\database\dao\ElementHolderDaoMysql;
-use Obcato\Core\rest\Handler;
-use Obcato\Core\rest\HttpMethod;
+use Pageflow\Core\database\dao\ElementHolderDaoMysql;
+use Pageflow\Core\rest\Handler;
+use Pageflow\Core\rest\HttpMethod;
 
 class ElementHolderHandler extends Handler {
 

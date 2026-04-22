@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\frontend\helper;
+namespace Pageflow\Core\frontend\helper;
 
 class FontStyleHelper {
 

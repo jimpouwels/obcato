@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\frontend\handlers;
+namespace Pageflow\Core\frontend\handlers;
 
 enum ErrorType: string {
     case InvalidValue = 'InvalidValue';

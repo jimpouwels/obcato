@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\modules\webforms;
+namespace Pageflow\Core\modules\webforms;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ConfigDao;
-use Obcato\Core\database\dao\ConfigDaoMysql;
-use Obcato\Core\database\dao\WebformDao;
-use Obcato\Core\database\dao\WebformDaoMysql;
-use Obcato\Core\modules\webforms\form\WebformForm;
-use Obcato\Core\modules\webforms\handlers\ArticleCommentFormHandler;
-use Obcato\Core\modules\webforms\handlers\EmailFormHandler;
-use Obcato\Core\modules\webforms\handlers\RedirectFormHandler;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\model\WebformButton;
-use Obcato\Core\modules\webforms\model\WebformTextArea;
-use Obcato\Core\modules\webforms\model\WebformTextfield;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ConfigDao;
+use Pageflow\Core\database\dao\ConfigDaoMysql;
+use Pageflow\Core\database\dao\WebformDao;
+use Pageflow\Core\database\dao\WebformDaoMysql;
+use Pageflow\Core\modules\webforms\form\WebformForm;
+use Pageflow\Core\modules\webforms\handlers\ArticleCommentFormHandler;
+use Pageflow\Core\modules\webforms\handlers\EmailFormHandler;
+use Pageflow\Core\modules\webforms\handlers\RedirectFormHandler;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\model\WebformButton;
+use Pageflow\Core\modules\webforms\model\WebformTextArea;
+use Pageflow\Core\modules\webforms\model\WebformTextfield;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class WebformRequestHandler extends HttpRequestHandler {
 

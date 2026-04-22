@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\photo_album_element\visuals;
+namespace Pageflow\Core\elements\photo_album_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class PhotoAlbumElementStatics extends ElementStatic {
 

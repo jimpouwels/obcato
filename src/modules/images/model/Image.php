@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\images\model;
+namespace Pageflow\Core\modules\images\model;
 
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\core\model\Entity;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\core\model\Entity;
 
 class Image extends Entity {
 

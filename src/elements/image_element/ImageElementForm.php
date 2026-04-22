@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\elements\image_element;
+namespace Pageflow\Core\elements\image_element;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\request_handlers\ElementForm;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\request_handlers\ElementForm;
 
 class ImageElementForm extends ElementForm {
 

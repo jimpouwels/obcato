@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\settings\model;
+namespace Pageflow\Core\modules\settings\model;
 
-use Obcato\Core\core\model\Entity;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\core\model\Entity;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\pages\model\Page;
 
 class Settings extends Entity {
     private string $websiteTitle;

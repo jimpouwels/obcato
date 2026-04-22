@@ -1,20 +1,20 @@
 <?php
 
-namespace Obcato\Core\elements\iframe_element;
+namespace Pageflow\Core\elements\iframe_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\elements\iframe_element\visuals\IFrameElementEditor;
-use Obcato\Core\elements\iframe_element\visuals\IFrameElementStatics;
-use Obcato\Core\frontend\IFrameElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\TemplateEngine;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\elements\iframe_element\visuals\IFrameElementEditor;
+use Pageflow\Core\elements\iframe_element\visuals\IFrameElementStatics;
+use Pageflow\Core\frontend\IFrameElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\TemplateEngine;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class IFrameElement extends Element {
 

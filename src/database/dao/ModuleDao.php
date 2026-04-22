@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\core\model\ModuleGroup;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\core\model\ModuleGroup;
 
 interface ModuleDao {
     public function getAllModules(): array;

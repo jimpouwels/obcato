@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\elements\separator_element\visuals;
+namespace Pageflow\Core\elements\separator_element\visuals;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\separator_element\SeparatorElement;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\separator_element\SeparatorElement;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\TextField;
 
 class SeparatorElementEditor extends ElementVisual {
 

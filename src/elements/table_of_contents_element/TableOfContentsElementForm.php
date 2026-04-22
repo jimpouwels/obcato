@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\elements\table_of_contents_element;
+namespace Pageflow\Core\elements\table_of_contents_element;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\request_handlers\ElementForm;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\request_handlers\ElementForm;
 
 class TableOfContentsElementForm extends ElementForm {
 

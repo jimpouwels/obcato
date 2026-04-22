@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\templates\visuals\template_editor;
+namespace Pageflow\Core\modules\templates\visuals\template_editor;
 
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\modules\templates\service\TemplateInteractor;
-use Obcato\Core\modules\templates\service\TemplateService;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\modules\templates\service\TemplateInteractor;
+use Pageflow\Core\modules\templates\service\TemplateService;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class TemplateVarEditor extends Panel {
 

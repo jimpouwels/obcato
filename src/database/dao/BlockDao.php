@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface BlockDao {
     public function getAllBlocks(): array;

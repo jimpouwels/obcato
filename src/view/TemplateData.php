@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\view;
+namespace Pageflow\Core\view;
 
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\view\views\Visual;
 use Smarty_Internal_Data;
 
 class TemplateData {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\handlers;
+namespace Pageflow\Core\modules\webforms\handlers;
 
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\webforms\visuals\RedirectFormHandlerEditor;
-use Obcato\Core\view\TemplateEngine;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\webforms\visuals\RedirectFormHandlerEditor;
+use Pageflow\Core\view\TemplateEngine;
+use const Pageflow\CMS_ROOT;
 
 class RedirectFormHandler extends FormHandler {
 

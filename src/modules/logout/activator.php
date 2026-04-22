@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\logout;
+namespace Pageflow\Core\modules\logout;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 
 class LogoutModuleVisual extends ModuleVisual {

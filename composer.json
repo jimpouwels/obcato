@@ -1,9 +1,9 @@
 {
-  "name": "obcato/obcato",
+  "name": "pageflow/pageflow",
   "type": "project",
   "autoload": {
     "psr-4": {
-      "Obcato\\Core\\": "src/"
+      "Pageflow\\Core\\": "src/"
     }
   },
   "authors": [

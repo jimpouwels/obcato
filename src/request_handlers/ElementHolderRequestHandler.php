@@ -1,20 +1,20 @@
 <?php
 
-namespace Obcato\Core\request_handlers;
+namespace Pageflow\Core\request_handlers;
 
-use Obcato\Core\core\form\ElementHolderForm;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\elements\ElementContainsErrorsException;
-use Obcato\Core\service\ElementHolderService;
-use Obcato\Core\service\ElementHolderInteractor;
-use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
-use Obcato\Core\request_handlers\exceptions\VersionConflictException;
-use const Obcato\core\ADD_ELEMENT_FORM_ID;
-use const Obcato\core\DELETE_ELEMENT_FORM_ID;
+use Pageflow\Core\core\form\ElementHolderForm;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\elements\ElementContainsErrorsException;
+use Pageflow\Core\service\ElementHolderService;
+use Pageflow\Core\service\ElementHolderInteractor;
+use Pageflow\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Pageflow\Core\request_handlers\exceptions\VersionConflictException;
+use const Pageflow\core\ADD_ELEMENT_FORM_ID;
+use const Pageflow\core\DELETE_ELEMENT_FORM_ID;
 
 abstract class ElementHolderRequestHandler extends HttpRequestHandler {
 

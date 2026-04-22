@@ -1,18 +1,18 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\elements\article_overview_element\ArticleOverviewElement;
-use Obcato\Core\frontend\helper\FrontendHelper;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\utilities\DateUtility;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\elements\article_overview_element\ArticleOverviewElement;
+use Pageflow\Core\frontend\helper\FrontendHelper;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\utilities\DateUtility;
 
 class ArticleOverviewElementFrontendVisual extends ElementFrontendVisual {
 

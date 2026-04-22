@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\positions;
+namespace Pageflow\Core\modules\blocks\visuals\positions;
 
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class PositionEditor extends Panel {
 

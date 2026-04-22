@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\view\TemplateData;
 
 abstract class Panel extends Visual {
 

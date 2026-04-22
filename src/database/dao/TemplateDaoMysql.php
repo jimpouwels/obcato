@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\modules\templates\model\TemplateFile;
-use Obcato\Core\modules\templates\model\TemplateVar;
-use Obcato\Core\modules\templates\model\TemplateVarDef;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\modules\templates\model\TemplateFile;
+use Pageflow\Core\modules\templates\model\TemplateVar;
+use Pageflow\Core\modules\templates\model\TemplateVarDef;
 
 class TemplateDaoMysql implements TemplateDao {
 

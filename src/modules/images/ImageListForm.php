@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\images;
+namespace Pageflow\Core\modules\images;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
 
 class ImageListForm extends Form {
 

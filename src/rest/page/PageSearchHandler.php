@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\rest\page;
+namespace Pageflow\Core\rest\page;
 
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\rest\Handler;
-use Obcato\Core\rest\HttpMethod;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\rest\Handler;
+use Pageflow\Core\rest\HttpMethod;
 
 class PageSearchHandler extends Handler {
 

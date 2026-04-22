@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\installation;
+namespace Pageflow\Core\modules\components\visuals\installation;
 
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\UploadField;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\UploadField;
 
 class ComponentInstallFormPanel extends Panel {
 

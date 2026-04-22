@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\authentication;
+namespace Pageflow\Core\authentication;
 
 use JetBrains\PhpStorm\NoReturn;
-use Obcato\Core\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\authorization\model\User;
-use Obcato\Core\utilities\StringUtility;
-use const Obcato\Core\SESSION_TIMEOUT;
+use Pageflow\Core\database\dao\AuthorizationDaoMysql;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\authorization\model\User;
+use Pageflow\Core\utilities\StringUtility;
+use const Pageflow\Core\SESSION_TIMEOUT;
 
 class Authenticator {
 

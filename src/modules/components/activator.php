@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\components;
+namespace Pageflow\Core\modules\components;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\components\visuals\components\ComponentsTabVisual;
-use Obcato\Core\modules\components\visuals\installation\InstallationTabVisual;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\components\visuals\components\ComponentsTabVisual;
+use Pageflow\Core\modules\components\visuals\installation\InstallationTabVisual;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class ComponentsModuleVisual extends ModuleVisual {
 

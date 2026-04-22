@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages\visuals;
+namespace Pageflow\Core\modules\sitewide_pages\visuals;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PageLookup;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\PageLookup;
+use Pageflow\Core\view\views\Panel;
 
 class SitewidePageList extends Panel {
 

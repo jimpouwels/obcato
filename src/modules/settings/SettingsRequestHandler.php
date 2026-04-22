@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\settings;
+namespace Pageflow\Core\modules\settings;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\SettingsDao;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class SettingsRequestHandler extends HttpRequestHandler {
 

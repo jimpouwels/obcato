@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\articles;
+namespace Pageflow\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\view\views\ElementContainer;
-use Obcato\Core\view\views\TermSelector;
-use Obcato\Core\view\views\Visual;
-use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\view\views\ElementContainer;
+use Pageflow\Core\view\views\TermSelector;
+use Pageflow\Core\view\views\Visual;
+use const Pageflow\core\ELEMENT_HOLDER_FORM_ID;
 
 class ArticleEditor extends Visual {
 

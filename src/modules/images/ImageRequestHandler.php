@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\images;
+namespace Pageflow\Core\modules\images;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\utilities\FileUtility;
-use Obcato\Core\utilities\ImageUtility;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\utilities\FileUtility;
+use Pageflow\Core\utilities\ImageUtility;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImageRequestHandler extends HttpRequestHandler {
 

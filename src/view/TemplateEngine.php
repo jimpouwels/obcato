@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\view;
+namespace Pageflow\Core\view;
 
 use Smarty;
-use const Obcato\Core\BACKEND_TEMPLATE_DIR;
-use const Obcato\CMS_ROOT;
-use const Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use const Pageflow\Core\BACKEND_TEMPLATE_DIR;
+use const Pageflow\CMS_ROOT;
+use const Pageflow\Core\FRONTEND_TEMPLATE_DIR;
 
 
 class TemplateEngine {

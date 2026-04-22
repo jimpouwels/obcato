@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\authorization\visuals;
+namespace Pageflow\Core\modules\authorization\visuals;
 
-use Obcato\Core\database\dao\AuthorizationDao;
-use Obcato\Core\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\modules\authorization\model\User;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\AuthorizationDao;
+use Pageflow\Core\database\dao\AuthorizationDaoMysql;
+use Pageflow\Core\modules\authorization\model\User;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class UserList extends Panel {
 

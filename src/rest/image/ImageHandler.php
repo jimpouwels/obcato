@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\rest\image;
+namespace Pageflow\Core\rest\image;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\rest\Handler;
-use Obcato\Core\rest\HttpMethod;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\rest\Handler;
+use Pageflow\Core\rest\HttpMethod;
 
 class ImageHandler extends Handler {
 

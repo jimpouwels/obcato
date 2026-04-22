@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages\persistence;
+namespace Pageflow\Core\modules\sitewide_pages\persistence;
 
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\database\MysqlConnector;
 
 class SitewideDaoMysql implements SitewideDao {
     private static string $myAllColumns = "id, page_id";

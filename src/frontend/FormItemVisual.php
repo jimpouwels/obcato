@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\frontend\handlers\FormStatus;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\model\WebformItem;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\frontend\handlers\FormStatus;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\model\WebformItem;
+use const Pageflow\CMS_ROOT;
 
 abstract class FormItemVisual extends FrontendVisual {
 

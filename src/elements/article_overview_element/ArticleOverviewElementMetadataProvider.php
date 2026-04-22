@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\elements\article_overview_element;
+namespace Pageflow\Core\elements\article_overview_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
 
 class ArticleOverviewElementMetadataProvider extends ElementMetadataProvider
 {

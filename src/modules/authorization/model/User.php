@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\authorization\model;
+namespace Pageflow\Core\modules\authorization\model;
 
 
-use Obcato\Core\core\model\Entity;
+use Pageflow\Core\core\model\Entity;
 
 class User extends Entity {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\pages\visuals;
+namespace Pageflow\Core\modules\pages\visuals;
 
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class PageTree extends Panel {
 

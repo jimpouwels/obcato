@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\images;
+namespace Pageflow\Core\modules\images;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\utilities\ImageUtility;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\utilities\ImageUtility;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImageForm extends Form {
 

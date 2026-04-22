@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\elements\article_overview_element;
+namespace Pageflow\Core\elements\article_overview_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\elements\article_overview_element\visuals\ArticleOverviewElementEditor;
-use Obcato\Core\elements\article_overview_element\visuals\ArticleOverviewElementStatics;
-use Obcato\Core\frontend\ArticleOverviewElementFrontendVisual;
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\utilities\DateUtility;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\elements\article_overview_element\visuals\ArticleOverviewElementEditor;
+use Pageflow\Core\elements\article_overview_element\visuals\ArticleOverviewElementStatics;
+use Pageflow\Core\frontend\ArticleOverviewElementFrontendVisual;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\utilities\DateUtility;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class ArticleOverviewElement extends Element {
 

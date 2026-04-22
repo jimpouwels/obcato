@@ -1,19 +1,19 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\database\dao\WebformDao;
-use Obcato\Core\database\dao\WebformDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\database\dao\WebformDao;
+use Pageflow\Core\database\dao\WebformDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use const Pageflow\core\FRONTEND_TEMPLATE_DIR;
 
 class ArticleVisual extends FrontendVisual {
 

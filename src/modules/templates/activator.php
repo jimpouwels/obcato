@@ -1,18 +1,18 @@
 <?php
 
-namespace Obcato\Core\modules\templates;
+namespace Pageflow\Core\modules\templates;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\modules\templates\visuals\template_editor\TemplateEditorTab;
-use Obcato\Core\modules\templates\visuals\template_files\TemplateFilesTab;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonReload;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\modules\templates\visuals\template_editor\TemplateEditorTab;
+use Pageflow\Core\modules\templates\visuals\template_files\TemplateFilesTab;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonReload;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class TemplateModuleVisual extends ModuleVisual {
     private static int $TEMPLATES_TAB = 0;

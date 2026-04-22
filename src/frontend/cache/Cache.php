@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\frontend\cache;
+namespace Pageflow\Core\frontend\cache;
 
-use const Obcato\Core\CACHE_DIR;
+use const Pageflow\Core\CACHE_DIR;
 
 class Cache {
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\positions;
+namespace Pageflow\Core\modules\blocks\visuals\positions;
 
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\SingleCheckbox;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\SingleCheckbox;
 
 class PositionList extends Panel {
 

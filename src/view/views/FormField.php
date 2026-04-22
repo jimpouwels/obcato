@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\utilities\StringUtility;
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\utilities\StringUtility;
+use Pageflow\Core\view\TemplateData;
 
 abstract class FormField extends Visual {
 

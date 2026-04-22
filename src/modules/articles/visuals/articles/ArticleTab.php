@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\articles;
+namespace Pageflow\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\modules\articles\ArticleRequestHandler;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\articles\ArticleRequestHandler;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\view\views\Visual;
 
 class ArticleTab extends Visual {
 

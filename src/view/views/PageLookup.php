@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\view\TemplateData;
 
 class PageLookup extends FormField {
 

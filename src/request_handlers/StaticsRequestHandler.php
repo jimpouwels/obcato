@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\request_handlers;
+namespace Pageflow\Core\request_handlers;
 
-use const Obcato\core\STATIC_DIR;
+use const Pageflow\core\STATIC_DIR;
 
 class StaticsRequestHandler extends HttpRequestHandler {
 

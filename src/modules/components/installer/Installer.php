@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\components\installer;
+namespace Pageflow\Core\modules\components\installer;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\utilities\FileUtility;
-use const Obcato\Core\COMPONENT_TEMP_DIR;
-use const Obcato\core\STATIC_DIR;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\utilities\FileUtility;
+use const Pageflow\Core\COMPONENT_TEMP_DIR;
+use const Pageflow\core\STATIC_DIR;
 
 abstract class Installer {
 

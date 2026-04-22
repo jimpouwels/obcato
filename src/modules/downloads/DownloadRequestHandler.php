@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\downloads;
+namespace Pageflow\Core\modules\downloads;
 
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\DownloadDao;
-use Obcato\Core\database\dao\DownloadDaoMysql;
-use Obcato\Core\modules\downloads\model\Download;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\DownloadForm;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\DownloadDao;
+use Pageflow\Core\database\dao\DownloadDaoMysql;
+use Pageflow\Core\modules\downloads\model\Download;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\DownloadForm;
 
 class DownloadRequestHandler extends HttpRequestHandler {
 

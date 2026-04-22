@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\text_element;
+namespace Pageflow\Core\elements\text_element;
 
-use Obcato\Core\request_handlers\ElementForm;
+use Pageflow\Core\request_handlers\ElementForm;
 
 class TextElementForm extends ElementForm {
 

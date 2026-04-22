@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\downloads;
+namespace Pageflow\Core\modules\downloads;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\downloads\model\Download;
-use Obcato\Core\modules\downloads\visuals\EditorVisual;
-use Obcato\Core\modules\downloads\visuals\ListVisual;
-use Obcato\Core\modules\downloads\visuals\SearchBoxVisual;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\downloads\model\Download;
+use Pageflow\Core\modules\downloads\visuals\EditorVisual;
+use Pageflow\Core\modules\downloads\visuals\ListVisual;
+use Pageflow\Core\modules\downloads\visuals\SearchBoxVisual;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class DownloadModuleVisual extends ModuleVisual {
 

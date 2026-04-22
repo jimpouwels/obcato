@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\blocks;
+namespace Pageflow\Core\modules\blocks\visuals\blocks;
 
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TemplatePicker;
-use Obcato\Core\view\views\TextField;
-use const Obcato\Core\ACTION_FORM_ID;
-use const Obcato\core\ADD_ELEMENT_FORM_ID;
-use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
-use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TemplatePicker;
+use Pageflow\Core\view\views\TextField;
+use const Pageflow\Core\ACTION_FORM_ID;
+use const Pageflow\core\ADD_ELEMENT_FORM_ID;
+use const Pageflow\Core\DELETE_ELEMENT_FORM_ID;
+use const Pageflow\core\EDIT_ELEMENT_HOLDER_ID;
+use const Pageflow\Core\ELEMENT_HOLDER_FORM_ID;
 
 class BlockMetadataEditor extends Panel {
 

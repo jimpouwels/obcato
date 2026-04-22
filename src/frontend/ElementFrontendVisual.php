@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\core\FRONTEND_TEMPLATE_DIR;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use const Pageflow\core\FRONTEND_TEMPLATE_DIR;
+use const Pageflow\CMS_ROOT;
 
 abstract class ElementFrontendVisual extends FrontendVisual {
 

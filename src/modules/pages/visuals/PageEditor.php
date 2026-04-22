@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\pages\visuals;
+namespace Pageflow\Core\modules\pages\visuals;
 
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\view\views\BlockSelector;
-use Obcato\Core\view\views\ElementContainer;
-use Obcato\Core\view\views\Visual;
-use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\view\views\BlockSelector;
+use Pageflow\Core\view\views\ElementContainer;
+use Pageflow\Core\view\views\Visual;
+use const Pageflow\core\ELEMENT_HOLDER_FORM_ID;
 
 class PageEditor extends Visual {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\templates;
+namespace Pageflow\Core\modules\templates;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\TemplateFile;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\TemplateFile;
 
 class TemplateFileForm extends Form {
 

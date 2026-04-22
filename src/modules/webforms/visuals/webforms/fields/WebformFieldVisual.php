@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals\webforms\fields;
+namespace Pageflow\Core\modules\webforms\visuals\webforms\fields;
 
-use Obcato\Core\modules\webforms\model\WebformItem;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\SingleCheckbox;
+use Pageflow\Core\modules\webforms\model\WebformItem;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\SingleCheckbox;
 
 abstract class WebformFieldVisual extends WebformItemVisual {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\model;
+namespace Pageflow\Core\modules\downloads\model;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
 
 class DownloadForm extends Form {
 

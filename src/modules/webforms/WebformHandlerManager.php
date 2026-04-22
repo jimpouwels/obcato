@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\webforms;
+namespace Pageflow\Core\modules\webforms;
 
-use Obcato\Core\modules\webforms\handlers\ArticleCommentFormHandler;
-use Obcato\Core\modules\webforms\handlers\EmailFormHandler;
-use Obcato\Core\modules\webforms\handlers\FormHandler;
-use Obcato\Core\modules\webforms\handlers\RedirectFormHandler;
+use Pageflow\Core\modules\webforms\handlers\ArticleCommentFormHandler;
+use Pageflow\Core\modules\webforms\handlers\EmailFormHandler;
+use Pageflow\Core\modules\webforms\handlers\FormHandler;
+use Pageflow\Core\modules\webforms\handlers\RedirectFormHandler;
 
 class WebformHandlerManager {
 

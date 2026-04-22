@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\model;
+namespace Pageflow\Core\modules\downloads\model;
 
-use Obcato\Core\core\model\Entity;
+use Pageflow\Core\core\model\Entity;
 
 class Download extends Entity {
 

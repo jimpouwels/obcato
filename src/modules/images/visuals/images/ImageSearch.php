@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\images\visuals\images;
+namespace Pageflow\Core\modules\images\visuals\images;
 
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class ImageSearch extends Panel {
 

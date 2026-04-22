@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\core\model\ModuleGroup;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\core\model\ModuleGroup;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
 
 class NavigationMenu extends Visual {
 

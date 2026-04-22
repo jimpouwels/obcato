@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato;
+namespace Pageflow;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\Backend;
-use Obcato\Core\frontend\handlers\RequestHandler;
-use Obcato\Core\request_handlers\StaticsRequestHandler;
-use Obcato\Core\rest\Router;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\Backend;
+use Pageflow\Core\frontend\handlers\RequestHandler;
+use Pageflow\Core\request_handlers\StaticsRequestHandler;
+use Pageflow\Core\rest\Router;
 
 const PUBLIC_DIR = PUBLIC_ROOT;
 const PRIVATE_DIR = PRIVATE_ROOT;
-const CMS_ROOT = OBCATO_ROOT;
+const CMS_ROOT = PAGEFLOW_ROOT;
 
 if (!file_exists(".htaccess")) {
     include_once CMS_ROOT . "/friendly_urls/FriendlyUrlManager.php";

@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato;
+namespace Pageflow;
 
 use DOMDocument;
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\database\MysqlConnector;
-use const Obcato\Core\CONFIG_DIR;
-use const Obcato\core\SYSTEM_VERSION;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\database\MysqlConnector;
+use const Pageflow\Core\CONFIG_DIR;
+use const Pageflow\core\SYSTEM_VERSION;
 
 // INCLUDE SYSTEM CONSTANTS
 require_once CMS_ROOT . "/authentication/Authenticator.php";

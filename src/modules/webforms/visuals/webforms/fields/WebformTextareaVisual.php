@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals\webforms\fields;
+namespace Pageflow\Core\modules\webforms\visuals\webforms\fields;
 
-use Obcato\Core\modules\webforms\model\WebformTextArea;
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\modules\webforms\model\WebformTextArea;
+use Pageflow\Core\view\TemplateData;
 
 class WebformTextareaVisual extends WebformFieldVisual {
 

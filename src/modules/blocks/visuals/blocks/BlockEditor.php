@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\blocks;
+namespace Pageflow\Core\modules\blocks\visuals\blocks;
 
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\view\views\ElementContainer;
-use Obcato\Core\view\views\Visual;
-use const Obcato\core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\view\views\ElementContainer;
+use Pageflow\Core\view\views\Visual;
+use const Pageflow\core\ELEMENT_HOLDER_FORM_ID;
 
 class BlockEditor extends Visual {
 

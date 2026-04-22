@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\elements\separator_element;
+namespace Pageflow\Core\elements\separator_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\separator_element\visuals\SeparatorElementEditor;
-use Obcato\Core\elements\separator_element\visuals\SeparatorElementStatics;
-use Obcato\Core\frontend\SeparatorElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\separator_element\visuals\SeparatorElementEditor;
+use Pageflow\Core\elements\separator_element\visuals\SeparatorElementStatics;
+use Pageflow\Core\frontend\SeparatorElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class SeparatorElement extends Element {
 

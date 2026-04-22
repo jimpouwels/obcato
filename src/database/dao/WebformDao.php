@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
 
-use Obcato\Core\modules\webforms\handlers\FormHandler;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\model\WebformHandlerProperty;
-use Obcato\Core\modules\webforms\model\WebformItem;
+use Pageflow\Core\modules\webforms\handlers\FormHandler;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\model\WebformHandlerProperty;
+use Pageflow\Core\modules\webforms\model\WebformItem;
 
 interface WebformDao {
     public function getWebForm(int $webformId): ?WebForm;

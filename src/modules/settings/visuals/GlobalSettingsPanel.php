@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\settings\visuals;
+namespace Pageflow\Core\modules\settings\visuals;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PageLookup;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\PageLookup;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class GlobalSettingsPanel extends Panel {
 

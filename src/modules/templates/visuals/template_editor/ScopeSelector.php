@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\templates\visuals\template_editor;
+namespace Pageflow\Core\modules\templates\visuals\template_editor;
 
-use Obcato\Core\database\dao\ScopeDao;
-use Obcato\Core\database\dao\ScopeDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\ScopeDao;
+use Pageflow\Core\database\dao\ScopeDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class ScopeSelector extends Panel {
 

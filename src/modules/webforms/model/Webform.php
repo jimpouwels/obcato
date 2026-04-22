@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\model;
+namespace Pageflow\Core\modules\webforms\model;
 
-use Obcato\Core\modules\templates\model\Presentable;
+use Pageflow\Core\modules\templates\model\Presentable;
 
 class Webform extends Presentable {
 

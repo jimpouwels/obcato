@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\database\dao\ModuleDao;
-use Obcato\Core\database\dao\ModuleDaoMysql;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\utilities\Logs;
-use const Obcato\core\SYSTEM_VERSION;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\database\dao\ModuleDao;
+use Pageflow\Core\database\dao\ModuleDaoMysql;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\utilities\Logs;
+use const Pageflow\core\SYSTEM_VERSION;
 
 class Cms extends Visual {
     private ?ModuleVisual $moduleVisual;

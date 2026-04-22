@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\pages;
+namespace Pageflow\Core\modules\pages;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\pages\model\Page;
 
 class PageForm extends Form {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\settings\model\Settings;
+use Pageflow\Core\modules\settings\model\Settings;
 
 interface SettingsDao {
     public function update(Settings $settings): void;

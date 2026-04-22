@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\core\model;
+namespace Pageflow\Core\core\model;
 
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
+use const Pageflow\CMS_ROOT;
 
 abstract class Element extends Presentable {
 
@@ -32,7 +32,7 @@ abstract class Element extends Presentable {
         $elementType = $record['classname'];
 
         // the constructor for each type will initialize specific metadata
-        $className = "Obcato\\Core\\elements\\" . $record['identifier'] . "\\" . $elementType;
+        $className = "Pageflow\\Core\\elements\\" . $record['identifier'] . "\\" . $elementType;
         $element = new $className($record["scope_id"]);
 
         $element->setId($record['id']);

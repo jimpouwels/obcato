@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\pages\service;
+namespace Pageflow\Core\modules\pages\service;
 
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface PageService {
     public function getHomepage(): Page;

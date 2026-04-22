@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\authorization\service;
+namespace Pageflow\Core\modules\authorization\service;
 
-use Obcato\Core\database\dao\AuthorizationDao;
-use Obcato\Core\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\modules\authorization\model\User;
+use Pageflow\Core\database\dao\AuthorizationDao;
+use Pageflow\Core\database\dao\AuthorizationDaoMysql;
+use Pageflow\Core\modules\authorization\model\User;
 
 class AuthorizationInteractor implements AuthorizationService {
 

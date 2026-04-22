@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\authentication\Authenticator;
+use Pageflow\Core\authentication\Authenticator;
 
 class CurrentUserIndicator extends Visual {
     public function __construct() {

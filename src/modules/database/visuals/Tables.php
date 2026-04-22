@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\database\visuals;
+namespace Pageflow\Core\modules\database\visuals;
 
 
-use Obcato\Core\database\dao\DatabaseDao;
-use Obcato\Core\database\dao\DatabaseDaoMysql;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\database\dao\DatabaseDao;
+use Pageflow\Core\database\dao\DatabaseDaoMysql;
+use Pageflow\Core\view\views\Visual;
 
 class Tables extends Visual {
 

@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\articles\visuals\articles\ArticleTab;
-use Obcato\Core\modules\articles\visuals\metadata\MetadataTab;
-use Obcato\Core\modules\articles\visuals\target_pages\TargetPagesList;
-use Obcato\Core\modules\articles\visuals\terms\TermTab;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonPreview;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\articles\visuals\articles\ArticleTab;
+use Pageflow\Core\modules\articles\visuals\metadata\MetadataTab;
+use Pageflow\Core\modules\articles\visuals\target_pages\TargetPagesList;
+use Pageflow\Core\modules\articles\visuals\terms\TermTab;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonPreview;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class ArticleModuleVisual extends ModuleVisual {
 

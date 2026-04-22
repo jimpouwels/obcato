@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\modules\pages\visuals;
+namespace Pageflow\Core\modules\pages\visuals;
 
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\ReadonlyTextField;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TemplatePicker;
-use Obcato\Core\view\views\TextArea;
-use Obcato\Core\view\views\TextField;
-use const Obcato\Core\ACTION_FORM_ID;
-use const Obcato\core\ADD_ELEMENT_FORM_ID;
-use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const Obcato\core\EDIT_ELEMENT_HOLDER_ID;
-use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\ReadonlyTextField;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TemplatePicker;
+use Pageflow\Core\view\views\TextArea;
+use Pageflow\Core\view\views\TextField;
+use const Pageflow\Core\ACTION_FORM_ID;
+use const Pageflow\core\ADD_ELEMENT_FORM_ID;
+use const Pageflow\Core\DELETE_ELEMENT_FORM_ID;
+use const Pageflow\core\EDIT_ELEMENT_HOLDER_ID;
+use const Pageflow\Core\ELEMENT_HOLDER_FORM_ID;
 
 class MetadataEditor extends Panel {
 

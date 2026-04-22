@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages;
+namespace Pageflow\Core\modules\sitewide_pages;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\modules\sitewide_pages\visuals\SitewidePageList;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\modules\sitewide_pages\visuals\SitewidePageList;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class SitewidePagesModuleVisual extends ModuleVisual {
 

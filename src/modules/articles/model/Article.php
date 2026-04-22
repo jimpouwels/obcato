@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\articles\model;
+namespace Pageflow\Core\modules\articles\model;
 
-use Obcato\Core\core\model\ElementHolder;
+use Pageflow\Core\core\model\ElementHolder;
 
 class Article extends ElementHolder {
 

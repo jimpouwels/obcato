@@ -1,28 +1,28 @@
 <?php
 
-namespace Obcato\Core\frontend\handlers;
+namespace Pageflow\Core\frontend\handlers;
 
 use JetBrains\PhpStorm\NoReturn;
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\frontend\cache\Cache;
-use Obcato\Core\frontend\helper\FrontendHelper;
-use Obcato\Core\frontend\RobotsVisual;
-use Obcato\Core\frontend\SitemapVisual;
-use Obcato\Core\frontend\WebsiteVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\modules\settings\model\IFrameSecurityPolicy;
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\rest\Router;
-use Obcato\Core\utilities\UrlHelper;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\database\dao\SettingsDao;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\frontend\cache\Cache;
+use Pageflow\Core\frontend\helper\FrontendHelper;
+use Pageflow\Core\frontend\RobotsVisual;
+use Pageflow\Core\frontend\SitemapVisual;
+use Pageflow\Core\frontend\WebsiteVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\modules\settings\model\IFrameSecurityPolicy;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\rest\Router;
+use Pageflow\Core\utilities\UrlHelper;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class RequestHandler {
 

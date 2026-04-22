@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\core\form;
+namespace Pageflow\Core\core\form;
 
-use Obcato\Core\authentication\Session;
+use Pageflow\Core\authentication\Session;
 
 abstract class Form {
 

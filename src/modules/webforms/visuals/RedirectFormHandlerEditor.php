@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals;
+namespace Pageflow\Core\modules\webforms\visuals;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\modules\webforms\model\WebformHandlerProperty;
-use Obcato\Core\view\views\PageLookup;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\modules\webforms\model\WebformHandlerProperty;
+use Pageflow\Core\view\views\PageLookup;
+use Pageflow\Core\view\views\Visual;
 
 class RedirectFormHandlerEditor extends Visual {
 

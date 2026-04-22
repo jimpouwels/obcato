@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\article_overview_element\visuals;
+namespace Pageflow\Core\elements\article_overview_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class ArticleOverviewElementStatics extends ElementStatic {
 

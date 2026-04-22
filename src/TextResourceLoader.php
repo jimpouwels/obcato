@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core;
+namespace Pageflow\Core;
 
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\database\dao\ModuleDao;
-use Obcato\Core\database\dao\ModuleDaoMysql;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\database\dao\ModuleDao;
+use Pageflow\Core\database\dao\ModuleDaoMysql;
 
 class TextResourceLoader {
 

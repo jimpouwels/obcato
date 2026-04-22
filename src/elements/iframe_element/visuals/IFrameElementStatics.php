@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\iframe_element\visuals;
+namespace Pageflow\Core\elements\iframe_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class IFrameElementStatics extends ElementStatic {
 

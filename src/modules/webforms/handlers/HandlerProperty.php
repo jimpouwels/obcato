@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\handlers;
+namespace Pageflow\Core\modules\webforms\handlers;
 
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\view\views\Visual;
 
 class HandlerProperty {
 

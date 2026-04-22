@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\templates\visuals\template_editor;
+namespace Pageflow\Core\modules\templates\visuals\template_editor;
 
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\view\views\Visual;
 
 class TemplateEditorTab extends Visual {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\elements\image_element\visuals;
+namespace Pageflow\Core\elements\image_element\visuals;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\image_element\ImageElement;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\ImageLookup;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\image_element\ImageElement;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\ImageLookup;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\TextField;
 
 class ImageElementEditor extends ElementVisual {
 

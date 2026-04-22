@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleComment;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\utilities\DateUtility;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleComment;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\utilities\DateUtility;
 
 class ArticleDaoMysql implements ArticleDao {
     private static string $myAllColumns = "e.id, e.template_id, e.name, e.title, e.published, e.last_modified, e.scope_id,

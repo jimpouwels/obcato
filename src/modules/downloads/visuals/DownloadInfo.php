@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\visuals;
+namespace Pageflow\Core\modules\downloads\visuals;
 
-use Obcato\Core\modules\downloads\model\Download;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use const Obcato\core\STATIC_DIR;
+use Pageflow\Core\modules\downloads\model\Download;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use const Pageflow\core\STATIC_DIR;
 
 class DownloadInfo extends Panel {
 

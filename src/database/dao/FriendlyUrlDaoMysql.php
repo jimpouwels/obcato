@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\MysqlConnector;
 
 class FriendlyUrlDaoMysql implements FriendlyUrlDao {
 

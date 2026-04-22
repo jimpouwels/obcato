@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\core;
+namespace Pageflow\Core\core;
 
 class BlackBoard {
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\elements\article_overview_element\visuals;
+namespace Pageflow\Core\elements\article_overview_element\visuals;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\article_overview_element\ArticleOverviewElement;
-use Obcato\Core\utilities\DateUtility;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\DateField;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TermSelector;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\article_overview_element\ArticleOverviewElement;
+use Pageflow\Core\utilities\DateUtility;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\DateField;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TermSelector;
+use Pageflow\Core\view\views\TextField;
 
 class ArticleOverviewElementEditor extends ElementVisual {
 

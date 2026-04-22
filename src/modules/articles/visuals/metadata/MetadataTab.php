@@ -1,8 +1,8 @@
 <?php
-namespace Obcato\Core\modules\articles\visuals\metadata;
+namespace Pageflow\Core\modules\articles\visuals\metadata;
 
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\view\views\Visual;
 
 class MetadataTab extends Visual {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\table_of_contents_element\visuals;
+namespace Pageflow\Core\elements\table_of_contents_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class TableOfContentsElementStatics extends ElementStatic {
 

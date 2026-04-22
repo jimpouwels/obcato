@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\list_element;
+namespace Pageflow\Core\elements\list_element;
 
-use Obcato\Core\core\model\Entity;
+use Pageflow\Core\core\model\Entity;
 
 class ListItem extends Entity {
 

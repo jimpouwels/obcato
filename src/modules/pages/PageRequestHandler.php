@@ -1,19 +1,19 @@
 <?php
 
-namespace Obcato\Core\modules\pages;
+namespace Pageflow\Core\modules\pages;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\blocks\service\BlockInteractor;
-use Obcato\Core\modules\blocks\service\BlockService;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\request_handlers\ElementHolderRequestHandler;
-use Obcato\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
-use Obcato\Core\request_handlers\exceptions\VersionConflictException;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\blocks\service\BlockInteractor;
+use Pageflow\Core\modules\blocks\service\BlockService;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\request_handlers\ElementHolderRequestHandler;
+use Pageflow\Core\request_handlers\exceptions\ElementHolderContainsErrorsException;
+use Pageflow\Core\request_handlers\exceptions\VersionConflictException;
 
 class PageRequestHandler extends ElementHolderRequestHandler {
 

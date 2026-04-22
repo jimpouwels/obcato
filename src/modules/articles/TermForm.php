@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
 
 class TermForm extends Form {
 

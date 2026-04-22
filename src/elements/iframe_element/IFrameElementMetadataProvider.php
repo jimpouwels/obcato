@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\elements\iframe_element;
+namespace Pageflow\Core\elements\iframe_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\MysqlConnector;
 
 class IFrameElementMetadataProvider extends ElementMetadataProvider
 {

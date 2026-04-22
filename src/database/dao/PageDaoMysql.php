@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\pages\model\Page;
 
 class PageDaoMysql implements PageDao {
 

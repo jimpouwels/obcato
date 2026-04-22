@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\modules\pages\model\Page;
-use const Obcato\Core\ELEMENT_HOLDER_BLOCK;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\modules\pages\model\Page;
+use const Pageflow\Core\ELEMENT_HOLDER_BLOCK;
 
 class BlockDaoMysql implements BlockDao {
 

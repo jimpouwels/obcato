@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\templates\model;
+namespace Pageflow\Core\modules\templates\model;
 
-use Obcato\Core\core\model\Entity;
+use Pageflow\Core\core\model\Entity;
 
 class TemplateVar extends Entity {
 

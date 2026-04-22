@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\request_handlers;
+namespace Pageflow\Core\request_handlers;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\model\Element;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\model\Element;
 
 abstract class ElementForm extends Form {
 

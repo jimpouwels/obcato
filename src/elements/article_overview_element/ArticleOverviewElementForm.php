@@ -1,11 +1,10 @@
 <?php
 
-namespace Obcato\Core\elements\article_overview_element;
+namespace Pageflow\Core\elements\article_overview_element;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\request_handlers\ElementForm;
-use Obcato\Core\utilities\DateUtility;
-use function Obcato\Core\utilities\dumpVar;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\request_handlers\ElementForm;
+use Pageflow\Core\utilities\DateUtility;
 
 class ArticleOverviewElementForm extends ElementForm {
 

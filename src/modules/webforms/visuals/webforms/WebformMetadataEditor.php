@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals\webforms;
+namespace Pageflow\Core\modules\webforms\visuals\webforms;
 
-use Obcato\Core\database\dao\ConfigDao;
-use Obcato\Core\database\dao\ConfigDaoMysql;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TemplatePicker;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\database\dao\ConfigDao;
+use Pageflow\Core\database\dao\ConfigDaoMysql;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TemplatePicker;
+use Pageflow\Core\view\views\TextField;
 
 class WebformMetadataEditor extends Panel {
     private WebForm $_current_webform;

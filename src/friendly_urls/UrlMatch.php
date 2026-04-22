@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\friendly_urls;
+namespace Pageflow\Core\friendly_urls;
 
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
 
 class UrlMatch {
 

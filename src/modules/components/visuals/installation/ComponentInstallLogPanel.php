@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\installation;
+namespace Pageflow\Core\modules\components\visuals\installation;
 
-use Obcato\Core\modules\components\InstallRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\modules\components\InstallRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class ComponentInstallLogPanel extends Panel {
 

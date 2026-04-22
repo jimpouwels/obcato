@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\elements\text_element;
+namespace Pageflow\Core\elements\text_element;
 
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class TextElementRequestHandler extends HttpRequestHandler {
 

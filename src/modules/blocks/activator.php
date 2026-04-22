@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\blocks;
+namespace Pageflow\Core\modules\blocks;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\modules\blocks\visuals\blocks\BlockTab;
-use Obcato\Core\modules\blocks\visuals\positions\PositionTab;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\modules\blocks\visuals\blocks\BlockTab;
+use Pageflow\Core\modules\blocks\visuals\positions\PositionTab;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class BlockModuleVisual extends ModuleVisual {
 

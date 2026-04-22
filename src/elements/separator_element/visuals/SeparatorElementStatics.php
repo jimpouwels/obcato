@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\separator_element\visuals;
+namespace Pageflow\Core\elements\separator_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class SeparatorElementStatics extends ElementStatic {
 

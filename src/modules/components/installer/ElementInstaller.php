@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\components\installer;
+namespace Pageflow\Core\modules\components\installer;
 
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\database\dao\ScopeDao;
-use Obcato\Core\database\dao\ScopeDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\utilities\FileUtility;
-use const Obcato\BACKEND_TEMPLATE_DIR;
-use const Obcato\core\STATIC_DIR;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\database\dao\ScopeDao;
+use Pageflow\Core\database\dao\ScopeDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\utilities\FileUtility;
+use const Pageflow\BACKEND_TEMPLATE_DIR;
+use const Pageflow\core\STATIC_DIR;
+use const Pageflow\CMS_ROOT;
 
 abstract class ElementInstaller extends Installer {
 

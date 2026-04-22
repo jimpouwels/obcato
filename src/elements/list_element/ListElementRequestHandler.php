@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\elements\list_element;
+namespace Pageflow\Core\elements\list_element;
 
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class ListElementRequestHandler extends HttpRequestHandler {
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class MetadataRequestHandler extends HttpRequestHandler {
 

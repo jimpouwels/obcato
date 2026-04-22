@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\images;
+namespace Pageflow\Core\modules\images;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\images\visuals\images\ImagesTab;
-use Obcato\Core\modules\images\visuals\import\ImportTab;
-use Obcato\Core\view\views\ActionButton;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\images\visuals\images\ImagesTab;
+use Pageflow\Core\modules\images\visuals\import\ImportTab;
+use Pageflow\Core\view\views\ActionButton;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class ImageModuleVisual extends ModuleVisual {
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\articles\service;
+namespace Pageflow\Core\modules\articles\service;
 
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface ArticleService {
     public function updateArticle(Article $article): void;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\utilities;
+namespace Pageflow\Core\utilities;
 class Logs {
     public static array $LOGS = array();
 

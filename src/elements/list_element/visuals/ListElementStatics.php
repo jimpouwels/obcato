@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\list_element\visuals;
+namespace Pageflow\Core\elements\list_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class ListElementStatics extends ElementStatic {
 

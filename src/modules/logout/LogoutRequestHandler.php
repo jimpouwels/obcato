@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\logout;
+namespace Pageflow\Core\modules\logout;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class LogoutRequestHandler extends HttpRequestHandler {
 

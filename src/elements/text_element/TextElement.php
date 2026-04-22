@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\elements\text_element;
+namespace Pageflow\Core\elements\text_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\elements\text_element\visuals\TextElementEditor;
-use Obcato\Core\elements\text_element\visuals\TextElementStatics;
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\frontend\TextElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\TemplateEngine;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\elements\text_element\visuals\TextElementEditor;
+use Pageflow\Core\elements\text_element\visuals\TextElementStatics;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\frontend\TextElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\TemplateEngine;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class TextElement extends Element {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\form;
+namespace Pageflow\Core\modules\webforms\form;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\modules\webforms\model\WebformItem;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\modules\webforms\model\WebformItem;
 
 abstract class WebformItemForm extends Form {
 

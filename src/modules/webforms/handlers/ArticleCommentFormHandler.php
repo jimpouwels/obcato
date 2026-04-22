@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\handlers;
+namespace Pageflow\Core\modules\webforms\handlers;
 
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\articles\model\ArticleComment;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\articles\model\ArticleComment;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\database\dao\SettingsDao;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
 
 class ArticleCommentFormHandler extends FormHandler {
 

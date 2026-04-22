@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\components\installer;
+namespace Pageflow\Core\modules\components\installer;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\ModuleDao;
-use Obcato\Core\database\dao\ModuleDaoMysql;
-use Obcato\Core\utilities\FileUtility;
-use const Obcato\CMS_ROOT;
-use const Obcato\BACKEND_TEMPLATE_DIR;
-use const Obcato\core\STATIC_DIR;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\ModuleDao;
+use Pageflow\Core\database\dao\ModuleDaoMysql;
+use Pageflow\Core\utilities\FileUtility;
+use const Pageflow\CMS_ROOT;
+use const Pageflow\BACKEND_TEMPLATE_DIR;
+use const Pageflow\core\STATIC_DIR;
 
 abstract class ModuleInstaller extends Installer {
 

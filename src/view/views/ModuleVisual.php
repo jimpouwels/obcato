@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\core\model\Module;
+use Pageflow\Core\core\model\Module;
 
 abstract class ModuleVisual extends Visual {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\frontend\handlers;
+namespace Pageflow\Core\frontend\handlers;
 
 class FormStatus {
 
-    private const SESSION_KEY = 'obcato_form';
+    private const SESSION_KEY = 'pageflow_form';
 
     public static function raiseError(int $webformId, string $key, ErrorType $errorType): void {
         self::ensureSession();

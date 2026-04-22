@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\frontend\handlers;
+namespace Pageflow\Core\frontend\handlers;
 
-use Obcato\Core\database\dao\ConfigDao;
-use Obcato\Core\database\dao\ConfigDaoMysql;
-use Obcato\Core\database\dao\WebformDao;
-use Obcato\Core\database\dao\WebformDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\model\WebformField;
-use Obcato\Core\modules\webforms\WebformHandlerManager;
+use Pageflow\Core\database\dao\ConfigDao;
+use Pageflow\Core\database\dao\ConfigDaoMysql;
+use Pageflow\Core\database\dao\WebformDao;
+use Pageflow\Core\database\dao\WebformDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\model\WebformField;
+use Pageflow\Core\modules\webforms\WebformHandlerManager;
 
 class FormRequestHandler {
 

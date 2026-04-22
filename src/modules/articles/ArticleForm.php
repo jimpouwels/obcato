@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
-use Obcato\Core\utilities\DateUtility;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Pageflow\Core\utilities\DateUtility;
 
 class ArticleForm extends Form {
 

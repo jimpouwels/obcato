@@ -1,19 +1,19 @@
 <?php
 
-namespace Obcato\Core\elements\photo_album_element;
+namespace Pageflow\Core\elements\photo_album_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\elements\photo_album_element\visuals\PhotoAlbumElementEditor;
-use Obcato\Core\elements\photo_album_element\visuals\PhotoAlbumElementStatics;
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\frontend\PhotoAlbumElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\elements\photo_album_element\visuals\PhotoAlbumElementEditor;
+use Pageflow\Core\elements\photo_album_element\visuals\PhotoAlbumElementStatics;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\frontend\PhotoAlbumElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class PhotoAlbumElement extends Element {
     private array $imageIds = array();

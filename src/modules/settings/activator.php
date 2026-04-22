@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\settings;
+namespace Pageflow\Core\modules\settings;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\modules\settings\visuals\DomainSettingsPanel;
-use Obcato\Core\modules\settings\visuals\FrontendSettingsPanel;
-use Obcato\Core\modules\settings\visuals\GlobalSettingsPanel;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
-use Obcato\Core\view\views\WarningMessage;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\modules\settings\visuals\DomainSettingsPanel;
+use Pageflow\Core\modules\settings\visuals\FrontendSettingsPanel;
+use Pageflow\Core\modules\settings\visuals\GlobalSettingsPanel;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
+use Pageflow\Core\view\views\WarningMessage;
 
 class SettingsModuleVisual extends ModuleVisual {
 

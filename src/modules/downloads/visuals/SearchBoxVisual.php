@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\visuals;
+namespace Pageflow\Core\modules\downloads\visuals;
 
-use Obcato\Core\modules\downloads\DownloadRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Button;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\downloads\DownloadRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Button;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class SearchBoxVisual extends Panel {
 

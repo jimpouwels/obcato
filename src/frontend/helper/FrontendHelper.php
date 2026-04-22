@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\frontend\helper;
+namespace Pageflow\Core\frontend\helper;
 
-use Obcato\Core\utilities\UrlHelper;
+use Pageflow\Core\utilities\UrlHelper;
 
 class FrontendHelper {
 

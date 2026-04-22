@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\images\model\Image;
+use Pageflow\Core\modules\images\model\Image;
 
 interface ImageDao {
     public function getImage(?int $imageId): ?Image;

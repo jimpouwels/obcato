@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\downloads\model\Download;
+use Pageflow\Core\modules\downloads\model\Download;
 
 interface DownloadDao {
     public function getDownload(string $id): ?Download;

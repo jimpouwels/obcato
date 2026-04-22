@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\images;
+namespace Pageflow\Core\modules\images;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\utilities\FileUtility;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\utilities\FileUtility;
 use ZipArchive;
-use const Obcato\Core\UPLOAD_DIR;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImportRequestHandler extends HttpRequestHandler {
     private static string $ZIP_FILE_ID = "import_zip_file";

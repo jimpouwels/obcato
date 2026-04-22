@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\templates\visuals\template_files;
+namespace Pageflow\Core\modules\templates\visuals\template_files;
 
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\TemplateFile;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\TemplateFile;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class TemplateFileEditor extends Panel {
     private TemplateDao $templateDao;

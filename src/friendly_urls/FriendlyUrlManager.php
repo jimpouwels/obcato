@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\friendly_urls;
+namespace Pageflow\Core\friendly_urls;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\FriendlyUrlDao;
-use Obcato\Core\database\dao\FriendlyUrlDaoMysql;
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\utilities\UrlHelper;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\database\dao\FriendlyUrlDao;
+use Pageflow\Core\database\dao\FriendlyUrlDaoMysql;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\utilities\UrlHelper;
 
 class FriendlyUrlManager {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\core\model;
+namespace Pageflow\Core\core\model;
 
-use Obcato\Core\database\dao\ScopeDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
+use Pageflow\Core\database\dao\ScopeDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
 
 class ElementType extends Entity {
 

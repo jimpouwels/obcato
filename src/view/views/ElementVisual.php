@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\core\model\Element;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\utilities\StringUtility;
-use Obcato\Core\view\TemplateData;
-use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\utilities\StringUtility;
+use Pageflow\Core\view\TemplateData;
+use const Pageflow\Core\DELETE_ELEMENT_FORM_ID;
 
 abstract class ElementVisual extends Visual {
 

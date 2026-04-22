@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\images\visuals\images;
+namespace Pageflow\Core\modules\images\visuals\images;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\modules\authorization\service\AuthorizationInteractor;
-use Obcato\Core\modules\authorization\service\AuthorizationService;
-use Obcato\Core\modules\images\ImageRequestHandler;
-use Obcato\Core\utilities\ImageUtility;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
-use const Obcato\Core\ACTION_FORM_ID;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\modules\authorization\service\AuthorizationInteractor;
+use Pageflow\Core\modules\authorization\service\AuthorizationService;
+use Pageflow\Core\modules\images\ImageRequestHandler;
+use Pageflow\Core\utilities\ImageUtility;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
+use const Pageflow\Core\ACTION_FORM_ID;
 
 class ImageList extends Panel {
 

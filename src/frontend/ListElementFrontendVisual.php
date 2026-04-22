@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\elements\list_element\ListElement;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\elements\list_element\ListElement;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
 
 class ListElementFrontendVisual extends ElementFrontendVisual {
 

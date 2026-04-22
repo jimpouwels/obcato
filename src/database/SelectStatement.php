@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\database;
+namespace Pageflow\Core\database;
 
 class SelectStatement extends Statement {
     private array $selectFields = array();

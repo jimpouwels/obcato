@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\settings\model\Settings;
-use const Obcato\Core\SYSTEM_VERSION;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\settings\model\Settings;
+use const Pageflow\Core\SYSTEM_VERSION;
 
 class SettingsDaoMysql implements SettingsDao {
 

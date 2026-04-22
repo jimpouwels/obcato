@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\modules\webforms;
+namespace Pageflow\Core\modules\webforms;
 
 class FormItemType {
     private string $typeName;

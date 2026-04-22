@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\form;
+namespace Pageflow\Core\modules\webforms\form;
 
-use Obcato\Core\modules\webforms\model\WebformTextfield;
+use Pageflow\Core\modules\webforms\model\WebformTextfield;
 
 class WebformTextfieldForm extends WebformFieldForm {
 

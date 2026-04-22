@@ -1,8 +1,8 @@
 <?php
 
-use Obcato\Core\database\Prepared;
-use Obcato\Core\database\SelectStatement;
-use Obcato\Core\database\WhereType;
+use Pageflow\Core\database\Prepared;
+use Pageflow\Core\database\SelectStatement;
+use Pageflow\Core\database\WhereType;
 use PHPUnit\Framework\TestCase;
 
 class SelectStatementTest extends TestCase {

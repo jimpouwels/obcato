@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\images\visuals\images;
+namespace Pageflow\Core\modules\images\visuals\images;
 
-use Obcato\Core\modules\images\ImageRequestHandler;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\images\ImageRequestHandler;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\view\views\Visual;
 
 class ImagesTab extends Visual {
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\components;
+namespace Pageflow\Core\modules\components\visuals\components;
 
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\modules\components\ComponentRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\modules\components\ComponentRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class ElementsListPanel extends Panel {
 

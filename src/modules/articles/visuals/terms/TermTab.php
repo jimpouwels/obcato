@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\terms;
+namespace Pageflow\Core\modules\articles\visuals\terms;
 
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\view\views\Visual;
 
 class TermTab extends Visual {
 

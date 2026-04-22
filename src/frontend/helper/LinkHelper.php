@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\frontend\helper;
+namespace Pageflow\Core\frontend\helper;
 
-use Obcato\Core\core\model\Link;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\utilities\UrlHelper;
+use Pageflow\Core\core\model\Link;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\utilities\UrlHelper;
 
 class LinkHelper
 {

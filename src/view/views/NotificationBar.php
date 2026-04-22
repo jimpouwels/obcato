@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
 
-use Obcato\Core\core\model\Notifications;
+use Pageflow\Core\core\model\Notifications;
 
 class NotificationBar extends Visual {
 

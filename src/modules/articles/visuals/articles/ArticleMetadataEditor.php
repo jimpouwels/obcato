@@ -1,31 +1,31 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\articles;
+namespace Pageflow\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\WebformDao;
-use Obcato\Core\database\dao\WebformDaoMysql;
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\ArticleLookup;
-use Obcato\Core\view\views\DateField;
-use Obcato\Core\view\views\ImageLookup;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\ReadonlyTextField;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TemplatePicker;
-use Obcato\Core\view\views\TextArea;
-use Obcato\Core\view\views\TextField;
-use const Obcato\Core\ACTION_FORM_ID;
-use const Obcato\Core\ADD_ELEMENT_FORM_ID;
-use const Obcato\Core\DELETE_ELEMENT_FORM_ID;
-use const Obcato\Core\EDIT_ELEMENT_HOLDER_ID;
-use const Obcato\Core\ELEMENT_HOLDER_FORM_ID;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\database\dao\WebformDao;
+use Pageflow\Core\database\dao\WebformDaoMysql;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\ArticleLookup;
+use Pageflow\Core\view\views\DateField;
+use Pageflow\Core\view\views\ImageLookup;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\ReadonlyTextField;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TemplatePicker;
+use Pageflow\Core\view\views\TextArea;
+use Pageflow\Core\view\views\TextField;
+use const Pageflow\Core\ACTION_FORM_ID;
+use const Pageflow\Core\ADD_ELEMENT_FORM_ID;
+use const Pageflow\Core\DELETE_ELEMENT_FORM_ID;
+use const Pageflow\Core\EDIT_ELEMENT_HOLDER_ID;
+use const Pageflow\Core\ELEMENT_HOLDER_FORM_ID;
 
 class ArticleMetadataEditor extends Panel {
 

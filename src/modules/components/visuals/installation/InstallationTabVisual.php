@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\installation;
+namespace Pageflow\Core\modules\components\visuals\installation;
 
-use Obcato\Core\modules\components\InstallRequestHandler;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\components\InstallRequestHandler;
+use Pageflow\Core\view\views\Visual;
 
 class InstallationTabVisual extends Visual {
 

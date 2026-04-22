@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages;
+namespace Pageflow\Core\modules\sitewide_pages;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
 
 class SitewidePagesForm extends Form {
 

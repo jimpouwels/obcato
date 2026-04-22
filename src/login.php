@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato;
+namespace Pageflow;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\authentication\Session;
-use Obcato\Core\view\views\Button;
-use Obcato\Core\view\views\PasswordField;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\view\views\Button;
+use Pageflow\Core\view\views\PasswordField;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\TextField;
 
 if (!file_exists(PRIVATE_DIR . "/database_config.php")) {
     header("Location: /admin");
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script type="text/javascript" src="/admin?file=/public/js/jquery.js"></script>
     <script type="text/javascript" src="/admin?file=/public/js/login_functions.js"></script>
 
-    <title>Obcato</title>
+    <title>Pageflow</title>
     <meta name="robots" content="noindex" />
 </head>
 <body>
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form id="form-login" method="post" action="/admin/login">
         <fieldset class="loginform">
             <div class="header">
-                <p>Obcato</p>
+                <p>Pageflow</p>
             </div>
             <div class="fields">
                 <?php if (isset($_GET['orgUrl']) && $_GET['orgUrl'] != ''): ?>

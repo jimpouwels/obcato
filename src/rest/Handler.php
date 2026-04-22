@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\rest;
+namespace Pageflow\Core\rest;
 
 use Closure;
-use Obcato\Core\database\dao\ElementHolderDao;
-use Obcato\Core\database\dao\ElementHolderDaoMysql;
+use Pageflow\Core\database\dao\ElementHolderDao;
+use Pageflow\Core\database\dao\ElementHolderDaoMysql;
 
 abstract class Handler {
 

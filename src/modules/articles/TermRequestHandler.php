@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\articles;
+namespace Pageflow\Core\modules\articles;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class TermRequestHandler extends HttpRequestHandler {
 

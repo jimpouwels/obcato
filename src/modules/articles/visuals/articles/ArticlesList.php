@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\articles;
+namespace Pageflow\Core\modules\articles\visuals\articles;
 
-use Obcato\Core\database\dao\AuthorizationDao;
-use Obcato\Core\database\dao\AuthorizationDaoMysql;
-use Obcato\Core\modules\articles\ArticleRequestHandler;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\AuthorizationDao;
+use Pageflow\Core\database\dao\AuthorizationDaoMysql;
+use Pageflow\Core\modules\articles\ArticleRequestHandler;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
 
 class ArticlesList extends Panel {
 

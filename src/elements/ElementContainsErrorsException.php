@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\elements;
+namespace Pageflow\Core\elements;
 
 use Exception;
 

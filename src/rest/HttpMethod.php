@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\rest;
+namespace Pageflow\Core\rest;
 
 enum HttpMethod {
     case GET;

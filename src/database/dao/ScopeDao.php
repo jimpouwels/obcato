@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Scope;
 
 interface ScopeDao {
     public function getScopes(): array;

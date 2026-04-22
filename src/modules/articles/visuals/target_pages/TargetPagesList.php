@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\target_pages;
+namespace Pageflow\Core\modules\articles\visuals\target_pages;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\PageLookup;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\PageLookup;
+use Pageflow\Core\view\views\Panel;
 
 class TargetPagesList extends Panel {
 

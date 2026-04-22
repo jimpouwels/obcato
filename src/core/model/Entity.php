@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\core\model;
+namespace Pageflow\Core\core\model;
 
 abstract class Entity {
 

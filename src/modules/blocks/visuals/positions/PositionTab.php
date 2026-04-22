@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\positions;
+namespace Pageflow\Core\modules\blocks\visuals\positions;
 
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\view\views\Visual;
 
 class PositionTab extends Visual {
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\database\SelectStatement;
-use Obcato\Core\database\WhereType;
-use Obcato\Core\modules\images\model\Image;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\database\SelectStatement;
+use Pageflow\Core\database\WhereType;
+use Pageflow\Core\modules\images\model\Image;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImageDaoMysql implements ImageDao {
 

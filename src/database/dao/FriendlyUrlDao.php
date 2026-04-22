@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\core\model\ElementHolder;
+use Pageflow\Core\core\model\ElementHolder;
 
 interface FriendlyUrlDao {
     public function insertFriendlyUrl(string $url, ElementHolder $elementHolder): void;

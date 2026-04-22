@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\core\model;
+namespace Pageflow\Core\core\model;
 
 use DateTime;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\modules\templates\model\Presentable;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\modules\templates\model\Presentable;
 
 class ElementHolder extends Presentable {
 

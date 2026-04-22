@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages\persistence;
+namespace Pageflow\Core\modules\sitewide_pages\persistence;
 
 interface SitewideDao {
     public function getSitewidePages(): array;

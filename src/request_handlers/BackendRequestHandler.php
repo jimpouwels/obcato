@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\request_handlers;
+namespace Pageflow\Core\request_handlers;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\database\dao\ModuleDao;
-use Obcato\Core\database\dao\ModuleDaoMysql;
-use Obcato\Core\utilities\UrlHelper;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\database\dao\ModuleDao;
+use Pageflow\Core\database\dao\ModuleDaoMysql;
+use Pageflow\Core\utilities\UrlHelper;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class BackendRequestHandler extends HttpRequestHandler {
 

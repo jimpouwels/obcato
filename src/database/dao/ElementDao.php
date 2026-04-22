@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\core\model\ElementType;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\core\model\ElementType;
 
 interface ElementDao {
     public function getElements(ElementHolder $elementHolder): array;

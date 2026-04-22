@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\settings;
+namespace Pageflow\Core\modules\settings;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\modules\settings\model\IFrameSecurityPolicy;
-use Obcato\Core\modules\settings\model\Settings;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\modules\settings\model\IFrameSecurityPolicy;
+use Pageflow\Core\modules\settings\model\Settings;
 
 class SettingsForm extends Form {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\images\visuals\images;
+namespace Pageflow\Core\modules\images\visuals\images;
 
-use Obcato\Core\database\dao\ImageDao;
-use Obcato\Core\database\dao\ImageDaoMysql;
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\database\dao\ImageDao;
+use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\view\views\Visual;
 
 class ImageEditor extends Visual {
     private Image $currentImage;

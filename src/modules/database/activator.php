@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\database;
+namespace Pageflow\Core\modules\database;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\modules\database\visuals\Configuration;
-use Obcato\Core\modules\database\visuals\QueriesTab;
-use Obcato\Core\modules\database\visuals\Tables;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\modules\database\visuals\Configuration;
+use Pageflow\Core\modules\database\visuals\QueriesTab;
+use Pageflow\Core\modules\database\visuals\Tables;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class DatabaseModuleVisual extends ModuleVisual {
 

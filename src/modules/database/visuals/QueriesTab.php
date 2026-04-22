@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\database\visuals;
+namespace Pageflow\Core\modules\database\visuals;
 
-use Obcato\Core\modules\database\DatabaseRequestHandler;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\database\DatabaseRequestHandler;
+use Pageflow\Core\view\views\Visual;
 
 class QueriesTab extends Visual {
 

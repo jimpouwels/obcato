@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\templates;
+namespace Pageflow\Core\modules\templates;
 
-use Obcato\Core\core\form\Form;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\utilities\Arrays;
+use Pageflow\Core\core\form\Form;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\utilities\Arrays;
 
 class TemplateEditorForm extends Form {
     private Template $template;

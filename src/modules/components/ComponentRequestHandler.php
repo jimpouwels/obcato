@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\modules\components;
+namespace Pageflow\Core\modules\components;
 
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\database\dao\ModuleDao;
-use Obcato\Core\database\dao\ModuleDaoMysql;
-use Obcato\Core\modules\components\installer\Logger;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\database\dao\ModuleDao;
+use Pageflow\Core\database\dao\ModuleDaoMysql;
+use Pageflow\Core\modules\components\installer\Logger;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class ComponentRequestHandler extends HttpRequestHandler {
 

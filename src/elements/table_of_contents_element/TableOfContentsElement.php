@@ -1,21 +1,21 @@
 <?php
 
-namespace Obcato\Core\elements\table_of_contents_element;
+namespace Pageflow\Core\elements\table_of_contents_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\elements\table_of_contents_element\visuals\TableOfContentsElementEditor;
-use Obcato\Core\elements\table_of_contents_element\visuals\TableOfContentsElementStatics;
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\frontend\TableOfContentsElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\TemplateEngine;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\elements\table_of_contents_element\visuals\TableOfContentsElementEditor;
+use Pageflow\Core\elements\table_of_contents_element\visuals\TableOfContentsElementStatics;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\frontend\TableOfContentsElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\TemplateEngine;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class TableOfContentsElement extends Element {
 

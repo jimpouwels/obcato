@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\components\visuals\components;
+namespace Pageflow\Core\modules\components\visuals\components;
 
-use Obcato\Core\modules\components\ComponentRequestHandler;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\components\ComponentRequestHandler;
+use Pageflow\Core\view\views\Visual;
 
 class ComponentsTabVisual extends Visual {
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\elements\photo_album_element;
+namespace Pageflow\Core\elements\photo_album_element;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\elements\ElementContainsErrorsException;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\elements\ElementContainsErrorsException;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class PhotoAlbumElementRequestHandler extends HttpRequestHandler {
 

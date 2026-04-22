@@ -1,20 +1,20 @@
 <?php
 
-namespace Obcato\Core\modules\pages;
+namespace Pageflow\Core\modules\pages;
 
-use Obcato\Core\core\model\Module;
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\visuals\PageEditor;
-use Obcato\Core\modules\pages\visuals\PageTree;
-use Obcato\Core\view\views\ActionButtonAdd;
-use Obcato\Core\view\views\ActionButtonDelete;
-use Obcato\Core\view\views\ActionButtonDown;
-use Obcato\Core\view\views\ActionButtonSave;
-use Obcato\Core\view\views\ActionButtonUp;
-use Obcato\Core\view\views\ModuleVisual;
-use Obcato\Core\view\views\TabMenu;
+use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\visuals\PageEditor;
+use Pageflow\Core\modules\pages\visuals\PageTree;
+use Pageflow\Core\view\views\ActionButtonAdd;
+use Pageflow\Core\view\views\ActionButtonDelete;
+use Pageflow\Core\view\views\ActionButtonDown;
+use Pageflow\Core\view\views\ActionButtonSave;
+use Pageflow\Core\view\views\ActionButtonUp;
+use Pageflow\Core\view\views\ModuleVisual;
+use Pageflow\Core\view\views\TabMenu;
 
 class PageModuleVisual extends ModuleVisual {
 

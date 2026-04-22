@@ -1,11 +1,10 @@
 <?php
 
-namespace Obcato\Core\modules\sitewide_pages;
+namespace Pageflow\Core\modules\sitewide_pages;
 
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use function Obcato\Core\utilities\dumpVar;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class SitewidePagesRequestHandler extends HttpRequestHandler {
 

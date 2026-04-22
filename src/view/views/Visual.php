@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\authentication\Session;
-use Obcato\Core\core\BlackBoard;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\TemplateEngine;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\core\BlackBoard;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\TemplateEngine;
 
 abstract class Visual {
 

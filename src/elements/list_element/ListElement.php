@@ -1,18 +1,18 @@
 <?php
 
-namespace Obcato\Core\elements\list_element;
+namespace Pageflow\Core\elements\list_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\list_element\visuals\ListElementEditor;
-use Obcato\Core\elements\list_element\visuals\ListElementStatics;
-use Obcato\Core\frontend\FrontendVisual;
-use Obcato\Core\frontend\ListElementFrontendVisual;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\request_handlers\HttpRequestHandler;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\list_element\visuals\ListElementEditor;
+use Pageflow\Core\elements\list_element\visuals\ListElementStatics;
+use Pageflow\Core\frontend\FrontendVisual;
+use Pageflow\Core\frontend\ListElementFrontendVisual;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Visual;
 
 class ListElement extends Element {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\authentication;
+namespace Pageflow\Core\authentication;
 
 class Session {
 

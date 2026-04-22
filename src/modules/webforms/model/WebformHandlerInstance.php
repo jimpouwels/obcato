@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\model;
+namespace Pageflow\Core\modules\webforms\model;
 
-use Obcato\Core\core\model\Entity;
-use Obcato\Core\utilities\Arrays;
+use Pageflow\Core\core\model\Entity;
+use Pageflow\Core\utilities\Arrays;
 
 class WebformHandlerInstance extends Entity {
 

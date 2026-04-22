@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\service;
+namespace Pageflow\Core\service;
 
-use Obcato\Core\database\dao\ElementHolderDao;
-use Obcato\Core\database\dao\ElementHolderDaoMysql;
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\core\model\Element;
-use Obcato\Core\service\ElementHolderService;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\database\dao\ElementHolderDao;
+use Pageflow\Core\database\dao\ElementHolderDaoMysql;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\service\ElementHolderService;
+use const Pageflow\CMS_ROOT;
 
 class ElementHolderInteractor implements ElementHolderService {
 
@@ -29,7 +29,7 @@ class ElementHolderInteractor implements ElementHolderService {
 
     public function addElementToElementHolder(ElementType $elementType, ElementHolder $elementHolder): Element {
         require_once CMS_ROOT . "/elements/" . $elementType->getIdentifier() . "/" . $elementType->getDomainObject();
-        $elementClassName = "Obcato\\Core\\elements\\" . $elementType->getIdentifier() . "\\" . $elementType->getClassName();
+        $elementClassName = "Pageflow\\Core\\elements\\" . $elementType->getIdentifier() . "\\" . $elementType->getClassName();
         $newElement = new $elementClassName($elementType->getScopeId());
         $newElement->setElementHolderId($elementHolder->getId());
         $newElement->setOrderNr(999);

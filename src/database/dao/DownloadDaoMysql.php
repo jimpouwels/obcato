@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
 class DownloadDaoMysql implements DownloadDao {
 

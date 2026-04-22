@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\images\visuals\images;
+namespace Pageflow\Core\modules\images\visuals\images;
 
-use Obcato\Core\modules\images\model\Image;
-use Obcato\Core\utilities\ImageUtility;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\ReadonlyTextField;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TextField;
-use Obcato\Core\view\views\UploadField;
-use const Obcato\Core\ACTION_FORM_ID;
-use const Obcato\Core\UPLOAD_DIR;
+use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\utilities\ImageUtility;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\ReadonlyTextField;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TextField;
+use Pageflow\Core\view\views\UploadField;
+use const Pageflow\Core\ACTION_FORM_ID;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImageDesktopEditor extends Panel {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\authorization\model\User;
-use Obcato\Core\utilities\StringUtility;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\authorization\model\User;
+use Pageflow\Core\utilities\StringUtility;
 
 class AuthorizationDaoMysql implements AuthorizationDao {
 

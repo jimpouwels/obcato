@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\utilities\Arrays;
-use Obcato\Core\view\TemplateData;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\utilities\Arrays;
+use Pageflow\Core\view\TemplateData;
 
 class BlockSelector extends Panel {
 

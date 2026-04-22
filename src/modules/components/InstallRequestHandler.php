@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\components;
+namespace Pageflow\Core\modules\components;
 
 use FileUtility;
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\modules\components\installer\InstallationException;
-use Obcato\Core\modules\components\installer\Logger;
-use Obcato\Core\modules\components\installer\ModuleInstaller;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\modules\components\installer\InstallationException;
+use Pageflow\Core\modules\components\installer\Logger;
+use Pageflow\Core\modules\components\installer\ModuleInstaller;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 use ZipArchive;
 
 class InstallRequestHandler extends HttpRequestHandler {

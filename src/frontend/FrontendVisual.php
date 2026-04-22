@@ -1,25 +1,25 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\dao\ElementDao;
-use Obcato\Core\database\dao\ElementDaoMysql;
-use Obcato\Core\frontend\helper\LinkHelper;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\service\ArticleInteractor;
-use Obcato\Core\modules\articles\service\ArticleService;
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use Obcato\Core\modules\templates\model\TemplateVar;
-use Obcato\Core\modules\templates\service\TemplateInteractor;
-use Obcato\Core\modules\templates\service\TemplateService;
-use Obcato\Core\frontend\helper\FontStyleHelper;
-use Obcato\Core\utilities\Arrays;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\TemplateEngine;
-use const Obcato\Core\FRONTEND_TEMPLATE_DIR;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\dao\ElementDao;
+use Pageflow\Core\database\dao\ElementDaoMysql;
+use Pageflow\Core\frontend\helper\LinkHelper;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\service\ArticleInteractor;
+use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use Pageflow\Core\modules\templates\model\TemplateVar;
+use Pageflow\Core\modules\templates\service\TemplateInteractor;
+use Pageflow\Core\modules\templates\service\TemplateService;
+use Pageflow\Core\frontend\helper\FontStyleHelper;
+use Pageflow\Core\utilities\Arrays;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\TemplateEngine;
+use const Pageflow\Core\FRONTEND_TEMPLATE_DIR;
 
 abstract class FrontendVisual {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\service;
+namespace Pageflow\Core\modules\blocks\service;
 
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface BlockService {
 

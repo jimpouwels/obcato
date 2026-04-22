@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\handlers;
+namespace Pageflow\Core\modules\webforms\handlers;
 
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\database\dao\SettingsDao;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
 
 class EmailFormHandler extends FormHandler {
 

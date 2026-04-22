@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\database\visuals;
+namespace Pageflow\Core\modules\database\visuals;
 
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
 
 class TablePanel extends Panel {
 

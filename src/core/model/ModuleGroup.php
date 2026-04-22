@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\core\model;
+namespace Pageflow\Core\core\model;
 
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\database\MysqlConnector;
 
 class ModuleGroup extends Entity {
 

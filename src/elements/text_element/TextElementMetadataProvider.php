@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\elements\text_element;
+namespace Pageflow\Core\elements\text_element;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\core\model\ElementMetadataProvider;
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementMetadataProvider;
+use Pageflow\Core\database\MysqlConnector;
 
 class TextElementMetadataProvider extends ElementMetadataProvider
 {

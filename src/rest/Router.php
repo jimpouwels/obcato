@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\rest;
+namespace Pageflow\Core\rest;
 
-use Obcato\Core\rest\article\ArticleHandler;
-use Obcato\Core\rest\element_holder\ElementHolderHandler;
-use Obcato\Core\rest\image\ImageElementHandler;
-use Obcato\Core\rest\image\PhotoAlbumElementHandler;
-use Obcato\Core\rest\image\ImageHandler;
-use Obcato\Core\rest\page\PageSearchHandler;
-use Obcato\Core\utilities\UrlHelper;
+use Pageflow\Core\rest\article\ArticleHandler;
+use Pageflow\Core\rest\element_holder\ElementHolderHandler;
+use Pageflow\Core\rest\image\ImageElementHandler;
+use Pageflow\Core\rest\image\PhotoAlbumElementHandler;
+use Pageflow\Core\rest\image\ImageHandler;
+use Pageflow\Core\rest\page\PageSearchHandler;
+use Pageflow\Core\utilities\UrlHelper;
 
 
 class Router {

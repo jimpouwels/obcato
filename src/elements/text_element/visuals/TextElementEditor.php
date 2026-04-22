@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\elements\text_element\visuals;
+namespace Pageflow\Core\elements\text_element\visuals;
 
-use Obcato\Core\core\model\Element;
-use Obcato\Core\elements\text_element\TextElement;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\ElementVisual;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\RichTextArea;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\core\model\Element;
+use Pageflow\Core\elements\text_element\TextElement;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\ElementVisual;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\RichTextArea;
+use Pageflow\Core\view\views\TextField;
 
 class TextElementEditor extends ElementVisual {
 

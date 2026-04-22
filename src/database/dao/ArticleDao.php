@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\modules\articles\model\ArticleMetadataFieldValue;
-use Obcato\Core\modules\articles\model\ArticleTerm;
-use Obcato\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\modules\articles\model\ArticleMetadataFieldValue;
+use Pageflow\Core\modules\articles\model\ArticleTerm;
+use Pageflow\Core\modules\pages\model\Page;
 
 interface ArticleDao {
     public function getArticle($id): ?Article;

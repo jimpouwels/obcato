@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\utilities;
+namespace Pageflow\Core\utilities;
 
 use Imagick;
-use const Obcato\Core\UPLOAD_DIR;
+use const Pageflow\Core\UPLOAD_DIR;
 
 class ImageUtility {
 

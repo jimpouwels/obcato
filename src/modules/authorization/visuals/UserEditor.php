@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\authorization\visuals;
+namespace Pageflow\Core\modules\authorization\visuals;
 
-use Obcato\Core\modules\authorization\model\User;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\PasswordField;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\authorization\model\User;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\PasswordField;
+use Pageflow\Core\view\views\TextField;
 
 class UserEditor extends Panel {
 

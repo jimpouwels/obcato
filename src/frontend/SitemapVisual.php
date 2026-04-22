@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\templates\model\Presentable;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\templates\model\Presentable;
+use const Pageflow\CMS_ROOT;
 
 class SitemapVisual extends FrontendVisual {
 

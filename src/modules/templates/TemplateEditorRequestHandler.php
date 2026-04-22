@@ -1,15 +1,15 @@
 <?php
 
-namespace Obcato\Core\modules\templates;
+namespace Pageflow\Core\modules\templates;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\ScopeDao;
-use Obcato\Core\database\dao\ScopeDaoMysql;
-use Obcato\Core\database\dao\TemplateDao;
-use Obcato\Core\database\dao\TemplateDaoMysql;
-use Obcato\Core\modules\templates\model\Scope;
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\ScopeDao;
+use Pageflow\Core\database\dao\ScopeDaoMysql;
+use Pageflow\Core\database\dao\TemplateDao;
+use Pageflow\Core\database\dao\TemplateDaoMysql;
+use Pageflow\Core\modules\templates\model\Scope;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class TemplateEditorRequestHandler extends HttpRequestHandler {
 

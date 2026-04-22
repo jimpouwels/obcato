@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\visuals;
+namespace Pageflow\Core\modules\downloads\visuals;
 
-use Obcato\Core\modules\downloads\model\Download;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\view\views\TextField;
-use Obcato\Core\view\views\UploadField;
+use Pageflow\Core\modules\downloads\model\Download;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\view\views\TextField;
+use Pageflow\Core\view\views\UploadField;
 
 class DownloadMetadataEditor extends Panel {
     private Download $download;

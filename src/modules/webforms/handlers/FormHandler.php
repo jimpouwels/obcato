@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\handlers;
+namespace Pageflow\Core\modules\webforms\handlers;
 
-use Obcato\Core\friendly_urls\FriendlyUrlManager;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\webforms\model\WebformHandlerInstance;
-use Obcato\Core\core\BlackBoard;
+use Pageflow\Core\friendly_urls\FriendlyUrlManager;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\webforms\model\WebformHandlerInstance;
+use Pageflow\Core\core\BlackBoard;
 
 abstract class FormHandler {
 

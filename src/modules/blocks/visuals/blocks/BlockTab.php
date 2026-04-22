@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\blocks\visuals\blocks;
+namespace Pageflow\Core\modules\blocks\visuals\blocks;
 
-use Obcato\Core\modules\blocks\model\Block;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\blocks\model\Block;
+use Pageflow\Core\view\views\Visual;
 
 class BlockTab extends Visual {
 

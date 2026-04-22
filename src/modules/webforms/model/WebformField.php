@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\model;
+namespace Pageflow\Core\modules\webforms\model;
 
 abstract class WebformField extends WebformItem {
 

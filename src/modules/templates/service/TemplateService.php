@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\templates\service;
+namespace Pageflow\Core\modules\templates\service;
 
-use Obcato\Core\modules\templates\model\Template;
-use Obcato\Core\modules\templates\model\TemplateFile;
-use Obcato\Core\modules\templates\model\TemplateVar;
-use Obcato\Core\modules\templates\model\TemplateVarDef;
+use Pageflow\Core\modules\templates\model\Template;
+use Pageflow\Core\modules\templates\model\TemplateFile;
+use Pageflow\Core\modules\templates\model\TemplateVar;
+use Pageflow\Core\modules\templates\model\TemplateVarDef;
 
 interface TemplateService {
 

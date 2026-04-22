@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\database;
+namespace Pageflow\Core\modules\database;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\database\MysqlResult;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\database\MysqlResult;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class DatabaseRequestHandler extends HttpRequestHandler {
 

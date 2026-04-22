@@ -1,12 +1,12 @@
 <?php
 
-namespace Obcato\Core\modules\blocks;
+namespace Pageflow\Core\modules\blocks;
 
-use Obcato\Core\core\form\FormException;
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\modules\blocks\model\BlockPosition;
-use Obcato\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\core\form\FormException;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\modules\blocks\model\BlockPosition;
+use Pageflow\Core\request_handlers\HttpRequestHandler;
 
 class PositionRequestHandler extends HttpRequestHandler {
 

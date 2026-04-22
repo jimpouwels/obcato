@@ -1,16 +1,16 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\articles;
+namespace Pageflow\Core\modules\articles\visuals\articles;
 
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\modules\articles\ArticleRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Button;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\modules\articles\ArticleRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Button;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\TextField;
 
 class ArticlesSearch extends Panel {
 

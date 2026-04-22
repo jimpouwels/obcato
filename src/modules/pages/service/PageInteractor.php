@@ -1,17 +1,17 @@
 <?php
 
-namespace Obcato\Core\modules\pages\service;
+namespace Pageflow\Core\modules\pages\service;
 
-use Obcato\Core\authentication\Authenticator;
-use Obcato\Core\authentication\Session;
-use Obcato\Core\database\dao\BlockDao;
-use Obcato\Core\database\dao\BlockDaoMysql;
-use Obcato\Core\database\dao\PageDao;
-use Obcato\Core\database\dao\PageDaoMysql;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\sitewide_pages\persistence\SitewideDao;
-use Obcato\Core\modules\sitewide_pages\persistence\SitewideDaoMysql;
-use const Obcato\Core\ELEMENT_HOLDER_PAGE;
+use Pageflow\Core\authentication\Authenticator;
+use Pageflow\Core\authentication\Session;
+use Pageflow\Core\database\dao\BlockDao;
+use Pageflow\Core\database\dao\BlockDaoMysql;
+use Pageflow\Core\database\dao\PageDao;
+use Pageflow\Core\database\dao\PageDaoMysql;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\sitewide_pages\persistence\SitewideDao;
+use Pageflow\Core\modules\sitewide_pages\persistence\SitewideDaoMysql;
+use const Pageflow\Core\ELEMENT_HOLDER_PAGE;
 
 class PageInteractor implements PageService {
 

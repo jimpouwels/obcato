@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\elements\text_element\visuals;
+namespace Pageflow\Core\elements\text_element\visuals;
 
-use Obcato\Core\view\views\ElementStatic;
+use Pageflow\Core\view\views\ElementStatic;
 
 class TextElementStatics extends ElementStatic {
 

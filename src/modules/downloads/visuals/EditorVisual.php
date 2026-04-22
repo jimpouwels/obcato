@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\visuals;
+namespace Pageflow\Core\modules\downloads\visuals;
 
-use Obcato\Core\modules\downloads\model\Download;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\downloads\model\Download;
+use Pageflow\Core\view\views\Visual;
 
 class EditorVisual extends Visual {
 

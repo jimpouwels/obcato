@@ -1,6 +1,6 @@
 <?php
 
-namespace Obcato\Core\view\views;
+namespace Pageflow\Core\view\views;
 
 class FormError extends Visual {
 

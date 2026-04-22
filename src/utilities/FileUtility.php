@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\utilities;
+namespace Pageflow\Core\utilities;
 
-use Obcato\Core\modules\images\model\Image;
+use Pageflow\Core\modules\images\model\Image;
 
 class FileUtility {
 

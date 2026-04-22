@@ -1,13 +1,13 @@
 <?php
 
-namespace Obcato\Core\modules\downloads\visuals;
+namespace Pageflow\Core\modules\downloads\visuals;
 
-use Obcato\Core\database\dao\DownloadDao;
-use Obcato\Core\database\dao\DownloadDaoMysql;
-use Obcato\Core\modules\downloads\DownloadRequestHandler;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
+use Pageflow\Core\database\dao\DownloadDao;
+use Pageflow\Core\database\dao\DownloadDaoMysql;
+use Pageflow\Core\modules\downloads\DownloadRequestHandler;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
 
 class ListVisual extends Panel {
 

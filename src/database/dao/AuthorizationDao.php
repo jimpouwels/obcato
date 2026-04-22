@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\modules\authorization\model\User;
+use Pageflow\Core\modules\authorization\model\User;
 
 interface AuthorizationDao {
     public function getUser(string $username): ?User;

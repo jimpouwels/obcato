@@ -1,10 +1,10 @@
 <?php
 
-namespace Obcato\Core\service;
+namespace Pageflow\Core\service;
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\core\model\ElementType;
-use Obcato\Core\core\model\Element;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\core\model\ElementType;
+use Pageflow\Core\core\model\Element;
 
 interface ElementHolderService {
 

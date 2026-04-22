@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\settings\visuals;
+namespace Pageflow\Core\modules\settings\visuals;
 
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class DomainSettingsPanel extends Panel {
 

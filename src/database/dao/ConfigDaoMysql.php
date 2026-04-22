@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use const Obcato\Core\CONFIG_DIR;
+use const Pageflow\Core\CONFIG_DIR;
 
 class ConfigDaoMysql implements ConfigDao {
 

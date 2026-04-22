@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\metadata;
+namespace Pageflow\Core\modules\articles\visuals\metadata;
 
-use Obcato\Core\modules\articles\model\ArticleMetadataField;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\TextField;
+use Pageflow\Core\modules\articles\model\ArticleMetadataField;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\TextField;
 
 class MetadataFieldEditor extends Panel {
 

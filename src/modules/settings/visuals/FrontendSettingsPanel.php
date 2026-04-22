@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\modules\settings\visuals;
+namespace Pageflow\Core\modules\settings\visuals;
 
-use Obcato\Core\modules\settings\model\Settings;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\Pulldown;
-use Obcato\Core\view\views\TextField;
-use Obcato\Core\view\views\SingleCheckbox;
-use Obcato\Core\modules\settings\model\IFrameSecurityPolicy;
+use Pageflow\Core\modules\settings\model\Settings;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\Pulldown;
+use Pageflow\Core\view\views\TextField;
+use Pageflow\Core\view\views\SingleCheckbox;
+use Pageflow\Core\modules\settings\model\IFrameSecurityPolicy;
 
 class FrontendSettingsPanel extends Panel {
 

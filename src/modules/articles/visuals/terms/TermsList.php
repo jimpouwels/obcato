@@ -1,20 +1,20 @@
 <?php
 
-namespace Obcato\Core\modules\articles\visuals\terms;
+namespace Pageflow\Core\modules\articles\visuals\terms;
 
-use Obcato\Core\database\dao\ArticleDao;
-use Obcato\Core\database\dao\ArticleDaoMysql;
-use Obcato\Core\view\TemplateData;
-use Obcato\Core\view\views\InformationMessage;
-use Obcato\Core\view\views\Panel;
-use Obcato\Core\view\views\SingleCheckbox;
+use Pageflow\Core\database\dao\ArticleDao;
+use Pageflow\Core\database\dao\ArticleDaoMysql;
+use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\InformationMessage;
+use Pageflow\Core\view\views\Panel;
+use Pageflow\Core\view\views\SingleCheckbox;
 
 class TermsList extends Panel {
 
     private ArticleDao $articleDao;
-    private ?\Obcato\Core\modules\articles\model\ArticleTerm $currentTerm;
+    private ?\Pageflow\Core\modules\articles\model\ArticleTerm $currentTerm;
 
-    public function __construct(?\Obcato\Core\modules\articles\model\ArticleTerm $currentTerm = null) {
+    public function __construct(?\Pageflow\Core\modules\articles\model\ArticleTerm $currentTerm = null) {
         parent::__construct('Termen', 'term_list');
         $this->articleDao = ArticleDaoMysql::getInstance();
         $this->currentTerm = $currentTerm;

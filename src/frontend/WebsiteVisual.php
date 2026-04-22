@@ -1,14 +1,14 @@
 <?php
 
-namespace Obcato\Core\frontend;
+namespace Pageflow\Core\frontend;
 
-use Obcato\Core\frontend\helper\FrontendHelper;
-use Obcato\Core\modules\articles\model\Article;
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\templates\model\Presentable;
-use Obcato\Core\database\dao\SettingsDao;
-use Obcato\Core\database\dao\SettingsDaoMysql;
-use const Obcato\CMS_ROOT;
+use Pageflow\Core\frontend\helper\FrontendHelper;
+use Pageflow\Core\modules\articles\model\Article;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\templates\model\Presentable;
+use Pageflow\Core\database\dao\SettingsDao;
+use Pageflow\Core\database\dao\SettingsDaoMysql;
+use const Pageflow\CMS_ROOT;
 
 class WebsiteVisual extends FrontendVisual {
 

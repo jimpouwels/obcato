@@ -1,9 +1,9 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
-use Obcato\Core\modules\templates\model\Scope;
+use Pageflow\Core\database\MysqlConnector;
+use Pageflow\Core\modules\templates\model\Scope;
 
 class ScopeDaoMysql implements ScopeDao {
 

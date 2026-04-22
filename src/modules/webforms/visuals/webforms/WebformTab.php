@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\webforms\visuals\webforms;
+namespace Pageflow\Core\modules\webforms\visuals\webforms;
 
-use Obcato\Core\modules\webforms\model\Webform;
-use Obcato\Core\modules\webforms\WebformRequestHandler;
-use Obcato\Core\view\views\Visual;
-use const Obcato\Core\ACTION_FORM_ID;
+use Pageflow\Core\modules\webforms\model\Webform;
+use Pageflow\Core\modules\webforms\WebformRequestHandler;
+use Pageflow\Core\view\views\Visual;
+use const Pageflow\Core\ACTION_FORM_ID;
 
 class WebformTab extends Visual {
 

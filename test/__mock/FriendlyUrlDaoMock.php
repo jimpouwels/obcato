@@ -1,7 +1,7 @@
 <?php
 
-use Obcato\Core\core\model\ElementHolder;
-use Obcato\Core\database\dao\FriendlyUrlDao;
+use Pageflow\Core\core\model\ElementHolder;
+use Pageflow\Core\database\dao\FriendlyUrlDao;
 
 require_once(CMS_ROOT . '/database/dao/FriendlyUrlDao.php');
 

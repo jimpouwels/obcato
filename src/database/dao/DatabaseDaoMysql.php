@@ -1,8 +1,8 @@
 <?php
 
-namespace Obcato\Core\database\dao;
+namespace Pageflow\Core\database\dao;
 
-use Obcato\Core\database\MysqlConnector;
+use Pageflow\Core\database\MysqlConnector;
 
 class DatabaseDaoMysql implements DatabaseDao {
 

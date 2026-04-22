@@ -1,11 +1,11 @@
 <?php
 
-namespace Obcato\Core\modules\pages\visuals;
+namespace Pageflow\Core\modules\pages\visuals;
 
-use Obcato\Core\modules\pages\model\Page;
-use Obcato\Core\modules\pages\service\PageInteractor;
-use Obcato\Core\modules\pages\service\PageService;
-use Obcato\Core\view\views\Visual;
+use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\modules\pages\service\PageInteractor;
+use Pageflow\Core\modules\pages\service\PageService;
+use Pageflow\Core\view\views\Visual;
 
 class PageTreeItem extends Visual {
 
