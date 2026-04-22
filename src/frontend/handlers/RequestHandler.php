@@ -45,12 +45,7 @@ class RequestHandler {
     }
 
     public function handleRequest(): void {
-        if ($this->settings->getIFrameSecurityPolicy() != IFrameSecurityPolicy::ALLOW) {
-            header("X-Frame-Options: " . IFrameSecurityPolicy::toString($this->settings->getIFrameSecurityPolicy()));
-        }
-        if ($this->settings->isForceHttps()) {
-            header("Strict-Transport-Security: max-age=31536000; includeSubDomains;");
-        }
+        $this->addSecurityHeaders();
         if ($this->isSitemapRequest()) {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');
@@ -76,6 +71,15 @@ class RequestHandler {
                     $this->renderPage($urlMatch->getPage(), $urlMatch->getArticle(), $urlMatch->getOriginalUrl());
                 }
             }
+        }
+    }
+
+    private function addSecurityHeaders(): void {
+        if ($this->settings->getIFrameSecurityPolicy() != IFrameSecurityPolicy::ALLOW) {
+            header("X-Frame-Options: " . IFrameSecurityPolicy::toString($this->settings->getIFrameSecurityPolicy()));
+        }
+        if ($this->settings->isForceHttps()) {
+            header("Strict-Transport-Security: max-age=31536000; includeSubDomains;");
         }
     }
 
