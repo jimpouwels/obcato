@@ -41,9 +41,9 @@ class SettingsDaoMysql implements SettingsDao {
         $databaseVersion = $settings->getDatabaseVersion();
         $page404Id = $settings->get404PageId();
         $browserCacheInSeconds = $settings->getBrowserImageCacheInSeconds();
-        $iFrameSecurityPolicy = $settings->getIFrameSecurityPolicy();
+        $iFrameSecurityPolicy = $settings->getIFrameSecurityPolicy()->value;
         $forceHttps = $settings->isForceHttps() ? 1 : 0;
-        $statement->bind_param("ssssssiisi", $websiteTitle,
+        $statement->bind_param("ssssssiiii", $websiteTitle,
             $backendHostname,
             $frontendHostname,
             $smtpHost,

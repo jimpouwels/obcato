@@ -18,6 +18,7 @@ use Obcato\Core\modules\images\model\Image;
 use Obcato\Core\modules\pages\model\Page;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
+use Obcato\Core\modules\settings\model\IFrameSecurityPolicy;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\rest\Router;
 use Obcato\Core\utilities\UrlHelper;
@@ -44,8 +45,8 @@ class RequestHandler {
     }
 
     public function handleRequest(): void {
-        if ($this->settings->getIFrameSecurityPolicy() != "ALLOW") {
-            header("X-Frame-Options: " . $this->settings->getIFrameSecurityPolicy());
+        if ($this->settings->getIFrameSecurityPolicy() != IFrameSecurityPolicy::ALLOW) {
+            header("X-Frame-Options: " . IFrameSecurityPolicy::toString($this->settings->getIFrameSecurityPolicy()));
         }
         if ($this->settings->isForceHttps()) {
             header("Strict-Transport-Security: max-age=31536000; includeSubDomains;");

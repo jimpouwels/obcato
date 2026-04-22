@@ -14,7 +14,7 @@ class Settings extends Entity {
     private string $smtpHost;
     private string $databaseVersion;
     private int $browserImageCacheInSeconds;
-    private string $iFrameSecurityPolicy;
+    private IFrameSecurityPolicy $iFrameSecurityPolicy;
     private bool $forceHttps;
     private ?Page $page404 = null;
 
@@ -86,11 +86,11 @@ class Settings extends Entity {
         return $this->browserImageCacheInSeconds;
     }
 
-    public function getIFrameSecurityPolicy(): string {
+    public function getIFrameSecurityPolicy(): IFrameSecurityPolicy {
         return $this->iFrameSecurityPolicy;
     }
 
-    public function setIFrameSecurityPolicy(string $iFrameSecurityPolicy): void {
+    public function setIFrameSecurityPolicy(IFrameSecurityPolicy $iFrameSecurityPolicy): void {
         $this->iFrameSecurityPolicy = $iFrameSecurityPolicy;
     }
 
@@ -116,7 +116,7 @@ class Settings extends Entity {
         $this->setSmtpHost($row['smtp_host']);
         $this->setDatabaseVersion($row['database_version']);
         $this->setBrowserImageCacheInSeconds($row['browser_image_cache_in_seconds']);
-        $this->setIFrameSecurityPolicy($row['iframe_security_policy']);
+        $this->setIFrameSecurityPolicy(IFrameSecurityPolicy::from($row['iframe_security_policy']));
         $this->setForceHttps($row['force_https'] == 1);
         $this->setPage404(PageDaoMysql::getInstance()->getPage($row['404_page_id']));
     }

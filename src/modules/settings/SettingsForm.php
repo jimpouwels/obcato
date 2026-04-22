@@ -6,6 +6,7 @@ use Obcato\Core\core\form\Form;
 use Obcato\Core\core\form\FormException;
 use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
+use Obcato\Core\modules\settings\model\IFrameSecurityPolicy;
 use Obcato\Core\modules\settings\model\Settings;
 
 class SettingsForm extends Form {
@@ -26,7 +27,7 @@ class SettingsForm extends Form {
         $this->settings->setSmtpHost($this->getFieldValue("smtp_host"));
         $this->settings->setEmailAddress($this->getEmailAddress("email_address"));
         $this->settings->setBrowserImageCacheInSeconds($this->getNumber("browser_image_cache_in_seconds"));
-        $this->settings->setIFrameSecurityPolicy($this->getFieldValue("iframe_security_policy"));
+        $this->settings->setIFrameSecurityPolicy(IFrameSecurityPolicy::from($this->getNumber("iframe_security_policy")));
         $this->settings->setForceHttps($this->getBooleanValue("force_https"));
 
         $selected404PageId = $this->getNumber("404_page_id");
