@@ -334,6 +334,7 @@
             <query>ALTER TABLE articles DROP COLUMN keywords</query>
             <query>ALTER TABLE pages CHANGE COLUMN h1 seo_title VARCHAR(255) DEFAULT NULL</query>
             <query>ALTER TABLE articles CHANGE COLUMN h1 seo_title VARCHAR(255) DEFAULT NULL</query>
+            <query>ALTER TABLE settings ADD COLUMN iframe_security_policy TEXT NOT NULL DEFAULT 'SAMEORIGIN'</query>
         </queries>
     </version>
 </versions>

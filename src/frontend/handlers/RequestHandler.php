@@ -20,7 +20,6 @@ use Obcato\Core\modules\pages\service\PageInteractor;
 use Obcato\Core\modules\pages\service\PageService;
 use Obcato\Core\modules\settings\model\Settings;
 use Obcato\Core\rest\Router;
-use Obcato\Core\utilities\ImageUtility;
 use Obcato\Core\utilities\UrlHelper;
 use const Obcato\Core\UPLOAD_DIR;
 
@@ -45,6 +44,9 @@ class RequestHandler {
     }
 
     public function handleRequest(): void {
+        if ($this->settings->getIFrameSecurityPolicy() != "ALLOW") {
+            header("X-Frame-Options: " . $this->settings->getIFrameSecurityPolicy());
+        }
         if ($this->isSitemapRequest()) {
             $sitemap = new SitemapVisual();
             header('Content-Type: application/xml');
@@ -53,9 +55,6 @@ class RequestHandler {
             $robots = new RobotsVisual();
             header('Content-Type: text/plain');
             echo $robots->render();
-        } else if ($this->isRestRequest()) {
-            $router = new Router();
-            $router->route();
         } else if ($this->isImageRequest()) {
             $this->loadImage();
         } else {
@@ -82,10 +81,6 @@ class RequestHandler {
 
     private function isRobotsRequest(): bool {
         return isset($_GET['robots']) && $_GET['robots'];
-    }
-
-    private function isRestRequest(): bool {
-        return isset($_GET['rest']) && $_GET['rest'] == "true";
     }
 
     private function isImageRequest(): bool {

@@ -21,6 +21,10 @@ settings_form_backend_component_dir_field: Component directory
 settings_form_selected_homepage: Selected homepage
 settings_form_selected_404_page: Selected 404-Page
 settings_form_browser_image_cache_in_seconds: Browser image cache in seconds
+settings_form_iframe_security_policy: Allow website to be enclosed in an iFrame
+settings_form_iframe_security_policy_sameorigin: Only from the same domain
+settings_form_iframe_security_policy_allow: Always allow
+settings_form_iframe_security_policy_deny: Block
 
 # PAGE LOOKUP
 settings_page_lookup_homepage_modal_title: Select homepage

@@ -26,6 +26,7 @@ class SettingsForm extends Form {
         $this->settings->setSmtpHost($this->getFieldValue("smtp_host"));
         $this->settings->setEmailAddress($this->getEmailAddress("email_address"));
         $this->settings->setBrowserImageCacheInSeconds($this->getNumber("browser_image_cache_in_seconds"));
+        $this->settings->setIFrameSecurityPolicy($this->getFieldValue("iframe_security_policy"));
 
         $selected404PageId = $this->getNumber("404_page_id");
         if ($this->getFieldValue("delete_404_page_id") === "true") {

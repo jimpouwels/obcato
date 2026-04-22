@@ -30,7 +30,8 @@ class SettingsDaoMysql implements SettingsDao {
                                                                                         email_address = ?,
                                                                                         database_version = ?,
                                                                                         404_page_id = ?,
-                                                                                        browser_image_cache_in_seconds = ?");
+                                                                                        browser_image_cache_in_seconds = ?,
+                                                                                        iframe_security_policy = ?");
         $websiteTitle = $settings->getWebsiteTitle();
         $backendHostname = $settings->getBackEndHostname();
         $frontendHostname = $settings->getFrontEndHostname();
@@ -39,14 +40,16 @@ class SettingsDaoMysql implements SettingsDao {
         $databaseVersion = $settings->getDatabaseVersion();
         $page404Id = $settings->get404PageId();
         $browserCacheInSeconds = $settings->getBrowserImageCacheInSeconds();
-        $statement->bind_param("ssssssii", $websiteTitle,
+        $iFrameSecurityPolicy = $settings->getIFrameSecurityPolicy();
+        $statement->bind_param("ssssssiis", $websiteTitle,
             $backendHostname,
             $frontendHostname,
             $smtpHost,
             $emailAddress,
             $databaseVersion,
             $page404Id,
-            $browserCacheInSeconds);
+            $browserCacheInSeconds,
+            $iFrameSecurityPolicy);
         $this->mysqlConnector->executeStatement($statement);
     }
 
