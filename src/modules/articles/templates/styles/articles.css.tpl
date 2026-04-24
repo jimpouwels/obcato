@@ -28,6 +28,9 @@
 .article_search .admin_field_wrapper select {
     width: 100%;
     box-sizing: border-box;
+    min-width: 220px;
+    font-size: 1.1em;
+    padding: 8px 10px;
 }
 
 .button_container {
