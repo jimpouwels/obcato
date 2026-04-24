@@ -43,6 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script type="text/javascript" src="/admin?file=/public/js/jquery.js"></script>
     <script type="text/javascript" src="/admin?file=/public/js/login_functions.js"></script>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/admin?file=/public/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/admin?file=/public/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin?file=/public/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/admin?file=/public/img/favicon/site.webmanifest">
+
     <title>Pageflow</title>
     <meta name="robots" content="noindex" />
 </head>

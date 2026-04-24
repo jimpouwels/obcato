@@ -15,6 +15,11 @@
     <script type="text/javascript" src="/admin?file=/default/js/functions.js?v=23"></script>
     <script type="text/javascript" src="/admin?file=/default/js/rich_text_editor.js?v=10"></script>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/admin?file=/public/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/admin?file=/public/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin?file=/public/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/admin?file=/public/img/favicon/site.webmanifest">
+
     {if isset($module_styles)}
         {foreach from=$module_styles item=style}
             <style>
