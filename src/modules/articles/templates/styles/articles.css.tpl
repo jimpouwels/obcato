@@ -128,7 +128,6 @@
 /* TARGET PAGES */
 .target_pages_fieldset {
     max-width: 900px;
-    margin: 0 auto;
 }
 
 .target_pages_fieldset .admin_form_field_v2 .admin_label_wrapper {
