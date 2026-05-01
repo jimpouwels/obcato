@@ -47,18 +47,25 @@
 .list_element_item_drag_handle {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    justify-content: center;
+    gap: 4px;
     flex-shrink: 0;
-    padding-top: 10px;
-    cursor: move;
+    padding: 8px 6px;
+    cursor: grab;
+    min-width: 20px;
+    align-self: stretch;
+}
+
+.list_element_item_drag_handle:active {
+    cursor: grabbing;
 }
 
 .list_element_item_drag_handle span {
     display: block;
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: var(--color-gray-500, #6b7280);
+    background: var(--color-gray-400, #9ca3af);
 }
 
 .list-element-sortable-item-active {

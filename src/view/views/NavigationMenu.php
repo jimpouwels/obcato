@@ -59,16 +59,4 @@ class NavigationMenu extends Visual {
         return $subItems;
     }
 
-    private function renderElementsMenuItem(): array {
-        $sub_items = array();
-        foreach ($this->elementDao->getElementTypes() as $elementType) {
-            $sub_item = array();
-            $sub_item["id"] = $elementType->getId();
-            $sub_item["name"] = $this->getTextResource($elementType->getIdentifier() . '_label');
-            $sub_item["icon_url"] = BlackBoard::getElementFileUrl($elementType->getIdentifier(), 'img/' . $elementType->getIdentifier() . '.png');
-            $sub_items[] = $sub_item;
-        }
-        return $sub_items;
-    }
-
 }

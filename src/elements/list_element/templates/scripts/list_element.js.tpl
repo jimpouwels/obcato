@@ -49,11 +49,18 @@ function initializeListItemSorting() {
             var item = this;
             item.draggable = true;
 
+            var mousedownTarget = null;
+            item.addEventListener('mousedown', function (e) {
+                mousedownTarget = e.target;
+            });
+
             item.addEventListener('dragstart', function (e) {
-                if (!$(e.target).closest(handle).length) {
+                var fromHandle = mousedownTarget && $(mousedownTarget).closest(handle).length > 0;
+                if (!fromHandle) {
                     e.preventDefault();
                     return;
                 }
+                e.stopPropagation();
                 dragSrc = item;
                 e.dataTransfer.effectAllowed = 'move';
                 e.dataTransfer.setData('text/plain', '');
