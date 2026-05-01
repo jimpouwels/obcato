@@ -2313,7 +2313,7 @@ input.hasDatepicker {
     flex: 1;
 }
 
-.link-selected-item .clear-selection {
+.clear-selection {
     background: none;
     border: none;
     font-size: 24px;
@@ -2329,7 +2329,7 @@ input.hasDatepicker {
     transition: all 0.15s;
 }
 
-.link-selected-item .clear-selection:hover {
+.clear-selection:hover {
     background: var(--color-gray-200);
     color: var(--color-gray-900);
 }
@@ -2857,6 +2857,26 @@ input.hasDatepicker {
     color: var(--color-gray-900);
 }
 
+.link-picker-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.link-picker-header .close-btn:hover {
+    background: var(--color-gray-100);
+    color: var(--color-gray-900);
+}
+
 .link-picker-search-bar {
     padding: 10px 16px;
     border-bottom: 1px solid var(--color-gray-200);
@@ -2948,6 +2968,7 @@ input.hasDatepicker {
     padding: 7px 16px;
     cursor: pointer;
     transition: background 0.1s;
+    overflow: hidden;
 }
 
 .link-picker-link-item:hover {
@@ -2958,6 +2979,9 @@ input.hasDatepicker {
     font-size: 13px;
     font-weight: 500;
     color: var(--color-gray-900);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .link-picker-link-url {
@@ -2982,19 +3006,18 @@ input.hasDatepicker {
     align-items: center;
     gap: 6px;
     padding: 5px 12px;
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-300);
+    background: var(--color-primary, #0066cc);
+    border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 13px;
-    color: var(--color-gray-600);
-    transition: all 0.15s;
+    font-weight: 500;
+    color: white;
+    transition: background 0.15s;
 }
 
 .link-lookup-trigger-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    background: var(--color-gray-50);
+    background: var(--color-primary-dark, #0052a3);
 }
 
 .link-lookup-preview {
@@ -3049,23 +3072,6 @@ input.hasDatepicker {
 .link-lookup-preview-change:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
-}
-
-.link-lookup-preview-clear {
-    font-size: 18px;
-    line-height: 1;
-    padding: 0 4px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--color-gray-400);
-    border-radius: 3px;
-    transition: all 0.15s;
-}
-
-.link-lookup-preview-clear:hover {
-    background: var(--color-gray-200);
-    color: var(--color-gray-700);
 }
 
 /* Reusable link selected item in link editor dialog */

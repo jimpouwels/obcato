@@ -19,8 +19,7 @@
 {foreach $links as $link}
 <div class="links-link-item{if $current_link_id == $link.id} selected{/if}" data-link-id="{$link.id}" draggable="true">
     <span class="links-link-icon">&#128279;</span>
-    <a href="{$backend_base_url}&amp;link={$link.id}" class="links-link-title">{$link.title|escape}</a>
-    <span class="links-link-url">{$link.url|escape|truncate:60}</span>
+    <a href="{$backend_base_url}&amp;link={$link.id}" class="links-link-title">{$link.name|escape}</a>
 </div>
 {/foreach}
 

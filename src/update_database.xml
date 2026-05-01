@@ -343,6 +343,8 @@
             <query>ALTER TABLE articles_metadata_fields ADD COLUMN link_id INT UNSIGNED DEFAULT NULL</query>
             <query>ALTER TABLE articles_metadata_fields ADD CONSTRAINT article_metadata_values_reusable_link FOREIGN KEY (link_id) REFERENCES reusable_links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
             <query>INSERT INTO modules (module_group_id, identifier, enabled, system_default, class) VALUES (2, 'links', 1, 1, 'LinksModuleVisual')</query>
+            <query>ALTER TABLE reusable_links ADD COLUMN name VARCHAR(255) NOT NULL</query>
+            <query>ALTER TABLE reusable_links MODIFY title VARCHAR(255) DEFAULT NULL</query>
         </queries>
     </version>
 </versions>

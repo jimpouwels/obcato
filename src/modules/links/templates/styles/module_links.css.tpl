@@ -20,7 +20,6 @@
     position: relative;
     padding: 3px 8px;
     border-radius: 4px;
-    gap: 4px;
 }
 
 .links-folder-header:hover {
@@ -90,10 +89,10 @@
     display: flex;
     align-items: center;
     padding: 3px 8px;
-    gap: 6px;
     border-radius: 4px;
     cursor: grab;
     font-size: 13px;
+    overflow: hidden;
 }
 
 .links-link-item.links-dragging {
@@ -121,11 +120,23 @@
     outline: 2px dashed #4a90d9;
 }
 
+.links-link-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 1;
+    align-self: center;
+}
+
 .links-link-title {
     flex: 1;
+    min-width: 0;
     color: #333;
     text-decoration: none;
     font-weight: 500;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .links-link-title:hover {
@@ -135,15 +146,6 @@
 .links-link-item.selected .links-link-title {
     color: var(--color-primary, #2a7ab8);
     font-weight: 600;
-}
-
-.links-link-url {
-    color: #888;
-    font-size: 11px;
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .links-empty-state {

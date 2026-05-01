@@ -1138,11 +1138,7 @@ function openLinkPickerModal(onSelect) {
     $('#link-picker-modal').css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 150);
     $('#link-picker-search').val('').focus();
 
-    if (linkPickerTree) {
-        renderLinkPickerTree(linkPickerTree);
-    } else {
-        loadLinkPickerTree();
-    }
+    loadLinkPickerTree();
 }
 
 function loadLinkPickerTree() {
@@ -1155,6 +1151,7 @@ function loadLinkPickerTree() {
             renderLinkPickerTree(tree);
         },
         error: function () {
+            console.error('[LinkPicker] tree load failed');
             $('#link-picker-body').html('<div class="link-picker-empty">Laden mislukt</div>');
         }
     });
@@ -1163,7 +1160,7 @@ function loadLinkPickerTree() {
 function renderLinkPickerTree(tree) {
     var html = '';
     if (tree.folders.length === 0 && tree.links.length === 0) {
-        html = '<div class="link-picker-empty">Geen herbruikbare links beschikbaar</div>';
+        html = '<div class="link-picker-empty">Geen links beschikbaar</div>';
     } else {
         html += renderPickerFolders(tree.folders);
         html += renderPickerLinks(tree.links);
@@ -1208,9 +1205,9 @@ function renderPickerLinks(links) {
     links.forEach(function (link) {
         html += '<div class="link-picker-link-item"'
             + ' data-link-id="' + link.id + '"'
-            + ' data-link-title="' + lpEscapeAttr(link.title) + '"'
+            + ' data-link-title="' + lpEscapeAttr(link.name) + '"'
             + ' data-link-url="' + lpEscapeAttr(link.url || '') + '">';
-        html += '<span class="link-picker-link-title">' + lpEscapeHtml(link.title) + '</span>';
+        html += '<span class="link-picker-link-title">' + lpEscapeHtml(link.name) + '</span>';
         if (link.url) {
             html += '<span class="link-picker-link-url">' + lpEscapeHtml(link.url) + '</span>';
         }
@@ -1220,7 +1217,9 @@ function renderPickerLinks(links) {
 }
 
 function filterLinkPickerSearch(keyword) {
-    if (!linkPickerTree) return;
+    if (!linkPickerTree) {
+        return;
+    }
     keyword = keyword.toLowerCase().trim();
     if (!keyword) {
         renderLinkPickerTree(linkPickerTree);
@@ -1228,7 +1227,7 @@ function filterLinkPickerSearch(keyword) {
     }
     var all = lpCollectAllLinks(linkPickerTree.folders, linkPickerTree.links);
     var filtered = all.filter(function (l) {
-        return l.title.toLowerCase().indexOf(keyword) !== -1
+        return l.name.toLowerCase().indexOf(keyword) !== -1
             || (l.url && l.url.toLowerCase().indexOf(keyword) !== -1);
     });
     var html = filtered.length
@@ -1250,7 +1249,7 @@ function lpCollectAllLinks(folders, rootLinks) {
 function selectLinkFromPicker(id, title, url) {
     closeLinkPickerModal();
     if (typeof linkPickerCallback === 'function') {
-        linkPickerCallback({ id: id, title: title, url: url || '' });
+        linkPickerCallback({ id: id, name: title, title: title, url: url || '' });
     }
     linkPickerCallback = null;
 }

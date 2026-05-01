@@ -107,6 +107,7 @@ class LinksModuleVisual extends ModuleVisual {
         foreach ($links as $link) {
             $data[] = [
                 'id'        => $link->getId(),
+                'name'      => $link->getName(),
                 'title'     => $link->getTitle(),
                 'url'       => $link->getUrl(),
                 'folder_id' => $link->getFolderId(),

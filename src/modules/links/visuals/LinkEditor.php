@@ -21,10 +21,12 @@ class LinkEditor extends Panel {
     }
 
     public function loadPanelContent(TemplateData $data): void {
-        $titleField = new TextField('title', 'links_editor_title_label', $this->link->getTitle(), true, false, null);
+        $nameField = new TextField('name', 'links_editor_name_label', $this->link->getName(), true, false, null);
+        $titleField = new TextField('title', 'links_editor_title_label', $this->link->getTitle(), false, false, null);
         $urlField   = new TextField('url', 'links_editor_url_label', $this->link->getUrl(), false, false, null);
 
         $data->assign('link_id',     $this->link->getId());
+        $data->assign('name_field',  $nameField->render());
         $data->assign('title_field', $titleField->render());
         $data->assign('url_field',   $urlField->render());
     }

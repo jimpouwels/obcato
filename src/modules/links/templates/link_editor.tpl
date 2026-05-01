@@ -2,6 +2,7 @@
     <input type="hidden" name="action" value="update_link" />
     <input type="hidden" name="link_id" value="{$link_id}" />
     <div class="admin_form_v2">
+        {$name_field}
         {$title_field}
         {$url_field}
     </div>

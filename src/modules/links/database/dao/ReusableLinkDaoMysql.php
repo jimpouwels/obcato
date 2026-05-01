@@ -58,7 +58,7 @@ class ReusableLinkDaoMysql implements ReusableLinkDao {
 
     public function searchLinks(string $keyword): array {
         $statement = $this->mysqlConnector->prepareStatement(
-            'SELECT * FROM reusable_links WHERE title LIKE ? OR url LIKE ? ORDER BY title LIMIT 30'
+            'SELECT * FROM reusable_links WHERE name LIKE ? OR url LIKE ? ORDER BY name LIMIT 30'
         );
         $like = '%' . $keyword . '%';
         $statement->bind_param('ss', $like, $like);
@@ -72,25 +72,27 @@ class ReusableLinkDaoMysql implements ReusableLinkDao {
 
     public function createLink(ReusableLink $link): void {
         $statement = $this->mysqlConnector->prepareStatement(
-            'INSERT INTO reusable_links (title, url, folder_id) VALUES (?, ?, ?)'
+            'INSERT INTO reusable_links (name, title, url, folder_id) VALUES (?, ?, ?, ?)'
         );
+        $name     = $link->getName();
         $title    = $link->getTitle();
         $url      = $link->getUrl();
         $folderId = $link->getFolderId();
-        $statement->bind_param('ssi', $title, $url, $folderId);
+        $statement->bind_param('sssi', $name, $title, $url, $folderId);
         $this->mysqlConnector->executeStatement($statement);
         $link->setId($this->mysqlConnector->getInsertId());
     }
 
     public function updateLink(ReusableLink $link): void {
         $statement = $this->mysqlConnector->prepareStatement(
-            'UPDATE reusable_links SET title = ?, url = ?, folder_id = ? WHERE id = ?'
+            'UPDATE reusable_links SET name = ?, title = ?, url = ?, folder_id = ? WHERE id = ?'
         );
+        $name     = $link->getName();
         $title    = $link->getTitle();
         $url      = $link->getUrl();
         $folderId = $link->getFolderId();
         $id       = $link->getId();
-        $statement->bind_param('ssii', $title, $url, $folderId, $id);
+        $statement->bind_param('sssii', $name, $title, $url, $folderId, $id);
         $this->mysqlConnector->executeStatement($statement);
     }
 

@@ -8,6 +8,7 @@ use Pageflow\Core\modules\links\database\dao\ReusableLinkDaoMysql;
 use Pageflow\Core\modules\links\model\ReusableLink;
 use Pageflow\Core\modules\links\model\ReusableLinkFolder;
 use Pageflow\Core\request_handlers\HttpRequestHandler;
+use Pageflow\Core\modules\links\LinksForm;
 
 class LinksRequestHandler extends HttpRequestHandler {
 
@@ -20,11 +21,8 @@ class LinksRequestHandler extends HttpRequestHandler {
     }
 
     public function handleGet(): void {
-        if (isset($_GET['link']) && $_GET['link'] !== '') {
-            $this->currentLink = $this->linkDao->getLink((int)$_GET['link']);
-        } elseif (isset($_GET['folder']) && $_GET['folder'] !== '') {
-            $this->currentFolder = $this->linkDao->getFolder((int)$_GET['folder']);
-        }
+        $this->currentLink = $this->getLinkFromGetRequest();
+        $this->currentFolder = $this->getFolderFromGetRequest();
     }
 
     public function handlePost(): void {
@@ -65,7 +63,8 @@ class LinksRequestHandler extends HttpRequestHandler {
 
     private function addLink(): void {
         $link = new ReusableLink();
-        $link->setTitle('Nieuwe link');
+        $link->setName('Nieuwe link');
+        $link->setTitle('');
         $link->setUrl('');
         $folderId = isset($_POST['folder_id']) && $_POST['folder_id'] !== '' ? (int)$_POST['folder_id'] : null;
         $link->setFolderId($folderId);
@@ -75,30 +74,24 @@ class LinksRequestHandler extends HttpRequestHandler {
     }
 
     private function updateLink(): void {
-        $linkId = (int)($_POST['link_id'] ?? 0);
-        $link = $this->linkDao->getLink($linkId);
-        if (!$link) {
-            $this->sendErrorMessage('Link niet gevonden');
+         try {
+            $this->currentLink = $this->getLinkFromPostRequest();
+            if (!$this->currentLink) {
+                $this->sendErrorMessage('Link niet gevonden');
+                return;
+            }
+            $linkForm = new LinksForm($this->currentLink);
+            $linkForm->loadFields();
+            $this->linkDao->updateLink($this->currentLink);
+            $this->sendSuccessMessage('Link opgeslagen');
+         } catch (FormException $e) {
+            $this->sendErrorMessage($this->getTextResource('link_not_saved_error_message'));
             return;
-        }
-        $title = trim($_POST['title'] ?? '');
-        $url = trim($_POST['url'] ?? '');
-        if ($title === '') {
-            $this->sendErrorMessage('Titel is verplicht');
-            $this->currentLink = $link;
-            return;
-        }
-        $link->setTitle($title);
-        $link->setUrl($url);
-        $folderId = isset($_POST['folder_id']) && $_POST['folder_id'] !== '' ? (int)$_POST['folder_id'] : $link->getFolderId();
-        $link->setFolderId($folderId);
-        $this->linkDao->updateLink($link);
-        $this->currentLink = $link;
-        $this->sendSuccessMessage('Link opgeslagen');
+         }
     }
 
     private function deleteLink(): void {
-        $linkId = (int)($_POST['link_id'] ?? 0);
+        $linkId = $this->getLinkFromPostRequest()->getId();
         $this->linkDao->deleteLink($linkId);
         $this->sendSuccessMessage('Link verwijderd');
         $this->redirectTo($this->getBackendBaseUrl());
@@ -115,7 +108,7 @@ class LinksRequestHandler extends HttpRequestHandler {
     }
 
     private function updateFolder(): void {
-        $folderId = (int)($_POST['folder_id'] ?? 0);
+        $folderId = $this->getFolderIdFromPostRequest();
         $folder = $this->linkDao->getFolder($folderId);
         if (!$folder) {
             $this->sendErrorMessage('Map niet gevonden');
@@ -134,8 +127,8 @@ class LinksRequestHandler extends HttpRequestHandler {
     }
 
     private function deleteFolder(): void {
-        $folderId = (int)($_POST['folder_id'] ?? 0);
-        // Unparent links if requested, otherwise cascade deletes them via DB FK
+        $folderId = $this->getFolderIdFromPostRequest();
+        // TODO delete_mode not implemented
         if (($_POST['delete_mode'] ?? '') === 'unparent') {
             $links = $this->linkDao->getLinksByFolder($folderId);
             foreach ($links as $link) {
@@ -148,9 +141,41 @@ class LinksRequestHandler extends HttpRequestHandler {
     }
 
     private function moveLink(): void {
-        $linkId   = (int)($_POST['link_id'] ?? 0);
-        $folderId = isset($_POST['folder_id']) && $_POST['folder_id'] !== '' ? (int)$_POST['folder_id'] : null;
+        $linkId   = $this->getLinkIdFromPostRequest();
+        $folderId = $this->getFolderIdFromPostRequest();
         $this->linkDao->moveLinkToFolder($linkId, $folderId);
         $this->sendSuccessMessage('Link verplaatst');
+    }
+
+    private function getLinkFromGetRequest(): ?ReusableLink {
+        if (isset($_GET['link']) && $_GET['link'] !== '') {
+            return $this->linkDao->getLink((int)$_GET['link']);
+        }
+        return null;
+    }
+
+    private function getFolderFromGetRequest(): ?ReusableLinkFolder {
+        if (isset($_GET['folder']) && $_GET['folder'] !== '') {
+            return $this->linkDao->getFolder((int)$_GET['folder']);
+        }
+        return null;
+    }
+
+    private function getLinkFromPostRequest(): ?ReusableLink {
+        return $this->linkDao->getLink($this->getLinkIdFromPostRequest());
+    }
+
+    private function getLinkIdFromPostRequest(): ?int {
+        if (isset($_POST['link_id']) && $_POST['link_id'] !== '') {
+            return (int)$_POST['link_id'];
+        }
+        return null;
+    }
+
+    private function getFolderIdFromPostRequest(): ?int {
+        if (isset($_POST['folder_id']) && $_POST['folder_id'] !== '') {
+            return (int)$_POST['folder_id'];
+        }
+        return null;
     }
 }

@@ -6,15 +6,24 @@ use Pageflow\Core\core\model\Entity;
 
 class ReusableLink extends Entity {
 
-    private string $title;
+    private string $name;
+    private ?string $title;
     private ?string $url;
     private ?int $folderId;
 
-    public function setTitle(string $title): void {
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function setTitle(?string $title): void {
         $this->title = $title;
     }
 
-    public function getTitle(): string {
+    public function getTitle(): ?string {
         return $this->title;
     }
 
@@ -41,6 +50,7 @@ class ReusableLink extends Entity {
     }
 
     protected function initFromDb(array $row): void {
+        $this->setName($row['name']);
         $this->setTitle($row['title']);
         $this->setUrl($row['url']);
         $this->setFolderId(isset($row['folder_id']) ? (int)$row['folder_id'] : null);

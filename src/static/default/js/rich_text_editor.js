@@ -7,7 +7,7 @@ var preserveEditorFocusState = false;
 
 // Cached DOM selectors
 var $dialog, $textInput, $urlInput, $newTabCheckbox, $deleteBtn, $dialogTitle;
-var $urlSelected, $pageSelected, $articleSelected, $reusableLinkSearch;
+var $urlSelected, $pageSelected, $articleSelected, $reusableLinkSelected;
 var $pageSearch, $articleSearch, $pageResults, $articleResults;
 var $urlInputGroup;
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
     $pageResults = $('#link-page-results');
     $articleResults = $('#link-article-results');
     $urlInputGroup = $('#link-url-input-group');
-    $reusableLinkSearch = $('#link-reusable-selected');
+    $reusableLinkSelected = $('#link-reusable-selected');
     
     initRichTextEditors();
     initLinkEditorDialog();
@@ -370,7 +370,18 @@ function editLink(linkElement, editor) {
             }
         });
     } else if (linkType === 'reusable' && linkId) {
-        selectReusable(linkId, linkElement.text());
+        // Show loading state, then fetch the actual link name
+        selectReusable(linkId, '...');
+        
+        $.ajax({
+            url: '/admin/api/link/get?id=' + linkId,
+            method: 'GET',
+            success: function(link) {
+                if (link && link.name) {
+                    $('#link-reusable-title').text(link.name);
+                }
+            }
+        });
     }
     
     showLinkEditorDialog();
@@ -439,7 +450,7 @@ function initLinkEditorDialog() {
     // Pick reusable link
     $('#link-reusable-pick').on('click', function() {
         openLinkPickerModal(function(link) {
-            selectReusable(link.id, link.title, link.url);
+            selectReusable(link.id, link.name, link.url);
         });
     });
     
@@ -510,7 +521,7 @@ function switchLinkTab(tab) {
             $pageSearch.focus();
         } else if (tab === 'article' && !$articleSelected.is(':visible')) {
             $articleSearch.focus();
-        } else if (tab === 'reusable' && !$reusableLinkSearch.is(':visible')) {
+        } else if (tab === 'reusable' && !$reusableLinkSelected.is(':visible')) {
             $('#link-reusable-pick').focus();
         }
     }, 50);
@@ -589,7 +600,7 @@ function selectUrl(url) {
     // Clear other selections (mutual exclusion)
     clearPage();
     clearArticle();
-
+    clearReusable();
     
     // Show URL as selected
     $urlSelected.show().find('.selected-item-name').text(url);
@@ -601,6 +612,7 @@ function selectPage(pageId, pageTitle) {
     // Clear other selections (mutual exclusion)
     clearUrl();
     clearArticle();
+    clearReusable();
     
     // Show page selection
     $pageSelected.show().find('.selected-item-name').text(pageTitle);
@@ -613,6 +625,7 @@ function selectArticle(articleId, articleTitle) {
     // Clear other selections (mutual exclusion)
     clearUrl();
     clearPage();
+    clearReusable();
     
     // Show article selection
     $articleSelected.show().find('.selected-item-name').text(articleTitle);
@@ -640,13 +653,18 @@ function clearArticle() {
 }
 
 function selectReusable(linkId, title) {
+    // Clear other selections (mutual exclusion)
+    clearUrl();
+    clearPage();
+    clearArticle();
+    
     $('#link-reusable-title').text(title || '');
-    $reusableLinkSearch.show().data('reusable-id', linkId);
+    $reusableLinkSelected.show().data('reusable-id', linkId);
     $('#link-reusable-pick').hide();
 }
 
 function clearReusable() {
-    $reusableLinkSearch.hide().data('reusable-id', null);
+    $reusableLinkSelected.hide().data('reusable-id', null);
     $('#link-reusable-title').text('');
     $('#link-reusable-pick').show();
 }
@@ -664,11 +682,11 @@ function saveLinkFromDialog() {
     const url = $urlSelected.data('url');
     const pageId = $pageSelected.data('page-id');
     const articleId = $articleSelected.data('article-id');
-    const reusableId = $reusableLinkSearch.data('reusable-id');
+    const reusableId = $reusableLinkSelected.data('reusable-id');
     
     // Exactly one must be selected
     if (!url && !pageId && !articleId && !reusableId) {
-        alert('Selecteer een pagina, artikel, herbruikbare link of voer een URL in');
+        alert('Selecteer een pagina, artikel, link of voer een URL in');
         return;
     }
     

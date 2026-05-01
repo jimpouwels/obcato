@@ -3,7 +3,7 @@
     <div class="link-picker-backdrop"></div>
     <div class="link-picker-content">
         <div class="link-picker-header">
-            <h3>Herbruikbare link selecteren</h3>
+            <h3>Link selecteren</h3>
             <button type="button" class="close-btn" id="link-picker-close">&times;</button>
         </div>
         <div class="link-picker-search-bar">

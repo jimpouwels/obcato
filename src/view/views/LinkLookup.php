@@ -19,7 +19,7 @@ class LinkLookup extends FormField {
         $dao = ReusableLinkDaoMysql::getInstance();
         $this->allLinks = array_map(fn($l) => [
             'id'    => $l->getId(),
-            'title' => $l->getTitle(),
+            'name' => $l->getName(),
             'url'   => $l->getUrl(),
         ], $dao->getAllLinks());
     }
@@ -34,19 +34,19 @@ class LinkLookup extends FormField {
 
     public function loadFormField(TemplateData $data): void {
         $selectedId    = $this->getValue();
-        $selectedTitle = '';
+        $selectedName = '';
         $selectedUrl   = '';
         if ($selectedId !== '') {
             foreach ($this->allLinks as $link) {
                 if ((string)$link['id'] === $selectedId) {
-                    $selectedTitle = $link['title'];
+                    $selectedName = $link['name'];
                     $selectedUrl   = $link['url'];
                     break;
                 }
             }
         }
         $data->assign('selected_link_id',    $selectedId);
-        $data->assign('selected_link_title', $selectedTitle);
+        $data->assign('selected_link_name', $selectedName);
         $data->assign('selected_link_url',   $selectedUrl);
     }
 }

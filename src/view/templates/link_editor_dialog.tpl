@@ -17,7 +17,7 @@
                     <button type="button" class="link-type-tab active" data-tab="url">URL</button>
                     <button type="button" class="link-type-tab" data-tab="page">Pagina</button>
                     <button type="button" class="link-type-tab" data-tab="article">Artikel</button>
-                    <button type="button" class="link-type-tab" data-tab="reusable">Herbruikbare link</button>
+                    <button type="button" class="link-type-tab" data-tab="reusable">Link</button>
                 </div>
             </div>
             
@@ -59,7 +59,7 @@
 
             <div class="link-type-content" id="link-type-reusable" style="display: none;">
                 <button type="button" class="link-add-btn" id="link-reusable-pick">
-                    &#128279; Herbruikbare link kiezen&hellip;
+                    &#128279; Link kiezen&hellip;
                 </button>
                 <div class="link-selected-item" id="link-reusable-selected" style="display: none;">
                     <span class="selected-item-name" id="link-reusable-title"></span>
