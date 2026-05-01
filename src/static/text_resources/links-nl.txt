@@ -1,0 +1,13 @@
+links_module_title: Links
+
+# EDITOR LABELS
+links_editor_link_panel_title: Link bewerken
+links_editor_folder_panel_title: Map bewerken
+links_editor_title_label: Titel
+links_editor_url_label: URL
+links_editor_folder_label: Map
+links_editor_folder_name_label: Naam
+
+# CONFIRM DIALOGS
+links_confirm_delete_link: Weet je zeker dat je deze link wil verwijderen?
+links_confirm_delete_folder: Weet je zeker dat je deze map wil verwijderen?

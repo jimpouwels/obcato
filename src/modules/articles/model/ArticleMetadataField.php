@@ -8,6 +8,7 @@ class ArticleMetadataField extends Entity {
 
     private string $name;
     private ?string $defaultValue;
+    private ?int $linkId;
 
     public function setName($name): void {
         $this->name = $name;
@@ -25,6 +26,14 @@ class ArticleMetadataField extends Entity {
         return $this->defaultValue;
     }
 
+    public function setLinkId(?int $linkId): void {
+        $this->linkId = $linkId;
+    }
+
+    public function getLinkId(): ?int {
+        return $this->linkId;
+    }
+
     public static function constructFromRecord($row): ArticleMetadataField {
         $field = new ArticleMetadataField();
         $field->initFromDb($row);
@@ -34,6 +43,7 @@ class ArticleMetadataField extends Entity {
     protected function initFromDb(array $row): void {
         $this->setName($row['name']);
         $this->setDefaultValue($row['default_value']);
+        $this->setLinkId(isset($row['link_id']) && $row['link_id'] !== null ? (int)$row['link_id'] : null);
         parent::initFromDb($row);
     }
 }

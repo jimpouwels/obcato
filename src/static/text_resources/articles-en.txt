@@ -78,4 +78,5 @@ articles_metadata_field_editor_title: Metadata field
 articles_confirm_delete_metadata_field: Are you sure you want to delete this metadata field?
 article_metadata_field_editor_name_field: Name
 article_metadata_field_editor_default_value_field: Default value
+article_metadata_field_editor_link_field: Reusable link
 article_metadata_fields_saved: Metadata fields saved

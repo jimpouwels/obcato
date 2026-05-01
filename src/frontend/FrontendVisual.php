@@ -285,10 +285,10 @@ abstract class FrontendVisual {
                 foreach ($metadataFields as $field) {
                     if ($matches[1][$i] == $field->getName()) {
                         $fieldValue = $this->articleService->getMetadataFieldValue($this->article, $field)->getValue() ?: $field->getDefaultValue();
-                        $value = str_replace($matches[0][$i], $fieldValue, $value);
+                        $value = str_replace($matches[0][$i], $fieldValue ?? '', $value);
                     } else if ($this->isParentMetadataPlaceHolder($matches[1][$i], $field->getName())) {
                         $fieldValue = $this->articleService->getMetadataFieldValue($this->articleService->getArticle($this->article->getParentArticleId()), $field)->getValue() ?: $field->getDefaultValue();
-                        $value = str_replace($matches[0][$i], $fieldValue, $value);
+                        $value = str_replace($matches[0][$i], $fieldValue ?? '', $value);
                     }
                 }
             }

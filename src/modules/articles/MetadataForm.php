@@ -19,7 +19,14 @@ class MetadataForm extends Form {
 
     public function loadFields(): void {
         $this->currentMetadataField->setName($this->getMandatoryFieldValue("name"));
-        $this->currentMetadataField->setDefaultValue($this->getFieldValue("default_value"));
+        $linkIdRaw = $_POST['link_id'] ?? '';
+        if ($linkIdRaw !== '') {
+            $this->currentMetadataField->setLinkId((int)$linkIdRaw);
+            $this->currentMetadataField->setDefaultValue(null);
+        } else {
+            $this->currentMetadataField->setLinkId(null);
+            $this->currentMetadataField->setDefaultValue($this->getFieldValue("default_value"));
+        }
     }
 
     public function getMetadataFieldsToDelete(): array {

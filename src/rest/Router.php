@@ -7,6 +7,7 @@ use Pageflow\Core\rest\element_holder\ElementHolderHandler;
 use Pageflow\Core\rest\image\ImageElementHandler;
 use Pageflow\Core\rest\image\PhotoAlbumElementHandler;
 use Pageflow\Core\rest\image\ImageHandler;
+use Pageflow\Core\rest\link\LinkHandler;
 use Pageflow\Core\rest\page\PageSearchHandler;
 use Pageflow\Core\utilities\UrlHelper;
 
@@ -22,6 +23,7 @@ class Router {
         $this->handlers[] = new ArticleHandler();
         $this->handlers[] = new PageSearchHandler();
         $this->handlers[] = new ElementHolderHandler();
+        $this->handlers[] = new LinkHandler();
     }
 
     public function route(): void {

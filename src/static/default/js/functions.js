@@ -1120,3 +1120,167 @@ $(function() {
         }, 2500);
     }
 });
+
+// =====================================================================
+// LINK PICKER MODAL
+// Global API: openLinkPickerModal(function(link) { link.id, .title, .url })
+// =====================================================================
+var linkPickerCallback = null;
+var linkPickerTree = null;
+var linkPickerSearchTimeout = null;
+
+$(document).ready(function () {
+    initLinkPickerModal();
+});
+
+function openLinkPickerModal(onSelect) {
+    linkPickerCallback = onSelect;
+    $('#link-picker-modal').css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 150);
+    $('#link-picker-search').val('').focus();
+
+    if (linkPickerTree) {
+        renderLinkPickerTree(linkPickerTree);
+    } else {
+        loadLinkPickerTree();
+    }
+}
+
+function loadLinkPickerTree() {
+    $('#link-picker-body').html('<div class="link-picker-loading"><div class="ajax-spinner"><span></span></div></div>');
+    $.ajax({
+        url: '/admin/api/link/tree',
+        method: 'GET',
+        success: function (tree) {
+            linkPickerTree = tree;
+            renderLinkPickerTree(tree);
+        },
+        error: function () {
+            $('#link-picker-body').html('<div class="link-picker-empty">Laden mislukt</div>');
+        }
+    });
+}
+
+function renderLinkPickerTree(tree) {
+    var html = '';
+    if (tree.folders.length === 0 && tree.links.length === 0) {
+        html = '<div class="link-picker-empty">Geen herbruikbare links beschikbaar</div>';
+    } else {
+        html += renderPickerFolders(tree.folders);
+        html += renderPickerLinks(tree.links);
+    }
+    $('#link-picker-body').html(html);
+    bindLinkPickerEvents();
+}
+
+function bindLinkPickerEvents() {
+    $('#link-picker-body').off('click.lp').on('click.lp', '.link-picker-folder-header', function () {
+        $(this).find('.link-picker-folder-toggle').toggleClass('open');
+        $(this).next('.link-picker-folder-children').slideToggle(150);
+    }).on('click.lp', '.link-picker-link-item', function () {
+        selectLinkFromPicker(
+            $(this).data('link-id'),
+            $(this).data('link-title'),
+            $(this).data('link-url')
+        );
+    });
+}
+
+function renderPickerFolders(folders) {
+    var html = '';
+    folders.forEach(function (folder) {
+        html += '<div class="link-picker-folder">';
+        html += '<div class="link-picker-folder-header">';
+        html += '<span class="link-picker-folder-toggle">&#9658;</span>';
+        html += '<span class="link-picker-folder-icon">&#128193;</span>';
+        html += '<span class="link-picker-folder-name">' + lpEscapeHtml(folder.name) + '</span>';
+        html += '</div>';
+        html += '<div class="link-picker-folder-children" style="display:none;">';
+        html += renderPickerFolders(folder.subFolders);
+        html += renderPickerLinks(folder.links);
+        html += '</div>';
+        html += '</div>';
+    });
+    return html;
+}
+
+function renderPickerLinks(links) {
+    var html = '';
+    links.forEach(function (link) {
+        html += '<div class="link-picker-link-item"'
+            + ' data-link-id="' + link.id + '"'
+            + ' data-link-title="' + lpEscapeAttr(link.title) + '"'
+            + ' data-link-url="' + lpEscapeAttr(link.url || '') + '">';
+        html += '<span class="link-picker-link-title">' + lpEscapeHtml(link.title) + '</span>';
+        if (link.url) {
+            html += '<span class="link-picker-link-url">' + lpEscapeHtml(link.url) + '</span>';
+        }
+        html += '</div>';
+    });
+    return html;
+}
+
+function filterLinkPickerSearch(keyword) {
+    if (!linkPickerTree) return;
+    keyword = keyword.toLowerCase().trim();
+    if (!keyword) {
+        renderLinkPickerTree(linkPickerTree);
+        return;
+    }
+    var all = lpCollectAllLinks(linkPickerTree.folders, linkPickerTree.links);
+    var filtered = all.filter(function (l) {
+        return l.title.toLowerCase().indexOf(keyword) !== -1
+            || (l.url && l.url.toLowerCase().indexOf(keyword) !== -1);
+    });
+    var html = filtered.length
+        ? renderPickerLinks(filtered)
+        : '<div class="link-picker-empty">Geen resultaten</div>';
+    $('#link-picker-body').html(html);
+    bindLinkPickerEvents();
+}
+
+function lpCollectAllLinks(folders, rootLinks) {
+    var result = rootLinks.slice();
+    folders.forEach(function (f) {
+        result = result.concat(f.links);
+        result = result.concat(lpCollectAllLinks(f.subFolders, []));
+    });
+    return result;
+}
+
+function selectLinkFromPicker(id, title, url) {
+    closeLinkPickerModal();
+    if (typeof linkPickerCallback === 'function') {
+        linkPickerCallback({ id: id, title: title, url: url || '' });
+    }
+    linkPickerCallback = null;
+}
+
+function closeLinkPickerModal() {
+    $('#link-picker-modal').animate({ opacity: 0 }, 150, function () { $(this).hide(); });
+}
+
+function initLinkPickerModal() {
+    $('#link-picker-close, #link-picker-cancel').on('click', closeLinkPickerModal);
+    $('.link-picker-backdrop').on('click', closeLinkPickerModal);
+    $(document).on('keydown.linkpicker', function (e) {
+        if (e.key === 'Escape' && $('#link-picker-modal').is(':visible')) {
+            e.stopPropagation();
+            closeLinkPickerModal();
+        }
+    });
+    $('#link-picker-search').on('input', function () {
+        var val = $(this).val();
+        clearTimeout(linkPickerSearchTimeout);
+        linkPickerSearchTimeout = setTimeout(function () {
+            filterLinkPickerSearch(val);
+        }, 200);
+    });
+}
+
+function lpEscapeHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function lpEscapeAttr(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}

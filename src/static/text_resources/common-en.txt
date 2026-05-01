@@ -21,6 +21,7 @@ action_button_save: Save
 action_button_reload: Reload
 action_button_delete: Delete
 action_button_add: Add
+action_button_add_folder: Add folder
 action_button_up: Up
 action_button_down: Down
 

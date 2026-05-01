@@ -4,6 +4,9 @@
 
     <div class="admin_form_v2">
         {$name_field}
-        {$default_value_field}
+        <div id="link-lookup-default-value-link_id" {if $has_link}style="display:none;"{/if}>
+            {$default_value_field}
+        </div>
+        {$link_field}
     </div>
 </form>

@@ -336,6 +336,13 @@
             <query>ALTER TABLE articles CHANGE COLUMN h1 seo_title VARCHAR(255) DEFAULT NULL</query>
             <query>ALTER TABLE settings ADD COLUMN iframe_security_policy TEXT NOT NULL DEFAULT 'SAMEORIGIN'</query>
             <query>ALTER TABLE settings ADD COLUMN force_https TINYINT(1) NOT NULL DEFAULT 1</query>
+            <query>CREATE TABLE link_folders (id INT UNSIGNED NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, parent_folder_id INT UNSIGNED DEFAULT NULL, PRIMARY KEY (id), KEY link_folders_parent (parent_folder_id), CONSTRAINT link_folders_parent FOREIGN KEY (parent_folder_id) REFERENCES link_folders (id) ON DELETE CASCADE ON UPDATE RESTRICT)</query>
+            <query>CREATE TABLE reusable_links (id INT UNSIGNED NOT NULL AUTO_INCREMENT, title VARCHAR(255) NOT NULL, url TEXT DEFAULT NULL, folder_id INT UNSIGNED DEFAULT NULL, PRIMARY KEY (id), KEY reusable_links_folder (folder_id), CONSTRAINT reusable_links_folder FOREIGN KEY (folder_id) REFERENCES link_folders (id) ON DELETE SET NULL ON UPDATE RESTRICT)</query>
+            <query>ALTER TABLE article_metadata_fields ADD COLUMN link_id INT UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE article_metadata_fields ADD CONSTRAINT metadata_fields_reusable_link FOREIGN KEY (link_id) REFERENCES reusable_links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>ALTER TABLE articles_metadata_fields ADD COLUMN link_id INT UNSIGNED DEFAULT NULL</query>
+            <query>ALTER TABLE articles_metadata_fields ADD CONSTRAINT article_metadata_values_reusable_link FOREIGN KEY (link_id) REFERENCES reusable_links (id) ON DELETE SET NULL ON UPDATE RESTRICT</query>
+            <query>INSERT INTO modules (module_group_id, identifier, enabled, system_default, class) VALUES (2, 'links', 1, 1, 'LinksModuleVisual')</query>
         </queries>
     </version>
 </versions>

@@ -21,6 +21,7 @@ action_button_save: Opslaan
 action_button_reload: Herladen
 action_button_delete: Verwijderen
 action_button_add: Toevoegen
+action_button_add_folder: Map toevoegen
 action_button_up: Omhoog
 action_button_down: Omlaag
 

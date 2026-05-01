@@ -11,6 +11,7 @@ use Pageflow\Core\database\dao\WebformDaoMysql;
 use Pageflow\Core\modules\articles\model\Article;
 use Pageflow\Core\modules\articles\service\ArticleInteractor;
 use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\links\database\dao\ReusableLinkDaoMysql;
 use Pageflow\Core\modules\pages\model\Page;
 use Pageflow\Core\modules\templates\model\Presentable;
 use const Pageflow\core\FRONTEND_TEMPLATE_DIR;
@@ -54,7 +55,8 @@ class ArticleVisual extends FrontendVisual {
             $fieldData = array();
             $fieldData['default_value'] = $metadataField->getDefaultValue();
             $fieldData['dedicated_value'] = $fieldValue?->getValue();
-            $fieldData["value"] = $fieldValue?->getValue() ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+            $fieldData['link'] = $this->getLinkData($metadataField->getLinkId());
+            $fieldData['value'] = $fieldData['link']['url'] ?? ($fieldValue?->getValue() ?: $metadataField->getDefaultValue());
 
             $data[$metadataField->getName()] = $fieldData;
         }
@@ -75,7 +77,8 @@ class ArticleVisual extends FrontendVisual {
                 $fieldData = array();
                 $fieldData['default_value'] = $metadataField->getDefaultValue();
                 $fieldData['dedicated_value'] = $fieldValue?->getValue();
-                $fieldData["value"] = $fieldValue?->getValue() ? $fieldValue->getValue() : $metadataField->getDefaultValue();
+                $fieldData['link'] = $this->getLinkData($metadataField->getLinkId());
+                $fieldData['value'] = $fieldData['link']['url'] ?? ($fieldValue?->getValue() ?: $metadataField->getDefaultValue());
 
                 $parentArticleData[$metadataField->getName()] = $fieldData;
             }
@@ -85,6 +88,17 @@ class ArticleVisual extends FrontendVisual {
 
     public function getPresentable(): ?Presentable {
         return $this->getArticle();
+    }
+
+    private function getLinkData(?int $linkId): ?array {
+        if (!$linkId) {
+            return null;
+        }
+        $link = ReusableLinkDaoMysql::getInstance()->getLink($linkId);
+        if (!$link) {
+            return null;
+        }
+        return ['url' => $link->getUrl(), 'title' => $link->getTitle()];
     }
 
     private function getImageData($image): ?array {

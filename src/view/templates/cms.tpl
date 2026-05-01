@@ -68,6 +68,7 @@
 
 {include file="confirm_dialog.tpl"}
 {include file="link_editor_dialog.tpl"}
+{include file="link_picker.tpl"}
 
 </body>
 </html>

@@ -7,6 +7,8 @@ use Pageflow\Core\friendly_urls\FriendlyUrlManager;
 use Pageflow\Core\modules\articles\model\Article;
 use Pageflow\Core\modules\articles\service\ArticleInteractor;
 use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\links\database\dao\ReusableLinkDao;
+use Pageflow\Core\modules\links\database\dao\ReusableLinkDaoMysql;
 use Pageflow\Core\modules\images\model\Image;
 use Pageflow\Core\modules\pages\model\Page;
 use Pageflow\Core\modules\pages\service\PageInteractor;
@@ -19,6 +21,7 @@ class LinkHelper
     private FriendlyUrlManager $friendlyUrlManager;
     private PageService $pageService;
     private ArticleService $articleService;
+    private ReusableLinkDao $reusableLinkDao;
     private ?Page $currentPage;
     private ?Article $currentArticle;
 
@@ -26,6 +29,7 @@ class LinkHelper
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->pageService = PageInteractor::getInstance();
         $this->articleService = ArticleInteractor::getInstance();
+        $this->reusableLinkDao = ReusableLinkDaoMysql::getInstance();
         $this->currentPage = $currentPage;
         $this->currentArticle = $currentArticle;
     }
@@ -141,6 +145,7 @@ class LinkHelper
             $linkId = preg_match('/data-link-id="([^"]+)"/i', $dataAttrs, $m) ? (int)$m[1] : null;
             $href = preg_match('/data-link-url="([^"]+)"/i', $dataAttrs, $m) ? htmlspecialchars_decode($m[1], ENT_QUOTES) : null;
             $linkTarget = preg_match('/data-link-target="([^"]+)"/i', $dataAttrs, $m) ? $m[1] : null;
+            $linkTitle = "";
             
             
             if ($linkType === 'page' && $linkId) {
@@ -149,6 +154,7 @@ class LinkHelper
                     return $linkText;
                 } else {
                     $href = $this->createPageUrl($page);
+                    $linkTitle = $page->getTitle();
                 }
             } elseif ($linkType === 'article' && $linkId) {
                 $article = $this->articleService->getArticle($linkId);
@@ -156,10 +162,23 @@ class LinkHelper
                     return $linkText;
                 } else {
                     $href = $this->createArticleUrl($article);
+                    $linkTitle = $article->getTitle();
                 }
+            } elseif ($linkType === 'reusable' && $linkId) {
+                $link = $this->reusableLinkDao->getLink($linkId);
+                if (!$link || !$link->getUrl()) {
+                    return $linkText;
+                }
+                $href = $link->getUrl();
+                $linkTarget = 'external';
+                $linkTitle = $link->getTitle();
             }
             
-            $attrs = ' href="' . htmlspecialchars($href, ENT_QUOTES) . '"';
+            if (!$href) {
+                return $linkText;
+            }
+
+            $attrs = ' href="' . htmlspecialchars($href, ENT_QUOTES) . '"' . ($linkTitle ? ' title="' . htmlspecialchars($linkTitle, ENT_QUOTES) . '"' : '');
             if ($linkTarget === 'external') {
                 $attrs .= ' class="external" target="_blank"';
             }

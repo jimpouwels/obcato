@@ -7,7 +7,7 @@ var preserveEditorFocusState = false;
 
 // Cached DOM selectors
 var $dialog, $textInput, $urlInput, $newTabCheckbox, $deleteBtn, $dialogTitle;
-var $urlSelected, $pageSelected, $articleSelected;
+var $urlSelected, $pageSelected, $articleSelected, $reusableLinkSearch;
 var $pageSearch, $articleSearch, $pageResults, $articleResults;
 var $urlInputGroup;
 
@@ -27,6 +27,7 @@ $(document).ready(function() {
     $pageResults = $('#link-page-results');
     $articleResults = $('#link-article-results');
     $urlInputGroup = $('#link-url-input-group');
+    $reusableLinkSearch = $('#link-reusable-selected');
     
     initRichTextEditors();
     initLinkEditorDialog();
@@ -302,6 +303,7 @@ function createLink(editor) {
     clearUrl();
     clearPage();
     clearArticle();
+    clearReusable();
     
     showLinkEditorDialog();
 }
@@ -327,6 +329,7 @@ function editLink(linkElement, editor) {
     clearUrl();
     clearPage();
     clearArticle();
+    clearReusable();
     
     // Switch to appropriate tab
     switchLinkTab(linkType);
@@ -366,6 +369,8 @@ function editLink(linkElement, editor) {
                 }
             }
         });
+    } else if (linkType === 'reusable' && linkId) {
+        selectReusable(linkId, linkElement.text());
     }
     
     showLinkEditorDialog();
@@ -431,6 +436,18 @@ function initLinkEditorDialog() {
         clearArticle();
     });
     
+    // Pick reusable link
+    $('#link-reusable-pick').on('click', function() {
+        openLinkPickerModal(function(link) {
+            selectReusable(link.id, link.title, link.url);
+        });
+    });
+    
+    // Clear reusable selection
+    $('#link-reusable-clear').on('click', function() {
+        clearReusable();
+    });
+    
     // Save button
     $('#link-editor-save').on('click', function() {
         saveLinkFromDialog();
@@ -493,6 +510,8 @@ function switchLinkTab(tab) {
             $pageSearch.focus();
         } else if (tab === 'article' && !$articleSelected.is(':visible')) {
             $articleSearch.focus();
+        } else if (tab === 'reusable' && !$reusableLinkSearch.is(':visible')) {
+            $('#link-reusable-pick').focus();
         }
     }, 50);
 }
@@ -620,6 +639,18 @@ function clearArticle() {
     $articleResults.empty();
 }
 
+function selectReusable(linkId, title) {
+    $('#link-reusable-title').text(title || '');
+    $reusableLinkSearch.show().data('reusable-id', linkId);
+    $('#link-reusable-pick').hide();
+}
+
+function clearReusable() {
+    $reusableLinkSearch.hide().data('reusable-id', null);
+    $('#link-reusable-title').text('');
+    $('#link-reusable-pick').show();
+}
+
 function saveLinkFromDialog() {
     const text = $textInput.val().trim();
     const newTab = $newTabCheckbox.is(':checked');
@@ -633,10 +664,11 @@ function saveLinkFromDialog() {
     const url = $urlSelected.data('url');
     const pageId = $pageSelected.data('page-id');
     const articleId = $articleSelected.data('article-id');
+    const reusableId = $reusableLinkSearch.data('reusable-id');
     
     // Exactly one must be selected
-    if (!url && !pageId && !articleId) {
-        alert('Selecteer een pagina, artikel of voer een URL in');
+    if (!url && !pageId && !articleId && !reusableId) {
+        alert('Selecteer een pagina, artikel, herbruikbare link of voer een URL in');
         return;
     }
     
@@ -655,6 +687,9 @@ function saveLinkFromDialog() {
     } else if (articleId) {
         linkData.type = 'article';
         linkData.id = articleId;
+    } else if (reusableId) {
+        linkData.type = 'reusable';
+        linkData.id = reusableId;
     }
     
     if (currentLinkElement) {
@@ -706,7 +741,7 @@ function createLinkElement(linkData) {
     if (linkData.type === 'url') {
         link.setAttribute('data-link-url', linkData.url);
     } else {
-        // Page or article - store ID in data-link-id
+        // Page, article or reusable - store ID in data-link-id
         link.setAttribute('data-link-id', linkData.id);
     }
     
@@ -728,11 +763,11 @@ function updateLinkElement($linkElement, linkData) {
     if (linkData.type === 'url') {
         $linkElement.attr('data-link-url', linkData.url);
         $linkElement.removeAttr('data-link-id');
-        $linkElement.removeAttr('href'); // Remove old href if present
+        $linkElement.removeAttr('href');
     } else {
-        // Page or article - store ID in data-link-id
+        // Page, article or reusable - store ID in data-link-id
         $linkElement.removeAttr('data-link-url');
-        $linkElement.removeAttr('href'); // Remove old href if present
+        $linkElement.removeAttr('href');
         $linkElement.attr('data-link-id', linkData.id);
     }
 }
@@ -775,6 +810,7 @@ function hideLinkEditorDialog(restoreSelection) {
     clearUrl();
     clearPage();
     clearArticle();
+    clearReusable();
     
     currentLinkElement = null;
     currentEditor = null;

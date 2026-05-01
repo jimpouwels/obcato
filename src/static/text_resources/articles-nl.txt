@@ -77,4 +77,5 @@ articles_metadata_field_editor_title: Metadata veld
 articles_confirm_delete_metadata_field: Weet u zeker dat u dit metadata veld wilt verwijderen?
 article_metadata_field_editor_name_field: Naam
 article_metadata_field_editor_default_value_field: Standaardwaarde
+article_metadata_field_editor_link_field: Herbruikbare link
 article_metadata_fields_saved: Metadata velden opgeslagen

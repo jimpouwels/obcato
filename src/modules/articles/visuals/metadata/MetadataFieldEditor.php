@@ -4,6 +4,7 @@ namespace Pageflow\Core\modules\articles\visuals\metadata;
 
 use Pageflow\Core\modules\articles\model\ArticleMetadataField;
 use Pageflow\Core\view\TemplateData;
+use Pageflow\Core\view\views\LinkLookup;
 use Pageflow\Core\view\views\Panel;
 use Pageflow\Core\view\views\TextField;
 
@@ -26,6 +27,9 @@ class MetadataFieldEditor extends Panel {
         $data->assign("name_field", $nameField->render());
         $defaultValueField = new TextField("default_value", $this->getTextResource("article_metadata_field_editor_default_value_field"), $this->currentMetadataField->getDefaultValue(), false, false, null);
         $data->assign("default_value_field", $defaultValueField->render());
+        $linkLookupField = new LinkLookup("link_id", $this->getTextResource("article_metadata_field_editor_link_field"), $this->currentMetadataField->getLinkId());
+        $data->assign("link_field", $linkLookupField->render());
+        $data->assign("has_link", $this->currentMetadataField->getLinkId() !== null);
     }
 
 }

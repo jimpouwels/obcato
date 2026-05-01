@@ -1,0 +1,13 @@
+links_module_title: Links
+
+# EDITOR LABELS
+links_editor_link_panel_title: Edit link
+links_editor_folder_panel_title: Edit folder
+links_editor_title_label: Title
+links_editor_url_label: URL
+links_editor_folder_label: Folder
+links_editor_folder_name_label: Name
+
+# CONFIRM DIALOGS
+links_confirm_delete_link: Are you sure you want to delete this link?
+links_confirm_delete_folder: Are you sure you want to delete this folder?

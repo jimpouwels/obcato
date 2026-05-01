@@ -85,7 +85,7 @@ class ArticleDaoMysql implements ArticleDao {
         $where = " WHERE
                       e.id = a.element_holder_id";
         if ($keyword)
-            $where = $where . " AND e.name LIKE '" . $keyword . "%'";
+            $where = $where . " AND e.name LIKE '%" . $keyword . "%'";
         if ($termId) {
             $from = $from . ", articles_terms ats";
             $where = $where . " AND ats.term_id = " . $termId . " AND ats.article_id = e.id";
@@ -424,12 +424,13 @@ class ArticleDaoMysql implements ArticleDao {
     }
 
     public function updateMetadataField(ArticleMetadataField $field): void {
-        $query = "UPDATE article_metadata_fields SET name = ?, default_value = ? WHERE id = ?";
+        $query = "UPDATE article_metadata_fields SET name = ?, default_value = ?, link_id = ? WHERE id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
         $id = $field->getId();
         $name = $field->getName();
         $defaultValue = $field->getDefaultValue();
-        $statement->bind_param("ssi", $name, $defaultValue, $id);
+        $linkId = $field->getLinkId();
+        $statement->bind_param("ssii", $name, $defaultValue, $linkId, $id);
         $this->mysqlConnector->executeStatement($statement);
     }
 
