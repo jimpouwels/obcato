@@ -27,6 +27,10 @@ class BlackBoard {
         return "/admin/image";
     }
 
+    public static function getFunctionalImageBaseUrl(): string {
+        return "/admin/fimage";
+    }
+
     public static function getModuleFileUrl(string $moduleIdentifier, string $filePath): string {
         return '/admin?file=' . urlencode($filePath) . '&module=' . urlencode($moduleIdentifier);
     }

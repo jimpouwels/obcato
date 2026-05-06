@@ -10,6 +10,7 @@ class ListItem extends Entity {
     private int $ident = 0;
     private int $elementId;
     private int $orderNr = 0;
+    private ?int $functionalImageId = null;
 
     public function getText(): ?string {
         return $this->text;
@@ -41,6 +42,14 @@ class ListItem extends Entity {
 
     public function setOrderNr(int $orderNr): void {
         $this->orderNr = $orderNr;
+    }
+
+    public function getFunctionalImageId(): ?int {
+        return $this->functionalImageId;
+    }
+
+    public function setFunctionalImageId(?int $functionalImageId): void {
+        $this->functionalImageId = $functionalImageId;
     }
 
 }

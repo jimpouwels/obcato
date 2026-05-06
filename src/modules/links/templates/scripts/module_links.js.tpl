@@ -1,6 +1,16 @@
 $(document).ready(function () {
 
-    // ── Toolbar action buttons ─────────────────────────────────────────────
+    // -- Folder collapse/expand -------------------------------------------
+
+    $('.links-folder-toggle').on('click', function (e) {
+        e.stopPropagation();
+        $(this).closest('.links-folder').toggleClass('open');
+    });
+
+    // Expand ancestor folders of the currently selected item
+    $('.links-folder-name.selected, .links-link-item.selected').parents('.links-folder').addClass('open');
+
+    // -- Toolbar action buttons ─────────────────────────────────────────────
 
     $('#add_link').on('click', function () {
         $('#add_link_folder_id').val('');

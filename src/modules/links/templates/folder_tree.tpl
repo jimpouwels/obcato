@@ -2,6 +2,7 @@
 {foreach $folders as $folder}
 <div class="links-folder" data-folder-id="{$folder.id}">
     <div class="links-folder-header">
+        <button type="button" class="links-folder-toggle">&#9658;</button>
         <span class="links-folder-icon">&#128193;</span>
         <a href="{$backend_base_url}&amp;folder={$folder.id}" class="links-folder-name{if $current_folder_id == $folder.id} selected{/if}">{$folder.name|escape}</a>
         <span class="links-folder-actions">

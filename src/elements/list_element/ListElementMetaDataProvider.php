@@ -9,7 +9,7 @@ use Pageflow\Core\database\MysqlConnector;
 class ListElementMetaDataProvider extends ElementMetadataProvider
 {
 
-    private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id, i.display_order";
+    private static string $myAllColumns = "i.id, i.text, i.indent, i.element_id, i.display_order, i.functional_image_id";
     private MysqlConnector $mysqlConnector;
 
     public function __construct(Element $element)
@@ -74,6 +74,7 @@ class ListElementMetaDataProvider extends ElementMetadataProvider
             $listItem->setIndent($row['indent']);
             $listItem->setElementId($row['element_id']);
             $listItem->setOrderNr($row['display_order']);
+            $listItem->setFunctionalImageId(isset($row['functional_image_id']) ? (int)$row['functional_image_id'] : null);
 
             $listItems[] = $listItem;
         }
@@ -83,13 +84,14 @@ class ListElementMetaDataProvider extends ElementMetadataProvider
 
     private function updateListItem(mixed $listItem): void
     {
-        $query = "UPDATE list_element_items SET `text` = ?, indent = ?, display_order = ? WHERE id = ?";
+        $query = "UPDATE list_element_items SET `text` = ?, indent = ?, display_order = ?, functional_image_id = ? WHERE id = ?";
         $statement = $this->mysqlConnector->prepareStatement($query);
         $indent = $listItem->getIndent();
         $id = $listItem->getId();
         $text = $listItem->getText();
         $displayOrder = $listItem->getOrderNr();
-        $statement->bind_param('siii', $text, $indent, $displayOrder, $id);
+        $functionalImageId = $listItem->getFunctionalImageId();
+        $statement->bind_param('siiii', $text, $indent, $displayOrder, $functionalImageId, $id);
         $this->mysqlConnector->executeStatement($statement);
     }
 

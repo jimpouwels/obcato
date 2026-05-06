@@ -46,3 +46,19 @@ images_image_editor_no_image_found_yet_message: Nog geen afbeelding geuploaded
 
 # CONFIRMATIONS
 images_confirm_delete_image: Weet u zeker dat u deze afbeelding wilt verwijderen?
+
+# FUNCTIONAL IMAGES TAB
+images_tab_functional: Functionele afbeeldingen
+functional_images_editor_panel_title: Functionele afbeelding
+functional_images_folder_editor_panel_title: Map
+functional_images_title_label: Titel
+functional_images_alt_text_label: Alternatieve tekst
+functional_images_published_label: Gepubliceerd
+functional_images_file_label: Bestand
+functional_images_folder_name_label: Naam
+functional_images_save_success: Functionele afbeelding succesvol opgeslagen
+functional_images_delete_success: Functionele afbeelding succesvol verwijderd
+functional_images_folder_save_success: Map succesvol opgeslagen
+functional_images_folder_delete_success: Map succesvol verwijderd
+functional_images_confirm_delete: Weet u zeker dat u deze afbeelding wilt verwijderen?
+functional_images_confirm_delete_folder: Weet u zeker dat u de map wilt verwijderen?

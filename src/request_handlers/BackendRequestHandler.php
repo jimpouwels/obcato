@@ -5,6 +5,7 @@ namespace Pageflow\Core\request_handlers;
 use Pageflow\Core\authentication\Authenticator;
 use Pageflow\Core\core\BlackBoard;
 use Pageflow\Core\core\model\Module;
+use Pageflow\Core\database\dao\FunctionalImageDaoMysql;
 use Pageflow\Core\database\dao\ImageDaoMysql;
 use Pageflow\Core\database\dao\ModuleDao;
 use Pageflow\Core\database\dao\ModuleDaoMysql;
@@ -21,7 +22,9 @@ class BackendRequestHandler extends HttpRequestHandler {
     }
 
     public function handleGet(): void {
-        if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/image')) {
+        if (str_starts_with($_SERVER['REQUEST_URI'], BlackBoard::getFunctionalImageBaseUrl())) {
+            $this->loadFunctionalImage();
+        } else if (str_starts_with($_SERVER['REQUEST_URI'], BlackBoard::getImageBaseUrl())) {
             $this->loadImage();
         } else if (str_starts_with($_SERVER['REQUEST_URI'], '/admin/download')) {
             // TODO
@@ -56,6 +59,35 @@ class BackendRequestHandler extends HttpRequestHandler {
             $value = $_POST[$name];
         }
         return $value;
+    }
+
+    private function loadFunctionalImage(): void {
+        $urlParts = UrlHelper::splitIntoParts($_SERVER['REQUEST_URI']);
+        $id = (int)$urlParts[count($urlParts) - 1];
+        $image = FunctionalImageDaoMysql::getInstance()->getFunctionalImage($id);
+
+        if (!$image || !$image->getFilename()) {
+            http_response_code(404);
+            exit;
+        }
+
+        if (!$image->isPublished()) {
+            Authenticator::isAuthenticated();
+        }
+
+        $path = UPLOAD_DIR . '/' . $image->getFilename();
+        $ext  = strtolower(pathinfo($image->getFilename(), PATHINFO_EXTENSION));
+        $contentType = match ($ext) {
+            'jpg', 'jpeg' => 'image/jpeg',
+            'png'         => 'image/png',
+            'gif'         => 'image/gif',
+            'svg'         => 'image/svg+xml',
+            'webp'        => 'image/webp',
+            default       => 'application/octet-stream',
+        };
+        header('Content-Type: ' . $contentType);
+        readfile($path);
+        exit;
     }
 
     private function loadImage(): void {

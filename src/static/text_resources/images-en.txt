@@ -46,3 +46,19 @@ images_image_editor_no_image_found_yet_message: No image uploaded yet
 
 # CONFIRMATIONS
 images_confirm_delete_image: Are you sure you want to delete this image?
+
+# FUNCTIONAL IMAGES TAB
+images_tab_functional: Functional images
+functional_images_editor_panel_title: Functional image
+functional_images_folder_editor_panel_title: Folder
+functional_images_title_label: Title
+functional_images_alt_text_label: Alternative text
+functional_images_published_label: Published
+functional_images_file_label: File
+functional_images_folder_name_label: Name
+functional_images_save_success: Functional image successfully saved
+functional_images_delete_success: Functional image successfully deleted
+functional_images_folder_save_success: Folder successfully saved
+functional_images_folder_delete_success: Folder successfully deleted
+functional_images_confirm_delete: Are you sure you want to delete this image?
+functional_images_confirm_delete_folder: Are you sure you want to delete this folder?

@@ -141,3 +141,70 @@
 .add_list_item_button {
     margin-top: 8px;
 }
+
+/* Functional image lookup widget */
+.list_element_item_functional_image {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 4px;
+}
+
+.fimg-lookup-preview {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px dashed #ccc;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+    flex-shrink: 0;
+}
+
+.fimg-lookup-preview:hover {
+    border-color: #999;
+}
+
+.fimg-lookup-thumb {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fimg-lookup-preview.has-image .fimg-lookup-thumb {
+    display: block;
+}
+
+.fimg-lookup-placeholder {
+    font-size: 16px;
+    color: #ccc;
+}
+
+.fimg-lookup-preview.has-image .fimg-lookup-placeholder {
+    display: none;
+}
+
+.fimg-lookup-clear-btn {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.fimg-lookup-preview.has-image:hover .fimg-lookup-clear-btn {
+    display: flex;
+}

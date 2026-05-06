@@ -33,6 +33,8 @@ class ListElementForm extends ElementForm {
     private function loadListItemsFields(): void {
         foreach ($this->listElement->getListItems() as $listItem) {
             $listItem->setText($this->getFieldValue("listitem_" . $listItem->getId() . "_text"));
+            $rawImageId = $this->getFieldValue("listitem_" . $listItem->getId() . "_functional_image_id");
+            $listItem->setFunctionalImageId($rawImageId !== null && $rawImageId !== '' ? (int)$rawImageId : null);
         }
     }
 

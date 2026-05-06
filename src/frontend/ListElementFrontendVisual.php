@@ -7,6 +7,7 @@ use Pageflow\Core\elements\list_element\ListElement;
 use Pageflow\Core\modules\articles\model\Article;
 use Pageflow\Core\modules\blocks\model\Block;
 use Pageflow\Core\modules\pages\model\Page;
+use Pageflow\Core\core\BlackBoard;
 
 class ListElementFrontendVisual extends ElementFrontendVisual {
 
@@ -23,7 +24,11 @@ class ListElementFrontendVisual extends ElementFrontendVisual {
         $listItems = array();
         
         foreach ($this->getElement()->getListItems() as $listItem) {
-            $listItems[] = $this->toHtml($listItem->getText());
+            $item = ['text' => $this->toHtml($listItem->getText())];
+            if ($listItem->getFunctionalImageId()) {
+                $item['functional_image_url'] = BlackBoard::getFunctionalImageBaseUrl() . '/' . $listItem->getFunctionalImageId();
+            }
+            $listItems[] = $item;
         }
         
         return $listItems;

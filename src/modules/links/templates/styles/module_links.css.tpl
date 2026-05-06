@@ -14,75 +14,9 @@
     margin-bottom: 1px;
 }
 
+/* Padding specific to links tree header/items */
 .links-folder-header {
-    display: flex;
-    align-items: center;
-    position: relative;
     padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.links-folder-header:hover {
-    background: #f0f0f0;
-}
-
-.links-folder-name {
-    flex: 1;
-    font-weight: 600;
-    font-size: 13px;
-    color: #333;
-    text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.links-folder-name:hover {
-    text-decoration: underline;
-}
-
-.links-folder-name.selected {
-    color: var(--color-primary, #2a7ab8);
-}
-
-.links-folder-actions {
-    display: none;
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    gap: 2px;
-    align-items: center;
-    background: #f0f0f0;
-    border-radius: 4px;
-    padding: 0 2px;
-}
-
-.links-folder-header:hover .links-folder-actions {
-    display: flex;
-}
-
-.links-folder-actions a,
-.links-folder-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px 3px;
-    font-size: 12px;
-    border-radius: 3px;
-    text-decoration: none;
-    color: #555;
-}
-
-.links-folder-actions a:hover,
-.links-folder-actions button:hover {
-    background: #ddd;
-}
-
-.links-folder-children {
-    padding-left: 12px;
-    border-left: 2px solid #e0e0e0;
-    margin-left: 8px;
 }
 
 .links-link-item {
@@ -146,19 +80,6 @@
 .links-link-item.selected .links-link-title {
     color: var(--color-primary, #2a7ab8);
     font-weight: 600;
-}
-
-.links-empty-state {
-    padding: 20px;
-    color: #888;
-    font-style: italic;
-    font-size: 13px;
-}
-
-/* Drop zone on folders */
-.links-folder-header.drop-target {
-    background: #e8f0fe;
-    outline: 2px dashed #4a90d9;
 }
 
 /* Delete folder dialog */
