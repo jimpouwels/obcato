@@ -41,7 +41,7 @@ class ArticleLookup extends FormField {
         if (!empty($selectedArticleId)) {
             $selectedArticle = $this->articleService->getArticle((int)$selectedArticleId);
             if ($selectedArticle) {
-                $selectedArticleTitle = $selectedArticle->getTitle() ?? '';
+                $selectedArticleTitle = $selectedArticle->getName() ?? '';
             }
         }
 

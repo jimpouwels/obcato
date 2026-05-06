@@ -74,6 +74,8 @@ class ImageRequestHandler extends HttpRequestHandler {
             $this->sendSuccessMessage($this->getTextResource("images_save_success_message"));
         } catch (FormException $e) {
             $this->sendErrorMessage($this->getTextResource("images_save_failed_message"));
+        } catch (\ImagickException $e) {
+            $this->sendErrorMessage($this->getTextResource("images_save_failed_message"));
         }
     }
 
@@ -197,11 +199,33 @@ class ImageRequestHandler extends HttpRequestHandler {
 
     private function moveImageToUploadDirectory(string $newFilename): void {
         $uploadedFilePath = $_FILES["image_file"]["tmp_name"];
+
+        // Temporarily raise memory limit for high-res camera images (e.g. DJI 48MP)
+        $prevMemLimit = ini_get('memory_limit');
+        ini_set('memory_limit', '512M');
+
         $imageObj = new \Imagick();
-        $imageObj->readImage($uploadedFilePath);
-        $imageObj->setImageFormat('webp');
-        $imageObj->setImageCompressionQuality(80);
-        $imageObj->writeImage(UPLOAD_DIR . "/" . $newFilename);
+        try {
+            // Set JPEG subsampling hint BEFORE readImage — the JPEG decoder will
+            // decode at reduced resolution internally, drastically cutting memory use
+            $imageObj->setOption('jpeg:size', '4000x4000');
+            $imageObj->readImage($uploadedFilePath);
+
+            // Strip all metadata (XMP drone telemetry, GPS, ICC profiles)
+            $imageObj->stripImage();
+
+            // Scale down if still wider than 4000px after subsampling
+            if ($imageObj->getImageWidth() > 4000) {
+                $imageObj->scaleImage(4000, 0);
+            }
+
+            $imageObj->setImageFormat('webp');
+            $imageObj->setImageCompressionQuality(80);
+            $imageObj->writeImage(UPLOAD_DIR . "/" . $newFilename);
+        } finally {
+            $imageObj->destroy();
+            ini_set('memory_limit', $prevMemLimit);
+        }
 
         unlink($uploadedFilePath);
         $this->currentImage->setFilename($newFilename);

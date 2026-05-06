@@ -185,14 +185,10 @@
                         $results.empty();
                         for (var j = 0; j < filteredArticles.length; j++) {
                             var article = filteredArticles[j];
-                            var title = article.title || '';
-                            var intro = article.intro || '';
+                            var title = article.name || '';
                             var $item = $('<button type="button" class="article-lookup-result-item"></button>');
 
                             $item.append('<span class="article-lookup-result-title">' + window.articleLookupEscapeHtml(title) + '</span>');
-                            if (intro) {
-                                $item.append('<span class="article-lookup-result-intro">' + window.articleLookupEscapeHtml(intro) + '</span>');
-                            }
 
                             $item.on('click', (function(id, selectedTitle) {
                                 return function() {

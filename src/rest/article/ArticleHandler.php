@@ -86,14 +86,9 @@ class ArticleHandler extends Handler {
         foreach ($foundArticles as $article) {
             $articleData = array();
             $articleData["id"] = $article->getId();
+            $articleData["title"] = $article->getTitle() ?? "";
             $articleData["name"] = $article->getName() ?? "";
             $articleData["url_title"] = $article->getUrlTitle() ?? "";
-            $description = $article->getDescription();
-            if ($description) {
-                $articleData["intro"] = substr(strip_tags($description), 0, 100);
-            } else {
-                $articleData["intro"] = "";
-            }
             $data[] = $articleData;
             
             if (count($data) >= 20) break;
