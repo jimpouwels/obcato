@@ -7,6 +7,7 @@ use Pageflow\Core\friendly_urls\FriendlyUrlManager;
 use Pageflow\Core\modules\articles\model\Article;
 use Pageflow\Core\modules\articles\service\ArticleInteractor;
 use Pageflow\Core\modules\articles\service\ArticleService;
+use Pageflow\Core\modules\images\model\FunctionalImage;
 use Pageflow\Core\modules\links\database\dao\ReusableLinkDao;
 use Pageflow\Core\modules\links\database\dao\ReusableLinkDaoMysql;
 use Pageflow\Core\modules\images\model\Image;
@@ -61,6 +62,13 @@ class LinkHelper
             return "";
         }
         return "/image/" . $image->getId();
+    }
+
+    public function createFunctionalImageUrl(?FunctionalImage $image): string {
+        if (!$image) {
+            return "";
+        }
+        return "/fimage/" . $image->getId();
     }
 
     public function createMobileImageUrl(?Image $image): string {

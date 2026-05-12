@@ -5,6 +5,8 @@ namespace Pageflow\Core\frontend\handlers;
 use JetBrains\PhpStorm\NoReturn;
 use Pageflow\Core\database\dao\ImageDao;
 use Pageflow\Core\database\dao\ImageDaoMysql;
+use Pageflow\Core\database\dao\FunctionalImageDao;
+use Pageflow\Core\database\dao\FunctionalImageDaoMysql;
 use Pageflow\Core\database\dao\SettingsDao;
 use Pageflow\Core\database\dao\SettingsDaoMysql;
 use Pageflow\Core\friendly_urls\FriendlyUrlManager;
@@ -15,12 +17,12 @@ use Pageflow\Core\frontend\SitemapVisual;
 use Pageflow\Core\frontend\WebsiteVisual;
 use Pageflow\Core\modules\articles\model\Article;
 use Pageflow\Core\modules\images\model\Image;
+use Pageflow\Core\modules\images\model\FunctionalImage;
 use Pageflow\Core\modules\pages\model\Page;
 use Pageflow\Core\modules\pages\service\PageInteractor;
 use Pageflow\Core\modules\pages\service\PageService;
 use Pageflow\Core\modules\settings\model\IFrameSecurityPolicy;
 use Pageflow\Core\modules\settings\model\Settings;
-use Pageflow\Core\rest\Router;
 use Pageflow\Core\utilities\UrlHelper;
 use const Pageflow\Core\UPLOAD_DIR;
 
@@ -28,6 +30,7 @@ class RequestHandler {
 
     private FormRequestHandler $formRequestHandler;
     private ImageDao $imageDao;
+    private FunctionalImageDao $functionalImageDao;
     private SettingsDao $settingsDao;
     private FriendlyUrlManager $friendlyUrlManager;
     private PageService $pageService;
@@ -37,6 +40,7 @@ class RequestHandler {
     public function __construct() {
         $this->settingsDao = SettingsDaoMysql::getInstance();
         $this->imageDao = ImageDaoMysql::getInstance();
+        $this->functionalImageDao = FunctionalImageDaoMysql::getInstance();
         $this->friendlyUrlManager = FriendlyUrlManager::getInstance();
         $this->formRequestHandler = FormRequestHandler::getInstance();
         $this->pageService = PageInteractor::getInstance();
@@ -56,6 +60,8 @@ class RequestHandler {
             echo $robots->render();
         } else if ($this->isImageRequest()) {
             $this->loadImage();
+        } else if ($this->isFunctionalImageRequest()) {
+            $this->loadFunctionalImage();
         } else {
             $url = explode('?', $_SERVER['REQUEST_URI'])[0];
             $urlMatch = $this->friendlyUrlManager->matchUrl($url);
@@ -95,6 +101,10 @@ class RequestHandler {
         return str_starts_with($_SERVER['REQUEST_URI'], '/image/');
     }
 
+    private function isFunctionalImageRequest(): bool {
+        return str_starts_with($_SERVER['REQUEST_URI'], '/fimage/');
+    }
+
     private function loadImage(): void {
         $image = $this->getImageFromRequest();
         if (!$image) {
@@ -112,8 +122,25 @@ class RequestHandler {
         }
     }
 
+    private function loadFunctionalImage(): void {
+        $image = $this->getFunctionalImageFromRequest();
+        if (!$image) {
+            $this->render404Page();
+        }
+        $imageFilepath = UPLOAD_DIR . "/" . $image->getFilename();
+        if ($image->isPublished()) {
+            header("Content-Type: image/webp");
+            header("Cache-Control: max-age=" . $this->settings->getBrowserImageCacheInSeconds() * 60 * 60);
+            readfile($imageFilepath);
+        }
+    }
+
     private function getImageFromRequest(): ?Image {
         return $this->imageDao->getImage(intval(UrlHelper::splitIntoParts($_SERVER['REQUEST_URI'])[2]));
+    }
+
+    private function getFunctionalImageFromRequest(): ?FunctionalImage {
+        return $this->functionalImageDao->getFunctionalImage(intval(UrlHelper::splitIntoParts($_SERVER['REQUEST_URI'])[2]));
     }
 
     private function renderHomepage(): void {
